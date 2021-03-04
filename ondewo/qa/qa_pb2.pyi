@@ -39,7 +39,7 @@ class GetAnswerRequest(google___protobuf___message___Message):
     max_num_answers = ... # type: builtin___int
     threshold_reader = ... # type: builtin___float
     threshold_retriever = ... # type: builtin___float
-    custom_score_formula = ... # type: typing___Text
+    threshold_overall = ... # type: builtin___float
     reader_model_name = ... # type: typing___Text
 
     @property
@@ -52,7 +52,7 @@ class GetAnswerRequest(google___protobuf___message___Message):
         max_num_answers : typing___Optional[builtin___int] = None,
         threshold_reader : typing___Optional[builtin___float] = None,
         threshold_retriever : typing___Optional[builtin___float] = None,
-        custom_score_formula : typing___Optional[typing___Text] = None,
+        threshold_overall : typing___Optional[builtin___float] = None,
         reader_model_name : typing___Optional[typing___Text] = None,
         ) -> None: ...
     if sys.version_info >= (3,):
@@ -64,7 +64,7 @@ class GetAnswerRequest(google___protobuf___message___Message):
     def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def HasField(self, field_name: typing_extensions___Literal[u"text",b"text"]) -> builtin___bool: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"custom_score_formula",b"custom_score_formula",u"max_num_answers",b"max_num_answers",u"reader_model_name",b"reader_model_name",u"session_id",b"session_id",u"text",b"text",u"threshold_reader",b"threshold_reader",u"threshold_retriever",b"threshold_retriever"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"max_num_answers",b"max_num_answers",u"reader_model_name",b"reader_model_name",u"session_id",b"session_id",u"text",b"text",u"threshold_overall",b"threshold_overall",u"threshold_reader",b"threshold_reader",u"threshold_retriever",b"threshold_retriever"]) -> None: ...
 global___GetAnswerRequest = GetAnswerRequest
 
 class GetAnswerResponse(google___protobuf___message___Message):

@@ -1,0 +1,3 @@
+[submodule "ondewo-nlu-api"]
+	path = ondewo-nlu-api
+	url = https://github.com/ondewo/ondewo-nlu-api.git
