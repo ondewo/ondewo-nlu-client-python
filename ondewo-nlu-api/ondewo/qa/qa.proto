@@ -1,0 +1,93 @@
+// Copyright 2020 ONDEWO GmbH
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package ondewo.qa;
+
+import "google/protobuf/empty.proto";
+import "google/api/annotations.proto";
+import "ondewo/nlu/session.proto";
+
+/////// Services ///////
+
+service QA {
+    rpc GetAnswer (GetAnswerRequest) returns (GetAnswerResponse) {
+        option (google.api.http) = {
+            post: "/qa"
+            body: "*"
+        };
+    }
+    rpc RunScraper (google.protobuf.Empty) returns (RunScraperResponse) {
+        option (google.api.http) = {
+            get: "/qa:RunScraper"
+        };
+    }
+
+    rpc RunTraining (google.protobuf.Empty) returns (RunTrainingResponse) {
+        option (google.api.http) = {
+            get: "/qa:RunTraining"
+        };
+    }
+	
+
+}
+
+/////// Messages ///////
+
+// The request message
+message GetAnswerRequest {
+    // Required. The name of the QA session.
+    string session_id = 1;
+
+    // Required. The context of the request. A string, in the form of a sentence.
+    ondewo.nlu.TextInput text = 2;
+
+    // Maximal number of answers returned
+    int32 max_num_answers = 3;
+
+    // Threshold (minimal score) to give back reader result
+    float threshold_reader = 4;
+
+    // Threshold (minimal score) to give back retriever result
+    float threshold_retriever = 5;
+
+    // Threshold (minimal score) overall probability
+    float threshold_overall = 6;
+
+    // Reader model name
+    string reader_model_name = 7;
+}
+
+// The response message containing the greetings
+message GetAnswerResponse {
+    // The results of the conversational query or event processing.
+    ondewo.nlu.DetectIntentResponse query_result = 2;
+}
+
+message RunScraperResponse {
+    // Name of the docker container that is running the job
+    string container_name = 1;
+    // ID of the docker container that is running the scraping job
+    string container_id = 2;
+
+}
+
+message RunTrainingResponse {
+    // Response message of training
+    float f1 = 1;
+    float accuracy = 2;
+
+}
+
