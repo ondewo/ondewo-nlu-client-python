@@ -1,7 +1,7 @@
 # Release History
 *****************
 
-## Release ONDEWO NLU Python Client 1.1.1
+## Release ONDEWO NLU Python Client 1.1.0
 
 ### New Features
  Implemented new endpoints:
