@@ -31,6 +31,6 @@ setuptools.setup(
         'Development Status :: 3 - Alpha',
         'Topic :: Software Development :: Libraries',
     ],
-    python_requires='>=3.0.1',
+    python_requires='>=2.6,!=3.0.*',
     install_requires=requires,
 )
