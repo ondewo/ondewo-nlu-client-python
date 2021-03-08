@@ -19,7 +19,7 @@ setuptools.setup(
         np
         for np in filter(
             lambda n: n.startswith('ondewo.') or n == 'ondewo',
-            setuptools.find_namespace_packages()
+            setuptools.find_packages()
         )
     ],
     package_data={
