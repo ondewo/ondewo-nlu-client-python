@@ -1,6 +1,13 @@
 # Release History
 *****************
 
+## Release ONDEWO NLU Python Client 1.1.1
+
+### New Features
+* py2 compatibility
+
+*****************
+
 ## Release ONDEWO NLU Python Client 1.1.0
 
 ### New Features
