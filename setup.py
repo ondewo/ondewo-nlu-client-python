@@ -7,7 +7,7 @@ with open("requirements.txt") as f:
     requires = f.read().splitlines()
 
 setuptools.setup(
-    name="ondewo-nlu-client-python",
+    name="ondewo-nlu-client",
     version="1.1.1",
     author="Ondewo GbmH",
     author_email="info@ondewo.com",
