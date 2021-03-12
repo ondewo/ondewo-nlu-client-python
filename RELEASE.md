@@ -1,6 +1,16 @@
 # Release History
 *****************
 
+## Release ONDEWO NLU Python Client 1.1.2
+
+### New Features
+* added to the [pypi](https://pypi.org/project/ondewo-nlu-client/)
+
+### Migration Guide
+ * pip install ondewo-nlu-client==1.1.2
+
+*****************
+
 ## Release ONDEWO NLU Python Client 1.1.1
 
 ### New Features
