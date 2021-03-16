@@ -6,6 +6,8 @@
 ### New Features
  * [OND211-1732] Implement new endpoints to directly create/update/get/delete training phrases.
 
+*****************
+
 ## Release ONDEWO NLU Python Client 1.1.2
 
 ### New Features
