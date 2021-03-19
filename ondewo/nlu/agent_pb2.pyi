@@ -79,6 +79,26 @@ AGENT_VIEW_FULL = typing___cast('AgentView', 1)
 AGENT_VIEW_SHALLOW = typing___cast('AgentView', 2)
 global___AgentView = AgentView
 
+class InitiationProtocol(builtin___int):
+    DESCRIPTOR: google___protobuf___descriptor___EnumDescriptor = ...
+    @classmethod
+    def Name(cls, number: builtin___int) -> builtin___str: ...
+    @classmethod
+    def Value(cls, name: builtin___str) -> 'InitiationProtocol': ...
+    @classmethod
+    def keys(cls) -> typing___List[builtin___str]: ...
+    @classmethod
+    def values(cls) -> typing___List['InitiationProtocol']: ...
+    @classmethod
+    def items(cls) -> typing___List[typing___Tuple[builtin___str, 'InitiationProtocol']]: ...
+    as_soon_as_possible = typing___cast('InitiationProtocol', 0)
+    when_trained = typing___cast('InitiationProtocol', 1)
+    never = typing___cast('InitiationProtocol', 2)
+as_soon_as_possible = typing___cast('InitiationProtocol', 0)
+when_trained = typing___cast('InitiationProtocol', 1)
+never = typing___cast('InitiationProtocol', 2)
+global___InitiationProtocol = InitiationProtocol
+
 class ReportType(builtin___int):
     DESCRIPTOR: google___protobuf___descriptor___EnumDescriptor = ...
     @classmethod
@@ -401,11 +421,13 @@ class TrainAgentRequest(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
     parent = ... # type: typing___Text
     branch = ... # type: typing___Text
+    initiation_protocol = ... # type: global___InitiationProtocol
 
     def __init__(self,
         *,
         parent : typing___Optional[typing___Text] = None,
         branch : typing___Optional[typing___Text] = None,
+        initiation_protocol : typing___Optional[global___InitiationProtocol] = None,
         ) -> None: ...
     if sys.version_info >= (3,):
         @classmethod
@@ -415,7 +437,7 @@ class TrainAgentRequest(google___protobuf___message___Message):
         def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> TrainAgentRequest: ...
     def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"branch",b"branch",u"parent",b"parent"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"branch",b"branch",u"initiation_protocol",b"initiation_protocol",u"parent",b"parent"]) -> None: ...
 global___TrainAgentRequest = TrainAgentRequest
 
 class BuildCacheRequest(google___protobuf___message___Message):
