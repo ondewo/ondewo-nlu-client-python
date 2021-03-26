@@ -194,6 +194,7 @@ class Intent(google___protobuf___message___Message):
 
         name = ... # type: typing___Text
         type = ... # type: global___Intent.TrainingPhrase.Type
+        language_code = ... # type: typing___Text
         text = ... # type: typing___Text
         times_added_count = ... # type: builtin___int
 
@@ -204,6 +205,7 @@ class Intent(google___protobuf___message___Message):
             *,
             name : typing___Optional[typing___Text] = None,
             type : typing___Optional[global___Intent.TrainingPhrase.Type] = None,
+            language_code : typing___Optional[typing___Text] = None,
             text : typing___Optional[typing___Text] = None,
             entities : typing___Optional[typing___Iterable[global___Intent.TrainingPhrase.Entity]] = None,
             times_added_count : typing___Optional[builtin___int] = None,
@@ -216,7 +218,7 @@ class Intent(google___protobuf___message___Message):
             def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> Intent.TrainingPhrase: ...
         def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
         def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
-        def ClearField(self, field_name: typing_extensions___Literal[u"entities",b"entities",u"name",b"name",u"text",b"text",u"times_added_count",b"times_added_count",u"type",b"type"]) -> None: ...
+        def ClearField(self, field_name: typing_extensions___Literal[u"entities",b"entities",u"language_code",b"language_code",u"name",b"name",u"text",b"text",u"times_added_count",b"times_added_count",u"type",b"type"]) -> None: ...
     global___TrainingPhrase = TrainingPhrase
 
     class Parameter(google___protobuf___message___Message):
