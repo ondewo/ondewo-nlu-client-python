@@ -102,11 +102,6 @@ class IntentsStub(object):
                 request_serializer=ondewo_dot_nlu_dot_intent__pb2.DeleteTrainingPhraseRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 )
-        self.ListTrainingPhrase = channel.unary_unary(
-                '/ondewo.nlu.Intents/ListTrainingPhrase',
-                request_serializer=ondewo_dot_nlu_dot_intent__pb2.ListTrainingPhraseRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_intent__pb2.ListTrainingPhraseResponse.FromString,
-                )
 
 
 class IntentsServicer(object):
@@ -224,13 +219,6 @@ class IntentsServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def ListTrainingPhrase(self, request, context):
-        """List training phrases (of a specific intent).
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
 
 def add_IntentsServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -288,11 +276,6 @@ def add_IntentsServicer_to_server(servicer, server):
                     servicer.DeleteTrainingPhrase,
                     request_deserializer=ondewo_dot_nlu_dot_intent__pb2.DeleteTrainingPhraseRequest.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-            ),
-            'ListTrainingPhrase': grpc.unary_unary_rpc_method_handler(
-                    servicer.ListTrainingPhrase,
-                    request_deserializer=ondewo_dot_nlu_dot_intent__pb2.ListTrainingPhraseRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_intent__pb2.ListTrainingPhraseResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -519,22 +502,5 @@ class Intents(object):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/DeleteTrainingPhrase',
             ondewo_dot_nlu_dot_intent__pb2.DeleteTrainingPhraseRequest.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def ListTrainingPhrase(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/ListTrainingPhrase',
-            ondewo_dot_nlu_dot_intent__pb2.ListTrainingPhraseRequest.SerializeToString,
-            ondewo_dot_nlu_dot_intent__pb2.ListTrainingPhraseResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
