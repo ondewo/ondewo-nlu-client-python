@@ -91,12 +91,12 @@ class InitiationProtocol(builtin___int):
     def values(cls) -> typing___List['InitiationProtocol']: ...
     @classmethod
     def items(cls) -> typing___List[typing___Tuple[builtin___str, 'InitiationProtocol']]: ...
-    as_soon_as_possible = typing___cast('InitiationProtocol', 0)
-    when_trained = typing___cast('InitiationProtocol', 1)
-    never = typing___cast('InitiationProtocol', 2)
-as_soon_as_possible = typing___cast('InitiationProtocol', 0)
-when_trained = typing___cast('InitiationProtocol', 1)
-never = typing___cast('InitiationProtocol', 2)
+    AS_SOON_AS_POSSIBLE = typing___cast('InitiationProtocol', 0)
+    WHEN_TRAINED = typing___cast('InitiationProtocol', 1)
+    NEVER = typing___cast('InitiationProtocol', 2)
+AS_SOON_AS_POSSIBLE = typing___cast('InitiationProtocol', 0)
+WHEN_TRAINED = typing___cast('InitiationProtocol', 1)
+NEVER = typing___cast('InitiationProtocol', 2)
 global___InitiationProtocol = InitiationProtocol
 
 class ReportType(builtin___int):
