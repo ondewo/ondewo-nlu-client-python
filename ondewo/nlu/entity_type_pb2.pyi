@@ -152,6 +152,7 @@ class EntityType(google___protobuf___message___Message):
         value = ... # type: typing___Text
         synonyms = ... # type: google___protobuf___internal___containers___RepeatedScalarFieldContainer[typing___Text]
         name = ... # type: typing___Text
+        language_code = ... # type: typing___Text
         display_name = ... # type: typing___Text
         synonym_count = ... # type: builtin___int
 
@@ -160,6 +161,7 @@ class EntityType(google___protobuf___message___Message):
             value : typing___Optional[typing___Text] = None,
             synonyms : typing___Optional[typing___Iterable[typing___Text]] = None,
             name : typing___Optional[typing___Text] = None,
+            language_code : typing___Optional[typing___Text] = None,
             display_name : typing___Optional[typing___Text] = None,
             synonym_count : typing___Optional[builtin___int] = None,
             ) -> None: ...
@@ -171,7 +173,7 @@ class EntityType(google___protobuf___message___Message):
             def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> EntityType.Entity: ...
         def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
         def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
-        def ClearField(self, field_name: typing_extensions___Literal[u"display_name",b"display_name",u"name",b"name",u"synonym_count",b"synonym_count",u"synonyms",b"synonyms",u"value",b"value"]) -> None: ...
+        def ClearField(self, field_name: typing_extensions___Literal[u"display_name",b"display_name",u"language_code",b"language_code",u"name",b"name",u"synonym_count",b"synonym_count",u"synonyms",b"synonyms",u"value",b"value"]) -> None: ...
     global___Entity = Entity
 
     name = ... # type: typing___Text
@@ -584,7 +586,6 @@ global___EntityTypeSorting = EntityTypeSorting
 class CreateEntityValueRequest(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
     name = ... # type: typing___Text
-    language_code = ... # type: typing___Text
 
     @property
     def entity(self) -> global___EntityType.Entity: ...
@@ -593,7 +594,6 @@ class CreateEntityValueRequest(google___protobuf___message___Message):
         *,
         name : typing___Optional[typing___Text] = None,
         entity : typing___Optional[global___EntityType.Entity] = None,
-        language_code : typing___Optional[typing___Text] = None,
         ) -> None: ...
     if sys.version_info >= (3,):
         @classmethod
@@ -604,7 +604,7 @@ class CreateEntityValueRequest(google___protobuf___message___Message):
     def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def HasField(self, field_name: typing_extensions___Literal[u"entity",b"entity"]) -> builtin___bool: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"entity",b"entity",u"language_code",b"language_code",u"name",b"name"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"entity",b"entity",u"name",b"name"]) -> None: ...
 global___CreateEntityValueRequest = CreateEntityValueRequest
 
 class UpdateEntityValueRequest(google___protobuf___message___Message):
