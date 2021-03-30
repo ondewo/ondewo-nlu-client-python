@@ -100,7 +100,7 @@ class IntentsStub(object):
         self.DeleteTrainingPhraseBatch = channel.unary_unary(
                 '/ondewo.nlu.Intents/DeleteTrainingPhraseBatch',
                 request_serializer=ondewo_dot_nlu_dot_intent__pb2.DeleteTrainingPhraseBatchRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_intent__pb2.DeleteTrainingPhraseResponse.FromString,
+                response_deserializer=ondewo_dot_nlu_dot_intent__pb2.DeleteTrainingPhraseBatchResponse.FromString,
                 )
 
 
@@ -275,7 +275,7 @@ def add_IntentsServicer_to_server(servicer, server):
             'DeleteTrainingPhraseBatch': grpc.unary_unary_rpc_method_handler(
                     servicer.DeleteTrainingPhraseBatch,
                     request_deserializer=ondewo_dot_nlu_dot_intent__pb2.DeleteTrainingPhraseBatchRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_intent__pb2.DeleteTrainingPhraseResponse.SerializeToString,
+                    response_serializer=ondewo_dot_nlu_dot_intent__pb2.DeleteTrainingPhraseBatchResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -501,6 +501,6 @@ class Intents(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/DeleteTrainingPhraseBatch',
             ondewo_dot_nlu_dot_intent__pb2.DeleteTrainingPhraseBatchRequest.SerializeToString,
-            ondewo_dot_nlu_dot_intent__pb2.DeleteTrainingPhraseResponse.FromString,
+            ondewo_dot_nlu_dot_intent__pb2.DeleteTrainingPhraseBatchResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
