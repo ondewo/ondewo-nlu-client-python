@@ -1,6 +1,11 @@
 # Release History
 *****************
 
+## Release ONDEWO NLU Python Client 1.2.0
+
+### New Features
+ * [OND211-1744] Add initiation protocol into train agent endpoint
+
 ## Release ONDEWO NLU Python Client 1.1.3
 
 ### New Features
