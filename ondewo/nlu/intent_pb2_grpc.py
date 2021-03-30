@@ -85,22 +85,22 @@ class IntentsStub(object):
         self.CreateTrainingPhraseBatch = channel.unary_unary(
                 '/ondewo.nlu.Intents/CreateTrainingPhraseBatch',
                 request_serializer=ondewo_dot_nlu_dot_intent__pb2.CreateTrainingPhraseBatchRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_intent__pb2.TrainingPhraseStatusBatch.FromString,
+                response_deserializer=ondewo_dot_nlu_dot_intent__pb2.TrainingPhraseStatusBatchResponse.FromString,
                 )
         self.GetTrainingPhraseBatch = channel.unary_unary(
                 '/ondewo.nlu.Intents/GetTrainingPhraseBatch',
                 request_serializer=ondewo_dot_nlu_dot_intent__pb2.GetTrainingPhraseBatchRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_intent__pb2.TrainingPhraseStatusBatch.FromString,
+                response_deserializer=ondewo_dot_nlu_dot_intent__pb2.TrainingPhraseStatusBatchResponse.FromString,
                 )
         self.UpdateTrainingPhraseBatch = channel.unary_unary(
                 '/ondewo.nlu.Intents/UpdateTrainingPhraseBatch',
                 request_serializer=ondewo_dot_nlu_dot_intent__pb2.UpdateTrainingPhraseBatchRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_intent__pb2.TrainingPhraseStatusBatch.FromString,
+                response_deserializer=ondewo_dot_nlu_dot_intent__pb2.TrainingPhraseStatusBatchResponse.FromString,
                 )
         self.DeleteTrainingPhraseBatch = channel.unary_unary(
                 '/ondewo.nlu.Intents/DeleteTrainingPhraseBatch',
                 request_serializer=ondewo_dot_nlu_dot_intent__pb2.DeleteTrainingPhraseBatchRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_intent__pb2.DeleteTrainingPhraseStatuses.FromString,
+                response_deserializer=ondewo_dot_nlu_dot_intent__pb2.DeleteTrainingPhraseResponse.FromString,
                 )
 
 
@@ -199,7 +199,7 @@ class IntentsServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetTrainingPhraseBatch(self, request, context):
-        """Retrieve a specific training phrases batch (of a specific intent).
+        """Retrieve a training phrases batch of the specified names.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -213,7 +213,7 @@ class IntentsServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def DeleteTrainingPhraseBatch(self, request, context):
-        """Delete a specific training phrases batch (of a specific intent).
+        """Delete a training phrases batch of the specified names.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -260,22 +260,22 @@ def add_IntentsServicer_to_server(servicer, server):
             'CreateTrainingPhraseBatch': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateTrainingPhraseBatch,
                     request_deserializer=ondewo_dot_nlu_dot_intent__pb2.CreateTrainingPhraseBatchRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_intent__pb2.TrainingPhraseStatusBatch.SerializeToString,
+                    response_serializer=ondewo_dot_nlu_dot_intent__pb2.TrainingPhraseStatusBatchResponse.SerializeToString,
             ),
             'GetTrainingPhraseBatch': grpc.unary_unary_rpc_method_handler(
                     servicer.GetTrainingPhraseBatch,
                     request_deserializer=ondewo_dot_nlu_dot_intent__pb2.GetTrainingPhraseBatchRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_intent__pb2.TrainingPhraseStatusBatch.SerializeToString,
+                    response_serializer=ondewo_dot_nlu_dot_intent__pb2.TrainingPhraseStatusBatchResponse.SerializeToString,
             ),
             'UpdateTrainingPhraseBatch': grpc.unary_unary_rpc_method_handler(
                     servicer.UpdateTrainingPhraseBatch,
                     request_deserializer=ondewo_dot_nlu_dot_intent__pb2.UpdateTrainingPhraseBatchRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_intent__pb2.TrainingPhraseStatusBatch.SerializeToString,
+                    response_serializer=ondewo_dot_nlu_dot_intent__pb2.TrainingPhraseStatusBatchResponse.SerializeToString,
             ),
             'DeleteTrainingPhraseBatch': grpc.unary_unary_rpc_method_handler(
                     servicer.DeleteTrainingPhraseBatch,
                     request_deserializer=ondewo_dot_nlu_dot_intent__pb2.DeleteTrainingPhraseBatchRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_intent__pb2.DeleteTrainingPhraseStatuses.SerializeToString,
+                    response_serializer=ondewo_dot_nlu_dot_intent__pb2.DeleteTrainingPhraseResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -450,7 +450,7 @@ class Intents(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/CreateTrainingPhraseBatch',
             ondewo_dot_nlu_dot_intent__pb2.CreateTrainingPhraseBatchRequest.SerializeToString,
-            ondewo_dot_nlu_dot_intent__pb2.TrainingPhraseStatusBatch.FromString,
+            ondewo_dot_nlu_dot_intent__pb2.TrainingPhraseStatusBatchResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -467,7 +467,7 @@ class Intents(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/GetTrainingPhraseBatch',
             ondewo_dot_nlu_dot_intent__pb2.GetTrainingPhraseBatchRequest.SerializeToString,
-            ondewo_dot_nlu_dot_intent__pb2.TrainingPhraseStatusBatch.FromString,
+            ondewo_dot_nlu_dot_intent__pb2.TrainingPhraseStatusBatchResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -484,7 +484,7 @@ class Intents(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/UpdateTrainingPhraseBatch',
             ondewo_dot_nlu_dot_intent__pb2.UpdateTrainingPhraseBatchRequest.SerializeToString,
-            ondewo_dot_nlu_dot_intent__pb2.TrainingPhraseStatusBatch.FromString,
+            ondewo_dot_nlu_dot_intent__pb2.TrainingPhraseStatusBatchResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -501,6 +501,6 @@ class Intents(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/DeleteTrainingPhraseBatch',
             ondewo_dot_nlu_dot_intent__pb2.DeleteTrainingPhraseBatchRequest.SerializeToString,
-            ondewo_dot_nlu_dot_intent__pb2.DeleteTrainingPhraseStatuses.FromString,
+            ondewo_dot_nlu_dot_intent__pb2.DeleteTrainingPhraseResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
