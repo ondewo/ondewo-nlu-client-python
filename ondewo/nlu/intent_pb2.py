@@ -2410,7 +2410,6 @@ _CREATETRAININGPHRASEBATCHREQUEST = _descriptor.Descriptor(
   serialized_end=6850,
 )
 
-
 _GETTRAININGPHRASEBATCHREQUEST = _descriptor.Descriptor(
   name='GetTrainingPhraseBatchRequest',
   full_name='ondewo.nlu.GetTrainingPhraseBatchRequest',
