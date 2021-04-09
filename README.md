@@ -4,7 +4,7 @@
     </a>
 </p>
 
-Ondewo Client Library
+Ondewo NLU Client Library
 ======================
 
 This library facilitates the interaction between a user and his/her CAI server. It achieves this by providing a higher-level interface mediator.
@@ -13,16 +13,16 @@ This higher-level interface mediator is structured around a series of python fil
 
 Python Installation
 -------------------
-You can install the library by installing it directly from the repository:
+You can install the library by installing it directly from the pypi:
 ```bash
-pip install -e https://github.com/ondewo/ondewo-nlu-client-python#egg=ondewo_client
+pip install ondewo-nlu-client
 ```
 
 Or, you could clone it and install the requirements:
 ```bash
 git clone git@github.com:ondewo/ondewo-nlu-client-python.git
-cd ondewo-client
-pip install -r requirements/python-requirements.txt
+cd ondewo-nlu-client-python
+pip install -e .
 ```
 
 Let's Get Started! (WIP)
