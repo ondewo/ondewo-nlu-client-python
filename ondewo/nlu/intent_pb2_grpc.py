@@ -102,6 +102,11 @@ class IntentsStub(object):
                 request_serializer=ondewo_dot_nlu_dot_intent__pb2.DeleteTrainingPhraseBatchRequest.SerializeToString,
                 response_deserializer=ondewo_dot_nlu_dot_intent__pb2.DeleteTrainingPhraseBatchResponse.FromString,
                 )
+        self.ListTrainingPhrases = channel.unary_unary(
+                '/ondewo.nlu.Intents/ListTrainingPhrases',
+                request_serializer=ondewo_dot_nlu_dot_intent__pb2.ListTrainingPhrasesRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_intent__pb2.ListTrainingPhrasesResponse.FromString,
+                )
 
 
 class IntentsServicer(object):
@@ -219,6 +224,13 @@ class IntentsServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ListTrainingPhrases(self, request, context):
+        """List training phrases (of a specific intent).
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_IntentsServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -276,6 +288,11 @@ def add_IntentsServicer_to_server(servicer, server):
                     servicer.DeleteTrainingPhraseBatch,
                     request_deserializer=ondewo_dot_nlu_dot_intent__pb2.DeleteTrainingPhraseBatchRequest.FromString,
                     response_serializer=ondewo_dot_nlu_dot_intent__pb2.DeleteTrainingPhraseBatchResponse.SerializeToString,
+            ),
+            'ListTrainingPhrases': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListTrainingPhrases,
+                    request_deserializer=ondewo_dot_nlu_dot_intent__pb2.ListTrainingPhrasesRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_intent__pb2.ListTrainingPhrasesResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -502,5 +519,22 @@ class Intents(object):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/DeleteTrainingPhraseBatch',
             ondewo_dot_nlu_dot_intent__pb2.DeleteTrainingPhraseBatchRequest.SerializeToString,
             ondewo_dot_nlu_dot_intent__pb2.DeleteTrainingPhraseBatchResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListTrainingPhrases(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/ListTrainingPhrases',
+            ondewo_dot_nlu_dot_intent__pb2.ListTrainingPhrasesRequest.SerializeToString,
+            ondewo_dot_nlu_dot_intent__pb2.ListTrainingPhrasesResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
