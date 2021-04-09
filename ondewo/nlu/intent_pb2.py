@@ -27,7 +27,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x17ondewo/nlu/intent.proto\x12\nondewo.nlu\x1a\x1cgoogle/api/annotations.proto\x1a\x18ondewo/nlu/context.proto\x1a\x17ondewo/nlu/common.proto\x1a#google/longrunning/operations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a google/protobuf/field_mask.proto\x1a\x1cgoogle/protobuf/struct.proto\"\xab\"\n\x06Intent\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x14\n\x0c\x64isplay_name\x18\x02 \x01(\t\x12\x36\n\rwebhook_state\x18\x06 \x01(\x0e\x32\x1f.ondewo.nlu.Intent.WebhookState\x12\x10\n\x08priority\x18\x03 \x01(\x05\x12\x13\n\x0bis_fallback\x18\x04 \x01(\x08\x12\x13\n\x0bml_disabled\x18\x13 \x01(\x08\x12\x1b\n\x13input_context_names\x18\x07 \x03(\t\x12\x0e\n\x06\x65vents\x18\x08 \x03(\t\x12;\n\x10training_phrases\x18\t \x03(\x0b\x32!.ondewo.nlu.Intent.TrainingPhrase\x12\x0e\n\x06\x61\x63tion\x18\n \x01(\t\x12,\n\x0foutput_contexts\x18\x0b \x03(\x0b\x32\x13.ondewo.nlu.Context\x12\x16\n\x0ereset_contexts\x18\x0c \x01(\x08\x12\x30\n\nparameters\x18\r \x03(\x0b\x32\x1c.ondewo.nlu.Intent.Parameter\x12,\n\x08messages\x18\x0e \x03(\x0b\x32\x1a.ondewo.nlu.Intent.Message\x12G\n\x1a\x64\x65\x66\x61ult_response_platforms\x18\x0f \x03(\x0e\x32#.ondewo.nlu.Intent.Message.Platform\x12!\n\x19root_followup_intent_name\x18\x10 \x01(\t\x12#\n\x1bparent_followup_intent_name\x18\x11 \x01(\t\x12\x43\n\x14\x66ollowup_intent_info\x18\x12 \x03(\x0b\x32%.ondewo.nlu.Intent.FollowupIntentInfo\x12\x17\n\x0fnext_page_token\x18\x1e \x01(\t\x12\x13\n\x0b\x64omain_name\x18\x1f \x01(\t\x12\x1d\n\x15is_start_of_deviation\x18  \x01(\x08\x12\x1b\n\x13is_end_of_deviation\x18! \x01(\x08\x12\x1d\n\x15training_phrase_count\x18\" \x01(\x05\x12/\n\x06status\x18# \x01(\x0e\x32\x1f.ondewo.nlu.Intent.IntentStatus\x1a\xcb\x03\n\x0eTrainingPhrase\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x34\n\x04type\x18\x02 \x01(\x0e\x32&.ondewo.nlu.Intent.TrainingPhrase.Type\x12\x0c\n\x04text\x18\x03 \x01(\t\x12:\n\x08\x65ntities\x18\x04 \x03(\x0b\x32(.ondewo.nlu.Intent.TrainingPhrase.Entity\x12\x19\n\x11times_added_count\x18\x05 \x01(\x05\x1a\xd6\x01\n\x06\x45ntity\x12\x18\n\x10\x65ntity_type_name\x18\x01 \x01(\t\x12 \n\x18\x65ntity_type_display_name\x18\x03 \x01(\t\x12\x19\n\x11\x65ntity_value_name\x18\x04 \x01(\t\x12!\n\x19\x65ntity_value_display_name\x18\x05 \x01(\t\x12\r\n\x05start\x18\x06 \x01(\x05\x12\x0b\n\x03\x65nd\x18\x07 \x01(\x05\x12\x16\n\x0eparameter_name\x18\x08 \x01(\t\x12\x1e\n\x16parameter_display_name\x18\t \x01(\t\"7\n\x04Type\x12\x14\n\x10TYPE_UNSPECIFIED\x10\x00\x12\x0b\n\x07\x45XAMPLE\x10\x01\x12\x0c\n\x08TEMPLATE\x10\x02\x1a\xc6\x01\n\tParameter\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x14\n\x0c\x64isplay_name\x18\x02 \x01(\t\x12\r\n\x05value\x18\x03 \x01(\t\x12\x15\n\rdefault_value\x18\x04 \x01(\t\x12\x18\n\x10\x65ntity_type_name\x18\x05 \x01(\t\x12 \n\x18\x65ntity_type_display_name\x18\x06 \x01(\t\x12\x11\n\tmandatory\x18\x07 \x01(\x08\x12\x0f\n\x07prompts\x18\x08 \x03(\t\x12\x0f\n\x07is_list\x18\t \x01(\x08\x1a\xc8\x14\n\x07Message\x12/\n\x04text\x18\x01 \x01(\x0b\x32\x1f.ondewo.nlu.Intent.Message.TextH\x00\x12\x31\n\x05image\x18\x02 \x01(\x0b\x32 .ondewo.nlu.Intent.Message.ImageH\x00\x12@\n\rquick_replies\x18\x03 \x01(\x0b\x32\'.ondewo.nlu.Intent.Message.QuickRepliesH\x00\x12/\n\x04\x63\x61rd\x18\x04 \x01(\x0b\x32\x1f.ondewo.nlu.Intent.Message.CardH\x00\x12*\n\x07payload\x18\x05 \x01(\x0b\x32\x17.google.protobuf.StructH\x00\x12\x46\n\x10simple_responses\x18\x07 \x01(\x0b\x32*.ondewo.nlu.Intent.Message.SimpleResponsesH\x00\x12:\n\nbasic_card\x18\x08 \x01(\x0b\x32$.ondewo.nlu.Intent.Message.BasicCardH\x00\x12=\n\x0bsuggestions\x18\t \x01(\x0b\x32&.ondewo.nlu.Intent.Message.SuggestionsH\x00\x12K\n\x13link_out_suggestion\x18\n \x01(\x0b\x32,.ondewo.nlu.Intent.Message.LinkOutSuggestionH\x00\x12<\n\x0blist_select\x18\x0b \x01(\x0b\x32%.ondewo.nlu.Intent.Message.ListSelectH\x00\x12\x44\n\x0f\x63\x61rousel_select\x18\x0c \x01(\x0b\x32).ondewo.nlu.Intent.Message.CarouselSelectH\x00\x12\x38\n\thtml_text\x18\r \x01(\x0b\x32#.ondewo.nlu.Intent.Message.HTMLTextH\x00\x12\x31\n\x05video\x18\x0e \x01(\x0b\x32 .ondewo.nlu.Intent.Message.VideoH\x00\x12\x31\n\x05\x61udio\x18\x0f \x01(\x0b\x32 .ondewo.nlu.Intent.Message.AudioH\x00\x12\x35\n\x08platform\x18\x06 \x01(\x0e\x32#.ondewo.nlu.Intent.Message.Platform\x1a\x14\n\x04Text\x12\x0c\n\x04text\x18\x01 \x03(\t\x1a\x36\n\x05Image\x12\x11\n\timage_uri\x18\x01 \x01(\t\x12\x1a\n\x12\x61\x63\x63\x65ssibility_text\x18\x02 \x01(\t\x1a\x34\n\x0cQuickReplies\x12\r\n\x05title\x18\x01 \x01(\t\x12\x15\n\rquick_replies\x18\x02 \x03(\t\x1a\x9d\x01\n\x04\x43\x61rd\x12\r\n\x05title\x18\x01 \x01(\t\x12\x10\n\x08subtitle\x18\x02 \x01(\t\x12\x11\n\timage_uri\x18\x03 \x01(\t\x12\x37\n\x07\x62uttons\x18\x04 \x03(\x0b\x32&.ondewo.nlu.Intent.Message.Card.Button\x1a(\n\x06\x42utton\x12\x0c\n\x04text\x18\x01 \x01(\t\x12\x10\n\x08postback\x18\x02 \x01(\t\x1aL\n\x0eSimpleResponse\x12\x16\n\x0etext_to_speech\x18\x01 \x01(\t\x12\x0c\n\x04ssml\x18\x02 \x01(\t\x12\x14\n\x0c\x64isplay_text\x18\x03 \x01(\t\x1aV\n\x0fSimpleResponses\x12\x43\n\x10simple_responses\x18\x01 \x03(\x0b\x32).ondewo.nlu.Intent.Message.SimpleResponse\x1a\xbf\x02\n\tBasicCard\x12\r\n\x05title\x18\x01 \x01(\t\x12\x10\n\x08subtitle\x18\x02 \x01(\t\x12\x16\n\x0e\x66ormatted_text\x18\x03 \x01(\t\x12/\n\x05image\x18\x04 \x01(\x0b\x32 .ondewo.nlu.Intent.Message.Image\x12<\n\x07\x62uttons\x18\x05 \x03(\x0b\x32+.ondewo.nlu.Intent.Message.BasicCard.Button\x1a\x89\x01\n\x06\x42utton\x12\r\n\x05title\x18\x01 \x01(\t\x12R\n\x0fopen_uri_action\x18\x02 \x01(\x0b\x32\x39.ondewo.nlu.Intent.Message.BasicCard.Button.OpenUriAction\x1a\x1c\n\rOpenUriAction\x12\x0b\n\x03uri\x18\x01 \x01(\t\x1a\x1b\n\nSuggestion\x12\r\n\x05title\x18\x01 \x01(\t\x1aI\n\x0bSuggestions\x12:\n\x0bsuggestions\x18\x01 \x03(\x0b\x32%.ondewo.nlu.Intent.Message.Suggestion\x1a:\n\x11LinkOutSuggestion\x12\x18\n\x10\x64\x65stination_name\x18\x01 \x01(\t\x12\x0b\n\x03uri\x18\x02 \x01(\t\x1a\xed\x01\n\nListSelect\x12\r\n\x05title\x18\x01 \x01(\t\x12\x39\n\x05items\x18\x02 \x03(\x0b\x32*.ondewo.nlu.Intent.Message.ListSelect.Item\x1a\x94\x01\n\x04Item\x12\x37\n\x04info\x18\x01 \x01(\x0b\x32).ondewo.nlu.Intent.Message.SelectItemInfo\x12\r\n\x05title\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\x12/\n\x05image\x18\x04 \x01(\x0b\x32 .ondewo.nlu.Intent.Message.Image\x1a\xe6\x01\n\x0e\x43\x61rouselSelect\x12=\n\x05items\x18\x01 \x03(\x0b\x32..ondewo.nlu.Intent.Message.CarouselSelect.Item\x1a\x94\x01\n\x04Item\x12\x37\n\x04info\x18\x01 \x01(\x0b\x32).ondewo.nlu.Intent.Message.SelectItemInfo\x12\r\n\x05title\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\x12/\n\x05image\x18\x04 \x01(\x0b\x32 .ondewo.nlu.Intent.Message.Image\x1a\x18\n\x08HTMLText\x12\x0c\n\x04text\x18\x01 \x03(\t\x1a\x30\n\x05Video\x12\x0b\n\x03uri\x18\x01 \x01(\t\x12\x1a\n\x12\x61\x63\x63\x65ssibility_text\x18\x02 \x01(\t\x1a\x30\n\x05\x41udio\x12\x0b\n\x03uri\x18\x01 \x01(\t\x12\x1a\n\x12\x61\x63\x63\x65ssibility_text\x18\x02 \x01(\t\x1a/\n\x0eSelectItemInfo\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x10\n\x08synonyms\x18\x02 \x03(\t\"\x8b\x01\n\x08Platform\x12\x18\n\x14PLATFORM_UNSPECIFIED\x10\x00\x12\x0c\n\x08\x46\x41\x43\x45\x42OOK\x10\x01\x12\t\n\x05SLACK\x10\x02\x12\x0c\n\x08TELEGRAM\x10\x03\x12\x07\n\x03KIK\x10\x04\x12\t\n\x05SKYPE\x10\x05\x12\x08\n\x04LINE\x10\x06\x12\t\n\x05VIBER\x10\x07\x12\x15\n\x11\x41\x43TIONS_ON_GOOGLE\x10\x08\x42\t\n\x07message\x1aW\n\x12\x46ollowupIntentInfo\x12\x1c\n\x14\x66ollowup_intent_name\x18\x01 \x01(\t\x12#\n\x1bparent_followup_intent_name\x18\x02 \x01(\t\"(\n\x0cIntentStatus\x12\n\n\x06\x41\x43TIVE\x10\x00\x12\x0c\n\x08INACTIVE\x10\x01\"t\n\x0cWebhookState\x12\x1d\n\x19WEBHOOK_STATE_UNSPECIFIED\x10\x00\x12\x19\n\x15WEBHOOK_STATE_ENABLED\x10\x01\x12*\n&WEBHOOK_STATE_ENABLED_FOR_SLOT_FILLING\x10\x02\"\xe6\x01\n\x12ListIntentsRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x15\n\rlanguage_code\x18\x02 \x01(\t\x12+\n\x0bintent_view\x18\x03 \x01(\x0e\x32\x16.ondewo.nlu.IntentView\x12\x12\n\npage_token\x18\x05 \x01(\t\x12\x36\n\x12\x66ilter_by_category\x18\x06 \x01(\x0e\x32\x1a.ondewo.nlu.IntentCategory\x12\x30\n\rsort_by_field\x18\x07 \x01(\x0b\x32\x19.ondewo.nlu.IntentSorting\"S\n\x13ListIntentsResponse\x12#\n\x07intents\x18\x01 \x03(\x0b\x32\x12.ondewo.nlu.Intent\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t\"x\n\x10GetIntentRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x15\n\rlanguage_code\x18\x02 \x01(\t\x12+\n\x0bintent_view\x18\x03 \x01(\x0e\x32\x16.ondewo.nlu.IntentView\x12\x12\n\npage_token\x18\n \x01(\t\"\x8d\x01\n\x13\x43reateIntentRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\"\n\x06intent\x18\x02 \x01(\x0b\x32\x12.ondewo.nlu.Intent\x12\x15\n\rlanguage_code\x18\x03 \x01(\t\x12+\n\x0bintent_view\x18\x04 \x01(\x0e\x32\x16.ondewo.nlu.IntentView\"\xae\x01\n\x13UpdateIntentRequest\x12\"\n\x06intent\x18\x01 \x01(\x0b\x32\x12.ondewo.nlu.Intent\x12\x15\n\rlanguage_code\x18\x02 \x01(\t\x12/\n\x0bupdate_mask\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\x12+\n\x0bintent_view\x18\x04 \x01(\x0e\x32\x16.ondewo.nlu.IntentView\"#\n\x13\x44\x65leteIntentRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"\x84\x02\n\x19\x42\x61tchUpdateIntentsRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x1a\n\x10intent_batch_uri\x18\x02 \x01(\tH\x00\x12\x36\n\x13intent_batch_inline\x18\x03 \x01(\x0b\x32\x17.ondewo.nlu.IntentBatchH\x00\x12\x15\n\rlanguage_code\x18\x04 \x01(\t\x12/\n\x0bupdate_mask\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\x12+\n\x0bintent_view\x18\x06 \x01(\x0e\x32\x16.ondewo.nlu.IntentViewB\x0e\n\x0cintent_batch\"A\n\x1a\x42\x61tchUpdateIntentsResponse\x12#\n\x07intents\x18\x01 \x03(\x0b\x32\x12.ondewo.nlu.Intent\"P\n\x19\x42\x61tchDeleteIntentsRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12#\n\x07intents\x18\x02 \x03(\x0b\x32\x12.ondewo.nlu.Intent\"2\n\x0bIntentBatch\x12#\n\x07intents\x18\x01 \x03(\x0b\x32\x12.ondewo.nlu.Intent\"\xb0\x02\n\rIntentSorting\x12\x43\n\rsorting_field\x18\x01 \x01(\x0e\x32,.ondewo.nlu.IntentSorting.IntentSortingField\x12-\n\x0csorting_mode\x18\x02 \x01(\x0e\x32\x17.ondewo.nlu.SortingMode\"\xaa\x01\n\x12IntentSortingField\x12\x15\n\x11NO_INTENT_SORTING\x10\x00\x12\x17\n\x13SORT_INTENT_BY_NAME\x10\x01\x12 \n\x1cSORT_INTENT_BY_CREATION_DATE\x10\x02\x12\x1f\n\x1bSORT_INTENT_BY_LAST_UPDATED\x10\x03\x12!\n\x1dSORT_INTENT_BY_USERSAYS_COUNT\x10\x04\"_\n UpdateTrainingPhraseBatchRequest\x12;\n\x10training_phrases\x18\x01 \x03(\x0b\x32!.ondewo.nlu.Intent.TrainingPhrase\"\x81\x01\n\x14TrainingPhraseStatus\x12<\n\x0ftraining_phrase\x18\x01 \x01(\x0b\x32!.ondewo.nlu.Intent.TrainingPhraseH\x00\x12\x17\n\rerror_message\x18\x02 \x01(\tH\x00\x42\x12\n\x10phrase_or_status\"{\n!TrainingPhraseStatusBatchResponse\x12\x42\n\x18training_phrase_statuses\x18\x01 \x03(\x0b\x32 .ondewo.nlu.TrainingPhraseStatus\x12\x12\n\nhas_errors\x18\x02 \x01(\x08\"\x96\x02\n CreateTrainingPhraseBatchRequest\x12j\n\x18training_phrase_requests\x18\x01 \x03(\x0b\x32H.ondewo.nlu.CreateTrainingPhraseBatchRequest.CreateTrainingPhraseRequest\x1a\x85\x01\n\x1b\x43reateTrainingPhraseRequest\x12\x13\n\x0bintent_name\x18\x01 \x01(\t\x12:\n\x0ftraining_phrase\x18\x02 \x01(\x0b\x32!.ondewo.nlu.Intent.TrainingPhrase\x12\x15\n\rlanguage_code\x18\x03 \x01(\t\".\n\x1dGetTrainingPhraseBatchRequest\x12\r\n\x05names\x18\x01 \x03(\t\"1\n DeleteTrainingPhraseBatchRequest\x12\r\n\x05names\x18\x01 \x03(\t\"\x9a\x02\n!DeleteTrainingPhraseBatchResponse\x12\x61\n\x0f\x64\x65lete_statuses\x18\x01 \x03(\x0b\x32H.ondewo.nlu.DeleteTrainingPhraseBatchResponse.DeleteTrainingPhraseStatus\x12\x12\n\nhas_errors\x18\x02 \x01(\x08\x1a~\n\x1a\x44\x65leteTrainingPhraseStatus\x12\x36\n\x14successfully_deleted\x18\x01 \x01(\x0b\x32\x16.google.protobuf.EmptyH\x00\x12\x17\n\rerror_message\x18\x02 \x01(\tH\x00\x42\x0f\n\rdelete_status\"\\\n\x1aListTrainingPhrasesRequest\x12\x13\n\x0bintent_name\x18\x01 \x01(\t\x12\x15\n\rlanguage_code\x18\x02 \x01(\t\x12\x12\n\npage_token\x18\x03 \x01(\t\"s\n\x1bListTrainingPhrasesResponse\x12;\n\x10training_phrases\x18\x01 \x03(\x0b\x32!.ondewo.nlu.Intent.TrainingPhrase\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t*q\n\nIntentView\x12\x1b\n\x17INTENT_VIEW_UNSPECIFIED\x10\x00\x12\x14\n\x10INTENT_VIEW_FULL\x10\x01\x12\x17\n\x13INTENT_VIEW_PARTIAL\x10\x02\x12\x17\n\x13INTENT_VIEW_SHALLOW\x10\x03*P\n\x0eIntentCategory\x12\x0f\n\x0b\x41LL_INTENTS\x10\x00\x12\x13\n\x0f\x44\x45\x46\x41ULT_INTENTS\x10\x01\x12\x18\n\x14USER_DEFINED_INTENTS\x10\x02\x32\xe3\x0b\n\x07Intents\x12}\n\x0bListIntents\x12\x1e.ondewo.nlu.ListIntentsRequest\x1a\x1f.ondewo.nlu.ListIntentsResponse\"-\x82\xd3\xe4\x93\x02\'\x12%/v2/{parent=projects/*/agent}/intents\x12l\n\tGetIntent\x12\x1c.ondewo.nlu.GetIntentRequest\x1a\x12.ondewo.nlu.Intent\"-\x82\xd3\xe4\x93\x02\'\x12%/v2/{name=projects/*/agent/intents/*}\x12u\n\x0c\x43reateIntent\x12\x1f.ondewo.nlu.CreateIntentRequest\x1a\x12.ondewo.nlu.Intent\"0\x82\xd3\xe4\x93\x02*\"%/v2/{parent=projects/*/agent}/intents:\x01*\x12|\n\x0cUpdateIntent\x12\x1f.ondewo.nlu.UpdateIntentRequest\x1a\x12.ondewo.nlu.Intent\"7\x82\xd3\xe4\x93\x02\x31\x32,/v2/{intent.name=projects/*/agent/intents/*}:\x01*\x12v\n\x0c\x44\x65leteIntent\x12\x1f.ondewo.nlu.DeleteIntentRequest\x1a\x16.google.protobuf.Empty\"-\x82\xd3\xe4\x93\x02\'*%/v2/{name=projects/*/agent/intents/*}\x12\x98\x01\n\x12\x42\x61tchUpdateIntents\x12%.ondewo.nlu.BatchUpdateIntentsRequest\x1a\x1d.google.longrunning.Operation\"<\x82\xd3\xe4\x93\x02\x36\"1/v2/{parent=projects/*/agent}/intents:batchUpdate:\x01*\x12\x98\x01\n\x12\x42\x61tchDeleteIntents\x12%.ondewo.nlu.BatchDeleteIntentsRequest\x1a\x1d.google.longrunning.Operation\"<\x82\xd3\xe4\x93\x02\x36\"1/v2/{parent=projects/*/agent}/intents:batchDelete:\x01*\x12x\n\x19\x43reateTrainingPhraseBatch\x12,.ondewo.nlu.CreateTrainingPhraseBatchRequest\x1a-.ondewo.nlu.TrainingPhraseStatusBatchResponse\x12r\n\x16GetTrainingPhraseBatch\x12).ondewo.nlu.GetTrainingPhraseBatchRequest\x1a-.ondewo.nlu.TrainingPhraseStatusBatchResponse\x12x\n\x19UpdateTrainingPhraseBatch\x12,.ondewo.nlu.UpdateTrainingPhraseBatchRequest\x1a-.ondewo.nlu.TrainingPhraseStatusBatchResponse\x12x\n\x19\x44\x65leteTrainingPhraseBatch\x12,.ondewo.nlu.DeleteTrainingPhraseBatchRequest\x1a-.ondewo.nlu.DeleteTrainingPhraseBatchResponse\x12\x66\n\x13ListTrainingPhrases\x12&.ondewo.nlu.ListTrainingPhrasesRequest\x1a\'.ondewo.nlu.ListTrainingPhrasesResponseb\x06proto3'
+  serialized_pb=b'\n\x17ondewo/nlu/intent.proto\x12\nondewo.nlu\x1a\x1cgoogle/api/annotations.proto\x1a\x18ondewo/nlu/context.proto\x1a\x17ondewo/nlu/common.proto\x1a#google/longrunning/operations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a google/protobuf/field_mask.proto\x1a\x1cgoogle/protobuf/struct.proto\"\xc2\"\n\x06Intent\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x14\n\x0c\x64isplay_name\x18\x02 \x01(\t\x12\x36\n\rwebhook_state\x18\x06 \x01(\x0e\x32\x1f.ondewo.nlu.Intent.WebhookState\x12\x10\n\x08priority\x18\x03 \x01(\x05\x12\x13\n\x0bis_fallback\x18\x04 \x01(\x08\x12\x13\n\x0bml_disabled\x18\x13 \x01(\x08\x12\x1b\n\x13input_context_names\x18\x07 \x03(\t\x12\x0e\n\x06\x65vents\x18\x08 \x03(\t\x12;\n\x10training_phrases\x18\t \x03(\x0b\x32!.ondewo.nlu.Intent.TrainingPhrase\x12\x0e\n\x06\x61\x63tion\x18\n \x01(\t\x12,\n\x0foutput_contexts\x18\x0b \x03(\x0b\x32\x13.ondewo.nlu.Context\x12\x16\n\x0ereset_contexts\x18\x0c \x01(\x08\x12\x30\n\nparameters\x18\r \x03(\x0b\x32\x1c.ondewo.nlu.Intent.Parameter\x12,\n\x08messages\x18\x0e \x03(\x0b\x32\x1a.ondewo.nlu.Intent.Message\x12G\n\x1a\x64\x65\x66\x61ult_response_platforms\x18\x0f \x03(\x0e\x32#.ondewo.nlu.Intent.Message.Platform\x12!\n\x19root_followup_intent_name\x18\x10 \x01(\t\x12#\n\x1bparent_followup_intent_name\x18\x11 \x01(\t\x12\x43\n\x14\x66ollowup_intent_info\x18\x12 \x03(\x0b\x32%.ondewo.nlu.Intent.FollowupIntentInfo\x12\x17\n\x0fnext_page_token\x18\x1e \x01(\t\x12\x13\n\x0b\x64omain_name\x18\x1f \x01(\t\x12\x1d\n\x15is_start_of_deviation\x18  \x01(\x08\x12\x1b\n\x13is_end_of_deviation\x18! \x01(\x08\x12\x1d\n\x15training_phrase_count\x18\" \x01(\x05\x12/\n\x06status\x18# \x01(\x0e\x32\x1f.ondewo.nlu.Intent.IntentStatus\x1a\xe2\x03\n\x0eTrainingPhrase\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x34\n\x04type\x18\x02 \x01(\x0e\x32&.ondewo.nlu.Intent.TrainingPhrase.Type\x12\x0c\n\x04text\x18\x03 \x01(\t\x12:\n\x08\x65ntities\x18\x04 \x03(\x0b\x32(.ondewo.nlu.Intent.TrainingPhrase.Entity\x12\x19\n\x11times_added_count\x18\x05 \x01(\x05\x12\x15\n\rlanguage_code\x18\x06 \x01(\t\x1a\xd6\x01\n\x06\x45ntity\x12\x18\n\x10\x65ntity_type_name\x18\x01 \x01(\t\x12 \n\x18\x65ntity_type_display_name\x18\x03 \x01(\t\x12\x19\n\x11\x65ntity_value_name\x18\x04 \x01(\t\x12!\n\x19\x65ntity_value_display_name\x18\x05 \x01(\t\x12\r\n\x05start\x18\x06 \x01(\x05\x12\x0b\n\x03\x65nd\x18\x07 \x01(\x05\x12\x16\n\x0eparameter_name\x18\x08 \x01(\t\x12\x1e\n\x16parameter_display_name\x18\t \x01(\t\"7\n\x04Type\x12\x14\n\x10TYPE_UNSPECIFIED\x10\x00\x12\x0b\n\x07\x45XAMPLE\x10\x01\x12\x0c\n\x08TEMPLATE\x10\x02\x1a\xc6\x01\n\tParameter\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x14\n\x0c\x64isplay_name\x18\x02 \x01(\t\x12\r\n\x05value\x18\x03 \x01(\t\x12\x15\n\rdefault_value\x18\x04 \x01(\t\x12\x18\n\x10\x65ntity_type_name\x18\x05 \x01(\t\x12 \n\x18\x65ntity_type_display_name\x18\x06 \x01(\t\x12\x11\n\tmandatory\x18\x07 \x01(\x08\x12\x0f\n\x07prompts\x18\x08 \x03(\t\x12\x0f\n\x07is_list\x18\t \x01(\x08\x1a\xc8\x14\n\x07Message\x12/\n\x04text\x18\x01 \x01(\x0b\x32\x1f.ondewo.nlu.Intent.Message.TextH\x00\x12\x31\n\x05image\x18\x02 \x01(\x0b\x32 .ondewo.nlu.Intent.Message.ImageH\x00\x12@\n\rquick_replies\x18\x03 \x01(\x0b\x32\'.ondewo.nlu.Intent.Message.QuickRepliesH\x00\x12/\n\x04\x63\x61rd\x18\x04 \x01(\x0b\x32\x1f.ondewo.nlu.Intent.Message.CardH\x00\x12*\n\x07payload\x18\x05 \x01(\x0b\x32\x17.google.protobuf.StructH\x00\x12\x46\n\x10simple_responses\x18\x07 \x01(\x0b\x32*.ondewo.nlu.Intent.Message.SimpleResponsesH\x00\x12:\n\nbasic_card\x18\x08 \x01(\x0b\x32$.ondewo.nlu.Intent.Message.BasicCardH\x00\x12=\n\x0bsuggestions\x18\t \x01(\x0b\x32&.ondewo.nlu.Intent.Message.SuggestionsH\x00\x12K\n\x13link_out_suggestion\x18\n \x01(\x0b\x32,.ondewo.nlu.Intent.Message.LinkOutSuggestionH\x00\x12<\n\x0blist_select\x18\x0b \x01(\x0b\x32%.ondewo.nlu.Intent.Message.ListSelectH\x00\x12\x44\n\x0f\x63\x61rousel_select\x18\x0c \x01(\x0b\x32).ondewo.nlu.Intent.Message.CarouselSelectH\x00\x12\x38\n\thtml_text\x18\r \x01(\x0b\x32#.ondewo.nlu.Intent.Message.HTMLTextH\x00\x12\x31\n\x05video\x18\x0e \x01(\x0b\x32 .ondewo.nlu.Intent.Message.VideoH\x00\x12\x31\n\x05\x61udio\x18\x0f \x01(\x0b\x32 .ondewo.nlu.Intent.Message.AudioH\x00\x12\x35\n\x08platform\x18\x06 \x01(\x0e\x32#.ondewo.nlu.Intent.Message.Platform\x1a\x14\n\x04Text\x12\x0c\n\x04text\x18\x01 \x03(\t\x1a\x36\n\x05Image\x12\x11\n\timage_uri\x18\x01 \x01(\t\x12\x1a\n\x12\x61\x63\x63\x65ssibility_text\x18\x02 \x01(\t\x1a\x34\n\x0cQuickReplies\x12\r\n\x05title\x18\x01 \x01(\t\x12\x15\n\rquick_replies\x18\x02 \x03(\t\x1a\x9d\x01\n\x04\x43\x61rd\x12\r\n\x05title\x18\x01 \x01(\t\x12\x10\n\x08subtitle\x18\x02 \x01(\t\x12\x11\n\timage_uri\x18\x03 \x01(\t\x12\x37\n\x07\x62uttons\x18\x04 \x03(\x0b\x32&.ondewo.nlu.Intent.Message.Card.Button\x1a(\n\x06\x42utton\x12\x0c\n\x04text\x18\x01 \x01(\t\x12\x10\n\x08postback\x18\x02 \x01(\t\x1aL\n\x0eSimpleResponse\x12\x16\n\x0etext_to_speech\x18\x01 \x01(\t\x12\x0c\n\x04ssml\x18\x02 \x01(\t\x12\x14\n\x0c\x64isplay_text\x18\x03 \x01(\t\x1aV\n\x0fSimpleResponses\x12\x43\n\x10simple_responses\x18\x01 \x03(\x0b\x32).ondewo.nlu.Intent.Message.SimpleResponse\x1a\xbf\x02\n\tBasicCard\x12\r\n\x05title\x18\x01 \x01(\t\x12\x10\n\x08subtitle\x18\x02 \x01(\t\x12\x16\n\x0e\x66ormatted_text\x18\x03 \x01(\t\x12/\n\x05image\x18\x04 \x01(\x0b\x32 .ondewo.nlu.Intent.Message.Image\x12<\n\x07\x62uttons\x18\x05 \x03(\x0b\x32+.ondewo.nlu.Intent.Message.BasicCard.Button\x1a\x89\x01\n\x06\x42utton\x12\r\n\x05title\x18\x01 \x01(\t\x12R\n\x0fopen_uri_action\x18\x02 \x01(\x0b\x32\x39.ondewo.nlu.Intent.Message.BasicCard.Button.OpenUriAction\x1a\x1c\n\rOpenUriAction\x12\x0b\n\x03uri\x18\x01 \x01(\t\x1a\x1b\n\nSuggestion\x12\r\n\x05title\x18\x01 \x01(\t\x1aI\n\x0bSuggestions\x12:\n\x0bsuggestions\x18\x01 \x03(\x0b\x32%.ondewo.nlu.Intent.Message.Suggestion\x1a:\n\x11LinkOutSuggestion\x12\x18\n\x10\x64\x65stination_name\x18\x01 \x01(\t\x12\x0b\n\x03uri\x18\x02 \x01(\t\x1a\xed\x01\n\nListSelect\x12\r\n\x05title\x18\x01 \x01(\t\x12\x39\n\x05items\x18\x02 \x03(\x0b\x32*.ondewo.nlu.Intent.Message.ListSelect.Item\x1a\x94\x01\n\x04Item\x12\x37\n\x04info\x18\x01 \x01(\x0b\x32).ondewo.nlu.Intent.Message.SelectItemInfo\x12\r\n\x05title\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\x12/\n\x05image\x18\x04 \x01(\x0b\x32 .ondewo.nlu.Intent.Message.Image\x1a\xe6\x01\n\x0e\x43\x61rouselSelect\x12=\n\x05items\x18\x01 \x03(\x0b\x32..ondewo.nlu.Intent.Message.CarouselSelect.Item\x1a\x94\x01\n\x04Item\x12\x37\n\x04info\x18\x01 \x01(\x0b\x32).ondewo.nlu.Intent.Message.SelectItemInfo\x12\r\n\x05title\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\x12/\n\x05image\x18\x04 \x01(\x0b\x32 .ondewo.nlu.Intent.Message.Image\x1a\x18\n\x08HTMLText\x12\x0c\n\x04text\x18\x01 \x03(\t\x1a\x30\n\x05Video\x12\x0b\n\x03uri\x18\x01 \x01(\t\x12\x1a\n\x12\x61\x63\x63\x65ssibility_text\x18\x02 \x01(\t\x1a\x30\n\x05\x41udio\x12\x0b\n\x03uri\x18\x01 \x01(\t\x12\x1a\n\x12\x61\x63\x63\x65ssibility_text\x18\x02 \x01(\t\x1a/\n\x0eSelectItemInfo\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x10\n\x08synonyms\x18\x02 \x03(\t\"\x8b\x01\n\x08Platform\x12\x18\n\x14PLATFORM_UNSPECIFIED\x10\x00\x12\x0c\n\x08\x46\x41\x43\x45\x42OOK\x10\x01\x12\t\n\x05SLACK\x10\x02\x12\x0c\n\x08TELEGRAM\x10\x03\x12\x07\n\x03KIK\x10\x04\x12\t\n\x05SKYPE\x10\x05\x12\x08\n\x04LINE\x10\x06\x12\t\n\x05VIBER\x10\x07\x12\x15\n\x11\x41\x43TIONS_ON_GOOGLE\x10\x08\x42\t\n\x07message\x1aW\n\x12\x46ollowupIntentInfo\x12\x1c\n\x14\x66ollowup_intent_name\x18\x01 \x01(\t\x12#\n\x1bparent_followup_intent_name\x18\x02 \x01(\t\"(\n\x0cIntentStatus\x12\n\n\x06\x41\x43TIVE\x10\x00\x12\x0c\n\x08INACTIVE\x10\x01\"t\n\x0cWebhookState\x12\x1d\n\x19WEBHOOK_STATE_UNSPECIFIED\x10\x00\x12\x19\n\x15WEBHOOK_STATE_ENABLED\x10\x01\x12*\n&WEBHOOK_STATE_ENABLED_FOR_SLOT_FILLING\x10\x02\"\xe6\x01\n\x12ListIntentsRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x15\n\rlanguage_code\x18\x02 \x01(\t\x12+\n\x0bintent_view\x18\x03 \x01(\x0e\x32\x16.ondewo.nlu.IntentView\x12\x12\n\npage_token\x18\x05 \x01(\t\x12\x36\n\x12\x66ilter_by_category\x18\x06 \x01(\x0e\x32\x1a.ondewo.nlu.IntentCategory\x12\x30\n\rsort_by_field\x18\x07 \x01(\x0b\x32\x19.ondewo.nlu.IntentSorting\"S\n\x13ListIntentsResponse\x12#\n\x07intents\x18\x01 \x03(\x0b\x32\x12.ondewo.nlu.Intent\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t\"x\n\x10GetIntentRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x15\n\rlanguage_code\x18\x02 \x01(\t\x12+\n\x0bintent_view\x18\x03 \x01(\x0e\x32\x16.ondewo.nlu.IntentView\x12\x12\n\npage_token\x18\n \x01(\t\"\x8d\x01\n\x13\x43reateIntentRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\"\n\x06intent\x18\x02 \x01(\x0b\x32\x12.ondewo.nlu.Intent\x12\x15\n\rlanguage_code\x18\x03 \x01(\t\x12+\n\x0bintent_view\x18\x04 \x01(\x0e\x32\x16.ondewo.nlu.IntentView\"\xae\x01\n\x13UpdateIntentRequest\x12\"\n\x06intent\x18\x01 \x01(\x0b\x32\x12.ondewo.nlu.Intent\x12\x15\n\rlanguage_code\x18\x02 \x01(\t\x12/\n\x0bupdate_mask\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\x12+\n\x0bintent_view\x18\x04 \x01(\x0e\x32\x16.ondewo.nlu.IntentView\"#\n\x13\x44\x65leteIntentRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"\x84\x02\n\x19\x42\x61tchUpdateIntentsRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x1a\n\x10intent_batch_uri\x18\x02 \x01(\tH\x00\x12\x36\n\x13intent_batch_inline\x18\x03 \x01(\x0b\x32\x17.ondewo.nlu.IntentBatchH\x00\x12\x15\n\rlanguage_code\x18\x04 \x01(\t\x12/\n\x0bupdate_mask\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\x12+\n\x0bintent_view\x18\x06 \x01(\x0e\x32\x16.ondewo.nlu.IntentViewB\x0e\n\x0cintent_batch\"A\n\x1a\x42\x61tchUpdateIntentsResponse\x12#\n\x07intents\x18\x01 \x03(\x0b\x32\x12.ondewo.nlu.Intent\"P\n\x19\x42\x61tchDeleteIntentsRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12#\n\x07intents\x18\x02 \x03(\x0b\x32\x12.ondewo.nlu.Intent\"2\n\x0bIntentBatch\x12#\n\x07intents\x18\x01 \x03(\x0b\x32\x12.ondewo.nlu.Intent\"\xb0\x02\n\rIntentSorting\x12\x43\n\rsorting_field\x18\x01 \x01(\x0e\x32,.ondewo.nlu.IntentSorting.IntentSortingField\x12-\n\x0csorting_mode\x18\x02 \x01(\x0e\x32\x17.ondewo.nlu.SortingMode\"\xaa\x01\n\x12IntentSortingField\x12\x15\n\x11NO_INTENT_SORTING\x10\x00\x12\x17\n\x13SORT_INTENT_BY_NAME\x10\x01\x12 \n\x1cSORT_INTENT_BY_CREATION_DATE\x10\x02\x12\x1f\n\x1bSORT_INTENT_BY_LAST_UPDATED\x10\x03\x12!\n\x1dSORT_INTENT_BY_USERSAYS_COUNT\x10\x04\"_\n UpdateTrainingPhraseBatchRequest\x12;\n\x10training_phrases\x18\x01 \x03(\x0b\x32!.ondewo.nlu.Intent.TrainingPhrase\"\x81\x01\n\x14TrainingPhraseStatus\x12<\n\x0ftraining_phrase\x18\x01 \x01(\x0b\x32!.ondewo.nlu.Intent.TrainingPhraseH\x00\x12\x17\n\rerror_message\x18\x02 \x01(\tH\x00\x42\x12\n\x10phrase_or_status\"{\n!TrainingPhraseStatusBatchResponse\x12\x42\n\x18training_phrase_statuses\x18\x01 \x03(\x0b\x32 .ondewo.nlu.TrainingPhraseStatus\x12\x12\n\nhas_errors\x18\x02 \x01(\x08\"\x96\x02\n CreateTrainingPhraseBatchRequest\x12j\n\x18training_phrase_requests\x18\x01 \x03(\x0b\x32H.ondewo.nlu.CreateTrainingPhraseBatchRequest.CreateTrainingPhraseRequest\x1a\x85\x01\n\x1b\x43reateTrainingPhraseRequest\x12\x13\n\x0bintent_name\x18\x01 \x01(\t\x12:\n\x0ftraining_phrase\x18\x02 \x01(\x0b\x32!.ondewo.nlu.Intent.TrainingPhrase\x12\x15\n\rlanguage_code\x18\x03 \x01(\t\".\n\x1dGetTrainingPhraseBatchRequest\x12\r\n\x05names\x18\x01 \x03(\t\"1\n DeleteTrainingPhraseBatchRequest\x12\r\n\x05names\x18\x01 \x03(\t\"\x9a\x02\n!DeleteTrainingPhraseBatchResponse\x12\x61\n\x0f\x64\x65lete_statuses\x18\x01 \x03(\x0b\x32H.ondewo.nlu.DeleteTrainingPhraseBatchResponse.DeleteTrainingPhraseStatus\x12\x12\n\nhas_errors\x18\x02 \x01(\x08\x1a~\n\x1a\x44\x65leteTrainingPhraseStatus\x12\x36\n\x14successfully_deleted\x18\x01 \x01(\x0b\x32\x16.google.protobuf.EmptyH\x00\x12\x17\n\rerror_message\x18\x02 \x01(\tH\x00\x42\x0f\n\rdelete_status\"\\\n\x1aListTrainingPhrasesRequest\x12\x13\n\x0bintent_name\x18\x01 \x01(\t\x12\x15\n\rlanguage_code\x18\x02 \x01(\t\x12\x12\n\npage_token\x18\x03 \x01(\t\"s\n\x1bListTrainingPhrasesResponse\x12;\n\x10training_phrases\x18\x01 \x03(\x0b\x32!.ondewo.nlu.Intent.TrainingPhrase\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t*q\n\nIntentView\x12\x1b\n\x17INTENT_VIEW_UNSPECIFIED\x10\x00\x12\x14\n\x10INTENT_VIEW_FULL\x10\x01\x12\x17\n\x13INTENT_VIEW_PARTIAL\x10\x02\x12\x17\n\x13INTENT_VIEW_SHALLOW\x10\x03*P\n\x0eIntentCategory\x12\x0f\n\x0b\x41LL_INTENTS\x10\x00\x12\x13\n\x0f\x44\x45\x46\x41ULT_INTENTS\x10\x01\x12\x18\n\x14USER_DEFINED_INTENTS\x10\x02\x32\xe3\x0b\n\x07Intents\x12}\n\x0bListIntents\x12\x1e.ondewo.nlu.ListIntentsRequest\x1a\x1f.ondewo.nlu.ListIntentsResponse\"-\x82\xd3\xe4\x93\x02\'\x12%/v2/{parent=projects/*/agent}/intents\x12l\n\tGetIntent\x12\x1c.ondewo.nlu.GetIntentRequest\x1a\x12.ondewo.nlu.Intent\"-\x82\xd3\xe4\x93\x02\'\x12%/v2/{name=projects/*/agent/intents/*}\x12u\n\x0c\x43reateIntent\x12\x1f.ondewo.nlu.CreateIntentRequest\x1a\x12.ondewo.nlu.Intent\"0\x82\xd3\xe4\x93\x02*\"%/v2/{parent=projects/*/agent}/intents:\x01*\x12|\n\x0cUpdateIntent\x12\x1f.ondewo.nlu.UpdateIntentRequest\x1a\x12.ondewo.nlu.Intent\"7\x82\xd3\xe4\x93\x02\x31\x32,/v2/{intent.name=projects/*/agent/intents/*}:\x01*\x12v\n\x0c\x44\x65leteIntent\x12\x1f.ondewo.nlu.DeleteIntentRequest\x1a\x16.google.protobuf.Empty\"-\x82\xd3\xe4\x93\x02\'*%/v2/{name=projects/*/agent/intents/*}\x12\x98\x01\n\x12\x42\x61tchUpdateIntents\x12%.ondewo.nlu.BatchUpdateIntentsRequest\x1a\x1d.google.longrunning.Operation\"<\x82\xd3\xe4\x93\x02\x36\"1/v2/{parent=projects/*/agent}/intents:batchUpdate:\x01*\x12\x98\x01\n\x12\x42\x61tchDeleteIntents\x12%.ondewo.nlu.BatchDeleteIntentsRequest\x1a\x1d.google.longrunning.Operation\"<\x82\xd3\xe4\x93\x02\x36\"1/v2/{parent=projects/*/agent}/intents:batchDelete:\x01*\x12x\n\x19\x43reateTrainingPhraseBatch\x12,.ondewo.nlu.CreateTrainingPhraseBatchRequest\x1a-.ondewo.nlu.TrainingPhraseStatusBatchResponse\x12r\n\x16GetTrainingPhraseBatch\x12).ondewo.nlu.GetTrainingPhraseBatchRequest\x1a-.ondewo.nlu.TrainingPhraseStatusBatchResponse\x12x\n\x19UpdateTrainingPhraseBatch\x12,.ondewo.nlu.UpdateTrainingPhraseBatchRequest\x1a-.ondewo.nlu.TrainingPhraseStatusBatchResponse\x12x\n\x19\x44\x65leteTrainingPhraseBatch\x12,.ondewo.nlu.DeleteTrainingPhraseBatchRequest\x1a-.ondewo.nlu.DeleteTrainingPhraseBatchResponse\x12\x66\n\x13ListTrainingPhrases\x12&.ondewo.nlu.ListTrainingPhrasesRequest\x1a\'.ondewo.nlu.ListTrainingPhrasesResponseb\x06proto3'
   ,
   dependencies=[google_dot_api_dot_annotations__pb2.DESCRIPTOR,ondewo_dot_nlu_dot_context__pb2.DESCRIPTOR,ondewo_dot_nlu_dot_common__pb2.DESCRIPTOR,google_dot_longrunning_dot_operations__pb2.DESCRIPTOR,google_dot_protobuf_dot_empty__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,google_dot_protobuf_dot_struct__pb2.DESCRIPTOR,])
 
@@ -61,8 +61,8 @@ _INTENTVIEW = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=7447,
-  serialized_end=7560,
+  serialized_start=7470,
+  serialized_end=7583,
 )
 _sym_db.RegisterEnumDescriptor(_INTENTVIEW)
 
@@ -92,8 +92,8 @@ _INTENTCATEGORY = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=7562,
-  serialized_end=7642,
+  serialized_start=7585,
+  serialized_end=7665,
 )
 _sym_db.RegisterEnumDescriptor(_INTENTCATEGORY)
 
@@ -132,8 +132,8 @@ _INTENT_TRAININGPHRASE_TYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=1506,
-  serialized_end=1561,
+  serialized_start=1529,
+  serialized_end=1584,
 )
 _sym_db.RegisterEnumDescriptor(_INTENT_TRAININGPHRASE_TYPE)
 
@@ -192,8 +192,8 @@ _INTENT_MESSAGE_PLATFORM = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=4247,
-  serialized_end=4386,
+  serialized_start=4270,
+  serialized_end=4409,
 )
 _sym_db.RegisterEnumDescriptor(_INTENT_MESSAGE_PLATFORM)
 
@@ -217,8 +217,8 @@ _INTENT_INTENTSTATUS = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=4488,
-  serialized_end=4528,
+  serialized_start=4511,
+  serialized_end=4551,
 )
 _sym_db.RegisterEnumDescriptor(_INTENT_INTENTSTATUS)
 
@@ -247,8 +247,8 @@ _INTENT_WEBHOOKSTATE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=4530,
-  serialized_end=4646,
+  serialized_start=4553,
+  serialized_end=4669,
 )
 _sym_db.RegisterEnumDescriptor(_INTENT_WEBHOOKSTATE)
 
@@ -287,8 +287,8 @@ _INTENTSORTING_INTENTSORTINGFIELD = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=6045,
-  serialized_end=6215,
+  serialized_start=6068,
+  serialized_end=6238,
 )
 _sym_db.RegisterEnumDescriptor(_INTENTSORTING_INTENTSORTINGFIELD)
 
@@ -369,8 +369,8 @@ _INTENT_TRAININGPHRASE_ENTITY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1290,
-  serialized_end=1504,
+  serialized_start=1313,
+  serialized_end=1527,
 )
 
 _INTENT_TRAININGPHRASE = _descriptor.Descriptor(
@@ -416,6 +416,13 @@ _INTENT_TRAININGPHRASE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='language_code', full_name='ondewo.nlu.Intent.TrainingPhrase.language_code', index=5,
+      number=6, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -430,7 +437,7 @@ _INTENT_TRAININGPHRASE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=1102,
-  serialized_end=1561,
+  serialized_end=1584,
 )
 
 _INTENT_PARAMETER = _descriptor.Descriptor(
@@ -516,8 +523,8 @@ _INTENT_PARAMETER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1564,
-  serialized_end=1762,
+  serialized_start=1587,
+  serialized_end=1785,
 )
 
 _INTENT_MESSAGE_TEXT = _descriptor.Descriptor(
@@ -547,8 +554,8 @@ _INTENT_MESSAGE_TEXT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2654,
-  serialized_end=2674,
+  serialized_start=2677,
+  serialized_end=2697,
 )
 
 _INTENT_MESSAGE_IMAGE = _descriptor.Descriptor(
@@ -585,8 +592,8 @@ _INTENT_MESSAGE_IMAGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2676,
-  serialized_end=2730,
+  serialized_start=2699,
+  serialized_end=2753,
 )
 
 _INTENT_MESSAGE_QUICKREPLIES = _descriptor.Descriptor(
@@ -623,8 +630,8 @@ _INTENT_MESSAGE_QUICKREPLIES = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2732,
-  serialized_end=2784,
+  serialized_start=2755,
+  serialized_end=2807,
 )
 
 _INTENT_MESSAGE_CARD_BUTTON = _descriptor.Descriptor(
@@ -661,8 +668,8 @@ _INTENT_MESSAGE_CARD_BUTTON = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2904,
-  serialized_end=2944,
+  serialized_start=2927,
+  serialized_end=2967,
 )
 
 _INTENT_MESSAGE_CARD = _descriptor.Descriptor(
@@ -713,8 +720,8 @@ _INTENT_MESSAGE_CARD = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2787,
-  serialized_end=2944,
+  serialized_start=2810,
+  serialized_end=2967,
 )
 
 _INTENT_MESSAGE_SIMPLERESPONSE = _descriptor.Descriptor(
@@ -758,8 +765,8 @@ _INTENT_MESSAGE_SIMPLERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2946,
-  serialized_end=3022,
+  serialized_start=2969,
+  serialized_end=3045,
 )
 
 _INTENT_MESSAGE_SIMPLERESPONSES = _descriptor.Descriptor(
@@ -789,8 +796,8 @@ _INTENT_MESSAGE_SIMPLERESPONSES = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3024,
-  serialized_end=3110,
+  serialized_start=3047,
+  serialized_end=3133,
 )
 
 _INTENT_MESSAGE_BASICCARD_BUTTON_OPENURIACTION = _descriptor.Descriptor(
@@ -820,8 +827,8 @@ _INTENT_MESSAGE_BASICCARD_BUTTON_OPENURIACTION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3404,
-  serialized_end=3432,
+  serialized_start=3427,
+  serialized_end=3455,
 )
 
 _INTENT_MESSAGE_BASICCARD_BUTTON = _descriptor.Descriptor(
@@ -858,8 +865,8 @@ _INTENT_MESSAGE_BASICCARD_BUTTON = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3295,
-  serialized_end=3432,
+  serialized_start=3318,
+  serialized_end=3455,
 )
 
 _INTENT_MESSAGE_BASICCARD = _descriptor.Descriptor(
@@ -917,8 +924,8 @@ _INTENT_MESSAGE_BASICCARD = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3113,
-  serialized_end=3432,
+  serialized_start=3136,
+  serialized_end=3455,
 )
 
 _INTENT_MESSAGE_SUGGESTION = _descriptor.Descriptor(
@@ -948,8 +955,8 @@ _INTENT_MESSAGE_SUGGESTION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3434,
-  serialized_end=3461,
+  serialized_start=3457,
+  serialized_end=3484,
 )
 
 _INTENT_MESSAGE_SUGGESTIONS = _descriptor.Descriptor(
@@ -979,8 +986,8 @@ _INTENT_MESSAGE_SUGGESTIONS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3463,
-  serialized_end=3536,
+  serialized_start=3486,
+  serialized_end=3559,
 )
 
 _INTENT_MESSAGE_LINKOUTSUGGESTION = _descriptor.Descriptor(
@@ -1017,8 +1024,8 @@ _INTENT_MESSAGE_LINKOUTSUGGESTION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3538,
-  serialized_end=3596,
+  serialized_start=3561,
+  serialized_end=3619,
 )
 
 _INTENT_MESSAGE_LISTSELECT_ITEM = _descriptor.Descriptor(
@@ -1069,8 +1076,8 @@ _INTENT_MESSAGE_LISTSELECT_ITEM = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3688,
-  serialized_end=3836,
+  serialized_start=3711,
+  serialized_end=3859,
 )
 
 _INTENT_MESSAGE_LISTSELECT = _descriptor.Descriptor(
@@ -1107,8 +1114,8 @@ _INTENT_MESSAGE_LISTSELECT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3599,
-  serialized_end=3836,
+  serialized_start=3622,
+  serialized_end=3859,
 )
 
 _INTENT_MESSAGE_CAROUSELSELECT_ITEM = _descriptor.Descriptor(
@@ -1159,8 +1166,8 @@ _INTENT_MESSAGE_CAROUSELSELECT_ITEM = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3688,
-  serialized_end=3836,
+  serialized_start=3711,
+  serialized_end=3859,
 )
 
 _INTENT_MESSAGE_CAROUSELSELECT = _descriptor.Descriptor(
@@ -1190,8 +1197,8 @@ _INTENT_MESSAGE_CAROUSELSELECT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3839,
-  serialized_end=4069,
+  serialized_start=3862,
+  serialized_end=4092,
 )
 
 _INTENT_MESSAGE_HTMLTEXT = _descriptor.Descriptor(
@@ -1221,8 +1228,8 @@ _INTENT_MESSAGE_HTMLTEXT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4071,
-  serialized_end=4095,
+  serialized_start=4094,
+  serialized_end=4118,
 )
 
 _INTENT_MESSAGE_VIDEO = _descriptor.Descriptor(
@@ -1259,8 +1266,8 @@ _INTENT_MESSAGE_VIDEO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4097,
-  serialized_end=4145,
+  serialized_start=4120,
+  serialized_end=4168,
 )
 
 _INTENT_MESSAGE_AUDIO = _descriptor.Descriptor(
@@ -1297,8 +1304,8 @@ _INTENT_MESSAGE_AUDIO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4147,
-  serialized_end=4195,
+  serialized_start=4170,
+  serialized_end=4218,
 )
 
 _INTENT_MESSAGE_SELECTITEMINFO = _descriptor.Descriptor(
@@ -1335,8 +1342,8 @@ _INTENT_MESSAGE_SELECTITEMINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4197,
-  serialized_end=4244,
+  serialized_start=4220,
+  serialized_end=4267,
 )
 
 _INTENT_MESSAGE = _descriptor.Descriptor(
@@ -1470,8 +1477,8 @@ _INTENT_MESSAGE = _descriptor.Descriptor(
       create_key=_descriptor._internal_create_key,
     fields=[]),
   ],
-  serialized_start=1765,
-  serialized_end=4397,
+  serialized_start=1788,
+  serialized_end=4420,
 )
 
 _INTENT_FOLLOWUPINTENTINFO = _descriptor.Descriptor(
@@ -1508,8 +1515,8 @@ _INTENT_FOLLOWUPINTENTINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4399,
-  serialized_end=4486,
+  serialized_start=4422,
+  serialized_end=4509,
 )
 
 _INTENT = _descriptor.Descriptor(
@@ -1703,7 +1710,7 @@ _INTENT = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=251,
-  serialized_end=4646,
+  serialized_end=4669,
 )
 
 
@@ -1769,8 +1776,8 @@ _LISTINTENTSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4649,
-  serialized_end=4879,
+  serialized_start=4672,
+  serialized_end=4902,
 )
 
 
@@ -1808,8 +1815,8 @@ _LISTINTENTSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4881,
-  serialized_end=4964,
+  serialized_start=4904,
+  serialized_end=4987,
 )
 
 
@@ -1861,8 +1868,8 @@ _GETINTENTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4966,
-  serialized_end=5086,
+  serialized_start=4989,
+  serialized_end=5109,
 )
 
 
@@ -1914,8 +1921,8 @@ _CREATEINTENTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5089,
-  serialized_end=5230,
+  serialized_start=5112,
+  serialized_end=5253,
 )
 
 
@@ -1967,8 +1974,8 @@ _UPDATEINTENTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5233,
-  serialized_end=5407,
+  serialized_start=5256,
+  serialized_end=5430,
 )
 
 
@@ -1999,8 +2006,8 @@ _DELETEINTENTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5409,
-  serialized_end=5444,
+  serialized_start=5432,
+  serialized_end=5467,
 )
 
 
@@ -2071,8 +2078,8 @@ _BATCHUPDATEINTENTSREQUEST = _descriptor.Descriptor(
       create_key=_descriptor._internal_create_key,
     fields=[]),
   ],
-  serialized_start=5447,
-  serialized_end=5707,
+  serialized_start=5470,
+  serialized_end=5730,
 )
 
 
@@ -2103,8 +2110,8 @@ _BATCHUPDATEINTENTSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5709,
-  serialized_end=5774,
+  serialized_start=5732,
+  serialized_end=5797,
 )
 
 
@@ -2142,8 +2149,8 @@ _BATCHDELETEINTENTSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5776,
-  serialized_end=5856,
+  serialized_start=5799,
+  serialized_end=5879,
 )
 
 
@@ -2174,8 +2181,8 @@ _INTENTBATCH = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5858,
-  serialized_end=5908,
+  serialized_start=5881,
+  serialized_end=5931,
 )
 
 
@@ -2214,8 +2221,8 @@ _INTENTSORTING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5911,
-  serialized_end=6215,
+  serialized_start=5934,
+  serialized_end=6238,
 )
 
 
@@ -2246,8 +2253,8 @@ _UPDATETRAININGPHRASEBATCHREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6217,
-  serialized_end=6312,
+  serialized_start=6240,
+  serialized_end=6335,
 )
 
 
@@ -2290,8 +2297,8 @@ _TRAININGPHRASESTATUS = _descriptor.Descriptor(
       create_key=_descriptor._internal_create_key,
     fields=[]),
   ],
-  serialized_start=6315,
-  serialized_end=6444,
+  serialized_start=6338,
+  serialized_end=6467,
 )
 
 
@@ -2329,8 +2336,8 @@ _TRAININGPHRASESTATUSBATCHRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6446,
-  serialized_end=6569,
+  serialized_start=6469,
+  serialized_end=6592,
 )
 
 
@@ -2375,8 +2382,8 @@ _CREATETRAININGPHRASEBATCHREQUEST_CREATETRAININGPHRASEREQUEST = _descriptor.Desc
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6717,
-  serialized_end=6850,
+  serialized_start=6740,
+  serialized_end=6873,
 )
 
 _CREATETRAININGPHRASEBATCHREQUEST = _descriptor.Descriptor(
@@ -2406,8 +2413,8 @@ _CREATETRAININGPHRASEBATCHREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6572,
-  serialized_end=6850,
+  serialized_start=6595,
+  serialized_end=6873,
 )
 
 
@@ -2438,8 +2445,8 @@ _GETTRAININGPHRASEBATCHREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6852,
-  serialized_end=6898,
+  serialized_start=6875,
+  serialized_end=6921,
 )
 
 
@@ -2470,8 +2477,8 @@ _DELETETRAININGPHRASEBATCHREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6900,
-  serialized_end=6949,
+  serialized_start=6923,
+  serialized_end=6972,
 )
 
 
@@ -2514,8 +2521,8 @@ _DELETETRAININGPHRASEBATCHRESPONSE_DELETETRAININGPHRASESTATUS = _descriptor.Desc
       create_key=_descriptor._internal_create_key,
     fields=[]),
   ],
-  serialized_start=7108,
-  serialized_end=7234,
+  serialized_start=7131,
+  serialized_end=7257,
 )
 
 _DELETETRAININGPHRASEBATCHRESPONSE = _descriptor.Descriptor(
@@ -2552,8 +2559,8 @@ _DELETETRAININGPHRASEBATCHRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6952,
-  serialized_end=7234,
+  serialized_start=6975,
+  serialized_end=7257,
 )
 
 
@@ -2598,8 +2605,8 @@ _LISTTRAININGPHRASESREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7236,
-  serialized_end=7328,
+  serialized_start=7259,
+  serialized_end=7351,
 )
 
 
@@ -2637,8 +2644,8 @@ _LISTTRAININGPHRASESRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7330,
-  serialized_end=7445,
+  serialized_start=7353,
+  serialized_end=7468,
 )
 
 _INTENT_TRAININGPHRASE_ENTITY.containing_type = _INTENT_TRAININGPHRASE
@@ -3202,8 +3209,8 @@ _INTENTS = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=7645,
-  serialized_end=9152,
+  serialized_start=7668,
+  serialized_end=9175,
   methods=[
   _descriptor.MethodDescriptor(
     name='ListIntents',
