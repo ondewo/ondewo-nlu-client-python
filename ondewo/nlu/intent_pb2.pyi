@@ -199,8 +199,8 @@ class Intent(google___protobuf___message___Message):
         name = ... # type: typing___Text
         type = ... # type: global___Intent.TrainingPhrase.Type
         text = ... # type: typing___Text
-        language_code = ... # type: typing___Text
         times_added_count = ... # type: builtin___int
+        language_code = ... # type: typing___Text
 
         @property
         def entities(self) -> google___protobuf___internal___containers___RepeatedCompositeFieldContainer[global___Intent.TrainingPhrase.Entity]: ...
@@ -210,9 +210,9 @@ class Intent(google___protobuf___message___Message):
             name : typing___Optional[typing___Text] = None,
             type : typing___Optional[global___Intent.TrainingPhrase.Type] = None,
             text : typing___Optional[typing___Text] = None,
-            language_code : typing___Optional[typing___Text] = None,
             entities : typing___Optional[typing___Iterable[global___Intent.TrainingPhrase.Entity]] = None,
             times_added_count : typing___Optional[builtin___int] = None,
+            language_code : typing___Optional[typing___Text] = None,
             ) -> None: ...
         if sys.version_info >= (3,):
             @classmethod
