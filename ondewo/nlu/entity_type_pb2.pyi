@@ -156,18 +156,18 @@ class EntityType(google___protobuf___message___Message):
         value = ... # type: typing___Text
         synonyms = ... # type: google___protobuf___internal___containers___RepeatedScalarFieldContainer[typing___Text]
         name = ... # type: typing___Text
-        language_code = ... # type: typing___Text
         display_name = ... # type: typing___Text
         synonym_count = ... # type: builtin___int
+        language_code = ... # type: typing___Text
 
         def __init__(self,
             *,
             value : typing___Optional[typing___Text] = None,
             synonyms : typing___Optional[typing___Iterable[typing___Text]] = None,
             name : typing___Optional[typing___Text] = None,
-            language_code : typing___Optional[typing___Text] = None,
             display_name : typing___Optional[typing___Text] = None,
             synonym_count : typing___Optional[builtin___int] = None,
+            language_code : typing___Optional[typing___Text] = None,
             ) -> None: ...
         if sys.version_info >= (3,):
             @classmethod
