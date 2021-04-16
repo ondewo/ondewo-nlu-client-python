@@ -63,7 +63,8 @@ global___ExtractEntitiesRequest = ExtractEntitiesRequest
 
 class EntityDetected(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
-    detection_data = ... # type: typing___Text
+    extraction_method = ... # type: typing___Text
+    score = ... # type: builtin___float
 
     @property
     def entity(self) -> ondewo___nlu___intent_pb2___Intent.TrainingPhrase.Entity: ...
@@ -71,7 +72,8 @@ class EntityDetected(google___protobuf___message___Message):
     def __init__(self,
         *,
         entity : typing___Optional[ondewo___nlu___intent_pb2___Intent.TrainingPhrase.Entity] = None,
-        detection_data : typing___Optional[typing___Text] = None,
+        extraction_method : typing___Optional[typing___Text] = None,
+        score : typing___Optional[builtin___float] = None,
         ) -> None: ...
     if sys.version_info >= (3,):
         @classmethod
@@ -82,7 +84,7 @@ class EntityDetected(google___protobuf___message___Message):
     def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def HasField(self, field_name: typing_extensions___Literal[u"entity",b"entity"]) -> builtin___bool: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"detection_data",b"detection_data",u"entity",b"entity"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"entity",b"entity",u"extraction_method",b"extraction_method",u"score",b"score"]) -> None: ...
 global___EntityDetected = EntityDetected
 
 class ExtractEntitiesResponse(google___protobuf___message___Message):
