@@ -22,6 +22,10 @@ from google.protobuf.struct_pb2 import (
     Struct as google___protobuf___struct_pb2___Struct,
 )
 
+from google.protobuf.timestamp_pb2 import (
+    Timestamp as google___protobuf___timestamp_pb2___Timestamp,
+)
+
 from ondewo.nlu.common_pb2 import (
     SortingMode as ondewo___nlu___common_pb2___SortingMode,
 )
@@ -1032,3 +1036,82 @@ class ExportResourcesResponse(google___protobuf___message___Message):
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def ClearField(self, field_name: typing_extensions___Literal[u"language_code",b"language_code",u"name",b"name",u"parent",b"parent",u"resource_file",b"resource_file",u"type",b"type"]) -> None: ...
 global___ExportResourcesResponse = ExportResourcesResponse
+
+class GetModelStatusesRequest(google___protobuf___message___Message):
+    DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
+    parent = ... # type: typing___Text
+
+    def __init__(self,
+        *,
+        parent : typing___Optional[typing___Text] = None,
+        ) -> None: ...
+    if sys.version_info >= (3,):
+        @classmethod
+        def FromString(cls, s: builtin___bytes) -> GetModelStatusesRequest: ...
+    else:
+        @classmethod
+        def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> GetModelStatusesRequest: ...
+    def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
+    def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"parent",b"parent"]) -> None: ...
+global___GetModelStatusesRequest = GetModelStatusesRequest
+
+class GetModelStatusesResponse(google___protobuf___message___Message):
+    DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
+    class StatusName(builtin___int):
+        DESCRIPTOR: google___protobuf___descriptor___EnumDescriptor = ...
+        @classmethod
+        def Name(cls, number: builtin___int) -> builtin___str: ...
+        @classmethod
+        def Value(cls, name: builtin___str) -> 'GetModelStatusesResponse.StatusName': ...
+        @classmethod
+        def keys(cls) -> typing___List[builtin___str]: ...
+        @classmethod
+        def values(cls) -> typing___List['GetModelStatusesResponse.StatusName']: ...
+        @classmethod
+        def items(cls) -> typing___List[typing___Tuple[builtin___str, 'GetModelStatusesResponse.StatusName']]: ...
+        UNKNOWN = typing___cast('GetModelStatusesResponse.StatusName', 0)
+        INITIALIZING = typing___cast('GetModelStatusesResponse.StatusName', 1)
+        INITIALIZED = typing___cast('GetModelStatusesResponse.StatusName', 2)
+        LOADING_DATA = typing___cast('GetModelStatusesResponse.StatusName', 3)
+        TRAINING = typing___cast('GetModelStatusesResponse.StatusName', 4)
+        TESTING = typing___cast('GetModelStatusesResponse.StatusName', 5)
+        TRAINED = typing___cast('GetModelStatusesResponse.StatusName', 6)
+    UNKNOWN = typing___cast('GetModelStatusesResponse.StatusName', 0)
+    INITIALIZING = typing___cast('GetModelStatusesResponse.StatusName', 1)
+    INITIALIZED = typing___cast('GetModelStatusesResponse.StatusName', 2)
+    LOADING_DATA = typing___cast('GetModelStatusesResponse.StatusName', 3)
+    TRAINING = typing___cast('GetModelStatusesResponse.StatusName', 4)
+    TESTING = typing___cast('GetModelStatusesResponse.StatusName', 5)
+    TRAINED = typing___cast('GetModelStatusesResponse.StatusName', 6)
+    global___StatusName = StatusName
+
+    cache_version = ... # type: builtin___int
+    language_code = ... # type: typing___Text
+    model_name = ... # type: typing___Text
+    config = ... # type: typing___Text
+    status = ... # type: global___GetModelStatusesResponse.StatusName
+
+    @property
+    def status_set_time(self) -> google___protobuf___timestamp_pb2___Timestamp: ...
+
+    def __init__(self,
+        *,
+        cache_version : typing___Optional[builtin___int] = None,
+        language_code : typing___Optional[typing___Text] = None,
+        model_name : typing___Optional[typing___Text] = None,
+        status_set_time : typing___Optional[google___protobuf___timestamp_pb2___Timestamp] = None,
+        config : typing___Optional[typing___Text] = None,
+        status : typing___Optional[global___GetModelStatusesResponse.StatusName] = None,
+        ) -> None: ...
+    if sys.version_info >= (3,):
+        @classmethod
+        def FromString(cls, s: builtin___bytes) -> GetModelStatusesResponse: ...
+    else:
+        @classmethod
+        def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> GetModelStatusesResponse: ...
+    def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
+    def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
+    def HasField(self, field_name: typing_extensions___Literal[u"status_set_time",b"status_set_time"]) -> builtin___bool: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"cache_version",b"cache_version",u"config",b"config",u"language_code",b"language_code",u"model_name",b"model_name",u"status",b"status",u"status_set_time",b"status_set_time"]) -> None: ...
+global___GetModelStatusesResponse = GetModelStatusesResponse
