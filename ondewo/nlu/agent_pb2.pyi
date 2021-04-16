@@ -1040,10 +1040,16 @@ global___ExportResourcesResponse = ExportResourcesResponse
 class GetModelStatusesRequest(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
     parent = ... # type: typing___Text
+    cache_version = ... # type: builtin___int
+    language_code = ... # type: typing___Text
+    model_name = ... # type: typing___Text
 
     def __init__(self,
         *,
         parent : typing___Optional[typing___Text] = None,
+        cache_version : typing___Optional[builtin___int] = None,
+        language_code : typing___Optional[typing___Text] = None,
+        model_name : typing___Optional[typing___Text] = None,
         ) -> None: ...
     if sys.version_info >= (3,):
         @classmethod
@@ -1053,7 +1059,7 @@ class GetModelStatusesRequest(google___protobuf___message___Message):
         def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> GetModelStatusesRequest: ...
     def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"parent",b"parent"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"cache_version",b"cache_version",u"language_code",b"language_code",u"model_name",b"model_name",u"parent",b"parent"]) -> None: ...
 global___GetModelStatusesRequest = GetModelStatusesRequest
 
 class GetModelStatusesResponse(google___protobuf___message___Message):
