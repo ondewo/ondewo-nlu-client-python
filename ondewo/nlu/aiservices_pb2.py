@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x1bondewo/nlu/aiservices.proto\x12\nondewo.nlu\x1a\x1cgoogle/api/annotations.proto\x1a\x17ondewo/nlu/intent.proto\"M\n\x16\x45xtractEntitiesRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x0c\n\x04text\x18\x02 \x01(\t\x12\x15\n\rlanguage_code\x18\x03 \x01(\t\"t\n\x0e\x45ntityDetected\x12\x38\n\x06\x65ntity\x18\x01 \x01(\x0b\x32(.ondewo.nlu.Intent.TrainingPhrase.Entity\x12\x19\n\x11\x65xtraction_method\x18\x02 \x01(\t\x12\r\n\x05score\x18\x03 \x01(\x02\"^\n\x17\x45xtractEntitiesResponse\x12\x35\n\x11\x65ntities_detected\x18\x01 \x03(\x0b\x32\x1a.ondewo.nlu.EntityDetected\x12\x0c\n\x04text\x18\x02 \x01(\t\"\xbd\x01\n\x1eGetAlternativeSentencesRequest\x12\x30\n\x06\x63onfig\x18\x01 \x01(\x0b\x32 .ondewo.nlu.DataEnrichmentConfig\x12\x10\n\x08sentence\x18\x02 \x01(\t\x12\x15\n\rlanguage_code\x18\x04 \x01(\t\x12\x0e\n\x06parent\x18\x05 \x01(\t\x12\x17\n\x0fprotected_words\x18\x06 \x03(\t\x12\x17\n\x0fwords_to_change\x18\x07 \x03(\t\"j\n\x17GenerateUserSaysRequest\x12\x15\n\rlanguage_code\x18\x04 \x01(\t\x12\x0e\n\x06parent\x18\x05 \x01(\t\x12\x18\n\x10n_repeat_synonym\x18\x06 \x01(\x05\x12\x0e\n\x06\x62ranch\x18\x08 \x01(\t\"\x8c\x01\n\x18GenerateResponsesRequest\x12\x15\n\rlanguage_code\x18\x04 \x01(\t\x12\x0e\n\x06parent\x18\x05 \x01(\t\x12\x18\n\x10n_repeat_synonym\x18\x07 \x01(\x05\x12\x0e\n\x06\x62ranch\x18\x08 \x01(\t\x12\x1f\n\x17\x64rop_unknown_parameters\x18\t \x01(\x08\"\xc9\x02\n$GetAlternativeTrainingPhrasesRequest\x12\x30\n\x06\x63onfig\x18\x01 \x01(\x0b\x32 .ondewo.nlu.DataEnrichmentConfig\x12:\n\x0ftraining_phrase\x18\x02 \x01(\x0b\x32!.ondewo.nlu.Intent.TrainingPhrase\x12\x13\n\x0bintent_name\x18\x03 \x01(\t\x12\x15\n\rlanguage_code\x18\x04 \x01(\t\x12\x0e\n\x06parent\x18\x05 \x01(\t\x12\x17\n\x0f\x64\x65tect_entities\x18\x06 \x01(\x08\x12\x1c\n\x14similarity_threshold\x18\x07 \x01(\x02\x12\x17\n\x0fprotected_words\x18\x08 \x03(\t\x12\x17\n\x0fwords_to_change\x18\t \x03(\t\x12\x0e\n\x06\x62ranch\x18\n \x01(\t\"{\n\x12GetSynonymsRequest\x12\x30\n\x06\x63onfig\x18\x01 \x01(\x0b\x32 .ondewo.nlu.DataEnrichmentConfig\x12\x0c\n\x04word\x18\x02 \x01(\t\x12\x15\n\rlanguage_code\x18\x04 \x01(\t\x12\x0e\n\x06parent\x18\x05 \x01(\t\"<\n\x13GetSynonymsResponse\x12%\n\x08synonyms\x18\x01 \x03(\x0b\x32\x13.ondewo.nlu.Synonym\")\n\x07Synonym\x12\x0f\n\x07synonym\x18\x01 \x01(\t\x12\r\n\x05score\x18\x02 \x01(\x05\"Y\n\x1fGetAlternativeSentencesResponse\x12\x36\n\x15\x61lternative_sentences\x18\x01 \x03(\x0b\x32\x17.ondewo.nlu.AltSentence\".\n\x19GenerateResponsesResponse\x12\x11\n\tresponses\x18\x02 \x03(\t\"-\n\x18GenerateUserSaysResponse\x12\x11\n\tuser_says\x18\x02 \x03(\t\"l\n%GetAlternativeTrainingPhrasesResponse\x12\x43\n\x1c\x61lternative_training_phrases\x18\x01 \x03(\x0b\x32\x1d.ondewo.nlu.AltTrainingPhrase\".\n\x0b\x41ltSentence\x12\x10\n\x08sentence\x18\x01 \x01(\t\x12\r\n\x05score\x18\x02 \x01(\x02\"^\n\x11\x41ltTrainingPhrase\x12:\n\x0ftraining_phrase\x18\x01 \x01(\x0b\x32!.ondewo.nlu.Intent.TrainingPhrase\x12\r\n\x05score\x18\x02 \x01(\x02\"\xdb\x04\n\x14\x44\x61taEnrichmentConfig\x12=\n\x11\x65ntity_enrichment\x18\x01 \x01(\x0b\x32\".ondewo.nlu.EntityEnrichmentConfig\x12\x43\n\x14thesaurus_enrichment\x18\x02 \x01(\x0b\x32%.ondewo.nlu.ThesaurusEnrichmentConfig\x12\x41\n\x13word2vec_enrichment\x18\x03 \x01(\x0b\x32$.ondewo.nlu.Word2VecEnrichmentConfig\x12\x43\n\x13word_net_enrichment\x18\x04 \x01(\x0b\x32&.ondewo.nlu.WordNetAugEnrichmentConfig\x12\x39\n\x0fgpt2_enrichment\x18\x05 \x01(\x0b\x32 .ondewo.nlu.GPT2EnrichmentConfig\x12;\n\x10glove_enrichment\x18\x06 \x01(\x0b\x32!.ondewo.nlu.GloVeEnrichmentConfig\x12\x41\n\x13\x66\x61sttext_enrichment\x18\x07 \x01(\x0b\x32$.ondewo.nlu.FastTextEnrichmentConfig\x12<\n\x0f\x62\x65rt_enrichment\x18\x08 \x01(\x0b\x32#.ondewo.nlu.BertAugEnrichmentConfig\x12>\n\x10xlnet_enrichment\x18\t \x01(\x0b\x32$.ondewo.nlu.XLNetAugEnrichmentConfig\"_\n\x16\x45ntityEnrichmentConfig\x12\x11\n\tis_active\x18\x01 \x01(\x08\x12\x19\n\x11\x65nrichment_factor\x18\x02 \x01(\x05\x12\x17\n\x0f\x65xecution_order\x18\x03 \x01(\x05\"b\n\x19ThesaurusEnrichmentConfig\x12\x11\n\tis_active\x18\x01 \x01(\x08\x12\x19\n\x11\x65nrichment_factor\x18\x02 \x01(\x05\x12\x17\n\x0f\x65xecution_order\x18\x03 \x01(\x05\"a\n\x18\x46\x61stTextEnrichmentConfig\x12\x11\n\tis_active\x18\x01 \x01(\x08\x12\x19\n\x11\x65nrichment_factor\x18\x02 \x01(\x05\x12\x17\n\x0f\x65xecution_order\x18\x03 \x01(\x05\"`\n\x17\x42\x65rtAugEnrichmentConfig\x12\x11\n\tis_active\x18\x01 \x01(\x08\x12\x19\n\x11\x65nrichment_factor\x18\x02 \x01(\x05\x12\x17\n\x0f\x65xecution_order\x18\x03 \x01(\x05\"^\n\x15GloVeEnrichmentConfig\x12\x11\n\tis_active\x18\x01 \x01(\x08\x12\x19\n\x11\x65nrichment_factor\x18\x02 \x01(\x05\x12\x17\n\x0f\x65xecution_order\x18\x03 \x01(\x05\"]\n\x14GPT2EnrichmentConfig\x12\x11\n\tis_active\x18\x01 \x01(\x08\x12\x19\n\x11\x65nrichment_factor\x18\x02 \x01(\x05\x12\x17\n\x0f\x65xecution_order\x18\x03 \x01(\x05\"a\n\x18Word2VecEnrichmentConfig\x12\x11\n\tis_active\x18\x01 \x01(\x08\x12\x19\n\x11\x65nrichment_factor\x18\x02 \x01(\x05\x12\x17\n\x0f\x65xecution_order\x18\x03 \x01(\x05\"c\n\x1aWordNetAugEnrichmentConfig\x12\x11\n\tis_active\x18\x01 \x01(\x08\x12\x19\n\x11\x65nrichment_factor\x18\x02 \x01(\x05\x12\x17\n\x0f\x65xecution_order\x18\x03 \x01(\x05\"a\n\x18XLNetAugEnrichmentConfig\x12\x11\n\tis_active\x18\x01 \x01(\x08\x12\x19\n\x11\x65nrichment_factor\x18\x02 \x01(\x05\x12\x17\n\x0f\x65xecution_order\x18\x03 \x01(\x05\x32\xf3\x07\n\nAiServices\x12\x95\x01\n\x0f\x45xtractEntities\x12\".ondewo.nlu.ExtractEntitiesRequest\x1a#.ondewo.nlu.ExtractEntitiesResponse\"9\x82\xd3\xe4\x93\x02\x33\"./v2/{parent=projects/*/agent}/entities:extract:\x01*\x12\x9a\x01\n\x10GenerateUserSays\x12#.ondewo.nlu.GenerateUserSaysRequest\x1a$.ondewo.nlu.GenerateUserSaysResponse\";\x82\xd3\xe4\x93\x02\x35\"0/v2/{parent=projects/*/agent}/generate_user_says:\x01*\x12\x9d\x01\n\x11GenerateResponses\x12$.ondewo.nlu.GenerateResponsesRequest\x1a%.ondewo.nlu.GenerateResponsesResponse\";\x82\xd3\xe4\x93\x02\x35\"0/v2/{parent=projects/*/agent}/generate_responses:\x01*\x12\xb5\x01\n\x17GetAlternativeSentences\x12*.ondewo.nlu.GetAlternativeSentencesRequest\x1a+.ondewo.nlu.GetAlternativeSentencesResponse\"A\x82\xd3\xe4\x93\x02;\"6/v2/{parent=projects/*/agent}/get_alternative:sentence:\x01*\x12\xcf\x01\n\x1dGetAlternativeTrainingPhrases\x12\x30.ondewo.nlu.GetAlternativeTrainingPhrasesRequest\x1a\x31.ondewo.nlu.GetAlternativeTrainingPhrasesResponse\"I\x82\xd3\xe4\x93\x02\x43\">/v2/{parent=projects/*/agent}/get_alternative:training_phrases:\x01*\x12\x85\x01\n\x0bGetSynonyms\x12\x1e.ondewo.nlu.GetSynonymsRequest\x1a\x1f.ondewo.nlu.GetSynonymsResponse\"5\x82\xd3\xe4\x93\x02/\"*/v2/{parent=projects/*/agent}/get_synonyms:\x01*b\x06proto3'
+  serialized_pb=b'\n\x1bondewo/nlu/aiservices.proto\x12\nondewo.nlu\x1a\x1cgoogle/api/annotations.proto\x1a\x17ondewo/nlu/intent.proto\"b\n\x16\x45xtractEntitiesRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x0c\n\x04text\x18\x02 \x01(\t\x12\x15\n\rlanguage_code\x18\x03 \x01(\t\x12\x13\n\x0bintent_name\x18\x04 \x01(\t\"t\n\x0e\x45ntityDetected\x12\x38\n\x06\x65ntity\x18\x01 \x01(\x0b\x32(.ondewo.nlu.Intent.TrainingPhrase.Entity\x12\x19\n\x11\x65xtraction_method\x18\x02 \x01(\t\x12\r\n\x05score\x18\x03 \x01(\x02\"^\n\x17\x45xtractEntitiesResponse\x12\x35\n\x11\x65ntities_detected\x18\x01 \x03(\x0b\x32\x1a.ondewo.nlu.EntityDetected\x12\x0c\n\x04text\x18\x02 \x01(\t\"\xbd\x01\n\x1eGetAlternativeSentencesRequest\x12\x30\n\x06\x63onfig\x18\x01 \x01(\x0b\x32 .ondewo.nlu.DataEnrichmentConfig\x12\x10\n\x08sentence\x18\x02 \x01(\t\x12\x15\n\rlanguage_code\x18\x04 \x01(\t\x12\x0e\n\x06parent\x18\x05 \x01(\t\x12\x17\n\x0fprotected_words\x18\x06 \x03(\t\x12\x17\n\x0fwords_to_change\x18\x07 \x03(\t\"j\n\x17GenerateUserSaysRequest\x12\x15\n\rlanguage_code\x18\x04 \x01(\t\x12\x0e\n\x06parent\x18\x05 \x01(\t\x12\x18\n\x10n_repeat_synonym\x18\x06 \x01(\x05\x12\x0e\n\x06\x62ranch\x18\x08 \x01(\t\"\x8c\x01\n\x18GenerateResponsesRequest\x12\x15\n\rlanguage_code\x18\x04 \x01(\t\x12\x0e\n\x06parent\x18\x05 \x01(\t\x12\x18\n\x10n_repeat_synonym\x18\x07 \x01(\x05\x12\x0e\n\x06\x62ranch\x18\x08 \x01(\t\x12\x1f\n\x17\x64rop_unknown_parameters\x18\t \x01(\x08\"\xc9\x02\n$GetAlternativeTrainingPhrasesRequest\x12\x30\n\x06\x63onfig\x18\x01 \x01(\x0b\x32 .ondewo.nlu.DataEnrichmentConfig\x12:\n\x0ftraining_phrase\x18\x02 \x01(\x0b\x32!.ondewo.nlu.Intent.TrainingPhrase\x12\x13\n\x0bintent_name\x18\x03 \x01(\t\x12\x15\n\rlanguage_code\x18\x04 \x01(\t\x12\x0e\n\x06parent\x18\x05 \x01(\t\x12\x17\n\x0f\x64\x65tect_entities\x18\x06 \x01(\x08\x12\x1c\n\x14similarity_threshold\x18\x07 \x01(\x02\x12\x17\n\x0fprotected_words\x18\x08 \x03(\t\x12\x17\n\x0fwords_to_change\x18\t \x03(\t\x12\x0e\n\x06\x62ranch\x18\n \x01(\t\"{\n\x12GetSynonymsRequest\x12\x30\n\x06\x63onfig\x18\x01 \x01(\x0b\x32 .ondewo.nlu.DataEnrichmentConfig\x12\x0c\n\x04word\x18\x02 \x01(\t\x12\x15\n\rlanguage_code\x18\x04 \x01(\t\x12\x0e\n\x06parent\x18\x05 \x01(\t\"<\n\x13GetSynonymsResponse\x12%\n\x08synonyms\x18\x01 \x03(\x0b\x32\x13.ondewo.nlu.Synonym\")\n\x07Synonym\x12\x0f\n\x07synonym\x18\x01 \x01(\t\x12\r\n\x05score\x18\x02 \x01(\x05\"Y\n\x1fGetAlternativeSentencesResponse\x12\x36\n\x15\x61lternative_sentences\x18\x01 \x03(\x0b\x32\x17.ondewo.nlu.AltSentence\".\n\x19GenerateResponsesResponse\x12\x11\n\tresponses\x18\x02 \x03(\t\"-\n\x18GenerateUserSaysResponse\x12\x11\n\tuser_says\x18\x02 \x03(\t\"l\n%GetAlternativeTrainingPhrasesResponse\x12\x43\n\x1c\x61lternative_training_phrases\x18\x01 \x03(\x0b\x32\x1d.ondewo.nlu.AltTrainingPhrase\".\n\x0b\x41ltSentence\x12\x10\n\x08sentence\x18\x01 \x01(\t\x12\r\n\x05score\x18\x02 \x01(\x02\"^\n\x11\x41ltTrainingPhrase\x12:\n\x0ftraining_phrase\x18\x01 \x01(\x0b\x32!.ondewo.nlu.Intent.TrainingPhrase\x12\r\n\x05score\x18\x02 \x01(\x02\"\xdb\x04\n\x14\x44\x61taEnrichmentConfig\x12=\n\x11\x65ntity_enrichment\x18\x01 \x01(\x0b\x32\".ondewo.nlu.EntityEnrichmentConfig\x12\x43\n\x14thesaurus_enrichment\x18\x02 \x01(\x0b\x32%.ondewo.nlu.ThesaurusEnrichmentConfig\x12\x41\n\x13word2vec_enrichment\x18\x03 \x01(\x0b\x32$.ondewo.nlu.Word2VecEnrichmentConfig\x12\x43\n\x13word_net_enrichment\x18\x04 \x01(\x0b\x32&.ondewo.nlu.WordNetAugEnrichmentConfig\x12\x39\n\x0fgpt2_enrichment\x18\x05 \x01(\x0b\x32 .ondewo.nlu.GPT2EnrichmentConfig\x12;\n\x10glove_enrichment\x18\x06 \x01(\x0b\x32!.ondewo.nlu.GloVeEnrichmentConfig\x12\x41\n\x13\x66\x61sttext_enrichment\x18\x07 \x01(\x0b\x32$.ondewo.nlu.FastTextEnrichmentConfig\x12<\n\x0f\x62\x65rt_enrichment\x18\x08 \x01(\x0b\x32#.ondewo.nlu.BertAugEnrichmentConfig\x12>\n\x10xlnet_enrichment\x18\t \x01(\x0b\x32$.ondewo.nlu.XLNetAugEnrichmentConfig\"_\n\x16\x45ntityEnrichmentConfig\x12\x11\n\tis_active\x18\x01 \x01(\x08\x12\x19\n\x11\x65nrichment_factor\x18\x02 \x01(\x05\x12\x17\n\x0f\x65xecution_order\x18\x03 \x01(\x05\"b\n\x19ThesaurusEnrichmentConfig\x12\x11\n\tis_active\x18\x01 \x01(\x08\x12\x19\n\x11\x65nrichment_factor\x18\x02 \x01(\x05\x12\x17\n\x0f\x65xecution_order\x18\x03 \x01(\x05\"a\n\x18\x46\x61stTextEnrichmentConfig\x12\x11\n\tis_active\x18\x01 \x01(\x08\x12\x19\n\x11\x65nrichment_factor\x18\x02 \x01(\x05\x12\x17\n\x0f\x65xecution_order\x18\x03 \x01(\x05\"`\n\x17\x42\x65rtAugEnrichmentConfig\x12\x11\n\tis_active\x18\x01 \x01(\x08\x12\x19\n\x11\x65nrichment_factor\x18\x02 \x01(\x05\x12\x17\n\x0f\x65xecution_order\x18\x03 \x01(\x05\"^\n\x15GloVeEnrichmentConfig\x12\x11\n\tis_active\x18\x01 \x01(\x08\x12\x19\n\x11\x65nrichment_factor\x18\x02 \x01(\x05\x12\x17\n\x0f\x65xecution_order\x18\x03 \x01(\x05\"]\n\x14GPT2EnrichmentConfig\x12\x11\n\tis_active\x18\x01 \x01(\x08\x12\x19\n\x11\x65nrichment_factor\x18\x02 \x01(\x05\x12\x17\n\x0f\x65xecution_order\x18\x03 \x01(\x05\"a\n\x18Word2VecEnrichmentConfig\x12\x11\n\tis_active\x18\x01 \x01(\x08\x12\x19\n\x11\x65nrichment_factor\x18\x02 \x01(\x05\x12\x17\n\x0f\x65xecution_order\x18\x03 \x01(\x05\"c\n\x1aWordNetAugEnrichmentConfig\x12\x11\n\tis_active\x18\x01 \x01(\x08\x12\x19\n\x11\x65nrichment_factor\x18\x02 \x01(\x05\x12\x17\n\x0f\x65xecution_order\x18\x03 \x01(\x05\"a\n\x18XLNetAugEnrichmentConfig\x12\x11\n\tis_active\x18\x01 \x01(\x08\x12\x19\n\x11\x65nrichment_factor\x18\x02 \x01(\x05\x12\x17\n\x0f\x65xecution_order\x18\x03 \x01(\x05\x32\xf3\x07\n\nAiServices\x12\x95\x01\n\x0f\x45xtractEntities\x12\".ondewo.nlu.ExtractEntitiesRequest\x1a#.ondewo.nlu.ExtractEntitiesResponse\"9\x82\xd3\xe4\x93\x02\x33\"./v2/{parent=projects/*/agent}/entities:extract:\x01*\x12\x9a\x01\n\x10GenerateUserSays\x12#.ondewo.nlu.GenerateUserSaysRequest\x1a$.ondewo.nlu.GenerateUserSaysResponse\";\x82\xd3\xe4\x93\x02\x35\"0/v2/{parent=projects/*/agent}/generate_user_says:\x01*\x12\x9d\x01\n\x11GenerateResponses\x12$.ondewo.nlu.GenerateResponsesRequest\x1a%.ondewo.nlu.GenerateResponsesResponse\";\x82\xd3\xe4\x93\x02\x35\"0/v2/{parent=projects/*/agent}/generate_responses:\x01*\x12\xb5\x01\n\x17GetAlternativeSentences\x12*.ondewo.nlu.GetAlternativeSentencesRequest\x1a+.ondewo.nlu.GetAlternativeSentencesResponse\"A\x82\xd3\xe4\x93\x02;\"6/v2/{parent=projects/*/agent}/get_alternative:sentence:\x01*\x12\xcf\x01\n\x1dGetAlternativeTrainingPhrases\x12\x30.ondewo.nlu.GetAlternativeTrainingPhrasesRequest\x1a\x31.ondewo.nlu.GetAlternativeTrainingPhrasesResponse\"I\x82\xd3\xe4\x93\x02\x43\">/v2/{parent=projects/*/agent}/get_alternative:training_phrases:\x01*\x12\x85\x01\n\x0bGetSynonyms\x12\x1e.ondewo.nlu.GetSynonymsRequest\x1a\x1f.ondewo.nlu.GetSynonymsResponse\"5\x82\xd3\xe4\x93\x02/\"*/v2/{parent=projects/*/agent}/get_synonyms:\x01*b\x06proto3'
   ,
   dependencies=[google_dot_api_dot_annotations__pb2.DESCRIPTOR,ondewo_dot_nlu_dot_intent__pb2.DESCRIPTOR,])
 
@@ -57,6 +57,13 @@ _EXTRACTENTITIESREQUEST = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='intent_name', full_name='ondewo.nlu.ExtractEntitiesRequest.intent_name', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -70,7 +77,7 @@ _EXTRACTENTITIESREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=98,
-  serialized_end=175,
+  serialized_end=196,
 )
 
 
@@ -115,8 +122,8 @@ _ENTITYDETECTED = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=177,
-  serialized_end=293,
+  serialized_start=198,
+  serialized_end=314,
 )
 
 
@@ -154,8 +161,8 @@ _EXTRACTENTITIESRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=295,
-  serialized_end=389,
+  serialized_start=316,
+  serialized_end=410,
 )
 
 
@@ -221,8 +228,8 @@ _GETALTERNATIVESENTENCESREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=392,
-  serialized_end=581,
+  serialized_start=413,
+  serialized_end=602,
 )
 
 
@@ -274,8 +281,8 @@ _GENERATEUSERSAYSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=583,
-  serialized_end=689,
+  serialized_start=604,
+  serialized_end=710,
 )
 
 
@@ -334,8 +341,8 @@ _GENERATERESPONSESREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=692,
-  serialized_end=832,
+  serialized_start=713,
+  serialized_end=853,
 )
 
 
@@ -429,8 +436,8 @@ _GETALTERNATIVETRAININGPHRASESREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=835,
-  serialized_end=1164,
+  serialized_start=856,
+  serialized_end=1185,
 )
 
 
@@ -482,8 +489,8 @@ _GETSYNONYMSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1166,
-  serialized_end=1289,
+  serialized_start=1187,
+  serialized_end=1310,
 )
 
 
@@ -514,8 +521,8 @@ _GETSYNONYMSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1291,
-  serialized_end=1351,
+  serialized_start=1312,
+  serialized_end=1372,
 )
 
 
@@ -553,8 +560,8 @@ _SYNONYM = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1353,
-  serialized_end=1394,
+  serialized_start=1374,
+  serialized_end=1415,
 )
 
 
@@ -585,8 +592,8 @@ _GETALTERNATIVESENTENCESRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1396,
-  serialized_end=1485,
+  serialized_start=1417,
+  serialized_end=1506,
 )
 
 
@@ -617,8 +624,8 @@ _GENERATERESPONSESRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1487,
-  serialized_end=1533,
+  serialized_start=1508,
+  serialized_end=1554,
 )
 
 
@@ -649,8 +656,8 @@ _GENERATEUSERSAYSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1535,
-  serialized_end=1580,
+  serialized_start=1556,
+  serialized_end=1601,
 )
 
 
@@ -681,8 +688,8 @@ _GETALTERNATIVETRAININGPHRASESRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1582,
-  serialized_end=1690,
+  serialized_start=1603,
+  serialized_end=1711,
 )
 
 
@@ -720,8 +727,8 @@ _ALTSENTENCE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1692,
-  serialized_end=1738,
+  serialized_start=1713,
+  serialized_end=1759,
 )
 
 
@@ -759,8 +766,8 @@ _ALTTRAININGPHRASE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1740,
-  serialized_end=1834,
+  serialized_start=1761,
+  serialized_end=1855,
 )
 
 
@@ -847,8 +854,8 @@ _DATAENRICHMENTCONFIG = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1837,
-  serialized_end=2440,
+  serialized_start=1858,
+  serialized_end=2461,
 )
 
 
@@ -893,8 +900,8 @@ _ENTITYENRICHMENTCONFIG = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2442,
-  serialized_end=2537,
+  serialized_start=2463,
+  serialized_end=2558,
 )
 
 
@@ -939,8 +946,8 @@ _THESAURUSENRICHMENTCONFIG = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2539,
-  serialized_end=2637,
+  serialized_start=2560,
+  serialized_end=2658,
 )
 
 
@@ -985,8 +992,8 @@ _FASTTEXTENRICHMENTCONFIG = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2639,
-  serialized_end=2736,
+  serialized_start=2660,
+  serialized_end=2757,
 )
 
 
@@ -1031,8 +1038,8 @@ _BERTAUGENRICHMENTCONFIG = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2738,
-  serialized_end=2834,
+  serialized_start=2759,
+  serialized_end=2855,
 )
 
 
@@ -1077,8 +1084,8 @@ _GLOVEENRICHMENTCONFIG = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2836,
-  serialized_end=2930,
+  serialized_start=2857,
+  serialized_end=2951,
 )
 
 
@@ -1123,8 +1130,8 @@ _GPT2ENRICHMENTCONFIG = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2932,
-  serialized_end=3025,
+  serialized_start=2953,
+  serialized_end=3046,
 )
 
 
@@ -1169,8 +1176,8 @@ _WORD2VECENRICHMENTCONFIG = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3027,
-  serialized_end=3124,
+  serialized_start=3048,
+  serialized_end=3145,
 )
 
 
@@ -1215,8 +1222,8 @@ _WORDNETAUGENRICHMENTCONFIG = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3126,
-  serialized_end=3225,
+  serialized_start=3147,
+  serialized_end=3246,
 )
 
 
@@ -1261,8 +1268,8 @@ _XLNETAUGENRICHMENTCONFIG = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3227,
-  serialized_end=3324,
+  serialized_start=3248,
+  serialized_end=3345,
 )
 
 _ENTITYDETECTED.fields_by_name['entity'].message_type = ondewo_dot_nlu_dot_intent__pb2._INTENT_TRAININGPHRASE_ENTITY
@@ -1503,8 +1510,8 @@ _AISERVICES = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=3327,
-  serialized_end=4338,
+  serialized_start=3348,
+  serialized_end=4359,
   methods=[
   _descriptor.MethodDescriptor(
     name='ExtractEntities',

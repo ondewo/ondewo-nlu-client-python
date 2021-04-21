@@ -43,12 +43,14 @@ class ExtractEntitiesRequest(google___protobuf___message___Message):
     parent = ... # type: typing___Text
     text = ... # type: typing___Text
     language_code = ... # type: typing___Text
+    intent_name = ... # type: typing___Text
 
     def __init__(self,
         *,
         parent : typing___Optional[typing___Text] = None,
         text : typing___Optional[typing___Text] = None,
         language_code : typing___Optional[typing___Text] = None,
+        intent_name : typing___Optional[typing___Text] = None,
         ) -> None: ...
     if sys.version_info >= (3,):
         @classmethod
@@ -58,7 +60,7 @@ class ExtractEntitiesRequest(google___protobuf___message___Message):
         def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> ExtractEntitiesRequest: ...
     def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"language_code",b"language_code",u"parent",b"parent",u"text",b"text"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"intent_name",b"intent_name",u"language_code",b"language_code",u"parent",b"parent",u"text",b"text"]) -> None: ...
 global___ExtractEntitiesRequest = ExtractEntitiesRequest
 
 class EntityDetected(google___protobuf___message___Message):
