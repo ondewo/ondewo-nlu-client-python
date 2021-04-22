@@ -227,6 +227,29 @@ class Intent(google___protobuf___message___Message):
 
     class Parameter(google___protobuf___message___Message):
         DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
+        class Prompt(google___protobuf___message___Message):
+            DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
+            name = ... # type: typing___Text
+            text = ... # type: typing___Text
+            language_code = ... # type: typing___Text
+
+            def __init__(self,
+                *,
+                name : typing___Optional[typing___Text] = None,
+                text : typing___Optional[typing___Text] = None,
+                language_code : typing___Optional[typing___Text] = None,
+                ) -> None: ...
+            if sys.version_info >= (3,):
+                @classmethod
+                def FromString(cls, s: builtin___bytes) -> Intent.Parameter.Prompt: ...
+            else:
+                @classmethod
+                def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> Intent.Parameter.Prompt: ...
+            def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
+            def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
+            def ClearField(self, field_name: typing_extensions___Literal[u"language_code",b"language_code",u"name",b"name",u"text",b"text"]) -> None: ...
+        global___Prompt = Prompt
+
         name = ... # type: typing___Text
         display_name = ... # type: typing___Text
         value = ... # type: typing___Text
@@ -234,9 +257,10 @@ class Intent(google___protobuf___message___Message):
         entity_type_name = ... # type: typing___Text
         entity_type_display_name = ... # type: typing___Text
         mandatory = ... # type: builtin___bool
-        prompts = ... # type: google___protobuf___internal___containers___RepeatedScalarFieldContainer[typing___Text]
         is_list = ... # type: builtin___bool
-        language_code = ... # type: typing___Text
+
+        @property
+        def prompts(self) -> google___protobuf___internal___containers___RepeatedCompositeFieldContainer[global___Intent.Parameter.Prompt]: ...
 
         def __init__(self,
             *,
@@ -247,9 +271,8 @@ class Intent(google___protobuf___message___Message):
             entity_type_name : typing___Optional[typing___Text] = None,
             entity_type_display_name : typing___Optional[typing___Text] = None,
             mandatory : typing___Optional[builtin___bool] = None,
-            prompts : typing___Optional[typing___Iterable[typing___Text]] = None,
+            prompts : typing___Optional[typing___Iterable[global___Intent.Parameter.Prompt]] = None,
             is_list : typing___Optional[builtin___bool] = None,
-            language_code : typing___Optional[typing___Text] = None,
             ) -> None: ...
         if sys.version_info >= (3,):
             @classmethod
@@ -259,7 +282,7 @@ class Intent(google___protobuf___message___Message):
             def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> Intent.Parameter: ...
         def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
         def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
-        def ClearField(self, field_name: typing_extensions___Literal[u"default_value",b"default_value",u"display_name",b"display_name",u"entity_type_display_name",b"entity_type_display_name",u"entity_type_name",b"entity_type_name",u"is_list",b"is_list",u"language_code",b"language_code",u"mandatory",b"mandatory",u"name",b"name",u"prompts",b"prompts",u"value",b"value"]) -> None: ...
+        def ClearField(self, field_name: typing_extensions___Literal[u"default_value",b"default_value",u"display_name",b"display_name",u"entity_type_display_name",b"entity_type_display_name",u"entity_type_name",b"entity_type_name",u"is_list",b"is_list",u"mandatory",b"mandatory",u"name",b"name",u"prompts",b"prompts",u"value",b"value"]) -> None: ...
     global___Parameter = Parameter
 
     class Message(google___protobuf___message___Message):
