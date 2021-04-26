@@ -16,6 +16,7 @@
 
 import argparse
 import io
+import time
 import wave
 from typing import Iterator, Dict, Any
 
@@ -29,7 +30,8 @@ from ondewo.nlu.services.sessions import Sessions
 from ondewo.nlu.session_pb2 import StreamingDetectIntentRequest, QueryInput, InputAudioConfig, \
     StreamingDetectIntentResponse, QueryResult
 
-AUDIO_FILE: str = "examples/audiofiles/sample_2.wav"
+# AUDIO_FILE: str = "examples/audiofiles/sample_2.wav"
+AUDIO_FILE: str = "examples/audiofiles/pizza_de.wav"
 CHUNK_SIZE: int = 8000
 
 
@@ -40,14 +42,19 @@ def get_streaming_audio(audio_path: str) -> Iterator[bytes]:
         while chunk != b"":
             yield chunk
             chunk = w.readframes(CHUNK_SIZE)
+        yield b""
 
 
 def create_streaming_request(
     audio_stream: Iterator[bytes],
 ) -> Iterator[StreamingDetectIntentRequest]:
     yield StreamingDetectIntentRequest(
-        session='projects/7452e79c-b865-4136-a80d-38ecdf8eb5f2/agent/sessions/csi-test',
-        query_input=QueryInput(audio_config=InputAudioConfig(language_code='en')),
+        # session='projects/7452e79c-b865-4136-a80d-38ecdf8eb5f2/agent/sessions/csi-test',
+        session=f'projects/924e70ca-c786-494c-bc48-4d0999da74db/agent/sessions/csi-test-{time.time()}',
+        query_input=QueryInput(audio_config=InputAudioConfig(
+            # language_code='en',
+            language_code='de',
+        )),
     )
     for i, chunk in enumerate(audio_stream):
         yield StreamingDetectIntentRequest(input_audio=chunk)
