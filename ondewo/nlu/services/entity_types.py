@@ -20,12 +20,15 @@ from ondewo.nlu.core.services_interface import ServicesInterface
 from ondewo.nlu.entity_type_pb2 import (
     BatchDeleteEntityTypesRequest,
     BatchUpdateEntityTypesRequest,
+    CreateEntityBatchRequest,
     CreateEntityTypeRequest,
+    DeleteEntityBatchRequest,
     DeleteEntityTypeRequest,
     EntityType,
     GetEntityTypeRequest,
     ListEntityTypesRequest,
     ListEntityTypesResponse,
+    UpdateEntityBatchRequest,
     UpdateEntityTypeRequest,
 )
 from ondewo.nlu.entity_type_pb2_grpc import EntityTypesStub
@@ -69,4 +72,16 @@ class EntityTypes(ServicesInterface):
 
     def batch_delete_entity_types(self, request: BatchDeleteEntityTypesRequest) -> Operation:
         response: Operation = self.stub.BatchDeleteEntityTypes(request, metadata=self.metadata)
+        return response
+
+    def create_entity_batch(self, request: CreateEntityBatchRequest) -> Operation:
+        response: Operation = self.stub.CreateEntityBatch(request, metadata=self.metadata)
+        return response
+
+    def update_entity_batch(self, request: UpdateEntityBatchRequest) -> Operation:
+        response: Operation = self.stub.UpdateEntityBatch(request, metadata=self.metadata)
+        return response
+
+    def delete_entity_batch(self, request: DeleteEntityBatchRequest) -> Operation:
+        response: Operation = self.stub.DeleteEntityBatch(request, metadata=self.metadata)
         return response
