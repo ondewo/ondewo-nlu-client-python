@@ -13,15 +13,22 @@
 # limitations under the License.
 
 
+from google.longrunning.operations_pb2 import Operation
 from google.protobuf.empty_pb2 import Empty
 
-from google.longrunning.operations_pb2 import Operation
-from ondewo.nlu.entity_type_pb2 import ListEntityTypesRequest, ListEntityTypesResponse, GetEntityTypeRequest, \
-    EntityType, CreateEntityTypeRequest, UpdateEntityTypeRequest, DeleteEntityTypeRequest, \
-    BatchUpdateEntityTypesRequest, BatchDeleteEntityTypesRequest, BatchCreateEntitiesRequest, \
-    BatchUpdateEntitiesRequest, BatchDeleteEntitiesRequest
-from ondewo.nlu.entity_type_pb2_grpc import EntityTypesStub
 from ondewo.nlu.core.services_interface import ServicesInterface
+from ondewo.nlu.entity_type_pb2 import (
+    BatchDeleteEntityTypesRequest,
+    BatchUpdateEntityTypesRequest,
+    CreateEntityTypeRequest,
+    DeleteEntityTypeRequest,
+    EntityType,
+    GetEntityTypeRequest,
+    ListEntityTypesRequest,
+    ListEntityTypesResponse,
+    UpdateEntityTypeRequest,
+)
+from ondewo.nlu.entity_type_pb2_grpc import EntityTypesStub
 
 
 class EntityTypes(ServicesInterface):
@@ -62,16 +69,4 @@ class EntityTypes(ServicesInterface):
 
     def batch_delete_entity_types(self, request: BatchDeleteEntityTypesRequest) -> Operation:
         response: Operation = self.stub.BatchDeleteEntityTypes(request, metadata=self.metadata)
-        return response
-
-    def batch_create_entities(self, request: BatchCreateEntitiesRequest) -> Operation:
-        response: Operation = self.stub.BatchCreateEntities(request, metadata=self.metadata)
-        return response
-
-    def batch_update_entities(self, request: BatchUpdateEntitiesRequest) -> Operation:
-        response: Operation = self.stub.BatchUpdateEntities(request, metadata=self.metadata)
-        return response
-
-    def batch_delete_entities(self, request: BatchDeleteEntitiesRequest) -> Operation:
-        response: Operation = self.stub.BatchDeleteEntities(request, metadata=self.metadata)
         return response

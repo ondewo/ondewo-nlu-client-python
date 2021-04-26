@@ -15,20 +15,18 @@
 # limitations under the License.
 
 import argparse
-import io
-import time
 import wave
-from typing import Iterator, Dict, Any
-
-import soundfile
-from IPython import display
-from google.protobuf.json_format import MessageToDict
+from typing import Iterator
 
 from ondewo.nlu.client import Client
 from ondewo.nlu.client_config import ClientConfig
 from ondewo.nlu.services.sessions import Sessions
-from ondewo.nlu.session_pb2 import StreamingDetectIntentRequest, QueryInput, InputAudioConfig, \
-    StreamingDetectIntentResponse, QueryResult
+from ondewo.nlu.session_pb2 import (
+    InputAudioConfig,
+    QueryInput,
+    QueryResult,
+    StreamingDetectIntentRequest,
+)
 
 # AUDIO_FILE: str = "examples/audiofiles/sample_2.wav"
 AUDIO_FILE: str = "examples/audiofiles/pizza_de.wav"
@@ -50,11 +48,13 @@ def create_streaming_request(
 ) -> Iterator[StreamingDetectIntentRequest]:
     yield StreamingDetectIntentRequest(
         # session='projects/7452e79c-b865-4136-a80d-38ecdf8eb5f2/agent/sessions/csi-test',
-        session=f'projects/924e70ca-c786-494c-bc48-4d0999da74db/agent/sessions/csi-test-{time.time()}',
-        query_input=QueryInput(audio_config=InputAudioConfig(
-            # language_code='en',
-            language_code='de',
-        )),
+        session="projects/924e70ca-c786-494c-bc48-4d0999da74db/agent/sessions/streaming-test",
+        query_input=QueryInput(
+            audio_config=InputAudioConfig(
+                # language_code='en',
+                language_code="de",
+            )
+        ),
     )
     for i, chunk in enumerate(audio_stream):
         yield StreamingDetectIntentRequest(input_audio=chunk)
