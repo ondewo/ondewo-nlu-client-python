@@ -24,11 +24,9 @@ from ondewo.nlu.services.sessions import Sessions
 from ondewo.nlu.session_pb2 import (
     InputAudioConfig,
     QueryInput,
-    QueryResult,
     StreamingDetectIntentRequest,
 )
 
-# AUDIO_FILE: str = "examples/audiofiles/sample_2.wav"
 AUDIO_FILE: str = "examples/audiofiles/pizza_de.wav"
 CHUNK_SIZE: int = 8000
 
@@ -47,11 +45,9 @@ def create_streaming_request(
     audio_stream: Iterator[bytes],
 ) -> Iterator[StreamingDetectIntentRequest]:
     yield StreamingDetectIntentRequest(
-        # session='projects/7452e79c-b865-4136-a80d-38ecdf8eb5f2/agent/sessions/csi-test',
         session="projects/924e70ca-c786-494c-bc48-4d0999da74db/agent/sessions/streaming-test",
         query_input=QueryInput(
             audio_config=InputAudioConfig(
-                # language_code='en',
                 language_code="de",
             )
         ),
@@ -79,14 +75,10 @@ def main():
     streaming_request: Iterator[StreamingDetectIntentRequest] = create_streaming_request(audio_stream)
 
     # get back responses
-    for response in sessions_service.streaming_detect_intent(streaming_request):
-        query_result: QueryResult = response.query_result
-        # diagnostic_info: Dict[str, Any] = MessageToDict(query_result.diagnostic_info)
-        for message in query_result.fulfillment_messages:
-            # for text in message.text.text:
-            print(message)
-            # data, rate = soundfile.read(io.BytesIO(audio_response))
-            # display.Audio(data, rate=rate)
+    for i, response in enumerate(sessions_service.streaming_detect_intent(streaming_request)):
+        print(response.query_result.fulfillment_messages)
+        with open(f"response_{i + 1}.wav", "wb") as f:
+            f.write(response.audio)
 
 
 if __name__ == "__main__":
