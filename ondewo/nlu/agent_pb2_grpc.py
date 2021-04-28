@@ -161,6 +161,11 @@ class AgentsStub(object):
                 request_serializer=ondewo_dot_nlu_dot_agent__pb2.ExportResourcesRequest.SerializeToString,
                 response_deserializer=ondewo_dot_nlu_dot_agent__pb2.ExportResourcesResponse.FromString,
                 )
+        self.GetModelStatuses = channel.unary_unary(
+                '/ondewo.nlu.Agents/GetModelStatuses',
+                request_serializer=ondewo_dot_nlu_dot_agent__pb2.GetModelStatusesRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_agent__pb2.GetModelStatusesResponse.FromString,
+                )
 
 
 class AgentsServicer(object):
@@ -372,6 +377,13 @@ class AgentsServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetModelStatuses(self, request, context):
+        """Get statuses of models related to project
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_AgentsServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -494,6 +506,11 @@ def add_AgentsServicer_to_server(servicer, server):
                     servicer.ExportResources,
                     request_deserializer=ondewo_dot_nlu_dot_agent__pb2.ExportResourcesRequest.FromString,
                     response_serializer=ondewo_dot_nlu_dot_agent__pb2.ExportResourcesResponse.SerializeToString,
+            ),
+            'GetModelStatuses': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetModelStatuses,
+                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.GetModelStatusesRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_agent__pb2.GetModelStatusesResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -935,5 +952,22 @@ class Agents(object):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/ExportResources',
             ondewo_dot_nlu_dot_agent__pb2.ExportResourcesRequest.SerializeToString,
             ondewo_dot_nlu_dot_agent__pb2.ExportResourcesResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetModelStatuses(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/GetModelStatuses',
+            ondewo_dot_nlu_dot_agent__pb2.GetModelStatusesRequest.SerializeToString,
+            ondewo_dot_nlu_dot_agent__pb2.GetModelStatusesResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
