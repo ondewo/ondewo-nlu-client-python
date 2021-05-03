@@ -1,6 +1,13 @@
 # Release History
 *****************
 
+## Release ONDEWO NLU APIS 1.3.0
+
+### New Features
+ * [OND211-1773] Implement endpoints to directly create/update/get/delete and list responses (=intent messages).
+
+*****************
+
 ## Release ONDEWO NLU Python Client 1.2.0
 
 ### New Features
