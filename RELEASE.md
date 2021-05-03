@@ -5,7 +5,8 @@
 
 ### New Features
  * [OND211-1773] Implement endpoints to directly create/update/get/delete and list responses (=intent messages).
-
+ * [OND211-354] Establish a clear hierarchy for the merging
+  of entities within the generalized waterfall strategy. Include intent parameters to entity selection criteria.
 *****************
 
 ## Release ONDEWO NLU Python Client 1.2.0
