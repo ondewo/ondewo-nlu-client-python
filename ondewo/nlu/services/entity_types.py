@@ -18,17 +18,17 @@ from google.protobuf.empty_pb2 import Empty
 
 from ondewo.nlu.core.services_interface import ServicesInterface
 from ondewo.nlu.entity_type_pb2 import (
+    BatchCreateEntitiesRequest,
+    BatchDeleteEntitiesRequest,
     BatchDeleteEntityTypesRequest,
+    BatchUpdateEntitiesRequest,
     BatchUpdateEntityTypesRequest,
-    CreateEntityBatchRequest,
     CreateEntityTypeRequest,
-    DeleteEntityBatchRequest,
     DeleteEntityTypeRequest,
     EntityType,
     GetEntityTypeRequest,
     ListEntityTypesRequest,
     ListEntityTypesResponse,
-    UpdateEntityBatchRequest,
     UpdateEntityTypeRequest,
 )
 from ondewo.nlu.entity_type_pb2_grpc import EntityTypesStub
@@ -74,14 +74,14 @@ class EntityTypes(ServicesInterface):
         response: Operation = self.stub.BatchDeleteEntityTypes(request, metadata=self.metadata)
         return response
 
-    def create_entity_batch(self, request: CreateEntityBatchRequest) -> Operation:
-        response: Operation = self.stub.CreateEntityBatch(request, metadata=self.metadata)
+    def create_entity_batch(self, request: BatchCreateEntitiesRequest) -> Operation:
+        response: Operation = self.stub.BatchCreateEntities(request, metadata=self.metadata)
         return response
 
-    def update_entity_batch(self, request: UpdateEntityBatchRequest) -> Operation:
-        response: Operation = self.stub.UpdateEntityBatch(request, metadata=self.metadata)
+    def update_entity_batch(self, request: BatchUpdateEntitiesRequest) -> Operation:
+        response: Operation = self.stub.BatchUpdateEntities(request, metadata=self.metadata)
         return response
 
-    def delete_entity_batch(self, request: DeleteEntityBatchRequest) -> Operation:
-        response: Operation = self.stub.DeleteEntityBatch(request, metadata=self.metadata)
+    def delete_entity_batch(self, request: BatchDeleteEntitiesRequest) -> Operation:
+        response: Operation = self.stub.BatchDeleteEntities(request, metadata=self.metadata)
         return response
