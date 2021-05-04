@@ -74,14 +74,14 @@ class EntityTypes(ServicesInterface):
         response: Operation = self.stub.BatchDeleteEntityTypes(request, metadata=self.metadata)
         return response
 
-    def create_entity_batch(self, request: BatchCreateEntitiesRequest) -> Operation:
+    def batch_create_entities(self, request: BatchCreateEntitiesRequest) -> Operation:
         response: Operation = self.stub.BatchCreateEntities(request, metadata=self.metadata)
         return response
 
-    def update_entity_batch(self, request: BatchUpdateEntitiesRequest) -> Operation:
+    def batch_update_entities(self, request: BatchUpdateEntitiesRequest) -> Operation:
         response: Operation = self.stub.BatchUpdateEntities(request, metadata=self.metadata)
         return response
 
-    def delete_entity_batch(self, request: BatchDeleteEntitiesRequest) -> Operation:
+    def batch_delete_entities(self, request: BatchDeleteEntitiesRequest) -> Operation:
         response: Operation = self.stub.BatchDeleteEntities(request, metadata=self.metadata)
         return response
