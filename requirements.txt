@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-dataclasses-json==0.5.2
+git+https://github.com/ondewo/ondewo-client-utils-python.git#egg=ondewo-client-utils
 google-api-core==1.13.0
 googleapis-common-protos==1.5.10
 grpcio==1.31.0
@@ -8,5 +8,4 @@ grpcio-tools==1.31.0
 mypy-protobuf==1.20
 polling==0.3.1
 pytest==6.0.1
-regex==2020.7.14
 protobuf==3.13.0
