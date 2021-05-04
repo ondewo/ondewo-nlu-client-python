@@ -12,7 +12,6 @@ with open("requirements.txt") as f:
             req_str = f"{req_name} @ {req_url}"
         else:
             req_str = req
-        print(req_str)
         requires.append(req_str)
 
 setuptools.setup(
