@@ -13,15 +13,25 @@
 # limitations under the License.
 
 
+from google.longrunning.operations_pb2 import Operation
 from google.protobuf.empty_pb2 import Empty
 
-from google.longrunning.operations_pb2 import Operation
-from ondewo.nlu.entity_type_pb2 import ListEntityTypesRequest, ListEntityTypesResponse, GetEntityTypeRequest, \
-    EntityType, CreateEntityTypeRequest, UpdateEntityTypeRequest, DeleteEntityTypeRequest, \
-    BatchUpdateEntityTypesRequest, BatchDeleteEntityTypesRequest, BatchCreateEntitiesRequest, \
-    BatchUpdateEntitiesRequest, BatchDeleteEntitiesRequest
-from ondewo.nlu.entity_type_pb2_grpc import EntityTypesStub
 from ondewo.nlu.core.services_interface import ServicesInterface
+from ondewo.nlu.entity_type_pb2 import (
+    BatchCreateEntitiesRequest,
+    BatchDeleteEntitiesRequest,
+    BatchDeleteEntityTypesRequest,
+    BatchUpdateEntitiesRequest,
+    BatchUpdateEntityTypesRequest,
+    CreateEntityTypeRequest,
+    DeleteEntityTypeRequest,
+    EntityType,
+    GetEntityTypeRequest,
+    ListEntityTypesRequest,
+    ListEntityTypesResponse,
+    UpdateEntityTypeRequest,
+)
+from ondewo.nlu.entity_type_pb2_grpc import EntityTypesStub
 
 
 class EntityTypes(ServicesInterface):
