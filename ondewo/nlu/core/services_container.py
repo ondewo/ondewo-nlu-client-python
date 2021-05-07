@@ -15,6 +15,7 @@
 
 from dataclasses import dataclass
 
+from ondewo.nlu.project_statistics_pb2_grpc import ProjectStatistics
 from ondewo.nlu.services.agents import Agents
 from ondewo.nlu.services.aiservices import AIServices
 from ondewo.nlu.services.contexts import Contexts
@@ -36,5 +37,6 @@ class ServicesContainer(BaseServicesContainer):
     intents: Intents
     operations: Operations
     project_roles: ProjectRoles
+    project_statistics: ProjectStatistics
     sessions: Sessions
     users: Users
