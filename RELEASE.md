@@ -4,6 +4,7 @@
 ## Release ONDEWO NLU APIS 1.3.0
 
 ### New Features
+ * [OND211-1774] Implement endpoints to directly create/update/get/delete and list parameters.
  * [OND211-1773] Implement endpoints to directly create/update/get/delete and list responses (=intent messages).
  * [OND211-354] Establish a clear hierarchy for the merging
   of entities within the generalized waterfall strategy. Include intent parameters to entity selection criteria.
