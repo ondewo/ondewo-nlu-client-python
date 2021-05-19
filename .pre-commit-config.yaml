@@ -1,0 +1,79 @@
+exclude: '^$'
+
+fail_fast: false
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.4.0
+    hooks:
+    - id: no-commit-to-branch
+      args: [--branch, master, --branch, develop]
+    - id: trailing-whitespace
+    - id: check-added-large-files
+      args: [maxkb=512]
+    - id: check-ast
+    - id: check-json
+    - id: pretty-format-json
+      args: [--autofix]
+    - id: check-xml
+    - id: check-yaml
+    - id: check-symlinks
+    - id: check-merge-conflict
+    - id: detect-private-key
+    - id: check-executables-have-shebangs
+    - id: name-tests-test
+      # args: ['--django']        # uncomment to change tests to 'test_*.py' rather '*_test.py'
+    - id: requirements-txt-fixer  # Sorts the requirement.txt files' content
+      files: 'requirements/requirements.*\.txt$'
+    - id: trailing-whitespace
+
+  ## consider using seed-isort-config
+  ## (pip install seed-isort-config)
+  ##
+  - repo: https://github.com/pre-commit/mirrors-isort
+    rev: 'v5.8.0'
+    hooks:
+    - id: isort
+      args: ["--profile", "black"]
+
+  - repo: https://github.com/asottile/seed-isort-config
+    rev: 'v2.2.0'
+    hooks:
+    - id: seed-isort-config
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: 'v0.812'
+    hooks:
+    - id: mypy
+
+  ## use either black *or* autopep8
+
+  - repo: https://github.com/ambv/black
+    rev: 20.8b1
+    hooks:
+    - id: black
+      args: ['--line-length=110']     # if this is different from the length you set flake8 to, you can get stuck in a refactor loop
+
+  # - repo: https://github.com/pre-commit/mirrors-autopep8
+  #   rev: ''  # Use the sha / tag you want to point at
+  #   hooks:
+  #   - id: autopep8
+
+  # - repo: https://github.com/Lucas-C/pre-commit-hooks-bandit
+  #   sha: v1.0.3
+  #   hooks:
+  #   - id: python-bandit-vulnerability-check
+
+  - repo: https://gitlab.com/pycqa/flake8
+    rev: 3.9.1
+    hooks:
+    - id: flake8
+      args: ['--config=.flake8']
+
+  - repo: https://github.com/milin/giticket
+    rev: v1.1
+    hooks:
+    - id: giticket  # Prepend the commit message with the JIRA ticket
+      args: ['--regex=(?:feature|bugfix|support|hotfix)/(OND[0-9]{3}-[0-9]{1,5})[_-][\w-]+',
+             '--format=[{ticket}] {commit_msg}',
+             '--mode=regex_match']

@@ -7,7 +7,7 @@ with open("requirements.txt") as f:
     requires = f.read().splitlines()
 
 setuptools.setup(
-    name="ondewo-nlu-client-python",
+    name="ondewo-nlu-client",
     version="1.1.3",
     author="Ondewo GbmH",
     author_email="info@ondewo.com",
@@ -16,21 +16,15 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/ondewo/ondewo-nlu-client-python",
     packages=[
-        np
-        for np in filter(
-            lambda n: n.startswith('ondewo.') or n == 'ondewo',
-            setuptools.find_packages()
-        )
+        np for np in filter(lambda n: n.startswith("ondewo.") or n == "ondewo", setuptools.find_packages())
     ],
-    package_data={
-        'ondewo.nlu': ['py.typed']
-    },
+    package_data={"ondewo.nlu": ["py.typed"]},
     classifiers=[
         "Programming Language :: Python :: 3",
         "Operating System :: OS Independent",
-        'Development Status :: 3 - Alpha',
-        'Topic :: Software Development :: Libraries',
+        "Development Status :: 3 - Alpha",
+        "Topic :: Software Development :: Libraries",
     ],
-    python_requires='>=2.6,!=3.0.*',
+    python_requires=">=2.6,!=3.0.*",
     install_requires=requires,
 )
