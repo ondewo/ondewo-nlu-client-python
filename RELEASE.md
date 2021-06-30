@@ -1,7 +1,7 @@
 # Release History
 *****************
 
-## Release ONDEWO NLU APIS 2.0.0
+## Release ONDEWO NLU Python Client 2.0.0
 
 ### New Features
  * [OND211-1774] Implement endpoints to directly create/update/get/delete and list parameters.
