@@ -25,7 +25,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'\n\036com.google.cloud.dialogflow.v2B\017EntityTypeProtoP\001ZDgoogle.golang.org/genproto/googleapis/cloud/dialogflow/v2;dialogflow\370\001\001\242\002\002DF\252\002\032Google.Cloud.Dialogflow.V2',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x1condewo/nlu/entity_type.proto\x12\nondewo.nlu\x1a\x1cgoogle/api/annotations.proto\x1a#google/longrunning/operations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a google/protobuf/field_mask.proto\x1a\x17ondewo/nlu/common.proto\"\xfc\x04\n\nEntityType\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x14\n\x0c\x64isplay_name\x18\x02 \x01(\t\x12)\n\x04kind\x18\x03 \x01(\x0e\x32\x1b.ondewo.nlu.EntityType.Kind\x12\x45\n\x13\x61uto_expansion_mode\x18\x04 \x01(\x0e\x32(.ondewo.nlu.EntityType.AutoExpansionMode\x12/\n\x08\x65ntities\x18\x06 \x03(\x0b\x32\x1d.ondewo.nlu.EntityType.Entity\x12\x17\n\x0fnext_page_token\x18\n \x01(\t\x12\x14\n\x0c\x65ntity_count\x18\x0b \x01(\x05\x12\x37\n\x06status\x18\x0c \x01(\x0e\x32\'.ondewo.nlu.EntityType.EntityTypeStatus\x12\x15\n\rsynonym_count\x18\r \x01(\x05\x1a\x64\n\x06\x45ntity\x12\r\n\x05value\x18\x01 \x01(\t\x12\x10\n\x08synonyms\x18\x02 \x03(\t\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x14\n\x0c\x64isplay_name\x18\x04 \x01(\t\x12\x15\n\rsynonym_count\x18\x05 \x01(\x05\"9\n\x04Kind\x12\x14\n\x10KIND_UNSPECIFIED\x10\x00\x12\x0c\n\x08KIND_MAP\x10\x01\x12\r\n\tKIND_LIST\x10\x02\",\n\x10\x45ntityTypeStatus\x12\n\n\x06\x41\x43TIVE\x10\x00\x12\x0c\n\x08INACTIVE\x10\x01\"Y\n\x11\x41utoExpansionMode\x12#\n\x1f\x41UTO_EXPANSION_MODE_UNSPECIFIED\x10\x00\x12\x1f\n\x1b\x41UTO_EXPANSION_MODE_DEFAULT\x10\x01\"\xfb\x01\n\x16ListEntityTypesRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x15\n\rlanguage_code\x18\x02 \x01(\t\x12\x12\n\npage_token\x18\x04 \x01(\t\x12\x34\n\x10\x65ntity_type_view\x18\x05 \x01(\x0e\x32\x1a.ondewo.nlu.EntityTypeView\x12:\n\x12\x66ilter_by_category\x18\x06 \x01(\x0e\x32\x1e.ondewo.nlu.EntityTypeCategory\x12\x34\n\rsort_by_field\x18\x07 \x01(\x0b\x32\x1d.ondewo.nlu.EntityTypeSorting\"`\n\x17ListEntityTypesResponse\x12,\n\x0c\x65ntity_types\x18\x01 \x03(\x0b\x32\x16.ondewo.nlu.EntityType\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t\"O\n\x14GetEntityTypeRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x15\n\rlanguage_code\x18\x02 \x01(\t\x12\x12\n\npage_token\x18\x05 \x01(\t\"m\n\x17\x43reateEntityTypeRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12+\n\x0b\x65ntity_type\x18\x02 \x01(\x0b\x32\x16.ondewo.nlu.EntityType\x12\x15\n\rlanguage_code\x18\x03 \x01(\t\"\x8e\x01\n\x17UpdateEntityTypeRequest\x12+\n\x0b\x65ntity_type\x18\x01 \x01(\x0b\x32\x16.ondewo.nlu.EntityType\x12\x15\n\rlanguage_code\x18\x02 \x01(\t\x12/\n\x0bupdate_mask\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\"\'\n\x17\x44\x65leteEntityTypeRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"\xee\x01\n\x1d\x42\x61tchUpdateEntityTypesRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x1f\n\x15\x65ntity_type_batch_uri\x18\x02 \x01(\tH\x00\x12?\n\x18\x65ntity_type_batch_inline\x18\x03 \x01(\x0b\x32\x1b.ondewo.nlu.EntityTypeBatchH\x00\x12\x15\n\rlanguage_code\x18\x04 \x01(\t\x12/\n\x0bupdate_mask\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.FieldMaskB\x13\n\x11\x65ntity_type_batch\"N\n\x1e\x42\x61tchUpdateEntityTypesResponse\x12,\n\x0c\x65ntity_types\x18\x01 \x03(\x0b\x32\x16.ondewo.nlu.EntityType\"J\n\x1d\x42\x61tchDeleteEntityTypesRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x19\n\x11\x65ntity_type_names\x18\x02 \x03(\t\"t\n\x1a\x42\x61tchCreateEntitiesRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12/\n\x08\x65ntities\x18\x02 \x03(\x0b\x32\x1d.ondewo.nlu.EntityType.Entity\x12\x15\n\rlanguage_code\x18\x03 \x01(\t\"\xa5\x01\n\x1a\x42\x61tchUpdateEntitiesRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12/\n\x08\x65ntities\x18\x02 \x03(\x0b\x32\x1d.ondewo.nlu.EntityType.Entity\x12\x15\n\rlanguage_code\x18\x03 \x01(\t\x12/\n\x0bupdate_mask\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\"Z\n\x1a\x42\x61tchDeleteEntitiesRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x15\n\rentity_values\x18\x02 \x03(\t\x12\x15\n\rlanguage_code\x18\x03 \x01(\t\"?\n\x0f\x45ntityTypeBatch\x12,\n\x0c\x65ntity_types\x18\x01 \x03(\x0b\x32\x16.ondewo.nlu.EntityType\"\x84\x03\n\x11\x45ntityTypeSorting\x12K\n\rsorting_field\x18\x01 \x01(\x0e\x32\x34.ondewo.nlu.EntityTypeSorting.EntityTypeSortingField\x12-\n\x0csorting_mode\x18\x02 \x01(\x0e\x32\x17.ondewo.nlu.SortingMode\"\xf2\x01\n\x16\x45ntityTypeSortingField\x12\x1a\n\x16NO_ENTITY_TYPE_SORTING\x10\x00\x12\x1c\n\x18SORT_ENTITY_TYPE_BY_NAME\x10\x01\x12%\n!SORT_ENTITY_TYPE_BY_CREATION_DATE\x10\x02\x12$\n SORT_ENTITY_TYPE_BY_LAST_UPDATED\x10\x03\x12*\n&SORT_ENTITY_TYPE_BY_ENTITY_VALUE_COUNT\x10\x04\x12%\n!SORT_ENTITY_TYPE_BY_SYNONYM_COUNT\x10\x05*\x89\x01\n\x0e\x45ntityTypeView\x12 \n\x1c\x45NTITY_TYPE_VIEW_UNSPECIFIED\x10\x00\x12\x19\n\x15\x45NTITY_TYPE_VIEW_FULL\x10\x01\x12\x1c\n\x18\x45NTITY_TYPE_VIEW_PARTIAL\x10\x02\x12\x1c\n\x18\x45NTITY_TYPE_VIEW_SHALLOW\x10\x03*c\n\x12\x45ntityTypeCategory\x12\x14\n\x10\x41LL_ENTITY_TYPES\x10\x00\x12\x18\n\x14\x44\x45\x46\x41ULT_ENTITY_TYPES\x10\x01\x12\x1d\n\x19USER_DEFINED_ENTITY_TYPES\x10\x02\x32\x8e\x0c\n\x0b\x45ntityTypes\x12\x8d\x01\n\x0fListEntityTypes\x12\".ondewo.nlu.ListEntityTypesRequest\x1a#.ondewo.nlu.ListEntityTypesResponse\"1\x82\xd3\xe4\x93\x02+\x12)/v2/{parent=projects/*/agent}/entityTypes\x12|\n\rGetEntityType\x12 .ondewo.nlu.GetEntityTypeRequest\x1a\x16.ondewo.nlu.EntityType\"1\x82\xd3\xe4\x93\x02+\x12)/v2/{name=projects/*/agent/entityTypes/*}\x12\x85\x01\n\x10\x43reateEntityType\x12#.ondewo.nlu.CreateEntityTypeRequest\x1a\x16.ondewo.nlu.EntityType\"4\x82\xd3\xe4\x93\x02.\")/v2/{parent=projects/*/agent}/entityTypes:\x01*\x12\x91\x01\n\x10UpdateEntityType\x12#.ondewo.nlu.UpdateEntityTypeRequest\x1a\x16.ondewo.nlu.EntityType\"@\x82\xd3\xe4\x93\x02:25/v2/{entity_type.name=projects/*/agent/entityTypes/*}:\x01*\x12\x82\x01\n\x10\x44\x65leteEntityType\x12#.ondewo.nlu.DeleteEntityTypeRequest\x1a\x16.google.protobuf.Empty\"1\x82\xd3\xe4\x93\x02+*)/v2/{name=projects/*/agent/entityTypes/*}\x12\xa4\x01\n\x16\x42\x61tchUpdateEntityTypes\x12).ondewo.nlu.BatchUpdateEntityTypesRequest\x1a\x1d.google.longrunning.Operation\"@\x82\xd3\xe4\x93\x02:\"5/v2/{parent=projects/*/agent}/entityTypes:batchUpdate:\x01*\x12\xa4\x01\n\x16\x42\x61tchDeleteEntityTypes\x12).ondewo.nlu.BatchDeleteEntityTypesRequest\x1a\x1d.google.longrunning.Operation\"@\x82\xd3\xe4\x93\x02:\"5/v2/{parent=projects/*/agent}/entityTypes:batchDelete:\x01*\x12\xa9\x01\n\x13\x42\x61tchCreateEntities\x12&.ondewo.nlu.BatchCreateEntitiesRequest\x1a\x1d.google.longrunning.Operation\"K\x82\xd3\xe4\x93\x02\x45\"@/v2/{parent=projects/*/agent/entityTypes/*}/entities:batchCreate:\x01*\x12\xa9\x01\n\x13\x42\x61tchUpdateEntities\x12&.ondewo.nlu.BatchUpdateEntitiesRequest\x1a\x1d.google.longrunning.Operation\"K\x82\xd3\xe4\x93\x02\x45\"@/v2/{parent=projects/*/agent/entityTypes/*}/entities:batchUpdate:\x01*\x12\xa9\x01\n\x13\x42\x61tchDeleteEntities\x12&.ondewo.nlu.BatchDeleteEntitiesRequest\x1a\x1d.google.longrunning.Operation\"K\x82\xd3\xe4\x93\x02\x45\"@/v2/{parent=projects/*/agent/entityTypes/*}/entities:batchDelete:\x01*B\x9e\x01\n\x1e\x63om.google.cloud.dialogflow.v2B\x0f\x45ntityTypeProtoP\x01ZDgoogle.golang.org/genproto/googleapis/cloud/dialogflow/v2;dialogflow\xf8\x01\x01\xa2\x02\x02\x44\x46\xaa\x02\x1aGoogle.Cloud.Dialogflow.V2b\x06proto3'
+  serialized_pb=b'\n\x1condewo/nlu/entity_type.proto\x12\nondewo.nlu\x1a\x1cgoogle/api/annotations.proto\x1a#google/longrunning/operations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a google/protobuf/field_mask.proto\x1a\x17ondewo/nlu/common.proto\"\x93\x05\n\nEntityType\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x14\n\x0c\x64isplay_name\x18\x02 \x01(\t\x12)\n\x04kind\x18\x03 \x01(\x0e\x32\x1b.ondewo.nlu.EntityType.Kind\x12\x45\n\x13\x61uto_expansion_mode\x18\x04 \x01(\x0e\x32(.ondewo.nlu.EntityType.AutoExpansionMode\x12/\n\x08\x65ntities\x18\x06 \x03(\x0b\x32\x1d.ondewo.nlu.EntityType.Entity\x12\x17\n\x0fnext_page_token\x18\n \x01(\t\x12\x14\n\x0c\x65ntity_count\x18\x0b \x01(\x05\x12\x37\n\x06status\x18\x0c \x01(\x0e\x32\'.ondewo.nlu.EntityType.EntityTypeStatus\x12\x15\n\rsynonym_count\x18\r \x01(\x05\x1a{\n\x06\x45ntity\x12\r\n\x05value\x18\x01 \x01(\t\x12\x10\n\x08synonyms\x18\x02 \x03(\t\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x14\n\x0c\x64isplay_name\x18\x04 \x01(\t\x12\x15\n\rsynonym_count\x18\x05 \x01(\x05\x12\x15\n\rlanguage_code\x18\x06 \x01(\t\"9\n\x04Kind\x12\x14\n\x10KIND_UNSPECIFIED\x10\x00\x12\x0c\n\x08KIND_MAP\x10\x01\x12\r\n\tKIND_LIST\x10\x02\",\n\x10\x45ntityTypeStatus\x12\n\n\x06\x41\x43TIVE\x10\x00\x12\x0c\n\x08INACTIVE\x10\x01\"Y\n\x11\x41utoExpansionMode\x12#\n\x1f\x41UTO_EXPANSION_MODE_UNSPECIFIED\x10\x00\x12\x1f\n\x1b\x41UTO_EXPANSION_MODE_DEFAULT\x10\x01\"\xfb\x01\n\x16ListEntityTypesRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x15\n\rlanguage_code\x18\x02 \x01(\t\x12\x12\n\npage_token\x18\x04 \x01(\t\x12\x34\n\x10\x65ntity_type_view\x18\x05 \x01(\x0e\x32\x1a.ondewo.nlu.EntityTypeView\x12:\n\x12\x66ilter_by_category\x18\x06 \x01(\x0e\x32\x1e.ondewo.nlu.EntityTypeCategory\x12\x34\n\rsort_by_field\x18\x07 \x01(\x0b\x32\x1d.ondewo.nlu.EntityTypeSorting\"`\n\x17ListEntityTypesResponse\x12,\n\x0c\x65ntity_types\x18\x01 \x03(\x0b\x32\x16.ondewo.nlu.EntityType\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t\"O\n\x14GetEntityTypeRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x15\n\rlanguage_code\x18\x02 \x01(\t\x12\x12\n\npage_token\x18\x05 \x01(\t\"m\n\x17\x43reateEntityTypeRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12+\n\x0b\x65ntity_type\x18\x02 \x01(\x0b\x32\x16.ondewo.nlu.EntityType\x12\x15\n\rlanguage_code\x18\x03 \x01(\t\"\x8e\x01\n\x17UpdateEntityTypeRequest\x12+\n\x0b\x65ntity_type\x18\x01 \x01(\x0b\x32\x16.ondewo.nlu.EntityType\x12\x15\n\rlanguage_code\x18\x02 \x01(\t\x12/\n\x0bupdate_mask\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\"\'\n\x17\x44\x65leteEntityTypeRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"\xee\x01\n\x1d\x42\x61tchUpdateEntityTypesRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x1f\n\x15\x65ntity_type_batch_uri\x18\x02 \x01(\tH\x00\x12?\n\x18\x65ntity_type_batch_inline\x18\x03 \x01(\x0b\x32\x1b.ondewo.nlu.EntityTypeBatchH\x00\x12\x15\n\rlanguage_code\x18\x04 \x01(\t\x12/\n\x0bupdate_mask\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.FieldMaskB\x13\n\x11\x65ntity_type_batch\"N\n\x1e\x42\x61tchUpdateEntityTypesResponse\x12,\n\x0c\x65ntity_types\x18\x01 \x03(\x0b\x32\x16.ondewo.nlu.EntityType\"J\n\x1d\x42\x61tchDeleteEntityTypesRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x19\n\x11\x65ntity_type_names\x18\x02 \x03(\t\"?\n\x0f\x45ntityTypeBatch\x12,\n\x0c\x65ntity_types\x18\x01 \x03(\x0b\x32\x16.ondewo.nlu.EntityType\"\x84\x03\n\x11\x45ntityTypeSorting\x12K\n\rsorting_field\x18\x01 \x01(\x0e\x32\x34.ondewo.nlu.EntityTypeSorting.EntityTypeSortingField\x12-\n\x0csorting_mode\x18\x02 \x01(\x0e\x32\x17.ondewo.nlu.SortingMode\"\xf2\x01\n\x16\x45ntityTypeSortingField\x12\x1a\n\x16NO_ENTITY_TYPE_SORTING\x10\x00\x12\x1c\n\x18SORT_ENTITY_TYPE_BY_NAME\x10\x01\x12%\n!SORT_ENTITY_TYPE_BY_CREATION_DATE\x10\x02\x12$\n SORT_ENTITY_TYPE_BY_LAST_UPDATED\x10\x03\x12*\n&SORT_ENTITY_TYPE_BY_ENTITY_VALUE_COUNT\x10\x04\x12%\n!SORT_ENTITY_TYPE_BY_SYNONYM_COUNT\x10\x05\"\xe2\x01\n\x15\x42\x61tchEntitiesResponse\x12G\n\x0f\x65ntity_statuses\x18\x01 \x03(\x0b\x32..ondewo.nlu.BatchEntitiesResponse.EntityStatus\x12\x12\n\nhas_errors\x18\x02 \x01(\x08\x1al\n\x0c\x45ntityStatus\x12/\n\x06\x65ntity\x18\x01 \x01(\x0b\x32\x1d.ondewo.nlu.EntityType.EntityH\x00\x12\x17\n\rerror_message\x18\x02 \x01(\tH\x00\x42\x12\n\x10\x65ntity_or_status\"\xd8\x01\n\x1a\x42\x61tchCreateEntitiesRequest\x12Z\n\x16\x63reate_entity_requests\x18\x01 \x03(\x0b\x32:.ondewo.nlu.BatchCreateEntitiesRequest.CreateEntityRequest\x1a^\n\x13\x43reateEntityRequest\x12\x18\n\x10\x65ntity_type_name\x18\x01 \x01(\t\x12-\n\x06\x65ntity\x18\x02 \x01(\x0b\x32\x1d.ondewo.nlu.EntityType.Entity\"M\n\x1a\x42\x61tchUpdateEntitiesRequest\x12/\n\x08\x65ntities\x18\x01 \x03(\x0b\x32\x1d.ondewo.nlu.EntityType.Entity\"(\n\x17\x42\x61tchGetEntitiesRequest\x12\r\n\x05names\x18\x01 \x03(\t\"+\n\x1a\x42\x61tchDeleteEntitiesRequest\x12\r\n\x05names\x18\x01 \x03(\t\"\xfe\x01\n\x1b\x42\x61tchDeleteEntitiesResponse\x12S\n\x0f\x64\x65lete_statuses\x18\x01 \x03(\x0b\x32:.ondewo.nlu.BatchDeleteEntitiesResponse.DeleteEntityStatus\x12\x12\n\nhas_errors\x18\x02 \x01(\x08\x1av\n\x12\x44\x65leteEntityStatus\x12\x36\n\x14successfully_deleted\x18\x01 \x01(\x0b\x32\x16.google.protobuf.EmptyH\x00\x12\x17\n\rerror_message\x18\x02 \x01(\tH\x00\x42\x0f\n\rdelete_status\"\x90\x01\n\x13ListEntitiesRequest\x12\x18\n\x10\x65ntity_type_name\x18\x01 \x01(\t\x12\x15\n\rlanguage_code\x18\x02 \x01(\t\x12\x12\n\npage_token\x18\x03 \x01(\t\x12\x34\n\x10\x65ntity_type_view\x18\x04 \x01(\x0e\x32\x1a.ondewo.nlu.EntityTypeView\"`\n\x14ListEntitiesResponse\x12/\n\x08\x65ntities\x18\x01 \x03(\x0b\x32\x1d.ondewo.nlu.EntityType.Entity\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t*\x89\x01\n\x0e\x45ntityTypeView\x12 \n\x1c\x45NTITY_TYPE_VIEW_UNSPECIFIED\x10\x00\x12\x19\n\x15\x45NTITY_TYPE_VIEW_FULL\x10\x01\x12\x1c\n\x18\x45NTITY_TYPE_VIEW_PARTIAL\x10\x02\x12\x1c\n\x18\x45NTITY_TYPE_VIEW_SHALLOW\x10\x03*c\n\x12\x45ntityTypeCategory\x12\x14\n\x10\x41LL_ENTITY_TYPES\x10\x00\x12\x18\n\x14\x44\x45\x46\x41ULT_ENTITY_TYPES\x10\x01\x12\x1d\n\x19USER_DEFINED_ENTITY_TYPES\x10\x02\x32\xe5\x0b\n\x0b\x45ntityTypes\x12\x8d\x01\n\x0fListEntityTypes\x12\".ondewo.nlu.ListEntityTypesRequest\x1a#.ondewo.nlu.ListEntityTypesResponse\"1\x82\xd3\xe4\x93\x02+\x12)/v2/{parent=projects/*/agent}/entityTypes\x12|\n\rGetEntityType\x12 .ondewo.nlu.GetEntityTypeRequest\x1a\x16.ondewo.nlu.EntityType\"1\x82\xd3\xe4\x93\x02+\x12)/v2/{name=projects/*/agent/entityTypes/*}\x12\x85\x01\n\x10\x43reateEntityType\x12#.ondewo.nlu.CreateEntityTypeRequest\x1a\x16.ondewo.nlu.EntityType\"4\x82\xd3\xe4\x93\x02.\")/v2/{parent=projects/*/agent}/entityTypes:\x01*\x12\x91\x01\n\x10UpdateEntityType\x12#.ondewo.nlu.UpdateEntityTypeRequest\x1a\x16.ondewo.nlu.EntityType\"@\x82\xd3\xe4\x93\x02:25/v2/{entity_type.name=projects/*/agent/entityTypes/*}:\x01*\x12\x82\x01\n\x10\x44\x65leteEntityType\x12#.ondewo.nlu.DeleteEntityTypeRequest\x1a\x16.google.protobuf.Empty\"1\x82\xd3\xe4\x93\x02+*)/v2/{name=projects/*/agent/entityTypes/*}\x12\xa4\x01\n\x16\x42\x61tchUpdateEntityTypes\x12).ondewo.nlu.BatchUpdateEntityTypesRequest\x1a\x1d.google.longrunning.Operation\"@\x82\xd3\xe4\x93\x02:\"5/v2/{parent=projects/*/agent}/entityTypes:batchUpdate:\x01*\x12\xa4\x01\n\x16\x42\x61tchDeleteEntityTypes\x12).ondewo.nlu.BatchDeleteEntityTypesRequest\x1a\x1d.google.longrunning.Operation\"@\x82\xd3\xe4\x93\x02:\"5/v2/{parent=projects/*/agent}/entityTypes:batchDelete:\x01*\x12`\n\x13\x42\x61tchCreateEntities\x12&.ondewo.nlu.BatchCreateEntitiesRequest\x1a!.ondewo.nlu.BatchEntitiesResponse\x12`\n\x13\x42\x61tchUpdateEntities\x12&.ondewo.nlu.BatchUpdateEntitiesRequest\x1a!.ondewo.nlu.BatchEntitiesResponse\x12Z\n\x10\x42\x61tchGetEntities\x12#.ondewo.nlu.BatchGetEntitiesRequest\x1a!.ondewo.nlu.BatchEntitiesResponse\x12\x66\n\x13\x42\x61tchDeleteEntities\x12&.ondewo.nlu.BatchDeleteEntitiesRequest\x1a\'.ondewo.nlu.BatchDeleteEntitiesResponse\x12Q\n\x0cListEntities\x12\x1f.ondewo.nlu.ListEntitiesRequest\x1a .ondewo.nlu.ListEntitiesResponseB\x9e\x01\n\x1e\x63om.google.cloud.dialogflow.v2B\x0f\x45ntityTypeProtoP\x01ZDgoogle.golang.org/genproto/googleapis/cloud/dialogflow/v2;dialogflow\xf8\x01\x01\xa2\x02\x02\x44\x46\xaa\x02\x1aGoogle.Cloud.Dialogflow.V2b\x06proto3'
   ,
   dependencies=[google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_longrunning_dot_operations__pb2.DESCRIPTOR,google_dot_protobuf_dot_empty__pb2.DESCRIPTOR,google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,ondewo_dot_nlu_dot_common__pb2.DESCRIPTOR,])
 
@@ -59,8 +59,8 @@ _ENTITYTYPEVIEW = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=2800,
-  serialized_end=2937,
+  serialized_start=3561,
+  serialized_end=3698,
 )
 _sym_db.RegisterEnumDescriptor(_ENTITYTYPEVIEW)
 
@@ -90,8 +90,8 @@ _ENTITYTYPECATEGORY = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=2939,
-  serialized_end=3038,
+  serialized_start=3700,
+  serialized_end=3799,
 )
 _sym_db.RegisterEnumDescriptor(_ENTITYTYPECATEGORY)
 
@@ -130,8 +130,8 @@ _ENTITYTYPE_KIND = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=642,
-  serialized_end=699,
+  serialized_start=665,
+  serialized_end=722,
 )
 _sym_db.RegisterEnumDescriptor(_ENTITYTYPE_KIND)
 
@@ -155,8 +155,8 @@ _ENTITYTYPE_ENTITYTYPESTATUS = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=701,
-  serialized_end=745,
+  serialized_start=724,
+  serialized_end=768,
 )
 _sym_db.RegisterEnumDescriptor(_ENTITYTYPE_ENTITYTYPESTATUS)
 
@@ -180,8 +180,8 @@ _ENTITYTYPE_AUTOEXPANSIONMODE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=747,
-  serialized_end=836,
+  serialized_start=770,
+  serialized_end=859,
 )
 _sym_db.RegisterEnumDescriptor(_ENTITYTYPE_AUTOEXPANSIONMODE)
 
@@ -225,8 +225,8 @@ _ENTITYTYPESORTING_ENTITYTYPESORTINGFIELD = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=2555,
-  serialized_end=2797,
+  serialized_start=2200,
+  serialized_end=2442,
 )
 _sym_db.RegisterEnumDescriptor(_ENTITYTYPESORTING_ENTITYTYPESORTINGFIELD)
 
@@ -274,6 +274,13 @@ _ENTITYTYPE_ENTITY = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='language_code', full_name='ondewo.nlu.EntityType.Entity.language_code', index=5,
+      number=6, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -287,7 +294,7 @@ _ENTITYTYPE_ENTITY = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=540,
-  serialized_end=640,
+  serialized_end=663,
 )
 
 _ENTITYTYPE = _descriptor.Descriptor(
@@ -377,7 +384,7 @@ _ENTITYTYPE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=200,
-  serialized_end=836,
+  serialized_end=859,
 )
 
 
@@ -443,8 +450,8 @@ _LISTENTITYTYPESREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=839,
-  serialized_end=1090,
+  serialized_start=862,
+  serialized_end=1113,
 )
 
 
@@ -482,8 +489,8 @@ _LISTENTITYTYPESRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1092,
-  serialized_end=1188,
+  serialized_start=1115,
+  serialized_end=1211,
 )
 
 
@@ -528,8 +535,8 @@ _GETENTITYTYPEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1190,
-  serialized_end=1269,
+  serialized_start=1213,
+  serialized_end=1292,
 )
 
 
@@ -574,8 +581,8 @@ _CREATEENTITYTYPEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1271,
-  serialized_end=1380,
+  serialized_start=1294,
+  serialized_end=1403,
 )
 
 
@@ -620,8 +627,8 @@ _UPDATEENTITYTYPEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1383,
-  serialized_end=1525,
+  serialized_start=1406,
+  serialized_end=1548,
 )
 
 
@@ -652,8 +659,8 @@ _DELETEENTITYTYPEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1527,
-  serialized_end=1566,
+  serialized_start=1550,
+  serialized_end=1589,
 )
 
 
@@ -717,8 +724,8 @@ _BATCHUPDATEENTITYTYPESREQUEST = _descriptor.Descriptor(
       create_key=_descriptor._internal_create_key,
     fields=[]),
   ],
-  serialized_start=1569,
-  serialized_end=1807,
+  serialized_start=1592,
+  serialized_end=1830,
 )
 
 
@@ -749,8 +756,8 @@ _BATCHUPDATEENTITYTYPESRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1809,
-  serialized_end=1887,
+  serialized_start=1832,
+  serialized_end=1910,
 )
 
 
@@ -788,153 +795,8 @@ _BATCHDELETEENTITYTYPESREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1889,
-  serialized_end=1963,
-)
-
-
-_BATCHCREATEENTITIESREQUEST = _descriptor.Descriptor(
-  name='BatchCreateEntitiesRequest',
-  full_name='ondewo.nlu.BatchCreateEntitiesRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='parent', full_name='ondewo.nlu.BatchCreateEntitiesRequest.parent', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='entities', full_name='ondewo.nlu.BatchCreateEntitiesRequest.entities', index=1,
-      number=2, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='language_code', full_name='ondewo.nlu.BatchCreateEntitiesRequest.language_code', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1965,
-  serialized_end=2081,
-)
-
-
-_BATCHUPDATEENTITIESREQUEST = _descriptor.Descriptor(
-  name='BatchUpdateEntitiesRequest',
-  full_name='ondewo.nlu.BatchUpdateEntitiesRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='parent', full_name='ondewo.nlu.BatchUpdateEntitiesRequest.parent', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='entities', full_name='ondewo.nlu.BatchUpdateEntitiesRequest.entities', index=1,
-      number=2, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='language_code', full_name='ondewo.nlu.BatchUpdateEntitiesRequest.language_code', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='update_mask', full_name='ondewo.nlu.BatchUpdateEntitiesRequest.update_mask', index=3,
-      number=4, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=2084,
-  serialized_end=2249,
-)
-
-
-_BATCHDELETEENTITIESREQUEST = _descriptor.Descriptor(
-  name='BatchDeleteEntitiesRequest',
-  full_name='ondewo.nlu.BatchDeleteEntitiesRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='parent', full_name='ondewo.nlu.BatchDeleteEntitiesRequest.parent', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='entity_values', full_name='ondewo.nlu.BatchDeleteEntitiesRequest.entity_values', index=1,
-      number=2, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='language_code', full_name='ondewo.nlu.BatchDeleteEntitiesRequest.language_code', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=2251,
-  serialized_end=2341,
+  serialized_start=1912,
+  serialized_end=1986,
 )
 
 
@@ -965,8 +827,8 @@ _ENTITYTYPEBATCH = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2343,
-  serialized_end=2406,
+  serialized_start=1988,
+  serialized_end=2051,
 )
 
 
@@ -1005,8 +867,430 @@ _ENTITYTYPESORTING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2409,
-  serialized_end=2797,
+  serialized_start=2054,
+  serialized_end=2442,
+)
+
+
+_BATCHENTITIESRESPONSE_ENTITYSTATUS = _descriptor.Descriptor(
+  name='EntityStatus',
+  full_name='ondewo.nlu.BatchEntitiesResponse.EntityStatus',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='entity', full_name='ondewo.nlu.BatchEntitiesResponse.EntityStatus.entity', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='error_message', full_name='ondewo.nlu.BatchEntitiesResponse.EntityStatus.error_message', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+    _descriptor.OneofDescriptor(
+      name='entity_or_status', full_name='ondewo.nlu.BatchEntitiesResponse.EntityStatus.entity_or_status',
+      index=0, containing_type=None,
+      create_key=_descriptor._internal_create_key,
+    fields=[]),
+  ],
+  serialized_start=2563,
+  serialized_end=2671,
+)
+
+_BATCHENTITIESRESPONSE = _descriptor.Descriptor(
+  name='BatchEntitiesResponse',
+  full_name='ondewo.nlu.BatchEntitiesResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='entity_statuses', full_name='ondewo.nlu.BatchEntitiesResponse.entity_statuses', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='has_errors', full_name='ondewo.nlu.BatchEntitiesResponse.has_errors', index=1,
+      number=2, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[_BATCHENTITIESRESPONSE_ENTITYSTATUS, ],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2445,
+  serialized_end=2671,
+)
+
+
+_BATCHCREATEENTITIESREQUEST_CREATEENTITYREQUEST = _descriptor.Descriptor(
+  name='CreateEntityRequest',
+  full_name='ondewo.nlu.BatchCreateEntitiesRequest.CreateEntityRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='entity_type_name', full_name='ondewo.nlu.BatchCreateEntitiesRequest.CreateEntityRequest.entity_type_name', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='entity', full_name='ondewo.nlu.BatchCreateEntitiesRequest.CreateEntityRequest.entity', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2796,
+  serialized_end=2890,
+)
+
+_BATCHCREATEENTITIESREQUEST = _descriptor.Descriptor(
+  name='BatchCreateEntitiesRequest',
+  full_name='ondewo.nlu.BatchCreateEntitiesRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='create_entity_requests', full_name='ondewo.nlu.BatchCreateEntitiesRequest.create_entity_requests', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[_BATCHCREATEENTITIESREQUEST_CREATEENTITYREQUEST, ],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2674,
+  serialized_end=2890,
+)
+
+
+_BATCHUPDATEENTITIESREQUEST = _descriptor.Descriptor(
+  name='BatchUpdateEntitiesRequest',
+  full_name='ondewo.nlu.BatchUpdateEntitiesRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='entities', full_name='ondewo.nlu.BatchUpdateEntitiesRequest.entities', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2892,
+  serialized_end=2969,
+)
+
+
+_BATCHGETENTITIESREQUEST = _descriptor.Descriptor(
+  name='BatchGetEntitiesRequest',
+  full_name='ondewo.nlu.BatchGetEntitiesRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='names', full_name='ondewo.nlu.BatchGetEntitiesRequest.names', index=0,
+      number=1, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2971,
+  serialized_end=3011,
+)
+
+
+_BATCHDELETEENTITIESREQUEST = _descriptor.Descriptor(
+  name='BatchDeleteEntitiesRequest',
+  full_name='ondewo.nlu.BatchDeleteEntitiesRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='names', full_name='ondewo.nlu.BatchDeleteEntitiesRequest.names', index=0,
+      number=1, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=3013,
+  serialized_end=3056,
+)
+
+
+_BATCHDELETEENTITIESRESPONSE_DELETEENTITYSTATUS = _descriptor.Descriptor(
+  name='DeleteEntityStatus',
+  full_name='ondewo.nlu.BatchDeleteEntitiesResponse.DeleteEntityStatus',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='successfully_deleted', full_name='ondewo.nlu.BatchDeleteEntitiesResponse.DeleteEntityStatus.successfully_deleted', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='error_message', full_name='ondewo.nlu.BatchDeleteEntitiesResponse.DeleteEntityStatus.error_message', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+    _descriptor.OneofDescriptor(
+      name='delete_status', full_name='ondewo.nlu.BatchDeleteEntitiesResponse.DeleteEntityStatus.delete_status',
+      index=0, containing_type=None,
+      create_key=_descriptor._internal_create_key,
+    fields=[]),
+  ],
+  serialized_start=3195,
+  serialized_end=3313,
+)
+
+_BATCHDELETEENTITIESRESPONSE = _descriptor.Descriptor(
+  name='BatchDeleteEntitiesResponse',
+  full_name='ondewo.nlu.BatchDeleteEntitiesResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='delete_statuses', full_name='ondewo.nlu.BatchDeleteEntitiesResponse.delete_statuses', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='has_errors', full_name='ondewo.nlu.BatchDeleteEntitiesResponse.has_errors', index=1,
+      number=2, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[_BATCHDELETEENTITIESRESPONSE_DELETEENTITYSTATUS, ],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=3059,
+  serialized_end=3313,
+)
+
+
+_LISTENTITIESREQUEST = _descriptor.Descriptor(
+  name='ListEntitiesRequest',
+  full_name='ondewo.nlu.ListEntitiesRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='entity_type_name', full_name='ondewo.nlu.ListEntitiesRequest.entity_type_name', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='language_code', full_name='ondewo.nlu.ListEntitiesRequest.language_code', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='page_token', full_name='ondewo.nlu.ListEntitiesRequest.page_token', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='entity_type_view', full_name='ondewo.nlu.ListEntitiesRequest.entity_type_view', index=3,
+      number=4, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=3316,
+  serialized_end=3460,
+)
+
+
+_LISTENTITIESRESPONSE = _descriptor.Descriptor(
+  name='ListEntitiesResponse',
+  full_name='ondewo.nlu.ListEntitiesResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='entities', full_name='ondewo.nlu.ListEntitiesResponse.entities', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='next_page_token', full_name='ondewo.nlu.ListEntitiesResponse.next_page_token', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=3462,
+  serialized_end=3558,
 )
 
 _ENTITYTYPE_ENTITY.containing_type = _ENTITYTYPE
@@ -1033,13 +1317,34 @@ _BATCHUPDATEENTITYTYPESREQUEST.oneofs_by_name['entity_type_batch'].fields.append
   _BATCHUPDATEENTITYTYPESREQUEST.fields_by_name['entity_type_batch_inline'])
 _BATCHUPDATEENTITYTYPESREQUEST.fields_by_name['entity_type_batch_inline'].containing_oneof = _BATCHUPDATEENTITYTYPESREQUEST.oneofs_by_name['entity_type_batch']
 _BATCHUPDATEENTITYTYPESRESPONSE.fields_by_name['entity_types'].message_type = _ENTITYTYPE
-_BATCHCREATEENTITIESREQUEST.fields_by_name['entities'].message_type = _ENTITYTYPE_ENTITY
-_BATCHUPDATEENTITIESREQUEST.fields_by_name['entities'].message_type = _ENTITYTYPE_ENTITY
-_BATCHUPDATEENTITIESREQUEST.fields_by_name['update_mask'].message_type = google_dot_protobuf_dot_field__mask__pb2._FIELDMASK
 _ENTITYTYPEBATCH.fields_by_name['entity_types'].message_type = _ENTITYTYPE
 _ENTITYTYPESORTING.fields_by_name['sorting_field'].enum_type = _ENTITYTYPESORTING_ENTITYTYPESORTINGFIELD
 _ENTITYTYPESORTING.fields_by_name['sorting_mode'].enum_type = ondewo_dot_nlu_dot_common__pb2._SORTINGMODE
 _ENTITYTYPESORTING_ENTITYTYPESORTINGFIELD.containing_type = _ENTITYTYPESORTING
+_BATCHENTITIESRESPONSE_ENTITYSTATUS.fields_by_name['entity'].message_type = _ENTITYTYPE_ENTITY
+_BATCHENTITIESRESPONSE_ENTITYSTATUS.containing_type = _BATCHENTITIESRESPONSE
+_BATCHENTITIESRESPONSE_ENTITYSTATUS.oneofs_by_name['entity_or_status'].fields.append(
+  _BATCHENTITIESRESPONSE_ENTITYSTATUS.fields_by_name['entity'])
+_BATCHENTITIESRESPONSE_ENTITYSTATUS.fields_by_name['entity'].containing_oneof = _BATCHENTITIESRESPONSE_ENTITYSTATUS.oneofs_by_name['entity_or_status']
+_BATCHENTITIESRESPONSE_ENTITYSTATUS.oneofs_by_name['entity_or_status'].fields.append(
+  _BATCHENTITIESRESPONSE_ENTITYSTATUS.fields_by_name['error_message'])
+_BATCHENTITIESRESPONSE_ENTITYSTATUS.fields_by_name['error_message'].containing_oneof = _BATCHENTITIESRESPONSE_ENTITYSTATUS.oneofs_by_name['entity_or_status']
+_BATCHENTITIESRESPONSE.fields_by_name['entity_statuses'].message_type = _BATCHENTITIESRESPONSE_ENTITYSTATUS
+_BATCHCREATEENTITIESREQUEST_CREATEENTITYREQUEST.fields_by_name['entity'].message_type = _ENTITYTYPE_ENTITY
+_BATCHCREATEENTITIESREQUEST_CREATEENTITYREQUEST.containing_type = _BATCHCREATEENTITIESREQUEST
+_BATCHCREATEENTITIESREQUEST.fields_by_name['create_entity_requests'].message_type = _BATCHCREATEENTITIESREQUEST_CREATEENTITYREQUEST
+_BATCHUPDATEENTITIESREQUEST.fields_by_name['entities'].message_type = _ENTITYTYPE_ENTITY
+_BATCHDELETEENTITIESRESPONSE_DELETEENTITYSTATUS.fields_by_name['successfully_deleted'].message_type = google_dot_protobuf_dot_empty__pb2._EMPTY
+_BATCHDELETEENTITIESRESPONSE_DELETEENTITYSTATUS.containing_type = _BATCHDELETEENTITIESRESPONSE
+_BATCHDELETEENTITIESRESPONSE_DELETEENTITYSTATUS.oneofs_by_name['delete_status'].fields.append(
+  _BATCHDELETEENTITIESRESPONSE_DELETEENTITYSTATUS.fields_by_name['successfully_deleted'])
+_BATCHDELETEENTITIESRESPONSE_DELETEENTITYSTATUS.fields_by_name['successfully_deleted'].containing_oneof = _BATCHDELETEENTITIESRESPONSE_DELETEENTITYSTATUS.oneofs_by_name['delete_status']
+_BATCHDELETEENTITIESRESPONSE_DELETEENTITYSTATUS.oneofs_by_name['delete_status'].fields.append(
+  _BATCHDELETEENTITIESRESPONSE_DELETEENTITYSTATUS.fields_by_name['error_message'])
+_BATCHDELETEENTITIESRESPONSE_DELETEENTITYSTATUS.fields_by_name['error_message'].containing_oneof = _BATCHDELETEENTITIESRESPONSE_DELETEENTITYSTATUS.oneofs_by_name['delete_status']
+_BATCHDELETEENTITIESRESPONSE.fields_by_name['delete_statuses'].message_type = _BATCHDELETEENTITIESRESPONSE_DELETEENTITYSTATUS
+_LISTENTITIESREQUEST.fields_by_name['entity_type_view'].enum_type = _ENTITYTYPEVIEW
+_LISTENTITIESRESPONSE.fields_by_name['entities'].message_type = _ENTITYTYPE_ENTITY
 DESCRIPTOR.message_types_by_name['EntityType'] = _ENTITYTYPE
 DESCRIPTOR.message_types_by_name['ListEntityTypesRequest'] = _LISTENTITYTYPESREQUEST
 DESCRIPTOR.message_types_by_name['ListEntityTypesResponse'] = _LISTENTITYTYPESRESPONSE
@@ -1050,11 +1355,16 @@ DESCRIPTOR.message_types_by_name['DeleteEntityTypeRequest'] = _DELETEENTITYTYPER
 DESCRIPTOR.message_types_by_name['BatchUpdateEntityTypesRequest'] = _BATCHUPDATEENTITYTYPESREQUEST
 DESCRIPTOR.message_types_by_name['BatchUpdateEntityTypesResponse'] = _BATCHUPDATEENTITYTYPESRESPONSE
 DESCRIPTOR.message_types_by_name['BatchDeleteEntityTypesRequest'] = _BATCHDELETEENTITYTYPESREQUEST
-DESCRIPTOR.message_types_by_name['BatchCreateEntitiesRequest'] = _BATCHCREATEENTITIESREQUEST
-DESCRIPTOR.message_types_by_name['BatchUpdateEntitiesRequest'] = _BATCHUPDATEENTITIESREQUEST
-DESCRIPTOR.message_types_by_name['BatchDeleteEntitiesRequest'] = _BATCHDELETEENTITIESREQUEST
 DESCRIPTOR.message_types_by_name['EntityTypeBatch'] = _ENTITYTYPEBATCH
 DESCRIPTOR.message_types_by_name['EntityTypeSorting'] = _ENTITYTYPESORTING
+DESCRIPTOR.message_types_by_name['BatchEntitiesResponse'] = _BATCHENTITIESRESPONSE
+DESCRIPTOR.message_types_by_name['BatchCreateEntitiesRequest'] = _BATCHCREATEENTITIESREQUEST
+DESCRIPTOR.message_types_by_name['BatchUpdateEntitiesRequest'] = _BATCHUPDATEENTITIESREQUEST
+DESCRIPTOR.message_types_by_name['BatchGetEntitiesRequest'] = _BATCHGETENTITIESREQUEST
+DESCRIPTOR.message_types_by_name['BatchDeleteEntitiesRequest'] = _BATCHDELETEENTITIESREQUEST
+DESCRIPTOR.message_types_by_name['BatchDeleteEntitiesResponse'] = _BATCHDELETEENTITIESRESPONSE
+DESCRIPTOR.message_types_by_name['ListEntitiesRequest'] = _LISTENTITIESREQUEST
+DESCRIPTOR.message_types_by_name['ListEntitiesResponse'] = _LISTENTITIESRESPONSE
 DESCRIPTOR.enum_types_by_name['EntityTypeView'] = _ENTITYTYPEVIEW
 DESCRIPTOR.enum_types_by_name['EntityTypeCategory'] = _ENTITYTYPECATEGORY
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -1137,27 +1447,6 @@ BatchDeleteEntityTypesRequest = _reflection.GeneratedProtocolMessageType('BatchD
   })
 _sym_db.RegisterMessage(BatchDeleteEntityTypesRequest)
 
-BatchCreateEntitiesRequest = _reflection.GeneratedProtocolMessageType('BatchCreateEntitiesRequest', (_message.Message,), {
-  'DESCRIPTOR' : _BATCHCREATEENTITIESREQUEST,
-  '__module__' : 'ondewo.nlu.entity_type_pb2'
-  # @@protoc_insertion_point(class_scope:ondewo.nlu.BatchCreateEntitiesRequest)
-  })
-_sym_db.RegisterMessage(BatchCreateEntitiesRequest)
-
-BatchUpdateEntitiesRequest = _reflection.GeneratedProtocolMessageType('BatchUpdateEntitiesRequest', (_message.Message,), {
-  'DESCRIPTOR' : _BATCHUPDATEENTITIESREQUEST,
-  '__module__' : 'ondewo.nlu.entity_type_pb2'
-  # @@protoc_insertion_point(class_scope:ondewo.nlu.BatchUpdateEntitiesRequest)
-  })
-_sym_db.RegisterMessage(BatchUpdateEntitiesRequest)
-
-BatchDeleteEntitiesRequest = _reflection.GeneratedProtocolMessageType('BatchDeleteEntitiesRequest', (_message.Message,), {
-  'DESCRIPTOR' : _BATCHDELETEENTITIESREQUEST,
-  '__module__' : 'ondewo.nlu.entity_type_pb2'
-  # @@protoc_insertion_point(class_scope:ondewo.nlu.BatchDeleteEntitiesRequest)
-  })
-_sym_db.RegisterMessage(BatchDeleteEntitiesRequest)
-
 EntityTypeBatch = _reflection.GeneratedProtocolMessageType('EntityTypeBatch', (_message.Message,), {
   'DESCRIPTOR' : _ENTITYTYPEBATCH,
   '__module__' : 'ondewo.nlu.entity_type_pb2'
@@ -1172,6 +1461,86 @@ EntityTypeSorting = _reflection.GeneratedProtocolMessageType('EntityTypeSorting'
   })
 _sym_db.RegisterMessage(EntityTypeSorting)
 
+BatchEntitiesResponse = _reflection.GeneratedProtocolMessageType('BatchEntitiesResponse', (_message.Message,), {
+
+  'EntityStatus' : _reflection.GeneratedProtocolMessageType('EntityStatus', (_message.Message,), {
+    'DESCRIPTOR' : _BATCHENTITIESRESPONSE_ENTITYSTATUS,
+    '__module__' : 'ondewo.nlu.entity_type_pb2'
+    # @@protoc_insertion_point(class_scope:ondewo.nlu.BatchEntitiesResponse.EntityStatus)
+    })
+  ,
+  'DESCRIPTOR' : _BATCHENTITIESRESPONSE,
+  '__module__' : 'ondewo.nlu.entity_type_pb2'
+  # @@protoc_insertion_point(class_scope:ondewo.nlu.BatchEntitiesResponse)
+  })
+_sym_db.RegisterMessage(BatchEntitiesResponse)
+_sym_db.RegisterMessage(BatchEntitiesResponse.EntityStatus)
+
+BatchCreateEntitiesRequest = _reflection.GeneratedProtocolMessageType('BatchCreateEntitiesRequest', (_message.Message,), {
+
+  'CreateEntityRequest' : _reflection.GeneratedProtocolMessageType('CreateEntityRequest', (_message.Message,), {
+    'DESCRIPTOR' : _BATCHCREATEENTITIESREQUEST_CREATEENTITYREQUEST,
+    '__module__' : 'ondewo.nlu.entity_type_pb2'
+    # @@protoc_insertion_point(class_scope:ondewo.nlu.BatchCreateEntitiesRequest.CreateEntityRequest)
+    })
+  ,
+  'DESCRIPTOR' : _BATCHCREATEENTITIESREQUEST,
+  '__module__' : 'ondewo.nlu.entity_type_pb2'
+  # @@protoc_insertion_point(class_scope:ondewo.nlu.BatchCreateEntitiesRequest)
+  })
+_sym_db.RegisterMessage(BatchCreateEntitiesRequest)
+_sym_db.RegisterMessage(BatchCreateEntitiesRequest.CreateEntityRequest)
+
+BatchUpdateEntitiesRequest = _reflection.GeneratedProtocolMessageType('BatchUpdateEntitiesRequest', (_message.Message,), {
+  'DESCRIPTOR' : _BATCHUPDATEENTITIESREQUEST,
+  '__module__' : 'ondewo.nlu.entity_type_pb2'
+  # @@protoc_insertion_point(class_scope:ondewo.nlu.BatchUpdateEntitiesRequest)
+  })
+_sym_db.RegisterMessage(BatchUpdateEntitiesRequest)
+
+BatchGetEntitiesRequest = _reflection.GeneratedProtocolMessageType('BatchGetEntitiesRequest', (_message.Message,), {
+  'DESCRIPTOR' : _BATCHGETENTITIESREQUEST,
+  '__module__' : 'ondewo.nlu.entity_type_pb2'
+  # @@protoc_insertion_point(class_scope:ondewo.nlu.BatchGetEntitiesRequest)
+  })
+_sym_db.RegisterMessage(BatchGetEntitiesRequest)
+
+BatchDeleteEntitiesRequest = _reflection.GeneratedProtocolMessageType('BatchDeleteEntitiesRequest', (_message.Message,), {
+  'DESCRIPTOR' : _BATCHDELETEENTITIESREQUEST,
+  '__module__' : 'ondewo.nlu.entity_type_pb2'
+  # @@protoc_insertion_point(class_scope:ondewo.nlu.BatchDeleteEntitiesRequest)
+  })
+_sym_db.RegisterMessage(BatchDeleteEntitiesRequest)
+
+BatchDeleteEntitiesResponse = _reflection.GeneratedProtocolMessageType('BatchDeleteEntitiesResponse', (_message.Message,), {
+
+  'DeleteEntityStatus' : _reflection.GeneratedProtocolMessageType('DeleteEntityStatus', (_message.Message,), {
+    'DESCRIPTOR' : _BATCHDELETEENTITIESRESPONSE_DELETEENTITYSTATUS,
+    '__module__' : 'ondewo.nlu.entity_type_pb2'
+    # @@protoc_insertion_point(class_scope:ondewo.nlu.BatchDeleteEntitiesResponse.DeleteEntityStatus)
+    })
+  ,
+  'DESCRIPTOR' : _BATCHDELETEENTITIESRESPONSE,
+  '__module__' : 'ondewo.nlu.entity_type_pb2'
+  # @@protoc_insertion_point(class_scope:ondewo.nlu.BatchDeleteEntitiesResponse)
+  })
+_sym_db.RegisterMessage(BatchDeleteEntitiesResponse)
+_sym_db.RegisterMessage(BatchDeleteEntitiesResponse.DeleteEntityStatus)
+
+ListEntitiesRequest = _reflection.GeneratedProtocolMessageType('ListEntitiesRequest', (_message.Message,), {
+  'DESCRIPTOR' : _LISTENTITIESREQUEST,
+  '__module__' : 'ondewo.nlu.entity_type_pb2'
+  # @@protoc_insertion_point(class_scope:ondewo.nlu.ListEntitiesRequest)
+  })
+_sym_db.RegisterMessage(ListEntitiesRequest)
+
+ListEntitiesResponse = _reflection.GeneratedProtocolMessageType('ListEntitiesResponse', (_message.Message,), {
+  'DESCRIPTOR' : _LISTENTITIESRESPONSE,
+  '__module__' : 'ondewo.nlu.entity_type_pb2'
+  # @@protoc_insertion_point(class_scope:ondewo.nlu.ListEntitiesResponse)
+  })
+_sym_db.RegisterMessage(ListEntitiesResponse)
+
 
 DESCRIPTOR._options = None
 
@@ -1182,8 +1551,8 @@ _ENTITYTYPES = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=3041,
-  serialized_end=4591,
+  serialized_start=3802,
+  serialized_end=5311,
   methods=[
   _descriptor.MethodDescriptor(
     name='ListEntityTypes',
@@ -1261,8 +1630,8 @@ _ENTITYTYPES = _descriptor.ServiceDescriptor(
     index=7,
     containing_service=None,
     input_type=_BATCHCREATEENTITIESREQUEST,
-    output_type=google_dot_longrunning_dot_operations__pb2._OPERATION,
-    serialized_options=b'\202\323\344\223\002E\"@/v2/{parent=projects/*/agent/entityTypes/*}/entities:batchCreate:\001*',
+    output_type=_BATCHENTITIESRESPONSE,
+    serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),
   _descriptor.MethodDescriptor(
@@ -1271,18 +1640,38 @@ _ENTITYTYPES = _descriptor.ServiceDescriptor(
     index=8,
     containing_service=None,
     input_type=_BATCHUPDATEENTITIESREQUEST,
-    output_type=google_dot_longrunning_dot_operations__pb2._OPERATION,
-    serialized_options=b'\202\323\344\223\002E\"@/v2/{parent=projects/*/agent/entityTypes/*}/entities:batchUpdate:\001*',
+    output_type=_BATCHENTITIESRESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='BatchGetEntities',
+    full_name='ondewo.nlu.EntityTypes.BatchGetEntities',
+    index=9,
+    containing_service=None,
+    input_type=_BATCHGETENTITIESREQUEST,
+    output_type=_BATCHENTITIESRESPONSE,
+    serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),
   _descriptor.MethodDescriptor(
     name='BatchDeleteEntities',
     full_name='ondewo.nlu.EntityTypes.BatchDeleteEntities',
-    index=9,
+    index=10,
     containing_service=None,
     input_type=_BATCHDELETEENTITIESREQUEST,
-    output_type=google_dot_longrunning_dot_operations__pb2._OPERATION,
-    serialized_options=b'\202\323\344\223\002E\"@/v2/{parent=projects/*/agent/entityTypes/*}/entities:batchDelete:\001*',
+    output_type=_BATCHDELETEENTITIESRESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='ListEntities',
+    full_name='ondewo.nlu.EntityTypes.ListEntities',
+    index=11,
+    containing_service=None,
+    input_type=_LISTENTITIESREQUEST,
+    output_type=_LISTENTITIESRESPONSE,
+    serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),
 ])

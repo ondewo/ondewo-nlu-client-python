@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
+from typing import Iterator
 
 from google.protobuf.empty_pb2 import Empty
 
@@ -41,10 +41,13 @@ class Sessions(ServicesInterface):
         response: DetectIntentResponse = self.stub.DetectIntent(request, metadata=self.metadata)
         return response
 
-    def streaming_detect_intent(self, request: StreamingDetectIntentRequest) -> StreamingDetectIntentResponse:
-        response: StreamingDetectIntentResponse = \
-            self.stub.StreamingDetectIntent(request, metadata=self.metadata)
-        return response
+    def streaming_detect_intent(
+            self,
+            request_iterator: Iterator[StreamingDetectIntentRequest],
+    ) -> Iterator[StreamingDetectIntentResponse]:
+        response_iterator: Iterator[StreamingDetectIntentResponse] = self.stub.StreamingDetectIntent(
+            request_iterator, metadata=self.metadata)
+        return response_iterator
 
     def list_sessions(self, request: ListSessionsRequest) -> ListSessionsResponse:
         response: ListSessionsResponse = self.stub.ListSessions(request, metadata=self.metadata)

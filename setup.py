@@ -1,20 +1,20 @@
 import setuptools
 
-with open("README.md", "r") as f:
+with open('README.md', 'r') as f:
     long_description = f.read()
 
-with open("requirements.txt") as f:
+with open('requirements.txt') as f:
     requires = f.read().splitlines()
 
 setuptools.setup(
-    name="ondewo-nlu-client-python",
-    version="1.1.3",
-    author="Ondewo GbmH",
-    author_email="info@ondewo.com",
-    description="This library facilitates the interaction between a user and his/her CAI server.",
+    name='ondewo-nlu-client',
+    version='2.0.0',
+    author='Ondewo GmbH',
+    author_email='info@ondewo.com',
+    description='This library facilitates the interaction between a user and his/her CAI server.',
     long_description=long_description,
-    long_description_content_type="text/markdown",
-    url="https://github.com/ondewo/ondewo-nlu-client-python",
+    long_description_content_type='text/markdown',
+    url='https://github.com/ondewo/ondewo-nlu-client-python',
     packages=[
         np
         for np in filter(
@@ -26,8 +26,8 @@ setuptools.setup(
         'ondewo.nlu': ['py.typed']
     },
     classifiers=[
-        "Programming Language :: Python :: 3",
-        "Operating System :: OS Independent",
+        'Programming Language :: Python :: 3',
+        'Operating System :: OS Independent',
         'Development Status :: 3 - Alpha',
         'Topic :: Software Development :: Libraries',
     ],

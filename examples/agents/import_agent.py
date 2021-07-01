@@ -1,23 +1,25 @@
+from typing import Optional
+
 import polling
-from google.longrunning.operations_pb2 import Operation, GetOperationRequest
+from google.longrunning.operations_pb2 import GetOperationRequest, Operation
 
 from ondewo.nlu.agent_pb2 import ImportAgentRequest
 from ondewo.nlu.client import Client
 from ondewo.nlu.client_config import ClientConfig
 
-if __name__ == '__main__':
-    parent: str = '<PUT_YOUR_AGENT_PARENT_HERE>'
-    zip_path: str = '<the path of your zip file>'
+if __name__ == "__main__":
+    parent: str = "<PUT_YOUR_AGENT_PARENT_HERE>"
+    zip_path: str = "<the path of your zip file>"
     config: ClientConfig = ClientConfig(
-        host='<host>',
-        port='<port>',
-        http_token='<http/root token>',
-        user_name='<e-mail of user>',
-        password='<password of user>'
+        host="<host>",
+        port="<port>",
+        http_token="<http/root token>",
+        user_name="<e-mail of user>",
+        password="<password of user>",
     )
     client: Client = Client(config=config, use_secure_channel=False)
 
-    with open(zip_path, 'rb') as file:
+    with open(zip_path, "rb") as file:
         byte_object = file.read()
 
     import_operation: Operation = client.services.agents.import_agent(
@@ -32,4 +34,8 @@ if __name__ == '__main__':
         timeout=600,  # wait 10 minutes until training is finished
     )
 
-    assert client.services.operations.get_operation(GetOperationRequest(name=import_operation.name)).done
+    operation: Optional[Operation] = client.services.operations.get_operation(
+        GetOperationRequest(name=import_operation.name)
+    )
+    assert operation
+    assert operation.done

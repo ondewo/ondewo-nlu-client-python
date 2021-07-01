@@ -1,10 +1,27 @@
 # Release History
 *****************
 
-## Release ONDEWO NLU Python Client 1.1.3
+## Release ONDEWO NLU Python Client 2.0.0
 
 ### New Features
- * [OND211-1732] Implement new endpoints to directly create/update/get/delete training phrases.
+ * [OND211-1774] Implement endpoints to directly create/update/get/delete and list parameters.
+ * [OND211-1773] Implement endpoints to directly create/update/get/delete and list responses (=intent messages).
+ * [OND211-354] Establish a clear hierarchy for the merging of entities within the generalized waterfall strategy. 
+   Include intent parameters to entity selection criteria.
+ * [OND211-1767] Change the training phrase message to include a language_code field
+ * [OND211-1766] Make training phrases endpoints work with batches.  
+ * [OND211-1760] Implement endpoint to directly list training phrases.
+ * [OND211-1744] Add initiation protocol into train agent endpoint
+ * [OND211-1732] Implement endpoints directly create/update/get/delete training phrases.
+ * [OND211-1731] Implement endpoints to directly create/update/get/delete and list entity values.
+ * [OND211-1724] Add compression_level field to ExportAgentRequest message.
+
+### Improvements
+ * [OND212-29] Inject context example script added
+ * [OND212-29] Full conversation demo example script added
+
+### Migration Guide
+ * `pip install ondewo-nlu-client==2.0.* --upgrade`
 
 *****************
 
@@ -14,7 +31,7 @@
 * added to the [pypi](https://pypi.org/project/ondewo-nlu-client/)
 
 ### Migration Guide
- * pip install ondewo-nlu-client==1.1.2
+ * `pip install ondewo-nlu-client==1.1.2`
 
 *****************
 

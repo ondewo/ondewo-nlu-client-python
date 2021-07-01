@@ -6,6 +6,7 @@ grpcio==1.31.0
 grpcio-reflection==1.31.0
 grpcio-tools==1.31.0
 mypy-protobuf==1.20
+ondewo-client-utils==0.1.0
 polling==0.3.1
 pytest==6.0.1
 regex==2020.7.14
