@@ -38,7 +38,8 @@ if __name__ == '__main__':
     # Pass in your project id and a session will be created for the nlu client
     project_id: str = '<project id>'
     session: str = create_session_nlu(project_id)
-    # You have to go to the function and set the client configurations
+    
+    # Client configuration
     config: ClientConfig = ClientConfig(
         host='<host>',
         port='<port>',
