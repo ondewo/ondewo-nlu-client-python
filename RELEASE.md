@@ -1,7 +1,7 @@
 # Release History
 *****************
 
-## Release ONDEWO NLU APIS 2.0.0
+## Release ONDEWO NLU Python Client 2.0.0
 
 ### New Features
  * [OND211-1774] Implement endpoints to directly create/update/get/delete and list parameters.
@@ -15,6 +15,10 @@
  * [OND211-1732] Implement endpoints directly create/update/get/delete training phrases.
  * [OND211-1731] Implement endpoints to directly create/update/get/delete and list entity values.
  * [OND211-1724] Add compression_level field to ExportAgentRequest message.
+
+### Improvements
+ * [OND212-29] Inject context example script added
+ * [OND212-29] Full conversation demo example script added
 
 ### Migration Guide
  * `pip install ondewo-nlu-client==2.0.* --upgrade`
