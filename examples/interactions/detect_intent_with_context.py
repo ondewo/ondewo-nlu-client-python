@@ -18,7 +18,7 @@ def make_context() -> context_pb2.Context:
     # intent_name in display_name and parameter "dictionary" are hardcoded. So don't change them
     parameter: Dict[str, context_pb2.Context.Parameter] = {'intent_name': context_parameter}
 
-    # Don't change the name, just change the lifespan_count, which defines how many times this context is going to be injected
+    # Don't change the name, just change the lifespan_count, which defines how many interactions this context is going to stay active
     context = context_pb2.Context(
         name=f"{session}/contexts/exact_intent",
         lifespan_count=20,
