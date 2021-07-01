@@ -13,6 +13,10 @@ from google.protobuf.message import (
     Message as google___protobuf___message___Message,
 )
 
+from ondewo.nlu.entity_type_pb2 import (
+    EntityType as ondewo___nlu___entity_type_pb2___EntityType,
+)
+
 from ondewo.nlu.intent_pb2 import (
     Intent as ondewo___nlu___intent_pb2___Intent,
 )
@@ -69,12 +73,12 @@ class ExtractEntitiesFuzzyRequest(google___protobuf___message___Message):
     minimal_score = ... # type: builtin___float
 
     @property
-    def potential_entities(self) -> google___protobuf___internal___containers___RepeatedCompositeFieldContainer[ondewo___nlu___intent_pb2___Intent.TrainingPhrase.Entity]: ...
+    def potential_entities(self) -> google___protobuf___internal___containers___RepeatedCompositeFieldContainer[ondewo___nlu___entity_type_pb2___EntityType]: ...
 
     def __init__(self,
         *,
         text : typing___Optional[typing___Text] = None,
-        potential_entities : typing___Optional[typing___Iterable[ondewo___nlu___intent_pb2___Intent.TrainingPhrase.Entity]] = None,
+        potential_entities : typing___Optional[typing___Iterable[ondewo___nlu___entity_type_pb2___EntityType]] = None,
         minimal_score : typing___Optional[builtin___float] = None,
         ) -> None: ...
     if sys.version_info >= (3,):
