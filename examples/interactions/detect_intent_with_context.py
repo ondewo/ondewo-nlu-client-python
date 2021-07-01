@@ -1,29 +1,10 @@
+import uuid
+from typing import Optional, Dict
+
 from ondewo.nlu import context_pb2
 from ondewo.nlu.client import Client as NluClient
 from ondewo.nlu.client_config import ClientConfig
 from ondewo.nlu.session_pb2 import DetectIntentResponse, DetectIntentRequest, QueryInput, TextInput, QueryParameters
-import uuid
-from typing import List, Tuple, Optional, Dict
-
-
-def get_response_from_request(session, nlu_client, text, context=None) -> DetectIntentResponse:
-    context: Optional[context_pb2.Context] = [context] if context else None
-    nlu_request: DetectIntentRequest = DetectIntentRequest(
-        session=session,
-        query_input=QueryInput(
-            text=TextInput(
-                text=text,
-                language_code='de',
-            )
-        ),
-        query_params=QueryParameters(
-            contexts=context
-        )
-    )
-    nlu_response: DetectIntentResponse = nlu_client.services.sessions.detect_intent(
-        request=nlu_request,
-    )
-    return nlu_response
 
 
 def make_context() -> context_pb2.Context:
@@ -47,19 +28,6 @@ def make_context() -> context_pb2.Context:
     return context
 
 
-def get_nlu_client() -> NluClient:
-    config: ClientConfig = ClientConfig(
-        host='<host>',
-        port='<port>',
-        http_token='<http/root token>',
-        user_name='<e-mail of user>',
-        password='<password of user>'
-    )
-    nlu_client: NluClient = NluClient(config=config, use_secure_channel=False)
-
-    return nlu_client
-
-
 def create_session_nlu(project_id: str) -> str:
     session_id: str = str(uuid.uuid4())
     project_parent: str = f'projects/{project_id}/agent'
@@ -71,16 +39,36 @@ if __name__ == '__main__':
     project_id: str = '<project id>'
     session: str = create_session_nlu(project_id)
     # You have to go to the function and set the client configurations
-    nlu_client: NluClient = get_nlu_client()
+    config: ClientConfig = ClientConfig(
+        host='<host>',
+        port='<port>',
+        http_token='<http/root token>',
+        user_name='<e-mail of user>',
+        password='<password of user>'
+    )
+    nlu_client: NluClient = NluClient(config=config, use_secure_channel=False)
     # You have to go to the function and set the context you want
     context: context_pb2.Context = make_context()
     print(f"The context here is: {context}")
 
-    # Enter a text to send to NLU
+    # Nlu request and response
     # You can have context set to None if you don't want to use this functionality
-    nlu_response: DetectIntentResponse = get_response_from_request(session=session, nlu_client=nlu_client,
-                                                                   text="<enter your text here>",
-                                                                   context=context)
+    context: Optional[context_pb2.Context] = [context] if context else None
+    nlu_request: DetectIntentRequest = DetectIntentRequest(
+        session=session,
+        query_input=QueryInput(
+            text=TextInput(
+                text="<enter your text here>",
+                language_code='de',
+            )
+        ),
+        query_params=QueryParameters(
+            contexts=context
+        )
+    )
+    nlu_response: DetectIntentResponse = nlu_client.services.sessions.detect_intent(
+        request=nlu_request,
+    )
 
     print(f'Text received by the server: {nlu_response.query_result.query_text}')
     print(f'Intent detected: {nlu_response.query_result.intent.display_name}')
