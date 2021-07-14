@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  export:
+    image: registry-dev.ondewo.com:5000/ondewo/export-agents:0.0.1
+    volumes:
+      - ./2.6.x:/src/2.6.x
+      - ./conf.json:/src/conf.json
+
+    command:
+      --config="${CONFIG}" --exported-agents-dir-name=${EXPORTED_VERSION_FOLDER} --secure
+
+    #  cat conf.json | sed 's/"/\\"/g'
