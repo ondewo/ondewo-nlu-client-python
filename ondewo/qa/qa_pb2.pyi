@@ -145,13 +145,13 @@ class MetadataFilters(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
     metadata_field = ... # type: typing___Text
     filters = ... # type: google___protobuf___internal___containers___RepeatedScalarFieldContainer[typing___Text]
-    regex_filter = ... # type: google___protobuf___internal___containers___RepeatedScalarFieldContainer[typing___Text]
+    regex_filter = ... # type: typing___Text
 
     def __init__(self,
         *,
         metadata_field : typing___Optional[typing___Text] = None,
         filters : typing___Optional[typing___Iterable[typing___Text]] = None,
-        regex_filter : typing___Optional[typing___Iterable[typing___Text]] = None,
+        regex_filter : typing___Optional[typing___Text] = None,
         ) -> None: ...
     if sys.version_info >= (3,):
         @classmethod
