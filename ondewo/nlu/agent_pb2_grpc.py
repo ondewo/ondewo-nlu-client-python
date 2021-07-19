@@ -8,31 +8,17 @@ from ondewo.nlu import agent_pb2 as ondewo_dot_nlu_dot_agent__pb2
 
 
 class AgentsStub(object):
-    """Agents are best described as Natural Language Understanding (NLU) modules
-    that transform user requests into actionable data. You can include agents
-    in your app, product, or service to determine user intent and respond to the
-    user in a natural way.
+    """Agents are best described as Natural Language Understanding (NLU) modules that transform user requests into actionable data. You can include agents in your app, product, or service to determine user intent and respond to the user in a natural way.
 
-    After you create an agent, you can add [Intents][google.cloud.dialogflow.v2.Intents], [Contexts][google.cloud.dialogflow.v2.Contexts],
-    [Entity Types][google.cloud.dialogflow.v2.EntityTypes], [Webhooks][google.cloud.dialogflow.v2.WebhookRequest], and so on to
-    manage the flow of a conversation and match user input to predefined intents
-    and actions.
+    After you create an agent, you can add [Intents][google.cloud.dialogflow.v2.Intents], [Contexts][google.cloud.dialogflow.v2.Contexts], [Entity Types][google.cloud.dialogflow.v2.EntityTypes], [Webhooks][google.cloud.dialogflow.v2.WebhookRequest], and so on to manage the flow of a conversation and match user input to predefined intents and actions.
 
-    You can create an agent using both Dialogflow Standard Edition and
-    Dialogflow Enterprise Edition. For details, see
-    [Dialogflow Editions](/dialogflow-enterprise/docs/editions).
+    You can create an agent using both Dialogflow Standard Edition and Dialogflow Enterprise Edition. For details, see [Dialogflow Editions](/dialogflow-enterprise/docs/editions).
 
-    You can save your agent for backup or versioning by exporting the agent by
-    using the [ExportAgent][google.cloud.dialogflow.v2.Agents.ExportAgent] method. You can import a saved
-    agent by using the [ImportAgent][google.cloud.dialogflow.v2.Agents.ImportAgent] method.
+    You can save your agent for backup or versioning by exporting the agent by using the [ExportAgent][google.cloud.dialogflow.v2.Agents.ExportAgent] method. You can import a saved agent by using the [ImportAgent][google.cloud.dialogflow.v2.Agents.ImportAgent] method.
 
-    Dialogflow provides several
-    [prebuilt agents](https://dialogflow.com/docs/prebuilt-agents) for common
-    conversation scenarios such as determining a date and time, converting
-    currency, and so on.
+    Dialogflow provides several [prebuilt agents](https://dialogflow.com/docs/prebuilt-agents) for common conversation scenarios such as determining a date and time, converting currency, and so on.
 
-    For more information about agents, see the
-    [Dialogflow documentation](https://dialogflow.com/docs/agents).
+    For more information about agents, see the [Dialogflow documentation](https://dialogflow.com/docs/agents).
     """
 
     def __init__(self, channel):
@@ -169,35 +155,48 @@ class AgentsStub(object):
 
 
 class AgentsServicer(object):
-    """Agents are best described as Natural Language Understanding (NLU) modules
-    that transform user requests into actionable data. You can include agents
-    in your app, product, or service to determine user intent and respond to the
-    user in a natural way.
+    """Agents are best described as Natural Language Understanding (NLU) modules that transform user requests into actionable data. You can include agents in your app, product, or service to determine user intent and respond to the user in a natural way.
 
-    After you create an agent, you can add [Intents][google.cloud.dialogflow.v2.Intents], [Contexts][google.cloud.dialogflow.v2.Contexts],
-    [Entity Types][google.cloud.dialogflow.v2.EntityTypes], [Webhooks][google.cloud.dialogflow.v2.WebhookRequest], and so on to
-    manage the flow of a conversation and match user input to predefined intents
-    and actions.
+    After you create an agent, you can add [Intents][google.cloud.dialogflow.v2.Intents], [Contexts][google.cloud.dialogflow.v2.Contexts], [Entity Types][google.cloud.dialogflow.v2.EntityTypes], [Webhooks][google.cloud.dialogflow.v2.WebhookRequest], and so on to manage the flow of a conversation and match user input to predefined intents and actions.
 
-    You can create an agent using both Dialogflow Standard Edition and
-    Dialogflow Enterprise Edition. For details, see
-    [Dialogflow Editions](/dialogflow-enterprise/docs/editions).
+    You can create an agent using both Dialogflow Standard Edition and Dialogflow Enterprise Edition. For details, see [Dialogflow Editions](/dialogflow-enterprise/docs/editions).
 
-    You can save your agent for backup or versioning by exporting the agent by
-    using the [ExportAgent][google.cloud.dialogflow.v2.Agents.ExportAgent] method. You can import a saved
-    agent by using the [ImportAgent][google.cloud.dialogflow.v2.Agents.ImportAgent] method.
+    You can save your agent for backup or versioning by exporting the agent by using the [ExportAgent][google.cloud.dialogflow.v2.Agents.ExportAgent] method. You can import a saved agent by using the [ImportAgent][google.cloud.dialogflow.v2.Agents.ImportAgent] method.
 
-    Dialogflow provides several
-    [prebuilt agents](https://dialogflow.com/docs/prebuilt-agents) for common
-    conversation scenarios such as determining a date and time, converting
-    currency, and so on.
+    Dialogflow provides several [prebuilt agents](https://dialogflow.com/docs/prebuilt-agents) for common conversation scenarios such as determining a date and time, converting currency, and so on.
 
-    For more information about agents, see the
-    [Dialogflow documentation](https://dialogflow.com/docs/agents).
+    For more information about agents, see the [Dialogflow documentation](https://dialogflow.com/docs/agents).
     """
 
     def CreateAgent(self, request, context):
         """Creates the specified agent.
+
+        <p>Examples:</p>
+
+        <pre>
+        grpcurl -plaintext -H 'cai-token: aimp' -d '{
+        "agent": {
+        "display_name": "Pizza Bot",
+        "default_language_code": "en",
+        "supported_language_codes": ["en"],
+        "time_zone": "Europe/Vienna",
+        "nlu_platform": "ONDEWO"
+        }
+        }' localhost:50055 ondewo.nlu.Agents.CreateAgent
+        </pre>
+
+        <samp>{
+        "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent",
+        "display_name": "Pizza Bot",
+        "default_language_code": "en",
+        "supported_language_codes": [
+        "en"
+        ],
+        "time_zone": "Europe/Vienna",
+        "nlu_platform": "ONDEWO",
+        "owner_id": "5aac51b8-668f-49dd-913f-cc683e56af34"
+        }
+        </samp>
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -205,6 +204,38 @@ class AgentsServicer(object):
 
     def UpdateAgent(self, request, context):
         """Updates the specified agent.
+
+        <p>Examples:</p>
+
+        <pre>
+        grpcurl -plaintext -H 'cai-token: aimp' -d '{
+        "agent": {
+        "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent",
+        "display_name": "Pizza Bot 2",
+        "supported_language_codes": ["en", "de"]
+        },
+        "update_mask": {
+        "paths": [
+        "agent.display_name",
+        "agent.supported_language_codes"
+        ]
+        }
+        }' localhost:50055 ondewo.nlu.Agents.UpdateAgent
+        </pre>
+
+        <samp>{
+        "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent",
+        "display_name": "Pizza Bot 2",
+        "default_language_code": "en",
+        "supported_language_codes": [
+        "en",
+        "de"
+        ],
+        "time_zone": "Europe/Vienna",
+        "nlu_platform": "ONDEWO",
+        "owner_id": "5aac51b8-668f-49dd-913f-cc683e56af34"
+        }
+        </samp>
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -212,6 +243,28 @@ class AgentsServicer(object):
 
     def GetAgent(self, request, context):
         """Retrieves the specified agent.
+
+        <p>Examples:</p>
+
+        <pre>
+        grpcurl -plaintext -H 'cai-token: aimp' -d '{
+        "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent"
+        }' localhost:50055 ondewo.nlu.Agents.GetAgent
+        </pre>
+        <samp>{
+        "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent",
+        "display_name": "Pizza Bot 2",
+        "default_language_code": "en",
+        "supported_language_codes": [
+        "en",
+        "de"
+        ],
+        "time_zone": "Europe/Vienna",
+        "nlu_platform": "ONDEWO",
+        "configs": {...},
+        "owner_id": "5aac51b8-668f-49dd-913f-cc683e56af34"
+        }
+        </samp>
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -219,6 +272,15 @@ class AgentsServicer(object):
 
     def DeleteAgent(self, request, context):
         """Deletes the specified agent.
+
+        <p>Examples:</p>
+
+        <pre>
+        grpcurl -plaintext -H 'cai-token: aimp' -d '{
+        "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent"
+        }' localhost:50055 ondewo.nlu.Agents.DeleteAgent
+        </pre>
+        <samp>{}</samp>
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -226,6 +288,13 @@ class AgentsServicer(object):
 
     def DeleteAllAgents(self, request, context):
         """Deletes all agents in the server (for development purposes only).
+
+        <p>Examples:</p>
+
+        <pre>
+        grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.DeleteAllAgents
+        </pre>
+        <samp>{}</samp>
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -233,6 +302,31 @@ class AgentsServicer(object):
 
     def ListAgents(self, request, context):
         """Lists agents in the server associated to the current user
+
+        <p>Examples:</p>
+
+        <pre>
+        grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.ListAgents
+        </pre>
+        <samp>{
+        "agents_with_owners": [
+        {
+        "agent": {
+        "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent",
+        "display_name": "Pizza Bot 2",
+        "owner_id": "5aac51b8-668f-49dd-913f-cc683e56af34"
+        },
+        "owner": {
+        "user_id": "5aac51b8-668f-49dd-913f-cc683e56af34",
+        "display_name": "admin",
+        "server_role_id": 3,
+        "user_email": "admin@ondewo.com"
+        }
+        }
+        ],
+        "next_page_token": "current_index-1"
+        }
+        </samp>
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -240,6 +334,37 @@ class AgentsServicer(object):
 
     def ListAgentsOfUser(self, request, context):
         """Lists agents in the server associated to the given user
+
+        <p>Examples:</p>
+
+        <pre>
+        grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.ListAgentsOfUser
+        </pre>
+        <samp>{
+        "agents_of_user_with_owners": [
+        {
+        "agent_with_owner": {
+        "agent": {
+        "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent",
+        "display_name": "Pizza Bot 2",
+        "owner_id": "5aac51b8-668f-49dd-913f-cc683e56af34"
+        },
+        "owner": {
+        "user_id": "5aac51b8-668f-49dd-913f-cc683e56af34",
+        "display_name": "admin",
+        "server_role_id": 3,
+        "user_email": "admin@ondewo.com"
+        }
+        },
+        "project_role": {
+        "role_id": 4,
+        "name": "ADMIN"
+        }
+        }
+        ],
+        "next_page_token": "current_index-1"
+        }
+        </samp>
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -247,6 +372,31 @@ class AgentsServicer(object):
 
     def ListAllAgents(self, request, context):
         """Lists all agents in the server
+
+        <p>Examples:</p>
+
+        <pre>
+        grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.ListAllAgents
+        </pre>
+        <samp>{
+        "agents_with_owners": [
+        {
+        "agent": {
+        "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent",
+        "display_name": "Pizza Bot 2",
+        "owner_id": "5aac51b8-668f-49dd-913f-cc683e56af34"
+        },
+        "owner": {
+        "user_id": "5aac51b8-668f-49dd-913f-cc683e56af34",
+        "display_name": "admin",
+        "server_role_id": 3,
+        "user_email": "admin@ondewo.com"
+        }
+        }
+        ],
+        "next_page_token": "current_index-1"
+        }
+        </samp>
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -520,31 +670,17 @@ def add_AgentsServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class Agents(object):
-    """Agents are best described as Natural Language Understanding (NLU) modules
-    that transform user requests into actionable data. You can include agents
-    in your app, product, or service to determine user intent and respond to the
-    user in a natural way.
+    """Agents are best described as Natural Language Understanding (NLU) modules that transform user requests into actionable data. You can include agents in your app, product, or service to determine user intent and respond to the user in a natural way.
 
-    After you create an agent, you can add [Intents][google.cloud.dialogflow.v2.Intents], [Contexts][google.cloud.dialogflow.v2.Contexts],
-    [Entity Types][google.cloud.dialogflow.v2.EntityTypes], [Webhooks][google.cloud.dialogflow.v2.WebhookRequest], and so on to
-    manage the flow of a conversation and match user input to predefined intents
-    and actions.
+    After you create an agent, you can add [Intents][google.cloud.dialogflow.v2.Intents], [Contexts][google.cloud.dialogflow.v2.Contexts], [Entity Types][google.cloud.dialogflow.v2.EntityTypes], [Webhooks][google.cloud.dialogflow.v2.WebhookRequest], and so on to manage the flow of a conversation and match user input to predefined intents and actions.
 
-    You can create an agent using both Dialogflow Standard Edition and
-    Dialogflow Enterprise Edition. For details, see
-    [Dialogflow Editions](/dialogflow-enterprise/docs/editions).
+    You can create an agent using both Dialogflow Standard Edition and Dialogflow Enterprise Edition. For details, see [Dialogflow Editions](/dialogflow-enterprise/docs/editions).
 
-    You can save your agent for backup or versioning by exporting the agent by
-    using the [ExportAgent][google.cloud.dialogflow.v2.Agents.ExportAgent] method. You can import a saved
-    agent by using the [ImportAgent][google.cloud.dialogflow.v2.Agents.ImportAgent] method.
+    You can save your agent for backup or versioning by exporting the agent by using the [ExportAgent][google.cloud.dialogflow.v2.Agents.ExportAgent] method. You can import a saved agent by using the [ImportAgent][google.cloud.dialogflow.v2.Agents.ImportAgent] method.
 
-    Dialogflow provides several
-    [prebuilt agents](https://dialogflow.com/docs/prebuilt-agents) for common
-    conversation scenarios such as determining a date and time, converting
-    currency, and so on.
+    Dialogflow provides several [prebuilt agents](https://dialogflow.com/docs/prebuilt-agents) for common conversation scenarios such as determining a date and time, converting currency, and so on.
 
-    For more information about agents, see the
-    [Dialogflow documentation](https://dialogflow.com/docs/agents).
+    For more information about agents, see the [Dialogflow documentation](https://dialogflow.com/docs/agents).
     """
 
     @staticmethod
