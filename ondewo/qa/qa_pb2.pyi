@@ -144,14 +144,18 @@ global___RunTrainingResponse = RunTrainingResponse
 class MetadataFilters(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
     metadata_field = ... # type: typing___Text
-    filters = ... # type: google___protobuf___internal___containers___RepeatedScalarFieldContainer[typing___Text]
-    regex_filter = ... # type: typing___Text
+    filters_include = ... # type: google___protobuf___internal___containers___RepeatedScalarFieldContainer[typing___Text]
+    filters_exclude = ... # type: google___protobuf___internal___containers___RepeatedScalarFieldContainer[typing___Text]
+    regex_filter_include = ... # type: typing___Text
+    regex_filter_exclude = ... # type: typing___Text
 
     def __init__(self,
         *,
         metadata_field : typing___Optional[typing___Text] = None,
-        filters : typing___Optional[typing___Iterable[typing___Text]] = None,
-        regex_filter : typing___Optional[typing___Text] = None,
+        filters_include : typing___Optional[typing___Iterable[typing___Text]] = None,
+        filters_exclude : typing___Optional[typing___Iterable[typing___Text]] = None,
+        regex_filter_include : typing___Optional[typing___Text] = None,
+        regex_filter_exclude : typing___Optional[typing___Text] = None,
         ) -> None: ...
     if sys.version_info >= (3,):
         @classmethod
@@ -161,5 +165,5 @@ class MetadataFilters(google___protobuf___message___Message):
         def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> MetadataFilters: ...
     def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"filters",b"filters",u"metadata_field",b"metadata_field",u"regex_filter",b"regex_filter"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"filters_exclude",b"filters_exclude",u"filters_include",b"filters_include",u"metadata_field",b"metadata_field",u"regex_filter_exclude",b"regex_filter_exclude",u"regex_filter_include",b"regex_filter_include"]) -> None: ...
 global___MetadataFilters = MetadataFilters
