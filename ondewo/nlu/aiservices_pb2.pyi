@@ -71,7 +71,7 @@ class ExtractEntitiesFuzzyRequest(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
     text = ... # type: typing___Text
     minimal_score = ... # type: builtin___float
-    same_value_cannot_overlap = ... # type: builtin___bool
+    allow_overlaps = ... # type: builtin___bool
 
     @property
     def potential_entities(self) -> google___protobuf___internal___containers___RepeatedCompositeFieldContainer[ondewo___nlu___entity_type_pb2___EntityType]: ...
@@ -81,7 +81,7 @@ class ExtractEntitiesFuzzyRequest(google___protobuf___message___Message):
         text : typing___Optional[typing___Text] = None,
         potential_entities : typing___Optional[typing___Iterable[ondewo___nlu___entity_type_pb2___EntityType]] = None,
         minimal_score : typing___Optional[builtin___float] = None,
-        same_value_cannot_overlap : typing___Optional[builtin___bool] = None,
+        allow_overlaps : typing___Optional[builtin___bool] = None,
         ) -> None: ...
     if sys.version_info >= (3,):
         @classmethod
@@ -91,7 +91,7 @@ class ExtractEntitiesFuzzyRequest(google___protobuf___message___Message):
         def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> ExtractEntitiesFuzzyRequest: ...
     def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"minimal_score",b"minimal_score",u"potential_entities",b"potential_entities",u"same_value_cannot_overlap",b"same_value_cannot_overlap",u"text",b"text"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"allow_overlaps",b"allow_overlaps",u"minimal_score",b"minimal_score",u"potential_entities",b"potential_entities",u"text",b"text"]) -> None: ...
 global___ExtractEntitiesFuzzyRequest = ExtractEntitiesFuzzyRequest
 
 class EntityDetected(google___protobuf___message___Message):
