@@ -69,6 +69,7 @@ global___ExtractEntitiesRequest = ExtractEntitiesRequest
 
 class ExtractEntitiesFuzzyRequest(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
+    parent = ... # type: typing___Text
     text = ... # type: typing___Text
     minimal_score = ... # type: builtin___float
     allow_overlaps = ... # type: builtin___bool
@@ -78,6 +79,7 @@ class ExtractEntitiesFuzzyRequest(google___protobuf___message___Message):
 
     def __init__(self,
         *,
+        parent : typing___Optional[typing___Text] = None,
         text : typing___Optional[typing___Text] = None,
         potential_entities : typing___Optional[typing___Iterable[ondewo___nlu___entity_type_pb2___EntityType]] = None,
         minimal_score : typing___Optional[builtin___float] = None,
@@ -91,7 +93,7 @@ class ExtractEntitiesFuzzyRequest(google___protobuf___message___Message):
         def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> ExtractEntitiesFuzzyRequest: ...
     def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"allow_overlaps",b"allow_overlaps",u"minimal_score",b"minimal_score",u"potential_entities",b"potential_entities",u"text",b"text"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"allow_overlaps",b"allow_overlaps",u"minimal_score",b"minimal_score",u"parent",b"parent",u"potential_entities",b"potential_entities",u"text",b"text"]) -> None: ...
 global___ExtractEntitiesFuzzyRequest = ExtractEntitiesFuzzyRequest
 
 class EntityDetected(google___protobuf___message___Message):
