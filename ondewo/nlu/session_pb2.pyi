@@ -711,11 +711,13 @@ global___GetSessionRequest = GetSessionRequest
 
 class CreateSessionRequest(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
-    session_path = ... # type: typing___Text
+    parent = ... # type: typing___Text
+    session_uuid = ... # type: typing___Text
 
     def __init__(self,
         *,
-        session_path : typing___Optional[typing___Text] = None,
+        parent : typing___Optional[typing___Text] = None,
+        session_uuid : typing___Optional[typing___Text] = None,
         ) -> None: ...
     if sys.version_info >= (3,):
         @classmethod
@@ -725,7 +727,7 @@ class CreateSessionRequest(google___protobuf___message___Message):
         def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> CreateSessionRequest: ...
     def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"session_path",b"session_path"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"parent",b"parent",u"session_uuid",b"session_uuid"]) -> None: ...
 global___CreateSessionRequest = CreateSessionRequest
 
 class DeleteSessionRequest(google___protobuf___message___Message):
