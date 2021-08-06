@@ -4,40 +4,16 @@ from google.protobuf.descriptor import (
     Descriptor as google___protobuf___descriptor___Descriptor,
     EnumDescriptor as google___protobuf___descriptor___EnumDescriptor,
 )
-
 from google.protobuf.internal.containers import (
     RepeatedCompositeFieldContainer as google___protobuf___internal___containers___RepeatedCompositeFieldContainer,
     RepeatedScalarFieldContainer as google___protobuf___internal___containers___RepeatedScalarFieldContainer,
 )
-
 from google.protobuf.message import (
     Message as google___protobuf___message___Message,
 )
-
 from google.protobuf.struct_pb2 import (
     Struct as google___protobuf___struct_pb2___Struct,
 )
-
-from google.rpc.status_pb2 import (
-    Status as google___rpc___status_pb2___Status,
-)
-
-from google.type.latlng_pb2 import (
-    LatLng as google___type___latlng_pb2___LatLng,
-)
-
-from ondewo.nlu.context_pb2 import (
-    Context as ondewo___nlu___context_pb2___Context,
-)
-
-from ondewo.nlu.entity_type_pb2 import (
-    EntityType as ondewo___nlu___entity_type_pb2___EntityType,
-)
-
-from ondewo.nlu.intent_pb2 import (
-    Intent as ondewo___nlu___intent_pb2___Intent,
-)
-
 from typing import (
     Iterable as typing___Iterable,
     List as typing___List,
@@ -47,11 +23,25 @@ from typing import (
     Union as typing___Union,
     cast as typing___cast,
 )
-
 from typing_extensions import (
     Literal as typing_extensions___Literal,
 )
 
+from google.rpc.status_pb2 import (
+    Status as google___rpc___status_pb2___Status,
+)
+from google.type.latlng_pb2 import (
+    LatLng as google___type___latlng_pb2___LatLng,
+)
+from ondewo.nlu.context_pb2 import (
+    Context as ondewo___nlu___context_pb2___Context,
+)
+from ondewo.nlu.entity_type_pb2 import (
+    EntityType as ondewo___nlu___entity_type_pb2___EntityType,
+)
+from ondewo.nlu.intent_pb2 import (
+    Intent as ondewo___nlu___intent_pb2___Intent,
+)
 
 builtin___bool = bool
 builtin___bytes = bytes
@@ -718,6 +708,25 @@ class GetSessionRequest(google___protobuf___message___Message):
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def ClearField(self, field_name: typing_extensions___Literal[u"session_id",b"session_id",u"session_view",b"session_view"]) -> None: ...
 global___GetSessionRequest = GetSessionRequest
+
+class CreateSessionRequest(google___protobuf___message___Message):
+    DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
+    session_path = ... # type: typing___Text
+
+    def __init__(self,
+        *,
+        session_path : typing___Optional[typing___Text] = None,
+        ) -> None: ...
+    if sys.version_info >= (3,):
+        @classmethod
+        def FromString(cls, s: builtin___bytes) -> CreateSessionRequest: ...
+    else:
+        @classmethod
+        def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> CreateSessionRequest: ...
+    def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
+    def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"session_path",b"session_path"]) -> None: ...
+global___CreateSessionRequest = CreateSessionRequest
 
 class DeleteSessionRequest(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
