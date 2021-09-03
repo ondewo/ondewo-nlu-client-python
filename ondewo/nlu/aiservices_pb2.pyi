@@ -55,10 +55,12 @@ class Mode(builtin___int):
     def values(cls) -> typing___List['Mode']: ...
     @classmethod
     def items(cls) -> typing___List[typing___Tuple[builtin___str, 'Mode']]: ...
-    EXCLUSIVE = typing___cast('Mode', 0)
-    INCLUSIVE = typing___cast('Mode', 1)
-EXCLUSIVE = typing___cast('Mode', 0)
-INCLUSIVE = typing___cast('Mode', 1)
+    UNSPECIFIED = typing___cast('Mode', 0)
+    EXCLUSIVE = typing___cast('Mode', 1)
+    INCLUSIVE = typing___cast('Mode', 2)
+UNSPECIFIED = typing___cast('Mode', 0)
+EXCLUSIVE = typing___cast('Mode', 1)
+INCLUSIVE = typing___cast('Mode', 2)
 global___Mode = Mode
 
 class IntentAlgorithms(builtin___int):
