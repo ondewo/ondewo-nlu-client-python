@@ -4,6 +4,11 @@ from google.protobuf.descriptor import (
     Descriptor as google___protobuf___descriptor___Descriptor,
 )
 
+from google.protobuf.internal.containers import (
+    RepeatedCompositeFieldContainer as google___protobuf___internal___containers___RepeatedCompositeFieldContainer,
+    RepeatedScalarFieldContainer as google___protobuf___internal___containers___RepeatedScalarFieldContainer,
+)
+
 from google.protobuf.message import (
     Message as google___protobuf___message___Message,
 )
@@ -14,6 +19,7 @@ from ondewo.nlu.session_pb2 import (
 )
 
 from typing import (
+    Iterable as typing___Iterable,
     Optional as typing___Optional,
     Text as typing___Text,
     Union as typing___Union,
@@ -45,6 +51,9 @@ class GetAnswerRequest(google___protobuf___message___Message):
     @property
     def text(self) -> ondewo___nlu___session_pb2___TextInput: ...
 
+    @property
+    def filters(self) -> google___protobuf___internal___containers___RepeatedCompositeFieldContainer[global___MetadataFilters]: ...
+
     def __init__(self,
         *,
         session_id : typing___Optional[typing___Text] = None,
@@ -54,6 +63,7 @@ class GetAnswerRequest(google___protobuf___message___Message):
         threshold_retriever : typing___Optional[builtin___float] = None,
         threshold_overall : typing___Optional[builtin___float] = None,
         reader_model_name : typing___Optional[typing___Text] = None,
+        filters : typing___Optional[typing___Iterable[global___MetadataFilters]] = None,
         ) -> None: ...
     if sys.version_info >= (3,):
         @classmethod
@@ -64,7 +74,7 @@ class GetAnswerRequest(google___protobuf___message___Message):
     def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def HasField(self, field_name: typing_extensions___Literal[u"text",b"text"]) -> builtin___bool: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"max_num_answers",b"max_num_answers",u"reader_model_name",b"reader_model_name",u"session_id",b"session_id",u"text",b"text",u"threshold_overall",b"threshold_overall",u"threshold_reader",b"threshold_reader",u"threshold_retriever",b"threshold_retriever"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"filters",b"filters",u"max_num_answers",b"max_num_answers",u"reader_model_name",b"reader_model_name",u"session_id",b"session_id",u"text",b"text",u"threshold_overall",b"threshold_overall",u"threshold_reader",b"threshold_reader",u"threshold_retriever",b"threshold_retriever"]) -> None: ...
 global___GetAnswerRequest = GetAnswerRequest
 
 class GetAnswerResponse(google___protobuf___message___Message):
@@ -130,3 +140,30 @@ class RunTrainingResponse(google___protobuf___message___Message):
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def ClearField(self, field_name: typing_extensions___Literal[u"accuracy",b"accuracy",u"f1",b"f1"]) -> None: ...
 global___RunTrainingResponse = RunTrainingResponse
+
+class MetadataFilters(google___protobuf___message___Message):
+    DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
+    metadata_field = ... # type: typing___Text
+    filters_include = ... # type: google___protobuf___internal___containers___RepeatedScalarFieldContainer[typing___Text]
+    filters_exclude = ... # type: google___protobuf___internal___containers___RepeatedScalarFieldContainer[typing___Text]
+    regex_filter_include = ... # type: typing___Text
+    regex_filter_exclude = ... # type: typing___Text
+
+    def __init__(self,
+        *,
+        metadata_field : typing___Optional[typing___Text] = None,
+        filters_include : typing___Optional[typing___Iterable[typing___Text]] = None,
+        filters_exclude : typing___Optional[typing___Iterable[typing___Text]] = None,
+        regex_filter_include : typing___Optional[typing___Text] = None,
+        regex_filter_exclude : typing___Optional[typing___Text] = None,
+        ) -> None: ...
+    if sys.version_info >= (3,):
+        @classmethod
+        def FromString(cls, s: builtin___bytes) -> MetadataFilters: ...
+    else:
+        @classmethod
+        def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> MetadataFilters: ...
+    def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
+    def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"filters_exclude",b"filters_exclude",u"filters_include",b"filters_include",u"metadata_field",b"metadata_field",u"regex_filter_exclude",b"regex_filter_exclude",u"regex_filter_include",b"regex_filter_include"]) -> None: ...
+global___MetadataFilters = MetadataFilters
