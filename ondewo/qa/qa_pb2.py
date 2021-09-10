@@ -22,12 +22,50 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x12ondewo/qa/qa.proto\x12\tondewo.qa\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x18ondewo/nlu/session.proto\"\xfe\x01\n\x10GetAnswerRequest\x12\x12\n\nsession_id\x18\x01 \x01(\t\x12#\n\x04text\x18\x02 \x01(\x0b\x32\x15.ondewo.nlu.TextInput\x12\x17\n\x0fmax_num_answers\x18\x03 \x01(\x05\x12\x18\n\x10threshold_reader\x18\x04 \x01(\x02\x12\x1b\n\x13threshold_retriever\x18\x05 \x01(\x02\x12\x19\n\x11threshold_overall\x18\x06 \x01(\x02\x12\x19\n\x11reader_model_name\x18\x07 \x01(\t\x12+\n\x07\x66ilters\x18\x08 \x03(\x0b\x32\x1a.ondewo.qa.MetadataFilters\"K\n\x11GetAnswerResponse\x12\x36\n\x0cquery_result\x18\x02 \x01(\x0b\x32 .ondewo.nlu.DetectIntentResponse\"B\n\x12RunScraperResponse\x12\x16\n\x0e\x63ontainer_name\x18\x01 \x01(\t\x12\x14\n\x0c\x63ontainer_id\x18\x02 \x01(\t\"3\n\x13RunTrainingResponse\x12\n\n\x02\x66\x31\x18\x01 \x01(\x02\x12\x10\n\x08\x61\x63\x63uracy\x18\x02 \x01(\x02\"\x97\x01\n\x0fMetadataFilters\x12\x16\n\x0emetadata_field\x18\x01 \x01(\t\x12\x17\n\x0f\x66ilters_include\x18\x02 \x03(\t\x12\x17\n\x0f\x66ilters_exclude\x18\x03 \x03(\t\x12\x1c\n\x14regex_filter_include\x18\x04 \x01(\t\x12\x1c\n\x14regex_filter_exclude\x18\x05 \x01(\t2\x99\x02\n\x02QA\x12V\n\tGetAnswer\x12\x1b.ondewo.qa.GetAnswerRequest\x1a\x1c.ondewo.qa.GetAnswerResponse\"\x0e\x82\xd3\xe4\x93\x02\x08\"\x03/qa:\x01*\x12[\n\nRunScraper\x12\x16.google.protobuf.Empty\x1a\x1d.ondewo.qa.RunScraperResponse\"\x16\x82\xd3\xe4\x93\x02\x10\x12\x0e/qa:RunScraper\x12^\n\x0bRunTraining\x12\x16.google.protobuf.Empty\x1a\x1e.ondewo.qa.RunTrainingResponse\"\x17\x82\xd3\xe4\x93\x02\x11\x12\x0f/qa:RunTrainingb\x06proto3'
+  serialized_pb=b'\n\x12ondewo/qa/qa.proto\x12\tondewo.qa\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x18ondewo/nlu/session.proto\"\xf0\x02\n\x10GetAnswerRequest\x12\x12\n\nsession_id\x18\x01 \x01(\t\x12#\n\x04text\x18\x02 \x01(\x0b\x32\x15.ondewo.nlu.TextInput\x12\x17\n\x0fmax_num_answers\x18\x03 \x01(\x05\x12\x18\n\x10threshold_reader\x18\x04 \x01(\x02\x12\x1b\n\x13threshold_retriever\x18\x05 \x01(\x02\x12\x19\n\x11threshold_overall\x18\x06 \x01(\x02\x12\x19\n\x11reader_model_name\x18\x07 \x01(\t\x12J\n\x10metadata_filters\x18\x08 \x03(\x0b\x32\x30.ondewo.qa.GetAnswerRequest.MetadataFiltersEntry\x1aQ\n\x14MetadataFiltersEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12(\n\x05value\x18\x02 \x01(\x0b\x32\x19.ondewo.qa.MetadataFilter:\x02\x38\x01\"K\n\x11GetAnswerResponse\x12\x36\n\x0cquery_result\x18\x02 \x01(\x0b\x32 .ondewo.nlu.DetectIntentResponse\"B\n\x12RunScraperResponse\x12\x16\n\x0e\x63ontainer_name\x18\x01 \x01(\t\x12\x14\n\x0c\x63ontainer_id\x18\x02 \x01(\t\"3\n\x13RunTrainingResponse\x12\n\n\x02\x66\x31\x18\x01 \x01(\x02\x12\x10\n\x08\x61\x63\x63uracy\x18\x02 \x01(\x02\"d\n\x0eMetadataFilter\x12\x16\n\x0e\x61llowed_values\x18\x01 \x03(\t\x12\x1c\n\x14regex_filter_include\x18\x02 \x01(\t\x12\x1c\n\x14regex_filter_exclude\x18\x03 \x01(\t2\x99\x02\n\x02QA\x12V\n\tGetAnswer\x12\x1b.ondewo.qa.GetAnswerRequest\x1a\x1c.ondewo.qa.GetAnswerResponse\"\x0e\x82\xd3\xe4\x93\x02\x08\"\x03/qa:\x01*\x12[\n\nRunScraper\x12\x16.google.protobuf.Empty\x1a\x1d.ondewo.qa.RunScraperResponse\"\x16\x82\xd3\xe4\x93\x02\x10\x12\x0e/qa:RunScraper\x12^\n\x0bRunTraining\x12\x16.google.protobuf.Empty\x1a\x1e.ondewo.qa.RunTrainingResponse\"\x17\x82\xd3\xe4\x93\x02\x11\x12\x0f/qa:RunTrainingb\x06proto3'
   ,
   dependencies=[google_dot_protobuf_dot_empty__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,ondewo_dot_nlu_dot_session__pb2.DESCRIPTOR,])
 
 
 
+
+_GETANSWERREQUEST_METADATAFILTERSENTRY = _descriptor.Descriptor(
+  name='MetadataFiltersEntry',
+  full_name='ondewo.qa.GetAnswerRequest.MetadataFiltersEntry',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='key', full_name='ondewo.qa.GetAnswerRequest.MetadataFiltersEntry.key', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='value', full_name='ondewo.qa.GetAnswerRequest.MetadataFiltersEntry.value', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=b'8\001',
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=406,
+  serialized_end=487,
+)
 
 _GETANSWERREQUEST = _descriptor.Descriptor(
   name='GetAnswerRequest',
@@ -87,7 +125,7 @@ _GETANSWERREQUEST = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='filters', full_name='ondewo.qa.GetAnswerRequest.filters', index=7,
+      name='metadata_filters', full_name='ondewo.qa.GetAnswerRequest.metadata_filters', index=7,
       number=8, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -96,7 +134,7 @@ _GETANSWERREQUEST = _descriptor.Descriptor(
   ],
   extensions=[
   ],
-  nested_types=[],
+  nested_types=[_GETANSWERREQUEST_METADATAFILTERSENTRY, ],
   enum_types=[
   ],
   serialized_options=None,
@@ -106,7 +144,7 @@ _GETANSWERREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=119,
-  serialized_end=373,
+  serialized_end=487,
 )
 
 
@@ -137,8 +175,8 @@ _GETANSWERRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=375,
-  serialized_end=450,
+  serialized_start=489,
+  serialized_end=564,
 )
 
 
@@ -176,8 +214,8 @@ _RUNSCRAPERRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=452,
-  serialized_end=518,
+  serialized_start=566,
+  serialized_end=632,
 )
 
 
@@ -215,50 +253,36 @@ _RUNTRAININGRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=520,
-  serialized_end=571,
+  serialized_start=634,
+  serialized_end=685,
 )
 
 
-_METADATAFILTERS = _descriptor.Descriptor(
-  name='MetadataFilters',
-  full_name='ondewo.qa.MetadataFilters',
+_METADATAFILTER = _descriptor.Descriptor(
+  name='MetadataFilter',
+  full_name='ondewo.qa.MetadataFilter',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='metadata_field', full_name='ondewo.qa.MetadataFilters.metadata_field', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='filters_include', full_name='ondewo.qa.MetadataFilters.filters_include', index=1,
-      number=2, type=9, cpp_type=9, label=3,
+      name='allowed_values', full_name='ondewo.qa.MetadataFilter.allowed_values', index=0,
+      number=1, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='filters_exclude', full_name='ondewo.qa.MetadataFilters.filters_exclude', index=2,
-      number=3, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='regex_filter_include', full_name='ondewo.qa.MetadataFilters.regex_filter_include', index=3,
-      number=4, type=9, cpp_type=9, label=1,
+      name='regex_filter_include', full_name='ondewo.qa.MetadataFilter.regex_filter_include', index=1,
+      number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='regex_filter_exclude', full_name='ondewo.qa.MetadataFilters.regex_filter_exclude', index=4,
-      number=5, type=9, cpp_type=9, label=1,
+      name='regex_filter_exclude', full_name='ondewo.qa.MetadataFilter.regex_filter_exclude', index=2,
+      number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -275,26 +299,36 @@ _METADATAFILTERS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=574,
-  serialized_end=725,
+  serialized_start=687,
+  serialized_end=787,
 )
 
+_GETANSWERREQUEST_METADATAFILTERSENTRY.fields_by_name['value'].message_type = _METADATAFILTER
+_GETANSWERREQUEST_METADATAFILTERSENTRY.containing_type = _GETANSWERREQUEST
 _GETANSWERREQUEST.fields_by_name['text'].message_type = ondewo_dot_nlu_dot_session__pb2._TEXTINPUT
-_GETANSWERREQUEST.fields_by_name['filters'].message_type = _METADATAFILTERS
+_GETANSWERREQUEST.fields_by_name['metadata_filters'].message_type = _GETANSWERREQUEST_METADATAFILTERSENTRY
 _GETANSWERRESPONSE.fields_by_name['query_result'].message_type = ondewo_dot_nlu_dot_session__pb2._DETECTINTENTRESPONSE
 DESCRIPTOR.message_types_by_name['GetAnswerRequest'] = _GETANSWERREQUEST
 DESCRIPTOR.message_types_by_name['GetAnswerResponse'] = _GETANSWERRESPONSE
 DESCRIPTOR.message_types_by_name['RunScraperResponse'] = _RUNSCRAPERRESPONSE
 DESCRIPTOR.message_types_by_name['RunTrainingResponse'] = _RUNTRAININGRESPONSE
-DESCRIPTOR.message_types_by_name['MetadataFilters'] = _METADATAFILTERS
+DESCRIPTOR.message_types_by_name['MetadataFilter'] = _METADATAFILTER
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GetAnswerRequest = _reflection.GeneratedProtocolMessageType('GetAnswerRequest', (_message.Message,), {
+
+  'MetadataFiltersEntry' : _reflection.GeneratedProtocolMessageType('MetadataFiltersEntry', (_message.Message,), {
+    'DESCRIPTOR' : _GETANSWERREQUEST_METADATAFILTERSENTRY,
+    '__module__' : 'ondewo.qa.qa_pb2'
+    # @@protoc_insertion_point(class_scope:ondewo.qa.GetAnswerRequest.MetadataFiltersEntry)
+    })
+  ,
   'DESCRIPTOR' : _GETANSWERREQUEST,
   '__module__' : 'ondewo.qa.qa_pb2'
   # @@protoc_insertion_point(class_scope:ondewo.qa.GetAnswerRequest)
   })
 _sym_db.RegisterMessage(GetAnswerRequest)
+_sym_db.RegisterMessage(GetAnswerRequest.MetadataFiltersEntry)
 
 GetAnswerResponse = _reflection.GeneratedProtocolMessageType('GetAnswerResponse', (_message.Message,), {
   'DESCRIPTOR' : _GETANSWERRESPONSE,
@@ -317,14 +351,15 @@ RunTrainingResponse = _reflection.GeneratedProtocolMessageType('RunTrainingRespo
   })
 _sym_db.RegisterMessage(RunTrainingResponse)
 
-MetadataFilters = _reflection.GeneratedProtocolMessageType('MetadataFilters', (_message.Message,), {
-  'DESCRIPTOR' : _METADATAFILTERS,
+MetadataFilter = _reflection.GeneratedProtocolMessageType('MetadataFilter', (_message.Message,), {
+  'DESCRIPTOR' : _METADATAFILTER,
   '__module__' : 'ondewo.qa.qa_pb2'
-  # @@protoc_insertion_point(class_scope:ondewo.qa.MetadataFilters)
+  # @@protoc_insertion_point(class_scope:ondewo.qa.MetadataFilter)
   })
-_sym_db.RegisterMessage(MetadataFilters)
+_sym_db.RegisterMessage(MetadataFilter)
 
 
+_GETANSWERREQUEST_METADATAFILTERSENTRY._options = None
 
 _QA = _descriptor.ServiceDescriptor(
   name='QA',
@@ -333,8 +368,8 @@ _QA = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=728,
-  serialized_end=1009,
+  serialized_start=790,
+  serialized_end=1071,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetAnswer',
