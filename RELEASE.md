@@ -1,5 +1,11 @@
 # Release History
 *****************
+## Release ONDEWO NLU Python Client 2.1.0
+
+### New Features
+* [OND211-1799] Implement endpoints for fuzzy named entity extraction.
+
+*****************
 
 ## Release ONDEWO NLU Python Client 2.0.0
 
