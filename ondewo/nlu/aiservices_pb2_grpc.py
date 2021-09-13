@@ -50,6 +50,11 @@ class AiServicesStub(object):
                 request_serializer=ondewo_dot_nlu_dot_aiservices__pb2.ClassifyIntentsRequest.SerializeToString,
                 response_deserializer=ondewo_dot_nlu_dot_aiservices__pb2.ClassifyIntentsResponse.FromString,
                 )
+        self.ExtractEntitiesFuzzy = channel.unary_unary(
+                '/ondewo.nlu.AiServices/ExtractEntitiesFuzzy',
+                request_serializer=ondewo_dot_nlu_dot_aiservices__pb2.ExtractEntitiesFuzzyRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_aiservices__pb2.ExtractEntitiesResponse.FromString,
+                )
 
 
 class AiServicesServicer(object):
@@ -99,6 +104,13 @@ class AiServicesServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ExtractEntitiesFuzzy(self, request, context):
+        """Processes a natural language query and returns detected entities
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_AiServicesServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -136,6 +148,11 @@ def add_AiServicesServicer_to_server(servicer, server):
                     servicer.ClassifyIntents,
                     request_deserializer=ondewo_dot_nlu_dot_aiservices__pb2.ClassifyIntentsRequest.FromString,
                     response_serializer=ondewo_dot_nlu_dot_aiservices__pb2.ClassifyIntentsResponse.SerializeToString,
+            ),
+            'ExtractEntitiesFuzzy': grpc.unary_unary_rpc_method_handler(
+                    servicer.ExtractEntitiesFuzzy,
+                    request_deserializer=ondewo_dot_nlu_dot_aiservices__pb2.ExtractEntitiesFuzzyRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_aiservices__pb2.ExtractEntitiesResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -264,5 +281,22 @@ class AiServices(object):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.AiServices/ClassifyIntents',
             ondewo_dot_nlu_dot_aiservices__pb2.ClassifyIntentsRequest.SerializeToString,
             ondewo_dot_nlu_dot_aiservices__pb2.ClassifyIntentsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ExtractEntitiesFuzzy(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.AiServices/ExtractEntitiesFuzzy',
+            ondewo_dot_nlu_dot_aiservices__pb2.ExtractEntitiesFuzzyRequest.SerializeToString,
+            ondewo_dot_nlu_dot_aiservices__pb2.ExtractEntitiesResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
