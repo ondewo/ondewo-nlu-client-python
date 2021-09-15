@@ -23,7 +23,7 @@ from ondewo.nlu.agent_pb2 import Agent, CreateAgentRequest, GetAgentRequest, Upd
     RemoveUserFromProjectRequest, ListUsersInProjectResponse, ListUsersInProjectRequest, \
     GetPlatformInfoResponse, ListProjectPermissionsRequest, ListProjectPermissionsResponse, \
     BuildCacheRequest, SetAgentStatusRequest, SetResourcesRequest, DeleteResourcesRequest, \
-    ExportResourcesRequest, ExportResourcesResponse
+    ExportResourcesRequest, ExportResourcesResponse, ExportBenchmarkAgentRequest
 from ondewo.nlu.agent_pb2_grpc import AgentsStub
 from ondewo.nlu.core.services_interface import ServicesInterface
 
@@ -104,6 +104,10 @@ class Agents(ServicesInterface):
 
     def export_agent(self, request: ExportAgentRequest) -> operations_pb2.Operation:
         response: operations_pb2.Operation = self.stub.ExportAgent(request, metadata=self.metadata)
+        return response
+
+    def export_benchmark_agent(self, request: ExportBenchmarkAgentRequest) -> operations_pb2.Operation:
+        response: operations_pb2.Operation = self.stub.ExportBenchmarkAgent(request, metadata=self.metadata)
         return response
 
     def import_agent(self, request: ImportAgentRequest) -> operations_pb2.Operation:
