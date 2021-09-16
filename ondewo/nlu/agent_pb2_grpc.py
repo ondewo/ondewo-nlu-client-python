@@ -470,7 +470,9 @@ class AgentsServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def ExportBenchmarkAgent(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Exports the specified train agent to a ZIP file after train-test split, returns the test TrainingPhrase list.
+
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
