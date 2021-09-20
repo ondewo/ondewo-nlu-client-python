@@ -32,6 +32,11 @@ class QAStub(object):
                 request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
                 response_deserializer=ondewo_dot_qa_dot_qa__pb2.RunTrainingResponse.FromString,
                 )
+        self.GetServerState = channel.unary_unary(
+                '/ondewo.qa.QA/GetServerState',
+                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                response_deserializer=ondewo_dot_qa_dot_qa__pb2.GetServerStateResponse.FromString,
+                )
 
 
 class QAServicer(object):
@@ -57,6 +62,12 @@ class QAServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetServerState(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_QAServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -74,6 +85,11 @@ def add_QAServicer_to_server(servicer, server):
                     servicer.RunTraining,
                     request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                     response_serializer=ondewo_dot_qa_dot_qa__pb2.RunTrainingResponse.SerializeToString,
+            ),
+            'GetServerState': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetServerState,
+                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    response_serializer=ondewo_dot_qa_dot_qa__pb2.GetServerStateResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -135,5 +151,22 @@ class QA(object):
         return grpc.experimental.unary_unary(request, target, '/ondewo.qa.QA/RunTraining',
             google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ondewo_dot_qa_dot_qa__pb2.RunTrainingResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetServerState(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.qa.QA/GetServerState',
+            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ondewo_dot_qa_dot_qa__pb2.GetServerStateResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
