@@ -37,6 +37,16 @@ class QAStub(object):
                 request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
                 response_deserializer=ondewo_dot_qa_dot_qa__pb2.GetServerStateResponse.FromString,
                 )
+        self.ListProjectIds = channel.unary_unary(
+                '/ondewo.qa.QA/ListProjectIds',
+                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                response_deserializer=ondewo_dot_qa_dot_qa__pb2.ListProjectIdsResponse.FromString,
+                )
+        self.GetProjectConfig = channel.unary_unary(
+                '/ondewo.qa.QA/GetProjectConfig',
+                request_serializer=ondewo_dot_qa_dot_qa__pb2.GetProjectConfigRequest.SerializeToString,
+                response_deserializer=ondewo_dot_qa_dot_qa__pb2.GetProjectConfigResponse.FromString,
+                )
 
 
 class QAServicer(object):
@@ -68,6 +78,18 @@ class QAServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ListProjectIds(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetProjectConfig(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_QAServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -90,6 +112,16 @@ def add_QAServicer_to_server(servicer, server):
                     servicer.GetServerState,
                     request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                     response_serializer=ondewo_dot_qa_dot_qa__pb2.GetServerStateResponse.SerializeToString,
+            ),
+            'ListProjectIds': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListProjectIds,
+                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    response_serializer=ondewo_dot_qa_dot_qa__pb2.ListProjectIdsResponse.SerializeToString,
+            ),
+            'GetProjectConfig': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetProjectConfig,
+                    request_deserializer=ondewo_dot_qa_dot_qa__pb2.GetProjectConfigRequest.FromString,
+                    response_serializer=ondewo_dot_qa_dot_qa__pb2.GetProjectConfigResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -168,5 +200,39 @@ class QA(object):
         return grpc.experimental.unary_unary(request, target, '/ondewo.qa.QA/GetServerState',
             google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ondewo_dot_qa_dot_qa__pb2.GetServerStateResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListProjectIds(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.qa.QA/ListProjectIds',
+            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ondewo_dot_qa_dot_qa__pb2.ListProjectIdsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetProjectConfig(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.qa.QA/GetProjectConfig',
+            ondewo_dot_qa_dot_qa__pb2.GetProjectConfigRequest.SerializeToString,
+            ondewo_dot_qa_dot_qa__pb2.GetProjectConfigResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
