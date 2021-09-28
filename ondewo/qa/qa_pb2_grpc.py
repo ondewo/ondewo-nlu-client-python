@@ -27,6 +27,11 @@ class QAStub(object):
                 request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
                 response_deserializer=ondewo_dot_qa_dot_qa__pb2.RunScraperResponse.FromString,
                 )
+        self.UpdateDatabase = channel.unary_unary(
+                '/ondewo.qa.QA/UpdateDatabase',
+                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                response_deserializer=ondewo_dot_qa_dot_qa__pb2.UpdateDatabaseResponse.FromString,
+                )
         self.RunTraining = channel.unary_unary(
                 '/ondewo.qa.QA/RunTraining',
                 request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
@@ -61,6 +66,12 @@ class QAServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def RunScraper(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def UpdateDatabase(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -102,6 +113,11 @@ def add_QAServicer_to_server(servicer, server):
                     servicer.RunScraper,
                     request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                     response_serializer=ondewo_dot_qa_dot_qa__pb2.RunScraperResponse.SerializeToString,
+            ),
+            'UpdateDatabase': grpc.unary_unary_rpc_method_handler(
+                    servicer.UpdateDatabase,
+                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    response_serializer=ondewo_dot_qa_dot_qa__pb2.UpdateDatabaseResponse.SerializeToString,
             ),
             'RunTraining': grpc.unary_unary_rpc_method_handler(
                     servicer.RunTraining,
@@ -166,6 +182,23 @@ class QA(object):
         return grpc.experimental.unary_unary(request, target, '/ondewo.qa.QA/RunScraper',
             google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ondewo_dot_qa_dot_qa__pb2.RunScraperResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def UpdateDatabase(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.qa.QA/UpdateDatabase',
+            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ondewo_dot_qa_dot_qa__pb2.UpdateDatabaseResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
