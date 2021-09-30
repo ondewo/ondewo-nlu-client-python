@@ -22,7 +22,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x12ondewo/qa/qa.proto\x12\tondewo.qa\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x18ondewo/nlu/session.proto\"\xfb\x01\n\x10GetAnswerRequest\x12\x12\n\nsession_id\x18\x01 \x01(\t\x12#\n\x04text\x18\x02 \x01(\x0b\x32\x15.ondewo.nlu.TextInput\x12\x17\n\x0fmax_num_answers\x18\x03 \x01(\x05\x12\x18\n\x10threshold_reader\x18\x04 \x01(\x02\x12\x1b\n\x13threshold_retriever\x18\x05 \x01(\x02\x12\x19\n\x11threshold_overall\x18\x06 \x01(\x02\x12\x19\n\x11reader_model_name\x18\x07 \x01(\t\x12(\n\nurl_filter\x18\x08 \x01(\x0b\x32\x14.ondewo.qa.UrlFilter\"K\n\x11GetAnswerResponse\x12\x36\n\x0cquery_result\x18\x02 \x01(\x0b\x32 .ondewo.nlu.DetectIntentResponse\"(\n\x11RunScraperRequest\x12\x13\n\x0bproject_ids\x18\x01 \x03(\t\"B\n\x12RunScraperResponse\x12\x16\n\x0e\x63ontainer_name\x18\x01 \x01(\t\x12\x14\n\x0c\x63ontainer_id\x18\x02 \x01(\t\"3\n\x13RunTrainingResponse\x12\n\n\x02\x66\x31\x18\x01 \x01(\x02\x12\x10\n\x08\x61\x63\x63uracy\x18\x02 \x01(\x02\"_\n\tUrlFilter\x12\x16\n\x0e\x61llowed_values\x18\x01 \x03(\t\x12\x1c\n\x14regex_filter_include\x18\x02 \x01(\t\x12\x1c\n\x14regex_filter_exclude\x18\x03 \x01(\t\"1\n\x16GetServerStateResponse\x12\x17\n\x0fserver_is_ready\x18\x01 \x01(\x08\"-\n\x16ListProjectIdsResponse\x12\x13\n\x0bproject_ids\x18\x01 \x03(\t\"-\n\x17GetProjectConfigRequest\x12\x12\n\nproject_id\x18\x01 \x01(\t\"5\n\x18GetProjectConfigResponse\x12\x19\n\x11\x63onfig_serialized\x18\x01 \x01(\t\",\n\x15UpdateDatabaseRequest\x12\x13\n\x0bproject_ids\x18\x01 \x03(\t\"0\n\x16UpdateDatabaseResponse\x12\x16\n\x0e\x65rror_messages\x18\x01 \x03(\t2\xe0\x05\n\x02QA\x12V\n\tGetAnswer\x12\x1b.ondewo.qa.GetAnswerRequest\x1a\x1c.ondewo.qa.GetAnswerResponse\"\x0e\x82\xd3\xe4\x93\x02\x08\"\x03/qa:\x01*\x12\x61\n\nRunScraper\x12\x1c.ondewo.qa.RunScraperRequest\x1a\x1d.ondewo.qa.RunScraperResponse\"\x16\x82\xd3\xe4\x93\x02\x10\x12\x0e/qa:RunScraper\x12q\n\x0eUpdateDatabase\x12 .ondewo.qa.UpdateDatabaseRequest\x1a!.ondewo.qa.UpdateDatabaseResponse\"\x1a\x82\xd3\xe4\x93\x02\x14\x12\x12/qa:UpdateDatabase\x12^\n\x0bRunTraining\x12\x16.google.protobuf.Empty\x1a\x1e.ondewo.qa.RunTrainingResponse\"\x17\x82\xd3\xe4\x93\x02\x11\x12\x0f/qa:RunTraining\x12g\n\x0eGetServerState\x12\x16.google.protobuf.Empty\x1a!.ondewo.qa.GetServerStateResponse\"\x1a\x82\xd3\xe4\x93\x02\x14\x12\x12/qa:GetServerState\x12g\n\x0eListProjectIds\x12\x16.google.protobuf.Empty\x1a!.ondewo.qa.ListProjectIdsResponse\"\x1a\x82\xd3\xe4\x93\x02\x14\x12\x12/qa:ListProjectIds\x12z\n\x10GetProjectConfig\x12\".ondewo.qa.GetProjectConfigRequest\x1a#.ondewo.qa.GetProjectConfigResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/qa:ListProjectConfigb\x06proto3'
+  serialized_pb=b'\n\x12ondewo/qa/qa.proto\x12\tondewo.qa\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x18ondewo/nlu/session.proto\"\xfb\x01\n\x10GetAnswerRequest\x12\x12\n\nsession_id\x18\x01 \x01(\t\x12#\n\x04text\x18\x02 \x01(\x0b\x32\x15.ondewo.nlu.TextInput\x12\x17\n\x0fmax_num_answers\x18\x03 \x01(\x05\x12\x18\n\x10threshold_reader\x18\x04 \x01(\x02\x12\x1b\n\x13threshold_retriever\x18\x05 \x01(\x02\x12\x19\n\x11threshold_overall\x18\x06 \x01(\x02\x12\x19\n\x11reader_model_name\x18\x07 \x01(\t\x12(\n\nurl_filter\x18\x08 \x01(\x0b\x32\x14.ondewo.qa.UrlFilter\"K\n\x11GetAnswerResponse\x12\x36\n\x0cquery_result\x18\x02 \x01(\x0b\x32 .ondewo.nlu.DetectIntentResponse\"(\n\x11RunScraperRequest\x12\x13\n\x0bproject_ids\x18\x01 \x03(\t\"\xa2\x01\n\x12RunScraperResponse\x12J\n\x12scraper_containers\x18\x01 \x03(\x0b\x32..ondewo.qa.RunScraperResponse.ScraperContainer\x1a@\n\x10ScraperContainer\x12\x16\n\x0e\x63ontainer_name\x18\x01 \x01(\t\x12\x14\n\x0c\x63ontainer_id\x18\x02 \x01(\t\"3\n\x13RunTrainingResponse\x12\n\n\x02\x66\x31\x18\x01 \x01(\x02\x12\x10\n\x08\x61\x63\x63uracy\x18\x02 \x01(\x02\"_\n\tUrlFilter\x12\x16\n\x0e\x61llowed_values\x18\x01 \x03(\t\x12\x1c\n\x14regex_filter_include\x18\x02 \x01(\t\x12\x1c\n\x14regex_filter_exclude\x18\x03 \x01(\t\"1\n\x16GetServerStateResponse\x12\x17\n\x0fserver_is_ready\x18\x01 \x01(\x08\"-\n\x16ListProjectIdsResponse\x12\x13\n\x0bproject_ids\x18\x01 \x03(\t\"-\n\x17GetProjectConfigRequest\x12\x12\n\nproject_id\x18\x01 \x01(\t\"5\n\x18GetProjectConfigResponse\x12\x19\n\x11\x63onfig_serialized\x18\x01 \x01(\t\",\n\x15UpdateDatabaseRequest\x12\x13\n\x0bproject_ids\x18\x01 \x03(\t\"0\n\x16UpdateDatabaseResponse\x12\x16\n\x0e\x65rror_messages\x18\x01 \x03(\t2\xe0\x05\n\x02QA\x12V\n\tGetAnswer\x12\x1b.ondewo.qa.GetAnswerRequest\x1a\x1c.ondewo.qa.GetAnswerResponse\"\x0e\x82\xd3\xe4\x93\x02\x08\"\x03/qa:\x01*\x12\x61\n\nRunScraper\x12\x1c.ondewo.qa.RunScraperRequest\x1a\x1d.ondewo.qa.RunScraperResponse\"\x16\x82\xd3\xe4\x93\x02\x10\x12\x0e/qa:RunScraper\x12q\n\x0eUpdateDatabase\x12 .ondewo.qa.UpdateDatabaseRequest\x1a!.ondewo.qa.UpdateDatabaseResponse\"\x1a\x82\xd3\xe4\x93\x02\x14\x12\x12/qa:UpdateDatabase\x12^\n\x0bRunTraining\x12\x16.google.protobuf.Empty\x1a\x1e.ondewo.qa.RunTrainingResponse\"\x17\x82\xd3\xe4\x93\x02\x11\x12\x0f/qa:RunTraining\x12g\n\x0eGetServerState\x12\x16.google.protobuf.Empty\x1a!.ondewo.qa.GetServerStateResponse\"\x1a\x82\xd3\xe4\x93\x02\x14\x12\x12/qa:GetServerState\x12g\n\x0eListProjectIds\x12\x16.google.protobuf.Empty\x1a!.ondewo.qa.ListProjectIdsResponse\"\x1a\x82\xd3\xe4\x93\x02\x14\x12\x12/qa:ListProjectIds\x12z\n\x10GetProjectConfig\x12\".ondewo.qa.GetProjectConfigRequest\x1a#.ondewo.qa.GetProjectConfigResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/qa:ListProjectConfigb\x06proto3'
   ,
   dependencies=[google_dot_protobuf_dot_empty__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,ondewo_dot_nlu_dot_session__pb2.DESCRIPTOR,])
 
@@ -174,23 +174,23 @@ _RUNSCRAPERREQUEST = _descriptor.Descriptor(
 )
 
 
-_RUNSCRAPERRESPONSE = _descriptor.Descriptor(
-  name='RunScraperResponse',
-  full_name='ondewo.qa.RunScraperResponse',
+_RUNSCRAPERRESPONSE_SCRAPERCONTAINER = _descriptor.Descriptor(
+  name='ScraperContainer',
+  full_name='ondewo.qa.RunScraperResponse.ScraperContainer',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='container_name', full_name='ondewo.qa.RunScraperResponse.container_name', index=0,
+      name='container_name', full_name='ondewo.qa.RunScraperResponse.ScraperContainer.container_name', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='container_id', full_name='ondewo.qa.RunScraperResponse.container_id', index=1,
+      name='container_id', full_name='ondewo.qa.RunScraperResponse.ScraperContainer.container_id', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -208,8 +208,39 @@ _RUNSCRAPERRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=491,
-  serialized_end=557,
+  serialized_start=590,
+  serialized_end=654,
+)
+
+_RUNSCRAPERRESPONSE = _descriptor.Descriptor(
+  name='RunScraperResponse',
+  full_name='ondewo.qa.RunScraperResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='scraper_containers', full_name='ondewo.qa.RunScraperResponse.scraper_containers', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[_RUNSCRAPERRESPONSE_SCRAPERCONTAINER, ],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=492,
+  serialized_end=654,
 )
 
 
@@ -247,8 +278,8 @@ _RUNTRAININGRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=559,
-  serialized_end=610,
+  serialized_start=656,
+  serialized_end=707,
 )
 
 
@@ -293,8 +324,8 @@ _URLFILTER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=612,
-  serialized_end=707,
+  serialized_start=709,
+  serialized_end=804,
 )
 
 
@@ -325,8 +356,8 @@ _GETSERVERSTATERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=709,
-  serialized_end=758,
+  serialized_start=806,
+  serialized_end=855,
 )
 
 
@@ -357,8 +388,8 @@ _LISTPROJECTIDSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=760,
-  serialized_end=805,
+  serialized_start=857,
+  serialized_end=902,
 )
 
 
@@ -389,8 +420,8 @@ _GETPROJECTCONFIGREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=807,
-  serialized_end=852,
+  serialized_start=904,
+  serialized_end=949,
 )
 
 
@@ -421,8 +452,8 @@ _GETPROJECTCONFIGRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=854,
-  serialized_end=907,
+  serialized_start=951,
+  serialized_end=1004,
 )
 
 
@@ -453,8 +484,8 @@ _UPDATEDATABASEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=909,
-  serialized_end=953,
+  serialized_start=1006,
+  serialized_end=1050,
 )
 
 
@@ -485,13 +516,15 @@ _UPDATEDATABASERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=955,
-  serialized_end=1003,
+  serialized_start=1052,
+  serialized_end=1100,
 )
 
 _GETANSWERREQUEST.fields_by_name['text'].message_type = ondewo_dot_nlu_dot_session__pb2._TEXTINPUT
 _GETANSWERREQUEST.fields_by_name['url_filter'].message_type = _URLFILTER
 _GETANSWERRESPONSE.fields_by_name['query_result'].message_type = ondewo_dot_nlu_dot_session__pb2._DETECTINTENTRESPONSE
+_RUNSCRAPERRESPONSE_SCRAPERCONTAINER.containing_type = _RUNSCRAPERRESPONSE
+_RUNSCRAPERRESPONSE.fields_by_name['scraper_containers'].message_type = _RUNSCRAPERRESPONSE_SCRAPERCONTAINER
 DESCRIPTOR.message_types_by_name['GetAnswerRequest'] = _GETANSWERREQUEST
 DESCRIPTOR.message_types_by_name['GetAnswerResponse'] = _GETANSWERRESPONSE
 DESCRIPTOR.message_types_by_name['RunScraperRequest'] = _RUNSCRAPERREQUEST
@@ -528,11 +561,19 @@ RunScraperRequest = _reflection.GeneratedProtocolMessageType('RunScraperRequest'
 _sym_db.RegisterMessage(RunScraperRequest)
 
 RunScraperResponse = _reflection.GeneratedProtocolMessageType('RunScraperResponse', (_message.Message,), {
+
+  'ScraperContainer' : _reflection.GeneratedProtocolMessageType('ScraperContainer', (_message.Message,), {
+    'DESCRIPTOR' : _RUNSCRAPERRESPONSE_SCRAPERCONTAINER,
+    '__module__' : 'ondewo.qa.qa_pb2'
+    # @@protoc_insertion_point(class_scope:ondewo.qa.RunScraperResponse.ScraperContainer)
+    })
+  ,
   'DESCRIPTOR' : _RUNSCRAPERRESPONSE,
   '__module__' : 'ondewo.qa.qa_pb2'
   # @@protoc_insertion_point(class_scope:ondewo.qa.RunScraperResponse)
   })
 _sym_db.RegisterMessage(RunScraperResponse)
+_sym_db.RegisterMessage(RunScraperResponse.ScraperContainer)
 
 RunTrainingResponse = _reflection.GeneratedProtocolMessageType('RunTrainingResponse', (_message.Message,), {
   'DESCRIPTOR' : _RUNTRAININGRESPONSE,
@@ -599,8 +640,8 @@ _QA = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=1006,
-  serialized_end=1742,
+  serialized_start=1103,
+  serialized_end=1839,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetAnswer',

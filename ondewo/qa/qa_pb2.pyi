@@ -5,6 +5,7 @@ from google.protobuf.descriptor import (
 )
 
 from google.protobuf.internal.containers import (
+    RepeatedCompositeFieldContainer as google___protobuf___internal___containers___RepeatedCompositeFieldContainer,
     RepeatedScalarFieldContainer as google___protobuf___internal___containers___RepeatedScalarFieldContainer,
 )
 
@@ -119,13 +120,34 @@ global___RunScraperRequest = RunScraperRequest
 
 class RunScraperResponse(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
-    container_name = ... # type: typing___Text
-    container_id = ... # type: typing___Text
+    class ScraperContainer(google___protobuf___message___Message):
+        DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
+        container_name = ... # type: typing___Text
+        container_id = ... # type: typing___Text
+
+        def __init__(self,
+            *,
+            container_name : typing___Optional[typing___Text] = None,
+            container_id : typing___Optional[typing___Text] = None,
+            ) -> None: ...
+        if sys.version_info >= (3,):
+            @classmethod
+            def FromString(cls, s: builtin___bytes) -> RunScraperResponse.ScraperContainer: ...
+        else:
+            @classmethod
+            def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> RunScraperResponse.ScraperContainer: ...
+        def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
+        def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
+        def ClearField(self, field_name: typing_extensions___Literal[u"container_id",b"container_id",u"container_name",b"container_name"]) -> None: ...
+    global___ScraperContainer = ScraperContainer
+
+
+    @property
+    def scraper_containers(self) -> google___protobuf___internal___containers___RepeatedCompositeFieldContainer[global___RunScraperResponse.ScraperContainer]: ...
 
     def __init__(self,
         *,
-        container_name : typing___Optional[typing___Text] = None,
-        container_id : typing___Optional[typing___Text] = None,
+        scraper_containers : typing___Optional[typing___Iterable[global___RunScraperResponse.ScraperContainer]] = None,
         ) -> None: ...
     if sys.version_info >= (3,):
         @classmethod
@@ -135,7 +157,7 @@ class RunScraperResponse(google___protobuf___message___Message):
         def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> RunScraperResponse: ...
     def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"container_id",b"container_id",u"container_name",b"container_name"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"scraper_containers",b"scraper_containers"]) -> None: ...
 global___RunScraperResponse = RunScraperResponse
 
 class RunTrainingResponse(google___protobuf___message___Message):
