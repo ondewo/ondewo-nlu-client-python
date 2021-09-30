@@ -524,7 +524,6 @@ class ExportBenchmarkAgentRequest(google___protobuf___message___Message):
     test_size = ... # type: builtin___float
     train_size = ... # type: builtin___float
     random_state = ... # type: builtin___int
-    shuffle = ... # type: builtin___bool
 
     def __init__(self,
         *,
@@ -533,7 +532,6 @@ class ExportBenchmarkAgentRequest(google___protobuf___message___Message):
         test_size : typing___Optional[builtin___float] = None,
         train_size : typing___Optional[builtin___float] = None,
         random_state : typing___Optional[builtin___int] = None,
-        shuffle : typing___Optional[builtin___bool] = None,
         ) -> None: ...
     if sys.version_info >= (3,):
         @classmethod
@@ -543,7 +541,7 @@ class ExportBenchmarkAgentRequest(google___protobuf___message___Message):
         def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> ExportBenchmarkAgentRequest: ...
     def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"compression_level",b"compression_level",u"parent",b"parent",u"random_state",b"random_state",u"shuffle",b"shuffle",u"test_size",b"test_size",u"train_size",b"train_size"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"compression_level",b"compression_level",u"parent",b"parent",u"random_state",b"random_state",u"test_size",b"test_size",u"train_size",b"train_size"]) -> None: ...
 global___ExportBenchmarkAgentRequest = ExportBenchmarkAgentRequest
 
 class ExportBenchmarkAgentResponse(google___protobuf___message___Message):
