@@ -24,12 +24,12 @@ class QAStub(object):
                 )
         self.RunScraper = channel.unary_unary(
                 '/ondewo.qa.QA/RunScraper',
-                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                request_serializer=ondewo_dot_qa_dot_qa__pb2.RunScraperRequest.SerializeToString,
                 response_deserializer=ondewo_dot_qa_dot_qa__pb2.RunScraperResponse.FromString,
                 )
         self.UpdateDatabase = channel.unary_unary(
                 '/ondewo.qa.QA/UpdateDatabase',
-                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                request_serializer=ondewo_dot_qa_dot_qa__pb2.UpdateDatabaseRequest.SerializeToString,
                 response_deserializer=ondewo_dot_qa_dot_qa__pb2.UpdateDatabaseResponse.FromString,
                 )
         self.RunTraining = channel.unary_unary(
@@ -111,12 +111,12 @@ def add_QAServicer_to_server(servicer, server):
             ),
             'RunScraper': grpc.unary_unary_rpc_method_handler(
                     servicer.RunScraper,
-                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    request_deserializer=ondewo_dot_qa_dot_qa__pb2.RunScraperRequest.FromString,
                     response_serializer=ondewo_dot_qa_dot_qa__pb2.RunScraperResponse.SerializeToString,
             ),
             'UpdateDatabase': grpc.unary_unary_rpc_method_handler(
                     servicer.UpdateDatabase,
-                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    request_deserializer=ondewo_dot_qa_dot_qa__pb2.UpdateDatabaseRequest.FromString,
                     response_serializer=ondewo_dot_qa_dot_qa__pb2.UpdateDatabaseResponse.SerializeToString,
             ),
             'RunTraining': grpc.unary_unary_rpc_method_handler(
@@ -180,7 +180,7 @@ class QA(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.qa.QA/RunScraper',
-            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ondewo_dot_qa_dot_qa__pb2.RunScraperRequest.SerializeToString,
             ondewo_dot_qa_dot_qa__pb2.RunScraperResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -197,7 +197,7 @@ class QA(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.qa.QA/UpdateDatabase',
-            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ondewo_dot_qa_dot_qa__pb2.UpdateDatabaseRequest.SerializeToString,
             ondewo_dot_qa_dot_qa__pb2.UpdateDatabaseResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
