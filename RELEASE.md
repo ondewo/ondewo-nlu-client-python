@@ -4,6 +4,8 @@
 ## Release ONDEWO NLU Python Client 2.0.0
 
 ### New Features
+ * Add endpoints to list project ids, get project config and get server state to qa.proto.
+ * [OND211-1799] Implement endpoints for fuzzy named entity extraction.
  * [OND211-1774] Implement endpoints to directly create/update/get/delete and list parameters.
  * [OND211-1773] Implement endpoints to directly create/update/get/delete and list responses (=intent messages).
  * [OND211-354] Establish a clear hierarchy for the merging of entities within the generalized waterfall strategy. 
