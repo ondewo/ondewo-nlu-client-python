@@ -107,6 +107,11 @@ class AgentsStub(object):
                 request_serializer=ondewo_dot_nlu_dot_agent__pb2.ExportAgentRequest.SerializeToString,
                 response_deserializer=google_dot_longrunning_dot_operations__pb2.Operation.FromString,
                 )
+        self.ExportBenchmarkAgent = channel.unary_unary(
+                '/ondewo.nlu.Agents/ExportBenchmarkAgent',
+                request_serializer=ondewo_dot_nlu_dot_agent__pb2.ExportBenchmarkAgentRequest.SerializeToString,
+                response_deserializer=google_dot_longrunning_dot_operations__pb2.Operation.FromString,
+                )
         self.ImportAgent = channel.unary_unary(
                 '/ondewo.nlu.Agents/ImportAgent',
                 request_serializer=ondewo_dot_nlu_dot_agent__pb2.ImportAgentRequest.SerializeToString,
@@ -464,6 +469,14 @@ class AgentsServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ExportBenchmarkAgent(self, request, context):
+        """Exports the specified train agent to a ZIP file after train-test split, returns the test TrainingPhrase list.
+
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def ImportAgent(self, request, context):
         """Imports the specified agent from a ZIP file.
 
@@ -615,6 +628,11 @@ def add_AgentsServicer_to_server(servicer, server):
             'ExportAgent': grpc.unary_unary_rpc_method_handler(
                     servicer.ExportAgent,
                     request_deserializer=ondewo_dot_nlu_dot_agent__pb2.ExportAgentRequest.FromString,
+                    response_serializer=google_dot_longrunning_dot_operations__pb2.Operation.SerializeToString,
+            ),
+            'ExportBenchmarkAgent': grpc.unary_unary_rpc_method_handler(
+                    servicer.ExportBenchmarkAgent,
+                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.ExportBenchmarkAgentRequest.FromString,
                     response_serializer=google_dot_longrunning_dot_operations__pb2.Operation.SerializeToString,
             ),
             'ImportAgent': grpc.unary_unary_rpc_method_handler(
@@ -951,6 +969,23 @@ class Agents(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/ExportAgent',
             ondewo_dot_nlu_dot_agent__pb2.ExportAgentRequest.SerializeToString,
+            google_dot_longrunning_dot_operations__pb2.Operation.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ExportBenchmarkAgent(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/ExportBenchmarkAgent',
+            ondewo_dot_nlu_dot_agent__pb2.ExportBenchmarkAgentRequest.SerializeToString,
             google_dot_longrunning_dot_operations__pb2.Operation.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

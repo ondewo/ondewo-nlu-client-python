@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n#ondewo/nlu/operation_metadata.proto\x12\nondewo.nlu\x1a\x1fgoogle/protobuf/timestamp.proto\"\xd2\x06\n\x11OperationMetadata\x12\x34\n\x06status\x18\x01 \x01(\x0e\x32$.ondewo.nlu.OperationMetadata.Status\x12\x1d\n\x15parent_operation_name\x18\x02 \x01(\t\x12\x1b\n\x13sub_operation_names\x18\x03 \x03(\t\x12/\n\x0b\x63reate_time\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12.\n\nstart_time\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12,\n\x08\x65nd_time\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12!\n\x19is_cancellation_requested\x18\x07 \x01(\x08\x12\x16\n\x0e\x63\x61ncel_command\x18\x08 \x01(\t\x12\x17\n\x0fuser_id_created\x18\t \x01(\t\x12\x19\n\x11user_id_cancelled\x18\n \x01(\t\x12\x16\n\x0eproject_parent\x18\x0b \x01(\t\x12\x43\n\x0eoperation_type\x18\x0c \x01(\x0e\x32+.ondewo.nlu.OperationMetadata.OperationType\x12\x11\n\thost_name\x18\r \x01(\t\x12\x12\n\nnum_reruns\x18\x0e \x01(\x05\x12\x16\n\x0emax_num_reruns\x18\x0f \x01(\x05\x12\x13\n\x0b\x64\x65scription\x18\x10 \x01(\t\"g\n\x06Status\x12\x16\n\x12STATUS_UNSPECIFIED\x10\x00\x12\x0f\n\x0bNOT_STARTED\x10\x01\x12\x0f\n\x0bIN_PROGRESS\x10\x02\x12\x08\n\x04\x44ONE\x10\x03\x12\r\n\tCANCELLED\x10\x04\x12\n\n\x06\x46\x41ILED\x10\x05\"\xb2\x01\n\rOperationType\x12\x1e\n\x1aOPERATION_TYPE_UNSPECIFIED\x10\x00\x12\x10\n\x0c\x43REATE_AGENT\x10\x01\x12\x10\n\x0cIMPORT_AGENT\x10\x02\x12\x10\n\x0c\x45XPORT_AGENT\x10\x03\x12\x10\n\x0c\x44\x45LETE_AGENT\x10\x04\x12\x11\n\rRESTORE_AGENT\x10\x05\x12\x15\n\x11\x42UILD_AGENT_CACHE\x10\x06\x12\x0f\n\x0bTRAIN_AGENT\x10\x07\x62\x06proto3'
+  serialized_pb=b'\n#ondewo/nlu/operation_metadata.proto\x12\nondewo.nlu\x1a\x1fgoogle/protobuf/timestamp.proto\"\xee\x06\n\x11OperationMetadata\x12\x34\n\x06status\x18\x01 \x01(\x0e\x32$.ondewo.nlu.OperationMetadata.Status\x12\x1d\n\x15parent_operation_name\x18\x02 \x01(\t\x12\x1b\n\x13sub_operation_names\x18\x03 \x03(\t\x12/\n\x0b\x63reate_time\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12.\n\nstart_time\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12,\n\x08\x65nd_time\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12!\n\x19is_cancellation_requested\x18\x07 \x01(\x08\x12\x16\n\x0e\x63\x61ncel_command\x18\x08 \x01(\t\x12\x17\n\x0fuser_id_created\x18\t \x01(\t\x12\x19\n\x11user_id_cancelled\x18\n \x01(\t\x12\x16\n\x0eproject_parent\x18\x0b \x01(\t\x12\x43\n\x0eoperation_type\x18\x0c \x01(\x0e\x32+.ondewo.nlu.OperationMetadata.OperationType\x12\x11\n\thost_name\x18\r \x01(\t\x12\x12\n\nnum_reruns\x18\x0e \x01(\x05\x12\x16\n\x0emax_num_reruns\x18\x0f \x01(\x05\x12\x13\n\x0b\x64\x65scription\x18\x10 \x01(\t\"g\n\x06Status\x12\x16\n\x12STATUS_UNSPECIFIED\x10\x00\x12\x0f\n\x0bNOT_STARTED\x10\x01\x12\x0f\n\x0bIN_PROGRESS\x10\x02\x12\x08\n\x04\x44ONE\x10\x03\x12\r\n\tCANCELLED\x10\x04\x12\n\n\x06\x46\x41ILED\x10\x05\"\xce\x01\n\rOperationType\x12\x1e\n\x1aOPERATION_TYPE_UNSPECIFIED\x10\x00\x12\x10\n\x0c\x43REATE_AGENT\x10\x01\x12\x10\n\x0cIMPORT_AGENT\x10\x02\x12\x10\n\x0c\x45XPORT_AGENT\x10\x03\x12\x10\n\x0c\x44\x45LETE_AGENT\x10\x04\x12\x11\n\rRESTORE_AGENT\x10\x05\x12\x15\n\x11\x42UILD_AGENT_CACHE\x10\x06\x12\x0f\n\x0bTRAIN_AGENT\x10\x07\x12\x1a\n\x16\x45XPORT_BENCHMARK_AGENT\x10\x08\x62\x06proto3'
   ,
   dependencies=[google_dot_protobuf_dot_timestamp__pb2.DESCRIPTOR,])
 
@@ -118,11 +118,16 @@ _OPERATIONMETADATA_OPERATIONTYPE = _descriptor.EnumDescriptor(
       serialized_options=None,
       type=None,
       create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='EXPORT_BENCHMARK_AGENT', index=8, number=8,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
   ],
   containing_type=None,
   serialized_options=None,
   serialized_start=757,
-  serialized_end=935,
+  serialized_end=963,
 )
 _sym_db.RegisterEnumDescriptor(_OPERATIONMETADATA_OPERATIONTYPE)
 
@@ -262,7 +267,7 @@ _OPERATIONMETADATA = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=85,
-  serialized_end=935,
+  serialized_end=963,
 )
 
 _OPERATIONMETADATA.fields_by_name['status'].enum_type = _OPERATIONMETADATA_STATUS

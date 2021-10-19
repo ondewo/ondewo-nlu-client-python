@@ -90,6 +90,7 @@ class OperationMetadata(google___protobuf___message___Message):
         RESTORE_AGENT = typing___cast('OperationMetadata.OperationType', 5)
         BUILD_AGENT_CACHE = typing___cast('OperationMetadata.OperationType', 6)
         TRAIN_AGENT = typing___cast('OperationMetadata.OperationType', 7)
+        EXPORT_BENCHMARK_AGENT = typing___cast('OperationMetadata.OperationType', 8)
     OPERATION_TYPE_UNSPECIFIED = typing___cast('OperationMetadata.OperationType', 0)
     CREATE_AGENT = typing___cast('OperationMetadata.OperationType', 1)
     IMPORT_AGENT = typing___cast('OperationMetadata.OperationType', 2)
@@ -98,6 +99,7 @@ class OperationMetadata(google___protobuf___message___Message):
     RESTORE_AGENT = typing___cast('OperationMetadata.OperationType', 5)
     BUILD_AGENT_CACHE = typing___cast('OperationMetadata.OperationType', 6)
     TRAIN_AGENT = typing___cast('OperationMetadata.OperationType', 7)
+    EXPORT_BENCHMARK_AGENT = typing___cast('OperationMetadata.OperationType', 8)
     global___OperationType = OperationType
 
     status = ... # type: global___OperationMetadata.Status
