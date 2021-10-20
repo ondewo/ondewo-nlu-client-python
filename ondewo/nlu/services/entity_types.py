@@ -29,7 +29,8 @@ from ondewo.nlu.entity_type_pb2 import (
     GetEntityTypeRequest,
     ListEntityTypesRequest,
     ListEntityTypesResponse,
-    UpdateEntityTypeRequest,
+    UpdateEntityTypeRequest, BatchDeleteEntitiesResponse, BatchEntitiesResponse, BatchGetEntitiesRequest,
+    ListEntitiesRequest, ListEntitiesResponse,
 )
 from ondewo.nlu.entity_type_pb2_grpc import EntityTypesStub
 
@@ -74,14 +75,22 @@ class EntityTypes(ServicesInterface):
         response: Operation = self.stub.BatchDeleteEntityTypes(request, metadata=self.metadata)
         return response
 
-    def batch_create_entities(self, request: BatchCreateEntitiesRequest) -> Operation:
-        response: Operation = self.stub.BatchCreateEntities(request, metadata=self.metadata)
+    def batch_create_entities(self, request: BatchCreateEntitiesRequest) -> BatchEntitiesResponse:
+        response: BatchEntitiesResponse = self.stub.BatchCreateEntities(request, metadata=self.metadata)
         return response
 
-    def batch_update_entities(self, request: BatchUpdateEntitiesRequest) -> Operation:
-        response: Operation = self.stub.BatchUpdateEntities(request, metadata=self.metadata)
+    def batch_update_entities(self, request: BatchUpdateEntitiesRequest) -> BatchEntitiesResponse:
+        response: BatchEntitiesResponse = self.stub.BatchUpdateEntities(request, metadata=self.metadata)
         return response
 
-    def batch_delete_entities(self, request: BatchDeleteEntitiesRequest) -> Operation:
-        response: Operation = self.stub.BatchDeleteEntities(request, metadata=self.metadata)
+    def batch_get_entities(self, request: BatchGetEntitiesRequest) -> BatchEntitiesResponse:
+        response: BatchEntitiesResponse = self.stub.BatchUpdateEntities(request, metadata=self.metadata)
+        return response
+
+    def batch_delete_entities(self, request: BatchDeleteEntitiesRequest) -> BatchDeleteEntitiesResponse:
+        response: BatchDeleteEntitiesResponse = self.stub.BatchDeleteEntities(request, metadata=self.metadata)
+        return response
+
+    def list_entities(self, request: ListEntitiesRequest) -> ListEntitiesResponse:
+        response: ListEntitiesResponse = self.stub.BatchUpdateEntities(request, metadata=self.metadata)
         return response
