@@ -5,6 +5,7 @@
 
 ### New Features
  * [OND212-34] Re-generate code to be compliant with the new NLU API version 2.1.0
+ * [OND212-34] Enable the services: Utilities and Server Statistics
  * [XXX002-38] Add endpoints to list project ids, get project config and get server state to qa.proto.
  * [OND211-1799] Add ExtractEntitiesFuzzy endpoint to the AIServices Servicer
  * [OND211-1774] Add endpoints to directly create/update/get/delete and list parameters.
