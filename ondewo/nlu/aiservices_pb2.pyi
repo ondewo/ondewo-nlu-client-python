@@ -2,6 +2,7 @@
 import sys
 from google.protobuf.descriptor import (
     Descriptor as google___protobuf___descriptor___Descriptor,
+    EnumDescriptor as google___protobuf___descriptor___EnumDescriptor,
 )
 
 from google.protobuf.internal.containers import (
@@ -13,15 +14,22 @@ from google.protobuf.message import (
     Message as google___protobuf___message___Message,
 )
 
+from ondewo.nlu.entity_type_pb2 import (
+    EntityType as ondewo___nlu___entity_type_pb2___EntityType,
+)
+
 from ondewo.nlu.intent_pb2 import (
     Intent as ondewo___nlu___intent_pb2___Intent,
 )
 
 from typing import (
     Iterable as typing___Iterable,
+    List as typing___List,
     Optional as typing___Optional,
     Text as typing___Text,
+    Tuple as typing___Tuple,
     Union as typing___Union,
+    cast as typing___cast,
 )
 
 from typing_extensions import (
@@ -33,6 +41,7 @@ builtin___bool = bool
 builtin___bytes = bytes
 builtin___float = float
 builtin___int = int
+builtin___str = str
 if sys.version_info < (3,):
     builtin___buffer = buffer
     builtin___unicode = unicode
@@ -62,6 +71,81 @@ class ExtractEntitiesRequest(google___protobuf___message___Message):
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def ClearField(self, field_name: typing_extensions___Literal[u"intent_name",b"intent_name",u"language_code",b"language_code",u"parent",b"parent",u"text",b"text"]) -> None: ...
 global___ExtractEntitiesRequest = ExtractEntitiesRequest
+
+class ExtractEntitiesFuzzyRequest(google___protobuf___message___Message):
+    DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
+    parent = ... # type: typing___Text
+    text = ... # type: typing___Text
+    minimal_score = ... # type: builtin___float
+    allow_overlaps = ... # type: builtin___bool
+
+    @property
+    def potential_entities(self) -> google___protobuf___internal___containers___RepeatedCompositeFieldContainer[global___EntityTypeFuzzyNerConfig]: ...
+
+    def __init__(self,
+        *,
+        parent : typing___Optional[typing___Text] = None,
+        text : typing___Optional[typing___Text] = None,
+        potential_entities : typing___Optional[typing___Iterable[global___EntityTypeFuzzyNerConfig]] = None,
+        minimal_score : typing___Optional[builtin___float] = None,
+        allow_overlaps : typing___Optional[builtin___bool] = None,
+        ) -> None: ...
+    if sys.version_info >= (3,):
+        @classmethod
+        def FromString(cls, s: builtin___bytes) -> ExtractEntitiesFuzzyRequest: ...
+    else:
+        @classmethod
+        def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> ExtractEntitiesFuzzyRequest: ...
+    def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
+    def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"allow_overlaps",b"allow_overlaps",u"minimal_score",b"minimal_score",u"parent",b"parent",u"potential_entities",b"potential_entities",u"text",b"text"]) -> None: ...
+global___ExtractEntitiesFuzzyRequest = ExtractEntitiesFuzzyRequest
+
+class EntityTypeFuzzyNerConfig(google___protobuf___message___Message):
+    DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
+    class FuzzyNerAlgorithm(builtin___int):
+        DESCRIPTOR: google___protobuf___descriptor___EnumDescriptor = ...
+        @classmethod
+        def Name(cls, number: builtin___int) -> builtin___str: ...
+        @classmethod
+        def Value(cls, name: builtin___str) -> 'EntityTypeFuzzyNerConfig.FuzzyNerAlgorithm': ...
+        @classmethod
+        def keys(cls) -> typing___List[builtin___str]: ...
+        @classmethod
+        def values(cls) -> typing___List['EntityTypeFuzzyNerConfig.FuzzyNerAlgorithm']: ...
+        @classmethod
+        def items(cls) -> typing___List[typing___Tuple[builtin___str, 'EntityTypeFuzzyNerConfig.FuzzyNerAlgorithm']]: ...
+        PREFILTER_LEVENSHTEIN = typing___cast('EntityTypeFuzzyNerConfig.FuzzyNerAlgorithm', 0)
+        LOCAL_MAXIMUM = typing___cast('EntityTypeFuzzyNerConfig.FuzzyNerAlgorithm', 1)
+    PREFILTER_LEVENSHTEIN = typing___cast('EntityTypeFuzzyNerConfig.FuzzyNerAlgorithm', 0)
+    LOCAL_MAXIMUM = typing___cast('EntityTypeFuzzyNerConfig.FuzzyNerAlgorithm', 1)
+    global___FuzzyNerAlgorithm = FuzzyNerAlgorithm
+
+    minimal_score = ... # type: builtin___float
+    entity_values = ... # type: google___protobuf___internal___containers___RepeatedScalarFieldContainer[typing___Text]
+    algorithm = ... # type: global___EntityTypeFuzzyNerConfig.FuzzyNerAlgorithm
+
+    @property
+    def entity_type(self) -> ondewo___nlu___entity_type_pb2___EntityType: ...
+
+    def __init__(self,
+        *,
+        entity_type : typing___Optional[ondewo___nlu___entity_type_pb2___EntityType] = None,
+        minimal_score : typing___Optional[builtin___float] = None,
+        entity_values : typing___Optional[typing___Iterable[typing___Text]] = None,
+        algorithm : typing___Optional[global___EntityTypeFuzzyNerConfig.FuzzyNerAlgorithm] = None,
+        ) -> None: ...
+    if sys.version_info >= (3,):
+        @classmethod
+        def FromString(cls, s: builtin___bytes) -> EntityTypeFuzzyNerConfig: ...
+    else:
+        @classmethod
+        def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> EntityTypeFuzzyNerConfig: ...
+    def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
+    def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
+    def HasField(self, field_name: typing_extensions___Literal[u"entity_type",b"entity_type"]) -> builtin___bool: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"algorithm",b"algorithm",u"entity_type",b"entity_type",u"entity_values",b"entity_values",u"minimal_score",b"minimal_score"]) -> None: ...
+global___EntityTypeFuzzyNerConfig = EntityTypeFuzzyNerConfig
 
 class EntityDetected(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...

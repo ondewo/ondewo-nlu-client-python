@@ -23,7 +23,8 @@ from ondewo.nlu.agent_pb2 import Agent, CreateAgentRequest, GetAgentRequest, Upd
     RemoveUserFromProjectRequest, ListUsersInProjectResponse, ListUsersInProjectRequest, \
     GetPlatformInfoResponse, ListProjectPermissionsRequest, ListProjectPermissionsResponse, \
     BuildCacheRequest, SetAgentStatusRequest, SetResourcesRequest, DeleteResourcesRequest, \
-    ExportResourcesRequest, ExportResourcesResponse
+    ExportResourcesRequest, ExportResourcesResponse, ExportBenchmarkAgentRequest, GetModelStatusesRequest, \
+    GetModelStatusesResponse
 from ondewo.nlu.agent_pb2_grpc import AgentsStub
 from ondewo.nlu.core.services_interface import ServicesInterface
 
@@ -106,6 +107,10 @@ class Agents(ServicesInterface):
         response: operations_pb2.Operation = self.stub.ExportAgent(request, metadata=self.metadata)
         return response
 
+    def export_benchmark_agent(self, request: ExportBenchmarkAgentRequest) -> operations_pb2.Operation:
+        response: operations_pb2.Operation = self.stub.ExportBenchmarkAgent(request, metadata=self.metadata)
+        return response
+
     def import_agent(self, request: ImportAgentRequest) -> operations_pb2.Operation:
         response: operations_pb2.Operation = self.stub.ImportAgent(request, metadata=self.metadata)
         return response
@@ -136,4 +141,8 @@ class Agents(ServicesInterface):
 
     def export_resources(self, request: ExportResourcesRequest) -> ExportResourcesResponse:
         response: ExportResourcesResponse = self.stub.ExportResources(request, metadata=self.metadata)
+        return response
+
+    def get_model_statuses(self, request: GetModelStatusesRequest) -> GetModelStatusesResponse:
+        response: GetModelStatusesResponse = self.stub.GetModelStatuses(request, metadata=self.metadata)
         return response

@@ -30,6 +30,10 @@ from ondewo.nlu.common_pb2 import (
     SortingMode as ondewo___nlu___common_pb2___SortingMode,
 )
 
+from ondewo.nlu.intent_pb2 import (
+    ListTrainingPhrasesResponse as ondewo___nlu___intent_pb2___ListTrainingPhrasesResponse,
+)
+
 from ondewo.nlu.project_role_pb2 import (
     ProjectRole as ondewo___nlu___project_role_pb2___ProjectRole,
 )
@@ -41,6 +45,8 @@ from ondewo.nlu.user_pb2 import (
 from typing import (
     Iterable as typing___Iterable,
     List as typing___List,
+    Mapping as typing___Mapping,
+    MutableMapping as typing___MutableMapping,
     Optional as typing___Optional,
     Text as typing___Text,
     Tuple as typing___Tuple,
@@ -510,6 +516,80 @@ class ExportAgentResponse(google___protobuf___message___Message):
     def ClearField(self, field_name: typing_extensions___Literal[u"agent",b"agent",u"agent_content",b"agent_content",u"agent_uri",b"agent_uri"]) -> None: ...
     def WhichOneof(self, oneof_group: typing_extensions___Literal[u"agent",b"agent"]) -> typing_extensions___Literal["agent_uri","agent_content"]: ...
 global___ExportAgentResponse = ExportAgentResponse
+
+class ExportBenchmarkAgentRequest(google___protobuf___message___Message):
+    DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
+    parent = ... # type: typing___Text
+    compression_level = ... # type: builtin___int
+    test_size = ... # type: builtin___float
+    train_size = ... # type: builtin___float
+    random_state = ... # type: builtin___int
+
+    def __init__(self,
+        *,
+        parent : typing___Optional[typing___Text] = None,
+        compression_level : typing___Optional[builtin___int] = None,
+        test_size : typing___Optional[builtin___float] = None,
+        train_size : typing___Optional[builtin___float] = None,
+        random_state : typing___Optional[builtin___int] = None,
+        ) -> None: ...
+    if sys.version_info >= (3,):
+        @classmethod
+        def FromString(cls, s: builtin___bytes) -> ExportBenchmarkAgentRequest: ...
+    else:
+        @classmethod
+        def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> ExportBenchmarkAgentRequest: ...
+    def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
+    def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"compression_level",b"compression_level",u"parent",b"parent",u"random_state",b"random_state",u"test_size",b"test_size",u"train_size",b"train_size"]) -> None: ...
+global___ExportBenchmarkAgentRequest = ExportBenchmarkAgentRequest
+
+class ExportBenchmarkAgentResponse(google___protobuf___message___Message):
+    DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
+    class TrainingPhrasesEntry(google___protobuf___message___Message):
+        DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
+        key = ... # type: typing___Text
+
+        @property
+        def value(self) -> ondewo___nlu___intent_pb2___ListTrainingPhrasesResponse: ...
+
+        def __init__(self,
+            *,
+            key : typing___Optional[typing___Text] = None,
+            value : typing___Optional[ondewo___nlu___intent_pb2___ListTrainingPhrasesResponse] = None,
+            ) -> None: ...
+        if sys.version_info >= (3,):
+            @classmethod
+            def FromString(cls, s: builtin___bytes) -> ExportBenchmarkAgentResponse.TrainingPhrasesEntry: ...
+        else:
+            @classmethod
+            def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> ExportBenchmarkAgentResponse.TrainingPhrasesEntry: ...
+        def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
+        def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
+        def HasField(self, field_name: typing_extensions___Literal[u"value",b"value"]) -> builtin___bool: ...
+        def ClearField(self, field_name: typing_extensions___Literal[u"key",b"key",u"value",b"value"]) -> None: ...
+    global___TrainingPhrasesEntry = TrainingPhrasesEntry
+
+    agent_content = ... # type: builtin___bytes
+
+    @property
+    def training_phrases(self) -> typing___MutableMapping[typing___Text, ondewo___nlu___intent_pb2___ListTrainingPhrasesResponse]: ...
+
+    def __init__(self,
+        *,
+        agent_content : typing___Optional[builtin___bytes] = None,
+        training_phrases : typing___Optional[typing___Mapping[typing___Text, ondewo___nlu___intent_pb2___ListTrainingPhrasesResponse]] = None,
+        ) -> None: ...
+    if sys.version_info >= (3,):
+        @classmethod
+        def FromString(cls, s: builtin___bytes) -> ExportBenchmarkAgentResponse: ...
+    else:
+        @classmethod
+        def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> ExportBenchmarkAgentResponse: ...
+    def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
+    def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"agent_content",b"agent_content",u"training_phrases",b"training_phrases"]) -> None: ...
+global___ExportBenchmarkAgentResponse = ExportBenchmarkAgentResponse
 
 class OptimizeRankingMatchRequest(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...

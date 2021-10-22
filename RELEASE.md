@@ -1,15 +1,24 @@
 # Release History
 *****************
 
+## Release ONDEWO NLU Python Client 2.1.0
+
+### New Features
+ * [OND212-34] Re-generate code to be compliant with the new NLU API version 2.1.0
+ * [OND212-34] Enable the services: Utilities and Server Statistics
+ * [XXX002-38] Add endpoints to list project ids, get project config and get server state to qa.proto.
+ * [OND211-1799] Add ExtractEntitiesFuzzy endpoint to the AIServices Servicer
+ * [OND211-1774] Add endpoints to directly create/update/get/delete and list parameters.
+ * [OND211-1773] Add endpoints to directly create/update/get/delete and list responses (=intent messages).
+ * [OND211-1785] Add CreateSession endpoint to the Session Servicer
+ * [OND211-1734] Add ExportBenchmarkAgent endpoint to the Agent Servicer
+*****************
 ## Release ONDEWO NLU Python Client 2.0.0
 
 ### New Features
- * [OND211-1774] Implement endpoints to directly create/update/get/delete and list parameters.
- * [OND211-1773] Implement endpoints to directly create/update/get/delete and list responses (=intent messages).
  * [OND211-354] Establish a clear hierarchy for the merging of entities within the generalized waterfall strategy. 
    Include intent parameters to entity selection criteria.
- * [OND211-1767] Change the training phrase message to include a language_code field
- * [OND211-1766] Make training phrases endpoints work with batches.  
+ * [OND211-1767] Change the training phrase message to include a language_code field  
  * [OND211-1760] Implement endpoint to directly list training phrases.
  * [OND211-1744] Add initiation protocol into train agent endpoint
  * [OND211-1732] Implement endpoints directly create/update/get/delete training phrases.
