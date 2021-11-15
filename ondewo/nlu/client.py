@@ -15,6 +15,9 @@
 
 from typing import Dict, Any
 
+from ondewo.utils.base_client import BaseClient
+from ondewo.utils.base_client_config import BaseClientConfig
+
 from ondewo.nlu.client_config import ClientConfig
 from ondewo.nlu.core.services_container import ServicesContainer
 from ondewo.nlu.services.agents import Agents
@@ -25,11 +28,11 @@ from ondewo.nlu.services.intents import Intents
 from ondewo.nlu.services.operations import Operations
 from ondewo.nlu.services.project_roles import ProjectRoles
 from ondewo.nlu.services.project_statistics import ProjectStatistics
+from ondewo.nlu.services.server_statistics import ServerStatistics
 from ondewo.nlu.services.sessions import Sessions
 from ondewo.nlu.services.users import Users
+from ondewo.nlu.services.utilities import Utilities
 from ondewo.nlu.utils.login import login
-from ondewo.utils.base_client import BaseClient
-from ondewo.utils.base_client_config import BaseClientConfig
 
 
 class Client(BaseClient):
@@ -62,6 +65,8 @@ class Client(BaseClient):
             operations=Operations(**kwargs),
             project_roles=ProjectRoles(**kwargs),
             project_statistics=ProjectStatistics(**kwargs),
+            server_statistics=ServerStatistics(**kwargs),
             sessions=Sessions(**kwargs),
             users=Users(**kwargs),
+            utilities=Utilities(**kwargs),
         )

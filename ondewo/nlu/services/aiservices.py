@@ -39,16 +39,6 @@ class AIServices(ServicesInterface):
         response: ExtractEntitiesResponse = self.stub.ExtractEntities(request, metadata=self.metadata)
         return response
 
-    def extract_entities_fuzzy(self, request: ExtractEntitiesFuzzyRequest) -> ExtractEntitiesResponse:
-        response: ExtractEntitiesResponse = self.stub.ExtractEntitiesFuzzy(request, metadata=self.metadata)
-        return response
-
-    def get_alternative_sentences(self,
-                                  request: GetAlternativeSentencesRequest) -> GetAlternativeSentencesResponse:
-        response: GetAlternativeSentencesResponse = \
-            self.stub.GetAlternativeSentences(request, metadata=self.metadata)
-        return response
-
     def generate_user_says(self,
                            request: GenerateUserSaysRequest) -> GenerateUserSaysResponse:
         response: GenerateUserSaysResponse = \
@@ -61,6 +51,12 @@ class AIServices(ServicesInterface):
             self.stub.GenerateResponses(request, metadata=self.metadata)
         return response
 
+    def get_alternative_sentences(self,
+                                  request: GetAlternativeSentencesRequest) -> GetAlternativeSentencesResponse:
+        response: GetAlternativeSentencesResponse = \
+            self.stub.GetAlternativeSentences(request, metadata=self.metadata)
+        return response
+
     def get_alternative_training_phrases(
             self,
             request: GetAlternativeTrainingPhrasesRequest
@@ -71,4 +67,8 @@ class AIServices(ServicesInterface):
 
     def get_synonyms(self, request: GetSynonymsRequest) -> GetSynonymsResponse:
         response: GetSynonymsResponse = self.stub.GetSynonyms(request, metadata=self.metadata)
+        return response
+
+    def extract_entities_fuzzy(self, request: ExtractEntitiesFuzzyRequest) -> ExtractEntitiesResponse:
+        response: ExtractEntitiesResponse = self.stub.ExtractEntitiesFuzzy(request, metadata=self.metadata)
         return response

@@ -21,7 +21,7 @@ from ondewo.nlu.session_pb2 import ListSessionsResponse, \
     ListSessionReviewsRequest, ListSessionReviewsResponse, SessionReview, GetLatestSessionReviewRequest, \
     GetSessionReviewRequest, CreateSessionReviewRequest, StreamingDetectIntentRequest, \
     StreamingDetectIntentResponse, TrackSessionStepRequest, DeleteSessionRequest, ListSessionLabelsRequest, \
-    ListSessionLabelsResponse, AddSessionLabelsRequest, RemoveSessionLabelsRequest
+    ListSessionLabelsResponse, AddSessionLabelsRequest, RemoveSessionLabelsRequest, CreateSessionRequest
 from ondewo.nlu.session_pb2_grpc import SessionsStub
 
 
@@ -55,6 +55,10 @@ class Sessions(ServicesInterface):
 
     def get_session(self, request: GetSessionRequest) -> Session:
         response: Session = self.stub.GetSession(request, metadata=self.metadata)
+        return response
+
+    def create_session(self, request: CreateSessionRequest) -> Session:
+        response: Session = self.stub.CreateSession(request, metadata=self.metadata)
         return response
 
     def track_session_step(self, request: TrackSessionStepRequest) -> Session:
