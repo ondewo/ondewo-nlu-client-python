@@ -24,7 +24,7 @@ from ondewo.nlu.agent_pb2 import Agent, CreateAgentRequest, GetAgentRequest, Upd
     GetPlatformInfoResponse, ListProjectPermissionsRequest, ListProjectPermissionsResponse, \
     BuildCacheRequest, SetAgentStatusRequest, SetResourcesRequest, DeleteResourcesRequest, \
     ExportResourcesRequest, ExportResourcesResponse, ExportBenchmarkAgentRequest, GetModelStatusesRequest, \
-    GetModelStatusesResponse
+    GetModelStatusesResponse, GetPlatformMappingRequest, PlatformMapping
 from ondewo.nlu.agent_pb2_grpc import AgentsStub
 from ondewo.nlu.core.services_interface import ServicesInterface
 
@@ -145,4 +145,12 @@ class Agents(ServicesInterface):
 
     def get_model_statuses(self, request: GetModelStatusesRequest) -> GetModelStatusesResponse:
         response: GetModelStatusesResponse = self.stub.GetModelStatuses(request, metadata=self.metadata)
+        return response
+
+    def get_platform_mapping(self, request: GetPlatformMappingRequest) -> PlatformMapping:
+        response: PlatformMapping = self.stub.GetPlatformMapping(request, metadata=self.metadata)
+        return response
+
+    def set_platform_mapping(self, request: PlatformMapping) -> PlatformMapping:
+        response: PlatformMapping = self.stub.SetPlatformMapping(request, metadata=self.metadata)
         return response
