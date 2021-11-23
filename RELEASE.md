@@ -1,6 +1,13 @@
 # Release History
 *****************
 
+## Release ONDEWO NLU Python Client 2.2.0
+
+### New Features
+* [OND211-1841] Re-generate code to be compliant with the new NLU API version 2.2.0
+* [OND211-1841] Handle custom platform messages
+*****************
+
 ## Release ONDEWO NLU Python Client 2.1.0
 
 ### New Features
