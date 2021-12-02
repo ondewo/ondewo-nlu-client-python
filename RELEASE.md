@@ -1,11 +1,19 @@
 # Release History
 *****************
 
+## Release ONDEWO NLU Python Client 2.2.1
+
+### Improvements
+ * [OND211-1844] Enable the typing information to be installable through PyPi.
+ * [OND211-1804] Add more examples of usages related to the Intent operations.
+
+*****************
+
 ## Release ONDEWO NLU Python Client 2.2.0
 
 ### New Features
-* [OND211-1841] Re-generate code to be compliant with the new NLU API version 2.2.0
-* [OND211-1841] Handle custom platform messages
+ * [OND211-1841] Re-generate code to be compliant with the new NLU API version 2.2.0
+ * [OND211-1841] Handle custom platform messages
 *****************
 
 ## Release ONDEWO NLU Python Client 2.1.0
