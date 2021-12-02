@@ -22,9 +22,7 @@ setuptools.setup(
             setuptools.find_packages()
         )
     ],
-    package_data={
-        'ondewo.nlu': ['py.typed']
-    },
+    include_package_data=True,
     classifiers=[
         'Programming Language :: Python :: 3',
         'Operating System :: OS Independent',
