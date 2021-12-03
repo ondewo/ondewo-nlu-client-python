@@ -66,4 +66,4 @@ upload_package:
 	twine upload -r pypi dist/*
 
 clear_package_data:
-	rm -rf build dist ondewo_logging.egg-info
+	rm -rf build dist ondewo_nlu_client.egg-info
