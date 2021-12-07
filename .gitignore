@@ -114,6 +114,9 @@ env.bak/
 venv.bak/
 venv*/
 
+.idea/
+google/
+
 # Spyder project settings
 .spyderproject
 .spyproject
