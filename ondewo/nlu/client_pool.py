@@ -28,6 +28,15 @@ class ClientPool:
             pool_size: int = 10,
             max_size_ratio: float = 1.5
     ) -> None:
+        """
+        Initialise a ClientPool to handle all your requests.
+
+        Args:
+            config: Client configuration; the same will be used on all clients created in the pool
+            use_secure_channel: self-explanatory
+            pool_size: self-explanatory
+            max_size_ratio: this is: (maximum_pool_size / pool_size); the pool can grow to up to a limit
+        """
         # Client configuration
         self.config: BaseClientConfig = config
         self.use_secure_channel: bool = use_secure_channel
@@ -36,30 +45,35 @@ class ClientPool:
         self.pool_size: int = pool_size
         self.max_size_ratio: float = max_size_ratio
         self.max_size: int = math.floor(self.pool_size * self.max_size_ratio)
-        self.stretch_tolerance_countdown: int = (self.max_size - self.pool_size) * 2
+
+        # Mechanism to prevent unlimited creation of clients
+        self.n_clients_created_limit: int = math.ceil(self.max_size * 1.5)
+        self.n_clients_created: int = 0
 
         # initialization
         self.pool: Queue = Queue(maxsize=self.max_size)
         self._initialize_pool()
 
     def _initialize_pool(self) -> None:
-        for i in range(self.max_size):
+        for i in range(self.pool_size):
             self.pool.put(Client(config=self.config, use_secure_channel=self.use_secure_channel))
+            self.n_clients_created += 1
 
     def acquire_client(self) -> Client:
         try:
-            return self.pool.get(block=True, timeout=5)
+            return self.pool.get(block=True, timeout=2)
         except Empty:
             logger.warning(f'The ClientPool is empty, cannot retrieve more clients from it.\n'
                            f'Opening new client to fulfill request...')
 
-            if self.stretch_tolerance_countdown <= 0:
-                raise Full(f'The ClientPool size was stretched to its limit!\n'
-                           f'Consider creating a ClientPool with a bigger pool size.\n'
-                           f'\t - Current stretched size: {self.max_size}\n'
-                           f'\t - # stretching instances: {(self.max_size - self.pool_size) * 2}')
+            if self.n_clients_created_limit <= self.n_clients_created:
+                raise Full(f'A concerning number of "Clients" have been created.'
+                           f'Remember to "release" (or "disconnect) the clients after using them.\n'
+                           f'If there are too many requests, consider increasing the pool size.\n'
+                           f'\t - # clients created: {self.n_clients_created}\n'
+                           f'\t - Current max pool size: {self.max_size}.')
 
-            self.stretch_tolerance_countdown -= 1
+            self.n_clients_created += 1
             return Client(config=self.config, use_secure_channel=self.use_secure_channel)
 
     def release_client(self, c: Client) -> None:
