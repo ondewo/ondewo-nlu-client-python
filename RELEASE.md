@@ -1,5 +1,8 @@
 # Release History
 *****************
+/
+## This is a temporary release note from automated client generation.
+/
 
 
 
