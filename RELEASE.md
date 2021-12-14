@@ -1,6 +1,7 @@
 # Release History
 *****************
 
+
 ## Release ONDEWO NLU Python Client 2.2.1
 
 ### Improvements
