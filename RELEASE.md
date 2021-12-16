@@ -1,5 +1,7 @@
 # Release History
 *****************
+## This is a temporary release note from automated client generation. Build Number = 137 
+
 ## This is a temporary release note from automated client generation. Build Number = 136 
 
 ## This is a temporary release note from automated client generation. Build Number = 135 
