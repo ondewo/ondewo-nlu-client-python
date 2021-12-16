@@ -1,6 +1,12 @@
 # Release History
 *****************
 
+## Release ONDEWO NLU Python Client 2.3.0
+
+ * [OND211-1877] Extend the Intent Messages to include information about it being a prompt or not
+
+*****************
+
 ## Release ONDEWO NLU Python Client 2.2.1
 
 ### Improvements
