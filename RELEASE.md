@@ -1,6 +1,13 @@
 # Release History
 *****************
 
+## Release ONDEWO NLU Python Client 2.3.1
+
+### Bug fixes
+ * [OND211-1877] Resolve submodule cloning issue
+
+*****************
+
 ## Release ONDEWO NLU Python Client 2.3.0
 
 ### Improvements
