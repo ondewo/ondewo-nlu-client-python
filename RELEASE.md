@@ -1,6 +1,15 @@
 # Release History
 *****************
 
+## Release ONDEWO NLU Python Client 2.3.0
+
+### Improvements
+ * [OND211-1877] Extend the Intent Messages to include information about it being a prompt or not
+ * [OND211-1877] Update gRPC libraries
+ * [OND211-1843] Output contexts added to SessionReviewStep
+
+*****************
+
 ## Release ONDEWO NLU Python Client 2.2.1
 
 ### Improvements
