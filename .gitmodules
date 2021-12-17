@@ -3,4 +3,4 @@
 	url = https://github.com/ondewo/ondewo-nlu-api.git
 [submodule "ondewo-proto-compiler"]
 	path = ondewo-proto-compiler
-	url = git@github.com:ondewo/ondewo-proto-compiler.git
+	url = https://github.com/ondewo/ondewo-proto-compiler.git
