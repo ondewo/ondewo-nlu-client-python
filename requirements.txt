@@ -1,11 +1,5 @@
 # -*- coding: utf-8 -*-
 dataclasses-json==0.5.2
-google-api-core==1.13.0
-googleapis-common-protos==1.5.10
-grpcio==1.31.0
-grpcio-reflection==1.31.0
-grpcio-tools==1.31.0
-mypy-protobuf==1.20
 ondewo-client-utils==0.1.0
 polling==0.3.1
 pytest==6.0.1

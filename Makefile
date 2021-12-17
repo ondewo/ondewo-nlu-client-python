@@ -12,19 +12,15 @@ clean_python_api:
 	rm ondewo/qa/*.pyi
 	rm -rf google
 
-generate_all_protos: generate_ondewo_protos generate_google_protos
-generate_google_protos:
-	# generate google api files
-	python -m grpc_tools.protoc -I${GOOGLE_APIS_DIR} --python_out=. --mypy_out=. --grpc_python_out=. ${GOOGLE_APIS_DIR}/google/api/annotations.proto
-	python -m grpc_tools.protoc -I${GOOGLE_APIS_DIR} --python_out=. --mypy_out=. --grpc_python_out=. ${GOOGLE_APIS_DIR}/google/rpc/status.proto
-	python -m grpc_tools.protoc -I${GOOGLE_APIS_DIR} --python_out=. --mypy_out=. --grpc_python_out=. ${GOOGLE_APIS_DIR}/google/type/latlng.proto
-	python -m grpc_tools.protoc -I${GOOGLE_APIS_DIR} --python_out=. --mypy_out=. --grpc_python_out=. ${GOOGLE_APIS_DIR}/google/api/http.proto
-	python -m grpc_tools.protoc -I${GOOGLE_APIS_DIR} --python_out=. --mypy_out=. --grpc_python_out=. ${GOOGLE_APIS_DIR}/google/longrunning/operations.proto
+build_compiler:
+	make -C ondewo-proto-compiler/python build
 
 generate_ondewo_protos:
-	for f in $$(find ${ONDEWO_PROTOS_DIR} -name '*.proto'); do \
-		python -m grpc_tools.protoc -I${GOOGLE_APIS_DIR} -I${ONDEWO_NLU_API_DIR} --python_out=. --mypy_out=. --grpc_python_out=. $$f; \
-	done
+	make -f ondewo-proto-compiler/python/Makefile run \
+		PROTO_DIR=${ONDEWO_PROTOS_DIR} \
+		EXTRA_PROTO_DIR=${GOOGLE_PROTOS_DIR} \
+		TARGET_DIR='ondewo' \
+		OUTPUT_DIR='.'
 
 build_zip:
 	zip -r ondewo-nlu-client-python.zip examples ondewo LICENSE LICENSE.md requirements.txt README.md setup.cfg setup.py
