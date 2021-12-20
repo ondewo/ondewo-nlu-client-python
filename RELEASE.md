@@ -1,6 +1,13 @@
 # Release History
 *****************
 
+## Release ONDEWO NLU Python Client 2.3.2
+
+### Improvements
+* [OND212-36] Addition of the Client Pool for easier retrieval of client for multi-thread/process purposes
+
+*****************
+
 ## Release ONDEWO NLU Python Client 2.3.1
 
 ### Bug fixes
