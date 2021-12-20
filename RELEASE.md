@@ -1,10 +1,26 @@
 # Release History
 *****************
 
-## Release ONDEWO NLU Python Client 2.2.2
+## Release ONDEWO NLU Python Client 2.3.2
 
 ### Improvements
 * [OND212-36] Addition of the Client Pool for easier retrieval of client for multi-thread/process purposes
+
+*****************
+
+## Release ONDEWO NLU Python Client 2.3.1
+
+### Bug fixes
+ * [OND211-1877] Resolve submodule cloning issue
+
+*****************
+
+## Release ONDEWO NLU Python Client 2.3.0
+
+### Improvements
+ * [OND211-1877] Extend the Intent Messages to include information about it being a prompt or not
+ * [OND211-1877] Use the proto-compiler for generating code from protos
+ * [OND211-1843] Output contexts added to SessionReviewStep
 
 *****************
 
