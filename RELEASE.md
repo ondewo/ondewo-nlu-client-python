@@ -1,6 +1,13 @@
 # Release History
 *****************
 
+## Release ONDEWO NLU Python Client 2.4.0
+
+### New features
+* [OND211-1850] API Update. Allow sorting and searching of entity values on listing
+
+*****************
+
 ## Release ONDEWO NLU Python Client 2.3.3
 
 *****************
