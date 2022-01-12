@@ -773,11 +773,13 @@ class EntityValueSorting(google___protobuf___message___Message):
         @classmethod
         def items(cls) -> typing___List[typing___Tuple[builtin___str, 'EntityValueSorting.EntityValueSortingField']]: ...
         NO_ENTITY_VALUE_SORTING = typing___cast('EntityValueSorting.EntityValueSortingField', 0)
-        SORT_ENTITY_VALUE_BY_NAME = typing___cast('EntityValueSorting.EntityValueSortingField', 1)
-        SORT_ENTITY_VALUE_BY_SYNONYM_COUNT = typing___cast('EntityValueSorting.EntityValueSortingField', 5)
+        SORT_ENTITY_VALUE_BY_DISPLAY_NAME = typing___cast('EntityValueSorting.EntityValueSortingField', 1)
+        SORT_ENTITY_VALUE_BY_VALUE = typing___cast('EntityValueSorting.EntityValueSortingField', 2)
+        SORT_ENTITY_VALUE_BY_SYNONYM_COUNT = typing___cast('EntityValueSorting.EntityValueSortingField', 3)
     NO_ENTITY_VALUE_SORTING = typing___cast('EntityValueSorting.EntityValueSortingField', 0)
-    SORT_ENTITY_VALUE_BY_NAME = typing___cast('EntityValueSorting.EntityValueSortingField', 1)
-    SORT_ENTITY_VALUE_BY_SYNONYM_COUNT = typing___cast('EntityValueSorting.EntityValueSortingField', 5)
+    SORT_ENTITY_VALUE_BY_DISPLAY_NAME = typing___cast('EntityValueSorting.EntityValueSortingField', 1)
+    SORT_ENTITY_VALUE_BY_VALUE = typing___cast('EntityValueSorting.EntityValueSortingField', 2)
+    SORT_ENTITY_VALUE_BY_SYNONYM_COUNT = typing___cast('EntityValueSorting.EntityValueSortingField', 3)
     global___EntityValueSortingField = EntityValueSortingField
 
     sorting_field = ... # type: global___EntityValueSorting.EntityValueSortingField
