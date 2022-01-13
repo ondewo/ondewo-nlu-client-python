@@ -269,12 +269,14 @@ class GetEntityTypeRequest(google___protobuf___message___Message):
     name = ... # type: typing___Text
     language_code = ... # type: typing___Text
     page_token = ... # type: typing___Text
+    entity_type_view = ... # type: global___EntityTypeView
 
     def __init__(self,
         *,
         name : typing___Optional[typing___Text] = None,
         language_code : typing___Optional[typing___Text] = None,
         page_token : typing___Optional[typing___Text] = None,
+        entity_type_view : typing___Optional[global___EntityTypeView] = None,
         ) -> None: ...
     if sys.version_info >= (3,):
         @classmethod
@@ -284,13 +286,14 @@ class GetEntityTypeRequest(google___protobuf___message___Message):
         def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> GetEntityTypeRequest: ...
     def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"language_code",b"language_code",u"name",b"name",u"page_token",b"page_token"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"entity_type_view",b"entity_type_view",u"language_code",b"language_code",u"name",b"name",u"page_token",b"page_token"]) -> None: ...
 global___GetEntityTypeRequest = GetEntityTypeRequest
 
 class CreateEntityTypeRequest(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
     parent = ... # type: typing___Text
     language_code = ... # type: typing___Text
+    entity_type_view = ... # type: global___EntityTypeView
 
     @property
     def entity_type(self) -> global___EntityType: ...
@@ -300,6 +303,7 @@ class CreateEntityTypeRequest(google___protobuf___message___Message):
         parent : typing___Optional[typing___Text] = None,
         entity_type : typing___Optional[global___EntityType] = None,
         language_code : typing___Optional[typing___Text] = None,
+        entity_type_view : typing___Optional[global___EntityTypeView] = None,
         ) -> None: ...
     if sys.version_info >= (3,):
         @classmethod
@@ -310,12 +314,13 @@ class CreateEntityTypeRequest(google___protobuf___message___Message):
     def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def HasField(self, field_name: typing_extensions___Literal[u"entity_type",b"entity_type"]) -> builtin___bool: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"entity_type",b"entity_type",u"language_code",b"language_code",u"parent",b"parent"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"entity_type",b"entity_type",u"entity_type_view",b"entity_type_view",u"language_code",b"language_code",u"parent",b"parent"]) -> None: ...
 global___CreateEntityTypeRequest = CreateEntityTypeRequest
 
 class UpdateEntityTypeRequest(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
     language_code = ... # type: typing___Text
+    entity_type_view = ... # type: global___EntityTypeView
 
     @property
     def entity_type(self) -> global___EntityType: ...
@@ -328,6 +333,7 @@ class UpdateEntityTypeRequest(google___protobuf___message___Message):
         entity_type : typing___Optional[global___EntityType] = None,
         language_code : typing___Optional[typing___Text] = None,
         update_mask : typing___Optional[google___protobuf___field_mask_pb2___FieldMask] = None,
+        entity_type_view : typing___Optional[global___EntityTypeView] = None,
         ) -> None: ...
     if sys.version_info >= (3,):
         @classmethod
@@ -338,7 +344,7 @@ class UpdateEntityTypeRequest(google___protobuf___message___Message):
     def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def HasField(self, field_name: typing_extensions___Literal[u"entity_type",b"entity_type",u"update_mask",b"update_mask"]) -> builtin___bool: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"entity_type",b"entity_type",u"language_code",b"language_code",u"update_mask",b"update_mask"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"entity_type",b"entity_type",u"entity_type_view",b"entity_type_view",u"language_code",b"language_code",u"update_mask",b"update_mask"]) -> None: ...
 global___UpdateEntityTypeRequest = UpdateEntityTypeRequest
 
 class DeleteEntityTypeRequest(google___protobuf___message___Message):
@@ -708,7 +714,6 @@ class ListEntitiesRequest(google___protobuf___message___Message):
     entity_type_name = ... # type: typing___Text
     language_code = ... # type: typing___Text
     page_token = ... # type: typing___Text
-    entity_type_view = ... # type: global___EntityTypeView
     search_by_pattern = ... # type: typing___Text
 
     @property
@@ -719,7 +724,6 @@ class ListEntitiesRequest(google___protobuf___message___Message):
         entity_type_name : typing___Optional[typing___Text] = None,
         language_code : typing___Optional[typing___Text] = None,
         page_token : typing___Optional[typing___Text] = None,
-        entity_type_view : typing___Optional[global___EntityTypeView] = None,
         sort_by_field : typing___Optional[global___EntityValueSorting] = None,
         search_by_pattern : typing___Optional[typing___Text] = None,
         ) -> None: ...
@@ -732,7 +736,7 @@ class ListEntitiesRequest(google___protobuf___message___Message):
     def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def HasField(self, field_name: typing_extensions___Literal[u"sort_by_field",b"sort_by_field"]) -> builtin___bool: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"entity_type_name",b"entity_type_name",u"entity_type_view",b"entity_type_view",u"language_code",b"language_code",u"page_token",b"page_token",u"search_by_pattern",b"search_by_pattern",u"sort_by_field",b"sort_by_field"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"entity_type_name",b"entity_type_name",u"language_code",b"language_code",u"page_token",b"page_token",u"search_by_pattern",b"search_by_pattern",u"sort_by_field",b"sort_by_field"]) -> None: ...
 global___ListEntitiesRequest = ListEntitiesRequest
 
 class ListEntitiesResponse(google___protobuf___message___Message):
