@@ -5,6 +5,7 @@
 
 ### New features
 * [OND211-1850] API Update. Allow sorting and searching of entity values on listing
+* [OND211-1850] API Update. Enable Entity Type View on all Entity Type CRUD operations
 
 *****************
 
