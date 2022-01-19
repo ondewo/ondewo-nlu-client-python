@@ -847,6 +847,7 @@ class Intent(google___protobuf___message___Message):
         name = ... # type: typing___Text
         language_code = ... # type: typing___Text
         platform = ... # type: global___Intent.Message.Platform
+        is_prompt = ... # type: builtin___bool
 
         @property
         def text(self) -> global___Intent.Message.Text: ...
@@ -909,6 +910,7 @@ class Intent(google___protobuf___message___Message):
             video : typing___Optional[global___Intent.Message.Video] = None,
             audio : typing___Optional[global___Intent.Message.Audio] = None,
             platform : typing___Optional[global___Intent.Message.Platform] = None,
+            is_prompt : typing___Optional[builtin___bool] = None,
             ) -> None: ...
         if sys.version_info >= (3,):
             @classmethod
@@ -919,7 +921,7 @@ class Intent(google___protobuf___message___Message):
         def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
         def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
         def HasField(self, field_name: typing_extensions___Literal[u"audio",b"audio",u"basic_card",b"basic_card",u"card",b"card",u"carousel_select",b"carousel_select",u"html_text",b"html_text",u"image",b"image",u"link_out_suggestion",b"link_out_suggestion",u"list_select",b"list_select",u"message",b"message",u"payload",b"payload",u"quick_replies",b"quick_replies",u"simple_responses",b"simple_responses",u"suggestions",b"suggestions",u"text",b"text",u"video",b"video"]) -> builtin___bool: ...
-        def ClearField(self, field_name: typing_extensions___Literal[u"audio",b"audio",u"basic_card",b"basic_card",u"card",b"card",u"carousel_select",b"carousel_select",u"html_text",b"html_text",u"image",b"image",u"language_code",b"language_code",u"link_out_suggestion",b"link_out_suggestion",u"list_select",b"list_select",u"message",b"message",u"name",b"name",u"payload",b"payload",u"platform",b"platform",u"quick_replies",b"quick_replies",u"simple_responses",b"simple_responses",u"suggestions",b"suggestions",u"text",b"text",u"video",b"video"]) -> None: ...
+        def ClearField(self, field_name: typing_extensions___Literal[u"audio",b"audio",u"basic_card",b"basic_card",u"card",b"card",u"carousel_select",b"carousel_select",u"html_text",b"html_text",u"image",b"image",u"is_prompt",b"is_prompt",u"language_code",b"language_code",u"link_out_suggestion",b"link_out_suggestion",u"list_select",b"list_select",u"message",b"message",u"name",b"name",u"payload",b"payload",u"platform",b"platform",u"quick_replies",b"quick_replies",u"simple_responses",b"simple_responses",u"suggestions",b"suggestions",u"text",b"text",u"video",b"video"]) -> None: ...
         def WhichOneof(self, oneof_group: typing_extensions___Literal[u"message",b"message"]) -> typing_extensions___Literal["text","image","quick_replies","card","payload","simple_responses","basic_card","suggestions","link_out_suggestion","list_select","carousel_select","html_text","video","audio"]: ...
     global___Message = Message
 
@@ -1035,6 +1037,7 @@ class ListIntentsRequest(google___protobuf___message___Message):
     intent_view = ... # type: global___IntentView
     page_token = ... # type: typing___Text
     filter_by_category = ... # type: global___IntentCategory
+    filter_by_tags = ... # type: google___protobuf___internal___containers___RepeatedScalarFieldContainer[typing___Text]
 
     @property
     def sort_by_field(self) -> global___IntentSorting: ...
@@ -1047,6 +1050,7 @@ class ListIntentsRequest(google___protobuf___message___Message):
         page_token : typing___Optional[typing___Text] = None,
         filter_by_category : typing___Optional[global___IntentCategory] = None,
         sort_by_field : typing___Optional[global___IntentSorting] = None,
+        filter_by_tags : typing___Optional[typing___Iterable[typing___Text]] = None,
         ) -> None: ...
     if sys.version_info >= (3,):
         @classmethod
@@ -1057,7 +1061,7 @@ class ListIntentsRequest(google___protobuf___message___Message):
     def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def HasField(self, field_name: typing_extensions___Literal[u"sort_by_field",b"sort_by_field"]) -> builtin___bool: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"filter_by_category",b"filter_by_category",u"intent_view",b"intent_view",u"language_code",b"language_code",u"page_token",b"page_token",u"parent",b"parent",u"sort_by_field",b"sort_by_field"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"filter_by_category",b"filter_by_category",u"filter_by_tags",b"filter_by_tags",u"intent_view",b"intent_view",u"language_code",b"language_code",u"page_token",b"page_token",u"parent",b"parent",u"sort_by_field",b"sort_by_field"]) -> None: ...
 global___ListIntentsRequest = ListIntentsRequest
 
 class ListIntentsResponse(google___protobuf___message___Message):
