@@ -8,7 +8,7 @@ with open('requirements.txt') as f:
 
 setuptools.setup(
     name='ondewo-nlu-client',
-    version='2.0.0',
+    version='2.3.3',
     author='Ondewo GmbH',
     author_email='info@ondewo.com',
     description='This library facilitates the interaction between a user and his/her CAI server.',
@@ -22,15 +22,13 @@ setuptools.setup(
             setuptools.find_packages()
         )
     ],
-    package_data={
-        'ondewo.nlu': ['py.typed']
-    },
+    include_package_data=True,
     classifiers=[
         'Programming Language :: Python :: 3',
         'Operating System :: OS Independent',
         'Development Status :: 3 - Alpha',
         'Topic :: Software Development :: Libraries',
     ],
-    python_requires='>=2.6,!=3.0.*',
+    python_requires='>=3',
     install_requires=requires,
 )

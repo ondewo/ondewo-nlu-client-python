@@ -39,16 +39,6 @@ class AIServices(ServicesInterface):
         response: ExtractEntitiesResponse = self.stub.ExtractEntities(request, metadata=self.metadata)
         return response
 
-    def extract_entities_fuzzy(self, request: ExtractEntitiesFuzzyRequest) -> ExtractEntitiesResponse:
-        response: ExtractEntitiesResponse = self.stub.ExtractEntitiesFuzzy(request, metadata=self.metadata)
-        return response
-
-    def get_alternative_sentences(self,
-                                  request: GetAlternativeSentencesRequest) -> GetAlternativeSentencesResponse:
-        response: GetAlternativeSentencesResponse = \
-            self.stub.GetAlternativeSentences(request, metadata=self.metadata)
-        return response
-
     def generate_user_says(self,
                            request: GenerateUserSaysRequest) -> GenerateUserSaysResponse:
         response: GenerateUserSaysResponse = \
@@ -61,9 +51,15 @@ class AIServices(ServicesInterface):
             self.stub.GenerateResponses(request, metadata=self.metadata)
         return response
 
+    def get_alternative_sentences(self,
+                                  request: GetAlternativeSentencesRequest) -> GetAlternativeSentencesResponse:
+        response: GetAlternativeSentencesResponse = \
+            self.stub.GetAlternativeSentences(request, metadata=self.metadata)
+        return response
+
     def get_alternative_training_phrases(
-            self,
-            request: GetAlternativeTrainingPhrasesRequest
+        self,
+        request: GetAlternativeTrainingPhrasesRequest
     ) -> GetAlternativeTrainingPhrasesResponse:
         response: GetAlternativeTrainingPhrasesResponse = \
             self.stub.GetAlternativeTrainingPhrases(request, metadata=self.metadata)
@@ -75,4 +71,8 @@ class AIServices(ServicesInterface):
 
     def classify_intents(self, request: ClassifyIntentsRequest) -> ClassifyIntentsResponse:
         response: ClassifyIntentsResponse = self.stub.ClassifyIntents(request, metadata=self.metadata)
+        return response
+
+    def extract_entities_fuzzy(self, request: ExtractEntitiesFuzzyRequest) -> ExtractEntitiesResponse:
+        response: ExtractEntitiesResponse = self.stub.ExtractEntitiesFuzzy(request, metadata=self.metadata)
         return response

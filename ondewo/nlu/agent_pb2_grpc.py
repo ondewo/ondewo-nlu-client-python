@@ -157,6 +157,16 @@ class AgentsStub(object):
                 request_serializer=ondewo_dot_nlu_dot_agent__pb2.GetModelStatusesRequest.SerializeToString,
                 response_deserializer=ondewo_dot_nlu_dot_agent__pb2.GetModelStatusesResponse.FromString,
                 )
+        self.GetPlatformMapping = channel.unary_unary(
+                '/ondewo.nlu.Agents/GetPlatformMapping',
+                request_serializer=ondewo_dot_nlu_dot_agent__pb2.GetPlatformMappingRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_agent__pb2.PlatformMapping.FromString,
+                )
+        self.SetPlatformMapping = channel.unary_unary(
+                '/ondewo.nlu.Agents/SetPlatformMapping',
+                request_serializer=ondewo_dot_nlu_dot_agent__pb2.PlatformMapping.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_agent__pb2.PlatformMapping.FromString,
+                )
 
 
 class AgentsServicer(object):
@@ -547,6 +557,20 @@ class AgentsServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetPlatformMapping(self, request, context):
+        """Get all set platform name mappings for an Agent
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def SetPlatformMapping(self, request, context):
+        """Set platform name mappings for an Agent
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_AgentsServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -679,6 +703,16 @@ def add_AgentsServicer_to_server(servicer, server):
                     servicer.GetModelStatuses,
                     request_deserializer=ondewo_dot_nlu_dot_agent__pb2.GetModelStatusesRequest.FromString,
                     response_serializer=ondewo_dot_nlu_dot_agent__pb2.GetModelStatusesResponse.SerializeToString,
+            ),
+            'GetPlatformMapping': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetPlatformMapping,
+                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.GetPlatformMappingRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_agent__pb2.PlatformMapping.SerializeToString,
+            ),
+            'SetPlatformMapping': grpc.unary_unary_rpc_method_handler(
+                    servicer.SetPlatformMapping,
+                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.PlatformMapping.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_agent__pb2.PlatformMapping.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -1140,5 +1174,39 @@ class Agents(object):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/GetModelStatuses',
             ondewo_dot_nlu_dot_agent__pb2.GetModelStatusesRequest.SerializeToString,
             ondewo_dot_nlu_dot_agent__pb2.GetModelStatusesResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetPlatformMapping(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/GetPlatformMapping',
+            ondewo_dot_nlu_dot_agent__pb2.GetPlatformMappingRequest.SerializeToString,
+            ondewo_dot_nlu_dot_agent__pb2.PlatformMapping.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def SetPlatformMapping(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/SetPlatformMapping',
+            ondewo_dot_nlu_dot_agent__pb2.PlatformMapping.SerializeToString,
+            ondewo_dot_nlu_dot_agent__pb2.PlatformMapping.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

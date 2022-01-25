@@ -26,6 +26,10 @@ from google.protobuf.struct_pb2 import (
     Struct as google___protobuf___struct_pb2___Struct,
 )
 
+from google.protobuf.timestamp_pb2 import (
+    Timestamp as google___protobuf___timestamp_pb2___Timestamp,
+)
+
 from ondewo.nlu.common_pb2 import (
     SortingMode as ondewo___nlu___common_pb2___SortingMode,
 )
@@ -96,9 +100,15 @@ class IntentCategory(builtin___int):
     ALL_INTENTS = typing___cast('IntentCategory', 0)
     DEFAULT_INTENTS = typing___cast('IntentCategory', 1)
     USER_DEFINED_INTENTS = typing___cast('IntentCategory', 2)
+    DATE_EXPIRED_INTENTS = typing___cast('IntentCategory', 3)
+    DATE_ACTIVE_INTENTS = typing___cast('IntentCategory', 4)
+    DATE_UPCOMING_INTENTS = typing___cast('IntentCategory', 5)
 ALL_INTENTS = typing___cast('IntentCategory', 0)
 DEFAULT_INTENTS = typing___cast('IntentCategory', 1)
 USER_DEFINED_INTENTS = typing___cast('IntentCategory', 2)
+DATE_EXPIRED_INTENTS = typing___cast('IntentCategory', 3)
+DATE_ACTIVE_INTENTS = typing___cast('IntentCategory', 4)
+DATE_UPCOMING_INTENTS = typing___cast('IntentCategory', 5)
 global___IntentCategory = IntentCategory
 
 class Intent(google___protobuf___message___Message):
@@ -308,6 +318,26 @@ class Intent(google___protobuf___message___Message):
             LINE = typing___cast('Intent.Message.Platform', 6)
             VIBER = typing___cast('Intent.Message.Platform', 7)
             ACTIONS_ON_GOOGLE = typing___cast('Intent.Message.Platform', 8)
+            PLACEHOLDER_1 = typing___cast('Intent.Message.Platform', 9)
+            PLACEHOLDER_2 = typing___cast('Intent.Message.Platform', 10)
+            PLACEHOLDER_3 = typing___cast('Intent.Message.Platform', 11)
+            PLACEHOLDER_4 = typing___cast('Intent.Message.Platform', 12)
+            PLACEHOLDER_5 = typing___cast('Intent.Message.Platform', 13)
+            PLACEHOLDER_6 = typing___cast('Intent.Message.Platform', 14)
+            PLACEHOLDER_7 = typing___cast('Intent.Message.Platform', 15)
+            PLACEHOLDER_8 = typing___cast('Intent.Message.Platform', 16)
+            PLACEHOLDER_9 = typing___cast('Intent.Message.Platform', 17)
+            PLACEHOLDER_10 = typing___cast('Intent.Message.Platform', 18)
+            PLACEHOLDER_11 = typing___cast('Intent.Message.Platform', 19)
+            PLACEHOLDER_12 = typing___cast('Intent.Message.Platform', 20)
+            PLACEHOLDER_13 = typing___cast('Intent.Message.Platform', 21)
+            PLACEHOLDER_14 = typing___cast('Intent.Message.Platform', 22)
+            PLACEHOLDER_15 = typing___cast('Intent.Message.Platform', 23)
+            PLACEHOLDER_16 = typing___cast('Intent.Message.Platform', 24)
+            PLACEHOLDER_17 = typing___cast('Intent.Message.Platform', 25)
+            PLACEHOLDER_18 = typing___cast('Intent.Message.Platform', 26)
+            PLACEHOLDER_19 = typing___cast('Intent.Message.Platform', 27)
+            PLACEHOLDER_20 = typing___cast('Intent.Message.Platform', 28)
         PLATFORM_UNSPECIFIED = typing___cast('Intent.Message.Platform', 0)
         FACEBOOK = typing___cast('Intent.Message.Platform', 1)
         SLACK = typing___cast('Intent.Message.Platform', 2)
@@ -317,6 +347,26 @@ class Intent(google___protobuf___message___Message):
         LINE = typing___cast('Intent.Message.Platform', 6)
         VIBER = typing___cast('Intent.Message.Platform', 7)
         ACTIONS_ON_GOOGLE = typing___cast('Intent.Message.Platform', 8)
+        PLACEHOLDER_1 = typing___cast('Intent.Message.Platform', 9)
+        PLACEHOLDER_2 = typing___cast('Intent.Message.Platform', 10)
+        PLACEHOLDER_3 = typing___cast('Intent.Message.Platform', 11)
+        PLACEHOLDER_4 = typing___cast('Intent.Message.Platform', 12)
+        PLACEHOLDER_5 = typing___cast('Intent.Message.Platform', 13)
+        PLACEHOLDER_6 = typing___cast('Intent.Message.Platform', 14)
+        PLACEHOLDER_7 = typing___cast('Intent.Message.Platform', 15)
+        PLACEHOLDER_8 = typing___cast('Intent.Message.Platform', 16)
+        PLACEHOLDER_9 = typing___cast('Intent.Message.Platform', 17)
+        PLACEHOLDER_10 = typing___cast('Intent.Message.Platform', 18)
+        PLACEHOLDER_11 = typing___cast('Intent.Message.Platform', 19)
+        PLACEHOLDER_12 = typing___cast('Intent.Message.Platform', 20)
+        PLACEHOLDER_13 = typing___cast('Intent.Message.Platform', 21)
+        PLACEHOLDER_14 = typing___cast('Intent.Message.Platform', 22)
+        PLACEHOLDER_15 = typing___cast('Intent.Message.Platform', 23)
+        PLACEHOLDER_16 = typing___cast('Intent.Message.Platform', 24)
+        PLACEHOLDER_17 = typing___cast('Intent.Message.Platform', 25)
+        PLACEHOLDER_18 = typing___cast('Intent.Message.Platform', 26)
+        PLACEHOLDER_19 = typing___cast('Intent.Message.Platform', 27)
+        PLACEHOLDER_20 = typing___cast('Intent.Message.Platform', 28)
         global___Platform = Platform
 
         class Text(google___protobuf___message___Message):
@@ -797,6 +847,7 @@ class Intent(google___protobuf___message___Message):
         name = ... # type: typing___Text
         language_code = ... # type: typing___Text
         platform = ... # type: global___Intent.Message.Platform
+        is_prompt = ... # type: builtin___bool
 
         @property
         def text(self) -> global___Intent.Message.Text: ...
@@ -859,6 +910,7 @@ class Intent(google___protobuf___message___Message):
             video : typing___Optional[global___Intent.Message.Video] = None,
             audio : typing___Optional[global___Intent.Message.Audio] = None,
             platform : typing___Optional[global___Intent.Message.Platform] = None,
+            is_prompt : typing___Optional[builtin___bool] = None,
             ) -> None: ...
         if sys.version_info >= (3,):
             @classmethod
@@ -869,7 +921,7 @@ class Intent(google___protobuf___message___Message):
         def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
         def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
         def HasField(self, field_name: typing_extensions___Literal[u"audio",b"audio",u"basic_card",b"basic_card",u"card",b"card",u"carousel_select",b"carousel_select",u"html_text",b"html_text",u"image",b"image",u"link_out_suggestion",b"link_out_suggestion",u"list_select",b"list_select",u"message",b"message",u"payload",b"payload",u"quick_replies",b"quick_replies",u"simple_responses",b"simple_responses",u"suggestions",b"suggestions",u"text",b"text",u"video",b"video"]) -> builtin___bool: ...
-        def ClearField(self, field_name: typing_extensions___Literal[u"audio",b"audio",u"basic_card",b"basic_card",u"card",b"card",u"carousel_select",b"carousel_select",u"html_text",b"html_text",u"image",b"image",u"language_code",b"language_code",u"link_out_suggestion",b"link_out_suggestion",u"list_select",b"list_select",u"message",b"message",u"name",b"name",u"payload",b"payload",u"platform",b"platform",u"quick_replies",b"quick_replies",u"simple_responses",b"simple_responses",u"suggestions",b"suggestions",u"text",b"text",u"video",b"video"]) -> None: ...
+        def ClearField(self, field_name: typing_extensions___Literal[u"audio",b"audio",u"basic_card",b"basic_card",u"card",b"card",u"carousel_select",b"carousel_select",u"html_text",b"html_text",u"image",b"image",u"is_prompt",b"is_prompt",u"language_code",b"language_code",u"link_out_suggestion",b"link_out_suggestion",u"list_select",b"list_select",u"message",b"message",u"name",b"name",u"payload",b"payload",u"platform",b"platform",u"quick_replies",b"quick_replies",u"simple_responses",b"simple_responses",u"suggestions",b"suggestions",u"text",b"text",u"video",b"video"]) -> None: ...
         def WhichOneof(self, oneof_group: typing_extensions___Literal[u"message",b"message"]) -> typing_extensions___Literal["text","image","quick_replies","card","payload","simple_responses","basic_card","suggestions","link_out_suggestion","list_select","carousel_select","html_text","video","audio"]: ...
     global___Message = Message
 
@@ -913,6 +965,7 @@ class Intent(google___protobuf___message___Message):
     is_end_of_deviation = ... # type: builtin___bool
     training_phrase_count = ... # type: builtin___int
     status = ... # type: global___Intent.IntentStatus
+    tags = ... # type: google___protobuf___internal___containers___RepeatedScalarFieldContainer[typing___Text]
 
     @property
     def training_phrases(self) -> google___protobuf___internal___containers___RepeatedCompositeFieldContainer[global___Intent.TrainingPhrase]: ...
@@ -928,6 +981,12 @@ class Intent(google___protobuf___message___Message):
 
     @property
     def followup_intent_info(self) -> google___protobuf___internal___containers___RepeatedCompositeFieldContainer[global___Intent.FollowupIntentInfo]: ...
+
+    @property
+    def start_date(self) -> google___protobuf___timestamp_pb2___Timestamp: ...
+
+    @property
+    def end_date(self) -> google___protobuf___timestamp_pb2___Timestamp: ...
 
     def __init__(self,
         *,
@@ -955,6 +1014,9 @@ class Intent(google___protobuf___message___Message):
         is_end_of_deviation : typing___Optional[builtin___bool] = None,
         training_phrase_count : typing___Optional[builtin___int] = None,
         status : typing___Optional[global___Intent.IntentStatus] = None,
+        start_date : typing___Optional[google___protobuf___timestamp_pb2___Timestamp] = None,
+        end_date : typing___Optional[google___protobuf___timestamp_pb2___Timestamp] = None,
+        tags : typing___Optional[typing___Iterable[typing___Text]] = None,
         ) -> None: ...
     if sys.version_info >= (3,):
         @classmethod
@@ -964,7 +1026,8 @@ class Intent(google___protobuf___message___Message):
         def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> Intent: ...
     def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"action",b"action",u"default_response_platforms",b"default_response_platforms",u"display_name",b"display_name",u"domain_name",b"domain_name",u"events",b"events",u"followup_intent_info",b"followup_intent_info",u"input_context_names",b"input_context_names",u"is_end_of_deviation",b"is_end_of_deviation",u"is_fallback",b"is_fallback",u"is_start_of_deviation",b"is_start_of_deviation",u"messages",b"messages",u"ml_disabled",b"ml_disabled",u"name",b"name",u"next_page_token",b"next_page_token",u"output_contexts",b"output_contexts",u"parameters",b"parameters",u"parent_followup_intent_name",b"parent_followup_intent_name",u"priority",b"priority",u"reset_contexts",b"reset_contexts",u"root_followup_intent_name",b"root_followup_intent_name",u"status",b"status",u"training_phrase_count",b"training_phrase_count",u"training_phrases",b"training_phrases",u"webhook_state",b"webhook_state"]) -> None: ...
+    def HasField(self, field_name: typing_extensions___Literal[u"end_date",b"end_date",u"start_date",b"start_date"]) -> builtin___bool: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"action",b"action",u"default_response_platforms",b"default_response_platforms",u"display_name",b"display_name",u"domain_name",b"domain_name",u"end_date",b"end_date",u"events",b"events",u"followup_intent_info",b"followup_intent_info",u"input_context_names",b"input_context_names",u"is_end_of_deviation",b"is_end_of_deviation",u"is_fallback",b"is_fallback",u"is_start_of_deviation",b"is_start_of_deviation",u"messages",b"messages",u"ml_disabled",b"ml_disabled",u"name",b"name",u"next_page_token",b"next_page_token",u"output_contexts",b"output_contexts",u"parameters",b"parameters",u"parent_followup_intent_name",b"parent_followup_intent_name",u"priority",b"priority",u"reset_contexts",b"reset_contexts",u"root_followup_intent_name",b"root_followup_intent_name",u"start_date",b"start_date",u"status",b"status",u"tags",b"tags",u"training_phrase_count",b"training_phrase_count",u"training_phrases",b"training_phrases",u"webhook_state",b"webhook_state"]) -> None: ...
 global___Intent = Intent
 
 class ListIntentsRequest(google___protobuf___message___Message):
@@ -974,6 +1037,7 @@ class ListIntentsRequest(google___protobuf___message___Message):
     intent_view = ... # type: global___IntentView
     page_token = ... # type: typing___Text
     filter_by_category = ... # type: global___IntentCategory
+    filter_by_tags = ... # type: google___protobuf___internal___containers___RepeatedScalarFieldContainer[typing___Text]
 
     @property
     def sort_by_field(self) -> global___IntentSorting: ...
@@ -986,6 +1050,7 @@ class ListIntentsRequest(google___protobuf___message___Message):
         page_token : typing___Optional[typing___Text] = None,
         filter_by_category : typing___Optional[global___IntentCategory] = None,
         sort_by_field : typing___Optional[global___IntentSorting] = None,
+        filter_by_tags : typing___Optional[typing___Iterable[typing___Text]] = None,
         ) -> None: ...
     if sys.version_info >= (3,):
         @classmethod
@@ -996,7 +1061,7 @@ class ListIntentsRequest(google___protobuf___message___Message):
     def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def HasField(self, field_name: typing_extensions___Literal[u"sort_by_field",b"sort_by_field"]) -> builtin___bool: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"filter_by_category",b"filter_by_category",u"intent_view",b"intent_view",u"language_code",b"language_code",u"page_token",b"page_token",u"parent",b"parent",u"sort_by_field",b"sort_by_field"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"filter_by_category",b"filter_by_category",u"filter_by_tags",b"filter_by_tags",u"intent_view",b"intent_view",u"language_code",b"language_code",u"page_token",b"page_token",u"parent",b"parent",u"sort_by_field",b"sort_by_field"]) -> None: ...
 global___ListIntentsRequest = ListIntentsRequest
 
 class ListIntentsResponse(google___protobuf___message___Message):
@@ -1243,11 +1308,15 @@ class IntentSorting(google___protobuf___message___Message):
         SORT_INTENT_BY_CREATION_DATE = typing___cast('IntentSorting.IntentSortingField', 2)
         SORT_INTENT_BY_LAST_UPDATED = typing___cast('IntentSorting.IntentSortingField', 3)
         SORT_INTENT_BY_USERSAYS_COUNT = typing___cast('IntentSorting.IntentSortingField', 4)
+        SORT_INTENT_BY_START_DATE = typing___cast('IntentSorting.IntentSortingField', 5)
+        SORT_INTENT_BY_END_DATE = typing___cast('IntentSorting.IntentSortingField', 6)
     NO_INTENT_SORTING = typing___cast('IntentSorting.IntentSortingField', 0)
     SORT_INTENT_BY_NAME = typing___cast('IntentSorting.IntentSortingField', 1)
     SORT_INTENT_BY_CREATION_DATE = typing___cast('IntentSorting.IntentSortingField', 2)
     SORT_INTENT_BY_LAST_UPDATED = typing___cast('IntentSorting.IntentSortingField', 3)
     SORT_INTENT_BY_USERSAYS_COUNT = typing___cast('IntentSorting.IntentSortingField', 4)
+    SORT_INTENT_BY_START_DATE = typing___cast('IntentSorting.IntentSortingField', 5)
+    SORT_INTENT_BY_END_DATE = typing___cast('IntentSorting.IntentSortingField', 6)
     global___IntentSortingField = IntentSortingField
 
     sorting_field = ... # type: global___IntentSorting.IntentSortingField
@@ -1268,6 +1337,27 @@ class IntentSorting(google___protobuf___message___Message):
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def ClearField(self, field_name: typing_extensions___Literal[u"sorting_field",b"sorting_field",u"sorting_mode",b"sorting_mode"]) -> None: ...
 global___IntentSorting = IntentSorting
+
+class IntentTagMessage(google___protobuf___message___Message):
+    DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
+    intent_name = ... # type: typing___Text
+    value = ... # type: typing___Text
+
+    def __init__(self,
+        *,
+        intent_name : typing___Optional[typing___Text] = None,
+        value : typing___Optional[typing___Text] = None,
+        ) -> None: ...
+    if sys.version_info >= (3,):
+        @classmethod
+        def FromString(cls, s: builtin___bytes) -> IntentTagMessage: ...
+    else:
+        @classmethod
+        def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> IntentTagMessage: ...
+    def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
+    def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"intent_name",b"intent_name",u"value",b"value"]) -> None: ...
+global___IntentTagMessage = IntentTagMessage
 
 class BatchUpdateTrainingPhrasesRequest(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
