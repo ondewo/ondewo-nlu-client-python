@@ -84,43 +84,33 @@ class IntentAlgorithms(builtin___int):
     OndewoIntentNamedExactMatch = typing___cast('IntentAlgorithms', 2)
     OndewoIntentSimilarityMatch = typing___cast('IntentAlgorithms', 3)
     OndewoIntentNamedSimilarityMatch = typing___cast('IntentAlgorithms', 4)
-    OndewoIntentLogisticRegression = typing___cast('IntentAlgorithms', 5)
-    OndewoIntentSupportVectorClassifier = typing___cast('IntentAlgorithms', 6)
-    OndewoIntentRandomForestClassifier = typing___cast('IntentAlgorithms', 7)
-    OndewoIntentFastTextClassifier = typing___cast('IntentAlgorithms', 8)
-    OndewoIntentMachineLearningMatch = typing___cast('IntentAlgorithms', 9)
-    OndewoIntentBertClassifier = typing___cast('IntentAlgorithms', 10)
-    OndewoIntentMetaClassifier = typing___cast('IntentAlgorithms', 11)
-    OndewoIntentSnipsClassifier = typing___cast('IntentAlgorithms', 12)
-    IntentExitDetector = typing___cast('IntentAlgorithms', 13)
-    DefaultFallBackAlgorithm = typing___cast('IntentAlgorithms', 14)
-    OndewoIntentRankingMatch = typing___cast('IntentAlgorithms', 15)
-    OndewoIntentRasaClassifier = typing___cast('IntentAlgorithms', 16)
-    DeviationEndingDetection = typing___cast('IntentAlgorithms', 17)
-    OndewoWeightedEnsemble = typing___cast('IntentAlgorithms', 18)
-    OndewoIntentExitDetector = typing___cast('IntentAlgorithms', 19)
-    OndewoIntentParameterMatch = typing___cast('IntentAlgorithms', 20)
+    OndewoIntentFastTextClassifier = typing___cast('IntentAlgorithms', 5)
+    OndewoIntentMachineLearningMatch = typing___cast('IntentAlgorithms', 6)
+    OndewoIntentBertClassifier = typing___cast('IntentAlgorithms', 7)
+    OndewoIntentMetaClassifier = typing___cast('IntentAlgorithms', 8)
+    OndewoIntentSnipsClassifier = typing___cast('IntentAlgorithms', 9)
+    IntentExitDetector = typing___cast('IntentAlgorithms', 10)
+    OndewoIntentRankingMatch = typing___cast('IntentAlgorithms', 11)
+    OndewoIntentRasaClassifier = typing___cast('IntentAlgorithms', 12)
+    OndewoWeightedEnsemble = typing___cast('IntentAlgorithms', 13)
+    OndewoIntentExitDetector = typing___cast('IntentAlgorithms', 14)
+    OndewoIntentParameterMatch = typing___cast('IntentAlgorithms', 15)
 OndewoIntentExactContextDetector = typing___cast('IntentAlgorithms', 0)
 OndewoIntentExactMatch = typing___cast('IntentAlgorithms', 1)
 OndewoIntentNamedExactMatch = typing___cast('IntentAlgorithms', 2)
 OndewoIntentSimilarityMatch = typing___cast('IntentAlgorithms', 3)
 OndewoIntentNamedSimilarityMatch = typing___cast('IntentAlgorithms', 4)
-OndewoIntentLogisticRegression = typing___cast('IntentAlgorithms', 5)
-OndewoIntentSupportVectorClassifier = typing___cast('IntentAlgorithms', 6)
-OndewoIntentRandomForestClassifier = typing___cast('IntentAlgorithms', 7)
-OndewoIntentFastTextClassifier = typing___cast('IntentAlgorithms', 8)
-OndewoIntentMachineLearningMatch = typing___cast('IntentAlgorithms', 9)
-OndewoIntentBertClassifier = typing___cast('IntentAlgorithms', 10)
-OndewoIntentMetaClassifier = typing___cast('IntentAlgorithms', 11)
-OndewoIntentSnipsClassifier = typing___cast('IntentAlgorithms', 12)
-IntentExitDetector = typing___cast('IntentAlgorithms', 13)
-DefaultFallBackAlgorithm = typing___cast('IntentAlgorithms', 14)
-OndewoIntentRankingMatch = typing___cast('IntentAlgorithms', 15)
-OndewoIntentRasaClassifier = typing___cast('IntentAlgorithms', 16)
-DeviationEndingDetection = typing___cast('IntentAlgorithms', 17)
-OndewoWeightedEnsemble = typing___cast('IntentAlgorithms', 18)
-OndewoIntentExitDetector = typing___cast('IntentAlgorithms', 19)
-OndewoIntentParameterMatch = typing___cast('IntentAlgorithms', 20)
+OndewoIntentFastTextClassifier = typing___cast('IntentAlgorithms', 5)
+OndewoIntentMachineLearningMatch = typing___cast('IntentAlgorithms', 6)
+OndewoIntentBertClassifier = typing___cast('IntentAlgorithms', 7)
+OndewoIntentMetaClassifier = typing___cast('IntentAlgorithms', 8)
+OndewoIntentSnipsClassifier = typing___cast('IntentAlgorithms', 9)
+IntentExitDetector = typing___cast('IntentAlgorithms', 10)
+OndewoIntentRankingMatch = typing___cast('IntentAlgorithms', 11)
+OndewoIntentRasaClassifier = typing___cast('IntentAlgorithms', 12)
+OndewoWeightedEnsemble = typing___cast('IntentAlgorithms', 13)
+OndewoIntentExitDetector = typing___cast('IntentAlgorithms', 14)
+OndewoIntentParameterMatch = typing___cast('IntentAlgorithms', 15)
 global___IntentAlgorithms = IntentAlgorithms
 
 class ExtractEntitiesRequest(google___protobuf___message___Message):
@@ -887,15 +877,15 @@ global___ClassifyIntentsRequest = ClassifyIntentsRequest
 
 class IntentClassified(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
+    intent_name = ... # type: typing___Text
+    intent_display_name = ... # type: typing___Text
     classifier = ... # type: typing___Text
     score = ... # type: builtin___float
 
-    @property
-    def intent(self) -> ondewo___nlu___intent_pb2___Intent: ...
-
     def __init__(self,
         *,
-        intent : typing___Optional[ondewo___nlu___intent_pb2___Intent] = None,
+        intent_name : typing___Optional[typing___Text] = None,
+        intent_display_name : typing___Optional[typing___Text] = None,
         classifier : typing___Optional[typing___Text] = None,
         score : typing___Optional[builtin___float] = None,
         ) -> None: ...
@@ -907,8 +897,7 @@ class IntentClassified(google___protobuf___message___Message):
         def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> IntentClassified: ...
     def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
-    def HasField(self, field_name: typing_extensions___Literal[u"intent",b"intent"]) -> builtin___bool: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"classifier",b"classifier",u"intent",b"intent",u"score",b"score"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"classifier",b"classifier",u"intent_display_name",b"intent_display_name",u"intent_name",b"intent_name",u"score",b"score"]) -> None: ...
 global___IntentClassified = IntentClassified
 
 class ClassifyIntentsResponse(google___protobuf___message___Message):
