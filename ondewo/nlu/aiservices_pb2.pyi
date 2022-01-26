@@ -47,6 +47,72 @@ if sys.version_info < (3,):
     builtin___unicode = unicode
 
 
+class Mode(builtin___int):
+    DESCRIPTOR: google___protobuf___descriptor___EnumDescriptor = ...
+    @classmethod
+    def Name(cls, number: builtin___int) -> builtin___str: ...
+    @classmethod
+    def Value(cls, name: builtin___str) -> 'Mode': ...
+    @classmethod
+    def keys(cls) -> typing___List[builtin___str]: ...
+    @classmethod
+    def values(cls) -> typing___List['Mode']: ...
+    @classmethod
+    def items(cls) -> typing___List[typing___Tuple[builtin___str, 'Mode']]: ...
+    UNSPECIFIED = typing___cast('Mode', 0)
+    EXCLUSIVE = typing___cast('Mode', 1)
+    INCLUSIVE = typing___cast('Mode', 2)
+UNSPECIFIED = typing___cast('Mode', 0)
+EXCLUSIVE = typing___cast('Mode', 1)
+INCLUSIVE = typing___cast('Mode', 2)
+global___Mode = Mode
+
+class IntentAlgorithms(builtin___int):
+    DESCRIPTOR: google___protobuf___descriptor___EnumDescriptor = ...
+    @classmethod
+    def Name(cls, number: builtin___int) -> builtin___str: ...
+    @classmethod
+    def Value(cls, name: builtin___str) -> 'IntentAlgorithms': ...
+    @classmethod
+    def keys(cls) -> typing___List[builtin___str]: ...
+    @classmethod
+    def values(cls) -> typing___List['IntentAlgorithms']: ...
+    @classmethod
+    def items(cls) -> typing___List[typing___Tuple[builtin___str, 'IntentAlgorithms']]: ...
+    OndewoIntentExactContextDetector = typing___cast('IntentAlgorithms', 0)
+    OndewoIntentExactMatch = typing___cast('IntentAlgorithms', 1)
+    OndewoIntentNamedExactMatch = typing___cast('IntentAlgorithms', 2)
+    OndewoIntentSimilarityMatch = typing___cast('IntentAlgorithms', 3)
+    OndewoIntentNamedSimilarityMatch = typing___cast('IntentAlgorithms', 4)
+    OndewoIntentFastTextClassifier = typing___cast('IntentAlgorithms', 5)
+    OndewoIntentMachineLearningMatch = typing___cast('IntentAlgorithms', 6)
+    OndewoIntentBertClassifier = typing___cast('IntentAlgorithms', 7)
+    OndewoIntentMetaClassifier = typing___cast('IntentAlgorithms', 8)
+    OndewoIntentSnipsClassifier = typing___cast('IntentAlgorithms', 9)
+    IntentExitDetector = typing___cast('IntentAlgorithms', 10)
+    OndewoIntentRankingMatch = typing___cast('IntentAlgorithms', 11)
+    OndewoIntentRasaClassifier = typing___cast('IntentAlgorithms', 12)
+    OndewoWeightedEnsemble = typing___cast('IntentAlgorithms', 13)
+    OndewoIntentExitDetector = typing___cast('IntentAlgorithms', 14)
+    OndewoIntentParameterMatch = typing___cast('IntentAlgorithms', 15)
+OndewoIntentExactContextDetector = typing___cast('IntentAlgorithms', 0)
+OndewoIntentExactMatch = typing___cast('IntentAlgorithms', 1)
+OndewoIntentNamedExactMatch = typing___cast('IntentAlgorithms', 2)
+OndewoIntentSimilarityMatch = typing___cast('IntentAlgorithms', 3)
+OndewoIntentNamedSimilarityMatch = typing___cast('IntentAlgorithms', 4)
+OndewoIntentFastTextClassifier = typing___cast('IntentAlgorithms', 5)
+OndewoIntentMachineLearningMatch = typing___cast('IntentAlgorithms', 6)
+OndewoIntentBertClassifier = typing___cast('IntentAlgorithms', 7)
+OndewoIntentMetaClassifier = typing___cast('IntentAlgorithms', 8)
+OndewoIntentSnipsClassifier = typing___cast('IntentAlgorithms', 9)
+IntentExitDetector = typing___cast('IntentAlgorithms', 10)
+OndewoIntentRankingMatch = typing___cast('IntentAlgorithms', 11)
+OndewoIntentRasaClassifier = typing___cast('IntentAlgorithms', 12)
+OndewoWeightedEnsemble = typing___cast('IntentAlgorithms', 13)
+OndewoIntentExitDetector = typing___cast('IntentAlgorithms', 14)
+OndewoIntentParameterMatch = typing___cast('IntentAlgorithms', 15)
+global___IntentAlgorithms = IntentAlgorithms
+
 class ExtractEntitiesRequest(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
     parent = ... # type: typing___Text
@@ -777,3 +843,86 @@ class XLNetAugEnrichmentConfig(google___protobuf___message___Message):
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def ClearField(self, field_name: typing_extensions___Literal[u"enrichment_factor",b"enrichment_factor",u"execution_order",b"execution_order",u"is_active",b"is_active"]) -> None: ...
 global___XLNetAugEnrichmentConfig = XLNetAugEnrichmentConfig
+
+class ClassifyIntentsRequest(google___protobuf___message___Message):
+    DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
+    parent = ... # type: typing___Text
+    text = ... # type: typing___Text
+    language_code = ... # type: typing___Text
+    active_contexts = ... # type: builtin___bool
+    context_names = ... # type: google___protobuf___internal___containers___RepeatedScalarFieldContainer[typing___Text]
+    mode = ... # type: global___Mode
+    algorithms = ... # type: google___protobuf___internal___containers___RepeatedScalarFieldContainer[global___IntentAlgorithms]
+
+    def __init__(self,
+        *,
+        parent : typing___Optional[typing___Text] = None,
+        text : typing___Optional[typing___Text] = None,
+        language_code : typing___Optional[typing___Text] = None,
+        active_contexts : typing___Optional[builtin___bool] = None,
+        context_names : typing___Optional[typing___Iterable[typing___Text]] = None,
+        mode : typing___Optional[global___Mode] = None,
+        algorithms : typing___Optional[typing___Iterable[global___IntentAlgorithms]] = None,
+        ) -> None: ...
+    if sys.version_info >= (3,):
+        @classmethod
+        def FromString(cls, s: builtin___bytes) -> ClassifyIntentsRequest: ...
+    else:
+        @classmethod
+        def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> ClassifyIntentsRequest: ...
+    def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
+    def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"active_contexts",b"active_contexts",u"algorithms",b"algorithms",u"context_names",b"context_names",u"language_code",b"language_code",u"mode",b"mode",u"parent",b"parent",u"text",b"text"]) -> None: ...
+global___ClassifyIntentsRequest = ClassifyIntentsRequest
+
+class IntentClassified(google___protobuf___message___Message):
+    DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
+    intent_name = ... # type: typing___Text
+    intent_display_name = ... # type: typing___Text
+    classifier = ... # type: typing___Text
+    score = ... # type: builtin___float
+
+    def __init__(self,
+        *,
+        intent_name : typing___Optional[typing___Text] = None,
+        intent_display_name : typing___Optional[typing___Text] = None,
+        classifier : typing___Optional[typing___Text] = None,
+        score : typing___Optional[builtin___float] = None,
+        ) -> None: ...
+    if sys.version_info >= (3,):
+        @classmethod
+        def FromString(cls, s: builtin___bytes) -> IntentClassified: ...
+    else:
+        @classmethod
+        def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> IntentClassified: ...
+    def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
+    def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"classifier",b"classifier",u"intent_display_name",b"intent_display_name",u"intent_name",b"intent_name",u"score",b"score"]) -> None: ...
+global___IntentClassified = IntentClassified
+
+class ClassifyIntentsResponse(google___protobuf___message___Message):
+    DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
+    text = ... # type: typing___Text
+    active_contexts = ... # type: builtin___bool
+    context_names = ... # type: google___protobuf___internal___containers___RepeatedScalarFieldContainer[typing___Text]
+
+    @property
+    def intents_classified(self) -> google___protobuf___internal___containers___RepeatedCompositeFieldContainer[global___IntentClassified]: ...
+
+    def __init__(self,
+        *,
+        intents_classified : typing___Optional[typing___Iterable[global___IntentClassified]] = None,
+        text : typing___Optional[typing___Text] = None,
+        active_contexts : typing___Optional[builtin___bool] = None,
+        context_names : typing___Optional[typing___Iterable[typing___Text]] = None,
+        ) -> None: ...
+    if sys.version_info >= (3,):
+        @classmethod
+        def FromString(cls, s: builtin___bytes) -> ClassifyIntentsResponse: ...
+    else:
+        @classmethod
+        def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> ClassifyIntentsResponse: ...
+    def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
+    def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"active_contexts",b"active_contexts",u"context_names",b"context_names",u"intents_classified",b"intents_classified",u"text",b"text"]) -> None: ...
+global___ClassifyIntentsResponse = ClassifyIntentsResponse
