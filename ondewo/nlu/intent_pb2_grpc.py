@@ -82,6 +82,16 @@ class IntentsStub(object):
                 request_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchDeleteIntentsRequest.SerializeToString,
                 response_deserializer=google_dot_longrunning_dot_operations__pb2.Operation.FromString,
                 )
+        self.TagIntent = channel.unary_unary(
+                '/ondewo.nlu.Intents/TagIntent',
+                request_serializer=ondewo_dot_nlu_dot_intent__pb2.IntentTagMessage.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                )
+        self.DeleteIntentTag = channel.unary_unary(
+                '/ondewo.nlu.Intents/DeleteIntentTag',
+                request_serializer=ondewo_dot_nlu_dot_intent__pb2.IntentTagMessage.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                )
         self.BatchCreateTrainingPhrases = channel.unary_unary(
                 '/ondewo.nlu.Intents/BatchCreateTrainingPhrases',
                 request_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchCreateTrainingPhrasesRequest.SerializeToString,
@@ -246,6 +256,18 @@ class IntentsServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def TagIntent(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteIntentTag(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def BatchCreateTrainingPhrases(self, request, context):
         """************************ Training Phrase RPC Endpoints ***************************
 
@@ -394,6 +416,16 @@ def add_IntentsServicer_to_server(servicer, server):
                     servicer.BatchDeleteIntents,
                     request_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchDeleteIntentsRequest.FromString,
                     response_serializer=google_dot_longrunning_dot_operations__pb2.Operation.SerializeToString,
+            ),
+            'TagIntent': grpc.unary_unary_rpc_method_handler(
+                    servicer.TagIntent,
+                    request_deserializer=ondewo_dot_nlu_dot_intent__pb2.IntentTagMessage.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'DeleteIntentTag': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteIntentTag,
+                    request_deserializer=ondewo_dot_nlu_dot_intent__pb2.IntentTagMessage.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
             'BatchCreateTrainingPhrases': grpc.unary_unary_rpc_method_handler(
                     servicer.BatchCreateTrainingPhrases,
@@ -627,6 +659,40 @@ class Intents(object):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/BatchDeleteIntents',
             ondewo_dot_nlu_dot_intent__pb2.BatchDeleteIntentsRequest.SerializeToString,
             google_dot_longrunning_dot_operations__pb2.Operation.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def TagIntent(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/TagIntent',
+            ondewo_dot_nlu_dot_intent__pb2.IntentTagMessage.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteIntentTag(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/DeleteIntentTag',
+            ondewo_dot_nlu_dot_intent__pb2.IntentTagMessage.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
