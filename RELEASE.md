@@ -8,6 +8,10 @@
 * [OND211-1850] API Update. Allow sorting and searching of entity values on listing
 * [OND211-1850] API Update. Enable Entity Type View on all Entity Type CRUD operations
 
+### Improvements
+* [OND211-1911] Updated ondewo-logging version
+* Updated requirements compatibility
+
 ### Bug fixes
 * [OND211-1911] Update Ondewo Logging dependency to fix the Log4J vulnerability on ElasticSearch
 
