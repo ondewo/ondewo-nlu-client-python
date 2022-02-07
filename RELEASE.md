@@ -4,7 +4,7 @@
 ## Release ONDEWO NLU Python Client 2.5.0
 
 ### New features
-* [OND211-1793] AI Services. Added endpoint to classify and intent given an agent
+* [OND211-1793] AI Services. Added endpoint to classify an intent given an agent
 
 *****************
 
