@@ -1,12 +1,22 @@
 # Release History
 *****************
 
+## Release ONDEWO NLU Python Client 2.5.0
+
+### New features
+* [OND211-1793] AI Services. Added endpoint to classify and intent given an agent
+
+*****************
+
 ## Release ONDEWO NLU Python Client 2.4.0
 
 ### New features
 * [OND211-1836] Support intent tags with filtering
 * [OND211-1850] API Update. Allow sorting and searching of entity values on listing
 * [OND211-1850] API Update. Enable Entity Type View on all Entity Type CRUD operations
+
+### Improvements
+* Updated requirements compatibility
 
 ### Bug fixes
 * [OND211-1911] Update Ondewo Logging dependency to fix the Log4J vulnerability on ElasticSearch
