@@ -66,7 +66,7 @@ if __name__ == '__main__':
         user_name=config_["user_name"],
         password=config_["password"],
         http_token=config_["http_token"],
-        grpc_cert=config_.get("grpc_cert", ''),  # type: ignore
+        grpc_cert=config_.get("grpc_cert", ''),
     )
 
     client: Client = Client(config=config, use_secure_channel=False)
