@@ -1,6 +1,13 @@
 # Release History
 *****************
 
+## Release ONDEWO NLU Python Client 2.4.1
+
+### Improvements
+* Updated requirements compatibility for ondewo-logging
+
+*****************
+
 ## Release ONDEWO NLU Python Client 2.4.0
 
 ### New features
