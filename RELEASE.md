@@ -1,6 +1,13 @@
 # Release History
 *****************
 
+## Release ONDEWO NLU Python Client 2.4.2
+
+### Bug fixes
+* [OND211-1911] Correct setup.py version  
+
+*****************
+
 ## Release ONDEWO NLU Python Client 2.4.1
 
 ### Improvements
