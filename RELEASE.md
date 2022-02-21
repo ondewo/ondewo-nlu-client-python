@@ -5,6 +5,9 @@
 
 ### New features
 * [OND211-1793] AI Services. Added endpoint to classify an intent given an agent
+
+### Improvements
+* [OND211-1940] Session Review. Allow the filtering of sessions by intent tags
  
 *****************
 
