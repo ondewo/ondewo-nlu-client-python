@@ -637,6 +637,7 @@ class SessionInfo(google___protobuf___message___Message):
     number_turns = ... # type: builtin___int
     labels = ... # type: google___protobuf___internal___containers___RepeatedScalarFieldContainer[typing___Text]
     user_ids = ... # type: google___protobuf___internal___containers___RepeatedScalarFieldContainer[typing___Text]
+    intent_tags = ... # type: google___protobuf___internal___containers___RepeatedScalarFieldContainer[typing___Text]
 
     @property
     def matched_intents(self) -> google___protobuf___internal___containers___RepeatedCompositeFieldContainer[ondewo___nlu___intent_pb2___Intent]: ...
@@ -656,6 +657,7 @@ class SessionInfo(google___protobuf___message___Message):
         number_turns : typing___Optional[builtin___int] = None,
         labels : typing___Optional[typing___Iterable[typing___Text]] = None,
         user_ids : typing___Optional[typing___Iterable[typing___Text]] = None,
+        intent_tags : typing___Optional[typing___Iterable[typing___Text]] = None,
         ) -> None: ...
     if sys.version_info >= (3,):
         @classmethod
@@ -665,7 +667,7 @@ class SessionInfo(google___protobuf___message___Message):
         def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> SessionInfo: ...
     def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"earliest",b"earliest",u"labels",b"labels",u"language_codes",b"language_codes",u"latest",b"latest",u"matched_entity_types",b"matched_entity_types",u"matched_intents",b"matched_intents",u"min_entity_types_confidence",b"min_entity_types_confidence",u"min_intents_confidence",b"min_intents_confidence",u"number_turns",b"number_turns",u"user_ids",b"user_ids"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"earliest",b"earliest",u"intent_tags",b"intent_tags",u"labels",b"labels",u"language_codes",b"language_codes",u"latest",b"latest",u"matched_entity_types",b"matched_entity_types",u"matched_intents",b"matched_intents",u"min_entity_types_confidence",b"min_entity_types_confidence",u"min_intents_confidence",b"min_intents_confidence",u"number_turns",b"number_turns",u"user_ids",b"user_ids"]) -> None: ...
 global___SessionInfo = SessionInfo
 
 class ListSessionsResponse(google___protobuf___message___Message):
