@@ -5,6 +5,20 @@
 
 ### New features
 * [OND211-1793] AI Services. Added endpoint to classify an intent given an agent
+ 
+*****************
+
+## Release ONDEWO NLU Python Client 2.4.2
+
+### Bug fixes
+* [OND211-1911] Correct setup.py version  
+
+*****************
+
+## Release ONDEWO NLU Python Client 2.4.1
+
+### Improvements
+* [OND211-1911] Updated requirements compatibility for ondewo-logging
 
 *****************
 
