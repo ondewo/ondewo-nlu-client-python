@@ -18,7 +18,7 @@ from ondewo.nlu.aiservices_pb2 import ExtractEntitiesRequest, GetAlternativeSent
     GenerateResponsesRequest, GenerateResponsesResponse, \
     GetAlternativeTrainingPhrasesRequest, GetAlternativeTrainingPhrasesResponse, \
     GetAlternativeSentencesResponse, ExtractEntitiesResponse, GetSynonymsResponse, GetSynonymsRequest, \
-    ExtractEntitiesFuzzyRequest
+    ExtractEntitiesFuzzyRequest, ClassifyIntentsRequest, ClassifyIntentsResponse
 from ondewo.nlu.aiservices_pb2_grpc import AiServicesStub
 from ondewo.nlu.core.services_interface import ServicesInterface
 
@@ -58,8 +58,8 @@ class AIServices(ServicesInterface):
         return response
 
     def get_alternative_training_phrases(
-            self,
-            request: GetAlternativeTrainingPhrasesRequest
+        self,
+        request: GetAlternativeTrainingPhrasesRequest
     ) -> GetAlternativeTrainingPhrasesResponse:
         response: GetAlternativeTrainingPhrasesResponse = \
             self.stub.GetAlternativeTrainingPhrases(request, metadata=self.metadata)
@@ -67,6 +67,10 @@ class AIServices(ServicesInterface):
 
     def get_synonyms(self, request: GetSynonymsRequest) -> GetSynonymsResponse:
         response: GetSynonymsResponse = self.stub.GetSynonyms(request, metadata=self.metadata)
+        return response
+
+    def classify_intents(self, request: ClassifyIntentsRequest) -> ClassifyIntentsResponse:
+        response: ClassifyIntentsResponse = self.stub.ClassifyIntents(request, metadata=self.metadata)
         return response
 
     def extract_entities_fuzzy(self, request: ExtractEntitiesFuzzyRequest) -> ExtractEntitiesResponse:

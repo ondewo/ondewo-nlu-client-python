@@ -1,6 +1,18 @@
 # Release History
 *****************
 
+## Release ONDEWO NLU Python Client 2.5.0
+
+### New features
+* [OND211-1793] AI Services. Added endpoint to classify an intent given an agent
+
+### Improvements
+* [OND211-1940] Session Review. Allow the filtering of sessions by intent tags
+* [OND211-1942] Intents. Allow the addition/deletion of multiple tags at a time
+* [OND211-1942] Intents. Rename of the IntentTagMessage to IntentTagRequest
+ 
+*****************
+
 ## Release ONDEWO NLU Python Client 2.4.2
 
 ### Bug fixes
