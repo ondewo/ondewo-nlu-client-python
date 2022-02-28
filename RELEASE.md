@@ -1,6 +1,13 @@
 # Release History
 *****************
 
+## Release ONDEWO NLU APIS 2.5.1
+
+### Bugfix
+* [OND211-1953] Intents. Fix import bug regarding IntentTagRequest
+
+*****************
+
 ## Release ONDEWO NLU Python Client 2.5.0
 
 ### New features
