@@ -84,14 +84,10 @@ class IntentAlgorithms(builtin___int):
     OndewoIntentNamedExactMatch = typing___cast('IntentAlgorithms', 2)
     OndewoIntentSimilarityMatch = typing___cast('IntentAlgorithms', 3)
     OndewoIntentNamedSimilarityMatch = typing___cast('IntentAlgorithms', 4)
-    OndewoIntentFastTextClassifier = typing___cast('IntentAlgorithms', 5)
-    OndewoIntentMachineLearningMatch = typing___cast('IntentAlgorithms', 6)
     OndewoIntentBertClassifier = typing___cast('IntentAlgorithms', 7)
     OndewoIntentMetaClassifier = typing___cast('IntentAlgorithms', 8)
-    OndewoIntentSnipsClassifier = typing___cast('IntentAlgorithms', 9)
     IntentExitDetector = typing___cast('IntentAlgorithms', 10)
     OndewoIntentRankingMatch = typing___cast('IntentAlgorithms', 11)
-    OndewoIntentRasaClassifier = typing___cast('IntentAlgorithms', 12)
     OndewoWeightedEnsemble = typing___cast('IntentAlgorithms', 13)
     OndewoIntentExitDetector = typing___cast('IntentAlgorithms', 14)
     OndewoIntentParameterMatch = typing___cast('IntentAlgorithms', 15)
@@ -100,14 +96,10 @@ OndewoIntentExactMatch = typing___cast('IntentAlgorithms', 1)
 OndewoIntentNamedExactMatch = typing___cast('IntentAlgorithms', 2)
 OndewoIntentSimilarityMatch = typing___cast('IntentAlgorithms', 3)
 OndewoIntentNamedSimilarityMatch = typing___cast('IntentAlgorithms', 4)
-OndewoIntentFastTextClassifier = typing___cast('IntentAlgorithms', 5)
-OndewoIntentMachineLearningMatch = typing___cast('IntentAlgorithms', 6)
 OndewoIntentBertClassifier = typing___cast('IntentAlgorithms', 7)
 OndewoIntentMetaClassifier = typing___cast('IntentAlgorithms', 8)
-OndewoIntentSnipsClassifier = typing___cast('IntentAlgorithms', 9)
 IntentExitDetector = typing___cast('IntentAlgorithms', 10)
 OndewoIntentRankingMatch = typing___cast('IntentAlgorithms', 11)
-OndewoIntentRasaClassifier = typing___cast('IntentAlgorithms', 12)
 OndewoWeightedEnsemble = typing___cast('IntentAlgorithms', 13)
 OndewoIntentExitDetector = typing___cast('IntentAlgorithms', 14)
 OndewoIntentParameterMatch = typing___cast('IntentAlgorithms', 15)
@@ -605,9 +597,6 @@ class DataEnrichmentConfig(google___protobuf___message___Message):
     def glove_enrichment(self) -> global___GloVeEnrichmentConfig: ...
 
     @property
-    def fasttext_enrichment(self) -> global___FastTextEnrichmentConfig: ...
-
-    @property
     def bert_enrichment(self) -> global___BertAugEnrichmentConfig: ...
 
     @property
@@ -621,7 +610,6 @@ class DataEnrichmentConfig(google___protobuf___message___Message):
         word_net_enrichment : typing___Optional[global___WordNetAugEnrichmentConfig] = None,
         gpt2_enrichment : typing___Optional[global___GPT2EnrichmentConfig] = None,
         glove_enrichment : typing___Optional[global___GloVeEnrichmentConfig] = None,
-        fasttext_enrichment : typing___Optional[global___FastTextEnrichmentConfig] = None,
         bert_enrichment : typing___Optional[global___BertAugEnrichmentConfig] = None,
         xlnet_enrichment : typing___Optional[global___XLNetAugEnrichmentConfig] = None,
         ) -> None: ...
@@ -633,8 +621,8 @@ class DataEnrichmentConfig(google___protobuf___message___Message):
         def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> DataEnrichmentConfig: ...
     def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
-    def HasField(self, field_name: typing_extensions___Literal[u"bert_enrichment",b"bert_enrichment",u"entity_enrichment",b"entity_enrichment",u"fasttext_enrichment",b"fasttext_enrichment",u"glove_enrichment",b"glove_enrichment",u"gpt2_enrichment",b"gpt2_enrichment",u"thesaurus_enrichment",b"thesaurus_enrichment",u"word2vec_enrichment",b"word2vec_enrichment",u"word_net_enrichment",b"word_net_enrichment",u"xlnet_enrichment",b"xlnet_enrichment"]) -> builtin___bool: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"bert_enrichment",b"bert_enrichment",u"entity_enrichment",b"entity_enrichment",u"fasttext_enrichment",b"fasttext_enrichment",u"glove_enrichment",b"glove_enrichment",u"gpt2_enrichment",b"gpt2_enrichment",u"thesaurus_enrichment",b"thesaurus_enrichment",u"word2vec_enrichment",b"word2vec_enrichment",u"word_net_enrichment",b"word_net_enrichment",u"xlnet_enrichment",b"xlnet_enrichment"]) -> None: ...
+    def HasField(self, field_name: typing_extensions___Literal[u"bert_enrichment",b"bert_enrichment",u"entity_enrichment",b"entity_enrichment",u"glove_enrichment",b"glove_enrichment",u"gpt2_enrichment",b"gpt2_enrichment",u"thesaurus_enrichment",b"thesaurus_enrichment",u"word2vec_enrichment",b"word2vec_enrichment",u"word_net_enrichment",b"word_net_enrichment",u"xlnet_enrichment",b"xlnet_enrichment"]) -> builtin___bool: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"bert_enrichment",b"bert_enrichment",u"entity_enrichment",b"entity_enrichment",u"glove_enrichment",b"glove_enrichment",u"gpt2_enrichment",b"gpt2_enrichment",u"thesaurus_enrichment",b"thesaurus_enrichment",u"word2vec_enrichment",b"word2vec_enrichment",u"word_net_enrichment",b"word_net_enrichment",u"xlnet_enrichment",b"xlnet_enrichment"]) -> None: ...
 global___DataEnrichmentConfig = DataEnrichmentConfig
 
 class EntityEnrichmentConfig(google___protobuf___message___Message):
@@ -682,29 +670,6 @@ class ThesaurusEnrichmentConfig(google___protobuf___message___Message):
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def ClearField(self, field_name: typing_extensions___Literal[u"enrichment_factor",b"enrichment_factor",u"execution_order",b"execution_order",u"is_active",b"is_active"]) -> None: ...
 global___ThesaurusEnrichmentConfig = ThesaurusEnrichmentConfig
-
-class FastTextEnrichmentConfig(google___protobuf___message___Message):
-    DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
-    is_active = ... # type: builtin___bool
-    enrichment_factor = ... # type: builtin___int
-    execution_order = ... # type: builtin___int
-
-    def __init__(self,
-        *,
-        is_active : typing___Optional[builtin___bool] = None,
-        enrichment_factor : typing___Optional[builtin___int] = None,
-        execution_order : typing___Optional[builtin___int] = None,
-        ) -> None: ...
-    if sys.version_info >= (3,):
-        @classmethod
-        def FromString(cls, s: builtin___bytes) -> FastTextEnrichmentConfig: ...
-    else:
-        @classmethod
-        def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> FastTextEnrichmentConfig: ...
-    def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
-    def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"enrichment_factor",b"enrichment_factor",u"execution_order",b"execution_order",u"is_active",b"is_active"]) -> None: ...
-global___FastTextEnrichmentConfig = FastTextEnrichmentConfig
 
 class BertAugEnrichmentConfig(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
