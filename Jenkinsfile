@@ -23,7 +23,7 @@ pipeline {
                 }
             }
             steps {
-                error "Branch ${BRANCH_NAME} is ingored"
+                error "Branch ${params.BRANCH_NAME} is ingored"
             }
         }
         stage('Build') {
