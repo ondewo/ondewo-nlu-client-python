@@ -11,7 +11,7 @@ regex==2020.7.14
 protobuf~=3.19.1
 grpcio-reflection==1.44.0
 grpcio-tools==1.44.0
-google-api-core~=1.13.0
+google-api-core==2.6.0
 python-dateutil~=2.8.1
 Faker~=8.7.0
 setuptools~=56.2.0
