@@ -92,6 +92,11 @@ class IntentsStub(object):
                 request_serializer=ondewo_dot_nlu_dot_intent__pb2.IntentTagRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 )
+        self.GetAllIntentTags = channel.unary_unary(
+                '/ondewo.nlu.Intents/GetAllIntentTags',
+                request_serializer=ondewo_dot_nlu_dot_intent__pb2.GetAllIntentTagsRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_intent__pb2.GetAllIntentTagsResponse.FromString,
+                )
         self.BatchCreateTrainingPhrases = channel.unary_unary(
                 '/ondewo.nlu.Intents/BatchCreateTrainingPhrases',
                 request_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchCreateTrainingPhrasesRequest.SerializeToString,
@@ -268,6 +273,12 @@ class IntentsServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetAllIntentTags(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def BatchCreateTrainingPhrases(self, request, context):
         """************************ Training Phrase RPC Endpoints ***************************
 
@@ -426,6 +437,11 @@ def add_IntentsServicer_to_server(servicer, server):
                     servicer.DeleteIntentTag,
                     request_deserializer=ondewo_dot_nlu_dot_intent__pb2.IntentTagRequest.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'GetAllIntentTags': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetAllIntentTags,
+                    request_deserializer=ondewo_dot_nlu_dot_intent__pb2.GetAllIntentTagsRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_intent__pb2.GetAllIntentTagsResponse.SerializeToString,
             ),
             'BatchCreateTrainingPhrases': grpc.unary_unary_rpc_method_handler(
                     servicer.BatchCreateTrainingPhrases,
@@ -693,6 +709,23 @@ class Intents(object):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/DeleteIntentTag',
             ondewo_dot_nlu_dot_intent__pb2.IntentTagRequest.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetAllIntentTags(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/GetAllIntentTags',
+            ondewo_dot_nlu_dot_intent__pb2.GetAllIntentTagsRequest.SerializeToString,
+            ondewo_dot_nlu_dot_intent__pb2.GetAllIntentTagsResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
