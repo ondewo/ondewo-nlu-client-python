@@ -27,7 +27,7 @@ from ondewo.nlu.intent_pb2 import BatchCreateTrainingPhrasesRequest, BatchTraini
     BatchParametersStatusResponse, BatchCreateParametersRequest, BatchGetParametersRequest, \
     BatchUpdateParametersRequest, BatchDeleteParametersResponse, BatchDeleteParametersRequest, \
     ListParametersResponse, ListParametersRequest, IntentTagRequest, GetIntentTagsResponse, GetIntentTagsRequest, \
-    GetAllIntentTagsResponse, GetAllIntentTagsRequest
+    GetAllIntentTagsRequest
 from ondewo.nlu.intent_pb2_grpc import IntentsStub
 
 
@@ -177,6 +177,6 @@ class Intents(ServicesInterface):
         response: GetIntentTagsResponse = self.stub.GetIntentTags(request, metadata=self.metadata)
         return response
 
-    def get_all_intent_tags(self, request: GetAllIntentTagsRequest) -> GetAllIntentTagsResponse:
-        response: GetAllIntentTagsResponse = self.stub.GetAllIntentTags(request, metadata=self.metadata)
+    def get_all_intent_tags(self, request: GetAllIntentTagsRequest) -> GetIntentTagsResponse:
+        response: GetIntentTagsResponse = self.stub.GetAllIntentTags(request, metadata=self.metadata)
         return response
