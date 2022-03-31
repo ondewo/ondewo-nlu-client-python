@@ -1,3 +1,5 @@
+import json
+
 import polling
 from google.longrunning.operations_pb2 import Operation, GetOperationRequest
 
@@ -6,15 +8,22 @@ from ondewo.nlu.client import Client
 from ondewo.nlu.client_config import ClientConfig
 
 if __name__ == '__main__':
-    parent: str = '<PUT_YOUR_AGENT_PARENT_HERE>'
-    config: ClientConfig = ClientConfig(
-        host='<host>',
-        port='<port>',
-        http_token='<http/root token>',
-        user_name='<e-mail of user>',
-        password='<password of user>'
+    parent: str = 'projects/some_agent_id/agent'
+    config_file: str = 'envs/example.json'
+
+    with open(config_file) as f:
+        config_ = json.load(f)
+
+    config = ClientConfig(
+        host=config_["host"],
+        port=config_["port"],
+        user_name=config_["user_name"],
+        password=config_["password"],
+        http_token=config_["http_token"],
+        grpc_cert=config_.get("grpc_cert", '').encode().decode().replace("\\n", "\n"),  # type: ignore
     )
-    client: Client = Client(config=config, use_secure_channel=False)
+
+    client: Client = Client(config=config, use_secure_channel=True)
     export_operation: Operation = client.services.agents.export_agent(
         ExportAgentRequest(
             parent=parent
