@@ -1,7 +1,7 @@
 # Release History
 *****************
 
-## Release ONDEWO NLU APIS 2.6.0
+## Release ONDEWO NLU Python Client 2.6.0
 
 ### New features
 * [[OND211-1959]](https://ondewo.atlassian.net/browse/OND211-1959) - Intents. GetAllTags and GetAllIntentTags endpoints.
