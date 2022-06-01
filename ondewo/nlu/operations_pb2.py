@@ -25,7 +25,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x1bondewo/nlu/operations.proto\x12\nondewo.nlu\x1a\x1cgoogle/api/annotations.proto\x1a\x19google/protobuf/any.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x17google/rpc/status.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#ondewo/nlu/operation_metadata.proto\"\xa8\x01\n\tOperation\x12\x0c\n\x04name\x18\x01 \x01(\t\x12&\n\x08metadata\x18\x02 \x01(\x0b\x32\x14.google.protobuf.Any\x12\x0c\n\x04\x64one\x18\x03 \x01(\x08\x12#\n\x05\x65rror\x18\x04 \x01(\x0b\x32\x12.google.rpc.StatusH\x00\x12(\n\x08response\x18\x05 \x01(\x0b\x32\x14.google.protobuf.AnyH\x00\x42\x08\n\x06result\"#\n\x13GetOperationRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"\x93\x01\n\x15ListOperationsRequest\x12\x0c\n\x04name\x18\x04 \x01(\t\x12\x0e\n\x06\x66ilter\x18\x01 \x01(\t\x12\x11\n\tpage_size\x18\x02 \x01(\x05\x12\x12\n\npage_token\x18\x03 \x01(\t\x12\x35\n\x10operation_filter\x18\x05 \x01(\x0b\x32\x1b.ondewo.nlu.OperationFilter\"\x8e\x02\n\x0fOperationFilter\x12\x17\n\x0fproject_parents\x18\x01 \x03(\t\x12\x36\n\x08statuses\x18\x02 \x03(\x0e\x32$.ondewo.nlu.OperationMetadata.Status\x12:\n\x05types\x18\x03 \x03(\x0e\x32+.ondewo.nlu.OperationMetadata.OperationType\x12.\n\nstart_time\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12,\n\x08\x65nd_time\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x10\n\x08user_ids\x18\x06 \x03(\t\"\\\n\x16ListOperationsResponse\x12)\n\noperations\x18\x01 \x03(\x0b\x32\x15.ondewo.nlu.Operation\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t\"&\n\x16\x43\x61ncelOperationRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"&\n\x16\x44\x65leteOperationRequest\x12\x0c\n\x04name\x18\x01 \x01(\t2\xda\x03\n\nOperations\x12v\n\x0eListOperations\x12!.ondewo.nlu.ListOperationsRequest\x1a\".ondewo.nlu.ListOperationsResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/v1/{name=operations}\x12h\n\x0cGetOperation\x12\x1f.ondewo.nlu.GetOperationRequest\x1a\x15.ondewo.nlu.Operation\" \x82\xd3\xe4\x93\x02\x1a\x12\x18/v1/{name=operations/**}\x12o\n\x0f\x44\x65leteOperation\x12\".ondewo.nlu.DeleteOperationRequest\x1a\x16.google.protobuf.Empty\" \x82\xd3\xe4\x93\x02\x1a*\x18/v1/{name=operations/**}\x12y\n\x0f\x43\x61ncelOperation\x12\".ondewo.nlu.CancelOperationRequest\x1a\x16.google.protobuf.Empty\"*\x82\xd3\xe4\x93\x02$\"\x1f/v1/{name=operations/**}:cancel:\x01*b\x06proto3'
+  serialized_pb=b'\n\x1bondewo/nlu/operations.proto\x12\nondewo.nlu\x1a\x1cgoogle/api/annotations.proto\x1a\x19google/protobuf/any.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x17google/rpc/status.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#ondewo/nlu/operation_metadata.proto\"\xa8\x01\n\tOperation\x12\x0c\n\x04name\x18\x01 \x01(\t\x12&\n\x08metadata\x18\x02 \x01(\x0b\x32\x14.google.protobuf.Any\x12\x0c\n\x04\x64one\x18\x03 \x01(\x08\x12#\n\x05\x65rror\x18\x04 \x01(\x0b\x32\x12.google.rpc.StatusH\x00\x12(\n\x08response\x18\x05 \x01(\x0b\x32\x14.google.protobuf.AnyH\x00\x42\x08\n\x06result\"#\n\x13GetOperationRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"\x93\x01\n\x15ListOperationsRequest\x12\x0c\n\x04name\x18\x04 \x01(\t\x12\x0e\n\x06\x66ilter\x18\x01 \x01(\t\x12\x11\n\tpage_size\x18\x02 \x01(\x05\x12\x12\n\npage_token\x18\x03 \x01(\t\x12\x35\n\x10operation_filter\x18\x05 \x01(\x0b\x32\x1b.ondewo.nlu.OperationFilter\"\xb8\x02\n\x0fOperationFilter\x12\x17\n\x0fproject_parents\x18\x01 \x03(\t\x12\x36\n\x08statuses\x18\x02 \x03(\x0e\x32$.ondewo.nlu.OperationMetadata.Status\x12:\n\x05types\x18\x03 \x03(\x0e\x32+.ondewo.nlu.OperationMetadata.OperationType\x12\x30\n\nstart_time\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.TimestampH\x00\x12.\n\x08\x65nd_time\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.TimestampH\x01\x12\x10\n\x08user_ids\x18\x06 \x03(\tB\x12\n\x10start_time_oneofB\x10\n\x0e\x65nd_time_oneof\"\\\n\x16ListOperationsResponse\x12)\n\noperations\x18\x01 \x03(\x0b\x32\x15.ondewo.nlu.Operation\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t\"&\n\x16\x43\x61ncelOperationRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"&\n\x16\x44\x65leteOperationRequest\x12\x0c\n\x04name\x18\x01 \x01(\t2\xda\x03\n\nOperations\x12v\n\x0eListOperations\x12!.ondewo.nlu.ListOperationsRequest\x1a\".ondewo.nlu.ListOperationsResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/v1/{name=operations}\x12h\n\x0cGetOperation\x12\x1f.ondewo.nlu.GetOperationRequest\x1a\x15.ondewo.nlu.Operation\" \x82\xd3\xe4\x93\x02\x1a\x12\x18/v1/{name=operations/**}\x12o\n\x0f\x44\x65leteOperation\x12\".ondewo.nlu.DeleteOperationRequest\x1a\x16.google.protobuf.Empty\" \x82\xd3\xe4\x93\x02\x1a*\x18/v1/{name=operations/**}\x12y\n\x0f\x43\x61ncelOperation\x12\".ondewo.nlu.CancelOperationRequest\x1a\x16.google.protobuf.Empty\"*\x82\xd3\xe4\x93\x02$\"\x1f/v1/{name=operations/**}:cancel:\x01*b\x06proto3'
   ,
   dependencies=[google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_protobuf_dot_any__pb2.DESCRIPTOR,google_dot_protobuf_dot_empty__pb2.DESCRIPTOR,google_dot_rpc_dot_status__pb2.DESCRIPTOR,google_dot_protobuf_dot_timestamp__pb2.DESCRIPTOR,ondewo_dot_nlu_dot_operation__metadata__pb2.DESCRIPTOR,])
 
@@ -250,9 +250,19 @@ _OPERATIONFILTER = _descriptor.Descriptor(
   syntax='proto3',
   extension_ranges=[],
   oneofs=[
+    _descriptor.OneofDescriptor(
+      name='start_time_oneof', full_name='ondewo.nlu.OperationFilter.start_time_oneof',
+      index=0, containing_type=None,
+      create_key=_descriptor._internal_create_key,
+    fields=[]),
+    _descriptor.OneofDescriptor(
+      name='end_time_oneof', full_name='ondewo.nlu.OperationFilter.end_time_oneof',
+      index=1, containing_type=None,
+      create_key=_descriptor._internal_create_key,
+    fields=[]),
   ],
   serialized_start=583,
-  serialized_end=853,
+  serialized_end=895,
 )
 
 
@@ -290,8 +300,8 @@ _LISTOPERATIONSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=855,
-  serialized_end=947,
+  serialized_start=897,
+  serialized_end=989,
 )
 
 
@@ -322,8 +332,8 @@ _CANCELOPERATIONREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=949,
-  serialized_end=987,
+  serialized_start=991,
+  serialized_end=1029,
 )
 
 
@@ -354,8 +364,8 @@ _DELETEOPERATIONREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=989,
-  serialized_end=1027,
+  serialized_start=1031,
+  serialized_end=1069,
 )
 
 _OPERATION.fields_by_name['metadata'].message_type = google_dot_protobuf_dot_any__pb2._ANY
@@ -372,6 +382,12 @@ _OPERATIONFILTER.fields_by_name['statuses'].enum_type = ondewo_dot_nlu_dot_opera
 _OPERATIONFILTER.fields_by_name['types'].enum_type = ondewo_dot_nlu_dot_operation__metadata__pb2._OPERATIONMETADATA_OPERATIONTYPE
 _OPERATIONFILTER.fields_by_name['start_time'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
 _OPERATIONFILTER.fields_by_name['end_time'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_OPERATIONFILTER.oneofs_by_name['start_time_oneof'].fields.append(
+  _OPERATIONFILTER.fields_by_name['start_time'])
+_OPERATIONFILTER.fields_by_name['start_time'].containing_oneof = _OPERATIONFILTER.oneofs_by_name['start_time_oneof']
+_OPERATIONFILTER.oneofs_by_name['end_time_oneof'].fields.append(
+  _OPERATIONFILTER.fields_by_name['end_time'])
+_OPERATIONFILTER.fields_by_name['end_time'].containing_oneof = _OPERATIONFILTER.oneofs_by_name['end_time_oneof']
 _LISTOPERATIONSRESPONSE.fields_by_name['operations'].message_type = _OPERATION
 DESCRIPTOR.message_types_by_name['Operation'] = _OPERATION
 DESCRIPTOR.message_types_by_name['GetOperationRequest'] = _GETOPERATIONREQUEST
@@ -440,8 +456,8 @@ _OPERATIONS = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=1030,
-  serialized_end=1504,
+  serialized_start=1072,
+  serialized_end=1546,
   methods=[
   _descriptor.MethodDescriptor(
     name='ListOperations',
