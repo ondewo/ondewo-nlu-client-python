@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-from google.longrunning import operations_pb2
+from ondewo.nlu import operations_pb2
 from google.protobuf import empty_pb2
 
 from ondewo.nlu import intent_pb2

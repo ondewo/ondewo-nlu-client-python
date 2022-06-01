@@ -1,5 +1,5 @@
 import polling
-from google.longrunning.operations_pb2 import Operation, GetOperationRequest
+from ondewo.nlu.operations_pb2 import Operation, GetOperationRequest
 
 from ondewo.nlu.agent_pb2 import TrainAgentRequest
 from ondewo.nlu.client import Client

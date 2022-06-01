@@ -1,7 +1,7 @@
 from typing import Optional
 
 import polling
-from google.longrunning.operations_pb2 import Operation, GetOperationRequest
+from ondewo.nlu.operations_pb2 import Operation, GetOperationRequest
 
 from ondewo.nlu.agent_pb2 import RestoreAgentRequest
 from ondewo.nlu.client import Client

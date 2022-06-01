@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-from google.longrunning import operations_pb2
+from ondewo.nlu import operations_pb2
 from google.protobuf.empty_pb2 import Empty
 
 from ondewo.nlu.agent_pb2 import Agent, CreateAgentRequest, GetAgentRequest, UpdateAgentRequest, \
