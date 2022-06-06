@@ -11,7 +11,7 @@ regex==2022.4.24
 protobuf~=3.19.1
 grpcio-reflection~=1.46.3
 grpcio-tools~=1.46.3
-google-api-core~=2.7.2
+google-api-core~=2.8.1
 python-dateutil~=2.8.1
 Faker~=8.7.0
 setuptools~=56.2.0
