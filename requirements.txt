@@ -2,7 +2,7 @@
 # Useful doc regarding compatible version: https://www.python.org/dev/peps/pep-0440/#id52
 # For more information about the compatible release check pep 440: https://www.python.org/dev/peps/pep-0440/#id52
 
-dataclasses-json~=0.5.7
+dataclasses-json~=0.5.6
 ondewo-client-utils~=0.1.0
 ondewo-logging~=3.1
 polling~=0.3.1
