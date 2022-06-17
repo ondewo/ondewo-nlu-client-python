@@ -88,6 +88,10 @@ def check_all_annotations(parent: str, language_code: str, entity_map: Dict, cli
 
 
 if __name__ == '__main__':
+    """
+    This script removes all annotations that mark text that is no part of the synonyms
+        of the entity type associated to them.
+    """
     project_id: str = '<Your project ID>'
     parent: str = f'projects/{project_id}/agent'
     language_code: str = 'de'
