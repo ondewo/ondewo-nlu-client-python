@@ -2,9 +2,9 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.longrunning import operations_pb2 as google_dot_longrunning_dot_operations__pb2
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 from ondewo.nlu import entity_type_pb2 as ondewo_dot_nlu_dot_entity__type__pb2
+from ondewo.nlu import operations_pb2 as ondewo_dot_nlu_dot_operations__pb2
 
 
 class EntityTypesStub(object):
@@ -71,12 +71,12 @@ class EntityTypesStub(object):
         self.BatchUpdateEntityTypes = channel.unary_unary(
                 '/ondewo.nlu.EntityTypes/BatchUpdateEntityTypes',
                 request_serializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchUpdateEntityTypesRequest.SerializeToString,
-                response_deserializer=google_dot_longrunning_dot_operations__pb2.Operation.FromString,
+                response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
                 )
         self.BatchDeleteEntityTypes = channel.unary_unary(
                 '/ondewo.nlu.EntityTypes/BatchDeleteEntityTypes',
                 request_serializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchDeleteEntityTypesRequest.SerializeToString,
-                response_deserializer=google_dot_longrunning_dot_operations__pb2.Operation.FromString,
+                response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
                 )
         self.BatchCreateEntities = channel.unary_unary(
                 '/ondewo.nlu.EntityTypes/BatchCreateEntities',
@@ -256,12 +256,12 @@ def add_EntityTypesServicer_to_server(servicer, server):
             'BatchUpdateEntityTypes': grpc.unary_unary_rpc_method_handler(
                     servicer.BatchUpdateEntityTypes,
                     request_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchUpdateEntityTypesRequest.FromString,
-                    response_serializer=google_dot_longrunning_dot_operations__pb2.Operation.SerializeToString,
+                    response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
             ),
             'BatchDeleteEntityTypes': grpc.unary_unary_rpc_method_handler(
                     servicer.BatchDeleteEntityTypes,
                     request_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchDeleteEntityTypesRequest.FromString,
-                    response_serializer=google_dot_longrunning_dot_operations__pb2.Operation.SerializeToString,
+                    response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
             ),
             'BatchCreateEntities': grpc.unary_unary_rpc_method_handler(
                     servicer.BatchCreateEntities,
@@ -423,7 +423,7 @@ class EntityTypes(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.EntityTypes/BatchUpdateEntityTypes',
             ondewo_dot_nlu_dot_entity__type__pb2.BatchUpdateEntityTypesRequest.SerializeToString,
-            google_dot_longrunning_dot_operations__pb2.Operation.FromString,
+            ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -440,7 +440,7 @@ class EntityTypes(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.EntityTypes/BatchDeleteEntityTypes',
             ondewo_dot_nlu_dot_entity__type__pb2.BatchDeleteEntityTypesRequest.SerializeToString,
-            google_dot_longrunning_dot_operations__pb2.Operation.FromString,
+            ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

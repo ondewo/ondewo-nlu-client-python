@@ -2,9 +2,9 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.longrunning import operations_pb2 as google_dot_longrunning_dot_operations__pb2
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 from ondewo.nlu import agent_pb2 as ondewo_dot_nlu_dot_agent__pb2
+from ondewo.nlu import operations_pb2 as ondewo_dot_nlu_dot_operations__pb2
 
 
 class AgentsStub(object):
@@ -95,37 +95,37 @@ class AgentsStub(object):
         self.TrainAgent = channel.unary_unary(
                 '/ondewo.nlu.Agents/TrainAgent',
                 request_serializer=ondewo_dot_nlu_dot_agent__pb2.TrainAgentRequest.SerializeToString,
-                response_deserializer=google_dot_longrunning_dot_operations__pb2.Operation.FromString,
+                response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
                 )
         self.BuildCache = channel.unary_unary(
                 '/ondewo.nlu.Agents/BuildCache',
                 request_serializer=ondewo_dot_nlu_dot_agent__pb2.BuildCacheRequest.SerializeToString,
-                response_deserializer=google_dot_longrunning_dot_operations__pb2.Operation.FromString,
+                response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
                 )
         self.ExportAgent = channel.unary_unary(
                 '/ondewo.nlu.Agents/ExportAgent',
                 request_serializer=ondewo_dot_nlu_dot_agent__pb2.ExportAgentRequest.SerializeToString,
-                response_deserializer=google_dot_longrunning_dot_operations__pb2.Operation.FromString,
+                response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
                 )
         self.ExportBenchmarkAgent = channel.unary_unary(
                 '/ondewo.nlu.Agents/ExportBenchmarkAgent',
                 request_serializer=ondewo_dot_nlu_dot_agent__pb2.ExportBenchmarkAgentRequest.SerializeToString,
-                response_deserializer=google_dot_longrunning_dot_operations__pb2.Operation.FromString,
+                response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
                 )
         self.ImportAgent = channel.unary_unary(
                 '/ondewo.nlu.Agents/ImportAgent',
                 request_serializer=ondewo_dot_nlu_dot_agent__pb2.ImportAgentRequest.SerializeToString,
-                response_deserializer=google_dot_longrunning_dot_operations__pb2.Operation.FromString,
+                response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
                 )
         self.OptimizeRankingMatch = channel.unary_unary(
                 '/ondewo.nlu.Agents/OptimizeRankingMatch',
                 request_serializer=ondewo_dot_nlu_dot_agent__pb2.OptimizeRankingMatchRequest.SerializeToString,
-                response_deserializer=google_dot_longrunning_dot_operations__pb2.Operation.FromString,
+                response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
                 )
         self.RestoreAgent = channel.unary_unary(
                 '/ondewo.nlu.Agents/RestoreAgent',
                 request_serializer=ondewo_dot_nlu_dot_agent__pb2.RestoreAgentRequest.SerializeToString,
-                response_deserializer=google_dot_longrunning_dot_operations__pb2.Operation.FromString,
+                response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
                 )
         self.GetAgentStatistics = channel.unary_unary(
                 '/ondewo.nlu.Agents/GetAgentStatistics',
@@ -642,37 +642,37 @@ def add_AgentsServicer_to_server(servicer, server):
             'TrainAgent': grpc.unary_unary_rpc_method_handler(
                     servicer.TrainAgent,
                     request_deserializer=ondewo_dot_nlu_dot_agent__pb2.TrainAgentRequest.FromString,
-                    response_serializer=google_dot_longrunning_dot_operations__pb2.Operation.SerializeToString,
+                    response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
             ),
             'BuildCache': grpc.unary_unary_rpc_method_handler(
                     servicer.BuildCache,
                     request_deserializer=ondewo_dot_nlu_dot_agent__pb2.BuildCacheRequest.FromString,
-                    response_serializer=google_dot_longrunning_dot_operations__pb2.Operation.SerializeToString,
+                    response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
             ),
             'ExportAgent': grpc.unary_unary_rpc_method_handler(
                     servicer.ExportAgent,
                     request_deserializer=ondewo_dot_nlu_dot_agent__pb2.ExportAgentRequest.FromString,
-                    response_serializer=google_dot_longrunning_dot_operations__pb2.Operation.SerializeToString,
+                    response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
             ),
             'ExportBenchmarkAgent': grpc.unary_unary_rpc_method_handler(
                     servicer.ExportBenchmarkAgent,
                     request_deserializer=ondewo_dot_nlu_dot_agent__pb2.ExportBenchmarkAgentRequest.FromString,
-                    response_serializer=google_dot_longrunning_dot_operations__pb2.Operation.SerializeToString,
+                    response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
             ),
             'ImportAgent': grpc.unary_unary_rpc_method_handler(
                     servicer.ImportAgent,
                     request_deserializer=ondewo_dot_nlu_dot_agent__pb2.ImportAgentRequest.FromString,
-                    response_serializer=google_dot_longrunning_dot_operations__pb2.Operation.SerializeToString,
+                    response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
             ),
             'OptimizeRankingMatch': grpc.unary_unary_rpc_method_handler(
                     servicer.OptimizeRankingMatch,
                     request_deserializer=ondewo_dot_nlu_dot_agent__pb2.OptimizeRankingMatchRequest.FromString,
-                    response_serializer=google_dot_longrunning_dot_operations__pb2.Operation.SerializeToString,
+                    response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
             ),
             'RestoreAgent': grpc.unary_unary_rpc_method_handler(
                     servicer.RestoreAgent,
                     request_deserializer=ondewo_dot_nlu_dot_agent__pb2.RestoreAgentRequest.FromString,
-                    response_serializer=google_dot_longrunning_dot_operations__pb2.Operation.SerializeToString,
+                    response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
             ),
             'GetAgentStatistics': grpc.unary_unary_rpc_method_handler(
                     servicer.GetAgentStatistics,
@@ -969,7 +969,7 @@ class Agents(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/TrainAgent',
             ondewo_dot_nlu_dot_agent__pb2.TrainAgentRequest.SerializeToString,
-            google_dot_longrunning_dot_operations__pb2.Operation.FromString,
+            ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -986,7 +986,7 @@ class Agents(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/BuildCache',
             ondewo_dot_nlu_dot_agent__pb2.BuildCacheRequest.SerializeToString,
-            google_dot_longrunning_dot_operations__pb2.Operation.FromString,
+            ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1003,7 +1003,7 @@ class Agents(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/ExportAgent',
             ondewo_dot_nlu_dot_agent__pb2.ExportAgentRequest.SerializeToString,
-            google_dot_longrunning_dot_operations__pb2.Operation.FromString,
+            ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1020,7 +1020,7 @@ class Agents(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/ExportBenchmarkAgent',
             ondewo_dot_nlu_dot_agent__pb2.ExportBenchmarkAgentRequest.SerializeToString,
-            google_dot_longrunning_dot_operations__pb2.Operation.FromString,
+            ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1037,7 +1037,7 @@ class Agents(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/ImportAgent',
             ondewo_dot_nlu_dot_agent__pb2.ImportAgentRequest.SerializeToString,
-            google_dot_longrunning_dot_operations__pb2.Operation.FromString,
+            ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1054,7 +1054,7 @@ class Agents(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/OptimizeRankingMatch',
             ondewo_dot_nlu_dot_agent__pb2.OptimizeRankingMatchRequest.SerializeToString,
-            google_dot_longrunning_dot_operations__pb2.Operation.FromString,
+            ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1071,7 +1071,7 @@ class Agents(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/RestoreAgent',
             ondewo_dot_nlu_dot_agent__pb2.RestoreAgentRequest.SerializeToString,
-            google_dot_longrunning_dot_operations__pb2.Operation.FromString,
+            ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
