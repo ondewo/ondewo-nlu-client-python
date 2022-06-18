@@ -1,9 +1,10 @@
-
-ONDEWO_NLU_API_DIR=ondewo-nlu-api
+# Choose the submodule version to build ondewo-nlu-client-python
 ONDEWO_NLU_API_GIT_BRANCH=develop
-
-ONDEWO_PROTO_COMPILER_DIR=ondewo-proto-compiler
 ONDEWO_PROTO_COMPILER_GIT_BRANCH=origin/feature/OND211-1938-library-upgrade-in-cai-new
+
+# Submodule paths
+ONDEWO_NLU_API_DIR=ondewo-nlu-api
+ONDEWO_PROTO_COMPILER_DIR=ondewo-proto-compiler
 
 # Specify protos directories
 GOOGLE_APIS_DIR=${ONDEWO_NLU_API_DIR}/googleapis
