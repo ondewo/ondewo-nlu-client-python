@@ -1,13 +1,16 @@
+
 ONDEWO_NLU_API_DIR=ondewo-nlu-api
+ONDEWO_NLU_API_GIT_BRANCH=develop
+
+ONDEWO_PROTO_COMPILER_DIR=ondewo-proto-compiler
+ONDEWO_PROTO_COMPILER_GIT_BRANCH=develop
+
+# Specify protos directories
 GOOGLE_APIS_DIR=${ONDEWO_NLU_API_DIR}/googleapis
 ONDEWO_PROTOS_DIR=${ONDEWO_NLU_API_DIR}/ondewo/
 GOOGLE_PROTOS_DIR=${GOOGLE_APIS_DIR}/google/
 
-NLU_API_GIT_BRANCH=tags/2.6.0
-NLU_APIS_DIR=ondewo-nlu-api
-NLU_PROTOS_DIR=${NLU_APIS_DIR}/ondewo
-GOOGLE_APIS_DIR=${NLU_APIS_DIR}/googleapis
-GOOGLE_PROTOS_DIR=${GOOGLE_APIS_DIR}/google
+build: init_submodules checkout_defined_submodule_versions build_compiler generate_ondewo_protos
 
 clean_python_api:
 	rm ondewo/nlu/*pb2_grpc.py
@@ -37,6 +40,14 @@ init_submodules:
 	@echo "START initializing submodules ..."
 	git submodule update --init --recursive
 	@echo "DONE initializing submodules"
+
+checkout_defined_submodule_versions:
+	@echo "START checking out submodules ..."
+	git -C ${ONDEWO_NLU_API_DIR} fetch --all
+	git -C ${ONDEWO_NLU_API_DIR} checkout ${ONDEWO_NLU_API_GIT_BRANCH}
+	git -C ${ONDEWO_PROTO_COMPILER_DIR} fetch --all
+	git -C ${ONDEWO_PROTO_COMPILER_DIR} checkout ${ONDEWO_PROTO_COMPILER_GIT_BRANCH}
+	@echo "DONE checking out submodules"
 
 git_new_branch_recursively:
 	git submodule foreach --recursive "git checkout -b $(shell git rev-parse --abbrev-ref HEAD)"
