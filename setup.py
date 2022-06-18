@@ -42,6 +42,6 @@ setuptools.setup(
         "google-api-core~=2.8.1",
         "python-dateutil~=2.8.2",
         "Faker",
-        "ondewo-client-utils-python>=0.1.1"
+        "ondewo-client-utils~=0.1.1"
     ],
 )
