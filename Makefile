@@ -3,6 +3,12 @@ GOOGLE_APIS_DIR=${ONDEWO_NLU_API_DIR}/googleapis
 ONDEWO_PROTOS_DIR=${ONDEWO_NLU_API_DIR}/ondewo/
 GOOGLE_PROTOS_DIR=${GOOGLE_APIS_DIR}/google/
 
+NLU_API_GIT_BRANCH=tags/2.6.0
+NLU_APIS_DIR=ondewo-nlu-api
+NLU_PROTOS_DIR=${NLU_APIS_DIR}/ondewo
+GOOGLE_APIS_DIR=${NLU_APIS_DIR}/googleapis
+GOOGLE_PROTOS_DIR=${GOOGLE_APIS_DIR}/google
+
 clean_python_api:
 	rm ondewo/nlu/*pb2_grpc.py
 	rm ondewo/nlu/*pb2.py
@@ -26,6 +32,12 @@ build_zip:
 	zip -r ondewo-nlu-client-python.zip examples ondewo LICENSE LICENSE.md requirements.txt README.md setup.cfg setup.py
 
 # Git Submodules targets
+
+init_submodules:
+    @echo "START initializing submodules ..."
+    git submodule update --init --recursive
+    @echo "DONE initializing submodules"
+
 git_new_branch_recursively:
 	git submodule foreach --recursive "git checkout -b $(shell git rev-parse --abbrev-ref HEAD)"
 	git submodule foreach --recursive "git push -u origin $(shell git rev-parse --abbrev-ref HEAD)"
