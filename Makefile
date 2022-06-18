@@ -1,6 +1,6 @@
 # Choose the submodule version to build ondewo-nlu-client-python
-ONDEWO_NLU_API_GIT_BRANCH=develop
-ONDEWO_PROTO_COMPILER_GIT_BRANCH=origin/feature/OND211-1938-library-upgrade-in-cai-new
+ONDEWO_NLU_API_GIT_BRANCH=tags/2.7.0
+ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags/2.0.0
 
 # Submodule paths
 ONDEWO_NLU_API_DIR=ondewo-nlu-api
@@ -11,7 +11,7 @@ GOOGLE_APIS_DIR=${ONDEWO_NLU_API_DIR}/googleapis
 ONDEWO_PROTOS_DIR=${ONDEWO_NLU_API_DIR}/ondewo/
 GOOGLE_PROTOS_DIR=${GOOGLE_APIS_DIR}/google/
 
-build: init_submodules checkout_defined_submodule_versions build_compiler generate_ondewo_protos
+build: clear_package_data init_submodules checkout_defined_submodule_versions build_compiler generate_ondewo_protos
 
 clean_python_api:
 	rm ondewo/nlu/*pb2_grpc.py
