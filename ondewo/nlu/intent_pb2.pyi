@@ -2421,3 +2421,65 @@ class ListParametersResponse(google.protobuf.message.Message):
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["next_page_token",b"next_page_token","parameters",b"parameters"]) -> None: ...
 global___ListParametersResponse = ListParametersResponse
+
+class ListTrainingPhrasesofIntentsWithEnrichmentRequest(google.protobuf.message.Message):
+    """The request message for TrainingPhraseRequest"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    PROJECT_ID_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    INTENT_IDS_FIELD_NUMBER: builtins.int
+    PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    project_id: typing.Text
+    """Required. The agent to list all intents from.
+    Format: `projects/<Project ID>/agent/intents/...`.
+    """
+
+    language_code: typing.Text
+    """Optional. The language code used to filter out prompts."""
+
+    @property
+    def intent_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """Optional. List of intent uuids to filter by. Only training phrases
+        that have this intent uuid will be returned
+        If not passed, returns all
+        """
+        pass
+    page_token: typing.Text
+    """Optional. The next_page_token value returned from a previous list request.
+    Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>--sub_field-<SUB_FIELD>`
+    where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `parameters`)
+    """
+
+    def __init__(self,
+        *,
+        project_id: typing.Text = ...,
+        language_code: typing.Text = ...,
+        intent_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        page_token: typing.Text = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["intent_ids",b"intent_ids","language_code",b"language_code","page_token",b"page_token","project_id",b"project_id"]) -> None: ...
+global___ListTrainingPhrasesofIntentsWithEnrichmentRequest = ListTrainingPhrasesofIntentsWithEnrichmentRequest
+
+class ListTrainingPhrasesofIntentsWithEnrichmentResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    TRAINING_PHRASES_FIELD_NUMBER: builtins.int
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    @property
+    def training_phrases(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """List of user_says values. There will be a maximum number of items
+        returned based on the page_token field in the request.
+        """
+        pass
+    next_page_token: typing.Text
+    """Optional. The next_page_token value returned from a previous list request.
+    Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>--sub_field-<SUB_FIELD>`
+    where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `parameters`)
+    """
+
+    def __init__(self,
+        *,
+        training_phrases: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        next_page_token: typing.Text = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["next_page_token",b"next_page_token","training_phrases",b"training_phrases"]) -> None: ...
+global___ListTrainingPhrasesofIntentsWithEnrichmentResponse = ListTrainingPhrasesofIntentsWithEnrichmentResponse

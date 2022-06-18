@@ -177,6 +177,11 @@ class IntentsStub(object):
                 request_serializer=ondewo_dot_nlu_dot_intent__pb2.ListParametersRequest.SerializeToString,
                 response_deserializer=ondewo_dot_nlu_dot_intent__pb2.ListParametersResponse.FromString,
                 )
+        self.ListTrainingPhrasesofIntentsWithEnrichment = channel.unary_unary(
+                '/ondewo.nlu.Intents/ListTrainingPhrasesofIntentsWithEnrichment',
+                request_serializer=ondewo_dot_nlu_dot_intent__pb2.ListTrainingPhrasesofIntentsWithEnrichmentRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_intent__pb2.ListTrainingPhrasesofIntentsWithEnrichmentResponse.FromString,
+                )
 
 
 class IntentsServicer(object):
@@ -405,6 +410,13 @@ class IntentsServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ListTrainingPhrasesofIntentsWithEnrichment(self, request, context):
+        """List Training phrases (of a specific intent).
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_IntentsServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -537,6 +549,11 @@ def add_IntentsServicer_to_server(servicer, server):
                     servicer.ListParameters,
                     request_deserializer=ondewo_dot_nlu_dot_intent__pb2.ListParametersRequest.FromString,
                     response_serializer=ondewo_dot_nlu_dot_intent__pb2.ListParametersResponse.SerializeToString,
+            ),
+            'ListTrainingPhrasesofIntentsWithEnrichment': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListTrainingPhrasesofIntentsWithEnrichment,
+                    request_deserializer=ondewo_dot_nlu_dot_intent__pb2.ListTrainingPhrasesofIntentsWithEnrichmentRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_intent__pb2.ListTrainingPhrasesofIntentsWithEnrichmentResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -1018,5 +1035,22 @@ class Intents(object):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/ListParameters',
             ondewo_dot_nlu_dot_intent__pb2.ListParametersRequest.SerializeToString,
             ondewo_dot_nlu_dot_intent__pb2.ListParametersResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListTrainingPhrasesofIntentsWithEnrichment(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/ListTrainingPhrasesofIntentsWithEnrichment',
+            ondewo_dot_nlu_dot_intent__pb2.ListTrainingPhrasesofIntentsWithEnrichmentRequest.SerializeToString,
+            ondewo_dot_nlu_dot_intent__pb2.ListTrainingPhrasesofIntentsWithEnrichmentResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
