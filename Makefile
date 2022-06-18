@@ -34,9 +34,9 @@ build_zip:
 # Git Submodules targets
 
 init_submodules:
-    @echo "START initializing submodules ..."
-    git submodule update --init --recursive
-    @echo "DONE initializing submodules"
+	@echo "START initializing submodules ..."
+	git submodule update --init --recursive
+	@echo "DONE initializing submodules"
 
 git_new_branch_recursively:
 	git submodule foreach --recursive "git checkout -b $(shell git rev-parse --abbrev-ref HEAD)"
