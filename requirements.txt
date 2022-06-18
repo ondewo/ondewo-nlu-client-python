@@ -3,7 +3,7 @@
 # For more information about the compatible release check pep 440: https://www.python.org/dev/peps/pep-0440/#id52
 
 dataclasses-json==0.5.2
-git+https://github.com/ondewo/ondewo-client-utils-python.git@0.1.1#egg=ondewo-client-utils
+ondewo-client-utils~=0.1.1
 ondewo-logging~=3.1.0
 polling==0.3.2
 pytest==7.1.2
