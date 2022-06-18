@@ -2,16 +2,16 @@
 # Useful doc regarding compatible version: https://www.python.org/dev/peps/pep-0440/#id52
 # For more information about the compatible release check pep 440: https://www.python.org/dev/peps/pep-0440/#id52
 
-dataclasses-json~=0.5.2
-ondewo-client-utils~=0.1.0
-ondewo-logging~=3.1
-polling~=0.3.1
-pytest~=6.0.1
-regex==2020.7.14
-protobuf~=3.19.1
-grpcio-reflection~=1.42.0
-grpcio-tools~=1.42.0
-google-api-core~=1.13.0
-python-dateutil~=2.8.1
-Faker~=8.7.0
-setuptools~=56.2.0
+dataclasses-json==0.5.2
+ondewo-logging~=3.1.0
+polling==0.3.2
+pytest==7.1.2
+regex~=2022.4.24
+protobuf~=3.20.1 
+grpcio-reflection~=1.46.3
+grpcio-tools~=1.46.3
+google-api-core~=2.8.1
+python-dateutil~=2.8.2
+Faker
+setuptools
+git+https://github.com/ondewo/ondewo-client-utils-python.git@0.1.1#egg=ondewo-client-utils

@@ -2,9 +2,9 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from google.longrunning import operations_pb2 as google_dot_longrunning_dot_operations__pb2
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 from ondewo.nlu import intent_pb2 as ondewo_dot_nlu_dot_intent__pb2
+from ondewo.nlu import operations_pb2 as ondewo_dot_nlu_dot_operations__pb2
 
 
 class IntentsStub(object):
@@ -75,12 +75,12 @@ class IntentsStub(object):
         self.BatchUpdateIntents = channel.unary_unary(
                 '/ondewo.nlu.Intents/BatchUpdateIntents',
                 request_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchUpdateIntentsRequest.SerializeToString,
-                response_deserializer=google_dot_longrunning_dot_operations__pb2.Operation.FromString,
+                response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
                 )
         self.BatchDeleteIntents = channel.unary_unary(
                 '/ondewo.nlu.Intents/BatchDeleteIntents',
                 request_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchDeleteIntentsRequest.SerializeToString,
-                response_deserializer=google_dot_longrunning_dot_operations__pb2.Operation.FromString,
+                response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
                 )
         self.TagIntent = channel.unary_unary(
                 '/ondewo.nlu.Intents/TagIntent',
@@ -436,12 +436,12 @@ def add_IntentsServicer_to_server(servicer, server):
             'BatchUpdateIntents': grpc.unary_unary_rpc_method_handler(
                     servicer.BatchUpdateIntents,
                     request_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchUpdateIntentsRequest.FromString,
-                    response_serializer=google_dot_longrunning_dot_operations__pb2.Operation.SerializeToString,
+                    response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
             ),
             'BatchDeleteIntents': grpc.unary_unary_rpc_method_handler(
                     servicer.BatchDeleteIntents,
                     request_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchDeleteIntentsRequest.FromString,
-                    response_serializer=google_dot_longrunning_dot_operations__pb2.Operation.SerializeToString,
+                    response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
             ),
             'TagIntent': grpc.unary_unary_rpc_method_handler(
                     servicer.TagIntent,
@@ -677,7 +677,7 @@ class Intents(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/BatchUpdateIntents',
             ondewo_dot_nlu_dot_intent__pb2.BatchUpdateIntentsRequest.SerializeToString,
-            google_dot_longrunning_dot_operations__pb2.Operation.FromString,
+            ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -694,7 +694,7 @@ class Intents(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/BatchDeleteIntents',
             ondewo_dot_nlu_dot_intent__pb2.BatchDeleteIntentsRequest.SerializeToString,
-            google_dot_longrunning_dot_operations__pb2.Operation.FromString,
+            ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
