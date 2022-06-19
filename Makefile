@@ -1,6 +1,14 @@
+# Fully automated build and deploy process for ondewo-nlu-client-python
+#
+# Step 1: Configure bellow the versions for build
+# Step 2: Configure your pypi user name and password
+# Step 3: Execute "make build_and_push_to_pypi_via_docker"
+
 # Choose the submodule version to build ondewo-nlu-client-python
-ONDEWO_NLU_API_GIT_BRANCH=tags/2.7.0
+ONDEWO_NLU_API_GIT_BRANCH=tags/2.8.0
 ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags/2.0.0
+PYPI_USERNAME=
+PYPI_PASSWORD=
 
 # Submodule paths
 ONDEWO_NLU_API_DIR=ondewo-nlu-api
@@ -10,6 +18,13 @@ ONDEWO_PROTO_COMPILER_DIR=ondewo-proto-compiler
 GOOGLE_APIS_DIR=${ONDEWO_NLU_API_DIR}/googleapis
 ONDEWO_PROTOS_DIR=${ONDEWO_NLU_API_DIR}/ondewo/
 GOOGLE_PROTOS_DIR=${GOOGLE_APIS_DIR}/google/
+
+# Pypi release docker image environment variables
+IMAGE_PYPI_NAME=ondewo-nlu-client-python:latest
+IMAGE_PYPI_DIST_FOLDER=dist
+
+# Release automation for building and pushing to pypi via a docker image
+build_and_push_to_pypi_via_docker: build build_pypi_docker_image push_to_pypi_via_docker_image
 
 build: clear_package_data init_submodules checkout_defined_submodule_versions build_compiler generate_ondewo_protos
 
@@ -76,6 +91,16 @@ git_status_recursively:
 	git submodule foreach --recursive "git status"
 	git submodule status --recursive
 
+build_pypi_docker_image:
+	docker build -f Dockerfile.pypi -t ${IMAGE_PYPI_NAME} .
+
+push_to_pypi_via_docker_image: 
+	[ -d $(OUTPUT_DIR) ] || mkdir -p $(OUTPUT_DIR)
+	docker run --rm \
+		-e PYPI_USERNAME=${PYPI_USERNAME} \
+		-e PYPI_PASSWORD=${PYPI_PASSWORD} \
+		${IMAGE_PYPI_NAME} make push_to_pypi
+
 push_to_pypi: build_package upload_package clear_package_data
 	echo 'pushed to pypi : )'
 
@@ -83,7 +108,7 @@ build_package:
 	python setup.py sdist bdist_wheel
 
 upload_package:
-	twine upload -r pypi dist/*
+	twine upload --verbose -r pypi dist/* -u${PYPI_USERNAME} -p${PYPI_PASSWORD}
 
 clear_package_data:
 	rm -rf build dist ondewo_nlu_client.egg-info
