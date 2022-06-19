@@ -2,6 +2,15 @@
 
 *****************
 
+## Release ONDEWO NLU Python Client 2.8.0
+
+### Improvements
+
+* Easier release process to pypi through docker image (no python installation required)
+* [[OND211-2011]](https://ondewo.atlassian.net/browse/OND211-2011) - Intent. List all user says from cache incl. enrichtment based on agent parent instead of project_id
+
+*****************
+
 ## Release ONDEWO NLU Python Client 2.7.0
 
 ### New features

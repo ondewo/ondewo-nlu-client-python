@@ -21,7 +21,6 @@ GOOGLE_PROTOS_DIR=${GOOGLE_APIS_DIR}/google/
 
 # Pypi release docker image environment variables
 IMAGE_PYPI_NAME=ondewo-nlu-client-python:latest
-IMAGE_PYPI_DIST_FOLDER=dist
 
 # Release automation for building and pushing to pypi via a docker image
 build_and_push_to_pypi_via_docker: build build_pypi_docker_image push_to_pypi_via_docker_image
@@ -97,6 +96,7 @@ build_pypi_docker_image:
 push_to_pypi_via_docker_image: 
 	[ -d $(OUTPUT_DIR) ] || mkdir -p $(OUTPUT_DIR)
 	docker run --rm \
+		-v ${shell pwd}/dist:/home/ondewo/dist \
 		-e PYPI_USERNAME=${PYPI_USERNAME} \
 		-e PYPI_PASSWORD=${PYPI_PASSWORD} \
 		${IMAGE_PYPI_NAME} make push_to_pypi
