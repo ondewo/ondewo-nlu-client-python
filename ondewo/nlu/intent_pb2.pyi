@@ -2425,13 +2425,13 @@ global___ListParametersResponse = ListParametersResponse
 class ListTrainingPhrasesofIntentsWithEnrichmentRequest(google.protobuf.message.Message):
     """The request message for TrainingPhraseRequest"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
-    PROJECT_ID_FIELD_NUMBER: builtins.int
+    PARENT_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     INTENT_IDS_FIELD_NUMBER: builtins.int
     PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    project_id: typing.Text
-    """Required. The agent to list all intents from.
-    Format: `projects/<Project ID>/agent/intents/...`.
+    parent: typing.Text
+    """Required. The name of the agent to delete all entities types for. Format:
+    `projects/<Project ID>/agent`.
     """
 
     language_code: typing.Text
@@ -2452,12 +2452,12 @@ class ListTrainingPhrasesofIntentsWithEnrichmentRequest(google.protobuf.message.
 
     def __init__(self,
         *,
-        project_id: typing.Text = ...,
+        parent: typing.Text = ...,
         language_code: typing.Text = ...,
         intent_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
         page_token: typing.Text = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["intent_ids",b"intent_ids","language_code",b"language_code","page_token",b"page_token","project_id",b"project_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["intent_ids",b"intent_ids","language_code",b"language_code","page_token",b"page_token","parent",b"parent"]) -> None: ...
 global___ListTrainingPhrasesofIntentsWithEnrichmentRequest = ListTrainingPhrasesofIntentsWithEnrichmentRequest
 
 class ListTrainingPhrasesofIntentsWithEnrichmentResponse(google.protobuf.message.Message):
