@@ -99,16 +99,18 @@ push_to_pypi_via_docker_image:
 		-v ${shell pwd}/dist:/home/ondewo/dist \
 		-e PYPI_USERNAME=${PYPI_USERNAME} \
 		-e PYPI_PASSWORD=${PYPI_PASSWORD} \
-		${IMAGE_PYPI_NAME} make push_to_pypi
+		${IMAGE_PYPI_NAME} make push_to_pypi 
+	rm -rf dist
 
 push_to_pypi: build_package upload_package clear_package_data
-	echo 'pushed to pypi : )'
+	@echo 'YAY - Pushed to pypi : )'
 
 build_package:
-	python setup.py sdist bdist_wheel
+	python setup.py sdist bdist_wheel 
+	chmod a+rw dist -R
 
 upload_package:
 	twine upload --verbose -r pypi dist/* -u${PYPI_USERNAME} -p${PYPI_PASSWORD}
 
 clear_package_data:
-	rm -rf build dist ondewo_nlu_client.egg-info
+	rm -rf build dist/* ondewo_nlu_client.egg-info
