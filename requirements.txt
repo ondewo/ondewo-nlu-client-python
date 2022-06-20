@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-dataclasses-json==0.5.7
+dataclasses-json==0.5.4  # https://github.com/lidatong/dataclasses-json/issues/318 from 0.5.5 onward
 Faker~=13.13.0
 google-api-core~=2.8.1
 grpcio-reflection~=1.46.3
