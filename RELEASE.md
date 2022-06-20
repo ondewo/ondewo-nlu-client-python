@@ -2,6 +2,14 @@
 
 *****************
 
+## Release ONDEWO NLU Python Client 2.8.2
+
+### Improvements
+
+* Downgraded to dataclasses-json==0.5.4 due to backend compatibility
+
+*****************
+
 ## Release ONDEWO NLU Python Client 2.8.1
 
 ### Improvements
