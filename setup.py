@@ -31,7 +31,7 @@ setuptools.setup(
     ],
     python_requires='>=3',
     install_requires=[
-        "dataclasses-json==0.5.7",
+        "dataclasses-json==0.5.4",
         "Faker~=13.13.0",
         "google-api-core~=2.8.1",
         "grpcio-reflection~=1.46.3",
