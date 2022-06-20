@@ -2,6 +2,15 @@
 
 *****************
 
+## Release ONDEWO NLU Python Client 2.8.1
+
+### Improvements
+
+* Aligned and fixed library versions to be aligned with backend
+* Increased version number to 2.8.1
+
+*****************
+
 ## Release ONDEWO NLU Python Client 2.8.0
 
 ### Improvements
