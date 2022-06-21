@@ -92,6 +92,16 @@ class IntentsStub(object):
                 request_serializer=ondewo_dot_nlu_dot_intent__pb2.IntentTagRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 )
+        self.GetIntentTags = channel.unary_unary(
+                '/ondewo.nlu.Intents/GetIntentTags',
+                request_serializer=ondewo_dot_nlu_dot_intent__pb2.GetIntentTagsRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_intent__pb2.GetIntentTagsResponse.FromString,
+                )
+        self.GetAllIntentTags = channel.unary_unary(
+                '/ondewo.nlu.Intents/GetAllIntentTags',
+                request_serializer=ondewo_dot_nlu_dot_intent__pb2.GetAllIntentTagsRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_intent__pb2.GetIntentTagsResponse.FromString,
+                )
         self.BatchCreateTrainingPhrases = channel.unary_unary(
                 '/ondewo.nlu.Intents/BatchCreateTrainingPhrases',
                 request_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchCreateTrainingPhrasesRequest.SerializeToString,
@@ -257,13 +267,29 @@ class IntentsServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def TagIntent(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Tags a specific intent with tag(s)
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def DeleteIntentTag(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Deletes tag(s) for a specific intent
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetIntentTags(self, request, context):
+        """Gets all the tags for a specific intent
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetAllIntentTags(self, request, context):
+        """Gets all the tags for all the intents
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -426,6 +452,16 @@ def add_IntentsServicer_to_server(servicer, server):
                     servicer.DeleteIntentTag,
                     request_deserializer=ondewo_dot_nlu_dot_intent__pb2.IntentTagRequest.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'GetIntentTags': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetIntentTags,
+                    request_deserializer=ondewo_dot_nlu_dot_intent__pb2.GetIntentTagsRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_intent__pb2.GetIntentTagsResponse.SerializeToString,
+            ),
+            'GetAllIntentTags': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetAllIntentTags,
+                    request_deserializer=ondewo_dot_nlu_dot_intent__pb2.GetAllIntentTagsRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_intent__pb2.GetIntentTagsResponse.SerializeToString,
             ),
             'BatchCreateTrainingPhrases': grpc.unary_unary_rpc_method_handler(
                     servicer.BatchCreateTrainingPhrases,
@@ -693,6 +729,40 @@ class Intents(object):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/DeleteIntentTag',
             ondewo_dot_nlu_dot_intent__pb2.IntentTagRequest.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetIntentTags(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/GetIntentTags',
+            ondewo_dot_nlu_dot_intent__pb2.GetIntentTagsRequest.SerializeToString,
+            ondewo_dot_nlu_dot_intent__pb2.GetIntentTagsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetAllIntentTags(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/GetAllIntentTags',
+            ondewo_dot_nlu_dot_intent__pb2.GetAllIntentTagsRequest.SerializeToString,
+            ondewo_dot_nlu_dot_intent__pb2.GetIntentTagsResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
