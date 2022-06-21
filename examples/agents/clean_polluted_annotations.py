@@ -26,7 +26,7 @@ def get_all_entities(parent: str, language_code: str, client: Client) -> Dict[st
 
     for et in tqdm.tqdm(iterable=response.entity_types, desc='Loading entity map...'):
         for ev in et.entities:
-            _map[et.name][ev.name] = _map[et.name][ev.name].union({s for s in ev.synonyms})
+            _map[et.name][ev.name] |= {s for s in ev.synonyms}  # Merge sets together in place
 
     print('Entity Map created!')
     return _map
