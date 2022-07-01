@@ -22,12 +22,23 @@ GOOGLE_PROTOS_DIR=${GOOGLE_APIS_DIR}/google/
 # Pypi release docker image environment variables
 IMAGE_PYPI_NAME=ondewo-nlu-client-python:latest
 
-# Release automation for building and pushing to pypi via a docker image
-build_and_push_to_pypi_via_docker: build build_pypi_docker_image push_to_pypi_via_docker_image
+.PHONY: help build install
 
-build: clear_package_data init_submodules checkout_defined_submodule_versions build_compiler generate_ondewo_protos
+.DEFAULT_GOAL := help
 
-clean_python_api:
+# First comment after target starting with double ## specifies usage
+help:  ## Print usage info about help targets
+	@grep -E '(^[a-zA-Z_-]+:.*?##.*$$)|(^##)' Makefile | awk 'BEGIN {FS = ":.*?## "}{printf "\033[32m%-30s\033[0m %s\n", $$1, $$2}' | sed -e 's/\[32m##/[33m/'
+
+build_and_push_to_pypi_via_docker: build build_pypi_docker_image push_to_pypi_via_docker_image  ## Release automation for building and pushing to pypi via a docker image
+
+build: clear_package_data init_submodules checkout_defined_submodule_versions build_compiler generate_ondewo_protos  ## Build source code
+
+install:  ## Install requirements
+	pip install .
+	pip install -r requirements.txt
+
+clean_python_api:  ## Clear generated python files
 	rm ondewo/nlu/*pb2_grpc.py
 	rm ondewo/nlu/*pb2.py
 	rm ondewo/nlu/*.pyi
@@ -36,27 +47,22 @@ clean_python_api:
 	rm ondewo/qa/*.pyi
 	rm -rf google
 
-build_compiler:
+build_compiler:  ## Build proto compiler docker image
 	make -C ondewo-proto-compiler/python build
 
-generate_ondewo_protos:
+generate_ondewo_protos:  ## Generate python code from proto files
 	make -f ondewo-proto-compiler/python/Makefile run \
 		PROTO_DIR=${ONDEWO_PROTOS_DIR} \
 		EXTRA_PROTO_DIR=${GOOGLE_PROTOS_DIR} \
 		TARGET_DIR='ondewo' \
-		OUTPUT_DIR='.'
+		OUTPUT_DIR=${OUTPUT_DIR}
 
-build_zip:
-	zip -r ondewo-nlu-client-python.zip examples ondewo LICENSE LICENSE.md requirements.txt README.md setup.cfg setup.py
-
-# Git Submodules targets
-
-init_submodules:
+init_submodules:  ## Initialize submodules
 	@echo "START initializing submodules ..."
 	git submodule update --init --recursive
 	@echo "DONE initializing submodules"
 
-checkout_defined_submodule_versions:
+checkout_defined_submodule_versions:  ## Update submodule versions
 	@echo "START checking out submodules ..."
 	git -C ${ONDEWO_NLU_API_DIR} fetch --all
 	git -C ${ONDEWO_NLU_API_DIR} checkout ${ONDEWO_NLU_API_GIT_BRANCH}
@@ -64,36 +70,10 @@ checkout_defined_submodule_versions:
 	git -C ${ONDEWO_PROTO_COMPILER_DIR} checkout ${ONDEWO_PROTO_COMPILER_GIT_BRANCH}
 	@echo "DONE checking out submodules"
 
-git_new_branch_recursively:
-	git submodule foreach --recursive "git checkout -b $(shell git rev-parse --abbrev-ref HEAD)"
-	git submodule foreach --recursive "git push -u origin $(shell git rev-parse --abbrev-ref HEAD)"
-
-git_checkout_branch_recursively:
-	git submodule foreach --recursive "git checkout $(shell git rev-parse --abbrev-ref HEAD)"
-	git submodule foreach --recursive "git pull"
-
-git_checkout_develop_recursively:
-	git submodule foreach --recursive "git checkout develop"
-	git submodule foreach --recursive "git pull"
-
-git_merge_develop_in_recursively: git_checkout_branch_recursively
-	git pull
-	git pull origin develop
-	git submodule foreach --recursive "git pull"
-	git submodule foreach --recursive "git pull origin develop"
-
-git_push_recursively:
-	git submodule foreach --recursive "git push"
-	git push
-
-git_status_recursively:
-	git submodule foreach --recursive "git status"
-	git submodule status --recursive
-
-build_pypi_docker_image:
+build_pypi_docker_image:  ## Build pypi docker image
 	docker build -f Dockerfile.pypi -t ${IMAGE_PYPI_NAME} .
 
-push_to_pypi_via_docker_image: 
+push_to_pypi_via_docker_image:  ## Push source code to pypi via docker
 	[ -d $(OUTPUT_DIR) ] || mkdir -p $(OUTPUT_DIR)
 	docker run --rm \
 		-v ${shell pwd}/dist:/home/ondewo/dist \
@@ -114,3 +94,6 @@ upload_package:
 
 clear_package_data:
 	rm -rf build dist/* ondewo_nlu_client.egg-info
+
+build_zip:  ## Compress source code into zip
+	zip -r ondewo-nlu-client-python.zip examples ondewo LICENSE LICENSE.md requirements.txt README.md setup.cfg setup.py
