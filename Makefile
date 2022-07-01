@@ -18,6 +18,7 @@ ONDEWO_PROTO_COMPILER_DIR=ondewo-proto-compiler
 GOOGLE_APIS_DIR=${ONDEWO_NLU_API_DIR}/googleapis
 ONDEWO_PROTOS_DIR=${ONDEWO_NLU_API_DIR}/ondewo/
 GOOGLE_PROTOS_DIR=${GOOGLE_APIS_DIR}/google/
+OUTPUT_DIR=.
 
 # Pypi release docker image environment variables
 IMAGE_PYPI_NAME=ondewo-nlu-client-python:latest
