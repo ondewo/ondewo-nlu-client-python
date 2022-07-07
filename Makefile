@@ -96,5 +96,3 @@ upload_package:
 clear_package_data:
 	rm -rf build dist/* ondewo_nlu_client.egg-info
 
-build_zip:  ## Compress source code into zip
-	zip -r ondewo-nlu-client-python.zip examples ondewo LICENSE LICENSE.md requirements.txt README.md setup.cfg setup.py
