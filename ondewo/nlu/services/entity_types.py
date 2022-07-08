@@ -13,7 +13,6 @@
 # limitations under the License.
 
 
-from google.longrunning.operations_pb2 import Operation
 from google.protobuf.empty_pb2 import Empty
 
 from ondewo.nlu.core.services_interface import ServicesInterface
@@ -33,6 +32,7 @@ from ondewo.nlu.entity_type_pb2 import (
     ListEntitiesRequest, ListEntitiesResponse,
 )
 from ondewo.nlu.entity_type_pb2_grpc import EntityTypesStub
+from ondewo.nlu.operations_pb2 import Operation
 
 
 class EntityTypes(ServicesInterface):
