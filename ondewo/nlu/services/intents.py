@@ -13,7 +13,6 @@
 # limitations under the License.
 
 
-from google.longrunning import operations_pb2
 from google.protobuf import empty_pb2
 
 from ondewo.nlu import intent_pb2
@@ -29,6 +28,7 @@ from ondewo.nlu.intent_pb2 import BatchCreateTrainingPhrasesRequest, BatchTraini
     ListParametersResponse, ListParametersRequest, IntentTagRequest, GetIntentTagsResponse, GetIntentTagsRequest, \
     GetAllIntentTagsRequest
 from ondewo.nlu.intent_pb2_grpc import IntentsStub
+from ondewo.nlu import operations_pb2
 
 
 class Intents(ServicesInterface):

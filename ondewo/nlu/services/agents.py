@@ -13,7 +13,6 @@
 # limitations under the License.
 
 
-from google.longrunning import operations_pb2
 from google.protobuf.empty_pb2 import Empty
 
 from ondewo.nlu.agent_pb2 import Agent, CreateAgentRequest, GetAgentRequest, UpdateAgentRequest, \
@@ -27,6 +26,7 @@ from ondewo.nlu.agent_pb2 import Agent, CreateAgentRequest, GetAgentRequest, Upd
     GetModelStatusesResponse, GetPlatformMappingRequest, PlatformMapping
 from ondewo.nlu.agent_pb2_grpc import AgentsStub
 from ondewo.nlu.core.services_interface import ServicesInterface
+from ondewo.nlu import operations_pb2
 
 
 class Agents(ServicesInterface):
