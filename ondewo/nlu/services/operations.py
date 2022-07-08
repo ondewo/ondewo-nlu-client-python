@@ -18,7 +18,7 @@ from typing import Optional
 from google.protobuf.empty_pb2 import Empty
 
 from ondewo.nlu import operations_pb2
-from ondewo.nlu.operations_grpc_pb2 import OperationsStub
+from ondewo.nlu.operations_pb2_grpc import OperationsStub
 from ondewo.nlu.core.services_interface import ServicesInterface
 
 

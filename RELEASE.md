@@ -2,6 +2,14 @@
 
 *****************
 
+## Release ONDEWO NLU Python Client 2.8.5
+
+### Bugfix
+
+* Change grpc_pb2 to pb2_grpc
+
+*****************
+
 ## Release ONDEWO NLU Python Client 2.8.4
 
 ### Bugfix
