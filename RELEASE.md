@@ -2,6 +2,14 @@
 
 *****************
 
+## Release ONDEWO NLU Python Client 2.8.3
+
+### Bugfix
+
+* Use ondewo.nlu operations module instead of google.longrunning
+
+*****************
+
 ## Release ONDEWO NLU Python Client 2.8.2
 
 ### Improvements
