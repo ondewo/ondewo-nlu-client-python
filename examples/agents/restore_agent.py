@@ -1,11 +1,11 @@
 from typing import Optional
 
 import polling
-from google.longrunning.operations_pb2 import Operation, GetOperationRequest
 
 from ondewo.nlu.agent_pb2 import RestoreAgentRequest
 from ondewo.nlu.client import Client
 from ondewo.nlu.client_config import ClientConfig
+from ondewo.nlu.operations_pb2 import Operation, GetOperationRequest
 
 if __name__ == '__main__':
     parent: str = '<PUT_YOUR_AGENT_PARENT_HERE>'

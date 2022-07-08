@@ -1,5 +1,4 @@
 import polling
-from google.longrunning.operations_pb2 import GetOperationRequest, Operation
 
 from ondewo.nlu.agent_pb2 import (
     Agent,
@@ -12,6 +11,7 @@ from ondewo.nlu.agent_pb2 import (
 from ondewo.nlu.client import Client
 from ondewo.nlu.client_config import ClientConfig
 from ondewo.nlu.intent_pb2 import CreateIntentRequest, Intent, ListIntentsRequest
+from ondewo.nlu.operations_pb2 import GetOperationRequest, Operation
 
 if __name__ == "__main__":
     config: ClientConfig = ClientConfig(
