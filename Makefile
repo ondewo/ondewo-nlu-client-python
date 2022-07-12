@@ -33,6 +33,13 @@ help:  ## Print usage info about help targets
 
 build_and_push_to_pypi_via_docker: build build_pypi_docker_image push_to_pypi_via_docker_image  ## Release automation for building and pushing to pypi via a docker image
 
+# Specify Github Release Number and Release Notes
+CURRENT_RELEASE_TAG=`cat RELEASE.md | grep '2.8' | head -1 | cut -c 37-41`
+CURRENT_RELEASE_NOTES=`cat RELEASE.md | grep -A 6 'Release ONDEWO' | head -6`
+
+build_gh_release: ## Genereate Github Release with CLI ##
+	gh release create "$(CURRENT_RELEASE_TAG)" -n "$(CURRENT_RELEASE_NOTES)" -t "Release ${"$(CURRENT_RELEASE_TAG)"}"
+
 build: clear_package_data init_submodules checkout_defined_submodule_versions build_compiler generate_ondewo_protos  ## Build source code
 
 install:  ## Install requirements
