@@ -5,7 +5,7 @@
 # Step 3: Execute "make build_and_push_to_pypi_via_docker"
 
 # Choose the submodule version to build ondewo-nlu-client-python
-ONDEWO_NLU_API_GIT_BRANCH=tags/2.8.0
+ONDEWO_NLU_API_GIT_BRANCH=OND211-2038-extend-session-filtering
 ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags/2.0.0
 PYPI_USERNAME=ENTER_HERE_YOUR_PYPI_USERNAME
 PYPI_PASSWORD=ENTER_HERE_YOUR_PYPI_PASSWORD
