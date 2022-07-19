@@ -38,7 +38,9 @@ COPY README.md .
 
 COPY RELEASE.md .
 
-COPY ondewo ondewo 
+COPY ./envs/versions.env ./envs/versions.env
+
+COPY ondewo ondewo
 
 # run the container forever
 CMD tail -f /dev/null
