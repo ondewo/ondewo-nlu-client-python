@@ -143,10 +143,10 @@ upload_package:
 clear_package_data:
 	rm -rf build dist/* ondewo_nlu_client.egg-info
 
-ondewo_release: clone_devops_accounts run_release_with_devops
+ondewo_release: spc clone_devops_accounts run_release_with_devops ## Release with credentials from devops-accounts repo
 	@rm -rf ${DEVOPS_ACCOUNT_GIT}
 
-clone_devops_accounts:
+clone_devops_accounts: ## Clones devops-accounts repo
 	if [ -d $(DEVOPS_ACCOUNT_GIT) ]; then rm -Rf $(DEVOPS_ACCOUNT_GIT); fi
 	git clone git@bitbucket.org:ondewo/${DEVOPS_ACCOUNT_GIT}.git
 
@@ -161,11 +161,13 @@ TEST:
 
 
 run_release_with_devops:
-	$(eval infoo:= $(shell cat ${DEVOPS_ACCOUNT_DIR} | grep GITHUB & cat ${DEVOPS_ACCOUNT_DIR} | grep PYPI_USERNAME & cat ${DEVOPS_ACCOUNT_DIR} | grep PYPI_PASSWORD))
-	make release $(infoo)
+	$(eval info:= $(shell cat ${DEVOPS_ACCOUNT_DIR} | grep GITHUB & cat ${DEVOPS_ACCOUNT_DIR} | grep PYPI_USERNAME & cat ${DEVOPS_ACCOUNT_DIR} | grep PYPI_PASSWORD))
+	make release $(info)
 
-
-get_env:
-	@echo `cat ${DEVOPS_ACCOUNT_DIR} | grep GITHUB` \
-	`cat ${DEVOPS_ACCOUNT_DIR} | grep PYPI_USERNAME` \
-	`cat ${DEVOPS_ACCOUNT_DIR} | grep PYPI_PASSWORD`
+spc: ## Checks if the Release Branch, Tag and Pypi version already exist
+	$(eval filtered_branches:= $(shell git branch --all | grep "release/${ONDEWO_NLU_VERSION}"))
+	$(eval filtered_tags:= $(shell git tag --list | grep "${ONDEWO_NLU_VERSION}"))
+	$(eval setuppy_version:= $(shell cat setup.py | grep "version"))
+	@if test "$(filtered_branches)" != ""; then echo "-- Test 1: Branch exists!!" & exit 1; else echo "-- Test 1: Branch is fine";fi
+	@if test "$(filtered_tags)" != ""; then echo "-- Test 2: Tag exists!!" & exit 1; else echo "-- Test 2: Tag is fine";fi
+	@if test "$(setuppy_version)" != "version='${ONDEWO_NLU_VERSION}',"; then echo "-- Test 3: Setup.py not updated!!" & exit 1; else echo "-- Test 3: Setup.py is fine";fi

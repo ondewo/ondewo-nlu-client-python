@@ -39,8 +39,6 @@ COPY README.md .
 
 COPY RELEASE.md .
 
-COPY ./envs/versions.env ./envs/versions.env
-
 COPY ondewo ondewo
 
 # run the container forever
