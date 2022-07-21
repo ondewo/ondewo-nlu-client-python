@@ -2,6 +2,14 @@
 
 *****************
 
+## Release ONDEWO NLU Python Client 2.8.6
+
+### Improvements
+
+* Implemented make target release for automated release process
+
+*****************
+
 ## Release ONDEWO NLU Python Client 2.8.5
 
 ### Bugfix
@@ -105,7 +113,7 @@
 
 ### Bug fixes
 
-* [[OND211-1911]](https://ondewo.atlassian.net/browse/OND211-1911) Correct setup.py version  
+* [[OND211-1911]](https://ondewo.atlassian.net/browse/OND211-1911) Correct setup.py version
 
 *****************
 
@@ -204,7 +212,7 @@
 
 * [[OND211-354]](https://ondewo.atlassian.net/browse/OND211-354) Establish a clear hierarchy for the merging of entities within the generalized waterfall strategy.
    Include intent parameters to entity selection criteria.
-* [[OND211-1767]](https://ondewo.atlassian.net/browse/OND211-1767) Change the training phrase message to include a language_code field  
+* [[OND211-1767]](https://ondewo.atlassian.net/browse/OND211-1767) Change the training phrase message to include a language_code field
 * [[OND211-1760]](https://ondewo.atlassian.net/browse/OND211-1760) Implement endpoint to directly list training phrases.
 * [[OND211-1744]](https://ondewo.atlassian.net/browse/OND211-1744) Add initiation protocol into train agent endpoint
 * [[OND211-1732]](https://ondewo.atlassian.net/browse/OND211-1732) Implement endpoints directly create/update/get/delete training phrases.
