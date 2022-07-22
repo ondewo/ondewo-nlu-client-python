@@ -2,7 +2,7 @@
 
 *****************
 
-## Release ONDEWO NLU Python Client 2.8.7
+## Release ONDEWO NLU Python Client 2.9.0
 
 ### Improvements
 
