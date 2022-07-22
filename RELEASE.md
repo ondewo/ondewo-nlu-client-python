@@ -2,6 +2,16 @@
 
 *****************
 
+## Release ONDEWO NLU Python Client 2.8.7
+
+### Improvements
+
+* [[OND211-2039]](https://ondewo.atlassian.net/browse/OND211-2039) - Improved automated release process
+* Upgraded to NLU API Version 2.9.0
+
+
+*****************
+
 ## Release ONDEWO NLU Python Client 2.8.6
 
 ### Improvements

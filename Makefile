@@ -12,10 +12,10 @@ export
 # 3 - GitHub Release
 # 4 - PyPI Release
 
-ONDEWO_NLU_VERSION=2.8.6
+ONDEWO_NLU_VERSION=2.8.7
 
 # Choose the submodule version to build ondewo-nlu-client-python
-ONDEWO_NLU_API_GIT_BRANCH=tags/2.8.0
+ONDEWO_NLU_API_GIT_BRANCH=tags/2.9.0
 ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags/2.0.0
 PYPI_USERNAME?=ENTER_HERE_YOUR_PYPI_USERNAME
 PYPI_PASSWORD?=ENTER_HERE_YOUR_PYPI_PASSWORD
@@ -153,12 +153,11 @@ clone_devops_accounts: ## Clones devops-accounts repo
 DEVOPS_ACCOUNT_GIT="ondewo-devops-accounts"
 DEVOPS_ACCOUNT_DIR="./${DEVOPS_ACCOUNT_GIT}"
 
-
 TEST:
 	@echo ${GITHUB_GH_TOKEN}
 	@echo ${PYPI_USERNAME}
 	@echo ${PYPI_PASSWORD}
-
+	@echo ${CURRENT_RELEASE_NOTES}
 
 run_release_with_devops:
 	$(eval info:= $(shell cat ${DEVOPS_ACCOUNT_DIR}/account_github.env | grep GITHUB_GH & cat ${DEVOPS_ACCOUNT_DIR}/account_pypi.env | grep PYPI_USERNAME & cat ${DEVOPS_ACCOUNT_DIR}/account_pypi.env | grep PYPI_PASSWORD))
