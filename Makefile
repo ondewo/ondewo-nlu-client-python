@@ -12,7 +12,9 @@ export
 # 3 - GitHub Release
 # 4 - PyPI Release
 
-ONDEWO_NLU_VERSION=2.8.7
+# MUST BE THE SAME AS API in Mayor and Minor Version Number
+# example: API 2.9.0 --> Client 2.9.X
+ONDEWO_NLU_VERSION=2.9.0
 
 # Choose the submodule version to build ondewo-nlu-client-python
 ONDEWO_NLU_API_GIT_BRANCH=tags/2.9.0

@@ -43,6 +43,8 @@ The entire process is automated to make development easier. The actual steps are
 TODOs in Pull Request before the release:
  
  - Update the Version number inside the Makefile
+   - ! : Major and Minor Version Number must be the same for Client and API at all times
+      >example: API 2.9.0 --> Client 2.9.X
  
  - Check if RELEASE.md is up-to-date
  
