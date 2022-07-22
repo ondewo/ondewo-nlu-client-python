@@ -6,6 +6,7 @@ ENV TZ=Europe/Vienna
 
 ENV PYPI_USERNAME=<PYPI_USERNAME>
 ENV PYPI_PASSWORD=<PYPI_PASSWORD>
+ENV GITHUB_GH_TOKEN=<GITHUB_GH_TOKEN>
 
 RUN apt-get update -qq  \
   && apt-get dist-upgrade -qq -y --no-install-recommends --fix-missing make tmux vim sed tree tk-dev curl sudo tzdata \
@@ -37,8 +38,6 @@ COPY setup.cfg .
 COPY README.md .
 
 COPY RELEASE.md .
-
-COPY ./envs/versions.env ./envs/versions.env
 
 COPY ondewo ondewo
 

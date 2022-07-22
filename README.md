@@ -36,3 +36,47 @@ Get a suitable example:
 ```bash
 ls examples
 ```
+Automatic Release Process
+------------------
+The entire process is automated to make development easier. The actual steps are simple:
+ 
+TODOs in Pull Request before the release:
+ 
+ - Update the Version number inside the Makefile
+ 
+ - Check if RELEASE.md is up-to-date
+ 
+ - Update the Version number inside the setup.py by using:
+    ```bash
+    make update_setup
+    ```
+
+TODOs after Pull Request was merged in:
+
+ - Checkout master:
+    ```bash
+    git checkout master
+    ```
+ - Pull the new stuff:
+    ```bash
+    git pull
+    ```
+ - Release:
+    ```bash
+    make ondewo_release
+    ```
+
+The   ``` make ondewo_release``` command can be divided into 5 steps: 
+
+- cloning the devops-accounts repository and extracting the credentials
+- creating and pushing the release branch
+- creating and pushing the release tag
+- creating the GitHub release
+- creating and pushing the new PyPi release
+
+The variables for the GitHub Access Token, PyPi Username and Password are all inside
+of the Makefile, but the values are overwritten during ``` make ondewo_release```, because
+they are passed from the devops-accounts repo as arguments to the actual ```release``` command.
+
+
+

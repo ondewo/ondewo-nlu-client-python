@@ -1,8 +1,0 @@
-{
-  "host": "localhost",
-  "port": "50055",
-  "http_token": "my_token",
-  "user_name": "bot@ondewo.com",
-  "password": "my_password",
-  "grpc_cert": "my_ssl_cert"
-}
