@@ -151,7 +151,7 @@ clone_devops_accounts: ## Clones devops-accounts repo
 	git clone git@bitbucket.org:ondewo/${DEVOPS_ACCOUNT_GIT}.git
 
 DEVOPS_ACCOUNT_GIT="ondewo-devops-accounts"
-DEVOPS_ACCOUNT_DIR="./${DEVOPS_ACCOUNT_GIT}/info"
+DEVOPS_ACCOUNT_DIR="./${DEVOPS_ACCOUNT_GIT}"
 
 
 TEST:
@@ -161,7 +161,7 @@ TEST:
 
 
 run_release_with_devops:
-	$(eval info:= $(shell cat ${DEVOPS_ACCOUNT_DIR} | grep GITHUB & cat ${DEVOPS_ACCOUNT_DIR} | grep PYPI_USERNAME & cat ${DEVOPS_ACCOUNT_DIR} | grep PYPI_PASSWORD))
+	$(eval info:= $(shell cat ${DEVOPS_ACCOUNT_DIR}/account_github.env | grep GITHUB_GH & cat ${DEVOPS_ACCOUNT_DIR}/account_pypi.env | grep PYPI_USERNAME & cat ${DEVOPS_ACCOUNT_DIR}/account_pypi.env | grep PYPI_PASSWORD))
 	make release $(info)
 
 spc: ## Checks if the Release Branch, Tag and Pypi version already exist

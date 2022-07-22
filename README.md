@@ -74,4 +74,9 @@ The   ``` make ondewo_release``` command can be divided into 5 steps:
 - creating the GitHub release
 - creating and pushing the new PyPi release
 
+The variables for the GitHub Access Token, PyPi Username and Password are all inside
+of the Makefile, but the values are overwritten during ``` make ondewo_release```, because
+they are passed from the devops-accounts repo as arguments to the actual ```release``` command.
+
+
 
