@@ -902,9 +902,6 @@ class SessionFilter(google.protobuf.message.Message):
     LABELS_FIELD_NUMBER: builtins.int
     USER_IDS_FIELD_NUMBER: builtins.int
     INTENT_TAGS_FIELD_NUMBER: builtins.int
-    SESSION_IDS_FIELD_NUMBER: builtins.int
-    INPUT_CONTEXTS_FIELD_NUMBER: builtins.int
-    OUTPUT_CONTEXTS_FIELD_NUMBER: builtins.int
     @property
     def language_codes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
         """Match only sessions with all of the following language_codes"""
@@ -965,16 +962,6 @@ class SessionFilter(google.protobuf.message.Message):
     def intent_tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
         """Match only session which have all of the following intent tags assigned"""
         pass
-    @property
-    def session_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
-        """Match only sessions whose IDs are specified here"""
-        pass
-    @property
-    def input_contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]:
-        """Match only sessions whose session info contains at least one step having all the contexts specified here"""
-        pass
-    @property
-    def output_contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]: ...
     def __init__(self,
         *,
         language_codes: typing.Optional[typing.Iterable[typing.Text]] = ...,
@@ -991,11 +978,8 @@ class SessionFilter(google.protobuf.message.Message):
         labels: typing.Optional[typing.Iterable[typing.Text]] = ...,
         user_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
         intent_tags: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        session_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        input_contexts: typing.Optional[typing.Iterable[ondewo.nlu.context_pb2.Context]] = ...,
-        output_contexts: typing.Optional[typing.Iterable[ondewo.nlu.context_pb2.Context]] = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["earliest",b"earliest","input_contexts",b"input_contexts","intent_tags",b"intent_tags","labels",b"labels","language_codes",b"language_codes","latest",b"latest","matched_entity_types",b"matched_entity_types","matched_intents",b"matched_intents","max_number_turns",b"max_number_turns","min_entity_types_confidence_max",b"min_entity_types_confidence_max","min_entity_types_confidence_min",b"min_entity_types_confidence_min","min_intents_confidence_max",b"min_intents_confidence_max","min_intents_confidence_min",b"min_intents_confidence_min","min_number_turns",b"min_number_turns","output_contexts",b"output_contexts","session_ids",b"session_ids","user_ids",b"user_ids"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["earliest",b"earliest","intent_tags",b"intent_tags","labels",b"labels","language_codes",b"language_codes","latest",b"latest","matched_entity_types",b"matched_entity_types","matched_intents",b"matched_intents","max_number_turns",b"max_number_turns","min_entity_types_confidence_max",b"min_entity_types_confidence_max","min_entity_types_confidence_min",b"min_entity_types_confidence_min","min_intents_confidence_max",b"min_intents_confidence_max","min_intents_confidence_min",b"min_intents_confidence_min","min_number_turns",b"min_number_turns","user_ids",b"user_ids"]) -> None: ...
 global___SessionFilter = SessionFilter
 
 class SessionInfo(google.protobuf.message.Message):
@@ -1007,18 +991,6 @@ class SessionInfo(google.protobuf.message.Message):
     All fields below are  optional. Multiple fields specified at the same time are chained
     """
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
-    class ContextSteps(google.protobuf.message.Message):
-        """The list of contexts of each step collected in an outer list"""
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
-        CONTEXTS_FIELD_NUMBER: builtins.int
-        @property
-        def contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]: ...
-        def __init__(self,
-            *,
-            contexts: typing.Optional[typing.Iterable[ondewo.nlu.context_pb2.Context]] = ...,
-            ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["contexts",b"contexts"]) -> None: ...
-
     LANGUAGE_CODES_FIELD_NUMBER: builtins.int
     MATCHED_INTENTS_FIELD_NUMBER: builtins.int
     MATCHED_ENTITY_TYPES_FIELD_NUMBER: builtins.int
@@ -1030,8 +1002,6 @@ class SessionInfo(google.protobuf.message.Message):
     LABELS_FIELD_NUMBER: builtins.int
     USER_IDS_FIELD_NUMBER: builtins.int
     INTENT_TAGS_FIELD_NUMBER: builtins.int
-    INPUT_CONTEXT_STEPS_FIELD_NUMBER: builtins.int
-    OUTPUT_CONTEXT_STEPS_FIELD_NUMBER: builtins.int
     @property
     def language_codes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
         """The language codes used in the given session."""
@@ -1069,10 +1039,6 @@ class SessionInfo(google.protobuf.message.Message):
     def intent_tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
         """The list of intent tags in the given session"""
         pass
-    @property
-    def input_context_steps(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___SessionInfo.ContextSteps]: ...
-    @property
-    def output_context_steps(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___SessionInfo.ContextSteps]: ...
     def __init__(self,
         *,
         language_codes: typing.Optional[typing.Iterable[typing.Text]] = ...,
@@ -1086,10 +1052,8 @@ class SessionInfo(google.protobuf.message.Message):
         labels: typing.Optional[typing.Iterable[typing.Text]] = ...,
         user_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
         intent_tags: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        input_context_steps: typing.Optional[typing.Iterable[global___SessionInfo.ContextSteps]] = ...,
-        output_context_steps: typing.Optional[typing.Iterable[global___SessionInfo.ContextSteps]] = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["earliest",b"earliest","input_context_steps",b"input_context_steps","intent_tags",b"intent_tags","labels",b"labels","language_codes",b"language_codes","latest",b"latest","matched_entity_types",b"matched_entity_types","matched_intents",b"matched_intents","min_entity_types_confidence",b"min_entity_types_confidence","min_intents_confidence",b"min_intents_confidence","number_turns",b"number_turns","output_context_steps",b"output_context_steps","user_ids",b"user_ids"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["earliest",b"earliest","intent_tags",b"intent_tags","labels",b"labels","language_codes",b"language_codes","latest",b"latest","matched_entity_types",b"matched_entity_types","matched_intents",b"matched_intents","min_entity_types_confidence",b"min_entity_types_confidence","min_intents_confidence",b"min_intents_confidence","number_turns",b"number_turns","user_ids",b"user_ids"]) -> None: ...
 global___SessionInfo = SessionInfo
 
 class ListSessionsResponse(google.protobuf.message.Message):

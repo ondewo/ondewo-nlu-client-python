@@ -3,6 +3,7 @@
 isort:skip_file
 """
 import builtins
+import google.protobuf.any_pb2
 import google.protobuf.descriptor
 import google.protobuf.field_mask_pb2
 import google.protobuf.internal.containers
@@ -1268,3 +1269,89 @@ class PlatformMapping(google.protobuf.message.Message):
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["parent",b"parent","platform_info",b"platform_info"]) -> None: ...
 global___PlatformMapping = PlatformMapping
+
+class FullTextSearchRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    class _QueryType:
+        ValueType = typing.NewType('ValueType', builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
+    class _QueryTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[FullTextSearchRequest._QueryType.ValueType], builtins.type):
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        ALL: FullTextSearchRequest._QueryType.ValueType  # 0
+        OndewoEntityQuery: FullTextSearchRequest._QueryType.ValueType  # 1
+        OndewoEntityTypeQuery: FullTextSearchRequest._QueryType.ValueType  # 2
+        OndewoSynonymQuery: FullTextSearchRequest._QueryType.ValueType  # 3
+        OndewoIntentNameQuery: FullTextSearchRequest._QueryType.ValueType  # 4
+        OndewoIntentContextInQuery: FullTextSearchRequest._QueryType.ValueType  # 5
+        OndewoIntentContextOutQuery: FullTextSearchRequest._QueryType.ValueType  # 6
+        OndewoIntentUsersaysQuery: FullTextSearchRequest._QueryType.ValueType  # 7
+        OndewoIntentTagsQuery: FullTextSearchRequest._QueryType.ValueType  # 8
+        OndewoIntentParametersQuery: FullTextSearchRequest._QueryType.ValueType  # 9
+    class QueryType(_QueryType, metaclass=_QueryTypeEnumTypeWrapper):
+        pass
+
+    ALL: FullTextSearchRequest.QueryType.ValueType  # 0
+    OndewoEntityQuery: FullTextSearchRequest.QueryType.ValueType  # 1
+    OndewoEntityTypeQuery: FullTextSearchRequest.QueryType.ValueType  # 2
+    OndewoSynonymQuery: FullTextSearchRequest.QueryType.ValueType  # 3
+    OndewoIntentNameQuery: FullTextSearchRequest.QueryType.ValueType  # 4
+    OndewoIntentContextInQuery: FullTextSearchRequest.QueryType.ValueType  # 5
+    OndewoIntentContextOutQuery: FullTextSearchRequest.QueryType.ValueType  # 6
+    OndewoIntentUsersaysQuery: FullTextSearchRequest.QueryType.ValueType  # 7
+    OndewoIntentTagsQuery: FullTextSearchRequest.QueryType.ValueType  # 8
+    OndewoIntentParametersQuery: FullTextSearchRequest.QueryType.ValueType  # 9
+
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    QUERY_TYPE_FIELD_NUMBER: builtins.int
+    TERM_FIELD_NUMBER: builtins.int
+    parent: typing.Text
+    """Required. The project that the agent is associated with.
+    Format: `projects/<Project ID>/agent`.
+    """
+
+    language_code: typing.Text
+    """In which language to search for"""
+
+    query_type: global___FullTextSearchRequest.QueryType.ValueType
+    """What is the type of the query that needs to be sent to elasticsearch"""
+
+    term: typing.Text
+    """What to search for in the elastic server"""
+
+    def __init__(self,
+        *,
+        parent: typing.Text = ...,
+        language_code: typing.Text = ...,
+        query_type: global___FullTextSearchRequest.QueryType.ValueType = ...,
+        term: typing.Text = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["language_code",b"language_code","parent",b"parent","query_type",b"query_type","term",b"term"]) -> None: ...
+global___FullTextSearchRequest = FullTextSearchRequest
+
+class FullTextSearchResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    class ResponseEntry(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+        KEY_FIELD_NUMBER: builtins.int
+        VALUE_FIELD_NUMBER: builtins.int
+        key: typing.Text
+        @property
+        def value(self) -> google.protobuf.any_pb2.Any: ...
+        def __init__(self,
+            *,
+            key: typing.Text = ...,
+            value: typing.Optional[google.protobuf.any_pb2.Any] = ...,
+            ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["value",b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+
+    RESPONSE_FIELD_NUMBER: builtins.int
+    @property
+    def response(self) -> google.protobuf.internal.containers.MessageMap[typing.Text, google.protobuf.any_pb2.Any]: ...
+    def __init__(self,
+        *,
+        response: typing.Optional[typing.Mapping[typing.Text, google.protobuf.any_pb2.Any]] = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["response",b"response"]) -> None: ...
+global___FullTextSearchResponse = FullTextSearchResponse

@@ -17,6 +17,7 @@ from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from google.protobuf import field_mask_pb2 as google_dot_protobuf_dot_field__mask__pb2
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 from google.protobuf import struct_pb2 as google_dot_protobuf_dot_struct__pb2
+from google.protobuf import any_pb2 as google_dot_protobuf_dot_any__pb2
 from ondewo.nlu import common_pb2 as ondewo_dot_nlu_dot_common__pb2
 from ondewo.nlu import intent_pb2 as ondewo_dot_nlu_dot_intent__pb2
 from ondewo.nlu import user_pb2 as ondewo_dot_nlu_dot_user__pb2
@@ -25,7 +26,7 @@ from ondewo.nlu import operations_pb2 as ondewo_dot_nlu_dot_operations__pb2
 from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x16ondewo/nlu/agent.proto\x12\nondewo.nlu\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x17ondewo/nlu/common.proto\x1a\x17ondewo/nlu/intent.proto\x1a\x15ondewo/nlu/user.proto\x1a\x1dondewo/nlu/project_role.proto\x1a\x1bondewo/nlu/operations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x91\x02\n\x05\x41gent\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x14\n\x0c\x64isplay_name\x18\x02 \x01(\t\x12\x1d\n\x15\x64\x65\x66\x61ult_language_code\x18\x03 \x01(\t\x12 \n\x18supported_language_codes\x18\x04 \x03(\t\x12\x11\n\ttime_zone\x18\x05 \x01(\t\x12\x14\n\x0cnlu_platform\x18\x06 \x01(\t\x12(\n\x07\x63onfigs\x18\x07 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x10\n\x08owner_id\x18\x08 \x01(\t\x12\'\n\x06status\x18\t \x01(\x0e\x32\x17.ondewo.nlu.AgentStatus\x12\x13\n\x0b\x64\x65scription\x18\n \x01(\t\"S\n\x0e\x41gentWithOwner\x12 \n\x05\x61gent\x18\x01 \x01(\x0b\x32\x11.ondewo.nlu.Agent\x12\x1f\n\x05owner\x18\x02 \x01(\x0b\x32\x10.ondewo.nlu.User\"{\n\x14\x41gentOfUserWithOwner\x12\x34\n\x10\x61gent_with_owner\x18\x01 \x01(\x0b\x32\x1a.ondewo.nlu.AgentWithOwner\x12-\n\x0cproject_role\x18\x02 \x01(\x0b\x32\x17.ondewo.nlu.ProjectRole\"a\n\x12\x43reateAgentRequest\x12 \n\x05\x61gent\x18\x01 \x01(\x0b\x32\x11.ondewo.nlu.Agent\x12)\n\nagent_view\x18\x02 \x01(\x0e\x32\x15.ondewo.nlu.AgentView\"\x92\x01\n\x12UpdateAgentRequest\x12 \n\x05\x61gent\x18\x01 \x01(\x0b\x32\x11.ondewo.nlu.Agent\x12)\n\nagent_view\x18\x02 \x01(\x0e\x32\x15.ondewo.nlu.AgentView\x12/\n\x0bupdate_mask\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\"$\n\x12\x44\x65leteAgentRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\"L\n\x0fGetAgentRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12)\n\nagent_view\x18\x02 \x01(\x0e\x32\x15.ondewo.nlu.AgentView\"\x83\x01\n\x11ListAgentsRequest\x12)\n\nagent_view\x18\x01 \x01(\x0e\x32\x15.ondewo.nlu.AgentView\x12\x12\n\npage_token\x18\x02 \x01(\t\x12/\n\rsort_by_field\x18\x03 \x01(\x0b\x32\x18.ondewo.nlu.AgentSorting\"e\n\x12ListAgentsResponse\x12\x36\n\x12\x61gents_with_owners\x18\x01 \x03(\x0b\x32\x1a.ondewo.nlu.AgentWithOwner\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t\"y\n\x18ListAgentsOfUserResponse\x12\x44\n\x1a\x61gents_of_user_with_owners\x18\x01 \x03(\x0b\x32 .ondewo.nlu.AgentOfUserWithOwner\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t\"p\n\x11TrainAgentRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x0e\n\x06\x62ranch\x18\x02 \x01(\t\x12;\n\x13initiation_protocol\x18\x03 \x01(\x0e\x32\x1e.ondewo.nlu.InitiationProtocol\"3\n\x11\x42uildCacheRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x0e\n\x06\x62ranch\x18\x02 \x01(\t\"R\n\x12\x45xportAgentRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x11\n\tagent_uri\x18\x02 \x01(\t\x12\x19\n\x11\x63ompression_level\x18\x03 \x01(\x05\"L\n\x13\x45xportAgentResponse\x12\x13\n\tagent_uri\x18\x01 \x01(\tH\x00\x12\x17\n\ragent_content\x18\x02 \x01(\x0cH\x00\x42\x07\n\x05\x61gent\"\x85\x01\n\x1b\x45xportBenchmarkAgentRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x19\n\x11\x63ompression_level\x18\x02 \x01(\x05\x12\x11\n\ttest_size\x18\x03 \x01(\x02\x12\x12\n\ntrain_size\x18\x04 \x01(\x02\x12\x14\n\x0crandom_state\x18\x05 \x01(\x05\"\xef\x01\n\x1c\x45xportBenchmarkAgentResponse\x12\x15\n\ragent_content\x18\x01 \x01(\x0c\x12W\n\x10training_phrases\x18\x02 \x03(\x0b\x32=.ondewo.nlu.ExportBenchmarkAgentResponse.TrainingPhrasesEntry\x1a_\n\x14TrainingPhrasesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x36\n\x05value\x18\x02 \x01(\x0b\x32\'.ondewo.nlu.ListTrainingPhrasesResponse:\x02\x38\x01\"\xa1\x01\n\x1bOptimizeRankingMatchRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x16\n\x0elanguage_codes\x18\x02 \x03(\t\x12H\n\x14optimization_configs\x18\x03 \x03(\x0b\x32*.ondewo.nlu.RankingMatchOptimizationConfig\x12\x10\n\x08in_place\x18\x04 \x01(\x08\"\x93\x01\n\x1eRankingMatchOptimizationConfig\x12\x15\n\rlanguage_code\x18\x01 \x01(\t\x12\x10\n\x08n_splits\x18\x02 \x01(\x05\x12\x13\n\x0brandom_seed\x18\x03 \x01(\x05\x12\x33\n\x12initial_thresholds\x18\x04 \x01(\x0b\x32\x17.google.protobuf.Struct\"\x8c\x01\n\x1cOptimizeRankingMatchResponse\x12\x32\n\x11optimization_info\x18\x01 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x38\n\x17optimized_ondewo_config\x18\x03 \x01(\x0b\x32\x17.google.protobuf.Struct\"[\n\x12ImportAgentRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x13\n\tagent_uri\x18\x02 \x01(\tH\x00\x12\x17\n\ragent_content\x18\x03 \x01(\x0cH\x00\x42\x07\n\x05\x61gent\"\\\n\x13RestoreAgentRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x13\n\tagent_uri\x18\x02 \x01(\tH\x00\x12\x17\n\ragent_content\x18\x03 \x01(\x0cH\x00\x42\x07\n\x05\x61gent\"\x92\x01\n\x19GetAgentStatisticsRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12(\n\x06\x66ormat\x18\x02 \x01(\x0e\x32\x18.ondewo.nlu.ReportFormat\x12\x15\n\rlanguage_code\x18\x03 \x01(\t\x12$\n\x04type\x18\x04 \x01(\x0e\x32\x16.ondewo.nlu.ReportType\"}\n\x1aGetAgentStatisticsResponse\x12\x0f\n\x07reports\x18\x01 \x01(\x0c\x12(\n\x06\x66ormat\x18\x02 \x01(\x0e\x32\x18.ondewo.nlu.ReportFormat\x12$\n\x04type\x18\x03 \x01(\x0e\x32\x16.ondewo.nlu.ReportType\"S\n\x17\x41\x64\x64UserToProjectRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x0f\n\x07user_id\x18\x02 \x01(\t\x12\x17\n\x0fproject_role_id\x18\x04 \x01(\r\"?\n\x1cRemoveUserFromProjectRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x0f\n\x07user_id\x18\x02 \x01(\t\"?\n\x19ListUsersInProjectRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x12\n\npage_token\x18\x02 \x01(\t\"P\n\rUserInProject\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x1e\n\x04user\x18\x02 \x01(\x0b\x32\x10.ondewo.nlu.User\x12\x0f\n\x07role_id\x18\x03 \x01(\r\"_\n\x1aListUsersInProjectResponse\x12(\n\x05users\x18\x01 \x03(\x0b\x32\x19.ondewo.nlu.UserInProject\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t\"?\n\x17GetPlatformInfoResponse\x12\x0f\n\x07version\x18\x01 \x01(\t\x12\x13\n\x0b\x63ommit_hash\x18\x02 \x01(\t\"3\n\x1dListProjectPermissionsRequest\x12\x12\n\npage_token\x18\x01 \x01(\t\"N\n\x1eListProjectPermissionsResponse\x12\x13\n\x0bpermissions\x18\x01 \x03(\t\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t\"{\n\x15SetAgentStatusRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\'\n\x06status\x18\x02 \x01(\x0e\x32\x17.ondewo.nlu.AgentStatus\x12)\n\nagent_view\x18\x03 \x01(\x0e\x32\x15.ondewo.nlu.AgentView\"\xa3\x02\n\x0c\x41gentSorting\x12\x41\n\rsorting_field\x18\x01 \x01(\x0e\x32*.ondewo.nlu.AgentSorting.AgentSortingField\x12-\n\x0csorting_mode\x18\x02 \x01(\x0e\x32\x17.ondewo.nlu.SortingMode\"\xa0\x01\n\x11\x41gentSortingField\x12\x14\n\x10NO_AGENT_SORTING\x10\x00\x12\x16\n\x12SORT_AGENT_BY_NAME\x10\x01\x12\x1f\n\x1bSORT_AGENT_BY_CREATION_DATE\x10\x02\x12\x1e\n\x1aSORT_AGENT_BY_LAST_UPDATED\x10\x03\x12\x1c\n\x18SORT_AGENT_BY_OWNER_NAME\x10\x04\"o\n\x13SetResourcesRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t\x12\x15\n\rresource_file\x18\x04 \x01(\x0c\x12\x15\n\rlanguage_code\x18\x05 \x01(\t\"[\n\x16\x44\x65leteResourcesRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t\x12\x15\n\rlanguage_code\x18\x04 \x01(\t\"[\n\x16\x45xportResourcesRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t\x12\x15\n\rlanguage_code\x18\x04 \x01(\t\"s\n\x17\x45xportResourcesResponse\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t\x12\x15\n\rlanguage_code\x18\x04 \x01(\t\x12\x15\n\rresource_file\x18\x05 \x01(\x0c\"k\n\x17GetModelStatusesRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x15\n\rcache_version\x18\x02 \x01(\x05\x12\x15\n\rlanguage_code\x18\x03 \x01(\t\x12\x12\n\nmodel_name\x18\x04 \x01(\t\"\xc0\x02\n\x0bModelStatus\x12\x15\n\rcache_version\x18\x01 \x01(\x05\x12\x15\n\rlanguage_code\x18\x02 \x01(\t\x12\x12\n\nmodel_name\x18\x03 \x01(\t\x12\x33\n\x0fstatus_set_time\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x0e\n\x06\x63onfig\x18\x05 \x01(\t\x12\x32\n\x06status\x18\x06 \x01(\x0e\x32\".ondewo.nlu.ModelStatus.StatusName\"v\n\nStatusName\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x10\n\x0cINITIALIZING\x10\x01\x12\x0f\n\x0bINITIALIZED\x10\x02\x12\x10\n\x0cLOADING_DATA\x10\x03\x12\x0c\n\x08TRAINING\x10\x04\x12\x0b\n\x07TESTING\x10\x05\x12\x0b\n\x07TRAINED\x10\x06\"K\n\x18GetModelStatusesResponse\x12/\n\x0emodel_statuses\x18\x01 \x03(\x0b\x32\x17.ondewo.nlu.ModelStatus\"s\n\x12\x43ustomPlatformInfo\x12\x35\n\x08platform\x18\x01 \x01(\x0e\x32#.ondewo.nlu.Intent.Message.Platform\x12\x14\n\x0c\x64isplay_name\x18\x02 \x01(\t\x12\x10\n\x08position\x18\x03 \x01(\r\"+\n\x19GetPlatformMappingRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\"X\n\x0fPlatformMapping\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x35\n\rplatform_info\x18\x02 \x03(\x0b\x32\x1e.ondewo.nlu.CustomPlatformInfo*T\n\tAgentView\x12\x1a\n\x16\x41GENT_VIEW_UNSPECIFIED\x10\x00\x12\x13\n\x0f\x41GENT_VIEW_FULL\x10\x01\x12\x16\n\x12\x41GENT_VIEW_SHALLOW\x10\x02*J\n\x12InitiationProtocol\x12\x17\n\x13\x41S_SOON_AS_POSSIBLE\x10\x00\x12\x10\n\x0cWHEN_TRAINED\x10\x01\x12\t\n\x05NEVER\x10\x02*q\n\nReportType\x12\x07\n\x03\x41LL\x10\x00\x12\x17\n\x13INTENT_PER_LANGUAGE\x10\x01\x12\x17\n\x13\x45NTITY_PER_LANGUAGE\x10\x02\x12\x14\n\x10\x45NTITY_COLLISION\x10\x03\x12\x12\n\x0eINTENT_GENERAL\x10\x04*+\n\x0cReportFormat\x12\x07\n\x03\x43SV\x10\x00\x12\x08\n\x04HTML\x10\x01\x12\x08\n\x04JSON\x10\x02*\'\n\x0b\x41gentStatus\x12\n\n\x06\x41\x43TIVE\x10\x00\x12\x0c\n\x08INACTIVE\x10\x01\x32\x95\x1a\n\x06\x41gents\x12Y\n\x0b\x43reateAgent\x12\x1e.ondewo.nlu.CreateAgentRequest\x1a\x11.ondewo.nlu.Agent\"\x17\x82\xd3\xe4\x93\x02\x11\"\x0c/v2/projects:\x01*\x12p\n\x0bUpdateAgent\x12\x1e.ondewo.nlu.UpdateAgentRequest\x1a\x11.ondewo.nlu.Agent\".\x82\xd3\xe4\x93\x02(2#/v2/{agent.parent=projects/*/agent}:\x01*\x12\x61\n\x08GetAgent\x12\x1b.ondewo.nlu.GetAgentRequest\x1a\x11.ondewo.nlu.Agent\"%\x82\xd3\xe4\x93\x02\x1f\x12\x1d/v2/{parent=projects/*/agent}\x12l\n\x0b\x44\x65leteAgent\x12\x1e.ondewo.nlu.DeleteAgentRequest\x1a\x16.google.protobuf.Empty\"%\x82\xd3\xe4\x93\x02\x1f*\x1d/v2/{parent=projects/*/agent}\x12W\n\x0f\x44\x65leteAllAgents\x12\x16.google.protobuf.Empty\x1a\x16.google.protobuf.Empty\"\x14\x82\xd3\xe4\x93\x02\x0e*\x0c/v2/projects\x12\x61\n\nListAgents\x12\x1d.ondewo.nlu.ListAgentsRequest\x1a\x1e.ondewo.nlu.ListAgentsResponse\"\x14\x82\xd3\xe4\x93\x02\x0e\x12\x0c/v2/projects\x12m\n\x10ListAgentsOfUser\x12\x1d.ondewo.nlu.ListAgentsRequest\x1a$.ondewo.nlu.ListAgentsOfUserResponse\"\x14\x82\xd3\xe4\x93\x02\x0e\x12\x0c/v2/projects\x12h\n\rListAllAgents\x12\x1d.ondewo.nlu.ListAgentsRequest\x1a\x1e.ondewo.nlu.ListAgentsResponse\"\x18\x82\xd3\xe4\x93\x02\x12\x12\x10/v2/projects:all\x12\x8b\x01\n\x10\x41\x64\x64UserToProject\x12#.ondewo.nlu.AddUserToProjectRequest\x1a\x16.google.protobuf.Empty\":\x82\xd3\xe4\x93\x02\x34\"//v2/{parent=projects/*/agent}/users/{user_id=*}:\x01*\x12\x92\x01\n\x15RemoveUserFromProject\x12(.ondewo.nlu.RemoveUserFromProjectRequest\x1a\x16.google.protobuf.Empty\"7\x82\xd3\xe4\x93\x02\x31*//v2/{parent=projects/*/agent}/users/{user_id=*}\x12\x90\x01\n\x12ListUsersInProject\x12%.ondewo.nlu.ListUsersInProjectRequest\x1a&.ondewo.nlu.ListUsersInProjectResponse\"+\x82\xd3\xe4\x93\x02%\x12#/v2/{parent=projects/*/agent}/users\x12\x63\n\x0fGetPlatformInfo\x12\x16.google.protobuf.Empty\x1a#.ondewo.nlu.GetPlatformInfoResponse\"\x13\x82\xd3\xe4\x93\x02\r\x12\x0b/v2/version\x12\x90\x01\n\x16ListProjectPermissions\x12).ondewo.nlu.ListProjectPermissionsRequest\x1a*.ondewo.nlu.ListProjectPermissionsResponse\"\x1f\x82\xd3\xe4\x93\x02\x19\x12\x17/v2/project_permissions\x12r\n\nTrainAgent\x12\x1d.ondewo.nlu.TrainAgentRequest\x1a\x15.ondewo.nlu.Operation\".\x82\xd3\xe4\x93\x02(\"#/v2/{parent=projects/*/agent}:train:\x01*\x12x\n\nBuildCache\x12\x1d.ondewo.nlu.BuildCacheRequest\x1a\x15.ondewo.nlu.Operation\"4\x82\xd3\xe4\x93\x02.\")/v2/{parent=projects/*/agent}:build_cache:\x01*\x12u\n\x0b\x45xportAgent\x12\x1e.ondewo.nlu.ExportAgentRequest\x1a\x15.ondewo.nlu.Operation\"/\x82\xd3\xe4\x93\x02)\"$/v2/{parent=projects/*/agent}:export:\x01*\x12\x91\x01\n\x14\x45xportBenchmarkAgent\x12\'.ondewo.nlu.ExportBenchmarkAgentRequest\x1a\x15.ondewo.nlu.Operation\"9\x82\xd3\xe4\x93\x02\x33\"./v2/{parent=projects/*/agent}:export_benchmark:\x01*\x12u\n\x0bImportAgent\x12\x1e.ondewo.nlu.ImportAgentRequest\x1a\x15.ondewo.nlu.Operation\"/\x82\xd3\xe4\x93\x02)\"$/v2/{parent=projects/*/agent}:import:\x01*\x12\x97\x01\n\x14OptimizeRankingMatch\x12\'.ondewo.nlu.OptimizeRankingMatchRequest\x1a\x15.ondewo.nlu.Operation\"?\x82\xd3\xe4\x93\x02\x39\"4/v2/{parent=projects/*/agent}:optimize_ranking_match:\x01*\x12x\n\x0cRestoreAgent\x12\x1f.ondewo.nlu.RestoreAgentRequest\x1a\x15.ondewo.nlu.Operation\"0\x82\xd3\xe4\x93\x02*\"%/v2/{parent=projects/*/agent}:restore:\x01*\x12\x95\x01\n\x12GetAgentStatistics\x12%.ondewo.nlu.GetAgentStatisticsRequest\x1a&.ondewo.nlu.GetAgentStatisticsResponse\"0\x82\xd3\xe4\x93\x02*\x12(/v2/{parent=projects/*/agent}:statistics\x12w\n\x0eSetAgentStatus\x12!.ondewo.nlu.SetAgentStatusRequest\x1a\x11.ondewo.nlu.Agent\"/\x82\xd3\xe4\x93\x02)\"$/v2/{parent=projects/*/agent}:status:\x01*\x12{\n\x0cSetResources\x12\x1f.ondewo.nlu.SetResourcesRequest\x1a\x16.google.protobuf.Empty\"2\x82\xd3\xe4\x93\x02,\"\'/v2/{parent=projects/*/agent}:resources:\x01*\x12~\n\x0f\x44\x65leteResources\x12\".ondewo.nlu.DeleteResourcesRequest\x1a\x16.google.protobuf.Empty\"/\x82\xd3\xe4\x93\x02)*\'/v2/{parent=projects/*/agent}:resources\x12\x8e\x01\n\x0f\x45xportResources\x12\".ondewo.nlu.ExportResourcesRequest\x1a#.ondewo.nlu.ExportResourcesResponse\"2\x82\xd3\xe4\x93\x02,\"\'/v2/{parent=projects/*/agent}:resources:\x01*\x12]\n\x10GetModelStatuses\x12#.ondewo.nlu.GetModelStatusesRequest\x1a$.ondewo.nlu.GetModelStatusesResponse\x12X\n\x12GetPlatformMapping\x12%.ondewo.nlu.GetPlatformMappingRequest\x1a\x1b.ondewo.nlu.PlatformMapping\x12N\n\x12SetPlatformMapping\x12\x1b.ondewo.nlu.PlatformMapping\x1a\x1b.ondewo.nlu.PlatformMappingb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x16ondewo/nlu/agent.proto\x12\nondewo.nlu\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/field_mask.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x19google/protobuf/any.proto\x1a\x17ondewo/nlu/common.proto\x1a\x17ondewo/nlu/intent.proto\x1a\x15ondewo/nlu/user.proto\x1a\x1dondewo/nlu/project_role.proto\x1a\x1bondewo/nlu/operations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x91\x02\n\x05\x41gent\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x14\n\x0c\x64isplay_name\x18\x02 \x01(\t\x12\x1d\n\x15\x64\x65\x66\x61ult_language_code\x18\x03 \x01(\t\x12 \n\x18supported_language_codes\x18\x04 \x03(\t\x12\x11\n\ttime_zone\x18\x05 \x01(\t\x12\x14\n\x0cnlu_platform\x18\x06 \x01(\t\x12(\n\x07\x63onfigs\x18\x07 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x10\n\x08owner_id\x18\x08 \x01(\t\x12\'\n\x06status\x18\t \x01(\x0e\x32\x17.ondewo.nlu.AgentStatus\x12\x13\n\x0b\x64\x65scription\x18\n \x01(\t\"S\n\x0e\x41gentWithOwner\x12 \n\x05\x61gent\x18\x01 \x01(\x0b\x32\x11.ondewo.nlu.Agent\x12\x1f\n\x05owner\x18\x02 \x01(\x0b\x32\x10.ondewo.nlu.User\"{\n\x14\x41gentOfUserWithOwner\x12\x34\n\x10\x61gent_with_owner\x18\x01 \x01(\x0b\x32\x1a.ondewo.nlu.AgentWithOwner\x12-\n\x0cproject_role\x18\x02 \x01(\x0b\x32\x17.ondewo.nlu.ProjectRole\"a\n\x12\x43reateAgentRequest\x12 \n\x05\x61gent\x18\x01 \x01(\x0b\x32\x11.ondewo.nlu.Agent\x12)\n\nagent_view\x18\x02 \x01(\x0e\x32\x15.ondewo.nlu.AgentView\"\x92\x01\n\x12UpdateAgentRequest\x12 \n\x05\x61gent\x18\x01 \x01(\x0b\x32\x11.ondewo.nlu.Agent\x12)\n\nagent_view\x18\x02 \x01(\x0e\x32\x15.ondewo.nlu.AgentView\x12/\n\x0bupdate_mask\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\"$\n\x12\x44\x65leteAgentRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\"L\n\x0fGetAgentRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12)\n\nagent_view\x18\x02 \x01(\x0e\x32\x15.ondewo.nlu.AgentView\"\x83\x01\n\x11ListAgentsRequest\x12)\n\nagent_view\x18\x01 \x01(\x0e\x32\x15.ondewo.nlu.AgentView\x12\x12\n\npage_token\x18\x02 \x01(\t\x12/\n\rsort_by_field\x18\x03 \x01(\x0b\x32\x18.ondewo.nlu.AgentSorting\"e\n\x12ListAgentsResponse\x12\x36\n\x12\x61gents_with_owners\x18\x01 \x03(\x0b\x32\x1a.ondewo.nlu.AgentWithOwner\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t\"y\n\x18ListAgentsOfUserResponse\x12\x44\n\x1a\x61gents_of_user_with_owners\x18\x01 \x03(\x0b\x32 .ondewo.nlu.AgentOfUserWithOwner\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t\"p\n\x11TrainAgentRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x0e\n\x06\x62ranch\x18\x02 \x01(\t\x12;\n\x13initiation_protocol\x18\x03 \x01(\x0e\x32\x1e.ondewo.nlu.InitiationProtocol\"3\n\x11\x42uildCacheRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x0e\n\x06\x62ranch\x18\x02 \x01(\t\"R\n\x12\x45xportAgentRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x11\n\tagent_uri\x18\x02 \x01(\t\x12\x19\n\x11\x63ompression_level\x18\x03 \x01(\x05\"L\n\x13\x45xportAgentResponse\x12\x13\n\tagent_uri\x18\x01 \x01(\tH\x00\x12\x17\n\ragent_content\x18\x02 \x01(\x0cH\x00\x42\x07\n\x05\x61gent\"\x85\x01\n\x1b\x45xportBenchmarkAgentRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x19\n\x11\x63ompression_level\x18\x02 \x01(\x05\x12\x11\n\ttest_size\x18\x03 \x01(\x02\x12\x12\n\ntrain_size\x18\x04 \x01(\x02\x12\x14\n\x0crandom_state\x18\x05 \x01(\x05\"\xef\x01\n\x1c\x45xportBenchmarkAgentResponse\x12\x15\n\ragent_content\x18\x01 \x01(\x0c\x12W\n\x10training_phrases\x18\x02 \x03(\x0b\x32=.ondewo.nlu.ExportBenchmarkAgentResponse.TrainingPhrasesEntry\x1a_\n\x14TrainingPhrasesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x36\n\x05value\x18\x02 \x01(\x0b\x32\'.ondewo.nlu.ListTrainingPhrasesResponse:\x02\x38\x01\"\xa1\x01\n\x1bOptimizeRankingMatchRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x16\n\x0elanguage_codes\x18\x02 \x03(\t\x12H\n\x14optimization_configs\x18\x03 \x03(\x0b\x32*.ondewo.nlu.RankingMatchOptimizationConfig\x12\x10\n\x08in_place\x18\x04 \x01(\x08\"\x93\x01\n\x1eRankingMatchOptimizationConfig\x12\x15\n\rlanguage_code\x18\x01 \x01(\t\x12\x10\n\x08n_splits\x18\x02 \x01(\x05\x12\x13\n\x0brandom_seed\x18\x03 \x01(\x05\x12\x33\n\x12initial_thresholds\x18\x04 \x01(\x0b\x32\x17.google.protobuf.Struct\"\x8c\x01\n\x1cOptimizeRankingMatchResponse\x12\x32\n\x11optimization_info\x18\x01 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x38\n\x17optimized_ondewo_config\x18\x03 \x01(\x0b\x32\x17.google.protobuf.Struct\"[\n\x12ImportAgentRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x13\n\tagent_uri\x18\x02 \x01(\tH\x00\x12\x17\n\ragent_content\x18\x03 \x01(\x0cH\x00\x42\x07\n\x05\x61gent\"\\\n\x13RestoreAgentRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x13\n\tagent_uri\x18\x02 \x01(\tH\x00\x12\x17\n\ragent_content\x18\x03 \x01(\x0cH\x00\x42\x07\n\x05\x61gent\"\x92\x01\n\x19GetAgentStatisticsRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12(\n\x06\x66ormat\x18\x02 \x01(\x0e\x32\x18.ondewo.nlu.ReportFormat\x12\x15\n\rlanguage_code\x18\x03 \x01(\t\x12$\n\x04type\x18\x04 \x01(\x0e\x32\x16.ondewo.nlu.ReportType\"}\n\x1aGetAgentStatisticsResponse\x12\x0f\n\x07reports\x18\x01 \x01(\x0c\x12(\n\x06\x66ormat\x18\x02 \x01(\x0e\x32\x18.ondewo.nlu.ReportFormat\x12$\n\x04type\x18\x03 \x01(\x0e\x32\x16.ondewo.nlu.ReportType\"S\n\x17\x41\x64\x64UserToProjectRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x0f\n\x07user_id\x18\x02 \x01(\t\x12\x17\n\x0fproject_role_id\x18\x04 \x01(\r\"?\n\x1cRemoveUserFromProjectRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x0f\n\x07user_id\x18\x02 \x01(\t\"?\n\x19ListUsersInProjectRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x12\n\npage_token\x18\x02 \x01(\t\"P\n\rUserInProject\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x1e\n\x04user\x18\x02 \x01(\x0b\x32\x10.ondewo.nlu.User\x12\x0f\n\x07role_id\x18\x03 \x01(\r\"_\n\x1aListUsersInProjectResponse\x12(\n\x05users\x18\x01 \x03(\x0b\x32\x19.ondewo.nlu.UserInProject\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t\"?\n\x17GetPlatformInfoResponse\x12\x0f\n\x07version\x18\x01 \x01(\t\x12\x13\n\x0b\x63ommit_hash\x18\x02 \x01(\t\"3\n\x1dListProjectPermissionsRequest\x12\x12\n\npage_token\x18\x01 \x01(\t\"N\n\x1eListProjectPermissionsResponse\x12\x13\n\x0bpermissions\x18\x01 \x03(\t\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t\"{\n\x15SetAgentStatusRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\'\n\x06status\x18\x02 \x01(\x0e\x32\x17.ondewo.nlu.AgentStatus\x12)\n\nagent_view\x18\x03 \x01(\x0e\x32\x15.ondewo.nlu.AgentView\"\xa3\x02\n\x0c\x41gentSorting\x12\x41\n\rsorting_field\x18\x01 \x01(\x0e\x32*.ondewo.nlu.AgentSorting.AgentSortingField\x12-\n\x0csorting_mode\x18\x02 \x01(\x0e\x32\x17.ondewo.nlu.SortingMode\"\xa0\x01\n\x11\x41gentSortingField\x12\x14\n\x10NO_AGENT_SORTING\x10\x00\x12\x16\n\x12SORT_AGENT_BY_NAME\x10\x01\x12\x1f\n\x1bSORT_AGENT_BY_CREATION_DATE\x10\x02\x12\x1e\n\x1aSORT_AGENT_BY_LAST_UPDATED\x10\x03\x12\x1c\n\x18SORT_AGENT_BY_OWNER_NAME\x10\x04\"o\n\x13SetResourcesRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t\x12\x15\n\rresource_file\x18\x04 \x01(\x0c\x12\x15\n\rlanguage_code\x18\x05 \x01(\t\"[\n\x16\x44\x65leteResourcesRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t\x12\x15\n\rlanguage_code\x18\x04 \x01(\t\"[\n\x16\x45xportResourcesRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t\x12\x15\n\rlanguage_code\x18\x04 \x01(\t\"s\n\x17\x45xportResourcesResponse\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t\x12\x15\n\rlanguage_code\x18\x04 \x01(\t\x12\x15\n\rresource_file\x18\x05 \x01(\x0c\"k\n\x17GetModelStatusesRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x15\n\rcache_version\x18\x02 \x01(\x05\x12\x15\n\rlanguage_code\x18\x03 \x01(\t\x12\x12\n\nmodel_name\x18\x04 \x01(\t\"\xc0\x02\n\x0bModelStatus\x12\x15\n\rcache_version\x18\x01 \x01(\x05\x12\x15\n\rlanguage_code\x18\x02 \x01(\t\x12\x12\n\nmodel_name\x18\x03 \x01(\t\x12\x33\n\x0fstatus_set_time\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x0e\n\x06\x63onfig\x18\x05 \x01(\t\x12\x32\n\x06status\x18\x06 \x01(\x0e\x32\".ondewo.nlu.ModelStatus.StatusName\"v\n\nStatusName\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x10\n\x0cINITIALIZING\x10\x01\x12\x0f\n\x0bINITIALIZED\x10\x02\x12\x10\n\x0cLOADING_DATA\x10\x03\x12\x0c\n\x08TRAINING\x10\x04\x12\x0b\n\x07TESTING\x10\x05\x12\x0b\n\x07TRAINED\x10\x06\"K\n\x18GetModelStatusesResponse\x12/\n\x0emodel_statuses\x18\x01 \x03(\x0b\x32\x17.ondewo.nlu.ModelStatus\"s\n\x12\x43ustomPlatformInfo\x12\x35\n\x08platform\x18\x01 \x01(\x0e\x32#.ondewo.nlu.Intent.Message.Platform\x12\x14\n\x0c\x64isplay_name\x18\x02 \x01(\t\x12\x10\n\x08position\x18\x03 \x01(\r\"+\n\x19GetPlatformMappingRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\"X\n\x0fPlatformMapping\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x35\n\rplatform_info\x18\x02 \x03(\x0b\x32\x1e.ondewo.nlu.CustomPlatformInfo\"\xa5\x03\n\x15\x46ullTextSearchRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x15\n\rlanguage_code\x18\x02 \x01(\t\x12?\n\nquery_type\x18\x03 \x01(\x0e\x32+.ondewo.nlu.FullTextSearchRequest.QueryType\x12\x0c\n\x04term\x18\x04 \x01(\t\"\x95\x02\n\tQueryType\x12\x07\n\x03\x41LL\x10\x00\x12\x15\n\x11OndewoEntityQuery\x10\x01\x12\x19\n\x15OndewoEntityTypeQuery\x10\x02\x12\x16\n\x12OndewoSynonymQuery\x10\x03\x12\x19\n\x15OndewoIntentNameQuery\x10\x04\x12\x1e\n\x1aOndewoIntentContextInQuery\x10\x05\x12\x1f\n\x1bOndewoIntentContextOutQuery\x10\x06\x12\x1d\n\x19OndewoIntentUsersaysQuery\x10\x07\x12\x19\n\x15OndewoIntentTagsQuery\x10\x08\x12\x1f\n\x1bOndewoIntentParametersQuery\x10\t\"\xa3\x01\n\x16\x46ullTextSearchResponse\x12\x42\n\x08response\x18\x01 \x03(\x0b\x32\x30.ondewo.nlu.FullTextSearchResponse.ResponseEntry\x1a\x45\n\rResponseEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12#\n\x05value\x18\x02 \x01(\x0b\x32\x14.google.protobuf.Any:\x02\x38\x01*T\n\tAgentView\x12\x1a\n\x16\x41GENT_VIEW_UNSPECIFIED\x10\x00\x12\x13\n\x0f\x41GENT_VIEW_FULL\x10\x01\x12\x16\n\x12\x41GENT_VIEW_SHALLOW\x10\x02*J\n\x12InitiationProtocol\x12\x17\n\x13\x41S_SOON_AS_POSSIBLE\x10\x00\x12\x10\n\x0cWHEN_TRAINED\x10\x01\x12\t\n\x05NEVER\x10\x02*q\n\nReportType\x12\x07\n\x03\x41LL\x10\x00\x12\x17\n\x13INTENT_PER_LANGUAGE\x10\x01\x12\x17\n\x13\x45NTITY_PER_LANGUAGE\x10\x02\x12\x14\n\x10\x45NTITY_COLLISION\x10\x03\x12\x12\n\x0eINTENT_GENERAL\x10\x04*+\n\x0cReportFormat\x12\x07\n\x03\x43SV\x10\x00\x12\x08\n\x04HTML\x10\x01\x12\x08\n\x04JSON\x10\x02*\'\n\x0b\x41gentStatus\x12\n\n\x06\x41\x43TIVE\x10\x00\x12\x0c\n\x08INACTIVE\x10\x01\x32\xf1\x1a\n\x06\x41gents\x12Y\n\x0b\x43reateAgent\x12\x1e.ondewo.nlu.CreateAgentRequest\x1a\x11.ondewo.nlu.Agent\"\x17\x82\xd3\xe4\x93\x02\x11\"\x0c/v2/projects:\x01*\x12p\n\x0bUpdateAgent\x12\x1e.ondewo.nlu.UpdateAgentRequest\x1a\x11.ondewo.nlu.Agent\".\x82\xd3\xe4\x93\x02(2#/v2/{agent.parent=projects/*/agent}:\x01*\x12\x61\n\x08GetAgent\x12\x1b.ondewo.nlu.GetAgentRequest\x1a\x11.ondewo.nlu.Agent\"%\x82\xd3\xe4\x93\x02\x1f\x12\x1d/v2/{parent=projects/*/agent}\x12l\n\x0b\x44\x65leteAgent\x12\x1e.ondewo.nlu.DeleteAgentRequest\x1a\x16.google.protobuf.Empty\"%\x82\xd3\xe4\x93\x02\x1f*\x1d/v2/{parent=projects/*/agent}\x12W\n\x0f\x44\x65leteAllAgents\x12\x16.google.protobuf.Empty\x1a\x16.google.protobuf.Empty\"\x14\x82\xd3\xe4\x93\x02\x0e*\x0c/v2/projects\x12\x61\n\nListAgents\x12\x1d.ondewo.nlu.ListAgentsRequest\x1a\x1e.ondewo.nlu.ListAgentsResponse\"\x14\x82\xd3\xe4\x93\x02\x0e\x12\x0c/v2/projects\x12m\n\x10ListAgentsOfUser\x12\x1d.ondewo.nlu.ListAgentsRequest\x1a$.ondewo.nlu.ListAgentsOfUserResponse\"\x14\x82\xd3\xe4\x93\x02\x0e\x12\x0c/v2/projects\x12h\n\rListAllAgents\x12\x1d.ondewo.nlu.ListAgentsRequest\x1a\x1e.ondewo.nlu.ListAgentsResponse\"\x18\x82\xd3\xe4\x93\x02\x12\x12\x10/v2/projects:all\x12\x8b\x01\n\x10\x41\x64\x64UserToProject\x12#.ondewo.nlu.AddUserToProjectRequest\x1a\x16.google.protobuf.Empty\":\x82\xd3\xe4\x93\x02\x34\"//v2/{parent=projects/*/agent}/users/{user_id=*}:\x01*\x12\x92\x01\n\x15RemoveUserFromProject\x12(.ondewo.nlu.RemoveUserFromProjectRequest\x1a\x16.google.protobuf.Empty\"7\x82\xd3\xe4\x93\x02\x31*//v2/{parent=projects/*/agent}/users/{user_id=*}\x12\x90\x01\n\x12ListUsersInProject\x12%.ondewo.nlu.ListUsersInProjectRequest\x1a&.ondewo.nlu.ListUsersInProjectResponse\"+\x82\xd3\xe4\x93\x02%\x12#/v2/{parent=projects/*/agent}/users\x12\x63\n\x0fGetPlatformInfo\x12\x16.google.protobuf.Empty\x1a#.ondewo.nlu.GetPlatformInfoResponse\"\x13\x82\xd3\xe4\x93\x02\r\x12\x0b/v2/version\x12\x90\x01\n\x16ListProjectPermissions\x12).ondewo.nlu.ListProjectPermissionsRequest\x1a*.ondewo.nlu.ListProjectPermissionsResponse\"\x1f\x82\xd3\xe4\x93\x02\x19\x12\x17/v2/project_permissions\x12r\n\nTrainAgent\x12\x1d.ondewo.nlu.TrainAgentRequest\x1a\x15.ondewo.nlu.Operation\".\x82\xd3\xe4\x93\x02(\"#/v2/{parent=projects/*/agent}:train:\x01*\x12x\n\nBuildCache\x12\x1d.ondewo.nlu.BuildCacheRequest\x1a\x15.ondewo.nlu.Operation\"4\x82\xd3\xe4\x93\x02.\")/v2/{parent=projects/*/agent}:build_cache:\x01*\x12u\n\x0b\x45xportAgent\x12\x1e.ondewo.nlu.ExportAgentRequest\x1a\x15.ondewo.nlu.Operation\"/\x82\xd3\xe4\x93\x02)\"$/v2/{parent=projects/*/agent}:export:\x01*\x12\x91\x01\n\x14\x45xportBenchmarkAgent\x12\'.ondewo.nlu.ExportBenchmarkAgentRequest\x1a\x15.ondewo.nlu.Operation\"9\x82\xd3\xe4\x93\x02\x33\"./v2/{parent=projects/*/agent}:export_benchmark:\x01*\x12u\n\x0bImportAgent\x12\x1e.ondewo.nlu.ImportAgentRequest\x1a\x15.ondewo.nlu.Operation\"/\x82\xd3\xe4\x93\x02)\"$/v2/{parent=projects/*/agent}:import:\x01*\x12\x97\x01\n\x14OptimizeRankingMatch\x12\'.ondewo.nlu.OptimizeRankingMatchRequest\x1a\x15.ondewo.nlu.Operation\"?\x82\xd3\xe4\x93\x02\x39\"4/v2/{parent=projects/*/agent}:optimize_ranking_match:\x01*\x12x\n\x0cRestoreAgent\x12\x1f.ondewo.nlu.RestoreAgentRequest\x1a\x15.ondewo.nlu.Operation\"0\x82\xd3\xe4\x93\x02*\"%/v2/{parent=projects/*/agent}:restore:\x01*\x12\x95\x01\n\x12GetAgentStatistics\x12%.ondewo.nlu.GetAgentStatisticsRequest\x1a&.ondewo.nlu.GetAgentStatisticsResponse\"0\x82\xd3\xe4\x93\x02*\x12(/v2/{parent=projects/*/agent}:statistics\x12w\n\x0eSetAgentStatus\x12!.ondewo.nlu.SetAgentStatusRequest\x1a\x11.ondewo.nlu.Agent\"/\x82\xd3\xe4\x93\x02)\"$/v2/{parent=projects/*/agent}:status:\x01*\x12{\n\x0cSetResources\x12\x1f.ondewo.nlu.SetResourcesRequest\x1a\x16.google.protobuf.Empty\"2\x82\xd3\xe4\x93\x02,\"\'/v2/{parent=projects/*/agent}:resources:\x01*\x12~\n\x0f\x44\x65leteResources\x12\".ondewo.nlu.DeleteResourcesRequest\x1a\x16.google.protobuf.Empty\"/\x82\xd3\xe4\x93\x02)*\'/v2/{parent=projects/*/agent}:resources\x12\x8e\x01\n\x0f\x45xportResources\x12\".ondewo.nlu.ExportResourcesRequest\x1a#.ondewo.nlu.ExportResourcesResponse\"2\x82\xd3\xe4\x93\x02,\"\'/v2/{parent=projects/*/agent}:resources:\x01*\x12]\n\x10GetModelStatuses\x12#.ondewo.nlu.GetModelStatusesRequest\x1a$.ondewo.nlu.GetModelStatusesResponse\x12X\n\x12GetPlatformMapping\x12%.ondewo.nlu.GetPlatformMappingRequest\x1a\x1b.ondewo.nlu.PlatformMapping\x12N\n\x12SetPlatformMapping\x12\x1b.ondewo.nlu.PlatformMapping\x1a\x1b.ondewo.nlu.PlatformMapping\x12Z\n\x11GetFullTextSearch\x12!.ondewo.nlu.FullTextSearchRequest\x1a\".ondewo.nlu.FullTextSearchResponseb\x06proto3')
 
 _AGENTVIEW = DESCRIPTOR.enum_types_by_name['AgentView']
 AgentView = enum_type_wrapper.EnumTypeWrapper(_AGENTVIEW)
@@ -99,8 +100,12 @@ _GETMODELSTATUSESRESPONSE = DESCRIPTOR.message_types_by_name['GetModelStatusesRe
 _CUSTOMPLATFORMINFO = DESCRIPTOR.message_types_by_name['CustomPlatformInfo']
 _GETPLATFORMMAPPINGREQUEST = DESCRIPTOR.message_types_by_name['GetPlatformMappingRequest']
 _PLATFORMMAPPING = DESCRIPTOR.message_types_by_name['PlatformMapping']
+_FULLTEXTSEARCHREQUEST = DESCRIPTOR.message_types_by_name['FullTextSearchRequest']
+_FULLTEXTSEARCHRESPONSE = DESCRIPTOR.message_types_by_name['FullTextSearchResponse']
+_FULLTEXTSEARCHRESPONSE_RESPONSEENTRY = _FULLTEXTSEARCHRESPONSE.nested_types_by_name['ResponseEntry']
 _AGENTSORTING_AGENTSORTINGFIELD = _AGENTSORTING.enum_types_by_name['AgentSortingField']
 _MODELSTATUS_STATUSNAME = _MODELSTATUS.enum_types_by_name['StatusName']
+_FULLTEXTSEARCHREQUEST_QUERYTYPE = _FULLTEXTSEARCHREQUEST.enum_types_by_name['QueryType']
 Agent = _reflection.GeneratedProtocolMessageType('Agent', (_message.Message,), {
   'DESCRIPTOR' : _AGENT,
   '__module__' : 'ondewo.nlu.agent_pb2'
@@ -410,12 +415,36 @@ PlatformMapping = _reflection.GeneratedProtocolMessageType('PlatformMapping', (_
   })
 _sym_db.RegisterMessage(PlatformMapping)
 
+FullTextSearchRequest = _reflection.GeneratedProtocolMessageType('FullTextSearchRequest', (_message.Message,), {
+  'DESCRIPTOR' : _FULLTEXTSEARCHREQUEST,
+  '__module__' : 'ondewo.nlu.agent_pb2'
+  # @@protoc_insertion_point(class_scope:ondewo.nlu.FullTextSearchRequest)
+  })
+_sym_db.RegisterMessage(FullTextSearchRequest)
+
+FullTextSearchResponse = _reflection.GeneratedProtocolMessageType('FullTextSearchResponse', (_message.Message,), {
+
+  'ResponseEntry' : _reflection.GeneratedProtocolMessageType('ResponseEntry', (_message.Message,), {
+    'DESCRIPTOR' : _FULLTEXTSEARCHRESPONSE_RESPONSEENTRY,
+    '__module__' : 'ondewo.nlu.agent_pb2'
+    # @@protoc_insertion_point(class_scope:ondewo.nlu.FullTextSearchResponse.ResponseEntry)
+    })
+  ,
+  'DESCRIPTOR' : _FULLTEXTSEARCHRESPONSE,
+  '__module__' : 'ondewo.nlu.agent_pb2'
+  # @@protoc_insertion_point(class_scope:ondewo.nlu.FullTextSearchResponse)
+  })
+_sym_db.RegisterMessage(FullTextSearchResponse)
+_sym_db.RegisterMessage(FullTextSearchResponse.ResponseEntry)
+
 _AGENTS = DESCRIPTOR.services_by_name['Agents']
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
   _EXPORTBENCHMARKAGENTRESPONSE_TRAININGPHRASESENTRY._options = None
   _EXPORTBENCHMARKAGENTRESPONSE_TRAININGPHRASESENTRY._serialized_options = b'8\001'
+  _FULLTEXTSEARCHRESPONSE_RESPONSEENTRY._options = None
+  _FULLTEXTSEARCHRESPONSE_RESPONSEENTRY._serialized_options = b'8\001'
   _AGENTS.methods_by_name['CreateAgent']._options = None
   _AGENTS.methods_by_name['CreateAgent']._serialized_options = b'\202\323\344\223\002\021\"\014/v2/projects:\001*'
   _AGENTS.methods_by_name['UpdateAgent']._options = None
@@ -466,108 +495,116 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _AGENTS.methods_by_name['DeleteResources']._serialized_options = b'\202\323\344\223\002)*\'/v2/{parent=projects/*/agent}:resources'
   _AGENTS.methods_by_name['ExportResources']._options = None
   _AGENTS.methods_by_name['ExportResources']._serialized_options = b'\202\323\344\223\002,\"\'/v2/{parent=projects/*/agent}:resources:\001*'
-  _AGENTVIEW._serialized_start=5352
-  _AGENTVIEW._serialized_end=5436
-  _INITIATIONPROTOCOL._serialized_start=5438
-  _INITIATIONPROTOCOL._serialized_end=5512
-  _REPORTTYPE._serialized_start=5514
-  _REPORTTYPE._serialized_end=5627
-  _REPORTFORMAT._serialized_start=5629
-  _REPORTFORMAT._serialized_end=5672
-  _AGENTSTATUS._serialized_start=5674
-  _AGENTSTATUS._serialized_end=5713
-  _AGENT._serialized_start=328
-  _AGENT._serialized_end=601
-  _AGENTWITHOWNER._serialized_start=603
-  _AGENTWITHOWNER._serialized_end=686
-  _AGENTOFUSERWITHOWNER._serialized_start=688
-  _AGENTOFUSERWITHOWNER._serialized_end=811
-  _CREATEAGENTREQUEST._serialized_start=813
-  _CREATEAGENTREQUEST._serialized_end=910
-  _UPDATEAGENTREQUEST._serialized_start=913
-  _UPDATEAGENTREQUEST._serialized_end=1059
-  _DELETEAGENTREQUEST._serialized_start=1061
-  _DELETEAGENTREQUEST._serialized_end=1097
-  _GETAGENTREQUEST._serialized_start=1099
-  _GETAGENTREQUEST._serialized_end=1175
-  _LISTAGENTSREQUEST._serialized_start=1178
-  _LISTAGENTSREQUEST._serialized_end=1309
-  _LISTAGENTSRESPONSE._serialized_start=1311
-  _LISTAGENTSRESPONSE._serialized_end=1412
-  _LISTAGENTSOFUSERRESPONSE._serialized_start=1414
-  _LISTAGENTSOFUSERRESPONSE._serialized_end=1535
-  _TRAINAGENTREQUEST._serialized_start=1537
-  _TRAINAGENTREQUEST._serialized_end=1649
-  _BUILDCACHEREQUEST._serialized_start=1651
-  _BUILDCACHEREQUEST._serialized_end=1702
-  _EXPORTAGENTREQUEST._serialized_start=1704
-  _EXPORTAGENTREQUEST._serialized_end=1786
-  _EXPORTAGENTRESPONSE._serialized_start=1788
-  _EXPORTAGENTRESPONSE._serialized_end=1864
-  _EXPORTBENCHMARKAGENTREQUEST._serialized_start=1867
-  _EXPORTBENCHMARKAGENTREQUEST._serialized_end=2000
-  _EXPORTBENCHMARKAGENTRESPONSE._serialized_start=2003
-  _EXPORTBENCHMARKAGENTRESPONSE._serialized_end=2242
-  _EXPORTBENCHMARKAGENTRESPONSE_TRAININGPHRASESENTRY._serialized_start=2147
-  _EXPORTBENCHMARKAGENTRESPONSE_TRAININGPHRASESENTRY._serialized_end=2242
-  _OPTIMIZERANKINGMATCHREQUEST._serialized_start=2245
-  _OPTIMIZERANKINGMATCHREQUEST._serialized_end=2406
-  _RANKINGMATCHOPTIMIZATIONCONFIG._serialized_start=2409
-  _RANKINGMATCHOPTIMIZATIONCONFIG._serialized_end=2556
-  _OPTIMIZERANKINGMATCHRESPONSE._serialized_start=2559
-  _OPTIMIZERANKINGMATCHRESPONSE._serialized_end=2699
-  _IMPORTAGENTREQUEST._serialized_start=2701
-  _IMPORTAGENTREQUEST._serialized_end=2792
-  _RESTOREAGENTREQUEST._serialized_start=2794
-  _RESTOREAGENTREQUEST._serialized_end=2886
-  _GETAGENTSTATISTICSREQUEST._serialized_start=2889
-  _GETAGENTSTATISTICSREQUEST._serialized_end=3035
-  _GETAGENTSTATISTICSRESPONSE._serialized_start=3037
-  _GETAGENTSTATISTICSRESPONSE._serialized_end=3162
-  _ADDUSERTOPROJECTREQUEST._serialized_start=3164
-  _ADDUSERTOPROJECTREQUEST._serialized_end=3247
-  _REMOVEUSERFROMPROJECTREQUEST._serialized_start=3249
-  _REMOVEUSERFROMPROJECTREQUEST._serialized_end=3312
-  _LISTUSERSINPROJECTREQUEST._serialized_start=3314
-  _LISTUSERSINPROJECTREQUEST._serialized_end=3377
-  _USERINPROJECT._serialized_start=3379
-  _USERINPROJECT._serialized_end=3459
-  _LISTUSERSINPROJECTRESPONSE._serialized_start=3461
-  _LISTUSERSINPROJECTRESPONSE._serialized_end=3556
-  _GETPLATFORMINFORESPONSE._serialized_start=3558
-  _GETPLATFORMINFORESPONSE._serialized_end=3621
-  _LISTPROJECTPERMISSIONSREQUEST._serialized_start=3623
-  _LISTPROJECTPERMISSIONSREQUEST._serialized_end=3674
-  _LISTPROJECTPERMISSIONSRESPONSE._serialized_start=3676
-  _LISTPROJECTPERMISSIONSRESPONSE._serialized_end=3754
-  _SETAGENTSTATUSREQUEST._serialized_start=3756
-  _SETAGENTSTATUSREQUEST._serialized_end=3879
-  _AGENTSORTING._serialized_start=3882
-  _AGENTSORTING._serialized_end=4173
-  _AGENTSORTING_AGENTSORTINGFIELD._serialized_start=4013
-  _AGENTSORTING_AGENTSORTINGFIELD._serialized_end=4173
-  _SETRESOURCESREQUEST._serialized_start=4175
-  _SETRESOURCESREQUEST._serialized_end=4286
-  _DELETERESOURCESREQUEST._serialized_start=4288
-  _DELETERESOURCESREQUEST._serialized_end=4379
-  _EXPORTRESOURCESREQUEST._serialized_start=4381
-  _EXPORTRESOURCESREQUEST._serialized_end=4472
-  _EXPORTRESOURCESRESPONSE._serialized_start=4474
-  _EXPORTRESOURCESRESPONSE._serialized_end=4589
-  _GETMODELSTATUSESREQUEST._serialized_start=4591
-  _GETMODELSTATUSESREQUEST._serialized_end=4698
-  _MODELSTATUS._serialized_start=4701
-  _MODELSTATUS._serialized_end=5021
-  _MODELSTATUS_STATUSNAME._serialized_start=4903
-  _MODELSTATUS_STATUSNAME._serialized_end=5021
-  _GETMODELSTATUSESRESPONSE._serialized_start=5023
-  _GETMODELSTATUSESRESPONSE._serialized_end=5098
-  _CUSTOMPLATFORMINFO._serialized_start=5100
-  _CUSTOMPLATFORMINFO._serialized_end=5215
-  _GETPLATFORMMAPPINGREQUEST._serialized_start=5217
-  _GETPLATFORMMAPPINGREQUEST._serialized_end=5260
-  _PLATFORMMAPPING._serialized_start=5262
-  _PLATFORMMAPPING._serialized_end=5350
-  _AGENTS._serialized_start=5716
-  _AGENTS._serialized_end=9065
+  _AGENTVIEW._serialized_start=5969
+  _AGENTVIEW._serialized_end=6053
+  _INITIATIONPROTOCOL._serialized_start=6055
+  _INITIATIONPROTOCOL._serialized_end=6129
+  _REPORTTYPE._serialized_start=6131
+  _REPORTTYPE._serialized_end=6244
+  _REPORTFORMAT._serialized_start=6246
+  _REPORTFORMAT._serialized_end=6289
+  _AGENTSTATUS._serialized_start=6291
+  _AGENTSTATUS._serialized_end=6330
+  _AGENT._serialized_start=355
+  _AGENT._serialized_end=628
+  _AGENTWITHOWNER._serialized_start=630
+  _AGENTWITHOWNER._serialized_end=713
+  _AGENTOFUSERWITHOWNER._serialized_start=715
+  _AGENTOFUSERWITHOWNER._serialized_end=838
+  _CREATEAGENTREQUEST._serialized_start=840
+  _CREATEAGENTREQUEST._serialized_end=937
+  _UPDATEAGENTREQUEST._serialized_start=940
+  _UPDATEAGENTREQUEST._serialized_end=1086
+  _DELETEAGENTREQUEST._serialized_start=1088
+  _DELETEAGENTREQUEST._serialized_end=1124
+  _GETAGENTREQUEST._serialized_start=1126
+  _GETAGENTREQUEST._serialized_end=1202
+  _LISTAGENTSREQUEST._serialized_start=1205
+  _LISTAGENTSREQUEST._serialized_end=1336
+  _LISTAGENTSRESPONSE._serialized_start=1338
+  _LISTAGENTSRESPONSE._serialized_end=1439
+  _LISTAGENTSOFUSERRESPONSE._serialized_start=1441
+  _LISTAGENTSOFUSERRESPONSE._serialized_end=1562
+  _TRAINAGENTREQUEST._serialized_start=1564
+  _TRAINAGENTREQUEST._serialized_end=1676
+  _BUILDCACHEREQUEST._serialized_start=1678
+  _BUILDCACHEREQUEST._serialized_end=1729
+  _EXPORTAGENTREQUEST._serialized_start=1731
+  _EXPORTAGENTREQUEST._serialized_end=1813
+  _EXPORTAGENTRESPONSE._serialized_start=1815
+  _EXPORTAGENTRESPONSE._serialized_end=1891
+  _EXPORTBENCHMARKAGENTREQUEST._serialized_start=1894
+  _EXPORTBENCHMARKAGENTREQUEST._serialized_end=2027
+  _EXPORTBENCHMARKAGENTRESPONSE._serialized_start=2030
+  _EXPORTBENCHMARKAGENTRESPONSE._serialized_end=2269
+  _EXPORTBENCHMARKAGENTRESPONSE_TRAININGPHRASESENTRY._serialized_start=2174
+  _EXPORTBENCHMARKAGENTRESPONSE_TRAININGPHRASESENTRY._serialized_end=2269
+  _OPTIMIZERANKINGMATCHREQUEST._serialized_start=2272
+  _OPTIMIZERANKINGMATCHREQUEST._serialized_end=2433
+  _RANKINGMATCHOPTIMIZATIONCONFIG._serialized_start=2436
+  _RANKINGMATCHOPTIMIZATIONCONFIG._serialized_end=2583
+  _OPTIMIZERANKINGMATCHRESPONSE._serialized_start=2586
+  _OPTIMIZERANKINGMATCHRESPONSE._serialized_end=2726
+  _IMPORTAGENTREQUEST._serialized_start=2728
+  _IMPORTAGENTREQUEST._serialized_end=2819
+  _RESTOREAGENTREQUEST._serialized_start=2821
+  _RESTOREAGENTREQUEST._serialized_end=2913
+  _GETAGENTSTATISTICSREQUEST._serialized_start=2916
+  _GETAGENTSTATISTICSREQUEST._serialized_end=3062
+  _GETAGENTSTATISTICSRESPONSE._serialized_start=3064
+  _GETAGENTSTATISTICSRESPONSE._serialized_end=3189
+  _ADDUSERTOPROJECTREQUEST._serialized_start=3191
+  _ADDUSERTOPROJECTREQUEST._serialized_end=3274
+  _REMOVEUSERFROMPROJECTREQUEST._serialized_start=3276
+  _REMOVEUSERFROMPROJECTREQUEST._serialized_end=3339
+  _LISTUSERSINPROJECTREQUEST._serialized_start=3341
+  _LISTUSERSINPROJECTREQUEST._serialized_end=3404
+  _USERINPROJECT._serialized_start=3406
+  _USERINPROJECT._serialized_end=3486
+  _LISTUSERSINPROJECTRESPONSE._serialized_start=3488
+  _LISTUSERSINPROJECTRESPONSE._serialized_end=3583
+  _GETPLATFORMINFORESPONSE._serialized_start=3585
+  _GETPLATFORMINFORESPONSE._serialized_end=3648
+  _LISTPROJECTPERMISSIONSREQUEST._serialized_start=3650
+  _LISTPROJECTPERMISSIONSREQUEST._serialized_end=3701
+  _LISTPROJECTPERMISSIONSRESPONSE._serialized_start=3703
+  _LISTPROJECTPERMISSIONSRESPONSE._serialized_end=3781
+  _SETAGENTSTATUSREQUEST._serialized_start=3783
+  _SETAGENTSTATUSREQUEST._serialized_end=3906
+  _AGENTSORTING._serialized_start=3909
+  _AGENTSORTING._serialized_end=4200
+  _AGENTSORTING_AGENTSORTINGFIELD._serialized_start=4040
+  _AGENTSORTING_AGENTSORTINGFIELD._serialized_end=4200
+  _SETRESOURCESREQUEST._serialized_start=4202
+  _SETRESOURCESREQUEST._serialized_end=4313
+  _DELETERESOURCESREQUEST._serialized_start=4315
+  _DELETERESOURCESREQUEST._serialized_end=4406
+  _EXPORTRESOURCESREQUEST._serialized_start=4408
+  _EXPORTRESOURCESREQUEST._serialized_end=4499
+  _EXPORTRESOURCESRESPONSE._serialized_start=4501
+  _EXPORTRESOURCESRESPONSE._serialized_end=4616
+  _GETMODELSTATUSESREQUEST._serialized_start=4618
+  _GETMODELSTATUSESREQUEST._serialized_end=4725
+  _MODELSTATUS._serialized_start=4728
+  _MODELSTATUS._serialized_end=5048
+  _MODELSTATUS_STATUSNAME._serialized_start=4930
+  _MODELSTATUS_STATUSNAME._serialized_end=5048
+  _GETMODELSTATUSESRESPONSE._serialized_start=5050
+  _GETMODELSTATUSESRESPONSE._serialized_end=5125
+  _CUSTOMPLATFORMINFO._serialized_start=5127
+  _CUSTOMPLATFORMINFO._serialized_end=5242
+  _GETPLATFORMMAPPINGREQUEST._serialized_start=5244
+  _GETPLATFORMMAPPINGREQUEST._serialized_end=5287
+  _PLATFORMMAPPING._serialized_start=5289
+  _PLATFORMMAPPING._serialized_end=5377
+  _FULLTEXTSEARCHREQUEST._serialized_start=5380
+  _FULLTEXTSEARCHREQUEST._serialized_end=5801
+  _FULLTEXTSEARCHREQUEST_QUERYTYPE._serialized_start=5524
+  _FULLTEXTSEARCHREQUEST_QUERYTYPE._serialized_end=5801
+  _FULLTEXTSEARCHRESPONSE._serialized_start=5804
+  _FULLTEXTSEARCHRESPONSE._serialized_end=5967
+  _FULLTEXTSEARCHRESPONSE_RESPONSEENTRY._serialized_start=5898
+  _FULLTEXTSEARCHRESPONSE_RESPONSEENTRY._serialized_end=5967
+  _AGENTS._serialized_start=6333
+  _AGENTS._serialized_end=9774
 # @@protoc_insertion_point(module_scope)

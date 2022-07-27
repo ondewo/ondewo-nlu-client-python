@@ -23,7 +23,7 @@ from ondewo.nlu.agent_pb2 import Agent, CreateAgentRequest, GetAgentRequest, Upd
     GetPlatformInfoResponse, ListProjectPermissionsRequest, ListProjectPermissionsResponse, \
     BuildCacheRequest, SetAgentStatusRequest, SetResourcesRequest, DeleteResourcesRequest, \
     ExportResourcesRequest, ExportResourcesResponse, ExportBenchmarkAgentRequest, GetModelStatusesRequest, \
-    GetModelStatusesResponse, GetPlatformMappingRequest, PlatformMapping
+    GetModelStatusesResponse, GetPlatformMappingRequest, PlatformMapping, FullTextSearchRequest, FullTextSearchResponse
 from ondewo.nlu.agent_pb2_grpc import AgentsStub
 from ondewo.nlu.core.services_interface import ServicesInterface
 from ondewo.nlu import operations_pb2
@@ -153,4 +153,8 @@ class Agents(ServicesInterface):
 
     def set_platform_mapping(self, request: PlatformMapping) -> PlatformMapping:
         response: PlatformMapping = self.stub.SetPlatformMapping(request, metadata=self.metadata)
+        return response
+
+    def get_full_text_search(self, request: FullTextSearchRequest) -> FullTextSearchResponse:
+        response: FullTextSearchResponse = self.stub.GetFullTextSearch(request, metadata=self.metadata)
         return response

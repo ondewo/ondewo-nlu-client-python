@@ -167,6 +167,11 @@ class AgentsStub(object):
                 request_serializer=ondewo_dot_nlu_dot_agent__pb2.PlatformMapping.SerializeToString,
                 response_deserializer=ondewo_dot_nlu_dot_agent__pb2.PlatformMapping.FromString,
                 )
+        self.GetFullTextSearch = channel.unary_unary(
+                '/ondewo.nlu.Agents/GetFullTextSearch',
+                request_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponse.FromString,
+                )
 
 
 class AgentsServicer(object):
@@ -571,6 +576,13 @@ class AgentsServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetFullTextSearch(self, request, context):
+        """Full text search endpoint
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_AgentsServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -713,6 +725,11 @@ def add_AgentsServicer_to_server(servicer, server):
                     servicer.SetPlatformMapping,
                     request_deserializer=ondewo_dot_nlu_dot_agent__pb2.PlatformMapping.FromString,
                     response_serializer=ondewo_dot_nlu_dot_agent__pb2.PlatformMapping.SerializeToString,
+            ),
+            'GetFullTextSearch': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetFullTextSearch,
+                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -1208,5 +1225,22 @@ class Agents(object):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/SetPlatformMapping',
             ondewo_dot_nlu_dot_agent__pb2.PlatformMapping.SerializeToString,
             ondewo_dot_nlu_dot_agent__pb2.PlatformMapping.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetFullTextSearch(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/GetFullTextSearch',
+            ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
+            ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
