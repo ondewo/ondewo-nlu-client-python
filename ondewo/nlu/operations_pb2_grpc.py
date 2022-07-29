@@ -25,25 +25,25 @@ class OperationsStub(object):
             channel: A grpc.Channel.
         """
         self.ListOperations = channel.unary_unary(
-                '/ondewo.nlu.Operations/ListOperations',
-                request_serializer=ondewo_dot_nlu_dot_operations__pb2.ListOperationsRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_operations__pb2.ListOperationsResponse.FromString,
-                )
+            '/ondewo.nlu.Operations/ListOperations',
+            request_serializer=ondewo_dot_nlu_dot_operations__pb2.ListOperationsRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_operations__pb2.ListOperationsResponse.FromString,
+        )
         self.GetOperation = channel.unary_unary(
-                '/ondewo.nlu.Operations/GetOperation',
-                request_serializer=ondewo_dot_nlu_dot_operations__pb2.GetOperationRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
-                )
+            '/ondewo.nlu.Operations/GetOperation',
+            request_serializer=ondewo_dot_nlu_dot_operations__pb2.GetOperationRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
+        )
         self.DeleteOperation = channel.unary_unary(
-                '/ondewo.nlu.Operations/DeleteOperation',
-                request_serializer=ondewo_dot_nlu_dot_operations__pb2.DeleteOperationRequest.SerializeToString,
-                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                )
+            '/ondewo.nlu.Operations/DeleteOperation',
+            request_serializer=ondewo_dot_nlu_dot_operations__pb2.DeleteOperationRequest.SerializeToString,
+            response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+        )
         self.CancelOperation = channel.unary_unary(
-                '/ondewo.nlu.Operations/CancelOperation',
-                request_serializer=ondewo_dot_nlu_dot_operations__pb2.CancelOperationRequest.SerializeToString,
-                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                )
+            '/ondewo.nlu.Operations/CancelOperation',
+            request_serializer=ondewo_dot_nlu_dot_operations__pb2.CancelOperationRequest.SerializeToString,
+            response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+        )
 
 
 class OperationsServicer(object):
@@ -107,33 +107,34 @@ class OperationsServicer(object):
 
 def add_OperationsServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'ListOperations': grpc.unary_unary_rpc_method_handler(
-                    servicer.ListOperations,
-                    request_deserializer=ondewo_dot_nlu_dot_operations__pb2.ListOperationsRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_operations__pb2.ListOperationsResponse.SerializeToString,
-            ),
-            'GetOperation': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetOperation,
-                    request_deserializer=ondewo_dot_nlu_dot_operations__pb2.GetOperationRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
-            ),
-            'DeleteOperation': grpc.unary_unary_rpc_method_handler(
-                    servicer.DeleteOperation,
-                    request_deserializer=ondewo_dot_nlu_dot_operations__pb2.DeleteOperationRequest.FromString,
-                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-            ),
-            'CancelOperation': grpc.unary_unary_rpc_method_handler(
-                    servicer.CancelOperation,
-                    request_deserializer=ondewo_dot_nlu_dot_operations__pb2.CancelOperationRequest.FromString,
-                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-            ),
+        'ListOperations': grpc.unary_unary_rpc_method_handler(
+            servicer.ListOperations,
+            request_deserializer=ondewo_dot_nlu_dot_operations__pb2.ListOperationsRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_operations__pb2.ListOperationsResponse.SerializeToString,
+        ),
+        'GetOperation': grpc.unary_unary_rpc_method_handler(
+            servicer.GetOperation,
+            request_deserializer=ondewo_dot_nlu_dot_operations__pb2.GetOperationRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
+        ),
+        'DeleteOperation': grpc.unary_unary_rpc_method_handler(
+            servicer.DeleteOperation,
+            request_deserializer=ondewo_dot_nlu_dot_operations__pb2.DeleteOperationRequest.FromString,
+            response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+        ),
+        'CancelOperation': grpc.unary_unary_rpc_method_handler(
+            servicer.CancelOperation,
+            request_deserializer=ondewo_dot_nlu_dot_operations__pb2.CancelOperationRequest.FromString,
+            response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+        ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'ondewo.nlu.Operations', rpc_method_handlers)
+        'ondewo.nlu.Operations', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
-
  # This class is part of an EXPERIMENTAL API.
+
+
 class Operations(object):
     """Manages long-running operations with an API service.
 
@@ -148,68 +149,68 @@ class Operations(object):
 
     @staticmethod
     def ListOperations(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                       target,
+                       options=(),
+                       channel_credentials=None,
+                       call_credentials=None,
+                       insecure=False,
+                       compression=None,
+                       wait_for_ready=None,
+                       timeout=None,
+                       metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Operations/ListOperations',
-            ondewo_dot_nlu_dot_operations__pb2.ListOperationsRequest.SerializeToString,
-            ondewo_dot_nlu_dot_operations__pb2.ListOperationsResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_operations__pb2.ListOperationsRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_operations__pb2.ListOperationsResponse.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def GetOperation(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                     target,
+                     options=(),
+                     channel_credentials=None,
+                     call_credentials=None,
+                     insecure=False,
+                     compression=None,
+                     wait_for_ready=None,
+                     timeout=None,
+                     metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Operations/GetOperation',
-            ondewo_dot_nlu_dot_operations__pb2.GetOperationRequest.SerializeToString,
-            ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_operations__pb2.GetOperationRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def DeleteOperation(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                        target,
+                        options=(),
+                        channel_credentials=None,
+                        call_credentials=None,
+                        insecure=False,
+                        compression=None,
+                        wait_for_ready=None,
+                        timeout=None,
+                        metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Operations/DeleteOperation',
-            ondewo_dot_nlu_dot_operations__pb2.DeleteOperationRequest.SerializeToString,
-            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_operations__pb2.DeleteOperationRequest.SerializeToString,
+                                             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def CancelOperation(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                        target,
+                        options=(),
+                        channel_credentials=None,
+                        call_credentials=None,
+                        insecure=False,
+                        compression=None,
+                        wait_for_ready=None,
+                        timeout=None,
+                        metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Operations/CancelOperation',
-            ondewo_dot_nlu_dot_operations__pb2.CancelOperationRequest.SerializeToString,
-            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_operations__pb2.CancelOperationRequest.SerializeToString,
+                                             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

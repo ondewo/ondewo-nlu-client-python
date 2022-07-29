@@ -1,10 +1,11 @@
 import uuid
-from typing import Optional, Dict
+from typing import Dict, Optional, List
 
 from ondewo.nlu import context_pb2
 from ondewo.nlu.client import Client as NluClient
 from ondewo.nlu.client_config import ClientConfig
-from ondewo.nlu.session_pb2 import DetectIntentResponse, DetectIntentRequest, QueryInput, TextInput, QueryParameters
+from ondewo.nlu.session_pb2 \
+    import DetectIntentResponse, DetectIntentRequest, QueryInput, TextInput, QueryParameters
 
 
 def make_context() -> context_pb2.Context:
@@ -18,7 +19,8 @@ def make_context() -> context_pb2.Context:
     # intent_name in display_name and parameter "dictionary" are hardcoded. So don't change them
     parameter: Dict[str, context_pb2.Context.Parameter] = {'intent_name': context_parameter}
 
-    # Don't change the name, just change the lifespan_count, which defines how many interactions this context is going to stay active
+    # Don't change the name, just change the lifespan_count, which
+    # defines how many interactions this context is going to stay active
     context = context_pb2.Context(
         name=f"{session}/contexts/exact_intent",
         lifespan_count=20,
@@ -38,7 +40,7 @@ if __name__ == '__main__':
     # Pass in your project id and a session will be created for the nlu client
     project_id: str = '<project id>'
     session: str = create_session_nlu(project_id)
-    
+
     # Client configuration
     config: ClientConfig = ClientConfig(
         host='<host>',
@@ -49,12 +51,12 @@ if __name__ == '__main__':
     )
     nlu_client: NluClient = NluClient(config=config, use_secure_channel=False)
     # You have to go to the function and set the context you want
-    context: context_pb2.Context = make_context()
+    context: Optional[List[context_pb2.Context]] = [make_context()]
     print(f"The context here is: {context}")
 
     # Nlu request and response
     # You can have context set to None if you don't want to use this functionality
-    context: Optional[context_pb2.Context] = [context] if context else None
+    context = context or None
     nlu_request: DetectIntentRequest = DetectIntentRequest(
         session=session,
         query_input=QueryInput(
@@ -73,6 +75,6 @@ if __name__ == '__main__':
 
     print(f'Text received by the server: {nlu_response.query_result.query_text}')
     print(f'Intent detected: {nlu_response.query_result.intent.display_name}')
-    print(f'Text response:')
+    print('Text response:')
     for message in nlu_response.query_result.fulfillment_messages:
         print(message.text.text[0])

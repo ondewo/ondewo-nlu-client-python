@@ -29,6 +29,22 @@ WORKDIR /home/ondewo/
 
 COPY Makefile .
 
+COPY .flake8 .
+
+COPY .isort.cfg .
+
+COPY .pre-commit-config.yaml .
+
+COPY CONTRIBUTING.md .
+
+COPY LICENSE .
+
+COPY MANIFEST.in .
+
+COPY mypy.ini .
+
+COPY examples .
+
 COPY requirements.txt .
 
 COPY setup.py  .

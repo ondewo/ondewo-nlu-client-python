@@ -44,65 +44,65 @@ class EntityTypesStub(object):
             channel: A grpc.Channel.
         """
         self.ListEntityTypes = channel.unary_unary(
-                '/ondewo.nlu.EntityTypes/ListEntityTypes',
-                request_serializer=ondewo_dot_nlu_dot_entity__type__pb2.ListEntityTypesRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.ListEntityTypesResponse.FromString,
-                )
+            '/ondewo.nlu.EntityTypes/ListEntityTypes',
+            request_serializer=ondewo_dot_nlu_dot_entity__type__pb2.ListEntityTypesRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.ListEntityTypesResponse.FromString,
+        )
         self.GetEntityType = channel.unary_unary(
-                '/ondewo.nlu.EntityTypes/GetEntityType',
-                request_serializer=ondewo_dot_nlu_dot_entity__type__pb2.GetEntityTypeRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.EntityType.FromString,
-                )
+            '/ondewo.nlu.EntityTypes/GetEntityType',
+            request_serializer=ondewo_dot_nlu_dot_entity__type__pb2.GetEntityTypeRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.EntityType.FromString,
+        )
         self.CreateEntityType = channel.unary_unary(
-                '/ondewo.nlu.EntityTypes/CreateEntityType',
-                request_serializer=ondewo_dot_nlu_dot_entity__type__pb2.CreateEntityTypeRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.EntityType.FromString,
-                )
+            '/ondewo.nlu.EntityTypes/CreateEntityType',
+            request_serializer=ondewo_dot_nlu_dot_entity__type__pb2.CreateEntityTypeRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.EntityType.FromString,
+        )
         self.UpdateEntityType = channel.unary_unary(
-                '/ondewo.nlu.EntityTypes/UpdateEntityType',
-                request_serializer=ondewo_dot_nlu_dot_entity__type__pb2.UpdateEntityTypeRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.EntityType.FromString,
-                )
+            '/ondewo.nlu.EntityTypes/UpdateEntityType',
+            request_serializer=ondewo_dot_nlu_dot_entity__type__pb2.UpdateEntityTypeRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.EntityType.FromString,
+        )
         self.DeleteEntityType = channel.unary_unary(
-                '/ondewo.nlu.EntityTypes/DeleteEntityType',
-                request_serializer=ondewo_dot_nlu_dot_entity__type__pb2.DeleteEntityTypeRequest.SerializeToString,
-                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                )
+            '/ondewo.nlu.EntityTypes/DeleteEntityType',
+            request_serializer=ondewo_dot_nlu_dot_entity__type__pb2.DeleteEntityTypeRequest.SerializeToString,
+            response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+        )
         self.BatchUpdateEntityTypes = channel.unary_unary(
-                '/ondewo.nlu.EntityTypes/BatchUpdateEntityTypes',
-                request_serializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchUpdateEntityTypesRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
-                )
+            '/ondewo.nlu.EntityTypes/BatchUpdateEntityTypes',
+            request_serializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchUpdateEntityTypesRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
+        )
         self.BatchDeleteEntityTypes = channel.unary_unary(
-                '/ondewo.nlu.EntityTypes/BatchDeleteEntityTypes',
-                request_serializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchDeleteEntityTypesRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
-                )
+            '/ondewo.nlu.EntityTypes/BatchDeleteEntityTypes',
+            request_serializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchDeleteEntityTypesRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
+        )
         self.BatchCreateEntities = channel.unary_unary(
-                '/ondewo.nlu.EntityTypes/BatchCreateEntities',
-                request_serializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchCreateEntitiesRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchEntitiesResponse.FromString,
-                )
+            '/ondewo.nlu.EntityTypes/BatchCreateEntities',
+            request_serializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchCreateEntitiesRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchEntitiesResponse.FromString,
+        )
         self.BatchUpdateEntities = channel.unary_unary(
-                '/ondewo.nlu.EntityTypes/BatchUpdateEntities',
-                request_serializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchUpdateEntitiesRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchEntitiesResponse.FromString,
-                )
+            '/ondewo.nlu.EntityTypes/BatchUpdateEntities',
+            request_serializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchUpdateEntitiesRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchEntitiesResponse.FromString,
+        )
         self.BatchGetEntities = channel.unary_unary(
-                '/ondewo.nlu.EntityTypes/BatchGetEntities',
-                request_serializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchGetEntitiesRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchEntitiesResponse.FromString,
-                )
+            '/ondewo.nlu.EntityTypes/BatchGetEntities',
+            request_serializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchGetEntitiesRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchEntitiesResponse.FromString,
+        )
         self.BatchDeleteEntities = channel.unary_unary(
-                '/ondewo.nlu.EntityTypes/BatchDeleteEntities',
-                request_serializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchDeleteEntitiesRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchDeleteEntitiesResponse.FromString,
-                )
+            '/ondewo.nlu.EntityTypes/BatchDeleteEntities',
+            request_serializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchDeleteEntitiesRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchDeleteEntitiesResponse.FromString,
+        )
         self.ListEntities = channel.unary_unary(
-                '/ondewo.nlu.EntityTypes/ListEntities',
-                request_serializer=ondewo_dot_nlu_dot_entity__type__pb2.ListEntitiesRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.ListEntitiesResponse.FromString,
-                )
+            '/ondewo.nlu.EntityTypes/ListEntities',
+            request_serializer=ondewo_dot_nlu_dot_entity__type__pb2.ListEntitiesRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.ListEntitiesResponse.FromString,
+        )
 
 
 class EntityTypesServicer(object):
@@ -228,73 +228,74 @@ class EntityTypesServicer(object):
 
 def add_EntityTypesServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'ListEntityTypes': grpc.unary_unary_rpc_method_handler(
-                    servicer.ListEntityTypes,
-                    request_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.ListEntityTypesRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_entity__type__pb2.ListEntityTypesResponse.SerializeToString,
-            ),
-            'GetEntityType': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetEntityType,
-                    request_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.GetEntityTypeRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_entity__type__pb2.EntityType.SerializeToString,
-            ),
-            'CreateEntityType': grpc.unary_unary_rpc_method_handler(
-                    servicer.CreateEntityType,
-                    request_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.CreateEntityTypeRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_entity__type__pb2.EntityType.SerializeToString,
-            ),
-            'UpdateEntityType': grpc.unary_unary_rpc_method_handler(
-                    servicer.UpdateEntityType,
-                    request_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.UpdateEntityTypeRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_entity__type__pb2.EntityType.SerializeToString,
-            ),
-            'DeleteEntityType': grpc.unary_unary_rpc_method_handler(
-                    servicer.DeleteEntityType,
-                    request_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.DeleteEntityTypeRequest.FromString,
-                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-            ),
-            'BatchUpdateEntityTypes': grpc.unary_unary_rpc_method_handler(
-                    servicer.BatchUpdateEntityTypes,
-                    request_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchUpdateEntityTypesRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
-            ),
-            'BatchDeleteEntityTypes': grpc.unary_unary_rpc_method_handler(
-                    servicer.BatchDeleteEntityTypes,
-                    request_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchDeleteEntityTypesRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
-            ),
-            'BatchCreateEntities': grpc.unary_unary_rpc_method_handler(
-                    servicer.BatchCreateEntities,
-                    request_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchCreateEntitiesRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchEntitiesResponse.SerializeToString,
-            ),
-            'BatchUpdateEntities': grpc.unary_unary_rpc_method_handler(
-                    servicer.BatchUpdateEntities,
-                    request_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchUpdateEntitiesRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchEntitiesResponse.SerializeToString,
-            ),
-            'BatchGetEntities': grpc.unary_unary_rpc_method_handler(
-                    servicer.BatchGetEntities,
-                    request_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchGetEntitiesRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchEntitiesResponse.SerializeToString,
-            ),
-            'BatchDeleteEntities': grpc.unary_unary_rpc_method_handler(
-                    servicer.BatchDeleteEntities,
-                    request_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchDeleteEntitiesRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchDeleteEntitiesResponse.SerializeToString,
-            ),
-            'ListEntities': grpc.unary_unary_rpc_method_handler(
-                    servicer.ListEntities,
-                    request_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.ListEntitiesRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_entity__type__pb2.ListEntitiesResponse.SerializeToString,
-            ),
+        'ListEntityTypes': grpc.unary_unary_rpc_method_handler(
+            servicer.ListEntityTypes,
+            request_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.ListEntityTypesRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_entity__type__pb2.ListEntityTypesResponse.SerializeToString,
+        ),
+        'GetEntityType': grpc.unary_unary_rpc_method_handler(
+            servicer.GetEntityType,
+            request_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.GetEntityTypeRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_entity__type__pb2.EntityType.SerializeToString,
+        ),
+        'CreateEntityType': grpc.unary_unary_rpc_method_handler(
+            servicer.CreateEntityType,
+            request_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.CreateEntityTypeRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_entity__type__pb2.EntityType.SerializeToString,
+        ),
+        'UpdateEntityType': grpc.unary_unary_rpc_method_handler(
+            servicer.UpdateEntityType,
+            request_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.UpdateEntityTypeRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_entity__type__pb2.EntityType.SerializeToString,
+        ),
+        'DeleteEntityType': grpc.unary_unary_rpc_method_handler(
+            servicer.DeleteEntityType,
+            request_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.DeleteEntityTypeRequest.FromString,
+            response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+        ),
+        'BatchUpdateEntityTypes': grpc.unary_unary_rpc_method_handler(
+            servicer.BatchUpdateEntityTypes,
+            request_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchUpdateEntityTypesRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
+        ),
+        'BatchDeleteEntityTypes': grpc.unary_unary_rpc_method_handler(
+            servicer.BatchDeleteEntityTypes,
+            request_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchDeleteEntityTypesRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
+        ),
+        'BatchCreateEntities': grpc.unary_unary_rpc_method_handler(
+            servicer.BatchCreateEntities,
+            request_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchCreateEntitiesRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchEntitiesResponse.SerializeToString,
+        ),
+        'BatchUpdateEntities': grpc.unary_unary_rpc_method_handler(
+            servicer.BatchUpdateEntities,
+            request_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchUpdateEntitiesRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchEntitiesResponse.SerializeToString,
+        ),
+        'BatchGetEntities': grpc.unary_unary_rpc_method_handler(
+            servicer.BatchGetEntities,
+            request_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchGetEntitiesRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchEntitiesResponse.SerializeToString,
+        ),
+        'BatchDeleteEntities': grpc.unary_unary_rpc_method_handler(
+            servicer.BatchDeleteEntities,
+            request_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchDeleteEntitiesRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_entity__type__pb2.BatchDeleteEntitiesResponse.SerializeToString,
+        ),
+        'ListEntities': grpc.unary_unary_rpc_method_handler(
+            servicer.ListEntities,
+            request_deserializer=ondewo_dot_nlu_dot_entity__type__pb2.ListEntitiesRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_entity__type__pb2.ListEntitiesResponse.SerializeToString,
+        ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'ondewo.nlu.EntityTypes', rpc_method_handlers)
+        'ondewo.nlu.EntityTypes', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
-
  # This class is part of an EXPERIMENTAL API.
+
+
 class EntityTypes(object):
     """Entities are extracted from user input and represent parameters that are
     meaningful to your application. For example, a date range, a proper name
@@ -327,204 +328,204 @@ class EntityTypes(object):
 
     @staticmethod
     def ListEntityTypes(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                        target,
+                        options=(),
+                        channel_credentials=None,
+                        call_credentials=None,
+                        insecure=False,
+                        compression=None,
+                        wait_for_ready=None,
+                        timeout=None,
+                        metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.EntityTypes/ListEntityTypes',
-            ondewo_dot_nlu_dot_entity__type__pb2.ListEntityTypesRequest.SerializeToString,
-            ondewo_dot_nlu_dot_entity__type__pb2.ListEntityTypesResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_entity__type__pb2.ListEntityTypesRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_entity__type__pb2.ListEntityTypesResponse.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def GetEntityType(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                      target,
+                      options=(),
+                      channel_credentials=None,
+                      call_credentials=None,
+                      insecure=False,
+                      compression=None,
+                      wait_for_ready=None,
+                      timeout=None,
+                      metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.EntityTypes/GetEntityType',
-            ondewo_dot_nlu_dot_entity__type__pb2.GetEntityTypeRequest.SerializeToString,
-            ondewo_dot_nlu_dot_entity__type__pb2.EntityType.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_entity__type__pb2.GetEntityTypeRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_entity__type__pb2.EntityType.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def CreateEntityType(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                         target,
+                         options=(),
+                         channel_credentials=None,
+                         call_credentials=None,
+                         insecure=False,
+                         compression=None,
+                         wait_for_ready=None,
+                         timeout=None,
+                         metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.EntityTypes/CreateEntityType',
-            ondewo_dot_nlu_dot_entity__type__pb2.CreateEntityTypeRequest.SerializeToString,
-            ondewo_dot_nlu_dot_entity__type__pb2.EntityType.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_entity__type__pb2.CreateEntityTypeRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_entity__type__pb2.EntityType.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def UpdateEntityType(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                         target,
+                         options=(),
+                         channel_credentials=None,
+                         call_credentials=None,
+                         insecure=False,
+                         compression=None,
+                         wait_for_ready=None,
+                         timeout=None,
+                         metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.EntityTypes/UpdateEntityType',
-            ondewo_dot_nlu_dot_entity__type__pb2.UpdateEntityTypeRequest.SerializeToString,
-            ondewo_dot_nlu_dot_entity__type__pb2.EntityType.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_entity__type__pb2.UpdateEntityTypeRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_entity__type__pb2.EntityType.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def DeleteEntityType(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                         target,
+                         options=(),
+                         channel_credentials=None,
+                         call_credentials=None,
+                         insecure=False,
+                         compression=None,
+                         wait_for_ready=None,
+                         timeout=None,
+                         metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.EntityTypes/DeleteEntityType',
-            ondewo_dot_nlu_dot_entity__type__pb2.DeleteEntityTypeRequest.SerializeToString,
-            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_entity__type__pb2.DeleteEntityTypeRequest.SerializeToString,
+                                             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def BatchUpdateEntityTypes(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                               target,
+                               options=(),
+                               channel_credentials=None,
+                               call_credentials=None,
+                               insecure=False,
+                               compression=None,
+                               wait_for_ready=None,
+                               timeout=None,
+                               metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.EntityTypes/BatchUpdateEntityTypes',
-            ondewo_dot_nlu_dot_entity__type__pb2.BatchUpdateEntityTypesRequest.SerializeToString,
-            ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_entity__type__pb2.BatchUpdateEntityTypesRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def BatchDeleteEntityTypes(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                               target,
+                               options=(),
+                               channel_credentials=None,
+                               call_credentials=None,
+                               insecure=False,
+                               compression=None,
+                               wait_for_ready=None,
+                               timeout=None,
+                               metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.EntityTypes/BatchDeleteEntityTypes',
-            ondewo_dot_nlu_dot_entity__type__pb2.BatchDeleteEntityTypesRequest.SerializeToString,
-            ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_entity__type__pb2.BatchDeleteEntityTypesRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def BatchCreateEntities(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                            target,
+                            options=(),
+                            channel_credentials=None,
+                            call_credentials=None,
+                            insecure=False,
+                            compression=None,
+                            wait_for_ready=None,
+                            timeout=None,
+                            metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.EntityTypes/BatchCreateEntities',
-            ondewo_dot_nlu_dot_entity__type__pb2.BatchCreateEntitiesRequest.SerializeToString,
-            ondewo_dot_nlu_dot_entity__type__pb2.BatchEntitiesResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_entity__type__pb2.BatchCreateEntitiesRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_entity__type__pb2.BatchEntitiesResponse.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def BatchUpdateEntities(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                            target,
+                            options=(),
+                            channel_credentials=None,
+                            call_credentials=None,
+                            insecure=False,
+                            compression=None,
+                            wait_for_ready=None,
+                            timeout=None,
+                            metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.EntityTypes/BatchUpdateEntities',
-            ondewo_dot_nlu_dot_entity__type__pb2.BatchUpdateEntitiesRequest.SerializeToString,
-            ondewo_dot_nlu_dot_entity__type__pb2.BatchEntitiesResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_entity__type__pb2.BatchUpdateEntitiesRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_entity__type__pb2.BatchEntitiesResponse.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def BatchGetEntities(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                         target,
+                         options=(),
+                         channel_credentials=None,
+                         call_credentials=None,
+                         insecure=False,
+                         compression=None,
+                         wait_for_ready=None,
+                         timeout=None,
+                         metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.EntityTypes/BatchGetEntities',
-            ondewo_dot_nlu_dot_entity__type__pb2.BatchGetEntitiesRequest.SerializeToString,
-            ondewo_dot_nlu_dot_entity__type__pb2.BatchEntitiesResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_entity__type__pb2.BatchGetEntitiesRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_entity__type__pb2.BatchEntitiesResponse.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def BatchDeleteEntities(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                            target,
+                            options=(),
+                            channel_credentials=None,
+                            call_credentials=None,
+                            insecure=False,
+                            compression=None,
+                            wait_for_ready=None,
+                            timeout=None,
+                            metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.EntityTypes/BatchDeleteEntities',
-            ondewo_dot_nlu_dot_entity__type__pb2.BatchDeleteEntitiesRequest.SerializeToString,
-            ondewo_dot_nlu_dot_entity__type__pb2.BatchDeleteEntitiesResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_entity__type__pb2.BatchDeleteEntitiesRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_entity__type__pb2.BatchDeleteEntitiesResponse.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def ListEntities(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                     target,
+                     options=(),
+                     channel_credentials=None,
+                     call_credentials=None,
+                     insecure=False,
+                     compression=None,
+                     wait_for_ready=None,
+                     timeout=None,
+                     metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.EntityTypes/ListEntities',
-            ondewo_dot_nlu_dot_entity__type__pb2.ListEntitiesRequest.SerializeToString,
-            ondewo_dot_nlu_dot_entity__type__pb2.ListEntitiesResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_entity__type__pb2.ListEntitiesRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_entity__type__pb2.ListEntitiesResponse.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
