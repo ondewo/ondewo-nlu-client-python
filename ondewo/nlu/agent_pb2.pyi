@@ -1287,6 +1287,7 @@ class FullTextSearchRequest(google.protobuf.message.Message):
         OndewoIntentUsersaysQuery: FullTextSearchRequest._QueryType.ValueType  # 7
         OndewoIntentTagsQuery: FullTextSearchRequest._QueryType.ValueType  # 8
         OndewoIntentParametersQuery: FullTextSearchRequest._QueryType.ValueType  # 9
+        OndewoIntentResponseQuery: FullTextSearchRequest._QueryType.ValueType  # 10
     class QueryType(_QueryType, metaclass=_QueryTypeEnumTypeWrapper):
         pass
 
@@ -1300,6 +1301,7 @@ class FullTextSearchRequest(google.protobuf.message.Message):
     OndewoIntentUsersaysQuery: FullTextSearchRequest.QueryType.ValueType  # 7
     OndewoIntentTagsQuery: FullTextSearchRequest.QueryType.ValueType  # 8
     OndewoIntentParametersQuery: FullTextSearchRequest.QueryType.ValueType  # 9
+    OndewoIntentResponseQuery: FullTextSearchRequest.QueryType.ValueType  # 10
 
     PARENT_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
