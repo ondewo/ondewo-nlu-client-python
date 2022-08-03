@@ -1,10 +1,11 @@
 import uuid
-from typing import Optional, Dict
+from typing import Dict
 
 from ondewo.nlu import context_pb2
 from ondewo.nlu.client import Client as NluClient
 from ondewo.nlu.client_config import ClientConfig
-from ondewo.nlu.session_pb2 import DetectIntentResponse, DetectIntentRequest, QueryInput, TextInput, QueryParameters
+from ondewo.nlu.session_pb2 import DetectIntentResponse, \
+    DetectIntentRequest, QueryInput, TextInput, QueryParameters
 
 
 def make_nlu_conversation(session):
@@ -32,7 +33,7 @@ def conversation_nlu_helper(session, text="Default Welcome Intent", context_flag
 
 
 def get_response_from_request(session, text, context=None) -> DetectIntentResponse:
-    context: Optional[context_pb2.Context] = [context] if context else None
+    context = [context] if context else None
     nlu_request: DetectIntentRequest = DetectIntentRequest(
         session=session,
         query_input=QueryInput(
@@ -62,7 +63,8 @@ def make_context() -> context_pb2.Context:
     # intent_name in display_name and parameter "dictionary" are hardcoded. So don't change them
     parameter: Dict[str, context_pb2.Context.Parameter] = {'intent_name': context_parameter}
 
-    # Don't change the name, just change the lifespan_count, which defines how many times this context is going to be injected
+    # Don't change the name, just change the lifespan_count,
+    # which defines how many times this context is going to be injected
     context = context_pb2.Context(
         name=f"{session}/contexts/exact_intent",
         lifespan_count=20,
@@ -82,7 +84,7 @@ if __name__ == '__main__':
     # Pass in your project id and a session will be created for the nlu client
     project_id: str = '<project id>'
     session: str = create_session_nlu(project_id)
-    
+
     # Client configuration
     config: ClientConfig = ClientConfig(
         host='<host>',

@@ -18,45 +18,45 @@ class UtilitiesStub(object):
             channel: A grpc.Channel.
         """
         self.ValidateRegex = channel.unary_unary(
-                '/ondewo.nlu.Utilities/ValidateRegex',
-                request_serializer=ondewo_dot_nlu_dot_utility__pb2.ValidateRegexRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_utility__pb2.ValidateRegexResponse.FromString,
-                )
+            '/ondewo.nlu.Utilities/ValidateRegex',
+            request_serializer=ondewo_dot_nlu_dot_utility__pb2.ValidateRegexRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_utility__pb2.ValidateRegexResponse.FromString,
+        )
         self.ValidateEmbeddedRegex = channel.unary_unary(
-                '/ondewo.nlu.Utilities/ValidateEmbeddedRegex',
-                request_serializer=ondewo_dot_nlu_dot_utility__pb2.ValidateEmbeddedRegexRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_utility__pb2.ValidateEmbeddedRegexResponse.FromString,
-                )
+            '/ondewo.nlu.Utilities/ValidateEmbeddedRegex',
+            request_serializer=ondewo_dot_nlu_dot_utility__pb2.ValidateEmbeddedRegexRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_utility__pb2.ValidateEmbeddedRegexResponse.FromString,
+        )
         self.CleanAllIntents = channel.unary_unary(
-                '/ondewo.nlu.Utilities/CleanAllIntents',
-                request_serializer=ondewo_dot_nlu_dot_utility__pb2.CleanAllIntentsRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_utility__pb2.CleanAllIntentsResponse.FromString,
-                )
+            '/ondewo.nlu.Utilities/CleanAllIntents',
+            request_serializer=ondewo_dot_nlu_dot_utility__pb2.CleanAllIntentsRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_utility__pb2.CleanAllIntentsResponse.FromString,
+        )
         self.CleanIntent = channel.unary_unary(
-                '/ondewo.nlu.Utilities/CleanIntent',
-                request_serializer=ondewo_dot_nlu_dot_utility__pb2.CleanIntentRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_utility__pb2.CleanIntentResponse.FromString,
-                )
+            '/ondewo.nlu.Utilities/CleanIntent',
+            request_serializer=ondewo_dot_nlu_dot_utility__pb2.CleanIntentRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_utility__pb2.CleanIntentResponse.FromString,
+        )
         self.CleanAllEntityTypes = channel.unary_unary(
-                '/ondewo.nlu.Utilities/CleanAllEntityTypes',
-                request_serializer=ondewo_dot_nlu_dot_utility__pb2.CleanAllEntityTypesRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_utility__pb2.CleanAllEntityTypesResponse.FromString,
-                )
+            '/ondewo.nlu.Utilities/CleanAllEntityTypes',
+            request_serializer=ondewo_dot_nlu_dot_utility__pb2.CleanAllEntityTypesRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_utility__pb2.CleanAllEntityTypesResponse.FromString,
+        )
         self.CleanEntityType = channel.unary_unary(
-                '/ondewo.nlu.Utilities/CleanEntityType',
-                request_serializer=ondewo_dot_nlu_dot_utility__pb2.CleanEntityTypeRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_utility__pb2.CleanEntityTypeResponse.FromString,
-                )
+            '/ondewo.nlu.Utilities/CleanEntityType',
+            request_serializer=ondewo_dot_nlu_dot_utility__pb2.CleanEntityTypeRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_utility__pb2.CleanEntityTypeResponse.FromString,
+        )
         self.AddTrainingPhrases = channel.unary_unary(
-                '/ondewo.nlu.Utilities/AddTrainingPhrases',
-                request_serializer=ondewo_dot_nlu_dot_utility__pb2.AddTrainingPhrasesRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_utility__pb2.AddTrainingPhrasesResponse.FromString,
-                )
+            '/ondewo.nlu.Utilities/AddTrainingPhrases',
+            request_serializer=ondewo_dot_nlu_dot_utility__pb2.AddTrainingPhrasesRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_utility__pb2.AddTrainingPhrasesResponse.FromString,
+        )
         self.AddTrainingPhrasesFromCSV = channel.unary_unary(
-                '/ondewo.nlu.Utilities/AddTrainingPhrasesFromCSV',
-                request_serializer=ondewo_dot_nlu_dot_utility__pb2.AddTrainingPhrasesFromCSVRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_utility__pb2.AddTrainingPhrasesResponse.FromString,
-                )
+            '/ondewo.nlu.Utilities/AddTrainingPhrasesFromCSV',
+            request_serializer=ondewo_dot_nlu_dot_utility__pb2.AddTrainingPhrasesFromCSVRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_utility__pb2.AddTrainingPhrasesResponse.FromString,
+        )
 
 
 class UtilitiesServicer(object):
@@ -125,53 +125,54 @@ class UtilitiesServicer(object):
 
 def add_UtilitiesServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'ValidateRegex': grpc.unary_unary_rpc_method_handler(
-                    servicer.ValidateRegex,
-                    request_deserializer=ondewo_dot_nlu_dot_utility__pb2.ValidateRegexRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_utility__pb2.ValidateRegexResponse.SerializeToString,
-            ),
-            'ValidateEmbeddedRegex': grpc.unary_unary_rpc_method_handler(
-                    servicer.ValidateEmbeddedRegex,
-                    request_deserializer=ondewo_dot_nlu_dot_utility__pb2.ValidateEmbeddedRegexRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_utility__pb2.ValidateEmbeddedRegexResponse.SerializeToString,
-            ),
-            'CleanAllIntents': grpc.unary_unary_rpc_method_handler(
-                    servicer.CleanAllIntents,
-                    request_deserializer=ondewo_dot_nlu_dot_utility__pb2.CleanAllIntentsRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_utility__pb2.CleanAllIntentsResponse.SerializeToString,
-            ),
-            'CleanIntent': grpc.unary_unary_rpc_method_handler(
-                    servicer.CleanIntent,
-                    request_deserializer=ondewo_dot_nlu_dot_utility__pb2.CleanIntentRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_utility__pb2.CleanIntentResponse.SerializeToString,
-            ),
-            'CleanAllEntityTypes': grpc.unary_unary_rpc_method_handler(
-                    servicer.CleanAllEntityTypes,
-                    request_deserializer=ondewo_dot_nlu_dot_utility__pb2.CleanAllEntityTypesRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_utility__pb2.CleanAllEntityTypesResponse.SerializeToString,
-            ),
-            'CleanEntityType': grpc.unary_unary_rpc_method_handler(
-                    servicer.CleanEntityType,
-                    request_deserializer=ondewo_dot_nlu_dot_utility__pb2.CleanEntityTypeRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_utility__pb2.CleanEntityTypeResponse.SerializeToString,
-            ),
-            'AddTrainingPhrases': grpc.unary_unary_rpc_method_handler(
-                    servicer.AddTrainingPhrases,
-                    request_deserializer=ondewo_dot_nlu_dot_utility__pb2.AddTrainingPhrasesRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_utility__pb2.AddTrainingPhrasesResponse.SerializeToString,
-            ),
-            'AddTrainingPhrasesFromCSV': grpc.unary_unary_rpc_method_handler(
-                    servicer.AddTrainingPhrasesFromCSV,
-                    request_deserializer=ondewo_dot_nlu_dot_utility__pb2.AddTrainingPhrasesFromCSVRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_utility__pb2.AddTrainingPhrasesResponse.SerializeToString,
-            ),
+        'ValidateRegex': grpc.unary_unary_rpc_method_handler(
+            servicer.ValidateRegex,
+            request_deserializer=ondewo_dot_nlu_dot_utility__pb2.ValidateRegexRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_utility__pb2.ValidateRegexResponse.SerializeToString,
+        ),
+        'ValidateEmbeddedRegex': grpc.unary_unary_rpc_method_handler(
+            servicer.ValidateEmbeddedRegex,
+            request_deserializer=ondewo_dot_nlu_dot_utility__pb2.ValidateEmbeddedRegexRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_utility__pb2.ValidateEmbeddedRegexResponse.SerializeToString,
+        ),
+        'CleanAllIntents': grpc.unary_unary_rpc_method_handler(
+            servicer.CleanAllIntents,
+            request_deserializer=ondewo_dot_nlu_dot_utility__pb2.CleanAllIntentsRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_utility__pb2.CleanAllIntentsResponse.SerializeToString,
+        ),
+        'CleanIntent': grpc.unary_unary_rpc_method_handler(
+            servicer.CleanIntent,
+            request_deserializer=ondewo_dot_nlu_dot_utility__pb2.CleanIntentRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_utility__pb2.CleanIntentResponse.SerializeToString,
+        ),
+        'CleanAllEntityTypes': grpc.unary_unary_rpc_method_handler(
+            servicer.CleanAllEntityTypes,
+            request_deserializer=ondewo_dot_nlu_dot_utility__pb2.CleanAllEntityTypesRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_utility__pb2.CleanAllEntityTypesResponse.SerializeToString,
+        ),
+        'CleanEntityType': grpc.unary_unary_rpc_method_handler(
+            servicer.CleanEntityType,
+            request_deserializer=ondewo_dot_nlu_dot_utility__pb2.CleanEntityTypeRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_utility__pb2.CleanEntityTypeResponse.SerializeToString,
+        ),
+        'AddTrainingPhrases': grpc.unary_unary_rpc_method_handler(
+            servicer.AddTrainingPhrases,
+            request_deserializer=ondewo_dot_nlu_dot_utility__pb2.AddTrainingPhrasesRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_utility__pb2.AddTrainingPhrasesResponse.SerializeToString,
+        ),
+        'AddTrainingPhrasesFromCSV': grpc.unary_unary_rpc_method_handler(
+            servicer.AddTrainingPhrasesFromCSV,
+            request_deserializer=ondewo_dot_nlu_dot_utility__pb2.AddTrainingPhrasesFromCSVRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_utility__pb2.AddTrainingPhrasesResponse.SerializeToString,
+        ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'ondewo.nlu.Utilities', rpc_method_handlers)
+        'ondewo.nlu.Utilities', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
-
  # This class is part of an EXPERIMENTAL API.
+
+
 class Utilities(object):
     """This is collection of utility endpoints, intended to language-independent operations,
     such as code checks, regex checks, etc.
@@ -180,136 +181,136 @@ class Utilities(object):
 
     @staticmethod
     def ValidateRegex(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                      target,
+                      options=(),
+                      channel_credentials=None,
+                      call_credentials=None,
+                      insecure=False,
+                      compression=None,
+                      wait_for_ready=None,
+                      timeout=None,
+                      metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Utilities/ValidateRegex',
-            ondewo_dot_nlu_dot_utility__pb2.ValidateRegexRequest.SerializeToString,
-            ondewo_dot_nlu_dot_utility__pb2.ValidateRegexResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_utility__pb2.ValidateRegexRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_utility__pb2.ValidateRegexResponse.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def ValidateEmbeddedRegex(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                              target,
+                              options=(),
+                              channel_credentials=None,
+                              call_credentials=None,
+                              insecure=False,
+                              compression=None,
+                              wait_for_ready=None,
+                              timeout=None,
+                              metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Utilities/ValidateEmbeddedRegex',
-            ondewo_dot_nlu_dot_utility__pb2.ValidateEmbeddedRegexRequest.SerializeToString,
-            ondewo_dot_nlu_dot_utility__pb2.ValidateEmbeddedRegexResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_utility__pb2.ValidateEmbeddedRegexRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_utility__pb2.ValidateEmbeddedRegexResponse.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def CleanAllIntents(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                        target,
+                        options=(),
+                        channel_credentials=None,
+                        call_credentials=None,
+                        insecure=False,
+                        compression=None,
+                        wait_for_ready=None,
+                        timeout=None,
+                        metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Utilities/CleanAllIntents',
-            ondewo_dot_nlu_dot_utility__pb2.CleanAllIntentsRequest.SerializeToString,
-            ondewo_dot_nlu_dot_utility__pb2.CleanAllIntentsResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_utility__pb2.CleanAllIntentsRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_utility__pb2.CleanAllIntentsResponse.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def CleanIntent(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                    target,
+                    options=(),
+                    channel_credentials=None,
+                    call_credentials=None,
+                    insecure=False,
+                    compression=None,
+                    wait_for_ready=None,
+                    timeout=None,
+                    metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Utilities/CleanIntent',
-            ondewo_dot_nlu_dot_utility__pb2.CleanIntentRequest.SerializeToString,
-            ondewo_dot_nlu_dot_utility__pb2.CleanIntentResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_utility__pb2.CleanIntentRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_utility__pb2.CleanIntentResponse.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def CleanAllEntityTypes(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                            target,
+                            options=(),
+                            channel_credentials=None,
+                            call_credentials=None,
+                            insecure=False,
+                            compression=None,
+                            wait_for_ready=None,
+                            timeout=None,
+                            metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Utilities/CleanAllEntityTypes',
-            ondewo_dot_nlu_dot_utility__pb2.CleanAllEntityTypesRequest.SerializeToString,
-            ondewo_dot_nlu_dot_utility__pb2.CleanAllEntityTypesResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_utility__pb2.CleanAllEntityTypesRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_utility__pb2.CleanAllEntityTypesResponse.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def CleanEntityType(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                        target,
+                        options=(),
+                        channel_credentials=None,
+                        call_credentials=None,
+                        insecure=False,
+                        compression=None,
+                        wait_for_ready=None,
+                        timeout=None,
+                        metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Utilities/CleanEntityType',
-            ondewo_dot_nlu_dot_utility__pb2.CleanEntityTypeRequest.SerializeToString,
-            ondewo_dot_nlu_dot_utility__pb2.CleanEntityTypeResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_utility__pb2.CleanEntityTypeRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_utility__pb2.CleanEntityTypeResponse.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def AddTrainingPhrases(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                           target,
+                           options=(),
+                           channel_credentials=None,
+                           call_credentials=None,
+                           insecure=False,
+                           compression=None,
+                           wait_for_ready=None,
+                           timeout=None,
+                           metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Utilities/AddTrainingPhrases',
-            ondewo_dot_nlu_dot_utility__pb2.AddTrainingPhrasesRequest.SerializeToString,
-            ondewo_dot_nlu_dot_utility__pb2.AddTrainingPhrasesResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_utility__pb2.AddTrainingPhrasesRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_utility__pb2.AddTrainingPhrasesResponse.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def AddTrainingPhrasesFromCSV(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                                  target,
+                                  options=(),
+                                  channel_credentials=None,
+                                  call_credentials=None,
+                                  insecure=False,
+                                  compression=None,
+                                  wait_for_ready=None,
+                                  timeout=None,
+                                  metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Utilities/AddTrainingPhrasesFromCSV',
-            ondewo_dot_nlu_dot_utility__pb2.AddTrainingPhrasesFromCSVRequest.SerializeToString,
-            ondewo_dot_nlu_dot_utility__pb2.AddTrainingPhrasesResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_utility__pb2.AddTrainingPhrasesFromCSVRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_utility__pb2.AddTrainingPhrasesResponse.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

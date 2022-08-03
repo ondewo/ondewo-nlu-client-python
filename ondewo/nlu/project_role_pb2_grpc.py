@@ -16,30 +16,30 @@ class ProjectRolesStub(object):
             channel: A grpc.Channel.
         """
         self.CreateProjectRole = channel.unary_unary(
-                '/ondewo.nlu.ProjectRoles/CreateProjectRole',
-                request_serializer=ondewo_dot_nlu_dot_project__role__pb2.CreateProjectRoleRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_project__role__pb2.ProjectRole.FromString,
-                )
+            '/ondewo.nlu.ProjectRoles/CreateProjectRole',
+            request_serializer=ondewo_dot_nlu_dot_project__role__pb2.CreateProjectRoleRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_project__role__pb2.ProjectRole.FromString,
+        )
         self.GetProjectRole = channel.unary_unary(
-                '/ondewo.nlu.ProjectRoles/GetProjectRole',
-                request_serializer=ondewo_dot_nlu_dot_project__role__pb2.GetProjectRoleRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_project__role__pb2.ProjectRole.FromString,
-                )
+            '/ondewo.nlu.ProjectRoles/GetProjectRole',
+            request_serializer=ondewo_dot_nlu_dot_project__role__pb2.GetProjectRoleRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_project__role__pb2.ProjectRole.FromString,
+        )
         self.DeleteProjectRole = channel.unary_unary(
-                '/ondewo.nlu.ProjectRoles/DeleteProjectRole',
-                request_serializer=ondewo_dot_nlu_dot_project__role__pb2.DeleteProjectRoleRequest.SerializeToString,
-                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                )
+            '/ondewo.nlu.ProjectRoles/DeleteProjectRole',
+            request_serializer=ondewo_dot_nlu_dot_project__role__pb2.DeleteProjectRoleRequest.SerializeToString,
+            response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+        )
         self.UpdateProjectRole = channel.unary_unary(
-                '/ondewo.nlu.ProjectRoles/UpdateProjectRole',
-                request_serializer=ondewo_dot_nlu_dot_project__role__pb2.UpdateProjectRoleRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_project__role__pb2.ProjectRole.FromString,
-                )
+            '/ondewo.nlu.ProjectRoles/UpdateProjectRole',
+            request_serializer=ondewo_dot_nlu_dot_project__role__pb2.UpdateProjectRoleRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_project__role__pb2.ProjectRole.FromString,
+        )
         self.ListProjectRoles = channel.unary_unary(
-                '/ondewo.nlu.ProjectRoles/ListProjectRoles',
-                request_serializer=ondewo_dot_nlu_dot_project__role__pb2.ListProjectRolesRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_project__role__pb2.ListProjectRolesResponse.FromString,
-                )
+            '/ondewo.nlu.ProjectRoles/ListProjectRoles',
+            request_serializer=ondewo_dot_nlu_dot_project__role__pb2.ListProjectRolesRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_project__role__pb2.ListProjectRolesResponse.FromString,
+        )
 
 
 class ProjectRolesServicer(object):
@@ -78,122 +78,123 @@ class ProjectRolesServicer(object):
 
 def add_ProjectRolesServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'CreateProjectRole': grpc.unary_unary_rpc_method_handler(
-                    servicer.CreateProjectRole,
-                    request_deserializer=ondewo_dot_nlu_dot_project__role__pb2.CreateProjectRoleRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_project__role__pb2.ProjectRole.SerializeToString,
-            ),
-            'GetProjectRole': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetProjectRole,
-                    request_deserializer=ondewo_dot_nlu_dot_project__role__pb2.GetProjectRoleRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_project__role__pb2.ProjectRole.SerializeToString,
-            ),
-            'DeleteProjectRole': grpc.unary_unary_rpc_method_handler(
-                    servicer.DeleteProjectRole,
-                    request_deserializer=ondewo_dot_nlu_dot_project__role__pb2.DeleteProjectRoleRequest.FromString,
-                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-            ),
-            'UpdateProjectRole': grpc.unary_unary_rpc_method_handler(
-                    servicer.UpdateProjectRole,
-                    request_deserializer=ondewo_dot_nlu_dot_project__role__pb2.UpdateProjectRoleRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_project__role__pb2.ProjectRole.SerializeToString,
-            ),
-            'ListProjectRoles': grpc.unary_unary_rpc_method_handler(
-                    servicer.ListProjectRoles,
-                    request_deserializer=ondewo_dot_nlu_dot_project__role__pb2.ListProjectRolesRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_project__role__pb2.ListProjectRolesResponse.SerializeToString,
-            ),
+        'CreateProjectRole': grpc.unary_unary_rpc_method_handler(
+            servicer.CreateProjectRole,
+            request_deserializer=ondewo_dot_nlu_dot_project__role__pb2.CreateProjectRoleRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_project__role__pb2.ProjectRole.SerializeToString,
+        ),
+        'GetProjectRole': grpc.unary_unary_rpc_method_handler(
+            servicer.GetProjectRole,
+            request_deserializer=ondewo_dot_nlu_dot_project__role__pb2.GetProjectRoleRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_project__role__pb2.ProjectRole.SerializeToString,
+        ),
+        'DeleteProjectRole': grpc.unary_unary_rpc_method_handler(
+            servicer.DeleteProjectRole,
+            request_deserializer=ondewo_dot_nlu_dot_project__role__pb2.DeleteProjectRoleRequest.FromString,
+            response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+        ),
+        'UpdateProjectRole': grpc.unary_unary_rpc_method_handler(
+            servicer.UpdateProjectRole,
+            request_deserializer=ondewo_dot_nlu_dot_project__role__pb2.UpdateProjectRoleRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_project__role__pb2.ProjectRole.SerializeToString,
+        ),
+        'ListProjectRoles': grpc.unary_unary_rpc_method_handler(
+            servicer.ListProjectRoles,
+            request_deserializer=ondewo_dot_nlu_dot_project__role__pb2.ListProjectRolesRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_project__role__pb2.ListProjectRolesResponse.SerializeToString,
+        ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'ondewo.nlu.ProjectRoles', rpc_method_handlers)
+        'ondewo.nlu.ProjectRoles', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
-
  # This class is part of an EXPERIMENTAL API.
+
+
 class ProjectRoles(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
     def CreateProjectRole(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                          target,
+                          options=(),
+                          channel_credentials=None,
+                          call_credentials=None,
+                          insecure=False,
+                          compression=None,
+                          wait_for_ready=None,
+                          timeout=None,
+                          metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.ProjectRoles/CreateProjectRole',
-            ondewo_dot_nlu_dot_project__role__pb2.CreateProjectRoleRequest.SerializeToString,
-            ondewo_dot_nlu_dot_project__role__pb2.ProjectRole.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_project__role__pb2.CreateProjectRoleRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_project__role__pb2.ProjectRole.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def GetProjectRole(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                       target,
+                       options=(),
+                       channel_credentials=None,
+                       call_credentials=None,
+                       insecure=False,
+                       compression=None,
+                       wait_for_ready=None,
+                       timeout=None,
+                       metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.ProjectRoles/GetProjectRole',
-            ondewo_dot_nlu_dot_project__role__pb2.GetProjectRoleRequest.SerializeToString,
-            ondewo_dot_nlu_dot_project__role__pb2.ProjectRole.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_project__role__pb2.GetProjectRoleRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_project__role__pb2.ProjectRole.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def DeleteProjectRole(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                          target,
+                          options=(),
+                          channel_credentials=None,
+                          call_credentials=None,
+                          insecure=False,
+                          compression=None,
+                          wait_for_ready=None,
+                          timeout=None,
+                          metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.ProjectRoles/DeleteProjectRole',
-            ondewo_dot_nlu_dot_project__role__pb2.DeleteProjectRoleRequest.SerializeToString,
-            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_project__role__pb2.DeleteProjectRoleRequest.SerializeToString,
+                                             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def UpdateProjectRole(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                          target,
+                          options=(),
+                          channel_credentials=None,
+                          call_credentials=None,
+                          insecure=False,
+                          compression=None,
+                          wait_for_ready=None,
+                          timeout=None,
+                          metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.ProjectRoles/UpdateProjectRole',
-            ondewo_dot_nlu_dot_project__role__pb2.UpdateProjectRoleRequest.SerializeToString,
-            ondewo_dot_nlu_dot_project__role__pb2.ProjectRole.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_project__role__pb2.UpdateProjectRoleRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_project__role__pb2.ProjectRole.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def ListProjectRoles(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                         target,
+                         options=(),
+                         channel_credentials=None,
+                         call_credentials=None,
+                         insecure=False,
+                         compression=None,
+                         wait_for_ready=None,
+                         timeout=None,
+                         metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.ProjectRoles/ListProjectRoles',
-            ondewo_dot_nlu_dot_project__role__pb2.ListProjectRolesRequest.SerializeToString,
-            ondewo_dot_nlu_dot_project__role__pb2.ListProjectRolesResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_project__role__pb2.ListProjectRolesRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_project__role__pb2.ListProjectRolesResponse.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
