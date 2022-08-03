@@ -2,8 +2,7 @@ import json
 from collections import defaultdict
 from typing import Dict, Set, List
 
-# Seems like the package is not typed correctly
-import tqdm as tqdm  # type: ignore[import]
+import tqdm as tqdm
 
 from ondewo.nlu.client import Client
 from ondewo.nlu.client_config import ClientConfig

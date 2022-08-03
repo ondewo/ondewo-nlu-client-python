@@ -31,8 +31,6 @@ COPY Makefile .
 
 COPY .flake8 .
 
-COPY .isort.cfg .
-
 COPY .pre-commit-config.yaml .
 
 COPY CONTRIBUTING.md .
