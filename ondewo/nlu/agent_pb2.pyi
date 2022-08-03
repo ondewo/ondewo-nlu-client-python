@@ -1280,8 +1280,8 @@ class FullTextSearchRequest(google.protobuf.message.Message):
         ALL: FullTextSearchRequest._QueryType.ValueType  # 0
         OndewoEntityQuery: FullTextSearchRequest._QueryType.ValueType  # 1
         OndewoEntityTypeQuery: FullTextSearchRequest._QueryType.ValueType  # 2
-        OndewoSynonymQuery: FullTextSearchRequest._QueryType.ValueType  # 3
-        OndewoIntentNameQuery: FullTextSearchRequest._QueryType.ValueType  # 4
+        OndewoEntitySynonymQuery: FullTextSearchRequest._QueryType.ValueType  # 3
+        OndewoIntentQuery: FullTextSearchRequest._QueryType.ValueType  # 4
         OndewoIntentContextInQuery: FullTextSearchRequest._QueryType.ValueType  # 5
         OndewoIntentContextOutQuery: FullTextSearchRequest._QueryType.ValueType  # 6
         OndewoIntentUsersaysQuery: FullTextSearchRequest._QueryType.ValueType  # 7
@@ -1294,8 +1294,8 @@ class FullTextSearchRequest(google.protobuf.message.Message):
     ALL: FullTextSearchRequest.QueryType.ValueType  # 0
     OndewoEntityQuery: FullTextSearchRequest.QueryType.ValueType  # 1
     OndewoEntityTypeQuery: FullTextSearchRequest.QueryType.ValueType  # 2
-    OndewoSynonymQuery: FullTextSearchRequest.QueryType.ValueType  # 3
-    OndewoIntentNameQuery: FullTextSearchRequest.QueryType.ValueType  # 4
+    OndewoEntitySynonymQuery: FullTextSearchRequest.QueryType.ValueType  # 3
+    OndewoIntentQuery: FullTextSearchRequest.QueryType.ValueType  # 4
     OndewoIntentContextInQuery: FullTextSearchRequest.QueryType.ValueType  # 5
     OndewoIntentContextOutQuery: FullTextSearchRequest.QueryType.ValueType  # 6
     OndewoIntentUsersaysQuery: FullTextSearchRequest.QueryType.ValueType  # 7
