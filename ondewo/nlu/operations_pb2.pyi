@@ -32,7 +32,7 @@ class Operation(google.protobuf.message.Message):
     """
 
     @property
-    def metadata(self) -> ondewo.nlu.operation_metadata_pb2.OperationMetadata:
+    def metadata(self) -> google.protobuf.any_pb2.Any:
         """Service-specific metadata associated with the operation.  It typically
         contains progress information and common metadata such as create time.
         Some services might not provide such metadata.  Any method that returns a
@@ -64,7 +64,7 @@ class Operation(google.protobuf.message.Message):
     def __init__(self,
         *,
         name: typing.Text = ...,
-        metadata: typing.Optional[ondewo.nlu.operation_metadata_pb2.OperationMetadata] = ...,
+        metadata: typing.Optional[google.protobuf.any_pb2.Any] = ...,
         done: builtins.bool = ...,
         error: typing.Optional[google.rpc.status_pb2.Status] = ...,
         response: typing.Optional[google.protobuf.any_pb2.Any] = ...,
