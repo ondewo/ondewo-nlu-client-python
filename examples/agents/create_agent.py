@@ -1,6 +1,6 @@
 import polling
-from google.longrunning.operations_pb2 import GetOperationRequest, Operation
 
+from typing import Optional
 from ondewo.nlu.agent_pb2 import (
     Agent,
     CreateAgentRequest,
@@ -12,6 +12,7 @@ from ondewo.nlu.agent_pb2 import (
 from ondewo.nlu.client import Client
 from ondewo.nlu.client_config import ClientConfig
 from ondewo.nlu.intent_pb2 import CreateIntentRequest, Intent, ListIntentsRequest
+from ondewo.nlu.operations_pb2 import GetOperationRequest, Operation
 
 if __name__ == "__main__":
     config: ClientConfig = ClientConfig(
@@ -73,11 +74,12 @@ if __name__ == "__main__":
         timeout=600,  # wait 10 minutes until training is finished
     )
 
-    export_operation_update: Operation = client.services.operations.get_operation(
+    export_operation_update: Optional[Operation] = client.services.operations.get_operation(
         GetOperationRequest(name=export_operation.name)
     )
     export_response: ExportAgentResponse = ExportAgentResponse()
-    export_operation_update.response.Unpack(export_response)
+    if export_operation_update is not None:
+        export_operation_update.response.Unpack(export_response)
     assert export_response.agent_content
 
     with open("my_backup.zip", mode="wb") as zf:

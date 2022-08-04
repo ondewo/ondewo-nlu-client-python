@@ -1,9 +1,9 @@
 import polling
-from google.longrunning.operations_pb2 import Operation, GetOperationRequest
-
+from typing import Optional
 from ondewo.nlu.agent_pb2 import TrainAgentRequest
 from ondewo.nlu.client import Client
 from ondewo.nlu.client_config import ClientConfig
+from ondewo.nlu.operations_pb2 import Operation, GetOperationRequest
 
 if __name__ == '__main__':
     parent: str = '<PUT_YOUR_AGENT_PARENT_HERE>'
@@ -31,7 +31,8 @@ if __name__ == '__main__':
         timeout=60 * 60 * 1,  # wait 1 hour until training is finished
     )
 
-    training_operation_update: Operation = client.services.operations.get_operation(
+    training_operation_update: Optional[Operation] = client.services.operations.get_operation(
         GetOperationRequest(name=train_operation.name)
     )
-    assert training_operation_update.done
+    if training_operation_update is not None:
+        assert training_operation_update.done
