@@ -1307,6 +1307,8 @@ class FullTextSearchRequest(google.protobuf.message.Message):
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     QUERY_TYPE_FIELD_NUMBER: builtins.int
     TERM_FIELD_NUMBER: builtins.int
+    FROM_RESULT_FIELD_NUMBER: builtins.int
+    SIZE_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The project that the agent is associated with.
     Format: `projects/<Project ID>/agent`.
@@ -1321,14 +1323,22 @@ class FullTextSearchRequest(google.protobuf.message.Message):
     term: typing.Text
     """What to search for in the elastic server"""
 
+    from_result: builtins.int
+    """Return results after this many result item"""
+
+    size: builtins.int
+    """Return this many results after from_result"""
+
     def __init__(self,
         *,
         parent: typing.Text = ...,
         language_code: typing.Text = ...,
         query_type: global___FullTextSearchRequest.QueryType.ValueType = ...,
         term: typing.Text = ...,
+        from_result: builtins.int = ...,
+        size: builtins.int = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["language_code",b"language_code","parent",b"parent","query_type",b"query_type","term",b"term"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["from_result",b"from_result","language_code",b"language_code","parent",b"parent","query_type",b"query_type","size",b"size","term",b"term"]) -> None: ...
 global___FullTextSearchRequest = FullTextSearchRequest
 
 class FullTextSearchResponse(google.protobuf.message.Message):
