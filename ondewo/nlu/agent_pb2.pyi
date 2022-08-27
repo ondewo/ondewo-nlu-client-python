@@ -3,7 +3,6 @@
 isort:skip_file
 """
 import builtins
-import google.protobuf.any_pb2
 import google.protobuf.descriptor
 import google.protobuf.field_mask_pb2
 import google.protobuf.internal.containers
@@ -1278,6 +1277,8 @@ class FullTextSearchRequest(google.protobuf.message.Message):
     class _QueryTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[FullTextSearchRequest._QueryType.ValueType], builtins.type):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         ALL: FullTextSearchRequest._QueryType.ValueType  # 0
+        """just a placeholder, has to start with zero"""
+
         OndewoEntityQuery: FullTextSearchRequest._QueryType.ValueType  # 1
         OndewoEntityTypeQuery: FullTextSearchRequest._QueryType.ValueType  # 2
         OndewoEntitySynonymQuery: FullTextSearchRequest._QueryType.ValueType  # 3
@@ -1292,6 +1293,8 @@ class FullTextSearchRequest(google.protobuf.message.Message):
         pass
 
     ALL: FullTextSearchRequest.QueryType.ValueType  # 0
+    """just a placeholder, has to start with zero"""
+
     OndewoEntityQuery: FullTextSearchRequest.QueryType.ValueType  # 1
     OndewoEntityTypeQuery: FullTextSearchRequest.QueryType.ValueType  # 2
     OndewoEntitySynonymQuery: FullTextSearchRequest.QueryType.ValueType  # 3
@@ -1305,7 +1308,6 @@ class FullTextSearchRequest(google.protobuf.message.Message):
 
     PARENT_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
-    QUERY_TYPE_FIELD_NUMBER: builtins.int
     TERM_FIELD_NUMBER: builtins.int
     PAGE_TOKEN_FIELD_NUMBER: builtins.int
     parent: typing.Text
@@ -1315,9 +1317,6 @@ class FullTextSearchRequest(google.protobuf.message.Message):
 
     language_code: typing.Text
     """In which language to search for"""
-
-    query_type: global___FullTextSearchRequest.QueryType.ValueType
-    """What is the type of the query that needs to be sent to elasticsearch"""
 
     term: typing.Text
     """What to search for in the elastic server"""
@@ -1329,36 +1328,504 @@ class FullTextSearchRequest(google.protobuf.message.Message):
         *,
         parent: typing.Text = ...,
         language_code: typing.Text = ...,
-        query_type: global___FullTextSearchRequest.QueryType.ValueType = ...,
         term: typing.Text = ...,
         page_token: typing.Text = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["language_code",b"language_code","page_token",b"page_token","parent",b"parent","query_type",b"query_type","term",b"term"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["language_code",b"language_code","page_token",b"page_token","parent",b"parent","term",b"term"]) -> None: ...
 global___FullTextSearchRequest = FullTextSearchRequest
 
-class FullTextSearchResponse(google.protobuf.message.Message):
+class FullTextSearchResponseEntityType(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
-    class ResponseEntry(google.protobuf.message.Message):
+    class EntityTypeSearchResult(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
-        KEY_FIELD_NUMBER: builtins.int
-        VALUE_FIELD_NUMBER: builtins.int
-        key: typing.Text
-        @property
-        def value(self) -> google.protobuf.any_pb2.Any: ...
+        NAME_FIELD_NUMBER: builtins.int
+        DISPLAY_NAME_FIELD_NUMBER: builtins.int
+        LANGUAGE_FIELD_NUMBER: builtins.int
+        name: typing.Text
+        display_name: typing.Text
+        language: typing.Text
         def __init__(self,
             *,
-            key: typing.Text = ...,
-            value: typing.Optional[google.protobuf.any_pb2.Any] = ...,
+            name: typing.Text = ...,
+            display_name: typing.Text = ...,
+            language: typing.Text = ...,
             ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["value",b"value"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["display_name",b"display_name","language",b"language","name",b"name"]) -> None: ...
 
-    RESPONSE_FIELD_NUMBER: builtins.int
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    ENTITY_TYPE_RESULTS_FIELD_NUMBER: builtins.int
+    TERM_FIELD_NUMBER: builtins.int
+    ELASTIC_QUERY_FIELD_NUMBER: builtins.int
+    TIME_FIELD_NUMBER: builtins.int
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    parent: typing.Text
+    language_code: typing.Text
     @property
-    def response(self) -> google.protobuf.internal.containers.MessageMap[typing.Text, google.protobuf.any_pb2.Any]: ...
+    def entity_type_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseEntityType.EntityTypeSearchResult]: ...
+    term: typing.Text
+    elastic_query: typing.Text
+    time: builtins.float
+    next_page_token: typing.Text
     def __init__(self,
         *,
-        response: typing.Optional[typing.Mapping[typing.Text, google.protobuf.any_pb2.Any]] = ...,
+        parent: typing.Text = ...,
+        language_code: typing.Text = ...,
+        entity_type_results: typing.Optional[typing.Iterable[global___FullTextSearchResponseEntityType.EntityTypeSearchResult]] = ...,
+        term: typing.Text = ...,
+        elastic_query: typing.Text = ...,
+        time: builtins.float = ...,
+        next_page_token: typing.Text = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["response",b"response"]) -> None: ...
-global___FullTextSearchResponse = FullTextSearchResponse
+    def ClearField(self, field_name: typing_extensions.Literal["elastic_query",b"elastic_query","entity_type_results",b"entity_type_results","language_code",b"language_code","next_page_token",b"next_page_token","parent",b"parent","term",b"term","time",b"time"]) -> None: ...
+global___FullTextSearchResponseEntityType = FullTextSearchResponseEntityType
+
+class FullTextSearchResponseEntity(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    class EntitySearchResult(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+        NAME_FIELD_NUMBER: builtins.int
+        DISPLAY_NAME_FIELD_NUMBER: builtins.int
+        ENTITY_TYPE_NAME_FIELD_NUMBER: builtins.int
+        LANGUAGE_FIELD_NUMBER: builtins.int
+        name: typing.Text
+        display_name: typing.Text
+        entity_type_name: typing.Text
+        language: typing.Text
+        def __init__(self,
+            *,
+            name: typing.Text = ...,
+            display_name: typing.Text = ...,
+            entity_type_name: typing.Text = ...,
+            language: typing.Text = ...,
+            ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["display_name",b"display_name","entity_type_name",b"entity_type_name","language",b"language","name",b"name"]) -> None: ...
+
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    ENTITY_RESULTS_FIELD_NUMBER: builtins.int
+    TERM_FIELD_NUMBER: builtins.int
+    ELASTIC_QUERY_FIELD_NUMBER: builtins.int
+    TIME_FIELD_NUMBER: builtins.int
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    parent: typing.Text
+    language_code: typing.Text
+    @property
+    def entity_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseEntity.EntitySearchResult]: ...
+    term: typing.Text
+    elastic_query: typing.Text
+    time: builtins.float
+    next_page_token: typing.Text
+    def __init__(self,
+        *,
+        parent: typing.Text = ...,
+        language_code: typing.Text = ...,
+        entity_results: typing.Optional[typing.Iterable[global___FullTextSearchResponseEntity.EntitySearchResult]] = ...,
+        term: typing.Text = ...,
+        elastic_query: typing.Text = ...,
+        time: builtins.float = ...,
+        next_page_token: typing.Text = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["elastic_query",b"elastic_query","entity_results",b"entity_results","language_code",b"language_code","next_page_token",b"next_page_token","parent",b"parent","term",b"term","time",b"time"]) -> None: ...
+global___FullTextSearchResponseEntity = FullTextSearchResponseEntity
+
+class FullTextSearchResponseEntitySynonym(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    class EntitySynonymSearchResult(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+        NAME_FIELD_NUMBER: builtins.int
+        DISPLAY_NAME_FIELD_NUMBER: builtins.int
+        ENTITY_TYPE_NAME_FIELD_NUMBER: builtins.int
+        ENTITY_NAME_FIELD_NUMBER: builtins.int
+        LANGUAGE_FIELD_NUMBER: builtins.int
+        name: typing.Text
+        display_name: typing.Text
+        entity_type_name: typing.Text
+        entity_name: typing.Text
+        language: typing.Text
+        def __init__(self,
+            *,
+            name: typing.Text = ...,
+            display_name: typing.Text = ...,
+            entity_type_name: typing.Text = ...,
+            entity_name: typing.Text = ...,
+            language: typing.Text = ...,
+            ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["display_name",b"display_name","entity_name",b"entity_name","entity_type_name",b"entity_type_name","language",b"language","name",b"name"]) -> None: ...
+
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    ENTITY_SYNONYM_RESULTS_FIELD_NUMBER: builtins.int
+    TERM_FIELD_NUMBER: builtins.int
+    ELASTIC_QUERY_FIELD_NUMBER: builtins.int
+    TIME_FIELD_NUMBER: builtins.int
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    parent: typing.Text
+    language_code: typing.Text
+    @property
+    def entity_synonym_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseEntitySynonym.EntitySynonymSearchResult]: ...
+    term: typing.Text
+    elastic_query: typing.Text
+    time: builtins.float
+    next_page_token: typing.Text
+    def __init__(self,
+        *,
+        parent: typing.Text = ...,
+        language_code: typing.Text = ...,
+        entity_synonym_results: typing.Optional[typing.Iterable[global___FullTextSearchResponseEntitySynonym.EntitySynonymSearchResult]] = ...,
+        term: typing.Text = ...,
+        elastic_query: typing.Text = ...,
+        time: builtins.float = ...,
+        next_page_token: typing.Text = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["elastic_query",b"elastic_query","entity_synonym_results",b"entity_synonym_results","language_code",b"language_code","next_page_token",b"next_page_token","parent",b"parent","term",b"term","time",b"time"]) -> None: ...
+global___FullTextSearchResponseEntitySynonym = FullTextSearchResponseEntitySynonym
+
+class FullTextSearchResponseIntent(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    class IntentSearchResult(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+        NAME_FIELD_NUMBER: builtins.int
+        DISPLAY_NAME_FIELD_NUMBER: builtins.int
+        DOMAIN_NAME_FIELD_NUMBER: builtins.int
+        LANGUAGE_FIELD_NUMBER: builtins.int
+        name: typing.Text
+        display_name: typing.Text
+        domain_name: typing.Text
+        language: typing.Text
+        def __init__(self,
+            *,
+            name: typing.Text = ...,
+            display_name: typing.Text = ...,
+            domain_name: typing.Text = ...,
+            language: typing.Text = ...,
+            ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["display_name",b"display_name","domain_name",b"domain_name","language",b"language","name",b"name"]) -> None: ...
+
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    INTENT_RESULTS_FIELD_NUMBER: builtins.int
+    TERM_FIELD_NUMBER: builtins.int
+    ELASTIC_QUERY_FIELD_NUMBER: builtins.int
+    TIME_FIELD_NUMBER: builtins.int
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    parent: typing.Text
+    language_code: typing.Text
+    @property
+    def intent_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseIntent.IntentSearchResult]: ...
+    term: typing.Text
+    elastic_query: typing.Text
+    time: builtins.float
+    next_page_token: typing.Text
+    def __init__(self,
+        *,
+        parent: typing.Text = ...,
+        language_code: typing.Text = ...,
+        intent_results: typing.Optional[typing.Iterable[global___FullTextSearchResponseIntent.IntentSearchResult]] = ...,
+        term: typing.Text = ...,
+        elastic_query: typing.Text = ...,
+        time: builtins.float = ...,
+        next_page_token: typing.Text = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["elastic_query",b"elastic_query","intent_results",b"intent_results","language_code",b"language_code","next_page_token",b"next_page_token","parent",b"parent","term",b"term","time",b"time"]) -> None: ...
+global___FullTextSearchResponseIntent = FullTextSearchResponseIntent
+
+class FullTextSearchResponseIntentContextIn(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    class IntentContextInSearchResult(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+        NAME_FIELD_NUMBER: builtins.int
+        INTENT_NAME_FIELD_NUMBER: builtins.int
+        LANGUAGE_FIELD_NUMBER: builtins.int
+        name: typing.Text
+        intent_name: typing.Text
+        language: typing.Text
+        def __init__(self,
+            *,
+            name: typing.Text = ...,
+            intent_name: typing.Text = ...,
+            language: typing.Text = ...,
+            ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["intent_name",b"intent_name","language",b"language","name",b"name"]) -> None: ...
+
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    INTENT_CONTEXT_IN_RESULTS_FIELD_NUMBER: builtins.int
+    TERM_FIELD_NUMBER: builtins.int
+    ELASTIC_QUERY_FIELD_NUMBER: builtins.int
+    TIME_FIELD_NUMBER: builtins.int
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    parent: typing.Text
+    language_code: typing.Text
+    @property
+    def intent_context_in_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseIntentContextIn.IntentContextInSearchResult]: ...
+    term: typing.Text
+    elastic_query: typing.Text
+    time: builtins.float
+    next_page_token: typing.Text
+    def __init__(self,
+        *,
+        parent: typing.Text = ...,
+        language_code: typing.Text = ...,
+        intent_context_in_results: typing.Optional[typing.Iterable[global___FullTextSearchResponseIntentContextIn.IntentContextInSearchResult]] = ...,
+        term: typing.Text = ...,
+        elastic_query: typing.Text = ...,
+        time: builtins.float = ...,
+        next_page_token: typing.Text = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["elastic_query",b"elastic_query","intent_context_in_results",b"intent_context_in_results","language_code",b"language_code","next_page_token",b"next_page_token","parent",b"parent","term",b"term","time",b"time"]) -> None: ...
+global___FullTextSearchResponseIntentContextIn = FullTextSearchResponseIntentContextIn
+
+class FullTextSearchResponseIntentContextOut(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    class IntentContextOutSearchResult(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+        NAME_FIELD_NUMBER: builtins.int
+        INTENT_NAME_FIELD_NUMBER: builtins.int
+        LANGUAGE_FIELD_NUMBER: builtins.int
+        name: typing.Text
+        intent_name: typing.Text
+        language: typing.Text
+        def __init__(self,
+            *,
+            name: typing.Text = ...,
+            intent_name: typing.Text = ...,
+            language: typing.Text = ...,
+            ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["intent_name",b"intent_name","language",b"language","name",b"name"]) -> None: ...
+
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    INTENT_CONTEXT_OUT_RESULTS_FIELD_NUMBER: builtins.int
+    TERM_FIELD_NUMBER: builtins.int
+    ELASTIC_QUERY_FIELD_NUMBER: builtins.int
+    TIME_FIELD_NUMBER: builtins.int
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    parent: typing.Text
+    language_code: typing.Text
+    @property
+    def intent_context_out_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseIntentContextOut.IntentContextOutSearchResult]: ...
+    term: typing.Text
+    elastic_query: typing.Text
+    time: builtins.float
+    next_page_token: typing.Text
+    def __init__(self,
+        *,
+        parent: typing.Text = ...,
+        language_code: typing.Text = ...,
+        intent_context_out_results: typing.Optional[typing.Iterable[global___FullTextSearchResponseIntentContextOut.IntentContextOutSearchResult]] = ...,
+        term: typing.Text = ...,
+        elastic_query: typing.Text = ...,
+        time: builtins.float = ...,
+        next_page_token: typing.Text = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["elastic_query",b"elastic_query","intent_context_out_results",b"intent_context_out_results","language_code",b"language_code","next_page_token",b"next_page_token","parent",b"parent","term",b"term","time",b"time"]) -> None: ...
+global___FullTextSearchResponseIntentContextOut = FullTextSearchResponseIntentContextOut
+
+class FullTextSearchResponseIntentUsersays(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    class IntentUsersaysSearchResult(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+        NAME_FIELD_NUMBER: builtins.int
+        TEXT_FIELD_NUMBER: builtins.int
+        TEXT_AS_ENTITY_TYPES_FIELD_NUMBER: builtins.int
+        TEXT_AS_ENTITY_VALUES_FIELD_NUMBER: builtins.int
+        TYPE_FIELD_NUMBER: builtins.int
+        INTENT_NAME_FIELD_NUMBER: builtins.int
+        LANGUAGE_FIELD_NUMBER: builtins.int
+        name: typing.Text
+        text: typing.Text
+        text_as_entity_types: typing.Text
+        text_as_entity_values: typing.Text
+        type: typing.Text
+        intent_name: typing.Text
+        language: typing.Text
+        def __init__(self,
+            *,
+            name: typing.Text = ...,
+            text: typing.Text = ...,
+            text_as_entity_types: typing.Text = ...,
+            text_as_entity_values: typing.Text = ...,
+            type: typing.Text = ...,
+            intent_name: typing.Text = ...,
+            language: typing.Text = ...,
+            ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["intent_name",b"intent_name","language",b"language","name",b"name","text",b"text","text_as_entity_types",b"text_as_entity_types","text_as_entity_values",b"text_as_entity_values","type",b"type"]) -> None: ...
+
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    INTENT_USERSAYS_RESULTS_FIELD_NUMBER: builtins.int
+    TERM_FIELD_NUMBER: builtins.int
+    ELASTIC_QUERY_FIELD_NUMBER: builtins.int
+    TIME_FIELD_NUMBER: builtins.int
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    parent: typing.Text
+    language_code: typing.Text
+    @property
+    def intent_usersays_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseIntentUsersays.IntentUsersaysSearchResult]: ...
+    term: typing.Text
+    elastic_query: typing.Text
+    time: builtins.float
+    next_page_token: typing.Text
+    def __init__(self,
+        *,
+        parent: typing.Text = ...,
+        language_code: typing.Text = ...,
+        intent_usersays_results: typing.Optional[typing.Iterable[global___FullTextSearchResponseIntentUsersays.IntentUsersaysSearchResult]] = ...,
+        term: typing.Text = ...,
+        elastic_query: typing.Text = ...,
+        time: builtins.float = ...,
+        next_page_token: typing.Text = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["elastic_query",b"elastic_query","intent_usersays_results",b"intent_usersays_results","language_code",b"language_code","next_page_token",b"next_page_token","parent",b"parent","term",b"term","time",b"time"]) -> None: ...
+global___FullTextSearchResponseIntentUsersays = FullTextSearchResponseIntentUsersays
+
+class FullTextSearchResponseIntentTags(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    class IntentTagsSearchResult(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+        NAME_FIELD_NUMBER: builtins.int
+        TEXT_FIELD_NUMBER: builtins.int
+        INTENT_NAME_FIELD_NUMBER: builtins.int
+        LANGUAGE_FIELD_NUMBER: builtins.int
+        name: typing.Text
+        text: typing.Text
+        intent_name: typing.Text
+        language: typing.Text
+        def __init__(self,
+            *,
+            name: typing.Text = ...,
+            text: typing.Text = ...,
+            intent_name: typing.Text = ...,
+            language: typing.Text = ...,
+            ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["intent_name",b"intent_name","language",b"language","name",b"name","text",b"text"]) -> None: ...
+
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    INTENT_TAGS_RESULTS_FIELD_NUMBER: builtins.int
+    TERM_FIELD_NUMBER: builtins.int
+    ELASTIC_QUERY_FIELD_NUMBER: builtins.int
+    TIME_FIELD_NUMBER: builtins.int
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    parent: typing.Text
+    language_code: typing.Text
+    @property
+    def intent_tags_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseIntentTags.IntentTagsSearchResult]: ...
+    term: typing.Text
+    elastic_query: typing.Text
+    time: builtins.float
+    next_page_token: typing.Text
+    def __init__(self,
+        *,
+        parent: typing.Text = ...,
+        language_code: typing.Text = ...,
+        intent_tags_results: typing.Optional[typing.Iterable[global___FullTextSearchResponseIntentTags.IntentTagsSearchResult]] = ...,
+        term: typing.Text = ...,
+        elastic_query: typing.Text = ...,
+        time: builtins.float = ...,
+        next_page_token: typing.Text = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["elastic_query",b"elastic_query","intent_tags_results",b"intent_tags_results","language_code",b"language_code","next_page_token",b"next_page_token","parent",b"parent","term",b"term","time",b"time"]) -> None: ...
+global___FullTextSearchResponseIntentTags = FullTextSearchResponseIntentTags
+
+class FullTextSearchResponseIntentResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    class IntentResponseSearchResult(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+        TEXT_FIELD_NUMBER: builtins.int
+        PLATFORM_FIELD_NUMBER: builtins.int
+        RESPONSE_TYPE_FIELD_NUMBER: builtins.int
+        INTENT_NAME_FIELD_NUMBER: builtins.int
+        LANGUAGE_FIELD_NUMBER: builtins.int
+        text: typing.Text
+        platform: builtins.int
+        response_type: typing.Text
+        intent_name: typing.Text
+        language: typing.Text
+        def __init__(self,
+            *,
+            text: typing.Text = ...,
+            platform: builtins.int = ...,
+            response_type: typing.Text = ...,
+            intent_name: typing.Text = ...,
+            language: typing.Text = ...,
+            ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["intent_name",b"intent_name","language",b"language","platform",b"platform","response_type",b"response_type","text",b"text"]) -> None: ...
+
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    INTENT_RESPONSE_RESULTS_FIELD_NUMBER: builtins.int
+    TERM_FIELD_NUMBER: builtins.int
+    ELASTIC_QUERY_FIELD_NUMBER: builtins.int
+    TIME_FIELD_NUMBER: builtins.int
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    parent: typing.Text
+    language_code: typing.Text
+    @property
+    def intent_response_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseIntentResponse.IntentResponseSearchResult]: ...
+    term: typing.Text
+    elastic_query: typing.Text
+    time: builtins.float
+    next_page_token: typing.Text
+    def __init__(self,
+        *,
+        parent: typing.Text = ...,
+        language_code: typing.Text = ...,
+        intent_response_results: typing.Optional[typing.Iterable[global___FullTextSearchResponseIntentResponse.IntentResponseSearchResult]] = ...,
+        term: typing.Text = ...,
+        elastic_query: typing.Text = ...,
+        time: builtins.float = ...,
+        next_page_token: typing.Text = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["elastic_query",b"elastic_query","intent_response_results",b"intent_response_results","language_code",b"language_code","next_page_token",b"next_page_token","parent",b"parent","term",b"term","time",b"time"]) -> None: ...
+global___FullTextSearchResponseIntentResponse = FullTextSearchResponseIntentResponse
+
+class FullTextSearchResponseIntentParameters(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    class IntentParametersSearchResult(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+        PARAMETER_NAME_FIELD_NUMBER: builtins.int
+        PARAMETER_DISPLAY_NAME_FIELD_NUMBER: builtins.int
+        INTENT_NAME_FIELD_NUMBER: builtins.int
+        LANGUAGE_FIELD_NUMBER: builtins.int
+        parameter_name: typing.Text
+        parameter_display_name: typing.Text
+        intent_name: typing.Text
+        language: typing.Text
+        def __init__(self,
+            *,
+            parameter_name: typing.Text = ...,
+            parameter_display_name: typing.Text = ...,
+            intent_name: typing.Text = ...,
+            language: typing.Text = ...,
+            ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["intent_name",b"intent_name","language",b"language","parameter_display_name",b"parameter_display_name","parameter_name",b"parameter_name"]) -> None: ...
+
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    INTENT_PARAMETERS_RESULTS_FIELD_NUMBER: builtins.int
+    TERM_FIELD_NUMBER: builtins.int
+    ELASTIC_QUERY_FIELD_NUMBER: builtins.int
+    TIME_FIELD_NUMBER: builtins.int
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    parent: typing.Text
+    language_code: typing.Text
+    @property
+    def intent_parameters_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseIntentParameters.IntentParametersSearchResult]: ...
+    term: typing.Text
+    elastic_query: typing.Text
+    time: builtins.float
+    next_page_token: typing.Text
+    def __init__(self,
+        *,
+        parent: typing.Text = ...,
+        language_code: typing.Text = ...,
+        intent_parameters_results: typing.Optional[typing.Iterable[global___FullTextSearchResponseIntentParameters.IntentParametersSearchResult]] = ...,
+        term: typing.Text = ...,
+        elastic_query: typing.Text = ...,
+        time: builtins.float = ...,
+        next_page_token: typing.Text = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["elastic_query",b"elastic_query","intent_parameters_results",b"intent_parameters_results","language_code",b"language_code","next_page_token",b"next_page_token","parent",b"parent","term",b"term","time",b"time"]) -> None: ...
+global___FullTextSearchResponseIntentParameters = FullTextSearchResponseIntentParameters
