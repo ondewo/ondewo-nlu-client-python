@@ -1,6 +1,13 @@
 # Release History
 
 *****************
+## Release ONDEWO NLU Python Client 2.14.0
+
+### Improvements
+
+* Upgraded to NLU API Version 2.14.0 and Proto-Compiler Version 4.0.0
+
+*****************
 ## Release ONDEWO NLU Python Client 2.10.0
 
 ### Improvements

@@ -167,6 +167,56 @@ class AgentsStub(object):
             request_serializer=ondewo_dot_nlu_dot_agent__pb2.PlatformMapping.SerializeToString,
             response_deserializer=ondewo_dot_nlu_dot_agent__pb2.PlatformMapping.FromString,
         )
+        self.GetFullTextSearchEntityType = channel.unary_unary(
+            '/ondewo.nlu.Agents/GetFullTextSearchEntityType',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseEntityType.FromString,
+        )
+        self.GetFullTextSearchEntity = channel.unary_unary(
+            '/ondewo.nlu.Agents/GetFullTextSearchEntity',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseEntity.FromString,
+        )
+        self.GetFullTextSearchEntitySynonym = channel.unary_unary(
+            '/ondewo.nlu.Agents/GetFullTextSearchEntitySynonym',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseEntitySynonym.FromString,
+        )
+        self.GetFullTextSearchIntent = channel.unary_unary(
+            '/ondewo.nlu.Agents/GetFullTextSearchIntent',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntent.FromString,
+        )
+        self.GetFullTextSearchIntentContextIn = channel.unary_unary(
+            '/ondewo.nlu.Agents/GetFullTextSearchIntentContextIn',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentContextIn.FromString,
+        )
+        self.GetFullTextSearchIntentContextOut = channel.unary_unary(
+            '/ondewo.nlu.Agents/GetFullTextSearchIntentContextOut',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentContextOut.FromString,
+        )
+        self.GetFullTextSearchIntentUsersays = channel.unary_unary(
+            '/ondewo.nlu.Agents/GetFullTextSearchIntentUsersays',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentUsersays.FromString,
+        )
+        self.GetFullTextSearchIntentTags = channel.unary_unary(
+            '/ondewo.nlu.Agents/GetFullTextSearchIntentTags',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentTags.FromString,
+        )
+        self.GetFullTextSearchIntentResponse = channel.unary_unary(
+            '/ondewo.nlu.Agents/GetFullTextSearchIntentResponse',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentResponse.FromString,
+        )
+        self.GetFullTextSearchIntentParameters = channel.unary_unary(
+            '/ondewo.nlu.Agents/GetFullTextSearchIntentParameters',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentParameters.FromString,
+        )
 
 
 class AgentsServicer(object):
@@ -571,6 +621,67 @@ class AgentsServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetFullTextSearchEntityType(self, request, context):
+        """Full text search endpoint
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetFullTextSearchEntity(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetFullTextSearchEntitySynonym(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetFullTextSearchIntent(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetFullTextSearchIntentContextIn(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetFullTextSearchIntentContextOut(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetFullTextSearchIntentUsersays(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetFullTextSearchIntentTags(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetFullTextSearchIntentResponse(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetFullTextSearchIntentParameters(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_AgentsServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -713,6 +824,56 @@ def add_AgentsServicer_to_server(servicer, server):
             servicer.SetPlatformMapping,
             request_deserializer=ondewo_dot_nlu_dot_agent__pb2.PlatformMapping.FromString,
             response_serializer=ondewo_dot_nlu_dot_agent__pb2.PlatformMapping.SerializeToString,
+        ),
+        'GetFullTextSearchEntityType': grpc.unary_unary_rpc_method_handler(
+            servicer.GetFullTextSearchEntityType,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseEntityType.SerializeToString,
+        ),
+        'GetFullTextSearchEntity': grpc.unary_unary_rpc_method_handler(
+            servicer.GetFullTextSearchEntity,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseEntity.SerializeToString,
+        ),
+        'GetFullTextSearchEntitySynonym': grpc.unary_unary_rpc_method_handler(
+            servicer.GetFullTextSearchEntitySynonym,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseEntitySynonym.SerializeToString,
+        ),
+        'GetFullTextSearchIntent': grpc.unary_unary_rpc_method_handler(
+            servicer.GetFullTextSearchIntent,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntent.SerializeToString,
+        ),
+        'GetFullTextSearchIntentContextIn': grpc.unary_unary_rpc_method_handler(
+            servicer.GetFullTextSearchIntentContextIn,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentContextIn.SerializeToString,
+        ),
+        'GetFullTextSearchIntentContextOut': grpc.unary_unary_rpc_method_handler(
+            servicer.GetFullTextSearchIntentContextOut,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentContextOut.SerializeToString,
+        ),
+        'GetFullTextSearchIntentUsersays': grpc.unary_unary_rpc_method_handler(
+            servicer.GetFullTextSearchIntentUsersays,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentUsersays.SerializeToString,
+        ),
+        'GetFullTextSearchIntentTags': grpc.unary_unary_rpc_method_handler(
+            servicer.GetFullTextSearchIntentTags,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentTags.SerializeToString,
+        ),
+        'GetFullTextSearchIntentResponse': grpc.unary_unary_rpc_method_handler(
+            servicer.GetFullTextSearchIntentResponse,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentResponse.SerializeToString,
+        ),
+        'GetFullTextSearchIntentParameters': grpc.unary_unary_rpc_method_handler(
+            servicer.GetFullTextSearchIntentParameters,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentParameters.SerializeToString,
         ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -1209,5 +1370,175 @@ class Agents(object):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/SetPlatformMapping',
                                              ondewo_dot_nlu_dot_agent__pb2.PlatformMapping.SerializeToString,
                                              ondewo_dot_nlu_dot_agent__pb2.PlatformMapping.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetFullTextSearchEntityType(request,
+                                    target,
+                                    options=(),
+                                    channel_credentials=None,
+                                    call_credentials=None,
+                                    insecure=False,
+                                    compression=None,
+                                    wait_for_ready=None,
+                                    timeout=None,
+                                    metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/GetFullTextSearchEntityType',
+                                             ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseEntityType.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetFullTextSearchEntity(request,
+                                target,
+                                options=(),
+                                channel_credentials=None,
+                                call_credentials=None,
+                                insecure=False,
+                                compression=None,
+                                wait_for_ready=None,
+                                timeout=None,
+                                metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/GetFullTextSearchEntity',
+                                             ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseEntity.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetFullTextSearchEntitySynonym(request,
+                                       target,
+                                       options=(),
+                                       channel_credentials=None,
+                                       call_credentials=None,
+                                       insecure=False,
+                                       compression=None,
+                                       wait_for_ready=None,
+                                       timeout=None,
+                                       metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/GetFullTextSearchEntitySynonym',
+                                             ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseEntitySynonym.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetFullTextSearchIntent(request,
+                                target,
+                                options=(),
+                                channel_credentials=None,
+                                call_credentials=None,
+                                insecure=False,
+                                compression=None,
+                                wait_for_ready=None,
+                                timeout=None,
+                                metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/GetFullTextSearchIntent',
+                                             ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntent.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetFullTextSearchIntentContextIn(request,
+                                         target,
+                                         options=(),
+                                         channel_credentials=None,
+                                         call_credentials=None,
+                                         insecure=False,
+                                         compression=None,
+                                         wait_for_ready=None,
+                                         timeout=None,
+                                         metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/GetFullTextSearchIntentContextIn',
+                                             ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentContextIn.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetFullTextSearchIntentContextOut(request,
+                                          target,
+                                          options=(),
+                                          channel_credentials=None,
+                                          call_credentials=None,
+                                          insecure=False,
+                                          compression=None,
+                                          wait_for_ready=None,
+                                          timeout=None,
+                                          metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/GetFullTextSearchIntentContextOut',
+                                             ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentContextOut.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetFullTextSearchIntentUsersays(request,
+                                        target,
+                                        options=(),
+                                        channel_credentials=None,
+                                        call_credentials=None,
+                                        insecure=False,
+                                        compression=None,
+                                        wait_for_ready=None,
+                                        timeout=None,
+                                        metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/GetFullTextSearchIntentUsersays',
+                                             ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentUsersays.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetFullTextSearchIntentTags(request,
+                                    target,
+                                    options=(),
+                                    channel_credentials=None,
+                                    call_credentials=None,
+                                    insecure=False,
+                                    compression=None,
+                                    wait_for_ready=None,
+                                    timeout=None,
+                                    metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/GetFullTextSearchIntentTags',
+                                             ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentTags.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetFullTextSearchIntentResponse(request,
+                                        target,
+                                        options=(),
+                                        channel_credentials=None,
+                                        call_credentials=None,
+                                        insecure=False,
+                                        compression=None,
+                                        wait_for_ready=None,
+                                        timeout=None,
+                                        metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/GetFullTextSearchIntentResponse',
+                                             ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentResponse.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetFullTextSearchIntentParameters(request,
+                                          target,
+                                          options=(),
+                                          channel_credentials=None,
+                                          call_credentials=None,
+                                          insecure=False,
+                                          compression=None,
+                                          wait_for_ready=None,
+                                          timeout=None,
+                                          metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/GetFullTextSearchIntentParameters',
+                                             ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentParameters.FromString,
                                              options, channel_credentials,
                                              insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
