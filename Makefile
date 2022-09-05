@@ -80,6 +80,20 @@ TEST:
 	@echo ${PYPI_PASSWORD}
 	@echo ${CURRENT_RELEASE_NOTES}
 
+check_build: ## Checks if all built proto-code is there
+	@rm -rf build_check.txt
+	@for proto in `find ondewo-nlu-api/ondewo -iname "*.proto*"`; \
+	do \
+		echo $${proto} | cut -d "/" -f 4 | cut -d "." -f 1 >> build_check.txt; \
+	done
+	@echo "`sort build_check.txt | uniq`" > build_check.txt
+	@for file in `cat build_check.txt`;\
+	do \
+		find ondewo -iname "*pb*" | grep -q $${file}; \
+		if test $$? != 0; then  echo "No Proto-Code for $${file}" & exit 1;fi \
+	done
+	@rm -rf build_check.txt
+
 ########################################################
 #       Repo Specific Make Targets
 ########################################################
