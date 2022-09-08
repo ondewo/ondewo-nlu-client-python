@@ -48,140 +48,140 @@ class IntentsStub(object):
             channel: A grpc.Channel.
         """
         self.ListIntents = channel.unary_unary(
-            '/ondewo.nlu.Intents/ListIntents',
-            request_serializer=ondewo_dot_nlu_dot_intent__pb2.ListIntentsRequest.SerializeToString,
-            response_deserializer=ondewo_dot_nlu_dot_intent__pb2.ListIntentsResponse.FromString,
-        )
+                '/ondewo.nlu.Intents/ListIntents',
+                request_serializer=ondewo_dot_nlu_dot_intent__pb2.ListIntentsRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_intent__pb2.ListIntentsResponse.FromString,
+                )
         self.GetIntent = channel.unary_unary(
-            '/ondewo.nlu.Intents/GetIntent',
-            request_serializer=ondewo_dot_nlu_dot_intent__pb2.GetIntentRequest.SerializeToString,
-            response_deserializer=ondewo_dot_nlu_dot_intent__pb2.Intent.FromString,
-        )
+                '/ondewo.nlu.Intents/GetIntent',
+                request_serializer=ondewo_dot_nlu_dot_intent__pb2.GetIntentRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_intent__pb2.Intent.FromString,
+                )
         self.CreateIntent = channel.unary_unary(
-            '/ondewo.nlu.Intents/CreateIntent',
-            request_serializer=ondewo_dot_nlu_dot_intent__pb2.CreateIntentRequest.SerializeToString,
-            response_deserializer=ondewo_dot_nlu_dot_intent__pb2.Intent.FromString,
-        )
+                '/ondewo.nlu.Intents/CreateIntent',
+                request_serializer=ondewo_dot_nlu_dot_intent__pb2.CreateIntentRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_intent__pb2.Intent.FromString,
+                )
         self.UpdateIntent = channel.unary_unary(
-            '/ondewo.nlu.Intents/UpdateIntent',
-            request_serializer=ondewo_dot_nlu_dot_intent__pb2.UpdateIntentRequest.SerializeToString,
-            response_deserializer=ondewo_dot_nlu_dot_intent__pb2.Intent.FromString,
-        )
+                '/ondewo.nlu.Intents/UpdateIntent',
+                request_serializer=ondewo_dot_nlu_dot_intent__pb2.UpdateIntentRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_intent__pb2.Intent.FromString,
+                )
         self.DeleteIntent = channel.unary_unary(
-            '/ondewo.nlu.Intents/DeleteIntent',
-            request_serializer=ondewo_dot_nlu_dot_intent__pb2.DeleteIntentRequest.SerializeToString,
-            response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-        )
+                '/ondewo.nlu.Intents/DeleteIntent',
+                request_serializer=ondewo_dot_nlu_dot_intent__pb2.DeleteIntentRequest.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                )
         self.BatchUpdateIntents = channel.unary_unary(
-            '/ondewo.nlu.Intents/BatchUpdateIntents',
-            request_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchUpdateIntentsRequest.SerializeToString,
-            response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
-        )
+                '/ondewo.nlu.Intents/BatchUpdateIntents',
+                request_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchUpdateIntentsRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
+                )
         self.BatchDeleteIntents = channel.unary_unary(
-            '/ondewo.nlu.Intents/BatchDeleteIntents',
-            request_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchDeleteIntentsRequest.SerializeToString,
-            response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
-        )
+                '/ondewo.nlu.Intents/BatchDeleteIntents',
+                request_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchDeleteIntentsRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
+                )
         self.TagIntent = channel.unary_unary(
-            '/ondewo.nlu.Intents/TagIntent',
-            request_serializer=ondewo_dot_nlu_dot_intent__pb2.IntentTagRequest.SerializeToString,
-            response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-        )
+                '/ondewo.nlu.Intents/TagIntent',
+                request_serializer=ondewo_dot_nlu_dot_intent__pb2.IntentTagRequest.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                )
         self.DeleteIntentTag = channel.unary_unary(
-            '/ondewo.nlu.Intents/DeleteIntentTag',
-            request_serializer=ondewo_dot_nlu_dot_intent__pb2.IntentTagRequest.SerializeToString,
-            response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-        )
+                '/ondewo.nlu.Intents/DeleteIntentTag',
+                request_serializer=ondewo_dot_nlu_dot_intent__pb2.IntentTagRequest.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                )
         self.GetIntentTags = channel.unary_unary(
-            '/ondewo.nlu.Intents/GetIntentTags',
-            request_serializer=ondewo_dot_nlu_dot_intent__pb2.GetIntentTagsRequest.SerializeToString,
-            response_deserializer=ondewo_dot_nlu_dot_intent__pb2.GetIntentTagsResponse.FromString,
-        )
+                '/ondewo.nlu.Intents/GetIntentTags',
+                request_serializer=ondewo_dot_nlu_dot_intent__pb2.GetIntentTagsRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_intent__pb2.GetIntentTagsResponse.FromString,
+                )
         self.GetAllIntentTags = channel.unary_unary(
-            '/ondewo.nlu.Intents/GetAllIntentTags',
-            request_serializer=ondewo_dot_nlu_dot_intent__pb2.GetAllIntentTagsRequest.SerializeToString,
-            response_deserializer=ondewo_dot_nlu_dot_intent__pb2.GetIntentTagsResponse.FromString,
-        )
+                '/ondewo.nlu.Intents/GetAllIntentTags',
+                request_serializer=ondewo_dot_nlu_dot_intent__pb2.GetAllIntentTagsRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_intent__pb2.GetIntentTagsResponse.FromString,
+                )
         self.BatchCreateTrainingPhrases = channel.unary_unary(
-            '/ondewo.nlu.Intents/BatchCreateTrainingPhrases',
-            request_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchCreateTrainingPhrasesRequest.SerializeToString,
-            response_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchTrainingPhrasesStatusResponse.FromString,
-        )
+                '/ondewo.nlu.Intents/BatchCreateTrainingPhrases',
+                request_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchCreateTrainingPhrasesRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchTrainingPhrasesStatusResponse.FromString,
+                )
         self.BatchGetTrainingPhrases = channel.unary_unary(
-            '/ondewo.nlu.Intents/BatchGetTrainingPhrases',
-            request_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchGetTrainingPhrasesRequest.SerializeToString,
-            response_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchTrainingPhrasesStatusResponse.FromString,
-        )
+                '/ondewo.nlu.Intents/BatchGetTrainingPhrases',
+                request_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchGetTrainingPhrasesRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchTrainingPhrasesStatusResponse.FromString,
+                )
         self.BatchUpdateTrainingPhrases = channel.unary_unary(
-            '/ondewo.nlu.Intents/BatchUpdateTrainingPhrases',
-            request_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchUpdateTrainingPhrasesRequest.SerializeToString,
-            response_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchTrainingPhrasesStatusResponse.FromString,
-        )
+                '/ondewo.nlu.Intents/BatchUpdateTrainingPhrases',
+                request_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchUpdateTrainingPhrasesRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchTrainingPhrasesStatusResponse.FromString,
+                )
         self.BatchDeleteTrainingPhrases = channel.unary_unary(
-            '/ondewo.nlu.Intents/BatchDeleteTrainingPhrases',
-            request_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchDeleteTrainingPhrasesRequest.SerializeToString,
-            response_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchDeleteTrainingPhrasesResponse.FromString,
-        )
+                '/ondewo.nlu.Intents/BatchDeleteTrainingPhrases',
+                request_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchDeleteTrainingPhrasesRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchDeleteTrainingPhrasesResponse.FromString,
+                )
         self.ListTrainingPhrases = channel.unary_unary(
-            '/ondewo.nlu.Intents/ListTrainingPhrases',
-            request_serializer=ondewo_dot_nlu_dot_intent__pb2.ListTrainingPhrasesRequest.SerializeToString,
-            response_deserializer=ondewo_dot_nlu_dot_intent__pb2.ListTrainingPhrasesResponse.FromString,
-        )
+                '/ondewo.nlu.Intents/ListTrainingPhrases',
+                request_serializer=ondewo_dot_nlu_dot_intent__pb2.ListTrainingPhrasesRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_intent__pb2.ListTrainingPhrasesResponse.FromString,
+                )
         self.BatchCreateResponseMessages = channel.unary_unary(
-            '/ondewo.nlu.Intents/BatchCreateResponseMessages',
-            request_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchCreateResponseMessagesRequest.SerializeToString,
-            response_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchResponseMessagesStatusResponse.FromString,
-        )
+                '/ondewo.nlu.Intents/BatchCreateResponseMessages',
+                request_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchCreateResponseMessagesRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchResponseMessagesStatusResponse.FromString,
+                )
         self.BatchGetResponseMessages = channel.unary_unary(
-            '/ondewo.nlu.Intents/BatchGetResponseMessages',
-            request_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchGetResponseMessagesRequest.SerializeToString,
-            response_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchResponseMessagesStatusResponse.FromString,
-        )
+                '/ondewo.nlu.Intents/BatchGetResponseMessages',
+                request_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchGetResponseMessagesRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchResponseMessagesStatusResponse.FromString,
+                )
         self.BatchUpdateResponseMessages = channel.unary_unary(
-            '/ondewo.nlu.Intents/BatchUpdateResponseMessages',
-            request_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchUpdateResponseMessagesRequest.SerializeToString,
-            response_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchResponseMessagesStatusResponse.FromString,
-        )
+                '/ondewo.nlu.Intents/BatchUpdateResponseMessages',
+                request_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchUpdateResponseMessagesRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchResponseMessagesStatusResponse.FromString,
+                )
         self.BatchDeleteResponseMessages = channel.unary_unary(
-            '/ondewo.nlu.Intents/BatchDeleteResponseMessages',
-            request_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchDeleteResponseMessagesRequest.SerializeToString,
-            response_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchDeleteResponseMessagesResponse.FromString,
-        )
+                '/ondewo.nlu.Intents/BatchDeleteResponseMessages',
+                request_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchDeleteResponseMessagesRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchDeleteResponseMessagesResponse.FromString,
+                )
         self.ListResponseMessages = channel.unary_unary(
-            '/ondewo.nlu.Intents/ListResponseMessages',
-            request_serializer=ondewo_dot_nlu_dot_intent__pb2.ListResponseMessagesRequest.SerializeToString,
-            response_deserializer=ondewo_dot_nlu_dot_intent__pb2.ListResponseMessagesResponse.FromString,
-        )
+                '/ondewo.nlu.Intents/ListResponseMessages',
+                request_serializer=ondewo_dot_nlu_dot_intent__pb2.ListResponseMessagesRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_intent__pb2.ListResponseMessagesResponse.FromString,
+                )
         self.BatchCreateParameters = channel.unary_unary(
-            '/ondewo.nlu.Intents/BatchCreateParameters',
-            request_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchCreateParametersRequest.SerializeToString,
-            response_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchParametersStatusResponse.FromString,
-        )
+                '/ondewo.nlu.Intents/BatchCreateParameters',
+                request_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchCreateParametersRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchParametersStatusResponse.FromString,
+                )
         self.BatchGetParameters = channel.unary_unary(
-            '/ondewo.nlu.Intents/BatchGetParameters',
-            request_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchGetParametersRequest.SerializeToString,
-            response_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchParametersStatusResponse.FromString,
-        )
+                '/ondewo.nlu.Intents/BatchGetParameters',
+                request_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchGetParametersRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchParametersStatusResponse.FromString,
+                )
         self.BatchUpdateParameters = channel.unary_unary(
-            '/ondewo.nlu.Intents/BatchUpdateParameters',
-            request_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchUpdateParametersRequest.SerializeToString,
-            response_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchParametersStatusResponse.FromString,
-        )
+                '/ondewo.nlu.Intents/BatchUpdateParameters',
+                request_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchUpdateParametersRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchParametersStatusResponse.FromString,
+                )
         self.BatchDeleteParameters = channel.unary_unary(
-            '/ondewo.nlu.Intents/BatchDeleteParameters',
-            request_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchDeleteParametersRequest.SerializeToString,
-            response_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchDeleteParametersResponse.FromString,
-        )
+                '/ondewo.nlu.Intents/BatchDeleteParameters',
+                request_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchDeleteParametersRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchDeleteParametersResponse.FromString,
+                )
         self.ListParameters = channel.unary_unary(
-            '/ondewo.nlu.Intents/ListParameters',
-            request_serializer=ondewo_dot_nlu_dot_intent__pb2.ListParametersRequest.SerializeToString,
-            response_deserializer=ondewo_dot_nlu_dot_intent__pb2.ListParametersResponse.FromString,
-        )
+                '/ondewo.nlu.Intents/ListParameters',
+                request_serializer=ondewo_dot_nlu_dot_intent__pb2.ListParametersRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_intent__pb2.ListParametersResponse.FromString,
+                )
         self.ListTrainingPhrasesofIntentsWithEnrichment = channel.unary_unary(
-            '/ondewo.nlu.Intents/ListTrainingPhrasesofIntentsWithEnrichment',
-            request_serializer=ondewo_dot_nlu_dot_intent__pb2.ListTrainingPhrasesofIntentsWithEnrichmentRequest.SerializeToString,
-            response_deserializer=ondewo_dot_nlu_dot_intent__pb2.ListTrainingPhrasesofIntentsWithEnrichmentResponse.FromString,
-        )
+                '/ondewo.nlu.Intents/ListTrainingPhrasesofIntentsWithEnrichment',
+                request_serializer=ondewo_dot_nlu_dot_intent__pb2.ListTrainingPhrasesofIntentsWithEnrichmentRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_intent__pb2.ListTrainingPhrasesofIntentsWithEnrichmentResponse.FromString,
+                )
 
 
 class IntentsServicer(object):
@@ -420,149 +420,148 @@ class IntentsServicer(object):
 
 def add_IntentsServicer_to_server(servicer, server):
     rpc_method_handlers = {
-        'ListIntents': grpc.unary_unary_rpc_method_handler(
-            servicer.ListIntents,
-            request_deserializer=ondewo_dot_nlu_dot_intent__pb2.ListIntentsRequest.FromString,
-            response_serializer=ondewo_dot_nlu_dot_intent__pb2.ListIntentsResponse.SerializeToString,
-        ),
-        'GetIntent': grpc.unary_unary_rpc_method_handler(
-            servicer.GetIntent,
-            request_deserializer=ondewo_dot_nlu_dot_intent__pb2.GetIntentRequest.FromString,
-            response_serializer=ondewo_dot_nlu_dot_intent__pb2.Intent.SerializeToString,
-        ),
-        'CreateIntent': grpc.unary_unary_rpc_method_handler(
-            servicer.CreateIntent,
-            request_deserializer=ondewo_dot_nlu_dot_intent__pb2.CreateIntentRequest.FromString,
-            response_serializer=ondewo_dot_nlu_dot_intent__pb2.Intent.SerializeToString,
-        ),
-        'UpdateIntent': grpc.unary_unary_rpc_method_handler(
-            servicer.UpdateIntent,
-            request_deserializer=ondewo_dot_nlu_dot_intent__pb2.UpdateIntentRequest.FromString,
-            response_serializer=ondewo_dot_nlu_dot_intent__pb2.Intent.SerializeToString,
-        ),
-        'DeleteIntent': grpc.unary_unary_rpc_method_handler(
-            servicer.DeleteIntent,
-            request_deserializer=ondewo_dot_nlu_dot_intent__pb2.DeleteIntentRequest.FromString,
-            response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-        ),
-        'BatchUpdateIntents': grpc.unary_unary_rpc_method_handler(
-            servicer.BatchUpdateIntents,
-            request_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchUpdateIntentsRequest.FromString,
-            response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
-        ),
-        'BatchDeleteIntents': grpc.unary_unary_rpc_method_handler(
-            servicer.BatchDeleteIntents,
-            request_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchDeleteIntentsRequest.FromString,
-            response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
-        ),
-        'TagIntent': grpc.unary_unary_rpc_method_handler(
-            servicer.TagIntent,
-            request_deserializer=ondewo_dot_nlu_dot_intent__pb2.IntentTagRequest.FromString,
-            response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-        ),
-        'DeleteIntentTag': grpc.unary_unary_rpc_method_handler(
-            servicer.DeleteIntentTag,
-            request_deserializer=ondewo_dot_nlu_dot_intent__pb2.IntentTagRequest.FromString,
-            response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-        ),
-        'GetIntentTags': grpc.unary_unary_rpc_method_handler(
-            servicer.GetIntentTags,
-            request_deserializer=ondewo_dot_nlu_dot_intent__pb2.GetIntentTagsRequest.FromString,
-            response_serializer=ondewo_dot_nlu_dot_intent__pb2.GetIntentTagsResponse.SerializeToString,
-        ),
-        'GetAllIntentTags': grpc.unary_unary_rpc_method_handler(
-            servicer.GetAllIntentTags,
-            request_deserializer=ondewo_dot_nlu_dot_intent__pb2.GetAllIntentTagsRequest.FromString,
-            response_serializer=ondewo_dot_nlu_dot_intent__pb2.GetIntentTagsResponse.SerializeToString,
-        ),
-        'BatchCreateTrainingPhrases': grpc.unary_unary_rpc_method_handler(
-            servicer.BatchCreateTrainingPhrases,
-            request_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchCreateTrainingPhrasesRequest.FromString,
-            response_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchTrainingPhrasesStatusResponse.SerializeToString,
-        ),
-        'BatchGetTrainingPhrases': grpc.unary_unary_rpc_method_handler(
-            servicer.BatchGetTrainingPhrases,
-            request_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchGetTrainingPhrasesRequest.FromString,
-            response_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchTrainingPhrasesStatusResponse.SerializeToString,
-        ),
-        'BatchUpdateTrainingPhrases': grpc.unary_unary_rpc_method_handler(
-            servicer.BatchUpdateTrainingPhrases,
-            request_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchUpdateTrainingPhrasesRequest.FromString,
-            response_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchTrainingPhrasesStatusResponse.SerializeToString,
-        ),
-        'BatchDeleteTrainingPhrases': grpc.unary_unary_rpc_method_handler(
-            servicer.BatchDeleteTrainingPhrases,
-            request_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchDeleteTrainingPhrasesRequest.FromString,
-            response_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchDeleteTrainingPhrasesResponse.SerializeToString,
-        ),
-        'ListTrainingPhrases': grpc.unary_unary_rpc_method_handler(
-            servicer.ListTrainingPhrases,
-            request_deserializer=ondewo_dot_nlu_dot_intent__pb2.ListTrainingPhrasesRequest.FromString,
-            response_serializer=ondewo_dot_nlu_dot_intent__pb2.ListTrainingPhrasesResponse.SerializeToString,
-        ),
-        'BatchCreateResponseMessages': grpc.unary_unary_rpc_method_handler(
-            servicer.BatchCreateResponseMessages,
-            request_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchCreateResponseMessagesRequest.FromString,
-            response_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchResponseMessagesStatusResponse.SerializeToString,
-        ),
-        'BatchGetResponseMessages': grpc.unary_unary_rpc_method_handler(
-            servicer.BatchGetResponseMessages,
-            request_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchGetResponseMessagesRequest.FromString,
-            response_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchResponseMessagesStatusResponse.SerializeToString,
-        ),
-        'BatchUpdateResponseMessages': grpc.unary_unary_rpc_method_handler(
-            servicer.BatchUpdateResponseMessages,
-            request_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchUpdateResponseMessagesRequest.FromString,
-            response_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchResponseMessagesStatusResponse.SerializeToString,
-        ),
-        'BatchDeleteResponseMessages': grpc.unary_unary_rpc_method_handler(
-            servicer.BatchDeleteResponseMessages,
-            request_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchDeleteResponseMessagesRequest.FromString,
-            response_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchDeleteResponseMessagesResponse.SerializeToString,
-        ),
-        'ListResponseMessages': grpc.unary_unary_rpc_method_handler(
-            servicer.ListResponseMessages,
-            request_deserializer=ondewo_dot_nlu_dot_intent__pb2.ListResponseMessagesRequest.FromString,
-            response_serializer=ondewo_dot_nlu_dot_intent__pb2.ListResponseMessagesResponse.SerializeToString,
-        ),
-        'BatchCreateParameters': grpc.unary_unary_rpc_method_handler(
-            servicer.BatchCreateParameters,
-            request_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchCreateParametersRequest.FromString,
-            response_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchParametersStatusResponse.SerializeToString,
-        ),
-        'BatchGetParameters': grpc.unary_unary_rpc_method_handler(
-            servicer.BatchGetParameters,
-            request_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchGetParametersRequest.FromString,
-            response_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchParametersStatusResponse.SerializeToString,
-        ),
-        'BatchUpdateParameters': grpc.unary_unary_rpc_method_handler(
-            servicer.BatchUpdateParameters,
-            request_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchUpdateParametersRequest.FromString,
-            response_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchParametersStatusResponse.SerializeToString,
-        ),
-        'BatchDeleteParameters': grpc.unary_unary_rpc_method_handler(
-            servicer.BatchDeleteParameters,
-            request_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchDeleteParametersRequest.FromString,
-            response_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchDeleteParametersResponse.SerializeToString,
-        ),
-        'ListParameters': grpc.unary_unary_rpc_method_handler(
-            servicer.ListParameters,
-            request_deserializer=ondewo_dot_nlu_dot_intent__pb2.ListParametersRequest.FromString,
-            response_serializer=ondewo_dot_nlu_dot_intent__pb2.ListParametersResponse.SerializeToString,
-        ),
-        'ListTrainingPhrasesofIntentsWithEnrichment': grpc.unary_unary_rpc_method_handler(
-            servicer.ListTrainingPhrasesofIntentsWithEnrichment,
-            request_deserializer=ondewo_dot_nlu_dot_intent__pb2.ListTrainingPhrasesofIntentsWithEnrichmentRequest.FromString,
-            response_serializer=ondewo_dot_nlu_dot_intent__pb2.ListTrainingPhrasesofIntentsWithEnrichmentResponse.SerializeToString,
-        ),
+            'ListIntents': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListIntents,
+                    request_deserializer=ondewo_dot_nlu_dot_intent__pb2.ListIntentsRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_intent__pb2.ListIntentsResponse.SerializeToString,
+            ),
+            'GetIntent': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetIntent,
+                    request_deserializer=ondewo_dot_nlu_dot_intent__pb2.GetIntentRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_intent__pb2.Intent.SerializeToString,
+            ),
+            'CreateIntent': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateIntent,
+                    request_deserializer=ondewo_dot_nlu_dot_intent__pb2.CreateIntentRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_intent__pb2.Intent.SerializeToString,
+            ),
+            'UpdateIntent': grpc.unary_unary_rpc_method_handler(
+                    servicer.UpdateIntent,
+                    request_deserializer=ondewo_dot_nlu_dot_intent__pb2.UpdateIntentRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_intent__pb2.Intent.SerializeToString,
+            ),
+            'DeleteIntent': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteIntent,
+                    request_deserializer=ondewo_dot_nlu_dot_intent__pb2.DeleteIntentRequest.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'BatchUpdateIntents': grpc.unary_unary_rpc_method_handler(
+                    servicer.BatchUpdateIntents,
+                    request_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchUpdateIntentsRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
+            ),
+            'BatchDeleteIntents': grpc.unary_unary_rpc_method_handler(
+                    servicer.BatchDeleteIntents,
+                    request_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchDeleteIntentsRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
+            ),
+            'TagIntent': grpc.unary_unary_rpc_method_handler(
+                    servicer.TagIntent,
+                    request_deserializer=ondewo_dot_nlu_dot_intent__pb2.IntentTagRequest.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'DeleteIntentTag': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteIntentTag,
+                    request_deserializer=ondewo_dot_nlu_dot_intent__pb2.IntentTagRequest.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'GetIntentTags': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetIntentTags,
+                    request_deserializer=ondewo_dot_nlu_dot_intent__pb2.GetIntentTagsRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_intent__pb2.GetIntentTagsResponse.SerializeToString,
+            ),
+            'GetAllIntentTags': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetAllIntentTags,
+                    request_deserializer=ondewo_dot_nlu_dot_intent__pb2.GetAllIntentTagsRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_intent__pb2.GetIntentTagsResponse.SerializeToString,
+            ),
+            'BatchCreateTrainingPhrases': grpc.unary_unary_rpc_method_handler(
+                    servicer.BatchCreateTrainingPhrases,
+                    request_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchCreateTrainingPhrasesRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchTrainingPhrasesStatusResponse.SerializeToString,
+            ),
+            'BatchGetTrainingPhrases': grpc.unary_unary_rpc_method_handler(
+                    servicer.BatchGetTrainingPhrases,
+                    request_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchGetTrainingPhrasesRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchTrainingPhrasesStatusResponse.SerializeToString,
+            ),
+            'BatchUpdateTrainingPhrases': grpc.unary_unary_rpc_method_handler(
+                    servicer.BatchUpdateTrainingPhrases,
+                    request_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchUpdateTrainingPhrasesRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchTrainingPhrasesStatusResponse.SerializeToString,
+            ),
+            'BatchDeleteTrainingPhrases': grpc.unary_unary_rpc_method_handler(
+                    servicer.BatchDeleteTrainingPhrases,
+                    request_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchDeleteTrainingPhrasesRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchDeleteTrainingPhrasesResponse.SerializeToString,
+            ),
+            'ListTrainingPhrases': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListTrainingPhrases,
+                    request_deserializer=ondewo_dot_nlu_dot_intent__pb2.ListTrainingPhrasesRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_intent__pb2.ListTrainingPhrasesResponse.SerializeToString,
+            ),
+            'BatchCreateResponseMessages': grpc.unary_unary_rpc_method_handler(
+                    servicer.BatchCreateResponseMessages,
+                    request_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchCreateResponseMessagesRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchResponseMessagesStatusResponse.SerializeToString,
+            ),
+            'BatchGetResponseMessages': grpc.unary_unary_rpc_method_handler(
+                    servicer.BatchGetResponseMessages,
+                    request_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchGetResponseMessagesRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchResponseMessagesStatusResponse.SerializeToString,
+            ),
+            'BatchUpdateResponseMessages': grpc.unary_unary_rpc_method_handler(
+                    servicer.BatchUpdateResponseMessages,
+                    request_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchUpdateResponseMessagesRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchResponseMessagesStatusResponse.SerializeToString,
+            ),
+            'BatchDeleteResponseMessages': grpc.unary_unary_rpc_method_handler(
+                    servicer.BatchDeleteResponseMessages,
+                    request_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchDeleteResponseMessagesRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchDeleteResponseMessagesResponse.SerializeToString,
+            ),
+            'ListResponseMessages': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListResponseMessages,
+                    request_deserializer=ondewo_dot_nlu_dot_intent__pb2.ListResponseMessagesRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_intent__pb2.ListResponseMessagesResponse.SerializeToString,
+            ),
+            'BatchCreateParameters': grpc.unary_unary_rpc_method_handler(
+                    servicer.BatchCreateParameters,
+                    request_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchCreateParametersRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchParametersStatusResponse.SerializeToString,
+            ),
+            'BatchGetParameters': grpc.unary_unary_rpc_method_handler(
+                    servicer.BatchGetParameters,
+                    request_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchGetParametersRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchParametersStatusResponse.SerializeToString,
+            ),
+            'BatchUpdateParameters': grpc.unary_unary_rpc_method_handler(
+                    servicer.BatchUpdateParameters,
+                    request_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchUpdateParametersRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchParametersStatusResponse.SerializeToString,
+            ),
+            'BatchDeleteParameters': grpc.unary_unary_rpc_method_handler(
+                    servicer.BatchDeleteParameters,
+                    request_deserializer=ondewo_dot_nlu_dot_intent__pb2.BatchDeleteParametersRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_intent__pb2.BatchDeleteParametersResponse.SerializeToString,
+            ),
+            'ListParameters': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListParameters,
+                    request_deserializer=ondewo_dot_nlu_dot_intent__pb2.ListParametersRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_intent__pb2.ListParametersResponse.SerializeToString,
+            ),
+            'ListTrainingPhrasesofIntentsWithEnrichment': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListTrainingPhrasesofIntentsWithEnrichment,
+                    request_deserializer=ondewo_dot_nlu_dot_intent__pb2.ListTrainingPhrasesofIntentsWithEnrichmentRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_intent__pb2.ListTrainingPhrasesofIntentsWithEnrichmentResponse.SerializeToString,
+            ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-        'ondewo.nlu.Intents', rpc_method_handlers)
+            'ondewo.nlu.Intents', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
+
  # This class is part of an EXPERIMENTAL API.
-
-
 class Intents(object):
     """An intent represents a mapping between input from a user and an action to
     be taken by your application. When you pass user input to the
@@ -599,459 +598,459 @@ class Intents(object):
 
     @staticmethod
     def ListIntents(request,
-                    target,
-                    options=(),
-                    channel_credentials=None,
-                    call_credentials=None,
-                    insecure=False,
-                    compression=None,
-                    wait_for_ready=None,
-                    timeout=None,
-                    metadata=None):
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/ListIntents',
-                                             ondewo_dot_nlu_dot_intent__pb2.ListIntentsRequest.SerializeToString,
-                                             ondewo_dot_nlu_dot_intent__pb2.ListIntentsResponse.FromString,
-                                             options, channel_credentials,
-                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            ondewo_dot_nlu_dot_intent__pb2.ListIntentsRequest.SerializeToString,
+            ondewo_dot_nlu_dot_intent__pb2.ListIntentsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def GetIntent(request,
-                  target,
-                  options=(),
-                  channel_credentials=None,
-                  call_credentials=None,
-                  insecure=False,
-                  compression=None,
-                  wait_for_ready=None,
-                  timeout=None,
-                  metadata=None):
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/GetIntent',
-                                             ondewo_dot_nlu_dot_intent__pb2.GetIntentRequest.SerializeToString,
-                                             ondewo_dot_nlu_dot_intent__pb2.Intent.FromString,
-                                             options, channel_credentials,
-                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            ondewo_dot_nlu_dot_intent__pb2.GetIntentRequest.SerializeToString,
+            ondewo_dot_nlu_dot_intent__pb2.Intent.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def CreateIntent(request,
-                     target,
-                     options=(),
-                     channel_credentials=None,
-                     call_credentials=None,
-                     insecure=False,
-                     compression=None,
-                     wait_for_ready=None,
-                     timeout=None,
-                     metadata=None):
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/CreateIntent',
-                                             ondewo_dot_nlu_dot_intent__pb2.CreateIntentRequest.SerializeToString,
-                                             ondewo_dot_nlu_dot_intent__pb2.Intent.FromString,
-                                             options, channel_credentials,
-                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            ondewo_dot_nlu_dot_intent__pb2.CreateIntentRequest.SerializeToString,
+            ondewo_dot_nlu_dot_intent__pb2.Intent.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def UpdateIntent(request,
-                     target,
-                     options=(),
-                     channel_credentials=None,
-                     call_credentials=None,
-                     insecure=False,
-                     compression=None,
-                     wait_for_ready=None,
-                     timeout=None,
-                     metadata=None):
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/UpdateIntent',
-                                             ondewo_dot_nlu_dot_intent__pb2.UpdateIntentRequest.SerializeToString,
-                                             ondewo_dot_nlu_dot_intent__pb2.Intent.FromString,
-                                             options, channel_credentials,
-                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            ondewo_dot_nlu_dot_intent__pb2.UpdateIntentRequest.SerializeToString,
+            ondewo_dot_nlu_dot_intent__pb2.Intent.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def DeleteIntent(request,
-                     target,
-                     options=(),
-                     channel_credentials=None,
-                     call_credentials=None,
-                     insecure=False,
-                     compression=None,
-                     wait_for_ready=None,
-                     timeout=None,
-                     metadata=None):
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/DeleteIntent',
-                                             ondewo_dot_nlu_dot_intent__pb2.DeleteIntentRequest.SerializeToString,
-                                             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                                             options, channel_credentials,
-                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            ondewo_dot_nlu_dot_intent__pb2.DeleteIntentRequest.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def BatchUpdateIntents(request,
-                           target,
-                           options=(),
-                           channel_credentials=None,
-                           call_credentials=None,
-                           insecure=False,
-                           compression=None,
-                           wait_for_ready=None,
-                           timeout=None,
-                           metadata=None):
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/BatchUpdateIntents',
-                                             ondewo_dot_nlu_dot_intent__pb2.BatchUpdateIntentsRequest.SerializeToString,
-                                             ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
-                                             options, channel_credentials,
-                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            ondewo_dot_nlu_dot_intent__pb2.BatchUpdateIntentsRequest.SerializeToString,
+            ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def BatchDeleteIntents(request,
-                           target,
-                           options=(),
-                           channel_credentials=None,
-                           call_credentials=None,
-                           insecure=False,
-                           compression=None,
-                           wait_for_ready=None,
-                           timeout=None,
-                           metadata=None):
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/BatchDeleteIntents',
-                                             ondewo_dot_nlu_dot_intent__pb2.BatchDeleteIntentsRequest.SerializeToString,
-                                             ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
-                                             options, channel_credentials,
-                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            ondewo_dot_nlu_dot_intent__pb2.BatchDeleteIntentsRequest.SerializeToString,
+            ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def TagIntent(request,
-                  target,
-                  options=(),
-                  channel_credentials=None,
-                  call_credentials=None,
-                  insecure=False,
-                  compression=None,
-                  wait_for_ready=None,
-                  timeout=None,
-                  metadata=None):
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/TagIntent',
-                                             ondewo_dot_nlu_dot_intent__pb2.IntentTagRequest.SerializeToString,
-                                             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                                             options, channel_credentials,
-                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            ondewo_dot_nlu_dot_intent__pb2.IntentTagRequest.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def DeleteIntentTag(request,
-                        target,
-                        options=(),
-                        channel_credentials=None,
-                        call_credentials=None,
-                        insecure=False,
-                        compression=None,
-                        wait_for_ready=None,
-                        timeout=None,
-                        metadata=None):
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/DeleteIntentTag',
-                                             ondewo_dot_nlu_dot_intent__pb2.IntentTagRequest.SerializeToString,
-                                             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                                             options, channel_credentials,
-                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            ondewo_dot_nlu_dot_intent__pb2.IntentTagRequest.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def GetIntentTags(request,
-                      target,
-                      options=(),
-                      channel_credentials=None,
-                      call_credentials=None,
-                      insecure=False,
-                      compression=None,
-                      wait_for_ready=None,
-                      timeout=None,
-                      metadata=None):
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/GetIntentTags',
-                                             ondewo_dot_nlu_dot_intent__pb2.GetIntentTagsRequest.SerializeToString,
-                                             ondewo_dot_nlu_dot_intent__pb2.GetIntentTagsResponse.FromString,
-                                             options, channel_credentials,
-                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            ondewo_dot_nlu_dot_intent__pb2.GetIntentTagsRequest.SerializeToString,
+            ondewo_dot_nlu_dot_intent__pb2.GetIntentTagsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def GetAllIntentTags(request,
-                         target,
-                         options=(),
-                         channel_credentials=None,
-                         call_credentials=None,
-                         insecure=False,
-                         compression=None,
-                         wait_for_ready=None,
-                         timeout=None,
-                         metadata=None):
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/GetAllIntentTags',
-                                             ondewo_dot_nlu_dot_intent__pb2.GetAllIntentTagsRequest.SerializeToString,
-                                             ondewo_dot_nlu_dot_intent__pb2.GetIntentTagsResponse.FromString,
-                                             options, channel_credentials,
-                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            ondewo_dot_nlu_dot_intent__pb2.GetAllIntentTagsRequest.SerializeToString,
+            ondewo_dot_nlu_dot_intent__pb2.GetIntentTagsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def BatchCreateTrainingPhrases(request,
-                                   target,
-                                   options=(),
-                                   channel_credentials=None,
-                                   call_credentials=None,
-                                   insecure=False,
-                                   compression=None,
-                                   wait_for_ready=None,
-                                   timeout=None,
-                                   metadata=None):
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/BatchCreateTrainingPhrases',
-                                             ondewo_dot_nlu_dot_intent__pb2.BatchCreateTrainingPhrasesRequest.SerializeToString,
-                                             ondewo_dot_nlu_dot_intent__pb2.BatchTrainingPhrasesStatusResponse.FromString,
-                                             options, channel_credentials,
-                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            ondewo_dot_nlu_dot_intent__pb2.BatchCreateTrainingPhrasesRequest.SerializeToString,
+            ondewo_dot_nlu_dot_intent__pb2.BatchTrainingPhrasesStatusResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def BatchGetTrainingPhrases(request,
-                                target,
-                                options=(),
-                                channel_credentials=None,
-                                call_credentials=None,
-                                insecure=False,
-                                compression=None,
-                                wait_for_ready=None,
-                                timeout=None,
-                                metadata=None):
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/BatchGetTrainingPhrases',
-                                             ondewo_dot_nlu_dot_intent__pb2.BatchGetTrainingPhrasesRequest.SerializeToString,
-                                             ondewo_dot_nlu_dot_intent__pb2.BatchTrainingPhrasesStatusResponse.FromString,
-                                             options, channel_credentials,
-                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            ondewo_dot_nlu_dot_intent__pb2.BatchGetTrainingPhrasesRequest.SerializeToString,
+            ondewo_dot_nlu_dot_intent__pb2.BatchTrainingPhrasesStatusResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def BatchUpdateTrainingPhrases(request,
-                                   target,
-                                   options=(),
-                                   channel_credentials=None,
-                                   call_credentials=None,
-                                   insecure=False,
-                                   compression=None,
-                                   wait_for_ready=None,
-                                   timeout=None,
-                                   metadata=None):
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/BatchUpdateTrainingPhrases',
-                                             ondewo_dot_nlu_dot_intent__pb2.BatchUpdateTrainingPhrasesRequest.SerializeToString,
-                                             ondewo_dot_nlu_dot_intent__pb2.BatchTrainingPhrasesStatusResponse.FromString,
-                                             options, channel_credentials,
-                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            ondewo_dot_nlu_dot_intent__pb2.BatchUpdateTrainingPhrasesRequest.SerializeToString,
+            ondewo_dot_nlu_dot_intent__pb2.BatchTrainingPhrasesStatusResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def BatchDeleteTrainingPhrases(request,
-                                   target,
-                                   options=(),
-                                   channel_credentials=None,
-                                   call_credentials=None,
-                                   insecure=False,
-                                   compression=None,
-                                   wait_for_ready=None,
-                                   timeout=None,
-                                   metadata=None):
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/BatchDeleteTrainingPhrases',
-                                             ondewo_dot_nlu_dot_intent__pb2.BatchDeleteTrainingPhrasesRequest.SerializeToString,
-                                             ondewo_dot_nlu_dot_intent__pb2.BatchDeleteTrainingPhrasesResponse.FromString,
-                                             options, channel_credentials,
-                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            ondewo_dot_nlu_dot_intent__pb2.BatchDeleteTrainingPhrasesRequest.SerializeToString,
+            ondewo_dot_nlu_dot_intent__pb2.BatchDeleteTrainingPhrasesResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def ListTrainingPhrases(request,
-                            target,
-                            options=(),
-                            channel_credentials=None,
-                            call_credentials=None,
-                            insecure=False,
-                            compression=None,
-                            wait_for_ready=None,
-                            timeout=None,
-                            metadata=None):
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/ListTrainingPhrases',
-                                             ondewo_dot_nlu_dot_intent__pb2.ListTrainingPhrasesRequest.SerializeToString,
-                                             ondewo_dot_nlu_dot_intent__pb2.ListTrainingPhrasesResponse.FromString,
-                                             options, channel_credentials,
-                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            ondewo_dot_nlu_dot_intent__pb2.ListTrainingPhrasesRequest.SerializeToString,
+            ondewo_dot_nlu_dot_intent__pb2.ListTrainingPhrasesResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def BatchCreateResponseMessages(request,
-                                    target,
-                                    options=(),
-                                    channel_credentials=None,
-                                    call_credentials=None,
-                                    insecure=False,
-                                    compression=None,
-                                    wait_for_ready=None,
-                                    timeout=None,
-                                    metadata=None):
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/BatchCreateResponseMessages',
-                                             ondewo_dot_nlu_dot_intent__pb2.BatchCreateResponseMessagesRequest.SerializeToString,
-                                             ondewo_dot_nlu_dot_intent__pb2.BatchResponseMessagesStatusResponse.FromString,
-                                             options, channel_credentials,
-                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            ondewo_dot_nlu_dot_intent__pb2.BatchCreateResponseMessagesRequest.SerializeToString,
+            ondewo_dot_nlu_dot_intent__pb2.BatchResponseMessagesStatusResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def BatchGetResponseMessages(request,
-                                 target,
-                                 options=(),
-                                 channel_credentials=None,
-                                 call_credentials=None,
-                                 insecure=False,
-                                 compression=None,
-                                 wait_for_ready=None,
-                                 timeout=None,
-                                 metadata=None):
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/BatchGetResponseMessages',
-                                             ondewo_dot_nlu_dot_intent__pb2.BatchGetResponseMessagesRequest.SerializeToString,
-                                             ondewo_dot_nlu_dot_intent__pb2.BatchResponseMessagesStatusResponse.FromString,
-                                             options, channel_credentials,
-                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            ondewo_dot_nlu_dot_intent__pb2.BatchGetResponseMessagesRequest.SerializeToString,
+            ondewo_dot_nlu_dot_intent__pb2.BatchResponseMessagesStatusResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def BatchUpdateResponseMessages(request,
-                                    target,
-                                    options=(),
-                                    channel_credentials=None,
-                                    call_credentials=None,
-                                    insecure=False,
-                                    compression=None,
-                                    wait_for_ready=None,
-                                    timeout=None,
-                                    metadata=None):
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/BatchUpdateResponseMessages',
-                                             ondewo_dot_nlu_dot_intent__pb2.BatchUpdateResponseMessagesRequest.SerializeToString,
-                                             ondewo_dot_nlu_dot_intent__pb2.BatchResponseMessagesStatusResponse.FromString,
-                                             options, channel_credentials,
-                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            ondewo_dot_nlu_dot_intent__pb2.BatchUpdateResponseMessagesRequest.SerializeToString,
+            ondewo_dot_nlu_dot_intent__pb2.BatchResponseMessagesStatusResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def BatchDeleteResponseMessages(request,
-                                    target,
-                                    options=(),
-                                    channel_credentials=None,
-                                    call_credentials=None,
-                                    insecure=False,
-                                    compression=None,
-                                    wait_for_ready=None,
-                                    timeout=None,
-                                    metadata=None):
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/BatchDeleteResponseMessages',
-                                             ondewo_dot_nlu_dot_intent__pb2.BatchDeleteResponseMessagesRequest.SerializeToString,
-                                             ondewo_dot_nlu_dot_intent__pb2.BatchDeleteResponseMessagesResponse.FromString,
-                                             options, channel_credentials,
-                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            ondewo_dot_nlu_dot_intent__pb2.BatchDeleteResponseMessagesRequest.SerializeToString,
+            ondewo_dot_nlu_dot_intent__pb2.BatchDeleteResponseMessagesResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def ListResponseMessages(request,
-                             target,
-                             options=(),
-                             channel_credentials=None,
-                             call_credentials=None,
-                             insecure=False,
-                             compression=None,
-                             wait_for_ready=None,
-                             timeout=None,
-                             metadata=None):
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/ListResponseMessages',
-                                             ondewo_dot_nlu_dot_intent__pb2.ListResponseMessagesRequest.SerializeToString,
-                                             ondewo_dot_nlu_dot_intent__pb2.ListResponseMessagesResponse.FromString,
-                                             options, channel_credentials,
-                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            ondewo_dot_nlu_dot_intent__pb2.ListResponseMessagesRequest.SerializeToString,
+            ondewo_dot_nlu_dot_intent__pb2.ListResponseMessagesResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def BatchCreateParameters(request,
-                              target,
-                              options=(),
-                              channel_credentials=None,
-                              call_credentials=None,
-                              insecure=False,
-                              compression=None,
-                              wait_for_ready=None,
-                              timeout=None,
-                              metadata=None):
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/BatchCreateParameters',
-                                             ondewo_dot_nlu_dot_intent__pb2.BatchCreateParametersRequest.SerializeToString,
-                                             ondewo_dot_nlu_dot_intent__pb2.BatchParametersStatusResponse.FromString,
-                                             options, channel_credentials,
-                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            ondewo_dot_nlu_dot_intent__pb2.BatchCreateParametersRequest.SerializeToString,
+            ondewo_dot_nlu_dot_intent__pb2.BatchParametersStatusResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def BatchGetParameters(request,
-                           target,
-                           options=(),
-                           channel_credentials=None,
-                           call_credentials=None,
-                           insecure=False,
-                           compression=None,
-                           wait_for_ready=None,
-                           timeout=None,
-                           metadata=None):
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/BatchGetParameters',
-                                             ondewo_dot_nlu_dot_intent__pb2.BatchGetParametersRequest.SerializeToString,
-                                             ondewo_dot_nlu_dot_intent__pb2.BatchParametersStatusResponse.FromString,
-                                             options, channel_credentials,
-                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            ondewo_dot_nlu_dot_intent__pb2.BatchGetParametersRequest.SerializeToString,
+            ondewo_dot_nlu_dot_intent__pb2.BatchParametersStatusResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def BatchUpdateParameters(request,
-                              target,
-                              options=(),
-                              channel_credentials=None,
-                              call_credentials=None,
-                              insecure=False,
-                              compression=None,
-                              wait_for_ready=None,
-                              timeout=None,
-                              metadata=None):
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/BatchUpdateParameters',
-                                             ondewo_dot_nlu_dot_intent__pb2.BatchUpdateParametersRequest.SerializeToString,
-                                             ondewo_dot_nlu_dot_intent__pb2.BatchParametersStatusResponse.FromString,
-                                             options, channel_credentials,
-                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            ondewo_dot_nlu_dot_intent__pb2.BatchUpdateParametersRequest.SerializeToString,
+            ondewo_dot_nlu_dot_intent__pb2.BatchParametersStatusResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def BatchDeleteParameters(request,
-                              target,
-                              options=(),
-                              channel_credentials=None,
-                              call_credentials=None,
-                              insecure=False,
-                              compression=None,
-                              wait_for_ready=None,
-                              timeout=None,
-                              metadata=None):
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/BatchDeleteParameters',
-                                             ondewo_dot_nlu_dot_intent__pb2.BatchDeleteParametersRequest.SerializeToString,
-                                             ondewo_dot_nlu_dot_intent__pb2.BatchDeleteParametersResponse.FromString,
-                                             options, channel_credentials,
-                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            ondewo_dot_nlu_dot_intent__pb2.BatchDeleteParametersRequest.SerializeToString,
+            ondewo_dot_nlu_dot_intent__pb2.BatchDeleteParametersResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def ListParameters(request,
-                       target,
-                       options=(),
-                       channel_credentials=None,
-                       call_credentials=None,
-                       insecure=False,
-                       compression=None,
-                       wait_for_ready=None,
-                       timeout=None,
-                       metadata=None):
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/ListParameters',
-                                             ondewo_dot_nlu_dot_intent__pb2.ListParametersRequest.SerializeToString,
-                                             ondewo_dot_nlu_dot_intent__pb2.ListParametersResponse.FromString,
-                                             options, channel_credentials,
-                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            ondewo_dot_nlu_dot_intent__pb2.ListParametersRequest.SerializeToString,
+            ondewo_dot_nlu_dot_intent__pb2.ListParametersResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def ListTrainingPhrasesofIntentsWithEnrichment(request,
-                                                   target,
-                                                   options=(),
-                                                   channel_credentials=None,
-                                                   call_credentials=None,
-                                                   insecure=False,
-                                                   compression=None,
-                                                   wait_for_ready=None,
-                                                   timeout=None,
-                                                   metadata=None):
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Intents/ListTrainingPhrasesofIntentsWithEnrichment',
-                                             ondewo_dot_nlu_dot_intent__pb2.ListTrainingPhrasesofIntentsWithEnrichmentRequest.SerializeToString,
-                                             ondewo_dot_nlu_dot_intent__pb2.ListTrainingPhrasesofIntentsWithEnrichmentResponse.FromString,
-                                             options, channel_credentials,
-                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            ondewo_dot_nlu_dot_intent__pb2.ListTrainingPhrasesofIntentsWithEnrichmentRequest.SerializeToString,
+            ondewo_dot_nlu_dot_intent__pb2.ListTrainingPhrasesofIntentsWithEnrichmentResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
