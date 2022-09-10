@@ -5,8 +5,8 @@
 
 from ondewo.nlu.client import Client as NluClient
 from ondewo.nlu.client_config import ClientConfig
-from ondewo.nlu.session_pb2 import DetectIntentResponse, DetectIntentRequest, QueryInput, TextInput, QueryParameters, \
-    DeleteSessionRequest
+from ondewo.nlu.session_pb2 import DetectIntentResponse, DetectIntentRequest, \
+    QueryInput, TextInput, QueryParameters, DeleteSessionRequest
 
 if __name__ == '__main__':
     # Pass in your project id and a session will be created for the nlu client
@@ -46,6 +46,6 @@ if __name__ == '__main__':
 
     print(f'Text received by the server: {nlu_response.query_result.query_text}')
     print(f'Intent detected: {nlu_response.query_result.intent.display_name}')
-    print(f'Text response:')
+    print('Text response:')
     for message in nlu_response.query_result.fulfillment_messages:
         print(message.text.text[0])

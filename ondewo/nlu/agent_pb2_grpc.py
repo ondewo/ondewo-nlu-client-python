@@ -28,195 +28,195 @@ class AgentsStub(object):
             channel: A grpc.Channel.
         """
         self.CreateAgent = channel.unary_unary(
-                '/ondewo.nlu.Agents/CreateAgent',
-                request_serializer=ondewo_dot_nlu_dot_agent__pb2.CreateAgentRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_agent__pb2.Agent.FromString,
-                )
+            '/ondewo.nlu.Agents/CreateAgent',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.CreateAgentRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_agent__pb2.Agent.FromString,
+        )
         self.UpdateAgent = channel.unary_unary(
-                '/ondewo.nlu.Agents/UpdateAgent',
-                request_serializer=ondewo_dot_nlu_dot_agent__pb2.UpdateAgentRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_agent__pb2.Agent.FromString,
-                )
+            '/ondewo.nlu.Agents/UpdateAgent',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.UpdateAgentRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_agent__pb2.Agent.FromString,
+        )
         self.GetAgent = channel.unary_unary(
-                '/ondewo.nlu.Agents/GetAgent',
-                request_serializer=ondewo_dot_nlu_dot_agent__pb2.GetAgentRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_agent__pb2.Agent.FromString,
-                )
+            '/ondewo.nlu.Agents/GetAgent',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.GetAgentRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_agent__pb2.Agent.FromString,
+        )
         self.DeleteAgent = channel.unary_unary(
-                '/ondewo.nlu.Agents/DeleteAgent',
-                request_serializer=ondewo_dot_nlu_dot_agent__pb2.DeleteAgentRequest.SerializeToString,
-                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                )
+            '/ondewo.nlu.Agents/DeleteAgent',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.DeleteAgentRequest.SerializeToString,
+            response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+        )
         self.DeleteAllAgents = channel.unary_unary(
-                '/ondewo.nlu.Agents/DeleteAllAgents',
-                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                )
+            '/ondewo.nlu.Agents/DeleteAllAgents',
+            request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+        )
         self.ListAgents = channel.unary_unary(
-                '/ondewo.nlu.Agents/ListAgents',
-                request_serializer=ondewo_dot_nlu_dot_agent__pb2.ListAgentsRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_agent__pb2.ListAgentsResponse.FromString,
-                )
+            '/ondewo.nlu.Agents/ListAgents',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.ListAgentsRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_agent__pb2.ListAgentsResponse.FromString,
+        )
         self.ListAgentsOfUser = channel.unary_unary(
-                '/ondewo.nlu.Agents/ListAgentsOfUser',
-                request_serializer=ondewo_dot_nlu_dot_agent__pb2.ListAgentsRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_agent__pb2.ListAgentsOfUserResponse.FromString,
-                )
+            '/ondewo.nlu.Agents/ListAgentsOfUser',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.ListAgentsRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_agent__pb2.ListAgentsOfUserResponse.FromString,
+        )
         self.ListAllAgents = channel.unary_unary(
-                '/ondewo.nlu.Agents/ListAllAgents',
-                request_serializer=ondewo_dot_nlu_dot_agent__pb2.ListAgentsRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_agent__pb2.ListAgentsResponse.FromString,
-                )
+            '/ondewo.nlu.Agents/ListAllAgents',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.ListAgentsRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_agent__pb2.ListAgentsResponse.FromString,
+        )
         self.AddUserToProject = channel.unary_unary(
-                '/ondewo.nlu.Agents/AddUserToProject',
-                request_serializer=ondewo_dot_nlu_dot_agent__pb2.AddUserToProjectRequest.SerializeToString,
-                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                )
+            '/ondewo.nlu.Agents/AddUserToProject',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.AddUserToProjectRequest.SerializeToString,
+            response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+        )
         self.RemoveUserFromProject = channel.unary_unary(
-                '/ondewo.nlu.Agents/RemoveUserFromProject',
-                request_serializer=ondewo_dot_nlu_dot_agent__pb2.RemoveUserFromProjectRequest.SerializeToString,
-                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                )
+            '/ondewo.nlu.Agents/RemoveUserFromProject',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.RemoveUserFromProjectRequest.SerializeToString,
+            response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+        )
         self.ListUsersInProject = channel.unary_unary(
-                '/ondewo.nlu.Agents/ListUsersInProject',
-                request_serializer=ondewo_dot_nlu_dot_agent__pb2.ListUsersInProjectRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_agent__pb2.ListUsersInProjectResponse.FromString,
-                )
+            '/ondewo.nlu.Agents/ListUsersInProject',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.ListUsersInProjectRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_agent__pb2.ListUsersInProjectResponse.FromString,
+        )
         self.GetPlatformInfo = channel.unary_unary(
-                '/ondewo.nlu.Agents/GetPlatformInfo',
-                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_agent__pb2.GetPlatformInfoResponse.FromString,
-                )
+            '/ondewo.nlu.Agents/GetPlatformInfo',
+            request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_agent__pb2.GetPlatformInfoResponse.FromString,
+        )
         self.ListProjectPermissions = channel.unary_unary(
-                '/ondewo.nlu.Agents/ListProjectPermissions',
-                request_serializer=ondewo_dot_nlu_dot_agent__pb2.ListProjectPermissionsRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_agent__pb2.ListProjectPermissionsResponse.FromString,
-                )
+            '/ondewo.nlu.Agents/ListProjectPermissions',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.ListProjectPermissionsRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_agent__pb2.ListProjectPermissionsResponse.FromString,
+        )
         self.TrainAgent = channel.unary_unary(
-                '/ondewo.nlu.Agents/TrainAgent',
-                request_serializer=ondewo_dot_nlu_dot_agent__pb2.TrainAgentRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
-                )
+            '/ondewo.nlu.Agents/TrainAgent',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.TrainAgentRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
+        )
         self.BuildCache = channel.unary_unary(
-                '/ondewo.nlu.Agents/BuildCache',
-                request_serializer=ondewo_dot_nlu_dot_agent__pb2.BuildCacheRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
-                )
+            '/ondewo.nlu.Agents/BuildCache',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.BuildCacheRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
+        )
         self.ExportAgent = channel.unary_unary(
-                '/ondewo.nlu.Agents/ExportAgent',
-                request_serializer=ondewo_dot_nlu_dot_agent__pb2.ExportAgentRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
-                )
+            '/ondewo.nlu.Agents/ExportAgent',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.ExportAgentRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
+        )
         self.ExportBenchmarkAgent = channel.unary_unary(
-                '/ondewo.nlu.Agents/ExportBenchmarkAgent',
-                request_serializer=ondewo_dot_nlu_dot_agent__pb2.ExportBenchmarkAgentRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
-                )
+            '/ondewo.nlu.Agents/ExportBenchmarkAgent',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.ExportBenchmarkAgentRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
+        )
         self.ImportAgent = channel.unary_unary(
-                '/ondewo.nlu.Agents/ImportAgent',
-                request_serializer=ondewo_dot_nlu_dot_agent__pb2.ImportAgentRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
-                )
+            '/ondewo.nlu.Agents/ImportAgent',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.ImportAgentRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
+        )
         self.OptimizeRankingMatch = channel.unary_unary(
-                '/ondewo.nlu.Agents/OptimizeRankingMatch',
-                request_serializer=ondewo_dot_nlu_dot_agent__pb2.OptimizeRankingMatchRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
-                )
+            '/ondewo.nlu.Agents/OptimizeRankingMatch',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.OptimizeRankingMatchRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
+        )
         self.RestoreAgent = channel.unary_unary(
-                '/ondewo.nlu.Agents/RestoreAgent',
-                request_serializer=ondewo_dot_nlu_dot_agent__pb2.RestoreAgentRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
-                )
+            '/ondewo.nlu.Agents/RestoreAgent',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.RestoreAgentRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
+        )
         self.GetAgentStatistics = channel.unary_unary(
-                '/ondewo.nlu.Agents/GetAgentStatistics',
-                request_serializer=ondewo_dot_nlu_dot_agent__pb2.GetAgentStatisticsRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_agent__pb2.GetAgentStatisticsResponse.FromString,
-                )
+            '/ondewo.nlu.Agents/GetAgentStatistics',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.GetAgentStatisticsRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_agent__pb2.GetAgentStatisticsResponse.FromString,
+        )
         self.SetAgentStatus = channel.unary_unary(
-                '/ondewo.nlu.Agents/SetAgentStatus',
-                request_serializer=ondewo_dot_nlu_dot_agent__pb2.SetAgentStatusRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_agent__pb2.Agent.FromString,
-                )
+            '/ondewo.nlu.Agents/SetAgentStatus',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.SetAgentStatusRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_agent__pb2.Agent.FromString,
+        )
         self.SetResources = channel.unary_unary(
-                '/ondewo.nlu.Agents/SetResources',
-                request_serializer=ondewo_dot_nlu_dot_agent__pb2.SetResourcesRequest.SerializeToString,
-                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                )
+            '/ondewo.nlu.Agents/SetResources',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.SetResourcesRequest.SerializeToString,
+            response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+        )
         self.DeleteResources = channel.unary_unary(
-                '/ondewo.nlu.Agents/DeleteResources',
-                request_serializer=ondewo_dot_nlu_dot_agent__pb2.DeleteResourcesRequest.SerializeToString,
-                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                )
+            '/ondewo.nlu.Agents/DeleteResources',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.DeleteResourcesRequest.SerializeToString,
+            response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+        )
         self.ExportResources = channel.unary_unary(
-                '/ondewo.nlu.Agents/ExportResources',
-                request_serializer=ondewo_dot_nlu_dot_agent__pb2.ExportResourcesRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_agent__pb2.ExportResourcesResponse.FromString,
-                )
+            '/ondewo.nlu.Agents/ExportResources',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.ExportResourcesRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_agent__pb2.ExportResourcesResponse.FromString,
+        )
         self.GetModelStatuses = channel.unary_unary(
-                '/ondewo.nlu.Agents/GetModelStatuses',
-                request_serializer=ondewo_dot_nlu_dot_agent__pb2.GetModelStatusesRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_agent__pb2.GetModelStatusesResponse.FromString,
-                )
+            '/ondewo.nlu.Agents/GetModelStatuses',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.GetModelStatusesRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_agent__pb2.GetModelStatusesResponse.FromString,
+        )
         self.GetPlatformMapping = channel.unary_unary(
-                '/ondewo.nlu.Agents/GetPlatformMapping',
-                request_serializer=ondewo_dot_nlu_dot_agent__pb2.GetPlatformMappingRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_agent__pb2.PlatformMapping.FromString,
-                )
+            '/ondewo.nlu.Agents/GetPlatformMapping',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.GetPlatformMappingRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_agent__pb2.PlatformMapping.FromString,
+        )
         self.SetPlatformMapping = channel.unary_unary(
-                '/ondewo.nlu.Agents/SetPlatformMapping',
-                request_serializer=ondewo_dot_nlu_dot_agent__pb2.PlatformMapping.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_agent__pb2.PlatformMapping.FromString,
-                )
+            '/ondewo.nlu.Agents/SetPlatformMapping',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.PlatformMapping.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_agent__pb2.PlatformMapping.FromString,
+        )
         self.GetFullTextSearchEntityType = channel.unary_unary(
-                '/ondewo.nlu.Agents/GetFullTextSearchEntityType',
-                request_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseEntityType.FromString,
-                )
+            '/ondewo.nlu.Agents/GetFullTextSearchEntityType',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseEntityType.FromString,
+        )
         self.GetFullTextSearchEntity = channel.unary_unary(
-                '/ondewo.nlu.Agents/GetFullTextSearchEntity',
-                request_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseEntity.FromString,
-                )
+            '/ondewo.nlu.Agents/GetFullTextSearchEntity',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseEntity.FromString,
+        )
         self.GetFullTextSearchEntitySynonym = channel.unary_unary(
-                '/ondewo.nlu.Agents/GetFullTextSearchEntitySynonym',
-                request_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseEntitySynonym.FromString,
-                )
+            '/ondewo.nlu.Agents/GetFullTextSearchEntitySynonym',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseEntitySynonym.FromString,
+        )
         self.GetFullTextSearchIntent = channel.unary_unary(
-                '/ondewo.nlu.Agents/GetFullTextSearchIntent',
-                request_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntent.FromString,
-                )
+            '/ondewo.nlu.Agents/GetFullTextSearchIntent',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntent.FromString,
+        )
         self.GetFullTextSearchIntentContextIn = channel.unary_unary(
-                '/ondewo.nlu.Agents/GetFullTextSearchIntentContextIn',
-                request_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentContextIn.FromString,
-                )
+            '/ondewo.nlu.Agents/GetFullTextSearchIntentContextIn',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentContextIn.FromString,
+        )
         self.GetFullTextSearchIntentContextOut = channel.unary_unary(
-                '/ondewo.nlu.Agents/GetFullTextSearchIntentContextOut',
-                request_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentContextOut.FromString,
-                )
+            '/ondewo.nlu.Agents/GetFullTextSearchIntentContextOut',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentContextOut.FromString,
+        )
         self.GetFullTextSearchIntentUsersays = channel.unary_unary(
-                '/ondewo.nlu.Agents/GetFullTextSearchIntentUsersays',
-                request_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentUsersays.FromString,
-                )
+            '/ondewo.nlu.Agents/GetFullTextSearchIntentUsersays',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentUsersays.FromString,
+        )
         self.GetFullTextSearchIntentTags = channel.unary_unary(
-                '/ondewo.nlu.Agents/GetFullTextSearchIntentTags',
-                request_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentTags.FromString,
-                )
+            '/ondewo.nlu.Agents/GetFullTextSearchIntentTags',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentTags.FromString,
+        )
         self.GetFullTextSearchIntentResponse = channel.unary_unary(
-                '/ondewo.nlu.Agents/GetFullTextSearchIntentResponse',
-                request_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentResponse.FromString,
-                )
+            '/ondewo.nlu.Agents/GetFullTextSearchIntentResponse',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentResponse.FromString,
+        )
         self.GetFullTextSearchIntentParameters = channel.unary_unary(
-                '/ondewo.nlu.Agents/GetFullTextSearchIntentParameters',
-                request_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentParameters.FromString,
-                )
+            '/ondewo.nlu.Agents/GetFullTextSearchIntentParameters',
+            request_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
+            response_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentParameters.FromString,
+        )
 
 
 class AgentsServicer(object):
@@ -685,203 +685,204 @@ class AgentsServicer(object):
 
 def add_AgentsServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'CreateAgent': grpc.unary_unary_rpc_method_handler(
-                    servicer.CreateAgent,
-                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.CreateAgentRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_agent__pb2.Agent.SerializeToString,
-            ),
-            'UpdateAgent': grpc.unary_unary_rpc_method_handler(
-                    servicer.UpdateAgent,
-                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.UpdateAgentRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_agent__pb2.Agent.SerializeToString,
-            ),
-            'GetAgent': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetAgent,
-                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.GetAgentRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_agent__pb2.Agent.SerializeToString,
-            ),
-            'DeleteAgent': grpc.unary_unary_rpc_method_handler(
-                    servicer.DeleteAgent,
-                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.DeleteAgentRequest.FromString,
-                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-            ),
-            'DeleteAllAgents': grpc.unary_unary_rpc_method_handler(
-                    servicer.DeleteAllAgents,
-                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-            ),
-            'ListAgents': grpc.unary_unary_rpc_method_handler(
-                    servicer.ListAgents,
-                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.ListAgentsRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_agent__pb2.ListAgentsResponse.SerializeToString,
-            ),
-            'ListAgentsOfUser': grpc.unary_unary_rpc_method_handler(
-                    servicer.ListAgentsOfUser,
-                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.ListAgentsRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_agent__pb2.ListAgentsOfUserResponse.SerializeToString,
-            ),
-            'ListAllAgents': grpc.unary_unary_rpc_method_handler(
-                    servicer.ListAllAgents,
-                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.ListAgentsRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_agent__pb2.ListAgentsResponse.SerializeToString,
-            ),
-            'AddUserToProject': grpc.unary_unary_rpc_method_handler(
-                    servicer.AddUserToProject,
-                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.AddUserToProjectRequest.FromString,
-                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-            ),
-            'RemoveUserFromProject': grpc.unary_unary_rpc_method_handler(
-                    servicer.RemoveUserFromProject,
-                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.RemoveUserFromProjectRequest.FromString,
-                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-            ),
-            'ListUsersInProject': grpc.unary_unary_rpc_method_handler(
-                    servicer.ListUsersInProject,
-                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.ListUsersInProjectRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_agent__pb2.ListUsersInProjectResponse.SerializeToString,
-            ),
-            'GetPlatformInfo': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetPlatformInfo,
-                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_agent__pb2.GetPlatformInfoResponse.SerializeToString,
-            ),
-            'ListProjectPermissions': grpc.unary_unary_rpc_method_handler(
-                    servicer.ListProjectPermissions,
-                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.ListProjectPermissionsRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_agent__pb2.ListProjectPermissionsResponse.SerializeToString,
-            ),
-            'TrainAgent': grpc.unary_unary_rpc_method_handler(
-                    servicer.TrainAgent,
-                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.TrainAgentRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
-            ),
-            'BuildCache': grpc.unary_unary_rpc_method_handler(
-                    servicer.BuildCache,
-                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.BuildCacheRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
-            ),
-            'ExportAgent': grpc.unary_unary_rpc_method_handler(
-                    servicer.ExportAgent,
-                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.ExportAgentRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
-            ),
-            'ExportBenchmarkAgent': grpc.unary_unary_rpc_method_handler(
-                    servicer.ExportBenchmarkAgent,
-                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.ExportBenchmarkAgentRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
-            ),
-            'ImportAgent': grpc.unary_unary_rpc_method_handler(
-                    servicer.ImportAgent,
-                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.ImportAgentRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
-            ),
-            'OptimizeRankingMatch': grpc.unary_unary_rpc_method_handler(
-                    servicer.OptimizeRankingMatch,
-                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.OptimizeRankingMatchRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
-            ),
-            'RestoreAgent': grpc.unary_unary_rpc_method_handler(
-                    servicer.RestoreAgent,
-                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.RestoreAgentRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
-            ),
-            'GetAgentStatistics': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetAgentStatistics,
-                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.GetAgentStatisticsRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_agent__pb2.GetAgentStatisticsResponse.SerializeToString,
-            ),
-            'SetAgentStatus': grpc.unary_unary_rpc_method_handler(
-                    servicer.SetAgentStatus,
-                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.SetAgentStatusRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_agent__pb2.Agent.SerializeToString,
-            ),
-            'SetResources': grpc.unary_unary_rpc_method_handler(
-                    servicer.SetResources,
-                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.SetResourcesRequest.FromString,
-                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-            ),
-            'DeleteResources': grpc.unary_unary_rpc_method_handler(
-                    servicer.DeleteResources,
-                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.DeleteResourcesRequest.FromString,
-                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-            ),
-            'ExportResources': grpc.unary_unary_rpc_method_handler(
-                    servicer.ExportResources,
-                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.ExportResourcesRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_agent__pb2.ExportResourcesResponse.SerializeToString,
-            ),
-            'GetModelStatuses': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetModelStatuses,
-                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.GetModelStatusesRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_agent__pb2.GetModelStatusesResponse.SerializeToString,
-            ),
-            'GetPlatformMapping': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetPlatformMapping,
-                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.GetPlatformMappingRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_agent__pb2.PlatformMapping.SerializeToString,
-            ),
-            'SetPlatformMapping': grpc.unary_unary_rpc_method_handler(
-                    servicer.SetPlatformMapping,
-                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.PlatformMapping.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_agent__pb2.PlatformMapping.SerializeToString,
-            ),
-            'GetFullTextSearchEntityType': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetFullTextSearchEntityType,
-                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseEntityType.SerializeToString,
-            ),
-            'GetFullTextSearchEntity': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetFullTextSearchEntity,
-                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseEntity.SerializeToString,
-            ),
-            'GetFullTextSearchEntitySynonym': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetFullTextSearchEntitySynonym,
-                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseEntitySynonym.SerializeToString,
-            ),
-            'GetFullTextSearchIntent': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetFullTextSearchIntent,
-                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntent.SerializeToString,
-            ),
-            'GetFullTextSearchIntentContextIn': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetFullTextSearchIntentContextIn,
-                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentContextIn.SerializeToString,
-            ),
-            'GetFullTextSearchIntentContextOut': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetFullTextSearchIntentContextOut,
-                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentContextOut.SerializeToString,
-            ),
-            'GetFullTextSearchIntentUsersays': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetFullTextSearchIntentUsersays,
-                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentUsersays.SerializeToString,
-            ),
-            'GetFullTextSearchIntentTags': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetFullTextSearchIntentTags,
-                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentTags.SerializeToString,
-            ),
-            'GetFullTextSearchIntentResponse': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetFullTextSearchIntentResponse,
-                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentResponse.SerializeToString,
-            ),
-            'GetFullTextSearchIntentParameters': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetFullTextSearchIntentParameters,
-                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentParameters.SerializeToString,
-            ),
+        'CreateAgent': grpc.unary_unary_rpc_method_handler(
+            servicer.CreateAgent,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.CreateAgentRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_agent__pb2.Agent.SerializeToString,
+        ),
+        'UpdateAgent': grpc.unary_unary_rpc_method_handler(
+            servicer.UpdateAgent,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.UpdateAgentRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_agent__pb2.Agent.SerializeToString,
+        ),
+        'GetAgent': grpc.unary_unary_rpc_method_handler(
+            servicer.GetAgent,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.GetAgentRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_agent__pb2.Agent.SerializeToString,
+        ),
+        'DeleteAgent': grpc.unary_unary_rpc_method_handler(
+            servicer.DeleteAgent,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.DeleteAgentRequest.FromString,
+            response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+        ),
+        'DeleteAllAgents': grpc.unary_unary_rpc_method_handler(
+            servicer.DeleteAllAgents,
+            request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+        ),
+        'ListAgents': grpc.unary_unary_rpc_method_handler(
+            servicer.ListAgents,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.ListAgentsRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_agent__pb2.ListAgentsResponse.SerializeToString,
+        ),
+        'ListAgentsOfUser': grpc.unary_unary_rpc_method_handler(
+            servicer.ListAgentsOfUser,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.ListAgentsRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_agent__pb2.ListAgentsOfUserResponse.SerializeToString,
+        ),
+        'ListAllAgents': grpc.unary_unary_rpc_method_handler(
+            servicer.ListAllAgents,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.ListAgentsRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_agent__pb2.ListAgentsResponse.SerializeToString,
+        ),
+        'AddUserToProject': grpc.unary_unary_rpc_method_handler(
+            servicer.AddUserToProject,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.AddUserToProjectRequest.FromString,
+            response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+        ),
+        'RemoveUserFromProject': grpc.unary_unary_rpc_method_handler(
+            servicer.RemoveUserFromProject,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.RemoveUserFromProjectRequest.FromString,
+            response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+        ),
+        'ListUsersInProject': grpc.unary_unary_rpc_method_handler(
+            servicer.ListUsersInProject,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.ListUsersInProjectRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_agent__pb2.ListUsersInProjectResponse.SerializeToString,
+        ),
+        'GetPlatformInfo': grpc.unary_unary_rpc_method_handler(
+            servicer.GetPlatformInfo,
+            request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            response_serializer=ondewo_dot_nlu_dot_agent__pb2.GetPlatformInfoResponse.SerializeToString,
+        ),
+        'ListProjectPermissions': grpc.unary_unary_rpc_method_handler(
+            servicer.ListProjectPermissions,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.ListProjectPermissionsRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_agent__pb2.ListProjectPermissionsResponse.SerializeToString,
+        ),
+        'TrainAgent': grpc.unary_unary_rpc_method_handler(
+            servicer.TrainAgent,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.TrainAgentRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
+        ),
+        'BuildCache': grpc.unary_unary_rpc_method_handler(
+            servicer.BuildCache,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.BuildCacheRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
+        ),
+        'ExportAgent': grpc.unary_unary_rpc_method_handler(
+            servicer.ExportAgent,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.ExportAgentRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
+        ),
+        'ExportBenchmarkAgent': grpc.unary_unary_rpc_method_handler(
+            servicer.ExportBenchmarkAgent,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.ExportBenchmarkAgentRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
+        ),
+        'ImportAgent': grpc.unary_unary_rpc_method_handler(
+            servicer.ImportAgent,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.ImportAgentRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
+        ),
+        'OptimizeRankingMatch': grpc.unary_unary_rpc_method_handler(
+            servicer.OptimizeRankingMatch,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.OptimizeRankingMatchRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
+        ),
+        'RestoreAgent': grpc.unary_unary_rpc_method_handler(
+            servicer.RestoreAgent,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.RestoreAgentRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
+        ),
+        'GetAgentStatistics': grpc.unary_unary_rpc_method_handler(
+            servicer.GetAgentStatistics,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.GetAgentStatisticsRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_agent__pb2.GetAgentStatisticsResponse.SerializeToString,
+        ),
+        'SetAgentStatus': grpc.unary_unary_rpc_method_handler(
+            servicer.SetAgentStatus,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.SetAgentStatusRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_agent__pb2.Agent.SerializeToString,
+        ),
+        'SetResources': grpc.unary_unary_rpc_method_handler(
+            servicer.SetResources,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.SetResourcesRequest.FromString,
+            response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+        ),
+        'DeleteResources': grpc.unary_unary_rpc_method_handler(
+            servicer.DeleteResources,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.DeleteResourcesRequest.FromString,
+            response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+        ),
+        'ExportResources': grpc.unary_unary_rpc_method_handler(
+            servicer.ExportResources,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.ExportResourcesRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_agent__pb2.ExportResourcesResponse.SerializeToString,
+        ),
+        'GetModelStatuses': grpc.unary_unary_rpc_method_handler(
+            servicer.GetModelStatuses,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.GetModelStatusesRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_agent__pb2.GetModelStatusesResponse.SerializeToString,
+        ),
+        'GetPlatformMapping': grpc.unary_unary_rpc_method_handler(
+            servicer.GetPlatformMapping,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.GetPlatformMappingRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_agent__pb2.PlatformMapping.SerializeToString,
+        ),
+        'SetPlatformMapping': grpc.unary_unary_rpc_method_handler(
+            servicer.SetPlatformMapping,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.PlatformMapping.FromString,
+            response_serializer=ondewo_dot_nlu_dot_agent__pb2.PlatformMapping.SerializeToString,
+        ),
+        'GetFullTextSearchEntityType': grpc.unary_unary_rpc_method_handler(
+            servicer.GetFullTextSearchEntityType,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseEntityType.SerializeToString,
+        ),
+        'GetFullTextSearchEntity': grpc.unary_unary_rpc_method_handler(
+            servicer.GetFullTextSearchEntity,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseEntity.SerializeToString,
+        ),
+        'GetFullTextSearchEntitySynonym': grpc.unary_unary_rpc_method_handler(
+            servicer.GetFullTextSearchEntitySynonym,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseEntitySynonym.SerializeToString,
+        ),
+        'GetFullTextSearchIntent': grpc.unary_unary_rpc_method_handler(
+            servicer.GetFullTextSearchIntent,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntent.SerializeToString,
+        ),
+        'GetFullTextSearchIntentContextIn': grpc.unary_unary_rpc_method_handler(
+            servicer.GetFullTextSearchIntentContextIn,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentContextIn.SerializeToString,
+        ),
+        'GetFullTextSearchIntentContextOut': grpc.unary_unary_rpc_method_handler(
+            servicer.GetFullTextSearchIntentContextOut,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentContextOut.SerializeToString,
+        ),
+        'GetFullTextSearchIntentUsersays': grpc.unary_unary_rpc_method_handler(
+            servicer.GetFullTextSearchIntentUsersays,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentUsersays.SerializeToString,
+        ),
+        'GetFullTextSearchIntentTags': grpc.unary_unary_rpc_method_handler(
+            servicer.GetFullTextSearchIntentTags,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentTags.SerializeToString,
+        ),
+        'GetFullTextSearchIntentResponse': grpc.unary_unary_rpc_method_handler(
+            servicer.GetFullTextSearchIntentResponse,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentResponse.SerializeToString,
+        ),
+        'GetFullTextSearchIntentParameters': grpc.unary_unary_rpc_method_handler(
+            servicer.GetFullTextSearchIntentParameters,
+            request_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.FromString,
+            response_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentParameters.SerializeToString,
+        ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'ondewo.nlu.Agents', rpc_method_handlers)
+        'ondewo.nlu.Agents', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
-
  # This class is part of an EXPERIMENTAL API.
+
+
 class Agents(object):
     """Agents are best described as Natural Language Understanding (NLU) modules that transform user requests into actionable data. You can include agents in your app, product, or service to determine user intent and respond to the user in a natural way.
 
@@ -898,646 +899,646 @@ class Agents(object):
 
     @staticmethod
     def CreateAgent(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                    target,
+                    options=(),
+                    channel_credentials=None,
+                    call_credentials=None,
+                    insecure=False,
+                    compression=None,
+                    wait_for_ready=None,
+                    timeout=None,
+                    metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/CreateAgent',
-            ondewo_dot_nlu_dot_agent__pb2.CreateAgentRequest.SerializeToString,
-            ondewo_dot_nlu_dot_agent__pb2.Agent.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_agent__pb2.CreateAgentRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_agent__pb2.Agent.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def UpdateAgent(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                    target,
+                    options=(),
+                    channel_credentials=None,
+                    call_credentials=None,
+                    insecure=False,
+                    compression=None,
+                    wait_for_ready=None,
+                    timeout=None,
+                    metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/UpdateAgent',
-            ondewo_dot_nlu_dot_agent__pb2.UpdateAgentRequest.SerializeToString,
-            ondewo_dot_nlu_dot_agent__pb2.Agent.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_agent__pb2.UpdateAgentRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_agent__pb2.Agent.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def GetAgent(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                 target,
+                 options=(),
+                 channel_credentials=None,
+                 call_credentials=None,
+                 insecure=False,
+                 compression=None,
+                 wait_for_ready=None,
+                 timeout=None,
+                 metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/GetAgent',
-            ondewo_dot_nlu_dot_agent__pb2.GetAgentRequest.SerializeToString,
-            ondewo_dot_nlu_dot_agent__pb2.Agent.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_agent__pb2.GetAgentRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_agent__pb2.Agent.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def DeleteAgent(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                    target,
+                    options=(),
+                    channel_credentials=None,
+                    call_credentials=None,
+                    insecure=False,
+                    compression=None,
+                    wait_for_ready=None,
+                    timeout=None,
+                    metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/DeleteAgent',
-            ondewo_dot_nlu_dot_agent__pb2.DeleteAgentRequest.SerializeToString,
-            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_agent__pb2.DeleteAgentRequest.SerializeToString,
+                                             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def DeleteAllAgents(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                        target,
+                        options=(),
+                        channel_credentials=None,
+                        call_credentials=None,
+                        insecure=False,
+                        compression=None,
+                        wait_for_ready=None,
+                        timeout=None,
+                        metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/DeleteAllAgents',
-            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                                             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def ListAgents(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                   target,
+                   options=(),
+                   channel_credentials=None,
+                   call_credentials=None,
+                   insecure=False,
+                   compression=None,
+                   wait_for_ready=None,
+                   timeout=None,
+                   metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/ListAgents',
-            ondewo_dot_nlu_dot_agent__pb2.ListAgentsRequest.SerializeToString,
-            ondewo_dot_nlu_dot_agent__pb2.ListAgentsResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_agent__pb2.ListAgentsRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_agent__pb2.ListAgentsResponse.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def ListAgentsOfUser(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                         target,
+                         options=(),
+                         channel_credentials=None,
+                         call_credentials=None,
+                         insecure=False,
+                         compression=None,
+                         wait_for_ready=None,
+                         timeout=None,
+                         metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/ListAgentsOfUser',
-            ondewo_dot_nlu_dot_agent__pb2.ListAgentsRequest.SerializeToString,
-            ondewo_dot_nlu_dot_agent__pb2.ListAgentsOfUserResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_agent__pb2.ListAgentsRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_agent__pb2.ListAgentsOfUserResponse.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def ListAllAgents(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                      target,
+                      options=(),
+                      channel_credentials=None,
+                      call_credentials=None,
+                      insecure=False,
+                      compression=None,
+                      wait_for_ready=None,
+                      timeout=None,
+                      metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/ListAllAgents',
-            ondewo_dot_nlu_dot_agent__pb2.ListAgentsRequest.SerializeToString,
-            ondewo_dot_nlu_dot_agent__pb2.ListAgentsResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_agent__pb2.ListAgentsRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_agent__pb2.ListAgentsResponse.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def AddUserToProject(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                         target,
+                         options=(),
+                         channel_credentials=None,
+                         call_credentials=None,
+                         insecure=False,
+                         compression=None,
+                         wait_for_ready=None,
+                         timeout=None,
+                         metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/AddUserToProject',
-            ondewo_dot_nlu_dot_agent__pb2.AddUserToProjectRequest.SerializeToString,
-            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_agent__pb2.AddUserToProjectRequest.SerializeToString,
+                                             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def RemoveUserFromProject(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                              target,
+                              options=(),
+                              channel_credentials=None,
+                              call_credentials=None,
+                              insecure=False,
+                              compression=None,
+                              wait_for_ready=None,
+                              timeout=None,
+                              metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/RemoveUserFromProject',
-            ondewo_dot_nlu_dot_agent__pb2.RemoveUserFromProjectRequest.SerializeToString,
-            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_agent__pb2.RemoveUserFromProjectRequest.SerializeToString,
+                                             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def ListUsersInProject(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                           target,
+                           options=(),
+                           channel_credentials=None,
+                           call_credentials=None,
+                           insecure=False,
+                           compression=None,
+                           wait_for_ready=None,
+                           timeout=None,
+                           metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/ListUsersInProject',
-            ondewo_dot_nlu_dot_agent__pb2.ListUsersInProjectRequest.SerializeToString,
-            ondewo_dot_nlu_dot_agent__pb2.ListUsersInProjectResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_agent__pb2.ListUsersInProjectRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_agent__pb2.ListUsersInProjectResponse.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def GetPlatformInfo(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                        target,
+                        options=(),
+                        channel_credentials=None,
+                        call_credentials=None,
+                        insecure=False,
+                        compression=None,
+                        wait_for_ready=None,
+                        timeout=None,
+                        metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/GetPlatformInfo',
-            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-            ondewo_dot_nlu_dot_agent__pb2.GetPlatformInfoResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                                             ondewo_dot_nlu_dot_agent__pb2.GetPlatformInfoResponse.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def ListProjectPermissions(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                               target,
+                               options=(),
+                               channel_credentials=None,
+                               call_credentials=None,
+                               insecure=False,
+                               compression=None,
+                               wait_for_ready=None,
+                               timeout=None,
+                               metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/ListProjectPermissions',
-            ondewo_dot_nlu_dot_agent__pb2.ListProjectPermissionsRequest.SerializeToString,
-            ondewo_dot_nlu_dot_agent__pb2.ListProjectPermissionsResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_agent__pb2.ListProjectPermissionsRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_agent__pb2.ListProjectPermissionsResponse.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def TrainAgent(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                   target,
+                   options=(),
+                   channel_credentials=None,
+                   call_credentials=None,
+                   insecure=False,
+                   compression=None,
+                   wait_for_ready=None,
+                   timeout=None,
+                   metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/TrainAgent',
-            ondewo_dot_nlu_dot_agent__pb2.TrainAgentRequest.SerializeToString,
-            ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_agent__pb2.TrainAgentRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def BuildCache(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                   target,
+                   options=(),
+                   channel_credentials=None,
+                   call_credentials=None,
+                   insecure=False,
+                   compression=None,
+                   wait_for_ready=None,
+                   timeout=None,
+                   metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/BuildCache',
-            ondewo_dot_nlu_dot_agent__pb2.BuildCacheRequest.SerializeToString,
-            ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_agent__pb2.BuildCacheRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def ExportAgent(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                    target,
+                    options=(),
+                    channel_credentials=None,
+                    call_credentials=None,
+                    insecure=False,
+                    compression=None,
+                    wait_for_ready=None,
+                    timeout=None,
+                    metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/ExportAgent',
-            ondewo_dot_nlu_dot_agent__pb2.ExportAgentRequest.SerializeToString,
-            ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_agent__pb2.ExportAgentRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def ExportBenchmarkAgent(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                             target,
+                             options=(),
+                             channel_credentials=None,
+                             call_credentials=None,
+                             insecure=False,
+                             compression=None,
+                             wait_for_ready=None,
+                             timeout=None,
+                             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/ExportBenchmarkAgent',
-            ondewo_dot_nlu_dot_agent__pb2.ExportBenchmarkAgentRequest.SerializeToString,
-            ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_agent__pb2.ExportBenchmarkAgentRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def ImportAgent(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                    target,
+                    options=(),
+                    channel_credentials=None,
+                    call_credentials=None,
+                    insecure=False,
+                    compression=None,
+                    wait_for_ready=None,
+                    timeout=None,
+                    metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/ImportAgent',
-            ondewo_dot_nlu_dot_agent__pb2.ImportAgentRequest.SerializeToString,
-            ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_agent__pb2.ImportAgentRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def OptimizeRankingMatch(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                             target,
+                             options=(),
+                             channel_credentials=None,
+                             call_credentials=None,
+                             insecure=False,
+                             compression=None,
+                             wait_for_ready=None,
+                             timeout=None,
+                             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/OptimizeRankingMatch',
-            ondewo_dot_nlu_dot_agent__pb2.OptimizeRankingMatchRequest.SerializeToString,
-            ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_agent__pb2.OptimizeRankingMatchRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def RestoreAgent(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                     target,
+                     options=(),
+                     channel_credentials=None,
+                     call_credentials=None,
+                     insecure=False,
+                     compression=None,
+                     wait_for_ready=None,
+                     timeout=None,
+                     metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/RestoreAgent',
-            ondewo_dot_nlu_dot_agent__pb2.RestoreAgentRequest.SerializeToString,
-            ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_agent__pb2.RestoreAgentRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def GetAgentStatistics(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                           target,
+                           options=(),
+                           channel_credentials=None,
+                           call_credentials=None,
+                           insecure=False,
+                           compression=None,
+                           wait_for_ready=None,
+                           timeout=None,
+                           metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/GetAgentStatistics',
-            ondewo_dot_nlu_dot_agent__pb2.GetAgentStatisticsRequest.SerializeToString,
-            ondewo_dot_nlu_dot_agent__pb2.GetAgentStatisticsResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_agent__pb2.GetAgentStatisticsRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_agent__pb2.GetAgentStatisticsResponse.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def SetAgentStatus(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                       target,
+                       options=(),
+                       channel_credentials=None,
+                       call_credentials=None,
+                       insecure=False,
+                       compression=None,
+                       wait_for_ready=None,
+                       timeout=None,
+                       metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/SetAgentStatus',
-            ondewo_dot_nlu_dot_agent__pb2.SetAgentStatusRequest.SerializeToString,
-            ondewo_dot_nlu_dot_agent__pb2.Agent.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_agent__pb2.SetAgentStatusRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_agent__pb2.Agent.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def SetResources(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                     target,
+                     options=(),
+                     channel_credentials=None,
+                     call_credentials=None,
+                     insecure=False,
+                     compression=None,
+                     wait_for_ready=None,
+                     timeout=None,
+                     metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/SetResources',
-            ondewo_dot_nlu_dot_agent__pb2.SetResourcesRequest.SerializeToString,
-            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_agent__pb2.SetResourcesRequest.SerializeToString,
+                                             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def DeleteResources(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                        target,
+                        options=(),
+                        channel_credentials=None,
+                        call_credentials=None,
+                        insecure=False,
+                        compression=None,
+                        wait_for_ready=None,
+                        timeout=None,
+                        metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/DeleteResources',
-            ondewo_dot_nlu_dot_agent__pb2.DeleteResourcesRequest.SerializeToString,
-            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_agent__pb2.DeleteResourcesRequest.SerializeToString,
+                                             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def ExportResources(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                        target,
+                        options=(),
+                        channel_credentials=None,
+                        call_credentials=None,
+                        insecure=False,
+                        compression=None,
+                        wait_for_ready=None,
+                        timeout=None,
+                        metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/ExportResources',
-            ondewo_dot_nlu_dot_agent__pb2.ExportResourcesRequest.SerializeToString,
-            ondewo_dot_nlu_dot_agent__pb2.ExportResourcesResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_agent__pb2.ExportResourcesRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_agent__pb2.ExportResourcesResponse.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def GetModelStatuses(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                         target,
+                         options=(),
+                         channel_credentials=None,
+                         call_credentials=None,
+                         insecure=False,
+                         compression=None,
+                         wait_for_ready=None,
+                         timeout=None,
+                         metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/GetModelStatuses',
-            ondewo_dot_nlu_dot_agent__pb2.GetModelStatusesRequest.SerializeToString,
-            ondewo_dot_nlu_dot_agent__pb2.GetModelStatusesResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_agent__pb2.GetModelStatusesRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_agent__pb2.GetModelStatusesResponse.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def GetPlatformMapping(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                           target,
+                           options=(),
+                           channel_credentials=None,
+                           call_credentials=None,
+                           insecure=False,
+                           compression=None,
+                           wait_for_ready=None,
+                           timeout=None,
+                           metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/GetPlatformMapping',
-            ondewo_dot_nlu_dot_agent__pb2.GetPlatformMappingRequest.SerializeToString,
-            ondewo_dot_nlu_dot_agent__pb2.PlatformMapping.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_agent__pb2.GetPlatformMappingRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_agent__pb2.PlatformMapping.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def SetPlatformMapping(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                           target,
+                           options=(),
+                           channel_credentials=None,
+                           call_credentials=None,
+                           insecure=False,
+                           compression=None,
+                           wait_for_ready=None,
+                           timeout=None,
+                           metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/SetPlatformMapping',
-            ondewo_dot_nlu_dot_agent__pb2.PlatformMapping.SerializeToString,
-            ondewo_dot_nlu_dot_agent__pb2.PlatformMapping.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_agent__pb2.PlatformMapping.SerializeToString,
+                                             ondewo_dot_nlu_dot_agent__pb2.PlatformMapping.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def GetFullTextSearchEntityType(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                                    target,
+                                    options=(),
+                                    channel_credentials=None,
+                                    call_credentials=None,
+                                    insecure=False,
+                                    compression=None,
+                                    wait_for_ready=None,
+                                    timeout=None,
+                                    metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/GetFullTextSearchEntityType',
-            ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
-            ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseEntityType.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseEntityType.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def GetFullTextSearchEntity(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                                target,
+                                options=(),
+                                channel_credentials=None,
+                                call_credentials=None,
+                                insecure=False,
+                                compression=None,
+                                wait_for_ready=None,
+                                timeout=None,
+                                metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/GetFullTextSearchEntity',
-            ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
-            ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseEntity.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseEntity.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def GetFullTextSearchEntitySynonym(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                                       target,
+                                       options=(),
+                                       channel_credentials=None,
+                                       call_credentials=None,
+                                       insecure=False,
+                                       compression=None,
+                                       wait_for_ready=None,
+                                       timeout=None,
+                                       metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/GetFullTextSearchEntitySynonym',
-            ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
-            ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseEntitySynonym.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseEntitySynonym.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def GetFullTextSearchIntent(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                                target,
+                                options=(),
+                                channel_credentials=None,
+                                call_credentials=None,
+                                insecure=False,
+                                compression=None,
+                                wait_for_ready=None,
+                                timeout=None,
+                                metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/GetFullTextSearchIntent',
-            ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
-            ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntent.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntent.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def GetFullTextSearchIntentContextIn(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                                         target,
+                                         options=(),
+                                         channel_credentials=None,
+                                         call_credentials=None,
+                                         insecure=False,
+                                         compression=None,
+                                         wait_for_ready=None,
+                                         timeout=None,
+                                         metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/GetFullTextSearchIntentContextIn',
-            ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
-            ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentContextIn.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentContextIn.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def GetFullTextSearchIntentContextOut(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                                          target,
+                                          options=(),
+                                          channel_credentials=None,
+                                          call_credentials=None,
+                                          insecure=False,
+                                          compression=None,
+                                          wait_for_ready=None,
+                                          timeout=None,
+                                          metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/GetFullTextSearchIntentContextOut',
-            ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
-            ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentContextOut.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentContextOut.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def GetFullTextSearchIntentUsersays(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                                        target,
+                                        options=(),
+                                        channel_credentials=None,
+                                        call_credentials=None,
+                                        insecure=False,
+                                        compression=None,
+                                        wait_for_ready=None,
+                                        timeout=None,
+                                        metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/GetFullTextSearchIntentUsersays',
-            ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
-            ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentUsersays.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentUsersays.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def GetFullTextSearchIntentTags(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                                    target,
+                                    options=(),
+                                    channel_credentials=None,
+                                    call_credentials=None,
+                                    insecure=False,
+                                    compression=None,
+                                    wait_for_ready=None,
+                                    timeout=None,
+                                    metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/GetFullTextSearchIntentTags',
-            ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
-            ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentTags.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentTags.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def GetFullTextSearchIntentResponse(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                                        target,
+                                        options=(),
+                                        channel_credentials=None,
+                                        call_credentials=None,
+                                        insecure=False,
+                                        compression=None,
+                                        wait_for_ready=None,
+                                        timeout=None,
+                                        metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/GetFullTextSearchIntentResponse',
-            ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
-            ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentResponse.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def GetFullTextSearchIntentParameters(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+                                          target,
+                                          options=(),
+                                          channel_credentials=None,
+                                          call_credentials=None,
+                                          insecure=False,
+                                          compression=None,
+                                          wait_for_ready=None,
+                                          timeout=None,
+                                          metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/GetFullTextSearchIntentParameters',
-            ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
-            ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentParameters.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
+                                             ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentParameters.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

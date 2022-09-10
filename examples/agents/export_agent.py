@@ -2,6 +2,7 @@ import json
 
 import polling
 
+from typing import Optional
 from ondewo.nlu.agent_pb2 import ExportAgentRequest, ExportAgentResponse
 from ondewo.nlu.client import Client
 from ondewo.nlu.client_config import ClientConfig
@@ -38,12 +39,15 @@ if __name__ == '__main__':
         timeout=600,  # wait 10 minutes until training is finished
     )
 
-    export_operation_update: Operation = client.services.operations.get_operation(
+    export_operation_update: Optional[Operation] = client.services.operations.get_operation(
         GetOperationRequest(name=export_operation.name)
     )
     export_response: ExportAgentResponse = ExportAgentResponse()
-    export_operation_update.response.Unpack(export_response)
-    assert export_response.agent_content
+    if export_operation_update is not None:
+        export_operation_update.response.Unpack(export_response)
+        assert export_response.agent_content
+    else:
+        assert False
 
     with open('my_backup.zip', mode='wb') as zf:
         zf.write(export_response.agent_content)
