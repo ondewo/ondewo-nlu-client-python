@@ -60,7 +60,7 @@ install_dependencies_locally: ## Install dependencies locally
 	pip install -r requirements-dev.txt
 	pip install -r requirements.txt
 
-flake8:
+flake8: ## Runs flake8
 	flake8 --exculde 'ondewo'
 
 mypy: ## Run mypy static code checking
@@ -125,13 +125,13 @@ generate_ondewo_protos:  ## Generate python code from proto files
 		OUTPUT_DIR=${OUTPUT_DIR}
 
 
-setup_conda_env:
+setup_conda_env: ## Checks for CONDA Environment
 	@echo "\n START SETTING UP CONDA ENV \n"
 	@conda env list | grep -q ondewo-nlu-client-python \
 	&& make release || ( echo "\n CONDA ENV FOR REPO DOESNT EXIST \n" \
 	&& make create_conda_env)
 
-create_conda_env:
+create_conda_env: ##Creates CONDA Environment
 	conda create -y --name ondewo-nlu-client-python python=3.8
 	/bin/bash -c 'source `conda info --base`/bin/activate ondewo-nlu-client-python; make setup_developer_environment_locally && echo "\n PRECOMMIT INSTALLED \n"'
 	make release
@@ -176,7 +176,7 @@ build_gh_release: ## Generate Github Release with CLI
 ########################################################
 #		Submodules
 
-install: init_submodules
+install: init_submodules ## Installs all packages
 	pip install -e .
 
 init_submodules:  ## Initialize submodules
@@ -195,14 +195,14 @@ checkout_defined_submodule_versions:  ## Update submodule versions
 ########################################################
 #		PYPI
 
-build_package:
+build_package: ## Builds PYPI Package
 	python setup.py sdist bdist_wheel
 	chmod a+rw dist -R
 
-upload_package:
+upload_package: ## Uploads PYPI Package
 	twine upload --verbose -r pypi dist/* -u${PYPI_USERNAME} -p${PYPI_PASSWORD}
 
-clear_package_data:
+clear_package_data: ## Clears PYPI Package
 	rm -rf build dist ondewo_nlu_client.egg-info
 
 build_utils_docker_image:  ## Build utils docker image
@@ -217,10 +217,10 @@ push_to_pypi_via_docker_image:  ## Push source code to pypi via docker
 		${IMAGE_UTILS_NAME} make push_to_pypi
 	rm -rf dist
 
-push_to_pypi: build_package upload_package clear_package_data
+push_to_pypi: build_package upload_package clear_package_data ## Builds -> Uploads -> Clears PYPI Package
 	@echo 'YAY - Pushed to pypi : )'
 
-show_pypi: build_package
+show_pypi: build_package ## Shows PYPI Package with Dockerimage
 	tar xvfz dist/ondewo-nlu-client-${ONDEWO_NLU_VERSION}.tar.gz
 	tree ondewo-nlu-client-${ONDEWO_NLU_VERSION}
 	cat ondewo-nlu-client-${ONDEWO_NLU_VERSION}/ondewo_nlu_client.egg-info/requires.txt
@@ -237,7 +237,7 @@ show_pypi_via_docker_image: build_utils_docker_image ## Push source code to pypi
 ########################################################
 #		GITHUB
 
-push_to_gh: login_to_gh build_gh_release
+push_to_gh: login_to_gh build_gh_release ## Logs into GitHub CLI and Releases
 	@echo 'Released to Github'
 
 release_to_github_via_docker_image:  ## Release to Github via docker
@@ -255,7 +255,7 @@ clone_devops_accounts: ## Clones devops-accounts repo
 	if [ -d $(DEVOPS_ACCOUNT_GIT) ]; then rm -Rf $(DEVOPS_ACCOUNT_GIT); fi
 	git clone git@bitbucket.org:ondewo/${DEVOPS_ACCOUNT_GIT}.git
 
-run_release_with_devops:
+run_release_with_devops: ## Gets Credentials from devops-repo and run release command with them
 	$(eval info:= $(shell cat ${DEVOPS_ACCOUNT_DIR}/account_github.env | grep GITHUB_GH & cat ${DEVOPS_ACCOUNT_DIR}/account_pypi.env | grep PYPI_USERNAME & cat ${DEVOPS_ACCOUNT_DIR}/account_pypi.env | grep PYPI_PASSWORD))
 	@echo ${CONDA_PREFIX} | grep -q nlu-client-python && make release $(info) || (make setup_conda_env $(info))
 
