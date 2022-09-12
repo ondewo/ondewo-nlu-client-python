@@ -16,20 +16,20 @@ class WebhookStub(object):
             channel: A grpc.Channel.
         """
         self.ResponseRefinement = channel.unary_unary(
-            '/ondewo.nlu.Webhook/ResponseRefinement',
-            request_serializer=ondewo_dot_nlu_dot_webhook__pb2.WebhookRequest.SerializeToString,
-            response_deserializer=ondewo_dot_nlu_dot_webhook__pb2.WebhookResponse.FromString,
-        )
+                '/ondewo.nlu.Webhook/ResponseRefinement',
+                request_serializer=ondewo_dot_nlu_dot_webhook__pb2.WebhookRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_webhook__pb2.WebhookResponse.FromString,
+                )
         self.SlotFilling = channel.unary_unary(
-            '/ondewo.nlu.Webhook/SlotFilling',
-            request_serializer=ondewo_dot_nlu_dot_webhook__pb2.WebhookRequest.SerializeToString,
-            response_deserializer=ondewo_dot_nlu_dot_webhook__pb2.WebhookResponse.FromString,
-        )
+                '/ondewo.nlu.Webhook/SlotFilling',
+                request_serializer=ondewo_dot_nlu_dot_webhook__pb2.WebhookRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_webhook__pb2.WebhookResponse.FromString,
+                )
         self.Ping = channel.unary_unary(
-            '/ondewo.nlu.Webhook/Ping',
-            request_serializer=ondewo_dot_nlu_dot_webhook__pb2.PingRequest.SerializeToString,
-            response_deserializer=ondewo_dot_nlu_dot_webhook__pb2.PingResponse.FromString,
-        )
+                '/ondewo.nlu.Webhook/Ping',
+                request_serializer=ondewo_dot_nlu_dot_webhook__pb2.PingRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_webhook__pb2.PingResponse.FromString,
+                )
 
 
 class WebhookServicer(object):
@@ -64,80 +64,79 @@ class WebhookServicer(object):
 
 def add_WebhookServicer_to_server(servicer, server):
     rpc_method_handlers = {
-        'ResponseRefinement': grpc.unary_unary_rpc_method_handler(
-            servicer.ResponseRefinement,
-            request_deserializer=ondewo_dot_nlu_dot_webhook__pb2.WebhookRequest.FromString,
-            response_serializer=ondewo_dot_nlu_dot_webhook__pb2.WebhookResponse.SerializeToString,
-        ),
-        'SlotFilling': grpc.unary_unary_rpc_method_handler(
-            servicer.SlotFilling,
-            request_deserializer=ondewo_dot_nlu_dot_webhook__pb2.WebhookRequest.FromString,
-            response_serializer=ondewo_dot_nlu_dot_webhook__pb2.WebhookResponse.SerializeToString,
-        ),
-        'Ping': grpc.unary_unary_rpc_method_handler(
-            servicer.Ping,
-            request_deserializer=ondewo_dot_nlu_dot_webhook__pb2.PingRequest.FromString,
-            response_serializer=ondewo_dot_nlu_dot_webhook__pb2.PingResponse.SerializeToString,
-        ),
+            'ResponseRefinement': grpc.unary_unary_rpc_method_handler(
+                    servicer.ResponseRefinement,
+                    request_deserializer=ondewo_dot_nlu_dot_webhook__pb2.WebhookRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_webhook__pb2.WebhookResponse.SerializeToString,
+            ),
+            'SlotFilling': grpc.unary_unary_rpc_method_handler(
+                    servicer.SlotFilling,
+                    request_deserializer=ondewo_dot_nlu_dot_webhook__pb2.WebhookRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_webhook__pb2.WebhookResponse.SerializeToString,
+            ),
+            'Ping': grpc.unary_unary_rpc_method_handler(
+                    servicer.Ping,
+                    request_deserializer=ondewo_dot_nlu_dot_webhook__pb2.PingRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_webhook__pb2.PingResponse.SerializeToString,
+            ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-        'ondewo.nlu.Webhook', rpc_method_handlers)
+            'ondewo.nlu.Webhook', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
+
  # This class is part of an EXPERIMENTAL API.
-
-
 class Webhook(object):
     """service to send requests to a webhook server
     """
 
     @staticmethod
     def ResponseRefinement(request,
-                           target,
-                           options=(),
-                           channel_credentials=None,
-                           call_credentials=None,
-                           insecure=False,
-                           compression=None,
-                           wait_for_ready=None,
-                           timeout=None,
-                           metadata=None):
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Webhook/ResponseRefinement',
-                                             ondewo_dot_nlu_dot_webhook__pb2.WebhookRequest.SerializeToString,
-                                             ondewo_dot_nlu_dot_webhook__pb2.WebhookResponse.FromString,
-                                             options, channel_credentials,
-                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            ondewo_dot_nlu_dot_webhook__pb2.WebhookRequest.SerializeToString,
+            ondewo_dot_nlu_dot_webhook__pb2.WebhookResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def SlotFilling(request,
-                    target,
-                    options=(),
-                    channel_credentials=None,
-                    call_credentials=None,
-                    insecure=False,
-                    compression=None,
-                    wait_for_ready=None,
-                    timeout=None,
-                    metadata=None):
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Webhook/SlotFilling',
-                                             ondewo_dot_nlu_dot_webhook__pb2.WebhookRequest.SerializeToString,
-                                             ondewo_dot_nlu_dot_webhook__pb2.WebhookResponse.FromString,
-                                             options, channel_credentials,
-                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            ondewo_dot_nlu_dot_webhook__pb2.WebhookRequest.SerializeToString,
+            ondewo_dot_nlu_dot_webhook__pb2.WebhookResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def Ping(request,
-             target,
-             options=(),
-             channel_credentials=None,
-             call_credentials=None,
-             insecure=False,
-             compression=None,
-             wait_for_ready=None,
-             timeout=None,
-             metadata=None):
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Webhook/Ping',
-                                             ondewo_dot_nlu_dot_webhook__pb2.PingRequest.SerializeToString,
-                                             ondewo_dot_nlu_dot_webhook__pb2.PingResponse.FromString,
-                                             options, channel_credentials,
-                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            ondewo_dot_nlu_dot_webhook__pb2.PingRequest.SerializeToString,
+            ondewo_dot_nlu_dot_webhook__pb2.PingResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

@@ -40,6 +40,10 @@ repos:
         hooks:
             -   id: autopep8  # Perform pep8 auto-formatting
                 args: [ --max-line-length=120, --in-place ]
+                exclude: |
+                    (?x) (
+                    ^.*_pb2*
+                    )
 
     -   repo: https://github.com/pre-commit/pre-commit-hooks
         rev: v4.3.0
