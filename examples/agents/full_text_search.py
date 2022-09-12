@@ -1,8 +1,10 @@
 import json
 
 from ondewo.nlu.agent_pb2 import FullTextSearchRequest, FullTextSearchResponseIntent, \
-    FullTextSearchResponseIntentContextIn, FullTextSearchResponseIntentContextOut, FullTextSearchResponseIntentUsersays, \
-    FullTextSearchResponseIntentTags, FullTextSearchResponseIntentResponse, FullTextSearchResponseIntentParameters, \
+    FullTextSearchResponseIntentContextIn, FullTextSearchResponseIntentContextOut, \
+    FullTextSearchResponseIntentUsersays, \
+    FullTextSearchResponseIntentTags, \
+    FullTextSearchResponseIntentResponse, FullTextSearchResponseIntentParameters, \
     FullTextSearchResponseEntityType, FullTextSearchResponseEntity, FullTextSearchResponseEntitySynonym
 from ondewo.nlu.client import Client
 from ondewo.nlu.client_config import ClientConfig

@@ -189,7 +189,7 @@ class Agents(ServicesInterface):
 
     def get_full_text_search_intent_context_in(
         self, request: FullTextSearchRequest
-    ) -> FullTextSearchResponseIntent:
+    ) -> FullTextSearchResponseIntentContextIn:
         response: FullTextSearchResponseIntentContextIn = \
             self.stub.GetFullTextSearchIntentContextIn(request, metadata=self.metadata)
         return response
