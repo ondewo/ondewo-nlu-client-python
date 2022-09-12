@@ -1739,14 +1739,14 @@ class FullTextSearchResponseIntentResponse(google.protobuf.message.Message):
         INTENT_NAME_FIELD_NUMBER: builtins.int
         LANGUAGE_FIELD_NUMBER: builtins.int
         text: typing.Text
-        platform: builtins.int
+        platform: typing.Text
         response_type: typing.Text
         intent_name: typing.Text
         language: typing.Text
         def __init__(self,
             *,
             text: typing.Text = ...,
-            platform: builtins.int = ...,
+            platform: typing.Text = ...,
             response_type: typing.Text = ...,
             intent_name: typing.Text = ...,
             language: typing.Text = ...,
