@@ -77,7 +77,7 @@ TEST:
 	@echo ${GITHUB_GH_TOKEN}
 	@echo ${PYPI_USERNAME}
 	@echo ${PYPI_PASSWORD}
-	@echo ${CURRENT_RELEASE_NOTES}
+	@echo "\n${CURRENT_RELEASE_NOTES}"
 
 check_build: ## Checks if all built proto-code is there
 	@rm -rf build_check.txt
@@ -151,12 +151,12 @@ release: ## Automate the entire release process
 	git add setup.py
 	git add ${ONDEWO_PROTO_COMPILER_DIR}
 	git status
-# git commit -m "PREPARING FOR RELEASE ${ONDEWO_NLU_VERSION}"
-# git push
-# make create_release_branch
-# make create_release_tag
-# make release_to_github_via_docker
-# make push_to_pypi_via_docker
+	git commit -m "PREPARING FOR RELEASE ${ONDEWO_NLU_VERSION}"
+	git push
+	make create_release_branch
+	make create_release_tag
+	make release_to_github_via_docker
+	make push_to_pypi_via_docker
 	@echo "Release Finished"
 
 create_release_branch: ## Create Release Branch and push it to origin
@@ -264,6 +264,6 @@ spc: ## Checks if the Release Branch, Tag and Pypi version already exist
 	$(eval filtered_branches:= $(shell git branch --all | grep "release/${ONDEWO_NLU_VERSION}"))
 	$(eval filtered_tags:= $(shell git tag --list | grep "${ONDEWO_NLU_VERSION}"))
 	$(eval setuppy_version:= $(shell cat setup.py | grep "version"))
-# @if test "$(filtered_branches)" != ""; then echo "-- Test 1: Branch exists!!" & exit 1; else echo "-- Test 1: Branch is fine";fi
-# @if test "$(filtered_tags)" != ""; then echo "-- Test 2: Tag exists!!" & exit 1; else echo "-- Test 2: Tag is fine";fi
-# @if test "$(setuppy_version)" != "version='${ONDEWO_NLU_VERSION}',"; then echo "-- Test 3: Setup.py not updated!!" & exit 1; else echo "-- Test 3: Setup.py is fine";fi
+	@if test "$(filtered_branches)" != ""; then echo "-- Test 1: Branch exists!!" & exit 1; else echo "-- Test 1: Branch is fine";fi
+	@if test "$(filtered_tags)" != ""; then echo "-- Test 2: Tag exists!!" & exit 1; else echo "-- Test 2: Tag is fine";fi
+	@if test "$(setuppy_version)" != "version='${ONDEWO_NLU_VERSION}',"; then echo "-- Test 3: Setup.py not updated!!" & exit 1; else echo "-- Test 3: Setup.py is fine";fi
