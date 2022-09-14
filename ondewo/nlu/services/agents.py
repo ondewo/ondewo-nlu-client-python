@@ -27,7 +27,7 @@ from ondewo.nlu.agent_pb2 import Agent, CreateAgentRequest, GetAgentRequest, Upd
     FullTextSearchResponseEntity, FullTextSearchResponseEntityType, FullTextSearchResponseEntitySynonym, \
     FullTextSearchResponseIntent, FullTextSearchResponseIntentContextIn, FullTextSearchResponseIntentContextOut, \
     FullTextSearchResponseIntentUsersays, FullTextSearchResponseIntentTags, FullTextSearchResponseIntentResponse, \
-    FullTextSearchResponseIntentParameters
+    FullTextSearchResponseIntentParameters, ReindexAgentRequest
 from ondewo.nlu.agent_pb2_grpc import AgentsStub
 from ondewo.nlu.core.services_interface import ServicesInterface
 from ondewo.nlu import operations_pb2
@@ -227,4 +227,10 @@ class Agents(ServicesInterface):
     ) -> FullTextSearchResponseIntentParameters:
         response: FullTextSearchResponseIntentParameters = \
             self.stub.GetFullTextSearchIntentParameters(request, metadata=self.metadata)
+        return response
+
+    def reindex_agent(
+        self, request: ReindexAgentRequest
+    ) -> operations_pb2.Operation:
+        response: operations_pb2.Operation = self.stub.ReindexAgent(request, metadata=self.metadata)
         return response
