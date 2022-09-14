@@ -1829,3 +1829,27 @@ class FullTextSearchResponseIntentParameters(google.protobuf.message.Message):
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["elastic_query",b"elastic_query","intent_parameters_results",b"intent_parameters_results","language_code",b"language_code","next_page_token",b"next_page_token","parent",b"parent","term",b"term","time",b"time"]) -> None: ...
 global___FullTextSearchResponseIntentParameters = FullTextSearchResponseIntentParameters
+
+class ReindexAgentRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    PARENT_FIELD_NUMBER: builtins.int
+    BRANCH_NAME_FIELD_NUMBER: builtins.int
+    INDEX_TYPES_FIELD_NUMBER: builtins.int
+    parent: typing.Text
+    """projects/<project_id>/agent"""
+
+    branch_name: typing.Text
+    """Optional, useful for versioning reasons in the future"""
+
+    @property
+    def index_types(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[global___FullTextSearchRequest.QueryType.ValueType]:
+        """Optional, useful for reindexing specific indices in the future"""
+        pass
+    def __init__(self,
+        *,
+        parent: typing.Text = ...,
+        branch_name: typing.Text = ...,
+        index_types: typing.Optional[typing.Iterable[global___FullTextSearchRequest.QueryType.ValueType]] = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["branch_name",b"branch_name","index_types",b"index_types","parent",b"parent"]) -> None: ...
+global___ReindexAgentRequest = ReindexAgentRequest
