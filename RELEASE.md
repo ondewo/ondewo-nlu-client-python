@@ -1,6 +1,15 @@
 # Release History
 
 *****************
+
+## Release ONDEWO NLU Python Client 3.0.1
+
+### Improvements
+ * [[OND211-2044]](https://ondewo.atlassian.net/browse/OND211-2044) - Added Reindex Agent Endpoint
+
+
+*****************
+
 ## Release ONDEWO NLU Python Client 3.0.0
 
 ### Improvements
