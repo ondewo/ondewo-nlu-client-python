@@ -217,6 +217,11 @@ class AgentsStub(object):
                 request_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
                 response_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentParameters.FromString,
                 )
+        self.ReindexAgent = channel.unary_unary(
+                '/ondewo.nlu.Agents/ReindexAgent',
+                request_serializer=ondewo_dot_nlu_dot_agent__pb2.ReindexAgentRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
+                )
 
 
 class AgentsServicer(object):
@@ -682,6 +687,13 @@ class AgentsServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ReindexAgent(self, request, context):
+        """Force reindexing Intent and Entity data of Agent
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_AgentsServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -874,6 +886,11 @@ def add_AgentsServicer_to_server(servicer, server):
                     servicer.GetFullTextSearchIntentParameters,
                     request_deserializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.FromString,
                     response_serializer=ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentParameters.SerializeToString,
+            ),
+            'ReindexAgent': grpc.unary_unary_rpc_method_handler(
+                    servicer.ReindexAgent,
+                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.ReindexAgentRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -1539,5 +1556,22 @@ class Agents(object):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/GetFullTextSearchIntentParameters',
             ondewo_dot_nlu_dot_agent__pb2.FullTextSearchRequest.SerializeToString,
             ondewo_dot_nlu_dot_agent__pb2.FullTextSearchResponseIntentParameters.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ReindexAgent(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/ReindexAgent',
+            ondewo_dot_nlu_dot_agent__pb2.ReindexAgentRequest.SerializeToString,
+            ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
