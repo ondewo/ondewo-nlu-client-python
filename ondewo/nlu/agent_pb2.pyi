@@ -38,6 +38,9 @@ class _AgentViewEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enum
     AGENT_VIEW_SHALLOW: _AgentView.ValueType  # 2
     """Shallow agent view: populates all the fields except configs."""
 
+    AGENT_VIEW_MINIMUM: _AgentView.ValueType  # 3
+    """Minimum view including only agent UUID and agent display name"""
+
 class AgentView(_AgentView, metaclass=_AgentViewEnumTypeWrapper):
     pass
 
@@ -54,6 +57,9 @@ AGENT_VIEW_FULL: AgentView.ValueType  # 1
 
 AGENT_VIEW_SHALLOW: AgentView.ValueType  # 2
 """Shallow agent view: populates all the fields except configs."""
+
+AGENT_VIEW_MINIMUM: AgentView.ValueType  # 3
+"""Minimum view including only agent UUID and agent display name"""
 
 global___AgentView = AgentView
 

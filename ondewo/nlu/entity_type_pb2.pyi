@@ -32,6 +32,9 @@ class _EntityTypeViewEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper.
     ENTITY_TYPE_VIEW_SHALLOW: _EntityTypeView.ValueType  # 3
     """No entity synonyms are returned, only entity values"""
 
+    ENTITY_TYPE_VIEW_MINIMUM: _EntityTypeView.ValueType  # 4
+    """Minimum view including only entity type UUID and entity type display name"""
+
 class EntityTypeView(_EntityTypeView, metaclass=_EntityTypeViewEnumTypeWrapper):
     """Represents the options for views of an entity type.
     An entity type can be a sizable object. Therefore, we provide a resource view that
@@ -50,6 +53,9 @@ ENTITY_TYPE_VIEW_PARTIAL: EntityTypeView.ValueType  # 2
 
 ENTITY_TYPE_VIEW_SHALLOW: EntityTypeView.ValueType  # 3
 """No entity synonyms are returned, only entity values"""
+
+ENTITY_TYPE_VIEW_MINIMUM: EntityTypeView.ValueType  # 4
+"""Minimum view including only entity type UUID and entity type display name"""
 
 global___EntityTypeView = EntityTypeView
 
