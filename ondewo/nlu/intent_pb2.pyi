@@ -31,11 +31,14 @@ class _IntentViewEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
 
     INTENT_VIEW_PARTIAL: _IntentView.ValueType  # 2
     """The only nested structures populated are Contexts and Training phrases.
-     The Training phrases field is populated with only a few entries and no annotations.
+    The Training phrases field is populated with only a few entries and no annotations.
     """
 
     INTENT_VIEW_SHALLOW: _IntentView.ValueType  # 3
     """All nested structures are not populated (no training phrases, nor contexts, nor parameters, ...)"""
+
+    INTENT_VIEW_MINIMUM: _IntentView.ValueType  # 4
+    """Minimum view including only intent UUID and intent display name"""
 
 class IntentView(_IntentView, metaclass=_IntentViewEnumTypeWrapper):
     """Represents the options for views of an intent.
@@ -52,11 +55,14 @@ INTENT_VIEW_FULL: IntentView.ValueType  # 1
 
 INTENT_VIEW_PARTIAL: IntentView.ValueType  # 2
 """The only nested structures populated are Contexts and Training phrases.
- The Training phrases field is populated with only a few entries and no annotations.
+The Training phrases field is populated with only a few entries and no annotations.
 """
 
 INTENT_VIEW_SHALLOW: IntentView.ValueType  # 3
 """All nested structures are not populated (no training phrases, nor contexts, nor parameters, ...)"""
+
+INTENT_VIEW_MINIMUM: IntentView.ValueType  # 4
+"""Minimum view including only intent UUID and intent display name"""
 
 global___IntentView = IntentView
 
