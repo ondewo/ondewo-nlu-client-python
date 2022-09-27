@@ -1393,19 +1393,22 @@ class FullTextSearchResponseEntity(google.protobuf.message.Message):
         NAME_FIELD_NUMBER: builtins.int
         DISPLAY_NAME_FIELD_NUMBER: builtins.int
         ENTITY_TYPE_NAME_FIELD_NUMBER: builtins.int
+        ENTITY_TYPE_DISPLAY_NAME_FIELD_NUMBER: builtins.int
         LANGUAGE_FIELD_NUMBER: builtins.int
         name: typing.Text
         display_name: typing.Text
         entity_type_name: typing.Text
+        entity_type_display_name: typing.Text
         language: typing.Text
         def __init__(self,
             *,
             name: typing.Text = ...,
             display_name: typing.Text = ...,
             entity_type_name: typing.Text = ...,
+            entity_type_display_name: typing.Text = ...,
             language: typing.Text = ...,
             ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["display_name",b"display_name","entity_type_name",b"entity_type_name","language",b"language","name",b"name"]) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["display_name",b"display_name","entity_type_display_name",b"entity_type_display_name","entity_type_name",b"entity_type_name","language",b"language","name",b"name"]) -> None: ...
 
     PARENT_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
@@ -1442,22 +1445,28 @@ class FullTextSearchResponseEntitySynonym(google.protobuf.message.Message):
         NAME_FIELD_NUMBER: builtins.int
         DISPLAY_NAME_FIELD_NUMBER: builtins.int
         ENTITY_TYPE_NAME_FIELD_NUMBER: builtins.int
+        ENTITY_TYPE_DISPLAY_NAME_FIELD_NUMBER: builtins.int
         ENTITY_NAME_FIELD_NUMBER: builtins.int
+        ENTITY_DISPLAY_NAME_FIELD_NUMBER: builtins.int
         LANGUAGE_FIELD_NUMBER: builtins.int
         name: typing.Text
         display_name: typing.Text
         entity_type_name: typing.Text
+        entity_type_display_name: typing.Text
         entity_name: typing.Text
+        entity_display_name: typing.Text
         language: typing.Text
         def __init__(self,
             *,
             name: typing.Text = ...,
             display_name: typing.Text = ...,
             entity_type_name: typing.Text = ...,
+            entity_type_display_name: typing.Text = ...,
             entity_name: typing.Text = ...,
+            entity_display_name: typing.Text = ...,
             language: typing.Text = ...,
             ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["display_name",b"display_name","entity_name",b"entity_name","entity_type_name",b"entity_type_name","language",b"language","name",b"name"]) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["display_name",b"display_name","entity_display_name",b"entity_display_name","entity_name",b"entity_name","entity_type_display_name",b"entity_type_display_name","entity_type_name",b"entity_type_name","language",b"language","name",b"name"]) -> None: ...
 
     PARENT_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
@@ -1542,17 +1551,20 @@ class FullTextSearchResponseIntentContextIn(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
         NAME_FIELD_NUMBER: builtins.int
         INTENT_NAME_FIELD_NUMBER: builtins.int
+        INTENT_DISPLAY_NAME_FIELD_NUMBER: builtins.int
         LANGUAGE_FIELD_NUMBER: builtins.int
         name: typing.Text
         intent_name: typing.Text
+        intent_display_name: typing.Text
         language: typing.Text
         def __init__(self,
             *,
             name: typing.Text = ...,
             intent_name: typing.Text = ...,
+            intent_display_name: typing.Text = ...,
             language: typing.Text = ...,
             ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["intent_name",b"intent_name","language",b"language","name",b"name"]) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["intent_display_name",b"intent_display_name","intent_name",b"intent_name","language",b"language","name",b"name"]) -> None: ...
 
     PARENT_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
@@ -1588,17 +1600,20 @@ class FullTextSearchResponseIntentContextOut(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
         NAME_FIELD_NUMBER: builtins.int
         INTENT_NAME_FIELD_NUMBER: builtins.int
+        INTENT_DISPLAY_NAME_FIELD_NUMBER: builtins.int
         LANGUAGE_FIELD_NUMBER: builtins.int
         name: typing.Text
         intent_name: typing.Text
+        intent_display_name: typing.Text
         language: typing.Text
         def __init__(self,
             *,
             name: typing.Text = ...,
             intent_name: typing.Text = ...,
+            intent_display_name: typing.Text = ...,
             language: typing.Text = ...,
             ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["intent_name",b"intent_name","language",b"language","name",b"name"]) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["intent_display_name",b"intent_display_name","intent_name",b"intent_name","language",b"language","name",b"name"]) -> None: ...
 
     PARENT_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
@@ -1638,6 +1653,7 @@ class FullTextSearchResponseIntentUsersays(google.protobuf.message.Message):
         TEXT_AS_ENTITY_VALUES_FIELD_NUMBER: builtins.int
         TYPE_FIELD_NUMBER: builtins.int
         INTENT_NAME_FIELD_NUMBER: builtins.int
+        INTENT_DISPLAY_NAME_FIELD_NUMBER: builtins.int
         LANGUAGE_FIELD_NUMBER: builtins.int
         name: typing.Text
         text: typing.Text
@@ -1645,6 +1661,7 @@ class FullTextSearchResponseIntentUsersays(google.protobuf.message.Message):
         text_as_entity_values: typing.Text
         type: typing.Text
         intent_name: typing.Text
+        intent_display_name: typing.Text
         language: typing.Text
         def __init__(self,
             *,
@@ -1654,9 +1671,10 @@ class FullTextSearchResponseIntentUsersays(google.protobuf.message.Message):
             text_as_entity_values: typing.Text = ...,
             type: typing.Text = ...,
             intent_name: typing.Text = ...,
+            intent_display_name: typing.Text = ...,
             language: typing.Text = ...,
             ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["intent_name",b"intent_name","language",b"language","name",b"name","text",b"text","text_as_entity_types",b"text_as_entity_types","text_as_entity_values",b"text_as_entity_values","type",b"type"]) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["intent_display_name",b"intent_display_name","intent_name",b"intent_name","language",b"language","name",b"name","text",b"text","text_as_entity_types",b"text_as_entity_types","text_as_entity_values",b"text_as_entity_values","type",b"type"]) -> None: ...
 
     PARENT_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
@@ -1693,19 +1711,22 @@ class FullTextSearchResponseIntentTags(google.protobuf.message.Message):
         NAME_FIELD_NUMBER: builtins.int
         TEXT_FIELD_NUMBER: builtins.int
         INTENT_NAME_FIELD_NUMBER: builtins.int
+        INTENT_DISPLAY_NAME_FIELD_NUMBER: builtins.int
         LANGUAGE_FIELD_NUMBER: builtins.int
         name: typing.Text
         text: typing.Text
         intent_name: typing.Text
+        intent_display_name: typing.Text
         language: typing.Text
         def __init__(self,
             *,
             name: typing.Text = ...,
             text: typing.Text = ...,
             intent_name: typing.Text = ...,
+            intent_display_name: typing.Text = ...,
             language: typing.Text = ...,
             ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["intent_name",b"intent_name","language",b"language","name",b"name","text",b"text"]) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["intent_display_name",b"intent_display_name","intent_name",b"intent_name","language",b"language","name",b"name","text",b"text"]) -> None: ...
 
     PARENT_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
@@ -1743,11 +1764,13 @@ class FullTextSearchResponseIntentResponse(google.protobuf.message.Message):
         PLATFORM_FIELD_NUMBER: builtins.int
         RESPONSE_TYPE_FIELD_NUMBER: builtins.int
         INTENT_NAME_FIELD_NUMBER: builtins.int
+        INTENT_DISPLAY_NAME_FIELD_NUMBER: builtins.int
         LANGUAGE_FIELD_NUMBER: builtins.int
         text: typing.Text
         platform: typing.Text
         response_type: typing.Text
         intent_name: typing.Text
+        intent_display_name: typing.Text
         language: typing.Text
         def __init__(self,
             *,
@@ -1755,9 +1778,10 @@ class FullTextSearchResponseIntentResponse(google.protobuf.message.Message):
             platform: typing.Text = ...,
             response_type: typing.Text = ...,
             intent_name: typing.Text = ...,
+            intent_display_name: typing.Text = ...,
             language: typing.Text = ...,
             ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["intent_name",b"intent_name","language",b"language","platform",b"platform","response_type",b"response_type","text",b"text"]) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["intent_display_name",b"intent_display_name","intent_name",b"intent_name","language",b"language","platform",b"platform","response_type",b"response_type","text",b"text"]) -> None: ...
 
     PARENT_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
@@ -1794,19 +1818,22 @@ class FullTextSearchResponseIntentParameters(google.protobuf.message.Message):
         PARAMETER_NAME_FIELD_NUMBER: builtins.int
         PARAMETER_DISPLAY_NAME_FIELD_NUMBER: builtins.int
         INTENT_NAME_FIELD_NUMBER: builtins.int
+        INTENT_DISPLAY_NAME_FIELD_NUMBER: builtins.int
         LANGUAGE_FIELD_NUMBER: builtins.int
         parameter_name: typing.Text
         parameter_display_name: typing.Text
         intent_name: typing.Text
+        intent_display_name: typing.Text
         language: typing.Text
         def __init__(self,
             *,
             parameter_name: typing.Text = ...,
             parameter_display_name: typing.Text = ...,
             intent_name: typing.Text = ...,
+            intent_display_name: typing.Text = ...,
             language: typing.Text = ...,
             ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["intent_name",b"intent_name","language",b"language","parameter_display_name",b"parameter_display_name","parameter_name",b"parameter_name"]) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["intent_display_name",b"intent_display_name","intent_name",b"intent_name","language",b"language","parameter_display_name",b"parameter_display_name","parameter_name",b"parameter_name"]) -> None: ...
 
     PARENT_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
