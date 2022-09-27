@@ -38,3 +38,31 @@ class StatResponse(google.protobuf.message.Message):
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["value",b"value"]) -> None: ...
 global___StatResponse = StatResponse
+
+class CreatedModified(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    CREATED_AT_FIELD_NUMBER: builtins.int
+    MODIFIED_AT_FIELD_NUMBER: builtins.int
+    CREATED_BY_FIELD_NUMBER: builtins.int
+    MODIFIED_BY_FIELD_NUMBER: builtins.int
+    created_at: typing.Text
+    """Read-only"""
+
+    modified_at: typing.Text
+    """Read-only"""
+
+    created_by: typing.Text
+    """Read-only, except import/restore agent, otherwise populated with current user"""
+
+    modified_by: typing.Text
+    """Read-only except import/restore agent, otherwise populated wit current user"""
+
+    def __init__(self,
+        *,
+        created_at: typing.Text = ...,
+        modified_at: typing.Text = ...,
+        created_by: typing.Text = ...,
+        modified_by: typing.Text = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["created_at",b"created_at","created_by",b"created_by","modified_at",b"modified_at","modified_by",b"modified_by"]) -> None: ...
+global___CreatedModified = CreatedModified
