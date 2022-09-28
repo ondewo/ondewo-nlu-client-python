@@ -95,6 +95,9 @@ class OperationMetadata(google.protobuf.message.Message):
         EXPORT_BENCHMARK_AGENT: OperationMetadata._OperationType.ValueType  # 8
         """export benchmark agent to a zip file"""
 
+        INDEX_AGENT: OperationMetadata._OperationType.ValueType  # 9
+        """force loading agent data for full text search"""
+
     class OperationType(_OperationType, metaclass=_OperationTypeEnumTypeWrapper):
         pass
 
@@ -124,6 +127,9 @@ class OperationMetadata(google.protobuf.message.Message):
 
     EXPORT_BENCHMARK_AGENT: OperationMetadata.OperationType.ValueType  # 8
     """export benchmark agent to a zip file"""
+
+    INDEX_AGENT: OperationMetadata.OperationType.ValueType  # 9
+    """force loading agent data for full text search"""
 
 
     STATUS_FIELD_NUMBER: builtins.int
