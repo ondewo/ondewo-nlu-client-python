@@ -1,15 +1,24 @@
-<p align="center">
-    <a href="https://www.ondewo.com">
-      <img alt="ONDEWO Logo" src="https://raw.githubusercontent.com/ondewo/ondewo-logos/master/github/ondewo_logo_github_2.png"/>
-    </a>
-</p>
-
+<table align="center">
+  <tr>
+    <td>
+      <a href="https://ondewo.com/en/products/natural-language-understanding/">
+        <img height="150" src="https://raw.githubusercontent.com/ondewo/ondewo-logos/master/ondewo_we_automate_your_phone_calls.png"/>
+      </a>
+    </td>
+    <td>
+      <a href="https://twitter.com/ondewo"><img height="35px" src="https://cdn-icons-png.flaticon.com/512/733/733579.png"> </a>
+      <br><a href="https://www.facebook.com/ondewo"><img height="35px" src="https://cdn-icons-png.flaticon.com/512/733/733547.png"></a>
+      <br><a href="https://www.instagram.com/ondewo.ai/"><img height="35px" src="https://cdn-icons-png.flaticon.com/512/174/174855.png"></a>
+      <br><a href="https://www.linkedin.com/company/ondewo "><img height="35px" src="https://cdn-icons-png.flaticon.com/512/3536/3536505.png"></a>
+    </td>
+  </tr>
+</table>
 
 ## Ondewo NLU Client Python Library
 
 This library facilitates the interaction between a user and a CAI server. It achieves this by providing a higher-level interface mediator.
 
-This higher-level interface mediator is structured around a series of python files generated from protobuf files. These protobuf files specify the details of the interface, and can be used to generate code in 10+ high-level languages. They are found in the [apis submodule](./ondewo-nlu-api) along with the older Google protobufs from Dialogueflow that were used at the start.
+This higher-level interface mediator is structured around a series of python files generated from protobuf files. These protobuf files specify the details of the interface, and can be used to generate code in 10+ high-level languages. They are found in the [ONDEWO NLU API](https://github.com/ondewo/ondewo-nlu-api) along with the older Google protobufs from Dialogueflow that were used at the start. The [ONDEWO PROTO-COMPILER](https://github.com/ondewo/ondewo-proto-compiler) will generate the needed files directly in this library.
 
 ## Python Installation
 You can install the library by installing it directly from the PyPi:
@@ -34,35 +43,13 @@ make setup_developer_environment_locally
 │   │   │   ├── __init__.py
 │   │   │   └── shared_request_data.py
 │   │   ├── core
-│   │   │   ├── __pycache__
-│   │   │   │   ├── __init__.cpython-38.pyc
-│   │   │   │   ├── services_container.cpython-38.pyc
-│   │   │   │   └── services_interface.cpython-38.pyc
 │   │   │   ├── __init__.py
 │   │   │   ├── services_container.py
 │   │   │   └── services_interface.py
-│   │   ├── __pycache__
-│   │   │   ├── agent_pb2.cpython-38.pyc
-│   │   │   ├── agent_pb2_grpc.cpython-38.pyc
-│   │   │   ├── ...
 │   │   ├── scripts
 │   │   │   ├── client_example_script.py
 │   │   │   └── __init__.py
 │   │   ├── services
-│   │   │   ├── __pycache__
-│   │   │   │   ├── agents.cpython-38.pyc
-│   │   │   │   ├── aiservices.cpython-38.pyc
-│   │   │   │   ├── contexts.cpython-38.pyc
-│   │   │   │   ├── entity_types.cpython-38.pyc
-│   │   │   │   ├── __init__.cpython-38.pyc
-│   │   │   │   ├── intents.cpython-38.pyc
-│   │   │   │   ├── operations.cpython-38.pyc
-│   │   │   │   ├── project_roles.cpython-38.pyc
-│   │   │   │   ├── project_statistics.cpython-38.pyc
-│   │   │   │   ├── server_statistics.cpython-38.pyc
-│   │   │   │   ├── sessions.cpython-38.pyc
-│   │   │   │   ├── users.cpython-38.pyc
-│   │   │   │   └── utilities.cpython-38.pyc
 │   │   │   ├── agents.py
 │   │   │   ├── aiservices.py
 │   │   │   ├── contexts.py
@@ -77,9 +64,6 @@ make setup_developer_environment_locally
 │   │   │   ├── users.py
 │   │   │   └── utilities.py
 │   │   ├── utils
-│   │   │   ├── __pycache__
-│   │   │   │   ├── __init__.cpython-38.pyc
-│   │   │   │   └── login.cpython-38.pyc
 │   │   │   ├── __init__.py
 │   │   │   └── login.py
 │   │   ├── agent_pb2_grpc.py
@@ -89,8 +73,6 @@ make setup_developer_environment_locally
 │   │   ├── aiservices_pb2.py
 │   │   ├── aiservices_pb2.pyi
 │   │   ├── ...
-│   ├── __pycache__
-│   │   └── __init__.cpython-38.pyc
 │   ├── qa
 │   │   ├── core
 │   │   │   ├── __init__.py
@@ -123,6 +105,15 @@ make setup_developer_environment_locally
 ├── setup.cfg
 └── setup.py
 ```
+## Build
+
+The `make build` command is dependent on 2 `repositories` and their speciefied `version`:
+  - [ondewo-nlu-api](https://github.com/ondewo/ondewo-nlu-api) -- `NLU_API_GIT_BRANCH` in `Makefile`
+  - [ondewo-proto-compiler](https://github.com/ondewo/ondewo-proto-compiler) -- `ONDEWO_PROTO_COMPILER_GIT_BRANCH` in `Makefile`
+
+It will generate a `_pb2.py`, `_pb2.pyi` and `_pb2_grpc.py` file for every `.proto` in the api submodule.
+
+> :warning: All Files in the `ondewo` folder that dont have `pb2` in their name are handwritten, and therefor need to be manually adjusted to any changes in the proto-code.
 
 ## Examples
 
@@ -138,7 +129,7 @@ The `/examples` folder provides a possible implementation of this library. To ru
 
 The entire process is automated to make development easier. The actual steps are simple:
 
-==TODO== after Pull Request was merged in:
+TODO after Pull Request was merged in:
 
  - Checkout master:
    ```shell
