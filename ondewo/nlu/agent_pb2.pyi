@@ -1712,11 +1712,14 @@ class FullTextSearchResponseIntentTags(google.protobuf.message.Message):
         TEXT_FIELD_NUMBER: builtins.int
         INTENT_NAME_FIELD_NUMBER: builtins.int
         INTENT_DISPLAY_NAME_FIELD_NUMBER: builtins.int
+        TAGS_FIELD_NUMBER: builtins.int
         LANGUAGE_FIELD_NUMBER: builtins.int
         name: typing.Text
         text: typing.Text
         intent_name: typing.Text
         intent_display_name: typing.Text
+        @property
+        def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
         language: typing.Text
         def __init__(self,
             *,
@@ -1724,9 +1727,10 @@ class FullTextSearchResponseIntentTags(google.protobuf.message.Message):
             text: typing.Text = ...,
             intent_name: typing.Text = ...,
             intent_display_name: typing.Text = ...,
+            tags: typing.Optional[typing.Iterable[typing.Text]] = ...,
             language: typing.Text = ...,
             ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["intent_display_name",b"intent_display_name","intent_name",b"intent_name","language",b"language","name",b"name","text",b"text"]) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["intent_display_name",b"intent_display_name","intent_name",b"intent_name","language",b"language","name",b"name","tags",b"tags","text",b"text"]) -> None: ...
 
     PARENT_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
