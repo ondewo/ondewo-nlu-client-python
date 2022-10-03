@@ -6,10 +6,10 @@
       </a>
     </td>
     <td>
-      <a href="https://twitter.com/ondewo"><img height="35px" src="https://cdn-icons-png.flaticon.com/512/733/733579.png"> </a>
+      <a href="https://www.linkedin.com/company/ondewo "><img height="35px" src="https://cdn-icons-png.flaticon.com/512/3536/3536505.png"></a>
       <br><a href="https://www.facebook.com/ondewo"><img height="35px" src="https://cdn-icons-png.flaticon.com/512/733/733547.png"></a>
+      <br><a href="https://twitter.com/ondewo"><img height="35px" src="https://cdn-icons-png.flaticon.com/512/733/733579.png"> </a>
       <br><a href="https://www.instagram.com/ondewo.ai/"><img height="35px" src="https://cdn-icons-png.flaticon.com/512/174/174855.png"></a>
-      <br><a href="https://www.linkedin.com/company/ondewo "><img height="35px" src="https://cdn-icons-png.flaticon.com/512/3536/3536505.png"></a>
     </td>
   </tr>
 </table>
