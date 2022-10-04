@@ -1,22 +1,15 @@
-<style>
-  @media screen and (max-width: 770px) {
-      table{
-        background-color: black;
-      }
-  }
-</style>
 <table align="center">
   <tr>
     <td>
       <a href="https://ondewo.com/en/products/natural-language-understanding/">
-        <img style="width: 40vw" src="https://raw.githubusercontent.com/ondewo/ondewo-logos/master/ondewo_we_automate_your_phone_calls.png"/>
+        <img width="200px" src="https://raw.githubusercontent.com/ondewo/ondewo-logos/master/ondewo_we_automate_your_phone_calls.png"/>
       </a>
     </td>
     <td>
-      <a href="https://www.linkedin.com/company/ondewo "><img style="width: 4vh" src="https://cdn-icons-png.flaticon.com/512/3536/3536505.png"></a>
-      <br><a href="https://www.facebook.com/ondewo"><img style="width: 4vh" src="https://cdn-icons-png.flaticon.com/512/733/733547.png"></a>
-      <br><a href="https://twitter.com/ondewo"><img style="width: 4vh" src="https://cdn-icons-png.flaticon.com/512/733/733579.png"> </a>
-      <br><a href="https://www.instagram.com/ondewo.ai/"><img style="width: 4vh" src="https://cdn-icons-png.flaticon.com/512/174/174855.png"></a>
+      <a href="https://www.linkedin.com/company/ondewo "><img width="25px" src="https://cdn-icons-png.flaticon.com/512/3536/3536505.png"></a>
+      <br><a href="https://www.facebook.com/ondewo"><img width="25px" src="https://cdn-icons-png.flaticon.com/512/733/733547.png"></a>
+      <br><a href="https://twitter.com/ondewo"><img width="25px" src="https://cdn-icons-png.flaticon.com/512/733/733579.png"> </a>
+      <br><a href="https://www.instagram.com/ondewo.ai/"><img width="25px" src="https://cdn-icons-png.flaticon.com/512/174/174855.png"></a>
     </td>
   </tr>
 </table>
