@@ -2,7 +2,7 @@
   <tr>
     <td>
       <a href="https://ondewo.com/en/products/natural-language-understanding/">
-        <img height="120" src="https://raw.githubusercontent.com/ondewo/ondewo-logos/master/ondewo_we_automate_your_phone_calls.png"/>
+        <img style="width: 40vw" src="https://raw.githubusercontent.com/ondewo/ondewo-logos/master/ondewo_we_automate_your_phone_calls.png"/>
       </a>
     </td>
     <td>
