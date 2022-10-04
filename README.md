@@ -1,4 +1,11 @@
-<table align="center" style="background-color: white;">
+<style>
+  @media screen and (max-width: 770px) {
+      table{
+        background-color: black;
+      }
+  }
+</style>
+<table align="center">
   <tr>
     <td>
       <a href="https://ondewo.com/en/products/natural-language-understanding/">
