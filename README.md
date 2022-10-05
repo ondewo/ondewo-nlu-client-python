@@ -1,7 +1,7 @@
 <div align="center">
   <div>
     <a href="https://ondewo.com/en/products/natural-language-understanding/">
-        <img width="400px" src="https://raw.githubusercontent.com/ondewo/ondewo-logos/master/ondewo_we_automate_your_phone_calls.png"/>
+        <img width="400px" style="border-radius: 10px;" src="https://raw.githubusercontent.com/ondewo/ondewo-logos/master/ondewo_we_automate_your_phone_calls.png"/>
     </a>
   </div>
   <div>
