@@ -12,9 +12,9 @@
   </div>
 </div>
 
-<h1 align="center">
-Ondewo NLU Client Python
-</h1>
+
+## Ondewo NLU Client Python Library
+
 This library facilitates the interaction between a user and a CAI server. It achieves this by providing a higher-level interface mediator.
 
 This higher-level interface mediator is structured around a series of python files generated from protobuf files. These protobuf files specify the details of the interface, and can be used to generate code in 10+ high-level languages. They are found in the [ONDEWO NLU API](https://github.com/ondewo/ondewo-nlu-api) along with the older Google protobufs from Dialogueflow that were used at the start. The [ONDEWO PROTO-COMPILER](https://github.com/ondewo/ondewo-proto-compiler) will generate the needed files directly in this library.
