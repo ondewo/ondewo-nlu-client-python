@@ -1,7 +1,7 @@
 <div align="center">
   <div>
     <a href="https://ondewo.com/en/products/natural-language-understanding/">
-        <img width="400px" style="border-radius: 10px;" src="https://raw.githubusercontent.com/ondewo/ondewo-logos/master/ondewo_we_automate_your_phone_calls.png"/>
+        <img width="400px" src="https://raw.githubusercontent.com/ondewo/ondewo-logos/master/ondewo_we_automate_your_phone_calls.png"/>
     </a>
   </div>
   <div>
@@ -10,10 +10,11 @@
       <a href="https://twitter.com/ondewo"><img width="35px" src="https://cdn-icons-png.flaticon.com/512/733/733579.png"> </a>
       <a href="https://www.instagram.com/ondewo.ai/"><img width="35px" src="https://cdn-icons-png.flaticon.com/512/174/174855.png"></a>
   </div>
+  <h1>
+  Ondewo NLU Client Python Library
+  </h1>
 </div>
 
-
-## Ondewo NLU Client Python Library
 
 This library facilitates the interaction between a user and a CAI server. It achieves this by providing a higher-level interface mediator.
 
