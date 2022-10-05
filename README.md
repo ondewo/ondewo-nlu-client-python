@@ -1,19 +1,19 @@
 <div align="center">
-  <col>
+  <div>
     <a href="https://ondewo.com/en/products/natural-language-understanding/">
         <img width="400px" src="https://raw.githubusercontent.com/ondewo/ondewo-logos/master/ondewo_we_automate_your_phone_calls.png"/>
     </a>
-  </col>
-  <col>
+  </div>
+  <div>
       <a href="https://www.linkedin.com/company/ondewo "><img width="35px" src="https://cdn-icons-png.flaticon.com/512/3536/3536505.png"></a>
       <a href="https://www.facebook.com/ondewo"><img width="35px" src="https://cdn-icons-png.flaticon.com/512/733/733547.png"></a>
       <a href="https://twitter.com/ondewo"><img width="35px" src="https://cdn-icons-png.flaticon.com/512/733/733579.png"> </a>
       <a href="https://www.instagram.com/ondewo.ai/"><img width="35px" src="https://cdn-icons-png.flaticon.com/512/174/174855.png"></a>
-  </col>
+  </div>
 </div>
 
 <h1 align="center">
-  Ondewo NLU Client Python
+Ondewo NLU Client Python
 </h1>
 This library facilitates the interaction between a user and a CAI server. It achieves this by providing a higher-level interface mediator.
 
