@@ -1,37 +1,47 @@
-<table align="center">
-  <tr>
-    <td>
-      <a href="https://ondewo.com/en/products/natural-language-understanding/">
-        <img height="120" src="https://raw.githubusercontent.com/ondewo/ondewo-logos/master/ondewo_we_automate_your_phone_calls.png"/>
-      </a>
-    </td>
-    <td>
-      <a href="https://www.linkedin.com/company/ondewo "><img height="35px" src="https://cdn-icons-png.flaticon.com/512/3536/3536505.png"></a>
-      <br><a href="https://www.facebook.com/ondewo"><img height="35px" src="https://cdn-icons-png.flaticon.com/512/733/733547.png"></a>
-      <br><a href="https://twitter.com/ondewo"><img height="35px" src="https://cdn-icons-png.flaticon.com/512/733/733579.png"> </a>
-      <br><a href="https://www.instagram.com/ondewo.ai/"><img height="35px" src="https://cdn-icons-png.flaticon.com/512/174/174855.png"></a>
-    </td>
-  </tr>
-</table>
+<div align="center">
+  <table>
+    <tr>
+      <td>
+        <a href="https://ondewo.com/en/products/natural-language-understanding/">
+            <img width="400px" src="https://raw.githubusercontent.com/ondewo/ondewo-logos/master/ondewo_we_automate_your_phone_calls.png"/>
+        </a>
+      </td>
+    </tr>
+    <tr>
+        <td align="center">
+          <a href="https://www.linkedin.com/company/ondewo "><img width="40px" src="https://cdn-icons-png.flaticon.com/512/3536/3536505.png"></a>
+          <a href="https://www.facebook.com/ondewo"><img width="40px" src="https://cdn-icons-png.flaticon.com/512/733/733547.png"></a>
+          <a href="https://twitter.com/ondewo"><img width="40px" src="https://cdn-icons-png.flaticon.com/512/733/733579.png"> </a>
+          <a href="https://www.instagram.com/ondewo.ai/"><img width="40px" src="https://cdn-icons-png.flaticon.com/512/174/174855.png"></a>
+        </td>
+    </tr>
+  </table>
+  <h1>
+  Ondewo NLU Client Python Library
+  </h1>
+</div>
 
-## Ondewo NLU Client Python Library
 
 This library facilitates the interaction between a user and a CAI server. It achieves this by providing a higher-level interface mediator.
 
 This higher-level interface mediator is structured around a series of python files generated from protobuf files. These protobuf files specify the details of the interface, and can be used to generate code in 10+ high-level languages. They are found in the [ONDEWO NLU API](https://github.com/ondewo/ondewo-nlu-api) along with the older Google protobufs from Dialogueflow that were used at the start. The [ONDEWO PROTO-COMPILER](https://github.com/ondewo/ondewo-proto-compiler) will generate the needed files directly in this library.
 
 ## Python Installation
+
 You can install the library by installing it directly from the PyPi:
+
 ```bash
 pip install ondewo-nlu-client
 ```
 
 Or, you could clone it and install the requirements:
+
 ```bash
 git clone git@github.com:ondewo/ondewo-nlu-client-python.git
 cd ondewo-nlu-client-python
 make setup_developer_environment_locally
 ```
+
 ## Repository Structure
 
 ```
@@ -105,11 +115,13 @@ make setup_developer_environment_locally
 ├── setup.cfg
 └── setup.py
 ```
+
 ## Build
 
 The `make build` command is dependent on 2 `repositories` and their speciefied `version`:
-  - [ondewo-nlu-api](https://github.com/ondewo/ondewo-nlu-api) -- `NLU_API_GIT_BRANCH` in `Makefile`
-  - [ondewo-proto-compiler](https://github.com/ondewo/ondewo-proto-compiler) -- `ONDEWO_PROTO_COMPILER_GIT_BRANCH` in `Makefile`
+
+- [ondewo-nlu-api](https://github.com/ondewo/ondewo-nlu-api) -- `NLU_API_GIT_BRANCH` in `Makefile`
+- [ondewo-proto-compiler](https://github.com/ondewo/ondewo-proto-compiler) -- `ONDEWO_PROTO_COMPILER_GIT_BRANCH` in `Makefile`
 
 It will generate a `_pb2.py`, `_pb2.pyi` and `_pb2_grpc.py` file for every `.proto` in the api submodule.
 
@@ -118,12 +130,13 @@ It will generate a `_pb2.py`, `_pb2.pyi` and `_pb2_grpc.py` file for every `.pro
 ## Examples
 
 The `/examples` folder provides a possible implementation of this library. To run an example, simple execute it like any other python file. To specify the server and credentials, you need to provide an environment file with the following variables:
-- host         `// The hostname of the Server - e.g. 127.0.0.1`
-- port         `// Port of the Server - e.g. 6600`
-- user_name    `// Username - same as you would use in AIM`
-- password     `// Password of the user`
-- http_token   `// Token to allow access through`
-- grpc_cert    `// gRPC Certificate of the server`
+
+- host `// The hostname of the Server - e.g. 127.0.0.1`
+- port `// Port of the Server - e.g. 6600`
+- user_name `// Username - same as you would use in AIM`
+- password `// Password of the user`
+- http_token `// Token to allow access through`
+- grpc_cert `// gRPC Certificate of the server`
 
 ## Automatic Release Process
 
@@ -131,33 +144,36 @@ The entire process is automated to make development easier. The actual steps are
 
 TODO after Pull Request was merged in:
 
- - Checkout master:
-   ```shell
-   git checkout master
-   ```
- - Pull the new stuff:
-   ```shell
-   git pull
-   ```
- - (If not already, run the `setup_developer_environment_locally` command):
-   ```shell
-   make setup_developer_environment_locally
-   ```
- - Update the `ONDEWO_NLU_VERSION` in the `Makefile`
- - Add the new Release Notes in `RELEASE.md` in the format:
-   ```
-   ## Release ONDEWO NLU Python Client X.X.X       <---- Beginning of Notes
+- Checkout master:
+  ```shell
+  git checkout master
+  ```
+- Pull the new stuff:
+  ```shell
+  git pull
+  ```
+- (If not already, run the `setup_developer_environment_locally` command):
+  ```shell
+  make setup_developer_environment_locally
+  ```
+- Update the `ONDEWO_NLU_VERSION` in the `Makefile`
+- Add the new Release Notes in `RELEASE.md` in the format:
 
-      ...<NOTES>...
+  ```
+  ## Release ONDEWO NLU Python Client X.X.X       <---- Beginning of Notes
 
-   *****************                      <---- End of Notes
-   ```
- - Release:
-   ```shell
-   make ondewo_release
-   ```
+     ...<NOTES>...
+
+  *****************                      <---- End of Notes
+  ```
+
+- Release:
+  ```shell
+  make ondewo_release
+  ```
 
 ---
+
 The release process can be divided into 6 Steps:
 
 1. `build` specified version of the `ondewo-nlu-api`
@@ -167,4 +183,4 @@ The release process can be divided into 6 Steps:
 5. Create a new `Release` on GitHub
 6. Publish the built `dist` folder to `pypi.org`
 
-> :warning:  The Release Automation checks if the build has created all the proto-code files, but it does not check the code-integrity. Please build and test the generated code prior to starting the release process.
+> :warning: The Release Automation checks if the build has created all the proto-code files, but it does not check the code-integrity. Please build and test the generated code prior to starting the release process.
