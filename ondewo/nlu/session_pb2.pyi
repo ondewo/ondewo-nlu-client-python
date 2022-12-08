@@ -1151,9 +1151,7 @@ class CreateSessionRequest(google.protobuf.message.Message):
 
     @property
     def labels(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
-        """Labels for the session
-        Optional
-        """
+        """labels for the session - Optional"""
         pass
     def __init__(self,
         *,
