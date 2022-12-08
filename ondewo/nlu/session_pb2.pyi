@@ -1135,6 +1135,7 @@ class CreateSessionRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PARENT_FIELD_NUMBER: builtins.int
     SESSION_UUID_FIELD_NUMBER: builtins.int
+    LABELS_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Creates a session that collects all the conversation interactions between the machine and a user
     The unique identifier of an Agent
@@ -1148,12 +1149,19 @@ class CreateSessionRequest(google.protobuf.message.Message):
     Optional. If not provided, it will be auto-generated
     """
 
+    @property
+    def labels(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """Labels for the session
+        Optional
+        """
+        pass
     def __init__(self,
         *,
         parent: typing.Text = ...,
         session_uuid: typing.Text = ...,
+        labels: typing.Optional[typing.Iterable[typing.Text]] = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["parent",b"parent","session_uuid",b"session_uuid"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["labels",b"labels","parent",b"parent","session_uuid",b"session_uuid"]) -> None: ...
 global___CreateSessionRequest = CreateSessionRequest
 
 class DeleteSessionRequest(google.protobuf.message.Message):
