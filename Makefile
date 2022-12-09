@@ -16,7 +16,7 @@ export
 
 # MUST BE THE SAME AS API in Mayor and Minor Version Number
 # example: API 2.9.0 --> Client 2.9.X
-ONDEWO_NLU_VERSION = 3.5.0
+ONDEWO_NLU_VERSION = 3.5.1
 
 ONDEWO_NLU_API_GIT_BRANCH=tags/3.5.0
 ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags/4.1.2
