@@ -16,6 +16,7 @@
 from google.protobuf import empty_pb2
 
 from ondewo.nlu import intent_pb2
+from ondewo.nlu import operations_pb2
 from ondewo.nlu.core.services_interface import ServicesInterface
 from ondewo.nlu.intent_pb2 import BatchCreateTrainingPhrasesRequest, BatchTrainingPhrasesStatusResponse, \
     BatchGetTrainingPhrasesRequest, BatchUpdateTrainingPhrasesRequest, BatchDeleteTrainingPhrasesRequest, \
@@ -28,7 +29,6 @@ from ondewo.nlu.intent_pb2 import BatchCreateTrainingPhrasesRequest, BatchTraini
     ListParametersResponse, ListParametersRequest, IntentTagRequest, GetIntentTagsResponse, GetIntentTagsRequest, \
     GetAllIntentTagsRequest
 from ondewo.nlu.intent_pb2_grpc import IntentsStub
-from ondewo.nlu import operations_pb2
 
 
 class Intents(ServicesInterface):
@@ -103,29 +103,37 @@ class Intents(ServicesInterface):
         response: ListTrainingPhrasesResponse = self.stub.ListTrainingPhrases(request, metadata=self.metadata)
         return response
 
-    def batch_create_response_messages(self,
-                                       request: BatchCreateResponseMessagesRequest) -> BatchResponseMessagesStatusResponse:
+    def batch_create_response_messages(
+            self,
+            request: BatchCreateResponseMessagesRequest,
+    ) -> BatchResponseMessagesStatusResponse:
         response: BatchResponseMessagesStatusResponse = self.stub.BatchCreateResponseMessages(
             request, metadata=self.metadata
         )
         return response
 
-    def batch_get_response_messages(self,
-                                    request: BatchGetResponseMessagesRequest) -> BatchResponseMessagesStatusResponse:
+    def batch_get_response_messages(
+            self,
+            request: BatchGetResponseMessagesRequest,
+    ) -> BatchResponseMessagesStatusResponse:
         response: BatchResponseMessagesStatusResponse = self.stub.BatchGetResponseMessages(
             request, metadata=self.metadata
         )
         return response
 
-    def batch_update_response_messages(self,
-                                       request: BatchUpdateResponseMessagesRequest) -> BatchResponseMessagesStatusResponse:
+    def batch_update_response_messages(
+            self,
+            request: BatchUpdateResponseMessagesRequest,
+    ) -> BatchResponseMessagesStatusResponse:
         response: BatchResponseMessagesStatusResponse = self.stub.BatchUpdateResponseMessages(
             request, metadata=self.metadata
         )
         return response
 
-    def batch_delete_response_messages(self,
-                                       request: BatchDeleteResponseMessagesRequest) -> BatchDeleteResponseMessagesResponse:
+    def batch_delete_response_messages(
+            self,
+            request: BatchDeleteResponseMessagesRequest,
+    ) -> BatchDeleteResponseMessagesResponse:
         response: BatchDeleteResponseMessagesResponse = self.stub.BatchDeleteResponseMessages(
             request, metadata=self.metadata
         )

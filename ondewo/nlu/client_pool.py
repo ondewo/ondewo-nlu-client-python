@@ -63,8 +63,8 @@ class ClientPool:
         try:
             return self.pool.get(block=True, timeout=2)
         except Empty:
-            logger.warning(f'The ClientPool is empty, cannot retrieve more clients from it.\n'
-                           f'Opening new client to fulfill request...')
+            logger.warning('The ClientPool is empty, cannot retrieve more clients from it.\n'
+                           'Opening new client to fulfill request...')
 
             if self.n_clients_created_limit <= self.n_clients_created:
                 raise Full(f'A concerning number of "Clients" have been created.'
@@ -80,8 +80,8 @@ class ClientPool:
         try:
             self.pool.put(c)
         except Full:
-            logger.warning(f'The ClientPool is full, putting more clients into it is not possible.\n'
-                           f'Closing client connection...')
+            logger.warning('The ClientPool is full, putting more clients into it is not possible.\n'
+                           'Closing client connection...')
             c.disconnect()
 
     def close(self) -> None:

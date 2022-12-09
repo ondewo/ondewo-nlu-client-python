@@ -61,7 +61,7 @@ install_dependencies_locally: ## Install dependencies locally
 	pip install -r requirements.txt
 
 flake8: ## Runs flake8
-	flake8 --exculde 'ondewo'
+	flake8 --config .flake8
 
 mypy: ## Run mypy static code checking
 	pre-commit run mypy --all-files
