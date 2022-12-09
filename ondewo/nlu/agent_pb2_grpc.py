@@ -627,62 +627,71 @@ class AgentsServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetFullTextSearchEntityType(self, request, context):
-        """Full text search endpoint
+        """Full text search endpoint in entity types
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetFullTextSearchEntity(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Full text search endpoint in entities
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetFullTextSearchEntitySynonym(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Full text search endpoint in entity synonyms
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetFullTextSearchIntent(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Full text search endpoint in intents
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetFullTextSearchIntentContextIn(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Full text search endpoint in context ins of intents
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetFullTextSearchIntentContextOut(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Full text search endpoint in context outs of intents
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetFullTextSearchIntentUsersays(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Full text search endpoint in user says of intents
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetFullTextSearchIntentTags(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Full text search endpoint in tags of intents
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetFullTextSearchIntentResponse(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Full text search endpoint in responses of intents
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetFullTextSearchIntentParameters(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Full text search endpoint in parameters of intents
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
