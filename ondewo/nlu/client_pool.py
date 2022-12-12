@@ -51,7 +51,7 @@ class ClientPool:
         self.n_clients_created: int = 0
 
         # initialization
-        self.pool: Queue = Queue(maxsize=self.max_size)
+        self.pool: Queue[Client] = Queue(maxsize=self.max_size)
         self._initialize_pool()
 
     def _initialize_pool(self) -> None:
