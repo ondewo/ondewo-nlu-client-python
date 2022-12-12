@@ -1,4 +1,7 @@
 [flake8]
+ignore = C901
+max-complexity = 10
+max-line-length = 120
 exclude =
     # No need to traverse our git directory
     .git,
@@ -52,6 +55,3 @@ exclude =
     ondewo/qa/qa_pb2.pyi,
     ondewo-nlu-api,
     ondewo-proto-compiler
-
-max-complexity = 10
-max-line-length = 120
