@@ -117,13 +117,14 @@ clean_python_api:  ## Clear generated python files
 build_compiler:  ## Build proto compiler docker image
 	make -C ondewo-proto-compiler/python build
 
-generate_ondewo_protos:  ## Generate python code from proto files
+generate_ondewo_protos: ## Generate python code from proto files
 	make -f ondewo-proto-compiler/python/Makefile run \
 		PROTO_DIR=${ONDEWO_PROTOS_DIR} \
 		EXTRA_PROTO_DIR=${GOOGLE_PROTOS_DIR} \
 		TARGET_DIR='ondewo' \
 		OUTPUT_DIR=${OUTPUT_DIR}
-
+	-make precommit_hooks_run_all_files
+	make precommit_hooks_run_all_files
 
 setup_conda_env: ## Checks for CONDA Environment
 	@echo "\n START SETTING UP CONDA ENV \n"
