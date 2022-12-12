@@ -7,6 +7,7 @@ from typing import Dict, Set, List
 import tqdm as tqdm
 from ondewo.logging.decorators import Timer
 from ondewo.logging.logger import logger_console as log
+
 from ondewo.nlu.client import Client
 from ondewo.nlu.client_config import ClientConfig
 from ondewo.nlu.entity_type_pb2 import ListEntityTypesRequest, EntityTypeView, ListEntityTypesResponse
@@ -16,9 +17,9 @@ from ondewo.nlu.intent_pb2 import ListTrainingPhrasesRequest, ListIntentsRequest
 
 @Timer(logger=log.debug, log_arguments=True, message='Retrieving all entities. Elapsed time: {}')
 def get_all_entities(
-    parent: str,
-    language_code: str,
-    client: Client
+        parent: str,
+        language_code: str,
+        client: Client
 ) -> Dict[str, Dict[str, Set[str]]]:
     log.debug('START: Creating Entity Map...')
     _map: Dict[str, Dict[str, Set[str]]] = defaultdict(lambda: defaultdict(set))
@@ -42,11 +43,11 @@ def get_all_entities(
 
 @Timer(logger=log.debug, log_arguments=True, message='Checking all annotations. Elapsed time: {}')
 async def check_all_annotations(
-    parent: str,
-    language_code: str,
-    entity_map: Dict,
-    client: Client,
-    dry_run: bool = False
+        parent: str,
+        language_code: str,
+        entity_map: Dict,
+        client: Client,
+        dry_run: bool = False
 ) -> None:
     log.debug("START: Retrieving the intent list...")
     intents_response: ListIntentsResponse = client.services.intents.list_intents(
@@ -83,10 +84,8 @@ async def check_all_annotations(
             for annotation in phrase.entities:
                 t: str = phrase.text[annotation.start:annotation.end]
 
-                if (
-                    not annotation.entity_type_display_name.startswith('sys.')
-                    and t not in entity_map[annotation.entity_type_name][annotation.entity_value_name]
-                ):
+                if (not annotation.entity_type_display_name.startswith('sys.') and t not in
+                        entity_map[annotation.entity_type_name][annotation.entity_value_name]):
                     log.debug(f'Annotation! "{t}" '
                               f'on intent [{intent.display_name}] '
                               f'has no synonym on the entity type: [{annotation.entity_type_display_name}]')
@@ -136,8 +135,8 @@ async def check_all_annotations(
 
 @Timer(logger=log.debug, log_arguments=False, message='batch_update_training_phrase. Elapsed time: {}')
 async def batch_update_training_phrase(
-    client: Client,
-    phrases_to_update: List[Intent.TrainingPhrase]
+        client: Client,
+        phrases_to_update: List[Intent.TrainingPhrase]
 ) -> None:
     client.services.intents.batch_update_training_phrases(
         BatchUpdateTrainingPhrasesRequest(
