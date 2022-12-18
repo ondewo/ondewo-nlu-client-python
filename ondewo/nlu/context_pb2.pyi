@@ -105,9 +105,9 @@ global___Context = Context
 class ListContextsRequest(google.protobuf.message.Message):
     """The request message for [Contexts.ListContexts][google.cloud.dialogflow.v2.Contexts.ListContexts]."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
-    PARENT_FIELD_NUMBER: builtins.int
+    SESSION_ID_FIELD_NUMBER: builtins.int
     PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    parent: typing.Text
+    session_id: typing.Text
     """Required. The session to list all contexts from.
     Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
     """
@@ -117,10 +117,10 @@ class ListContextsRequest(google.protobuf.message.Message):
 
     def __init__(self,
         *,
-        parent: typing.Text = ...,
+        session_id: typing.Text = ...,
         page_token: typing.Text = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["page_token",b"page_token","parent",b"parent"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["page_token",b"page_token","session_id",b"session_id"]) -> None: ...
 global___ListContextsRequest = ListContextsRequest
 
 class ListContextsResponse(google.protobuf.message.Message):
@@ -166,9 +166,9 @@ global___GetContextRequest = GetContextRequest
 class CreateContextRequest(google.protobuf.message.Message):
     """The request message for [Contexts.CreateContext][google.cloud.dialogflow.v2.Contexts.CreateContext]."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
-    PARENT_FIELD_NUMBER: builtins.int
+    SESSION_ID_FIELD_NUMBER: builtins.int
     CONTEXT_FIELD_NUMBER: builtins.int
-    parent: typing.Text
+    session_id: typing.Text
     """Required. The session to create a context for.
     Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
     """
@@ -179,11 +179,11 @@ class CreateContextRequest(google.protobuf.message.Message):
         pass
     def __init__(self,
         *,
-        parent: typing.Text = ...,
+        session_id: typing.Text = ...,
         context: typing.Optional[global___Context] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["context",b"context"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["context",b"context","parent",b"parent"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["context",b"context","session_id",b"session_id"]) -> None: ...
 global___CreateContextRequest = CreateContextRequest
 
 class UpdateContextRequest(google.protobuf.message.Message):
