@@ -59,19 +59,14 @@ class SessionsStub(object):
                 request_serializer=ondewo_dot_nlu_dot_session__pb2.ListSessionLabelsRequest.SerializeToString,
                 response_deserializer=ondewo_dot_nlu_dot_session__pb2.ListSessionLabelsResponse.FromString,
                 )
-        self.ListSessionLabelsOfAllSessions = channel.unary_unary(
-                '/ondewo.nlu.Sessions/ListSessionLabelsOfAllSessions',
-                request_serializer=ondewo_dot_nlu_dot_session__pb2.ListSessionLabelsOfAllSessionsRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_session__pb2.ListSessionLabelsResponse.FromString,
-                )
         self.AddSessionLabels = channel.unary_unary(
                 '/ondewo.nlu.Sessions/AddSessionLabels',
                 request_serializer=ondewo_dot_nlu_dot_session__pb2.AddSessionLabelsRequest.SerializeToString,
                 response_deserializer=ondewo_dot_nlu_dot_session__pb2.Session.FromString,
                 )
-        self.DeleteSessionLabels = channel.unary_unary(
-                '/ondewo.nlu.Sessions/DeleteSessionLabels',
-                request_serializer=ondewo_dot_nlu_dot_session__pb2.DeleteSessionLabelsRequest.SerializeToString,
+        self.RemoveSessionLabels = channel.unary_unary(
+                '/ondewo.nlu.Sessions/RemoveSessionLabels',
+                request_serializer=ondewo_dot_nlu_dot_session__pb2.RemoveSessionLabelsRequest.SerializeToString,
                 response_deserializer=ondewo_dot_nlu_dot_session__pb2.Session.FromString,
                 )
         self.ListSessionReviews = channel.unary_unary(
@@ -165,19 +160,13 @@ class SessionsServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def ListSessionLabelsOfAllSessions(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
     def AddSessionLabels(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def DeleteSessionLabels(self, request, context):
+    def RemoveSessionLabels(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -260,19 +249,14 @@ def add_SessionsServicer_to_server(servicer, server):
                     request_deserializer=ondewo_dot_nlu_dot_session__pb2.ListSessionLabelsRequest.FromString,
                     response_serializer=ondewo_dot_nlu_dot_session__pb2.ListSessionLabelsResponse.SerializeToString,
             ),
-            'ListSessionLabelsOfAllSessions': grpc.unary_unary_rpc_method_handler(
-                    servicer.ListSessionLabelsOfAllSessions,
-                    request_deserializer=ondewo_dot_nlu_dot_session__pb2.ListSessionLabelsOfAllSessionsRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_session__pb2.ListSessionLabelsResponse.SerializeToString,
-            ),
             'AddSessionLabels': grpc.unary_unary_rpc_method_handler(
                     servicer.AddSessionLabels,
                     request_deserializer=ondewo_dot_nlu_dot_session__pb2.AddSessionLabelsRequest.FromString,
                     response_serializer=ondewo_dot_nlu_dot_session__pb2.Session.SerializeToString,
             ),
-            'DeleteSessionLabels': grpc.unary_unary_rpc_method_handler(
-                    servicer.DeleteSessionLabels,
-                    request_deserializer=ondewo_dot_nlu_dot_session__pb2.DeleteSessionLabelsRequest.FromString,
+            'RemoveSessionLabels': grpc.unary_unary_rpc_method_handler(
+                    servicer.RemoveSessionLabels,
+                    request_deserializer=ondewo_dot_nlu_dot_session__pb2.RemoveSessionLabelsRequest.FromString,
                     response_serializer=ondewo_dot_nlu_dot_session__pb2.Session.SerializeToString,
             ),
             'ListSessionReviews': grpc.unary_unary_rpc_method_handler(
@@ -446,23 +430,6 @@ class Sessions(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def ListSessionLabelsOfAllSessions(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Sessions/ListSessionLabelsOfAllSessions',
-            ondewo_dot_nlu_dot_session__pb2.ListSessionLabelsOfAllSessionsRequest.SerializeToString,
-            ondewo_dot_nlu_dot_session__pb2.ListSessionLabelsResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
     def AddSessionLabels(request,
             target,
             options=(),
@@ -480,7 +447,7 @@ class Sessions(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def DeleteSessionLabels(request,
+    def RemoveSessionLabels(request,
             target,
             options=(),
             channel_credentials=None,
@@ -490,8 +457,8 @@ class Sessions(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Sessions/DeleteSessionLabels',
-            ondewo_dot_nlu_dot_session__pb2.DeleteSessionLabelsRequest.SerializeToString,
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Sessions/RemoveSessionLabels',
+            ondewo_dot_nlu_dot_session__pb2.RemoveSessionLabelsRequest.SerializeToString,
             ondewo_dot_nlu_dot_session__pb2.Session.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
