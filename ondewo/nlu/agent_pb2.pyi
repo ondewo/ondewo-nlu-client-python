@@ -115,6 +115,7 @@ class _ReportTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     """report of statistics of the general (relevant to all supported languages) part of intent database"""
 
 class ReportType(_ReportType, metaclass=_ReportTypeEnumTypeWrapper):
+    """Type of reports about the domain of the agent"""
     pass
 
 ALL: ReportType.ValueType  # 0
@@ -141,14 +142,27 @@ class _ReportFormat:
 class _ReportFormatEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_ReportFormat.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     CSV: _ReportFormat.ValueType  # 0
+    """CSV (comma separated values) file format"""
+
     HTML: _ReportFormat.ValueType  # 1
+    """HTML file format"""
+
     JSON: _ReportFormat.ValueType  # 2
+    """JSON file format"""
+
 class ReportFormat(_ReportFormat, metaclass=_ReportFormatEnumTypeWrapper):
+    """File formats for reports"""
     pass
 
 CSV: ReportFormat.ValueType  # 0
+"""CSV (comma separated values) file format"""
+
 HTML: ReportFormat.ValueType  # 1
+"""HTML file format"""
+
 JSON: ReportFormat.ValueType  # 2
+"""JSON file format"""
+
 global___ReportFormat = ReportFormat
 
 
@@ -167,9 +181,7 @@ class _AgentStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._En
     """
 
 class AgentStatus(_AgentStatus, metaclass=_AgentStatusEnumTypeWrapper):
-    """fixme: add endpoint to set agent owner
-
-    """
+    """fixme: add endpoint to set agent owner"""
     pass
 
 ACTIVE: AgentStatus.ValueType  # 0
@@ -266,9 +278,13 @@ class AgentWithOwner(google.protobuf.message.Message):
     AGENT_FIELD_NUMBER: builtins.int
     OWNER_FIELD_NUMBER: builtins.int
     @property
-    def agent(self) -> global___Agent: ...
+    def agent(self) -> global___Agent:
+        """The agent"""
+        pass
     @property
-    def owner(self) -> ondewo.nlu.user_pb2.User: ...
+    def owner(self) -> ondewo.nlu.user_pb2.User:
+        """User who created the agent"""
+        pass
     def __init__(self,
         *,
         agent: typing.Optional[global___Agent] = ...,
@@ -304,7 +320,9 @@ class CreateAgentRequest(google.protobuf.message.Message):
     AGENT_FIELD_NUMBER: builtins.int
     AGENT_VIEW_FIELD_NUMBER: builtins.int
     @property
-    def agent(self) -> global___Agent: ...
+    def agent(self) -> global___Agent:
+        """The agent"""
+        pass
     agent_view: global___AgentView.ValueType
     """Optional. Specify the view of the returned agent (sparse view by default)"""
 
@@ -323,7 +341,9 @@ class UpdateAgentRequest(google.protobuf.message.Message):
     AGENT_VIEW_FIELD_NUMBER: builtins.int
     UPDATE_MASK_FIELD_NUMBER: builtins.int
     @property
-    def agent(self) -> global___Agent: ...
+    def agent(self) -> global___Agent:
+        """The agent"""
+        pass
     agent_view: global___AgentView.ValueType
     """Optional. Specify the view of the returned agent (sparse view by default)"""
 
@@ -345,6 +365,10 @@ class DeleteAgentRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PARENT_FIELD_NUMBER: builtins.int
     parent: typing.Text
+    """Required. The project that the agent to fetch is associated with.
+    Format: `projects/<Project ID>/agents`.
+    """
+
     def __init__(self,
         *,
         parent: typing.Text = ...,
@@ -456,7 +480,11 @@ class TrainAgentRequest(google.protobuf.message.Message):
     """
 
     branch: typing.Text
+    """Name of the branch of the agent for versioning. The default branch name is <code>develop</code>."""
+
     initiation_protocol: global___InitiationProtocol.ValueType
+    """Defines when to initiate newly created agent when training started"""
+
     def __init__(self,
         *,
         parent: typing.Text = ...,
@@ -477,6 +505,8 @@ class BuildCacheRequest(google.protobuf.message.Message):
     """
 
     branch: typing.Text
+    """Name of the branch of the agent for versioning. The default branch name is <code>develop</code>."""
+
     def __init__(self,
         *,
         parent: typing.Text = ...,
@@ -617,6 +647,8 @@ class ExportBenchmarkAgentResponse(google.protobuf.message.Message):
     AGENT_CONTENT_FIELD_NUMBER: builtins.int
     TRAINING_PHRASES_FIELD_NUMBER: builtins.int
     agent_content: builtins.bytes
+    """Agent responses as zip file"""
+
     @property
     def training_phrases(self) -> google.protobuf.internal.containers.MessageMap[typing.Text, ondewo.nlu.intent_pb2.ListTrainingPhrasesResponse]:
         """Key is the language code, value is the corresponding ListTrainingPhrasesResponse"""
@@ -636,8 +668,14 @@ class OptimizeRankingMatchRequest(google.protobuf.message.Message):
     OPTIMIZATION_CONFIGS_FIELD_NUMBER: builtins.int
     IN_PLACE_FIELD_NUMBER: builtins.int
     parent: typing.Text
+    """Required. The project that the agent to train is associated with.
+    Format: `projects/<Project ID>`.
+    """
+
     @property
-    def language_codes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
+    def language_codes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """languages that should be optimized"""
+        pass
     @property
     def optimization_configs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RankingMatchOptimizationConfig]:
         """optimization config will contain all possible optimizations, with which we will come up in the future"""
@@ -664,8 +702,14 @@ class RankingMatchOptimizationConfig(google.protobuf.message.Message):
     RANDOM_SEED_FIELD_NUMBER: builtins.int
     INITIAL_THRESHOLDS_FIELD_NUMBER: builtins.int
     language_code: typing.Text
+    """language"""
+
     n_splits: builtins.int
+    """number of splits for optimization"""
+
     random_seed: builtins.int
+    """random seed number for defining the split of train and test of training phrases for optimization"""
+
     @property
     def initial_thresholds(self) -> google.protobuf.struct_pb2.Struct:
         """initial thresholds are optional, if not given will be taken from the current config
@@ -688,9 +732,13 @@ class OptimizeRankingMatchResponse(google.protobuf.message.Message):
     OPTIMIZATION_INFO_FIELD_NUMBER: builtins.int
     OPTIMIZED_ONDEWO_CONFIG_FIELD_NUMBER: builtins.int
     @property
-    def optimization_info(self) -> google.protobuf.struct_pb2.Struct: ...
+    def optimization_info(self) -> google.protobuf.struct_pb2.Struct:
+        """info about optimization"""
+        pass
     @property
-    def optimized_ondewo_config(self) -> google.protobuf.struct_pb2.Struct: ...
+    def optimized_ondewo_config(self) -> google.protobuf.struct_pb2.Struct:
+        """the optimized configuration of the ondewo agent e.g., optimized parameters"""
+        pass
     def __init__(self,
         *,
         optimization_info: typing.Optional[google.protobuf.struct_pb2.Struct] = ...,
@@ -800,8 +848,14 @@ class GetAgentStatisticsRequest(google.protobuf.message.Message):
     """
 
     format: global___ReportFormat.ValueType
+    """File formats for reports"""
+
     language_code: typing.Text
+    """the language to calculate statistics about"""
+
     type: global___ReportType.ValueType
+    """Type of reports about the domain of the agent"""
+
     def __init__(self,
         *,
         parent: typing.Text = ...,
@@ -821,7 +875,11 @@ class GetAgentStatisticsResponse(google.protobuf.message.Message):
     """Statistic info."""
 
     format: global___ReportFormat.ValueType
+    """File formats for reports"""
+
     type: global___ReportType.ValueType
+    """Type of reports about the domain of the agent"""
+
     def __init__(self,
         *,
         reports: builtins.bytes = ...,
@@ -837,8 +895,16 @@ class AddUserToProjectRequest(google.protobuf.message.Message):
     USER_ID_FIELD_NUMBER: builtins.int
     PROJECT_ROLE_ID_FIELD_NUMBER: builtins.int
     parent: typing.Text
+    """Required. The project that the agent to train is associated with.
+    Format: `projects/<Project ID>`.
+    """
+
     user_id: typing.Text
+    """id of the user"""
+
     project_role_id: builtins.int
+    """role id of the user in the project"""
+
     def __init__(self,
         *,
         parent: typing.Text = ...,
@@ -853,7 +919,13 @@ class RemoveUserFromProjectRequest(google.protobuf.message.Message):
     PARENT_FIELD_NUMBER: builtins.int
     USER_ID_FIELD_NUMBER: builtins.int
     parent: typing.Text
+    """Required. The project that the agent to train is associated with.
+    Format: `projects/<Project ID>`.
+    """
+
     user_id: typing.Text
+    """id of the user"""
+
     def __init__(self,
         *,
         parent: typing.Text = ...,
@@ -867,6 +939,10 @@ class ListUsersInProjectRequest(google.protobuf.message.Message):
     PARENT_FIELD_NUMBER: builtins.int
     PAGE_TOKEN_FIELD_NUMBER: builtins.int
     parent: typing.Text
+    """Required. The project that the agent to train is associated with.
+    Format: `projects/<Project ID>`.
+    """
+
     page_token: typing.Text
     """Optional. The next_page_token value returned from a previous list request."""
 
@@ -884,14 +960,16 @@ class UserInProject(google.protobuf.message.Message):
     USER_FIELD_NUMBER: builtins.int
     ROLE_ID_FIELD_NUMBER: builtins.int
     parent: typing.Text
-    """ID of the project"""
+    """Required. The project that the agent to train is associated with.
+    Format: `projects/<Project ID>`.
+    """
 
     @property
     def user(self) -> ondewo.nlu.user_pb2.User:
         """User object"""
         pass
     role_id: builtins.int
-    """ID of the project role of the user"""
+    """id of the project role of the user"""
 
     def __init__(self,
         *,
@@ -904,6 +982,7 @@ class UserInProject(google.protobuf.message.Message):
 global___UserInProject = UserInProject
 
 class ListUsersInProjectResponse(google.protobuf.message.Message):
+    """List the users in a project"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     USERS_FIELD_NUMBER: builtins.int
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
@@ -927,11 +1006,16 @@ class ListUsersInProjectResponse(google.protobuf.message.Message):
 global___ListUsersInProjectResponse = ListUsersInProjectResponse
 
 class GetPlatformInfoResponse(google.protobuf.message.Message):
+    """GIT information about the version of the server"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     VERSION_FIELD_NUMBER: builtins.int
     COMMIT_HASH_FIELD_NUMBER: builtins.int
     version: typing.Text
+    """version of the server build"""
+
     commit_hash: typing.Text
+    """git commit hash of the server build"""
+
     def __init__(self,
         *,
         version: typing.Text = ...,
@@ -978,6 +1062,7 @@ class ListProjectPermissionsResponse(google.protobuf.message.Message):
 global___ListProjectPermissionsResponse = ListProjectPermissionsResponse
 
 class SetAgentStatusRequest(google.protobuf.message.Message):
+    """status of the agent"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PARENT_FIELD_NUMBER: builtins.int
     STATUS_FIELD_NUMBER: builtins.int
@@ -1003,6 +1088,7 @@ class SetAgentStatusRequest(google.protobuf.message.Message):
 global___SetAgentStatusRequest = SetAgentStatusRequest
 
 class AgentSorting(google.protobuf.message.Message):
+    """Sorting order of agent"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     class _AgentSortingField:
         ValueType = typing.NewType('ValueType', builtins.int)
@@ -1010,23 +1096,48 @@ class AgentSorting(google.protobuf.message.Message):
     class _AgentSortingFieldEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[AgentSorting._AgentSortingField.ValueType], builtins.type):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         NO_AGENT_SORTING: AgentSorting._AgentSortingField.ValueType  # 0
+        """no sorting"""
+
         SORT_AGENT_BY_NAME: AgentSorting._AgentSortingField.ValueType  # 1
+        """sorting by name"""
+
         SORT_AGENT_BY_CREATION_DATE: AgentSorting._AgentSortingField.ValueType  # 2
+        """sorting by creation date"""
+
         SORT_AGENT_BY_LAST_UPDATED: AgentSorting._AgentSortingField.ValueType  # 3
+        """sorting by last updated date"""
+
         SORT_AGENT_BY_OWNER_NAME: AgentSorting._AgentSortingField.ValueType  # 4
+        """sorting by owner, i.e. user who owns the agent which is usually the creator of the agent"""
+
     class AgentSortingField(_AgentSortingField, metaclass=_AgentSortingFieldEnumTypeWrapper):
+        """Sorting field"""
         pass
 
     NO_AGENT_SORTING: AgentSorting.AgentSortingField.ValueType  # 0
+    """no sorting"""
+
     SORT_AGENT_BY_NAME: AgentSorting.AgentSortingField.ValueType  # 1
+    """sorting by name"""
+
     SORT_AGENT_BY_CREATION_DATE: AgentSorting.AgentSortingField.ValueType  # 2
+    """sorting by creation date"""
+
     SORT_AGENT_BY_LAST_UPDATED: AgentSorting.AgentSortingField.ValueType  # 3
+    """sorting by last updated date"""
+
     SORT_AGENT_BY_OWNER_NAME: AgentSorting.AgentSortingField.ValueType  # 4
+    """sorting by owner, i.e. user who owns the agent which is usually the creator of the agent"""
+
 
     SORTING_FIELD_FIELD_NUMBER: builtins.int
     SORTING_MODE_FIELD_NUMBER: builtins.int
     sorting_field: global___AgentSorting.AgentSortingField.ValueType
+    """sorting field for agent sorting"""
+
     sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType
+    """Sorting mode"""
+
     def __init__(self,
         *,
         sorting_field: global___AgentSorting.AgentSortingField.ValueType = ...,

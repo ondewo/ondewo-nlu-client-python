@@ -210,6 +210,7 @@ class QueryParameters(google.protobuf.message.Message):
     CONTEXTS_FIELD_NUMBER: builtins.int
     RESET_CONTEXTS_FIELD_NUMBER: builtins.int
     PAYLOAD_FIELD_NUMBER: builtins.int
+    LABELS_FIELD_NUMBER: builtins.int
     time_zone: typing.Text
     """Optional. The time zone of this conversational query from the
     [time zone database](https://www.iana.org/time-zones), e.g.,
@@ -238,6 +239,10 @@ class QueryParameters(google.protobuf.message.Message):
         associated with the agent. Arbitrary JSON objects are supported.
         """
         pass
+    @property
+    def labels(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """labels associated to this request"""
+        pass
     def __init__(self,
         *,
         time_zone: typing.Text = ...,
@@ -245,9 +250,10 @@ class QueryParameters(google.protobuf.message.Message):
         contexts: typing.Optional[typing.Iterable[ondewo.nlu.context_pb2.Context]] = ...,
         reset_contexts: builtins.bool = ...,
         payload: typing.Optional[google.protobuf.struct_pb2.Struct] = ...,
+        labels: typing.Optional[typing.Iterable[typing.Text]] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["geo_location",b"geo_location","payload",b"payload"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["contexts",b"contexts","geo_location",b"geo_location","payload",b"payload","reset_contexts",b"reset_contexts","time_zone",b"time_zone"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["contexts",b"contexts","geo_location",b"geo_location","labels",b"labels","payload",b"payload","reset_contexts",b"reset_contexts","time_zone",b"time_zone"]) -> None: ...
 global___QueryParameters = QueryParameters
 
 class QueryInput(google.protobuf.message.Message):
@@ -971,10 +977,14 @@ class SessionFilter(google.protobuf.message.Message):
         pass
     @property
     def input_contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]:
-        """Match only sessions whose session info contains at least one step having all the contexts specified here"""
+        """Match only sessions whose session info contains at least one step having all the contexts specified here
+        The input contexts are pre-conditions for detecting intents
+        """
         pass
     @property
-    def output_contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]: ...
+    def output_contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]:
+        """The output contexts are the result of the intent matching and track the contextual state of a conversation"""
+        pass
     def __init__(self,
         *,
         language_codes: typing.Optional[typing.Iterable[typing.Text]] = ...,
@@ -1135,6 +1145,7 @@ class CreateSessionRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PARENT_FIELD_NUMBER: builtins.int
     SESSION_UUID_FIELD_NUMBER: builtins.int
+    LABELS_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Creates a session that collects all the conversation interactions between the machine and a user
     The unique identifier of an Agent
@@ -1148,12 +1159,17 @@ class CreateSessionRequest(google.protobuf.message.Message):
     Optional. If not provided, it will be auto-generated
     """
 
+    @property
+    def labels(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """labels for the session - Optional"""
+        pass
     def __init__(self,
         *,
         parent: typing.Text = ...,
         session_uuid: typing.Text = ...,
+        labels: typing.Optional[typing.Iterable[typing.Text]] = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["parent",b"parent","session_uuid",b"session_uuid"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["labels",b"labels","parent",b"parent","session_uuid",b"session_uuid"]) -> None: ...
 global___CreateSessionRequest = CreateSessionRequest
 
 class DeleteSessionRequest(google.protobuf.message.Message):
@@ -1340,6 +1356,19 @@ global___DetectedIntent = DetectedIntent
 
 class ListSessionLabelsRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    SESSION_ID_FIELD_NUMBER: builtins.int
+    session_id: typing.Text
+    """The id of the session"""
+
+    def __init__(self,
+        *,
+        session_id: typing.Text = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["session_id",b"session_id"]) -> None: ...
+global___ListSessionLabelsRequest = ListSessionLabelsRequest
+
+class ListSessionLabelsOfAllSessionsRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PARENT_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """The parent for which the labels for all sessions should be listed
@@ -1351,13 +1380,15 @@ class ListSessionLabelsRequest(google.protobuf.message.Message):
         parent: typing.Text = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["parent",b"parent"]) -> None: ...
-global___ListSessionLabelsRequest = ListSessionLabelsRequest
+global___ListSessionLabelsOfAllSessionsRequest = ListSessionLabelsOfAllSessionsRequest
 
 class ListSessionLabelsResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     LABELS_FIELD_NUMBER: builtins.int
     @property
-    def labels(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
+    def labels(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """The labels of the session"""
+        pass
     def __init__(self,
         *,
         labels: typing.Optional[typing.Iterable[typing.Text]] = ...,
@@ -1369,37 +1400,39 @@ class AddSessionLabelsRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     SESSION_ID_FIELD_NUMBER: builtins.int
     LABELS_FIELD_NUMBER: builtins.int
-    SESSION_VIEW_FIELD_NUMBER: builtins.int
     session_id: typing.Text
+    """The id of the session"""
+
     @property
-    def labels(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
-    session_view: global___Session.View.ValueType
+    def labels(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """The labels to add to the session"""
+        pass
     def __init__(self,
         *,
         session_id: typing.Text = ...,
         labels: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        session_view: global___Session.View.ValueType = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["labels",b"labels","session_id",b"session_id","session_view",b"session_view"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["labels",b"labels","session_id",b"session_id"]) -> None: ...
 global___AddSessionLabelsRequest = AddSessionLabelsRequest
 
-class RemoveSessionLabelsRequest(google.protobuf.message.Message):
+class DeleteSessionLabelsRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     SESSION_ID_FIELD_NUMBER: builtins.int
     LABELS_FIELD_NUMBER: builtins.int
-    SESSION_VIEW_FIELD_NUMBER: builtins.int
     session_id: typing.Text
+    """The id of the session"""
+
     @property
-    def labels(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
-    session_view: global___Session.View.ValueType
+    def labels(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """The labels to delete from the session"""
+        pass
     def __init__(self,
         *,
         session_id: typing.Text = ...,
         labels: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        session_view: global___Session.View.ValueType = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["labels",b"labels","session_id",b"session_id","session_view",b"session_view"]) -> None: ...
-global___RemoveSessionLabelsRequest = RemoveSessionLabelsRequest
+    def ClearField(self, field_name: typing_extensions.Literal["labels",b"labels","session_id",b"session_id"]) -> None: ...
+global___DeleteSessionLabelsRequest = DeleteSessionLabelsRequest
 
 class ListSessionReviewsRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor

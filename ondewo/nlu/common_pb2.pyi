@@ -17,16 +17,26 @@ class _SortingMode:
 class _SortingModeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_SortingMode.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     ASCENDING: _SortingMode.ValueType  # 0
+    """ascending sorting"""
+
     DESCENDING: _SortingMode.ValueType  # 1
+    """descending sorting"""
+
 class SortingMode(_SortingMode, metaclass=_SortingModeEnumTypeWrapper):
+    """Sorting mode"""
     pass
 
 ASCENDING: SortingMode.ValueType  # 0
+"""ascending sorting"""
+
 DESCENDING: SortingMode.ValueType  # 1
+"""descending sorting"""
+
 global___SortingMode = SortingMode
 
 
 class StatResponse(google.protobuf.message.Message):
+    """statistic response"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     VALUE_FIELD_NUMBER: builtins.int
     value: builtins.int
