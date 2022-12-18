@@ -225,17 +225,16 @@ class DeleteContextRequest(google.protobuf.message.Message):
 global___DeleteContextRequest = DeleteContextRequest
 
 class DeleteAllContextsRequest(google.protobuf.message.Message):
-    """The request message for [Contexts.DeleteAllContexts][google.cloud.dialogflow.v2.Contexts.DeleteAllContexts]."""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-    PARENT_FIELD_NUMBER: builtins.int
-    parent: typing.Text
-    """Required. The name of the session to delete all contexts from. Format:
-    `projects/<Project ID>/agent/sessions/<Session ID>`.
+    """The request message for [Contexts.DeleteAllContexts][google.cloud.dialogflow.v2.Contexts.DeleteAllContexts].
+    Required. The name of the session to delete all contexts from.
+    Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_UUID>`.
     """
-
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    SESSION_ID_FIELD_NUMBER: builtins.int
+    session_id: typing.Text
     def __init__(self,
         *,
-        parent: typing.Text = ...,
+        session_id: typing.Text = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["parent",b"parent"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["session_id",b"session_id"]) -> None: ...
 global___DeleteAllContextsRequest = DeleteAllContextsRequest
