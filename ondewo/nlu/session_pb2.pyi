@@ -1190,7 +1190,7 @@ class SessionInfo(google.protobuf.message.Message):
     STARTED_TIME_SLOT_PER_HALF_HOUR_FIELD_NUMBER: builtins.int
     STARTED_TIME_SLOT_PER_DAY_PHASE_FIELD_NUMBER: builtins.int
     STARTED_TIME_SLOT_PER_MINUTE_FIELD_NUMBER: builtins.int
-    DURATION_IN_S_ROUNDED_MAX_FIELD_NUMBER: builtins.int
+    DURATION_IN_S_ROUNDED_FIELD_NUMBER: builtins.int
     @property
     def language_codes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
         """The language codes used in the given session."""
@@ -1279,7 +1279,7 @@ class SessionInfo(google.protobuf.message.Message):
     started_time_slot_per_minute: typing.Text
     """started_time_slot_per_minute (e.g. 14:00)"""
 
-    duration_in_s_rounded_max: builtins.float
+    duration_in_s_rounded: builtins.float
     """duration in seconds rounded"""
 
     def __init__(self,
@@ -1308,9 +1308,9 @@ class SessionInfo(google.protobuf.message.Message):
         started_time_slot_per_half_hour: typing.Text = ...,
         started_time_slot_per_day_phase: typing.Text = ...,
         started_time_slot_per_minute: typing.Text = ...,
-        duration_in_s_rounded_max: builtins.float = ...,
+        duration_in_s_rounded: builtins.float = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["duration_in_m",b"duration_in_m","duration_in_m_rounded",b"duration_in_m_rounded","duration_in_s",b"duration_in_s","duration_in_s_rounded_max",b"duration_in_s_rounded_max","duration_interval_15s_rounded",b"duration_interval_15s_rounded","duration_interval_30s_rounded",b"duration_interval_30s_rounded","duration_interval_45s_rounded",b"duration_interval_45s_rounded","earliest",b"earliest","input_context_steps",b"input_context_steps","intent_tags",b"intent_tags","labels",b"labels","language_codes",b"language_codes","latest",b"latest","matched_entity_types",b"matched_entity_types","matched_intents",b"matched_intents","min_entity_types_confidence",b"min_entity_types_confidence","min_intents_confidence",b"min_intents_confidence","number_turns",b"number_turns","output_context_steps",b"output_context_steps","started_time_slot_per_day_phase",b"started_time_slot_per_day_phase","started_time_slot_per_half_hour",b"started_time_slot_per_half_hour","started_time_slot_per_hour",b"started_time_slot_per_hour","started_time_slot_per_minute",b"started_time_slot_per_minute","started_time_slot_per_quarter_hour",b"started_time_slot_per_quarter_hour","user_ids",b"user_ids"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["duration_in_m",b"duration_in_m","duration_in_m_rounded",b"duration_in_m_rounded","duration_in_s",b"duration_in_s","duration_in_s_rounded",b"duration_in_s_rounded","duration_interval_15s_rounded",b"duration_interval_15s_rounded","duration_interval_30s_rounded",b"duration_interval_30s_rounded","duration_interval_45s_rounded",b"duration_interval_45s_rounded","earliest",b"earliest","input_context_steps",b"input_context_steps","intent_tags",b"intent_tags","labels",b"labels","language_codes",b"language_codes","latest",b"latest","matched_entity_types",b"matched_entity_types","matched_intents",b"matched_intents","min_entity_types_confidence",b"min_entity_types_confidence","min_intents_confidence",b"min_intents_confidence","number_turns",b"number_turns","output_context_steps",b"output_context_steps","started_time_slot_per_day_phase",b"started_time_slot_per_day_phase","started_time_slot_per_half_hour",b"started_time_slot_per_half_hour","started_time_slot_per_hour",b"started_time_slot_per_hour","started_time_slot_per_minute",b"started_time_slot_per_minute","started_time_slot_per_quarter_hour",b"started_time_slot_per_quarter_hour","user_ids",b"user_ids"]) -> None: ...
 global___SessionInfo = SessionInfo
 
 class ListSessionsResponse(google.protobuf.message.Message):
