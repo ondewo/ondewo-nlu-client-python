@@ -4,6 +4,7 @@ isort:skip_file
 """
 import builtins
 import google.protobuf.descriptor
+import google.protobuf.field_mask_pb2
 import google.protobuf.internal.containers
 import google.protobuf.internal.enum_type_wrapper
 import google.protobuf.message
@@ -862,6 +863,7 @@ class ListSessionsRequest(google.protobuf.message.Message):
     SESSION_VIEW_FIELD_NUMBER: builtins.int
     PAGE_TOKEN_FIELD_NUMBER: builtins.int
     SESSION_FILTER_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """The parent for which sessions should be listed
     Format: `projects/<PROJECT_ID>/agent`.
@@ -877,15 +879,20 @@ class ListSessionsRequest(google.protobuf.message.Message):
     def session_filter(self) -> global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
         pass
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields will be filled with data."""
+        pass
     def __init__(self,
         *,
         parent: typing.Text = ...,
         session_view: global___Session.View.ValueType = ...,
         page_token: typing.Text = ...,
         session_filter: typing.Optional[global___SessionFilter] = ...,
+        field_mask: typing.Optional[google.protobuf.field_mask_pb2.FieldMask] = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["session_filter",b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["page_token",b"page_token","parent",b"parent","session_filter",b"session_filter","session_view",b"session_view"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["field_mask",b"field_mask","session_filter",b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["field_mask",b"field_mask","page_token",b"page_token","parent",b"parent","session_filter",b"session_filter","session_view",b"session_view"]) -> None: ...
 global___ListSessionsRequest = ListSessionsRequest
 
 class SessionFilter(google.protobuf.message.Message):
@@ -911,6 +918,30 @@ class SessionFilter(google.protobuf.message.Message):
     SESSION_IDS_FIELD_NUMBER: builtins.int
     INPUT_CONTEXTS_FIELD_NUMBER: builtins.int
     OUTPUT_CONTEXTS_FIELD_NUMBER: builtins.int
+    DURATION_IN_S_MIN_FIELD_NUMBER: builtins.int
+    DURATION_IN_S_MAX_FIELD_NUMBER: builtins.int
+    DURATION_IN_M_MIN_FIELD_NUMBER: builtins.int
+    DURATION_IN_M_MAX_FIELD_NUMBER: builtins.int
+    DURATION_IN_M_ROUNDED_MIN_FIELD_NUMBER: builtins.int
+    DURATION_IN_M_ROUNDED_MAX_FIELD_NUMBER: builtins.int
+    DURATION_INTERVAL_15S_ROUNDED_MIN_FIELD_NUMBER: builtins.int
+    DURATION_INTERVAL_15S_ROUNDED_MAX_FIELD_NUMBER: builtins.int
+    DURATION_INTERVAL_30S_ROUNDED_MIN_FIELD_NUMBER: builtins.int
+    DURATION_INTERVAL_30S_ROUNDED_MAX_FIELD_NUMBER: builtins.int
+    DURATION_INTERVAL_45S_ROUNDED_MIN_FIELD_NUMBER: builtins.int
+    DURATION_INTERVAL_45S_ROUNDED_MAX_FIELD_NUMBER: builtins.int
+    STARTED_TIME_SLOT_PER_HOUR_MIN_FIELD_NUMBER: builtins.int
+    STARTED_TIME_SLOT_PER_HOUR_MAX_FIELD_NUMBER: builtins.int
+    STARTED_TIME_SLOT_PER_QUARTER_HOUR_MIN_FIELD_NUMBER: builtins.int
+    STARTED_TIME_SLOT_PER_QUARTER_HOUR_MAX_FIELD_NUMBER: builtins.int
+    STARTED_TIME_SLOT_PER_HALF_HOUR_MIN_FIELD_NUMBER: builtins.int
+    STARTED_TIME_SLOT_PER_HALF_HOUR_MAX_FIELD_NUMBER: builtins.int
+    STARTED_TIME_SLOT_PER_DAY_PHASE_MIN_FIELD_NUMBER: builtins.int
+    STARTED_TIME_SLOT_PER_DAY_PHASE_MAX_FIELD_NUMBER: builtins.int
+    STARTED_TIME_SLOT_PER_MINUTE_MIN_FIELD_NUMBER: builtins.int
+    STARTED_TIME_SLOT_PER_MINUTE_MAX_FIELD_NUMBER: builtins.int
+    DURATION_IN_S_ROUNDED_MIN_FIELD_NUMBER: builtins.int
+    DURATION_IN_S_ROUNDED_MAX_FIELD_NUMBER: builtins.int
     @property
     def language_codes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
         """Match only sessions with all of the following language_codes"""
@@ -928,36 +959,44 @@ class SessionFilter(google.protobuf.message.Message):
         """
         pass
     min_intents_confidence_min: builtins.float
-    """Match only sessions where the minimum confidence for intent detection along the session falls in the following range
-    defaults to -1 if not set
+    """Match only sessions where the minimum confidence for intent detection along the session falls
+    in the following range. Defaults to -1 if not set.
     """
 
     min_intents_confidence_max: builtins.float
-    """defaults to +1 if not set"""
+    """Match only sessions where the minimum confidence for intent detection along the session falls
+    in the following range. Defaults to +1 if not set.
+    """
 
     min_entity_types_confidence_min: builtins.float
-    """Match only sessions where the minimum confidence for entity recognition along the session falls in the following range
-    defaults to -1 if not set
+    """Match only sessions where the minimum confidence for entity recognition along the session falls
+     in the following range. Defaults to -1 if not set.
     """
 
     min_entity_types_confidence_max: builtins.float
-    """defaults to +1 if not set"""
+    """Match only sessions where the minimum confidence for entity recognition along the session falls
+     in the following range. Defaults to +1 if not set.
+    """
 
     earliest: builtins.float
-    """Match only sessions whose time range falls within the following range (in UNIX epochs)
-    defaults to 0 if not set
+    """Match only sessions whose time range falls within the following range (in UNIX epochs).
+    Defaults to 0 if not set.
     """
 
     latest: builtins.float
-    """defaults to current epoch if not set"""
+    """Match only sessions whose time range falls within the following range (in UNIX epochs).
+    Defaults to current epoch if not set
+    """
 
     min_number_turns: builtins.int
     """Match only sessions for which the number of turns (interaction steps) falls in the following range
-    defaults to 0 if not set
+    Defaults to 0 if not set.
     """
 
     max_number_turns: builtins.int
-    """defaults to MAXINT if not set"""
+    """Match only sessions for which the number of turns (interaction steps) falls in the following range
+    Defaults to MAXINT if not set.
+    """
 
     @property
     def labels(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
@@ -985,6 +1024,78 @@ class SessionFilter(google.protobuf.message.Message):
     def output_contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]:
         """The output contexts are the result of the intent matching and track the contextual state of a conversation"""
         pass
+    duration_in_s_min: builtins.float
+    """Match only sessions for which the duration in seconds are larger or equal"""
+
+    duration_in_s_max: builtins.float
+    """Match only sessions for which the duration in seconds are smaller or equal"""
+
+    duration_in_m_min: builtins.float
+    """Match only sessions for which the duration in minutes are larger or equal"""
+
+    duration_in_m_max: builtins.float
+    """Match only sessions for which the duration in minutes are smaller or equal"""
+
+    duration_in_m_rounded_min: builtins.float
+    """Match only sessions for which the duration in minutes rounded are larger or equal"""
+
+    duration_in_m_rounded_max: builtins.float
+    """Match only sessions for which the duration in minutes rounded are smaller or equal"""
+
+    duration_interval_15s_rounded_min: builtins.float
+    """Match only sessions for which the duration in 15 seconds rounded are larger or equal"""
+
+    duration_interval_15s_rounded_max: builtins.float
+    """Match only sessions for which the duration in 15 seconds rounded are smaller or equal"""
+
+    duration_interval_30s_rounded_min: builtins.float
+    """Match only sessions for which the duration in 30 seconds rounded are larger or equal"""
+
+    duration_interval_30s_rounded_max: builtins.float
+    """Match only sessions for which the duration in 30 seconds rounded are smaller or equal"""
+
+    duration_interval_45s_rounded_min: builtins.float
+    """Match only sessions for which the duration in 45 seconds rounded are larger or equal"""
+
+    duration_interval_45s_rounded_max: builtins.float
+    """Match only sessions for which the duration in 45 seconds rounded are smaller or equal"""
+
+    started_time_slot_per_hour_min: typing.Text
+    """Match only sessions for which the started_time_slot_per_hour (e.g. 08:00) are larger or equal"""
+
+    started_time_slot_per_hour_max: typing.Text
+    """Match only sessions for which the started_time_slot_per_hour (e.g. 14:00) are smaller or equal"""
+
+    started_time_slot_per_quarter_hour_min: typing.Text
+    """Match only sessions for which the started_time_slot_per_quarter_hour (e.g. 08:00) are larger or equal"""
+
+    started_time_slot_per_quarter_hour_max: typing.Text
+    """Match only sessions for which the started_time_slot_per_quarter_hour (e.g. 14:00) are smaller or equal"""
+
+    started_time_slot_per_half_hour_min: typing.Text
+    """Match only sessions for which the started_time_slot_per_half_hour (e.g. 08:00) are larger or equal"""
+
+    started_time_slot_per_half_hour_max: typing.Text
+    """Match only sessions for which the started_time_slot_per_half_hour (e.g. 14:00) are smaller or equal"""
+
+    started_time_slot_per_day_phase_min: typing.Text
+    """Match only sessions for which the started_time_slot_per_day_phase (e.g. 08:00) are larger or equal"""
+
+    started_time_slot_per_day_phase_max: typing.Text
+    """Match only sessions for which the started_time_slot_per_day_phase (e.g. 14:00) are smaller or equal"""
+
+    started_time_slot_per_minute_min: typing.Text
+    """Match only sessions for which the started_time_slot_per_minute (e.g. 08:00) are larger or equal"""
+
+    started_time_slot_per_minute_max: typing.Text
+    """Match only sessions for which the started_time_slot_per_minute (e.g. 14:00) are smaller or equal"""
+
+    duration_in_s_rounded_min: builtins.float
+    """Match only sessions for which the duration in seconds rounded are larger or equal"""
+
+    duration_in_s_rounded_max: builtins.float
+    """Match only sessions for which the duration in seconds rounded are smaller or equal"""
+
     def __init__(self,
         *,
         language_codes: typing.Optional[typing.Iterable[typing.Text]] = ...,
@@ -1004,8 +1115,32 @@ class SessionFilter(google.protobuf.message.Message):
         session_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
         input_contexts: typing.Optional[typing.Iterable[ondewo.nlu.context_pb2.Context]] = ...,
         output_contexts: typing.Optional[typing.Iterable[ondewo.nlu.context_pb2.Context]] = ...,
+        duration_in_s_min: builtins.float = ...,
+        duration_in_s_max: builtins.float = ...,
+        duration_in_m_min: builtins.float = ...,
+        duration_in_m_max: builtins.float = ...,
+        duration_in_m_rounded_min: builtins.float = ...,
+        duration_in_m_rounded_max: builtins.float = ...,
+        duration_interval_15s_rounded_min: builtins.float = ...,
+        duration_interval_15s_rounded_max: builtins.float = ...,
+        duration_interval_30s_rounded_min: builtins.float = ...,
+        duration_interval_30s_rounded_max: builtins.float = ...,
+        duration_interval_45s_rounded_min: builtins.float = ...,
+        duration_interval_45s_rounded_max: builtins.float = ...,
+        started_time_slot_per_hour_min: typing.Text = ...,
+        started_time_slot_per_hour_max: typing.Text = ...,
+        started_time_slot_per_quarter_hour_min: typing.Text = ...,
+        started_time_slot_per_quarter_hour_max: typing.Text = ...,
+        started_time_slot_per_half_hour_min: typing.Text = ...,
+        started_time_slot_per_half_hour_max: typing.Text = ...,
+        started_time_slot_per_day_phase_min: typing.Text = ...,
+        started_time_slot_per_day_phase_max: typing.Text = ...,
+        started_time_slot_per_minute_min: typing.Text = ...,
+        started_time_slot_per_minute_max: typing.Text = ...,
+        duration_in_s_rounded_min: builtins.float = ...,
+        duration_in_s_rounded_max: builtins.float = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["earliest",b"earliest","input_contexts",b"input_contexts","intent_tags",b"intent_tags","labels",b"labels","language_codes",b"language_codes","latest",b"latest","matched_entity_types",b"matched_entity_types","matched_intents",b"matched_intents","max_number_turns",b"max_number_turns","min_entity_types_confidence_max",b"min_entity_types_confidence_max","min_entity_types_confidence_min",b"min_entity_types_confidence_min","min_intents_confidence_max",b"min_intents_confidence_max","min_intents_confidence_min",b"min_intents_confidence_min","min_number_turns",b"min_number_turns","output_contexts",b"output_contexts","session_ids",b"session_ids","user_ids",b"user_ids"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["duration_in_m_max",b"duration_in_m_max","duration_in_m_min",b"duration_in_m_min","duration_in_m_rounded_max",b"duration_in_m_rounded_max","duration_in_m_rounded_min",b"duration_in_m_rounded_min","duration_in_s_max",b"duration_in_s_max","duration_in_s_min",b"duration_in_s_min","duration_in_s_rounded_max",b"duration_in_s_rounded_max","duration_in_s_rounded_min",b"duration_in_s_rounded_min","duration_interval_15s_rounded_max",b"duration_interval_15s_rounded_max","duration_interval_15s_rounded_min",b"duration_interval_15s_rounded_min","duration_interval_30s_rounded_max",b"duration_interval_30s_rounded_max","duration_interval_30s_rounded_min",b"duration_interval_30s_rounded_min","duration_interval_45s_rounded_max",b"duration_interval_45s_rounded_max","duration_interval_45s_rounded_min",b"duration_interval_45s_rounded_min","earliest",b"earliest","input_contexts",b"input_contexts","intent_tags",b"intent_tags","labels",b"labels","language_codes",b"language_codes","latest",b"latest","matched_entity_types",b"matched_entity_types","matched_intents",b"matched_intents","max_number_turns",b"max_number_turns","min_entity_types_confidence_max",b"min_entity_types_confidence_max","min_entity_types_confidence_min",b"min_entity_types_confidence_min","min_intents_confidence_max",b"min_intents_confidence_max","min_intents_confidence_min",b"min_intents_confidence_min","min_number_turns",b"min_number_turns","output_contexts",b"output_contexts","session_ids",b"session_ids","started_time_slot_per_day_phase_max",b"started_time_slot_per_day_phase_max","started_time_slot_per_day_phase_min",b"started_time_slot_per_day_phase_min","started_time_slot_per_half_hour_max",b"started_time_slot_per_half_hour_max","started_time_slot_per_half_hour_min",b"started_time_slot_per_half_hour_min","started_time_slot_per_hour_max",b"started_time_slot_per_hour_max","started_time_slot_per_hour_min",b"started_time_slot_per_hour_min","started_time_slot_per_minute_max",b"started_time_slot_per_minute_max","started_time_slot_per_minute_min",b"started_time_slot_per_minute_min","started_time_slot_per_quarter_hour_max",b"started_time_slot_per_quarter_hour_max","started_time_slot_per_quarter_hour_min",b"started_time_slot_per_quarter_hour_min","user_ids",b"user_ids"]) -> None: ...
 global___SessionFilter = SessionFilter
 
 class SessionInfo(google.protobuf.message.Message):
@@ -1014,7 +1149,7 @@ class SessionInfo(google.protobuf.message.Message):
     This information can be returned inside a Session object for consumption by a client.
     Or it can be used by the backend to check whether the Session matches a given SessionFilter.
 
-    All fields below are  optional. Multiple fields specified at the same time are chained
+    All fields below are optional. Multiple fields specified at the same time are chained.
     """
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     class ContextSteps(google.protobuf.message.Message):
@@ -1061,9 +1196,15 @@ class SessionInfo(google.protobuf.message.Message):
     """The minimum confidence for entity recognition along the session"""
 
     earliest: builtins.float
-    """The start and end dates of the given session (in UNIX epochs)"""
+    """The earliest date of the given session (in UNIX epochs), i.e. the time of the first interaction of a user
+    in the given session
+    """
 
     latest: builtins.float
+    """The latest date of the given session (in UNIX epochs), i.e. the time of the last interaction of a user
+    in the given session
+    """
+
     number_turns: builtins.int
     """The number of turns (interaction steps) in the given session"""
 
@@ -1080,9 +1221,17 @@ class SessionInfo(google.protobuf.message.Message):
         """The list of intent tags in the given session"""
         pass
     @property
-    def input_context_steps(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___SessionInfo.ContextSteps]: ...
+    def input_context_steps(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___SessionInfo.ContextSteps]:
+        """The input contexts that are matched in the given session. The name of the context here is the short name
+        and not the full URL name including the project parent
+        """
+        pass
     @property
-    def output_context_steps(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___SessionInfo.ContextSteps]: ...
+    def output_context_steps(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___SessionInfo.ContextSteps]:
+        """The output contexts that are matched in the given session. The name of the context here is the short name
+        and not the full URL name including the project parent
+        """
+        pass
     def __init__(self,
         *,
         language_codes: typing.Optional[typing.Iterable[typing.Text]] = ...,
@@ -1125,6 +1274,7 @@ class GetSessionRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     SESSION_ID_FIELD_NUMBER: builtins.int
     SESSION_VIEW_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     session_id: typing.Text
     """The session to be returned
     Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>`.
@@ -1133,12 +1283,18 @@ class GetSessionRequest(google.protobuf.message.Message):
     session_view: global___Session.View.ValueType
     """whether to return a full or sparse view; if unspecified full view is returned"""
 
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields will be filled with data."""
+        pass
     def __init__(self,
         *,
         session_id: typing.Text = ...,
         session_view: global___Session.View.ValueType = ...,
+        field_mask: typing.Optional[google.protobuf.field_mask_pb2.FieldMask] = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["session_id",b"session_id","session_view",b"session_view"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["field_mask",b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["field_mask",b"field_mask","session_id",b"session_id","session_view",b"session_view"]) -> None: ...
 global___GetSessionRequest = GetSessionRequest
 
 class CreateSessionRequest(google.protobuf.message.Message):
