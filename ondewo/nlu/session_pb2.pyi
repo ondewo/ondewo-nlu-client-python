@@ -1181,10 +1181,9 @@ class SessionInfo(google.protobuf.message.Message):
     OUTPUT_CONTEXT_STEPS_FIELD_NUMBER: builtins.int
     DURATION_IN_S_FIELD_NUMBER: builtins.int
     DURATION_IN_M_FIELD_NUMBER: builtins.int
-    DURATION_IN_M_ROUNDED_MIN_FIELD_NUMBER: builtins.int
+    DURATION_IN_M_ROUNDED_FIELD_NUMBER: builtins.int
     DURATION_INTERVAL_15S_ROUNDED_FIELD_NUMBER: builtins.int
-    DURATION_INTERVAL_30S_ROUNDED_MIN_FIELD_NUMBER: builtins.int
-    DURATION_INTERVAL_30S_ROUNDED_MAX_FIELD_NUMBER: builtins.int
+    DURATION_INTERVAL_30S_ROUNDED_FIELD_NUMBER: builtins.int
     DURATION_INTERVAL_45S_ROUNDED_FIELD_NUMBER: builtins.int
     STARTED_TIME_SLOT_PER_HOUR_FIELD_NUMBER: builtins.int
     STARTED_TIME_SLOT_PER_QUARTER_HOUR_FIELD_NUMBER: builtins.int
@@ -1253,16 +1252,13 @@ class SessionInfo(google.protobuf.message.Message):
     duration_in_m: builtins.float
     """duration in minutes"""
 
-    duration_in_m_rounded_min: builtins.float
+    duration_in_m_rounded: builtins.float
     """duration in minutes rounded"""
 
     duration_interval_15s_rounded: builtins.float
     """duration in 15 seconds intervals rounded"""
 
-    duration_interval_30s_rounded_min: builtins.float
-    """duration in 30 seconds intervals rounded"""
-
-    duration_interval_30s_rounded_max: builtins.float
+    duration_interval_30s_rounded: builtins.float
     """duration in 30 seconds intervals rounded"""
 
     duration_interval_45s_rounded: builtins.float
@@ -1303,10 +1299,9 @@ class SessionInfo(google.protobuf.message.Message):
         output_context_steps: typing.Optional[typing.Iterable[global___SessionInfo.ContextSteps]] = ...,
         duration_in_s: builtins.float = ...,
         duration_in_m: builtins.float = ...,
-        duration_in_m_rounded_min: builtins.float = ...,
+        duration_in_m_rounded: builtins.float = ...,
         duration_interval_15s_rounded: builtins.float = ...,
-        duration_interval_30s_rounded_min: builtins.float = ...,
-        duration_interval_30s_rounded_max: builtins.float = ...,
+        duration_interval_30s_rounded: builtins.float = ...,
         duration_interval_45s_rounded: builtins.float = ...,
         started_time_slot_per_hour: typing.Text = ...,
         started_time_slot_per_quarter_hour: typing.Text = ...,
@@ -1315,7 +1310,7 @@ class SessionInfo(google.protobuf.message.Message):
         started_time_slot_per_minute: typing.Text = ...,
         duration_in_s_rounded_max: builtins.float = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["duration_in_m",b"duration_in_m","duration_in_m_rounded_min",b"duration_in_m_rounded_min","duration_in_s",b"duration_in_s","duration_in_s_rounded_max",b"duration_in_s_rounded_max","duration_interval_15s_rounded",b"duration_interval_15s_rounded","duration_interval_30s_rounded_max",b"duration_interval_30s_rounded_max","duration_interval_30s_rounded_min",b"duration_interval_30s_rounded_min","duration_interval_45s_rounded",b"duration_interval_45s_rounded","earliest",b"earliest","input_context_steps",b"input_context_steps","intent_tags",b"intent_tags","labels",b"labels","language_codes",b"language_codes","latest",b"latest","matched_entity_types",b"matched_entity_types","matched_intents",b"matched_intents","min_entity_types_confidence",b"min_entity_types_confidence","min_intents_confidence",b"min_intents_confidence","number_turns",b"number_turns","output_context_steps",b"output_context_steps","started_time_slot_per_day_phase",b"started_time_slot_per_day_phase","started_time_slot_per_half_hour",b"started_time_slot_per_half_hour","started_time_slot_per_hour",b"started_time_slot_per_hour","started_time_slot_per_minute",b"started_time_slot_per_minute","started_time_slot_per_quarter_hour",b"started_time_slot_per_quarter_hour","user_ids",b"user_ids"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["duration_in_m",b"duration_in_m","duration_in_m_rounded",b"duration_in_m_rounded","duration_in_s",b"duration_in_s","duration_in_s_rounded_max",b"duration_in_s_rounded_max","duration_interval_15s_rounded",b"duration_interval_15s_rounded","duration_interval_30s_rounded",b"duration_interval_30s_rounded","duration_interval_45s_rounded",b"duration_interval_45s_rounded","earliest",b"earliest","input_context_steps",b"input_context_steps","intent_tags",b"intent_tags","labels",b"labels","language_codes",b"language_codes","latest",b"latest","matched_entity_types",b"matched_entity_types","matched_intents",b"matched_intents","min_entity_types_confidence",b"min_entity_types_confidence","min_intents_confidence",b"min_intents_confidence","number_turns",b"number_turns","output_context_steps",b"output_context_steps","started_time_slot_per_day_phase",b"started_time_slot_per_day_phase","started_time_slot_per_half_hour",b"started_time_slot_per_half_hour","started_time_slot_per_hour",b"started_time_slot_per_hour","started_time_slot_per_minute",b"started_time_slot_per_minute","started_time_slot_per_quarter_hour",b"started_time_slot_per_quarter_hour","user_ids",b"user_ids"]) -> None: ...
 global___SessionInfo = SessionInfo
 
 class ListSessionsResponse(google.protobuf.message.Message):
