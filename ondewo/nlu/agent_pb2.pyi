@@ -13,6 +13,7 @@ import google.protobuf.timestamp_pb2
 import ondewo.nlu.common_pb2
 import ondewo.nlu.intent_pb2
 import ondewo.nlu.project_role_pb2
+import ondewo.nlu.session_pb2
 import ondewo.nlu.user_pb2
 import typing
 import typing_extensions
@@ -134,6 +135,66 @@ INTENT_GENERAL: ReportType.ValueType  # 4
 """report of statistics of the general (relevant to all supported languages) part of intent database"""
 
 global___ReportType = ReportType
+
+
+class _SessionsReportType:
+    ValueType = typing.NewType('ValueType', builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+class _SessionsReportTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_SessionsReportType.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    SESSION: _SessionsReportType.ValueType  # 0
+    """report on sessions. Supports SessionFilter to filter"""
+
+    SESSION_TOP_X_INTENTS: _SessionsReportType.ValueType  # 1
+    """report top x detected intents in session. Supports SessionFilter to filter"""
+
+    SESSION_TOP_X_ENTITIES: _SessionsReportType.ValueType  # 2
+    """report top x detected entities. Supports SessionFilter to filter"""
+
+    SESSION_TOP_X_USERS: _SessionsReportType.ValueType  # 3
+    """report top x users. Supports SessionFilter to filter"""
+
+    SESSION_TOP_X_LABELS: _SessionsReportType.ValueType  # 4
+    """report top x labels. Supports SessionFilter to filter"""
+
+    SESSION_TOP_X_TAGS: _SessionsReportType.ValueType  # 5
+    """report top x tags. Supports SessionFilter to filter"""
+
+    SESSION_TOP_X_PHONE_NUMBERS: _SessionsReportType.ValueType  # 6
+    """report top x phone_numbers. Supports SessionFilter to filter"""
+
+    SESSION_HUMAN_HANDOVERS: _SessionsReportType.ValueType  # 7
+    """report on human handovers. Supports SessionFilter to filter"""
+
+class SessionsReportType(_SessionsReportType, metaclass=_SessionsReportTypeEnumTypeWrapper):
+    """Type of reports about the domain of the agent"""
+    pass
+
+SESSION: SessionsReportType.ValueType  # 0
+"""report on sessions. Supports SessionFilter to filter"""
+
+SESSION_TOP_X_INTENTS: SessionsReportType.ValueType  # 1
+"""report top x detected intents in session. Supports SessionFilter to filter"""
+
+SESSION_TOP_X_ENTITIES: SessionsReportType.ValueType  # 2
+"""report top x detected entities. Supports SessionFilter to filter"""
+
+SESSION_TOP_X_USERS: SessionsReportType.ValueType  # 3
+"""report top x users. Supports SessionFilter to filter"""
+
+SESSION_TOP_X_LABELS: SessionsReportType.ValueType  # 4
+"""report top x labels. Supports SessionFilter to filter"""
+
+SESSION_TOP_X_TAGS: SessionsReportType.ValueType  # 5
+"""report top x tags. Supports SessionFilter to filter"""
+
+SESSION_TOP_X_PHONE_NUMBERS: SessionsReportType.ValueType  # 6
+"""report top x phone_numbers. Supports SessionFilter to filter"""
+
+SESSION_HUMAN_HANDOVERS: SessionsReportType.ValueType  # 7
+"""report on human handovers. Supports SessionFilter to filter"""
+
+global___SessionsReportType = SessionsReportType
 
 
 class _ReportFormat:
@@ -837,6 +898,7 @@ class RestoreAgentRequest(google.protobuf.message.Message):
 global___RestoreAgentRequest = RestoreAgentRequest
 
 class GetAgentStatisticsRequest(google.protobuf.message.Message):
+    """Request agent statistics"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PARENT_FIELD_NUMBER: builtins.int
     FORMAT_FIELD_NUMBER: builtins.int
@@ -867,6 +929,7 @@ class GetAgentStatisticsRequest(google.protobuf.message.Message):
 global___GetAgentStatisticsRequest = GetAgentStatisticsRequest
 
 class GetAgentStatisticsResponse(google.protobuf.message.Message):
+    """Response agent statistics"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     REPORTS_FIELD_NUMBER: builtins.int
     FORMAT_FIELD_NUMBER: builtins.int
@@ -888,6 +951,92 @@ class GetAgentStatisticsResponse(google.protobuf.message.Message):
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["format",b"format","reports",b"reports","type",b"type"]) -> None: ...
 global___GetAgentStatisticsResponse = GetAgentStatisticsResponse
+
+class GetSessionsStatisticsRequest(google.protobuf.message.Message):
+    """Request of the report of the statistics about sessions"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    PARENT_FIELD_NUMBER: builtins.int
+    FORMAT_FIELD_NUMBER: builtins.int
+    TYPE_FIELD_NUMBER: builtins.int
+    SESSION_FILTER_FIELD_NUMBER: builtins.int
+    CONTEXT_FILTER_FIELD_NUMBER: builtins.int
+    LIMIT_FIELD_NUMBER: builtins.int
+    GROUP_BY_FIELD_NUMBER: builtins.int
+    SORT_BY_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
+    parent: typing.Text
+    """Required. The project to get statistics from.
+    Format: `projects/<Project ID>`.
+    """
+
+    format: global___ReportFormat.ValueType
+    """File formats for reports"""
+
+    type: global___ReportType.ValueType
+    """Type of reports about the domain of the agent"""
+
+    @property
+    def session_filter(self) -> ondewo.nlu.session_pb2.SessionFilter:
+        """Optional. A filter to narrow reports based on sessions"""
+        pass
+    @property
+    def context_filter(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.session_pb2.ContextFilter]: ...
+    limit: builtins.int
+    """Optional. limit the returned number of results"""
+
+    @property
+    def group_by(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """Optional. Grouping based on named properties"""
+        pass
+    @property
+    def sort_by(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """Optional. Sorting based on named properties"""
+        pass
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which data fields will be added to the returned data.
+        Example: path=["session.duration_in_s_min", "session.tags"]
+        """
+        pass
+    def __init__(self,
+        *,
+        parent: typing.Text = ...,
+        format: global___ReportFormat.ValueType = ...,
+        type: global___ReportType.ValueType = ...,
+        session_filter: typing.Optional[ondewo.nlu.session_pb2.SessionFilter] = ...,
+        context_filter: typing.Optional[typing.Iterable[ondewo.nlu.session_pb2.ContextFilter]] = ...,
+        limit: builtins.int = ...,
+        group_by: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        sort_by: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        field_mask: typing.Optional[google.protobuf.field_mask_pb2.FieldMask] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["field_mask",b"field_mask","session_filter",b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["context_filter",b"context_filter","field_mask",b"field_mask","format",b"format","group_by",b"group_by","limit",b"limit","parent",b"parent","session_filter",b"session_filter","sort_by",b"sort_by","type",b"type"]) -> None: ...
+global___GetSessionsStatisticsRequest = GetSessionsStatisticsRequest
+
+class GetSessionsStatisticsResponse(google.protobuf.message.Message):
+    """Report of the statistics about sessions"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    REPORTS_FIELD_NUMBER: builtins.int
+    FORMAT_FIELD_NUMBER: builtins.int
+    TYPE_FIELD_NUMBER: builtins.int
+    reports: builtins.bytes
+    """Statistic info."""
+
+    format: global___ReportFormat.ValueType
+    """File formats for reports"""
+
+    type: global___SessionsReportType.ValueType
+    """Type of reports about the domain of the agent"""
+
+    def __init__(self,
+        *,
+        reports: builtins.bytes = ...,
+        format: global___ReportFormat.ValueType = ...,
+        type: global___SessionsReportType.ValueType = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["format",b"format","reports",b"reports","type",b"type"]) -> None: ...
+global___GetSessionsStatisticsResponse = GetSessionsStatisticsResponse
 
 class AddUserToProjectRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
