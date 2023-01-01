@@ -124,6 +124,60 @@ wideband is supported. `sample_rate_hertz` must be 16000.
 global___AudioEncoding = AudioEncoding
 
 
+class _ComparisonOperator:
+    ValueType = typing.NewType('ValueType', builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+class _ComparisonOperatorEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_ComparisonOperator.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    EQUAL: _ComparisonOperator.ValueType  # 0
+    """equal operator"""
+
+    GREATER: _ComparisonOperator.ValueType  # 1
+    """greater operator, e.g. for numbers, dates, and strings"""
+
+    GREATER_OR_EQUAL: _ComparisonOperator.ValueType  # 2
+    """greater or equal operator, e.g. for numbers, dates, and strings"""
+
+    LESS_OR_EQUAL: _ComparisonOperator.ValueType  # 3
+    """less or equal operator, e.g. for numbers, dates, and strings"""
+
+    CONTAINS: _ComparisonOperator.ValueType  # 4
+    """contains operator, e.g. part of string, or one of the elements in an iterable such as set or list"""
+
+    STARTS_WITH: _ComparisonOperator.ValueType  # 5
+    """starts with operator for string comparison only"""
+
+    ENDS_WITH: _ComparisonOperator.ValueType  # 6
+    """ends with operator for string comparison only"""
+
+class ComparisonOperator(_ComparisonOperator, metaclass=_ComparisonOperatorEnumTypeWrapper):
+    """Type of operator to compare"""
+    pass
+
+EQUAL: ComparisonOperator.ValueType  # 0
+"""equal operator"""
+
+GREATER: ComparisonOperator.ValueType  # 1
+"""greater operator, e.g. for numbers, dates, and strings"""
+
+GREATER_OR_EQUAL: ComparisonOperator.ValueType  # 2
+"""greater or equal operator, e.g. for numbers, dates, and strings"""
+
+LESS_OR_EQUAL: ComparisonOperator.ValueType  # 3
+"""less or equal operator, e.g. for numbers, dates, and strings"""
+
+CONTAINS: ComparisonOperator.ValueType  # 4
+"""contains operator, e.g. part of string, or one of the elements in an iterable such as set or list"""
+
+STARTS_WITH: ComparisonOperator.ValueType  # 5
+"""starts with operator for string comparison only"""
+
+ENDS_WITH: ComparisonOperator.ValueType  # 6
+"""ends with operator for string comparison only"""
+
+global___ComparisonOperator = ComparisonOperator
+
+
 class DetectIntentRequest(google.protobuf.message.Message):
     """The request to detect user's intent."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -896,6 +950,33 @@ class ListSessionsRequest(google.protobuf.message.Message):
     def HasField(self, field_name: typing_extensions.Literal["field_mask",b"field_mask","session_filter",b"session_filter"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["field_mask",b"field_mask","page_token",b"page_token","parent",b"parent","session_filter",b"session_filter","session_view",b"session_view"]) -> None: ...
 global___ListSessionsRequest = ListSessionsRequest
+
+class ContextFilter(google.protobuf.message.Message):
+    """Message used to filter sessions based on contextual information"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    CONTEXT_NAME_FIELD_NUMBER: builtins.int
+    KEY_FIELD_NUMBER: builtins.int
+    VALUE_FIELD_NUMBER: builtins.int
+    OPERATOR_FIELD_NUMBER: builtins.int
+    context_name: typing.Text
+    """name of the context"""
+
+    key: typing.Text
+    """name of the key of the context parameter"""
+
+    value: typing.Text
+    """value of the parameter"""
+
+    operator: global___ComparisonOperator.ValueType
+    def __init__(self,
+        *,
+        context_name: typing.Text = ...,
+        key: typing.Text = ...,
+        value: typing.Text = ...,
+        operator: global___ComparisonOperator.ValueType = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["context_name",b"context_name","key",b"key","operator",b"operator","value",b"value"]) -> None: ...
+global___ContextFilter = ContextFilter
 
 class SessionFilter(google.protobuf.message.Message):
     """A SessionFilter can be used in some requests to return only sessions matching certain filter conditions.
