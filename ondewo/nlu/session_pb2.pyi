@@ -883,7 +883,7 @@ class SessionStep(google.protobuf.message.Message):
     CONTEXTS_FIELD_NUMBER: builtins.int
     name: typing.Text
     """The unique identifier for the given review
-    Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/steps/<SESSION_ID>`.
+    Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/sessionsteps/<SESSION_ID>`.
     """
 
     @property
@@ -1609,7 +1609,7 @@ class SessionReviewStep(google.protobuf.message.Message):
     CONTEXTS_OUT_FIELD_NUMBER: builtins.int
     name: typing.Text
     """The unique identifier for the given review step
-    Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/reviews/<SESSION_REVIEW_ID>/steps/<SESSION_REVIEW_STEP_ID>`.
+    Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/reviews/<SESSION_REVIEW_ID>/sessionreviewsteps/<SESSION_REVIEW_STEP_ID>`.
     """
 
     @property
