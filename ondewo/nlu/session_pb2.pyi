@@ -814,7 +814,10 @@ class EventInput(google.protobuf.message.Message):
 global___EventInput = EventInput
 
 class Session(google.protobuf.message.Message):
-    """*** SESSION RELATED MESSAGES *** //"""
+    """*** SESSION RELATED MESSAGES *** //
+
+    Session of a user interaction
+    """
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     class _View:
         ValueType = typing.NewType('ValueType', builtins.int)
@@ -872,44 +875,58 @@ class Session(google.protobuf.message.Message):
 global___Session = Session
 
 class SessionStep(google.protobuf.message.Message):
+    """SessionSTep is a single user interaction as part of a session"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    NAME_FIELD_NUMBER: builtins.int
     DETECT_INTENT_REQUEST_FIELD_NUMBER: builtins.int
     DETECT_INTENT_RESPONSE_FIELD_NUMBER: builtins.int
     CONTEXTS_FIELD_NUMBER: builtins.int
-    NAME_FIELD_NUMBER: builtins.int
-    @property
-    def detect_intent_request(self) -> global___DetectIntentRequest: ...
-    @property
-    def detect_intent_response(self) -> global___DetectIntentResponse: ...
-    @property
-    def contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]:
-        """The contexts which were active at the beginning of this step"""
-        pass
     name: typing.Text
     """The unique identifier for the given review
     Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/steps/<SESSION_ID>`.
     """
 
+    @property
+    def detect_intent_request(self) -> global___DetectIntentRequest:
+        """The detect intent request of the session step"""
+        pass
+    @property
+    def detect_intent_response(self) -> global___DetectIntentResponse:
+        """The detect intent response  of the session step"""
+        pass
+    @property
+    def contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]:
+        """The contexts which were active at the beginning of this step"""
+        pass
     def __init__(self,
         *,
+        name: typing.Text = ...,
         detect_intent_request: typing.Optional[global___DetectIntentRequest] = ...,
         detect_intent_response: typing.Optional[global___DetectIntentResponse] = ...,
         contexts: typing.Optional[typing.Iterable[ondewo.nlu.context_pb2.Context]] = ...,
-        name: typing.Text = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["detect_intent_request",b"detect_intent_request","detect_intent_response",b"detect_intent_response"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["contexts",b"contexts","detect_intent_request",b"detect_intent_request","detect_intent_response",b"detect_intent_response","name",b"name"]) -> None: ...
 global___SessionStep = SessionStep
 
 class TrackSessionStepRequest(google.protobuf.message.Message):
+    """TrackSessionStepRequest stores a session step into the session"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     SESSION_ID_FIELD_NUMBER: builtins.int
     SESSION_STEP_FIELD_NUMBER: builtins.int
     SESSION_VIEW_FIELD_NUMBER: builtins.int
     session_id: typing.Text
+    """The unique identifier for the given review
+    Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/steps/<SESSION_ID>`.
+    """
+
     @property
-    def session_step(self) -> global___SessionStep: ...
+    def session_step(self) -> global___SessionStep:
+        """The session step to be added"""
+        pass
     session_view: global___Session.View.ValueType
+    """Defines which fields of the session should be returned in the response"""
+
     def __init__(self,
         *,
         session_id: typing.Text = ...,
@@ -1584,12 +1601,17 @@ global___SessionReview = SessionReview
 
 class SessionReviewStep(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    NAME_FIELD_NUMBER: builtins.int
     ANNOTATED_USERSAYS_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     DETECTED_INTENTS_FIELD_NUMBER: builtins.int
     CONTEXTS_FIELD_NUMBER: builtins.int
     CONTEXTS_OUT_FIELD_NUMBER: builtins.int
-    NAME_FIELD_NUMBER: builtins.int
+    name: typing.Text
+    """The unique identifier for the given review step
+    Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/reviews/<SESSION_REVIEW_ID>/steps/<SESSION_REVIEW_STEP_ID>`.
+    """
+
     @property
     def annotated_usersays(self) -> ondewo.nlu.intent_pb2.Intent.TrainingPhrase:
         """The user says with markup of the detected entity types"""
@@ -1609,19 +1631,14 @@ class SessionReviewStep(google.protobuf.message.Message):
     def contexts_out(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]:
         """The output contexts of this step"""
         pass
-    name: typing.Text
-    """The unique identifier for the given review step
-    Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/reviews/<SESSION_REVIEW_ID>/steps/<SESSION_REVIEW_STEP_ID>`.
-    """
-
     def __init__(self,
         *,
+        name: typing.Text = ...,
         annotated_usersays: typing.Optional[ondewo.nlu.intent_pb2.Intent.TrainingPhrase] = ...,
         language_code: typing.Text = ...,
         detected_intents: typing.Optional[typing.Iterable[global___DetectedIntent]] = ...,
         contexts: typing.Optional[typing.Iterable[ondewo.nlu.context_pb2.Context]] = ...,
         contexts_out: typing.Optional[typing.Iterable[ondewo.nlu.context_pb2.Context]] = ...,
-        name: typing.Text = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["annotated_usersays",b"annotated_usersays"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["annotated_usersays",b"annotated_usersays","contexts",b"contexts","contexts_out",b"contexts_out","detected_intents",b"detected_intents","language_code",b"language_code","name",b"name"]) -> None: ...
