@@ -58,8 +58,8 @@ class AIServices(ServicesInterface):
         return response
 
     def get_alternative_training_phrases(
-        self,
-        request: GetAlternativeTrainingPhrasesRequest
+            self,
+            request: GetAlternativeTrainingPhrasesRequest
     ) -> GetAlternativeTrainingPhrasesResponse:
         response: GetAlternativeTrainingPhrasesResponse = \
             self.stub.GetAlternativeTrainingPhrases(request, metadata=self.metadata)

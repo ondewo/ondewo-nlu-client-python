@@ -39,8 +39,10 @@ class Utilities(ServicesInterface):
         return response
 
     def validate_embedded_regex(self, request: ValidateEmbeddedRegexRequest) -> ValidateEmbeddedRegexResponse:
-        response: ValidateEmbeddedRegexResponse = self.stub.ValidateEmbeddedRegex(request,
-                                                                                  metadata=self.metadata)
+        response: ValidateEmbeddedRegexResponse = self.stub.ValidateEmbeddedRegex(
+            request,
+            metadata=self.metadata
+        )
         return response
 
     def clean_all_intents(self, request: CleanAllIntentsRequest) -> CleanAllIntentsResponse:
@@ -63,9 +65,12 @@ class Utilities(ServicesInterface):
         response: AddTrainingPhrasesResponse = self.stub.AddTrainingPhrases(request, metadata=self.metadata)
         return response
 
-    def add_training_phrases_from_csv(self,
-                                      request: AddTrainingPhrasesFromCSVRequest) -> AddTrainingPhrasesResponse:
+    def add_training_phrases_from_csv(
+            self,
+            request: AddTrainingPhrasesFromCSVRequest,
+    ) -> AddTrainingPhrasesResponse:
         response: AddTrainingPhrasesResponse = self.stub.AddTrainingPhrasesFromCSV(
-            request, metadata=self.metadata
+            request,
+            metadata=self.metadata,
         )
         return response

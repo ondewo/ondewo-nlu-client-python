@@ -16,8 +16,9 @@
 from abc import ABC
 from typing import Tuple, List
 
-from ondewo.nlu.client_config import ClientConfig
 from ondewo.utils.base_services_interface import BaseServicesInterface
+
+from ondewo.nlu.client_config import ClientConfig
 
 
 class ServicesInterface(BaseServicesInterface, ABC):

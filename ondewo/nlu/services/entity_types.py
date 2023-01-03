@@ -16,21 +16,11 @@
 from google.protobuf.empty_pb2 import Empty
 
 from ondewo.nlu.core.services_interface import ServicesInterface
-from ondewo.nlu.entity_type_pb2 import (
-    BatchCreateEntitiesRequest,
-    BatchDeleteEntitiesRequest,
-    BatchDeleteEntityTypesRequest,
-    BatchUpdateEntitiesRequest,
-    BatchUpdateEntityTypesRequest,
-    CreateEntityTypeRequest,
-    DeleteEntityTypeRequest,
-    EntityType,
-    GetEntityTypeRequest,
-    ListEntityTypesRequest,
-    ListEntityTypesResponse,
-    UpdateEntityTypeRequest, BatchDeleteEntitiesResponse, BatchEntitiesResponse, BatchGetEntitiesRequest,
-    ListEntitiesRequest, ListEntitiesResponse,
-)
+from ondewo.nlu.entity_type_pb2 import BatchCreateEntitiesRequest, BatchDeleteEntitiesRequest, \
+    BatchDeleteEntitiesResponse, BatchDeleteEntityTypesRequest, BatchEntitiesResponse, BatchGetEntitiesRequest, \
+    BatchUpdateEntitiesRequest, BatchUpdateEntityTypesRequest, CreateEntityTypeRequest, DeleteEntityTypeRequest, \
+    EntityType, GetEntityTypeRequest, ListEntitiesRequest, ListEntitiesResponse, ListEntityTypesRequest, \
+    ListEntityTypesResponse, UpdateEntityTypeRequest
 from ondewo.nlu.entity_type_pb2_grpc import EntityTypesStub
 from ondewo.nlu.operations_pb2 import Operation
 

@@ -15,10 +15,10 @@
 
 from google.protobuf.empty_pb2 import Empty
 
+from ondewo.nlu.core.services_interface import ServicesInterface
 from ondewo.nlu.project_role_pb2 import ProjectRole, CreateProjectRoleRequest, GetProjectRoleRequest, \
     DeleteProjectRoleRequest, UpdateProjectRoleRequest, ListProjectRolesRequest, ListProjectRolesResponse
 from ondewo.nlu.project_role_pb2_grpc import ProjectRolesStub
-from ondewo.nlu.core.services_interface import ServicesInterface
 
 
 class ProjectRoles(ServicesInterface):
