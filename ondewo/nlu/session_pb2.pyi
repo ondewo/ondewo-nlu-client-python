@@ -45,7 +45,7 @@ class _AudioEncodingEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._
     """Adaptive Multi-Rate Narrowband codec. `sample_rate_hertz` must be 8000."""
 
     AUDIO_ENCODING_AMR_WB: _AudioEncoding.ValueType  # 5
-    """Adaptive Multi-Rate Wideband codec. `sample_rate_hertz` must be 16000."""
+    """Adaptive Multi-Rate wideband codec. `sample_rate_hertz` must be 16000."""
 
     AUDIO_ENCODING_OGG_OPUS: _AudioEncoding.ValueType  # 6
     """Opus encoded audio frames in Ogg container
@@ -97,7 +97,7 @@ AUDIO_ENCODING_AMR: AudioEncoding.ValueType  # 4
 """Adaptive Multi-Rate Narrowband codec. `sample_rate_hertz` must be 8000."""
 
 AUDIO_ENCODING_AMR_WB: AudioEncoding.ValueType  # 5
-"""Adaptive Multi-Rate Wideband codec. `sample_rate_hertz` must be 16000."""
+"""Adaptive Multi-Rate wideband codec. `sample_rate_hertz` must be 16000."""
 
 AUDIO_ENCODING_OGG_OPUS: AudioEncoding.ValueType  # 6
 """Opus encoded audio frames in Ogg container
@@ -938,6 +938,7 @@ class TrackSessionStepRequest(google.protobuf.message.Message):
 global___TrackSessionStepRequest = TrackSessionStepRequest
 
 class ListSessionsRequest(google.protobuf.message.Message):
+    """This message is a request to list sessions"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PARENT_FIELD_NUMBER: builtins.int
     SESSION_VIEW_FIELD_NUMBER: builtins.int
@@ -1005,10 +1006,7 @@ class ContextFilter(google.protobuf.message.Message):
 global___ContextFilter = ContextFilter
 
 class SessionFilter(google.protobuf.message.Message):
-    """A SessionFilter can be used in some requests to return only sessions matching certain filter conditions.
-
-    All fields below are  optional. Multiple fields specified at the same time are chained via AND.
-    """
+    """This message contains a session filter"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     LANGUAGE_CODES_FIELD_NUMBER: builtins.int
     MATCHED_INTENTS_FIELD_NUMBER: builtins.int
@@ -1053,7 +1051,10 @@ class SessionFilter(google.protobuf.message.Message):
     DURATION_IN_S_ROUNDED_MAX_FIELD_NUMBER: builtins.int
     @property
     def language_codes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
-        """Match only sessions with all of the following language_codes"""
+        """A SessionFilter can be used in some requests to return only sessions matching certain filter conditions.
+        All fields below are optional. Multiple fields specified at the same time are chained via AND.
+        Match only sessions with all of the following language_codes
+        """
         pass
     @property
     def matched_intents(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.intent_pb2.Intent]:
@@ -1253,13 +1254,7 @@ class SessionFilter(google.protobuf.message.Message):
 global___SessionFilter = SessionFilter
 
 class SessionInfo(google.protobuf.message.Message):
-    """A SessionInfo contains some general information about a session.
-
-    This information can be returned inside a Session object for consumption by a client.
-    Or it can be used by the backend to check whether the Session matches a given SessionFilter.
-
-    All fields below are optional. Multiple fields specified at the same time are chained.
-    """
+    """This message contains information about session"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     class ContextSteps(google.protobuf.message.Message):
         """The list of contexts of each step collected in an outer list"""
@@ -1300,7 +1295,14 @@ class SessionInfo(google.protobuf.message.Message):
     DURATION_IN_S_ROUNDED_FIELD_NUMBER: builtins.int
     @property
     def language_codes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
-        """The language codes used in the given session."""
+        """A SessionInfo contains some general information about a session.
+
+        This information can be returned inside a Session object for consumption by a client.
+        Or it can be used by the backend to check whether the Session matches a given SessionFilter.
+
+        All fields below are optional. Multiple fields specified at the same time are chained
+        The language codes used in the given session.
+        """
         pass
     @property
     def matched_intents(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.intent_pb2.Intent]:
@@ -1421,6 +1423,7 @@ class SessionInfo(google.protobuf.message.Message):
 global___SessionInfo = SessionInfo
 
 class ListSessionsResponse(google.protobuf.message.Message):
+    """This message is a response including the listing of sessions"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     SESSIONS_FIELD_NUMBER: builtins.int
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
@@ -1440,6 +1443,7 @@ class ListSessionsResponse(google.protobuf.message.Message):
 global___ListSessionsResponse = ListSessionsResponse
 
 class GetSessionRequest(google.protobuf.message.Message):
+    """This message is a request to get a session"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     SESSION_ID_FIELD_NUMBER: builtins.int
     SESSION_VIEW_FIELD_NUMBER: builtins.int
@@ -1469,6 +1473,7 @@ class GetSessionRequest(google.protobuf.message.Message):
 global___GetSessionRequest = GetSessionRequest
 
 class CreateSessionRequest(google.protobuf.message.Message):
+    """This message is a request to create a session"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PARENT_FIELD_NUMBER: builtins.int
     SESSION_UUID_FIELD_NUMBER: builtins.int
@@ -1500,6 +1505,7 @@ class CreateSessionRequest(google.protobuf.message.Message):
 global___CreateSessionRequest = CreateSessionRequest
 
 class DeleteSessionRequest(google.protobuf.message.Message):
+    """This message is a request to delete a session"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     SESSION_ID_FIELD_NUMBER: builtins.int
     session_id: typing.Text
@@ -1548,6 +1554,7 @@ class CreateSessionReviewRequest(google.protobuf.message.Message):
 global___CreateSessionReviewRequest = CreateSessionReviewRequest
 
 class SessionReview(google.protobuf.message.Message):
+    """This message contains a session review"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     class _View:
         ValueType = typing.NewType('ValueType', builtins.int)
@@ -1600,6 +1607,7 @@ class SessionReview(google.protobuf.message.Message):
 global___SessionReview = SessionReview
 
 class SessionReviewStep(google.protobuf.message.Message):
+    """This message contains a session review step"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     NAME_FIELD_NUMBER: builtins.int
     ANNOTATED_USERSAYS_FIELD_NUMBER: builtins.int
@@ -1645,6 +1653,7 @@ class SessionReviewStep(google.protobuf.message.Message):
 global___SessionReviewStep = SessionReviewStep
 
 class DetectedIntent(google.protobuf.message.Message):
+    """This message contains a detected intent"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     INTENT_FIELD_NUMBER: builtins.int
     SCORE_FIELD_NUMBER: builtins.int
@@ -1689,6 +1698,7 @@ class DetectedIntent(google.protobuf.message.Message):
 global___DetectedIntent = DetectedIntent
 
 class ListSessionLabelsRequest(google.protobuf.message.Message):
+    """This message is a request to list session labels"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     SESSION_ID_FIELD_NUMBER: builtins.int
     session_id: typing.Text
@@ -1717,6 +1727,7 @@ class ListSessionLabelsOfAllSessionsRequest(google.protobuf.message.Message):
 global___ListSessionLabelsOfAllSessionsRequest = ListSessionLabelsOfAllSessionsRequest
 
 class ListSessionLabelsResponse(google.protobuf.message.Message):
+    """This message is a response of listing session labels"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     LABELS_FIELD_NUMBER: builtins.int
     @property
@@ -1731,6 +1742,7 @@ class ListSessionLabelsResponse(google.protobuf.message.Message):
 global___ListSessionLabelsResponse = ListSessionLabelsResponse
 
 class AddSessionLabelsRequest(google.protobuf.message.Message):
+    """This message is a request to add session labels"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     SESSION_ID_FIELD_NUMBER: builtins.int
     LABELS_FIELD_NUMBER: builtins.int
@@ -1750,6 +1762,7 @@ class AddSessionLabelsRequest(google.protobuf.message.Message):
 global___AddSessionLabelsRequest = AddSessionLabelsRequest
 
 class DeleteSessionLabelsRequest(google.protobuf.message.Message):
+    """This message is a request to delete session labels"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     SESSION_ID_FIELD_NUMBER: builtins.int
     LABELS_FIELD_NUMBER: builtins.int
@@ -1769,6 +1782,7 @@ class DeleteSessionLabelsRequest(google.protobuf.message.Message):
 global___DeleteSessionLabelsRequest = DeleteSessionLabelsRequest
 
 class ListSessionReviewsRequest(google.protobuf.message.Message):
+    """This message is a request to list session reviews"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     SESSION_ID_FIELD_NUMBER: builtins.int
     SESSION_REVIEW_VIEW_FIELD_NUMBER: builtins.int
@@ -1794,6 +1808,7 @@ class ListSessionReviewsRequest(google.protobuf.message.Message):
 global___ListSessionReviewsRequest = ListSessionReviewsRequest
 
 class ListSessionReviewsResponse(google.protobuf.message.Message):
+    """This message is a response of listing session reviews"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     SESSION_REVIEWS_FIELD_NUMBER: builtins.int
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
@@ -1813,6 +1828,7 @@ class ListSessionReviewsResponse(google.protobuf.message.Message):
 global___ListSessionReviewsResponse = ListSessionReviewsResponse
 
 class GetSessionReviewRequest(google.protobuf.message.Message):
+    """This message is a request to get session review"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     SESSION_REVIEW_ID_FIELD_NUMBER: builtins.int
     SESSION_REVIEW_VIEW_FIELD_NUMBER: builtins.int
@@ -1829,6 +1845,7 @@ class GetSessionReviewRequest(google.protobuf.message.Message):
 global___GetSessionReviewRequest = GetSessionReviewRequest
 
 class GetLatestSessionReviewRequest(google.protobuf.message.Message):
+    """This message is a request to get latest session review"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     SESSION_ID_FIELD_NUMBER: builtins.int
     SESSION_REVIEW_VIEW_FIELD_NUMBER: builtins.int

@@ -54,7 +54,7 @@ class WebhookServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def Ping(self, request, context):
-        """send a Ping to the webhook server to check server health
+        """send a Ping to the webhook server to verify server health
         will return True if http status_code==200 is detected in the response
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)

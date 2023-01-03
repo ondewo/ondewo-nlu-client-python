@@ -7,8 +7,7 @@ from ondewo.qa import qa_pb2 as ondewo_dot_qa_dot_qa__pb2
 
 
 class QAStub(object):
-    """///// Services ///////
-
+    """///// Question Answering (QA) Services ///////
     """
 
     def __init__(self, channel):
@@ -55,8 +54,7 @@ class QAStub(object):
 
 
 class QAServicer(object):
-    """///// Services ///////
-
+    """///// Question Answering (QA) Services ///////
     """
 
     def GetAnswer(self, request, context):
@@ -147,8 +145,7 @@ def add_QAServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class QA(object):
-    """///// Services ///////
-
+    """///// Question Answering (QA) Services ///////
     """
 
     @staticmethod

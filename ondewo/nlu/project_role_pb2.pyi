@@ -45,6 +45,7 @@ class _DefaultProjectRoleEnumTypeWrapper(google.protobuf.internal.enum_type_wrap
     """
 
 class DefaultProjectRole(_DefaultProjectRole, metaclass=_DefaultProjectRoleEnumTypeWrapper):
+    """Structure of project role"""
     pass
 
 PROJECT_UNSPECIFIED: DefaultProjectRole.ValueType  # 0
@@ -96,6 +97,7 @@ class _ProjectRoleViewEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper
     """all fields including permissions are populated"""
 
 class ProjectRoleView(_ProjectRoleView, metaclass=_ProjectRoleViewEnumTypeWrapper):
+    """Structure of project role view"""
     pass
 
 PROJECT_ROLE_VIEW_UNSPECIFIED: ProjectRoleView.ValueType  # 0
@@ -141,6 +143,7 @@ class ProjectRole(google.protobuf.message.Message):
 global___ProjectRole = ProjectRole
 
 class CreateProjectRoleRequest(google.protobuf.message.Message):
+    """This message is a request to create project role"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PARENT_FIELD_NUMBER: builtins.int
     ROLE_FIELD_NUMBER: builtins.int
@@ -167,6 +170,7 @@ class CreateProjectRoleRequest(google.protobuf.message.Message):
 global___CreateProjectRoleRequest = CreateProjectRoleRequest
 
 class UpdateProjectRoleRequest(google.protobuf.message.Message):
+    """This message is a request to update project role"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PARENT_FIELD_NUMBER: builtins.int
     ROLE_FIELD_NUMBER: builtins.int
@@ -198,6 +202,7 @@ class UpdateProjectRoleRequest(google.protobuf.message.Message):
 global___UpdateProjectRoleRequest = UpdateProjectRoleRequest
 
 class GetProjectRoleRequest(google.protobuf.message.Message):
+    """This message is a request to get project role"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PARENT_FIELD_NUMBER: builtins.int
     ROLE_ID_FIELD_NUMBER: builtins.int
@@ -226,6 +231,7 @@ class GetProjectRoleRequest(google.protobuf.message.Message):
 global___GetProjectRoleRequest = GetProjectRoleRequest
 
 class DeleteProjectRoleRequest(google.protobuf.message.Message):
+    """This message is a request to delete project role"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PARENT_FIELD_NUMBER: builtins.int
     ROLE_ID_FIELD_NUMBER: builtins.int
@@ -242,6 +248,7 @@ class DeleteProjectRoleRequest(google.protobuf.message.Message):
 global___DeleteProjectRoleRequest = DeleteProjectRoleRequest
 
 class ListProjectRolesRequest(google.protobuf.message.Message):
+    """This message is a request to list project role"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PARENT_FIELD_NUMBER: builtins.int
     PAGE_TOKEN_FIELD_NUMBER: builtins.int
@@ -263,6 +270,7 @@ class ListProjectRolesRequest(google.protobuf.message.Message):
 global___ListProjectRolesRequest = ListProjectRolesRequest
 
 class ListProjectRolesResponse(google.protobuf.message.Message):
+    """This message is a response of listing project role"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PROJECT_ROLES_FIELD_NUMBER: builtins.int
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int

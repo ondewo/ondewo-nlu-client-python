@@ -13,6 +13,7 @@ import typing_extensions
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
 class GetIntentCountRequest(google.protobuf.message.Message):
+    """Request to get the intent count"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PARENT_FIELD_NUMBER: builtins.int
     FILTER_BY_CATEGORY_FIELD_NUMBER: builtins.int
@@ -35,6 +36,7 @@ class GetIntentCountRequest(google.protobuf.message.Message):
 global___GetIntentCountRequest = GetIntentCountRequest
 
 class GetEntityTypeCountRequest(google.protobuf.message.Message):
+    """Request to get entity type count"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PARENT_FIELD_NUMBER: builtins.int
     FILTER_BY_CATEGORY_FIELD_NUMBER: builtins.int
@@ -57,6 +59,7 @@ class GetEntityTypeCountRequest(google.protobuf.message.Message):
 global___GetEntityTypeCountRequest = GetEntityTypeCountRequest
 
 class GetProjectStatRequest(google.protobuf.message.Message):
+    """Request to get project statistics"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PARENT_FIELD_NUMBER: builtins.int
     parent: typing.Text
@@ -74,6 +77,7 @@ class GetProjectStatRequest(google.protobuf.message.Message):
 global___GetProjectStatRequest = GetProjectStatRequest
 
 class GetProjectElementStatRequest(google.protobuf.message.Message):
+    """Request to get project element statistics"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     NAME_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int

@@ -141,6 +141,8 @@ class RunTrainingResponse(google.protobuf.message.Message):
     """Response message of training"""
 
     accuracy: builtins.float
+    """accuracy"""
+
     def __init__(self,
         *,
         f1: builtins.float = ...,
@@ -150,6 +152,7 @@ class RunTrainingResponse(google.protobuf.message.Message):
 global___RunTrainingResponse = RunTrainingResponse
 
 class UrlFilter(google.protobuf.message.Message):
+    """Filters with URLs should be included and excluded from the scraping process"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     ALLOWED_VALUES_FIELD_NUMBER: builtins.int
     REGEX_FILTER_INCLUDE_FIELD_NUMBER: builtins.int

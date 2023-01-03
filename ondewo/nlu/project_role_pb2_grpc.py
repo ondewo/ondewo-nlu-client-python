@@ -7,7 +7,8 @@ from ondewo.nlu import project_role_pb2 as ondewo_dot_nlu_dot_project__role__pb2
 
 
 class ProjectRolesStub(object):
-    """Missing associated documentation comment in .proto file."""
+    """Project roles
+    """
 
     def __init__(self, channel):
         """Constructor.
@@ -43,34 +44,40 @@ class ProjectRolesStub(object):
 
 
 class ProjectRolesServicer(object):
-    """Missing associated documentation comment in .proto file."""
+    """Project roles
+    """
 
     def CreateProjectRole(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Creates a project role by creating the knowledge base master
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetProjectRole(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Creates a project role by getting the knowledge base master
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def DeleteProjectRole(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Deletes project role
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def UpdateProjectRole(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Updates project role
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ListProjectRoles(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """List project roles
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -111,7 +118,8 @@ def add_ProjectRolesServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class ProjectRoles(object):
-    """Missing associated documentation comment in .proto file."""
+    """Project roles
+    """
 
     @staticmethod
     def CreateProjectRole(request,

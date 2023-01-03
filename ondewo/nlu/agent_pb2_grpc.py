@@ -492,19 +492,22 @@ class AgentsServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def ListUsersInProject(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Lists users in the project (agent)
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetPlatformInfo(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Gets information from the platform
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ListProjectPermissions(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """List permissions from the project (agent)
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -562,7 +565,8 @@ class AgentsServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def OptimizeRankingMatch(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Runs optimize ranking match
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -581,7 +585,8 @@ class AgentsServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetAgentStatistics(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Gets statistics for the agent
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -593,25 +598,29 @@ class AgentsServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def SetAgentStatus(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Sets status for the agent
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def SetResources(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Sets resources
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def DeleteResources(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Deletes resources
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ExportResources(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Exports resources
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')

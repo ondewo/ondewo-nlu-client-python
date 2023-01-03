@@ -374,6 +374,8 @@ class GetEntityTypeRequest(google.protobuf.message.Message):
     """
 
     page_token: typing.Text
+    """A page_token allows the pagination of elements where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `parameters`). An example for a page_token is page_size-1000"""
+
     entity_type_view: global___EntityTypeView.ValueType
     """Optional. The resource view to apply to the returned Entity Type"""
 
@@ -584,6 +586,7 @@ class EntityTypeBatch(google.protobuf.message.Message):
 global___EntityTypeBatch = EntityTypeBatch
 
 class EntityTypeSorting(google.protobuf.message.Message):
+    """This message contains Entity type sorting"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     class _EntityTypeSortingField:
         ValueType = typing.NewType('ValueType', builtins.int)
@@ -597,6 +600,7 @@ class EntityTypeSorting(google.protobuf.message.Message):
         SORT_ENTITY_TYPE_BY_ENTITY_VALUE_COUNT: EntityTypeSorting._EntityTypeSortingField.ValueType  # 4
         SORT_ENTITY_TYPE_BY_SYNONYM_COUNT: EntityTypeSorting._EntityTypeSortingField.ValueType  # 5
     class EntityTypeSortingField(_EntityTypeSortingField, metaclass=_EntityTypeSortingFieldEnumTypeWrapper):
+        """Structure of Entity type sorting field"""
         pass
 
     NO_ENTITY_TYPE_SORTING: EntityTypeSorting.EntityTypeSortingField.ValueType  # 0
@@ -619,6 +623,7 @@ class EntityTypeSorting(google.protobuf.message.Message):
 global___EntityTypeSorting = EntityTypeSorting
 
 class BatchEntitiesResponse(google.protobuf.message.Message):
+    """This message is a response of batch entities"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     class EntityStatus(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -639,7 +644,9 @@ class BatchEntitiesResponse(google.protobuf.message.Message):
     ENTITY_STATUSES_FIELD_NUMBER: builtins.int
     HAS_ERRORS_FIELD_NUMBER: builtins.int
     @property
-    def entity_statuses(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___BatchEntitiesResponse.EntityStatus]: ...
+    def entity_statuses(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___BatchEntitiesResponse.EntityStatus]:
+        """A list of entity statuses"""
+        pass
     has_errors: builtins.bool
     """indicates if statuses of some of the training phrases have errors"""
 
@@ -652,6 +659,7 @@ class BatchEntitiesResponse(google.protobuf.message.Message):
 global___BatchEntitiesResponse = BatchEntitiesResponse
 
 class BatchCreateEntitiesRequest(google.protobuf.message.Message):
+    """This message is a request to create a batch entities"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     class CreateEntityRequest(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -685,6 +693,7 @@ class BatchCreateEntitiesRequest(google.protobuf.message.Message):
 global___BatchCreateEntitiesRequest = BatchCreateEntitiesRequest
 
 class BatchUpdateEntitiesRequest(google.protobuf.message.Message):
+    """This message is a request to update a batch of entities"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     ENTITIES_FIELD_NUMBER: builtins.int
     @property
@@ -699,6 +708,7 @@ class BatchUpdateEntitiesRequest(google.protobuf.message.Message):
 global___BatchUpdateEntitiesRequest = BatchUpdateEntitiesRequest
 
 class BatchGetEntitiesRequest(google.protobuf.message.Message):
+    """Thiss message is a request to get a batch of entities"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     NAMES_FIELD_NUMBER: builtins.int
     @property
@@ -715,6 +725,7 @@ class BatchGetEntitiesRequest(google.protobuf.message.Message):
 global___BatchGetEntitiesRequest = BatchGetEntitiesRequest
 
 class BatchDeleteEntitiesRequest(google.protobuf.message.Message):
+    """This message is a request to delete a batch of entities"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     NAMES_FIELD_NUMBER: builtins.int
     @property
@@ -731,8 +742,10 @@ class BatchDeleteEntitiesRequest(google.protobuf.message.Message):
 global___BatchDeleteEntitiesRequest = BatchDeleteEntitiesRequest
 
 class BatchDeleteEntitiesResponse(google.protobuf.message.Message):
+    """This message is a response of deletion of a batch of entities"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     class DeleteEntityStatus(google.protobuf.message.Message):
+        """This message contains the status of an entity deletion"""
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
         SUCCESSFULLY_DELETED_FIELD_NUMBER: builtins.int
         ERROR_MESSAGE_FIELD_NUMBER: builtins.int
@@ -762,6 +775,7 @@ class BatchDeleteEntitiesResponse(google.protobuf.message.Message):
 global___BatchDeleteEntitiesResponse = BatchDeleteEntitiesResponse
 
 class ListEntitiesRequest(google.protobuf.message.Message):
+    """This message is a request to get a list of entities"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     ENTITY_TYPE_NAME_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
@@ -809,6 +823,7 @@ class ListEntitiesRequest(google.protobuf.message.Message):
 global___ListEntitiesRequest = ListEntitiesRequest
 
 class ListEntitiesResponse(google.protobuf.message.Message):
+    """This message is a response of listing entities"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     ENTITIES_FIELD_NUMBER: builtins.int
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
@@ -830,6 +845,7 @@ class ListEntitiesResponse(google.protobuf.message.Message):
 global___ListEntitiesResponse = ListEntitiesResponse
 
 class EntityValueSorting(google.protobuf.message.Message):
+    """This message contains entity value sorting"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     class _EntityValueSortingField:
         ValueType = typing.NewType('ValueType', builtins.int)
@@ -843,6 +859,7 @@ class EntityValueSorting(google.protobuf.message.Message):
         SORT_ENTITY_VALUE_BY_VALUE: EntityValueSorting._EntityValueSortingField.ValueType  # 2
         SORT_ENTITY_VALUE_BY_SYNONYM_COUNT: EntityValueSorting._EntityValueSortingField.ValueType  # 3
     class EntityValueSortingField(_EntityValueSortingField, metaclass=_EntityValueSortingFieldEnumTypeWrapper):
+        """Structure of Entity value sorting field"""
         pass
 
     NO_ENTITY_VALUE_SORTING: EntityValueSorting.EntityValueSortingField.ValueType  # 0

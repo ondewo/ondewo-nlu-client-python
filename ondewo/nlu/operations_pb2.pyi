@@ -125,10 +125,7 @@ class ListOperationsRequest(google.protobuf.message.Message):
 global___ListOperationsRequest = ListOperationsRequest
 
 class OperationFilter(google.protobuf.message.Message):
-    """An operationFilter can be used in some requests to return only operations matching certain filter conditions.
-
-    All fields below are  optional. Multiple fields specified at the same time are chained via OR.
-    """
+    """This message contains an operation filter"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PROJECT_PARENTS_FIELD_NUMBER: builtins.int
     STATUSES_FIELD_NUMBER: builtins.int
@@ -138,7 +135,11 @@ class OperationFilter(google.protobuf.message.Message):
     USER_IDS_FIELD_NUMBER: builtins.int
     @property
     def project_parents(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
-        """Match operations with any of the following project parents."""
+        """An operationFilter can be used in some requests to return only operations matching certain filter conditions.
+
+        All fields below are  optional. Multiple fields specified at the same time are chained via OR.
+        Match operations with any of the following project parents.
+        """
         pass
     @property
     def statuses(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[ondewo.nlu.operation_metadata_pb2.OperationMetadata.Status.ValueType]:

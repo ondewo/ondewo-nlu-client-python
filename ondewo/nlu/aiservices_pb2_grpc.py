@@ -69,37 +69,43 @@ class AiServicesServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GenerateUserSays(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Generates a list of training phrases
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GenerateResponses(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Generate responses from all intents using synonyms
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetAlternativeSentences(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Generates alternative phrase based on original phrase
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetAlternativeTrainingPhrases(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Generates alternative training phrase based on original training phrase
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetSynonyms(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Generates synonyms for a certain word
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ClassifyIntents(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Preprocess text and detects intents in a sentence
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')

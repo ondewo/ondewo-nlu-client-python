@@ -42,6 +42,9 @@ class OperationMetadata(google.protobuf.message.Message):
         """operation has completed with errors"""
 
     class Status(_Status, metaclass=_StatusEnumTypeWrapper):
+        """Structure to set status of operation. An operation may not be started if NOT_STARTED is set, in
+        progress if IN_PROGRESS, finished if DONE, interrupted if CANCELED or failed if FAILED.
+        """
         pass
 
     STATUS_UNSPECIFIED: OperationMetadata.Status.ValueType  # 0
@@ -96,6 +99,9 @@ class OperationMetadata(google.protobuf.message.Message):
         """export benchmark agent to a zip file"""
 
     class OperationType(_OperationType, metaclass=_OperationTypeEnumTypeWrapper):
+        """Type of operation. It can be creating, importing, exporting, deleting, restoring, building cache,
+        training or exporting benchmark an agent
+        """
         pass
 
     OPERATION_TYPE_UNSPECIFIED: OperationMetadata.OperationType.ValueType  # 0
