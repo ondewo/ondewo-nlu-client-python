@@ -168,7 +168,8 @@ class _SessionsReportTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrap
     """report on human handovers. Supports SessionFilter to filter"""
 
     SESSION_SQL_QUERY: _SessionsReportType.ValueType  # 8
-    """report based on a query issued tables with session information
+    """report based on a query issued tables with session information.
+    Requires to define <code>sql_query</code> in request.
 
     Allowed tables to query are:
     * session
@@ -217,7 +218,8 @@ SESSION_HUMAN_HANDOVERS: SessionsReportType.ValueType  # 7
 """report on human handovers. Supports SessionFilter to filter"""
 
 SESSION_SQL_QUERY: SessionsReportType.ValueType  # 8
-"""report based on a query issued tables with session information
+"""report based on a query issued tables with session information.
+Requires to define <code>sql_query</code> in request.
 
 Allowed tables to query are:
 * session
@@ -1025,6 +1027,7 @@ class GetSessionsStatisticsRequest(google.protobuf.message.Message):
     GROUP_BY_FIELD_NUMBER: builtins.int
     ORDER_BY_FIELD_NUMBER: builtins.int
     FIELD_MASK_FIELD_NUMBER: builtins.int
+    SQL_QUERY_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The project to get statistics from.
     Format: `projects/<Project ID>`.
@@ -1059,6 +1062,9 @@ class GetSessionsStatisticsRequest(google.protobuf.message.Message):
         Example: path=["session.duration_in_s_min", "session.tags"]
         """
         pass
+    sql_query: typing.Text
+    """SQL Query - only usable with specific SessionsReportType such as SessionsReportType.SESSION_SQL_QUERY"""
+
     def __init__(self,
         *,
         parent: typing.Text = ...,
@@ -1070,9 +1076,10 @@ class GetSessionsStatisticsRequest(google.protobuf.message.Message):
         group_by: typing.Optional[typing.Iterable[typing.Text]] = ...,
         order_by: typing.Optional[typing.Iterable[typing.Text]] = ...,
         field_mask: typing.Optional[google.protobuf.field_mask_pb2.FieldMask] = ...,
+        sql_query: typing.Text = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["field_mask",b"field_mask","session_filter",b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["context_filter",b"context_filter","field_mask",b"field_mask","format",b"format","group_by",b"group_by","limit",b"limit","order_by",b"order_by","parent",b"parent","session_filter",b"session_filter","type",b"type"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["context_filter",b"context_filter","field_mask",b"field_mask","format",b"format","group_by",b"group_by","limit",b"limit","order_by",b"order_by","parent",b"parent","session_filter",b"session_filter","sql_query",b"sql_query","type",b"type"]) -> None: ...
 global___GetSessionsStatisticsRequest = GetSessionsStatisticsRequest
 
 class GetSessionsStatisticsResponse(google.protobuf.message.Message):
