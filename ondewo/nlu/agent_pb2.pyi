@@ -167,6 +167,27 @@ class _SessionsReportTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrap
     SESSION_HUMAN_HANDOVERS: _SessionsReportType.ValueType  # 7
     """report on human handovers. Supports SessionFilter to filter"""
 
+    SESSION_SQL_QUERY: _SessionsReportType.ValueType  # 8
+    """report based on a query issued tables with session information
+
+    Allowed tables to query are:
+    * session
+    * session_context
+    * session_step
+    * session_step_context
+    * session_step_detect_entity
+    * session_step_detect_intent
+    * session_step_detect_intent_context_in
+    * session_step_detect_intent_context_out
+    * session_step_detect_intent_context_out
+    * session_step_detect_intent_label
+    * session_step_detect_intent_tag
+
+    Example:
+      <code>SELECT ... FROM session</code>
+      <code>SELECT ... FROM session, session_steps</code>
+    """
+
 class SessionsReportType(_SessionsReportType, metaclass=_SessionsReportTypeEnumTypeWrapper):
     """Type of reports about the domain of the agent"""
     pass
@@ -194,6 +215,27 @@ SESSION_TOP_X_PHONE_NUMBERS: SessionsReportType.ValueType  # 6
 
 SESSION_HUMAN_HANDOVERS: SessionsReportType.ValueType  # 7
 """report on human handovers. Supports SessionFilter to filter"""
+
+SESSION_SQL_QUERY: SessionsReportType.ValueType  # 8
+"""report based on a query issued tables with session information
+
+Allowed tables to query are:
+* session
+* session_context
+* session_step
+* session_step_context
+* session_step_detect_entity
+* session_step_detect_intent
+* session_step_detect_intent_context_in
+* session_step_detect_intent_context_out
+* session_step_detect_intent_context_out
+* session_step_detect_intent_label
+* session_step_detect_intent_tag
+
+Example:
+  <code>SELECT ... FROM session</code>
+  <code>SELECT ... FROM session, session_steps</code>
+"""
 
 global___SessionsReportType = SessionsReportType
 
