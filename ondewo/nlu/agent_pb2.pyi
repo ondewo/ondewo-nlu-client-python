@@ -991,7 +991,7 @@ class GetSessionsStatisticsRequest(google.protobuf.message.Message):
     format: global___ReportFormat.ValueType
     """File formats for reports"""
 
-    type: global___ReportType.ValueType
+    type: global___SessionsReportType.ValueType
     """Type of reports about the domain of the agent"""
 
     @property
@@ -1021,7 +1021,7 @@ class GetSessionsStatisticsRequest(google.protobuf.message.Message):
         *,
         parent: typing.Text = ...,
         format: global___ReportFormat.ValueType = ...,
-        type: global___ReportType.ValueType = ...,
+        type: global___SessionsReportType.ValueType = ...,
         session_filter: typing.Optional[ondewo.nlu.session_pb2.SessionFilter] = ...,
         context_filter: typing.Optional[typing.Iterable[ondewo.nlu.session_pb2.ContextFilter]] = ...,
         limit: builtins.int = ...,
