@@ -981,7 +981,7 @@ class GetSessionsStatisticsRequest(google.protobuf.message.Message):
     CONTEXT_FILTER_FIELD_NUMBER: builtins.int
     LIMIT_FIELD_NUMBER: builtins.int
     GROUP_BY_FIELD_NUMBER: builtins.int
-    SORT_BY_FIELD_NUMBER: builtins.int
+    ORDER_BY_FIELD_NUMBER: builtins.int
     FIELD_MASK_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The project to get statistics from.
@@ -1008,8 +1008,8 @@ class GetSessionsStatisticsRequest(google.protobuf.message.Message):
         """Optional. Grouping based on named properties"""
         pass
     @property
-    def sort_by(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
-        """Optional. Sorting based on named properties"""
+    def order_by(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """Optional. Order based on named properties"""
         pass
     @property
     def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
@@ -1026,11 +1026,11 @@ class GetSessionsStatisticsRequest(google.protobuf.message.Message):
         context_filter: typing.Optional[typing.Iterable[ondewo.nlu.session_pb2.ContextFilter]] = ...,
         limit: builtins.int = ...,
         group_by: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        sort_by: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        order_by: typing.Optional[typing.Iterable[typing.Text]] = ...,
         field_mask: typing.Optional[google.protobuf.field_mask_pb2.FieldMask] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["field_mask",b"field_mask","session_filter",b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["context_filter",b"context_filter","field_mask",b"field_mask","format",b"format","group_by",b"group_by","limit",b"limit","parent",b"parent","session_filter",b"session_filter","sort_by",b"sort_by","type",b"type"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["context_filter",b"context_filter","field_mask",b"field_mask","format",b"format","group_by",b"group_by","limit",b"limit","order_by",b"order_by","parent",b"parent","session_filter",b"session_filter","type",b"type"]) -> None: ...
 global___GetSessionsStatisticsRequest = GetSessionsStatisticsRequest
 
 class GetSessionsStatisticsResponse(google.protobuf.message.Message):
