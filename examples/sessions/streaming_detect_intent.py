@@ -56,7 +56,7 @@ def create_streaming_request(
         yield StreamingDetectIntentRequest(input_audio=chunk)
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description="Streaming example.")
     parser.add_argument("--config", type=str)
     parser.add_argument("--secure", default=False, action="store_true")
@@ -78,7 +78,8 @@ def main():
     for i, response in enumerate(sessions_service.streaming_detect_intent(streaming_request)):
         print(response.query_result.fulfillment_messages)
         with open(f"response_{i + 1}.wav", "wb") as f:
-            f.write(response.audio)
+            if hasattr(response, "audio"):
+                f.write(response.audio)
 
 
 if __name__ == "__main__":

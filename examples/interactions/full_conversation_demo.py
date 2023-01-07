@@ -1,9 +1,10 @@
 import uuid
-from typing import Dict
+from typing import Dict, Optional, List
 
 from ondewo.nlu import context_pb2
 from ondewo.nlu.client import Client as NluClient
 from ondewo.nlu.client_config import ClientConfig
+from ondewo.nlu.context_pb2 import Context
 from ondewo.nlu.session_pb2 import DetectIntentResponse, \
     DetectIntentRequest, QueryInput, TextInput, QueryParameters
 
@@ -19,11 +20,13 @@ def make_nlu_conversation(session):
         conversation_nlu_helper(session, text)
 
 
-def conversation_nlu_helper(session, text="Default Welcome Intent", context_flag=False):
-    context = make_context() if context_flag else None
-    nlu_response: DetectIntentResponse = get_response_from_request(session=session,
-                                                                   text=text,
-                                                                   context=context)
+def conversation_nlu_helper(session: str, text: str = "Default Welcome Intent", context_flag: bool = False):
+    context_helper: Optional[context_pb2.Context] = make_context() if context_flag else None
+    nlu_response: DetectIntentResponse = get_response_from_request(
+        session=session,
+        text=text,
+        context=context_helper,
+    )
     print(f'Text received by the server: {nlu_response.query_result.query_text}')
     print(f'Intent detected: {nlu_response.query_result.intent.display_name}')
 
@@ -32,8 +35,12 @@ def conversation_nlu_helper(session, text="Default Welcome Intent", context_flag
         print(message.text.text[0])
 
 
-def get_response_from_request(session, text, context=None) -> DetectIntentResponse:
-    context = [context] if context else None
+def get_response_from_request(
+        session: str,
+        text: str,
+        context: Optional[Context] = None
+) -> DetectIntentResponse:
+    contexts: List[Context] = [context] if context else []
     nlu_request: DetectIntentRequest = DetectIntentRequest(
         session=session,
         query_input=QueryInput(
@@ -43,7 +50,7 @@ def get_response_from_request(session, text, context=None) -> DetectIntentRespon
             )
         ),
         query_params=QueryParameters(
-            contexts=context
+            contexts=contexts,
         )
     )
     nlu_response: DetectIntentResponse = nlu_client.services.sessions.detect_intent(
@@ -65,7 +72,7 @@ def make_context() -> context_pb2.Context:
 
     # Don't change the name, just change the lifespan_count,
     # which defines how many times this context is going to be injected
-    context = context_pb2.Context(
+    context: context_pb2.Context = context_pb2.Context(
         name=f"{session}/contexts/exact_intent",
         lifespan_count=20,
         parameters=parameter

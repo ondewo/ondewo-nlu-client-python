@@ -16,9 +16,9 @@ export
 
 # MUST BE THE SAME AS API in Mayor and Minor Version Number
 # example: API 2.9.0 --> Client 2.9.X
-ONDEWO_NLU_VERSION = 4.0.0
+ONDEWO_NLU_VERSION = 3.4.0
 
-ONDEWO_NLU_API_GIT_BRANCH=feature/OND211-1979-session-tracking-optimise
+ONDEWO_NLU_API_GIT_BRANCH=tags/3.4.0
 ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags/4.1.1
 PYPI_USERNAME?=ENTER_HERE_YOUR_PYPI_USERNAME
 PYPI_PASSWORD?=ENTER_HERE_YOUR_PYPI_PASSWORD
@@ -60,7 +60,8 @@ install_dependencies_locally: ## Install dependencies locally
 	pip install -r requirements.txt
 
 flake8: ## Runs flake8
-	flake8 --exculde 'ondewo'
+	flake8 --config .flake8
+# flake8 --exculde 'ondewo'
 
 mypy: ## Run mypy static code checking
 	pre-commit run mypy --all-files
@@ -122,7 +123,8 @@ generate_ondewo_protos:  ## Generate python code from proto files
 		EXTRA_PROTO_DIR=${GOOGLE_PROTOS_DIR} \
 		TARGET_DIR='ondewo' \
 		OUTPUT_DIR=${OUTPUT_DIR}
-
+	-make precommit_hooks_run_all_files
+	make precommit_hooks_run_all_files
 
 setup_conda_env: ## Checks for CONDA Environment
 	@echo "\n START SETTING UP CONDA ENV \n"
