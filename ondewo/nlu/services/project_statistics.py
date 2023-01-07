@@ -15,8 +15,8 @@
 from ondewo.nlu.common_pb2 import StatResponse
 
 from ondewo.nlu.core.services_interface import ServicesInterface
-from ondewo.nlu.project_statistics_pb2 import GetIntentCountRequest, GetEntityTypeCountRequest, GetProjectStatRequest, \
-    GetProjectElementStatRequest
+from ondewo.nlu.project_statistics_pb2 import GetIntentCountRequest, GetEntityTypeCountRequest, \
+    GetProjectStatRequest, GetProjectElementStatRequest
 from ondewo.nlu.project_statistics_pb2_grpc import ProjectStatisticsStub
 
 

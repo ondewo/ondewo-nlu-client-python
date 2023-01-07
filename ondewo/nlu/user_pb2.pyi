@@ -35,6 +35,7 @@ class _DefaultServerRoleEnumTypeWrapper(google.protobuf.internal.enum_type_wrapp
     """this role can do nothing. Used to set a user as inactive in the server."""
 
 class DefaultServerRole(_DefaultServerRole, metaclass=_DefaultServerRoleEnumTypeWrapper):
+    """Structure of server role"""
     pass
 
 SERVER_UNSPECIFIED: DefaultServerRole.ValueType  # 0
@@ -90,6 +91,7 @@ class User(google.protobuf.message.Message):
 global___User = User
 
 class UserInfo(google.protobuf.message.Message):
+    """This message contains information about user"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     class ProjectRolesEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -109,7 +111,9 @@ class UserInfo(google.protobuf.message.Message):
     USER_FIELD_NUMBER: builtins.int
     PROJECT_ROLES_FIELD_NUMBER: builtins.int
     @property
-    def user(self) -> global___User: ...
+    def user(self) -> global___User:
+        """user object"""
+        pass
     @property
     def project_roles(self) -> google.protobuf.internal.containers.MessageMap[typing.Text, ondewo.nlu.project_role_pb2.ProjectRole]:
         """If in GetUser, ListUser requests UserView is FULL, then the mapping is additionally provided
@@ -126,12 +130,17 @@ class UserInfo(google.protobuf.message.Message):
 global___UserInfo = UserInfo
 
 class CreateUserRequest(google.protobuf.message.Message):
+    """Request to create user"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     USER_FIELD_NUMBER: builtins.int
     PASSWORD_FIELD_NUMBER: builtins.int
     @property
-    def user(self) -> global___User: ...
+    def user(self) -> global___User:
+        """user_id in the User message should be given, if empty will throw an error in the backend"""
+        pass
     password: typing.Text
+    """password"""
+
     def __init__(self,
         *,
         user: typing.Optional[global___User] = ...,
@@ -142,6 +151,7 @@ class CreateUserRequest(google.protobuf.message.Message):
 global___CreateUserRequest = CreateUserRequest
 
 class UpdateUserRequest(google.protobuf.message.Message):
+    """Request to update user"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     USER_FIELD_NUMBER: builtins.int
     PASSWORD_FIELD_NUMBER: builtins.int
@@ -153,6 +163,8 @@ class UpdateUserRequest(google.protobuf.message.Message):
         """
         pass
     password: typing.Text
+    """Password of the user"""
+
     @property
     def update_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields get updated."""
@@ -168,6 +180,7 @@ class UpdateUserRequest(google.protobuf.message.Message):
 global___UpdateUserRequest = UpdateUserRequest
 
 class GetUserRequest(google.protobuf.message.Message):
+    """Request to get user"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     USER_ID_FIELD_NUMBER: builtins.int
     USER_EMAIL_FIELD_NUMBER: builtins.int
@@ -188,6 +201,7 @@ class GetUserRequest(google.protobuf.message.Message):
 global___GetUserRequest = GetUserRequest
 
 class DeleteUserRequest(google.protobuf.message.Message):
+    """Request to delete user"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     USER_ID_FIELD_NUMBER: builtins.int
     user_id: typing.Text
@@ -201,6 +215,7 @@ class DeleteUserRequest(google.protobuf.message.Message):
 global___DeleteUserRequest = DeleteUserRequest
 
 class ListUsersRequest(google.protobuf.message.Message):
+    """Request to list user"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PAGE_TOKEN_FIELD_NUMBER: builtins.int
     page_token: typing.Text
@@ -214,6 +229,7 @@ class ListUsersRequest(google.protobuf.message.Message):
 global___ListUsersRequest = ListUsersRequest
 
 class ListUsersResponse(google.protobuf.message.Message):
+    """Response containing list of users"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     USERS_FIELD_NUMBER: builtins.int
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
@@ -237,6 +253,7 @@ class ListUsersResponse(google.protobuf.message.Message):
 global___ListUsersResponse = ListUsersResponse
 
 class ListUserInfosResponse(google.protobuf.message.Message):
+    """Response containing list of users"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     USERS_FIELD_NUMBER: builtins.int
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
@@ -285,6 +302,7 @@ class ServerRole(google.protobuf.message.Message):
 global___ServerRole = ServerRole
 
 class CreateServerRoleRequest(google.protobuf.message.Message):
+    """Request to create server role"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     ROLE_FIELD_NUMBER: builtins.int
     @property
@@ -303,6 +321,7 @@ class CreateServerRoleRequest(google.protobuf.message.Message):
 global___CreateServerRoleRequest = CreateServerRoleRequest
 
 class UpdateServerRoleRequest(google.protobuf.message.Message):
+    """Request to update server role"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     ROLE_FIELD_NUMBER: builtins.int
     UPDATE_MASK_FIELD_NUMBER: builtins.int
@@ -326,6 +345,7 @@ class UpdateServerRoleRequest(google.protobuf.message.Message):
 global___UpdateServerRoleRequest = UpdateServerRoleRequest
 
 class DeleteServerRoleRequest(google.protobuf.message.Message):
+    """Request to delete server role"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     ROLE_ID_FIELD_NUMBER: builtins.int
     role_id: builtins.int
@@ -339,6 +359,7 @@ class DeleteServerRoleRequest(google.protobuf.message.Message):
 global___DeleteServerRoleRequest = DeleteServerRoleRequest
 
 class GetServerRoleRequest(google.protobuf.message.Message):
+    """Request to get server role"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     ROLE_ID_FIELD_NUMBER: builtins.int
     ROLE_NAME_FIELD_NUMBER: builtins.int
@@ -359,6 +380,7 @@ class GetServerRoleRequest(google.protobuf.message.Message):
 global___GetServerRoleRequest = GetServerRoleRequest
 
 class ListServerRolesRequest(google.protobuf.message.Message):
+    """Request to list server roles"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PAGE_TOKEN_FIELD_NUMBER: builtins.int
     page_token: typing.Text
@@ -372,6 +394,7 @@ class ListServerRolesRequest(google.protobuf.message.Message):
 global___ListServerRolesRequest = ListServerRolesRequest
 
 class ListServerRolesResponse(google.protobuf.message.Message):
+    """Response containing list of server roles"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     SERVER_ROLES_FIELD_NUMBER: builtins.int
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
@@ -409,6 +432,7 @@ class ListServerPermissionsRequest(google.protobuf.message.Message):
 global___ListServerPermissionsRequest = ListServerPermissionsRequest
 
 class ListServerPermissionsResponse(google.protobuf.message.Message):
+    """Response containing list of server permissions"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PERMISSIONS_FIELD_NUMBER: builtins.int
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
@@ -437,7 +461,11 @@ class LoginRequest(google.protobuf.message.Message):
     USER_EMAIL_FIELD_NUMBER: builtins.int
     PASSWORD_FIELD_NUMBER: builtins.int
     user_email: typing.Text
+    """user email"""
+
     password: typing.Text
+    """user password"""
+
     def __init__(self,
         *,
         user_email: typing.Text = ...,
@@ -447,12 +475,17 @@ class LoginRequest(google.protobuf.message.Message):
 global___LoginRequest = LoginRequest
 
 class LoginResponse(google.protobuf.message.Message):
+    """This message is a response of logging"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     USER_FIELD_NUMBER: builtins.int
     AUTH_TOKEN_FIELD_NUMBER: builtins.int
     @property
-    def user(self) -> global___User: ...
+    def user(self) -> global___User:
+        """user object - user_id must be there"""
+        pass
     auth_token: typing.Text
+    """authentication token after successful login of the user to access NLU services"""
+
     def __init__(self,
         *,
         user: typing.Optional[global___User] = ...,

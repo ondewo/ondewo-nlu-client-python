@@ -20,14 +20,27 @@ class _Mode:
 class _ModeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_Mode.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     UNSPECIFIED: _Mode.ValueType  # 0
+    """default mode, described in agent config"""
+
     EXCLUSIVE: _Mode.ValueType  # 1
+    """skip algorithms listed in `algorithms` field,"""
+
     INCLUSIVE: _Mode.ValueType  # 2
+    """run ONLY algorithms listed in `algorithms` field"""
+
 class Mode(_Mode, metaclass=_ModeEnumTypeWrapper):
+    """Type of mode"""
     pass
 
 UNSPECIFIED: Mode.ValueType  # 0
+"""default mode, described in agent config"""
+
 EXCLUSIVE: Mode.ValueType  # 1
+"""skip algorithms listed in `algorithms` field,"""
+
 INCLUSIVE: Mode.ValueType  # 2
+"""run ONLY algorithms listed in `algorithms` field"""
+
 global___Mode = Mode
 
 
@@ -37,32 +50,101 @@ class _IntentAlgorithms:
 class _IntentAlgorithmsEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_IntentAlgorithms.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     OndewoIntentExactContextDetector: _IntentAlgorithms.ValueType  # 0
+    """By enabling this, a specific intent is triggered if the context and the intent name in the user says is
+    matched. This can be used for directly triggering 'quick reply' button clicks confidence is always '1.0'.
+    """
+
     OndewoIntentExactMatch: _IntentAlgorithms.ValueType  # 1
+    """exact matching' of user input to user says is used to detect the intent. Confidence is always '1.0' if an
+    'exact match' is found.
+    """
+
     OndewoIntentNamedExactMatch: _IntentAlgorithms.ValueType  # 2
+    """the entity synonym in the user says text is replaced by the entity and 'exact matching' of user says text
+    is performed. Confidence is alway '1.0'.
+    """
+
     OndewoIntentSimilarityMatch: _IntentAlgorithms.ValueType  # 3
+    """the algorithm computes the similarity of the user input to all user says of all intents."""
+
     OndewoIntentNamedSimilarityMatch: _IntentAlgorithms.ValueType  # 4
+    """the entity synonyms in the user says are replaced by their Entity. Text similarity algorithms are then
+    used to detect the intent.
+    """
+
     OndewoIntentBertClassifier: _IntentAlgorithms.ValueType  # 7
+    """new language representation model called BERT, which stands for Bidirectional Encoder Representations
+    from Transformers.BERT is designed to pre-train deep bidirectional representations by jointly conditioning
+    on both left and right context in all layers. As a result, the pre-trained BERT representations can be
+    fine-tuned for multi-class intent detection. For details seehttps://arxiv.org/abs/1810.04805
+    """
+
     OndewoIntentMetaClassifier: _IntentAlgorithms.ValueType  # 8
     IntentExitDetector: _IntentAlgorithms.ValueType  # 10
+    """Maximum number of repeated fallbacks before this algorithm exists the conversation and resets contexts"""
+
     OndewoIntentRankingMatch: _IntentAlgorithms.ValueType  # 11
+    """Algorithm to improve the interplay of the other algorithms"""
+
     OndewoWeightedEnsemble: _IntentAlgorithms.ValueType  # 13
+    """Ensemble calculation of used algorithms"""
+
     OndewoIntentExitDetector: _IntentAlgorithms.ValueType  # 14
+    """Maximum number of repeated fallbacks before this algorithm exists the conversation and resets contexts"""
+
     OndewoIntentParameterMatch: _IntentAlgorithms.ValueType  # 15
+    """Matches the intent based on the parameter constellation and the current user context"""
+
 class IntentAlgorithms(_IntentAlgorithms, metaclass=_IntentAlgorithmsEnumTypeWrapper):
+    """Type of Intent algorithm."""
     pass
 
 OndewoIntentExactContextDetector: IntentAlgorithms.ValueType  # 0
+"""By enabling this, a specific intent is triggered if the context and the intent name in the user says is
+matched. This can be used for directly triggering 'quick reply' button clicks confidence is always '1.0'.
+"""
+
 OndewoIntentExactMatch: IntentAlgorithms.ValueType  # 1
+"""exact matching' of user input to user says is used to detect the intent. Confidence is always '1.0' if an
+'exact match' is found.
+"""
+
 OndewoIntentNamedExactMatch: IntentAlgorithms.ValueType  # 2
+"""the entity synonym in the user says text is replaced by the entity and 'exact matching' of user says text
+is performed. Confidence is alway '1.0'.
+"""
+
 OndewoIntentSimilarityMatch: IntentAlgorithms.ValueType  # 3
+"""the algorithm computes the similarity of the user input to all user says of all intents."""
+
 OndewoIntentNamedSimilarityMatch: IntentAlgorithms.ValueType  # 4
+"""the entity synonyms in the user says are replaced by their Entity. Text similarity algorithms are then
+used to detect the intent.
+"""
+
 OndewoIntentBertClassifier: IntentAlgorithms.ValueType  # 7
+"""new language representation model called BERT, which stands for Bidirectional Encoder Representations
+from Transformers.BERT is designed to pre-train deep bidirectional representations by jointly conditioning
+on both left and right context in all layers. As a result, the pre-trained BERT representations can be
+fine-tuned for multi-class intent detection. For details seehttps://arxiv.org/abs/1810.04805
+"""
+
 OndewoIntentMetaClassifier: IntentAlgorithms.ValueType  # 8
 IntentExitDetector: IntentAlgorithms.ValueType  # 10
+"""Maximum number of repeated fallbacks before this algorithm exists the conversation and resets contexts"""
+
 OndewoIntentRankingMatch: IntentAlgorithms.ValueType  # 11
+"""Algorithm to improve the interplay of the other algorithms"""
+
 OndewoWeightedEnsemble: IntentAlgorithms.ValueType  # 13
+"""Ensemble calculation of used algorithms"""
+
 OndewoIntentExitDetector: IntentAlgorithms.ValueType  # 14
+"""Maximum number of repeated fallbacks before this algorithm exists the conversation and resets contexts"""
+
 OndewoIntentParameterMatch: IntentAlgorithms.ValueType  # 15
+"""Matches the intent based on the parameter constellation and the current user context"""
+
 global___IntentAlgorithms = IntentAlgorithms
 
 
@@ -101,6 +183,7 @@ class ExtractEntitiesRequest(google.protobuf.message.Message):
 global___ExtractEntitiesRequest = ExtractEntitiesRequest
 
 class ExtractEntitiesFuzzyRequest(google.protobuf.message.Message):
+    """This message is a request to extract entities with Fuzzy Entity Recognizer"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PARENT_FIELD_NUMBER: builtins.int
     TEXT_FIELD_NUMBER: builtins.int
@@ -137,6 +220,7 @@ class ExtractEntitiesFuzzyRequest(google.protobuf.message.Message):
 global___ExtractEntitiesFuzzyRequest = ExtractEntitiesFuzzyRequest
 
 class EntityTypeFuzzyNerConfig(google.protobuf.message.Message):
+    """Configuration for Fuzzy Entity Recognizer"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     class _FuzzyNerAlgorithm:
         ValueType = typing.NewType('ValueType', builtins.int)
@@ -144,18 +228,27 @@ class EntityTypeFuzzyNerConfig(google.protobuf.message.Message):
     class _FuzzyNerAlgorithmEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[EntityTypeFuzzyNerConfig._FuzzyNerAlgorithm.ValueType], builtins.type):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         PREFILTER_LEVENSHTEIN: EntityTypeFuzzyNerConfig._FuzzyNerAlgorithm.ValueType  # 0
+        """Levenshtein algorithm for fuzzy ner matching"""
+
         LOCAL_MAXIMUM: EntityTypeFuzzyNerConfig._FuzzyNerAlgorithm.ValueType  # 1
+        """local maximum"""
+
     class FuzzyNerAlgorithm(_FuzzyNerAlgorithm, metaclass=_FuzzyNerAlgorithmEnumTypeWrapper):
         """Enum of fuzzy ner algorithms"""
         pass
 
     PREFILTER_LEVENSHTEIN: EntityTypeFuzzyNerConfig.FuzzyNerAlgorithm.ValueType  # 0
+    """Levenshtein algorithm for fuzzy ner matching"""
+
     LOCAL_MAXIMUM: EntityTypeFuzzyNerConfig.FuzzyNerAlgorithm.ValueType  # 1
+    """local maximum"""
+
 
     ENTITY_TYPE_FIELD_NUMBER: builtins.int
     MINIMAL_SCORE_FIELD_NUMBER: builtins.int
     ENTITY_VALUES_FIELD_NUMBER: builtins.int
     ALGORITHM_FIELD_NUMBER: builtins.int
+    ALLOW_OVERLAPS_FIELD_NUMBER: builtins.int
     @property
     def entity_type(self) -> ondewo.nlu.entity_type_pb2.EntityType:
         """The Entity Type"""
@@ -168,10 +261,10 @@ class EntityTypeFuzzyNerConfig(google.protobuf.message.Message):
         """Optional. If defined, only entity value from this list are considered."""
         pass
     algorithm: global___EntityTypeFuzzyNerConfig.FuzzyNerAlgorithm.ValueType
-    """Optional. Specify the Fuzzy Ner algorithm
-    Should not use allow_overlaps here, since its default value is False
-    bool allow_overlaps = 5;
-    """
+    """Optional. Specify the Fuzzy Ner algorithm"""
+
+    allow_overlaps: builtins.bool
+    """Should not use allow_overlaps here, since its default value is False"""
 
     def __init__(self,
         *,
@@ -179,20 +272,28 @@ class EntityTypeFuzzyNerConfig(google.protobuf.message.Message):
         minimal_score: builtins.float = ...,
         entity_values: typing.Optional[typing.Iterable[typing.Text]] = ...,
         algorithm: global___EntityTypeFuzzyNerConfig.FuzzyNerAlgorithm.ValueType = ...,
+        allow_overlaps: builtins.bool = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["entity_type",b"entity_type"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["algorithm",b"algorithm","entity_type",b"entity_type","entity_values",b"entity_values","minimal_score",b"minimal_score"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["algorithm",b"algorithm","allow_overlaps",b"allow_overlaps","entity_type",b"entity_type","entity_values",b"entity_values","minimal_score",b"minimal_score"]) -> None: ...
 global___EntityTypeFuzzyNerConfig = EntityTypeFuzzyNerConfig
 
 class EntityDetected(google.protobuf.message.Message):
+    """This message contains the entity detected"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     ENTITY_FIELD_NUMBER: builtins.int
     EXTRACTION_METHOD_FIELD_NUMBER: builtins.int
     SCORE_FIELD_NUMBER: builtins.int
     @property
-    def entity(self) -> ondewo.nlu.intent_pb2.Intent.TrainingPhrase.Entity: ...
+    def entity(self) -> ondewo.nlu.intent_pb2.Intent.TrainingPhrase.Entity:
+        """The entity name that is detected"""
+        pass
     extraction_method: typing.Text
+    """The extractor name, e.g. SpacyNer"""
+
     score: builtins.float
+    """The confidence score of the detected entity"""
+
     def __init__(self,
         *,
         entity: typing.Optional[ondewo.nlu.intent_pb2.Intent.TrainingPhrase.Entity] = ...,
@@ -204,12 +305,17 @@ class EntityDetected(google.protobuf.message.Message):
 global___EntityDetected = EntityDetected
 
 class ExtractEntitiesResponse(google.protobuf.message.Message):
+    """This message is a response of extracting entities"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     ENTITIES_DETECTED_FIELD_NUMBER: builtins.int
     TEXT_FIELD_NUMBER: builtins.int
     @property
-    def entities_detected(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___EntityDetected]: ...
+    def entities_detected(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___EntityDetected]:
+        """A list of entities detected"""
+        pass
     text: typing.Text
+    """The text containing the entities detected"""
+
     def __init__(self,
         *,
         entities_detected: typing.Optional[typing.Iterable[global___EntityDetected]] = ...,
@@ -219,6 +325,7 @@ class ExtractEntitiesResponse(google.protobuf.message.Message):
 global___ExtractEntitiesResponse = ExtractEntitiesResponse
 
 class GetAlternativeSentencesRequest(google.protobuf.message.Message):
+    """Request to get alternative sentences"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     CONFIG_FIELD_NUMBER: builtins.int
     SENTENCE_FIELD_NUMBER: builtins.int
@@ -227,14 +334,28 @@ class GetAlternativeSentencesRequest(google.protobuf.message.Message):
     PROTECTED_WORDS_FIELD_NUMBER: builtins.int
     WORDS_TO_CHANGE_FIELD_NUMBER: builtins.int
     @property
-    def config(self) -> global___DataEnrichmentConfig: ...
+    def config(self) -> global___DataEnrichmentConfig:
+        """Configuration type of the enricher"""
+        pass
     sentence: typing.Text
+    """The sentence from which it is desired to get alternative sentences"""
+
     language_code: typing.Text
+    """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+
     parent: typing.Text
+    """the parent of the request
+    Format: `projects/<Project ID>`.
+    """
+
     @property
-    def protected_words(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
+    def protected_words(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """Protected words in the augmentation process"""
+        pass
     @property
-    def words_to_change(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
+    def words_to_change(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """Words to be changed in the augmentation process"""
+        pass
     def __init__(self,
         *,
         config: typing.Optional[global___DataEnrichmentConfig] = ...,
@@ -249,15 +370,26 @@ class GetAlternativeSentencesRequest(google.protobuf.message.Message):
 global___GetAlternativeSentencesRequest = GetAlternativeSentencesRequest
 
 class GenerateUserSaysRequest(google.protobuf.message.Message):
+    """Request to generate user sentences"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     PARENT_FIELD_NUMBER: builtins.int
     N_REPEAT_SYNONYM_FIELD_NUMBER: builtins.int
     BRANCH_FIELD_NUMBER: builtins.int
     language_code: typing.Text
+    """language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+
     parent: typing.Text
+    """the parent of the request
+    Format: `projects/<Project ID>`.
+    """
+
     n_repeat_synonym: builtins.int
+    """The number of synonyms desired"""
+
     branch: typing.Text
+    """Git branch"""
+
     def __init__(self,
         *,
         language_code: typing.Text = ...,
@@ -269,6 +401,7 @@ class GenerateUserSaysRequest(google.protobuf.message.Message):
 global___GenerateUserSaysRequest = GenerateUserSaysRequest
 
 class GenerateResponsesRequest(google.protobuf.message.Message):
+    """Request to generate responses"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     PARENT_FIELD_NUMBER: builtins.int
@@ -276,9 +409,19 @@ class GenerateResponsesRequest(google.protobuf.message.Message):
     BRANCH_FIELD_NUMBER: builtins.int
     DROP_UNKNOWN_PARAMETERS_FIELD_NUMBER: builtins.int
     language_code: typing.Text
+    """language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+
     parent: typing.Text
+    """the parent of the request
+    Format: `projects/<Project ID>`.
+    """
+
     n_repeat_synonym: builtins.int
+    """The number of synonyms desired"""
+
     branch: typing.Text
+    """Git branch"""
+
     drop_unknown_parameters: builtins.bool
     def __init__(self,
         *,
@@ -292,6 +435,7 @@ class GenerateResponsesRequest(google.protobuf.message.Message):
 global___GenerateResponsesRequest = GenerateResponsesRequest
 
 class GetAlternativeTrainingPhrasesRequest(google.protobuf.message.Message):
+    """Request to get alternative training phrases"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     CONFIG_FIELD_NUMBER: builtins.int
     TRAINING_PHRASE_FIELD_NUMBER: builtins.int
@@ -304,23 +448,43 @@ class GetAlternativeTrainingPhrasesRequest(google.protobuf.message.Message):
     WORDS_TO_CHANGE_FIELD_NUMBER: builtins.int
     BRANCH_FIELD_NUMBER: builtins.int
     @property
-    def config(self) -> global___DataEnrichmentConfig: ...
+    def config(self) -> global___DataEnrichmentConfig:
+        """Configuration of the enricher"""
+        pass
     @property
-    def training_phrase(self) -> ondewo.nlu.intent_pb2.Intent.TrainingPhrase: ...
+    def training_phrase(self) -> ondewo.nlu.intent_pb2.Intent.TrainingPhrase:
+        """Training phrase from which an alternative one is got"""
+        pass
     intent_name: typing.Text
+    """The intent tag attached to the training phrase"""
+
     language_code: typing.Text
+    """language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+
     parent: typing.Text
+    """the parent of the request
+    Format: `projects/<Project ID>`.
+    """
+
     detect_entities: builtins.bool
+    """Flag to determine whether entities must or not be detected"""
+
     similarity_threshold: builtins.float
     """similarity threshold defines how similar sentences should be to drop generated training phrase
     as duplicate. Meaningful values of similarity_threshold are between 0.95 and 1.0
     """
 
     @property
-    def protected_words(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
+    def protected_words(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """Protected words in the augmentation process"""
+        pass
     @property
-    def words_to_change(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
+    def words_to_change(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """Words to be changed in the augmentation process"""
+        pass
     branch: typing.Text
+    """Git branch"""
+
     def __init__(self,
         *,
         config: typing.Optional[global___DataEnrichmentConfig] = ...,
@@ -339,16 +503,27 @@ class GetAlternativeTrainingPhrasesRequest(google.protobuf.message.Message):
 global___GetAlternativeTrainingPhrasesRequest = GetAlternativeTrainingPhrasesRequest
 
 class GetSynonymsRequest(google.protobuf.message.Message):
+    """Request to get synonyms"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     CONFIG_FIELD_NUMBER: builtins.int
     WORD_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     PARENT_FIELD_NUMBER: builtins.int
     @property
-    def config(self) -> global___DataEnrichmentConfig: ...
+    def config(self) -> global___DataEnrichmentConfig:
+        """Configuration of the enricher"""
+        pass
     word: typing.Text
+    """Word from which a synonym is got"""
+
     language_code: typing.Text
+    """language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+
     parent: typing.Text
+    """the parent of the request
+    Format: `projects/<Project ID>`.
+    """
+
     def __init__(self,
         *,
         config: typing.Optional[global___DataEnrichmentConfig] = ...,
@@ -361,10 +536,13 @@ class GetSynonymsRequest(google.protobuf.message.Message):
 global___GetSynonymsRequest = GetSynonymsRequest
 
 class GetSynonymsResponse(google.protobuf.message.Message):
+    """Response containing synonyms"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     SYNONYMS_FIELD_NUMBER: builtins.int
     @property
-    def synonyms(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Synonym]: ...
+    def synonyms(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Synonym]:
+        """A list of synonyms"""
+        pass
     def __init__(self,
         *,
         synonyms: typing.Optional[typing.Iterable[global___Synonym]] = ...,
@@ -373,11 +551,16 @@ class GetSynonymsResponse(google.protobuf.message.Message):
 global___GetSynonymsResponse = GetSynonymsResponse
 
 class Synonym(google.protobuf.message.Message):
+    """This message contains a Synonym"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     SYNONYM_FIELD_NUMBER: builtins.int
     SCORE_FIELD_NUMBER: builtins.int
     synonym: typing.Text
+    """Synonym word"""
+
     score: builtins.int
+    """Score associated to the synonym resulted"""
+
     def __init__(self,
         *,
         synonym: typing.Text = ...,
@@ -387,10 +570,13 @@ class Synonym(google.protobuf.message.Message):
 global___Synonym = Synonym
 
 class GetAlternativeSentencesResponse(google.protobuf.message.Message):
+    """Response containing alternative sentences"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     ALTERNATIVE_SENTENCES_FIELD_NUMBER: builtins.int
     @property
-    def alternative_sentences(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AltSentence]: ...
+    def alternative_sentences(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AltSentence]:
+        """A list of alternative sentences"""
+        pass
     def __init__(self,
         *,
         alternative_sentences: typing.Optional[typing.Iterable[global___AltSentence]] = ...,
@@ -399,10 +585,13 @@ class GetAlternativeSentencesResponse(google.protobuf.message.Message):
 global___GetAlternativeSentencesResponse = GetAlternativeSentencesResponse
 
 class GenerateResponsesResponse(google.protobuf.message.Message):
+    """Response containing responses"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     RESPONSES_FIELD_NUMBER: builtins.int
     @property
-    def responses(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
+    def responses(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """A list of responses"""
+        pass
     def __init__(self,
         *,
         responses: typing.Optional[typing.Iterable[typing.Text]] = ...,
@@ -411,10 +600,13 @@ class GenerateResponsesResponse(google.protobuf.message.Message):
 global___GenerateResponsesResponse = GenerateResponsesResponse
 
 class GenerateUserSaysResponse(google.protobuf.message.Message):
+    """Response containing user sentences"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     USER_SAYS_FIELD_NUMBER: builtins.int
     @property
-    def user_says(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
+    def user_says(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """A list of sampled sentences"""
+        pass
     def __init__(self,
         *,
         user_says: typing.Optional[typing.Iterable[typing.Text]] = ...,
@@ -423,10 +615,13 @@ class GenerateUserSaysResponse(google.protobuf.message.Message):
 global___GenerateUserSaysResponse = GenerateUserSaysResponse
 
 class GetAlternativeTrainingPhrasesResponse(google.protobuf.message.Message):
+    """Response containing alternative training phrases"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     ALTERNATIVE_TRAINING_PHRASES_FIELD_NUMBER: builtins.int
     @property
-    def alternative_training_phrases(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AltTrainingPhrase]: ...
+    def alternative_training_phrases(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AltTrainingPhrase]:
+        """A list of alternative training phrases"""
+        pass
     def __init__(self,
         *,
         alternative_training_phrases: typing.Optional[typing.Iterable[global___AltTrainingPhrase]] = ...,
@@ -435,11 +630,16 @@ class GetAlternativeTrainingPhrasesResponse(google.protobuf.message.Message):
 global___GetAlternativeTrainingPhrasesResponse = GetAlternativeTrainingPhrasesResponse
 
 class AltSentence(google.protobuf.message.Message):
+    """This message contains an alternative sentence"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     SENTENCE_FIELD_NUMBER: builtins.int
     SCORE_FIELD_NUMBER: builtins.int
     sentence: typing.Text
+    """Alternative sentence"""
+
     score: builtins.float
+    """Score associated to the alternative sentence resulted"""
+
     def __init__(self,
         *,
         sentence: typing.Text = ...,
@@ -449,12 +649,17 @@ class AltSentence(google.protobuf.message.Message):
 global___AltSentence = AltSentence
 
 class AltTrainingPhrase(google.protobuf.message.Message):
+    """This message contains an alternative training phrase"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     TRAINING_PHRASE_FIELD_NUMBER: builtins.int
     SCORE_FIELD_NUMBER: builtins.int
     @property
-    def training_phrase(self) -> ondewo.nlu.intent_pb2.Intent.TrainingPhrase: ...
+    def training_phrase(self) -> ondewo.nlu.intent_pb2.Intent.TrainingPhrase:
+        """Alternative training phrase"""
+        pass
     score: builtins.float
+    """Score associated to training_phrase"""
+
     def __init__(self,
         *,
         training_phrase: typing.Optional[ondewo.nlu.intent_pb2.Intent.TrainingPhrase] = ...,
@@ -465,6 +670,7 @@ class AltTrainingPhrase(google.protobuf.message.Message):
 global___AltTrainingPhrase = AltTrainingPhrase
 
 class DataEnrichmentConfig(google.protobuf.message.Message):
+    """This message contains the configuration of data enrichment"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     ENTITY_ENRICHMENT_FIELD_NUMBER: builtins.int
     THESAURUS_ENRICHMENT_FIELD_NUMBER: builtins.int
@@ -475,21 +681,37 @@ class DataEnrichmentConfig(google.protobuf.message.Message):
     BERT_ENRICHMENT_FIELD_NUMBER: builtins.int
     XLNET_ENRICHMENT_FIELD_NUMBER: builtins.int
     @property
-    def entity_enrichment(self) -> global___EntityEnrichmentConfig: ...
+    def entity_enrichment(self) -> global___EntityEnrichmentConfig:
+        """Entity augmenter configuration"""
+        pass
     @property
-    def thesaurus_enrichment(self) -> global___ThesaurusEnrichmentConfig: ...
+    def thesaurus_enrichment(self) -> global___ThesaurusEnrichmentConfig:
+        """Thesaurus augmenter configuration"""
+        pass
     @property
-    def word2vec_enrichment(self) -> global___Word2VecEnrichmentConfig: ...
+    def word2vec_enrichment(self) -> global___Word2VecEnrichmentConfig:
+        """Word2Vec augmenter configuration"""
+        pass
     @property
-    def word_net_enrichment(self) -> global___WordNetAugEnrichmentConfig: ...
+    def word_net_enrichment(self) -> global___WordNetAugEnrichmentConfig:
+        """WordNet augmenter configuration"""
+        pass
     @property
-    def gpt2_enrichment(self) -> global___GPT2EnrichmentConfig: ...
+    def gpt2_enrichment(self) -> global___GPT2EnrichmentConfig:
+        """GPT2 augmenter configuration"""
+        pass
     @property
-    def glove_enrichment(self) -> global___GloVeEnrichmentConfig: ...
+    def glove_enrichment(self) -> global___GloVeEnrichmentConfig:
+        """GloVe augmenter configuration"""
+        pass
     @property
-    def bert_enrichment(self) -> global___BertAugEnrichmentConfig: ...
+    def bert_enrichment(self) -> global___BertAugEnrichmentConfig:
+        """BERT augmenter configuration"""
+        pass
     @property
-    def xlnet_enrichment(self) -> global___XLNetAugEnrichmentConfig: ...
+    def xlnet_enrichment(self) -> global___XLNetAugEnrichmentConfig:
+        """XLNet augmenter configuration"""
+        pass
     def __init__(self,
         *,
         entity_enrichment: typing.Optional[global___EntityEnrichmentConfig] = ...,
@@ -506,13 +728,20 @@ class DataEnrichmentConfig(google.protobuf.message.Message):
 global___DataEnrichmentConfig = DataEnrichmentConfig
 
 class EntityEnrichmentConfig(google.protobuf.message.Message):
+    """Configuration for Entity enrichment"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     IS_ACTIVE_FIELD_NUMBER: builtins.int
     ENRICHMENT_FACTOR_FIELD_NUMBER: builtins.int
     EXECUTION_ORDER_FIELD_NUMBER: builtins.int
     is_active: builtins.bool
+    """Activation flag"""
+
     enrichment_factor: builtins.int
+    """Factor of enrichment"""
+
     execution_order: builtins.int
+    """Order of augmenter execution"""
+
     def __init__(self,
         *,
         is_active: builtins.bool = ...,
@@ -523,13 +752,20 @@ class EntityEnrichmentConfig(google.protobuf.message.Message):
 global___EntityEnrichmentConfig = EntityEnrichmentConfig
 
 class ThesaurusEnrichmentConfig(google.protobuf.message.Message):
+    """Configuration for Thesaurus enrichment"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     IS_ACTIVE_FIELD_NUMBER: builtins.int
     ENRICHMENT_FACTOR_FIELD_NUMBER: builtins.int
     EXECUTION_ORDER_FIELD_NUMBER: builtins.int
     is_active: builtins.bool
+    """Activation flag"""
+
     enrichment_factor: builtins.int
+    """Factor of enrichment"""
+
     execution_order: builtins.int
+    """Order of augmenter execution"""
+
     def __init__(self,
         *,
         is_active: builtins.bool = ...,
@@ -540,13 +776,20 @@ class ThesaurusEnrichmentConfig(google.protobuf.message.Message):
 global___ThesaurusEnrichmentConfig = ThesaurusEnrichmentConfig
 
 class BertAugEnrichmentConfig(google.protobuf.message.Message):
+    """Configuration for BERT augmenter enrichment"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     IS_ACTIVE_FIELD_NUMBER: builtins.int
     ENRICHMENT_FACTOR_FIELD_NUMBER: builtins.int
     EXECUTION_ORDER_FIELD_NUMBER: builtins.int
     is_active: builtins.bool
+    """Activation flag"""
+
     enrichment_factor: builtins.int
+    """Factor of enrichment"""
+
     execution_order: builtins.int
+    """Order of augmenter execution"""
+
     def __init__(self,
         *,
         is_active: builtins.bool = ...,
@@ -557,13 +800,20 @@ class BertAugEnrichmentConfig(google.protobuf.message.Message):
 global___BertAugEnrichmentConfig = BertAugEnrichmentConfig
 
 class GloVeEnrichmentConfig(google.protobuf.message.Message):
+    """Configuration for GloVe enrichment"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     IS_ACTIVE_FIELD_NUMBER: builtins.int
     ENRICHMENT_FACTOR_FIELD_NUMBER: builtins.int
     EXECUTION_ORDER_FIELD_NUMBER: builtins.int
     is_active: builtins.bool
+    """Activation flag"""
+
     enrichment_factor: builtins.int
+    """Factor of enrichment"""
+
     execution_order: builtins.int
+    """Order of augmenter execution"""
+
     def __init__(self,
         *,
         is_active: builtins.bool = ...,
@@ -574,13 +824,20 @@ class GloVeEnrichmentConfig(google.protobuf.message.Message):
 global___GloVeEnrichmentConfig = GloVeEnrichmentConfig
 
 class GPT2EnrichmentConfig(google.protobuf.message.Message):
+    """Configuration for GPT2 enrichment"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     IS_ACTIVE_FIELD_NUMBER: builtins.int
     ENRICHMENT_FACTOR_FIELD_NUMBER: builtins.int
     EXECUTION_ORDER_FIELD_NUMBER: builtins.int
     is_active: builtins.bool
+    """Activation flag"""
+
     enrichment_factor: builtins.int
+    """Factor of enrichment"""
+
     execution_order: builtins.int
+    """Order of augmenter execution"""
+
     def __init__(self,
         *,
         is_active: builtins.bool = ...,
@@ -591,13 +848,20 @@ class GPT2EnrichmentConfig(google.protobuf.message.Message):
 global___GPT2EnrichmentConfig = GPT2EnrichmentConfig
 
 class Word2VecEnrichmentConfig(google.protobuf.message.Message):
+    """Configuration for Word2Vec enrichment"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     IS_ACTIVE_FIELD_NUMBER: builtins.int
     ENRICHMENT_FACTOR_FIELD_NUMBER: builtins.int
     EXECUTION_ORDER_FIELD_NUMBER: builtins.int
     is_active: builtins.bool
+    """Activation flag"""
+
     enrichment_factor: builtins.int
+    """Factor of enrichment"""
+
     execution_order: builtins.int
+    """Order of augmenter execution"""
+
     def __init__(self,
         *,
         is_active: builtins.bool = ...,
@@ -608,13 +872,20 @@ class Word2VecEnrichmentConfig(google.protobuf.message.Message):
 global___Word2VecEnrichmentConfig = Word2VecEnrichmentConfig
 
 class WordNetAugEnrichmentConfig(google.protobuf.message.Message):
+    """Configuration for WordNet augmenter enrichment"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     IS_ACTIVE_FIELD_NUMBER: builtins.int
     ENRICHMENT_FACTOR_FIELD_NUMBER: builtins.int
     EXECUTION_ORDER_FIELD_NUMBER: builtins.int
     is_active: builtins.bool
+    """Activation flag"""
+
     enrichment_factor: builtins.int
+    """Factor of enrichment"""
+
     execution_order: builtins.int
+    """Order of augmenter execution"""
+
     def __init__(self,
         *,
         is_active: builtins.bool = ...,
@@ -625,13 +896,20 @@ class WordNetAugEnrichmentConfig(google.protobuf.message.Message):
 global___WordNetAugEnrichmentConfig = WordNetAugEnrichmentConfig
 
 class XLNetAugEnrichmentConfig(google.protobuf.message.Message):
+    """Configuration for Thesaurus enrichment"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     IS_ACTIVE_FIELD_NUMBER: builtins.int
     ENRICHMENT_FACTOR_FIELD_NUMBER: builtins.int
     EXECUTION_ORDER_FIELD_NUMBER: builtins.int
     is_active: builtins.bool
+    """Activation flag"""
+
     enrichment_factor: builtins.int
+    """Factor of enrichment"""
+
     execution_order: builtins.int
+    """Order of augmenter execution"""
+
     def __init__(self,
         *,
         is_active: builtins.bool = ...,
@@ -652,8 +930,8 @@ class ClassifyIntentsRequest(google.protobuf.message.Message):
     MODE_FIELD_NUMBER: builtins.int
     ALGORITHMS_FIELD_NUMBER: builtins.int
     parent: typing.Text
-    """the parent of the request
-    Format: `projects/<Project ID>`.
+    """Required. The project of this agent.
+    Format: `projects/<Project ID>/agent`.
     """
 
     text: typing.Text
@@ -696,6 +974,7 @@ class ClassifyIntentsRequest(google.protobuf.message.Message):
 global___ClassifyIntentsRequest = ClassifyIntentsRequest
 
 class IntentClassified(google.protobuf.message.Message):
+    """Intent classified by a certain intent classifier"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     INTENT_NAME_FIELD_NUMBER: builtins.int
     INTENT_DISPLAY_NAME_FIELD_NUMBER: builtins.int
@@ -710,7 +989,11 @@ class IntentClassified(google.protobuf.message.Message):
     """The name of the intent."""
 
     classifier: typing.Text
+    """The name of the classifier that detected the intent"""
+
     score: builtins.float
+    """Score associated to the detection of the intent by the classifier"""
+
     def __init__(self,
         *,
         intent_name: typing.Text = ...,
@@ -722,17 +1005,26 @@ class IntentClassified(google.protobuf.message.Message):
 global___IntentClassified = IntentClassified
 
 class ClassifyIntentsResponse(google.protobuf.message.Message):
+    """Response containing the intents classified in a sentence"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     INTENTS_CLASSIFIED_FIELD_NUMBER: builtins.int
     TEXT_FIELD_NUMBER: builtins.int
     ACTIVE_CONTEXTS_FIELD_NUMBER: builtins.int
     CONTEXT_NAMES_FIELD_NUMBER: builtins.int
     @property
-    def intents_classified(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___IntentClassified]: ...
+    def intents_classified(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___IntentClassified]:
+        """A list of intents detected"""
+        pass
     text: typing.Text
+    """The text containing from which the intents were detected"""
+
     active_contexts: builtins.bool
+    """Flag that enables the context through the conversation"""
+
     @property
-    def context_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
+    def context_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """The context tags associated to the intents"""
+        pass
     def __init__(self,
         *,
         intents_classified: typing.Optional[typing.Iterable[global___IntentClassified]] = ...,

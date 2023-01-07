@@ -18,6 +18,7 @@ from typing import Optional, TypeVar, Dict, Type, Any
 from uuid import uuid4
 
 from google.protobuf.message import Message
+from ondewo.utils.helpers import get_attr_recursive, set_attr_recursive
 
 from ondewo.nlu.context_pb2 import CreateContextRequest, ListContextsRequest, UpdateContextRequest, \
     DeleteContextRequest, DeleteAllContextsRequest, GetContextRequest
@@ -26,7 +27,6 @@ from ondewo.nlu.intent_pb2 import GetIntentRequest, ListIntentsRequest, CreateIn
 from ondewo.nlu.session_pb2 import DetectIntentRequest, GetLatestSessionReviewRequest, ListSessionsRequest, \
     GetSessionRequest, ListSessionReviewsRequest, GetSessionReviewRequest, CreateSessionReviewRequest
 from ondewo.nlu.user_pb2 import LoginRequest
-from ondewo.utils.helpers import get_attr_recursive, set_attr_recursive
 
 T = TypeVar("T", bound=Message)
 

@@ -13,6 +13,7 @@ import google.protobuf.timestamp_pb2
 import ondewo.nlu.common_pb2
 import ondewo.nlu.intent_pb2
 import ondewo.nlu.project_role_pb2
+import ondewo.nlu.session_pb2
 import ondewo.nlu.user_pb2
 import typing
 import typing_extensions
@@ -42,6 +43,7 @@ class _AgentViewEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enum
     """Minimum view including only agent UUID and agent display name"""
 
 class AgentView(_AgentView, metaclass=_AgentViewEnumTypeWrapper):
+    """Structure of agent view"""
     pass
 
 AGENT_VIEW_UNSPECIFIED: AgentView.ValueType  # 0
@@ -136,6 +138,122 @@ INTENT_GENERAL: ReportType.ValueType  # 4
 global___ReportType = ReportType
 
 
+class _SessionsReportType:
+    ValueType = typing.NewType('ValueType', builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+class _SessionsReportTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_SessionsReportType.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    SESSIONS: _SessionsReportType.ValueType  # 0
+    """report on sessions. Supports SessionFilter to filter"""
+
+    SESSION_STEPS: _SessionsReportType.ValueType  # 1
+    """report on session steps. Supports SessionFilter to filter"""
+
+    SESSION_TOP_X_INTENTS: _SessionsReportType.ValueType  # 2
+    """report top x detected intents in session. Supports SessionFilter to filter"""
+
+    SESSION_TOP_X_ENTITY_TYPES: _SessionsReportType.ValueType  # 3
+    """report top x detected entity types. Supports SessionFilter to filter"""
+
+    SESSION_TOP_X_ENTITY_VALUES: _SessionsReportType.ValueType  # 4
+    """report top x detected entity values Supports SessionFilter to filter"""
+
+    SESSION_TOP_X_USERS: _SessionsReportType.ValueType  # 5
+    """report top x users. Supports SessionFilter to filter (Coming soon! Not yet implemented)"""
+
+    SESSION_TOP_X_LABELS: _SessionsReportType.ValueType  # 6
+    """report top x labels. Supports SessionFilter to filter"""
+
+    SESSION_TOP_X_TAGS: _SessionsReportType.ValueType  # 7
+    """report top x tags. Supports SessionFilter to filter"""
+
+    SESSION_TOP_X_PHONE_NUMBERS: _SessionsReportType.ValueType  # 8
+    """report top x phone_numbers. Supports SessionFilter to filter (Coming soon! Not yet implemented)"""
+
+    SESSION_HUMAN_HANDOVERS: _SessionsReportType.ValueType  # 9
+    """report on human handovers. Supports SessionFilter to filter (Coming soon! Not yet implemented)"""
+
+    SESSION_SQL_QUERY: _SessionsReportType.ValueType  # 10
+    """report based on a query issued tables with session information.
+    Requires to define <code>sql_query</code> in request.
+
+    Allowed tables to query are:
+    * session
+    * session_context
+    * session_step
+    * session_step_context
+    * session_step_detect_entity
+    * session_step_detect_intent
+    * session_step_detect_intent_context_in
+    * session_step_detect_intent_context_out
+    * session_step_detect_intent_context_out
+    * session_step_detect_intent_label
+    * session_step_detect_intent_tag
+
+    Example:
+      <code>SELECT ... FROM session</code>
+      <code>SELECT ... FROM session, session_steps</code>
+    """
+
+class SessionsReportType(_SessionsReportType, metaclass=_SessionsReportTypeEnumTypeWrapper):
+    """Type of reports about the domain of the agent"""
+    pass
+
+SESSIONS: SessionsReportType.ValueType  # 0
+"""report on sessions. Supports SessionFilter to filter"""
+
+SESSION_STEPS: SessionsReportType.ValueType  # 1
+"""report on session steps. Supports SessionFilter to filter"""
+
+SESSION_TOP_X_INTENTS: SessionsReportType.ValueType  # 2
+"""report top x detected intents in session. Supports SessionFilter to filter"""
+
+SESSION_TOP_X_ENTITY_TYPES: SessionsReportType.ValueType  # 3
+"""report top x detected entity types. Supports SessionFilter to filter"""
+
+SESSION_TOP_X_ENTITY_VALUES: SessionsReportType.ValueType  # 4
+"""report top x detected entity values Supports SessionFilter to filter"""
+
+SESSION_TOP_X_USERS: SessionsReportType.ValueType  # 5
+"""report top x users. Supports SessionFilter to filter (Coming soon! Not yet implemented)"""
+
+SESSION_TOP_X_LABELS: SessionsReportType.ValueType  # 6
+"""report top x labels. Supports SessionFilter to filter"""
+
+SESSION_TOP_X_TAGS: SessionsReportType.ValueType  # 7
+"""report top x tags. Supports SessionFilter to filter"""
+
+SESSION_TOP_X_PHONE_NUMBERS: SessionsReportType.ValueType  # 8
+"""report top x phone_numbers. Supports SessionFilter to filter (Coming soon! Not yet implemented)"""
+
+SESSION_HUMAN_HANDOVERS: SessionsReportType.ValueType  # 9
+"""report on human handovers. Supports SessionFilter to filter (Coming soon! Not yet implemented)"""
+
+SESSION_SQL_QUERY: SessionsReportType.ValueType  # 10
+"""report based on a query issued tables with session information.
+Requires to define <code>sql_query</code> in request.
+
+Allowed tables to query are:
+* session
+* session_context
+* session_step
+* session_step_context
+* session_step_detect_entity
+* session_step_detect_intent
+* session_step_detect_intent_context_in
+* session_step_detect_intent_context_out
+* session_step_detect_intent_context_out
+* session_step_detect_intent_label
+* session_step_detect_intent_tag
+
+Example:
+  <code>SELECT ... FROM session</code>
+  <code>SELECT ... FROM session, session_steps</code>
+"""
+
+global___SessionsReportType = SessionsReportType
+
+
 class _ReportFormat:
     ValueType = typing.NewType('ValueType', builtins.int)
     V: typing_extensions.TypeAlias = ValueType
@@ -181,7 +299,10 @@ class _AgentStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._En
     """
 
 class AgentStatus(_AgentStatus, metaclass=_AgentStatusEnumTypeWrapper):
-    """fixme: add endpoint to set agent owner"""
+    """FIXME(arath): add endpoint to set agent owner
+
+    Type of Agent / Project status
+    """
     pass
 
 ACTIVE: AgentStatus.ValueType  # 0
@@ -274,6 +395,7 @@ class Agent(google.protobuf.message.Message):
 global___Agent = Agent
 
 class AgentWithOwner(google.protobuf.message.Message):
+    """This message contains the agent with owner"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     AGENT_FIELD_NUMBER: builtins.int
     OWNER_FIELD_NUMBER: builtins.int
@@ -295,6 +417,7 @@ class AgentWithOwner(google.protobuf.message.Message):
 global___AgentWithOwner = AgentWithOwner
 
 class AgentOfUserWithOwner(google.protobuf.message.Message):
+    """This message contains the agent of user with owner"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     AGENT_WITH_OWNER_FIELD_NUMBER: builtins.int
     PROJECT_ROLE_FIELD_NUMBER: builtins.int
@@ -316,6 +439,7 @@ class AgentOfUserWithOwner(google.protobuf.message.Message):
 global___AgentOfUserWithOwner = AgentOfUserWithOwner
 
 class CreateAgentRequest(google.protobuf.message.Message):
+    """Request to create an agent"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     AGENT_FIELD_NUMBER: builtins.int
     AGENT_VIEW_FIELD_NUMBER: builtins.int
@@ -336,6 +460,7 @@ class CreateAgentRequest(google.protobuf.message.Message):
 global___CreateAgentRequest = CreateAgentRequest
 
 class UpdateAgentRequest(google.protobuf.message.Message):
+    """Request to update the agent"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     AGENT_FIELD_NUMBER: builtins.int
     AGENT_VIEW_FIELD_NUMBER: builtins.int
@@ -362,6 +487,7 @@ class UpdateAgentRequest(google.protobuf.message.Message):
 global___UpdateAgentRequest = UpdateAgentRequest
 
 class DeleteAgentRequest(google.protobuf.message.Message):
+    """Request to delete the agent"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PARENT_FIELD_NUMBER: builtins.int
     parent: typing.Text
@@ -398,6 +524,7 @@ class GetAgentRequest(google.protobuf.message.Message):
 global___GetAgentRequest = GetAgentRequest
 
 class ListAgentsRequest(google.protobuf.message.Message):
+    """Request to get the list of agents"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     AGENT_VIEW_FIELD_NUMBER: builtins.int
     PAGE_TOKEN_FIELD_NUMBER: builtins.int
@@ -423,6 +550,7 @@ class ListAgentsRequest(google.protobuf.message.Message):
 global___ListAgentsRequest = ListAgentsRequest
 
 class ListAgentsResponse(google.protobuf.message.Message):
+    """Get list of agents"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     AGENTS_WITH_OWNERS_FIELD_NUMBER: builtins.int
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
@@ -446,6 +574,7 @@ class ListAgentsResponse(google.protobuf.message.Message):
 global___ListAgentsResponse = ListAgentsResponse
 
 class ListAgentsOfUserResponse(google.protobuf.message.Message):
+    """Get list of agents of user"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     AGENTS_OF_USER_WITH_OWNERS_FIELD_NUMBER: builtins.int
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
@@ -585,6 +714,7 @@ class ExportAgentResponse(google.protobuf.message.Message):
 global___ExportAgentResponse = ExportAgentResponse
 
 class ExportBenchmarkAgentRequest(google.protobuf.message.Message):
+    """Request to export benchmark agent"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PARENT_FIELD_NUMBER: builtins.int
     COMPRESSION_LEVEL_FIELD_NUMBER: builtins.int
@@ -628,6 +758,7 @@ class ExportBenchmarkAgentRequest(google.protobuf.message.Message):
 global___ExportBenchmarkAgentRequest = ExportBenchmarkAgentRequest
 
 class ExportBenchmarkAgentResponse(google.protobuf.message.Message):
+    """Response to export benchmark agent"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     class TrainingPhrasesEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -662,6 +793,7 @@ class ExportBenchmarkAgentResponse(google.protobuf.message.Message):
 global___ExportBenchmarkAgentResponse = ExportBenchmarkAgentResponse
 
 class OptimizeRankingMatchRequest(google.protobuf.message.Message):
+    """This message is a request to run Optimize Ranking Match"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PARENT_FIELD_NUMBER: builtins.int
     LANGUAGE_CODES_FIELD_NUMBER: builtins.int
@@ -696,13 +828,14 @@ class OptimizeRankingMatchRequest(google.protobuf.message.Message):
 global___OptimizeRankingMatchRequest = OptimizeRankingMatchRequest
 
 class RankingMatchOptimizationConfig(google.protobuf.message.Message):
+    """This message contains the configuration to run Optimize Ranking Match"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     N_SPLITS_FIELD_NUMBER: builtins.int
     RANDOM_SEED_FIELD_NUMBER: builtins.int
     INITIAL_THRESHOLDS_FIELD_NUMBER: builtins.int
     language_code: typing.Text
-    """language"""
+    """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
 
     n_splits: builtins.int
     """number of splits for optimization"""
@@ -728,6 +861,7 @@ class RankingMatchOptimizationConfig(google.protobuf.message.Message):
 global___RankingMatchOptimizationConfig = RankingMatchOptimizationConfig
 
 class OptimizeRankingMatchResponse(google.protobuf.message.Message):
+    """This message is a response of Optimize Ranking Match"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     OPTIMIZATION_INFO_FIELD_NUMBER: builtins.int
     OPTIMIZED_ONDEWO_CONFIG_FIELD_NUMBER: builtins.int
@@ -837,6 +971,7 @@ class RestoreAgentRequest(google.protobuf.message.Message):
 global___RestoreAgentRequest = RestoreAgentRequest
 
 class GetAgentStatisticsRequest(google.protobuf.message.Message):
+    """Request statistics of the agent"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PARENT_FIELD_NUMBER: builtins.int
     FORMAT_FIELD_NUMBER: builtins.int
@@ -851,7 +986,9 @@ class GetAgentStatisticsRequest(google.protobuf.message.Message):
     """File formats for reports"""
 
     language_code: typing.Text
-    """the language to calculate statistics about"""
+    """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
+    the language to calculate statistics about
+    """
 
     type: global___ReportType.ValueType
     """Type of reports about the domain of the agent"""
@@ -867,6 +1004,7 @@ class GetAgentStatisticsRequest(google.protobuf.message.Message):
 global___GetAgentStatisticsRequest = GetAgentStatisticsRequest
 
 class GetAgentStatisticsResponse(google.protobuf.message.Message):
+    """Response to get statistics of the agent"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     REPORTS_FIELD_NUMBER: builtins.int
     FORMAT_FIELD_NUMBER: builtins.int
@@ -889,7 +1027,101 @@ class GetAgentStatisticsResponse(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["format",b"format","reports",b"reports","type",b"type"]) -> None: ...
 global___GetAgentStatisticsResponse = GetAgentStatisticsResponse
 
+class GetSessionsStatisticsRequest(google.protobuf.message.Message):
+    """Request of the report of the statistics about sessions"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    PARENT_FIELD_NUMBER: builtins.int
+    FORMAT_FIELD_NUMBER: builtins.int
+    TYPE_FIELD_NUMBER: builtins.int
+    SESSION_FILTER_FIELD_NUMBER: builtins.int
+    CONTEXT_FILTERS_FIELD_NUMBER: builtins.int
+    LIMIT_FIELD_NUMBER: builtins.int
+    GROUP_BYS_FIELD_NUMBER: builtins.int
+    ORDER_BYS_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
+    SQL_QUERY_FIELD_NUMBER: builtins.int
+    parent: typing.Text
+    """Required. The project to get statistics from.
+    Format: `projects/<Project ID>`.
+    """
+
+    format: global___ReportFormat.ValueType
+    """File formats for reports"""
+
+    type: global___SessionsReportType.ValueType
+    """Type of reports about the domain of the agent"""
+
+    @property
+    def session_filter(self) -> ondewo.nlu.session_pb2.SessionFilter:
+        """Optional. A filter to narrow reports based on sessions"""
+        pass
+    @property
+    def context_filters(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.session_pb2.ContextFilter]:
+        """Optional. A filter to narrow reports based on contextual information (Coming soon! Not yet implemented)"""
+        pass
+    limit: builtins.int
+    """Optional. limit the returned number of results"""
+
+    @property
+    def group_bys(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """Optional. Grouping based on named properties"""
+        pass
+    @property
+    def order_bys(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """Optional. Order based on named properties"""
+        pass
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which data fields will be added to the returned data.
+        Example: path=["session.duration_in_s_min", "session.tags"]
+        """
+        pass
+    sql_query: typing.Text
+    """SQL Query - only usable with specific SessionsReportType such as SessionsReportType.SESSION_SQL_QUERY"""
+
+    def __init__(self,
+        *,
+        parent: typing.Text = ...,
+        format: global___ReportFormat.ValueType = ...,
+        type: global___SessionsReportType.ValueType = ...,
+        session_filter: typing.Optional[ondewo.nlu.session_pb2.SessionFilter] = ...,
+        context_filters: typing.Optional[typing.Iterable[ondewo.nlu.session_pb2.ContextFilter]] = ...,
+        limit: builtins.int = ...,
+        group_bys: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        order_bys: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        field_mask: typing.Optional[google.protobuf.field_mask_pb2.FieldMask] = ...,
+        sql_query: typing.Text = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["field_mask",b"field_mask","session_filter",b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["context_filters",b"context_filters","field_mask",b"field_mask","format",b"format","group_bys",b"group_bys","limit",b"limit","order_bys",b"order_bys","parent",b"parent","session_filter",b"session_filter","sql_query",b"sql_query","type",b"type"]) -> None: ...
+global___GetSessionsStatisticsRequest = GetSessionsStatisticsRequest
+
+class GetSessionsStatisticsResponse(google.protobuf.message.Message):
+    """Report of the statistics about sessions"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    REPORTS_FIELD_NUMBER: builtins.int
+    FORMAT_FIELD_NUMBER: builtins.int
+    TYPE_FIELD_NUMBER: builtins.int
+    reports: builtins.bytes
+    """Statistic info."""
+
+    format: global___ReportFormat.ValueType
+    """File formats for reports"""
+
+    type: global___SessionsReportType.ValueType
+    """Type of reports about the domain of the agent"""
+
+    def __init__(self,
+        *,
+        reports: builtins.bytes = ...,
+        format: global___ReportFormat.ValueType = ...,
+        type: global___SessionsReportType.ValueType = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["format",b"format","reports",b"reports","type",b"type"]) -> None: ...
+global___GetSessionsStatisticsResponse = GetSessionsStatisticsResponse
+
 class AddUserToProjectRequest(google.protobuf.message.Message):
+    """Request to add user to project."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PARENT_FIELD_NUMBER: builtins.int
     USER_ID_FIELD_NUMBER: builtins.int
@@ -903,7 +1135,7 @@ class AddUserToProjectRequest(google.protobuf.message.Message):
     """id of the user"""
 
     project_role_id: builtins.int
-    """role id of the user in the project"""
+    """ID of the project role of the user"""
 
     def __init__(self,
         *,
@@ -915,6 +1147,7 @@ class AddUserToProjectRequest(google.protobuf.message.Message):
 global___AddUserToProjectRequest = AddUserToProjectRequest
 
 class RemoveUserFromProjectRequest(google.protobuf.message.Message):
+    """Request to remove user from the project."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PARENT_FIELD_NUMBER: builtins.int
     USER_ID_FIELD_NUMBER: builtins.int
@@ -935,6 +1168,7 @@ class RemoveUserFromProjectRequest(google.protobuf.message.Message):
 global___RemoveUserFromProjectRequest = RemoveUserFromProjectRequest
 
 class ListUsersInProjectRequest(google.protobuf.message.Message):
+    """Request to list users in the project"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PARENT_FIELD_NUMBER: builtins.int
     PAGE_TOKEN_FIELD_NUMBER: builtins.int
@@ -955,6 +1189,7 @@ class ListUsersInProjectRequest(google.protobuf.message.Message):
 global___ListUsersInProjectRequest = ListUsersInProjectRequest
 
 class UserInProject(google.protobuf.message.Message):
+    """Request to get user in project"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PARENT_FIELD_NUMBER: builtins.int
     USER_FIELD_NUMBER: builtins.int
@@ -969,7 +1204,7 @@ class UserInProject(google.protobuf.message.Message):
         """User object"""
         pass
     role_id: builtins.int
-    """id of the project role of the user"""
+    """ID of the project role of the user"""
 
     def __init__(self,
         *,
@@ -1039,6 +1274,7 @@ class ListProjectPermissionsRequest(google.protobuf.message.Message):
 global___ListProjectPermissionsRequest = ListProjectPermissionsRequest
 
 class ListProjectPermissionsResponse(google.protobuf.message.Message):
+    """List project permissions"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PERMISSIONS_FIELD_NUMBER: builtins.int
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
@@ -1062,7 +1298,7 @@ class ListProjectPermissionsResponse(google.protobuf.message.Message):
 global___ListProjectPermissionsResponse = ListProjectPermissionsResponse
 
 class SetAgentStatusRequest(google.protobuf.message.Message):
-    """status of the agent"""
+    """Request to set status of the agent"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PARENT_FIELD_NUMBER: builtins.int
     STATUS_FIELD_NUMBER: builtins.int
@@ -1147,6 +1383,7 @@ class AgentSorting(google.protobuf.message.Message):
 global___AgentSorting = AgentSorting
 
 class SetResourcesRequest(google.protobuf.message.Message):
+    """Request to set resources"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PARENT_FIELD_NUMBER: builtins.int
     NAME_FIELD_NUMBER: builtins.int
@@ -1154,10 +1391,16 @@ class SetResourcesRequest(google.protobuf.message.Message):
     RESOURCE_FILE_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     parent: typing.Text
+    """Required. The project that the agent to fetch is associated with.
+    Format: `projects/<Project ID>/agents`.
+    """
+
     name: typing.Text
     type: typing.Text
     resource_file: builtins.bytes
     language_code: typing.Text
+    """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+
     def __init__(self,
         *,
         parent: typing.Text = ...,
@@ -1170,15 +1413,22 @@ class SetResourcesRequest(google.protobuf.message.Message):
 global___SetResourcesRequest = SetResourcesRequest
 
 class DeleteResourcesRequest(google.protobuf.message.Message):
+    """Request to delete resources"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PARENT_FIELD_NUMBER: builtins.int
     NAME_FIELD_NUMBER: builtins.int
     TYPE_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     parent: typing.Text
+    """Required. The project that the agent to fetch is associated with.
+    Format: `projects/<Project ID>/agents`.
+    """
+
     name: typing.Text
     type: typing.Text
     language_code: typing.Text
+    """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+
     def __init__(self,
         *,
         parent: typing.Text = ...,
@@ -1190,15 +1440,22 @@ class DeleteResourcesRequest(google.protobuf.message.Message):
 global___DeleteResourcesRequest = DeleteResourcesRequest
 
 class ExportResourcesRequest(google.protobuf.message.Message):
+    """Request to export resources"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PARENT_FIELD_NUMBER: builtins.int
     NAME_FIELD_NUMBER: builtins.int
     TYPE_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     parent: typing.Text
+    """Required. The project that the agent to fetch is associated with.
+    Format: `projects/<Project ID>/agents`.
+    """
+
     name: typing.Text
     type: typing.Text
     language_code: typing.Text
+    """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+
     def __init__(self,
         *,
         parent: typing.Text = ...,
@@ -1210,6 +1467,7 @@ class ExportResourcesRequest(google.protobuf.message.Message):
 global___ExportResourcesRequest = ExportResourcesRequest
 
 class ExportResourcesResponse(google.protobuf.message.Message):
+    """Response to export resources"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PARENT_FIELD_NUMBER: builtins.int
     NAME_FIELD_NUMBER: builtins.int
@@ -1217,9 +1475,15 @@ class ExportResourcesResponse(google.protobuf.message.Message):
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     RESOURCE_FILE_FIELD_NUMBER: builtins.int
     parent: typing.Text
+    """Required. The project that the agent to fetch is associated with.
+    Format: `projects/<Project ID>/agents`.
+    """
+
     name: typing.Text
     type: typing.Text
     language_code: typing.Text
+    """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+
     resource_file: builtins.bytes
     def __init__(self,
         *,
@@ -1233,6 +1497,7 @@ class ExportResourcesResponse(google.protobuf.message.Message):
 global___ExportResourcesResponse = ExportResourcesResponse
 
 class GetModelStatusesRequest(google.protobuf.message.Message):
+    """Request to get model statuses"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PARENT_FIELD_NUMBER: builtins.int
     CACHE_VERSION_FIELD_NUMBER: builtins.int
@@ -1245,6 +1510,8 @@ class GetModelStatusesRequest(google.protobuf.message.Message):
 
     cache_version: builtins.int
     language_code: typing.Text
+    """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+
     model_name: typing.Text
     def __init__(self,
         *,
@@ -1257,6 +1524,7 @@ class GetModelStatusesRequest(google.protobuf.message.Message):
 global___GetModelStatusesRequest = GetModelStatusesRequest
 
 class ModelStatus(google.protobuf.message.Message):
+    """Status of model"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     class _StatusName:
         ValueType = typing.NewType('ValueType', builtins.int)
@@ -1288,8 +1556,14 @@ class ModelStatus(google.protobuf.message.Message):
     CONFIG_FIELD_NUMBER: builtins.int
     STATUS_FIELD_NUMBER: builtins.int
     cache_version: builtins.int
+    """Cache version that contains the correspondent model"""
+
     language_code: typing.Text
+    """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+
     model_name: typing.Text
+    """The model name"""
+
     @property
     def status_set_time(self) -> google.protobuf.timestamp_pb2.Timestamp: ...
     config: typing.Text
@@ -1308,6 +1582,7 @@ class ModelStatus(google.protobuf.message.Message):
 global___ModelStatus = ModelStatus
 
 class GetModelStatusesResponse(google.protobuf.message.Message):
+    """Response to get model statuses"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     MODEL_STATUSES_FIELD_NUMBER: builtins.int
     @property
@@ -1320,6 +1595,7 @@ class GetModelStatusesResponse(google.protobuf.message.Message):
 global___GetModelStatusesResponse = GetModelStatusesResponse
 
 class CustomPlatformInfo(google.protobuf.message.Message):
+    """This message contains the information of custom platform"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PLATFORM_FIELD_NUMBER: builtins.int
     DISPLAY_NAME_FIELD_NUMBER: builtins.int
@@ -1349,6 +1625,7 @@ class CustomPlatformInfo(google.protobuf.message.Message):
 global___CustomPlatformInfo = CustomPlatformInfo
 
 class GetPlatformMappingRequest(google.protobuf.message.Message):
+    """Request to get platform mapping"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PARENT_FIELD_NUMBER: builtins.int
     parent: typing.Text
@@ -1364,6 +1641,7 @@ class GetPlatformMappingRequest(google.protobuf.message.Message):
 global___GetPlatformMappingRequest = GetPlatformMappingRequest
 
 class PlatformMapping(google.protobuf.message.Message):
+    """This message contains the mapping of platform"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PARENT_FIELD_NUMBER: builtins.int
     PLATFORM_INFO_FIELD_NUMBER: builtins.int
@@ -1374,9 +1652,7 @@ class PlatformMapping(google.protobuf.message.Message):
 
     @property
     def platform_info(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___CustomPlatformInfo]:
-        """Required.
-        If not set, it will set it empty.
-        """
+        """Required. If not set, it will set it empty."""
         pass
     def __init__(self,
         *,
@@ -1387,6 +1663,7 @@ class PlatformMapping(google.protobuf.message.Message):
 global___PlatformMapping = PlatformMapping
 
 class FullTextSearchRequest(google.protobuf.message.Message):
+    """This message is a request to run full text search"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     class _QueryType:
         ValueType = typing.NewType('ValueType', builtins.int)
@@ -1407,6 +1684,7 @@ class FullTextSearchRequest(google.protobuf.message.Message):
         OndewoIntentParametersQuery: FullTextSearchRequest._QueryType.ValueType  # 9
         OndewoIntentResponseQuery: FullTextSearchRequest._QueryType.ValueType  # 10
     class QueryType(_QueryType, metaclass=_QueryTypeEnumTypeWrapper):
+        """Type of query"""
         pass
 
     ALL: FullTextSearchRequest.QueryType.ValueType  # 0
@@ -1433,7 +1711,7 @@ class FullTextSearchRequest(google.protobuf.message.Message):
     """
 
     language_code: typing.Text
-    """In which language to search for"""
+    """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
 
     term: typing.Text
     """What to search for in the elastic server"""
@@ -1452,6 +1730,7 @@ class FullTextSearchRequest(google.protobuf.message.Message):
 global___FullTextSearchRequest = FullTextSearchRequest
 
 class FullTextSearchResponseEntityType(google.protobuf.message.Message):
+    """This message is a response of full text search of entity type"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     class EntityTypeSearchResult(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -1477,13 +1756,21 @@ class FullTextSearchResponseEntityType(google.protobuf.message.Message):
     TIME_FIELD_NUMBER: builtins.int
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
     parent: typing.Text
+    """Required. The project that the agent to fetch is associated with.
+    Format: `projects/<Project ID>/agents`.
+    """
+
     language_code: typing.Text
+    """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+
     @property
     def entity_type_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseEntityType.EntityTypeSearchResult]: ...
     term: typing.Text
     elastic_query: typing.Text
     time: builtins.float
     next_page_token: typing.Text
+    """The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2"""
+
     def __init__(self,
         *,
         parent: typing.Text = ...,
@@ -1498,6 +1785,7 @@ class FullTextSearchResponseEntityType(google.protobuf.message.Message):
 global___FullTextSearchResponseEntityType = FullTextSearchResponseEntityType
 
 class FullTextSearchResponseEntity(google.protobuf.message.Message):
+    """This message is a response of full text search of entity"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     class EntitySearchResult(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -1529,13 +1817,21 @@ class FullTextSearchResponseEntity(google.protobuf.message.Message):
     TIME_FIELD_NUMBER: builtins.int
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
     parent: typing.Text
+    """Required. The project that the agent to fetch is associated with.
+    Format: `projects/<Project ID>/agents`.
+    """
+
     language_code: typing.Text
+    """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+
     @property
     def entity_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseEntity.EntitySearchResult]: ...
     term: typing.Text
     elastic_query: typing.Text
     time: builtins.float
     next_page_token: typing.Text
+    """The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2"""
+
     def __init__(self,
         *,
         parent: typing.Text = ...,
@@ -1550,6 +1846,7 @@ class FullTextSearchResponseEntity(google.protobuf.message.Message):
 global___FullTextSearchResponseEntity = FullTextSearchResponseEntity
 
 class FullTextSearchResponseEntitySynonym(google.protobuf.message.Message):
+    """This message is a response of full text search of synonym entity"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     class EntitySynonymSearchResult(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -1587,13 +1884,21 @@ class FullTextSearchResponseEntitySynonym(google.protobuf.message.Message):
     TIME_FIELD_NUMBER: builtins.int
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
     parent: typing.Text
+    """Required. The project that the agent to fetch is associated with.
+    Format: `projects/<Project ID>/agents`.
+    """
+
     language_code: typing.Text
+    """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+
     @property
     def entity_synonym_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseEntitySynonym.EntitySynonymSearchResult]: ...
     term: typing.Text
     elastic_query: typing.Text
     time: builtins.float
     next_page_token: typing.Text
+    """The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2"""
+
     def __init__(self,
         *,
         parent: typing.Text = ...,
@@ -1608,6 +1913,7 @@ class FullTextSearchResponseEntitySynonym(google.protobuf.message.Message):
 global___FullTextSearchResponseEntitySynonym = FullTextSearchResponseEntitySynonym
 
 class FullTextSearchResponseIntent(google.protobuf.message.Message):
+    """This message is a response of full text search of intent"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     class IntentSearchResult(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -1640,13 +1946,21 @@ class FullTextSearchResponseIntent(google.protobuf.message.Message):
     TIME_FIELD_NUMBER: builtins.int
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
     parent: typing.Text
+    """Required. The project that the agent to fetch is associated with.
+    Format: `projects/<Project ID>/agents`.
+    """
+
     language_code: typing.Text
+    """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+
     @property
     def intent_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseIntent.IntentSearchResult]: ...
     term: typing.Text
     elastic_query: typing.Text
     time: builtins.float
     next_page_token: typing.Text
+    """The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2"""
+
     def __init__(self,
         *,
         parent: typing.Text = ...,
@@ -1661,6 +1975,7 @@ class FullTextSearchResponseIntent(google.protobuf.message.Message):
 global___FullTextSearchResponseIntent = FullTextSearchResponseIntent
 
 class FullTextSearchResponseIntentContextIn(google.protobuf.message.Message):
+    """This message is a response of full text search of intent with context in"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     class IntentContextInSearchResult(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -1693,13 +2008,21 @@ class FullTextSearchResponseIntentContextIn(google.protobuf.message.Message):
     TIME_FIELD_NUMBER: builtins.int
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
     parent: typing.Text
+    """Required. The project that the agent to fetch is associated with.
+    Format: `projects/<Project ID>/agents`.
+    """
+
     language_code: typing.Text
+    """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+
     @property
     def intent_context_in_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseIntentContextIn.IntentContextInSearchResult]: ...
     term: typing.Text
     elastic_query: typing.Text
     time: builtins.float
     next_page_token: typing.Text
+    """The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2"""
+
     def __init__(self,
         *,
         parent: typing.Text = ...,
@@ -1714,6 +2037,7 @@ class FullTextSearchResponseIntentContextIn(google.protobuf.message.Message):
 global___FullTextSearchResponseIntentContextIn = FullTextSearchResponseIntentContextIn
 
 class FullTextSearchResponseIntentContextOut(google.protobuf.message.Message):
+    """This message is a response of full text search of intent with context out"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     class IntentContextOutSearchResult(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -1746,13 +2070,21 @@ class FullTextSearchResponseIntentContextOut(google.protobuf.message.Message):
     TIME_FIELD_NUMBER: builtins.int
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
     parent: typing.Text
+    """Required. The project that the agent to fetch is associated with.
+    Format: `projects/<Project ID>/agents`.
+    """
+
     language_code: typing.Text
+    """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+
     @property
     def intent_context_out_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseIntentContextOut.IntentContextOutSearchResult]: ...
     term: typing.Text
     elastic_query: typing.Text
     time: builtins.float
     next_page_token: typing.Text
+    """The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2"""
+
     def __init__(self,
         *,
         parent: typing.Text = ...,
@@ -1767,6 +2099,7 @@ class FullTextSearchResponseIntentContextOut(google.protobuf.message.Message):
 global___FullTextSearchResponseIntentContextOut = FullTextSearchResponseIntentContextOut
 
 class FullTextSearchResponseIntentUsersays(google.protobuf.message.Message):
+    """This message is a response of full text search of intent with sentence"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     class IntentUsersaysSearchResult(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -1811,13 +2144,21 @@ class FullTextSearchResponseIntentUsersays(google.protobuf.message.Message):
     TIME_FIELD_NUMBER: builtins.int
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
     parent: typing.Text
+    """Required. The project that the agent to fetch is associated with.
+    Format: `projects/<Project ID>/agents`.
+    """
+
     language_code: typing.Text
+    """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+
     @property
     def intent_usersays_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseIntentUsersays.IntentUsersaysSearchResult]: ...
     term: typing.Text
     elastic_query: typing.Text
     time: builtins.float
     next_page_token: typing.Text
+    """The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2"""
+
     def __init__(self,
         *,
         parent: typing.Text = ...,
@@ -1832,6 +2173,7 @@ class FullTextSearchResponseIntentUsersays(google.protobuf.message.Message):
 global___FullTextSearchResponseIntentUsersays = FullTextSearchResponseIntentUsersays
 
 class FullTextSearchResponseIntentTags(google.protobuf.message.Message):
+    """This message is a response of full text search of intent with tags"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     class IntentTagsSearchResult(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -1867,13 +2209,21 @@ class FullTextSearchResponseIntentTags(google.protobuf.message.Message):
     TIME_FIELD_NUMBER: builtins.int
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
     parent: typing.Text
+    """Required. The project that the agent to fetch is associated with.
+    Format: `projects/<Project ID>/agents`.
+    """
+
     language_code: typing.Text
+    """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+
     @property
     def intent_tags_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseIntentTags.IntentTagsSearchResult]: ...
     term: typing.Text
     elastic_query: typing.Text
     time: builtins.float
     next_page_token: typing.Text
+    """The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2"""
+
     def __init__(self,
         *,
         parent: typing.Text = ...,
@@ -1888,6 +2238,7 @@ class FullTextSearchResponseIntentTags(google.protobuf.message.Message):
 global___FullTextSearchResponseIntentTags = FullTextSearchResponseIntentTags
 
 class FullTextSearchResponseIntentResponse(google.protobuf.message.Message):
+    """This message is a response of full text search of intent response"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     class IntentResponseSearchResult(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -1926,13 +2277,21 @@ class FullTextSearchResponseIntentResponse(google.protobuf.message.Message):
     TIME_FIELD_NUMBER: builtins.int
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
     parent: typing.Text
+    """Required. The project that the agent to fetch is associated with.
+    Format: `projects/<Project ID>/agents`.
+    """
+
     language_code: typing.Text
+    """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+
     @property
     def intent_response_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseIntentResponse.IntentResponseSearchResult]: ...
     term: typing.Text
     elastic_query: typing.Text
     time: builtins.float
     next_page_token: typing.Text
+    """The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2"""
+
     def __init__(self,
         *,
         parent: typing.Text = ...,
@@ -1947,6 +2306,7 @@ class FullTextSearchResponseIntentResponse(google.protobuf.message.Message):
 global___FullTextSearchResponseIntentResponse = FullTextSearchResponseIntentResponse
 
 class FullTextSearchResponseIntentParameters(google.protobuf.message.Message):
+    """This message is a response of full text search of intent with parameters"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     class IntentParametersSearchResult(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -1982,13 +2342,21 @@ class FullTextSearchResponseIntentParameters(google.protobuf.message.Message):
     TIME_FIELD_NUMBER: builtins.int
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
     parent: typing.Text
+    """Required. The project that the agent to fetch is associated with.
+    Format: `projects/<Project ID>/agents`.
+    """
+
     language_code: typing.Text
+    """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+
     @property
     def intent_parameters_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseIntentParameters.IntentParametersSearchResult]: ...
     term: typing.Text
     elastic_query: typing.Text
     time: builtins.float
     next_page_token: typing.Text
+    """The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2"""
+
     def __init__(self,
         *,
         parent: typing.Text = ...,
@@ -2003,15 +2371,18 @@ class FullTextSearchResponseIntentParameters(google.protobuf.message.Message):
 global___FullTextSearchResponseIntentParameters = FullTextSearchResponseIntentParameters
 
 class ReindexAgentRequest(google.protobuf.message.Message):
+    """This message is a request to reindex agent"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PARENT_FIELD_NUMBER: builtins.int
     BRANCH_NAME_FIELD_NUMBER: builtins.int
     INDEX_TYPES_FIELD_NUMBER: builtins.int
     parent: typing.Text
-    """projects/<project_id>/agent"""
+    """Required. The project that the agent to fetch is associated with.
+    Format: `projects/<Project ID>/agents`.
+    """
 
     branch_name: typing.Text
-    """Optional, useful for versioning reasons in the future"""
+    """Optional, useful for versioning reasons of the agent data"""
 
     @property
     def index_types(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[global___FullTextSearchRequest.QueryType.ValueType]:

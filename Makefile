@@ -16,10 +16,10 @@ export
 
 # MUST BE THE SAME AS API in Mayor and Minor Version Number
 # example: API 2.9.0 --> Client 2.9.X
-ONDEWO_NLU_VERSION = 3.5.1
+ONDEWO_NLU_VERSION = 4.0.0
 
-ONDEWO_NLU_API_GIT_BRANCH=tags/3.5.0
-ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags/4.1.2
+ONDEWO_NLU_API_GIT_BRANCH=master
+ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags/4.1.1
 PYPI_USERNAME?=ENTER_HERE_YOUR_PYPI_USERNAME
 PYPI_PASSWORD?=ENTER_HERE_YOUR_PYPI_PASSWORD
 
@@ -35,9 +35,8 @@ DEVOPS_ACCOUNT_GIT="ondewo-devops-accounts"
 DEVOPS_ACCOUNT_DIR="./${DEVOPS_ACCOUNT_GIT}"
 ONDEWO_NLU_API_DIR=ondewo-nlu-api
 ONDEWO_PROTO_COMPILER_DIR=ondewo-proto-compiler
-GOOGLE_APIS_DIR=${ONDEWO_NLU_API_DIR}/googleapis
 ONDEWO_PROTOS_DIR=${ONDEWO_NLU_API_DIR}/ondewo/
-GOOGLE_PROTOS_DIR=${GOOGLE_APIS_DIR}/google/
+GOOGLE_PROTOS_DIR=${ONDEWO_NLU_API_DIR}/google/
 OUTPUT_DIR=.
 IMAGE_UTILS_NAME=ondewo-nlu-client-utils-python:${ONDEWO_NLU_VERSION}
 .DEFAULT_GOAL := help
@@ -62,6 +61,7 @@ install_dependencies_locally: ## Install dependencies locally
 
 flake8: ## Runs flake8
 	flake8 --config .flake8
+# flake8 --exculde 'ondewo'
 
 mypy: ## Run mypy static code checking
 	pre-commit run mypy --all-files
@@ -117,7 +117,7 @@ clean_python_api:  ## Clear generated python files
 build_compiler:  ## Build proto compiler docker image
 	make -C ondewo-proto-compiler/python build
 
-generate_ondewo_protos: ## Generate python code from proto files
+generate_ondewo_protos:  ## Generate python code from proto files
 	make -f ondewo-proto-compiler/python/Makefile run \
 		PROTO_DIR=${ONDEWO_PROTOS_DIR} \
 		EXTRA_PROTO_DIR=${GOOGLE_PROTOS_DIR} \

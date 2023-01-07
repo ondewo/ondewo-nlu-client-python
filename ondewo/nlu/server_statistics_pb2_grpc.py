@@ -8,7 +8,8 @@ from ondewo.nlu import server_statistics_pb2 as ondewo_dot_nlu_dot_server__stati
 
 
 class ServerStatisticsStub(object):
-    """Missing associated documentation comment in .proto file."""
+    """Server project statistics
+    """
 
     def __init__(self, channel):
         """Constructor.
@@ -34,22 +35,26 @@ class ServerStatisticsStub(object):
 
 
 class ServerStatisticsServicer(object):
-    """Missing associated documentation comment in .proto file."""
+    """Server project statistics
+    """
 
     def GetProjectCount(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Returns the count of projects in the CAI server
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetUserProjectCount(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Returns the count of projects of a user
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetUserCount(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Returns the users count within a project
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -80,7 +85,8 @@ def add_ServerStatisticsServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class ServerStatistics(object):
-    """Missing associated documentation comment in .proto file."""
+    """Server project statistics
+    """
 
     @staticmethod
     def GetProjectCount(request,

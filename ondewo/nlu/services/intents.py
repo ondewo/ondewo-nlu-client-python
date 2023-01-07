@@ -105,10 +105,11 @@ class Intents(ServicesInterface):
 
     def batch_create_response_messages(
             self,
-            request: BatchCreateResponseMessagesRequest,
+            request: BatchCreateResponseMessagesRequest
     ) -> BatchResponseMessagesStatusResponse:
         response: BatchResponseMessagesStatusResponse = self.stub.BatchCreateResponseMessages(
-            request, metadata=self.metadata
+            request,
+            metadata=self.metadata,
         )
         return response
 

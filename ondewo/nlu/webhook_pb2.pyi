@@ -179,6 +179,7 @@ class OriginalDetectIntentRequest(google.protobuf.message.Message):
 global___OriginalDetectIntentRequest = OriginalDetectIntentRequest
 
 class PingResponse(google.protobuf.message.Message):
+    """This message is a response of pinging"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     IS_REACHABLE_FIELD_NUMBER: builtins.int
     is_reachable: builtins.bool

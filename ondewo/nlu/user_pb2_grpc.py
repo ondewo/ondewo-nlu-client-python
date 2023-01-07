@@ -96,91 +96,106 @@ class UsersServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def CreateUser(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Creates user
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetUser(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Gets user
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetUserInfo(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Gets user information
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def DeleteUser(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Deletes user
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def UpdateUser(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Updates user
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ListUsers(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Lists users
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ListUserInfos(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Lists users information
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def CreateServerRole(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Creates server role
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetServerRole(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Get server role
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def DeleteServerRole(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Deletes server role
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def UpdateServerRole(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Updates server role
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ListServerRoles(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Lists server roles
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ListServerPermissions(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Lists server permissions
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def Login(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Request to login
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def CheckLogin(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Checks login
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')

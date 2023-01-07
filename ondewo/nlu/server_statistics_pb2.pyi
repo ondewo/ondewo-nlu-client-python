@@ -11,6 +11,7 @@ import typing_extensions
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
 class GetUserProjectCountRequest(google.protobuf.message.Message):
+    """Request to get user project count"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     USER_ID_FIELD_NUMBER: builtins.int
     user_id: typing.Text

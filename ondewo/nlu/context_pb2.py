@@ -17,7 +17,7 @@ from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 from google.protobuf import field_mask_pb2 as google_dot_protobuf_dot_field__mask__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x18ondewo/nlu/context.proto\x12\nondewo.nlu\x1a\x1cgoogle/api/annotations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a google/protobuf/field_mask.proto\"\xa9\x02\n\x07\x43ontext\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x16\n\x0elifespan_count\x18\x02 \x01(\x05\x12\x37\n\nparameters\x18\x03 \x03(\x0b\x32#.ondewo.nlu.Context.ParametersEntry\x12\x15\n\rlifespan_time\x18\x04 \x01(\x02\x1aV\n\tParameter\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x14\n\x0c\x64isplay_name\x18\x02 \x01(\t\x12\r\n\x05value\x18\x03 \x01(\t\x12\x16\n\x0evalue_original\x18\x04 \x01(\t\x1aP\n\x0fParametersEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12,\n\x05value\x18\x02 \x01(\x0b\x32\x1d.ondewo.nlu.Context.Parameter:\x02\x38\x01\"9\n\x13ListContextsRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12\x12\n\npage_token\x18\x03 \x01(\t\"V\n\x14ListContextsResponse\x12%\n\x08\x63ontexts\x18\x01 \x03(\x0b\x32\x13.ondewo.nlu.Context\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t\"!\n\x11GetContextRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"L\n\x14\x43reateContextRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t\x12$\n\x07\x63ontext\x18\x02 \x01(\x0b\x32\x13.ondewo.nlu.Context\"m\n\x14UpdateContextRequest\x12$\n\x07\x63ontext\x18\x01 \x01(\x0b\x32\x13.ondewo.nlu.Context\x12/\n\x0bupdate_mask\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\"$\n\x14\x44\x65leteContextRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"*\n\x18\x44\x65leteAllContextsRequest\x12\x0e\n\x06parent\x18\x01 \x01(\t2\xce\x06\n\x08\x43ontexts\x12\x8c\x01\n\x0cListContexts\x12\x1f.ondewo.nlu.ListContextsRequest\x1a .ondewo.nlu.ListContextsResponse\"9\x82\xd3\xe4\x93\x02\x33\x12\x31/v2/{parent=projects/*/agent/sessions/*}/contexts\x12{\n\nGetContext\x12\x1d.ondewo.nlu.GetContextRequest\x1a\x13.ondewo.nlu.Context\"9\x82\xd3\xe4\x93\x02\x33\x12\x31/v2/{name=projects/*/agent/sessions/*/contexts/*}\x12\x8a\x01\n\rCreateContext\x12 .ondewo.nlu.CreateContextRequest\x1a\x13.ondewo.nlu.Context\"B\x82\xd3\xe4\x93\x02<\"1/v2/{parent=projects/*/agent/sessions/*}/contexts:\x07\x63ontext\x12\x92\x01\n\rUpdateContext\x12 .ondewo.nlu.UpdateContextRequest\x1a\x13.ondewo.nlu.Context\"J\x82\xd3\xe4\x93\x02\x44\x32\x39/v2/{context.name=projects/*/agent/sessions/*/contexts/*}:\x07\x63ontext\x12\x84\x01\n\rDeleteContext\x12 .ondewo.nlu.DeleteContextRequest\x1a\x16.google.protobuf.Empty\"9\x82\xd3\xe4\x93\x02\x33*1/v2/{name=projects/*/agent/sessions/*/contexts/*}\x12\x8c\x01\n\x11\x44\x65leteAllContexts\x12$.ondewo.nlu.DeleteAllContextsRequest\x1a\x16.google.protobuf.Empty\"9\x82\xd3\xe4\x93\x02\x33*1/v2/{parent=projects/*/agent/sessions/*}/contextsB\x9b\x01\n\x1e\x63om.google.cloud.dialogflow.v2B\x0c\x43ontextProtoP\x01ZDgoogle.golang.org/genproto/googleapis/cloud/dialogflow/v2;dialogflow\xf8\x01\x01\xa2\x02\x02\x44\x46\xaa\x02\x1aGoogle.Cloud.Dialogflow.V2b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x18ondewo/nlu/context.proto\x12\nondewo.nlu\x1a\x1cgoogle/api/annotations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a google/protobuf/field_mask.proto\"\xa9\x02\n\x07\x43ontext\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x16\n\x0elifespan_count\x18\x02 \x01(\x05\x12\x37\n\nparameters\x18\x03 \x03(\x0b\x32#.ondewo.nlu.Context.ParametersEntry\x12\x15\n\rlifespan_time\x18\x04 \x01(\x02\x1aV\n\tParameter\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x14\n\x0c\x64isplay_name\x18\x02 \x01(\t\x12\r\n\x05value\x18\x03 \x01(\t\x12\x16\n\x0evalue_original\x18\x04 \x01(\t\x1aP\n\x0fParametersEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12,\n\x05value\x18\x02 \x01(\x0b\x32\x1d.ondewo.nlu.Context.Parameter:\x02\x38\x01\"=\n\x13ListContextsRequest\x12\x12\n\nsession_id\x18\x01 \x01(\t\x12\x12\n\npage_token\x18\x03 \x01(\t\"V\n\x14ListContextsResponse\x12%\n\x08\x63ontexts\x18\x01 \x03(\x0b\x32\x13.ondewo.nlu.Context\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t\"!\n\x11GetContextRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"P\n\x14\x43reateContextRequest\x12\x12\n\nsession_id\x18\x01 \x01(\t\x12$\n\x07\x63ontext\x18\x02 \x01(\x0b\x32\x13.ondewo.nlu.Context\"m\n\x14UpdateContextRequest\x12$\n\x07\x63ontext\x18\x01 \x01(\x0b\x32\x13.ondewo.nlu.Context\x12/\n\x0bupdate_mask\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\"$\n\x14\x44\x65leteContextRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\".\n\x18\x44\x65leteAllContextsRequest\x12\x12\n\nsession_id\x18\x01 \x01(\t2\xce\x06\n\x08\x43ontexts\x12\x8c\x01\n\x0cListContexts\x12\x1f.ondewo.nlu.ListContextsRequest\x1a .ondewo.nlu.ListContextsResponse\"9\x82\xd3\xe4\x93\x02\x33\x12\x31/v2/{parent=projects/*/agent/sessions/*}/contexts\x12{\n\nGetContext\x12\x1d.ondewo.nlu.GetContextRequest\x1a\x13.ondewo.nlu.Context\"9\x82\xd3\xe4\x93\x02\x33\x12\x31/v2/{name=projects/*/agent/sessions/*/contexts/*}\x12\x8a\x01\n\rCreateContext\x12 .ondewo.nlu.CreateContextRequest\x1a\x13.ondewo.nlu.Context\"B\x82\xd3\xe4\x93\x02<\"1/v2/{parent=projects/*/agent/sessions/*}/contexts:\x07\x63ontext\x12\x92\x01\n\rUpdateContext\x12 .ondewo.nlu.UpdateContextRequest\x1a\x13.ondewo.nlu.Context\"J\x82\xd3\xe4\x93\x02\x44\x32\x39/v2/{context.name=projects/*/agent/sessions/*/contexts/*}:\x07\x63ontext\x12\x84\x01\n\rDeleteContext\x12 .ondewo.nlu.DeleteContextRequest\x1a\x16.google.protobuf.Empty\"9\x82\xd3\xe4\x93\x02\x33*1/v2/{name=projects/*/agent/sessions/*/contexts/*}\x12\x8c\x01\n\x11\x44\x65leteAllContexts\x12$.ondewo.nlu.DeleteAllContextsRequest\x1a\x16.google.protobuf.Empty\"9\x82\xd3\xe4\x93\x02\x33*1/v2/{parent=projects/*/agent/sessions/*}/contextsB\x9b\x01\n\x1e\x63om.google.cloud.dialogflow.v2B\x0c\x43ontextProtoP\x01ZDgoogle.golang.org/genproto/googleapis/cloud/dialogflow/v2;dialogflow\xf8\x01\x01\xa2\x02\x02\x44\x46\xaa\x02\x1aGoogle.Cloud.Dialogflow.V2b\x06proto3')
 
 
 
@@ -129,19 +129,19 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _CONTEXT_PARAMETERSENTRY._serialized_start=351
   _CONTEXT_PARAMETERSENTRY._serialized_end=431
   _LISTCONTEXTSREQUEST._serialized_start=433
-  _LISTCONTEXTSREQUEST._serialized_end=490
-  _LISTCONTEXTSRESPONSE._serialized_start=492
-  _LISTCONTEXTSRESPONSE._serialized_end=578
-  _GETCONTEXTREQUEST._serialized_start=580
-  _GETCONTEXTREQUEST._serialized_end=613
-  _CREATECONTEXTREQUEST._serialized_start=615
-  _CREATECONTEXTREQUEST._serialized_end=691
-  _UPDATECONTEXTREQUEST._serialized_start=693
-  _UPDATECONTEXTREQUEST._serialized_end=802
-  _DELETECONTEXTREQUEST._serialized_start=804
-  _DELETECONTEXTREQUEST._serialized_end=840
-  _DELETEALLCONTEXTSREQUEST._serialized_start=842
-  _DELETEALLCONTEXTSREQUEST._serialized_end=884
-  _CONTEXTS._serialized_start=887
-  _CONTEXTS._serialized_end=1733
+  _LISTCONTEXTSREQUEST._serialized_end=494
+  _LISTCONTEXTSRESPONSE._serialized_start=496
+  _LISTCONTEXTSRESPONSE._serialized_end=582
+  _GETCONTEXTREQUEST._serialized_start=584
+  _GETCONTEXTREQUEST._serialized_end=617
+  _CREATECONTEXTREQUEST._serialized_start=619
+  _CREATECONTEXTREQUEST._serialized_end=699
+  _UPDATECONTEXTREQUEST._serialized_start=701
+  _UPDATECONTEXTREQUEST._serialized_end=810
+  _DELETECONTEXTREQUEST._serialized_start=812
+  _DELETECONTEXTREQUEST._serialized_end=848
+  _DELETEALLCONTEXTSREQUEST._serialized_start=850
+  _DELETEALLCONTEXTSREQUEST._serialized_end=896
+  _CONTEXTS._serialized_start=899
+  _CONTEXTS._serialized_end=1745
 # @@protoc_insertion_point(module_scope)

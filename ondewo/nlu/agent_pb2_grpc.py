@@ -132,6 +132,11 @@ class AgentsStub(object):
                 request_serializer=ondewo_dot_nlu_dot_agent__pb2.GetAgentStatisticsRequest.SerializeToString,
                 response_deserializer=ondewo_dot_nlu_dot_agent__pb2.GetAgentStatisticsResponse.FromString,
                 )
+        self.GetSessionsStatistics = channel.unary_unary(
+                '/ondewo.nlu.Agents/GetSessionsStatistics',
+                request_serializer=ondewo_dot_nlu_dot_agent__pb2.GetSessionsStatisticsRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_agent__pb2.GetSessionsStatisticsResponse.FromString,
+                )
         self.SetAgentStatus = channel.unary_unary(
                 '/ondewo.nlu.Agents/SetAgentStatus',
                 request_serializer=ondewo_dot_nlu_dot_agent__pb2.SetAgentStatusRequest.SerializeToString,
@@ -487,19 +492,22 @@ class AgentsServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def ListUsersInProject(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Lists users in the project (agent)
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetPlatformInfo(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Gets information from the platform
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ListProjectPermissions(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """List permissions from the project (agent)
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -557,7 +565,8 @@ class AgentsServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def OptimizeRankingMatch(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Runs optimize ranking match
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -576,31 +585,42 @@ class AgentsServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetAgentStatistics(self, request, context):
+        """Gets statistics for the agent
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetSessionsStatistics(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def SetAgentStatus(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Sets status for the agent
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def SetResources(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Sets resources
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def DeleteResources(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Deletes resources
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ExportResources(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Exports resources
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -810,6 +830,11 @@ def add_AgentsServicer_to_server(servicer, server):
                     servicer.GetAgentStatistics,
                     request_deserializer=ondewo_dot_nlu_dot_agent__pb2.GetAgentStatisticsRequest.FromString,
                     response_serializer=ondewo_dot_nlu_dot_agent__pb2.GetAgentStatisticsResponse.SerializeToString,
+            ),
+            'GetSessionsStatistics': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetSessionsStatistics,
+                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.GetSessionsStatisticsRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_agent__pb2.GetSessionsStatisticsResponse.SerializeToString,
             ),
             'SetAgentStatus': grpc.unary_unary_rpc_method_handler(
                     servicer.SetAgentStatus,
@@ -1276,6 +1301,23 @@ class Agents(object):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/GetAgentStatistics',
             ondewo_dot_nlu_dot_agent__pb2.GetAgentStatisticsRequest.SerializeToString,
             ondewo_dot_nlu_dot_agent__pb2.GetAgentStatisticsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetSessionsStatistics(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/GetSessionsStatistics',
+            ondewo_dot_nlu_dot_agent__pb2.GetSessionsStatisticsRequest.SerializeToString,
+            ondewo_dot_nlu_dot_agent__pb2.GetSessionsStatisticsResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

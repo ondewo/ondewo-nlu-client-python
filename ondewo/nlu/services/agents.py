@@ -15,6 +15,7 @@
 
 from google.protobuf.empty_pb2 import Empty
 
+from ondewo.nlu import operations_pb2
 from ondewo.nlu.agent_pb2 import Agent, CreateAgentRequest, GetAgentRequest, UpdateAgentRequest, \
     DeleteAgentRequest, TrainAgentRequest, ExportAgentRequest, GetAgentStatisticsRequest, \
     GetAgentStatisticsResponse, ImportAgentRequest, RestoreAgentRequest, OptimizeRankingMatchRequest, \
@@ -27,10 +28,10 @@ from ondewo.nlu.agent_pb2 import Agent, CreateAgentRequest, GetAgentRequest, Upd
     FullTextSearchResponseEntity, FullTextSearchResponseEntityType, FullTextSearchResponseEntitySynonym, \
     FullTextSearchResponseIntent, FullTextSearchResponseIntentContextIn, FullTextSearchResponseIntentContextOut, \
     FullTextSearchResponseIntentUsersays, FullTextSearchResponseIntentTags, FullTextSearchResponseIntentResponse, \
-    FullTextSearchResponseIntentParameters, ReindexAgentRequest
+    FullTextSearchResponseIntentParameters, ReindexAgentRequest, GetSessionsStatisticsRequest, \
+    GetSessionsStatisticsResponse
 from ondewo.nlu.agent_pb2_grpc import AgentsStub
 from ondewo.nlu.core.services_interface import ServicesInterface
-from ondewo.nlu import operations_pb2
 
 
 class Agents(ServicesInterface):
@@ -131,6 +132,10 @@ class Agents(ServicesInterface):
         response: GetAgentStatisticsResponse = self.stub.GetAgentStatistics(request, metadata=self.metadata)
         return response
 
+    def get_sessions_statistics(self, request: GetSessionsStatisticsRequest) -> GetSessionsStatisticsResponse:
+        response: GetSessionsStatisticsResponse = self.stub.GetSessionsStatistics(request, metadata=self.metadata)
+        return response
+
     def set_agent_status(self, request: SetAgentStatusRequest) -> Agent:
         response: Agent = self.stub.SetAgentStatus(request, metadata=self.metadata)
         return response
@@ -160,77 +165,77 @@ class Agents(ServicesInterface):
         return response
 
     def get_full_text_search_entity(
-        self, request: FullTextSearchRequest
+            self, request: FullTextSearchRequest
     ) -> FullTextSearchResponseEntity:
         response: FullTextSearchResponseEntity = \
             self.stub.GetFullTextSearchEntity(request, metadata=self.metadata)
         return response
 
     def get_full_text_search_entity_type(
-        self, request: FullTextSearchRequest
+            self, request: FullTextSearchRequest
     ) -> FullTextSearchResponseEntityType:
         response: FullTextSearchResponseEntityType = \
             self.stub.GetFullTextSearchEntityType(request, metadata=self.metadata)
         return response
 
     def get_full_text_search_entity_synonym(
-        self, request: FullTextSearchRequest
+            self, request: FullTextSearchRequest
     ) -> FullTextSearchResponseEntitySynonym:
         response: FullTextSearchResponseEntitySynonym = \
             self.stub.GetFullTextSearchEntitySynonym(request, metadata=self.metadata)
         return response
 
     def get_full_text_search_intent(
-        self, request: FullTextSearchRequest
+            self, request: FullTextSearchRequest
     ) -> FullTextSearchResponseIntent:
         response: FullTextSearchResponseIntent = \
             self.stub.GetFullTextSearchIntent(request, metadata=self.metadata)
         return response
 
     def get_full_text_search_intent_context_in(
-        self, request: FullTextSearchRequest
+            self, request: FullTextSearchRequest
     ) -> FullTextSearchResponseIntentContextIn:
         response: FullTextSearchResponseIntentContextIn = \
             self.stub.GetFullTextSearchIntentContextIn(request, metadata=self.metadata)
         return response
 
     def get_full_text_search_intent_context_out(
-        self, request: FullTextSearchRequest
+            self, request: FullTextSearchRequest
     ) -> FullTextSearchResponseIntentContextOut:
         response: FullTextSearchResponseIntentContextOut = \
             self.stub.GetFullTextSearchIntentContextOut(request, metadata=self.metadata)
         return response
 
     def get_full_text_search_intent_usersays(
-        self, request: FullTextSearchRequest
+            self, request: FullTextSearchRequest
     ) -> FullTextSearchResponseIntentUsersays:
         response: FullTextSearchResponseIntentUsersays = \
             self.stub.GetFullTextSearchIntentUsersays(request, metadata=self.metadata)
         return response
 
     def get_full_text_search_intent_tags(
-        self, request: FullTextSearchRequest
+            self, request: FullTextSearchRequest
     ) -> FullTextSearchResponseIntentTags:
         response: FullTextSearchResponseIntentTags = \
             self.stub.GetFullTextSearchIntentTags(request, metadata=self.metadata)
         return response
 
     def get_full_text_search_intent_response(
-        self, request: FullTextSearchRequest
+            self, request: FullTextSearchRequest
     ) -> FullTextSearchResponseIntentResponse:
         response: FullTextSearchResponseIntentResponse = \
             self.stub.GetFullTextSearchIntentResponse(request, metadata=self.metadata)
         return response
 
     def get_full_text_search_intent_parameters(
-        self, request: FullTextSearchRequest
+            self, request: FullTextSearchRequest
     ) -> FullTextSearchResponseIntentParameters:
         response: FullTextSearchResponseIntentParameters = \
             self.stub.GetFullTextSearchIntentParameters(request, metadata=self.metadata)
         return response
 
     def reindex_agent(
-        self, request: ReindexAgentRequest
+            self, request: ReindexAgentRequest
     ) -> operations_pb2.Operation:
         response: operations_pb2.Operation = self.stub.ReindexAgent(request, metadata=self.metadata)
         return response
