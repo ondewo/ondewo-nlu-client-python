@@ -143,31 +143,37 @@ class _SessionsReportType:
     V: typing_extensions.TypeAlias = ValueType
 class _SessionsReportTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_SessionsReportType.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-    SESSION: _SessionsReportType.ValueType  # 0
+    SESSIONS: _SessionsReportType.ValueType  # 0
     """report on sessions. Supports SessionFilter to filter"""
 
-    SESSION_TOP_X_INTENTS: _SessionsReportType.ValueType  # 1
+    SESSION_STEPS: _SessionsReportType.ValueType  # 1
+    """report on session steps. Supports SessionFilter to filter"""
+
+    SESSION_TOP_X_INTENTS: _SessionsReportType.ValueType  # 2
     """report top x detected intents in session. Supports SessionFilter to filter"""
 
-    SESSION_TOP_X_ENTITIES: _SessionsReportType.ValueType  # 2
-    """report top x detected entities. Supports SessionFilter to filter"""
+    SESSION_TOP_X_ENTITY_TYPES: _SessionsReportType.ValueType  # 3
+    """report top x detected entity types. Supports SessionFilter to filter"""
 
-    SESSION_TOP_X_USERS: _SessionsReportType.ValueType  # 3
-    """report top x users. Supports SessionFilter to filter"""
+    SESSION_TOP_X_ENTITY_VALUES: _SessionsReportType.ValueType  # 4
+    """report top x detected entity values Supports SessionFilter to filter"""
 
-    SESSION_TOP_X_LABELS: _SessionsReportType.ValueType  # 4
+    SESSION_TOP_X_USERS: _SessionsReportType.ValueType  # 5
+    """report top x users. Supports SessionFilter to filter (Coming soon! Not yet implemented)"""
+
+    SESSION_TOP_X_LABELS: _SessionsReportType.ValueType  # 6
     """report top x labels. Supports SessionFilter to filter"""
 
-    SESSION_TOP_X_TAGS: _SessionsReportType.ValueType  # 5
+    SESSION_TOP_X_TAGS: _SessionsReportType.ValueType  # 7
     """report top x tags. Supports SessionFilter to filter"""
 
-    SESSION_TOP_X_PHONE_NUMBERS: _SessionsReportType.ValueType  # 6
-    """report top x phone_numbers. Supports SessionFilter to filter"""
+    SESSION_TOP_X_PHONE_NUMBERS: _SessionsReportType.ValueType  # 8
+    """report top x phone_numbers. Supports SessionFilter to filter (Coming soon! Not yet implemented)"""
 
-    SESSION_HUMAN_HANDOVERS: _SessionsReportType.ValueType  # 7
-    """report on human handovers. Supports SessionFilter to filter"""
+    SESSION_HUMAN_HANDOVERS: _SessionsReportType.ValueType  # 9
+    """report on human handovers. Supports SessionFilter to filter (Coming soon! Not yet implemented)"""
 
-    SESSION_SQL_QUERY: _SessionsReportType.ValueType  # 8
+    SESSION_SQL_QUERY: _SessionsReportType.ValueType  # 10
     """report based on a query issued tables with session information.
     Requires to define <code>sql_query</code> in request.
 
@@ -193,31 +199,37 @@ class SessionsReportType(_SessionsReportType, metaclass=_SessionsReportTypeEnumT
     """Type of reports about the domain of the agent"""
     pass
 
-SESSION: SessionsReportType.ValueType  # 0
+SESSIONS: SessionsReportType.ValueType  # 0
 """report on sessions. Supports SessionFilter to filter"""
 
-SESSION_TOP_X_INTENTS: SessionsReportType.ValueType  # 1
+SESSION_STEPS: SessionsReportType.ValueType  # 1
+"""report on session steps. Supports SessionFilter to filter"""
+
+SESSION_TOP_X_INTENTS: SessionsReportType.ValueType  # 2
 """report top x detected intents in session. Supports SessionFilter to filter"""
 
-SESSION_TOP_X_ENTITIES: SessionsReportType.ValueType  # 2
-"""report top x detected entities. Supports SessionFilter to filter"""
+SESSION_TOP_X_ENTITY_TYPES: SessionsReportType.ValueType  # 3
+"""report top x detected entity types. Supports SessionFilter to filter"""
 
-SESSION_TOP_X_USERS: SessionsReportType.ValueType  # 3
-"""report top x users. Supports SessionFilter to filter"""
+SESSION_TOP_X_ENTITY_VALUES: SessionsReportType.ValueType  # 4
+"""report top x detected entity values Supports SessionFilter to filter"""
 
-SESSION_TOP_X_LABELS: SessionsReportType.ValueType  # 4
+SESSION_TOP_X_USERS: SessionsReportType.ValueType  # 5
+"""report top x users. Supports SessionFilter to filter (Coming soon! Not yet implemented)"""
+
+SESSION_TOP_X_LABELS: SessionsReportType.ValueType  # 6
 """report top x labels. Supports SessionFilter to filter"""
 
-SESSION_TOP_X_TAGS: SessionsReportType.ValueType  # 5
+SESSION_TOP_X_TAGS: SessionsReportType.ValueType  # 7
 """report top x tags. Supports SessionFilter to filter"""
 
-SESSION_TOP_X_PHONE_NUMBERS: SessionsReportType.ValueType  # 6
-"""report top x phone_numbers. Supports SessionFilter to filter"""
+SESSION_TOP_X_PHONE_NUMBERS: SessionsReportType.ValueType  # 8
+"""report top x phone_numbers. Supports SessionFilter to filter (Coming soon! Not yet implemented)"""
 
-SESSION_HUMAN_HANDOVERS: SessionsReportType.ValueType  # 7
-"""report on human handovers. Supports SessionFilter to filter"""
+SESSION_HUMAN_HANDOVERS: SessionsReportType.ValueType  # 9
+"""report on human handovers. Supports SessionFilter to filter (Coming soon! Not yet implemented)"""
 
-SESSION_SQL_QUERY: SessionsReportType.ValueType  # 8
+SESSION_SQL_QUERY: SessionsReportType.ValueType  # 10
 """report based on a query issued tables with session information.
 Requires to define <code>sql_query</code> in request.
 
@@ -1044,7 +1056,9 @@ class GetSessionsStatisticsRequest(google.protobuf.message.Message):
         """Optional. A filter to narrow reports based on sessions"""
         pass
     @property
-    def context_filters(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.session_pb2.ContextFilter]: ...
+    def context_filters(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.session_pb2.ContextFilter]:
+        """Optional. A filter to narrow reports based on contextual information (Coming soon! Not yet implemented)"""
+        pass
     limit: builtins.int
     """Optional. limit the returned number of results"""
 
