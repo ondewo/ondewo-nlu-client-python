@@ -1022,10 +1022,10 @@ class GetSessionsStatisticsRequest(google.protobuf.message.Message):
     FORMAT_FIELD_NUMBER: builtins.int
     TYPE_FIELD_NUMBER: builtins.int
     SESSION_FILTER_FIELD_NUMBER: builtins.int
-    CONTEXT_FILTER_FIELD_NUMBER: builtins.int
+    CONTEXT_FILTERS_FIELD_NUMBER: builtins.int
     LIMIT_FIELD_NUMBER: builtins.int
-    GROUP_BY_FIELD_NUMBER: builtins.int
-    ORDER_BY_FIELD_NUMBER: builtins.int
+    GROUP_BYS_FIELD_NUMBER: builtins.int
+    ORDER_BYS_FIELD_NUMBER: builtins.int
     FIELD_MASK_FIELD_NUMBER: builtins.int
     SQL_QUERY_FIELD_NUMBER: builtins.int
     parent: typing.Text
@@ -1044,16 +1044,16 @@ class GetSessionsStatisticsRequest(google.protobuf.message.Message):
         """Optional. A filter to narrow reports based on sessions"""
         pass
     @property
-    def context_filter(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.session_pb2.ContextFilter]: ...
+    def context_filters(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.session_pb2.ContextFilter]: ...
     limit: builtins.int
     """Optional. limit the returned number of results"""
 
     @property
-    def group_by(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def group_bys(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
         """Optional. Grouping based on named properties"""
         pass
     @property
-    def order_by(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def order_bys(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
         """Optional. Order based on named properties"""
         pass
     @property
@@ -1071,15 +1071,15 @@ class GetSessionsStatisticsRequest(google.protobuf.message.Message):
         format: global___ReportFormat.ValueType = ...,
         type: global___SessionsReportType.ValueType = ...,
         session_filter: typing.Optional[ondewo.nlu.session_pb2.SessionFilter] = ...,
-        context_filter: typing.Optional[typing.Iterable[ondewo.nlu.session_pb2.ContextFilter]] = ...,
+        context_filters: typing.Optional[typing.Iterable[ondewo.nlu.session_pb2.ContextFilter]] = ...,
         limit: builtins.int = ...,
-        group_by: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        order_by: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        group_bys: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        order_bys: typing.Optional[typing.Iterable[typing.Text]] = ...,
         field_mask: typing.Optional[google.protobuf.field_mask_pb2.FieldMask] = ...,
         sql_query: typing.Text = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["field_mask",b"field_mask","session_filter",b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["context_filter",b"context_filter","field_mask",b"field_mask","format",b"format","group_by",b"group_by","limit",b"limit","order_by",b"order_by","parent",b"parent","session_filter",b"session_filter","sql_query",b"sql_query","type",b"type"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["context_filters",b"context_filters","field_mask",b"field_mask","format",b"format","group_bys",b"group_bys","limit",b"limit","order_bys",b"order_bys","parent",b"parent","session_filter",b"session_filter","sql_query",b"sql_query","type",b"type"]) -> None: ...
 global___GetSessionsStatisticsRequest = GetSessionsStatisticsRequest
 
 class GetSessionsStatisticsResponse(google.protobuf.message.Message):
