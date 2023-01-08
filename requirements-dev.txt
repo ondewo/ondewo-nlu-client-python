@@ -4,4 +4,3 @@ flake8
 Faker>=13.13.0
 tqdm>=4.64.0
 mypy-protobuf
-jupyter
