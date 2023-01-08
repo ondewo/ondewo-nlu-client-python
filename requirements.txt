@@ -1,5 +1,4 @@
 dataclasses-json>=0.5.4
-Faker>=13.13.0
 google-api-core>=2.8.1
 grpcio-reflection>=1.46.3
 grpcio-tools>=1.46.3
@@ -10,4 +9,3 @@ protobuf>=3.20.1
 python-dateutil>=2.8.2
 regex>=2022.6.2
 setuptools>=59.5.0
-tqdm>=4.64.0
