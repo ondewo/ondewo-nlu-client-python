@@ -352,7 +352,6 @@ class QueryResult(google.protobuf.message.Message):
     """Represents the result of conversational query or event processing."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     QUERY_TEXT_FIELD_NUMBER: builtins.int
-    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     SPEECH_RECOGNITION_CONFIDENCE_FIELD_NUMBER: builtins.int
     ACTION_FIELD_NUMBER: builtins.int
     PARAMETERS_FIELD_NUMBER: builtins.int
@@ -364,7 +363,9 @@ class QueryResult(google.protobuf.message.Message):
     OUTPUT_CONTEXTS_FIELD_NUMBER: builtins.int
     INTENT_FIELD_NUMBER: builtins.int
     INTENT_DETECTION_CONFIDENCE_FIELD_NUMBER: builtins.int
+    QUERY_TEXT_ORIGINAL_FIELD_NUMBER: builtins.int
     DIAGNOSTIC_INFO_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     query_text: typing.Text
     """The original conversational query text:
     - If natural language text was provided as input, `query_text` contains
@@ -373,12 +374,6 @@ class QueryResult(google.protobuf.message.Message):
       contains the speech recognition result. If speech recognizer produced
       multiple alternatives, a particular one is picked.
     - If an event was provided as input, `query_text` is not set.
-    """
-
-    language_code: typing.Text
-    """The language that was triggered during intent detection.
-    See [Language Support](https://dialogflow.com/docs/reference/language)
-    for a list of the currently supported language codes.
     """
 
     speech_recognition_confidence: builtins.float
@@ -446,16 +441,26 @@ class QueryResult(google.protobuf.message.Message):
     (completely uncertain) to 1.0 (completely certain).
     """
 
+    query_text_original: typing.Text
+    """The user input gets pre-processed by spelling correction, stop word removal etc. This property holds
+    the string that is passed to the entity recognition and intent detection
+    """
+
     @property
     def diagnostic_info(self) -> google.protobuf.struct_pb2.Struct:
         """The free-form diagnostic info. For example, this field
         could contain webhook call latency.
         """
         pass
+    language_code: typing.Text
+    """The language that was triggered during intent detection.
+    See [Language Support](https://dialogflow.com/docs/reference/language)
+    for a list of the currently supported language codes.
+    """
+
     def __init__(self,
         *,
         query_text: typing.Text = ...,
-        language_code: typing.Text = ...,
         speech_recognition_confidence: builtins.float = ...,
         action: typing.Text = ...,
         parameters: typing.Optional[google.protobuf.struct_pb2.Struct] = ...,
@@ -467,10 +472,12 @@ class QueryResult(google.protobuf.message.Message):
         output_contexts: typing.Optional[typing.Iterable[ondewo.nlu.context_pb2.Context]] = ...,
         intent: typing.Optional[ondewo.nlu.intent_pb2.Intent] = ...,
         intent_detection_confidence: builtins.float = ...,
+        query_text_original: typing.Text = ...,
         diagnostic_info: typing.Optional[google.protobuf.struct_pb2.Struct] = ...,
+        language_code: typing.Text = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["diagnostic_info",b"diagnostic_info","intent",b"intent","parameters",b"parameters","webhook_payload",b"webhook_payload"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["action",b"action","all_required_params_present",b"all_required_params_present","diagnostic_info",b"diagnostic_info","fulfillment_messages",b"fulfillment_messages","fulfillment_text",b"fulfillment_text","intent",b"intent","intent_detection_confidence",b"intent_detection_confidence","language_code",b"language_code","output_contexts",b"output_contexts","parameters",b"parameters","query_text",b"query_text","speech_recognition_confidence",b"speech_recognition_confidence","webhook_payload",b"webhook_payload","webhook_source",b"webhook_source"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action",b"action","all_required_params_present",b"all_required_params_present","diagnostic_info",b"diagnostic_info","fulfillment_messages",b"fulfillment_messages","fulfillment_text",b"fulfillment_text","intent",b"intent","intent_detection_confidence",b"intent_detection_confidence","language_code",b"language_code","output_contexts",b"output_contexts","parameters",b"parameters","query_text",b"query_text","query_text_original",b"query_text_original","speech_recognition_confidence",b"speech_recognition_confidence","webhook_payload",b"webhook_payload","webhook_source",b"webhook_source"]) -> None: ...
 global___QueryResult = QueryResult
 
 class StreamingDetectIntentRequest(google.protobuf.message.Message):
@@ -875,7 +882,7 @@ class Session(google.protobuf.message.Message):
 global___Session = Session
 
 class SessionStep(google.protobuf.message.Message):
-    """SessionSTep is a single user interaction as part of a session"""
+    """SessionStep is a single user interaction as part of a session"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     NAME_FIELD_NUMBER: builtins.int
     DETECT_INTENT_REQUEST_FIELD_NUMBER: builtins.int
@@ -1615,6 +1622,7 @@ class SessionReviewStep(google.protobuf.message.Message):
     DETECTED_INTENTS_FIELD_NUMBER: builtins.int
     CONTEXTS_FIELD_NUMBER: builtins.int
     CONTEXTS_OUT_FIELD_NUMBER: builtins.int
+    QUERY_TEXT_ORIGINAL_FIELD_NUMBER: builtins.int
     name: typing.Text
     """The unique identifier for the given review step
     Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/reviews/<SESSION_REVIEW_ID>/sessionreviewsteps/<SESSION_REVIEW_STEP_ID>`.
@@ -1622,7 +1630,11 @@ class SessionReviewStep(google.protobuf.message.Message):
 
     @property
     def annotated_usersays(self) -> ondewo.nlu.intent_pb2.Intent.TrainingPhrase:
-        """The user says with markup of the detected entity types"""
+        """The user says with markup of the detected entity types after the preprocessing such as spelling correction,
+        stopword removal etc. has been applied.
+
+        This string represents what has been passed to the entity recognition and intent detection algorithms.
+        """
         pass
     language_code: typing.Text
     """The language code"""
@@ -1639,6 +1651,9 @@ class SessionReviewStep(google.protobuf.message.Message):
     def contexts_out(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]:
         """The output contexts of this step"""
         pass
+    query_text_original: typing.Text
+    """User input without any pre-processing applied"""
+
     def __init__(self,
         *,
         name: typing.Text = ...,
@@ -1647,9 +1662,10 @@ class SessionReviewStep(google.protobuf.message.Message):
         detected_intents: typing.Optional[typing.Iterable[global___DetectedIntent]] = ...,
         contexts: typing.Optional[typing.Iterable[ondewo.nlu.context_pb2.Context]] = ...,
         contexts_out: typing.Optional[typing.Iterable[ondewo.nlu.context_pb2.Context]] = ...,
+        query_text_original: typing.Text = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["annotated_usersays",b"annotated_usersays"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["annotated_usersays",b"annotated_usersays","contexts",b"contexts","contexts_out",b"contexts_out","detected_intents",b"detected_intents","language_code",b"language_code","name",b"name"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["annotated_usersays",b"annotated_usersays","contexts",b"contexts","contexts_out",b"contexts_out","detected_intents",b"detected_intents","language_code",b"language_code","name",b"name","query_text_original",b"query_text_original"]) -> None: ...
 global___SessionReviewStep = SessionReviewStep
 
 class DetectedIntent(google.protobuf.message.Message):
