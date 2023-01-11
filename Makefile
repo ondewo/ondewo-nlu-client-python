@@ -48,7 +48,8 @@ IMAGE_UTILS_NAME=ondewo-nlu-client-utils-python:${ONDEWO_NLU_VERSION}
 setup_developer_environment_locally: install_precommit_hooks install_dependencies_locally
 
 install_precommit_hooks: ## Installs pre-commit hooks and sets them up for the ondewo-csi-client repo
-	pip install pre-commit
+	-pip install pre-commit
+	-conda -y install pre-commit
 	pre-commit install
 	pre-commit install --hook-type commit-msg
 
