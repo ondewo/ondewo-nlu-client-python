@@ -1635,6 +1635,7 @@ class SessionReviewStep(google.protobuf.message.Message):
     CONTEXTS_FIELD_NUMBER: builtins.int
     CONTEXTS_OUT_FIELD_NUMBER: builtins.int
     QUERY_TEXT_ORIGINAL_FIELD_NUMBER: builtins.int
+    PLATFORMS_FIELD_NUMBER: builtins.int
     name: typing.Text
     """The unique identifier for the given review step
     Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/reviews/<SESSION_REVIEW_ID>/sessionreviewsteps/<SESSION_REVIEW_STEP_ID>`.
@@ -1666,6 +1667,12 @@ class SessionReviewStep(google.protobuf.message.Message):
     query_text_original: typing.Text
     """User input without any pre-processing applied"""
 
+    @property
+    def platforms(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[ondewo.nlu.intent_pb2.Intent.Message.Platform.ValueType]:
+        """Custom Intent.Message.Platform placeholder.
+        Note: it will not work with non-placeholders values
+        """
+        pass
     def __init__(self,
         *,
         name: typing.Text = ...,
@@ -1675,9 +1682,10 @@ class SessionReviewStep(google.protobuf.message.Message):
         contexts: typing.Optional[typing.Iterable[ondewo.nlu.context_pb2.Context]] = ...,
         contexts_out: typing.Optional[typing.Iterable[ondewo.nlu.context_pb2.Context]] = ...,
         query_text_original: typing.Text = ...,
+        platforms: typing.Optional[typing.Iterable[ondewo.nlu.intent_pb2.Intent.Message.Platform.ValueType]] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["annotated_usersays",b"annotated_usersays"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["annotated_usersays",b"annotated_usersays","contexts",b"contexts","contexts_out",b"contexts_out","detected_intents",b"detected_intents","language_code",b"language_code","name",b"name","query_text_original",b"query_text_original"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["annotated_usersays",b"annotated_usersays","contexts",b"contexts","contexts_out",b"contexts_out","detected_intents",b"detected_intents","language_code",b"language_code","name",b"name","platforms",b"platforms","query_text_original",b"query_text_original"]) -> None: ...
 global___SessionReviewStep = SessionReviewStep
 
 class DetectedIntent(google.protobuf.message.Message):
