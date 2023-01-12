@@ -266,6 +266,7 @@ class QueryParameters(google.protobuf.message.Message):
     RESET_CONTEXTS_FIELD_NUMBER: builtins.int
     PAYLOAD_FIELD_NUMBER: builtins.int
     LABELS_FIELD_NUMBER: builtins.int
+    PLATFORM_FIELD_NUMBER: builtins.int
     time_zone: typing.Text
     """Optional. The time zone of this conversational query from the
     [time zone database](https://www.iana.org/time-zones), e.g.,
@@ -298,6 +299,10 @@ class QueryParameters(google.protobuf.message.Message):
     def labels(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
         """labels associated to this request"""
         pass
+    @property
+    def platform(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[ondewo.nlu.intent_pb2.Intent.Message.Platform.ValueType]:
+        """Custom Intent.Message.Platform placeholder. Note: it will not work with non-placeholders values"""
+        pass
     def __init__(self,
         *,
         time_zone: typing.Text = ...,
@@ -306,9 +311,10 @@ class QueryParameters(google.protobuf.message.Message):
         reset_contexts: builtins.bool = ...,
         payload: typing.Optional[google.protobuf.struct_pb2.Struct] = ...,
         labels: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        platform: typing.Optional[typing.Iterable[ondewo.nlu.intent_pb2.Intent.Message.Platform.ValueType]] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["geo_location",b"geo_location","payload",b"payload"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["contexts",b"contexts","geo_location",b"geo_location","labels",b"labels","payload",b"payload","reset_contexts",b"reset_contexts","time_zone",b"time_zone"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["contexts",b"contexts","geo_location",b"geo_location","labels",b"labels","payload",b"payload","platform",b"platform","reset_contexts",b"reset_contexts","time_zone",b"time_zone"]) -> None: ...
 global___QueryParameters = QueryParameters
 
 class QueryInput(google.protobuf.message.Message):
@@ -1056,6 +1062,7 @@ class SessionFilter(google.protobuf.message.Message):
     STARTED_TIME_SLOT_PER_MINUTE_MAX_FIELD_NUMBER: builtins.int
     DURATION_IN_S_ROUNDED_MIN_FIELD_NUMBER: builtins.int
     DURATION_IN_S_ROUNDED_MAX_FIELD_NUMBER: builtins.int
+    PLATFORM_FIELD_NUMBER: builtins.int
     @property
     def language_codes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
         """A SessionFilter can be used in some requests to return only sessions matching certain filter conditions.
@@ -1213,6 +1220,10 @@ class SessionFilter(google.protobuf.message.Message):
     duration_in_s_rounded_max: builtins.float
     """Match only sessions for which the duration in seconds rounded are smaller or equal"""
 
+    @property
+    def platform(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[ondewo.nlu.intent_pb2.Intent.Message.Platform.ValueType]:
+        """Custom Intent.Message.Platform placeholder. Note: it will not work with non-placeholders values"""
+        pass
     def __init__(self,
         *,
         language_codes: typing.Optional[typing.Iterable[typing.Text]] = ...,
@@ -1256,8 +1267,9 @@ class SessionFilter(google.protobuf.message.Message):
         started_time_slot_per_minute_max: typing.Text = ...,
         duration_in_s_rounded_min: builtins.float = ...,
         duration_in_s_rounded_max: builtins.float = ...,
+        platform: typing.Optional[typing.Iterable[ondewo.nlu.intent_pb2.Intent.Message.Platform.ValueType]] = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["duration_in_m_max",b"duration_in_m_max","duration_in_m_min",b"duration_in_m_min","duration_in_m_rounded_max",b"duration_in_m_rounded_max","duration_in_m_rounded_min",b"duration_in_m_rounded_min","duration_in_s_max",b"duration_in_s_max","duration_in_s_min",b"duration_in_s_min","duration_in_s_rounded_max",b"duration_in_s_rounded_max","duration_in_s_rounded_min",b"duration_in_s_rounded_min","duration_interval_15s_rounded_max",b"duration_interval_15s_rounded_max","duration_interval_15s_rounded_min",b"duration_interval_15s_rounded_min","duration_interval_30s_rounded_max",b"duration_interval_30s_rounded_max","duration_interval_30s_rounded_min",b"duration_interval_30s_rounded_min","duration_interval_45s_rounded_max",b"duration_interval_45s_rounded_max","duration_interval_45s_rounded_min",b"duration_interval_45s_rounded_min","earliest",b"earliest","input_contexts",b"input_contexts","intent_tags",b"intent_tags","labels",b"labels","language_codes",b"language_codes","latest",b"latest","matched_entity_types",b"matched_entity_types","matched_intents",b"matched_intents","max_number_turns",b"max_number_turns","min_entity_types_confidence_max",b"min_entity_types_confidence_max","min_entity_types_confidence_min",b"min_entity_types_confidence_min","min_intents_confidence_max",b"min_intents_confidence_max","min_intents_confidence_min",b"min_intents_confidence_min","min_number_turns",b"min_number_turns","output_contexts",b"output_contexts","session_ids",b"session_ids","started_time_slot_per_day_phase_max",b"started_time_slot_per_day_phase_max","started_time_slot_per_day_phase_min",b"started_time_slot_per_day_phase_min","started_time_slot_per_half_hour_max",b"started_time_slot_per_half_hour_max","started_time_slot_per_half_hour_min",b"started_time_slot_per_half_hour_min","started_time_slot_per_hour_max",b"started_time_slot_per_hour_max","started_time_slot_per_hour_min",b"started_time_slot_per_hour_min","started_time_slot_per_minute_max",b"started_time_slot_per_minute_max","started_time_slot_per_minute_min",b"started_time_slot_per_minute_min","started_time_slot_per_quarter_hour_max",b"started_time_slot_per_quarter_hour_max","started_time_slot_per_quarter_hour_min",b"started_time_slot_per_quarter_hour_min","user_ids",b"user_ids"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["duration_in_m_max",b"duration_in_m_max","duration_in_m_min",b"duration_in_m_min","duration_in_m_rounded_max",b"duration_in_m_rounded_max","duration_in_m_rounded_min",b"duration_in_m_rounded_min","duration_in_s_max",b"duration_in_s_max","duration_in_s_min",b"duration_in_s_min","duration_in_s_rounded_max",b"duration_in_s_rounded_max","duration_in_s_rounded_min",b"duration_in_s_rounded_min","duration_interval_15s_rounded_max",b"duration_interval_15s_rounded_max","duration_interval_15s_rounded_min",b"duration_interval_15s_rounded_min","duration_interval_30s_rounded_max",b"duration_interval_30s_rounded_max","duration_interval_30s_rounded_min",b"duration_interval_30s_rounded_min","duration_interval_45s_rounded_max",b"duration_interval_45s_rounded_max","duration_interval_45s_rounded_min",b"duration_interval_45s_rounded_min","earliest",b"earliest","input_contexts",b"input_contexts","intent_tags",b"intent_tags","labels",b"labels","language_codes",b"language_codes","latest",b"latest","matched_entity_types",b"matched_entity_types","matched_intents",b"matched_intents","max_number_turns",b"max_number_turns","min_entity_types_confidence_max",b"min_entity_types_confidence_max","min_entity_types_confidence_min",b"min_entity_types_confidence_min","min_intents_confidence_max",b"min_intents_confidence_max","min_intents_confidence_min",b"min_intents_confidence_min","min_number_turns",b"min_number_turns","output_contexts",b"output_contexts","platform",b"platform","session_ids",b"session_ids","started_time_slot_per_day_phase_max",b"started_time_slot_per_day_phase_max","started_time_slot_per_day_phase_min",b"started_time_slot_per_day_phase_min","started_time_slot_per_half_hour_max",b"started_time_slot_per_half_hour_max","started_time_slot_per_half_hour_min",b"started_time_slot_per_half_hour_min","started_time_slot_per_hour_max",b"started_time_slot_per_hour_max","started_time_slot_per_hour_min",b"started_time_slot_per_hour_min","started_time_slot_per_minute_max",b"started_time_slot_per_minute_max","started_time_slot_per_minute_min",b"started_time_slot_per_minute_min","started_time_slot_per_quarter_hour_max",b"started_time_slot_per_quarter_hour_max","started_time_slot_per_quarter_hour_min",b"started_time_slot_per_quarter_hour_min","user_ids",b"user_ids"]) -> None: ...
 global___SessionFilter = SessionFilter
 
 class SessionInfo(google.protobuf.message.Message):
