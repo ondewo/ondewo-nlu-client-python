@@ -1625,6 +1625,7 @@ class CreateSessionRequest(google.protobuf.message.Message):
     PARENT_FIELD_NUMBER: builtins.int
     SESSION_UUID_FIELD_NUMBER: builtins.int
     LABELS_FIELD_NUMBER: builtins.int
+    CONTEXTS_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Creates a session that collects all the conversation interactions between the machine and a user
     The unique identifier of an Agent
@@ -1642,13 +1643,18 @@ class CreateSessionRequest(google.protobuf.message.Message):
     def labels(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
         """labels for the session - Optional"""
         pass
+    @property
+    def contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]:
+        """Optional. The collection of contexts to be activated before this query is executed."""
+        pass
     def __init__(self,
         *,
         parent: typing.Text = ...,
         session_uuid: typing.Text = ...,
         labels: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        contexts: typing.Optional[typing.Iterable[ondewo.nlu.context_pb2.Context]] = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["labels",b"labels","parent",b"parent","session_uuid",b"session_uuid"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["contexts",b"contexts","labels",b"labels","parent",b"parent","session_uuid",b"session_uuid"]) -> None: ...
 global___CreateSessionRequest = CreateSessionRequest
 
 class DeleteSessionRequest(google.protobuf.message.Message):
