@@ -267,6 +267,11 @@ class QueryParameters(google.protobuf.message.Message):
     PAYLOAD_FIELD_NUMBER: builtins.int
     LABELS_FIELD_NUMBER: builtins.int
     PLATFORMS_FIELD_NUMBER: builtins.int
+    ACCOUNT_ID_FIELD_NUMBER: builtins.int
+    PROPERTY_ID_FIELD_NUMBER: builtins.int
+    DATASTREAM_ID_FIELD_NUMBER: builtins.int
+    ORIGIN_ID_FIELD_NUMBER: builtins.int
+    IDENTIFIED_USER_ID_FIELD_NUMBER: builtins.int
     time_zone: typing.Text
     """Optional. The time zone of this conversational query from the
     [time zone database](https://www.iana.org/time-zones), e.g.,
@@ -301,8 +306,38 @@ class QueryParameters(google.protobuf.message.Message):
         pass
     @property
     def platforms(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[ondewo.nlu.intent_pb2.Intent.Message.Platform.ValueType]:
-        """Custom Intent.Message.Platform placeholder. Note: it will not work with non-placeholders values"""
+        """Only messages for the specified Intent.Message.Platform platforms are sent to the user in the
+        <code>DetectIntentResponse</code>
+        """
         pass
+    account_id: typing.Text
+    """Id of the account, e.g. Company Ondewo"""
+
+    property_id: typing.Text
+    """Id of the property of the account, e.g. Domain ondewo.com
+    This field can also be used for a customized tracking id or tag id
+    """
+
+    datastream_id: typing.Text
+    """Id of the datastream of the property of the account, e.g. Subdomain sub1.ondewo.com or sub2.ondewo.com
+    This field can also be used for a customized tracking id or tag id
+    """
+
+    origin_id: typing.Text
+    """Id of the the origin of the user request
+
+    For a phone bot, this is the phone number +123456789 the user called (Note: This is not the user's phone number)
+    For a chatbot or voicebot on the web, this is the URL on which the bo, e.g. https://ondewo.com/webchat
+    For a voice assistant device, this is the device-id or the app id
+    This field can also be used for a customized tracking id or tag id
+    https://aim-develop.ondewo.com/
+    """
+
+    identified_user_id: typing.Text
+    """Id of the "identified user" e.g. for a chatbot the email address or for a phone bot the phone number of the user
+    This field can also be used for a customized tracking id or tag id
+    """
+
     def __init__(self,
         *,
         time_zone: typing.Text = ...,
@@ -312,9 +347,14 @@ class QueryParameters(google.protobuf.message.Message):
         payload: typing.Optional[google.protobuf.struct_pb2.Struct] = ...,
         labels: typing.Optional[typing.Iterable[typing.Text]] = ...,
         platforms: typing.Optional[typing.Iterable[ondewo.nlu.intent_pb2.Intent.Message.Platform.ValueType]] = ...,
+        account_id: typing.Text = ...,
+        property_id: typing.Text = ...,
+        datastream_id: typing.Text = ...,
+        origin_id: typing.Text = ...,
+        identified_user_id: typing.Text = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["geo_location",b"geo_location","payload",b"payload"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["contexts",b"contexts","geo_location",b"geo_location","labels",b"labels","payload",b"payload","platforms",b"platforms","reset_contexts",b"reset_contexts","time_zone",b"time_zone"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["account_id",b"account_id","contexts",b"contexts","datastream_id",b"datastream_id","geo_location",b"geo_location","identified_user_id",b"identified_user_id","labels",b"labels","origin_id",b"origin_id","payload",b"payload","platforms",b"platforms","property_id",b"property_id","reset_contexts",b"reset_contexts","time_zone",b"time_zone"]) -> None: ...
 global___QueryParameters = QueryParameters
 
 class QueryInput(google.protobuf.message.Message):
@@ -1063,6 +1103,11 @@ class SessionFilter(google.protobuf.message.Message):
     DURATION_IN_S_ROUNDED_MIN_FIELD_NUMBER: builtins.int
     DURATION_IN_S_ROUNDED_MAX_FIELD_NUMBER: builtins.int
     PLATFORMS_FIELD_NUMBER: builtins.int
+    ACCOUNT_IDS_FIELD_NUMBER: builtins.int
+    PROPERTY_IDS_FIELD_NUMBER: builtins.int
+    DATASTREAM_IDS_FIELD_NUMBER: builtins.int
+    ORIGIN_IDS_FIELD_NUMBER: builtins.int
+    IDENTIFIED_USER_IDS_FIELD_NUMBER: builtins.int
     @property
     def language_codes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
         """A SessionFilter can be used in some requests to return only sessions matching certain filter conditions.
@@ -1222,7 +1267,38 @@ class SessionFilter(google.protobuf.message.Message):
 
     @property
     def platforms(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[ondewo.nlu.intent_pb2.Intent.Message.Platform.ValueType]:
-        """Custom Intent.Message.Platform placeholder. Note: it will not work with non-placeholders values"""
+        """Messages for each of the Intent.Message.Platform were sent to the user"""
+        pass
+    @property
+    def account_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """Ids of the account, e.g. Company Ondewo,
+        This field can also be used for customized tracking ids or tag ids
+        """
+        pass
+    @property
+    def property_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """Ids of the property of the account, e.g. Domain ondewo.com
+        This field can also be used for customized tracking ids or tag ids
+        """
+        pass
+    @property
+    def datastream_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """Ids of the datastream of the property of the account, e.g. Subdomain sub1.ondewo.com or sub2.ondewo.com
+        This field can also be used for customized tracking ids or tag ids
+        """
+        pass
+    @property
+    def origin_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """Ids of the the origin of the user request
+
+        For a phone bot, this is the phone number +123456789 the user called (Note: This is not the user's phone number)
+        For a chatbot or voicebot on the web, this is the URL on which the bo, e.g. https://ondewo.com/webchat
+        For a voice assistant device, this is the device-id or the app id
+        """
+        pass
+    @property
+    def identified_user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """Ids of the "identified user" e.g. for a chatbot the email address or for a phone bot the phone number of the user"""
         pass
     def __init__(self,
         *,
@@ -1268,8 +1344,13 @@ class SessionFilter(google.protobuf.message.Message):
         duration_in_s_rounded_min: builtins.float = ...,
         duration_in_s_rounded_max: builtins.float = ...,
         platforms: typing.Optional[typing.Iterable[ondewo.nlu.intent_pb2.Intent.Message.Platform.ValueType]] = ...,
+        account_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        property_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        datastream_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        origin_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        identified_user_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["duration_in_m_max",b"duration_in_m_max","duration_in_m_min",b"duration_in_m_min","duration_in_m_rounded_max",b"duration_in_m_rounded_max","duration_in_m_rounded_min",b"duration_in_m_rounded_min","duration_in_s_max",b"duration_in_s_max","duration_in_s_min",b"duration_in_s_min","duration_in_s_rounded_max",b"duration_in_s_rounded_max","duration_in_s_rounded_min",b"duration_in_s_rounded_min","duration_interval_15s_rounded_max",b"duration_interval_15s_rounded_max","duration_interval_15s_rounded_min",b"duration_interval_15s_rounded_min","duration_interval_30s_rounded_max",b"duration_interval_30s_rounded_max","duration_interval_30s_rounded_min",b"duration_interval_30s_rounded_min","duration_interval_45s_rounded_max",b"duration_interval_45s_rounded_max","duration_interval_45s_rounded_min",b"duration_interval_45s_rounded_min","earliest",b"earliest","input_contexts",b"input_contexts","intent_tags",b"intent_tags","labels",b"labels","language_codes",b"language_codes","latest",b"latest","matched_entity_types",b"matched_entity_types","matched_intents",b"matched_intents","max_number_turns",b"max_number_turns","min_entity_types_confidence_max",b"min_entity_types_confidence_max","min_entity_types_confidence_min",b"min_entity_types_confidence_min","min_intents_confidence_max",b"min_intents_confidence_max","min_intents_confidence_min",b"min_intents_confidence_min","min_number_turns",b"min_number_turns","output_contexts",b"output_contexts","platforms",b"platforms","session_ids",b"session_ids","started_time_slot_per_day_phase_max",b"started_time_slot_per_day_phase_max","started_time_slot_per_day_phase_min",b"started_time_slot_per_day_phase_min","started_time_slot_per_half_hour_max",b"started_time_slot_per_half_hour_max","started_time_slot_per_half_hour_min",b"started_time_slot_per_half_hour_min","started_time_slot_per_hour_max",b"started_time_slot_per_hour_max","started_time_slot_per_hour_min",b"started_time_slot_per_hour_min","started_time_slot_per_minute_max",b"started_time_slot_per_minute_max","started_time_slot_per_minute_min",b"started_time_slot_per_minute_min","started_time_slot_per_quarter_hour_max",b"started_time_slot_per_quarter_hour_max","started_time_slot_per_quarter_hour_min",b"started_time_slot_per_quarter_hour_min","user_ids",b"user_ids"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["account_ids",b"account_ids","datastream_ids",b"datastream_ids","duration_in_m_max",b"duration_in_m_max","duration_in_m_min",b"duration_in_m_min","duration_in_m_rounded_max",b"duration_in_m_rounded_max","duration_in_m_rounded_min",b"duration_in_m_rounded_min","duration_in_s_max",b"duration_in_s_max","duration_in_s_min",b"duration_in_s_min","duration_in_s_rounded_max",b"duration_in_s_rounded_max","duration_in_s_rounded_min",b"duration_in_s_rounded_min","duration_interval_15s_rounded_max",b"duration_interval_15s_rounded_max","duration_interval_15s_rounded_min",b"duration_interval_15s_rounded_min","duration_interval_30s_rounded_max",b"duration_interval_30s_rounded_max","duration_interval_30s_rounded_min",b"duration_interval_30s_rounded_min","duration_interval_45s_rounded_max",b"duration_interval_45s_rounded_max","duration_interval_45s_rounded_min",b"duration_interval_45s_rounded_min","earliest",b"earliest","identified_user_ids",b"identified_user_ids","input_contexts",b"input_contexts","intent_tags",b"intent_tags","labels",b"labels","language_codes",b"language_codes","latest",b"latest","matched_entity_types",b"matched_entity_types","matched_intents",b"matched_intents","max_number_turns",b"max_number_turns","min_entity_types_confidence_max",b"min_entity_types_confidence_max","min_entity_types_confidence_min",b"min_entity_types_confidence_min","min_intents_confidence_max",b"min_intents_confidence_max","min_intents_confidence_min",b"min_intents_confidence_min","min_number_turns",b"min_number_turns","origin_ids",b"origin_ids","output_contexts",b"output_contexts","platforms",b"platforms","property_ids",b"property_ids","session_ids",b"session_ids","started_time_slot_per_day_phase_max",b"started_time_slot_per_day_phase_max","started_time_slot_per_day_phase_min",b"started_time_slot_per_day_phase_min","started_time_slot_per_half_hour_max",b"started_time_slot_per_half_hour_max","started_time_slot_per_half_hour_min",b"started_time_slot_per_half_hour_min","started_time_slot_per_hour_max",b"started_time_slot_per_hour_max","started_time_slot_per_hour_min",b"started_time_slot_per_hour_min","started_time_slot_per_minute_max",b"started_time_slot_per_minute_max","started_time_slot_per_minute_min",b"started_time_slot_per_minute_min","started_time_slot_per_quarter_hour_max",b"started_time_slot_per_quarter_hour_max","started_time_slot_per_quarter_hour_min",b"started_time_slot_per_quarter_hour_min","user_ids",b"user_ids"]) -> None: ...
 global___SessionFilter = SessionFilter
 
 class SessionInfo(google.protobuf.message.Message):
@@ -1312,6 +1393,12 @@ class SessionInfo(google.protobuf.message.Message):
     STARTED_TIME_SLOT_PER_DAY_PHASE_FIELD_NUMBER: builtins.int
     STARTED_TIME_SLOT_PER_MINUTE_FIELD_NUMBER: builtins.int
     DURATION_IN_S_ROUNDED_FIELD_NUMBER: builtins.int
+    PLATFORMS_FIELD_NUMBER: builtins.int
+    ACCOUNT_IDS_FIELD_NUMBER: builtins.int
+    PROPERTY_IDS_FIELD_NUMBER: builtins.int
+    DATASTREAM_IDS_FIELD_NUMBER: builtins.int
+    ORIGIN_IDS_FIELD_NUMBER: builtins.int
+    IDENTIFIED_USER_IDS_FIELD_NUMBER: builtins.int
     @property
     def language_codes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
         """A SessionInfo contains some general information about a session.
@@ -1410,6 +1497,41 @@ class SessionInfo(google.protobuf.message.Message):
     duration_in_s_rounded: builtins.float
     """duration in seconds rounded"""
 
+    @property
+    def platforms(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[ondewo.nlu.intent_pb2.Intent.Message.Platform.ValueType]:
+        """Messages for each of the Intent.Message.Platform were sent to the user"""
+        pass
+    @property
+    def account_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """Ids of the account, e.g. Company Ondewo,
+        This field can also be used for customized tracking ids or tag ids
+        """
+        pass
+    @property
+    def property_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """Ids of the property of the account, e.g. Domain ondewo.com
+        This field can also be used for customized tracking ids or tag ids
+        """
+        pass
+    @property
+    def datastream_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """Ids of the datastream of the property of the account, e.g. Subdomain sub1.ondewo.com or sub2.ondewo.com
+        This field can also be used for customized tracking ids or tag ids
+        """
+        pass
+    @property
+    def origin_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """Ids of the the origin of the user request
+
+        For a phone bot, this is the phone number +123456789 the user called (Note: This is not the user's phone number)
+        For a chatbot or voicebot on the web, this is the URL on which the bo, e.g. https://ondewo.com/webchat
+        For a voice assistant device, this is the device-id or the app id
+        """
+        pass
+    @property
+    def identified_user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """Ids of the "identified user" e.g. for a chatbot the email address or for a phone bot the phone number of the user"""
+        pass
     def __init__(self,
         *,
         language_codes: typing.Optional[typing.Iterable[typing.Text]] = ...,
@@ -1437,8 +1559,14 @@ class SessionInfo(google.protobuf.message.Message):
         started_time_slot_per_day_phase: typing.Text = ...,
         started_time_slot_per_minute: typing.Text = ...,
         duration_in_s_rounded: builtins.float = ...,
+        platforms: typing.Optional[typing.Iterable[ondewo.nlu.intent_pb2.Intent.Message.Platform.ValueType]] = ...,
+        account_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        property_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        datastream_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        origin_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        identified_user_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["duration_in_m",b"duration_in_m","duration_in_m_rounded",b"duration_in_m_rounded","duration_in_s",b"duration_in_s","duration_in_s_rounded",b"duration_in_s_rounded","duration_interval_15s_rounded",b"duration_interval_15s_rounded","duration_interval_30s_rounded",b"duration_interval_30s_rounded","duration_interval_45s_rounded",b"duration_interval_45s_rounded","earliest",b"earliest","input_context_steps",b"input_context_steps","intent_tags",b"intent_tags","labels",b"labels","language_codes",b"language_codes","latest",b"latest","matched_entity_types",b"matched_entity_types","matched_intents",b"matched_intents","min_entity_types_confidence",b"min_entity_types_confidence","min_intents_confidence",b"min_intents_confidence","number_turns",b"number_turns","output_context_steps",b"output_context_steps","started_time_slot_per_day_phase",b"started_time_slot_per_day_phase","started_time_slot_per_half_hour",b"started_time_slot_per_half_hour","started_time_slot_per_hour",b"started_time_slot_per_hour","started_time_slot_per_minute",b"started_time_slot_per_minute","started_time_slot_per_quarter_hour",b"started_time_slot_per_quarter_hour","user_ids",b"user_ids"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["account_ids",b"account_ids","datastream_ids",b"datastream_ids","duration_in_m",b"duration_in_m","duration_in_m_rounded",b"duration_in_m_rounded","duration_in_s",b"duration_in_s","duration_in_s_rounded",b"duration_in_s_rounded","duration_interval_15s_rounded",b"duration_interval_15s_rounded","duration_interval_30s_rounded",b"duration_interval_30s_rounded","duration_interval_45s_rounded",b"duration_interval_45s_rounded","earliest",b"earliest","identified_user_ids",b"identified_user_ids","input_context_steps",b"input_context_steps","intent_tags",b"intent_tags","labels",b"labels","language_codes",b"language_codes","latest",b"latest","matched_entity_types",b"matched_entity_types","matched_intents",b"matched_intents","min_entity_types_confidence",b"min_entity_types_confidence","min_intents_confidence",b"min_intents_confidence","number_turns",b"number_turns","origin_ids",b"origin_ids","output_context_steps",b"output_context_steps","platforms",b"platforms","property_ids",b"property_ids","started_time_slot_per_day_phase",b"started_time_slot_per_day_phase","started_time_slot_per_half_hour",b"started_time_slot_per_half_hour","started_time_slot_per_hour",b"started_time_slot_per_hour","started_time_slot_per_minute",b"started_time_slot_per_minute","started_time_slot_per_quarter_hour",b"started_time_slot_per_quarter_hour","user_ids",b"user_ids"]) -> None: ...
 global___SessionInfo = SessionInfo
 
 class ListSessionsResponse(google.protobuf.message.Message):
@@ -1669,9 +1797,7 @@ class SessionReviewStep(google.protobuf.message.Message):
 
     @property
     def platforms(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[ondewo.nlu.intent_pb2.Intent.Message.Platform.ValueType]:
-        """Custom Intent.Message.Platform placeholder.
-        Note: it will not work with non-placeholders values
-        """
+        """Messages for each of the Intent.Message.Platform were sent to the user"""
         pass
     def __init__(self,
         *,
