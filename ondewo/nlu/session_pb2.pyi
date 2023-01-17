@@ -1880,18 +1880,26 @@ class ListSessionLabelsRequest(google.protobuf.message.Message):
 global___ListSessionLabelsRequest = ListSessionLabelsRequest
 
 class ListSessionLabelsOfAllSessionsRequest(google.protobuf.message.Message):
+    """request to list all labels of all sessions"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     PARENT_FIELD_NUMBER: builtins.int
+    SESSION_FILTER_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """The parent for which the labels for all sessions should be listed
     Format: `projects/<PROJECT_ID>/agent`.
     """
 
+    @property
+    def session_filter(self) -> global___SessionFilter:
+        """Optional. A filter to narrow the response down to sessions of interest."""
+        pass
     def __init__(self,
         *,
         parent: typing.Text = ...,
+        session_filter: typing.Optional[global___SessionFilter] = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["parent",b"parent"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["session_filter",b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["parent",b"parent","session_filter",b"session_filter"]) -> None: ...
 global___ListSessionLabelsOfAllSessionsRequest = ListSessionLabelsOfAllSessionsRequest
 
 class ListSessionLabelsResponse(google.protobuf.message.Message):
@@ -1908,6 +1916,500 @@ class ListSessionLabelsResponse(google.protobuf.message.Message):
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["labels",b"labels"]) -> None: ...
 global___ListSessionLabelsResponse = ListSessionLabelsResponse
+
+class ListLanguageCodesOfAllSessionsRequest(google.protobuf.message.Message):
+    """request to list all language codes of all sessions"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    PARENT_FIELD_NUMBER: builtins.int
+    SESSION_FILTER_FIELD_NUMBER: builtins.int
+    parent: typing.Text
+    """The parent for which the language_codes for all sessions should be listed
+    Format: `projects/<PROJECT_ID>/agent`.
+    """
+
+    @property
+    def session_filter(self) -> global___SessionFilter:
+        """Optional. A filter to narrow the response down to sessions of interest."""
+        pass
+    def __init__(self,
+        *,
+        parent: typing.Text = ...,
+        session_filter: typing.Optional[global___SessionFilter] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["session_filter",b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["parent",b"parent","session_filter",b"session_filter"]) -> None: ...
+global___ListLanguageCodesOfAllSessionsRequest = ListLanguageCodesOfAllSessionsRequest
+
+class ListLanguageCodesResponse(google.protobuf.message.Message):
+    """This message is a response of listing session language_codes"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    LANGUAGE_CODES_FIELD_NUMBER: builtins.int
+    @property
+    def language_codes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """The language_codes of the session"""
+        pass
+    def __init__(self,
+        *,
+        language_codes: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["language_codes",b"language_codes"]) -> None: ...
+global___ListLanguageCodesResponse = ListLanguageCodesResponse
+
+class ListMatchedIntentsOfAllSessionsRequest(google.protobuf.message.Message):
+    """request to list all matched_intents of all sessions"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    PARENT_FIELD_NUMBER: builtins.int
+    SESSION_FILTER_FIELD_NUMBER: builtins.int
+    parent: typing.Text
+    """The parent for which the matched_intents for all sessions should be listed
+    Format: `projects/<PROJECT_ID>/agent`.
+    """
+
+    @property
+    def session_filter(self) -> global___SessionFilter:
+        """Optional. A filter to narrow the response down to sessions of interest."""
+        pass
+    def __init__(self,
+        *,
+        parent: typing.Text = ...,
+        session_filter: typing.Optional[global___SessionFilter] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["session_filter",b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["parent",b"parent","session_filter",b"session_filter"]) -> None: ...
+global___ListMatchedIntentsOfAllSessionsRequest = ListMatchedIntentsOfAllSessionsRequest
+
+class ListMatchedIntentsResponse(google.protobuf.message.Message):
+    """This message is a response of listing session matched_intents"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    MATCHED_INTENTS_FIELD_NUMBER: builtins.int
+    @property
+    def matched_intents(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """The matched_intents of the session"""
+        pass
+    def __init__(self,
+        *,
+        matched_intents: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["matched_intents",b"matched_intents"]) -> None: ...
+global___ListMatchedIntentsResponse = ListMatchedIntentsResponse
+
+class ListMatchedEntityTypesOfAllSessionsRequest(google.protobuf.message.Message):
+    """request to list all matched_entity_types of all sessions"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    PARENT_FIELD_NUMBER: builtins.int
+    SESSION_FILTER_FIELD_NUMBER: builtins.int
+    parent: typing.Text
+    """The parent for which the matched_entity_types for all sessions should be listed
+    Format: `projects/<PROJECT_ID>/agent`.
+    """
+
+    @property
+    def session_filter(self) -> global___SessionFilter:
+        """Optional. A filter to narrow the response down to sessions of interest."""
+        pass
+    def __init__(self,
+        *,
+        parent: typing.Text = ...,
+        session_filter: typing.Optional[global___SessionFilter] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["session_filter",b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["parent",b"parent","session_filter",b"session_filter"]) -> None: ...
+global___ListMatchedEntityTypesOfAllSessionsRequest = ListMatchedEntityTypesOfAllSessionsRequest
+
+class ListMatchedEntityTypesResponse(google.protobuf.message.Message):
+    """This message is a response of listing session matched_entity_types"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    MATCHED_ENTITY_TYPES_FIELD_NUMBER: builtins.int
+    @property
+    def matched_entity_types(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """The matched_entity_types of the session"""
+        pass
+    def __init__(self,
+        *,
+        matched_entity_types: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["matched_entity_types",b"matched_entity_types"]) -> None: ...
+global___ListMatchedEntityTypesResponse = ListMatchedEntityTypesResponse
+
+class ListUserIdsOfAllSessionsRequest(google.protobuf.message.Message):
+    """request to list all user_ids of all sessions"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    PARENT_FIELD_NUMBER: builtins.int
+    SESSION_FILTER_FIELD_NUMBER: builtins.int
+    parent: typing.Text
+    """The parent for which the user_ids for all sessions should be listed
+    Format: `projects/<PROJECT_ID>/agent`.
+    """
+
+    @property
+    def session_filter(self) -> global___SessionFilter:
+        """Optional. A filter to narrow the response down to sessions of interest."""
+        pass
+    def __init__(self,
+        *,
+        parent: typing.Text = ...,
+        session_filter: typing.Optional[global___SessionFilter] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["session_filter",b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["parent",b"parent","session_filter",b"session_filter"]) -> None: ...
+global___ListUserIdsOfAllSessionsRequest = ListUserIdsOfAllSessionsRequest
+
+class ListUserIdsResponse(google.protobuf.message.Message):
+    """This message is a response of listing session user_ids"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    USER_IDS_FIELD_NUMBER: builtins.int
+    @property
+    def user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """The user_ids of the session"""
+        pass
+    def __init__(self,
+        *,
+        user_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["user_ids",b"user_ids"]) -> None: ...
+global___ListUserIdsResponse = ListUserIdsResponse
+
+class ListIdentifiedUserIdsOfAllSessionsRequest(google.protobuf.message.Message):
+    """request to list all identified_user_ids of all sessions"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    PARENT_FIELD_NUMBER: builtins.int
+    SESSION_FILTER_FIELD_NUMBER: builtins.int
+    parent: typing.Text
+    """The parent for which the identified_user_ids for all sessions should be listed
+    Format: `projects/<PROJECT_ID>/agent`.
+    """
+
+    @property
+    def session_filter(self) -> global___SessionFilter:
+        """Optional. A filter to narrow the response down to sessions of interest."""
+        pass
+    def __init__(self,
+        *,
+        parent: typing.Text = ...,
+        session_filter: typing.Optional[global___SessionFilter] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["session_filter",b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["parent",b"parent","session_filter",b"session_filter"]) -> None: ...
+global___ListIdentifiedUserIdsOfAllSessionsRequest = ListIdentifiedUserIdsOfAllSessionsRequest
+
+class ListIdentifiedUserIdsResponse(google.protobuf.message.Message):
+    """This message is a response of listing session identified_user_ids"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    IDENTIFIED_USER_IDS_FIELD_NUMBER: builtins.int
+    @property
+    def identified_user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """The identified_user_ids of the session"""
+        pass
+    def __init__(self,
+        *,
+        identified_user_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["identified_user_ids",b"identified_user_ids"]) -> None: ...
+global___ListIdentifiedUserIdsResponse = ListIdentifiedUserIdsResponse
+
+class ListTagsOfAllSessionsRequest(google.protobuf.message.Message):
+    """request to list all tags of all sessions"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    PARENT_FIELD_NUMBER: builtins.int
+    SESSION_FILTER_FIELD_NUMBER: builtins.int
+    parent: typing.Text
+    """The parent for which the tags for all sessions should be listed
+    Format: `projects/<PROJECT_ID>/agent`.
+    """
+
+    @property
+    def session_filter(self) -> global___SessionFilter:
+        """Optional. A filter to narrow the response down to sessions of interest."""
+        pass
+    def __init__(self,
+        *,
+        parent: typing.Text = ...,
+        session_filter: typing.Optional[global___SessionFilter] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["session_filter",b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["parent",b"parent","session_filter",b"session_filter"]) -> None: ...
+global___ListTagsOfAllSessionsRequest = ListTagsOfAllSessionsRequest
+
+class ListTagsResponse(google.protobuf.message.Message):
+    """This message is a response of listing session tags"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    TAGS_FIELD_NUMBER: builtins.int
+    @property
+    def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """The tags of the session"""
+        pass
+    def __init__(self,
+        *,
+        tags: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["tags",b"tags"]) -> None: ...
+global___ListTagsResponse = ListTagsResponse
+
+class ListInputContextsOfAllSessionsRequest(google.protobuf.message.Message):
+    """request to list all input_contexts of all sessions"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    PARENT_FIELD_NUMBER: builtins.int
+    SESSION_FILTER_FIELD_NUMBER: builtins.int
+    parent: typing.Text
+    """The parent for which the input_contexts for all sessions should be listed
+    Format: `projects/<PROJECT_ID>/agent`.
+    """
+
+    @property
+    def session_filter(self) -> global___SessionFilter:
+        """Optional. A filter to narrow the response down to sessions of interest."""
+        pass
+    def __init__(self,
+        *,
+        parent: typing.Text = ...,
+        session_filter: typing.Optional[global___SessionFilter] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["session_filter",b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["parent",b"parent","session_filter",b"session_filter"]) -> None: ...
+global___ListInputContextsOfAllSessionsRequest = ListInputContextsOfAllSessionsRequest
+
+class ListInputContextsResponse(google.protobuf.message.Message):
+    """This message is a response of listing session input_contexts"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    INPUT_CONTEXTS_FIELD_NUMBER: builtins.int
+    @property
+    def input_contexts(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """The input_contexts ids of the session"""
+        pass
+    def __init__(self,
+        *,
+        input_contexts: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["input_contexts",b"input_contexts"]) -> None: ...
+global___ListInputContextsResponse = ListInputContextsResponse
+
+class ListOutputContextsOfAllSessionsRequest(google.protobuf.message.Message):
+    """request to list all output_contexts of all sessions"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    PARENT_FIELD_NUMBER: builtins.int
+    SESSION_FILTER_FIELD_NUMBER: builtins.int
+    parent: typing.Text
+    """The parent for which the output_contexts for all sessions should be listed
+    Format: `projects/<PROJECT_ID>/agent`.
+    """
+
+    @property
+    def session_filter(self) -> global___SessionFilter:
+        """Optional. A filter to narrow the response down to sessions of interest."""
+        pass
+    def __init__(self,
+        *,
+        parent: typing.Text = ...,
+        session_filter: typing.Optional[global___SessionFilter] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["session_filter",b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["parent",b"parent","session_filter",b"session_filter"]) -> None: ...
+global___ListOutputContextsOfAllSessionsRequest = ListOutputContextsOfAllSessionsRequest
+
+class ListOutputContextsResponse(google.protobuf.message.Message):
+    """This message is a response of listing session output_contexts"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    OUTPUT_CONTEXTS_FIELD_NUMBER: builtins.int
+    @property
+    def output_contexts(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """The output_contexts ids of the session"""
+        pass
+    def __init__(self,
+        *,
+        output_contexts: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["output_contexts",b"output_contexts"]) -> None: ...
+global___ListOutputContextsResponse = ListOutputContextsResponse
+
+class ListPlatformsOfAllSessionsRequest(google.protobuf.message.Message):
+    """request to list all labels of all sessions"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    PARENT_FIELD_NUMBER: builtins.int
+    SESSION_FILTER_FIELD_NUMBER: builtins.int
+    parent: typing.Text
+    """The parent for which the platforms for all sessions should be listed
+    Format: `projects/<PROJECT_ID>/agent`.
+    """
+
+    @property
+    def session_filter(self) -> global___SessionFilter:
+        """Optional. A filter to narrow the response down to sessions of interest."""
+        pass
+    def __init__(self,
+        *,
+        parent: typing.Text = ...,
+        session_filter: typing.Optional[global___SessionFilter] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["session_filter",b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["parent",b"parent","session_filter",b"session_filter"]) -> None: ...
+global___ListPlatformsOfAllSessionsRequest = ListPlatformsOfAllSessionsRequest
+
+class ListPlatformsResponse(google.protobuf.message.Message):
+    """This message is a response of listing session platforms"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    PLATFORMS_FIELD_NUMBER: builtins.int
+    @property
+    def platforms(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """The platforms of the session"""
+        pass
+    def __init__(self,
+        *,
+        platforms: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["platforms",b"platforms"]) -> None: ...
+global___ListPlatformsResponse = ListPlatformsResponse
+
+class ListAccountIdsOfAllSessionsRequest(google.protobuf.message.Message):
+    """request to list all account_ids of all sessions"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    PARENT_FIELD_NUMBER: builtins.int
+    SESSION_FILTER_FIELD_NUMBER: builtins.int
+    parent: typing.Text
+    """The parent for which the account_ids for all sessions should be listed
+    Format: `projects/<PROJECT_ID>/agent`.
+    """
+
+    @property
+    def session_filter(self) -> global___SessionFilter:
+        """Optional. A filter to narrow the response down to sessions of interest."""
+        pass
+    def __init__(self,
+        *,
+        parent: typing.Text = ...,
+        session_filter: typing.Optional[global___SessionFilter] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["session_filter",b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["parent",b"parent","session_filter",b"session_filter"]) -> None: ...
+global___ListAccountIdsOfAllSessionsRequest = ListAccountIdsOfAllSessionsRequest
+
+class ListAccountIdsResponse(google.protobuf.message.Message):
+    """This message is a response of listing session account_ids"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    ACCOUNT_IDS_FIELD_NUMBER: builtins.int
+    @property
+    def account_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """The account_ids of the session"""
+        pass
+    def __init__(self,
+        *,
+        account_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["account_ids",b"account_ids"]) -> None: ...
+global___ListAccountIdsResponse = ListAccountIdsResponse
+
+class ListPropertyIdsOfAllSessionsRequest(google.protobuf.message.Message):
+    """request to list all property_ids of all sessions"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    PARENT_FIELD_NUMBER: builtins.int
+    SESSION_FILTER_FIELD_NUMBER: builtins.int
+    parent: typing.Text
+    """The parent for which the property_ids for all sessions should be listed
+    Format: `projects/<PROJECT_ID>/agent`.
+    """
+
+    @property
+    def session_filter(self) -> global___SessionFilter:
+        """Optional. A filter to narrow the response down to sessions of interest."""
+        pass
+    def __init__(self,
+        *,
+        parent: typing.Text = ...,
+        session_filter: typing.Optional[global___SessionFilter] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["session_filter",b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["parent",b"parent","session_filter",b"session_filter"]) -> None: ...
+global___ListPropertyIdsOfAllSessionsRequest = ListPropertyIdsOfAllSessionsRequest
+
+class ListPropertyIdsResponse(google.protobuf.message.Message):
+    """This message is a response of listing session property_ids"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    PROPERTY_IDS_FIELD_NUMBER: builtins.int
+    @property
+    def property_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """The property_ids of the session"""
+        pass
+    def __init__(self,
+        *,
+        property_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["property_ids",b"property_ids"]) -> None: ...
+global___ListPropertyIdsResponse = ListPropertyIdsResponse
+
+class ListDatastreamIdsOfAllSessionsRequest(google.protobuf.message.Message):
+    """request to list all datastream_ids of all sessions"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    PARENT_FIELD_NUMBER: builtins.int
+    SESSION_FILTER_FIELD_NUMBER: builtins.int
+    parent: typing.Text
+    """The parent for which the datastream_ids for all sessions should be listed
+    Format: `projects/<PROJECT_ID>/agent`.
+    """
+
+    @property
+    def session_filter(self) -> global___SessionFilter:
+        """Optional. A filter to narrow the response down to sessions of interest."""
+        pass
+    def __init__(self,
+        *,
+        parent: typing.Text = ...,
+        session_filter: typing.Optional[global___SessionFilter] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["session_filter",b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["parent",b"parent","session_filter",b"session_filter"]) -> None: ...
+global___ListDatastreamIdsOfAllSessionsRequest = ListDatastreamIdsOfAllSessionsRequest
+
+class ListDatastreamIdsResponse(google.protobuf.message.Message):
+    """This message is a response of listing session datastream_ids"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DATASTREAM_IDS_FIELD_NUMBER: builtins.int
+    @property
+    def datastream_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """The datastream_ids of the session"""
+        pass
+    def __init__(self,
+        *,
+        datastream_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["datastream_ids",b"datastream_ids"]) -> None: ...
+global___ListDatastreamIdsResponse = ListDatastreamIdsResponse
+
+class ListOriginIdsOfAllSessionsRequest(google.protobuf.message.Message):
+    """request to list all origin_ids of all sessions"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    PARENT_FIELD_NUMBER: builtins.int
+    SESSION_FILTER_FIELD_NUMBER: builtins.int
+    parent: typing.Text
+    """The parent for which the origin_ids for all sessions should be listed
+    Format: `projects/<PROJECT_ID>/agent`.
+    """
+
+    @property
+    def session_filter(self) -> global___SessionFilter:
+        """Optional. A filter to narrow the response down to sessions of interest."""
+        pass
+    def __init__(self,
+        *,
+        parent: typing.Text = ...,
+        session_filter: typing.Optional[global___SessionFilter] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["session_filter",b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["parent",b"parent","session_filter",b"session_filter"]) -> None: ...
+global___ListOriginIdsOfAllSessionsRequest = ListOriginIdsOfAllSessionsRequest
+
+class ListOriginIdsResponse(google.protobuf.message.Message):
+    """This message is a response of listing session origin_ids"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    ORIGIN_IDS_FIELD_NUMBER: builtins.int
+    @property
+    def origin_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """The origin_ids of the session"""
+        pass
+    def __init__(self,
+        *,
+        origin_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["origin_ids",b"origin_ids"]) -> None: ...
+global___ListOriginIdsResponse = ListOriginIdsResponse
 
 class AddSessionLabelsRequest(google.protobuf.message.Message):
     """This message is a request to add session labels"""
