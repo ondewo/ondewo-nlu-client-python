@@ -23,6 +23,10 @@ setuptools.setup(
         )
     ],
     include_package_data=True,
+    package_data={
+        'ondewo.nlu': ['py.typed', '*.pyi'],
+        'ondewo.qa': ['py.typed', '*.pyi'],
+    },
     classifiers=[
         'Programming Language :: Python :: 3.8',
         'Operating System :: OS Independent',
