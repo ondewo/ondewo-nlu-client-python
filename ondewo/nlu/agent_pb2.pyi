@@ -195,6 +195,24 @@ class _SessionsReportTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrap
       <code>SELECT ... FROM session, session_steps</code>
     """
 
+    SESSION_LEAST_X_INTENTS: _SessionsReportType.ValueType  # 11
+    """report least x detected intents in session. Supports SessionFilter to filter"""
+
+    SESSION_LEAST_X_ENTITY_TYPES: _SessionsReportType.ValueType  # 12
+    """report least x detected entity types. Supports SessionFilter to filter"""
+
+    SESSION_LEAST_X_ENTITY_VALUES: _SessionsReportType.ValueType  # 13
+    """report least x detected entity values Supports SessionFilter to filter"""
+
+    SESSION_LEAST_X_USERS: _SessionsReportType.ValueType  # 14
+    """report least x users. Supports SessionFilter to filter (Coming soon! Not yet implemented)"""
+
+    SESSION_LEAST_X_LABELS: _SessionsReportType.ValueType  # 15
+    """report least x labels. Supports SessionFilter to filter"""
+
+    SESSION_LEAST_X_TAGS: _SessionsReportType.ValueType  # 16
+    """report least x tags. Supports SessionFilter to filter"""
+
 class SessionsReportType(_SessionsReportType, metaclass=_SessionsReportTypeEnumTypeWrapper):
     """Type of reports about the domain of the agent"""
     pass
@@ -250,6 +268,24 @@ Example:
   <code>SELECT ... FROM session</code>
   <code>SELECT ... FROM session, session_steps</code>
 """
+
+SESSION_LEAST_X_INTENTS: SessionsReportType.ValueType  # 11
+"""report least x detected intents in session. Supports SessionFilter to filter"""
+
+SESSION_LEAST_X_ENTITY_TYPES: SessionsReportType.ValueType  # 12
+"""report least x detected entity types. Supports SessionFilter to filter"""
+
+SESSION_LEAST_X_ENTITY_VALUES: SessionsReportType.ValueType  # 13
+"""report least x detected entity values Supports SessionFilter to filter"""
+
+SESSION_LEAST_X_USERS: SessionsReportType.ValueType  # 14
+"""report least x users. Supports SessionFilter to filter (Coming soon! Not yet implemented)"""
+
+SESSION_LEAST_X_LABELS: SessionsReportType.ValueType  # 15
+"""report least x labels. Supports SessionFilter to filter"""
+
+SESSION_LEAST_X_TAGS: SessionsReportType.ValueType  # 16
+"""report least x tags. Supports SessionFilter to filter"""
 
 global___SessionsReportType = SessionsReportType
 
@@ -332,7 +368,7 @@ class Agent(google.protobuf.message.Message):
     DESCRIPTION_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The project of this agent.
-    Format: `projects/<Project ID>/agent`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     Read-only in the Agent message
     """
 
@@ -492,7 +528,7 @@ class DeleteAgentRequest(google.protobuf.message.Message):
     PARENT_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The project that the agent to fetch is associated with.
-    Format: `projects/<Project ID>/agents`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
 
     def __init__(self,
@@ -509,7 +545,7 @@ class GetAgentRequest(google.protobuf.message.Message):
     AGENT_VIEW_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The project that the agent to fetch is associated with.
-    Format: `projects/<Project ID>/agents`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
 
     agent_view: global___AgentView.ValueType
@@ -605,7 +641,7 @@ class TrainAgentRequest(google.protobuf.message.Message):
     INITIATION_PROTOCOL_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The project that the agent to train is associated with.
-    Format: `projects/<Project ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     """
 
     branch: typing.Text
@@ -630,7 +666,7 @@ class BuildCacheRequest(google.protobuf.message.Message):
     BRANCH_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The project that the agent to build cache is associated with.
-    Format: `projects/<Project ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     """
 
     branch: typing.Text
@@ -652,7 +688,7 @@ class ExportAgentRequest(google.protobuf.message.Message):
     COMPRESSION_LEVEL_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The project that the agent to export is associated with.
-    Format: `projects/<Project ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     """
 
     agent_uri: typing.Text
@@ -724,7 +760,7 @@ class ExportBenchmarkAgentRequest(google.protobuf.message.Message):
     parent: typing.Text
     """Agent related info
     Required. The project that the agent to export is associated with.
-    Format: `projects/<Project ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     """
 
     compression_level: builtins.int
@@ -801,7 +837,7 @@ class OptimizeRankingMatchRequest(google.protobuf.message.Message):
     IN_PLACE_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The project that the agent to train is associated with.
-    Format: `projects/<Project ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     """
 
     @property
@@ -890,7 +926,7 @@ class ImportAgentRequest(google.protobuf.message.Message):
     AGENT_CONTENT_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The project that the agent to import is associated with.
-    Format: `projects/<Project ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     """
 
     agent_uri: typing.Text
@@ -934,7 +970,7 @@ class RestoreAgentRequest(google.protobuf.message.Message):
     AGENT_CONTENT_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The project that the agent to restore is associated with.
-    Format: `projects/<Project ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     """
 
     agent_uri: typing.Text
@@ -979,7 +1015,7 @@ class GetAgentStatisticsRequest(google.protobuf.message.Message):
     TYPE_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The project to get statistics from.
-    Format: `projects/<Project ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     """
 
     format: global___ReportFormat.ValueType
@@ -1042,7 +1078,7 @@ class GetSessionsStatisticsRequest(google.protobuf.message.Message):
     SQL_QUERY_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The project to get statistics from.
-    Format: `projects/<Project ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     """
 
     format: global___ReportFormat.ValueType
@@ -1128,7 +1164,7 @@ class AddUserToProjectRequest(google.protobuf.message.Message):
     PROJECT_ROLE_ID_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The project that the agent to train is associated with.
-    Format: `projects/<Project ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     """
 
     user_id: typing.Text
@@ -1153,7 +1189,7 @@ class RemoveUserFromProjectRequest(google.protobuf.message.Message):
     USER_ID_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The project that the agent to train is associated with.
-    Format: `projects/<Project ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     """
 
     user_id: typing.Text
@@ -1174,7 +1210,7 @@ class ListUsersInProjectRequest(google.protobuf.message.Message):
     PAGE_TOKEN_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The project that the agent to train is associated with.
-    Format: `projects/<Project ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     """
 
     page_token: typing.Text
@@ -1196,7 +1232,7 @@ class UserInProject(google.protobuf.message.Message):
     ROLE_ID_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The project that the agent to train is associated with.
-    Format: `projects/<Project ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     """
 
     @property
@@ -1305,7 +1341,7 @@ class SetAgentStatusRequest(google.protobuf.message.Message):
     AGENT_VIEW_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The project of which to set the status.
-    Format: `projects/<Project ID>/agent`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
 
     status: global___AgentStatus.ValueType
@@ -1392,7 +1428,7 @@ class SetResourcesRequest(google.protobuf.message.Message):
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The project that the agent to fetch is associated with.
-    Format: `projects/<Project ID>/agents`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
 
     name: typing.Text
@@ -1421,7 +1457,7 @@ class DeleteResourcesRequest(google.protobuf.message.Message):
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The project that the agent to fetch is associated with.
-    Format: `projects/<Project ID>/agents`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
 
     name: typing.Text
@@ -1448,7 +1484,7 @@ class ExportResourcesRequest(google.protobuf.message.Message):
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The project that the agent to fetch is associated with.
-    Format: `projects/<Project ID>/agents`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
 
     name: typing.Text
@@ -1476,7 +1512,7 @@ class ExportResourcesResponse(google.protobuf.message.Message):
     RESOURCE_FILE_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The project that the agent to fetch is associated with.
-    Format: `projects/<Project ID>/agents`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
 
     name: typing.Text
@@ -1505,7 +1541,7 @@ class GetModelStatusesRequest(google.protobuf.message.Message):
     MODEL_NAME_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The project that the agent to fetch is associated with.
-    Format: `projects/<Project ID>/agent`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
 
     cache_version: builtins.int
@@ -1630,7 +1666,7 @@ class GetPlatformMappingRequest(google.protobuf.message.Message):
     PARENT_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The project that the agent is associated with.
-    Format: `projects/<Project ID>/agent`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
 
     def __init__(self,
@@ -1647,7 +1683,7 @@ class PlatformMapping(google.protobuf.message.Message):
     PLATFORM_INFO_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The project that the agent is associated with.
-    Format: `projects/<Project ID>/agent`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
 
     @property
@@ -1707,7 +1743,7 @@ class FullTextSearchRequest(google.protobuf.message.Message):
     PAGE_TOKEN_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The project that the agent is associated with.
-    Format: `projects/<Project ID>/agent`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
 
     language_code: typing.Text
@@ -1757,7 +1793,7 @@ class FullTextSearchResponseEntityType(google.protobuf.message.Message):
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The project that the agent to fetch is associated with.
-    Format: `projects/<Project ID>/agents`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
 
     language_code: typing.Text
@@ -1818,7 +1854,7 @@ class FullTextSearchResponseEntity(google.protobuf.message.Message):
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The project that the agent to fetch is associated with.
-    Format: `projects/<Project ID>/agents`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
 
     language_code: typing.Text
@@ -1885,7 +1921,7 @@ class FullTextSearchResponseEntitySynonym(google.protobuf.message.Message):
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The project that the agent to fetch is associated with.
-    Format: `projects/<Project ID>/agents`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
 
     language_code: typing.Text
@@ -1947,7 +1983,7 @@ class FullTextSearchResponseIntent(google.protobuf.message.Message):
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The project that the agent to fetch is associated with.
-    Format: `projects/<Project ID>/agents`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
 
     language_code: typing.Text
@@ -2009,7 +2045,7 @@ class FullTextSearchResponseIntentContextIn(google.protobuf.message.Message):
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The project that the agent to fetch is associated with.
-    Format: `projects/<Project ID>/agents`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
 
     language_code: typing.Text
@@ -2071,7 +2107,7 @@ class FullTextSearchResponseIntentContextOut(google.protobuf.message.Message):
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The project that the agent to fetch is associated with.
-    Format: `projects/<Project ID>/agents`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
 
     language_code: typing.Text
@@ -2145,7 +2181,7 @@ class FullTextSearchResponseIntentUsersays(google.protobuf.message.Message):
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The project that the agent to fetch is associated with.
-    Format: `projects/<Project ID>/agents`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
 
     language_code: typing.Text
@@ -2210,7 +2246,7 @@ class FullTextSearchResponseIntentTags(google.protobuf.message.Message):
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The project that the agent to fetch is associated with.
-    Format: `projects/<Project ID>/agents`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
 
     language_code: typing.Text
@@ -2278,7 +2314,7 @@ class FullTextSearchResponseIntentResponse(google.protobuf.message.Message):
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The project that the agent to fetch is associated with.
-    Format: `projects/<Project ID>/agents`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
 
     language_code: typing.Text
@@ -2343,7 +2379,7 @@ class FullTextSearchResponseIntentParameters(google.protobuf.message.Message):
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The project that the agent to fetch is associated with.
-    Format: `projects/<Project ID>/agents`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
 
     language_code: typing.Text
@@ -2378,7 +2414,7 @@ class ReindexAgentRequest(google.protobuf.message.Message):
     INDEX_TYPES_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The project that the agent to fetch is associated with.
-    Format: `projects/<Project ID>/agents`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
 
     branch_name: typing.Text

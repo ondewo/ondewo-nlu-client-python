@@ -251,7 +251,7 @@ class AgentsServicer(object):
         <pre>
         grpcurl -plaintext -H 'cai-token: aimp' -d '{
         "agent": {
-        "display_name": "Pizza Bot",
+        "display_name": "My Pizza Bot",
         "default_language_code": "en",
         "supported_language_codes": ["en"],
         "time_zone": "Europe/Vienna",
