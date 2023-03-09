@@ -157,7 +157,7 @@ class ExtractEntitiesRequest(google.protobuf.message.Message):
     INTENT_NAME_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """the parent of the request
-    Format: `projects/<Project ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     """
 
     text: typing.Text
@@ -169,7 +169,7 @@ class ExtractEntitiesRequest(google.protobuf.message.Message):
     intent_name: typing.Text
     """Optional. The name of the relevant intent. Used to establish preference
     hierarchy for entities that correspond to intent parameters
-    Format: `projects/<Project ID>/agent/intents/<Intent ID>`
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
     """
 
     def __init__(self,
@@ -192,7 +192,7 @@ class ExtractEntitiesFuzzyRequest(google.protobuf.message.Message):
     ALLOW_OVERLAPS_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """the parent of the request
-    Format: `projects/<Project ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     """
 
     text: typing.Text
@@ -345,7 +345,7 @@ class GetAlternativeSentencesRequest(google.protobuf.message.Message):
 
     parent: typing.Text
     """the parent of the request
-    Format: `projects/<Project ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     """
 
     @property
@@ -381,7 +381,7 @@ class GenerateUserSaysRequest(google.protobuf.message.Message):
 
     parent: typing.Text
     """the parent of the request
-    Format: `projects/<Project ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     """
 
     n_repeat_synonym: builtins.int
@@ -413,7 +413,7 @@ class GenerateResponsesRequest(google.protobuf.message.Message):
 
     parent: typing.Text
     """the parent of the request
-    Format: `projects/<Project ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     """
 
     n_repeat_synonym: builtins.int
@@ -463,7 +463,7 @@ class GetAlternativeTrainingPhrasesRequest(google.protobuf.message.Message):
 
     parent: typing.Text
     """the parent of the request
-    Format: `projects/<Project ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     """
 
     detect_entities: builtins.bool
@@ -521,7 +521,7 @@ class GetSynonymsRequest(google.protobuf.message.Message):
 
     parent: typing.Text
     """the parent of the request
-    Format: `projects/<Project ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     """
 
     def __init__(self,
@@ -931,7 +931,7 @@ class ClassifyIntentsRequest(google.protobuf.message.Message):
     ALGORITHMS_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The project of this agent.
-    Format: `projects/<Project ID>/agent`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
 
     text: typing.Text
@@ -982,7 +982,7 @@ class IntentClassified(google.protobuf.message.Message):
     SCORE_FIELD_NUMBER: builtins.int
     intent_name: typing.Text
     """The unique identifier of this intent.
-    Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
     """
 
     intent_display_name: typing.Text

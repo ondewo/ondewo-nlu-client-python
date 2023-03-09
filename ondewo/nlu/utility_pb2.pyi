@@ -127,7 +127,7 @@ class CleanAllIntentsRequest(google.protobuf.message.Message):
     NUMBER_OF_WORKERS_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The agent to list all intents from.
-    Format: `projects/<Project ID>/agent`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
 
     language_code: typing.Text
@@ -210,12 +210,12 @@ class CleanIntentRequest(google.protobuf.message.Message):
     REANNOTATE_ENTITIES_OPTIONS_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The agent to list all intents from.
-    Format: `projects/<Project ID>/agent`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
 
     intent_name: typing.Text
     """Required. The name of the intent.
-    Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
     """
 
     language_code: typing.Text
@@ -438,7 +438,7 @@ class CleanAllEntityTypesRequest(google.protobuf.message.Message):
     NUMBER_OF_WORKERS_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The agent to list all intents from.
-    Format: `projects/<Project ID>/agent`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
 
     language_code: typing.Text
@@ -536,7 +536,7 @@ class CleanEntityTypeRequest(google.protobuf.message.Message):
     DRY_RUN_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The agent to list all intents from.
-    Format: `projects/<Project ID>/agent`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
 
     entity_type_name: typing.Text
@@ -641,7 +641,7 @@ class AddTrainingPhrasesRequest(google.protobuf.message.Message):
     NUMBER_OF_WORKERS_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The agent to list all intents from.
-    Format: `projects/<Project ID>/agent`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
 
     language_code: typing.Text
@@ -710,7 +710,7 @@ class AddTrainingPhrasesFromCSVRequest(google.protobuf.message.Message):
     NUMBER_OF_WORKERS_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The agent to list all intents from.
-    Format: `projects/<Project ID>/agent`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
 
     language_code: typing.Text

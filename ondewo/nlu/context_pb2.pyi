@@ -109,7 +109,7 @@ class ListContextsRequest(google.protobuf.message.Message):
     PAGE_TOKEN_FIELD_NUMBER: builtins.int
     session_id: typing.Text
     """Required. The session to list all contexts from.
-    Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
     """
 
     page_token: typing.Text
@@ -170,7 +170,7 @@ class CreateContextRequest(google.protobuf.message.Message):
     CONTEXT_FIELD_NUMBER: builtins.int
     session_id: typing.Text
     """Required. The session to create a context for.
-    Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
     """
 
     @property
@@ -227,7 +227,7 @@ global___DeleteContextRequest = DeleteContextRequest
 class DeleteAllContextsRequest(google.protobuf.message.Message):
     """The request message for [Contexts.DeleteAllContexts][google.cloud.dialogflow.v2.Contexts.DeleteAllContexts].
     Required. The name of the session to delete all contexts from.
-    Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_UUID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
     """
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     SESSION_ID_FIELD_NUMBER: builtins.int

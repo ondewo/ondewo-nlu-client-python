@@ -279,7 +279,7 @@ class Intent(google.protobuf.message.Message):
         LANGUAGE_CODE_FIELD_NUMBER: builtins.int
         name: typing.Text
         """Required. The unique identifier of this training phrase.
-        Format: `projects/<Project ID>/agent/intents/<Intent ID>/trainingPhrases/<Training Phrase ID>`.
+        Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/trainingPhrases/&lt;training_phrase_uuid&gt;</code></pre>
         """
 
         type: global___Intent.TrainingPhrase.Type.ValueType
@@ -323,7 +323,7 @@ class Intent(google.protobuf.message.Message):
             LANGUAGE_CODE_FIELD_NUMBER: builtins.int
             name: typing.Text
             """The unique identifier of this prompt.
-            Format: `projects/<Project ID>/agent/intents/<Intent ID>/parameters/<Parameter ID>/prompts/<Prompt ID>`.
+            Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/parameters/&lt;parameter_uuid&gt;/prompts/&lt;prompt_uuid&gt;</code></pre>
             """
 
             text: typing.Text
@@ -351,7 +351,7 @@ class Intent(google.protobuf.message.Message):
         IS_LIST_FIELD_NUMBER: builtins.int
         name: typing.Text
         """The unique identifier of this parameter.
-        Format: `projects/<Project ID>/agent/intents/<Intent ID>/parameters/<Parameter ID>`.
+        Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/parameters/&lt;parameter_uuid&gt;</code></pre>
         """
 
         display_name: typing.Text
@@ -1104,7 +1104,7 @@ class Intent(google.protobuf.message.Message):
         IS_PROMPT_FIELD_NUMBER: builtins.int
         name: typing.Text
         """Required. The name of the return message.
-        Format: `projects/<Project ID>/agent/intents/<Intent ID>/responseMessages/<Message ID>`.
+        Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/responseMessages/&lt;message_uuid&gt;</code></pre>
         """
 
         language_code: typing.Text
@@ -1207,12 +1207,12 @@ class Intent(google.protobuf.message.Message):
         PARENT_FOLLOWUP_INTENT_NAME_FIELD_NUMBER: builtins.int
         followup_intent_name: typing.Text
         """The unique identifier of the followup intent.
-        Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+        Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
         """
 
         parent_followup_intent_name: typing.Text
         """The unique identifier of the followup intent parent.
-        Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+        Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
         """
 
         def __init__(self,
@@ -1253,7 +1253,7 @@ class Intent(google.protobuf.message.Message):
     """Required for all methods except `create` (`create` populates the name
     automatically.
     The unique identifier of this intent.
-    Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
     """
 
     display_name: typing.Text
@@ -1281,7 +1281,7 @@ class Intent(google.protobuf.message.Message):
     def input_context_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
         """Optional. The list of context names required for this intent to be
         triggered.
-        Format: `projects/<Project ID>/agent/sessions/-/contexts/<Context ID>`.
+        Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/-/contexts/&lt;context_uuid&gt;</code></pre>
         """
         pass
     @property
@@ -1306,7 +1306,7 @@ class Intent(google.protobuf.message.Message):
         is matched. Context messages in this collection should not set the
         parameters field. Setting the `lifespan_count` to 0 will reset the context
         when the intent is matched.
-        Format: `projects/<Project ID>/agent/sessions/-/contexts/<Context ID>`.
+        Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/-/contexts/&lt;context_uuid&gt;</code></pre>
         """
         pass
     reset_contexts: builtins.bool
@@ -1333,14 +1333,14 @@ class Intent(google.protobuf.message.Message):
     root_followup_intent_name: typing.Text
     """The unique identifier of the root intent in the chain of followup intents.
     It identifies the correct followup intents chain for this intent.
-    Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
     """
 
     parent_followup_intent_name: typing.Text
     """The unique identifier of the parent intent in the chain of followup
     intents.
     It identifies the parent followup intent.
-    Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
     """
 
     @property
@@ -1427,7 +1427,7 @@ class ListIntentsRequest(google.protobuf.message.Message):
     FILTER_BY_TAGS_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The agent to list all intents from.
-    Format: `projects/<Project ID>/agent`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
 
     language_code: typing.Text
@@ -1507,7 +1507,7 @@ class GetIntentRequest(google.protobuf.message.Message):
     PAGE_TOKEN_FIELD_NUMBER: builtins.int
     name: typing.Text
     """Required. The name of the intent.
-    Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
     """
 
     language_code: typing.Text
@@ -1546,7 +1546,7 @@ class CreateIntentRequest(google.protobuf.message.Message):
     INTENT_VIEW_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The agent to create a intent for.
-    Format: `projects/<Project ID>/agent`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
 
     @property
@@ -1585,7 +1585,7 @@ class UpdateIntentRequest(google.protobuf.message.Message):
     @property
     def intent(self) -> global___Intent:
         """Required. The intent to update.
-        Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+        Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
         """
         pass
     language_code: typing.Text
@@ -1620,7 +1620,7 @@ class DeleteIntentRequest(google.protobuf.message.Message):
     NAME_FIELD_NUMBER: builtins.int
     name: typing.Text
     """Required. The name of the intent to delete.
-    Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
     """
 
     def __init__(self,
@@ -1641,7 +1641,7 @@ class BatchUpdateIntentsRequest(google.protobuf.message.Message):
     INTENT_VIEW_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The name of the agent to update or create intents in.
-    Format: `projects/<Project ID>/agent`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
 
     intent_batch_uri: typing.Text
@@ -1783,7 +1783,7 @@ class IntentTagRequest(google.protobuf.message.Message):
     TAGS_FIELD_NUMBER: builtins.int
     intent_name: typing.Text
     """The path of the intent.
-    Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
     """
 
     @property
@@ -1804,7 +1804,7 @@ class GetIntentTagsRequest(google.protobuf.message.Message):
     INTENT_NAME_FIELD_NUMBER: builtins.int
     intent_name: typing.Text
     """The path of the intent.
-    Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
     """
 
     def __init__(self,
@@ -1937,7 +1937,7 @@ class BatchGetTrainingPhrasesRequest(google.protobuf.message.Message):
     @property
     def names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
         """Required. The names of the training phrases.
-        Format: `projects/<Project ID>/agent/intents/<Intent ID>/trainingPhrases/<Training Phrase ID>`
+        Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/trainingPhrases/&lt;training_phrase_uuid&gt;</code></pre>
         """
         pass
     def __init__(self,
@@ -1954,7 +1954,7 @@ class BatchDeleteTrainingPhrasesRequest(google.protobuf.message.Message):
     @property
     def names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
         """Required. The names of the training phrases.
-        Format: `projects/<Project ID>/agent/intents/<Intent ID>/trainingPhrases/<Training Phrase ID>`
+        Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/trainingPhrases/&lt;training_phrase_uuid&gt;</code></pre>
         """
         pass
     def __init__(self,
@@ -2004,7 +2004,7 @@ class ListTrainingPhrasesRequest(google.protobuf.message.Message):
     PAGE_TOKEN_FIELD_NUMBER: builtins.int
     intent_name: typing.Text
     """Required. The agent to list all intents from.
-    Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
     """
 
     language_code: typing.Text
@@ -2141,7 +2141,7 @@ class BatchGetResponseMessagesRequest(google.protobuf.message.Message):
     @property
     def names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
         """Required. The names of the response messages.
-        Format: `projects/<Project ID>/agent/intents/<Intent ID>/responseMessages/<Message ID>`
+        Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/responseMessages/&lt;message_uuid&gt;</code></pre>
         """
         pass
     def __init__(self,
@@ -2158,7 +2158,7 @@ class BatchDeleteResponseMessagesRequest(google.protobuf.message.Message):
     @property
     def names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
         """Required. The names of the  response messages.
-        Format: `projects/<Project ID>/agent/intents/<Intent ID>/responseMessages/<Message ID>`
+        Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/responseMessages/&lt;message_uuid&gt;</code></pre>
         """
         pass
     def __init__(self,
@@ -2208,7 +2208,7 @@ class ListResponseMessagesRequest(google.protobuf.message.Message):
     PAGE_TOKEN_FIELD_NUMBER: builtins.int
     intent_name: typing.Text
     """Required. The agent to list all intents from.
-    Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
     """
 
     language_code: typing.Text
@@ -2345,7 +2345,7 @@ class BatchGetParametersRequest(google.protobuf.message.Message):
     @property
     def names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
         """Required. The names of the response messages.
-        Format: `projects/<Project ID>/agent/intents/<Intent ID>/parameters/<Parameter ID>`
+        Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/parameters/&lt;parameter_uuid</code></pre>
         """
         pass
     def __init__(self,
@@ -2362,7 +2362,7 @@ class BatchDeleteParametersRequest(google.protobuf.message.Message):
     @property
     def names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
         """Required. The names of the  response messages.
-        Format: `projects/<Project ID>/agent/intents/<Intent ID>/parameters/<Parameter ID>`
+        Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/parameters/&lt;parameter_uuid</code></pre>
         """
         pass
     def __init__(self,
@@ -2412,7 +2412,7 @@ class ListParametersRequest(google.protobuf.message.Message):
     PAGE_TOKEN_FIELD_NUMBER: builtins.int
     intent_name: typing.Text
     """Required. The agent to list all intents from.
-    Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
     """
 
     language_code: typing.Text

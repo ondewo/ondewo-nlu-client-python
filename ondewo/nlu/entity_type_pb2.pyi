@@ -292,7 +292,7 @@ class ListEntityTypesRequest(google.protobuf.message.Message):
     SORT_BY_FIELD_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The agent to list all entity types from.
-    Format: `projects/<Project ID>/agent`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
 
     language_code: typing.Text
@@ -362,7 +362,7 @@ class GetEntityTypeRequest(google.protobuf.message.Message):
     ENTITY_TYPE_VIEW_FIELD_NUMBER: builtins.int
     name: typing.Text
     """Required. The name of the entity type.
-    Format: `projects/<Project ID>/agent/entityTypes/<EntityType ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;</code></pre>
     """
 
     language_code: typing.Text
@@ -398,7 +398,7 @@ class CreateEntityTypeRequest(google.protobuf.message.Message):
     ENTITY_TYPE_VIEW_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The agent to create a entity type for.
-    Format: `projects/<Project ID>/agent`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
 
     @property
@@ -437,7 +437,7 @@ class UpdateEntityTypeRequest(google.protobuf.message.Message):
     @property
     def entity_type(self) -> global___EntityType:
         """Required. The entity type to update.
-        Format: `projects/<Project ID>/agent/entityTypes/<EntityType ID>`.
+        Format: <pre><code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;</code></pre>
         """
         pass
     language_code: typing.Text
@@ -472,7 +472,7 @@ class DeleteEntityTypeRequest(google.protobuf.message.Message):
     NAME_FIELD_NUMBER: builtins.int
     name: typing.Text
     """Required. The name of the entity type to delete.
-    Format: `projects/<Project ID>/agent/entityTypes/<EntityType ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;</code></pre>
     """
 
     def __init__(self,
@@ -492,7 +492,7 @@ class BatchUpdateEntityTypesRequest(google.protobuf.message.Message):
     UPDATE_MASK_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """Required. The name of the agent to update or create entity types in.
-    Format: `projects/<Project ID>/agent`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
 
     entity_type_batch_uri: typing.Text

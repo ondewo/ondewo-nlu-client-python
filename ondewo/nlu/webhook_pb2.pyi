@@ -40,7 +40,7 @@ class WebhookRequest(google.protobuf.message.Message):
     session: typing.Text
     """The unique identifier of detectIntent request session.
     Can be used to identify end-user inside webhook implementation.
-    Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
     """
 
     response_id: typing.Text

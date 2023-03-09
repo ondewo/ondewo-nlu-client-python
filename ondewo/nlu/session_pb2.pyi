@@ -908,7 +908,7 @@ class Session(google.protobuf.message.Message):
     SESSION_INFO_FIELD_NUMBER: builtins.int
     name: typing.Text
     """The unique identifier of the session
-    Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
     """
 
     @property
@@ -936,7 +936,7 @@ class SessionStep(google.protobuf.message.Message):
     CONTEXTS_FIELD_NUMBER: builtins.int
     name: typing.Text
     """The unique identifier for the given review
-    Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/sessionsteps/<SESSION_ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/steps/&lt;session_step_uuid&gt;</code></pre>
     """
 
     @property
@@ -970,7 +970,7 @@ class TrackSessionStepRequest(google.protobuf.message.Message):
     SESSION_VIEW_FIELD_NUMBER: builtins.int
     session_id: typing.Text
     """The unique identifier for the given review
-    Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/steps/<SESSION_ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/steps/&lt;session_step_uuid&gt;</code></pre>.
     """
 
     @property
@@ -1000,7 +1000,7 @@ class ListSessionsRequest(google.protobuf.message.Message):
     FIELD_MASK_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """The parent for which sessions should be listed
-    Format: `projects/<PROJECT_ID>/agent`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
 
     session_view: global___Session.View.ValueType
@@ -1597,7 +1597,7 @@ class GetSessionRequest(google.protobuf.message.Message):
     FIELD_MASK_FIELD_NUMBER: builtins.int
     session_id: typing.Text
     """The session to be returned
-    Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
     """
 
     session_view: global___Session.View.ValueType
@@ -1629,7 +1629,7 @@ class CreateSessionRequest(google.protobuf.message.Message):
     parent: typing.Text
     """Creates a session that collects all the conversation interactions between the machine and a user
     The unique identifier of an Agent
-    Format: `projects/<PROJECT_ID>/agent`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     Required.
     """
 
@@ -1663,7 +1663,7 @@ class DeleteSessionRequest(google.protobuf.message.Message):
     SESSION_ID_FIELD_NUMBER: builtins.int
     session_id: typing.Text
     """Required. The session to be deleted
-    Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_UUID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
     """
 
     def __init__(self,
@@ -1682,12 +1682,12 @@ class CreateSessionReviewRequest(google.protobuf.message.Message):
     SESSION_REVIEW_VIEW_FIELD_NUMBER: builtins.int
     session_id: typing.Text
     """The unique identifier for the session under review
-    Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
     """
 
     parent_review_id: typing.Text
     """Optional: The unique identifier of the parent review
-    Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/reviews/<SESSION_REVIEW_ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/reviews/&lt;session_review_uuid&gt;</code></pre>
     """
 
     @property
@@ -1744,7 +1744,7 @@ class SessionReview(google.protobuf.message.Message):
     SESSION_REVIEW_STEPS_FIELD_NUMBER: builtins.int
     name: typing.Text
     """The unique identifier for the given review
-    Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/reviews/<SESSION_REVIEW_ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/reviews/&lt;session_review_uuid&gt;</code></pre>
     """
 
     @property
@@ -1772,7 +1772,7 @@ class SessionReviewStep(google.protobuf.message.Message):
     PLATFORMS_FIELD_NUMBER: builtins.int
     name: typing.Text
     """The unique identifier for the given review step
-    Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>/reviews/<SESSION_REVIEW_ID>/sessionreviewsteps/<SESSION_REVIEW_STEP_ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/reviews/&lt;review_uuid&gt;/sessionreviewsteps/&lt;session_review_step_uuid&gt;</code></pre>
     """
 
     @property
@@ -1886,7 +1886,7 @@ class ListSessionLabelsOfAllSessionsRequest(google.protobuf.message.Message):
     SESSION_FILTER_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """The parent for which the labels for all sessions should be listed
-    Format: `projects/<PROJECT_ID>/agent`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
 
     @property
@@ -1924,7 +1924,7 @@ class ListLanguageCodesOfAllSessionsRequest(google.protobuf.message.Message):
     SESSION_FILTER_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """The parent for which the language_codes for all sessions should be listed
-    Format: `projects/<PROJECT_ID>/agent`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
 
     @property
@@ -1962,7 +1962,7 @@ class ListMatchedIntentsOfAllSessionsRequest(google.protobuf.message.Message):
     SESSION_FILTER_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """The parent for which the matched_intents for all sessions should be listed
-    Format: `projects/<PROJECT_ID>/agent`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
 
     @property
@@ -2000,7 +2000,7 @@ class ListMatchedEntityTypesOfAllSessionsRequest(google.protobuf.message.Message
     SESSION_FILTER_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """The parent for which the matched_entity_types for all sessions should be listed
-    Format: `projects/<PROJECT_ID>/agent`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
 
     @property
@@ -2038,7 +2038,7 @@ class ListUserIdsOfAllSessionsRequest(google.protobuf.message.Message):
     SESSION_FILTER_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """The parent for which the user_ids for all sessions should be listed
-    Format: `projects/<PROJECT_ID>/agent`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
 
     @property
@@ -2076,7 +2076,7 @@ class ListIdentifiedUserIdsOfAllSessionsRequest(google.protobuf.message.Message)
     SESSION_FILTER_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """The parent for which the identified_user_ids for all sessions should be listed
-    Format: `projects/<PROJECT_ID>/agent`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
 
     @property
@@ -2114,7 +2114,7 @@ class ListTagsOfAllSessionsRequest(google.protobuf.message.Message):
     SESSION_FILTER_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """The parent for which the tags for all sessions should be listed
-    Format: `projects/<PROJECT_ID>/agent`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
 
     @property
@@ -2152,7 +2152,7 @@ class ListInputContextsOfAllSessionsRequest(google.protobuf.message.Message):
     SESSION_FILTER_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """The parent for which the input_contexts for all sessions should be listed
-    Format: `projects/<PROJECT_ID>/agent`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
 
     @property
@@ -2190,7 +2190,7 @@ class ListOutputContextsOfAllSessionsRequest(google.protobuf.message.Message):
     SESSION_FILTER_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """The parent for which the output_contexts for all sessions should be listed
-    Format: `projects/<PROJECT_ID>/agent`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
 
     @property
@@ -2228,7 +2228,7 @@ class ListPlatformsOfAllSessionsRequest(google.protobuf.message.Message):
     SESSION_FILTER_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """The parent for which the platforms for all sessions should be listed
-    Format: `projects/<PROJECT_ID>/agent`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
 
     @property
@@ -2266,7 +2266,7 @@ class ListAccountIdsOfAllSessionsRequest(google.protobuf.message.Message):
     SESSION_FILTER_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """The parent for which the account_ids for all sessions should be listed
-    Format: `projects/<PROJECT_ID>/agent`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
 
     @property
@@ -2304,7 +2304,7 @@ class ListPropertyIdsOfAllSessionsRequest(google.protobuf.message.Message):
     SESSION_FILTER_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """The parent for which the property_ids for all sessions should be listed
-    Format: `projects/<PROJECT_ID>/agent`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
 
     @property
@@ -2342,7 +2342,7 @@ class ListDatastreamIdsOfAllSessionsRequest(google.protobuf.message.Message):
     SESSION_FILTER_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """The parent for which the datastream_ids for all sessions should be listed
-    Format: `projects/<PROJECT_ID>/agent`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
 
     @property
@@ -2380,7 +2380,7 @@ class ListOriginIdsOfAllSessionsRequest(google.protobuf.message.Message):
     SESSION_FILTER_FIELD_NUMBER: builtins.int
     parent: typing.Text
     """The parent for which the origin_ids for all sessions should be listed
-    Format: `projects/<PROJECT_ID>/agent`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
 
     @property
@@ -2459,7 +2459,7 @@ class ListSessionReviewsRequest(google.protobuf.message.Message):
     PAGE_TOKEN_FIELD_NUMBER: builtins.int
     session_id: typing.Text
     """The unique identifier for the session for which reviews should be listed
-    Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
     """
 
     session_review_view: global___SessionReview.View.ValueType
@@ -2521,7 +2521,7 @@ class GetLatestSessionReviewRequest(google.protobuf.message.Message):
     SESSION_REVIEW_VIEW_FIELD_NUMBER: builtins.int
     session_id: typing.Text
     """The unique identifier of the session for which the latest review should be returned
-    Format: `projects/<PROJECT_ID>/agent/sessions/<SESSION_ID>`.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
     """
 
     session_review_view: global___SessionReview.View.ValueType

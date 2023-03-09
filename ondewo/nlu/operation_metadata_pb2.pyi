@@ -148,6 +148,8 @@ class OperationMetadata(google.protobuf.message.Message):
     NUM_RERUNS_FIELD_NUMBER: builtins.int
     MAX_NUM_RERUNS_FIELD_NUMBER: builtins.int
     DESCRIPTION_FIELD_NUMBER: builtins.int
+    LOG_FIELD_NUMBER: builtins.int
+    LOG_LIMIT_FIELD_NUMBER: builtins.int
     status: global___OperationMetadata.Status.ValueType
     """long-running operation status code"""
 
@@ -198,7 +200,14 @@ class OperationMetadata(google.protobuf.message.Message):
     """maximum number of re-runs in case the operation fails"""
 
     description: typing.Text
-    """description, normally needed for suboperations when type is OPERATION_TYPE_UNSPECIFIED"""
+    """description, normally needed for sub operations when type is OPERATION_TYPE_UNSPECIFIED"""
+
+    @property
+    def log(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """The log output of an operation"""
+        pass
+    log_limit: builtins.int
+    """The log output of an operation limited to the last x log entries"""
 
     def __init__(self,
         *,
@@ -218,7 +227,9 @@ class OperationMetadata(google.protobuf.message.Message):
         num_reruns: builtins.int = ...,
         max_num_reruns: builtins.int = ...,
         description: typing.Text = ...,
+        log: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        log_limit: builtins.int = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["create_time",b"create_time","end_time",b"end_time","start_time",b"start_time"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["cancel_command",b"cancel_command","create_time",b"create_time","description",b"description","end_time",b"end_time","host_name",b"host_name","is_cancellation_requested",b"is_cancellation_requested","max_num_reruns",b"max_num_reruns","num_reruns",b"num_reruns","operation_type",b"operation_type","parent_operation_name",b"parent_operation_name","project_parent",b"project_parent","start_time",b"start_time","status",b"status","sub_operation_names",b"sub_operation_names","user_id_cancelled",b"user_id_cancelled","user_id_created",b"user_id_created"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["cancel_command",b"cancel_command","create_time",b"create_time","description",b"description","end_time",b"end_time","host_name",b"host_name","is_cancellation_requested",b"is_cancellation_requested","log",b"log","log_limit",b"log_limit","max_num_reruns",b"max_num_reruns","num_reruns",b"num_reruns","operation_type",b"operation_type","parent_operation_name",b"parent_operation_name","project_parent",b"project_parent","start_time",b"start_time","status",b"status","sub_operation_names",b"sub_operation_names","user_id_cancelled",b"user_id_cancelled","user_id_created",b"user_id_created"]) -> None: ...
 global___OperationMetadata = OperationMetadata
