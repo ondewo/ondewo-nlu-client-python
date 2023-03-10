@@ -213,6 +213,9 @@ class _SessionsReportTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrap
     SESSION_LEAST_X_TAGS: _SessionsReportType.ValueType  # 16
     """report least x tags. Supports SessionFilter to filter"""
 
+    TOTAL_STATISTICS: _SessionsReportType.ValueType  # 17
+    """report total numbers of e.g. sessions, session steps, etc."""
+
 class SessionsReportType(_SessionsReportType, metaclass=_SessionsReportTypeEnumTypeWrapper):
     """Type of reports about the domain of the agent"""
     pass
@@ -286,6 +289,9 @@ SESSION_LEAST_X_LABELS: SessionsReportType.ValueType  # 15
 
 SESSION_LEAST_X_TAGS: SessionsReportType.ValueType  # 16
 """report least x tags. Supports SessionFilter to filter"""
+
+TOTAL_STATISTICS: SessionsReportType.ValueType  # 17
+"""report total numbers of e.g. sessions, session steps, etc."""
 
 global___SessionsReportType = SessionsReportType
 
@@ -1109,7 +1115,7 @@ class GetSessionsStatisticsRequest(google.protobuf.message.Message):
     @property
     def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
         """Optional. The mask to control which data fields will be added to the returned data.
-        Example: path=["session.duration_in_s_min", "session.tags"]
+        Example: paths=["duration_in_s_min", "id", "session_id", "project_id"]
         """
         pass
     sql_query: typing.Text
