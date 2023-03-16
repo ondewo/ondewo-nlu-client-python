@@ -1108,6 +1108,8 @@ class SessionFilter(google.protobuf.message.Message):
     DATASTREAM_IDS_FIELD_NUMBER: builtins.int
     ORIGIN_IDS_FIELD_NUMBER: builtins.int
     IDENTIFIED_USER_IDS_FIELD_NUMBER: builtins.int
+    DURATION_INTERVAL_60S_ROUNDED_MIN_FIELD_NUMBER: builtins.int
+    DURATION_INTERVAL_60S_ROUNDED_MAX_FIELD_NUMBER: builtins.int
     @property
     def language_codes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
         """A SessionFilter can be used in some requests to return only sessions matching certain filter conditions.
@@ -1300,6 +1302,12 @@ class SessionFilter(google.protobuf.message.Message):
     def identified_user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
         """Ids of the "identified user" e.g. for a chatbot the email address or for a phone bot the phone number of the user"""
         pass
+    duration_interval_60s_rounded_min: builtins.float
+    """Match only sessions for which the duration in 60 seconds rounded are larger or equal"""
+
+    duration_interval_60s_rounded_max: builtins.float
+    """Match only sessions for which the duration in 60 seconds rounded are smaller or equal"""
+
     def __init__(self,
         *,
         language_codes: typing.Optional[typing.Iterable[typing.Text]] = ...,
@@ -1349,8 +1357,10 @@ class SessionFilter(google.protobuf.message.Message):
         datastream_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
         origin_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
         identified_user_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        duration_interval_60s_rounded_min: builtins.float = ...,
+        duration_interval_60s_rounded_max: builtins.float = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["account_ids",b"account_ids","datastream_ids",b"datastream_ids","duration_in_m_max",b"duration_in_m_max","duration_in_m_min",b"duration_in_m_min","duration_in_m_rounded_max",b"duration_in_m_rounded_max","duration_in_m_rounded_min",b"duration_in_m_rounded_min","duration_in_s_max",b"duration_in_s_max","duration_in_s_min",b"duration_in_s_min","duration_in_s_rounded_max",b"duration_in_s_rounded_max","duration_in_s_rounded_min",b"duration_in_s_rounded_min","duration_interval_15s_rounded_max",b"duration_interval_15s_rounded_max","duration_interval_15s_rounded_min",b"duration_interval_15s_rounded_min","duration_interval_30s_rounded_max",b"duration_interval_30s_rounded_max","duration_interval_30s_rounded_min",b"duration_interval_30s_rounded_min","duration_interval_45s_rounded_max",b"duration_interval_45s_rounded_max","duration_interval_45s_rounded_min",b"duration_interval_45s_rounded_min","earliest",b"earliest","identified_user_ids",b"identified_user_ids","input_contexts",b"input_contexts","intent_tags",b"intent_tags","labels",b"labels","language_codes",b"language_codes","latest",b"latest","matched_entity_types",b"matched_entity_types","matched_intents",b"matched_intents","max_number_turns",b"max_number_turns","min_entity_types_confidence_max",b"min_entity_types_confidence_max","min_entity_types_confidence_min",b"min_entity_types_confidence_min","min_intents_confidence_max",b"min_intents_confidence_max","min_intents_confidence_min",b"min_intents_confidence_min","min_number_turns",b"min_number_turns","origin_ids",b"origin_ids","output_contexts",b"output_contexts","platforms",b"platforms","property_ids",b"property_ids","session_ids",b"session_ids","started_time_slot_per_day_phase_max",b"started_time_slot_per_day_phase_max","started_time_slot_per_day_phase_min",b"started_time_slot_per_day_phase_min","started_time_slot_per_half_hour_max",b"started_time_slot_per_half_hour_max","started_time_slot_per_half_hour_min",b"started_time_slot_per_half_hour_min","started_time_slot_per_hour_max",b"started_time_slot_per_hour_max","started_time_slot_per_hour_min",b"started_time_slot_per_hour_min","started_time_slot_per_minute_max",b"started_time_slot_per_minute_max","started_time_slot_per_minute_min",b"started_time_slot_per_minute_min","started_time_slot_per_quarter_hour_max",b"started_time_slot_per_quarter_hour_max","started_time_slot_per_quarter_hour_min",b"started_time_slot_per_quarter_hour_min","user_ids",b"user_ids"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["account_ids",b"account_ids","datastream_ids",b"datastream_ids","duration_in_m_max",b"duration_in_m_max","duration_in_m_min",b"duration_in_m_min","duration_in_m_rounded_max",b"duration_in_m_rounded_max","duration_in_m_rounded_min",b"duration_in_m_rounded_min","duration_in_s_max",b"duration_in_s_max","duration_in_s_min",b"duration_in_s_min","duration_in_s_rounded_max",b"duration_in_s_rounded_max","duration_in_s_rounded_min",b"duration_in_s_rounded_min","duration_interval_15s_rounded_max",b"duration_interval_15s_rounded_max","duration_interval_15s_rounded_min",b"duration_interval_15s_rounded_min","duration_interval_30s_rounded_max",b"duration_interval_30s_rounded_max","duration_interval_30s_rounded_min",b"duration_interval_30s_rounded_min","duration_interval_45s_rounded_max",b"duration_interval_45s_rounded_max","duration_interval_45s_rounded_min",b"duration_interval_45s_rounded_min","duration_interval_60s_rounded_max",b"duration_interval_60s_rounded_max","duration_interval_60s_rounded_min",b"duration_interval_60s_rounded_min","earliest",b"earliest","identified_user_ids",b"identified_user_ids","input_contexts",b"input_contexts","intent_tags",b"intent_tags","labels",b"labels","language_codes",b"language_codes","latest",b"latest","matched_entity_types",b"matched_entity_types","matched_intents",b"matched_intents","max_number_turns",b"max_number_turns","min_entity_types_confidence_max",b"min_entity_types_confidence_max","min_entity_types_confidence_min",b"min_entity_types_confidence_min","min_intents_confidence_max",b"min_intents_confidence_max","min_intents_confidence_min",b"min_intents_confidence_min","min_number_turns",b"min_number_turns","origin_ids",b"origin_ids","output_contexts",b"output_contexts","platforms",b"platforms","property_ids",b"property_ids","session_ids",b"session_ids","started_time_slot_per_day_phase_max",b"started_time_slot_per_day_phase_max","started_time_slot_per_day_phase_min",b"started_time_slot_per_day_phase_min","started_time_slot_per_half_hour_max",b"started_time_slot_per_half_hour_max","started_time_slot_per_half_hour_min",b"started_time_slot_per_half_hour_min","started_time_slot_per_hour_max",b"started_time_slot_per_hour_max","started_time_slot_per_hour_min",b"started_time_slot_per_hour_min","started_time_slot_per_minute_max",b"started_time_slot_per_minute_max","started_time_slot_per_minute_min",b"started_time_slot_per_minute_min","started_time_slot_per_quarter_hour_max",b"started_time_slot_per_quarter_hour_max","started_time_slot_per_quarter_hour_min",b"started_time_slot_per_quarter_hour_min","user_ids",b"user_ids"]) -> None: ...
 global___SessionFilter = SessionFilter
 
 class SessionInfo(google.protobuf.message.Message):
@@ -1399,6 +1409,7 @@ class SessionInfo(google.protobuf.message.Message):
     DATASTREAM_IDS_FIELD_NUMBER: builtins.int
     ORIGIN_IDS_FIELD_NUMBER: builtins.int
     IDENTIFIED_USER_IDS_FIELD_NUMBER: builtins.int
+    DURATION_INTERVAL_60S_ROUNDED_FIELD_NUMBER: builtins.int
     @property
     def language_codes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
         """A SessionInfo contains some general information about a session.
@@ -1532,6 +1543,9 @@ class SessionInfo(google.protobuf.message.Message):
     def identified_user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
         """Ids of the "identified user" e.g. for a chatbot the email address or for a phone bot the phone number of the user"""
         pass
+    duration_interval_60s_rounded: builtins.float
+    """duration in 60 seconds intervals rounded"""
+
     def __init__(self,
         *,
         language_codes: typing.Optional[typing.Iterable[typing.Text]] = ...,
@@ -1565,8 +1579,9 @@ class SessionInfo(google.protobuf.message.Message):
         datastream_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
         origin_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
         identified_user_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        duration_interval_60s_rounded: builtins.float = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["account_ids",b"account_ids","datastream_ids",b"datastream_ids","duration_in_m",b"duration_in_m","duration_in_m_rounded",b"duration_in_m_rounded","duration_in_s",b"duration_in_s","duration_in_s_rounded",b"duration_in_s_rounded","duration_interval_15s_rounded",b"duration_interval_15s_rounded","duration_interval_30s_rounded",b"duration_interval_30s_rounded","duration_interval_45s_rounded",b"duration_interval_45s_rounded","earliest",b"earliest","identified_user_ids",b"identified_user_ids","input_context_steps",b"input_context_steps","intent_tags",b"intent_tags","labels",b"labels","language_codes",b"language_codes","latest",b"latest","matched_entity_types",b"matched_entity_types","matched_intents",b"matched_intents","min_entity_types_confidence",b"min_entity_types_confidence","min_intents_confidence",b"min_intents_confidence","number_turns",b"number_turns","origin_ids",b"origin_ids","output_context_steps",b"output_context_steps","platforms",b"platforms","property_ids",b"property_ids","started_time_slot_per_day_phase",b"started_time_slot_per_day_phase","started_time_slot_per_half_hour",b"started_time_slot_per_half_hour","started_time_slot_per_hour",b"started_time_slot_per_hour","started_time_slot_per_minute",b"started_time_slot_per_minute","started_time_slot_per_quarter_hour",b"started_time_slot_per_quarter_hour","user_ids",b"user_ids"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["account_ids",b"account_ids","datastream_ids",b"datastream_ids","duration_in_m",b"duration_in_m","duration_in_m_rounded",b"duration_in_m_rounded","duration_in_s",b"duration_in_s","duration_in_s_rounded",b"duration_in_s_rounded","duration_interval_15s_rounded",b"duration_interval_15s_rounded","duration_interval_30s_rounded",b"duration_interval_30s_rounded","duration_interval_45s_rounded",b"duration_interval_45s_rounded","duration_interval_60s_rounded",b"duration_interval_60s_rounded","earliest",b"earliest","identified_user_ids",b"identified_user_ids","input_context_steps",b"input_context_steps","intent_tags",b"intent_tags","labels",b"labels","language_codes",b"language_codes","latest",b"latest","matched_entity_types",b"matched_entity_types","matched_intents",b"matched_intents","min_entity_types_confidence",b"min_entity_types_confidence","min_intents_confidence",b"min_intents_confidence","number_turns",b"number_turns","origin_ids",b"origin_ids","output_context_steps",b"output_context_steps","platforms",b"platforms","property_ids",b"property_ids","started_time_slot_per_day_phase",b"started_time_slot_per_day_phase","started_time_slot_per_half_hour",b"started_time_slot_per_half_hour","started_time_slot_per_hour",b"started_time_slot_per_hour","started_time_slot_per_minute",b"started_time_slot_per_minute","started_time_slot_per_quarter_hour",b"started_time_slot_per_quarter_hour","user_ids",b"user_ids"]) -> None: ...
 global___SessionInfo = SessionInfo
 
 class ListSessionsResponse(google.protobuf.message.Message):
