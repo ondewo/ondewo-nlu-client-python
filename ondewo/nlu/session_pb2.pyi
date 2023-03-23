@@ -11,6 +11,7 @@ import google.protobuf.message
 import google.protobuf.struct_pb2
 import google.rpc.status_pb2
 import google.type.latlng_pb2
+import ondewo.nlu.common_pb2
 import ondewo.nlu.context_pb2
 import ondewo.nlu.entity_type_pb2
 import ondewo.nlu.intent_pb2
@@ -906,6 +907,7 @@ class Session(google.protobuf.message.Message):
     NAME_FIELD_NUMBER: builtins.int
     SESSION_STEPS_FIELD_NUMBER: builtins.int
     SESSION_INFO_FIELD_NUMBER: builtins.int
+    CREATED_MODIFIED_FIELD_NUMBER: builtins.int
     name: typing.Text
     """The unique identifier of the session
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
@@ -917,14 +919,19 @@ class Session(google.protobuf.message.Message):
         pass
     @property
     def session_info(self) -> global___SessionInfo: ...
+    @property
+    def created_modified(self) -> ondewo.nlu.common_pb2.CreatedModified:
+        """created_at, created_by,modified_at, modified_by"""
+        pass
     def __init__(self,
         *,
         name: typing.Text = ...,
         session_steps: typing.Optional[typing.Iterable[global___SessionStep]] = ...,
         session_info: typing.Optional[global___SessionInfo] = ...,
+        created_modified: typing.Optional[ondewo.nlu.common_pb2.CreatedModified] = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["session_info",b"session_info"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["name",b"name","session_info",b"session_info","session_steps",b"session_steps"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["created_modified",b"created_modified","session_info",b"session_info"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["created_modified",b"created_modified","name",b"name","session_info",b"session_info","session_steps",b"session_steps"]) -> None: ...
 global___Session = Session
 
 class SessionStep(google.protobuf.message.Message):
@@ -934,6 +941,7 @@ class SessionStep(google.protobuf.message.Message):
     DETECT_INTENT_REQUEST_FIELD_NUMBER: builtins.int
     DETECT_INTENT_RESPONSE_FIELD_NUMBER: builtins.int
     CONTEXTS_FIELD_NUMBER: builtins.int
+    CREATED_MODIFIED_FIELD_NUMBER: builtins.int
     name: typing.Text
     """The unique identifier for the given review
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/steps/&lt;session_step_uuid&gt;</code></pre>
@@ -951,15 +959,20 @@ class SessionStep(google.protobuf.message.Message):
     def contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]:
         """The contexts which were active at the beginning of this step"""
         pass
+    @property
+    def created_modified(self) -> ondewo.nlu.common_pb2.CreatedModified:
+        """created_at, created_by,modified_at, modified_by"""
+        pass
     def __init__(self,
         *,
         name: typing.Text = ...,
         detect_intent_request: typing.Optional[global___DetectIntentRequest] = ...,
         detect_intent_response: typing.Optional[global___DetectIntentResponse] = ...,
         contexts: typing.Optional[typing.Iterable[ondewo.nlu.context_pb2.Context]] = ...,
+        created_modified: typing.Optional[ondewo.nlu.common_pb2.CreatedModified] = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["detect_intent_request",b"detect_intent_request","detect_intent_response",b"detect_intent_response"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["contexts",b"contexts","detect_intent_request",b"detect_intent_request","detect_intent_response",b"detect_intent_response","name",b"name"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["created_modified",b"created_modified","detect_intent_request",b"detect_intent_request","detect_intent_response",b"detect_intent_response"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["contexts",b"contexts","created_modified",b"created_modified","detect_intent_request",b"detect_intent_request","detect_intent_response",b"detect_intent_response","name",b"name"]) -> None: ...
 global___SessionStep = SessionStep
 
 class TrackSessionStepRequest(google.protobuf.message.Message):
@@ -1757,6 +1770,7 @@ class SessionReview(google.protobuf.message.Message):
 
     NAME_FIELD_NUMBER: builtins.int
     SESSION_REVIEW_STEPS_FIELD_NUMBER: builtins.int
+    CREATED_MODIFIED_FIELD_NUMBER: builtins.int
     name: typing.Text
     """The unique identifier for the given review
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/reviews/&lt;session_review_uuid&gt;</code></pre>
@@ -1766,12 +1780,18 @@ class SessionReview(google.protobuf.message.Message):
     def session_review_steps(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___SessionReviewStep]:
         """The reviews for all steps in the session"""
         pass
+    @property
+    def created_modified(self) -> ondewo.nlu.common_pb2.CreatedModified:
+        """created_at, created_by,modified_at, modified_by"""
+        pass
     def __init__(self,
         *,
         name: typing.Text = ...,
         session_review_steps: typing.Optional[typing.Iterable[global___SessionReviewStep]] = ...,
+        created_modified: typing.Optional[ondewo.nlu.common_pb2.CreatedModified] = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["name",b"name","session_review_steps",b"session_review_steps"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["created_modified",b"created_modified"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["created_modified",b"created_modified","name",b"name","session_review_steps",b"session_review_steps"]) -> None: ...
 global___SessionReview = SessionReview
 
 class SessionReviewStep(google.protobuf.message.Message):
@@ -1785,6 +1805,7 @@ class SessionReviewStep(google.protobuf.message.Message):
     CONTEXTS_OUT_FIELD_NUMBER: builtins.int
     QUERY_TEXT_ORIGINAL_FIELD_NUMBER: builtins.int
     PLATFORMS_FIELD_NUMBER: builtins.int
+    CREATED_MODIFIED_FIELD_NUMBER: builtins.int
     name: typing.Text
     """The unique identifier for the given review step
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/reviews/&lt;review_uuid&gt;/sessionreviewsteps/&lt;session_review_step_uuid&gt;</code></pre>
@@ -1820,6 +1841,10 @@ class SessionReviewStep(google.protobuf.message.Message):
     def platforms(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[ondewo.nlu.intent_pb2.Intent.Message.Platform.ValueType]:
         """Messages for each of the Intent.Message.Platform were sent to the user"""
         pass
+    @property
+    def created_modified(self) -> ondewo.nlu.common_pb2.CreatedModified:
+        """created_at, created_by,modified_at, modified_by"""
+        pass
     def __init__(self,
         *,
         name: typing.Text = ...,
@@ -1830,9 +1855,10 @@ class SessionReviewStep(google.protobuf.message.Message):
         contexts_out: typing.Optional[typing.Iterable[ondewo.nlu.context_pb2.Context]] = ...,
         query_text_original: typing.Text = ...,
         platforms: typing.Optional[typing.Iterable[ondewo.nlu.intent_pb2.Intent.Message.Platform.ValueType]] = ...,
+        created_modified: typing.Optional[ondewo.nlu.common_pb2.CreatedModified] = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["annotated_usersays",b"annotated_usersays"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["annotated_usersays",b"annotated_usersays","contexts",b"contexts","contexts_out",b"contexts_out","detected_intents",b"detected_intents","language_code",b"language_code","name",b"name","platforms",b"platforms","query_text_original",b"query_text_original"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["annotated_usersays",b"annotated_usersays","created_modified",b"created_modified"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["annotated_usersays",b"annotated_usersays","contexts",b"contexts","contexts_out",b"contexts_out","created_modified",b"created_modified","detected_intents",b"detected_intents","language_code",b"language_code","name",b"name","platforms",b"platforms","query_text_original",b"query_text_original"]) -> None: ...
 global___SessionReviewStep = SessionReviewStep
 
 class DetectedIntent(google.protobuf.message.Message):

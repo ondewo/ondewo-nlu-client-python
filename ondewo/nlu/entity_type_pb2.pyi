@@ -185,6 +185,7 @@ class EntityType(google.protobuf.message.Message):
         DISPLAY_NAME_FIELD_NUMBER: builtins.int
         SYNONYM_COUNT_FIELD_NUMBER: builtins.int
         LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+        CREATED_MODIFIED_FIELD_NUMBER: builtins.int
         value: typing.Text
         """Required.
         For `KIND_MAP` entity types:
@@ -214,6 +215,10 @@ class EntityType(google.protobuf.message.Message):
         language_code: typing.Text
         """Required. The language to list entity synonyms for."""
 
+        @property
+        def created_modified(self) -> ondewo.nlu.common_pb2.CreatedModified:
+            """created_at, created_by,modified_at, modified_by"""
+            pass
         def __init__(self,
             *,
             value: typing.Text = ...,
@@ -222,8 +227,10 @@ class EntityType(google.protobuf.message.Message):
             display_name: typing.Text = ...,
             synonym_count: builtins.int = ...,
             language_code: typing.Text = ...,
+            created_modified: typing.Optional[ondewo.nlu.common_pb2.CreatedModified] = ...,
             ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["display_name",b"display_name","language_code",b"language_code","name",b"name","synonym_count",b"synonym_count","synonyms",b"synonyms","value",b"value"]) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["created_modified",b"created_modified"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["created_modified",b"created_modified","display_name",b"display_name","language_code",b"language_code","name",b"name","synonym_count",b"synonym_count","synonyms",b"synonyms","value",b"value"]) -> None: ...
 
     NAME_FIELD_NUMBER: builtins.int
     DISPLAY_NAME_FIELD_NUMBER: builtins.int
@@ -234,6 +241,7 @@ class EntityType(google.protobuf.message.Message):
     ENTITY_COUNT_FIELD_NUMBER: builtins.int
     STATUS_FIELD_NUMBER: builtins.int
     SYNONYM_COUNT_FIELD_NUMBER: builtins.int
+    CREATED_MODIFIED_FIELD_NUMBER: builtins.int
     name: typing.Text
     """Required for all methods except `create` (`create` populates the name
     automatically.
@@ -266,6 +274,10 @@ class EntityType(google.protobuf.message.Message):
     synonym_count: builtins.int
     """Read-Only field. Total count of entity synonyms of the entity type"""
 
+    @property
+    def created_modified(self) -> ondewo.nlu.common_pb2.CreatedModified:
+        """created_at, created_by,modified_at, modified_by"""
+        pass
     def __init__(self,
         *,
         name: typing.Text = ...,
@@ -277,8 +289,10 @@ class EntityType(google.protobuf.message.Message):
         entity_count: builtins.int = ...,
         status: global___EntityType.EntityTypeStatus.ValueType = ...,
         synonym_count: builtins.int = ...,
+        created_modified: typing.Optional[ondewo.nlu.common_pb2.CreatedModified] = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["auto_expansion_mode",b"auto_expansion_mode","display_name",b"display_name","entities",b"entities","entity_count",b"entity_count","kind",b"kind","name",b"name","next_page_token",b"next_page_token","status",b"status","synonym_count",b"synonym_count"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["created_modified",b"created_modified"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["auto_expansion_mode",b"auto_expansion_mode","created_modified",b"created_modified","display_name",b"display_name","entities",b"entities","entity_count",b"entity_count","kind",b"kind","name",b"name","next_page_token",b"next_page_token","status",b"status","synonym_count",b"synonym_count"]) -> None: ...
 global___EntityType = EntityType
 
 class ListEntityTypesRequest(google.protobuf.message.Message):
