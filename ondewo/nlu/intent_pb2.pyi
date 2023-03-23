@@ -277,6 +277,7 @@ class Intent(google.protobuf.message.Message):
         ENTITIES_FIELD_NUMBER: builtins.int
         TIMES_ADDED_COUNT_FIELD_NUMBER: builtins.int
         LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+        CREATED_MODIFIED_FIELD_NUMBER: builtins.int
         name: typing.Text
         """Required. The unique identifier of this training phrase.
         Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/trainingPhrases/&lt;training_phrase_uuid&gt;</code></pre>
@@ -301,6 +302,10 @@ class Intent(google.protobuf.message.Message):
         language_code: typing.Text
         """Optional. The language of the training phrase."""
 
+        @property
+        def created_modified(self) -> ondewo.nlu.common_pb2.CreatedModified:
+            """created_at, created_by,modified_at, modified_by"""
+            pass
         def __init__(self,
             *,
             name: typing.Text = ...,
@@ -309,8 +314,10 @@ class Intent(google.protobuf.message.Message):
             entities: typing.Optional[typing.Iterable[global___Intent.TrainingPhrase.Entity]] = ...,
             times_added_count: builtins.int = ...,
             language_code: typing.Text = ...,
+            created_modified: typing.Optional[ondewo.nlu.common_pb2.CreatedModified] = ...,
             ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["entities",b"entities","language_code",b"language_code","name",b"name","text",b"text","times_added_count",b"times_added_count","type",b"type"]) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["created_modified",b"created_modified"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["created_modified",b"created_modified","entities",b"entities","language_code",b"language_code","name",b"name","text",b"text","times_added_count",b"times_added_count","type",b"type"]) -> None: ...
 
     class Parameter(google.protobuf.message.Message):
         """Represents intent parameters."""
@@ -321,6 +328,7 @@ class Intent(google.protobuf.message.Message):
             NAME_FIELD_NUMBER: builtins.int
             TEXT_FIELD_NUMBER: builtins.int
             LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+            CREATED_MODIFIED_FIELD_NUMBER: builtins.int
             name: typing.Text
             """The unique identifier of this prompt.
             Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/parameters/&lt;parameter_uuid&gt;/prompts/&lt;prompt_uuid&gt;</code></pre>
@@ -332,13 +340,19 @@ class Intent(google.protobuf.message.Message):
             language_code: typing.Text
             """The language of the prompts. If not specified, the default language code will be used."""
 
+            @property
+            def created_modified(self) -> ondewo.nlu.common_pb2.CreatedModified:
+                """created_at, created_by,modified_at, modified_by"""
+                pass
             def __init__(self,
                 *,
                 name: typing.Text = ...,
                 text: typing.Text = ...,
                 language_code: typing.Text = ...,
+                created_modified: typing.Optional[ondewo.nlu.common_pb2.CreatedModified] = ...,
                 ) -> None: ...
-            def ClearField(self, field_name: typing_extensions.Literal["language_code",b"language_code","name",b"name","text",b"text"]) -> None: ...
+            def HasField(self, field_name: typing_extensions.Literal["created_modified",b"created_modified"]) -> builtins.bool: ...
+            def ClearField(self, field_name: typing_extensions.Literal["created_modified",b"created_modified","language_code",b"language_code","name",b"name","text",b"text"]) -> None: ...
 
         NAME_FIELD_NUMBER: builtins.int
         DISPLAY_NAME_FIELD_NUMBER: builtins.int
@@ -349,6 +363,7 @@ class Intent(google.protobuf.message.Message):
         MANDATORY_FIELD_NUMBER: builtins.int
         PROMPTS_FIELD_NUMBER: builtins.int
         IS_LIST_FIELD_NUMBER: builtins.int
+        CREATED_MODIFIED_FIELD_NUMBER: builtins.int
         name: typing.Text
         """The unique identifier of this parameter.
         Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/parameters/&lt;parameter_uuid&gt;</code></pre>
@@ -399,6 +414,10 @@ class Intent(google.protobuf.message.Message):
         is_list: builtins.bool
         """Optional. Indicates whether the parameter represents a list of values."""
 
+        @property
+        def created_modified(self) -> ondewo.nlu.common_pb2.CreatedModified:
+            """created_at, created_by,modified_at, modified_by"""
+            pass
         def __init__(self,
             *,
             name: typing.Text = ...,
@@ -410,8 +429,10 @@ class Intent(google.protobuf.message.Message):
             mandatory: builtins.bool = ...,
             prompts: typing.Optional[typing.Iterable[global___Intent.Parameter.Prompt]] = ...,
             is_list: builtins.bool = ...,
+            created_modified: typing.Optional[ondewo.nlu.common_pb2.CreatedModified] = ...,
             ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["default_value",b"default_value","display_name",b"display_name","entity_type_display_name",b"entity_type_display_name","entity_type_name",b"entity_type_name","is_list",b"is_list","mandatory",b"mandatory","name",b"name","prompts",b"prompts","value",b"value"]) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["created_modified",b"created_modified"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["created_modified",b"created_modified","default_value",b"default_value","display_name",b"display_name","entity_type_display_name",b"entity_type_display_name","entity_type_name",b"entity_type_name","is_list",b"is_list","mandatory",b"mandatory","name",b"name","prompts",b"prompts","value",b"value"]) -> None: ...
 
     class Message(google.protobuf.message.Message):
         """Corresponds to the `Response` field in the Dialogflow console."""
@@ -1102,6 +1123,7 @@ class Intent(google.protobuf.message.Message):
         AUDIO_FIELD_NUMBER: builtins.int
         PLATFORM_FIELD_NUMBER: builtins.int
         IS_PROMPT_FIELD_NUMBER: builtins.int
+        CREATED_MODIFIED_FIELD_NUMBER: builtins.int
         name: typing.Text
         """Required. The name of the return message.
         Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/responseMessages/&lt;message_uuid&gt;</code></pre>
@@ -1175,6 +1197,10 @@ class Intent(google.protobuf.message.Message):
         is_prompt: builtins.bool
         """Read-only. States if a returned message is a prompt or not."""
 
+        @property
+        def created_modified(self) -> ondewo.nlu.common_pb2.CreatedModified:
+            """created_at, created_by,modified_at, modified_by"""
+            pass
         def __init__(self,
             *,
             name: typing.Text = ...,
@@ -1195,9 +1221,10 @@ class Intent(google.protobuf.message.Message):
             audio: typing.Optional[global___Intent.Message.Audio] = ...,
             platform: global___Intent.Message.Platform.ValueType = ...,
             is_prompt: builtins.bool = ...,
+            created_modified: typing.Optional[ondewo.nlu.common_pb2.CreatedModified] = ...,
             ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["audio",b"audio","basic_card",b"basic_card","card",b"card","carousel_select",b"carousel_select","html_text",b"html_text","image",b"image","link_out_suggestion",b"link_out_suggestion","list_select",b"list_select","message",b"message","payload",b"payload","quick_replies",b"quick_replies","simple_responses",b"simple_responses","suggestions",b"suggestions","text",b"text","video",b"video"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["audio",b"audio","basic_card",b"basic_card","card",b"card","carousel_select",b"carousel_select","html_text",b"html_text","image",b"image","is_prompt",b"is_prompt","language_code",b"language_code","link_out_suggestion",b"link_out_suggestion","list_select",b"list_select","message",b"message","name",b"name","payload",b"payload","platform",b"platform","quick_replies",b"quick_replies","simple_responses",b"simple_responses","suggestions",b"suggestions","text",b"text","video",b"video"]) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["audio",b"audio","basic_card",b"basic_card","card",b"card","carousel_select",b"carousel_select","created_modified",b"created_modified","html_text",b"html_text","image",b"image","link_out_suggestion",b"link_out_suggestion","list_select",b"list_select","message",b"message","payload",b"payload","quick_replies",b"quick_replies","simple_responses",b"simple_responses","suggestions",b"suggestions","text",b"text","video",b"video"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["audio",b"audio","basic_card",b"basic_card","card",b"card","carousel_select",b"carousel_select","created_modified",b"created_modified","html_text",b"html_text","image",b"image","is_prompt",b"is_prompt","language_code",b"language_code","link_out_suggestion",b"link_out_suggestion","list_select",b"list_select","message",b"message","name",b"name","payload",b"payload","platform",b"platform","quick_replies",b"quick_replies","simple_responses",b"simple_responses","suggestions",b"suggestions","text",b"text","video",b"video"]) -> None: ...
         def WhichOneof(self, oneof_group: typing_extensions.Literal["message",b"message"]) -> typing.Optional[typing_extensions.Literal["text","image","quick_replies","card","payload","simple_responses","basic_card","suggestions","link_out_suggestion","list_select","carousel_select","html_text","video","audio"]]: ...
 
     class FollowupIntentInfo(google.protobuf.message.Message):
@@ -1249,6 +1276,7 @@ class Intent(google.protobuf.message.Message):
     START_DATE_FIELD_NUMBER: builtins.int
     END_DATE_FIELD_NUMBER: builtins.int
     TAGS_FIELD_NUMBER: builtins.int
+    CREATED_MODIFIED_FIELD_NUMBER: builtins.int
     name: typing.Text
     """Required for all methods except `create` (`create` populates the name
     automatically.
@@ -1381,6 +1409,10 @@ class Intent(google.protobuf.message.Message):
     def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
         """Optional. Adds arbitrary "categories" for which one could filter the intents"""
         pass
+    @property
+    def created_modified(self) -> ondewo.nlu.common_pb2.CreatedModified:
+        """created_at, created_by,modified_at, modified_by"""
+        pass
     def __init__(self,
         *,
         name: typing.Text = ...,
@@ -1410,9 +1442,10 @@ class Intent(google.protobuf.message.Message):
         start_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
         end_date: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
         tags: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        created_modified: typing.Optional[ondewo.nlu.common_pb2.CreatedModified] = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["end_date",b"end_date","start_date",b"start_date"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["action",b"action","default_response_platforms",b"default_response_platforms","display_name",b"display_name","domain_name",b"domain_name","end_date",b"end_date","events",b"events","followup_intent_info",b"followup_intent_info","input_context_names",b"input_context_names","is_end_of_deviation",b"is_end_of_deviation","is_fallback",b"is_fallback","is_start_of_deviation",b"is_start_of_deviation","messages",b"messages","ml_disabled",b"ml_disabled","name",b"name","next_page_token",b"next_page_token","output_contexts",b"output_contexts","parameters",b"parameters","parent_followup_intent_name",b"parent_followup_intent_name","priority",b"priority","reset_contexts",b"reset_contexts","root_followup_intent_name",b"root_followup_intent_name","start_date",b"start_date","status",b"status","tags",b"tags","training_phrase_count",b"training_phrase_count","training_phrases",b"training_phrases","webhook_state",b"webhook_state"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["created_modified",b"created_modified","end_date",b"end_date","start_date",b"start_date"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action",b"action","created_modified",b"created_modified","default_response_platforms",b"default_response_platforms","display_name",b"display_name","domain_name",b"domain_name","end_date",b"end_date","events",b"events","followup_intent_info",b"followup_intent_info","input_context_names",b"input_context_names","is_end_of_deviation",b"is_end_of_deviation","is_fallback",b"is_fallback","is_start_of_deviation",b"is_start_of_deviation","messages",b"messages","ml_disabled",b"ml_disabled","name",b"name","next_page_token",b"next_page_token","output_contexts",b"output_contexts","parameters",b"parameters","parent_followup_intent_name",b"parent_followup_intent_name","priority",b"priority","reset_contexts",b"reset_contexts","root_followup_intent_name",b"root_followup_intent_name","start_date",b"start_date","status",b"status","tags",b"tags","training_phrase_count",b"training_phrase_count","training_phrases",b"training_phrases","webhook_state",b"webhook_state"]) -> None: ...
 global___Intent = Intent
 
 class ListIntentsRequest(google.protobuf.message.Message):

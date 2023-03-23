@@ -7,6 +7,7 @@ import google.protobuf.descriptor
 import google.protobuf.field_mask_pb2
 import google.protobuf.internal.containers
 import google.protobuf.message
+import ondewo.nlu.common_pb2
 import typing
 import typing_extensions
 
@@ -21,6 +22,7 @@ class Context(google.protobuf.message.Message):
         DISPLAY_NAME_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
         VALUE_ORIGINAL_FIELD_NUMBER: builtins.int
+        CREATED_MODIFIED_FIELD_NUMBER: builtins.int
         name: typing.Text
         """The name of the context parameter."""
 
@@ -33,14 +35,20 @@ class Context(google.protobuf.message.Message):
         value_original: typing.Text
         """The original value(s) of the context parameter."""
 
+        @property
+        def created_modified(self) -> ondewo.nlu.common_pb2.CreatedModified:
+            """created_at, created_by,modified_at, modified_by"""
+            pass
         def __init__(self,
             *,
             name: typing.Text = ...,
             display_name: typing.Text = ...,
             value: typing.Text = ...,
             value_original: typing.Text = ...,
+            created_modified: typing.Optional[ondewo.nlu.common_pb2.CreatedModified] = ...,
             ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["display_name",b"display_name","name",b"name","value",b"value","value_original",b"value_original"]) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["created_modified",b"created_modified"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["created_modified",b"created_modified","display_name",b"display_name","name",b"name","value",b"value","value_original",b"value_original"]) -> None: ...
 
     class ParametersEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -61,6 +69,7 @@ class Context(google.protobuf.message.Message):
     LIFESPAN_COUNT_FIELD_NUMBER: builtins.int
     PARAMETERS_FIELD_NUMBER: builtins.int
     LIFESPAN_TIME_FIELD_NUMBER: builtins.int
+    CREATED_MODIFIED_FIELD_NUMBER: builtins.int
     name: typing.Text
     """Required. The display name of the context (must be unique per session).
 
@@ -92,14 +101,20 @@ class Context(google.protobuf.message.Message):
     lifespan_time: builtins.float
     """Optional. The time span in seconds after which the context expires. By default it does not expire."""
 
+    @property
+    def created_modified(self) -> ondewo.nlu.common_pb2.CreatedModified:
+        """created_at, created_by,modified_at, modified_by"""
+        pass
     def __init__(self,
         *,
         name: typing.Text = ...,
         lifespan_count: builtins.int = ...,
         parameters: typing.Optional[typing.Mapping[typing.Text, global___Context.Parameter]] = ...,
         lifespan_time: builtins.float = ...,
+        created_modified: typing.Optional[ondewo.nlu.common_pb2.CreatedModified] = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["lifespan_count",b"lifespan_count","lifespan_time",b"lifespan_time","name",b"name","parameters",b"parameters"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["created_modified",b"created_modified"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["created_modified",b"created_modified","lifespan_count",b"lifespan_count","lifespan_time",b"lifespan_time","name",b"name","parameters",b"parameters"]) -> None: ...
 global___Context = Context
 
 class ListContextsRequest(google.protobuf.message.Message):
