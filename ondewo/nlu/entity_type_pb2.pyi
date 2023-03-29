@@ -622,29 +622,35 @@ class EntityTypeSorting(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["sorting_field",b"sorting_field","sorting_mode",b"sorting_mode"]) -> None: ...
 global___EntityTypeSorting = EntityTypeSorting
 
+class EntityStatus(google.protobuf.message.Message):
+    """This message is for the entity status"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    ENTITY_FIELD_NUMBER: builtins.int
+    ERROR_MESSAGE_FIELD_NUMBER: builtins.int
+    @property
+    def entity(self) -> global___EntityType.Entity:
+        """The entity"""
+        pass
+    error_message: typing.Text
+    """Error message"""
+
+    def __init__(self,
+        *,
+        entity: typing.Optional[global___EntityType.Entity] = ...,
+        error_message: typing.Text = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["entity",b"entity","entity_or_status",b"entity_or_status","error_message",b"error_message"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["entity",b"entity","entity_or_status",b"entity_or_status","error_message",b"error_message"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["entity_or_status",b"entity_or_status"]) -> typing.Optional[typing_extensions.Literal["entity","error_message"]]: ...
+global___EntityStatus = EntityStatus
+
 class BatchEntitiesResponse(google.protobuf.message.Message):
     """This message is a response of batch entities"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
-    class EntityStatus(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
-        ENTITY_FIELD_NUMBER: builtins.int
-        ERROR_MESSAGE_FIELD_NUMBER: builtins.int
-        @property
-        def entity(self) -> global___EntityType.Entity: ...
-        error_message: typing.Text
-        def __init__(self,
-            *,
-            entity: typing.Optional[global___EntityType.Entity] = ...,
-            error_message: typing.Text = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["entity",b"entity","entity_or_status",b"entity_or_status","error_message",b"error_message"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["entity",b"entity","entity_or_status",b"entity_or_status","error_message",b"error_message"]) -> None: ...
-        def WhichOneof(self, oneof_group: typing_extensions.Literal["entity_or_status",b"entity_or_status"]) -> typing.Optional[typing_extensions.Literal["entity","error_message"]]: ...
-
     ENTITY_STATUSES_FIELD_NUMBER: builtins.int
     HAS_ERRORS_FIELD_NUMBER: builtins.int
     @property
-    def entity_statuses(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___BatchEntitiesResponse.EntityStatus]:
+    def entity_statuses(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___EntityStatus]:
         """A list of entity statuses"""
         pass
     has_errors: builtins.bool
@@ -652,42 +658,45 @@ class BatchEntitiesResponse(google.protobuf.message.Message):
 
     def __init__(self,
         *,
-        entity_statuses: typing.Optional[typing.Iterable[global___BatchEntitiesResponse.EntityStatus]] = ...,
+        entity_statuses: typing.Optional[typing.Iterable[global___EntityStatus]] = ...,
         has_errors: builtins.bool = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["entity_statuses",b"entity_statuses","has_errors",b"has_errors"]) -> None: ...
 global___BatchEntitiesResponse = BatchEntitiesResponse
 
+class CreateEntityRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    ENTITY_TYPE_NAME_FIELD_NUMBER: builtins.int
+    ENTITY_FIELD_NUMBER: builtins.int
+    entity_type_name: typing.Text
+    """Required. Name of the entity type in which to create the entity value. Format:
+    `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`.
+    """
+
+    @property
+    def entity(self) -> global___EntityType.Entity:
+        """The entity value to create"""
+        pass
+    def __init__(self,
+        *,
+        entity_type_name: typing.Text = ...,
+        entity: typing.Optional[global___EntityType.Entity] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["entity",b"entity"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["entity",b"entity","entity_type_name",b"entity_type_name"]) -> None: ...
+global___CreateEntityRequest = CreateEntityRequest
+
 class BatchCreateEntitiesRequest(google.protobuf.message.Message):
     """This message is a request to create a batch entities"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
-    class CreateEntityRequest(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
-        ENTITY_TYPE_NAME_FIELD_NUMBER: builtins.int
-        ENTITY_FIELD_NUMBER: builtins.int
-        entity_type_name: typing.Text
-        """Required. Name of the entity type in which to create the entity value. Format:
-        `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
-        """
-
-        @property
-        def entity(self) -> global___EntityType.Entity:
-            """The entity value to create"""
-            pass
-        def __init__(self,
-            *,
-            entity_type_name: typing.Text = ...,
-            entity: typing.Optional[global___EntityType.Entity] = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["entity",b"entity"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["entity",b"entity","entity_type_name",b"entity_type_name"]) -> None: ...
-
     CREATE_ENTITY_REQUESTS_FIELD_NUMBER: builtins.int
     @property
-    def create_entity_requests(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___BatchCreateEntitiesRequest.CreateEntityRequest]: ...
+    def create_entity_requests(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___CreateEntityRequest]:
+        """The create entity requests in a batch"""
+        pass
     def __init__(self,
         *,
-        create_entity_requests: typing.Optional[typing.Iterable[global___BatchCreateEntitiesRequest.CreateEntityRequest]] = ...,
+        create_entity_requests: typing.Optional[typing.Iterable[global___CreateEntityRequest]] = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["create_entity_requests",b"create_entity_requests"]) -> None: ...
 global___BatchCreateEntitiesRequest = BatchCreateEntitiesRequest
@@ -707,8 +716,40 @@ class BatchUpdateEntitiesRequest(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["entities",b"entities"]) -> None: ...
 global___BatchUpdateEntitiesRequest = BatchUpdateEntitiesRequest
 
+class UpdateEntityRequest(google.protobuf.message.Message):
+    """This message is a request to update an entity"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    ENTITIES_FIELD_NUMBER: builtins.int
+    @property
+    def entities(self) -> global___EntityType.Entity:
+        """The entity to update"""
+        pass
+    def __init__(self,
+        *,
+        entities: typing.Optional[global___EntityType.Entity] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["entities",b"entities"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["entities",b"entities"]) -> None: ...
+global___UpdateEntityRequest = UpdateEntityRequest
+
+class GetEntityRequest(google.protobuf.message.Message):
+    """This message is a request to get a an entity"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    NAME_FIELD_NUMBER: builtins.int
+    name: typing.Text
+    """The unique identifiers of the entities. Format:
+    `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`.
+    """
+
+    def __init__(self,
+        *,
+        name: typing.Text = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["name",b"name"]) -> None: ...
+global___GetEntityRequest = GetEntityRequest
+
 class BatchGetEntitiesRequest(google.protobuf.message.Message):
-    """Thiss message is a request to get a batch of entities"""
+    """This message is a request to get a batch of entities"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     NAMES_FIELD_NUMBER: builtins.int
     @property
@@ -741,34 +782,55 @@ class BatchDeleteEntitiesRequest(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["names",b"names"]) -> None: ...
 global___BatchDeleteEntitiesRequest = BatchDeleteEntitiesRequest
 
+class DeleteEntityRequest(google.protobuf.message.Message):
+    """This message is a request to delete a batch of entities"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    NAME_FIELD_NUMBER: builtins.int
+    name: typing.Text
+    """The unique identifiers of the entities. Format:
+    `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`.
+    """
+
+    def __init__(self,
+        *,
+        name: typing.Text = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["name",b"name"]) -> None: ...
+global___DeleteEntityRequest = DeleteEntityRequest
+
+class DeleteEntityStatus(google.protobuf.message.Message):
+    """This message contains the status of an entity deletion"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    SUCCESSFULLY_DELETED_FIELD_NUMBER: builtins.int
+    ERROR_MESSAGE_FIELD_NUMBER: builtins.int
+    @property
+    def successfully_deleted(self) -> google.protobuf.empty_pb2.Empty: ...
+    error_message: typing.Text
+    def __init__(self,
+        *,
+        successfully_deleted: typing.Optional[google.protobuf.empty_pb2.Empty] = ...,
+        error_message: typing.Text = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["delete_status",b"delete_status","error_message",b"error_message","successfully_deleted",b"successfully_deleted"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["delete_status",b"delete_status","error_message",b"error_message","successfully_deleted",b"successfully_deleted"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["delete_status",b"delete_status"]) -> typing.Optional[typing_extensions.Literal["successfully_deleted","error_message"]]: ...
+global___DeleteEntityStatus = DeleteEntityStatus
+
 class BatchDeleteEntitiesResponse(google.protobuf.message.Message):
     """This message is a response of deletion of a batch of entities"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
-    class DeleteEntityStatus(google.protobuf.message.Message):
-        """This message contains the status of an entity deletion"""
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
-        SUCCESSFULLY_DELETED_FIELD_NUMBER: builtins.int
-        ERROR_MESSAGE_FIELD_NUMBER: builtins.int
-        @property
-        def successfully_deleted(self) -> google.protobuf.empty_pb2.Empty: ...
-        error_message: typing.Text
-        def __init__(self,
-            *,
-            successfully_deleted: typing.Optional[google.protobuf.empty_pb2.Empty] = ...,
-            error_message: typing.Text = ...,
-            ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["delete_status",b"delete_status","error_message",b"error_message","successfully_deleted",b"successfully_deleted"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["delete_status",b"delete_status","error_message",b"error_message","successfully_deleted",b"successfully_deleted"]) -> None: ...
-        def WhichOneof(self, oneof_group: typing_extensions.Literal["delete_status",b"delete_status"]) -> typing.Optional[typing_extensions.Literal["successfully_deleted","error_message"]]: ...
-
     DELETE_STATUSES_FIELD_NUMBER: builtins.int
     HAS_ERRORS_FIELD_NUMBER: builtins.int
     @property
-    def delete_statuses(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___BatchDeleteEntitiesResponse.DeleteEntityStatus]: ...
+    def delete_statuses(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___DeleteEntityStatus]:
+        """status of an entity deletion"""
+        pass
     has_errors: builtins.bool
+    """error messages"""
+
     def __init__(self,
         *,
-        delete_statuses: typing.Optional[typing.Iterable[global___BatchDeleteEntitiesResponse.DeleteEntityStatus]] = ...,
+        delete_statuses: typing.Optional[typing.Iterable[global___DeleteEntityStatus]] = ...,
         has_errors: builtins.bool = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["delete_statuses",b"delete_statuses","has_errors",b"has_errors"]) -> None: ...
