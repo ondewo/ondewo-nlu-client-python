@@ -719,17 +719,17 @@ global___BatchUpdateEntitiesRequest = BatchUpdateEntitiesRequest
 class UpdateEntityRequest(google.protobuf.message.Message):
     """This message is a request to update an entity"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
-    ENTITIES_FIELD_NUMBER: builtins.int
+    ENTITY_FIELD_NUMBER: builtins.int
     @property
-    def entities(self) -> global___EntityType.Entity:
+    def entity(self) -> global___EntityType.Entity:
         """The entity to update"""
         pass
     def __init__(self,
         *,
-        entities: typing.Optional[global___EntityType.Entity] = ...,
+        entity: typing.Optional[global___EntityType.Entity] = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["entities",b"entities"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["entities",b"entities"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["entity",b"entity"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["entity",b"entity"]) -> None: ...
 global___UpdateEntityRequest = UpdateEntityRequest
 
 class GetEntityRequest(google.protobuf.message.Message):
