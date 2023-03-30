@@ -2,10 +2,11 @@ dataclasses-json>=0.5.4
 google-api-core>=2.8.1
 grpcio-reflection>=1.46.3
 grpcio-tools>=1.46.3
-ondewo-client-utils>=0.1.1
-ondewo-logging>=3.2.5
 polling>=0.3.2
 protobuf>=3.20.1
 python-dateutil>=2.8.2
 regex>=2022.6.2
 setuptools>=59.5.0
+
+ondewo-client-utils
+ondewo-logging
