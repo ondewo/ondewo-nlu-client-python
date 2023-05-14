@@ -1,6 +1,13 @@
 # Release History
 
 *****************
+## Release ONDEWO NLU Python Client 4.7.0
+
+### Improvements
+ * Tracking API Version [4.7.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/4.7.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+
+
+*****************
 ## Release ONDEWO NLU Python Client 4.6.0
 
 ### Improvements

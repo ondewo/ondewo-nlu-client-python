@@ -9,6 +9,7 @@ import google.protobuf.internal.containers
 import google.protobuf.internal.enum_type_wrapper
 import google.protobuf.message
 import google.protobuf.struct_pb2
+import google.protobuf.timestamp_pb2
 import google.rpc.status_pb2
 import google.type.latlng_pb2
 import ondewo.nlu.context_pb2
@@ -916,7 +917,9 @@ class Session(google.protobuf.message.Message):
         """The list of all the steps of the session"""
         pass
     @property
-    def session_info(self) -> global___SessionInfo: ...
+    def session_info(self) -> global___SessionInfo:
+        """session information"""
+        pass
     def __init__(self,
         *,
         name: typing.Text = ...,
@@ -934,6 +937,7 @@ class SessionStep(google.protobuf.message.Message):
     DETECT_INTENT_REQUEST_FIELD_NUMBER: builtins.int
     DETECT_INTENT_RESPONSE_FIELD_NUMBER: builtins.int
     CONTEXTS_FIELD_NUMBER: builtins.int
+    TIMESTAMP_FIELD_NUMBER: builtins.int
     name: typing.Text
     """The unique identifier for the given review
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/steps/&lt;session_step_uuid&gt;</code></pre>
@@ -951,15 +955,20 @@ class SessionStep(google.protobuf.message.Message):
     def contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]:
         """The contexts which were active at the beginning of this step"""
         pass
+    @property
+    def timestamp(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Timestamp of session step"""
+        pass
     def __init__(self,
         *,
         name: typing.Text = ...,
         detect_intent_request: typing.Optional[global___DetectIntentRequest] = ...,
         detect_intent_response: typing.Optional[global___DetectIntentResponse] = ...,
         contexts: typing.Optional[typing.Iterable[ondewo.nlu.context_pb2.Context]] = ...,
+        timestamp: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["detect_intent_request",b"detect_intent_request","detect_intent_response",b"detect_intent_response"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["contexts",b"contexts","detect_intent_request",b"detect_intent_request","detect_intent_response",b"detect_intent_response","name",b"name"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["detect_intent_request",b"detect_intent_request","detect_intent_response",b"detect_intent_response","timestamp",b"timestamp"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["contexts",b"contexts","detect_intent_request",b"detect_intent_request","detect_intent_response",b"detect_intent_response","name",b"name","timestamp",b"timestamp"]) -> None: ...
 global___SessionStep = SessionStep
 
 class TrackSessionStepRequest(google.protobuf.message.Message):
@@ -1785,6 +1794,7 @@ class SessionReviewStep(google.protobuf.message.Message):
     CONTEXTS_OUT_FIELD_NUMBER: builtins.int
     QUERY_TEXT_ORIGINAL_FIELD_NUMBER: builtins.int
     PLATFORMS_FIELD_NUMBER: builtins.int
+    TIMESTAMP_FIELD_NUMBER: builtins.int
     name: typing.Text
     """The unique identifier for the given review step
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/reviews/&lt;review_uuid&gt;/sessionreviewsteps/&lt;session_review_step_uuid&gt;</code></pre>
@@ -1820,6 +1830,10 @@ class SessionReviewStep(google.protobuf.message.Message):
     def platforms(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[ondewo.nlu.intent_pb2.Intent.Message.Platform.ValueType]:
         """Messages for each of the Intent.Message.Platform were sent to the user"""
         pass
+    @property
+    def timestamp(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Timestamp of session review step"""
+        pass
     def __init__(self,
         *,
         name: typing.Text = ...,
@@ -1830,9 +1844,10 @@ class SessionReviewStep(google.protobuf.message.Message):
         contexts_out: typing.Optional[typing.Iterable[ondewo.nlu.context_pb2.Context]] = ...,
         query_text_original: typing.Text = ...,
         platforms: typing.Optional[typing.Iterable[ondewo.nlu.intent_pb2.Intent.Message.Platform.ValueType]] = ...,
+        timestamp: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["annotated_usersays",b"annotated_usersays"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["annotated_usersays",b"annotated_usersays","contexts",b"contexts","contexts_out",b"contexts_out","detected_intents",b"detected_intents","language_code",b"language_code","name",b"name","platforms",b"platforms","query_text_original",b"query_text_original"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["annotated_usersays",b"annotated_usersays","timestamp",b"timestamp"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["annotated_usersays",b"annotated_usersays","contexts",b"contexts","contexts_out",b"contexts_out","detected_intents",b"detected_intents","language_code",b"language_code","name",b"name","platforms",b"platforms","query_text_original",b"query_text_original","timestamp",b"timestamp"]) -> None: ...
 global___SessionReviewStep = SessionReviewStep
 
 class DetectedIntent(google.protobuf.message.Message):
