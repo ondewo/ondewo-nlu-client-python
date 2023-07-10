@@ -186,6 +186,7 @@ class DetectIntentRequest(google.protobuf.message.Message):
     QUERY_PARAMS_FIELD_NUMBER: builtins.int
     QUERY_INPUT_FIELD_NUMBER: builtins.int
     INPUT_AUDIO_FIELD_NUMBER: builtins.int
+    TIMESTAMP_FIELD_NUMBER: builtins.int
     session: typing.Text
     """Required. The name of the session this query is sent to. Format:
     `projects/<Project ID>/agent/sessions/<Session ID>`. It's up to the API
@@ -216,15 +217,22 @@ class DetectIntentRequest(google.protobuf.message.Message):
     A single request can contain up to 1 minute of speech audio data.
     """
 
+    @property
+    def timestamp(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Optional. Timestamp to use for the request.
+        This overwrites the server side timestamp.
+        """
+        pass
     def __init__(self,
         *,
         session: typing.Text = ...,
         query_params: typing.Optional[global___QueryParameters] = ...,
         query_input: typing.Optional[global___QueryInput] = ...,
         input_audio: builtins.bytes = ...,
+        timestamp: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["query_input",b"query_input","query_params",b"query_params"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["input_audio",b"input_audio","query_input",b"query_input","query_params",b"query_params","session",b"session"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["query_input",b"query_input","query_params",b"query_params","timestamp",b"timestamp"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["input_audio",b"input_audio","query_input",b"query_input","query_params",b"query_params","session",b"session","timestamp",b"timestamp"]) -> None: ...
 global___DetectIntentRequest = DetectIntentRequest
 
 class DetectIntentResponse(google.protobuf.message.Message):
