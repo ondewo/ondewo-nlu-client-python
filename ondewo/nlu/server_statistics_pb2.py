@@ -4,9 +4,8 @@
 """Generated protocol buffer code."""
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import descriptor_pool as _descriptor_pool
-from google.protobuf import message as _message
-from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
+from google.protobuf.internal import builder as _builder
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -19,19 +18,10 @@ from ondewo.nlu import common_pb2 as ondewo_dot_nlu_dot_common__pb2
 
 DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\"ondewo/nlu/server_statistics.proto\x12\nondewo.nlu\x1a\x1cgoogle/api/annotations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x17ondewo/nlu/common.proto\"-\n\x1aGetUserProjectCountRequest\x12\x0f\n\x07user_id\x18\x01 \x01(\t2\xd5\x02\n\x10ServerStatistics\x12\\\n\x0fGetProjectCount\x12\x16.google.protobuf.Empty\x1a\x18.ondewo.nlu.StatResponse\"\x17\x82\xd3\xe4\x93\x02\x11\x12\x0f/projects:count\x12\x8a\x01\n\x13GetUserProjectCount\x12&.ondewo.nlu.GetUserProjectCountRequest\x1a\x18.ondewo.nlu.StatResponse\"1\x82\xd3\xe4\x93\x02+\x12)/users/{user_identifier=*}/projects:count\x12V\n\x0cGetUserCount\x12\x16.google.protobuf.Empty\x1a\x18.ondewo.nlu.StatResponse\"\x14\x82\xd3\xe4\x93\x02\x0e\x12\x0c/users:countb\x06proto3')
 
-
-
-_GETUSERPROJECTCOUNTREQUEST = DESCRIPTOR.message_types_by_name['GetUserProjectCountRequest']
-GetUserProjectCountRequest = _reflection.GeneratedProtocolMessageType('GetUserProjectCountRequest', (_message.Message,), {
-  'DESCRIPTOR' : _GETUSERPROJECTCOUNTREQUEST,
-  '__module__' : 'ondewo.nlu.server_statistics_pb2'
-  # @@protoc_insertion_point(class_scope:ondewo.nlu.GetUserProjectCountRequest)
-  })
-_sym_db.RegisterMessage(GetUserProjectCountRequest)
-
-_SERVERSTATISTICS = DESCRIPTOR.services_by_name['ServerStatistics']
+_globals = globals()
+_builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
+_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'ondewo.nlu.server_statistics_pb2', _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
-
   DESCRIPTOR._options = None
   _SERVERSTATISTICS.methods_by_name['GetProjectCount']._options = None
   _SERVERSTATISTICS.methods_by_name['GetProjectCount']._serialized_options = b'\202\323\344\223\002\021\022\017/projects:count'
@@ -39,8 +29,8 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _SERVERSTATISTICS.methods_by_name['GetUserProjectCount']._serialized_options = b'\202\323\344\223\002+\022)/users/{user_identifier=*}/projects:count'
   _SERVERSTATISTICS.methods_by_name['GetUserCount']._options = None
   _SERVERSTATISTICS.methods_by_name['GetUserCount']._serialized_options = b'\202\323\344\223\002\016\022\014/users:count'
-  _GETUSERPROJECTCOUNTREQUEST._serialized_start=134
-  _GETUSERPROJECTCOUNTREQUEST._serialized_end=179
-  _SERVERSTATISTICS._serialized_start=182
-  _SERVERSTATISTICS._serialized_end=523
+  _globals['_GETUSERPROJECTCOUNTREQUEST']._serialized_start=134
+  _globals['_GETUSERPROJECTCOUNTREQUEST']._serialized_end=179
+  _globals['_SERVERSTATISTICS']._serialized_start=182
+  _globals['_SERVERSTATISTICS']._serialized_end=523
 # @@protoc_insertion_point(module_scope)
