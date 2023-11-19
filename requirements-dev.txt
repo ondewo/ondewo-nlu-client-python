@@ -1,6 +1,9 @@
+-r requirements.txt
 mypy
 pytest
 flake8
-Faker>=13.13.0
-tqdm>=4.64.0
+Faker
+tqdm
 mypy-protobuf
+protobuf
+types-protobuf
