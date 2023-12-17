@@ -25,8 +25,13 @@ from ondewo.nlu.core.services_interface import ServicesInterface
 from ondewo.nlu.user_pb2 import (
     CreateServerRoleRequest,
     CreateUserRequest,
+    DeleteAllUserPreferencesRequest,
     DeleteServerRoleRequest,
+    DeleteUserPreferencesRequest,
+    DeleteUserPreferencesResponse,
     GetServerRoleRequest,
+    GetUserPreferencesRequest,
+    GetUserPreferencesResponse,
     GetUserRequest,
     ListServerPermissionsRequest,
     ListServerPermissionsResponse,
@@ -38,6 +43,8 @@ from ondewo.nlu.user_pb2 import (
     LoginRequest,
     LoginResponse,
     ServerRole,
+    SetUserPreferencesRequest,
+    SetUserPreferencesResponse,
     UpdateServerRoleRequest,
     UpdateUserRequest,
     User,
@@ -138,4 +145,23 @@ class Users(ServicesInterface):
         response: ListNotificationsResponse = self.stub.SetNotificationsReadStatus(request, metadata=self.metadata)
         return response
 
-# endregion notifications
+    # endregion notifications
+
+    # region user preferences
+    def get_user_preferences(self, request: GetUserPreferencesRequest) -> GetUserPreferencesResponse:
+        response: GetUserPreferencesResponse = self.stub.GetUserPreferences(request, metadata=self.metadata)
+        return response
+
+    def set_user_preferences(self, request: SetUserPreferencesRequest) -> SetUserPreferencesResponse:
+        response: SetUserPreferencesResponse = self.stub.SetUserPreferences(request, metadata=self.metadata)
+        return response
+
+    def delete_user_preferences(self, request: DeleteUserPreferencesRequest) -> DeleteUserPreferencesResponse:
+        response: DeleteUserPreferencesResponse = self.stub.DeleteUserPreferences(request, metadata=self.metadata)
+        return response
+
+    def delete_all_user_preferences(self, request: DeleteAllUserPreferencesRequest) -> DeleteUserPreferencesResponse:
+        response: DeleteUserPreferencesResponse = self.stub.DeleteAllUserPreferences(request, metadata=self.metadata)
+        return response
+
+    # endregion user preferences

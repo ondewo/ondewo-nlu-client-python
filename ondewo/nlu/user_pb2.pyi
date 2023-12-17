@@ -23,6 +23,7 @@ import google.protobuf.internal.containers
 import google.protobuf.internal.enum_type_wrapper
 import google.protobuf.message
 import google.protobuf.timestamp_pb2
+import ondewo.nlu.common_pb2
 import ondewo.nlu.project_role_pb2
 import sys
 import typing
@@ -79,6 +80,7 @@ class User(google.protobuf.message.Message):
     DISPLAY_NAME_FIELD_NUMBER: builtins.int
     SERVER_ROLE_ID_FIELD_NUMBER: builtins.int
     USER_EMAIL_FIELD_NUMBER: builtins.int
+    USER_PROFILE_PICTURE_FIELD_NUMBER: builtins.int
     CREATED_AT_FIELD_NUMBER: builtins.int
     MODIFIED_AT_FIELD_NUMBER: builtins.int
     CREATED_BY_FIELD_NUMBER: builtins.int
@@ -93,6 +95,8 @@ class User(google.protobuf.message.Message):
     """server role type of the given user. If nothing is provided, the user is set to USER (minimum access)"""
     user_email: builtins.str
     """user e-mail should be a valid e-mail and unique"""
+    user_profile_picture: builtins.bytes
+    """user profile picture"""
     @property
     def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Creation date and time. Read-only field."""
@@ -110,13 +114,14 @@ class User(google.protobuf.message.Message):
         display_name: builtins.str = ...,
         server_role_id: builtins.int = ...,
         user_email: builtins.str = ...,
+        user_profile_picture: builtins.bytes = ...,
         created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         created_by: builtins.str = ...,
         modified_by: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "modified_at", b"modified_at", "modified_by", b"modified_by", "server_role_id", b"server_role_id", "user_email", b"user_email", "user_id", b"user_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "modified_at", b"modified_at", "modified_by", b"modified_by", "server_role_id", b"server_role_id", "user_email", b"user_email", "user_id", b"user_id", "user_profile_picture", b"user_profile_picture"]) -> None: ...
 
 global___User = User
 
@@ -607,3 +612,245 @@ class LoginResponse(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["auth_token", b"auth_token", "user", b"user"]) -> None: ...
 
 global___LoginResponse = LoginResponse
+
+@typing_extensions.final
+class GetUserPreferencesRequest(google.protobuf.message.Message):
+    """Request to get user preferences."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_NAME_FIELD_NUMBER: builtins.int
+    KEYS_FIELD_NUMBER: builtins.int
+    user_name: builtins.str
+    """The name of the user.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre>
+    """
+    @property
+    def keys(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Specific keys to retrieve from user preferences."""
+    def __init__(
+        self,
+        *,
+        user_name: builtins.str = ...,
+        keys: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["keys", b"keys", "user_name", b"user_name"]) -> None: ...
+
+global___GetUserPreferencesRequest = GetUserPreferencesRequest
+
+@typing_extensions.final
+class GetUserPreferencesResponse(google.protobuf.message.Message):
+    """Response containing user preferences."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_NAME_FIELD_NUMBER: builtins.int
+    KEY_VALUE_PAIRS_FIELD_NUMBER: builtins.int
+    ERROR_MESSAGE_FIELD_NUMBER: builtins.int
+    user_name: builtins.str
+    """The name of the user.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre>
+    """
+    @property
+    def key_value_pairs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.common_pb2.KeyValuePair]:
+        """List of key-value pairs representing user preferences."""
+    error_message: builtins.str
+    """error message if there are any."""
+    def __init__(
+        self,
+        *,
+        user_name: builtins.str = ...,
+        key_value_pairs: collections.abc.Iterable[ondewo.nlu.common_pb2.KeyValuePair] | None = ...,
+        error_message: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["error_message", b"error_message", "key_value_pairs", b"key_value_pairs", "user_name", b"user_name"]) -> None: ...
+
+global___GetUserPreferencesResponse = GetUserPreferencesResponse
+
+@typing_extensions.final
+class SetUserPreferencesRequest(google.protobuf.message.Message):
+    """Request to set or update user preferences."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_NAME_FIELD_NUMBER: builtins.int
+    KEY_VALUE_PAIRS_FIELD_NUMBER: builtins.int
+    user_name: builtins.str
+    """The name of the user.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre>
+    """
+    @property
+    def key_value_pairs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.common_pb2.KeyValuePair]:
+        """List of key-value pairs to set or update."""
+    def __init__(
+        self,
+        *,
+        user_name: builtins.str = ...,
+        key_value_pairs: collections.abc.Iterable[ondewo.nlu.common_pb2.KeyValuePair] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["key_value_pairs", b"key_value_pairs", "user_name", b"user_name"]) -> None: ...
+
+global___SetUserPreferencesRequest = SetUserPreferencesRequest
+
+@typing_extensions.final
+class SetUserPreferencesResponse(google.protobuf.message.Message):
+    """Response to set or update user preferences."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_NAME_FIELD_NUMBER: builtins.int
+    KEYS_FIELD_NUMBER: builtins.int
+    ERROR_MESSAGE_FIELD_NUMBER: builtins.int
+    user_name: builtins.str
+    """The name of the user.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre>
+    """
+    @property
+    def keys(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """List of keys to delete from user preferences."""
+    error_message: builtins.str
+    """error message if there are any."""
+    def __init__(
+        self,
+        *,
+        user_name: builtins.str = ...,
+        keys: collections.abc.Iterable[builtins.str] | None = ...,
+        error_message: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["error_message", b"error_message", "keys", b"keys", "user_name", b"user_name"]) -> None: ...
+
+global___SetUserPreferencesResponse = SetUserPreferencesResponse
+
+@typing_extensions.final
+class DeleteUserPreferencesRequest(google.protobuf.message.Message):
+    """Request to delete specific user preferences."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_NAME_FIELD_NUMBER: builtins.int
+    KEYS_FIELD_NUMBER: builtins.int
+    user_name: builtins.str
+    """The name of the user.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre>
+    """
+    @property
+    def keys(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """List of keys to delete from user preferences."""
+    def __init__(
+        self,
+        *,
+        user_name: builtins.str = ...,
+        keys: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["keys", b"keys", "user_name", b"user_name"]) -> None: ...
+
+global___DeleteUserPreferencesRequest = DeleteUserPreferencesRequest
+
+@typing_extensions.final
+class DeleteUserPreferencesResponse(google.protobuf.message.Message):
+    """Response to delete specific user preferences."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_NAME_FIELD_NUMBER: builtins.int
+    KEYS_FIELD_NUMBER: builtins.int
+    ERROR_MESSAGE_FIELD_NUMBER: builtins.int
+    user_name: builtins.str
+    """The name of the user.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre>
+    """
+    @property
+    def keys(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """List of keys to delete from user preferences."""
+    error_message: builtins.str
+    """error message if there are any."""
+    def __init__(
+        self,
+        *,
+        user_name: builtins.str = ...,
+        keys: collections.abc.Iterable[builtins.str] | None = ...,
+        error_message: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["error_message", b"error_message", "keys", b"keys", "user_name", b"user_name"]) -> None: ...
+
+global___DeleteUserPreferencesResponse = DeleteUserPreferencesResponse
+
+@typing_extensions.final
+class DeleteAllUserPreferencesRequest(google.protobuf.message.Message):
+    """Request to delete all user preferences with an optional filter substring."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_NAME_FIELD_NUMBER: builtins.int
+    REGEX_FILTER_FIELD_NUMBER: builtins.int
+    user_name: builtins.str
+    """The name of the user.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre>
+    """
+    regex_filter: builtins.str
+    """Optional: Only delete keys that match the provided regular expression.
+    If user does not add regex_filter, then all user preferences will be deleted
+    Example:
+    Only delete keys starting with DE: <code>^DE_</code>
+    Only delete keys matching: <code>.*user.*</code>
+    """
+    def __init__(
+        self,
+        *,
+        user_name: builtins.str = ...,
+        regex_filter: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["regex_filter", b"regex_filter", "user_name", b"user_name"]) -> None: ...
+
+global___DeleteAllUserPreferencesRequest = DeleteAllUserPreferencesRequest
+
+@typing_extensions.final
+class ListUserPreferencesRequest(google.protobuf.message.Message):
+    """Request to list all user preferences for a specific user."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_NAME_FIELD_NUMBER: builtins.int
+    REGEX_FILTER_FIELD_NUMBER: builtins.int
+    user_name: builtins.str
+    """The name of the user.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre>
+    """
+    regex_filter: builtins.str
+    """Optional: Only list keys that match the provided regular expression"""
+    def __init__(
+        self,
+        *,
+        user_name: builtins.str = ...,
+        regex_filter: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["regex_filter", b"regex_filter", "user_name", b"user_name"]) -> None: ...
+
+global___ListUserPreferencesRequest = ListUserPreferencesRequest
+
+@typing_extensions.final
+class ListUserPreferencesResponse(google.protobuf.message.Message):
+    """Response containing a list of user preferences for a specific user with an optional filter substring."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_NAME_FIELD_NUMBER: builtins.int
+    KEY_VALUE_PAIRS_FIELD_NUMBER: builtins.int
+    ERROR_MESSAGE_FIELD_NUMBER: builtins.int
+    user_name: builtins.str
+    """The name of the user."""
+    @property
+    def key_value_pairs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.common_pb2.KeyValuePair]:
+        """List of key-value pairs representing user preferences."""
+    error_message: builtins.str
+    """error message if there are any."""
+    def __init__(
+        self,
+        *,
+        user_name: builtins.str = ...,
+        key_value_pairs: collections.abc.Iterable[ondewo.nlu.common_pb2.KeyValuePair] | None = ...,
+        error_message: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["error_message", b"error_message", "key_value_pairs", b"key_value_pairs", "user_name", b"user_name"]) -> None: ...
+
+global___ListUserPreferencesResponse = ListUserPreferencesResponse

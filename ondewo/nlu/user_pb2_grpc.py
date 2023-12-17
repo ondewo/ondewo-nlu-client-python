@@ -107,6 +107,26 @@ class UsersStub(object):
                 request_serializer=ondewo_dot_nlu_dot_common__pb2.SetNotificationsReadStatusRequest.SerializeToString,
                 response_deserializer=ondewo_dot_nlu_dot_common__pb2.ListNotificationsResponse.FromString,
                 )
+        self.GetUserPreferences = channel.unary_unary(
+                '/ondewo.nlu.Users/GetUserPreferences',
+                request_serializer=ondewo_dot_nlu_dot_user__pb2.GetUserPreferencesRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_user__pb2.GetUserPreferencesResponse.FromString,
+                )
+        self.SetUserPreferences = channel.unary_unary(
+                '/ondewo.nlu.Users/SetUserPreferences',
+                request_serializer=ondewo_dot_nlu_dot_user__pb2.SetUserPreferencesRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_user__pb2.SetUserPreferencesResponse.FromString,
+                )
+        self.DeleteUserPreferences = channel.unary_unary(
+                '/ondewo.nlu.Users/DeleteUserPreferences',
+                request_serializer=ondewo_dot_nlu_dot_user__pb2.DeleteUserPreferencesRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_user__pb2.DeleteUserPreferencesResponse.FromString,
+                )
+        self.DeleteAllUserPreferences = channel.unary_unary(
+                '/ondewo.nlu.Users/DeleteAllUserPreferences',
+                request_serializer=ondewo_dot_nlu_dot_user__pb2.DeleteAllUserPreferencesRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_user__pb2.DeleteUserPreferencesResponse.FromString,
+                )
 
 
 class UsersServicer(object):
@@ -239,6 +259,34 @@ class UsersServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetUserPreferences(self, request, context):
+        """Retrieves user preferences based on the provided request.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def SetUserPreferences(self, request, context):
+        """Sets or updates user preferences based on the provided request.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteUserPreferences(self, request, context):
+        """Deletes specific user preferences based on the provided request.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteAllUserPreferences(self, request, context):
+        """Deletes all user preferences for a specific user, optionally filtered by a substring.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_UsersServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -331,6 +379,26 @@ def add_UsersServicer_to_server(servicer, server):
                     servicer.SetNotificationsReadStatus,
                     request_deserializer=ondewo_dot_nlu_dot_common__pb2.SetNotificationsReadStatusRequest.FromString,
                     response_serializer=ondewo_dot_nlu_dot_common__pb2.ListNotificationsResponse.SerializeToString,
+            ),
+            'GetUserPreferences': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetUserPreferences,
+                    request_deserializer=ondewo_dot_nlu_dot_user__pb2.GetUserPreferencesRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_user__pb2.GetUserPreferencesResponse.SerializeToString,
+            ),
+            'SetUserPreferences': grpc.unary_unary_rpc_method_handler(
+                    servicer.SetUserPreferences,
+                    request_deserializer=ondewo_dot_nlu_dot_user__pb2.SetUserPreferencesRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_user__pb2.SetUserPreferencesResponse.SerializeToString,
+            ),
+            'DeleteUserPreferences': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteUserPreferences,
+                    request_deserializer=ondewo_dot_nlu_dot_user__pb2.DeleteUserPreferencesRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_user__pb2.DeleteUserPreferencesResponse.SerializeToString,
+            ),
+            'DeleteAllUserPreferences': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteAllUserPreferences,
+                    request_deserializer=ondewo_dot_nlu_dot_user__pb2.DeleteAllUserPreferencesRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_user__pb2.DeleteUserPreferencesResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -646,5 +714,73 @@ class Users(object):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Users/SetNotificationsReadStatus',
             ondewo_dot_nlu_dot_common__pb2.SetNotificationsReadStatusRequest.SerializeToString,
             ondewo_dot_nlu_dot_common__pb2.ListNotificationsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetUserPreferences(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Users/GetUserPreferences',
+            ondewo_dot_nlu_dot_user__pb2.GetUserPreferencesRequest.SerializeToString,
+            ondewo_dot_nlu_dot_user__pb2.GetUserPreferencesResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def SetUserPreferences(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Users/SetUserPreferences',
+            ondewo_dot_nlu_dot_user__pb2.SetUserPreferencesRequest.SerializeToString,
+            ondewo_dot_nlu_dot_user__pb2.SetUserPreferencesResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteUserPreferences(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Users/DeleteUserPreferences',
+            ondewo_dot_nlu_dot_user__pb2.DeleteUserPreferencesRequest.SerializeToString,
+            ondewo_dot_nlu_dot_user__pb2.DeleteUserPreferencesResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteAllUserPreferences(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Users/DeleteAllUserPreferences',
+            ondewo_dot_nlu_dot_user__pb2.DeleteAllUserPreferencesRequest.SerializeToString,
+            ondewo_dot_nlu_dot_user__pb2.DeleteUserPreferencesResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

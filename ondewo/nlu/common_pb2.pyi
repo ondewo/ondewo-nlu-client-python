@@ -622,3 +622,44 @@ class SetNotificationsReadStatusRequest(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["flagged", b"flagged", "notification_name", b"notification_name"]) -> None: ...
 
 global___SetNotificationsReadStatusRequest = SetNotificationsReadStatusRequest
+
+@typing_extensions.final
+class KeyValuePair(google.protobuf.message.Message):
+    """Key-Value pair message, where the value can be one of various types (int, float, double, string, etc.)."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    KEY_FIELD_NUMBER: builtins.int
+    INT_VALUE_FIELD_NUMBER: builtins.int
+    FLOAT_VALUE_FIELD_NUMBER: builtins.int
+    DOUBLE_VALUE_FIELD_NUMBER: builtins.int
+    STRING_VALUE_FIELD_NUMBER: builtins.int
+    CREATED_AT_FIELD_NUMBER: builtins.int
+    key: builtins.str
+    """The key of the key-value pair."""
+    int_value: builtins.int
+    """The integer value (if applicable)."""
+    float_value: builtins.float
+    """The float value (if applicable)."""
+    double_value: builtins.float
+    """The double value (if applicable)."""
+    string_value: builtins.str
+    """The string value (if applicable)."""
+    @property
+    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """The timestamp value (if applicable)."""
+    def __init__(
+        self,
+        *,
+        key: builtins.str = ...,
+        int_value: builtins.int = ...,
+        float_value: builtins.float = ...,
+        double_value: builtins.float = ...,
+        string_value: builtins.str = ...,
+        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "double_value", b"double_value", "float_value", b"float_value", "int_value", b"int_value", "string_value", b"string_value", "value", b"value"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "double_value", b"double_value", "float_value", b"float_value", "int_value", b"int_value", "key", b"key", "string_value", b"string_value", "value", b"value"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["value", b"value"]) -> typing_extensions.Literal["int_value", "float_value", "double_value", "string_value", "created_at"] | None: ...
+
+global___KeyValuePair = KeyValuePair
