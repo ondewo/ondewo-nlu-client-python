@@ -15,7 +15,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-Modifications Copyright 2021 ONDEWO GmbH
+Modifications Copyright 2020-2023 ONDEWO GmbH
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -35,6 +35,7 @@ import google.protobuf.descriptor
 import google.protobuf.field_mask_pb2
 import google.protobuf.internal.containers
 import google.protobuf.message
+import google.protobuf.timestamp_pb2
 import sys
 
 if sys.version_info >= (3, 8):
@@ -58,6 +59,10 @@ class Context(google.protobuf.message.Message):
         DISPLAY_NAME_FIELD_NUMBER: builtins.int
         VALUE_FIELD_NUMBER: builtins.int
         VALUE_ORIGINAL_FIELD_NUMBER: builtins.int
+        CREATED_AT_FIELD_NUMBER: builtins.int
+        MODIFIED_AT_FIELD_NUMBER: builtins.int
+        CREATED_BY_FIELD_NUMBER: builtins.int
+        MODIFIED_BY_FIELD_NUMBER: builtins.int
         name: builtins.str
         """The name of the context parameter."""
         display_name: builtins.str
@@ -66,6 +71,16 @@ class Context(google.protobuf.message.Message):
         """The value(s) of the context parameter."""
         value_original: builtins.str
         """The original value(s) of the context parameter."""
+        @property
+        def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Creation date and time. Read-only field."""
+        @property
+        def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Modification date and time. Read-only field."""
+        created_by: builtins.str
+        """User id in form of a valid UUID."""
+        modified_by: builtins.str
+        """User id in form of a valid UUID."""
         def __init__(
             self,
             *,
@@ -73,8 +88,13 @@ class Context(google.protobuf.message.Message):
             display_name: builtins.str = ...,
             value: builtins.str = ...,
             value_original: builtins.str = ...,
+            created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            created_by: builtins.str = ...,
+            modified_by: builtins.str = ...,
         ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["display_name", b"display_name", "name", b"name", "value", b"value", "value_original", b"value_original"]) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "value", b"value", "value_original", b"value_original"]) -> None: ...
 
     @typing_extensions.final
     class ParametersEntry(google.protobuf.message.Message):
@@ -98,6 +118,10 @@ class Context(google.protobuf.message.Message):
     LIFESPAN_COUNT_FIELD_NUMBER: builtins.int
     PARAMETERS_FIELD_NUMBER: builtins.int
     LIFESPAN_TIME_FIELD_NUMBER: builtins.int
+    CREATED_AT_FIELD_NUMBER: builtins.int
+    MODIFIED_AT_FIELD_NUMBER: builtins.int
+    CREATED_BY_FIELD_NUMBER: builtins.int
+    MODIFIED_BY_FIELD_NUMBER: builtins.int
     name: builtins.str
     """Required. The display name of the context (must be unique per session).
 
@@ -125,6 +149,16 @@ class Context(google.protobuf.message.Message):
         """
     lifespan_time: builtins.float
     """Optional. The time span in seconds after which the context expires. By default it does not expire."""
+    @property
+    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Creation date and time. Read-only field."""
+    @property
+    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Modification date and time. Read-only field."""
+    created_by: builtins.str
+    """User id in form of a valid UUID."""
+    modified_by: builtins.str
+    """User id in form of a valid UUID."""
     def __init__(
         self,
         *,
@@ -132,8 +166,13 @@ class Context(google.protobuf.message.Message):
         lifespan_count: builtins.int = ...,
         parameters: collections.abc.Mapping[builtins.str, global___Context.Parameter] | None = ...,
         lifespan_time: builtins.float = ...,
+        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        created_by: builtins.str = ...,
+        modified_by: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["lifespan_count", b"lifespan_count", "lifespan_time", b"lifespan_time", "name", b"name", "parameters", b"parameters"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "created_by", b"created_by", "lifespan_count", b"lifespan_count", "lifespan_time", b"lifespan_time", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "parameters", b"parameters"]) -> None: ...
 
 global___Context = Context
 

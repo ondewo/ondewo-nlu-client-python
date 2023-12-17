@@ -1,4 +1,4 @@
-# Copyright 2021 ONDEWO GmbH
+# Copyright 2021-2023 ONDEWO GmbH
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,12 +16,36 @@ from typing import Iterator
 from google.protobuf.empty_pb2 import Empty
 
 from ondewo.nlu.core.services_interface import ServicesInterface
-from ondewo.nlu.session_pb2 import ListSessionsResponse, \
-    ListSessionsRequest, DetectIntentResponse, DetectIntentRequest, Session, GetSessionRequest, \
-    ListSessionReviewsRequest, ListSessionReviewsResponse, SessionReview, GetLatestSessionReviewRequest, \
-    GetSessionReviewRequest, CreateSessionReviewRequest, StreamingDetectIntentRequest, \
-    StreamingDetectIntentResponse, TrackSessionStepRequest, DeleteSessionRequest, ListSessionLabelsRequest, \
-    ListSessionLabelsResponse, AddSessionLabelsRequest, CreateSessionRequest, DeleteSessionLabelsRequest
+from ondewo.nlu.session_pb2 import (
+    AddAudioFilesRequest,
+    AddAudioFilesResponse,
+    AddSessionLabelsRequest,
+    AudioFileResource,
+    CreateSessionRequest,
+    CreateSessionReviewRequest,
+    DeleteAudioFilesRequest,
+    DeleteSessionLabelsRequest,
+    DeleteSessionRequest,
+    DetectIntentRequest,
+    DetectIntentResponse,
+    GetAudioFileOfSessionRequest,
+    GetAudioFilesRequest,
+    GetAudioFilesResponse,
+    GetLatestSessionReviewRequest,
+    GetSessionRequest,
+    GetSessionReviewRequest,
+    ListSessionLabelsRequest,
+    ListSessionLabelsResponse,
+    ListSessionReviewsRequest,
+    ListSessionReviewsResponse,
+    ListSessionsRequest,
+    ListSessionsResponse,
+    Session,
+    SessionReview,
+    StreamingDetectIntentRequest,
+    StreamingDetectIntentResponse,
+    TrackSessionStepRequest,
+)
 from ondewo.nlu.session_pb2_grpc import SessionsStub
 
 
@@ -42,11 +66,12 @@ class Sessions(ServicesInterface):
         return response
 
     def streaming_detect_intent(
-            self,
-            request_iterator: Iterator[StreamingDetectIntentRequest],
+        self,
+        request_iterator: Iterator[StreamingDetectIntentRequest],
     ) -> Iterator[StreamingDetectIntentResponse]:
         response_iterator: Iterator[StreamingDetectIntentResponse] = self.stub.StreamingDetectIntent(
-            request_iterator, metadata=self.metadata)
+            request_iterator, metadata=self.metadata
+        )
         return response_iterator
 
     def list_sessions(self, request: ListSessionsRequest) -> ListSessionsResponse:
@@ -96,3 +121,21 @@ class Sessions(ServicesInterface):
     def create_session_review(self, request: CreateSessionReviewRequest) -> SessionReview:
         response: SessionReview = self.stub.CreateSessionReview(request, metadata=self.metadata)
         return response
+
+    # region audio handling for sessions
+    def get_audio_files(self, request: GetAudioFilesRequest) -> GetAudioFilesResponse:
+        response: GetAudioFilesResponse = self.stub.GetAudioFiles(request, metadata=self.metadata)
+        return response
+
+    def add_audio_files(self, request: AddAudioFilesRequest) -> AddAudioFilesResponse:
+        response: AddAudioFilesResponse = self.stub.AddAudioFiles(request, metadata=self.metadata)
+        return response
+
+    def delete_audio_files(self, request: DeleteAudioFilesRequest) -> Empty:
+        response: Empty = self.stub.DeleteAudioFiles(request, metadata=self.metadata)
+        return response
+
+    def get_audio_file_of_session(self, request: GetAudioFileOfSessionRequest) -> AudioFileResource:
+        response: AudioFileResource = self.stub.GetAudioFileOfSession(request, metadata=self.metadata)
+        return response
+    # endregion audio handling for sessions

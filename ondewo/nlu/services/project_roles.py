@@ -1,4 +1,4 @@
-# Copyright 2021 ONDEWO GmbH
+# Copyright 2021-2023 ONDEWO GmbH
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,8 +16,15 @@
 from google.protobuf.empty_pb2 import Empty
 
 from ondewo.nlu.core.services_interface import ServicesInterface
-from ondewo.nlu.project_role_pb2 import ProjectRole, CreateProjectRoleRequest, GetProjectRoleRequest, \
-    DeleteProjectRoleRequest, UpdateProjectRoleRequest, ListProjectRolesRequest, ListProjectRolesResponse
+from ondewo.nlu.project_role_pb2 import (
+    CreateProjectRoleRequest,
+    DeleteProjectRoleRequest,
+    GetProjectRoleRequest,
+    ListProjectRolesRequest,
+    ListProjectRolesResponse,
+    ProjectRole,
+    UpdateProjectRoleRequest,
+)
 from ondewo.nlu.project_role_pb2_grpc import ProjectRolesStub
 
 

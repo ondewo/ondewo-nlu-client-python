@@ -1,4 +1,4 @@
-# Copyright 2021 ONDEWO GmbH
+# Copyright 2021-2023 ONDEWO GmbH
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,7 +15,10 @@
 
 from ondewo.nlu.client_config import ClientConfig
 from ondewo.nlu.services.users import Users
-from ondewo.nlu.user_pb2 import LoginRequest, LoginResponse
+from ondewo.nlu.user_pb2 import (
+    LoginRequest,
+    LoginResponse,
+)
 
 
 def login(config: ClientConfig, use_secure_channel: bool) -> str:

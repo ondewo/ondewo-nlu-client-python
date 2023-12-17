@@ -1,4 +1,4 @@
-# Copyright 2021 ONDEWO GmbH
+# Copyright 2021-2023 ONDEWO GmbH
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ class ClientConfig(BaseClientConfig):
     Attributes:
         http_token: str ... the token required for getting past nginx
         user_name: str ... the user name for ONDEWO NLU services (e.g., testuser@ondewo.com)
-        passwort: str ... the password for ONDEWO NLU services
+        password: str ... the password for ONDEWO NLU services
 
     """
     http_token: str = ''

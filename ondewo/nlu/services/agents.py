@@ -1,4 +1,4 @@
-# Copyright 2021 ONDEWO GmbH
+# Copyright 2021-2023 ONDEWO GmbH
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,21 +16,68 @@
 from google.protobuf.empty_pb2 import Empty
 
 from ondewo.nlu import operations_pb2
-from ondewo.nlu.agent_pb2 import Agent, CreateAgentRequest, GetAgentRequest, UpdateAgentRequest, \
-    DeleteAgentRequest, TrainAgentRequest, ExportAgentRequest, GetAgentStatisticsRequest, \
-    GetAgentStatisticsResponse, ImportAgentRequest, RestoreAgentRequest, OptimizeRankingMatchRequest, \
-    ListAgentsOfUserResponse, ListAgentsResponse, ListAgentsRequest, AddUserToProjectRequest, \
-    RemoveUserFromProjectRequest, ListUsersInProjectResponse, ListUsersInProjectRequest, \
-    GetPlatformInfoResponse, ListProjectPermissionsRequest, ListProjectPermissionsResponse, \
-    BuildCacheRequest, SetAgentStatusRequest, SetResourcesRequest, DeleteResourcesRequest, \
-    ExportResourcesRequest, ExportResourcesResponse, ExportBenchmarkAgentRequest, GetModelStatusesRequest, \
-    GetModelStatusesResponse, GetPlatformMappingRequest, PlatformMapping, FullTextSearchRequest, \
-    FullTextSearchResponseEntity, FullTextSearchResponseEntityType, FullTextSearchResponseEntitySynonym, \
-    FullTextSearchResponseIntent, FullTextSearchResponseIntentContextIn, FullTextSearchResponseIntentContextOut, \
-    FullTextSearchResponseIntentUsersays, FullTextSearchResponseIntentTags, FullTextSearchResponseIntentResponse, \
-    FullTextSearchResponseIntentParameters, ReindexAgentRequest, GetSessionsStatisticsRequest, \
-    GetSessionsStatisticsResponse
+from ondewo.nlu.agent_pb2 import (
+    AddUserToProjectRequest,
+    Agent,
+    BuildCacheRequest,
+    CreateAgentRequest,
+    DeleteAgentRequest,
+    DeleteResourcesRequest,
+    ExportAgentRequest,
+    ExportBenchmarkAgentRequest,
+    ExportResourcesRequest,
+    ExportResourcesResponse,
+    FullTextSearchRequest,
+    FullTextSearchResponseEntity,
+    FullTextSearchResponseEntitySynonym,
+    FullTextSearchResponseEntityType,
+    FullTextSearchResponseIntent,
+    FullTextSearchResponseIntentContextIn,
+    FullTextSearchResponseIntentContextOut,
+    FullTextSearchResponseIntentParameters,
+    FullTextSearchResponseIntentResponse,
+    FullTextSearchResponseIntentTags,
+    FullTextSearchResponseIntentUsersays,
+    GetAgentRequest,
+    GetAgentStatisticsRequest,
+    GetAgentStatisticsResponse,
+    GetModelStatusesRequest,
+    GetModelStatusesResponse,
+    GetPlatformInfoResponse,
+    GetPlatformMappingRequest,
+    GetSessionsStatisticsRequest,
+    GetSessionsStatisticsResponse,
+    ImportAgentRequest,
+    ListAgentsOfUserResponse,
+    ListAgentsRequest,
+    ListAgentsResponse,
+    ListProjectPermissionsRequest,
+    ListProjectPermissionsResponse,
+    ListUsersInProjectRequest,
+    ListUsersInProjectResponse,
+    OptimizeRankingMatchRequest,
+    PlatformMapping,
+    ReindexAgentRequest,
+    RemoveUserFromProjectRequest,
+    RestoreAgentRequest,
+    SetAgentStatusRequest,
+    SetResourcesRequest,
+    TrainAgentRequest,
+    UpdateAgentRequest,
+)
 from ondewo.nlu.agent_pb2_grpc import AgentsStub
+from ondewo.nlu.ccai_project_pb2 import (
+    CcaiProject,
+    CreateCcaiProjectRequest,
+    CreateCcaiProjectResponse,
+    DeleteCcaiProjectRequest,
+    DeleteCcaiProjectResponse,
+    GetCcaiProjectRequest,
+    ListCcaiProjectsRequest,
+    ListCcaiProjectsResponse,
+    UpdateCcaiProjectRequest,
+    UpdateCcaiProjectResponse,
+)
 from ondewo.nlu.core.services_interface import ServicesInterface
 
 
@@ -94,8 +141,10 @@ class Agents(ServicesInterface):
         response: GetPlatformInfoResponse = self.stub.GetPlatformInfo(Empty(), metadata=self.metadata)
         return response
 
-    def list_project_permissions(self,
-                                 request: ListProjectPermissionsRequest) -> ListProjectPermissionsResponse:
+    def list_project_permissions(
+        self,
+        request: ListProjectPermissionsRequest
+    ) -> ListProjectPermissionsResponse:
         response: ListProjectPermissionsResponse = \
             self.stub.ListProjectPermissions(request, metadata=self.metadata)
         return response
@@ -164,78 +213,101 @@ class Agents(ServicesInterface):
         response: PlatformMapping = self.stub.SetPlatformMapping(request, metadata=self.metadata)
         return response
 
-    def get_full_text_search_entity(
-            self, request: FullTextSearchRequest
-    ) -> FullTextSearchResponseEntity:
-        response: FullTextSearchResponseEntity = \
-            self.stub.GetFullTextSearchEntity(request, metadata=self.metadata)
+    def get_full_text_search_entity(self, request: FullTextSearchRequest) -> FullTextSearchResponseEntity:
+        response: FullTextSearchResponseEntity = self.stub.GetFullTextSearchEntity(request, metadata=self.metadata)
         return response
 
-    def get_full_text_search_entity_type(
-            self, request: FullTextSearchRequest
-    ) -> FullTextSearchResponseEntityType:
+    def get_full_text_search_entity_type(self, request: FullTextSearchRequest) -> FullTextSearchResponseEntityType:
         response: FullTextSearchResponseEntityType = \
             self.stub.GetFullTextSearchEntityType(request, metadata=self.metadata)
         return response
 
     def get_full_text_search_entity_synonym(
-            self, request: FullTextSearchRequest
+        self,
+        request: FullTextSearchRequest,
     ) -> FullTextSearchResponseEntitySynonym:
         response: FullTextSearchResponseEntitySynonym = \
             self.stub.GetFullTextSearchEntitySynonym(request, metadata=self.metadata)
         return response
 
     def get_full_text_search_intent(
-            self, request: FullTextSearchRequest
+        self,
+        request: FullTextSearchRequest,
     ) -> FullTextSearchResponseIntent:
         response: FullTextSearchResponseIntent = \
             self.stub.GetFullTextSearchIntent(request, metadata=self.metadata)
         return response
 
     def get_full_text_search_intent_context_in(
-            self, request: FullTextSearchRequest
+        self,
+        request: FullTextSearchRequest,
     ) -> FullTextSearchResponseIntentContextIn:
         response: FullTextSearchResponseIntentContextIn = \
             self.stub.GetFullTextSearchIntentContextIn(request, metadata=self.metadata)
         return response
 
     def get_full_text_search_intent_context_out(
-            self, request: FullTextSearchRequest
+        self,
+        request: FullTextSearchRequest,
     ) -> FullTextSearchResponseIntentContextOut:
         response: FullTextSearchResponseIntentContextOut = \
             self.stub.GetFullTextSearchIntentContextOut(request, metadata=self.metadata)
         return response
 
     def get_full_text_search_intent_usersays(
-            self, request: FullTextSearchRequest
+        self,
+        request: FullTextSearchRequest,
     ) -> FullTextSearchResponseIntentUsersays:
         response: FullTextSearchResponseIntentUsersays = \
             self.stub.GetFullTextSearchIntentUsersays(request, metadata=self.metadata)
         return response
 
     def get_full_text_search_intent_tags(
-            self, request: FullTextSearchRequest
+        self,
+        request: FullTextSearchRequest,
     ) -> FullTextSearchResponseIntentTags:
         response: FullTextSearchResponseIntentTags = \
             self.stub.GetFullTextSearchIntentTags(request, metadata=self.metadata)
         return response
 
     def get_full_text_search_intent_response(
-            self, request: FullTextSearchRequest
+        self,
+        request: FullTextSearchRequest,
     ) -> FullTextSearchResponseIntentResponse:
         response: FullTextSearchResponseIntentResponse = \
             self.stub.GetFullTextSearchIntentResponse(request, metadata=self.metadata)
         return response
 
     def get_full_text_search_intent_parameters(
-            self, request: FullTextSearchRequest
+        self,
+        request: FullTextSearchRequest,
     ) -> FullTextSearchResponseIntentParameters:
         response: FullTextSearchResponseIntentParameters = \
             self.stub.GetFullTextSearchIntentParameters(request, metadata=self.metadata)
         return response
 
-    def reindex_agent(
-            self, request: ReindexAgentRequest
-    ) -> operations_pb2.Operation:
+    def reindex_agent(self, request: ReindexAgentRequest) -> operations_pb2.Operation:
         response: operations_pb2.Operation = self.stub.ReindexAgent(request, metadata=self.metadata)
         return response
+
+    # region: ccai_project
+    def create_ccai_project(self, request: CreateCcaiProjectRequest) -> CreateCcaiProjectResponse:
+        response: CreateCcaiProjectResponse = self.stub.CreateCcaiProject(request, metadata=self.metadata)
+        return response
+
+    def delete_ccai_project(self, request: DeleteCcaiProjectRequest) -> DeleteCcaiProjectResponse:
+        response: DeleteCcaiProjectResponse = self.stub.DeleteCcaiProject(request, metadata=self.metadata)
+        return response
+
+    def get_ccai_project(self, request: GetCcaiProjectRequest) -> CcaiProject:
+        response: CcaiProject = self.stub.GetCcaiProject(request, metadata=self.metadata)
+        return response
+
+    def list_ccai_projects(self, request: ListCcaiProjectsRequest) -> ListCcaiProjectsResponse:
+        response: ListCcaiProjectsResponse = self.stub.ListCcaiProjects(request, metadata=self.metadata)
+        return response
+
+    def update_ccai_project(self, request: UpdateCcaiProjectRequest) -> UpdateCcaiProjectResponse:
+        response: UpdateCcaiProjectResponse = self.stub.UpdateCcaiProject(request, metadata=self.metadata)
+        return response
+    # endregion: ccai_project

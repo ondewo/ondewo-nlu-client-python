@@ -2,6 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
+from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 from ondewo.nlu import webhook_pb2 as ondewo_dot_nlu_dot_webhook__pb2
 
 
@@ -29,6 +30,21 @@ class WebhookStub(object):
                 '/ondewo.nlu.Webhook/Ping',
                 request_serializer=ondewo_dot_nlu_dot_webhook__pb2.PingRequest.SerializeToString,
                 response_deserializer=ondewo_dot_nlu_dot_webhook__pb2.PingResponse.FromString,
+                )
+        self.CreateSessionEntityType = channel.unary_unary(
+                '/ondewo.nlu.Webhook/CreateSessionEntityType',
+                request_serializer=ondewo_dot_nlu_dot_webhook__pb2.CreateSessionEntityTypeRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_webhook__pb2.SessionEntityType.FromString,
+                )
+        self.UpdateSessionEntityType = channel.unary_unary(
+                '/ondewo.nlu.Webhook/UpdateSessionEntityType',
+                request_serializer=ondewo_dot_nlu_dot_webhook__pb2.UpdateSessionEntityTypeRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_webhook__pb2.SessionEntityType.FromString,
+                )
+        self.DeleteSessionEntityType = channel.unary_unary(
+                '/ondewo.nlu.Webhook/DeleteSessionEntityType',
+                request_serializer=ondewo_dot_nlu_dot_webhook__pb2.DeleteSessionEntityTypeRequest.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 )
 
 
@@ -61,6 +77,42 @@ class WebhookServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def CreateSessionEntityType(self, request, context):
+        """Creates a session entity type.
+
+        If the specified session entity type already exists, overrides the session
+        entity type.
+
+        This method doesn't work with Google Assistant integration.
+        Contact Dialogflow support if you need to use session entities
+        with Google Assistant integration.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def UpdateSessionEntityType(self, request, context):
+        """Updates the specified session entity type.
+
+        This method doesn't work with Google Assistant integration.
+        Contact Dialogflow support if you need to use session entities
+        with Google Assistant integration.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteSessionEntityType(self, request, context):
+        """Deletes the specified session entity type.
+
+        This method doesn't work with Google Assistant integration.
+        Contact Dialogflow support if you need to use session entities
+        with Google Assistant integration.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_WebhookServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -78,6 +130,21 @@ def add_WebhookServicer_to_server(servicer, server):
                     servicer.Ping,
                     request_deserializer=ondewo_dot_nlu_dot_webhook__pb2.PingRequest.FromString,
                     response_serializer=ondewo_dot_nlu_dot_webhook__pb2.PingResponse.SerializeToString,
+            ),
+            'CreateSessionEntityType': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateSessionEntityType,
+                    request_deserializer=ondewo_dot_nlu_dot_webhook__pb2.CreateSessionEntityTypeRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_webhook__pb2.SessionEntityType.SerializeToString,
+            ),
+            'UpdateSessionEntityType': grpc.unary_unary_rpc_method_handler(
+                    servicer.UpdateSessionEntityType,
+                    request_deserializer=ondewo_dot_nlu_dot_webhook__pb2.UpdateSessionEntityTypeRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_webhook__pb2.SessionEntityType.SerializeToString,
+            ),
+            'DeleteSessionEntityType': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteSessionEntityType,
+                    request_deserializer=ondewo_dot_nlu_dot_webhook__pb2.DeleteSessionEntityTypeRequest.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -138,5 +205,56 @@ class Webhook(object):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Webhook/Ping',
             ondewo_dot_nlu_dot_webhook__pb2.PingRequest.SerializeToString,
             ondewo_dot_nlu_dot_webhook__pb2.PingResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateSessionEntityType(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Webhook/CreateSessionEntityType',
+            ondewo_dot_nlu_dot_webhook__pb2.CreateSessionEntityTypeRequest.SerializeToString,
+            ondewo_dot_nlu_dot_webhook__pb2.SessionEntityType.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def UpdateSessionEntityType(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Webhook/UpdateSessionEntityType',
+            ondewo_dot_nlu_dot_webhook__pb2.UpdateSessionEntityTypeRequest.SerializeToString,
+            ondewo_dot_nlu_dot_webhook__pb2.SessionEntityType.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteSessionEntityType(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Webhook/DeleteSessionEntityType',
+            ondewo_dot_nlu_dot_webhook__pb2.DeleteSessionEntityTypeRequest.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

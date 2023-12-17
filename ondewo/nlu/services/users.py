@@ -1,4 +1,4 @@
-# Copyright 2021 ONDEWO GmbH
+# Copyright 2021-2023 ONDEWO GmbH
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,12 +15,34 @@
 
 from google.protobuf.empty_pb2 import Empty
 
+from ondewo.nlu.common_pb2 import (
+    ListNotificationsRequest,
+    ListNotificationsResponse,
+    SetNotificationsFlaggedStatusRequest,
+    SetNotificationsReadStatusRequest,
+)
 from ondewo.nlu.core.services_interface import ServicesInterface
-from ondewo.nlu.user_pb2 import CreateUserRequest, User, GetUserRequest, UserInfo, UpdateUserRequest, \
-    ListUsersRequest, ListUsersResponse, ListUserInfosResponse, CreateServerRoleRequest, ServerRole, \
-    GetServerRoleRequest, DeleteServerRoleRequest, UpdateServerRoleRequest, ListServerRolesRequest, \
-    ListServerRolesResponse, ListServerPermissionsRequest, ListServerPermissionsResponse, LoginResponse, \
-    LoginRequest
+from ondewo.nlu.user_pb2 import (
+    CreateServerRoleRequest,
+    CreateUserRequest,
+    DeleteServerRoleRequest,
+    GetServerRoleRequest,
+    GetUserRequest,
+    ListServerPermissionsRequest,
+    ListServerPermissionsResponse,
+    ListServerRolesRequest,
+    ListServerRolesResponse,
+    ListUserInfosResponse,
+    ListUsersRequest,
+    ListUsersResponse,
+    LoginRequest,
+    LoginResponse,
+    ServerRole,
+    UpdateServerRoleRequest,
+    UpdateUserRequest,
+    User,
+    UserInfo,
+)
 from ondewo.nlu.user_pb2_grpc import UsersStub
 
 
@@ -96,3 +118,24 @@ class Users(ServicesInterface):
     def check_login(self) -> Empty:
         response: Empty = self.stub.CheckLogin(Empty(), metadata=self.metadata)
         return response
+
+    # region notifications
+    def list_notifications(self, request: ListNotificationsRequest) -> ListNotificationsResponse:
+        response: ListNotificationsResponse = self.stub.ListNotifications(request, metadata=self.metadata)
+        return response
+
+    def set_notifications_flagged_status(
+        self,
+        request: SetNotificationsFlaggedStatusRequest,
+    ) -> ListNotificationsResponse:
+        response: ListNotificationsResponse = self.stub.SetNotificationsFlaggedStatus(request, metadata=self.metadata)
+        return response
+
+    def set_notifications_read_status(
+        self,
+        request: SetNotificationsReadStatusRequest,
+    ) -> ListNotificationsResponse:
+        response: ListNotificationsResponse = self.stub.SetNotificationsReadStatus(request, metadata=self.metadata)
+        return response
+
+# endregion notifications

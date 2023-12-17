@@ -7,7 +7,7 @@ from ondewo.qa import qa_pb2 as ondewo_dot_qa_dot_qa__pb2
 
 
 class QAStub(object):
-    """///// Question Answering (QA) Services ///////
+    """gRPC service for QA functionalities.
     """
 
     def __init__(self, channel):
@@ -54,47 +54,54 @@ class QAStub(object):
 
 
 class QAServicer(object):
-    """///// Question Answering (QA) Services ///////
+    """gRPC service for QA functionalities.
     """
 
     def GetAnswer(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Retrieves an answer based on the provided request.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def RunScraper(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Runs a web scraper job for specified project IDs.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def UpdateDatabase(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Updates the database for specified project IDs.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def RunTraining(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Runs a training job for the QA system.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetServerState(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Retrieves the server state for QA.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ListProjectIds(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Lists project IDs associated with QA.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetProjectConfig(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Retrieves the configuration of a specific project.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -145,7 +152,7 @@ def add_QAServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class QA(object):
-    """///// Question Answering (QA) Services ///////
+    """gRPC service for QA functionalities.
     """
 
     @staticmethod

@@ -3,11 +3,13 @@
 import grpc
 
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
+from ondewo.nlu import common_pb2 as ondewo_dot_nlu_dot_common__pb2
 from ondewo.nlu import user_pb2 as ondewo_dot_nlu_dot_user__pb2
 
 
 class UsersStub(object):
-    """Missing associated documentation comment in .proto file."""
+    """gRPC service for managing users and server roles.
+    """
 
     def __init__(self, channel):
         """Constructor.
@@ -90,111 +92,148 @@ class UsersStub(object):
                 request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 )
+        self.ListNotifications = channel.unary_unary(
+                '/ondewo.nlu.Users/ListNotifications',
+                request_serializer=ondewo_dot_nlu_dot_common__pb2.ListNotificationsRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_common__pb2.ListNotificationsResponse.FromString,
+                )
+        self.SetNotificationsFlaggedStatus = channel.unary_unary(
+                '/ondewo.nlu.Users/SetNotificationsFlaggedStatus',
+                request_serializer=ondewo_dot_nlu_dot_common__pb2.SetNotificationsFlaggedStatusRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_common__pb2.ListNotificationsResponse.FromString,
+                )
+        self.SetNotificationsReadStatus = channel.unary_unary(
+                '/ondewo.nlu.Users/SetNotificationsReadStatus',
+                request_serializer=ondewo_dot_nlu_dot_common__pb2.SetNotificationsReadStatusRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_common__pb2.ListNotificationsResponse.FromString,
+                )
 
 
 class UsersServicer(object):
-    """Missing associated documentation comment in .proto file."""
+    """gRPC service for managing users and server roles.
+    """
 
     def CreateUser(self, request, context):
-        """Creates user
+        """Creates a user.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetUser(self, request, context):
-        """Gets user
+        """Retrieves a user by identifier.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetUserInfo(self, request, context):
-        """Gets user information
+        """Retrieves user information by identifier.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def DeleteUser(self, request, context):
-        """Deletes user
+        """Deletes a user by identifier.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def UpdateUser(self, request, context):
-        """Updates user
+        """Updates a user.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ListUsers(self, request, context):
-        """Lists users
+        """Lists users.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ListUserInfos(self, request, context):
-        """Lists users information
+        """Lists user information.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def CreateServerRole(self, request, context):
-        """Creates server role
+        """Creates a server role.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetServerRole(self, request, context):
-        """Get server role
+        """Retrieves a server role by ID.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def DeleteServerRole(self, request, context):
-        """Deletes server role
+        """Deletes a server role by ID.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def UpdateServerRole(self, request, context):
-        """Updates server role
+        """Updates a server role.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ListServerRoles(self, request, context):
-        """Lists server roles
+        """Lists server roles.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ListServerPermissions(self, request, context):
-        """Lists server permissions
+        """Lists server permissions.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def Login(self, request, context):
-        """Request to login
+        """Requests login.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def CheckLogin(self, request, context):
-        """Checks login
+        """Checks login.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListNotifications(self, request, context):
+        """Lists notifications based on specified filters.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def SetNotificationsFlaggedStatus(self, request, context):
+        """Sets the flagged status for multiple notifications.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def SetNotificationsReadStatus(self, request, context):
+        """Sets the read status for multiple notifications.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -278,6 +317,21 @@ def add_UsersServicer_to_server(servicer, server):
                     request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
+            'ListNotifications': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListNotifications,
+                    request_deserializer=ondewo_dot_nlu_dot_common__pb2.ListNotificationsRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_common__pb2.ListNotificationsResponse.SerializeToString,
+            ),
+            'SetNotificationsFlaggedStatus': grpc.unary_unary_rpc_method_handler(
+                    servicer.SetNotificationsFlaggedStatus,
+                    request_deserializer=ondewo_dot_nlu_dot_common__pb2.SetNotificationsFlaggedStatusRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_common__pb2.ListNotificationsResponse.SerializeToString,
+            ),
+            'SetNotificationsReadStatus': grpc.unary_unary_rpc_method_handler(
+                    servicer.SetNotificationsReadStatus,
+                    request_deserializer=ondewo_dot_nlu_dot_common__pb2.SetNotificationsReadStatusRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_common__pb2.ListNotificationsResponse.SerializeToString,
+            ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
             'ondewo.nlu.Users', rpc_method_handlers)
@@ -286,7 +340,8 @@ def add_UsersServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class Users(object):
-    """Missing associated documentation comment in .proto file."""
+    """gRPC service for managing users and server roles.
+    """
 
     @staticmethod
     def CreateUser(request,
@@ -540,5 +595,56 @@ class Users(object):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Users/CheckLogin',
             google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListNotifications(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Users/ListNotifications',
+            ondewo_dot_nlu_dot_common__pb2.ListNotificationsRequest.SerializeToString,
+            ondewo_dot_nlu_dot_common__pb2.ListNotificationsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def SetNotificationsFlaggedStatus(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Users/SetNotificationsFlaggedStatus',
+            ondewo_dot_nlu_dot_common__pb2.SetNotificationsFlaggedStatusRequest.SerializeToString,
+            ondewo_dot_nlu_dot_common__pb2.ListNotificationsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def SetNotificationsReadStatus(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Users/SetNotificationsReadStatus',
+            ondewo_dot_nlu_dot_common__pb2.SetNotificationsReadStatusRequest.SerializeToString,
+            ondewo_dot_nlu_dot_common__pb2.ListNotificationsResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

@@ -1,4 +1,4 @@
-# Copyright 2021 ONDEWO GmbH
+# Copyright 2021-2023 ONDEWO GmbH
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,11 +14,23 @@
 
 
 from ondewo.nlu.core.services_interface import ServicesInterface
-from ondewo.nlu.utility_pb2 import ValidateRegexResponse, ValidateRegexRequest, ValidateEmbeddedRegexResponse, \
-    ValidateEmbeddedRegexRequest, CleanAllIntentsResponse, CleanAllIntentsRequest, CleanIntentResponse, \
-    CleanIntentRequest, CleanAllEntityTypesRequest, CleanAllEntityTypesResponse, CleanEntityTypeResponse, \
-    CleanEntityTypeRequest, AddTrainingPhrasesRequest, AddTrainingPhrasesResponse, \
-    AddTrainingPhrasesFromCSVRequest
+from ondewo.nlu.utility_pb2 import (
+    AddTrainingPhrasesFromCSVRequest,
+    AddTrainingPhrasesRequest,
+    AddTrainingPhrasesResponse,
+    CleanAllEntityTypesRequest,
+    CleanAllEntityTypesResponse,
+    CleanAllIntentsRequest,
+    CleanAllIntentsResponse,
+    CleanEntityTypeRequest,
+    CleanEntityTypeResponse,
+    CleanIntentRequest,
+    CleanIntentResponse,
+    ValidateEmbeddedRegexRequest,
+    ValidateEmbeddedRegexResponse,
+    ValidateRegexRequest,
+    ValidateRegexResponse,
+)
 from ondewo.nlu.utility_pb2_grpc import UtilitiesStub
 
 
@@ -66,8 +78,8 @@ class Utilities(ServicesInterface):
         return response
 
     def add_training_phrases_from_csv(
-            self,
-            request: AddTrainingPhrasesFromCSVRequest,
+        self,
+        request: AddTrainingPhrasesFromCSVRequest,
     ) -> AddTrainingPhrasesResponse:
         response: AddTrainingPhrasesResponse = self.stub.AddTrainingPhrasesFromCSV(
             request,

@@ -15,7 +15,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-Modifications Copyright 2021 ONDEWO GmbH
+Modifications Copyright 2020-2023 ONDEWO GmbH
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -344,6 +344,10 @@ class Agent(google.protobuf.message.Message):
     OWNER_ID_FIELD_NUMBER: builtins.int
     STATUS_FIELD_NUMBER: builtins.int
     DESCRIPTION_FIELD_NUMBER: builtins.int
+    CREATED_AT_FIELD_NUMBER: builtins.int
+    MODIFIED_AT_FIELD_NUMBER: builtins.int
+    CREATED_BY_FIELD_NUMBER: builtins.int
+    MODIFIED_BY_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The project of this agent.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
@@ -382,6 +386,16 @@ class Agent(google.protobuf.message.Message):
     Read-only in the Agent message
     """
     description: builtins.str
+    @property
+    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Creation date and time. Read-only field."""
+    @property
+    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Modification date and time. Read-only field."""
+    created_by: builtins.str
+    """User id in form of a valid UUID."""
+    modified_by: builtins.str
+    """User id in form of a valid UUID."""
     def __init__(
         self,
         *,
@@ -395,9 +409,13 @@ class Agent(google.protobuf.message.Message):
         owner_id: builtins.str = ...,
         status: global___AgentStatus.ValueType = ...,
         description: builtins.str = ...,
+        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        created_by: builtins.str = ...,
+        modified_by: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["configs", b"configs"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["configs", b"configs", "default_language_code", b"default_language_code", "description", b"description", "display_name", b"display_name", "nlu_platform", b"nlu_platform", "owner_id", b"owner_id", "parent", b"parent", "status", b"status", "supported_language_codes", b"supported_language_codes", "time_zone", b"time_zone"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["configs", b"configs", "created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["configs", b"configs", "created_at", b"created_at", "created_by", b"created_by", "default_language_code", b"default_language_code", "description", b"description", "display_name", b"display_name", "modified_at", b"modified_at", "modified_by", b"modified_by", "nlu_platform", b"nlu_platform", "owner_id", b"owner_id", "parent", b"parent", "status", b"status", "supported_language_codes", b"supported_language_codes", "time_zone", b"time_zone"]) -> None: ...
 
 global___Agent = Agent
 
@@ -1850,17 +1868,36 @@ class FullTextSearchResponseEntityType(google.protobuf.message.Message):
         NAME_FIELD_NUMBER: builtins.int
         DISPLAY_NAME_FIELD_NUMBER: builtins.int
         LANGUAGE_FIELD_NUMBER: builtins.int
+        CREATED_AT_FIELD_NUMBER: builtins.int
+        MODIFIED_AT_FIELD_NUMBER: builtins.int
+        CREATED_BY_FIELD_NUMBER: builtins.int
+        MODIFIED_BY_FIELD_NUMBER: builtins.int
         name: builtins.str
         display_name: builtins.str
         language: builtins.str
+        @property
+        def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Creation date and time. Read-only field."""
+        @property
+        def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Modification date and time. Read-only field."""
+        created_by: builtins.str
+        """User id in form of a valid UUID."""
+        modified_by: builtins.str
+        """User id in form of a valid UUID."""
         def __init__(
             self,
             *,
             name: builtins.str = ...,
             display_name: builtins.str = ...,
             language: builtins.str = ...,
+            created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            created_by: builtins.str = ...,
+            modified_by: builtins.str = ...,
         ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["display_name", b"display_name", "language", b"language", "name", b"name"]) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name"]) -> None: ...
 
     PARENT_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
@@ -1912,11 +1949,25 @@ class FullTextSearchResponseEntity(google.protobuf.message.Message):
         ENTITY_TYPE_NAME_FIELD_NUMBER: builtins.int
         ENTITY_TYPE_DISPLAY_NAME_FIELD_NUMBER: builtins.int
         LANGUAGE_FIELD_NUMBER: builtins.int
+        CREATED_AT_FIELD_NUMBER: builtins.int
+        MODIFIED_AT_FIELD_NUMBER: builtins.int
+        CREATED_BY_FIELD_NUMBER: builtins.int
+        MODIFIED_BY_FIELD_NUMBER: builtins.int
         name: builtins.str
         display_name: builtins.str
         entity_type_name: builtins.str
         entity_type_display_name: builtins.str
         language: builtins.str
+        @property
+        def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Creation date and time. Read-only field."""
+        @property
+        def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Modification date and time. Read-only field."""
+        created_by: builtins.str
+        """User id in form of a valid UUID."""
+        modified_by: builtins.str
+        """User id in form of a valid UUID."""
         def __init__(
             self,
             *,
@@ -1925,8 +1976,13 @@ class FullTextSearchResponseEntity(google.protobuf.message.Message):
             entity_type_name: builtins.str = ...,
             entity_type_display_name: builtins.str = ...,
             language: builtins.str = ...,
+            created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            created_by: builtins.str = ...,
+            modified_by: builtins.str = ...,
         ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["display_name", b"display_name", "entity_type_display_name", b"entity_type_display_name", "entity_type_name", b"entity_type_name", "language", b"language", "name", b"name"]) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "entity_type_display_name", b"entity_type_display_name", "entity_type_name", b"entity_type_name", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name"]) -> None: ...
 
     PARENT_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
@@ -1980,6 +2036,10 @@ class FullTextSearchResponseEntitySynonym(google.protobuf.message.Message):
         ENTITY_NAME_FIELD_NUMBER: builtins.int
         ENTITY_DISPLAY_NAME_FIELD_NUMBER: builtins.int
         LANGUAGE_FIELD_NUMBER: builtins.int
+        CREATED_AT_FIELD_NUMBER: builtins.int
+        MODIFIED_AT_FIELD_NUMBER: builtins.int
+        CREATED_BY_FIELD_NUMBER: builtins.int
+        MODIFIED_BY_FIELD_NUMBER: builtins.int
         name: builtins.str
         display_name: builtins.str
         entity_type_name: builtins.str
@@ -1987,6 +2047,16 @@ class FullTextSearchResponseEntitySynonym(google.protobuf.message.Message):
         entity_name: builtins.str
         entity_display_name: builtins.str
         language: builtins.str
+        @property
+        def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Creation date and time. Read-only field."""
+        @property
+        def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Modification date and time. Read-only field."""
+        created_by: builtins.str
+        """User id in form of a valid UUID."""
+        modified_by: builtins.str
+        """User id in form of a valid UUID."""
         def __init__(
             self,
             *,
@@ -1997,8 +2067,13 @@ class FullTextSearchResponseEntitySynonym(google.protobuf.message.Message):
             entity_name: builtins.str = ...,
             entity_display_name: builtins.str = ...,
             language: builtins.str = ...,
+            created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            created_by: builtins.str = ...,
+            modified_by: builtins.str = ...,
         ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["display_name", b"display_name", "entity_display_name", b"entity_display_name", "entity_name", b"entity_name", "entity_type_display_name", b"entity_type_display_name", "entity_type_name", b"entity_type_name", "language", b"language", "name", b"name"]) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "entity_display_name", b"entity_display_name", "entity_name", b"entity_name", "entity_type_display_name", b"entity_type_display_name", "entity_type_name", b"entity_type_name", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name"]) -> None: ...
 
     PARENT_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
@@ -2050,12 +2125,26 @@ class FullTextSearchResponseIntent(google.protobuf.message.Message):
         DOMAIN_NAME_FIELD_NUMBER: builtins.int
         TAGS_FIELD_NUMBER: builtins.int
         LANGUAGE_FIELD_NUMBER: builtins.int
+        CREATED_AT_FIELD_NUMBER: builtins.int
+        MODIFIED_AT_FIELD_NUMBER: builtins.int
+        CREATED_BY_FIELD_NUMBER: builtins.int
+        MODIFIED_BY_FIELD_NUMBER: builtins.int
         name: builtins.str
         display_name: builtins.str
         domain_name: builtins.str
         @property
         def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
         language: builtins.str
+        @property
+        def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Creation date and time. Read-only field."""
+        @property
+        def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Modification date and time. Read-only field."""
+        created_by: builtins.str
+        """User id in form of a valid UUID."""
+        modified_by: builtins.str
+        """User id in form of a valid UUID."""
         def __init__(
             self,
             *,
@@ -2064,8 +2153,13 @@ class FullTextSearchResponseIntent(google.protobuf.message.Message):
             domain_name: builtins.str = ...,
             tags: collections.abc.Iterable[builtins.str] | None = ...,
             language: builtins.str = ...,
+            created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            created_by: builtins.str = ...,
+            modified_by: builtins.str = ...,
         ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["display_name", b"display_name", "domain_name", b"domain_name", "language", b"language", "name", b"name", "tags", b"tags"]) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "domain_name", b"domain_name", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "tags", b"tags"]) -> None: ...
 
     PARENT_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
@@ -2117,12 +2211,26 @@ class FullTextSearchResponseIntentContextIn(google.protobuf.message.Message):
         INTENT_DISPLAY_NAME_FIELD_NUMBER: builtins.int
         TAGS_FIELD_NUMBER: builtins.int
         LANGUAGE_FIELD_NUMBER: builtins.int
+        CREATED_AT_FIELD_NUMBER: builtins.int
+        MODIFIED_AT_FIELD_NUMBER: builtins.int
+        CREATED_BY_FIELD_NUMBER: builtins.int
+        MODIFIED_BY_FIELD_NUMBER: builtins.int
         name: builtins.str
         intent_name: builtins.str
         intent_display_name: builtins.str
         @property
         def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
         language: builtins.str
+        @property
+        def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Creation date and time. Read-only field."""
+        @property
+        def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Modification date and time. Read-only field."""
+        created_by: builtins.str
+        """User id in form of a valid UUID."""
+        modified_by: builtins.str
+        """User id in form of a valid UUID."""
         def __init__(
             self,
             *,
@@ -2131,8 +2239,13 @@ class FullTextSearchResponseIntentContextIn(google.protobuf.message.Message):
             intent_display_name: builtins.str = ...,
             tags: collections.abc.Iterable[builtins.str] | None = ...,
             language: builtins.str = ...,
+            created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            created_by: builtins.str = ...,
+            modified_by: builtins.str = ...,
         ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["intent_display_name", b"intent_display_name", "intent_name", b"intent_name", "language", b"language", "name", b"name", "tags", b"tags"]) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "created_by", b"created_by", "intent_display_name", b"intent_display_name", "intent_name", b"intent_name", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "tags", b"tags"]) -> None: ...
 
     PARENT_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
@@ -2184,12 +2297,26 @@ class FullTextSearchResponseIntentContextOut(google.protobuf.message.Message):
         INTENT_DISPLAY_NAME_FIELD_NUMBER: builtins.int
         TAGS_FIELD_NUMBER: builtins.int
         LANGUAGE_FIELD_NUMBER: builtins.int
+        CREATED_AT_FIELD_NUMBER: builtins.int
+        MODIFIED_AT_FIELD_NUMBER: builtins.int
+        CREATED_BY_FIELD_NUMBER: builtins.int
+        MODIFIED_BY_FIELD_NUMBER: builtins.int
         name: builtins.str
         intent_name: builtins.str
         intent_display_name: builtins.str
         @property
         def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
         language: builtins.str
+        @property
+        def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Creation date and time. Read-only field."""
+        @property
+        def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Modification date and time. Read-only field."""
+        created_by: builtins.str
+        """User id in form of a valid UUID."""
+        modified_by: builtins.str
+        """User id in form of a valid UUID."""
         def __init__(
             self,
             *,
@@ -2198,8 +2325,13 @@ class FullTextSearchResponseIntentContextOut(google.protobuf.message.Message):
             intent_display_name: builtins.str = ...,
             tags: collections.abc.Iterable[builtins.str] | None = ...,
             language: builtins.str = ...,
+            created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            created_by: builtins.str = ...,
+            modified_by: builtins.str = ...,
         ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["intent_display_name", b"intent_display_name", "intent_name", b"intent_name", "language", b"language", "name", b"name", "tags", b"tags"]) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "created_by", b"created_by", "intent_display_name", b"intent_display_name", "intent_name", b"intent_name", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "tags", b"tags"]) -> None: ...
 
     PARENT_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
@@ -2255,6 +2387,10 @@ class FullTextSearchResponseIntentUsersays(google.protobuf.message.Message):
         INTENT_DISPLAY_NAME_FIELD_NUMBER: builtins.int
         TAGS_FIELD_NUMBER: builtins.int
         LANGUAGE_FIELD_NUMBER: builtins.int
+        CREATED_AT_FIELD_NUMBER: builtins.int
+        MODIFIED_AT_FIELD_NUMBER: builtins.int
+        CREATED_BY_FIELD_NUMBER: builtins.int
+        MODIFIED_BY_FIELD_NUMBER: builtins.int
         name: builtins.str
         text: builtins.str
         text_as_entity_types: builtins.str
@@ -2265,6 +2401,16 @@ class FullTextSearchResponseIntentUsersays(google.protobuf.message.Message):
         @property
         def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
         language: builtins.str
+        @property
+        def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Creation date and time. Read-only field."""
+        @property
+        def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Modification date and time. Read-only field."""
+        created_by: builtins.str
+        """User id in form of a valid UUID."""
+        modified_by: builtins.str
+        """User id in form of a valid UUID."""
         def __init__(
             self,
             *,
@@ -2277,8 +2423,13 @@ class FullTextSearchResponseIntentUsersays(google.protobuf.message.Message):
             intent_display_name: builtins.str = ...,
             tags: collections.abc.Iterable[builtins.str] | None = ...,
             language: builtins.str = ...,
+            created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            created_by: builtins.str = ...,
+            modified_by: builtins.str = ...,
         ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["intent_display_name", b"intent_display_name", "intent_name", b"intent_name", "language", b"language", "name", b"name", "tags", b"tags", "text", b"text", "text_as_entity_types", b"text_as_entity_types", "text_as_entity_values", b"text_as_entity_values", "type", b"type"]) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "created_by", b"created_by", "intent_display_name", b"intent_display_name", "intent_name", b"intent_name", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "tags", b"tags", "text", b"text", "text_as_entity_types", b"text_as_entity_types", "text_as_entity_values", b"text_as_entity_values", "type", b"type"]) -> None: ...
 
     PARENT_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
@@ -2331,6 +2482,10 @@ class FullTextSearchResponseIntentTags(google.protobuf.message.Message):
         INTENT_DISPLAY_NAME_FIELD_NUMBER: builtins.int
         TAGS_FIELD_NUMBER: builtins.int
         LANGUAGE_FIELD_NUMBER: builtins.int
+        CREATED_AT_FIELD_NUMBER: builtins.int
+        MODIFIED_AT_FIELD_NUMBER: builtins.int
+        CREATED_BY_FIELD_NUMBER: builtins.int
+        MODIFIED_BY_FIELD_NUMBER: builtins.int
         name: builtins.str
         text: builtins.str
         intent_name: builtins.str
@@ -2338,6 +2493,16 @@ class FullTextSearchResponseIntentTags(google.protobuf.message.Message):
         @property
         def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
         language: builtins.str
+        @property
+        def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Creation date and time. Read-only field."""
+        @property
+        def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Modification date and time. Read-only field."""
+        created_by: builtins.str
+        """User id in form of a valid UUID."""
+        modified_by: builtins.str
+        """User id in form of a valid UUID."""
         def __init__(
             self,
             *,
@@ -2347,8 +2512,13 @@ class FullTextSearchResponseIntentTags(google.protobuf.message.Message):
             intent_display_name: builtins.str = ...,
             tags: collections.abc.Iterable[builtins.str] | None = ...,
             language: builtins.str = ...,
+            created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            created_by: builtins.str = ...,
+            modified_by: builtins.str = ...,
         ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["intent_display_name", b"intent_display_name", "intent_name", b"intent_name", "language", b"language", "name", b"name", "tags", b"tags", "text", b"text"]) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "created_by", b"created_by", "intent_display_name", b"intent_display_name", "intent_name", b"intent_name", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "tags", b"tags", "text", b"text"]) -> None: ...
 
     PARENT_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
@@ -2402,6 +2572,10 @@ class FullTextSearchResponseIntentResponse(google.protobuf.message.Message):
         INTENT_DISPLAY_NAME_FIELD_NUMBER: builtins.int
         TAGS_FIELD_NUMBER: builtins.int
         LANGUAGE_FIELD_NUMBER: builtins.int
+        CREATED_AT_FIELD_NUMBER: builtins.int
+        MODIFIED_AT_FIELD_NUMBER: builtins.int
+        CREATED_BY_FIELD_NUMBER: builtins.int
+        MODIFIED_BY_FIELD_NUMBER: builtins.int
         text: builtins.str
         platform: builtins.str
         response_type: builtins.str
@@ -2410,6 +2584,16 @@ class FullTextSearchResponseIntentResponse(google.protobuf.message.Message):
         @property
         def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
         language: builtins.str
+        @property
+        def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Creation date and time. Read-only field."""
+        @property
+        def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Modification date and time. Read-only field."""
+        created_by: builtins.str
+        """User id in form of a valid UUID."""
+        modified_by: builtins.str
+        """User id in form of a valid UUID."""
         def __init__(
             self,
             *,
@@ -2420,8 +2604,13 @@ class FullTextSearchResponseIntentResponse(google.protobuf.message.Message):
             intent_display_name: builtins.str = ...,
             tags: collections.abc.Iterable[builtins.str] | None = ...,
             language: builtins.str = ...,
+            created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            created_by: builtins.str = ...,
+            modified_by: builtins.str = ...,
         ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["intent_display_name", b"intent_display_name", "intent_name", b"intent_name", "language", b"language", "platform", b"platform", "response_type", b"response_type", "tags", b"tags", "text", b"text"]) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "created_by", b"created_by", "intent_display_name", b"intent_display_name", "intent_name", b"intent_name", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "platform", b"platform", "response_type", b"response_type", "tags", b"tags", "text", b"text"]) -> None: ...
 
     PARENT_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
@@ -2474,6 +2663,10 @@ class FullTextSearchResponseIntentParameters(google.protobuf.message.Message):
         INTENT_DISPLAY_NAME_FIELD_NUMBER: builtins.int
         TAGS_FIELD_NUMBER: builtins.int
         LANGUAGE_FIELD_NUMBER: builtins.int
+        CREATED_AT_FIELD_NUMBER: builtins.int
+        MODIFIED_AT_FIELD_NUMBER: builtins.int
+        CREATED_BY_FIELD_NUMBER: builtins.int
+        MODIFIED_BY_FIELD_NUMBER: builtins.int
         parameter_name: builtins.str
         parameter_display_name: builtins.str
         intent_name: builtins.str
@@ -2481,6 +2674,16 @@ class FullTextSearchResponseIntentParameters(google.protobuf.message.Message):
         @property
         def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
         language: builtins.str
+        @property
+        def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Creation date and time. Read-only field."""
+        @property
+        def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Modification date and time. Read-only field."""
+        created_by: builtins.str
+        """User id in form of a valid UUID."""
+        modified_by: builtins.str
+        """User id in form of a valid UUID."""
         def __init__(
             self,
             *,
@@ -2490,8 +2693,13 @@ class FullTextSearchResponseIntentParameters(google.protobuf.message.Message):
             intent_display_name: builtins.str = ...,
             tags: collections.abc.Iterable[builtins.str] | None = ...,
             language: builtins.str = ...,
+            created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            created_by: builtins.str = ...,
+            modified_by: builtins.str = ...,
         ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["intent_display_name", b"intent_display_name", "intent_name", b"intent_name", "language", b"language", "parameter_display_name", b"parameter_display_name", "parameter_name", b"parameter_name", "tags", b"tags"]) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "created_by", b"created_by", "intent_display_name", b"intent_display_name", "intent_name", b"intent_name", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "parameter_display_name", b"parameter_display_name", "parameter_name", b"parameter_name", "tags", b"tags"]) -> None: ...
 
     PARENT_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int

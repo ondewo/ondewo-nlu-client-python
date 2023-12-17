@@ -1,4 +1,4 @@
-# Copyright 2021 ONDEWO GmbH
+# Copyright 2021-2023 ONDEWO GmbH
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,19 +15,41 @@
 
 from google.protobuf import empty_pb2
 
-from ondewo.nlu import intent_pb2
-from ondewo.nlu import operations_pb2
+from ondewo.nlu import (
+    intent_pb2,
+    operations_pb2,
+)
 from ondewo.nlu.core.services_interface import ServicesInterface
-from ondewo.nlu.intent_pb2 import BatchCreateTrainingPhrasesRequest, BatchTrainingPhrasesStatusResponse, \
-    BatchGetTrainingPhrasesRequest, BatchUpdateTrainingPhrasesRequest, BatchDeleteTrainingPhrasesRequest, \
-    BatchDeleteTrainingPhrasesResponse, ListTrainingPhrasesRequest, ListTrainingPhrasesResponse, \
-    BatchResponseMessagesStatusResponse, BatchCreateResponseMessagesRequest, BatchGetResponseMessagesRequest, \
-    BatchUpdateResponseMessagesRequest, BatchDeleteResponseMessagesResponse, \
-    BatchDeleteResponseMessagesRequest, ListResponseMessagesResponse, ListResponseMessagesRequest, \
-    BatchParametersStatusResponse, BatchCreateParametersRequest, BatchGetParametersRequest, \
-    BatchUpdateParametersRequest, BatchDeleteParametersResponse, BatchDeleteParametersRequest, \
-    ListParametersResponse, ListParametersRequest, IntentTagRequest, GetIntentTagsResponse, GetIntentTagsRequest, \
-    GetAllIntentTagsRequest
+from ondewo.nlu.intent_pb2 import (
+    BatchCreateParametersRequest,
+    BatchCreateResponseMessagesRequest,
+    BatchCreateTrainingPhrasesRequest,
+    BatchDeleteParametersRequest,
+    BatchDeleteParametersResponse,
+    BatchDeleteResponseMessagesRequest,
+    BatchDeleteResponseMessagesResponse,
+    BatchDeleteTrainingPhrasesRequest,
+    BatchDeleteTrainingPhrasesResponse,
+    BatchGetParametersRequest,
+    BatchGetResponseMessagesRequest,
+    BatchGetTrainingPhrasesRequest,
+    BatchParametersStatusResponse,
+    BatchResponseMessagesStatusResponse,
+    BatchTrainingPhrasesStatusResponse,
+    BatchUpdateParametersRequest,
+    BatchUpdateResponseMessagesRequest,
+    BatchUpdateTrainingPhrasesRequest,
+    GetAllIntentTagsRequest,
+    GetIntentTagsRequest,
+    GetIntentTagsResponse,
+    IntentTagRequest,
+    ListParametersRequest,
+    ListParametersResponse,
+    ListResponseMessagesRequest,
+    ListResponseMessagesResponse,
+    ListTrainingPhrasesRequest,
+    ListTrainingPhrasesResponse,
+)
 from ondewo.nlu.intent_pb2_grpc import IntentsStub
 
 
@@ -71,29 +93,37 @@ class Intents(ServicesInterface):
         response: operations_pb2.Operation = self.stub.BatchDeleteIntents(request, metadata=self.metadata)
         return response
 
-    def batch_create_training_phrases(self,
-                                      request: BatchCreateTrainingPhrasesRequest) -> BatchTrainingPhrasesStatusResponse:
+    def batch_create_training_phrases(
+        self,
+        request: BatchCreateTrainingPhrasesRequest
+    ) -> BatchTrainingPhrasesStatusResponse:
         response: BatchTrainingPhrasesStatusResponse = self.stub.BatchCreateTrainingPhrases(
             request, metadata=self.metadata
         )
         return response
 
-    def batch_get_training_phrases(self,
-                                   request: BatchGetTrainingPhrasesRequest) -> BatchTrainingPhrasesStatusResponse:
+    def batch_get_training_phrases(
+        self,
+        request: BatchGetTrainingPhrasesRequest
+    ) -> BatchTrainingPhrasesStatusResponse:
         response: BatchTrainingPhrasesStatusResponse = self.stub.BatchGetTrainingPhrases(
             request, metadata=self.metadata
         )
         return response
 
-    def batch_update_training_phrases(self,
-                                      request: BatchUpdateTrainingPhrasesRequest) -> BatchTrainingPhrasesStatusResponse:
+    def batch_update_training_phrases(
+        self,
+        request: BatchUpdateTrainingPhrasesRequest
+    ) -> BatchTrainingPhrasesStatusResponse:
         response: BatchTrainingPhrasesStatusResponse = self.stub.BatchUpdateTrainingPhrases(
             request, metadata=self.metadata
         )
         return response
 
-    def batch_delete_training_phrases(self,
-                                      request: BatchDeleteTrainingPhrasesRequest) -> BatchDeleteTrainingPhrasesResponse:
+    def batch_delete_training_phrases(
+        self,
+        request: BatchDeleteTrainingPhrasesRequest
+    ) -> BatchDeleteTrainingPhrasesResponse:
         response: BatchDeleteTrainingPhrasesResponse = self.stub.BatchDeleteTrainingPhrases(
             request, metadata=self.metadata
         )
@@ -104,8 +134,8 @@ class Intents(ServicesInterface):
         return response
 
     def batch_create_response_messages(
-            self,
-            request: BatchCreateResponseMessagesRequest
+        self,
+        request: BatchCreateResponseMessagesRequest
     ) -> BatchResponseMessagesStatusResponse:
         response: BatchResponseMessagesStatusResponse = self.stub.BatchCreateResponseMessages(
             request,
@@ -114,8 +144,8 @@ class Intents(ServicesInterface):
         return response
 
     def batch_get_response_messages(
-            self,
-            request: BatchGetResponseMessagesRequest,
+        self,
+        request: BatchGetResponseMessagesRequest,
     ) -> BatchResponseMessagesStatusResponse:
         response: BatchResponseMessagesStatusResponse = self.stub.BatchGetResponseMessages(
             request, metadata=self.metadata
@@ -123,8 +153,8 @@ class Intents(ServicesInterface):
         return response
 
     def batch_update_response_messages(
-            self,
-            request: BatchUpdateResponseMessagesRequest,
+        self,
+        request: BatchUpdateResponseMessagesRequest,
     ) -> BatchResponseMessagesStatusResponse:
         response: BatchResponseMessagesStatusResponse = self.stub.BatchUpdateResponseMessages(
             request, metadata=self.metadata
@@ -132,8 +162,8 @@ class Intents(ServicesInterface):
         return response
 
     def batch_delete_response_messages(
-            self,
-            request: BatchDeleteResponseMessagesRequest,
+        self,
+        request: BatchDeleteResponseMessagesRequest,
     ) -> BatchDeleteResponseMessagesResponse:
         response: BatchDeleteResponseMessagesResponse = self.stub.BatchDeleteResponseMessages(
             request, metadata=self.metadata

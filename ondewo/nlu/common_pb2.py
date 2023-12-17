@@ -11,17 +11,48 @@ from google.protobuf.internal import builder as _builder
 _sym_db = _symbol_database.Default()
 
 
+from google.protobuf import field_mask_pb2 as google_dot_protobuf_dot_field__mask__pb2
+from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x17ondewo/nlu/common.proto\x12\nondewo.nlu\"\x1d\n\x0cStatResponse\x12\r\n\x05value\x18\x01 \x01(\r*,\n\x0bSortingMode\x12\r\n\tASCENDING\x10\x00\x12\x0e\n\nDESCENDING\x10\x01\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x17ondewo/nlu/common.proto\x12\nondewo.nlu\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x1d\n\x0cStatResponse\x12\r\n\x05value\x18\x01 \x01(\r\"\xf9\x01\n\x07\x43omment\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0c\n\x04text\x18\x02 \x01(\t\x12\x0f\n\x07user_id\x18\x03 \x01(\t\x12\x1a\n\x12\x63omment_about_name\x18\x04 \x01(\t\x12\x1b\n\x13parent_comment_name\x18\x05 \x01(\t\x12.\n\ncreated_at\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\x07 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x12\n\ncreated_by\x18\x08 \x01(\t\x12\x13\n\x0bmodified_by\x18\t \x01(\t\"\xfd\x05\n\x0cNotification\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x11\n\tuser_name\x18\x02 \x01(\t\x12\r\n\x05title\x18\x03 \x01(\t\x12\x19\n\x11\x64\x65scription_short\x18\x04 \x01(\t\x12\x18\n\x10\x64\x65scription_long\x18\x05 \x01(\t\x12J\n\x1bnotification_flagged_status\x18\x06 \x01(\x0e\x32%.ondewo.nlu.NotificationFlaggedStatus\x12\x42\n\x1enotification_flagged_timestamp\x18\x07 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x44\n\x18notification_read_status\x18\x08 \x01(\x0e\x32\".ondewo.nlu.NotificationReadStatus\x12?\n\x1bnotification_read_timestamp\x18\t \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12;\n\x13notification_origin\x18\n \x01(\x0e\x32\x1e.ondewo.nlu.NotificationOrigin\x12\x13\n\x0borigin_name\x18\x0b \x01(\t\x12\x17\n\x0forigin_language\x18\x0c \x01(\t\x12\x37\n\x11notification_type\x18\r \x01(\x0e\x32\x1c.ondewo.nlu.NotificationType\x12\x43\n\x17notification_visibility\x18\x0e \x01(\x0e\x32\".ondewo.nlu.NotificationVisibility\x12.\n\ncreated_at\x18\x0f \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\x10 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x12\n\ncreated_by\x18\x11 \x01(\t\x12\x13\n\x0bmodified_by\x18\x12 \x01(\t\"I\n\x17\x41\x64\x64NotificationsRequest\x12.\n\x0cnotification\x18\x01 \x03(\x0b\x32\x18.ondewo.nlu.Notification\"J\n\x18\x41\x64\x64NotificationsResponse\x12.\n\x0cnotification\x18\x01 \x03(\x0b\x32\x18.ondewo.nlu.Notification\"\xc7\x03\n\x12NotificationFilter\x12\x16\n\x0elanguage_codes\x18\x01 \x03(\t\x12<\n\x14notification_origins\x18\x02 \x03(\x0e\x32\x1e.ondewo.nlu.NotificationOrigin\x12\x45\n\x19notification_visibilities\x18\x03 \x03(\x0e\x32\".ondewo.nlu.NotificationVisibility\x12J\n\x1bnotification_flagged_status\x18\x04 \x03(\x0e\x32%.ondewo.nlu.NotificationFlaggedStatus\x12\x44\n\x18notification_read_status\x18\x05 \x03(\x0e\x32\".ondewo.nlu.NotificationReadStatus\x12,\n\x08\x65\x61rliest\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12*\n\x06latest\x18\x07 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x12\n\nuser_names\x18\x08 \x03(\t\x12\x14\n\x0corigin_names\x18\t \x03(\t\"\x9b\x01\n\x18ListNotificationsRequest\x12;\n\x13notification_filter\x18\x01 \x01(\x0b\x32\x1e.ondewo.nlu.NotificationFilter\x12\x12\n\npage_token\x18\x02 \x01(\t\x12.\n\nfield_mask\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.FieldMask\"K\n\x19ListNotificationsResponse\x12.\n\x0cnotification\x18\x01 \x03(\x0b\x32\x18.ondewo.nlu.Notification\"R\n$SetNotificationsFlaggedStatusRequest\x12\x19\n\x11notification_name\x18\x01 \x03(\t\x12\x0f\n\x07\x66lagged\x18\x02 \x03(\x08\"O\n!SetNotificationsReadStatusRequest\x12\x19\n\x11notification_name\x18\x01 \x03(\t\x12\x0f\n\x07\x66lagged\x18\x02 \x03(\x08*,\n\x0bSortingMode\x12\r\n\tASCENDING\x10\x00\x12\x0e\n\nDESCENDING\x10\x01*\x9c\x01\n\x19NotificationFlaggedStatus\x12+\n\'NOTIFICATION_FLAGGED_STATUS_UNSPECIFIED\x10\x00\x12\'\n#NOTIFICATION_FLAGGED_STATUS_FLAGGED\x10\x01\x12)\n%NOTIFICATION_FLAGGED_STATUS_UNFLAGGED\x10\x02*\x8a\x01\n\x16NotificationReadStatus\x12(\n$NOTIFICATION_READ_STATUS_UNSPECIFIED\x10\x00\x12!\n\x1dNOTIFICATION_READ_STATUS_READ\x10\x01\x12#\n\x1fNOTIFICATION_READ_STATUS_UNREAD\x10\x02*\xbf\x04\n\x16NotificationVisibility\x12\'\n#NOTIFICATION_VISIBILITY_UNSPECIFIED\x10\x00\x12 \n\x1cNOTIFICATION_VISIBILITY_USER\x10\x01\x12#\n\x1fNOTIFICATION_VISIBILITY_PROJECT\x10\x02\x12)\n%NOTIFICATION_VISIBILITY_PROJECT_OWNER\x10\x03\x12)\n%NOTIFICATION_VISIBILITY_PROJECT_ADMIN\x10\x04\x12-\n)NOTIFICATION_VISIBILITY_PROJECT_DEVELOPER\x10\x05\x12(\n$NOTIFICATION_VISIBILITY_PROJECT_USER\x10\x06\x12,\n(NOTIFICATION_VISIBILITY_PROJECT_EXECUTOR\x10\x07\x12,\n(NOTIFICATION_VISIBILITY_PROJECT_INACTIVE\x10\x08\x12(\n$NOTIFICATION_VISIBILITY_SERVER_ADMIN\x10\t\x12*\n&NOTIFICATION_VISIBILITY_SERVER_MANAGER\x10\n\x12\'\n#NOTIFICATION_VISIBILITY_SERVER_USER\x10\x0b\x12+\n\'NOTIFICATION_VISIBILITY_SERVER_INACTIVE\x10\x0c*\xc6\x01\n\x10NotificationType\x12!\n\x1dNOTIFICATION_TYPE_UNSPECIFIED\x10\x00\x12\x1b\n\x17NOTIFICATION_TYPE_DEBUG\x10\x01\x12\x1d\n\x19NOTIFICATION_TYPE_WARNING\x10\x02\x12\x1a\n\x16NOTIFICATION_TYPE_INFO\x10\x03\x12\x1b\n\x17NOTIFICATION_TYPE_ERROR\x10\x04\x12\x1a\n\x16NOTIFICATION_TYPE_NEWS\x10\x05*\x88\x03\n\x12NotificationOrigin\x12#\n\x1fNOTIFICATION_ORIGIN_UNSPECIFIED\x10\x00\x12\"\n\x1eNOTIFICATION_ORIGIN_ONDEWO_AIM\x10\x01\x12\"\n\x1eNOTIFICATION_ORIGIN_ONDEWO_BPI\x10\x02\x12\"\n\x1eNOTIFICATION_ORIGIN_ONDEWO_CSI\x10\x03\x12\"\n\x1eNOTIFICATION_ORIGIN_ONDEWO_NLU\x10\x04\x12\"\n\x1eNOTIFICATION_ORIGIN_ONDEWO_S2T\x10\x05\x12\"\n\x1eNOTIFICATION_ORIGIN_ONDEWO_SIP\x10\x06\x12\"\n\x1eNOTIFICATION_ORIGIN_ONDEWO_T2S\x10\x07\x12#\n\x1fNOTIFICATION_ORIGIN_ONDEWO_VTSI\x10\x08\x12,\n(NOTIFICATION_ORIGIN_ONDEWO_VTSI_RABBITMQ\x10\tB\x9a\x01\n\x1e\x63om.google.cloud.dialogflow.v2B\x0b\x43ommonProtoP\x01ZDgoogle.golang.org/genproto/googleapis/cloud/dialogflow/v2;dialogflow\xf8\x01\x01\xa2\x02\x02\x44\x46\xaa\x02\x1aGoogle.Cloud.Dialogflow.V2b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'ondewo.nlu.common_pb2', _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
-  _globals['_SORTINGMODE']._serialized_start=70
-  _globals['_SORTINGMODE']._serialized_end=114
-  _globals['_STATRESPONSE']._serialized_start=39
-  _globals['_STATRESPONSE']._serialized_end=68
+  DESCRIPTOR._serialized_options = b'\n\036com.google.cloud.dialogflow.v2B\013CommonProtoP\001ZDgoogle.golang.org/genproto/googleapis/cloud/dialogflow/v2;dialogflow\370\001\001\242\002\002DF\252\002\032Google.Cloud.Dialogflow.V2'
+  _globals['_SORTINGMODE']._serialized_start=2166
+  _globals['_SORTINGMODE']._serialized_end=2210
+  _globals['_NOTIFICATIONFLAGGEDSTATUS']._serialized_start=2213
+  _globals['_NOTIFICATIONFLAGGEDSTATUS']._serialized_end=2369
+  _globals['_NOTIFICATIONREADSTATUS']._serialized_start=2372
+  _globals['_NOTIFICATIONREADSTATUS']._serialized_end=2510
+  _globals['_NOTIFICATIONVISIBILITY']._serialized_start=2513
+  _globals['_NOTIFICATIONVISIBILITY']._serialized_end=3088
+  _globals['_NOTIFICATIONTYPE']._serialized_start=3091
+  _globals['_NOTIFICATIONTYPE']._serialized_end=3289
+  _globals['_NOTIFICATIONORIGIN']._serialized_start=3292
+  _globals['_NOTIFICATIONORIGIN']._serialized_end=3684
+  _globals['_STATRESPONSE']._serialized_start=106
+  _globals['_STATRESPONSE']._serialized_end=135
+  _globals['_COMMENT']._serialized_start=138
+  _globals['_COMMENT']._serialized_end=387
+  _globals['_NOTIFICATION']._serialized_start=390
+  _globals['_NOTIFICATION']._serialized_end=1155
+  _globals['_ADDNOTIFICATIONSREQUEST']._serialized_start=1157
+  _globals['_ADDNOTIFICATIONSREQUEST']._serialized_end=1230
+  _globals['_ADDNOTIFICATIONSRESPONSE']._serialized_start=1232
+  _globals['_ADDNOTIFICATIONSRESPONSE']._serialized_end=1306
+  _globals['_NOTIFICATIONFILTER']._serialized_start=1309
+  _globals['_NOTIFICATIONFILTER']._serialized_end=1764
+  _globals['_LISTNOTIFICATIONSREQUEST']._serialized_start=1767
+  _globals['_LISTNOTIFICATIONSREQUEST']._serialized_end=1922
+  _globals['_LISTNOTIFICATIONSRESPONSE']._serialized_start=1924
+  _globals['_LISTNOTIFICATIONSRESPONSE']._serialized_end=1999
+  _globals['_SETNOTIFICATIONSFLAGGEDSTATUSREQUEST']._serialized_start=2001
+  _globals['_SETNOTIFICATIONSFLAGGEDSTATUSREQUEST']._serialized_end=2083
+  _globals['_SETNOTIFICATIONSREADSTATUSREQUEST']._serialized_start=2085
+  _globals['_SETNOTIFICATIONSREADSTATUSREQUEST']._serialized_end=2164
 # @@protoc_insertion_point(module_scope)

@@ -1,4 +1,4 @@
-# Copyright 2021 ONDEWO GmbH
+# Copyright 2021-2023 ONDEWO GmbH
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,10 +13,13 @@
 # limitations under the License.
 
 from ondewo.nlu.common_pb2 import StatResponse
-
 from ondewo.nlu.core.services_interface import ServicesInterface
-from ondewo.nlu.project_statistics_pb2 import GetIntentCountRequest, GetEntityTypeCountRequest, \
-    GetProjectStatRequest, GetProjectElementStatRequest
+from ondewo.nlu.project_statistics_pb2 import (
+    GetEntityTypeCountRequest,
+    GetIntentCountRequest,
+    GetProjectElementStatRequest,
+    GetProjectStatRequest,
+)
 from ondewo.nlu.project_statistics_pb2_grpc import ProjectStatisticsStub
 
 

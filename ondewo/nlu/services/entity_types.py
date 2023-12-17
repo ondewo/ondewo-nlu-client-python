@@ -1,4 +1,4 @@
-# Copyright 2021 ONDEWO GmbH
+# Copyright 2021-2023 ONDEWO GmbH
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,11 +16,25 @@
 from google.protobuf.empty_pb2 import Empty
 
 from ondewo.nlu.core.services_interface import ServicesInterface
-from ondewo.nlu.entity_type_pb2 import BatchCreateEntitiesRequest, BatchDeleteEntitiesRequest, \
-    BatchDeleteEntitiesResponse, BatchDeleteEntityTypesRequest, BatchEntitiesResponse, BatchGetEntitiesRequest, \
-    BatchUpdateEntitiesRequest, BatchUpdateEntityTypesRequest, CreateEntityTypeRequest, DeleteEntityTypeRequest, \
-    EntityType, GetEntityTypeRequest, ListEntitiesRequest, ListEntitiesResponse, ListEntityTypesRequest, \
-    ListEntityTypesResponse, UpdateEntityTypeRequest
+from ondewo.nlu.entity_type_pb2 import (
+    BatchCreateEntitiesRequest,
+    BatchDeleteEntitiesRequest,
+    BatchDeleteEntitiesResponse,
+    BatchDeleteEntityTypesRequest,
+    BatchEntitiesResponse,
+    BatchGetEntitiesRequest,
+    BatchUpdateEntitiesRequest,
+    BatchUpdateEntityTypesRequest,
+    CreateEntityTypeRequest,
+    DeleteEntityTypeRequest,
+    EntityType,
+    GetEntityTypeRequest,
+    ListEntitiesRequest,
+    ListEntitiesResponse,
+    ListEntityTypesRequest,
+    ListEntityTypesResponse,
+    UpdateEntityTypeRequest,
+)
 from ondewo.nlu.entity_type_pb2_grpc import EntityTypesStub
 from ondewo.nlu.operations_pb2 import Operation
 

@@ -15,7 +15,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-Modifications Copyright 2021 ONDEWO GmbH
+Modifications Copyright 2020-2023 ONDEWO GmbH
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -230,6 +230,10 @@ class Intent(google.protobuf.message.Message):
             END_FIELD_NUMBER: builtins.int
             PARAMETER_NAME_FIELD_NUMBER: builtins.int
             PARAMETER_DISPLAY_NAME_FIELD_NUMBER: builtins.int
+            CREATED_AT_FIELD_NUMBER: builtins.int
+            MODIFIED_AT_FIELD_NUMBER: builtins.int
+            CREATED_BY_FIELD_NUMBER: builtins.int
+            MODIFIED_BY_FIELD_NUMBER: builtins.int
             entity_type_name: builtins.str
             """Required. The unique entity type identifier in format
             `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
@@ -261,6 +265,16 @@ class Intent(google.protobuf.message.Message):
             """
             parameter_display_name: builtins.str
             """Optional. The parameter name."""
+            @property
+            def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+                """Creation date and time. Read-only field."""
+            @property
+            def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+                """Modification date and time. Read-only field."""
+            created_by: builtins.str
+            """User id in form of a valid UUID."""
+            modified_by: builtins.str
+            """User id in form of a valid UUID."""
             def __init__(
                 self,
                 *,
@@ -272,8 +286,13 @@ class Intent(google.protobuf.message.Message):
                 end: builtins.int = ...,
                 parameter_name: builtins.str = ...,
                 parameter_display_name: builtins.str = ...,
+                created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+                modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+                created_by: builtins.str = ...,
+                modified_by: builtins.str = ...,
             ) -> None: ...
-            def ClearField(self, field_name: typing_extensions.Literal["end", b"end", "entity_type_display_name", b"entity_type_display_name", "entity_type_name", b"entity_type_name", "entity_value_display_name", b"entity_value_display_name", "entity_value_name", b"entity_value_name", "parameter_display_name", b"parameter_display_name", "parameter_name", b"parameter_name", "start", b"start"]) -> None: ...
+            def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+            def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "created_by", b"created_by", "end", b"end", "entity_type_display_name", b"entity_type_display_name", "entity_type_name", b"entity_type_name", "entity_value_display_name", b"entity_value_display_name", "entity_value_name", b"entity_value_name", "modified_at", b"modified_at", "modified_by", b"modified_by", "parameter_display_name", b"parameter_display_name", "parameter_name", b"parameter_name", "start", b"start"]) -> None: ...
 
         NAME_FIELD_NUMBER: builtins.int
         TYPE_FIELD_NUMBER: builtins.int
@@ -281,6 +300,10 @@ class Intent(google.protobuf.message.Message):
         ENTITIES_FIELD_NUMBER: builtins.int
         TIMES_ADDED_COUNT_FIELD_NUMBER: builtins.int
         LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+        CREATED_AT_FIELD_NUMBER: builtins.int
+        MODIFIED_AT_FIELD_NUMBER: builtins.int
+        CREATED_BY_FIELD_NUMBER: builtins.int
+        MODIFIED_BY_FIELD_NUMBER: builtins.int
         name: builtins.str
         """Required. The unique identifier of this training phrase.
         Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/trainingPhrases/&lt;training_phrase_uuid&gt;</code></pre>
@@ -299,6 +322,16 @@ class Intent(google.protobuf.message.Message):
         """
         language_code: builtins.str
         """Optional. The language of the training phrase."""
+        @property
+        def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Creation date and time. Read-only field."""
+        @property
+        def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Modification date and time. Read-only field."""
+        created_by: builtins.str
+        """User id in form of a valid UUID."""
+        modified_by: builtins.str
+        """User id in form of a valid UUID."""
         def __init__(
             self,
             *,
@@ -308,8 +341,13 @@ class Intent(google.protobuf.message.Message):
             entities: collections.abc.Iterable[global___Intent.TrainingPhrase.Entity] | None = ...,
             times_added_count: builtins.int = ...,
             language_code: builtins.str = ...,
+            created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            created_by: builtins.str = ...,
+            modified_by: builtins.str = ...,
         ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["entities", b"entities", "language_code", b"language_code", "name", b"name", "text", b"text", "times_added_count", b"times_added_count", "type", b"type"]) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "created_by", b"created_by", "entities", b"entities", "language_code", b"language_code", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "text", b"text", "times_added_count", b"times_added_count", "type", b"type"]) -> None: ...
 
     @typing_extensions.final
     class Parameter(google.protobuf.message.Message):
@@ -326,6 +364,10 @@ class Intent(google.protobuf.message.Message):
             NAME_FIELD_NUMBER: builtins.int
             TEXT_FIELD_NUMBER: builtins.int
             LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+            CREATED_AT_FIELD_NUMBER: builtins.int
+            MODIFIED_AT_FIELD_NUMBER: builtins.int
+            CREATED_BY_FIELD_NUMBER: builtins.int
+            MODIFIED_BY_FIELD_NUMBER: builtins.int
             name: builtins.str
             """The unique identifier of this prompt.
             Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/parameters/&lt;parameter_uuid&gt;/prompts/&lt;prompt_uuid&gt;</code></pre>
@@ -334,14 +376,29 @@ class Intent(google.protobuf.message.Message):
             """Required. Text of the prompt"""
             language_code: builtins.str
             """The language of the prompts. If not specified, the default language code will be used."""
+            @property
+            def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+                """Creation date and time. Read-only field."""
+            @property
+            def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+                """Modification date and time. Read-only field."""
+            created_by: builtins.str
+            """User id in form of a valid UUID."""
+            modified_by: builtins.str
+            """User id in form of a valid UUID."""
             def __init__(
                 self,
                 *,
                 name: builtins.str = ...,
                 text: builtins.str = ...,
                 language_code: builtins.str = ...,
+                created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+                modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+                created_by: builtins.str = ...,
+                modified_by: builtins.str = ...,
             ) -> None: ...
-            def ClearField(self, field_name: typing_extensions.Literal["language_code", b"language_code", "name", b"name", "text", b"text"]) -> None: ...
+            def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+            def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "created_by", b"created_by", "language_code", b"language_code", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "text", b"text"]) -> None: ...
 
         NAME_FIELD_NUMBER: builtins.int
         DISPLAY_NAME_FIELD_NUMBER: builtins.int
@@ -352,6 +409,10 @@ class Intent(google.protobuf.message.Message):
         MANDATORY_FIELD_NUMBER: builtins.int
         PROMPTS_FIELD_NUMBER: builtins.int
         IS_LIST_FIELD_NUMBER: builtins.int
+        CREATED_AT_FIELD_NUMBER: builtins.int
+        MODIFIED_AT_FIELD_NUMBER: builtins.int
+        CREATED_BY_FIELD_NUMBER: builtins.int
+        MODIFIED_BY_FIELD_NUMBER: builtins.int
         name: builtins.str
         """The unique identifier of this parameter.
         Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/parameters/&lt;parameter_uuid&gt;</code></pre>
@@ -393,6 +454,16 @@ class Intent(google.protobuf.message.Message):
             """
         is_list: builtins.bool
         """Optional. Indicates whether the parameter represents a list of values."""
+        @property
+        def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Creation date and time. Read-only field."""
+        @property
+        def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Modification date and time. Read-only field."""
+        created_by: builtins.str
+        """User id in form of a valid UUID."""
+        modified_by: builtins.str
+        """User id in form of a valid UUID."""
         def __init__(
             self,
             *,
@@ -405,8 +476,13 @@ class Intent(google.protobuf.message.Message):
             mandatory: builtins.bool = ...,
             prompts: collections.abc.Iterable[global___Intent.Parameter.Prompt] | None = ...,
             is_list: builtins.bool = ...,
+            created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            created_by: builtins.str = ...,
+            modified_by: builtins.str = ...,
         ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["default_value", b"default_value", "display_name", b"display_name", "entity_type_display_name", b"entity_type_display_name", "entity_type_name", b"entity_type_name", "is_list", b"is_list", "mandatory", b"mandatory", "name", b"name", "prompts", b"prompts", "value", b"value"]) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "created_by", b"created_by", "default_value", b"default_value", "display_name", b"display_name", "entity_type_display_name", b"entity_type_display_name", "entity_type_name", b"entity_type_name", "is_list", b"is_list", "mandatory", b"mandatory", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "prompts", b"prompts", "value", b"value"]) -> None: ...
 
     @typing_extensions.final
     class Message(google.protobuf.message.Message):
@@ -1122,6 +1198,10 @@ class Intent(google.protobuf.message.Message):
         AUDIO_FIELD_NUMBER: builtins.int
         PLATFORM_FIELD_NUMBER: builtins.int
         IS_PROMPT_FIELD_NUMBER: builtins.int
+        CREATED_AT_FIELD_NUMBER: builtins.int
+        MODIFIED_AT_FIELD_NUMBER: builtins.int
+        CREATED_BY_FIELD_NUMBER: builtins.int
+        MODIFIED_BY_FIELD_NUMBER: builtins.int
         name: builtins.str
         """Required. The name of the return message.
         Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/responseMessages/&lt;message_uuid&gt;</code></pre>
@@ -1177,6 +1257,16 @@ class Intent(google.protobuf.message.Message):
         """Optional. The platform that this message is intended for."""
         is_prompt: builtins.bool
         """Read-only. States if a returned message is a prompt or not."""
+        @property
+        def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Creation date and time. Read-only field."""
+        @property
+        def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Modification date and time. Read-only field."""
+        created_by: builtins.str
+        """User id in form of a valid UUID."""
+        modified_by: builtins.str
+        """User id in form of a valid UUID."""
         def __init__(
             self,
             *,
@@ -1198,9 +1288,13 @@ class Intent(google.protobuf.message.Message):
             audio: global___Intent.Message.Audio | None = ...,
             platform: global___Intent.Message.Platform.ValueType = ...,
             is_prompt: builtins.bool = ...,
+            created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            created_by: builtins.str = ...,
+            modified_by: builtins.str = ...,
         ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["audio", b"audio", "basic_card", b"basic_card", "card", b"card", "carousel_select", b"carousel_select", "html_text", b"html_text", "image", b"image", "link_out_suggestion", b"link_out_suggestion", "list_select", b"list_select", "message", b"message", "payload", b"payload", "quick_replies", b"quick_replies", "simple_responses", b"simple_responses", "suggestions", b"suggestions", "text", b"text", "video", b"video"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["audio", b"audio", "basic_card", b"basic_card", "card", b"card", "carousel_select", b"carousel_select", "html_text", b"html_text", "image", b"image", "is_prompt", b"is_prompt", "language_code", b"language_code", "link_out_suggestion", b"link_out_suggestion", "list_select", b"list_select", "message", b"message", "name", b"name", "payload", b"payload", "platform", b"platform", "quick_replies", b"quick_replies", "simple_responses", b"simple_responses", "suggestions", b"suggestions", "text", b"text", "video", b"video"]) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["audio", b"audio", "basic_card", b"basic_card", "card", b"card", "carousel_select", b"carousel_select", "created_at", b"created_at", "html_text", b"html_text", "image", b"image", "link_out_suggestion", b"link_out_suggestion", "list_select", b"list_select", "message", b"message", "modified_at", b"modified_at", "payload", b"payload", "quick_replies", b"quick_replies", "simple_responses", b"simple_responses", "suggestions", b"suggestions", "text", b"text", "video", b"video"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["audio", b"audio", "basic_card", b"basic_card", "card", b"card", "carousel_select", b"carousel_select", "created_at", b"created_at", "created_by", b"created_by", "html_text", b"html_text", "image", b"image", "is_prompt", b"is_prompt", "language_code", b"language_code", "link_out_suggestion", b"link_out_suggestion", "list_select", b"list_select", "message", b"message", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "payload", b"payload", "platform", b"platform", "quick_replies", b"quick_replies", "simple_responses", b"simple_responses", "suggestions", b"suggestions", "text", b"text", "video", b"video"]) -> None: ...
         def WhichOneof(self, oneof_group: typing_extensions.Literal["message", b"message"]) -> typing_extensions.Literal["text", "image", "quick_replies", "card", "payload", "simple_responses", "basic_card", "suggestions", "link_out_suggestion", "list_select", "carousel_select", "html_text", "video", "audio"] | None: ...
 
     @typing_extensions.final
@@ -1254,6 +1348,10 @@ class Intent(google.protobuf.message.Message):
     START_DATE_FIELD_NUMBER: builtins.int
     END_DATE_FIELD_NUMBER: builtins.int
     TAGS_FIELD_NUMBER: builtins.int
+    CREATED_AT_FIELD_NUMBER: builtins.int
+    MODIFIED_AT_FIELD_NUMBER: builtins.int
+    CREATED_BY_FIELD_NUMBER: builtins.int
+    MODIFIED_BY_FIELD_NUMBER: builtins.int
     name: builtins.str
     """Required for all methods except `create` (`create` populates the name
     automatically.
@@ -1272,7 +1370,7 @@ class Intent(google.protobuf.message.Message):
     """Optional. Indicates whether this is a fallback intent."""
     ml_disabled: builtins.bool
     """Optional. Indicates whether Machine Learning is disabled for the intent.
-    Note: If `ml_diabled` setting is set to true, then this intent is not
+    Note: If `ml_disabled` setting is set to true, then this intent is not
     taken into account during inference in `ML ONLY` match mode. Also,
     auto-markup in the UI is turned off.
     """
@@ -1359,6 +1457,16 @@ class Intent(google.protobuf.message.Message):
     @property
     def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Optional. Adds arbitrary "categories" for which one could filter the intents"""
+    @property
+    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Creation date and time. Read-only field."""
+    @property
+    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Modification date and time. Read-only field."""
+    created_by: builtins.str
+    """User id in form of a valid UUID."""
+    modified_by: builtins.str
+    """User id in form of a valid UUID."""
     def __init__(
         self,
         *,
@@ -1389,9 +1497,13 @@ class Intent(google.protobuf.message.Message):
         start_date: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         end_date: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         tags: collections.abc.Iterable[builtins.str] | None = ...,
+        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        created_by: builtins.str = ...,
+        modified_by: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["end_date", b"end_date", "start_date", b"start_date"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "default_response_platforms", b"default_response_platforms", "display_name", b"display_name", "domain_name", b"domain_name", "end_date", b"end_date", "events", b"events", "followup_intent_info", b"followup_intent_info", "input_context_names", b"input_context_names", "is_end_of_deviation", b"is_end_of_deviation", "is_fallback", b"is_fallback", "is_start_of_deviation", b"is_start_of_deviation", "messages", b"messages", "ml_disabled", b"ml_disabled", "name", b"name", "next_page_token", b"next_page_token", "output_contexts", b"output_contexts", "parameters", b"parameters", "parent_followup_intent_name", b"parent_followup_intent_name", "priority", b"priority", "reset_contexts", b"reset_contexts", "root_followup_intent_name", b"root_followup_intent_name", "start_date", b"start_date", "status", b"status", "tags", b"tags", "training_phrase_count", b"training_phrase_count", "training_phrases", b"training_phrases", "webhook_state", b"webhook_state"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "end_date", b"end_date", "modified_at", b"modified_at", "start_date", b"start_date"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "created_at", b"created_at", "created_by", b"created_by", "default_response_platforms", b"default_response_platforms", "display_name", b"display_name", "domain_name", b"domain_name", "end_date", b"end_date", "events", b"events", "followup_intent_info", b"followup_intent_info", "input_context_names", b"input_context_names", "is_end_of_deviation", b"is_end_of_deviation", "is_fallback", b"is_fallback", "is_start_of_deviation", b"is_start_of_deviation", "messages", b"messages", "ml_disabled", b"ml_disabled", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "next_page_token", b"next_page_token", "output_contexts", b"output_contexts", "parameters", b"parameters", "parent_followup_intent_name", b"parent_followup_intent_name", "priority", b"priority", "reset_contexts", b"reset_contexts", "root_followup_intent_name", b"root_followup_intent_name", "start_date", b"start_date", "status", b"status", "tags", b"tags", "training_phrase_count", b"training_phrase_count", "training_phrases", b"training_phrases", "webhook_state", b"webhook_state"]) -> None: ...
 
 global___Intent = Intent
 
@@ -1737,7 +1849,7 @@ global___IntentBatch = IntentBatch
 
 @typing_extensions.final
 class IntentSorting(google.protobuf.message.Message):
-    """This message contains sorting of an intentn"""
+    """This message contains sorting of an intent"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 

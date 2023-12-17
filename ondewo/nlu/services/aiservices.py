@@ -1,4 +1,4 @@
-# Copyright 2021 ONDEWO GmbH
+# Copyright 2021-2023 ONDEWO GmbH
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,12 +13,23 @@
 # limitations under the License.
 
 
-from ondewo.nlu.aiservices_pb2 import ExtractEntitiesRequest, GetAlternativeSentencesRequest, \
-    GenerateUserSaysRequest, GenerateUserSaysResponse, \
-    GenerateResponsesRequest, GenerateResponsesResponse, \
-    GetAlternativeTrainingPhrasesRequest, GetAlternativeTrainingPhrasesResponse, \
-    GetAlternativeSentencesResponse, ExtractEntitiesResponse, GetSynonymsResponse, GetSynonymsRequest, \
-    ExtractEntitiesFuzzyRequest, ClassifyIntentsRequest, ClassifyIntentsResponse
+from ondewo.nlu.aiservices_pb2 import (
+    ClassifyIntentsRequest,
+    ClassifyIntentsResponse,
+    ExtractEntitiesFuzzyRequest,
+    ExtractEntitiesRequest,
+    ExtractEntitiesResponse,
+    GenerateResponsesRequest,
+    GenerateResponsesResponse,
+    GenerateUserSaysRequest,
+    GenerateUserSaysResponse,
+    GetAlternativeSentencesRequest,
+    GetAlternativeSentencesResponse,
+    GetAlternativeTrainingPhrasesRequest,
+    GetAlternativeTrainingPhrasesResponse,
+    GetSynonymsRequest,
+    GetSynonymsResponse,
+)
 from ondewo.nlu.aiservices_pb2_grpc import AiServicesStub
 from ondewo.nlu.core.services_interface import ServicesInterface
 
@@ -39,27 +50,33 @@ class AIServices(ServicesInterface):
         response: ExtractEntitiesResponse = self.stub.ExtractEntities(request, metadata=self.metadata)
         return response
 
-    def generate_user_says(self,
-                           request: GenerateUserSaysRequest) -> GenerateUserSaysResponse:
+    def generate_user_says(
+        self,
+        request: GenerateUserSaysRequest
+    ) -> GenerateUserSaysResponse:
         response: GenerateUserSaysResponse = \
             self.stub.GenerateUserSays(request, metadata=self.metadata)
         return response
 
-    def generate_responses(self,
-                           request: GenerateResponsesRequest) -> GenerateResponsesResponse:
+    def generate_responses(
+        self,
+        request: GenerateResponsesRequest
+    ) -> GenerateResponsesResponse:
         response: GenerateResponsesResponse = \
             self.stub.GenerateResponses(request, metadata=self.metadata)
         return response
 
-    def get_alternative_sentences(self,
-                                  request: GetAlternativeSentencesRequest) -> GetAlternativeSentencesResponse:
+    def get_alternative_sentences(
+        self,
+        request: GetAlternativeSentencesRequest
+    ) -> GetAlternativeSentencesResponse:
         response: GetAlternativeSentencesResponse = \
             self.stub.GetAlternativeSentences(request, metadata=self.metadata)
         return response
 
     def get_alternative_training_phrases(
-            self,
-            request: GetAlternativeTrainingPhrasesRequest
+        self,
+        request: GetAlternativeTrainingPhrasesRequest
     ) -> GetAlternativeTrainingPhrasesResponse:
         response: GetAlternativeTrainingPhrasesResponse = \
             self.stub.GetAlternativeTrainingPhrases(request, metadata=self.metadata)

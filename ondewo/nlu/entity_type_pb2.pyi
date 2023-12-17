@@ -15,7 +15,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-Modifications Copyright 2021 ONDEWO GmbH
+Modifications Copyright 2020-2023 ONDEWO GmbH
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -37,6 +37,7 @@ import google.protobuf.field_mask_pb2
 import google.protobuf.internal.containers
 import google.protobuf.internal.enum_type_wrapper
 import google.protobuf.message
+import google.protobuf.timestamp_pb2
 import ondewo.nlu.common_pb2
 import sys
 import typing
@@ -200,6 +201,10 @@ class EntityType(google.protobuf.message.Message):
         DISPLAY_NAME_FIELD_NUMBER: builtins.int
         SYNONYM_COUNT_FIELD_NUMBER: builtins.int
         LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+        CREATED_AT_FIELD_NUMBER: builtins.int
+        MODIFIED_AT_FIELD_NUMBER: builtins.int
+        CREATED_BY_FIELD_NUMBER: builtins.int
+        MODIFIED_BY_FIELD_NUMBER: builtins.int
         value: builtins.str
         """Required.
         For `KIND_MAP` entity types:
@@ -223,6 +228,16 @@ class EntityType(google.protobuf.message.Message):
         """Optional. Total count of entity synonyms"""
         language_code: builtins.str
         """Required. The language to list entity synonyms for."""
+        @property
+        def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Creation date and time. Read-only field."""
+        @property
+        def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Modification date and time. Read-only field."""
+        created_by: builtins.str
+        """User id in form of a valid UUID."""
+        modified_by: builtins.str
+        """User id in form of a valid UUID."""
         def __init__(
             self,
             *,
@@ -232,8 +247,13 @@ class EntityType(google.protobuf.message.Message):
             display_name: builtins.str = ...,
             synonym_count: builtins.int = ...,
             language_code: builtins.str = ...,
+            created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            created_by: builtins.str = ...,
+            modified_by: builtins.str = ...,
         ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["display_name", b"display_name", "language_code", b"language_code", "name", b"name", "synonym_count", b"synonym_count", "synonyms", b"synonyms", "value", b"value"]) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "language_code", b"language_code", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "synonym_count", b"synonym_count", "synonyms", b"synonyms", "value", b"value"]) -> None: ...
 
     NAME_FIELD_NUMBER: builtins.int
     DISPLAY_NAME_FIELD_NUMBER: builtins.int
@@ -244,6 +264,10 @@ class EntityType(google.protobuf.message.Message):
     ENTITY_COUNT_FIELD_NUMBER: builtins.int
     STATUS_FIELD_NUMBER: builtins.int
     SYNONYM_COUNT_FIELD_NUMBER: builtins.int
+    CREATED_AT_FIELD_NUMBER: builtins.int
+    MODIFIED_AT_FIELD_NUMBER: builtins.int
+    CREATED_BY_FIELD_NUMBER: builtins.int
+    MODIFIED_BY_FIELD_NUMBER: builtins.int
     name: builtins.str
     """Required for all methods except `create` (`create` populates the name
     automatically.
@@ -268,6 +292,16 @@ class EntityType(google.protobuf.message.Message):
     """Indicates whether the entity type is active or not"""
     synonym_count: builtins.int
     """Read-Only field. Total count of entity synonyms of the entity type"""
+    @property
+    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Creation date and time. Read-only field."""
+    @property
+    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Modification date and time. Read-only field."""
+    created_by: builtins.str
+    """User id in form of a valid UUID."""
+    modified_by: builtins.str
+    """User id in form of a valid UUID."""
     def __init__(
         self,
         *,
@@ -280,8 +314,13 @@ class EntityType(google.protobuf.message.Message):
         entity_count: builtins.int = ...,
         status: global___EntityType.EntityTypeStatus.ValueType = ...,
         synonym_count: builtins.int = ...,
+        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        created_by: builtins.str = ...,
+        modified_by: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["auto_expansion_mode", b"auto_expansion_mode", "display_name", b"display_name", "entities", b"entities", "entity_count", b"entity_count", "kind", b"kind", "name", b"name", "next_page_token", b"next_page_token", "status", b"status", "synonym_count", b"synonym_count"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["auto_expansion_mode", b"auto_expansion_mode", "created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "entities", b"entities", "entity_count", b"entity_count", "kind", b"kind", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "next_page_token", b"next_page_token", "status", b"status", "synonym_count", b"synonym_count"]) -> None: ...
 
 global___EntityType = EntityType
 

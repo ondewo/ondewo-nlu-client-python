@@ -1,4 +1,4 @@
-# Copyright 2021 ONDEWO GmbH
+# Copyright 2021-2023 ONDEWO GmbH
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,18 +14,47 @@
 
 
 from dataclasses import dataclass
-from typing import Optional, TypeVar, Dict, Type, Any
+from typing import (
+    Any,
+    Dict,
+    Optional,
+    Type,
+    TypeVar,
+)
 from uuid import uuid4
 
 from google.protobuf.message import Message
-from ondewo.utils.helpers import get_attr_recursive, set_attr_recursive
+from ondewo.utils.helpers import (
+    get_attr_recursive,
+    set_attr_recursive,
+)
 
-from ondewo.nlu.context_pb2 import CreateContextRequest, ListContextsRequest, UpdateContextRequest, \
-    DeleteContextRequest, DeleteAllContextsRequest, GetContextRequest
-from ondewo.nlu.intent_pb2 import GetIntentRequest, ListIntentsRequest, CreateIntentRequest, \
-    UpdateIntentRequest, DeleteIntentRequest, BatchUpdateIntentsRequest, BatchDeleteIntentsRequest
-from ondewo.nlu.session_pb2 import DetectIntentRequest, GetLatestSessionReviewRequest, ListSessionsRequest, \
-    GetSessionRequest, ListSessionReviewsRequest, GetSessionReviewRequest, CreateSessionReviewRequest
+from ondewo.nlu.context_pb2 import (
+    CreateContextRequest,
+    DeleteAllContextsRequest,
+    DeleteContextRequest,
+    GetContextRequest,
+    ListContextsRequest,
+    UpdateContextRequest,
+)
+from ondewo.nlu.intent_pb2 import (
+    BatchDeleteIntentsRequest,
+    BatchUpdateIntentsRequest,
+    CreateIntentRequest,
+    DeleteIntentRequest,
+    GetIntentRequest,
+    ListIntentsRequest,
+    UpdateIntentRequest,
+)
+from ondewo.nlu.session_pb2 import (
+    CreateSessionReviewRequest,
+    DetectIntentRequest,
+    GetLatestSessionReviewRequest,
+    GetSessionRequest,
+    GetSessionReviewRequest,
+    ListSessionReviewsRequest,
+    ListSessionsRequest,
+)
 from ondewo.nlu.user_pb2 import LoginRequest
 
 T = TypeVar("T", bound=Message)
@@ -115,7 +144,7 @@ class SharedRequestData(object):
 
     @property
     def _request_field__to__field__per__request_type(
-            self,
+        self,
     ) -> Dict[Any, Dict[str, str]]:  # fixme: return type should be  Dict[Type[T], Dict[str, str]]
         """
         _request_field__to__field__per__request_type specifies ...

@@ -15,7 +15,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-Modifications Copyright 2021 ONDEWO GmbH
+Modifications Copyright 2020-2023 ONDEWO GmbH
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -32,15 +32,19 @@ limitations under the License.
 import builtins
 import collections.abc
 import google.protobuf.descriptor
+import google.protobuf.field_mask_pb2
 import google.protobuf.internal.containers
+import google.protobuf.internal.enum_type_wrapper
 import google.protobuf.message
 import google.protobuf.struct_pb2
 import ondewo.nlu.context_pb2
+import ondewo.nlu.entity_type_pb2
 import ondewo.nlu.intent_pb2
 import ondewo.nlu.session_pb2
 import sys
+import typing
 
-if sys.version_info >= (3, 8):
+if sys.version_info >= (3, 10):
     import typing as typing_extensions
 else:
     import typing_extensions
@@ -71,16 +75,11 @@ class WebhookRequest(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    SESSION_FIELD_NUMBER: builtins.int
     RESPONSE_ID_FIELD_NUMBER: builtins.int
     QUERY_RESULT_FIELD_NUMBER: builtins.int
     ORIGINAL_DETECT_INTENT_REQUEST_FIELD_NUMBER: builtins.int
+    SESSION_FIELD_NUMBER: builtins.int
     HEADERS_FIELD_NUMBER: builtins.int
-    session: builtins.str
-    """The unique identifier of detectIntent request session.
-    Can be used to identify end-user inside webhook implementation.
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
-    """
     response_id: builtins.str
     """The unique identifier of the response. Contains the same value as
     `[Streaming]DetectIntentResponse.response_id`.
@@ -95,16 +94,21 @@ class WebhookRequest(google.protobuf.message.Message):
         """Optional. The contents of the original request that was passed to
         `[Streaming]DetectIntent` call.
         """
+    session: builtins.str
+    """The unique identifier of detectIntent request session.
+    Can be used to identify end-user inside webhook implementation.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
+    """
     @property
     def headers(self) -> google.protobuf.struct_pb2.Struct:
         """Optional. The headers of the request message"""
     def __init__(
         self,
         *,
-        session: builtins.str = ...,
         response_id: builtins.str = ...,
         query_result: ondewo.nlu.session_pb2.QueryResult | None = ...,
         original_detect_intent_request: global___OriginalDetectIntentRequest | None = ...,
+        session: builtins.str = ...,
         headers: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["headers", b"headers", "original_detect_intent_request", b"original_detect_intent_request", "query_result", b"query_result"]) -> builtins.bool: ...
@@ -124,6 +128,7 @@ class WebhookResponse(google.protobuf.message.Message):
     PAYLOAD_FIELD_NUMBER: builtins.int
     OUTPUT_CONTEXTS_FIELD_NUMBER: builtins.int
     FOLLOWUP_EVENT_INPUT_FIELD_NUMBER: builtins.int
+    SESSION_ENTITY_TYPES_FIELD_NUMBER: builtins.int
     fulfillment_text: builtins.str
     """Optional. The text to be shown on the screen. This value is passed directly
     to `QueryResult.fulfillment_text`.
@@ -171,6 +176,13 @@ class WebhookResponse(google.protobuf.message.Message):
         """Optional. Makes the platform immediately invoke another `DetectIntent` call
         internally with the specified event as input.
         """
+    @property
+    def session_entity_types(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___SessionEntityType]:
+        """Optional. Additional session entity types to replace or extend developer
+        entity types with. The entity synonyms apply to all languages and persist
+        for the session. Setting this data from a webhook overwrites
+        the session entity types that have been set using `detectIntent` method.
+        """
     def __init__(
         self,
         *,
@@ -180,9 +192,10 @@ class WebhookResponse(google.protobuf.message.Message):
         payload: google.protobuf.struct_pb2.Struct | None = ...,
         output_contexts: collections.abc.Iterable[ondewo.nlu.context_pb2.Context] | None = ...,
         followup_event_input: ondewo.nlu.session_pb2.EventInput | None = ...,
+        session_entity_types: collections.abc.Iterable[global___SessionEntityType] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["followup_event_input", b"followup_event_input", "payload", b"payload"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["followup_event_input", b"followup_event_input", "fulfillment_messages", b"fulfillment_messages", "fulfillment_text", b"fulfillment_text", "output_contexts", b"output_contexts", "payload", b"payload", "source", b"source"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["followup_event_input", b"followup_event_input", "fulfillment_messages", b"fulfillment_messages", "fulfillment_text", b"fulfillment_text", "output_contexts", b"output_contexts", "payload", b"payload", "session_entity_types", b"session_entity_types", "source", b"source"]) -> None: ...
 
 global___WebhookResponse = WebhookResponse
 
@@ -197,13 +210,21 @@ class OriginalDetectIntentRequest(google.protobuf.message.Message):
     SOURCE_FIELD_NUMBER: builtins.int
     PAYLOAD_FIELD_NUMBER: builtins.int
     source: builtins.str
-    """The source of this request, e.g., `google`, `facebook`, `slack`. It is set
-    by Dialogflow-owned servers.
+    """The source of this request, e.g., `google`, `facebook`, `slack` or other "platforms". .
+    Used to identify the "platform"
     """
     @property
     def payload(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. This field is set to the value of `QueryParameters.payload` field
-        passed in the request.
+        """Optional. This field is set to the value of the `QueryParameters.payload`
+        field passed in the request. Some integrations that query an
+        agent may provide additional data in the payload.
+
+        In particular this can be of the form:
+        <pre>{
+         "a": {
+           "b": "c"
+         }
+        }</pre>
         """
     def __init__(
         self,
@@ -235,3 +256,277 @@ class PingResponse(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["is_reachable", b"is_reachable"]) -> None: ...
 
 global___PingResponse = PingResponse
+
+@typing_extensions.final
+class SessionEntityType(google.protobuf.message.Message):
+    """A session represents a conversation between a Dialogflow agent and an
+    end-user. You can create special entities, called session entities, during a
+    session. Session entities can extend or replace custom entity types and only
+    exist during the session that they were created for. All session data,
+    including session entities, is stored by Dialogflow for 20 minutes.
+
+    For more information, see the [session entity
+    guide](https://cloud.google.com/dialogflow/docs/entities-session).
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    class _EntityOverrideMode:
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
+
+    class _EntityOverrideModeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[SessionEntityType._EntityOverrideMode.ValueType], builtins.type):
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        ENTITY_OVERRIDE_MODE_UNSPECIFIED: SessionEntityType._EntityOverrideMode.ValueType  # 0
+        """Not specified. This value should be never used."""
+        ENTITY_OVERRIDE_MODE_OVERRIDE: SessionEntityType._EntityOverrideMode.ValueType  # 1
+        """The collection of session entities overrides the collection of entities
+        in the corresponding custom entity type.
+        """
+        ENTITY_OVERRIDE_MODE_SUPPLEMENT: SessionEntityType._EntityOverrideMode.ValueType  # 2
+        """The collection of session entities extends the collection of entities in
+        the corresponding custom entity type.
+
+        Note: Even in this override mode calls to `ListSessionEntityTypes`,
+        `GetSessionEntityType`, `CreateSessionEntityType` and
+        `UpdateSessionEntityType` only return the additional entities added in
+        this session entity type. If you want to get the supplemented list,
+        please call
+        [EntityTypes.GetEntityType][google.cloud.dialogflow.v2.EntityTypes.GetEntityType]
+        on the custom entity type and merge.
+        """
+
+    class EntityOverrideMode(_EntityOverrideMode, metaclass=_EntityOverrideModeEnumTypeWrapper):
+        """The types of modifications for a session entity type."""
+
+    ENTITY_OVERRIDE_MODE_UNSPECIFIED: SessionEntityType.EntityOverrideMode.ValueType  # 0
+    """Not specified. This value should be never used."""
+    ENTITY_OVERRIDE_MODE_OVERRIDE: SessionEntityType.EntityOverrideMode.ValueType  # 1
+    """The collection of session entities overrides the collection of entities
+    in the corresponding custom entity type.
+    """
+    ENTITY_OVERRIDE_MODE_SUPPLEMENT: SessionEntityType.EntityOverrideMode.ValueType  # 2
+    """The collection of session entities extends the collection of entities in
+    the corresponding custom entity type.
+
+    Note: Even in this override mode calls to `ListSessionEntityTypes`,
+    `GetSessionEntityType`, `CreateSessionEntityType` and
+    `UpdateSessionEntityType` only return the additional entities added in
+    this session entity type. If you want to get the supplemented list,
+    please call
+    [EntityTypes.GetEntityType][google.cloud.dialogflow.v2.EntityTypes.GetEntityType]
+    on the custom entity type and merge.
+    """
+
+    NAME_FIELD_NUMBER: builtins.int
+    ENTITY_OVERRIDE_MODE_FIELD_NUMBER: builtins.int
+    ENTITIES_FIELD_NUMBER: builtins.int
+    name: builtins.str
+    """Required. The unique identifier of this session entity type. Format:
+    `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
+    Display Name>`, or `projects/<Project ID>/agent/environments/<Environment
+    ID>/users/<User ID>/sessions/<Session ID>/entityTypes/<Entity Type Display
+    Name>`.
+    If `Environment ID` is not specified, we assume default 'draft'
+    environment. If `User ID` is not specified, we assume default '-' user.
+
+    `<Entity Type Display Name>` must be the display name of an existing entity
+    type in the same agent that will be overridden or supplemented.
+    """
+    entity_override_mode: global___SessionEntityType.EntityOverrideMode.ValueType
+    """Required. Indicates whether the additional data should override or
+    supplement the custom entity type definition.
+    """
+    @property
+    def entities(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.entity_type_pb2.EntityType.Entity]:
+        """Required. The collection of entities associated with this session entity
+        type.
+        """
+    def __init__(
+        self,
+        *,
+        name: builtins.str = ...,
+        entity_override_mode: global___SessionEntityType.EntityOverrideMode.ValueType = ...,
+        entities: collections.abc.Iterable[ondewo.nlu.entity_type_pb2.EntityType.Entity] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["entities", b"entities", "entity_override_mode", b"entity_override_mode", "name", b"name"]) -> None: ...
+
+global___SessionEntityType = SessionEntityType
+
+@typing_extensions.final
+class ListSessionEntityTypesRequest(google.protobuf.message.Message):
+    """The request message for
+    [SessionEntityTypes.ListSessionEntityTypes][google.cloud.dialogflow.v2.SessionEntityTypes.ListSessionEntityTypes].
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PARENT_FIELD_NUMBER: builtins.int
+    PAGE_SIZE_FIELD_NUMBER: builtins.int
+    PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Required. The session to list all session entity types from.
+    Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
+    `projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/
+    sessions/<Session ID>`.
+    If `Environment ID` is not specified, we assume default 'draft'
+    environment. If `User ID` is not specified, we assume default '-' user.
+    """
+    page_size: builtins.int
+    """Optional. The maximum number of items to return in a single page. By
+    default 100 and at most 1000.
+    """
+    page_token: builtins.str
+    """Optional. The next_page_token value returned from a previous list request."""
+    def __init__(
+        self,
+        *,
+        parent: builtins.str = ...,
+        page_size: builtins.int = ...,
+        page_token: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["page_size", b"page_size", "page_token", b"page_token", "parent", b"parent"]) -> None: ...
+
+global___ListSessionEntityTypesRequest = ListSessionEntityTypesRequest
+
+@typing_extensions.final
+class ListSessionEntityTypesResponse(google.protobuf.message.Message):
+    """The response message for
+    [SessionEntityTypes.ListSessionEntityTypes][google.cloud.dialogflow.v2.SessionEntityTypes.ListSessionEntityTypes].
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    SESSION_ENTITY_TYPES_FIELD_NUMBER: builtins.int
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    @property
+    def session_entity_types(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___SessionEntityType]:
+        """The list of session entity types. There will be a maximum number of items
+        returned based on the page_size field in the request.
+        """
+    next_page_token: builtins.str
+    """Token to retrieve the next page of results, or empty if there are no
+    more results in the list.
+    """
+    def __init__(
+        self,
+        *,
+        session_entity_types: collections.abc.Iterable[global___SessionEntityType] | None = ...,
+        next_page_token: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["next_page_token", b"next_page_token", "session_entity_types", b"session_entity_types"]) -> None: ...
+
+global___ListSessionEntityTypesResponse = ListSessionEntityTypesResponse
+
+@typing_extensions.final
+class GetSessionEntityTypeRequest(google.protobuf.message.Message):
+    """The request message for
+    [SessionEntityTypes.GetSessionEntityType][google.cloud.dialogflow.v2.SessionEntityTypes.GetSessionEntityType].
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    NAME_FIELD_NUMBER: builtins.int
+    name: builtins.str
+    """Required. The name of the session entity type. Format:
+    `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
+    Display Name>` or `projects/<Project ID>/agent/environments/<Environment
+    ID>/users/<User ID>/sessions/<Session ID>/entityTypes/<Entity Type Display
+    Name>`.
+    If `Environment ID` is not specified, we assume default 'draft'
+    environment. If `User ID` is not specified, we assume default '-' user.
+    """
+    def __init__(
+        self,
+        *,
+        name: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["name", b"name"]) -> None: ...
+
+global___GetSessionEntityTypeRequest = GetSessionEntityTypeRequest
+
+@typing_extensions.final
+class CreateSessionEntityTypeRequest(google.protobuf.message.Message):
+    """The request message for
+    [SessionEntityTypes.CreateSessionEntityType][google.cloud.dialogflow.v2.SessionEntityTypes.CreateSessionEntityType].
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PARENT_FIELD_NUMBER: builtins.int
+    SESSION_ENTITY_TYPE_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Required. The session to create a session entity type for.
+    Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
+    `projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/
+    sessions/<Session ID>`.
+    If `Environment ID` is not specified, we assume default 'draft'
+    environment. If `User ID` is not specified, we assume default '-' user.
+    """
+    @property
+    def session_entity_type(self) -> global___SessionEntityType:
+        """Required. The session entity type to create."""
+    def __init__(
+        self,
+        *,
+        parent: builtins.str = ...,
+        session_entity_type: global___SessionEntityType | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["session_entity_type", b"session_entity_type"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["parent", b"parent", "session_entity_type", b"session_entity_type"]) -> None: ...
+
+global___CreateSessionEntityTypeRequest = CreateSessionEntityTypeRequest
+
+@typing_extensions.final
+class UpdateSessionEntityTypeRequest(google.protobuf.message.Message):
+    """The request message for
+    [SessionEntityTypes.UpdateSessionEntityType][google.cloud.dialogflow.v2.SessionEntityTypes.UpdateSessionEntityType].
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    SESSION_ENTITY_TYPE_FIELD_NUMBER: builtins.int
+    UPDATE_MASK_FIELD_NUMBER: builtins.int
+    @property
+    def session_entity_type(self) -> global___SessionEntityType:
+        """Required. The session entity type to update."""
+    @property
+    def update_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields get updated."""
+    def __init__(
+        self,
+        *,
+        session_entity_type: global___SessionEntityType | None = ...,
+        update_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["session_entity_type", b"session_entity_type", "update_mask", b"update_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["session_entity_type", b"session_entity_type", "update_mask", b"update_mask"]) -> None: ...
+
+global___UpdateSessionEntityTypeRequest = UpdateSessionEntityTypeRequest
+
+@typing_extensions.final
+class DeleteSessionEntityTypeRequest(google.protobuf.message.Message):
+    """The request message for
+    [SessionEntityTypes.DeleteSessionEntityType][google.cloud.dialogflow.v2.SessionEntityTypes.DeleteSessionEntityType].
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    NAME_FIELD_NUMBER: builtins.int
+    name: builtins.str
+    """Required. The name of the entity type to delete. Format:
+    `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
+    Display Name>` or `projects/<Project ID>/agent/environments/<Environment
+    ID>/users/<User ID>/sessions/<Session ID>/entityTypes/<Entity Type Display
+    Name>`.
+    If `Environment ID` is not specified, we assume default 'draft'
+    environment. If `User ID` is not specified, we assume default '-' user.
+    """
+    def __init__(
+        self,
+        *,
+        name: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["name", b"name"]) -> None: ...
+
+global___DeleteSessionEntityTypeRequest = DeleteSessionEntityTypeRequest

@@ -3,6 +3,7 @@
 import grpc
 
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
+from ondewo.nlu import common_pb2 as ondewo_dot_nlu_dot_common__pb2
 from ondewo.nlu import session_pb2 as ondewo_dot_nlu_dot_session__pb2
 
 
@@ -139,6 +140,26 @@ class SessionsStub(object):
                 request_serializer=ondewo_dot_nlu_dot_session__pb2.DeleteSessionLabelsRequest.SerializeToString,
                 response_deserializer=ondewo_dot_nlu_dot_session__pb2.Session.FromString,
                 )
+        self.AddSessionComment = channel.unary_unary(
+                '/ondewo.nlu.Sessions/AddSessionComment',
+                request_serializer=ondewo_dot_nlu_dot_session__pb2.AddSessionCommentRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_common__pb2.Comment.FromString,
+                )
+        self.DeleteSessionComments = channel.unary_unary(
+                '/ondewo.nlu.Sessions/DeleteSessionComments',
+                request_serializer=ondewo_dot_nlu_dot_session__pb2.DeleteSessionCommentsRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_session__pb2.Session.FromString,
+                )
+        self.UpdateSessionComments = channel.unary_unary(
+                '/ondewo.nlu.Sessions/UpdateSessionComments',
+                request_serializer=ondewo_dot_nlu_dot_session__pb2.UpdateSessionCommentsRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_session__pb2.Session.FromString,
+                )
+        self.ListSessionComments = channel.unary_unary(
+                '/ondewo.nlu.Sessions/ListSessionComments',
+                request_serializer=ondewo_dot_nlu_dot_session__pb2.ListSessionCommentsRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_session__pb2.ListSessionCommentsResponse.FromString,
+                )
         self.ListSessionReviews = channel.unary_unary(
                 '/ondewo.nlu.Sessions/ListSessionReviews',
                 request_serializer=ondewo_dot_nlu_dot_session__pb2.ListSessionReviewsRequest.SerializeToString,
@@ -158,6 +179,26 @@ class SessionsStub(object):
                 '/ondewo.nlu.Sessions/CreateSessionReview',
                 request_serializer=ondewo_dot_nlu_dot_session__pb2.CreateSessionReviewRequest.SerializeToString,
                 response_deserializer=ondewo_dot_nlu_dot_session__pb2.SessionReview.FromString,
+                )
+        self.GetAudioFiles = channel.unary_unary(
+                '/ondewo.nlu.Sessions/GetAudioFiles',
+                request_serializer=ondewo_dot_nlu_dot_session__pb2.GetAudioFilesRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_session__pb2.GetAudioFilesResponse.FromString,
+                )
+        self.AddAudioFiles = channel.unary_unary(
+                '/ondewo.nlu.Sessions/AddAudioFiles',
+                request_serializer=ondewo_dot_nlu_dot_session__pb2.AddAudioFilesRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_session__pb2.AddAudioFilesResponse.FromString,
+                )
+        self.DeleteAudioFiles = channel.unary_unary(
+                '/ondewo.nlu.Sessions/DeleteAudioFiles',
+                request_serializer=ondewo_dot_nlu_dot_session__pb2.DeleteAudioFilesRequest.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                )
+        self.GetAudioFileOfSession = channel.unary_unary(
+                '/ondewo.nlu.Sessions/GetAudioFileOfSession',
+                request_serializer=ondewo_dot_nlu_dot_session__pb2.GetAudioFileOfSessionRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_session__pb2.AudioFileResource.FromString,
                 )
 
 
@@ -326,6 +367,30 @@ class SessionsServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def AddSessionComment(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteSessionComments(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def UpdateSessionComments(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListSessionComments(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def ListSessionReviews(self, request, context):
         """*** SESSION-REVIEW RELATED ENDPOINTS *** //
         ListSessionReviews:
@@ -355,6 +420,42 @@ class SessionsServicer(object):
         """CreateSessionReview:
         persist a session review in ondewo-kb
         as a side effect: also update training data in ondewo-cai
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetAudioFiles(self, request, context):
+        """RPC to get audio files based on specified criteria.
+        Retrieves information about audio files associated with specific sessions.
+        Returns a response containing details of the requested audio files.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def AddAudioFiles(self, request, context):
+        """RPC to add audio files to a session.
+        Adds new audio files to the specified session, providing details about each file.
+        Returns a response containing information about the added audio files.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteAudioFiles(self, request, context):
+        """RPC to delete specified audio files.
+        Deletes audio files associated with specific sessions based on unique identifiers.
+        Returns an empty response indicating the successful deletion of the specified audio files.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetAudioFileOfSession(self, request, context):
+        """RPC to get a consolidated audio file for a specific session.
+        Retrieves a single audio file that combines all audio files associated with the specified session.
+        Returns details of the consolidated audio file.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -483,6 +584,26 @@ def add_SessionsServicer_to_server(servicer, server):
                     request_deserializer=ondewo_dot_nlu_dot_session__pb2.DeleteSessionLabelsRequest.FromString,
                     response_serializer=ondewo_dot_nlu_dot_session__pb2.Session.SerializeToString,
             ),
+            'AddSessionComment': grpc.unary_unary_rpc_method_handler(
+                    servicer.AddSessionComment,
+                    request_deserializer=ondewo_dot_nlu_dot_session__pb2.AddSessionCommentRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_common__pb2.Comment.SerializeToString,
+            ),
+            'DeleteSessionComments': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteSessionComments,
+                    request_deserializer=ondewo_dot_nlu_dot_session__pb2.DeleteSessionCommentsRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_session__pb2.Session.SerializeToString,
+            ),
+            'UpdateSessionComments': grpc.unary_unary_rpc_method_handler(
+                    servicer.UpdateSessionComments,
+                    request_deserializer=ondewo_dot_nlu_dot_session__pb2.UpdateSessionCommentsRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_session__pb2.Session.SerializeToString,
+            ),
+            'ListSessionComments': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListSessionComments,
+                    request_deserializer=ondewo_dot_nlu_dot_session__pb2.ListSessionCommentsRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_session__pb2.ListSessionCommentsResponse.SerializeToString,
+            ),
             'ListSessionReviews': grpc.unary_unary_rpc_method_handler(
                     servicer.ListSessionReviews,
                     request_deserializer=ondewo_dot_nlu_dot_session__pb2.ListSessionReviewsRequest.FromString,
@@ -502,6 +623,26 @@ def add_SessionsServicer_to_server(servicer, server):
                     servicer.CreateSessionReview,
                     request_deserializer=ondewo_dot_nlu_dot_session__pb2.CreateSessionReviewRequest.FromString,
                     response_serializer=ondewo_dot_nlu_dot_session__pb2.SessionReview.SerializeToString,
+            ),
+            'GetAudioFiles': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetAudioFiles,
+                    request_deserializer=ondewo_dot_nlu_dot_session__pb2.GetAudioFilesRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_session__pb2.GetAudioFilesResponse.SerializeToString,
+            ),
+            'AddAudioFiles': grpc.unary_unary_rpc_method_handler(
+                    servicer.AddAudioFiles,
+                    request_deserializer=ondewo_dot_nlu_dot_session__pb2.AddAudioFilesRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_session__pb2.AddAudioFilesResponse.SerializeToString,
+            ),
+            'DeleteAudioFiles': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteAudioFiles,
+                    request_deserializer=ondewo_dot_nlu_dot_session__pb2.DeleteAudioFilesRequest.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'GetAudioFileOfSession': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetAudioFileOfSession,
+                    request_deserializer=ondewo_dot_nlu_dot_session__pb2.GetAudioFileOfSessionRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_session__pb2.AudioFileResource.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -926,6 +1067,74 @@ class Sessions(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def AddSessionComment(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Sessions/AddSessionComment',
+            ondewo_dot_nlu_dot_session__pb2.AddSessionCommentRequest.SerializeToString,
+            ondewo_dot_nlu_dot_common__pb2.Comment.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteSessionComments(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Sessions/DeleteSessionComments',
+            ondewo_dot_nlu_dot_session__pb2.DeleteSessionCommentsRequest.SerializeToString,
+            ondewo_dot_nlu_dot_session__pb2.Session.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def UpdateSessionComments(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Sessions/UpdateSessionComments',
+            ondewo_dot_nlu_dot_session__pb2.UpdateSessionCommentsRequest.SerializeToString,
+            ondewo_dot_nlu_dot_session__pb2.Session.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListSessionComments(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Sessions/ListSessionComments',
+            ondewo_dot_nlu_dot_session__pb2.ListSessionCommentsRequest.SerializeToString,
+            ondewo_dot_nlu_dot_session__pb2.ListSessionCommentsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def ListSessionReviews(request,
             target,
             options=(),
@@ -990,5 +1199,73 @@ class Sessions(object):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Sessions/CreateSessionReview',
             ondewo_dot_nlu_dot_session__pb2.CreateSessionReviewRequest.SerializeToString,
             ondewo_dot_nlu_dot_session__pb2.SessionReview.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetAudioFiles(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Sessions/GetAudioFiles',
+            ondewo_dot_nlu_dot_session__pb2.GetAudioFilesRequest.SerializeToString,
+            ondewo_dot_nlu_dot_session__pb2.GetAudioFilesResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def AddAudioFiles(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Sessions/AddAudioFiles',
+            ondewo_dot_nlu_dot_session__pb2.AddAudioFilesRequest.SerializeToString,
+            ondewo_dot_nlu_dot_session__pb2.AddAudioFilesResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteAudioFiles(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Sessions/DeleteAudioFiles',
+            ondewo_dot_nlu_dot_session__pb2.DeleteAudioFilesRequest.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetAudioFileOfSession(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Sessions/GetAudioFileOfSession',
+            ondewo_dot_nlu_dot_session__pb2.GetAudioFileOfSessionRequest.SerializeToString,
+            ondewo_dot_nlu_dot_session__pb2.AudioFileResource.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

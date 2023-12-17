@@ -1,4 +1,4 @@
-# Copyright 2021 ONDEWO GmbH
+# Copyright 2021-2023 ONDEWO GmbH
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,7 +14,10 @@
 
 
 from abc import ABC
-from typing import Tuple, List
+from typing import (
+    List,
+    Tuple,
+)
 
 from ondewo.utils.base_services_interface import BaseServicesInterface
 
@@ -23,10 +26,10 @@ from ondewo.nlu.client_config import ClientConfig
 
 class ServicesInterface(BaseServicesInterface, ABC):
     def __init__(
-            self,
-            config: ClientConfig,
-            nlu_token: str,
-            use_secure_channel: bool,
+        self,
+        config: ClientConfig,
+        nlu_token: str,
+        use_secure_channel: bool,
     ) -> None:
         super(ServicesInterface, self).__init__(config=config, use_secure_channel=use_secure_channel)
         self.metadata: List[Tuple[str, str]] = [

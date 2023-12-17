@@ -1,4 +1,4 @@
-# Copyright 2021 ONDEWO GmbH
+# Copyright 2021-2023 ONDEWO GmbH
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,7 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 import math
-from queue import Queue, Full, Empty
+from queue import (
+    Empty,
+    Full,
+    Queue,
+)
 
 from ondewo.logging.logger import logger
 from ondewo.utils.base_client_config import BaseClientConfig
@@ -22,11 +26,11 @@ from ondewo.nlu.client import Client
 
 class ClientPool:
     def __init__(
-            self,
-            config: BaseClientConfig,
-            use_secure_channel: bool = True,
-            pool_size: int = 10,
-            max_size_ratio: float = 1.5
+        self,
+        config: BaseClientConfig,
+        use_secure_channel: bool = True,
+        pool_size: int = 10,
+        max_size_ratio: float = 1.5
     ) -> None:
         """
         Initialise a ClientPool to handle all your requests.
@@ -63,15 +67,19 @@ class ClientPool:
         try:
             return self.pool.get(block=True, timeout=2)
         except Empty:
-            logger.warning('The ClientPool is empty, cannot retrieve more clients from it.\n'
-                           'Opening new client to fulfill request...')
+            logger.warning(
+                'The ClientPool is empty, cannot retrieve more clients from it.\n'
+                'Opening new client to fulfill request...'
+            )
 
             if self.n_clients_created_limit <= self.n_clients_created:
-                raise Full(f'A concerning number of "Clients" have been created.'
-                           f'Remember to "release" (or "disconnect) the clients after using them.\n'
-                           f'If there are too many requests, consider increasing the pool size.\n'
-                           f'\t - # clients created: {self.n_clients_created}\n'
-                           f'\t - Current max pool size: {self.max_size}.')
+                raise Full(
+                    f'A concerning number of "Clients" have been created.'
+                    f'Remember to "release" (or "disconnect) the clients after using them.\n'
+                    f'If there are too many requests, consider increasing the pool size.\n'
+                    f'\t - # clients created: {self.n_clients_created}\n'
+                    f'\t - Current max pool size: {self.max_size}.'
+                )
 
             self.n_clients_created += 1
             return Client(config=self.config, use_secure_channel=self.use_secure_channel)
@@ -80,8 +88,10 @@ class ClientPool:
         try:
             self.pool.put(c)
         except Full:
-            logger.warning('The ClientPool is full, putting more clients into it is not possible.\n'
-                           'Closing client connection...')
+            logger.warning(
+                'The ClientPool is full, putting more clients into it is not possible.\n'
+                'Closing client connection...'
+            )
             c.disconnect()
 
     def close(self) -> None:
