@@ -3141,10 +3141,10 @@ class AddAudioFilesResponse(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    AUDIO_FILE_FIELD_NUMBER: builtins.int
+    AUDIO_FILE_RESOURCES_FIELD_NUMBER: builtins.int
     ERROR_MESSAGE_FIELD_NUMBER: builtins.int
     @property
-    def audio_file(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AudioFileResource]:
+    def audio_file_resources(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AudioFileResource]:
         """The unique identifier of the audio files for a specific session.
         Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
         """
@@ -3153,10 +3153,10 @@ class AddAudioFilesResponse(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        audio_file: collections.abc.Iterable[global___AudioFileResource] | None = ...,
+        audio_file_resources: collections.abc.Iterable[global___AudioFileResource] | None = ...,
         error_message: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["audio_file", b"audio_file", "error_message", b"error_message"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["audio_file_resources", b"audio_file_resources", "error_message", b"error_message"]) -> None: ...
 
 global___AddAudioFilesResponse = AddAudioFilesResponse
 
