@@ -1097,13 +1097,36 @@ class ListSessionsRequest(google.protobuf.message.Message):
     SESSION_FILTER_FIELD_NUMBER: builtins.int
     FIELD_MASK_FIELD_NUMBER: builtins.int
     parent: builtins.str
-    """The parent for which sessions should be listed
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """Required. The project that the agent to fetch is associated with.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
     session_view: global___Session.View.ValueType
     """An enum specifying the amount of information to be returned per session"""
     page_token: builtins.str
-    """Optional. The next_page_token value returned from a previous list request."""
+    """Optional: The page token to support pagination.
+    Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+    The page token is a string representing the current index and page size.
+
+    Valid page token strings:
+    * "" (empty string) - Retrieves the first page.
+    * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+    * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+    Index starts at 0.
+
+    Examples of valid page token strings:
+    * ""
+    * "current_index-0--page_size-20"
+    * "current_index-1--page_size-20"
+    * "current_index-10--page_size-20"
+
+    Examples of invalid page token strings:
+    * "1"
+    * "current_index-0--page_size-20"
+    * "current_index--1--page_size-20"
+    * "current_index1--page_size-20"
+    * "current_index-1--page_size--20"
+    """
     @property
     def session_filter(self) -> global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
@@ -1685,10 +1708,8 @@ class CreateSessionRequest(google.protobuf.message.Message):
     LABELS_FIELD_NUMBER: builtins.int
     CONTEXTS_FIELD_NUMBER: builtins.int
     parent: builtins.str
-    """Creates a session that collects all the conversation interactions between the machine and a user
-    The unique identifier of an Agent
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    Required.
+    """Required. The project that the agent to fetch is associated with.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
     session_uuid: builtins.str
     """The unique UUID of a Session
@@ -1697,7 +1718,7 @@ class CreateSessionRequest(google.protobuf.message.Message):
     """
     @property
     def labels(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """labels for the session - Optional"""
+        """Optional. labels for the session."""
     @property
     def contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]:
         """Optional. The collection of contexts to be activated before this query is executed."""
@@ -2742,7 +2763,30 @@ class ListSessionCommentsRequest(google.protobuf.message.Message):
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
     """
     page_token: builtins.str
-    """Optional. The next_page_token value returned from a previous list request."""
+    """Optional: The page token to support pagination.
+    Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+    The page token is a string representing the current index and page size.
+
+    Valid page token strings:
+    * "" (empty string) - Retrieves the first page.
+    * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+    * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+    Index starts at 0.
+
+    Examples of valid page token strings:
+    * ""
+    * "current_index-0--page_size-20"
+    * "current_index-1--page_size-20"
+    * "current_index-10--page_size-20"
+
+    Examples of invalid page token strings:
+    * "1"
+    * "current_index-0--page_size-20"
+    * "current_index--1--page_size-20"
+    * "current_index1--page_size-20"
+    * "current_index-1--page_size--20"
+    """
     def __init__(
         self,
         *,
@@ -2767,7 +2811,30 @@ class ListSessionCommentsResponse(google.protobuf.message.Message):
         Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/comments/&lt;comment_uuid&gt;</code></pre>
         """
     page_token: builtins.str
-    """Optional. The next_page_token value returned from a previous list request."""
+    """Optional: The page token to support pagination.
+    Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+    The page token is a string representing the current index and page size.
+
+    Valid page token strings:
+    * "" (empty string) - Retrieves the first page.
+    * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+    * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+    Index starts at 0.
+
+    Examples of valid page token strings:
+    * ""
+    * "current_index-0--page_size-20"
+    * "current_index-1--page_size-20"
+    * "current_index-10--page_size-20"
+
+    Examples of invalid page token strings:
+    * "1"
+    * "current_index-0--page_size-20"
+    * "current_index--1--page_size-20"
+    * "current_index1--page_size-20"
+    * "current_index-1--page_size--20"
+    """
     def __init__(
         self,
         *,
@@ -2794,7 +2861,30 @@ class ListSessionReviewsRequest(google.protobuf.message.Message):
     session_review_view: global___SessionReview.View.ValueType
     """An enum specifying the amount of information to be returned per session review"""
     page_token: builtins.str
-    """Optional. The next_page_token value returned from a previous list request."""
+    """Optional: The page token to support pagination.
+    Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+    The page token is a string representing the current index and page size.
+
+    Valid page token strings:
+    * "" (empty string) - Retrieves the first page.
+    * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+    * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+    Index starts at 0.
+
+    Examples of valid page token strings:
+    * ""
+    * "current_index-0--page_size-20"
+    * "current_index-1--page_size-20"
+    * "current_index-10--page_size-20"
+
+    Examples of invalid page token strings:
+    * "1"
+    * "current_index-0--page_size-20"
+    * "current_index--1--page_size-20"
+    * "current_index1--page_size-20"
+    * "current_index-1--page_size--20"
+    """
     def __init__(
         self,
         *,
@@ -2934,8 +3024,14 @@ class GetAudioFilesRequest(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
+    PARENT_FIELD_NUMBER: builtins.int
     NAMES_FIELD_NUMBER: builtins.int
     RESOURCE_VIEW_FIELD_NUMBER: builtins.int
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Required. The project of this agent.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
     @property
     def names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """The unique identifier of the audio file of the specific session
@@ -2943,13 +3039,17 @@ class GetAudioFilesRequest(google.protobuf.message.Message):
         """
     resource_view: global___ResourceView.ValueType
     """Represents the options for views of resources"""
+    next_page_token: builtins.str
+    """Token to retrieve the next page of results, or empty if there are no more results in the list"""
     def __init__(
         self,
         *,
+        parent: builtins.str = ...,
         names: collections.abc.Iterable[builtins.str] | None = ...,
         resource_view: global___ResourceView.ValueType = ...,
+        next_page_token: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["names", b"names", "resource_view", b"resource_view"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["names", b"names", "next_page_token", b"next_page_token", "parent", b"parent", "resource_view", b"resource_view"]) -> None: ...
 
 global___GetAudioFilesRequest = GetAudioFilesRequest
 
@@ -2960,17 +3060,21 @@ class GetAudioFilesResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     AUDIO_FILES_FIELD_NUMBER: builtins.int
+    ERROR_MESSAGE_FIELD_NUMBER: builtins.int
     @property
     def audio_files(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AudioFileResource]:
-        """The unique identifier of the audio files for a specific session.
+        """The unique identifier of the audio file for a specific session.
         Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
         """
+    error_message: builtins.str
+    """error message if there are any."""
     def __init__(
         self,
         *,
         audio_files: collections.abc.Iterable[global___AudioFileResource] | None = ...,
+        error_message: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["audio_files", b"audio_files"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["audio_files", b"audio_files", "error_message", b"error_message"]) -> None: ...
 
 global___GetAudioFilesResponse = GetAudioFilesResponse
 
@@ -2980,16 +3084,28 @@ class AddAudioFilesRequest(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
+    PARENT_FIELD_NUMBER: builtins.int
+    SESSION_ID_FIELD_NUMBER: builtins.int
     AUDIO_FILE_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Required. The project of this agent.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
+    session_id: builtins.str
+    """The unique identifier of the session for which the audio files should be listed
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/&lt</code></pre>
+    """
     @property
     def audio_file(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AudioFileResource]:
         """AudioFileResources to be added"""
     def __init__(
         self,
         *,
+        parent: builtins.str = ...,
+        session_id: builtins.str = ...,
         audio_file: collections.abc.Iterable[global___AudioFileResource] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["audio_file", b"audio_file"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["audio_file", b"audio_file", "parent", b"parent", "session_id", b"session_id"]) -> None: ...
 
 global___AddAudioFilesRequest = AddAudioFilesRequest
 
@@ -3000,17 +3116,21 @@ class AddAudioFilesResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     AUDIO_FILE_FIELD_NUMBER: builtins.int
+    ERROR_MESSAGE_FIELD_NUMBER: builtins.int
     @property
     def audio_file(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AudioFileResource]:
         """The unique identifier of the audio files for a specific session.
         Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
         """
+    error_message: builtins.str
+    """error message if there are any."""
     def __init__(
         self,
         *,
         audio_file: collections.abc.Iterable[global___AudioFileResource] | None = ...,
+        error_message: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["audio_file", b"audio_file"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["audio_file", b"audio_file", "error_message", b"error_message"]) -> None: ...
 
 global___AddAudioFilesResponse = AddAudioFilesResponse
 
@@ -3020,7 +3140,12 @@ class DeleteAudioFilesRequest(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
+    PARENT_FIELD_NUMBER: builtins.int
     NAMES_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Required. The project of this agent.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
     @property
     def names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """The unique identifier of the audio file of the specific session
@@ -3029,11 +3154,37 @@ class DeleteAudioFilesRequest(google.protobuf.message.Message):
     def __init__(
         self,
         *,
+        parent: builtins.str = ...,
         names: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["names", b"names"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["names", b"names", "parent", b"parent"]) -> None: ...
 
 global___DeleteAudioFilesRequest = DeleteAudioFilesRequest
+
+@typing_extensions.final
+class DeleteAudioFilesResponse(google.protobuf.message.Message):
+    """This message is a request to the delete audio files specified"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    NAMES_FIELD_NUMBER: builtins.int
+    ERROR_MESSAGE_FIELD_NUMBER: builtins.int
+    @property
+    def names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """The unique identifier of the audio file of the specific session
+        Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
+        """
+    error_message: builtins.str
+    """error message if there are any."""
+    def __init__(
+        self,
+        *,
+        names: collections.abc.Iterable[builtins.str] | None = ...,
+        error_message: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["error_message", b"error_message", "names", b"names"]) -> None: ...
+
+global___DeleteAudioFilesResponse = DeleteAudioFilesResponse
 
 @typing_extensions.final
 class ListAudioFilesRequest(google.protobuf.message.Message):
@@ -3041,13 +3192,19 @@ class ListAudioFilesRequest(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
+    PARENT_FIELD_NUMBER: builtins.int
     SESSION_ID_FIELD_NUMBER: builtins.int
     RESOURCE_VIEW_FIELD_NUMBER: builtins.int
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    session_id: builtins.str
-    """The unique identifier of the session for which the audio files should be listed
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/&lt</code></pre>
+    parent: builtins.str
+    """Required. The project of this agent.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
+    @property
+    def session_id(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional: The unique identifier of the session for which the audio files should be listed
+        Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/&lt</code></pre>
+        """
     resource_view: global___ResourceView.ValueType
     """Represents the options for views of resources"""
     next_page_token: builtins.str
@@ -3055,13 +3212,39 @@ class ListAudioFilesRequest(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        session_id: builtins.str = ...,
+        parent: builtins.str = ...,
+        session_id: collections.abc.Iterable[builtins.str] | None = ...,
         resource_view: global___ResourceView.ValueType = ...,
         next_page_token: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["next_page_token", b"next_page_token", "resource_view", b"resource_view", "session_id", b"session_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["next_page_token", b"next_page_token", "parent", b"parent", "resource_view", b"resource_view", "session_id", b"session_id"]) -> None: ...
 
 global___ListAudioFilesRequest = ListAudioFilesRequest
+
+@typing_extensions.final
+class ListAudioFilesResponse(google.protobuf.message.Message):
+    """This message is a request to retrieve the audio files specified"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    AUDIO_FILES_FIELD_NUMBER: builtins.int
+    ERROR_MESSAGE_FIELD_NUMBER: builtins.int
+    @property
+    def audio_files(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AudioFileResource]:
+        """The requested audio files .
+        Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
+        """
+    error_message: builtins.str
+    """error message if there are any."""
+    def __init__(
+        self,
+        *,
+        audio_files: collections.abc.Iterable[global___AudioFileResource] | None = ...,
+        error_message: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["audio_files", b"audio_files", "error_message", b"error_message"]) -> None: ...
+
+global___ListAudioFilesResponse = ListAudioFilesResponse
 
 @typing_extensions.final
 class GetAudioFileOfSessionRequest(google.protobuf.message.Message):
@@ -3069,8 +3252,13 @@ class GetAudioFileOfSessionRequest(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
+    PARENT_FIELD_NUMBER: builtins.int
     SESSION_ID_FIELD_NUMBER: builtins.int
     RESOURCE_VIEW_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Required. The project of this agent.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
     session_id: builtins.str
     """The unique identifier of the session for which the audio files should be combined
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/&lt</code></pre>
@@ -3080,9 +3268,10 @@ class GetAudioFileOfSessionRequest(google.protobuf.message.Message):
     def __init__(
         self,
         *,
+        parent: builtins.str = ...,
         session_id: builtins.str = ...,
         resource_view: global___ResourceView.ValueType = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["resource_view", b"resource_view", "session_id", b"session_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["parent", b"parent", "resource_view", b"resource_view", "session_id", b"session_id"]) -> None: ...
 
 global___GetAudioFileOfSessionRequest = GetAudioFileOfSessionRequest

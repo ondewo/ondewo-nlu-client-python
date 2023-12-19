@@ -348,7 +348,31 @@ class ListEntityTypesRequest(google.protobuf.message.Message):
     Note: languages must be enabled in the agent, before they can be used.
     """
     page_token: builtins.str
-    """Optional. The next_page_token value returned from a previous list request."""
+    """Optional. The next_page_token value returned from a previous list request.
+    The page token to support pagination.
+    Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+    The page token is a string representing the current index and page size.
+
+    Valid page token strings:
+    * "" (empty string) - Retrieves the first page.
+    * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+    * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+    Index starts at 0.
+
+    Examples of valid page token strings:
+    * ""
+    * "current_index-0--page_size-20"
+    * "current_index-1--page_size-20"
+    * "current_index-10--page_size-20"
+
+    Examples of invalid page token strings:
+    * "1"
+    * "current_index-0--page_size-20"
+    * "current_index--1--page_size-20"
+    * "current_index1--page_size-20"
+    * "current_index-1--page_size--20"
+    """
     entity_type_view: global___EntityTypeView.ValueType
     """Optional. The resource view to apply to the returned entity type."""
     filter_by_category: global___EntityTypeCategory.ValueType
@@ -420,7 +444,30 @@ class GetEntityTypeRequest(google.protobuf.message.Message):
     Note: languages must be enabled in the agent, before they can be used.
     """
     page_token: builtins.str
-    """A page_token allows the pagination of elements where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `parameters`). An example for a page_token is page_size-1000"""
+    """The page token to support pagination.
+    Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+    The page token is a string representing the current index and page size.
+
+    Valid page token strings:
+    * "" (empty string) - Retrieves the first page.
+    * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+    * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+    Index starts at 0.
+
+    Examples of valid page token strings:
+    * ""
+    * "current_index-0--page_size-20"
+    * "current_index-1--page_size-20"
+    * "current_index-10--page_size-20"
+
+    Examples of invalid page token strings:
+    * "1"
+    * "current_index-0--page_size-20"
+    * "current_index--1--page_size-20"
+    * "current_index1--page_size-20"
+    * "current_index-1--page_size--20"
+    """
     entity_type_view: global___EntityTypeView.ValueType
     """Optional. The resource view to apply to the returned Entity Type"""
     def __init__(
@@ -969,7 +1016,31 @@ class ListEntitiesRequest(google.protobuf.message.Message):
     messages for. If not specified, the agent's default language is used.
     """
     page_token: builtins.str
-    """Optional. The next_page_token value returned from a previous list request."""
+    """Optional. The next_page_token value returned from a previous list request.
+    The page token to support pagination.
+    Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+    The page token is a string representing the current index and page size.
+
+    Valid page token strings:
+    * "" (empty string) - Retrieves the first page.
+    * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+    * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+    Index starts at 0.
+
+    Examples of valid page token strings:
+    * ""
+    * "current_index-0--page_size-20"
+    * "current_index-1--page_size-20"
+    * "current_index-10--page_size-20"
+
+    Examples of invalid page token strings:
+    * "1"
+    * "current_index-0--page_size-20"
+    * "current_index--1--page_size-20"
+    * "current_index1--page_size-20"
+    * "current_index-1--page_size--20"
+    """
     @property
     def sort_by_field(self) -> global___EntityValueSorting:
         """Optional. Defines the sorting of the list. Default, no sorting."""

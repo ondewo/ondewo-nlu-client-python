@@ -34,6 +34,8 @@ from ondewo.nlu.session_pb2 import (
     GetLatestSessionReviewRequest,
     GetSessionRequest,
     GetSessionReviewRequest,
+    ListAudioFilesRequest,
+    ListAudioFilesResponse,
     ListSessionLabelsRequest,
     ListSessionLabelsResponse,
     ListSessionReviewsRequest,
@@ -137,5 +139,9 @@ class Sessions(ServicesInterface):
 
     def get_audio_file_of_session(self, request: GetAudioFileOfSessionRequest) -> AudioFileResource:
         response: AudioFileResource = self.stub.GetAudioFileOfSession(request, metadata=self.metadata)
+        return response
+
+    def list_audio_files(self, request: ListAudioFilesRequest) -> ListAudioFilesResponse:
+        response: ListAudioFilesResponse = self.stub.ListAudioFiles(request, metadata=self.metadata)
         return response
     # endregion audio handling for sessions

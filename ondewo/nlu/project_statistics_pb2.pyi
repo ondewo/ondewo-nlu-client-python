@@ -38,10 +38,8 @@ class GetIntentCountRequest(google.protobuf.message.Message):
     PARENT_FIELD_NUMBER: builtins.int
     FILTER_BY_CATEGORY_FIELD_NUMBER: builtins.int
     parent: builtins.str
-    """Required. The parent/path of the project to get the statistic from.
-
-    Example:
-         * `projects/<Project ID>/agent`
+    """Required. The project that the agent to fetch is associated with.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
     filter_by_category: ondewo.nlu.intent_pb2.IntentCategory.ValueType
     """Optional. Applies a filter to the list to be counted. Default, no filter."""
@@ -64,10 +62,8 @@ class GetEntityTypeCountRequest(google.protobuf.message.Message):
     PARENT_FIELD_NUMBER: builtins.int
     FILTER_BY_CATEGORY_FIELD_NUMBER: builtins.int
     parent: builtins.str
-    """Required. The parent/path of the project to get the statistic from.
-
-    Example:
-         * `projects/<Project ID>/agent`
+    """Required. The project that the agent to fetch is associated with.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
     filter_by_category: ondewo.nlu.entity_type_pb2.EntityTypeCategory.ValueType
     """Optional. Applies a filter to the list to be counted. Default, no filter."""
@@ -89,10 +85,8 @@ class GetProjectStatRequest(google.protobuf.message.Message):
 
     PARENT_FIELD_NUMBER: builtins.int
     parent: builtins.str
-    """Required. The parent/path of the project to get the statistic from.
-
-    Example:
-         * `projects/<Project ID>/agent`
+    """Required. The project that the agent to fetch is associated with.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
     def __init__(
         self,

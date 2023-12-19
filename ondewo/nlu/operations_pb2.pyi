@@ -129,7 +129,30 @@ class ListOperationsRequest(google.protobuf.message.Message):
     page_size: builtins.int
     """The standard list page size."""
     page_token: builtins.str
-    """The standard list page token."""
+    """Optional: The page token to support pagination.
+    Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+    The page token is a string representing the current index and page size.
+
+    Valid page token strings:
+    * "" (empty string) - Retrieves the first page.
+    * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+    * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+    Index starts at 0.
+
+    Examples of valid page token strings:
+    * ""
+    * "current_index-0--page_size-20"
+    * "current_index-1--page_size-20"
+    * "current_index-10--page_size-20"
+
+    Examples of invalid page token strings:
+    * "1"
+    * "current_index-0--page_size-20"
+    * "current_index--1--page_size-20"
+    * "current_index1--page_size-20"
+    * "current_index-1--page_size--20"
+    """
     @property
     def operation_filter(self) -> global___OperationFilter:
         """Optional. A filter to narrow the response down to operations of interest."""

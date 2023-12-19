@@ -538,7 +538,31 @@ class ListNotificationsRequest(google.protobuf.message.Message):
     def notification_filter(self) -> global___NotificationFilter:
         """Optional filter to narrow the response down to specific notifications."""
     page_token: builtins.str
-    """Optional. Token for pagination, obtained from a previous list request."""
+    """Optional. Token for pagination, obtained from a previous list request.
+    The page token to support pagination.
+    Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+    The page token is a string representing the current index and page size.
+
+    Valid page token strings:
+    * "" (empty string) - Retrieves the first page.
+    * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+    * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+    Index starts at 0.
+
+    Examples of valid page token strings:
+    * ""
+    * "current_index-0--page_size-20"
+    * "current_index-1--page_size-20"
+    * "current_index-10--page_size-20"
+
+    Examples of invalid page token strings:
+    * "1"
+    * "current_index-0--page_size-20"
+    * "current_index--1--page_size-20"
+    * "current_index1--page_size-20"
+    * "current_index-1--page_size--20"
+    """
     @property
     def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
         """Optional. Mask to control which fields will be filled with data.

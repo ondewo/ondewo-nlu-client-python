@@ -159,6 +159,9 @@ class CreateProjectRoleRequest(google.protobuf.message.Message):
     ROLE_FIELD_NUMBER: builtins.int
     PROJECT_ROLE_VIEW_FIELD_NUMBER: builtins.int
     parent: builtins.str
+    """Required. The project that the agent to fetch is associated with.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
+    """
     @property
     def role(self) -> global___ProjectRole:
         """If the role_id is not provided, an incremental value will be assigned
@@ -190,6 +193,9 @@ class UpdateProjectRoleRequest(google.protobuf.message.Message):
     UPDATE_MASK_FIELD_NUMBER: builtins.int
     PROJECT_ROLE_VIEW_FIELD_NUMBER: builtins.int
     parent: builtins.str
+    """Required. The project that the agent to fetch is associated with.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
+    """
     @property
     def role(self) -> global___ProjectRole:
         """role_id in the Role message should be given, if empty will throw an error in the backend
@@ -224,6 +230,9 @@ class GetProjectRoleRequest(google.protobuf.message.Message):
     ROLE_NAME_FIELD_NUMBER: builtins.int
     PROJECT_ROLE_VIEW_FIELD_NUMBER: builtins.int
     parent: builtins.str
+    """Required. The project that the agent to fetch is associated with.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
+    """
     role_id: builtins.int
     """role is identified by role id"""
     role_name: builtins.str
@@ -253,6 +262,9 @@ class DeleteProjectRoleRequest(google.protobuf.message.Message):
     PARENT_FIELD_NUMBER: builtins.int
     ROLE_ID_FIELD_NUMBER: builtins.int
     parent: builtins.str
+    """Required. The project that the agent to fetch is associated with.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
+    """
     role_id: builtins.int
     """role is identified by role id, if empty will throw an error in the backend"""
     def __init__(
@@ -275,8 +287,34 @@ class ListProjectRolesRequest(google.protobuf.message.Message):
     PAGE_TOKEN_FIELD_NUMBER: builtins.int
     PROJECT_ROLE_VIEW_FIELD_NUMBER: builtins.int
     parent: builtins.str
+    """Required. The project that the agent to fetch is associated with.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
+    """
     page_token: builtins.str
-    """Optional. The next_page_token value returned from a previous list request."""
+    """Optional: The page token to support pagination.
+    Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+    The page token is a string representing the current index and page size.
+
+    Valid page token strings:
+    * "" (empty string) - Retrieves the first page.
+    * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+    * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+    Index starts at 0.
+
+    Examples of valid page token strings:
+    * ""
+    * "current_index-0--page_size-20"
+    * "current_index-1--page_size-20"
+    * "current_index-10--page_size-20"
+
+    Examples of invalid page token strings:
+    * "1"
+    * "current_index-0--page_size-20"
+    * "current_index--1--page_size-20"
+    * "current_index1--page_size-20"
+    * "current_index-1--page_size--20"
+    """
     project_role_view: global___ProjectRoleView.ValueType
     """Optional. specify the view of the project roles, PROJECT_ROLE_VIEW_FULL by default"""
     def __init__(

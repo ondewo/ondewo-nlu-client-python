@@ -1261,7 +1261,31 @@ class ListUsersInProjectRequest(google.protobuf.message.Message):
     Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     """
     page_token: builtins.str
-    """Optional. The next_page_token value returned from a previous list request."""
+    """Optional. The next_page_token value returned from a previous list request.
+    The page token to support pagination.
+    Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+    The page token is a string representing the current index and page size.
+
+    Valid page token strings:
+    * "" (empty string) - Retrieves the first page.
+    * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+    * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+    Index starts at 0.
+
+    Examples of valid page token strings:
+    * ""
+    * "current_index-0--page_size-20"
+    * "current_index-1--page_size-20"
+    * "current_index-10--page_size-20"
+
+    Examples of invalid page token strings:
+    * "1"
+    * "current_index-0--page_size-20"
+    * "current_index--1--page_size-20"
+    * "current_index1--page_size-20"
+    * "current_index-1--page_size--20"
+    """
     def __init__(
         self,
         *,
@@ -1359,7 +1383,31 @@ class ListProjectPermissionsRequest(google.protobuf.message.Message):
 
     PAGE_TOKEN_FIELD_NUMBER: builtins.int
     page_token: builtins.str
-    """Optional. The next_page_token value returned from a previous list request."""
+    """Optional. The next_page_token value returned from a previous list request.
+    The page token to support pagination.
+    Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+    The page token is a string representing the current index and page size.
+
+    Valid page token strings:
+    * "" (empty string) - Retrieves the first page.
+    * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+    * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+    Index starts at 0.
+
+    Examples of valid page token strings:
+    * ""
+    * "current_index-0--page_size-20"
+    * "current_index-1--page_size-20"
+    * "current_index-10--page_size-20"
+
+    Examples of invalid page token strings:
+    * "1"
+    * "current_index-0--page_size-20"
+    * "current_index--1--page_size-20"
+    * "current_index1--page_size-20"
+    * "current_index-1--page_size--20"
+    """
     def __init__(
         self,
         *,
@@ -1842,7 +1890,31 @@ class FullTextSearchRequest(google.protobuf.message.Message):
     term: builtins.str
     """What to search for in the elastic server"""
     page_token: builtins.str
-    """Composite string: current_index-0--page_size-10"""
+    """Composite string: current_index-0--page_size-10
+    The page token to support pagination.
+    Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+    The page token is a string representing the current index and page size.
+
+    Valid page token strings:
+    * "" (empty string) - Retrieves the first page.
+    * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+    * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+    Index starts at 0.
+
+    Examples of valid page token strings:
+    * ""
+    * "current_index-0--page_size-20"
+    * "current_index-1--page_size-20"
+    * "current_index-10--page_size-20"
+
+    Examples of invalid page token strings:
+    * "1"
+    * "current_index-0--page_size-20"
+    * "current_index--1--page_size-20"
+    * "current_index1--page_size-20"
+    * "current_index-1--page_size--20"
+    """
     def __init__(
         self,
         *,
@@ -2631,7 +2703,31 @@ class FullTextSearchResponseIntentResponse(google.protobuf.message.Message):
     elastic_query: builtins.str
     time: builtins.float
     next_page_token: builtins.str
-    """The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2"""
+    """The next_page_token is used to retrieve the next page of a returned result.
+    The page token to support pagination.
+    Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+    The page token is a string representing the current index and page size.
+
+    Valid page token strings:
+    * "" (empty string) - Retrieves the first page.
+    * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+    * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+    Index starts at 0.
+
+    Examples of valid page token strings:
+    * ""
+    * "current_index-0--page_size-20"
+    * "current_index-1--page_size-20"
+    * "current_index-10--page_size-20"
+
+    Examples of invalid page token strings:
+    * "1"
+    * "current_index-0--page_size-20"
+    * "current_index--1--page_size-20"
+    * "current_index1--page_size-20"
+    * "current_index-1--page_size--20"
+    """
     def __init__(
         self,
         *,

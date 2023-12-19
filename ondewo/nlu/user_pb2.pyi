@@ -275,7 +275,30 @@ class ListUsersRequest(google.protobuf.message.Message):
 
     PAGE_TOKEN_FIELD_NUMBER: builtins.int
     page_token: builtins.str
-    """Optional. The next_page_token value returned from a previous list request."""
+    """Optional: The page token to support pagination.
+    Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+    The page token is a string representing the current index and page size.
+
+    Valid page token strings:
+    * "" (empty string) - Retrieves the first page.
+    * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+    * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+    Index starts at 0.
+
+    Examples of valid page token strings:
+    * ""
+    * "current_index-0--page_size-20"
+    * "current_index-1--page_size-20"
+    * "current_index-10--page_size-20"
+
+    Examples of invalid page token strings:
+    * "1"
+    * "current_index-0--page_size-20"
+    * "current_index--1--page_size-20"
+    * "current_index1--page_size-20"
+    * "current_index-1--page_size--20"
+    """
     def __init__(
         self,
         *,
@@ -485,7 +508,30 @@ class ListServerRolesRequest(google.protobuf.message.Message):
 
     PAGE_TOKEN_FIELD_NUMBER: builtins.int
     page_token: builtins.str
-    """Optional. The next_page_token value returned from a previous list request."""
+    """Optional: The page token to support pagination.
+    Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+    The page token is a string representing the current index and page size.
+
+    Valid page token strings:
+    * "" (empty string) - Retrieves the first page.
+    * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+    * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+    Index starts at 0.
+
+    Examples of valid page token strings:
+    * ""
+    * "current_index-0--page_size-20"
+    * "current_index-1--page_size-20"
+    * "current_index-10--page_size-20"
+
+    Examples of invalid page token strings:
+    * "1"
+    * "current_index-0--page_size-20"
+    * "current_index--1--page_size-20"
+    * "current_index1--page_size-20"
+    * "current_index-1--page_size--20"
+    """
     def __init__(
         self,
         *,
@@ -530,7 +576,30 @@ class ListServerPermissionsRequest(google.protobuf.message.Message):
 
     PAGE_TOKEN_FIELD_NUMBER: builtins.int
     page_token: builtins.str
-    """Optional. The next_page_token value returned from a previous list request."""
+    """Optional: The page token to support pagination.
+    Pagination allows you to retrieve a large result set in smaller, more manageable portions.
+    The page token is a string representing the current index and page size.
+
+    Valid page token strings:
+    * "" (empty string) - Retrieves the first page.
+    * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
+    * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+
+    Index starts at 0.
+
+    Examples of valid page token strings:
+    * ""
+    * "current_index-0--page_size-20"
+    * "current_index-1--page_size-20"
+    * "current_index-10--page_size-20"
+
+    Examples of invalid page token strings:
+    * "1"
+    * "current_index-0--page_size-20"
+    * "current_index--1--page_size-20"
+    * "current_index1--page_size-20"
+    * "current_index-1--page_size--20"
+    """
     def __init__(
         self,
         *,
@@ -621,20 +690,31 @@ class GetUserPreferencesRequest(google.protobuf.message.Message):
 
     USER_NAME_FIELD_NUMBER: builtins.int
     KEYS_FIELD_NUMBER: builtins.int
+    REGEX_INCLUDE_FIELD_NUMBER: builtins.int
     user_name: builtins.str
     """The name of the user.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre>
     """
     @property
     def keys(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Specific keys to retrieve from user preferences."""
+        """Specific keys to retrieve from user preferences.
+        If keys are specified multiple times then only one KeyValue pair is returned
+        """
+    regex_include: builtins.str
+    """Optional: In addition to the keys specified also include all <pre>keys</pre> that match the provided
+    <pre>regex_include</pre> regular expression.
+    If user does not add regex_filter, then only the keys specified in the keys field are returned.
+    If both, a key in the keys field and in the regex_include will be matched than only a single
+    <pre>KeyValuePair</pre> is returned.
+    """
     def __init__(
         self,
         *,
         user_name: builtins.str = ...,
         keys: collections.abc.Iterable[builtins.str] | None = ...,
+        regex_include: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["keys", b"keys", "user_name", b"user_name"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["keys", b"keys", "regex_include", b"regex_include", "user_name", b"user_name"]) -> None: ...
 
 global___GetUserPreferencesRequest = GetUserPreferencesRequest
 
@@ -729,6 +809,7 @@ class DeleteUserPreferencesRequest(google.protobuf.message.Message):
 
     USER_NAME_FIELD_NUMBER: builtins.int
     KEYS_FIELD_NUMBER: builtins.int
+    REGEX_INCLUDE_FIELD_NUMBER: builtins.int
     user_name: builtins.str
     """The name of the user.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre>
@@ -736,13 +817,20 @@ class DeleteUserPreferencesRequest(google.protobuf.message.Message):
     @property
     def keys(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """List of keys to delete from user preferences."""
+    regex_include: builtins.str
+    """Optional: In addition to the keys specified also include all <pre>keys</pre> that match the provided
+    <pre>regex_include</pre> regular expression.
+    If user does not add regex_filter, then only the keys specified in the keys field are deleted.
+    If both, a key in the keys field and in the regex_include is matched then the key is deleted without raising an error.
+    """
     def __init__(
         self,
         *,
         user_name: builtins.str = ...,
         keys: collections.abc.Iterable[builtins.str] | None = ...,
+        regex_include: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["keys", b"keys", "user_name", b"user_name"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["keys", b"keys", "regex_include", b"regex_include", "user_name", b"user_name"]) -> None: ...
 
 global___DeleteUserPreferencesRequest = DeleteUserPreferencesRequest
 
