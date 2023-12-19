@@ -478,25 +478,36 @@ class CreateSessionEntityTypeRequest(google.protobuf.message.Message):
 
     PARENT_FIELD_NUMBER: builtins.int
     SESSION_ENTITY_TYPE_FIELD_NUMBER: builtins.int
+    SESSION_ID_FIELD_NUMBER: builtins.int
     parent: builtins.str
-    """Required. The session to create a session entity type for.
-    Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
-    `projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/
-    sessions/<Session ID>`.
-    If `Environment ID` is not specified, we assume default 'draft'
-    environment. If `User ID` is not specified, we assume default '-' user.
+    """Required. The agent to list all intents from.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
     @property
     def session_entity_type(self) -> global___SessionEntityType:
         """Required. The session entity type to create."""
+    session_id: builtins.str
+    """Required. The session to create a session entity type for.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agents/sessions/&lt;session_uuid&gt;</code></pre>
+    or
+    <pre><code>projects/&lt;project_uuid&gt;/agents/sessions/&lt;session_uuid&gt;</code></pre>
+    `projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/
+    sessions/<Session ID>`.
+    If `Environment ID` is not specified, we assume default 'draft'
+    environment. If `User ID` is not specified, we assume default '-' user.
+    Required. The project that the agent to fetch is associated with.
+    The session to create a session entity type for.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agents/sessions/&lt;session_uuid&gt;</code></pre>
+    """
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
         session_entity_type: global___SessionEntityType | None = ...,
+        session_id: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["session_entity_type", b"session_entity_type"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["parent", b"parent", "session_entity_type", b"session_entity_type"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["parent", b"parent", "session_entity_type", b"session_entity_type", "session_id", b"session_id"]) -> None: ...
 
 global___CreateSessionEntityTypeRequest = CreateSessionEntityTypeRequest
 

@@ -2977,11 +2977,10 @@ class AudioFileResource(google.protobuf.message.Message):
     MODIFIED_AT_FIELD_NUMBER: builtins.int
     CREATED_BY_FIELD_NUMBER: builtins.int
     MODIFIED_BY_FIELD_NUMBER: builtins.int
-    @property
-    def name(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """The unique identifier of the session for which the latest review should be returned
-        Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
-        """
+    name: builtins.str
+    """The unique identifier of the session for which the latest review should be returned
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
+    """
     bytes: builtins.bytes
     """Bytes of the audio file"""
     language: builtins.str
@@ -3003,7 +3002,7 @@ class AudioFileResource(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        name: collections.abc.Iterable[builtins.str] | None = ...,
+        name: builtins.str = ...,
         bytes: builtins.bytes = ...,
         language: builtins.str = ...,
         duration_in_s: builtins.float = ...,
