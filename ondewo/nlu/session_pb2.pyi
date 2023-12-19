@@ -3239,11 +3239,10 @@ class ListAudioFilesRequest(google.protobuf.message.Message):
     """Required. The project of this agent.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
-    @property
-    def session_id(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Optional: The unique identifier of the session for which the audio files should be listed
-        Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/&lt</code></pre>
-        """
+    session_id: builtins.str
+    """Optional: The unique identifier of the session for which the audio files should be listed
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/&lt</code></pre>
+    """
     resource_view: global___ResourceView.ValueType
     """Represents the options for views of resources"""
     page_token: builtins.str
@@ -3277,7 +3276,7 @@ class ListAudioFilesRequest(google.protobuf.message.Message):
         self,
         *,
         parent: builtins.str = ...,
-        session_id: collections.abc.Iterable[builtins.str] | None = ...,
+        session_id: builtins.str = ...,
         resource_view: global___ResourceView.ValueType = ...,
         page_token: builtins.str = ...,
         sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType = ...,
