@@ -3035,6 +3035,7 @@ class GetAudioFilesRequest(google.protobuf.message.Message):
     NAMES_FIELD_NUMBER: builtins.int
     RESOURCE_VIEW_FIELD_NUMBER: builtins.int
     PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    SORTING_MODE_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The project of this agent.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
@@ -3071,6 +3072,8 @@ class GetAudioFilesRequest(google.protobuf.message.Message):
     * "current_index1--page_size-20"
     * "current_index-1--page_size--20"
     """
+    sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType
+    """sorting mode"""
     def __init__(
         self,
         *,
@@ -3078,8 +3081,9 @@ class GetAudioFilesRequest(google.protobuf.message.Message):
         names: collections.abc.Iterable[builtins.str] | None = ...,
         resource_view: global___ResourceView.ValueType = ...,
         page_token: builtins.str = ...,
+        sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["names", b"names", "page_token", b"page_token", "parent", b"parent", "resource_view", b"resource_view"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["names", b"names", "page_token", b"page_token", "parent", b"parent", "resource_view", b"resource_view", "sorting_mode", b"sorting_mode"]) -> None: ...
 
 global___GetAudioFilesRequest = GetAudioFilesRequest
 
@@ -3092,7 +3096,6 @@ class GetAudioFilesResponse(google.protobuf.message.Message):
     AUDIO_FILES_FIELD_NUMBER: builtins.int
     ERROR_MESSAGE_FIELD_NUMBER: builtins.int
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    SORTING_MODE_FIELD_NUMBER: builtins.int
     @property
     def audio_files(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AudioFileResource]:
         """The unique identifier of the audio file for a specific session.
@@ -3102,17 +3105,14 @@ class GetAudioFilesResponse(google.protobuf.message.Message):
     """error message if there are any."""
     next_page_token: builtins.str
     """Token to retrieve the next page of results, or empty if there are no more results in the list"""
-    sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType
-    """sorting mode"""
     def __init__(
         self,
         *,
         audio_files: collections.abc.Iterable[global___AudioFileResource] | None = ...,
         error_message: builtins.str = ...,
         next_page_token: builtins.str = ...,
-        sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["audio_files", b"audio_files", "error_message", b"error_message", "next_page_token", b"next_page_token", "sorting_mode", b"sorting_mode"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["audio_files", b"audio_files", "error_message", b"error_message", "next_page_token", b"next_page_token"]) -> None: ...
 
 global___GetAudioFilesResponse = GetAudioFilesResponse
 
