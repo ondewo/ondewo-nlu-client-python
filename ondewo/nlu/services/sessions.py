@@ -24,6 +24,7 @@ from ondewo.nlu.session_pb2 import (
     CreateSessionRequest,
     CreateSessionReviewRequest,
     DeleteAudioFilesRequest,
+    DeleteAudioFilesResponse,
     DeleteSessionLabelsRequest,
     DeleteSessionRequest,
     DetectIntentRequest,
@@ -133,8 +134,8 @@ class Sessions(ServicesInterface):
         response: AddAudioFilesResponse = self.stub.AddAudioFiles(request, metadata=self.metadata)
         return response
 
-    def delete_audio_files(self, request: DeleteAudioFilesRequest) -> Empty:
-        response: Empty = self.stub.DeleteAudioFiles(request, metadata=self.metadata)
+    def delete_audio_files(self, request: DeleteAudioFilesRequest) -> DeleteAudioFilesResponse:
+        response: DeleteAudioFilesResponse = self.stub.DeleteAudioFiles(request, metadata=self.metadata)
         return response
 
     def get_audio_file_of_session(self, request: GetAudioFileOfSessionRequest) -> AudioFileResource:
