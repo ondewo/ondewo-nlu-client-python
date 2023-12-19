@@ -2972,6 +2972,7 @@ class AudioFileResource(google.protobuf.message.Message):
     BYTES_FIELD_NUMBER: builtins.int
     LANGUAGE_FIELD_NUMBER: builtins.int
     DURATION_IN_S_FIELD_NUMBER: builtins.int
+    SAMPLE_RATE_FIELD_NUMBER: builtins.int
     AUDIO_FILE_RESOURCE_TYPE_FIELD_NUMBER: builtins.int
     CREATED_AT_FIELD_NUMBER: builtins.int
     MODIFIED_AT_FIELD_NUMBER: builtins.int
@@ -2987,6 +2988,8 @@ class AudioFileResource(google.protobuf.message.Message):
     """Language of the audio file"""
     duration_in_s: builtins.float
     """Duration in seconds and milliseconds of the audio file"""
+    sample_rate: builtins.int
+    """sample rate of the audio"""
     audio_file_resource_type: global___AudioFileResourceType.ValueType
     """File type of an audio resource"""
     @property
@@ -3006,6 +3009,7 @@ class AudioFileResource(google.protobuf.message.Message):
         bytes: builtins.bytes = ...,
         language: builtins.str = ...,
         duration_in_s: builtins.float = ...,
+        sample_rate: builtins.int = ...,
         audio_file_resource_type: global___AudioFileResourceType.ValueType = ...,
         created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
@@ -3013,7 +3017,7 @@ class AudioFileResource(google.protobuf.message.Message):
         modified_by: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["audio_file_resource_type", b"audio_file_resource_type", "bytes", b"bytes", "created_at", b"created_at", "created_by", b"created_by", "duration_in_s", b"duration_in_s", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["audio_file_resource_type", b"audio_file_resource_type", "bytes", b"bytes", "created_at", b"created_at", "created_by", b"created_by", "duration_in_s", b"duration_in_s", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "sample_rate", b"sample_rate"]) -> None: ...
 
 global___AudioFileResource = AudioFileResource
 
