@@ -223,6 +223,8 @@ class _AudioFileResourceTypeEnumTypeWrapper(google.protobuf.internal.enum_type_w
     """Audio file from text to speech"""
     AUDIO_FILE_RESOURCE_TYPE_S2T: _AudioFileResourceType.ValueType  # 2
     """Audio file from speech to text"""
+    AUDIO_FILE_RESOURCE_TYPE_S2T_AND_T2S: _AudioFileResourceType.ValueType  # 3
+    """Audio file from speech to text and text to speech"""
 
 class AudioFileResourceType(_AudioFileResourceType, metaclass=_AudioFileResourceTypeEnumTypeWrapper):
     """File type of an audio resource"""
@@ -233,6 +235,8 @@ AUDIO_FILE_RESOURCE_TYPE_T2S: AudioFileResourceType.ValueType  # 1
 """Audio file from text to speech"""
 AUDIO_FILE_RESOURCE_TYPE_S2T: AudioFileResourceType.ValueType  # 2
 """Audio file from speech to text"""
+AUDIO_FILE_RESOURCE_TYPE_S2T_AND_T2S: AudioFileResourceType.ValueType  # 3
+"""Audio file from speech to text and text to speech"""
 global___AudioFileResourceType = AudioFileResourceType
 
 @typing_extensions.final
