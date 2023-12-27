@@ -17,7 +17,7 @@ from nlu.ccai_project_pb2_grpc import CcaiProjectsStub
 from ondewo.nlu.core.services_interface import ServicesInterface
 
 
-class CcaiProjectServices(ServicesInterface):
+class CcaiProject(ServicesInterface):
     """
     Exposes the ai-services-related endpoints of ONDEWO NLU services in a user-friendly way.
 
