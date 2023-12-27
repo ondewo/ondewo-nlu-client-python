@@ -34,6 +34,50 @@ else:
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+class _CcaiProjectStatus:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _CcaiProjectStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_CcaiProjectStatus.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    UNSPECIFIED: _CcaiProjectStatus.ValueType  # 0
+    """No status specified"""
+    UNDEPLOYED: _CcaiProjectStatus.ValueType  # 1
+    """Project successfully created and undeployed"""
+    UPDATING: _CcaiProjectStatus.ValueType  # 2
+    """Project configuration is updating"""
+    DEPLOYING: _CcaiProjectStatus.ValueType  # 3
+    """Project is deploying"""
+    DEPLOYED: _CcaiProjectStatus.ValueType  # 4
+    """Project is deployed"""
+    UNDEPLOYING: _CcaiProjectStatus.ValueType  # 5
+    """Project is un-deploying"""
+    DELETING: _CcaiProjectStatus.ValueType  # 6
+    """Project is currently deleting"""
+    DELETED: _CcaiProjectStatus.ValueType  # 7
+    """Project is deleted"""
+
+class CcaiProjectStatus(_CcaiProjectStatus, metaclass=_CcaiProjectStatusEnumTypeWrapper):
+    """Status of a VtsiProject."""
+
+UNSPECIFIED: CcaiProjectStatus.ValueType  # 0
+"""No status specified"""
+UNDEPLOYED: CcaiProjectStatus.ValueType  # 1
+"""Project successfully created and undeployed"""
+UPDATING: CcaiProjectStatus.ValueType  # 2
+"""Project configuration is updating"""
+DEPLOYING: CcaiProjectStatus.ValueType  # 3
+"""Project is deploying"""
+DEPLOYED: CcaiProjectStatus.ValueType  # 4
+"""Project is deployed"""
+UNDEPLOYING: CcaiProjectStatus.ValueType  # 5
+"""Project is un-deploying"""
+DELETING: CcaiProjectStatus.ValueType  # 6
+"""Project is currently deleting"""
+DELETED: CcaiProjectStatus.ValueType  # 7
+"""Project is deleted"""
+global___CcaiProjectStatus = CcaiProjectStatus
+
 class _CcaiServiceType:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
@@ -155,18 +199,27 @@ class CcaiProject(google.protobuf.message.Message):
         def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
     NAME_FIELD_NUMBER: builtins.int
+    DISPLAY_NAME_FIELD_NUMBER: builtins.int
+    OWNER_NAME_FIELD_NUMBER: builtins.int
     CCAI_SERVICE_LISTS_FIELD_NUMBER: builtins.int
+    CCAI_PROJECT_STATUS_FIELD_NUMBER: builtins.int
     CREATED_AT_FIELD_NUMBER: builtins.int
     MODIFIED_AT_FIELD_NUMBER: builtins.int
     CREATED_BY_FIELD_NUMBER: builtins.int
     MODIFIED_BY_FIELD_NUMBER: builtins.int
     name: builtins.str
     """Resource name of the CCAI project"""
+    display_name: builtins.str
+    """Required. The display name of this ccai project."""
+    owner_name: builtins.str
+    """Optional. Resource name of the user who is the owner of the project."""
     @property
     def ccai_service_lists(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, global___CcaiServiceList]:
         """Map of two letter language codes to lists of CcaiServiceList
         Two-letter language codes following ISO 639-1 (see https://en.wikipedia.org/wiki/ISO_639-1)
         """
+    ccai_project_status: global___CcaiProjectStatus.ValueType
+    """The status of the ccai project."""
     @property
     def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Creation date and time. Read-only field."""
@@ -181,14 +234,17 @@ class CcaiProject(google.protobuf.message.Message):
         self,
         *,
         name: builtins.str = ...,
+        display_name: builtins.str = ...,
+        owner_name: builtins.str = ...,
         ccai_service_lists: collections.abc.Mapping[builtins.str, global___CcaiServiceList] | None = ...,
+        ccai_project_status: global___CcaiProjectStatus.ValueType = ...,
         created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         created_by: builtins.str = ...,
         modified_by: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["ccai_service_lists", b"ccai_service_lists", "created_at", b"created_at", "created_by", b"created_by", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["ccai_project_status", b"ccai_project_status", "ccai_service_lists", b"ccai_service_lists", "created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "owner_name", b"owner_name"]) -> None: ...
 
 global___CcaiProject = CcaiProject
 
