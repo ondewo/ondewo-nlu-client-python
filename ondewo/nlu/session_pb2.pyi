@@ -54,6 +54,29 @@ else:
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+class _TranscriptionType:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _TranscriptionTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_TranscriptionType.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    TRANSCRIPTION_TYPE_UNSPECIFIED: _TranscriptionType.ValueType  # 0
+    """unspecified"""
+    TRANSCRIPTION_TYPE_S2T: _TranscriptionType.ValueType  # 1
+    """Automatic transcription by a speech to text system"""
+    TRANSCRIPTION_TYPE_HUMAN: _TranscriptionType.ValueType  # 2
+    """Manual human transcription"""
+
+class TranscriptionType(_TranscriptionType, metaclass=_TranscriptionTypeEnumTypeWrapper): ...
+
+TRANSCRIPTION_TYPE_UNSPECIFIED: TranscriptionType.ValueType  # 0
+"""unspecified"""
+TRANSCRIPTION_TYPE_S2T: TranscriptionType.ValueType  # 1
+"""Automatic transcription by a speech to text system"""
+TRANSCRIPTION_TYPE_HUMAN: TranscriptionType.ValueType  # 2
+"""Manual human transcription"""
+global___TranscriptionType = TranscriptionType
+
 class _AudioEncoding:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
@@ -339,6 +362,7 @@ class QueryParameters(google.protobuf.message.Message):
     DATASTREAM_ID_FIELD_NUMBER: builtins.int
     ORIGIN_ID_FIELD_NUMBER: builtins.int
     IDENTIFIED_USER_ID_FIELD_NUMBER: builtins.int
+    TRANSCRIPTIONS_FIELD_NUMBER: builtins.int
     time_zone: builtins.str
     """Optional. The time zone of this conversational query from the
     [time zone database](https://www.iana.org/time-zones), e.g.,
@@ -397,6 +421,9 @@ class QueryParameters(google.protobuf.message.Message):
     """Id of the "identified user" e.g. for a chatbot the email address or for a phone bot the phone number of the user
     This field can also be used for a customized tracking id or tag id
     """
+    @property
+    def transcriptions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Transcription]:
+        """transcriptions of the user input sorted by score"""
     def __init__(
         self,
         *,
@@ -412,11 +439,78 @@ class QueryParameters(google.protobuf.message.Message):
         datastream_id: builtins.str = ...,
         origin_id: builtins.str = ...,
         identified_user_id: builtins.str = ...,
+        transcriptions: collections.abc.Iterable[global___Transcription] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["geo_location", b"geo_location", "payload", b"payload"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["account_id", b"account_id", "contexts", b"contexts", "datastream_id", b"datastream_id", "geo_location", b"geo_location", "identified_user_id", b"identified_user_id", "labels", b"labels", "origin_id", b"origin_id", "payload", b"payload", "platforms", b"platforms", "property_id", b"property_id", "reset_contexts", b"reset_contexts", "time_zone", b"time_zone"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["account_id", b"account_id", "contexts", b"contexts", "datastream_id", b"datastream_id", "geo_location", b"geo_location", "identified_user_id", b"identified_user_id", "labels", b"labels", "origin_id", b"origin_id", "payload", b"payload", "platforms", b"platforms", "property_id", b"property_id", "reset_contexts", b"reset_contexts", "time_zone", b"time_zone", "transcriptions", b"transcriptions"]) -> None: ...
 
 global___QueryParameters = QueryParameters
+
+@typing_extensions.final
+class Transcription(google.protobuf.message.Message):
+    """Represents a speech-to-text transcription."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TEXT_FIELD_NUMBER: builtins.int
+    SCORE_FIELD_NUMBER: builtins.int
+    LANGUAGE_FIELD_NUMBER: builtins.int
+    AUDIO_RESOURCE_NAME_FIELD_NUMBER: builtins.int
+    PIPELINE_FIELD_NUMBER: builtins.int
+    DURATION_IN_S_FIELD_NUMBER: builtins.int
+    TRANSCRIPTION_TYE_FIELD_NUMBER: builtins.int
+    CREATED_AT_FIELD_NUMBER: builtins.int
+    MODIFIED_AT_FIELD_NUMBER: builtins.int
+    CREATED_BY_FIELD_NUMBER: builtins.int
+    MODIFIED_BY_FIELD_NUMBER: builtins.int
+    text: builtins.str
+    """The transcribed text content."""
+    score: builtins.float
+    """Optional. A confidence score associated with the transcription.
+    The score indicates the level of confidence in the accuracy of the transcription.
+    It is a floating-point number, typically ranging from 0.0 (low confidence) to 1.0 (high confidence).
+    """
+    language: builtins.str
+    """Optional. The detected language of the transcription.
+    The language is represented by a string following language codes (e.g., "en" for English, "es" for Spanish).
+    """
+    audio_resource_name: builtins.str
+    """the resource name of the audio file of the transcription"""
+    pipeline: builtins.str
+    """Optional. pipeline used for transcription"""
+    duration_in_s: builtins.float
+    """Optional. Duration in seconds for transcription"""
+    transcription_tye: global___TranscriptionType.ValueType
+    """Whether a speech-to-text engine or a human has transcribed the audio"""
+    @property
+    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Creation date and time. Read-only field."""
+    @property
+    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Modification date and time. Read-only field."""
+    created_by: builtins.str
+    """User id in form of a valid UUID."""
+    modified_by: builtins.str
+    """User id in form of a valid UUID."""
+    def __init__(
+        self,
+        *,
+        text: builtins.str = ...,
+        score: builtins.float = ...,
+        language: builtins.str = ...,
+        audio_resource_name: builtins.str = ...,
+        pipeline: builtins.str = ...,
+        duration_in_s: builtins.float = ...,
+        transcription_tye: global___TranscriptionType.ValueType = ...,
+        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        created_by: builtins.str = ...,
+        modified_by: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["audio_resource_name", b"audio_resource_name", "created_at", b"created_at", "created_by", b"created_by", "duration_in_s", b"duration_in_s", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "pipeline", b"pipeline", "score", b"score", "text", b"text", "transcription_tye", b"transcription_tye"]) -> None: ...
+
+global___Transcription = Transcription
 
 @typing_extensions.final
 class QueryInput(google.protobuf.message.Message):
@@ -1015,6 +1109,7 @@ class SessionStep(google.protobuf.message.Message):
     MODIFIED_AT_FIELD_NUMBER: builtins.int
     CREATED_BY_FIELD_NUMBER: builtins.int
     MODIFIED_BY_FIELD_NUMBER: builtins.int
+    AUDIO_FILE_RESOURCES_FIELD_NUMBER: builtins.int
     name: builtins.str
     """The unique identifier for the given review
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/steps/&lt;session_step_uuid&gt;</code></pre>
@@ -1041,6 +1136,9 @@ class SessionStep(google.protobuf.message.Message):
     """User id in form of a valid UUID."""
     modified_by: builtins.str
     """User id in form of a valid UUID."""
+    @property
+    def audio_file_resources(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AudioFileResource]:
+        """audio file resources associated with the session step"""
     def __init__(
         self,
         *,
@@ -1053,9 +1151,10 @@ class SessionStep(google.protobuf.message.Message):
         modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         created_by: builtins.str = ...,
         modified_by: builtins.str = ...,
+        audio_file_resources: collections.abc.Iterable[global___AudioFileResource] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "detect_intent_request", b"detect_intent_request", "detect_intent_response", b"detect_intent_response", "modified_at", b"modified_at", "timestamp", b"timestamp"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["contexts", b"contexts", "created_at", b"created_at", "created_by", b"created_by", "detect_intent_request", b"detect_intent_request", "detect_intent_response", b"detect_intent_response", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "timestamp", b"timestamp"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["audio_file_resources", b"audio_file_resources", "contexts", b"contexts", "created_at", b"created_at", "created_by", b"created_by", "detect_intent_request", b"detect_intent_request", "detect_intent_response", b"detect_intent_response", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "timestamp", b"timestamp"]) -> None: ...
 
 global___SessionStep = SessionStep
 
@@ -1882,6 +1981,7 @@ class SessionReviewStep(google.protobuf.message.Message):
     MODIFIED_AT_FIELD_NUMBER: builtins.int
     CREATED_BY_FIELD_NUMBER: builtins.int
     MODIFIED_BY_FIELD_NUMBER: builtins.int
+    AUDIO_FILE_RESOURCES_FIELD_NUMBER: builtins.int
     name: builtins.str
     """The unique identifier for the given review step
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/reviews/&lt;review_uuid&gt;/sessionreviewsteps/&lt;session_review_step_uuid&gt;</code></pre>
@@ -1922,6 +2022,9 @@ class SessionReviewStep(google.protobuf.message.Message):
     """User id in form of a valid UUID."""
     modified_by: builtins.str
     """User id in form of a valid UUID."""
+    @property
+    def audio_file_resources(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AudioFileResource]:
+        """audio file resources associated with the session review step"""
     def __init__(
         self,
         *,
@@ -1938,9 +2041,10 @@ class SessionReviewStep(google.protobuf.message.Message):
         modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         created_by: builtins.str = ...,
         modified_by: builtins.str = ...,
+        audio_file_resources: collections.abc.Iterable[global___AudioFileResource] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["annotated_usersays", b"annotated_usersays", "created_at", b"created_at", "modified_at", b"modified_at", "timestamp", b"timestamp"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["annotated_usersays", b"annotated_usersays", "contexts", b"contexts", "contexts_out", b"contexts_out", "created_at", b"created_at", "created_by", b"created_by", "detected_intents", b"detected_intents", "language_code", b"language_code", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "platforms", b"platforms", "query_text_original", b"query_text_original", "timestamp", b"timestamp"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["annotated_usersays", b"annotated_usersays", "audio_file_resources", b"audio_file_resources", "contexts", b"contexts", "contexts_out", b"contexts_out", "created_at", b"created_at", "created_by", b"created_by", "detected_intents", b"detected_intents", "language_code", b"language_code", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "platforms", b"platforms", "query_text_original", b"query_text_original", "timestamp", b"timestamp"]) -> None: ...
 
 global___SessionReviewStep = SessionReviewStep
 
@@ -2978,6 +3082,7 @@ class AudioFileResource(google.protobuf.message.Message):
     DURATION_IN_S_FIELD_NUMBER: builtins.int
     SAMPLE_RATE_FIELD_NUMBER: builtins.int
     AUDIO_FILE_RESOURCE_TYPE_FIELD_NUMBER: builtins.int
+    TRANSCRIPTIONS_FIELD_NUMBER: builtins.int
     CREATED_AT_FIELD_NUMBER: builtins.int
     MODIFIED_AT_FIELD_NUMBER: builtins.int
     CREATED_BY_FIELD_NUMBER: builtins.int
@@ -2997,6 +3102,11 @@ class AudioFileResource(google.protobuf.message.Message):
     audio_file_resource_type: global___AudioFileResourceType.ValueType
     """File type of an audio resource"""
     @property
+    def transcriptions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Transcription]:
+        """transcriptions of the user input sorted by score.
+        A transcription can be from a speech-to-text system or a human
+        """
+    @property
     def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Creation date and time. Read-only field."""
     @property
@@ -3015,13 +3125,14 @@ class AudioFileResource(google.protobuf.message.Message):
         duration_in_s: builtins.float = ...,
         sample_rate: builtins.int = ...,
         audio_file_resource_type: global___AudioFileResourceType.ValueType = ...,
+        transcriptions: collections.abc.Iterable[global___Transcription] | None = ...,
         created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         created_by: builtins.str = ...,
         modified_by: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["audio_file_resource_type", b"audio_file_resource_type", "bytes", b"bytes", "created_at", b"created_at", "created_by", b"created_by", "duration_in_s", b"duration_in_s", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "sample_rate", b"sample_rate"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["audio_file_resource_type", b"audio_file_resource_type", "bytes", b"bytes", "created_at", b"created_at", "created_by", b"created_by", "duration_in_s", b"duration_in_s", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "sample_rate", b"sample_rate", "transcriptions", b"transcriptions"]) -> None: ...
 
 global___AudioFileResource = AudioFileResource
 

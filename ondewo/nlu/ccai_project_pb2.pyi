@@ -60,6 +60,12 @@ class _CcaiServiceTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper
     """ondewo-vtsi service"""
     CCAI_SERVICE_TYPE_VTSI_RABBITMQ: _CcaiServiceType.ValueType  # 9
     """ondewo-vtsi service"""
+    CCAI_SERVICE_TYPE_ONDEWO_NLU_QA: _CcaiServiceType.ValueType  # 10
+    """ondewo-nlu-qa service"""
+    CCAI_SERVICE_TYPE_ONDEWO_NLU_WEBHOOK: _CcaiServiceType.ValueType  # 11
+    """ondewo-nlu-webhook service"""
+    CCAI_SERVICE_TYPE_ONDEWO_SURVEY: _CcaiServiceType.ValueType  # 12
+    """ondewo-survey service"""
 
 class CcaiServiceType(_CcaiServiceType, metaclass=_CcaiServiceTypeEnumTypeWrapper): ...
 
@@ -83,6 +89,12 @@ CCAI_SERVICE_TYPE_ONDEWO_VTSI: CcaiServiceType.ValueType  # 8
 """ondewo-vtsi service"""
 CCAI_SERVICE_TYPE_VTSI_RABBITMQ: CcaiServiceType.ValueType  # 9
 """ondewo-vtsi service"""
+CCAI_SERVICE_TYPE_ONDEWO_NLU_QA: CcaiServiceType.ValueType  # 10
+"""ondewo-nlu-qa service"""
+CCAI_SERVICE_TYPE_ONDEWO_NLU_WEBHOOK: CcaiServiceType.ValueType  # 11
+"""ondewo-nlu-webhook service"""
+CCAI_SERVICE_TYPE_ONDEWO_SURVEY: CcaiServiceType.ValueType  # 12
+"""ondewo-survey service"""
 global___CcaiServiceType = CcaiServiceType
 
 class _CcaiProjectView:
