@@ -21,6 +21,7 @@ from typing import (
 from ondewo.utils.base_client import BaseClient
 from ondewo.utils.base_client_config import BaseClientConfig
 
+from nlu.services.ccai_project_services import CcaiProjectServices
 from ondewo.nlu.client_config import ClientConfig
 from ondewo.nlu.core.services_container import ServicesContainer
 from ondewo.nlu.services.agents import Agents
@@ -62,6 +63,7 @@ class Client(BaseClient):
         self.services: ServicesContainer = ServicesContainer(
             agents=Agents(**kwargs),
             aiservices=AIServices(**kwargs),
+            ccai_projects=CcaiProjectServices(**kwargs),
             contexts=Contexts(**kwargs),
             entity_types=EntityTypes(**kwargs),
             intents=Intents(**kwargs),
