@@ -16,7 +16,7 @@ fail_fast: false
 repos:
 
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.7.0
+    rev: v1.8.0
     hooks:
       - id: mypy  # Run mypy type checker; note: runs with flag --missing-imports
         exclude: ondewo
@@ -36,7 +36,7 @@ repos:
         verbose: true
         types: [ python ]
 
-  - repo: https://github.com/pre-commit/mirrors-autopep8
+  - repo: https://github.com/hhatto/autopep8
     rev: v2.0.4
     hooks:
       - id: autopep8  # Perform pep8 auto-formatting
