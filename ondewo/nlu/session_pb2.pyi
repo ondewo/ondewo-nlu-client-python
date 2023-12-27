@@ -455,7 +455,7 @@ class Transcription(google.protobuf.message.Message):
     NAME_FIELD_NUMBER: builtins.int
     TEXT_FIELD_NUMBER: builtins.int
     SCORE_FIELD_NUMBER: builtins.int
-    LANGUAGE_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     AUDIO_RESOURCE_NAME_FIELD_NUMBER: builtins.int
     PIPELINE_FIELD_NUMBER: builtins.int
     DURATION_IN_S_FIELD_NUMBER: builtins.int
@@ -473,7 +473,7 @@ class Transcription(google.protobuf.message.Message):
     The score indicates the level of confidence in the accuracy of the transcription.
     It is a floating-point number, typically ranging from 0.0 (low confidence) to 1.0 (high confidence).
     """
-    language: builtins.str
+    language_code: builtins.str
     """Optional. The detected language of the transcription.
     The language is represented by a string following language codes (e.g., "en" for English, "es" for Spanish).
     """
@@ -501,7 +501,7 @@ class Transcription(google.protobuf.message.Message):
         name: builtins.str = ...,
         text: builtins.str = ...,
         score: builtins.float = ...,
-        language: builtins.str = ...,
+        language_code: builtins.str = ...,
         audio_resource_name: builtins.str = ...,
         pipeline: builtins.str = ...,
         duration_in_s: builtins.float = ...,
@@ -512,7 +512,7 @@ class Transcription(google.protobuf.message.Message):
         modified_by: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["audio_resource_name", b"audio_resource_name", "created_at", b"created_at", "created_by", b"created_by", "duration_in_s", b"duration_in_s", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "pipeline", b"pipeline", "score", b"score", "text", b"text", "transcription_type", b"transcription_type"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["audio_resource_name", b"audio_resource_name", "created_at", b"created_at", "created_by", b"created_by", "duration_in_s", b"duration_in_s", "language_code", b"language_code", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "pipeline", b"pipeline", "score", b"score", "text", b"text", "transcription_type", b"transcription_type"]) -> None: ...
 
 global___Transcription = Transcription
 
