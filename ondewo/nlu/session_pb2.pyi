@@ -457,7 +457,7 @@ class Transcription(google.protobuf.message.Message):
     SCORE_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     AUDIO_RESOURCE_NAME_FIELD_NUMBER: builtins.int
-    PIPELINE_FIELD_NUMBER: builtins.int
+    PIPELINE_ID_FIELD_NUMBER: builtins.int
     DURATION_IN_S_FIELD_NUMBER: builtins.int
     TRANSCRIPTION_TYPE_FIELD_NUMBER: builtins.int
     CREATED_AT_FIELD_NUMBER: builtins.int
@@ -479,8 +479,8 @@ class Transcription(google.protobuf.message.Message):
     """
     audio_resource_name: builtins.str
     """the resource name of the audio file of the transcription"""
-    pipeline: builtins.str
-    """Optional. pipeline used for transcription"""
+    pipeline_id: builtins.str
+    """Optional. pipeline used for transcription. A pipeline ID. Example: "pipeline_1" """
     duration_in_s: builtins.float
     """Optional. Duration in seconds for transcription"""
     transcription_type: global___TranscriptionType.ValueType
@@ -503,7 +503,7 @@ class Transcription(google.protobuf.message.Message):
         score: builtins.float = ...,
         language_code: builtins.str = ...,
         audio_resource_name: builtins.str = ...,
-        pipeline: builtins.str = ...,
+        pipeline_id: builtins.str = ...,
         duration_in_s: builtins.float = ...,
         transcription_type: global___TranscriptionType.ValueType = ...,
         created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
@@ -512,7 +512,7 @@ class Transcription(google.protobuf.message.Message):
         modified_by: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["audio_resource_name", b"audio_resource_name", "created_at", b"created_at", "created_by", b"created_by", "duration_in_s", b"duration_in_s", "language_code", b"language_code", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "pipeline", b"pipeline", "score", b"score", "text", b"text", "transcription_type", b"transcription_type"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["audio_resource_name", b"audio_resource_name", "created_at", b"created_at", "created_by", b"created_by", "duration_in_s", b"duration_in_s", "language_code", b"language_code", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "pipeline_id", b"pipeline_id", "score", b"score", "text", b"text", "transcription_type", b"transcription_type"]) -> None: ...
 
 global___Transcription = Transcription
 
