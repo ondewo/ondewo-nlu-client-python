@@ -40,41 +40,41 @@ class _CcaiProjectStatus:
 
 class _CcaiProjectStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_CcaiProjectStatus.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-    UNSPECIFIED: _CcaiProjectStatus.ValueType  # 0
+    CCAI_PROJECT_STATUS_UNSPECIFIED: _CcaiProjectStatus.ValueType  # 0
     """No status specified"""
-    UNDEPLOYED: _CcaiProjectStatus.ValueType  # 1
+    CCAI_PROJECT_STATUS_UNDEPLOYED: _CcaiProjectStatus.ValueType  # 1
     """Project successfully created and undeployed"""
-    UPDATING: _CcaiProjectStatus.ValueType  # 2
+    CCAI_PROJECT_STATUS_UPDATING: _CcaiProjectStatus.ValueType  # 2
     """Project configuration is updating"""
-    DEPLOYING: _CcaiProjectStatus.ValueType  # 3
+    CCAI_PROJECT_STATUS_DEPLOYING: _CcaiProjectStatus.ValueType  # 3
     """Project is deploying"""
-    DEPLOYED: _CcaiProjectStatus.ValueType  # 4
+    CCAI_PROJECT_STATUS_DEPLOYED: _CcaiProjectStatus.ValueType  # 4
     """Project is deployed"""
-    UNDEPLOYING: _CcaiProjectStatus.ValueType  # 5
+    CCAI_PROJECT_STATUS_UNDEPLOYING: _CcaiProjectStatus.ValueType  # 5
     """Project is un-deploying"""
-    DELETING: _CcaiProjectStatus.ValueType  # 6
+    CCAI_PROJECT_STATUS_DELETING: _CcaiProjectStatus.ValueType  # 6
     """Project is currently deleting"""
-    DELETED: _CcaiProjectStatus.ValueType  # 7
+    CCAI_PROJECT_STATUS_DELETED: _CcaiProjectStatus.ValueType  # 7
     """Project is deleted"""
 
 class CcaiProjectStatus(_CcaiProjectStatus, metaclass=_CcaiProjectStatusEnumTypeWrapper):
-    """Status of a VtsiProject."""
+    """Status of a Call Center AI (CCAI) Project."""
 
-UNSPECIFIED: CcaiProjectStatus.ValueType  # 0
+CCAI_PROJECT_STATUS_UNSPECIFIED: CcaiProjectStatus.ValueType  # 0
 """No status specified"""
-UNDEPLOYED: CcaiProjectStatus.ValueType  # 1
+CCAI_PROJECT_STATUS_UNDEPLOYED: CcaiProjectStatus.ValueType  # 1
 """Project successfully created and undeployed"""
-UPDATING: CcaiProjectStatus.ValueType  # 2
+CCAI_PROJECT_STATUS_UPDATING: CcaiProjectStatus.ValueType  # 2
 """Project configuration is updating"""
-DEPLOYING: CcaiProjectStatus.ValueType  # 3
+CCAI_PROJECT_STATUS_DEPLOYING: CcaiProjectStatus.ValueType  # 3
 """Project is deploying"""
-DEPLOYED: CcaiProjectStatus.ValueType  # 4
+CCAI_PROJECT_STATUS_DEPLOYED: CcaiProjectStatus.ValueType  # 4
 """Project is deployed"""
-UNDEPLOYING: CcaiProjectStatus.ValueType  # 5
+CCAI_PROJECT_STATUS_UNDEPLOYING: CcaiProjectStatus.ValueType  # 5
 """Project is un-deploying"""
-DELETING: CcaiProjectStatus.ValueType  # 6
+CCAI_PROJECT_STATUS_DELETING: CcaiProjectStatus.ValueType  # 6
 """Project is currently deleting"""
-DELETED: CcaiProjectStatus.ValueType  # 7
+CCAI_PROJECT_STATUS_DELETED: CcaiProjectStatus.ValueType  # 7
 """Project is deleted"""
 global___CcaiProjectStatus = CcaiProjectStatus
 
