@@ -452,17 +452,20 @@ class Transcription(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
+    NAME_FIELD_NUMBER: builtins.int
     TEXT_FIELD_NUMBER: builtins.int
     SCORE_FIELD_NUMBER: builtins.int
     LANGUAGE_FIELD_NUMBER: builtins.int
     AUDIO_RESOURCE_NAME_FIELD_NUMBER: builtins.int
     PIPELINE_FIELD_NUMBER: builtins.int
     DURATION_IN_S_FIELD_NUMBER: builtins.int
-    TRANSCRIPTION_TYE_FIELD_NUMBER: builtins.int
+    TRANSCRIPTION_TYPE_FIELD_NUMBER: builtins.int
     CREATED_AT_FIELD_NUMBER: builtins.int
     MODIFIED_AT_FIELD_NUMBER: builtins.int
     CREATED_BY_FIELD_NUMBER: builtins.int
     MODIFIED_BY_FIELD_NUMBER: builtins.int
+    name: builtins.str
+    """resource name of the transcription"""
     text: builtins.str
     """The transcribed text content."""
     score: builtins.float
@@ -480,7 +483,7 @@ class Transcription(google.protobuf.message.Message):
     """Optional. pipeline used for transcription"""
     duration_in_s: builtins.float
     """Optional. Duration in seconds for transcription"""
-    transcription_tye: global___TranscriptionType.ValueType
+    transcription_type: global___TranscriptionType.ValueType
     """Whether a speech-to-text engine or a human has transcribed the audio"""
     @property
     def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
@@ -495,20 +498,21 @@ class Transcription(google.protobuf.message.Message):
     def __init__(
         self,
         *,
+        name: builtins.str = ...,
         text: builtins.str = ...,
         score: builtins.float = ...,
         language: builtins.str = ...,
         audio_resource_name: builtins.str = ...,
         pipeline: builtins.str = ...,
         duration_in_s: builtins.float = ...,
-        transcription_tye: global___TranscriptionType.ValueType = ...,
+        transcription_type: global___TranscriptionType.ValueType = ...,
         created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         created_by: builtins.str = ...,
         modified_by: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["audio_resource_name", b"audio_resource_name", "created_at", b"created_at", "created_by", b"created_by", "duration_in_s", b"duration_in_s", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "pipeline", b"pipeline", "score", b"score", "text", b"text", "transcription_tye", b"transcription_tye"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["audio_resource_name", b"audio_resource_name", "created_at", b"created_at", "created_by", b"created_by", "duration_in_s", b"duration_in_s", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "pipeline", b"pipeline", "score", b"score", "text", b"text", "transcription_type", b"transcription_type"]) -> None: ...
 
 global___Transcription = Transcription
 
