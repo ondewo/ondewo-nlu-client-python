@@ -419,22 +419,27 @@ class GetCcaiProjectRequest(google.protobuf.message.Message):
 
     NAME_FIELD_NUMBER: builtins.int
     CCAI_PROJECT_VIEW_FIELD_NUMBER: builtins.int
-    CCAI_PROJECT_FILTER_FIELD_NUMBER: builtins.int
+    CCAI_SERVICE_FILTER_FIELD_NUMBER: builtins.int
     name: builtins.str
     """CCAI project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre>"""
     ccai_project_view: global___CcaiProjectView.ValueType
     """Optional. Specify the view of the returned CcaiProject (full view by default)"""
     @property
-    def ccai_project_filter(self) -> global___CcaiProjectFilter: ...
+    def ccai_service_filter(self) -> global___CcaiServiceFilter:
+        """Filter which services should be included in the returned CcaiProject"""
     def __init__(
         self,
         *,
         name: builtins.str = ...,
-        ccai_project_view: global___CcaiProjectView.ValueType = ...,
-        ccai_project_filter: global___CcaiProjectFilter | None = ...,
+        ccai_project_view: global___CcaiProjectView.ValueType | None = ...,
+        ccai_service_filter: global___CcaiServiceFilter | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["ccai_project_filter", b"ccai_project_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["ccai_project_filter", b"ccai_project_filter", "ccai_project_view", b"ccai_project_view", "name", b"name"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["_ccai_project_view", b"_ccai_project_view", "_ccai_service_filter", b"_ccai_service_filter", "ccai_project_view", b"ccai_project_view", "ccai_service_filter", b"ccai_service_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["_ccai_project_view", b"_ccai_project_view", "_ccai_service_filter", b"_ccai_service_filter", "ccai_project_view", b"ccai_project_view", "ccai_service_filter", b"ccai_service_filter", "name", b"name"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_ccai_project_view", b"_ccai_project_view"]) -> typing_extensions.Literal["ccai_project_view"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_ccai_service_filter", b"_ccai_service_filter"]) -> typing_extensions.Literal["ccai_service_filter"] | None: ...
 
 global___GetCcaiProjectRequest = GetCcaiProjectRequest
 
@@ -591,7 +596,9 @@ class CcaiProjectSorting(google.protobuf.message.Message):
 global___CcaiProjectSorting = CcaiProjectSorting
 
 @typing_extensions.final
-class CcaiProjectFilter(google.protobuf.message.Message):
+class CcaiServiceFilter(google.protobuf.message.Message):
+    """Filter which services should be included in the returned CcaiProject"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     LANGUAGE_CODES_FIELD_NUMBER: builtins.int
@@ -610,7 +617,7 @@ class CcaiProjectFilter(google.protobuf.message.Message):
     ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["ccai_service_type", b"ccai_service_type", "language_codes", b"language_codes"]) -> None: ...
 
-global___CcaiProjectFilter = CcaiProjectFilter
+global___CcaiServiceFilter = CcaiServiceFilter
 
 @typing_extensions.final
 class UpdateCcaiProjectRequest(google.protobuf.message.Message):
@@ -619,10 +626,14 @@ class UpdateCcaiProjectRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     CCAI_PROJECT_FIELD_NUMBER: builtins.int
+    CCAI_SERVICE_FILTER_FIELD_NUMBER: builtins.int
     UPDATE_MASK_FIELD_NUMBER: builtins.int
     @property
     def ccai_project(self) -> global___CcaiProject:
-        """Project Configs."""
+        """The CcaiProject that should be updated"""
+    @property
+    def ccai_service_filter(self) -> global___CcaiServiceFilter:
+        """Filter which services should be updated in the CcaiProject"""
     @property
     def update_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields get updated."""
@@ -630,10 +641,12 @@ class UpdateCcaiProjectRequest(google.protobuf.message.Message):
         self,
         *,
         ccai_project: global___CcaiProject | None = ...,
+        ccai_service_filter: global___CcaiServiceFilter | None = ...,
         update_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["ccai_project", b"ccai_project", "update_mask", b"update_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["ccai_project", b"ccai_project", "update_mask", b"update_mask"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["_ccai_service_filter", b"_ccai_service_filter", "ccai_project", b"ccai_project", "ccai_service_filter", b"ccai_service_filter", "update_mask", b"update_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["_ccai_service_filter", b"_ccai_service_filter", "ccai_project", b"ccai_project", "ccai_service_filter", b"ccai_service_filter", "update_mask", b"update_mask"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_ccai_service_filter", b"_ccai_service_filter"]) -> typing_extensions.Literal["ccai_service_filter"] | None: ...
 
 global___UpdateCcaiProjectRequest = UpdateCcaiProjectRequest
 
