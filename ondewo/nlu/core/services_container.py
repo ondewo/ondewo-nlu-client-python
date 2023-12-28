@@ -17,9 +17,9 @@ from dataclasses import dataclass
 
 from ondewo.utils.base_service_container import BaseServicesContainer
 
-from ondewo.nlu.ccai_project_pb2 import CcaiProject
 from ondewo.nlu.services.agents import Agents
 from ondewo.nlu.services.aiservices import AIServices
+from ondewo.nlu.services.ccai_projects import CcaiProjects
 from ondewo.nlu.services.contexts import Contexts
 from ondewo.nlu.services.entity_types import EntityTypes
 from ondewo.nlu.services.intents import Intents
@@ -36,7 +36,7 @@ from ondewo.nlu.services.utilities import Utilities
 class ServicesContainer(BaseServicesContainer):
     agents: Agents
     aiservices: AIServices
-    ccai_projects: CcaiProject
+    ccai_projects: CcaiProjects
     contexts: Contexts
     entity_types: EntityTypes
     intents: Intents

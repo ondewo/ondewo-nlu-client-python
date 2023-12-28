@@ -25,7 +25,7 @@ from ondewo.nlu.client_config import ClientConfig
 from ondewo.nlu.core.services_container import ServicesContainer
 from ondewo.nlu.services.agents import Agents
 from ondewo.nlu.services.aiservices import AIServices
-from ondewo.nlu.services.ccai_project import CcaiProject
+from ondewo.nlu.services.ccai_projects import CcaiProjects
 from ondewo.nlu.services.contexts import Contexts
 from ondewo.nlu.services.entity_types import EntityTypes
 from ondewo.nlu.services.intents import Intents
@@ -54,7 +54,7 @@ class Client(BaseClient):
         if not isinstance(config, ClientConfig):
             raise ValueError('The provided config must be of type `ondewo.nlu.client_config.ClientConfig`')
 
-        nlu_token: str = login(config=config, use_secure_channel=use_secure_channel)
+        nlu_token: str = login(config=config, use_secure_channel=use_secure_channel)  # type:ignore
         kwargs: Dict[str, Any] = {
             'config': config,
             'nlu_token': nlu_token,
@@ -63,7 +63,7 @@ class Client(BaseClient):
         self.services: ServicesContainer = ServicesContainer(
             agents=Agents(**kwargs),
             aiservices=AIServices(**kwargs),
-            ccai_projects=CcaiProject(**kwargs),
+            ccai_projects=CcaiProjects(**kwargs),
             contexts=Contexts(**kwargs),
             entity_types=EntityTypes(**kwargs),
             intents=Intents(**kwargs),
