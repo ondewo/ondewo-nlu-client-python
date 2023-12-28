@@ -232,7 +232,7 @@ class CcaiProject(google.protobuf.message.Message):
     modified_by: builtins.str
     """User id in the form of a valid UUID."""
     nlu_agent_name: builtins.str
-    """Associated NLU agent
+    """Required. Associated NLU agent
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
     def __init__(
@@ -383,16 +383,22 @@ class CreateCcaiProjectRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     CCAI_PROJECT_FIELD_NUMBER: builtins.int
+    NLU_AGENT_NAME_FIELD_NUMBER: builtins.int
     @property
     def ccai_project(self) -> global___CcaiProject:
         """The CCAI project to be created."""
+    nlu_agent_name: builtins.str
+    """Required. The nlu agent project of this CcaiProject.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
     def __init__(
         self,
         *,
         ccai_project: global___CcaiProject | None = ...,
+        nlu_agent_name: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["ccai_project", b"ccai_project"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["ccai_project", b"ccai_project"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["ccai_project", b"ccai_project", "nlu_agent_name", b"nlu_agent_name"]) -> None: ...
 
 global___CreateCcaiProjectRequest = CreateCcaiProjectRequest
 
@@ -429,6 +435,7 @@ class GetCcaiProjectRequest(google.protobuf.message.Message):
     NAME_FIELD_NUMBER: builtins.int
     CCAI_PROJECT_VIEW_FIELD_NUMBER: builtins.int
     CCAI_SERVICE_FILTER_FIELD_NUMBER: builtins.int
+    NLU_AGENT_NAME_FIELD_NUMBER: builtins.int
     name: builtins.str
     """CCAI project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre>"""
     ccai_project_view: global___CcaiProjectView.ValueType
@@ -436,15 +443,20 @@ class GetCcaiProjectRequest(google.protobuf.message.Message):
     @property
     def ccai_service_filter(self) -> global___CcaiServiceFilter:
         """Filter which services should be included in the returned CcaiProject"""
+    nlu_agent_name: builtins.str
+    """Required. The nlu agent project of this CcaiProject.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
     def __init__(
         self,
         *,
         name: builtins.str = ...,
         ccai_project_view: global___CcaiProjectView.ValueType | None = ...,
         ccai_service_filter: global___CcaiServiceFilter | None = ...,
+        nlu_agent_name: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["_ccai_project_view", b"_ccai_project_view", "_ccai_service_filter", b"_ccai_service_filter", "ccai_project_view", b"ccai_project_view", "ccai_service_filter", b"ccai_service_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["_ccai_project_view", b"_ccai_project_view", "_ccai_service_filter", b"_ccai_service_filter", "ccai_project_view", b"ccai_project_view", "ccai_service_filter", b"ccai_service_filter", "name", b"name"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["_ccai_project_view", b"_ccai_project_view", "_ccai_service_filter", b"_ccai_service_filter", "ccai_project_view", b"ccai_project_view", "ccai_service_filter", b"ccai_service_filter", "name", b"name", "nlu_agent_name", b"nlu_agent_name"]) -> None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing_extensions.Literal["_ccai_project_view", b"_ccai_project_view"]) -> typing_extensions.Literal["ccai_project_view"] | None: ...
     @typing.overload
@@ -497,7 +509,7 @@ class ListCcaiProjectsRequest(google.protobuf.message.Message):
         If not specified, the default behavior is to have no sorting.
         """
     nlu_agent_name: builtins.str
-    """Optional. Filter based on associated NLU agent
+    """Required. The nlu agent project of this CcaiProject.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
     def __init__(
@@ -636,6 +648,7 @@ class UpdateCcaiProjectRequest(google.protobuf.message.Message):
     CCAI_PROJECT_FIELD_NUMBER: builtins.int
     CCAI_SERVICE_FILTER_FIELD_NUMBER: builtins.int
     UPDATE_MASK_FIELD_NUMBER: builtins.int
+    NLU_AGENT_NAME_FIELD_NUMBER: builtins.int
     @property
     def ccai_project(self) -> global___CcaiProject:
         """The CcaiProject that should be updated"""
@@ -645,15 +658,20 @@ class UpdateCcaiProjectRequest(google.protobuf.message.Message):
     @property
     def update_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields get updated."""
+    nlu_agent_name: builtins.str
+    """Required. The nlu agent project of this CcaiProject.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
     def __init__(
         self,
         *,
         ccai_project: global___CcaiProject | None = ...,
         ccai_service_filter: global___CcaiServiceFilter | None = ...,
         update_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        nlu_agent_name: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["_ccai_service_filter", b"_ccai_service_filter", "ccai_project", b"ccai_project", "ccai_service_filter", b"ccai_service_filter", "update_mask", b"update_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["_ccai_service_filter", b"_ccai_service_filter", "ccai_project", b"ccai_project", "ccai_service_filter", b"ccai_service_filter", "update_mask", b"update_mask"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["_ccai_service_filter", b"_ccai_service_filter", "ccai_project", b"ccai_project", "ccai_service_filter", b"ccai_service_filter", "nlu_agent_name", b"nlu_agent_name", "update_mask", b"update_mask"]) -> None: ...
     def WhichOneof(self, oneof_group: typing_extensions.Literal["_ccai_service_filter", b"_ccai_service_filter"]) -> typing_extensions.Literal["ccai_service_filter"] | None: ...
 
 global___UpdateCcaiProjectRequest = UpdateCcaiProjectRequest
@@ -689,14 +707,20 @@ class DeleteCcaiProjectRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     NAME_FIELD_NUMBER: builtins.int
+    NLU_AGENT_NAME_FIELD_NUMBER: builtins.int
     name: builtins.str
     """CCAI project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre>"""
+    nlu_agent_name: builtins.str
+    """Required. The nlu agent project of this CcaiProject.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
     def __init__(
         self,
         *,
         name: builtins.str = ...,
+        nlu_agent_name: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["name", b"name"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["name", b"name", "nlu_agent_name", b"nlu_agent_name"]) -> None: ...
 
 global___DeleteCcaiProjectRequest = DeleteCcaiProjectRequest
 
@@ -710,16 +734,22 @@ class DeleteCcaiProjectResponse(google.protobuf.message.Message):
 
     NAME_FIELD_NUMBER: builtins.int
     ERROR_MESSAGE_FIELD_NUMBER: builtins.int
+    NLU_AGENT_NAME_FIELD_NUMBER: builtins.int
     name: builtins.str
     """CCAI project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre>"""
     error_message: builtins.str
     """error message if there are any."""
+    nlu_agent_name: builtins.str
+    """Required. The nlu agent project of this CcaiProject.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
     def __init__(
         self,
         *,
         name: builtins.str = ...,
         error_message: builtins.str = ...,
+        nlu_agent_name: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["error_message", b"error_message", "name", b"name"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["error_message", b"error_message", "name", b"name", "nlu_agent_name", b"nlu_agent_name"]) -> None: ...
 
 global___DeleteCcaiProjectResponse = DeleteCcaiProjectResponse
