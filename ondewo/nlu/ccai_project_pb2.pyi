@@ -276,10 +276,13 @@ global___CcaiServiceList = CcaiServiceList
 
 @typing_extensions.final
 class CcaiService(google.protobuf.message.Message):
+    """Definition of a Call Center AI (CCAI) Service."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     NAME_FIELD_NUMBER: builtins.int
     DISPLAY_NAME_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     GRPC_HOST_FIELD_NUMBER: builtins.int
     GRPC_PORT_FIELD_NUMBER: builtins.int
     WEBGRPC_HOST_FIELD_NUMBER: builtins.int
@@ -297,43 +300,53 @@ class CcaiService(google.protobuf.message.Message):
     CREATED_BY_FIELD_NUMBER: builtins.int
     MODIFIED_BY_FIELD_NUMBER: builtins.int
     name: builtins.str
-    """Resource name of the service"""
+    """Resource name of the service. Must be unique."""
     display_name: builtins.str
-    """Display name"""
+    """Display name for better identification."""
+    language_code: builtins.str
+    """Language code representing the service language
+    Format (e.g., "en" for English, "de" for German).
+    """
     grpc_host: builtins.str
-    """gRPC host and port"""
+    """gRPC host for communication with the specified port."""
     grpc_port: builtins.int
+    """Port for gRPC communication."""
     webgrpc_host: builtins.str
-    """Web gRPC host and port"""
+    """Web gRPC host for web-based communication with the specified port."""
     webgrpc_port: builtins.int
+    """Port for web gRPC communication."""
     grpc_cert: builtins.str
-    """Path to the gRPC certificate"""
+    """Path to the gRPC certificate for secure communication."""
     host: builtins.str
-    """Additional host and ports"""
+    """Additional host for communication, if needed."""
     port: builtins.int
+    """Port for additional communication."""
     port2: builtins.int
+    """Another additional port for communication if required."""
     account_name: builtins.str
-    """Account information"""
+    """Account name for authentication."""
     account_password: builtins.str
+    """Password for the specified account for authentication."""
     api_key: builtins.str
-    """API key for the service"""
+    """API key for accessing the service, if applicable."""
     ccai_service_type: global___CcaiServiceType.ValueType
-    """Type of CCAI service"""
+    """Type of CCAI service (e.g., TEXT_TO_SPEECH, SPEECH_TO_TEXT)."""
     @property
     def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Creation date and time. Read-only field."""
+        """Creation date and time of the service. Read-only field."""
     @property
     def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Modification date and time. Read-only field."""
+        """Modification date and time of the service. Read-only field."""
     created_by: builtins.str
-    """User id in the form of a valid UUID."""
+    """User ID of the creator in the form of a valid UUID. Read-only field."""
     modified_by: builtins.str
-    """User id in the form of a valid UUID."""
+    """User ID of the last modifier in the form of a valid UUID. Read-only field."""
     def __init__(
         self,
         *,
         name: builtins.str = ...,
         display_name: builtins.str = ...,
+        language_code: builtins.str = ...,
         grpc_host: builtins.str = ...,
         grpc_port: builtins.int = ...,
         webgrpc_host: builtins.str = ...,
@@ -352,7 +365,7 @@ class CcaiService(google.protobuf.message.Message):
         modified_by: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["account_name", b"account_name", "account_password", b"account_password", "api_key", b"api_key", "ccai_service_type", b"ccai_service_type", "created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "grpc_cert", b"grpc_cert", "grpc_host", b"grpc_host", "grpc_port", b"grpc_port", "host", b"host", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "port", b"port", "port2", b"port2", "webgrpc_host", b"webgrpc_host", "webgrpc_port", b"webgrpc_port"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["account_name", b"account_name", "account_password", b"account_password", "api_key", b"api_key", "ccai_service_type", b"ccai_service_type", "created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "grpc_cert", b"grpc_cert", "grpc_host", b"grpc_host", "grpc_port", b"grpc_port", "host", b"host", "language_code", b"language_code", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "port", b"port", "port2", b"port2", "webgrpc_host", b"webgrpc_host", "webgrpc_port", b"webgrpc_port"]) -> None: ...
 
 global___CcaiService = CcaiService
 
