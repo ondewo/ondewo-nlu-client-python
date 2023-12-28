@@ -181,7 +181,7 @@ class CcaiProject(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     @typing_extensions.final
-    class CcaiServiceListsEntry(google.protobuf.message.Message):
+    class CcaiServicesMapEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
         KEY_FIELD_NUMBER: builtins.int
@@ -201,7 +201,7 @@ class CcaiProject(google.protobuf.message.Message):
     NAME_FIELD_NUMBER: builtins.int
     DISPLAY_NAME_FIELD_NUMBER: builtins.int
     OWNER_NAME_FIELD_NUMBER: builtins.int
-    CCAI_SERVICE_LISTS_FIELD_NUMBER: builtins.int
+    CCAI_SERVICES_MAP_FIELD_NUMBER: builtins.int
     CCAI_PROJECT_STATUS_FIELD_NUMBER: builtins.int
     CREATED_AT_FIELD_NUMBER: builtins.int
     MODIFIED_AT_FIELD_NUMBER: builtins.int
@@ -215,7 +215,7 @@ class CcaiProject(google.protobuf.message.Message):
     owner_name: builtins.str
     """Optional. Resource name of the user who is the owner of the project."""
     @property
-    def ccai_service_lists(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, global___CcaiServiceList]:
+    def ccai_services_map(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, global___CcaiServiceList]:
         """Map of two letter language codes to lists of CcaiServiceList
         Two-letter language codes following ISO 639-1 (see https://en.wikipedia.org/wiki/ISO_639-1)
         """
@@ -241,7 +241,7 @@ class CcaiProject(google.protobuf.message.Message):
         name: builtins.str = ...,
         display_name: builtins.str = ...,
         owner_name: builtins.str = ...,
-        ccai_service_lists: collections.abc.Mapping[builtins.str, global___CcaiServiceList] | None = ...,
+        ccai_services_map: collections.abc.Mapping[builtins.str, global___CcaiServiceList] | None = ...,
         ccai_project_status: global___CcaiProjectStatus.ValueType = ...,
         created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
@@ -250,7 +250,7 @@ class CcaiProject(google.protobuf.message.Message):
         nlu_agent_name: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["ccai_project_status", b"ccai_project_status", "ccai_service_lists", b"ccai_service_lists", "created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "nlu_agent_name", b"nlu_agent_name", "owner_name", b"owner_name"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["ccai_project_status", b"ccai_project_status", "ccai_services_map", b"ccai_services_map", "created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "nlu_agent_name", b"nlu_agent_name", "owner_name", b"owner_name"]) -> None: ...
 
 global___CcaiProject = CcaiProject
 
