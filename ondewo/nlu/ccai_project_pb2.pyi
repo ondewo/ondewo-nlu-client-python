@@ -606,20 +606,20 @@ class CcaiServiceFilter(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     LANGUAGE_CODES_FIELD_NUMBER: builtins.int
-    CCAI_SERVICE_TYPE_FIELD_NUMBER: builtins.int
+    CCAI_SERVICE_TYPES_FIELD_NUMBER: builtins.int
     @property
     def language_codes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Language codes of the projects for which services are filtered."""
     @property
-    def ccai_service_type(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[global___CcaiServiceType.ValueType]:
+    def ccai_service_types(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[global___CcaiServiceType.ValueType]:
         """Type of CCAI service"""
     def __init__(
         self,
         *,
         language_codes: collections.abc.Iterable[builtins.str] | None = ...,
-        ccai_service_type: collections.abc.Iterable[global___CcaiServiceType.ValueType] | None = ...,
+        ccai_service_types: collections.abc.Iterable[global___CcaiServiceType.ValueType] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["ccai_service_type", b"ccai_service_type", "language_codes", b"language_codes"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["ccai_service_types", b"ccai_service_types", "language_codes", b"language_codes"]) -> None: ...
 
 global___CcaiServiceFilter = CcaiServiceFilter
 
