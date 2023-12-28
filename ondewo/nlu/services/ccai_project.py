@@ -11,9 +11,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-from nlu import ccai_project_pb2
-from nlu.ccai_project_pb2_grpc import CcaiProjectsStub
+from ondewo.nlu import ccai_project_pb2
+from ondewo.nlu.ccai_project_pb2_grpc import CcaiProjectsStub
 from ondewo.nlu.core.services_interface import ServicesInterface
 
 
@@ -40,7 +39,8 @@ class CcaiProject(ServicesInterface):
             request (ccai_project_pb2.CreateCcaiProjectRequest): The request message to create a new CcaiProject.
 
         Returns:
-            ccai_project_pb2.CreateCcaiProjectResponse: The response message containing the details of the created CcaiProject.
+            ccai_project_pb2.CreateCcaiProjectResponse:
+                The response message containing the details of the created CcaiProject.
         """
         return self.stub.CreateCcaiProject(request=request)
 
@@ -70,7 +70,8 @@ class CcaiProject(ServicesInterface):
             request (ccai_project_pb2.UpdateCcaiProjectRequest): The request message to update an existing CcaiProject.
 
         Returns:
-            ccai_project_pb2.UpdateCcaiProjectResponse: The response message containing the details of the updated CcaiProject.
+            ccai_project_pb2.UpdateCcaiProjectResponse:
+                The response message containing the details of the updated CcaiProject.
         """
         return self.stub.UpdateCcaiProject(request=request)
 
@@ -85,7 +86,8 @@ class CcaiProject(ServicesInterface):
             request (ccai_project_pb2.DeleteCcaiProjectRequest): The request message to delete an existing CcaiProject.
 
         Returns:
-            ccai_project_pb2.DeleteCcaiProjectResponse: The response message containing the details of the deleted CcaiProject.
+            ccai_project_pb2.DeleteCcaiProjectResponse:
+                The response message containing the details of the deleted CcaiProject.
         """
         return self.stub.DeleteCcaiProject(request=request)
 

@@ -207,6 +207,7 @@ class CcaiProject(google.protobuf.message.Message):
     MODIFIED_AT_FIELD_NUMBER: builtins.int
     CREATED_BY_FIELD_NUMBER: builtins.int
     MODIFIED_BY_FIELD_NUMBER: builtins.int
+    NLU_AGENT_NAMES_FIELD_NUMBER: builtins.int
     name: builtins.str
     """Resource name of the CCAI project"""
     display_name: builtins.str
@@ -230,6 +231,11 @@ class CcaiProject(google.protobuf.message.Message):
     """User id in the form of a valid UUID."""
     modified_by: builtins.str
     """User id in the form of a valid UUID."""
+    @property
+    def nlu_agent_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Associated NLU agents
+        Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+        """
     def __init__(
         self,
         *,
@@ -242,9 +248,10 @@ class CcaiProject(google.protobuf.message.Message):
         modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         created_by: builtins.str = ...,
         modified_by: builtins.str = ...,
+        nlu_agent_names: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["ccai_project_status", b"ccai_project_status", "ccai_service_lists", b"ccai_service_lists", "created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "owner_name", b"owner_name"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["ccai_project_status", b"ccai_project_status", "ccai_service_lists", b"ccai_service_lists", "created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "nlu_agent_names", b"nlu_agent_names", "owner_name", b"owner_name"]) -> None: ...
 
 global___CcaiProject = CcaiProject
 
