@@ -289,7 +289,7 @@ class CcaiService(google.protobuf.message.Message):
     PORT_FIELD_NUMBER: builtins.int
     PORT2_FIELD_NUMBER: builtins.int
     ACCOUNT_NAME_FIELD_NUMBER: builtins.int
-    PASSWORD_FIELD_NUMBER: builtins.int
+    ACCOUNT_PASSWORD_FIELD_NUMBER: builtins.int
     API_KEY_FIELD_NUMBER: builtins.int
     CCAI_SERVICE_TYPE_FIELD_NUMBER: builtins.int
     CREATED_AT_FIELD_NUMBER: builtins.int
@@ -314,7 +314,7 @@ class CcaiService(google.protobuf.message.Message):
     port2: builtins.int
     account_name: builtins.str
     """Account information"""
-    password: builtins.str
+    account_password: builtins.str
     api_key: builtins.str
     """API key for the service"""
     ccai_service_type: global___CcaiServiceType.ValueType
@@ -343,7 +343,7 @@ class CcaiService(google.protobuf.message.Message):
         port: builtins.int = ...,
         port2: builtins.int = ...,
         account_name: builtins.str = ...,
-        password: builtins.str = ...,
+        account_password: builtins.str = ...,
         api_key: builtins.str = ...,
         ccai_service_type: global___CcaiServiceType.ValueType = ...,
         created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
@@ -352,7 +352,7 @@ class CcaiService(google.protobuf.message.Message):
         modified_by: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["account_name", b"account_name", "api_key", b"api_key", "ccai_service_type", b"ccai_service_type", "created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "grpc_cert", b"grpc_cert", "grpc_host", b"grpc_host", "grpc_port", b"grpc_port", "host", b"host", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "password", b"password", "port", b"port", "port2", b"port2", "webgrpc_host", b"webgrpc_host", "webgrpc_port", b"webgrpc_port"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["account_name", b"account_name", "account_password", b"account_password", "api_key", b"api_key", "ccai_service_type", b"ccai_service_type", "created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "grpc_cert", b"grpc_cert", "grpc_host", b"grpc_host", "grpc_port", b"grpc_port", "host", b"host", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "port", b"port", "port2", b"port2", "webgrpc_host", b"webgrpc_host", "webgrpc_port", b"webgrpc_port"]) -> None: ...
 
 global___CcaiService = CcaiService
 
