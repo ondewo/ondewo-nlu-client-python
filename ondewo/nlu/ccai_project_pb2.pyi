@@ -207,7 +207,7 @@ class CcaiProject(google.protobuf.message.Message):
     MODIFIED_AT_FIELD_NUMBER: builtins.int
     CREATED_BY_FIELD_NUMBER: builtins.int
     MODIFIED_BY_FIELD_NUMBER: builtins.int
-    NLU_AGENT_NAMES_FIELD_NUMBER: builtins.int
+    NLU_AGENT_NAME_FIELD_NUMBER: builtins.int
     name: builtins.str
     """Resource name of the CCAI project"""
     display_name: builtins.str
@@ -231,11 +231,10 @@ class CcaiProject(google.protobuf.message.Message):
     """User id in the form of a valid UUID."""
     modified_by: builtins.str
     """User id in the form of a valid UUID."""
-    @property
-    def nlu_agent_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Associated NLU agents
-        Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-        """
+    nlu_agent_name: builtins.str
+    """Associated NLU agent
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
     def __init__(
         self,
         *,
@@ -248,10 +247,10 @@ class CcaiProject(google.protobuf.message.Message):
         modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         created_by: builtins.str = ...,
         modified_by: builtins.str = ...,
-        nlu_agent_names: collections.abc.Iterable[builtins.str] | None = ...,
+        nlu_agent_name: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["ccai_project_status", b"ccai_project_status", "ccai_service_lists", b"ccai_service_lists", "created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "nlu_agent_names", b"nlu_agent_names", "owner_name", b"owner_name"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["ccai_project_status", b"ccai_project_status", "ccai_service_lists", b"ccai_service_lists", "created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "nlu_agent_name", b"nlu_agent_name", "owner_name", b"owner_name"]) -> None: ...
 
 global___CcaiProject = CcaiProject
 
@@ -375,11 +374,14 @@ global___CcaiService = CcaiService
 
 @typing_extensions.final
 class CreateCcaiProjectRequest(google.protobuf.message.Message):
+    """Request to create a Call Center AI (CCAI) project."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     CCAI_PROJECT_FIELD_NUMBER: builtins.int
     @property
-    def ccai_project(self) -> global___CcaiProject: ...
+    def ccai_project(self) -> global___CcaiProject:
+        """The CCAI project to be created."""
     def __init__(
         self,
         *,
@@ -392,14 +394,17 @@ global___CreateCcaiProjectRequest = CreateCcaiProjectRequest
 
 @typing_extensions.final
 class CreateCcaiProjectResponse(google.protobuf.message.Message):
+    """Response after attempting to create a Call Center AI (CCAI) project."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     CCAI_PROJECT_FIELD_NUMBER: builtins.int
     ERROR_MESSAGE_FIELD_NUMBER: builtins.int
     @property
-    def ccai_project(self) -> global___CcaiProject: ...
+    def ccai_project(self) -> global___CcaiProject:
+        """The created CCAI project."""
     error_message: builtins.str
-    """error message if there are any."""
+    """Error message if the creation is unsuccessful."""
     def __init__(
         self,
         *,
@@ -452,7 +457,7 @@ class ListCcaiProjectsRequest(google.protobuf.message.Message):
     CCAI_PROJECT_VIEW_FIELD_NUMBER: builtins.int
     PAGE_TOKEN_FIELD_NUMBER: builtins.int
     CCAI_PROJECT_SORTING_FIELD_NUMBER: builtins.int
-    NLU_AGENT_NAMES_FIELD_NUMBER: builtins.int
+    NLU_AGENT_NAME_FIELD_NUMBER: builtins.int
     ccai_project_view: global___CcaiProjectView.ValueType
     """Optional. Specify the view of the returned CcaiProject (full view by default)"""
     page_token: builtins.str
@@ -487,21 +492,20 @@ class ListCcaiProjectsRequest(google.protobuf.message.Message):
         """Optional. Field to define the sorting of the list of CCAI projects in the response.
         If not specified, the default behavior is to have no sorting.
         """
-    @property
-    def nlu_agent_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Optional. Filter based on associated NLU agents
-        Format: `projects/<Project ID>/agent`.
-        """
+    nlu_agent_name: builtins.str
+    """Optional. Filter based on associated NLU agent
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
     def __init__(
         self,
         *,
         ccai_project_view: global___CcaiProjectView.ValueType = ...,
         page_token: builtins.str | None = ...,
         ccai_project_sorting: global___CcaiProjectSorting | None = ...,
-        nlu_agent_names: collections.abc.Iterable[builtins.str] | None = ...,
+        nlu_agent_name: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["_ccai_project_sorting", b"_ccai_project_sorting", "_page_token", b"_page_token", "ccai_project_sorting", b"ccai_project_sorting", "page_token", b"page_token"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["_ccai_project_sorting", b"_ccai_project_sorting", "_page_token", b"_page_token", "ccai_project_sorting", b"ccai_project_sorting", "ccai_project_view", b"ccai_project_view", "nlu_agent_names", b"nlu_agent_names", "page_token", b"page_token"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["_ccai_project_sorting", b"_ccai_project_sorting", "_page_token", b"_page_token", "ccai_project_sorting", b"ccai_project_sorting", "ccai_project_view", b"ccai_project_view", "nlu_agent_name", b"nlu_agent_name", "page_token", b"page_token"]) -> None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing_extensions.Literal["_ccai_project_sorting", b"_ccai_project_sorting"]) -> typing_extensions.Literal["ccai_project_sorting"] | None: ...
     @typing.overload
