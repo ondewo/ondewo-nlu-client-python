@@ -22,6 +22,7 @@ import google.protobuf.field_mask_pb2
 import google.protobuf.internal.containers
 import google.protobuf.internal.enum_type_wrapper
 import google.protobuf.message
+import google.protobuf.struct_pb2
 import google.protobuf.timestamp_pb2
 import ondewo.nlu.common_pb2
 import sys
@@ -157,12 +158,7 @@ class _CcaiProjectViewEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper
     """Minimum view including only CCAI_PROJECT UUID and CCAI_PROJECT display name"""
 
 class CcaiProjectView(_CcaiProjectView, metaclass=_CcaiProjectViewEnumTypeWrapper):
-    """Structure of CCAI_PROJECT view
-    - CreateCCAI_PROJECT: CCAI_PROJECT_VIEW_SHALLOW
-    - UpdateCCAI_PROJECT: CCAI_PROJECT_VIEW_SHALLOW
-    - GetCCAI_PROJECT: CCAI_PROJECT_VIEW_FULL
-    - ListCCAI_PROJECTs: CCAI_PROJECT_VIEW_SHALLOW
-    """
+    """CcaiProjectView defines what the CcaiProject message contains"""
 
 CCAI_PROJECT_VIEW_UNSPECIFIED: CcaiProjectView.ValueType  # 0
 """Unspecified CCAI_PROJECT view: the view is defined by the call:"""
@@ -296,6 +292,7 @@ class CcaiService(google.protobuf.message.Message):
     API_KEY_FIELD_NUMBER: builtins.int
     CCAI_SERVICE_TYPE_FIELD_NUMBER: builtins.int
     CCAI_PROJECT_NAME_FIELD_NUMBER: builtins.int
+    CCAI_SERVICE_CONFIG_FIELD_NUMBER: builtins.int
     CREATED_AT_FIELD_NUMBER: builtins.int
     MODIFIED_AT_FIELD_NUMBER: builtins.int
     CREATED_BY_FIELD_NUMBER: builtins.int
@@ -337,6 +334,9 @@ class CcaiService(google.protobuf.message.Message):
     ccai_project_name: builtins.str
     """Resource name of the ccai_project the ccai_service belongs to"""
     @property
+    def ccai_service_config(self) -> google.protobuf.struct_pb2.Struct:
+        """Detailed configuration of the CcaiService"""
+    @property
     def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Creation date and time of the service. Read-only field."""
     @property
@@ -366,13 +366,14 @@ class CcaiService(google.protobuf.message.Message):
         api_key: builtins.str = ...,
         ccai_service_type: global___CcaiServiceType.ValueType = ...,
         ccai_project_name: builtins.str = ...,
+        ccai_service_config: google.protobuf.struct_pb2.Struct | None = ...,
         created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         created_by: builtins.str = ...,
         modified_by: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["account_name", b"account_name", "account_password", b"account_password", "api_key", b"api_key", "ccai_project_name", b"ccai_project_name", "ccai_service_type", b"ccai_service_type", "created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "grpc_cert", b"grpc_cert", "grpc_host", b"grpc_host", "grpc_port", b"grpc_port", "host", b"host", "http_basic_auth_token", b"http_basic_auth_token", "language_code", b"language_code", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "port", b"port", "port2", b"port2", "webgrpc_host", b"webgrpc_host", "webgrpc_port", b"webgrpc_port"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["ccai_service_config", b"ccai_service_config", "created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["account_name", b"account_name", "account_password", b"account_password", "api_key", b"api_key", "ccai_project_name", b"ccai_project_name", "ccai_service_config", b"ccai_service_config", "ccai_service_type", b"ccai_service_type", "created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "grpc_cert", b"grpc_cert", "grpc_host", b"grpc_host", "grpc_port", b"grpc_port", "host", b"host", "http_basic_auth_token", b"http_basic_auth_token", "language_code", b"language_code", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "port", b"port", "port2", b"port2", "webgrpc_host", b"webgrpc_host", "webgrpc_port", b"webgrpc_port"]) -> None: ...
 
 global___CcaiService = CcaiService
 
