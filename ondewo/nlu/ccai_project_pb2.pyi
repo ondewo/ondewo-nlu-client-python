@@ -471,11 +471,20 @@ class ListCcaiProjectsRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     CCAI_PROJECT_VIEW_FIELD_NUMBER: builtins.int
-    PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    CCAI_SERVICE_FILTER_FIELD_NUMBER: builtins.int
     CCAI_PROJECT_SORTING_FIELD_NUMBER: builtins.int
+    PAGE_TOKEN_FIELD_NUMBER: builtins.int
     NLU_PROJECT_NAME_FIELD_NUMBER: builtins.int
     ccai_project_view: global___CcaiProjectView.ValueType
     """Optional. Specify the view of the returned CcaiProject (full view by default)"""
+    @property
+    def ccai_service_filter(self) -> global___CcaiServiceFilter:
+        """Filter which services should be included in the CcaiProject"""
+    @property
+    def ccai_project_sorting(self) -> global___CcaiProjectSorting:
+        """Optional. Field to define the sorting of the list of CCAI projects in the response.
+        If not specified, the default behavior is to have no sorting.
+        """
     page_token: builtins.str
     """Optional. The next_page_token value returned from a previous list request.
     Example: "current_index-1--page_size-20"
@@ -503,11 +512,6 @@ class ListCcaiProjectsRequest(google.protobuf.message.Message):
     * "current_index1--page_size-20"
     * "current_index-1--page_size--20"
     """
-    @property
-    def ccai_project_sorting(self) -> global___CcaiProjectSorting:
-        """Optional. Field to define the sorting of the list of CCAI projects in the response.
-        If not specified, the default behavior is to have no sorting.
-        """
     nlu_project_name: builtins.str
     """Required. The nlu agent project of this CcaiProject.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
@@ -516,14 +520,17 @@ class ListCcaiProjectsRequest(google.protobuf.message.Message):
         self,
         *,
         ccai_project_view: global___CcaiProjectView.ValueType = ...,
-        page_token: builtins.str | None = ...,
+        ccai_service_filter: global___CcaiServiceFilter | None = ...,
         ccai_project_sorting: global___CcaiProjectSorting | None = ...,
+        page_token: builtins.str | None = ...,
         nlu_project_name: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["_ccai_project_sorting", b"_ccai_project_sorting", "_page_token", b"_page_token", "ccai_project_sorting", b"ccai_project_sorting", "page_token", b"page_token"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["_ccai_project_sorting", b"_ccai_project_sorting", "_page_token", b"_page_token", "ccai_project_sorting", b"ccai_project_sorting", "ccai_project_view", b"ccai_project_view", "nlu_project_name", b"nlu_project_name", "page_token", b"page_token"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["_ccai_project_sorting", b"_ccai_project_sorting", "_ccai_service_filter", b"_ccai_service_filter", "_page_token", b"_page_token", "ccai_project_sorting", b"ccai_project_sorting", "ccai_service_filter", b"ccai_service_filter", "page_token", b"page_token"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["_ccai_project_sorting", b"_ccai_project_sorting", "_ccai_service_filter", b"_ccai_service_filter", "_page_token", b"_page_token", "ccai_project_sorting", b"ccai_project_sorting", "ccai_project_view", b"ccai_project_view", "ccai_service_filter", b"ccai_service_filter", "nlu_project_name", b"nlu_project_name", "page_token", b"page_token"]) -> None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing_extensions.Literal["_ccai_project_sorting", b"_ccai_project_sorting"]) -> typing_extensions.Literal["ccai_project_sorting"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_ccai_service_filter", b"_ccai_service_filter"]) -> typing_extensions.Literal["ccai_service_filter"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing_extensions.Literal["_page_token", b"_page_token"]) -> typing_extensions.Literal["page_token"] | None: ...
 
