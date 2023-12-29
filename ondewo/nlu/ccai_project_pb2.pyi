@@ -665,7 +665,9 @@ class UpdateCcaiProjectRequest(google.protobuf.message.Message):
         """Filter which services should be updated in the CcaiProject"""
     @property
     def update_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
-        """Optional. The mask to control which fields get updated."""
+        """Optional. The mask to control which fields get updated.
+        Note: Not implemented yet
+        """
     nlu_project_name: builtins.str
     """Required. The nlu agent project of this CcaiProject.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
