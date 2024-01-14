@@ -1768,6 +1768,10 @@ class CustomPlatformInfo(google.protobuf.message.Message):
     PLATFORM_FIELD_NUMBER: builtins.int
     DISPLAY_NAME_FIELD_NUMBER: builtins.int
     POSITION_FIELD_NUMBER: builtins.int
+    CREATED_AT_FIELD_NUMBER: builtins.int
+    MODIFIED_AT_FIELD_NUMBER: builtins.int
+    CREATED_BY_FIELD_NUMBER: builtins.int
+    MODIFIED_BY_FIELD_NUMBER: builtins.int
     platform: ondewo.nlu.intent_pb2.Intent.Message.Platform.ValueType
     """Required. ID of the Platform.
     Custom Intent.Message.Platform placeholder. Note: it will not work with non-placeholders values
@@ -1780,14 +1784,29 @@ class CustomPlatformInfo(google.protobuf.message.Message):
     """Optional.
     Sorting position of the GetPlatformMappingRequest.
     """
+    @property
+    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Creation date and time. Read-only field."""
+    @property
+    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Modification date and time. Read-only field."""
+    created_by: builtins.str
+    """User id in form of a valid UUID."""
+    modified_by: builtins.str
+    """User id in form of a valid UUID."""
     def __init__(
         self,
         *,
         platform: ondewo.nlu.intent_pb2.Intent.Message.Platform.ValueType = ...,
         display_name: builtins.str = ...,
         position: builtins.int = ...,
+        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        created_by: builtins.str = ...,
+        modified_by: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["display_name", b"display_name", "platform", b"platform", "position", b"position"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "modified_at", b"modified_at", "modified_by", b"modified_by", "platform", b"platform", "position", b"position"]) -> None: ...
 
 global___CustomPlatformInfo = CustomPlatformInfo
 
