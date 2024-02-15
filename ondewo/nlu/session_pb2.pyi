@@ -422,7 +422,7 @@ class QueryParameters(google.protobuf.message.Message):
     This field can also be used for a customized tracking id or tag id
     """
     @property
-    def transcriptions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Transcription]:
+    def transcriptions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___S2tTranscription]:
         """transcriptions of the user input sorted by score"""
     def __init__(
         self,
@@ -439,7 +439,7 @@ class QueryParameters(google.protobuf.message.Message):
         datastream_id: builtins.str = ...,
         origin_id: builtins.str = ...,
         identified_user_id: builtins.str = ...,
-        transcriptions: collections.abc.Iterable[global___Transcription] | None = ...,
+        transcriptions: collections.abc.Iterable[global___S2tTranscription] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["geo_location", b"geo_location", "payload", b"payload"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["account_id", b"account_id", "contexts", b"contexts", "datastream_id", b"datastream_id", "geo_location", b"geo_location", "identified_user_id", b"identified_user_id", "labels", b"labels", "origin_id", b"origin_id", "payload", b"payload", "platforms", b"platforms", "property_id", b"property_id", "reset_contexts", b"reset_contexts", "time_zone", b"time_zone", "transcriptions", b"transcriptions"]) -> None: ...
@@ -447,7 +447,7 @@ class QueryParameters(google.protobuf.message.Message):
 global___QueryParameters = QueryParameters
 
 @typing_extensions.final
-class Transcription(google.protobuf.message.Message):
+class S2tTranscription(google.protobuf.message.Message):
     """Represents a speech-to-text transcription."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -514,7 +514,7 @@ class Transcription(google.protobuf.message.Message):
     def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["audio_resource_name", b"audio_resource_name", "created_at", b"created_at", "created_by", b"created_by", "duration_in_s", b"duration_in_s", "language_code", b"language_code", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "pipeline_id", b"pipeline_id", "score", b"score", "text", b"text", "transcription_type", b"transcription_type"]) -> None: ...
 
-global___Transcription = Transcription
+global___S2tTranscription = S2tTranscription
 
 @typing_extensions.final
 class QueryInput(google.protobuf.message.Message):
@@ -3106,7 +3106,7 @@ class AudioFileResource(google.protobuf.message.Message):
     audio_file_resource_type: global___AudioFileResourceType.ValueType
     """File type of an audio resource"""
     @property
-    def transcriptions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Transcription]:
+    def transcriptions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___S2tTranscription]:
         """transcriptions of the user input sorted by score.
         A transcription can be from a speech-to-text system or a human
         """
@@ -3129,7 +3129,7 @@ class AudioFileResource(google.protobuf.message.Message):
         duration_in_s: builtins.float = ...,
         sample_rate: builtins.int = ...,
         audio_file_resource_type: global___AudioFileResourceType.ValueType = ...,
-        transcriptions: collections.abc.Iterable[global___Transcription] | None = ...,
+        transcriptions: collections.abc.Iterable[global___S2tTranscription] | None = ...,
         created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         created_by: builtins.str = ...,
