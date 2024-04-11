@@ -66,18 +66,6 @@ from ondewo.nlu.agent_pb2 import (
     UpdateAgentRequest,
 )
 from ondewo.nlu.agent_pb2_grpc import AgentsStub
-from ondewo.nlu.ccai_project_pb2 import (
-    CcaiProject,
-    CreateCcaiProjectRequest,
-    CreateCcaiProjectResponse,
-    DeleteCcaiProjectRequest,
-    DeleteCcaiProjectResponse,
-    GetCcaiProjectRequest,
-    ListCcaiProjectsRequest,
-    ListCcaiProjectsResponse,
-    UpdateCcaiProjectRequest,
-    UpdateCcaiProjectResponse,
-)
 from ondewo.nlu.core.services_interface import ServicesInterface
 
 
@@ -289,25 +277,3 @@ class Agents(ServicesInterface):
     def reindex_agent(self, request: ReindexAgentRequest) -> operations_pb2.Operation:
         response: operations_pb2.Operation = self.stub.ReindexAgent(request, metadata=self.metadata)
         return response
-
-    # region: ccai_project
-    def create_ccai_project(self, request: CreateCcaiProjectRequest) -> CreateCcaiProjectResponse:
-        response: CreateCcaiProjectResponse = self.stub.CreateCcaiProject(request, metadata=self.metadata)
-        return response
-
-    def delete_ccai_project(self, request: DeleteCcaiProjectRequest) -> DeleteCcaiProjectResponse:
-        response: DeleteCcaiProjectResponse = self.stub.DeleteCcaiProject(request, metadata=self.metadata)
-        return response
-
-    def get_ccai_project(self, request: GetCcaiProjectRequest) -> CcaiProject:
-        response: CcaiProject = self.stub.GetCcaiProject(request, metadata=self.metadata)
-        return response
-
-    def list_ccai_projects(self, request: ListCcaiProjectsRequest) -> ListCcaiProjectsResponse:
-        response: ListCcaiProjectsResponse = self.stub.ListCcaiProjects(request, metadata=self.metadata)
-        return response
-
-    def update_ccai_project(self, request: UpdateCcaiProjectRequest) -> UpdateCcaiProjectResponse:
-        response: UpdateCcaiProjectResponse = self.stub.UpdateCcaiProject(request, metadata=self.metadata)
-        return response
-    # endregion: ccai_project

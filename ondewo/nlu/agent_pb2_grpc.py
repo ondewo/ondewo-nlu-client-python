@@ -4,7 +4,6 @@ import grpc
 
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 from ondewo.nlu import agent_pb2 as ondewo_dot_nlu_dot_agent__pb2
-from ondewo.nlu import ccai_project_pb2 as ondewo_dot_nlu_dot_ccai__project__pb2
 from ondewo.nlu import operations_pb2 as ondewo_dot_nlu_dot_operations__pb2
 
 
@@ -227,31 +226,6 @@ class AgentsStub(object):
                 '/ondewo.nlu.Agents/ReindexAgent',
                 request_serializer=ondewo_dot_nlu_dot_agent__pb2.ReindexAgentRequest.SerializeToString,
                 response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
-                )
-        self.CreateCcaiProject = channel.unary_unary(
-                '/ondewo.nlu.Agents/CreateCcaiProject',
-                request_serializer=ondewo_dot_nlu_dot_ccai__project__pb2.CreateCcaiProjectRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_ccai__project__pb2.CreateCcaiProjectResponse.FromString,
-                )
-        self.DeleteCcaiProject = channel.unary_unary(
-                '/ondewo.nlu.Agents/DeleteCcaiProject',
-                request_serializer=ondewo_dot_nlu_dot_ccai__project__pb2.DeleteCcaiProjectRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_ccai__project__pb2.DeleteCcaiProjectResponse.FromString,
-                )
-        self.GetCcaiProject = channel.unary_unary(
-                '/ondewo.nlu.Agents/GetCcaiProject',
-                request_serializer=ondewo_dot_nlu_dot_ccai__project__pb2.GetCcaiProjectRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_ccai__project__pb2.CcaiProject.FromString,
-                )
-        self.ListCcaiProjects = channel.unary_unary(
-                '/ondewo.nlu.Agents/ListCcaiProjects',
-                request_serializer=ondewo_dot_nlu_dot_ccai__project__pb2.ListCcaiProjectsRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_ccai__project__pb2.ListCcaiProjectsResponse.FromString,
-                )
-        self.UpdateCcaiProject = channel.unary_unary(
-                '/ondewo.nlu.Agents/UpdateCcaiProject',
-                request_serializer=ondewo_dot_nlu_dot_ccai__project__pb2.UpdateCcaiProjectRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_ccai__project__pb2.UpdateCcaiProjectResponse.FromString,
                 )
 
 
@@ -749,41 +723,6 @@ class AgentsServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def CreateCcaiProject(self, request, context):
-        """RPC to create a new CCAI project
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def DeleteCcaiProject(self, request, context):
-        """RPC to delete an existing CCAI project
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def GetCcaiProject(self, request, context):
-        """RPC to get details of an existing CCAI project
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def ListCcaiProjects(self, request, context):
-        """RPC to list all available CCAI projects
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def UpdateCcaiProject(self, request, context):
-        """RPC to update an existing CCAI project
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
 
 def add_AgentsServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -986,31 +925,6 @@ def add_AgentsServicer_to_server(servicer, server):
                     servicer.ReindexAgent,
                     request_deserializer=ondewo_dot_nlu_dot_agent__pb2.ReindexAgentRequest.FromString,
                     response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
-            ),
-            'CreateCcaiProject': grpc.unary_unary_rpc_method_handler(
-                    servicer.CreateCcaiProject,
-                    request_deserializer=ondewo_dot_nlu_dot_ccai__project__pb2.CreateCcaiProjectRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_ccai__project__pb2.CreateCcaiProjectResponse.SerializeToString,
-            ),
-            'DeleteCcaiProject': grpc.unary_unary_rpc_method_handler(
-                    servicer.DeleteCcaiProject,
-                    request_deserializer=ondewo_dot_nlu_dot_ccai__project__pb2.DeleteCcaiProjectRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_ccai__project__pb2.DeleteCcaiProjectResponse.SerializeToString,
-            ),
-            'GetCcaiProject': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetCcaiProject,
-                    request_deserializer=ondewo_dot_nlu_dot_ccai__project__pb2.GetCcaiProjectRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_ccai__project__pb2.CcaiProject.SerializeToString,
-            ),
-            'ListCcaiProjects': grpc.unary_unary_rpc_method_handler(
-                    servicer.ListCcaiProjects,
-                    request_deserializer=ondewo_dot_nlu_dot_ccai__project__pb2.ListCcaiProjectsRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_ccai__project__pb2.ListCcaiProjectsResponse.SerializeToString,
-            ),
-            'UpdateCcaiProject': grpc.unary_unary_rpc_method_handler(
-                    servicer.UpdateCcaiProject,
-                    request_deserializer=ondewo_dot_nlu_dot_ccai__project__pb2.UpdateCcaiProjectRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_ccai__project__pb2.UpdateCcaiProjectResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -1710,90 +1624,5 @@ class Agents(object):
         return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/ReindexAgent',
             ondewo_dot_nlu_dot_agent__pb2.ReindexAgentRequest.SerializeToString,
             ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def CreateCcaiProject(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/CreateCcaiProject',
-            ondewo_dot_nlu_dot_ccai__project__pb2.CreateCcaiProjectRequest.SerializeToString,
-            ondewo_dot_nlu_dot_ccai__project__pb2.CreateCcaiProjectResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def DeleteCcaiProject(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/DeleteCcaiProject',
-            ondewo_dot_nlu_dot_ccai__project__pb2.DeleteCcaiProjectRequest.SerializeToString,
-            ondewo_dot_nlu_dot_ccai__project__pb2.DeleteCcaiProjectResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def GetCcaiProject(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/GetCcaiProject',
-            ondewo_dot_nlu_dot_ccai__project__pb2.GetCcaiProjectRequest.SerializeToString,
-            ondewo_dot_nlu_dot_ccai__project__pb2.CcaiProject.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def ListCcaiProjects(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/ListCcaiProjects',
-            ondewo_dot_nlu_dot_ccai__project__pb2.ListCcaiProjectsRequest.SerializeToString,
-            ondewo_dot_nlu_dot_ccai__project__pb2.ListCcaiProjectsResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def UpdateCcaiProject(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/ondewo.nlu.Agents/UpdateCcaiProject',
-            ondewo_dot_nlu_dot_ccai__project__pb2.UpdateCcaiProjectRequest.SerializeToString,
-            ondewo_dot_nlu_dot_ccai__project__pb2.UpdateCcaiProjectResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
