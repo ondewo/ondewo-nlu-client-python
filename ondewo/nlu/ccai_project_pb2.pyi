@@ -551,9 +551,8 @@ class ListCcaiProjectsResponse(google.protobuf.message.Message):
         Use the 'repeated' keyword to indicate that this field can contain multiple instances of CcaiProject.
         """
     next_page_token: builtins.str
-    """Token to retrieve the next page of results.
-    This field is a string that holds a token for fetching the next page of results.
-    If there are no more results in the list, this field will be empty.
+    """The next_page_token is used to retrieve the next page of a returned result,
+    e.g. next_page_token is current_index-2
     """
     def __init__(
         self,

@@ -207,20 +207,53 @@ class EntityType(google.protobuf.message.Message):
         MODIFIED_BY_FIELD_NUMBER: builtins.int
         value: builtins.str
         """Required.
-        For `KIND_MAP` entity types:
-          A canonical name to be used in place of synonyms.
-        For `KIND_LIST` entity types:
-          A string that can contain references to other entity types (with or
-          without aliases).
+        For `KIND_MAP` entity types: </br>
+          A canonical name to be used in place of synonyms.</br>
+        For `KIND_LIST` entity types:</br>
+          A string that can contain references to other entity types (with or without aliases). </br>
+
+        Values can also be described as regexes with postprocessing options such as:
+
+          <pre><code>
+           * regex('//1') => references the first group match of the regex defined as a synonym
+           * regex('//2') => references the second group match of the regex defined as a synonym
+           * regex('//1') => references the first group match of the regex defined as a synonym
+          </code></pre>
+
+        Values can also be described as regexes with one or more postprocessing options such as one postprocessing
+        option to remove all whitespaces <code>regex('&lt;#RW#&gt;\\\\1')</code> or by a combination of several
+        postprocessing options such as remove all whitespaces and lower casing
+        <code>regex('&lt;#RW#&gt;&lt;#LC#&gt;\\\\1') </code>.
+
+        All processing options are:
+
+          <pre><code>
+           * regex('&lt;#TW&gt;//1') => matches 1st group and trims duplicated whitespaces to one single space
+           * regex('&lt;#RW&gt;//1') => matches 1st group and removes all whitespaces
+           * regex('&lt;#UC&gt;//1') => matches 1st group and converts to upper case
+           * regex('&lt;#LC&gt;//1') => matches 1st group and converts to lower case
+           * regex('&lt;#CC&gt;//1') => matches 1st group and converts to camelCase
+           * regex('&lt;#SC&gt;//1') => matches 1st group and converts to snake_case
+          </code></pre>
         """
         @property
         def synonyms(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
             """Required. A collection of synonyms. For `KIND_LIST` entity types this
             must contain exactly one synonym equal to `value`.
+            Synonyms can be regex expressions, i.e. regular expressions, that are python compatible.
+            See here for supported regex: https://docs.python.org/3/library/re.html
+            Examples are:
+
+             <pre><code>
+              * regex('[a-zA-Z]+') => just letters
+              * regex('\\d{1,5}') => just numbers
+              * regex('^[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$') => mix of numbers, letters and dot
+              * regex('(?i)(^|\\s)(0\\s{0,3}') => with matching groups and case insensitivity
+             </code></pre>
             """
         name: builtins.str
         """The unique identifier of the entity. Format:
-        `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`.
+        `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;`.
         """
         display_name: builtins.str
         """The name of the entity."""
@@ -272,7 +305,7 @@ class EntityType(google.protobuf.message.Message):
     """Required for all methods except `create` (`create` populates the name
     automatically.
     The unique identifier of the entity type. Format:
-    `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
+    `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;`.
     """
     display_name: builtins.str
     """Required. The name of the entity type."""
@@ -286,6 +319,9 @@ class EntityType(google.protobuf.message.Message):
     def entities(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___EntityType.Entity]:
         """Optional. The collection of entities associated with the entity type."""
     next_page_token: builtins.str
+    """The next_page_token is used to retrieve the next page of a returned result,
+    e.g. next_page_token is current_index-2
+    """
     entity_count: builtins.int
     """Read-Only field. Total count of entity values of the entity type"""
     status: global___EntityType.EntityTypeStatus.ValueType
@@ -409,8 +445,8 @@ class ListEntityTypesResponse(google.protobuf.message.Message):
         returned based on the page_token field in the request.
         """
     next_page_token: builtins.str
-    """Token to retrieve the next page of results, or empty if there are no
-    more results in the list.
+    """The next_page_token is used to retrieve the next page of a returned result,
+    e.g. next_page_token is current_index-2
     """
     def __init__(
         self,
@@ -659,7 +695,7 @@ class BatchDeleteEntityTypesRequest(google.protobuf.message.Message):
     ENTITY_TYPE_NAMES_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The name of the agent to delete all entities types for. Format:
-    `projects/<Project ID>/agent`.
+    `projects/&lt;project_uuid&gt;/agent`.
     """
     @property
     def entity_type_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
@@ -794,7 +830,7 @@ class CreateEntityRequest(google.protobuf.message.Message):
     ENTITY_FIELD_NUMBER: builtins.int
     entity_type_name: builtins.str
     """Required. Name of the entity type in which to create the entity value. Format:
-    `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`.
+    `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;`.
     """
     @property
     def entity(self) -> global___EntityType.Entity:
@@ -877,7 +913,7 @@ class GetEntityRequest(google.protobuf.message.Message):
     NAME_FIELD_NUMBER: builtins.int
     name: builtins.str
     """The unique identifiers of the entities. Format:
-    `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`.
+    `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;`.
     """
     def __init__(
         self,
@@ -898,7 +934,7 @@ class BatchGetEntitiesRequest(google.protobuf.message.Message):
     @property
     def names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """The unique identifiers of the entities. Format:
-        `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`.
+        `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;`.
         """
     def __init__(
         self,
@@ -919,7 +955,7 @@ class BatchDeleteEntitiesRequest(google.protobuf.message.Message):
     @property
     def names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """The unique identifiers of the entities. Format:
-        `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`.
+        `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;`.
         """
     def __init__(
         self,
@@ -939,7 +975,7 @@ class DeleteEntityRequest(google.protobuf.message.Message):
     NAME_FIELD_NUMBER: builtins.int
     name: builtins.str
     """The unique identifiers of the entities. Format:
-    `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`.
+    `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;`.
     """
     def __init__(
         self,
@@ -1009,7 +1045,7 @@ class ListEntitiesRequest(google.protobuf.message.Message):
     SEARCH_BY_PATTERN_FIELD_NUMBER: builtins.int
     entity_type_name: builtins.str
     """The unique identifier of the entity type. Format:
-    `projects/<Project ID>/agent/entityTypes/<Entity Type ID>
+    `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;
     """
     language_code: builtins.str
     """Optional. The language to list training phrases, parameters and rich
@@ -1080,8 +1116,8 @@ class ListEntitiesResponse(google.protobuf.message.Message):
     def entities(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___EntityType.Entity]:
         """The list of entities"""
     next_page_token: builtins.str
-    """Token to retrieve the next page of results, or empty if there are no
-    more results in the list.
+    """The next_page_token is used to retrieve the next page of a returned result,
+    e.g. next_page_token is current_index-2
     """
     def __init__(
         self,

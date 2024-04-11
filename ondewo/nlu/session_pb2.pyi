@@ -274,7 +274,7 @@ class DetectIntentRequest(google.protobuf.message.Message):
     INPUT_AUDIO_FIELD_NUMBER: builtins.int
     session: builtins.str
     """Required. The name of the session this query is sent to. Format:
-    `projects/<Project ID>/agent/sessions/<Session ID>`. It's up to the API
+    `projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;`. It's up to the API
     caller to choose an appropriate session ID. It can be a random number or
     some type of user identifier (preferably hashed). The length of the session
     ID must not exceed 36 bytes.
@@ -702,8 +702,8 @@ class StreamingDetectIntentRequest(google.protobuf.message.Message):
     session: builtins.str
     """Required. The name of the session the query is sent to.
     Format of the session name:
-    `projects/<Project ID>/agent/sessions/<Session ID>`. It’s up to the API
-    caller to choose an appropriate <Session ID>. It can be a random number or
+    `projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;`. It’s up to the API
+    caller to choose an appropriate &lt;session_uuid&gt;. It can be a random number or
     some type of user identifier (preferably hashed). The length of the session
     ID must not exceed 36 characters.
     """
@@ -1761,7 +1761,9 @@ class ListSessionsResponse(google.protobuf.message.Message):
     def sessions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Session]:
         """The requested sessions"""
     next_page_token: builtins.str
-    """Token to retrieve the next page of results, or empty if there are no more results in the list"""
+    """The next_page_token is used to retrieve the next page of a returned result,
+    e.g. next_page_token is current_index-2
+    """
     def __init__(
         self,
         *,
@@ -3020,7 +3022,9 @@ class ListSessionReviewsResponse(google.protobuf.message.Message):
     def session_reviews(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___SessionReview]:
         """The requested session reviews"""
     next_page_token: builtins.str
-    """Token to retrieve the next page of results, or empty if there are no more results in the list"""
+    """The next_page_token is used to retrieve the next page of a returned result,
+    e.g. next_page_token is current_index-2
+    """
     def __init__(
         self,
         *,
@@ -3219,7 +3223,9 @@ class GetAudioFilesResponse(google.protobuf.message.Message):
     error_message: builtins.str
     """error message if there are any."""
     next_page_token: builtins.str
-    """Token to retrieve the next page of results, or empty if there are no more results in the list"""
+    """The next_page_token is used to retrieve the next page of a returned result,
+    e.g. next_page_token is current_index-2
+    """
     def __init__(
         self,
         *,
@@ -3415,7 +3421,9 @@ class ListAudioFilesResponse(google.protobuf.message.Message):
         Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
         """
     next_page_token: builtins.str
-    """Token to retrieve the next page of results, or empty if there are no more results in the list"""
+    """The next_page_token is used to retrieve the next page of a returned result,
+    e.g. next_page_token is current_index-2
+    """
     error_message: builtins.str
     """error message if there are any."""
     def __init__(

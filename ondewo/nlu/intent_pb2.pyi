@@ -236,14 +236,14 @@ class Intent(google.protobuf.message.Message):
             MODIFIED_BY_FIELD_NUMBER: builtins.int
             entity_type_name: builtins.str
             """Required. The unique entity type identifier in format
-            `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
+            `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;`.
             """
             entity_type_display_name: builtins.str
             """Optional. The entity type name."""
             entity_value_name: builtins.str
             """Optional. The unique entity value identifier in format
-            `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entities/<Entity ID>`. The entity
-            value must belong to the entity type defined in entity_type_name
+            `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;`.
+            The entity value must belong to the entity type defined in entity_type_name.
             """
             entity_value_display_name: builtins.str
             """Optional. The entity value name."""
@@ -257,9 +257,9 @@ class Intent(google.protobuf.message.Message):
             """
             parameter_name: builtins.str
             """Optional. The unique parameter identifier in format
-            `projects/<Project ID>/agent/intents/<Intent ID>/parameters/<Parameter ID>` for the value
-            extracted from the annotated part of the example. The parameter must be one of the parameters
-            defined in the top-level intent message.
+            `projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/parameters/&lt;parameter_uuid&gt;`
+            for the value extracted from the annotated part of the example. The parameter must be one of the
+            parameters defined in the top-level intent message.
             Can be unset if the parameter is created in the same create/update intent request as the
             annotation.
             """
@@ -435,8 +435,8 @@ class Intent(google.protobuf.message.Message):
         """
         entity_type_name: builtins.str
         """Optional. The unique identifier of the entity type in format
-        `projects/<Project ID>/agent/entityTypes/<Entity Type ID>` that describes values of the parameter.
-        If the parameter is required, this must be provided.
+        `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;` that describes values
+        of the parameter. If the parameter is required, this must be provided.
         """
         entity_type_display_name: builtins.str
         """Optional. The name of the entity type that describes values of the parameter. If the parameter is
@@ -1435,8 +1435,8 @@ class Intent(google.protobuf.message.Message):
         name of this intent as a root_name.
         """
     next_page_token: builtins.str
-    """Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>`
-    where <CURRENT_INDEX> and <PAGE_SIZE> are of type int
+    """The next_page_token is used to retrieve the next page of a returned result,
+    e.g. next_page_token is current_index-2
     """
     domain_name: builtins.str
     """Optional. Domain to which the intent belongs"""
@@ -1596,10 +1596,8 @@ class ListIntentsResponse(google.protobuf.message.Message):
         returned based on the page_token field in the request.
         """
     next_page_token: builtins.str
-    """Token to retrieve the next page of results, or empty if there are no
-    more results in the list.
-    Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>`
-    where <CURRENT_INDEX> and <PAGE_SIZE> are of type int
+    """The next_page_token is used to retrieve the next page of a returned result,
+    e.g. next_page_token is current_index-2
     """
     def __init__(
         self,
@@ -1851,7 +1849,7 @@ class BatchDeleteIntentsRequest(google.protobuf.message.Message):
     INTENTS_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The name of the agent to delete all entities types for. Format:
-    `projects/<Project ID>/agent`.
+    `projects/&lt;project_uuid&gt;/agent`.
     """
     @property
     def intents(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Intent]:
@@ -2005,7 +2003,7 @@ class GetAllIntentTagsRequest(google.protobuf.message.Message):
     PARENT_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The name of the agent to delete all entities types for. Format:
-    `projects/<Project ID>/agent`.
+    `projects/&lt;project_uuid&gt;/agent`.
     """
     def __init__(
         self,
@@ -2817,7 +2815,7 @@ class ListTrainingPhrasesofIntentsWithEnrichmentRequest(google.protobuf.message.
     PAGE_TOKEN_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The name of the agent to delete all entities types for. Format:
-    `projects/<Project ID>/agent`.
+    `projects/&lt;project_uuid&gt;/agent`.
     """
     language_code: builtins.str
     """Optional. The language code used to filter out prompts."""

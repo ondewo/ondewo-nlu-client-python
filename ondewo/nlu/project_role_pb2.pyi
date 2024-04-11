@@ -342,8 +342,8 @@ class ListProjectRolesResponse(google.protobuf.message.Message):
         returned based on the page_token field in the request.
         """
     next_page_token: builtins.str
-    """Token to retrieve the next page of results, or empty if there are no
-    more results in the list.
+    """The next_page_token is used to retrieve the next page of a returned result,
+    e.g. next_page_token is current_index-2
     """
     def __init__(
         self,

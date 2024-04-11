@@ -15,7 +15,7 @@ from typing import Iterator
 
 from google.protobuf.empty_pb2 import Empty
 
-from nlu.common_pb2 import Comment
+from ondewo.nlu.common_pb2 import Comment
 from ondewo.nlu.core.services_interface import ServicesInterface
 from ondewo.nlu.session_pb2 import (
     AddAudioFilesRequest,

@@ -107,13 +107,15 @@ class GetProjectElementStatRequest(google.protobuf.message.Message):
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     name: builtins.str
     """Required. The name/path of the concept to get the statistic from.
-
     Example:
-         * `projects/<Project ID>/agent/intents/<Intent ID>`
-         * `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`
-         * `projects/<Project ID>/agent/entityTypes/<Entity Type ID>/entityValues/<Entity Value ID>`
+    <pre><code>
+    * projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;
+    * projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;
+    * projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entityValues&lt;entity_value_uuid&gt;
+    </code></pre>
     """
     language_code: builtins.str
+    """Language code"""
     def __init__(
         self,
         *,

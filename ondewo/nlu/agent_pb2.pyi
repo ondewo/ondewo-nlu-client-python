@@ -608,8 +608,8 @@ class ListAgentsResponse(google.protobuf.message.Message):
         returned based on the page_token field in the request.
         """
     next_page_token: builtins.str
-    """Token to retrieve the next page of results, or empty if there are no
-    more results in the list.
+    """The next_page_token is used to retrieve the next page of a returned result,
+    e.g. next_page_token is current_index-2
     """
     def __init__(
         self,
@@ -635,8 +635,8 @@ class ListAgentsOfUserResponse(google.protobuf.message.Message):
         returned based on the page_token field in the request.
         """
     next_page_token: builtins.str
-    """Token to retrieve the next page of results, or empty if there are no
-    more results in the list.
+    """The next_page_token is used to retrieve the next page of a returned result,
+    e.g. next_page_token is current_index-2
     """
     def __init__(
         self,
@@ -1340,8 +1340,8 @@ class ListUsersInProjectResponse(google.protobuf.message.Message):
         returned based on the page_token field in the request.
         """
     next_page_token: builtins.str
-    """Token to retrieve the next page of results, or empty if there are no
-    more results in the list.
+    """The next_page_token is used to retrieve the next page of a returned result,
+    e.g. next_page_token is current_index-2
     """
     def __init__(
         self,
@@ -1431,8 +1431,8 @@ class ListProjectPermissionsResponse(google.protobuf.message.Message):
         returned based on the page_token field in the request.
         """
     next_page_token: builtins.str
-    """Token to retrieve the next page of results, or empty if there are no
-    more results in the list.
+    """The next_page_token is used to retrieve the next page of a returned result,
+    e.g. next_page_token is current_index-2
     """
     def __init__(
         self,
@@ -2009,7 +2009,9 @@ class FullTextSearchResponseEntityType(google.protobuf.message.Message):
     elastic_query: builtins.str
     time: builtins.float
     next_page_token: builtins.str
-    """The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2"""
+    """The next_page_token is used to retrieve the next page of a returned result,
+    e.g. next_page_token is current_index-2
+    """
     def __init__(
         self,
         *,
@@ -2094,7 +2096,9 @@ class FullTextSearchResponseEntity(google.protobuf.message.Message):
     elastic_query: builtins.str
     time: builtins.float
     next_page_token: builtins.str
-    """The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2"""
+    """The next_page_token is used to retrieve the next page of a returned result,
+    e.g. next_page_token is current_index-2
+    """
     def __init__(
         self,
         *,
@@ -2185,7 +2189,9 @@ class FullTextSearchResponseEntitySynonym(google.protobuf.message.Message):
     elastic_query: builtins.str
     time: builtins.float
     next_page_token: builtins.str
-    """The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2"""
+    """The next_page_token is used to retrieve the next page of a returned result,
+    e.g. next_page_token is current_index-2
+    """
     def __init__(
         self,
         *,
@@ -2271,7 +2277,9 @@ class FullTextSearchResponseIntent(google.protobuf.message.Message):
     elastic_query: builtins.str
     time: builtins.float
     next_page_token: builtins.str
-    """The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2"""
+    """The next_page_token is used to retrieve the next page of a returned result,
+    e.g. next_page_token is current_index-2
+    """
     def __init__(
         self,
         *,
@@ -2357,7 +2365,9 @@ class FullTextSearchResponseIntentContextIn(google.protobuf.message.Message):
     elastic_query: builtins.str
     time: builtins.float
     next_page_token: builtins.str
-    """The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2"""
+    """The next_page_token is used to retrieve the next page of a returned result,
+    e.g. next_page_token is current_index-2
+    """
     def __init__(
         self,
         *,
@@ -2443,7 +2453,9 @@ class FullTextSearchResponseIntentContextOut(google.protobuf.message.Message):
     elastic_query: builtins.str
     time: builtins.float
     next_page_token: builtins.str
-    """The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2"""
+    """The next_page_token is used to retrieve the next page of a returned result,
+    e.g. next_page_token is current_index-2
+    """
     def __init__(
         self,
         *,
@@ -2541,7 +2553,9 @@ class FullTextSearchResponseIntentUsersays(google.protobuf.message.Message):
     elastic_query: builtins.str
     time: builtins.float
     next_page_token: builtins.str
-    """The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2"""
+    """The next_page_token is used to retrieve the next page of a returned result,
+    e.g. next_page_token is current_index-2
+    """
     def __init__(
         self,
         *,
@@ -2630,7 +2644,9 @@ class FullTextSearchResponseIntentTags(google.protobuf.message.Message):
     elastic_query: builtins.str
     time: builtins.float
     next_page_token: builtins.str
-    """The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2"""
+    """The next_page_token is used to retrieve the next page of a returned result,
+    e.g. next_page_token is current_index-2
+    """
     def __init__(
         self,
         *,
@@ -2835,7 +2851,9 @@ class FullTextSearchResponseIntentParameters(google.protobuf.message.Message):
     elastic_query: builtins.str
     time: builtins.float
     next_page_token: builtins.str
-    """The next_page_token is used to retrieve the next page of a returned result, e.g. next_page_token is current_index-2"""
+    """The next_page_token is used to retrieve the next page of a returned result,
+    e.g. next_page_token is current_index-2
+    """
     def __init__(
         self,
         *,

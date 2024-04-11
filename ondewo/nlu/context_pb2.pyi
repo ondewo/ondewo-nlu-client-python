@@ -125,7 +125,8 @@ class Context(google.protobuf.message.Message):
     name: builtins.str
     """Required. The display name of the context (must be unique per session).
 
-    Note: we are deviating from the dialogflow format `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`.
+    Note: we are deviating from the dialogflow format
+    `projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/contexts/&lt;context_uuid&gt;`.
 
     - DetectIntent only returns
        - the short display name in the "name" field in query_result.output_contexts
@@ -238,8 +239,8 @@ class ListContextsResponse(google.protobuf.message.Message):
         returned based on the page_token field in the request.
         """
     next_page_token: builtins.str
-    """Token to retrieve the next page of results, or empty if there are no
-    more results in the list.
+    """The next_page_token is used to retrieve the next page of a returned result,
+    e.g. next_page_token is current_index-2
     """
     def __init__(
         self,
@@ -260,7 +261,7 @@ class GetContextRequest(google.protobuf.message.Message):
     NAME_FIELD_NUMBER: builtins.int
     name: builtins.str
     """Required. The name of the context. Format:
-    `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`.
+    `projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/contexts/&lt;context_uuid&gt;`.
     """
     def __init__(
         self,
@@ -331,7 +332,7 @@ class DeleteContextRequest(google.protobuf.message.Message):
     NAME_FIELD_NUMBER: builtins.int
     name: builtins.str
     """Required. The name of the context to delete. Format:
-    `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`.
+    `projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/contexts/&lt;context_uuid&gt;`.
     """
     def __init__(
         self,
