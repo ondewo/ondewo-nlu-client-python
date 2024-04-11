@@ -49,6 +49,8 @@ from ondewo.nlu.intent_pb2 import (
     ListResponseMessagesResponse,
     ListTrainingPhrasesRequest,
     ListTrainingPhrasesResponse,
+    ListTrainingPhrasesofIntentsWithEnrichmentRequest,
+    ListTrainingPhrasesofIntentsWithEnrichmentResponse,
 )
 from ondewo.nlu.intent_pb2_grpc import IntentsStub
 
@@ -131,6 +133,14 @@ class Intents(ServicesInterface):
 
     def list_training_phrases(self, request: ListTrainingPhrasesRequest) -> ListTrainingPhrasesResponse:
         response: ListTrainingPhrasesResponse = self.stub.ListTrainingPhrases(request, metadata=self.metadata)
+        return response
+
+    def list_training_phrases_of_intents_with_enrichment(
+        self,
+        request: ListTrainingPhrasesofIntentsWithEnrichmentRequest,
+    ) -> ListTrainingPhrasesofIntentsWithEnrichmentResponse:
+        response: ListTrainingPhrasesofIntentsWithEnrichmentResponse = \
+            self.stub.ListTrainingPhrasesofIntentsWithEnrichment(request, metadata=self.metadata)
         return response
 
     def batch_create_response_messages(

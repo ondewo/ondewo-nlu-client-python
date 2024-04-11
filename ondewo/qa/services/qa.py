@@ -15,8 +15,8 @@
 
 from google.protobuf.empty_pb2 import Empty
 
-from ondewo.qa.core.services_interface import ServicesInterface
 from ondewo.qa import qa_pb2
+from ondewo.qa.core.services_interface import ServicesInterface
 from ondewo.qa.qa_pb2_grpc import QAStub
 
 
@@ -42,4 +42,20 @@ class QA(ServicesInterface):
 
     def run_training(self) -> qa_pb2.RunTrainingResponse:
         response: qa_pb2.RunTrainingResponse = self.stub.RunTraining(Empty())
+        return response
+
+    def update_database(self) -> qa_pb2.UpdateDatabaseResponse:
+        response: qa_pb2.UpdateDatabaseResponse = self.stub.UpdateDatabase(Empty())
+        return response
+
+    def get_server_state(self) -> qa_pb2.GetServerStateResponse:
+        response: qa_pb2.GetServerStateResponse = self.stub.GetServerState(Empty())
+        return response
+
+    def list_project_ids(self) -> qa_pb2.ListProjectIdsResponse:
+        response: qa_pb2.ListProjectIdsResponse = self.stub.ListProjectIds(Empty())
+        return response
+
+    def get_project_config(self) -> qa_pb2.GetProjectConfigResponse:
+        response: qa_pb2.GetProjectConfigResponse = self.stub.GetProjectConfig(Empty())
         return response

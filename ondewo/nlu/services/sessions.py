@@ -15,16 +15,19 @@ from typing import Iterator
 
 from google.protobuf.empty_pb2 import Empty
 
+from nlu.common_pb2 import Comment
 from ondewo.nlu.core.services_interface import ServicesInterface
 from ondewo.nlu.session_pb2 import (
     AddAudioFilesRequest,
     AddAudioFilesResponse,
+    AddSessionCommentRequest,
     AddSessionLabelsRequest,
     AudioFileResource,
     CreateSessionRequest,
     CreateSessionReviewRequest,
     DeleteAudioFilesRequest,
     DeleteAudioFilesResponse,
+    DeleteSessionCommentsRequest,
     DeleteSessionLabelsRequest,
     DeleteSessionRequest,
     DetectIntentRequest,
@@ -35,19 +38,49 @@ from ondewo.nlu.session_pb2 import (
     GetLatestSessionReviewRequest,
     GetSessionRequest,
     GetSessionReviewRequest,
+    ListAccountIdsOfAllSessionsRequest,
+    ListAccountIdsResponse,
     ListAudioFilesRequest,
     ListAudioFilesResponse,
+    ListDatastreamIdsOfAllSessionsRequest,
+    ListDatastreamIdsResponse,
+    ListIdentifiedUserIdsOfAllSessionsRequest,
+    ListIdentifiedUserIdsResponse,
+    ListInputContextsOfAllSessionsRequest,
+    ListInputContextsResponse,
+    ListLanguageCodesOfAllSessionsRequest,
+    ListLanguageCodesResponse,
+    ListMatchedEntityTypesOfAllSessionsRequest,
+    ListMatchedEntityTypesResponse,
+    ListMatchedIntentsOfAllSessionsRequest,
+    ListMatchedIntentsResponse,
+    ListOriginIdsOfAllSessionsRequest,
+    ListOriginIdsResponse,
+    ListOutputContextsOfAllSessionsRequest,
+    ListOutputContextsResponse,
+    ListPlatformsOfAllSessionsRequest,
+    ListPlatformsResponse,
+    ListPropertyIdsOfAllSessionsRequest,
+    ListPropertyIdsResponse,
+    ListSessionCommentsRequest,
+    ListSessionCommentsResponse,
+    ListSessionLabelsOfAllSessionsRequest,
     ListSessionLabelsRequest,
     ListSessionLabelsResponse,
     ListSessionReviewsRequest,
     ListSessionReviewsResponse,
     ListSessionsRequest,
     ListSessionsResponse,
+    ListTagsOfAllSessionsRequest,
+    ListTagsResponse,
+    ListUserIdsOfAllSessionsRequest,
+    ListUserIdsResponse,
     Session,
     SessionReview,
     StreamingDetectIntentRequest,
     StreamingDetectIntentResponse,
     TrackSessionStepRequest,
+    UpdateSessionCommentsRequest,
 )
 from ondewo.nlu.session_pb2_grpc import SessionsStub
 
@@ -145,4 +178,115 @@ class Sessions(ServicesInterface):
     def list_audio_files(self, request: ListAudioFilesRequest) -> ListAudioFilesResponse:
         response: ListAudioFilesResponse = self.stub.ListAudioFiles(request, metadata=self.metadata)
         return response
+
     # endregion audio handling for sessions
+
+    def list_session_labels_of_all_sessions(
+        self, request: ListSessionLabelsOfAllSessionsRequest
+    ) -> ListSessionLabelsResponse:
+        response: ListSessionLabelsResponse = self.stub.ListSessionLabelsOfAllSessions(request, metadata=self.metadata)
+        return response
+
+    def list_language_codes_of_all_sessions(
+        self,
+        request: ListLanguageCodesOfAllSessionsRequest,
+    ) -> ListLanguageCodesResponse:
+        response: ListLanguageCodesResponse = self.stub.ListLanguageCodesOfAllSessions(request, metadata=self.metadata)
+        return response
+
+    def list_matched_intents_of_all_sessions(
+        self,
+        request: ListMatchedIntentsOfAllSessionsRequest,
+    ) -> ListMatchedIntentsResponse:
+        response: ListMatchedIntentsResponse = self.stub.ListMatchedIntentsOfAllSessions(
+            request,
+            metadata=self.metadata,
+        )
+        return response
+
+    def list_matched_entity_types_of_all_sessions(
+        self,
+        request: ListMatchedEntityTypesOfAllSessionsRequest,
+    ) -> ListMatchedEntityTypesResponse:
+        response: ListMatchedEntityTypesResponse = self.stub.ListMatchedEntityTypesOfAllSessions(
+            request,
+            metadata=self.metadata,
+        )
+        return response
+
+    def list_user_ids_of_all_sessions(self, request: ListUserIdsOfAllSessionsRequest) -> ListUserIdsResponse:
+        response: ListUserIdsResponse = self.stub.ListUserIdsOfAllSessions(request, metadata=self.metadata)
+        return response
+
+    def list_identified_user_ids_of_all_sessions(
+        self,
+        request: ListIdentifiedUserIdsOfAllSessionsRequest,
+    ) -> ListIdentifiedUserIdsResponse:
+        response: ListIdentifiedUserIdsResponse = self.stub.ListIdentifiedUserIdsOfAllSessions(
+            request,
+            metadata=self.metadata,
+        )
+        return response
+
+    def list_tags_of_all_sessions(self, request: ListTagsOfAllSessionsRequest) -> ListTagsResponse:
+        response: ListTagsResponse = self.stub.ListTagsOfAllSessions(request, metadata=self.metadata)
+        return response
+
+    def list_input_contexts_of_all_sessions(
+        self,
+        request: ListInputContextsOfAllSessionsRequest,
+    ) -> ListInputContextsResponse:
+        response: ListInputContextsResponse = self.stub.ListInputContextsOfAllSessions(request, metadata=self.metadata)
+        return response
+
+    def list_output_contexts_of_all_sessions(
+        self,
+        request: ListOutputContextsOfAllSessionsRequest,
+    ) -> ListOutputContextsResponse:
+        response: ListOutputContextsResponse = self.stub.ListOutputContextsOfAllSessions(
+            request,
+            metadata=self.metadata,
+        )
+        return response
+
+    def list_platforms_of_all_sessions(self, request: ListPlatformsOfAllSessionsRequest) -> ListPlatformsResponse:
+        response: ListPlatformsResponse = self.stub.ListPlatformsOfAllSessions(request, metadata=self.metadata)
+        return response
+
+    def list_account_ids_of_all_sessions(self, request: ListAccountIdsOfAllSessionsRequest) -> ListAccountIdsResponse:
+        response: ListAccountIdsResponse = self.stub.ListAccountIdsOfAllSessions(request, metadata=self.metadata)
+        return response
+
+    def list_property_ids_of_all_sessions(
+        self,
+        request: ListPropertyIdsOfAllSessionsRequest,
+    ) -> ListPropertyIdsResponse:
+        response: ListPropertyIdsResponse = self.stub.ListPropertyIdsOfAllSessions(request, metadata=self.metadata)
+        return response
+
+    def list_datastream_ids_of_all_sessions(
+        self,
+        request: ListDatastreamIdsOfAllSessionsRequest,
+    ) -> ListDatastreamIdsResponse:
+        response: ListDatastreamIdsResponse = self.stub.ListDatastreamIdsOfAllSessions(request, metadata=self.metadata)
+        return response
+
+    def list_origin_ids_of_all_sessions(self, request: ListOriginIdsOfAllSessionsRequest) -> ListOriginIdsResponse:
+        response: ListOriginIdsResponse = self.stub.ListOriginIdsOfAllSessions(request, metadata=self.metadata)
+        return response
+
+    def add_session_comment(self, request: AddSessionCommentRequest) -> Comment:
+        response: Comment = self.stub.AddSessionComment(request, metadata=self.metadata)
+        return response
+
+    def delete_session_comments(self, request: DeleteSessionCommentsRequest) -> Session:
+        response: Session = self.stub.DeleteSessionComments(request, metadata=self.metadata)
+        return response
+
+    def update_session_comments(self, request: UpdateSessionCommentsRequest) -> Session:
+        response: Session = self.stub.UpdateSessionComments(request, metadata=self.metadata)
+        return response
+
+    def list_session_comments(self, request: ListSessionCommentsRequest) -> ListSessionCommentsResponse:
+        response: ListSessionCommentsResponse = self.stub.ListSessionComments(request, metadata=self.metadata)
+        return response
