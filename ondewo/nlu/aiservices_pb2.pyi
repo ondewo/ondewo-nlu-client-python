@@ -703,6 +703,7 @@ class DataEnrichmentConfig(google.protobuf.message.Message):
     GLOVE_ENRICHMENT_FIELD_NUMBER: builtins.int
     BERT_ENRICHMENT_FIELD_NUMBER: builtins.int
     XLNET_ENRICHMENT_FIELD_NUMBER: builtins.int
+    LLM_ENRICHMENT_FIELD_NUMBER: builtins.int
     @property
     def entity_enrichment(self) -> global___EntityEnrichmentConfig:
         """Entity augmenter configuration"""
@@ -727,6 +728,9 @@ class DataEnrichmentConfig(google.protobuf.message.Message):
     @property
     def xlnet_enrichment(self) -> global___XLNetAugEnrichmentConfig:
         """XLNet augmenter configuration"""
+    @property
+    def llm_enrichment(self) -> global___LlmAugEnrichmentConfig:
+        """Llm augmenter configuration"""
     def __init__(
         self,
         *,
@@ -738,9 +742,10 @@ class DataEnrichmentConfig(google.protobuf.message.Message):
         glove_enrichment: global___GloVeEnrichmentConfig | None = ...,
         bert_enrichment: global___BertAugEnrichmentConfig | None = ...,
         xlnet_enrichment: global___XLNetAugEnrichmentConfig | None = ...,
+        llm_enrichment: global___LlmAugEnrichmentConfig | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["bert_enrichment", b"bert_enrichment", "entity_enrichment", b"entity_enrichment", "glove_enrichment", b"glove_enrichment", "gpt2_enrichment", b"gpt2_enrichment", "thesaurus_enrichment", b"thesaurus_enrichment", "word2vec_enrichment", b"word2vec_enrichment", "word_net_enrichment", b"word_net_enrichment", "xlnet_enrichment", b"xlnet_enrichment"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["bert_enrichment", b"bert_enrichment", "entity_enrichment", b"entity_enrichment", "glove_enrichment", b"glove_enrichment", "gpt2_enrichment", b"gpt2_enrichment", "thesaurus_enrichment", b"thesaurus_enrichment", "word2vec_enrichment", b"word2vec_enrichment", "word_net_enrichment", b"word_net_enrichment", "xlnet_enrichment", b"xlnet_enrichment"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["bert_enrichment", b"bert_enrichment", "entity_enrichment", b"entity_enrichment", "glove_enrichment", b"glove_enrichment", "gpt2_enrichment", b"gpt2_enrichment", "llm_enrichment", b"llm_enrichment", "thesaurus_enrichment", b"thesaurus_enrichment", "word2vec_enrichment", b"word2vec_enrichment", "word_net_enrichment", b"word_net_enrichment", "xlnet_enrichment", b"xlnet_enrichment"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["bert_enrichment", b"bert_enrichment", "entity_enrichment", b"entity_enrichment", "glove_enrichment", b"glove_enrichment", "gpt2_enrichment", b"gpt2_enrichment", "llm_enrichment", b"llm_enrichment", "thesaurus_enrichment", b"thesaurus_enrichment", "word2vec_enrichment", b"word2vec_enrichment", "word_net_enrichment", b"word_net_enrichment", "xlnet_enrichment", b"xlnet_enrichment"]) -> None: ...
 
 global___DataEnrichmentConfig = DataEnrichmentConfig
 
@@ -928,7 +933,7 @@ global___WordNetAugEnrichmentConfig = WordNetAugEnrichmentConfig
 
 @typing_extensions.final
 class XLNetAugEnrichmentConfig(google.protobuf.message.Message):
-    """Configuration for Thesaurus enrichment"""
+    """Configuration for XLNet enrichment"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -951,6 +956,91 @@ class XLNetAugEnrichmentConfig(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["enrichment_factor", b"enrichment_factor", "execution_order", b"execution_order", "is_active", b"is_active"]) -> None: ...
 
 global___XLNetAugEnrichmentConfig = XLNetAugEnrichmentConfig
+
+@typing_extensions.final
+class LlmAugEnrichmentConfig(google.protobuf.message.Message):
+    """Configuration for Large Language Models (LLM) enrichment"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    IS_ACTIVE_FIELD_NUMBER: builtins.int
+    ENRICHMENT_FACTOR_FIELD_NUMBER: builtins.int
+    EXECUTION_ORDER_FIELD_NUMBER: builtins.int
+    HOST_FIELD_NUMBER: builtins.int
+    PORT_FIELD_NUMBER: builtins.int
+    HTTP_BASIC_AUTH_TOKEN_FIELD_NUMBER: builtins.int
+    API_KEY_FIELD_NUMBER: builtins.int
+    SYSTEM_ROLE_FIELD_NUMBER: builtins.int
+    PROMPT_FIELD_NUMBER: builtins.int
+    DO_SAMPLE_FIELD_NUMBER: builtins.int
+    MAX_NEW_TOKENS_FIELD_NUMBER: builtins.int
+    RETURN_FULL_TEXT_FIELD_NUMBER: builtins.int
+    STOP_SEQUENCES_FIELD_NUMBER: builtins.int
+    TEMPERATURE_FIELD_NUMBER: builtins.int
+    TOP_K_FIELD_NUMBER: builtins.int
+    TOP_P_FIELD_NUMBER: builtins.int
+    TRUNCATE_FIELD_NUMBER: builtins.int
+    is_active: builtins.bool
+    """Activation flag"""
+    enrichment_factor: builtins.int
+    """Factor of enrichment"""
+    execution_order: builtins.int
+    """Order of augmenter execution"""
+    host: builtins.str
+    """Additional host for communication, if needed."""
+    port: builtins.int
+    """Port for additional communication."""
+    http_basic_auth_token: builtins.str
+    """Http basic auth token"""
+    api_key: builtins.str
+    """API key for accessing the service, if applicable."""
+    system_role: builtins.str
+    """Define system role."""
+    prompt: builtins.str
+    """Set the input text prompt."""
+    do_sample: builtins.bool
+    """Set do_sample flag to activate logits sampling."""
+    max_new_tokens: builtins.int
+    """Define maximum number of generated tokens."""
+    return_full_text: builtins.bool
+    """Set whether to prepend the prompt to the generated text."""
+    @property
+    def stop_sequences(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """List of string to stop generating tokens if a member of `stop_sequences` is generated"""
+    temperature: builtins.float
+    """Set temperature value to module the logits distribution."""
+    top_k: builtins.float
+    """Set top_k value for highest probability vocabulary tokens to keep for top-k-filtering."""
+    top_p: builtins.float
+    """If set to < 1, only the smallest set of most probable tokens with probabilities that add up to `top_p` or
+    higher are kept for generation.
+    """
+    truncate: builtins.int
+    """Truncate inputs tokens to the given size."""
+    def __init__(
+        self,
+        *,
+        is_active: builtins.bool = ...,
+        enrichment_factor: builtins.int = ...,
+        execution_order: builtins.int = ...,
+        host: builtins.str = ...,
+        port: builtins.int = ...,
+        http_basic_auth_token: builtins.str = ...,
+        api_key: builtins.str = ...,
+        system_role: builtins.str = ...,
+        prompt: builtins.str = ...,
+        do_sample: builtins.bool = ...,
+        max_new_tokens: builtins.int = ...,
+        return_full_text: builtins.bool = ...,
+        stop_sequences: collections.abc.Iterable[builtins.str] | None = ...,
+        temperature: builtins.float = ...,
+        top_k: builtins.float = ...,
+        top_p: builtins.float = ...,
+        truncate: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["api_key", b"api_key", "do_sample", b"do_sample", "enrichment_factor", b"enrichment_factor", "execution_order", b"execution_order", "host", b"host", "http_basic_auth_token", b"http_basic_auth_token", "is_active", b"is_active", "max_new_tokens", b"max_new_tokens", "port", b"port", "prompt", b"prompt", "return_full_text", b"return_full_text", "stop_sequences", b"stop_sequences", "system_role", b"system_role", "temperature", b"temperature", "top_k", b"top_k", "top_p", b"top_p", "truncate", b"truncate"]) -> None: ...
+
+global___LlmAugEnrichmentConfig = LlmAugEnrichmentConfig
 
 @typing_extensions.final
 class ClassifyIntentsRequest(google.protobuf.message.Message):
