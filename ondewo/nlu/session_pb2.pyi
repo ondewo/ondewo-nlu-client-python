@@ -1193,6 +1193,87 @@ class TrackSessionStepRequest(google.protobuf.message.Message):
 global___TrackSessionStepRequest = TrackSessionStepRequest
 
 @typing_extensions.final
+class GetSessionStepRequest(google.protobuf.message.Message):
+    """This message is a request to get a session step"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    SESSION_STEP_NAME_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
+    session_step_name: builtins.str
+    """The unique identifier for the given session step
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/steps/&lt;session_step_uuid&gt;
+    """
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields will be filled with data.
+        Example: path=["session_step.detect_intent_response.query_result.fulfillment_messages"]
+        """
+    def __init__(
+        self,
+        *,
+        session_step_name: builtins.str = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["field_mask", b"field_mask", "session_step_name", b"session_step_name"]) -> None: ...
+
+global___GetSessionStepRequest = GetSessionStepRequest
+
+@typing_extensions.final
+class UpdateSessionStepRequest(google.protobuf.message.Message):
+    """UpdateSessionStepRequest stores a session step into the session"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    SESSION_STEP_NAME_FIELD_NUMBER: builtins.int
+    SESSION_STEP_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
+    session_step_name: builtins.str
+    """The unique identifier for the given session step
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/steps/&lt;session_step_uuid&gt;</code></pre>.
+    """
+    @property
+    def session_step(self) -> global___SessionStep:
+        """The session step to be updated"""
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields will be filled with data.
+        Example: path=["session_step.detect_intent_response.query_result.fulfillment_messages"]
+        """
+    def __init__(
+        self,
+        *,
+        session_step_name: builtins.str = ...,
+        session_step: global___SessionStep | None = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["field_mask", b"field_mask", "session_step", b"session_step"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["field_mask", b"field_mask", "session_step", b"session_step", "session_step_name", b"session_step_name"]) -> None: ...
+
+global___UpdateSessionStepRequest = UpdateSessionStepRequest
+
+@typing_extensions.final
+class DeleteSessionStepRequest(google.protobuf.message.Message):
+    """This message is a request to delete a session step of a session"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    SESSION_STEP_NAME_FIELD_NUMBER: builtins.int
+    session_step_name: builtins.str
+    """The unique identifier for the given session step
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/steps/&lt;session_step_uuid&gt;</code></pre>.
+    """
+    def __init__(
+        self,
+        *,
+        session_step_name: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["session_step_name", b"session_step_name"]) -> None: ...
+
+global___DeleteSessionStepRequest = DeleteSessionStepRequest
+
+@typing_extensions.final
 class ListSessionsRequest(google.protobuf.message.Message):
     """This message is a request to list sessions"""
 

@@ -30,6 +30,7 @@ from ondewo.nlu.session_pb2 import (
     DeleteSessionCommentsRequest,
     DeleteSessionLabelsRequest,
     DeleteSessionRequest,
+    DeleteSessionStepRequest,
     DetectIntentRequest,
     DetectIntentResponse,
     GetAudioFileOfSessionRequest,
@@ -38,6 +39,7 @@ from ondewo.nlu.session_pb2 import (
     GetLatestSessionReviewRequest,
     GetSessionRequest,
     GetSessionReviewRequest,
+    GetSessionStepRequest,
     ListAccountIdsOfAllSessionsRequest,
     ListAccountIdsResponse,
     ListAudioFilesRequest,
@@ -77,10 +79,12 @@ from ondewo.nlu.session_pb2 import (
     ListUserIdsResponse,
     Session,
     SessionReview,
+    SessionStep,
     StreamingDetectIntentRequest,
     StreamingDetectIntentResponse,
     TrackSessionStepRequest,
     UpdateSessionCommentsRequest,
+    UpdateSessionStepRequest,
 )
 from ondewo.nlu.session_pb2_grpc import SessionsStub
 
@@ -124,6 +128,18 @@ class Sessions(ServicesInterface):
 
     def track_session_step(self, request: TrackSessionStepRequest) -> Session:
         response: Session = self.stub.TrackSessionStep(request, metadata=self.metadata)
+        return response
+
+    def get_session_step(self, request: GetSessionStepRequest) -> SessionStep:
+        response: SessionStep = self.stub.GetSessionStep(request, metadata=self.metadata)
+        return response
+
+    def update_session_step(self, request: UpdateSessionStepRequest) -> SessionStep:
+        response: SessionStep = self.stub.UpdateSessionStep(request, metadata=self.metadata)
+        return response
+
+    def delete_session_step(self, request: DeleteSessionStepRequest) -> Empty:
+        response: Empty = self.stub.DeleteSessionStep(request, metadata=self.metadata)
         return response
 
     def delete_session(self, request: DeleteSessionRequest) -> Empty:
