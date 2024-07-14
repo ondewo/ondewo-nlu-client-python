@@ -1227,10 +1227,16 @@ class UpdateSessionStepRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     SESSION_STEP_FIELD_NUMBER: builtins.int
+    UPDATE_MASK_FIELD_NUMBER: builtins.int
     FIELD_MASK_FIELD_NUMBER: builtins.int
     @property
     def session_step(self) -> global___SessionStep:
         """The session step to be updated"""
+    @property
+    def update_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields will be updated.
+        Example: path=["session_step.detect_intent_response.query_result.fulfillment_messages"]
+        """
     @property
     def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields will be filled with data.
@@ -1240,10 +1246,11 @@ class UpdateSessionStepRequest(google.protobuf.message.Message):
         self,
         *,
         session_step: global___SessionStep | None = ...,
+        update_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
         field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["field_mask", b"field_mask", "session_step", b"session_step"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["field_mask", b"field_mask", "session_step", b"session_step"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["field_mask", b"field_mask", "session_step", b"session_step", "update_mask", b"update_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["field_mask", b"field_mask", "session_step", b"session_step", "update_mask", b"update_mask"]) -> None: ...
 
 global___UpdateSessionStepRequest = UpdateSessionStepRequest
 
