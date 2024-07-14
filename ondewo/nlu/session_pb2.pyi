@@ -1226,13 +1226,8 @@ class UpdateSessionStepRequest(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    SESSION_STEP_NAME_FIELD_NUMBER: builtins.int
     SESSION_STEP_FIELD_NUMBER: builtins.int
     FIELD_MASK_FIELD_NUMBER: builtins.int
-    session_step_name: builtins.str
-    """The unique identifier for the given session step
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/steps/&lt;session_step_uuid&gt;</code></pre>.
-    """
     @property
     def session_step(self) -> global___SessionStep:
         """The session step to be updated"""
@@ -1244,12 +1239,11 @@ class UpdateSessionStepRequest(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        session_step_name: builtins.str = ...,
         session_step: global___SessionStep | None = ...,
         field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["field_mask", b"field_mask", "session_step", b"session_step"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["field_mask", b"field_mask", "session_step", b"session_step", "session_step_name", b"session_step_name"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["field_mask", b"field_mask", "session_step", b"session_step"]) -> None: ...
 
 global___UpdateSessionStepRequest = UpdateSessionStepRequest
 
