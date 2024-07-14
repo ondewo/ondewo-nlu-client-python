@@ -1198,9 +1198,9 @@ class GetSessionStepRequest(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    SESSION_STEP_NAME_FIELD_NUMBER: builtins.int
+    NAME_FIELD_NUMBER: builtins.int
     FIELD_MASK_FIELD_NUMBER: builtins.int
-    session_step_name: builtins.str
+    name: builtins.str
     """The unique identifier for the given session step
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/steps/&lt;session_step_uuid&gt;
     """
@@ -1212,11 +1212,11 @@ class GetSessionStepRequest(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        session_step_name: builtins.str = ...,
+        name: builtins.str = ...,
         field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["field_mask", b"field_mask", "session_step_name", b"session_step_name"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["field_mask", b"field_mask", "name", b"name"]) -> None: ...
 
 global___GetSessionStepRequest = GetSessionStepRequest
 
@@ -1253,17 +1253,17 @@ class DeleteSessionStepRequest(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    SESSION_STEP_NAME_FIELD_NUMBER: builtins.int
-    session_step_name: builtins.str
+    NAME_FIELD_NUMBER: builtins.int
+    name: builtins.str
     """The unique identifier for the given session step
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/steps/&lt;session_step_uuid&gt;</code></pre>.
     """
     def __init__(
         self,
         *,
-        session_step_name: builtins.str = ...,
+        name: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["session_step_name", b"session_step_name"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["name", b"name"]) -> None: ...
 
 global___DeleteSessionStepRequest = DeleteSessionStepRequest
 
