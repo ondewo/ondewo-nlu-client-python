@@ -1,6 +1,14 @@
+import json
+from typing import (
+    Any,
+    Optional,
+    Set,
+    Tuple,
+)
+
+import grpc
 import polling
 
-from typing import Optional
 from ondewo.nlu.agent_pb2 import (
     Agent,
     CreateAgentRequest,
@@ -11,8 +19,15 @@ from ondewo.nlu.agent_pb2 import (
 )
 from ondewo.nlu.client import Client
 from ondewo.nlu.client_config import ClientConfig
-from ondewo.nlu.intent_pb2 import CreateIntentRequest, Intent, ListIntentsRequest
-from ondewo.nlu.operations_pb2 import GetOperationRequest, Operation
+from ondewo.nlu.intent_pb2 import (
+    CreateIntentRequest,
+    Intent,
+    ListIntentsRequest,
+)
+from ondewo.nlu.operations_pb2 import (
+    GetOperationRequest,
+    Operation,
+)
 
 if __name__ == "__main__":
     config: ClientConfig = ClientConfig(
@@ -22,10 +37,57 @@ if __name__ == "__main__":
         user_name="<e-mail of user>",
         password="<password of user>",
     )
-    client: Client = Client(config=config, use_secure_channel=False)
+
+    # https://github.com/grpc/grpc-proto/blob/master/grpc/service_config/service_config.proto
+    service_config_json: str = json.dumps(
+        {
+            "methodConfig": [
+                {
+                    # To apply retry to all methods, put [{}] in the "name" field
+                    "name": [
+                        {"service": "ondewo.nlu.Users", "method": "Login"}
+                    ],
+                    "retryPolicy": {
+                        "maxAttempts": 10,
+                        "initialBackoff": "1.1s",
+                        "maxBackoff": "3000s",
+                        "backoffMultiplier": 2,
+                        "retryableStatusCodes": [
+                            grpc.StatusCode.CANCELLED.name,
+                            grpc.StatusCode.UNKNOWN.name,
+                            grpc.StatusCode.DEADLINE_EXCEEDED.name,
+                            grpc.StatusCode.NOT_FOUND.name,
+                            grpc.StatusCode.RESOURCE_EXHAUSTED.name,
+                            grpc.StatusCode.ABORTED.name,
+                            grpc.StatusCode.INTERNAL.name,
+                            grpc.StatusCode.UNAVAILABLE.name,
+                            grpc.StatusCode.DATA_LOSS.name,
+                        ],
+                    },
+                }
+            ]
+        }
+    )
+
+    options: Set[Tuple[str, Any]] = {
+        # Define custom max message sizes: 1MB here is an arbitrary example.
+        ("grpc.max_send_message_length", 1024 * 1024),
+        ("grpc.max_receive_message_length", 1024 * 1024),
+        # Example of setting KeepAlive options through generic channel_args
+        ("grpc.keepalive_time_ms", 2 ** 31 - 1),
+        ("grpc.keepalive_timeout_ms", 20000),
+        ("grpc.keepalive_permit_without_calls", False),
+        ("grpc.http2.max_pings_without_data", 2),
+        # Example arg requested for the feature
+        ("grpc.dns_enable_srv_queries", 1),
+        ("grpc.enable_retries", 1),
+        ("grpc.service_config", service_config_json)
+    }
+
+    client: Client = Client(config=config, use_secure_channel=False, options=options)
 
     created_agent: Agent = client.services.agents.create_agent(
-        CreateAgentRequest(
+        request=CreateAgentRequest(
             agent=Agent(
                 display_name="my python agent",
                 default_language_code="en",
