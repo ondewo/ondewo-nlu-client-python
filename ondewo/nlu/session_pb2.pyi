@@ -1116,7 +1116,7 @@ class SessionStep(google.protobuf.message.Message):
     AUDIO_FILE_RESOURCES_FIELD_NUMBER: builtins.int
     name: builtins.str
     """The unique identifier for the given review
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/steps/&lt;session_step_uuid&gt;</code></pre>
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;</code></pre>
     """
     @property
     def detect_intent_request(self) -> global___DetectIntentRequest:
@@ -1173,7 +1173,7 @@ class TrackSessionStepRequest(google.protobuf.message.Message):
     SESSION_VIEW_FIELD_NUMBER: builtins.int
     session_id: builtins.str
     """The unique identifier for the given review
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/steps/&lt;session_step_uuid&gt;</code></pre>.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;</code></pre>.
     """
     @property
     def session_step(self) -> global___SessionStep:
@@ -1202,7 +1202,7 @@ class GetSessionStepRequest(google.protobuf.message.Message):
     FIELD_MASK_FIELD_NUMBER: builtins.int
     name: builtins.str
     """The unique identifier for the given session step
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/steps/&lt;session_step_uuid&gt;
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;
     """
     @property
     def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
@@ -1263,7 +1263,7 @@ class DeleteSessionStepRequest(google.protobuf.message.Message):
     NAME_FIELD_NUMBER: builtins.int
     name: builtins.str
     """The unique identifier for the given session step
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/steps/&lt;session_step_uuid&gt;</code></pre>.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;</code></pre>.
     """
     def __init__(
         self,
