@@ -1,4 +1,4 @@
-# Copyright 2021-2023 ONDEWO GmbH
+# Copyright 2021-2024 ONDEWO GmbH
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,7 +15,10 @@
 
 from abc import ABC
 from typing import (
+    Any,
     List,
+    Optional,
+    Set,
     Tuple,
 )
 
@@ -30,8 +33,9 @@ class ServicesInterface(BaseServicesInterface, ABC):
         config: ClientConfig,
         nlu_token: str,
         use_secure_channel: bool,
+        options: Optional[Set[Tuple[str, Any]]] = None,
     ) -> None:
-        super(ServicesInterface, self).__init__(config=config, use_secure_channel=use_secure_channel)
+        super(ServicesInterface, self).__init__(config=config, use_secure_channel=use_secure_channel, options=options)
         self.metadata: List[Tuple[str, str]] = [
             ('cai-token', nlu_token if nlu_token else 'null'),
             ('authorization', config.http_token),

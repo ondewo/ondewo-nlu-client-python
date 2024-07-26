@@ -1,4 +1,4 @@
-# Copyright 2021-2023 ONDEWO GmbH
+# Copyright 2021-2024 ONDEWO GmbH
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@
 from dataclasses import dataclass
 
 from dataclasses_json import dataclass_json
-
 from ondewo.utils.base_client_config import BaseClientConfig
 
 

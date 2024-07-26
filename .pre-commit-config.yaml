@@ -16,7 +16,7 @@ fail_fast: false
 repos:
 
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.8.0
+    rev: v1.11.0
     hooks:
       - id: mypy  # Run mypy type checker; note: runs with flag --missing-imports
         exclude: ondewo
@@ -37,7 +37,7 @@ repos:
         types: [ python ]
 
   - repo: https://github.com/hhatto/autopep8
-    rev: v2.0.4
+    rev: v2.3.1
     hooks:
       - id: autopep8  # Perform pep8 auto-formatting
         args: [ --max-line-length=120, --in-place ]
@@ -47,7 +47,7 @@ repos:
           )
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
+    rev: v4.6.0
     hooks:
       - id: check-added-large-files  # Prevent giant files from being committed
         args: [ maxkb=1024 ]
@@ -70,13 +70,12 @@ repos:
         files: 'requirements/requirements.*\.txt$'
 
   - repo: https://github.com/pycqa/flake8
-    rev: 6.1.0
+    rev: 7.1.0
     hooks:
       - id: flake8
-        exclude: ondewo/
 
   - repo: https://github.com/milin/giticket
-    rev: d4a4c3b943892add7ee86d0d54a1e41c76b1fced
+    rev: v1.4
     hooks:
       - id: giticket  # Prepend the commit message with the JIRA ticket
         args: [ '--regex=(?:(?:feature|bugfix|support|hotfix)/)?(OND[0-9]{3}-[0-9]{1,5})[_-][\w-]+',

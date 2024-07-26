@@ -1,4 +1,4 @@
-# Copyright 2021-2023 ONDEWO GmbH
+# Copyright 2021-2024 ONDEWO GmbH
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,10 +16,12 @@
 from typing import (
     Any,
     Dict,
+    Optional,
+    Set,
+    Tuple,
 )
 
 from ondewo.utils.base_client import BaseClient
-from ondewo.utils.base_client_config import BaseClientConfig
 
 from ondewo.nlu.client_config import ClientConfig
 from ondewo.nlu.core.services_container import ServicesContainer
@@ -44,17 +46,28 @@ class Client(BaseClient):
     The core python client for interacting with ONDEWO NLU services.
     """
 
-    def _initialize_services(self, config: BaseClientConfig, use_secure_channel: bool) -> None:
+    def _initialize_services(
+        self,
+        config: ClientConfig,
+        use_secure_channel: bool,
+        options: Optional[Set[Tuple[str, Any]]] = None,
+    ) -> None:
         """
-        Login with the current config and setup the services in self.services
 
-        Returns:
-            None
+        Initialize the service clients and lLogin with the current config and setup the services in self.services
+
+        Args:
+            config (BaseClientConfig):
+                Configuration for the client.
+            use_secure_channel (bool):
+                Whether to use a secure gRPC channel.
+            options (Optional[Set[Tuple[str, Any]]]):
+                Additional options for the gRPC channel.
         """
         if not isinstance(config, ClientConfig):
             raise ValueError('The provided config must be of type `ondewo.nlu.client_config.ClientConfig`')
 
-        nlu_token: str = login(config=config, use_secure_channel=use_secure_channel)  # type:ignore
+        nlu_token: str = login(config=config, use_secure_channel=use_secure_channel, options=options)
         kwargs: Dict[str, Any] = {
             'config': config,
             'nlu_token': nlu_token,
