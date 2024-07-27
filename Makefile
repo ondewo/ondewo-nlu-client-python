@@ -206,7 +206,9 @@ upload_package: ## Uploads PYPI Package
 	twine upload --verbose -r pypi dist/* -u${PYPI_USERNAME} -p${PYPI_PASSWORD}
 
 clear_package_data: ## Clears PYPI Package
-	rm -rf build dist ondewo_nlu_client.egg-info
+	echo "Waiting 5s so directory for removal is not busy anymore"
+	sleep 5s
+	-rm -rf build dist ondewo_nlu_client.egg-info
 
 build_utils_docker_image:  ## Build utils docker image
 	docker build -f Dockerfile.utils -t ${IMAGE_UTILS_NAME} .
