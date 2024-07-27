@@ -1,12 +1,34 @@
+# Copyright 2021-2024 ONDEWO GmbH
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 import uuid
-from typing import Dict, Optional, List
+from typing import (
+    Dict,
+    List,
+    Optional,
+)
 
 from ondewo.nlu import context_pb2
 from ondewo.nlu.client import Client as NluClient
 from ondewo.nlu.client_config import ClientConfig
 from ondewo.nlu.context_pb2 import Context
-from ondewo.nlu.session_pb2 import DetectIntentResponse, \
-    DetectIntentRequest, QueryInput, TextInput, QueryParameters
+from ondewo.nlu.session_pb2 import (
+    DetectIntentRequest,
+    DetectIntentResponse,
+    QueryInput,
+    QueryParameters,
+    TextInput,
+)
 
 
 def make_nlu_conversation(session):
@@ -36,9 +58,9 @@ def conversation_nlu_helper(session: str, text: str = "Default Welcome Intent", 
 
 
 def get_response_from_request(
-        session: str,
-        text: str,
-        context: Optional[Context] = None
+    session: str,
+    text: str,
+    context: Optional[Context] = None
 ) -> DetectIntentResponse:
     contexts: List[Context] = [context] if context else []
     nlu_request: DetectIntentRequest = DetectIntentRequest(
@@ -94,8 +116,8 @@ if __name__ == '__main__':
 
     # Client configuration
     config: ClientConfig = ClientConfig(
-        host='<host>',
-        port='<port>',
+        host='localhost',
+        port='1234',
         http_token='<http/root token>',
         user_name='<e-mail of user>',
         password='<password of user>'

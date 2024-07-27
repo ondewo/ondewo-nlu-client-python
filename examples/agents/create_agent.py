@@ -1,3 +1,16 @@
+# Copyright 2021-2024 ONDEWO GmbH
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 import json
 from typing import (
     Any,
@@ -31,11 +44,11 @@ from ondewo.nlu.operations_pb2 import (
 
 if __name__ == "__main__":
     config: ClientConfig = ClientConfig(
-        host="<host>",
-        port="<port>",
-        http_token="<http/root token>",
-        user_name="<e-mail of user>",
-        password="<password of user>",
+        host='localhost',
+        port='1234',
+        http_token='<http/root token>',
+        user_name='<e-mail of user>',
+        password='<password of user>',
     )
 
     # https://github.com/grpc/grpc-proto/blob/master/grpc/service_config/service_config.proto
@@ -43,9 +56,12 @@ if __name__ == "__main__":
         {
             "methodConfig": [
                 {
-                    # To apply retry to all methods, put [{}] in the "name" field
                     "name": [
-                        {"service": "ondewo.nlu.Users", "method": "Login"}
+                        # To apply retry to all methods, put [{}] as a value in the "name" field
+                        # {}
+                        # List single  rpc method call
+                        {"service": "ondewo.nlu.Users", "method": "CreateUser"},
+                        {"service": "ondewo.nlu.Users", "method": "Login"},
                     ],
                     "retryPolicy": {
                         "maxAttempts": 10,

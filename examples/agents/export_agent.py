@@ -1,12 +1,31 @@
+# Copyright 2021-2024 ONDEWO GmbH
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 import json
+from typing import Optional
 
 import polling
 
-from typing import Optional
-from ondewo.nlu.agent_pb2 import ExportAgentRequest, ExportAgentResponse
+from ondewo.nlu.agent_pb2 import (
+    ExportAgentRequest,
+    ExportAgentResponse,
+)
 from ondewo.nlu.client import Client
 from ondewo.nlu.client_config import ClientConfig
-from ondewo.nlu.operations_pb2 import Operation, GetOperationRequest
+from ondewo.nlu.operations_pb2 import (
+    GetOperationRequest,
+    Operation,
+)
 
 if __name__ == '__main__':
     parent: str = 'projects/some_agent_id/agent'
@@ -16,12 +35,12 @@ if __name__ == '__main__':
         config_ = json.load(f)
 
     config = ClientConfig(
-        host=config_["host"],
-        port=config_["port"],
-        user_name=config_["user_name"],
-        password=config_["password"],
-        http_token=config_["http_token"],
-        grpc_cert=config_.get("grpc_cert", '').encode().decode().replace("\\n", "\n"),  # type: ignore
+        host=config_['host'],
+        port=config_['port'],
+        user_name=config_['user_name'],
+        password=config_['password'],
+        http_token=config_['http_token'],
+        grpc_cert=config_.get('grpc_cert', '').encode().decode().replace('\\n', '\n'),  # type: ignore
     )
 
     client: Client = Client(config=config, use_secure_channel=True)

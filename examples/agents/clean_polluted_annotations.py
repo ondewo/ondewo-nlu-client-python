@@ -1,8 +1,25 @@
+# Copyright 2021-2024 ONDEWO GmbH
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 import asyncio
 import json
 import os.path
 from collections import defaultdict
-from typing import Dict, Set, List
+from typing import (
+    Dict,
+    List,
+    Set,
+)
 
 import tqdm as tqdm
 from ondewo.logging.decorators import Timer
@@ -10,16 +27,27 @@ from ondewo.logging.logger import logger_console as log
 
 from ondewo.nlu.client import Client
 from ondewo.nlu.client_config import ClientConfig
-from ondewo.nlu.entity_type_pb2 import ListEntityTypesRequest, EntityTypeView, ListEntityTypesResponse
-from ondewo.nlu.intent_pb2 import ListTrainingPhrasesRequest, ListIntentsRequest, IntentView, ListIntentsResponse, \
-    ListTrainingPhrasesResponse, Intent, BatchUpdateTrainingPhrasesRequest
+from ondewo.nlu.entity_type_pb2 import (
+    EntityTypeView,
+    ListEntityTypesRequest,
+    ListEntityTypesResponse,
+)
+from ondewo.nlu.intent_pb2 import (
+    BatchUpdateTrainingPhrasesRequest,
+    Intent,
+    IntentView,
+    ListIntentsRequest,
+    ListIntentsResponse,
+    ListTrainingPhrasesRequest,
+    ListTrainingPhrasesResponse,
+)
 
 
 @Timer(logger=log.debug, log_arguments=True, message='Retrieving all entities. Elapsed time: {}')
 def get_all_entities(
-        parent: str,
-        language_code: str,
-        client: Client
+    parent: str,
+    language_code: str,
+    client: Client
 ) -> Dict[str, Dict[str, Set[str]]]:
     log.debug('START: Creating Entity Map...')
     _map: Dict[str, Dict[str, Set[str]]] = defaultdict(lambda: defaultdict(set))
@@ -43,11 +71,11 @@ def get_all_entities(
 
 @Timer(logger=log.debug, log_arguments=True, message='Checking all annotations. Elapsed time: {}')
 async def check_all_annotations(
-        parent: str,
-        language_code: str,
-        entity_map: Dict,
-        client: Client,
-        dry_run: bool = False
+    parent: str,
+    language_code: str,
+    entity_map: Dict,
+    client: Client,
+    dry_run: bool = False
 ) -> None:
     log.debug("START: Retrieving the intent list...")
     intents_response: ListIntentsResponse = client.services.intents.list_intents(
@@ -86,9 +114,11 @@ async def check_all_annotations(
 
                 if (not annotation.entity_type_display_name.startswith('sys.') and t not in
                         entity_map[annotation.entity_type_name][annotation.entity_value_name]):
-                    log.debug(f'Annotation! "{t}" '
-                              f'on intent [{intent.display_name}] '
-                              f'has no synonym on the entity type: [{annotation.entity_type_display_name}]')
+                    log.debug(
+                        f'Annotation! "{t}" '
+                        f'on intent [{intent.display_name}] '
+                        f'has no synonym on the entity type: [{annotation.entity_type_display_name}]'
+                    )
 
                     if dry_run:
                         # Only, if dry run, then keep entity annotation if synonym is in our domain else don't
@@ -106,18 +136,24 @@ async def check_all_annotations(
 
         nr_of_cleaned_training_phrases_of_intent: int = len(phrases_to_update_in_intent)
         if nr_of_cleaned_training_phrases_of_intent > 0:
-            log.debug(f'DONE: Cleaned {nr_of_cleaned_training_phrases_of_intent} of {nr_of_training_phrass_in_intent} '
-                      f'training phrases in intent {intent.display_name}.')
+            log.debug(
+                f'DONE: Cleaned {nr_of_cleaned_training_phrases_of_intent} of {nr_of_training_phrass_in_intent} '
+                f'training phrases in intent {intent.display_name}.'
+            )
             phrases_to_update.extend(phrases_to_update_in_intent)
         else:
-            log.debug(f'DONE: No cleaning was necessary for {nr_of_training_phrass_in_intent} '
-                      f'training phrases in intent {intent.display_name}.')
+            log.debug(
+                f'DONE: No cleaning was necessary for {nr_of_training_phrass_in_intent} '
+                f'training phrases in intent {intent.display_name}.'
+            )
 
     if not dry_run:
         nr_of_training_phrases_to_update = len(phrases_to_update)
         if nr_of_training_phrases_to_update > 0:
-            log.info(f'START: Updating {nr_of_training_phrases_to_update} training phrases in '
-                     f'{nr_of_intents} intents...')
+            log.info(
+                f'START: Updating {nr_of_training_phrases_to_update} training phrases in '
+                f'{nr_of_intents} intents...'
+            )
 
             chunk_size: int = 100
             training_phrase_chunks: List[List[Intent.TrainingPhrase]] = [
@@ -127,16 +163,18 @@ async def check_all_annotations(
             tasks = [batch_update_training_phrase(client, chunk) for chunk in training_phrase_chunks]
             await asyncio.wait(tasks)
 
-            log.info(f'DONE: Updating {nr_of_training_phrases_to_update} training phrases in '
-                     f'{nr_of_intents} intents.')
+            log.info(
+                f'DONE: Updating {nr_of_training_phrases_to_update} training phrases in '
+                f'{nr_of_intents} intents.'
+            )
         else:
             log.info(f'No training phrases need to be cleaned. Checked {nr_of_intents} intents.')
 
 
 @Timer(logger=log.debug, log_arguments=False, message='batch_update_training_phrase. Elapsed time: {}')
 async def batch_update_training_phrase(
-        client: Client,
-        phrases_to_update: List[Intent.TrainingPhrase]
+    client: Client,
+    phrases_to_update: List[Intent.TrainingPhrase]
 ) -> None:
     client.services.intents.batch_update_training_phrases(
         BatchUpdateTrainingPhrasesRequest(
@@ -146,12 +184,14 @@ async def batch_update_training_phrase(
 
 
 if __name__ == '__main__':
-    log.info("""
-    ------------------------------------------------------------------------
-      INFO: This script removes all annotations that mark text that is not
-      part of the synonyms of the associated entity value and entity type
-    ------------------------------------------------------------------------
-    """)
+    log.info(
+        """
+            ------------------------------------------------------------------------
+              INFO: This script removes all annotations that mark text that is not
+              part of the synonyms of the associated entity value and entity type
+            ------------------------------------------------------------------------
+            """
+    )
     ################################################################################
     # Update here your configuration for the project and the nlu client            #
     ################################################################################
@@ -163,7 +203,7 @@ if __name__ == '__main__':
     # default client settings
     config: ClientConfig = ClientConfig(
         host='localhost',
-        port='50055',
+        port='1234',
         http_token='aimp',
         user_name='admin@ondewo.com',
         password='asdf'
@@ -174,12 +214,12 @@ if __name__ == '__main__':
         with open(config_file) as f:
             config_ = json.load(f)
         config = ClientConfig(
-            host=config_["host"],
-            port=config_["port"],
-            user_name=config_["user_name"],
-            password=config_["password"],
-            http_token=config_["http_token"],
-            grpc_cert=config_.get("grpc_cert", ''),
+            host=config_['host'],
+            port=config_['port'],
+            user_name=config_['user_name'],
+            password=config_['password'],
+            http_token=config_['http_token'],
+            grpc_cert=config_.get('grpc_cert', ''),
         )
     # endregion
 

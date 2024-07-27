@@ -1,14 +1,33 @@
+# Copyright 2021-2024 ONDEWO GmbH
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 import json
 
-from ondewo.nlu.agent_pb2 import FullTextSearchRequest, FullTextSearchResponseIntent, \
-    FullTextSearchResponseIntentContextIn, FullTextSearchResponseIntentContextOut, \
-    FullTextSearchResponseIntentUsersays, \
-    FullTextSearchResponseIntentTags, \
-    FullTextSearchResponseIntentResponse, FullTextSearchResponseIntentParameters, \
-    FullTextSearchResponseEntityType, FullTextSearchResponseEntity, FullTextSearchResponseEntitySynonym
+from ondewo.nlu.agent_pb2 import (
+    FullTextSearchRequest,
+    FullTextSearchResponseEntity,
+    FullTextSearchResponseEntitySynonym,
+    FullTextSearchResponseEntityType,
+    FullTextSearchResponseIntent,
+    FullTextSearchResponseIntentContextIn,
+    FullTextSearchResponseIntentContextOut,
+    FullTextSearchResponseIntentParameters,
+    FullTextSearchResponseIntentResponse,
+    FullTextSearchResponseIntentTags,
+    FullTextSearchResponseIntentUsersays,
+)
 from ondewo.nlu.client import Client
 from ondewo.nlu.client_config import ClientConfig
-
 
 project_id: str = '<Your project ID>'
 parent: str = f'projects/{project_id}/agent'
@@ -19,12 +38,12 @@ with open(config_file) as f:
     config_ = json.load(f)
 
 config = ClientConfig(
-    host=config_["host"],
-    port=config_["port"],
-    user_name=config_["user_name"],
-    password=config_["password"],
-    http_token=config_["http_token"],
-    grpc_cert=config_.get("grpc_cert", ''),
+    host=config_['host'],
+    port=config_['port'],
+    user_name=config_['user_name'],
+    password=config_['password'],
+    http_token=config_['http_token'],
+    grpc_cert=config_.get('grpc_cert', ''),
 )
 
 client: Client = Client(config=config, use_secure_channel=False)

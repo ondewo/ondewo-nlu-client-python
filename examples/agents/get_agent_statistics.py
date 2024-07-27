@@ -1,8 +1,26 @@
+# Copyright 2021-2024 ONDEWO GmbH
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 import io
 import json
 from zipfile import ZipFile
 
-from ondewo.nlu import agent_pb2, intent_pb2, project_statistics_pb2, common_pb2
+from ondewo.nlu import (
+    agent_pb2,
+    common_pb2,
+    intent_pb2,
+    project_statistics_pb2,
+)
 from ondewo.nlu.client import Client
 from ondewo.nlu.client_config import ClientConfig
 
@@ -61,12 +79,12 @@ if __name__ == '__main__':
         config_ = json.load(f)
 
     config = ClientConfig(
-        host=config_["host"],
-        port=config_["port"],
-        user_name=config_["user_name"],
-        password=config_["password"],
-        http_token=config_["http_token"],
-        grpc_cert=config_.get("grpc_cert", ''),
+        host=config_['host'],
+        port=config_['port'],
+        user_name=config_['user_name'],
+        password=config_['password'],
+        http_token=config_['http_token'],
+        grpc_cert=config_.get('grpc_cert', ''),
     )
 
     client: Client = Client(config=config, use_secure_channel=False)

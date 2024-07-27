@@ -11,8 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-
 from typing import (
     Any,
     Dict,
@@ -54,7 +52,7 @@ class Client(BaseClient):
     ) -> None:
         """
 
-        Initialize the service clients and lLogin with the current config and setup the services in self.services
+        Initialize the service clients and lLogin with the current config and set up the services in self.services
 
         Args:
             config (BaseClientConfig):
@@ -72,6 +70,7 @@ class Client(BaseClient):
             'config': config,
             'nlu_token': nlu_token,
             'use_secure_channel': use_secure_channel,
+            'options': options,
         }
         self.services: ServicesContainer = ServicesContainer(
             agents=Agents(**kwargs),
