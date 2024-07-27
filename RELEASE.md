@@ -202,7 +202,7 @@
 
 ### Bugfix
 
-* Use ondewo.nlu operations module instead of google.longrunning
+* Use ondewo.nlu operations module instead of `google.longrunning`
 
 *****************
 
@@ -210,7 +210,7 @@
 
 ### Bugfix
 
-* Use ondewo.nlu operations module instead of google.longrunning
+* Use ondewo.nlu operations module instead of `google.longrunning`
 
 *****************
 
@@ -218,7 +218,7 @@
 
 ### Improvements
 
-* Downgraded to dataclasses-json==0.5.4 due to backend compatibility
+* Downgraded to `dataclasses-json==0.5.4` due to backend compatibility
 
 *****************
 
@@ -236,7 +236,7 @@
 ### Improvements
 
 * Easier release process to pypi through docker image (no python installation required)
-* [[OND211-2011]](https://ondewo.atlassian.net/browse/OND211-2011) - Intent. List all user says from cache incl. enrichtment based on agent parent instead of project_id
+* [[OND211-2011]](https://ondewo.atlassian.net/browse/OND211-2011) - Intent. List all user says from cache incl. enrichment based on agent parent instead of project_id
 
 *****************
 
