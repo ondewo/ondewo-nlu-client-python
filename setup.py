@@ -11,7 +11,7 @@ setuptools.setup(
     version='5.0.1',
     author='ONDEWO GmbH',
     author_email='office@ondewo.com',
-    description='This library facilitates the interaction between users and ONDEWO NLU servers.',
+    description='ONDEWO Natural Language Understanding (NLU) Client library for Python',
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/ondewo/ondewo-nlu-client-python',
