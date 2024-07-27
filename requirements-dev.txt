@@ -1,9 +1,9 @@
 -r requirements.txt
-mypy
-pytest
-flake8
 Faker
-tqdm
+flake8
+mypy
 mypy-protobuf
 protobuf
+pytest
+tqdm
 types-protobuf

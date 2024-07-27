@@ -3,11 +3,10 @@ google-api-core
 grpcio
 grpcio-reflection
 grpcio-tools
+ondewo-client-utils
+ondewo-logging
 polling
 protobuf
 python-dateutil
 regex
 setuptools
-
-ondewo-client-utils
-ondewo-logging
