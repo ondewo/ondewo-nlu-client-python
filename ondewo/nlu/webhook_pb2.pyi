@@ -29,6 +29,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 """
+
 import builtins
 import collections.abc
 import google.protobuf.descriptor
@@ -51,7 +52,7 @@ else:
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
-@typing_extensions.final
+@typing.final
 class PingRequest(google.protobuf.message.Message):
     """request sent for webhook ping"""
 
@@ -65,11 +66,11 @@ class PingRequest(google.protobuf.message.Message):
         *,
         session: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["session", b"session"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["session", b"session"]) -> None: ...
 
 global___PingRequest = PingRequest
 
-@typing_extensions.final
+@typing.final
 class WebhookRequest(google.protobuf.message.Message):
     """The request message for a webhook call."""
 
@@ -84,24 +85,27 @@ class WebhookRequest(google.protobuf.message.Message):
     """The unique identifier of the response. Contains the same value as
     `[Streaming]DetectIntentResponse.response_id`.
     """
-    @property
-    def query_result(self) -> ondewo.nlu.session_pb2.QueryResult:
-        """The result of the conversational query or event processing. Contains the
-        same value as `[Streaming]DetectIntentResponse.query_result`.
-        """
-    @property
-    def original_detect_intent_request(self) -> global___OriginalDetectIntentRequest:
-        """Optional. The contents of the original request that was passed to
-        `[Streaming]DetectIntent` call.
-        """
     session: builtins.str
     """The unique identifier of detectIntent request session.
     Can be used to identify end-user inside webhook implementation.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
     """
     @property
+    def query_result(self) -> ondewo.nlu.session_pb2.QueryResult:
+        """The result of the conversational query or event processing. Contains the
+        same value as `[Streaming]DetectIntentResponse.query_result`.
+        """
+
+    @property
+    def original_detect_intent_request(self) -> global___OriginalDetectIntentRequest:
+        """Optional. The contents of the original request that was passed to
+        `[Streaming]DetectIntent` call.
+        """
+
+    @property
     def headers(self) -> google.protobuf.struct_pb2.Struct:
         """Optional. The headers of the request message"""
+
     def __init__(
         self,
         *,
@@ -111,12 +115,12 @@ class WebhookRequest(google.protobuf.message.Message):
         session: builtins.str = ...,
         headers: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["headers", b"headers", "original_detect_intent_request", b"original_detect_intent_request", "query_result", b"query_result"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["headers", b"headers", "original_detect_intent_request", b"original_detect_intent_request", "query_result", b"query_result", "response_id", b"response_id", "session", b"session"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["headers", b"headers", "original_detect_intent_request", b"original_detect_intent_request", "query_result", b"query_result"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["headers", b"headers", "original_detect_intent_request", b"original_detect_intent_request", "query_result", b"query_result", "response_id", b"response_id", "session", b"session"]) -> None: ...
 
 global___WebhookRequest = WebhookRequest
 
-@typing_extensions.final
+@typing.final
 class WebhookResponse(google.protobuf.message.Message):
     """The response message for a webhook call."""
 
@@ -133,13 +137,14 @@ class WebhookResponse(google.protobuf.message.Message):
     """Optional. The text to be shown on the screen. This value is passed directly
     to `QueryResult.fulfillment_text`.
     """
+    source: builtins.str
+    """Optional. This value is passed directly to `QueryResult.webhook_source`."""
     @property
     def fulfillment_messages(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.intent_pb2.Intent.Message]:
         """Optional. The collection of rich messages to present to the user. This
         value is passed directly to `QueryResult.fulfillment_messages`.
         """
-    source: builtins.str
-    """Optional. This value is passed directly to `QueryResult.webhook_source`."""
+
     @property
     def payload(self) -> google.protobuf.struct_pb2.Struct:
         """Optional. This value is passed directly to `QueryResult.webhook_payload`.
@@ -166,16 +171,19 @@ class WebhookResponse(google.protobuf.message.Message):
           }
         }</pre>
         """
+
     @property
     def output_contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]:
         """Optional. The collection of output contexts. This value is passed directly
         to `QueryResult.output_contexts`.
         """
+
     @property
     def followup_event_input(self) -> ondewo.nlu.session_pb2.EventInput:
         """Optional. Makes the platform immediately invoke another `DetectIntent` call
         internally with the specified event as input.
         """
+
     @property
     def session_entity_types(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___SessionEntityType]:
         """Optional. Additional session entity types to replace or extend developer
@@ -183,6 +191,7 @@ class WebhookResponse(google.protobuf.message.Message):
         for the session. Setting this data from a webhook overwrites
         the session entity types that have been set using `detectIntent` method.
         """
+
     def __init__(
         self,
         *,
@@ -194,12 +203,12 @@ class WebhookResponse(google.protobuf.message.Message):
         followup_event_input: ondewo.nlu.session_pb2.EventInput | None = ...,
         session_entity_types: collections.abc.Iterable[global___SessionEntityType] | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["followup_event_input", b"followup_event_input", "payload", b"payload"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["followup_event_input", b"followup_event_input", "fulfillment_messages", b"fulfillment_messages", "fulfillment_text", b"fulfillment_text", "output_contexts", b"output_contexts", "payload", b"payload", "session_entity_types", b"session_entity_types", "source", b"source"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["followup_event_input", b"followup_event_input", "payload", b"payload"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["followup_event_input", b"followup_event_input", "fulfillment_messages", b"fulfillment_messages", "fulfillment_text", b"fulfillment_text", "output_contexts", b"output_contexts", "payload", b"payload", "session_entity_types", b"session_entity_types", "source", b"source"]) -> None: ...
 
 global___WebhookResponse = WebhookResponse
 
-@typing_extensions.final
+@typing.final
 class OriginalDetectIntentRequest(google.protobuf.message.Message):
     """Represents the contents of the original request that was passed to
     the `[Streaming]DetectIntent` call.
@@ -226,18 +235,19 @@ class OriginalDetectIntentRequest(google.protobuf.message.Message):
          }
         }</pre>
         """
+
     def __init__(
         self,
         *,
         source: builtins.str = ...,
         payload: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["payload", b"payload"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["payload", b"payload", "source", b"source"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["payload", b"payload"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["payload", b"payload", "source", b"source"]) -> None: ...
 
 global___OriginalDetectIntentRequest = OriginalDetectIntentRequest
 
-@typing_extensions.final
+@typing.final
 class PingResponse(google.protobuf.message.Message):
     """This message is a response of pinging"""
 
@@ -253,11 +263,11 @@ class PingResponse(google.protobuf.message.Message):
         *,
         is_reachable: builtins.bool = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["is_reachable", b"is_reachable"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["is_reachable", b"is_reachable"]) -> None: ...
 
 global___PingResponse = PingResponse
 
-@typing_extensions.final
+@typing.final
 class SessionEntityType(google.protobuf.message.Message):
     """A session represents a conversation between a Dialogflow agent and an
     end-user. You can create special entities, called session entities, during a
@@ -342,6 +352,7 @@ class SessionEntityType(google.protobuf.message.Message):
         """Required. The collection of entities associated with this session entity
         type.
         """
+
     def __init__(
         self,
         *,
@@ -349,11 +360,11 @@ class SessionEntityType(google.protobuf.message.Message):
         entity_override_mode: global___SessionEntityType.EntityOverrideMode.ValueType = ...,
         entities: collections.abc.Iterable[ondewo.nlu.entity_type_pb2.EntityType.Entity] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["entities", b"entities", "entity_override_mode", b"entity_override_mode", "name", b"name"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["entities", b"entities", "entity_override_mode", b"entity_override_mode", "name", b"name"]) -> None: ...
 
 global___SessionEntityType = SessionEntityType
 
-@typing_extensions.final
+@typing.final
 class ListSessionEntityTypesRequest(google.protobuf.message.Message):
     """The request message for
     [SessionEntityTypes.ListSessionEntityTypes][google.cloud.dialogflow.v2.SessionEntityTypes.ListSessionEntityTypes].
@@ -408,11 +419,11 @@ class ListSessionEntityTypesRequest(google.protobuf.message.Message):
         page_size: builtins.int = ...,
         page_token: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["page_size", b"page_size", "page_token", b"page_token", "parent", b"parent"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["page_size", b"page_size", "page_token", b"page_token", "parent", b"parent"]) -> None: ...
 
 global___ListSessionEntityTypesRequest = ListSessionEntityTypesRequest
 
-@typing_extensions.final
+@typing.final
 class ListSessionEntityTypesResponse(google.protobuf.message.Message):
     """The response message for
     [SessionEntityTypes.ListSessionEntityTypes][google.cloud.dialogflow.v2.SessionEntityTypes.ListSessionEntityTypes].
@@ -422,26 +433,27 @@ class ListSessionEntityTypesResponse(google.protobuf.message.Message):
 
     SESSION_ENTITY_TYPES_FIELD_NUMBER: builtins.int
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    next_page_token: builtins.str
+    """The next_page_token is used to retrieve the next page of a returned result,
+    e.g. next_page_token is current_index-2
+    """
     @property
     def session_entity_types(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___SessionEntityType]:
         """The list of session entity types. There will be a maximum number of items
         returned based on the page_size field in the request.
         """
-    next_page_token: builtins.str
-    """The next_page_token is used to retrieve the next page of a returned result,
-    e.g. next_page_token is current_index-2
-    """
+
     def __init__(
         self,
         *,
         session_entity_types: collections.abc.Iterable[global___SessionEntityType] | None = ...,
         next_page_token: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["next_page_token", b"next_page_token", "session_entity_types", b"session_entity_types"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["next_page_token", b"next_page_token", "session_entity_types", b"session_entity_types"]) -> None: ...
 
 global___ListSessionEntityTypesResponse = ListSessionEntityTypesResponse
 
-@typing_extensions.final
+@typing.final
 class GetSessionEntityTypeRequest(google.protobuf.message.Message):
     """The request message for
     [SessionEntityTypes.GetSessionEntityType][google.cloud.dialogflow.v2.SessionEntityTypes.GetSessionEntityType].
@@ -464,11 +476,11 @@ class GetSessionEntityTypeRequest(google.protobuf.message.Message):
         *,
         name: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["name", b"name"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["name", b"name"]) -> None: ...
 
 global___GetSessionEntityTypeRequest = GetSessionEntityTypeRequest
 
-@typing_extensions.final
+@typing.final
 class CreateSessionEntityTypeRequest(google.protobuf.message.Message):
     """The request message for
     [SessionEntityTypes.CreateSessionEntityType][google.cloud.dialogflow.v2.SessionEntityTypes.CreateSessionEntityType].
@@ -483,9 +495,6 @@ class CreateSessionEntityTypeRequest(google.protobuf.message.Message):
     """Required. The agent to list all intents from.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
-    @property
-    def session_entity_type(self) -> global___SessionEntityType:
-        """Required. The session entity type to create."""
     session_id: builtins.str
     """Required. The session to create a session entity type for.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agents/sessions/&lt;session_uuid&gt;</code></pre>
@@ -499,6 +508,10 @@ class CreateSessionEntityTypeRequest(google.protobuf.message.Message):
     The session to create a session entity type for.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agents/sessions/&lt;session_uuid&gt;</code></pre>
     """
+    @property
+    def session_entity_type(self) -> global___SessionEntityType:
+        """Required. The session entity type to create."""
+
     def __init__(
         self,
         *,
@@ -506,12 +519,12 @@ class CreateSessionEntityTypeRequest(google.protobuf.message.Message):
         session_entity_type: global___SessionEntityType | None = ...,
         session_id: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["session_entity_type", b"session_entity_type"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["parent", b"parent", "session_entity_type", b"session_entity_type", "session_id", b"session_id"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["session_entity_type", b"session_entity_type"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["parent", b"parent", "session_entity_type", b"session_entity_type", "session_id", b"session_id"]) -> None: ...
 
 global___CreateSessionEntityTypeRequest = CreateSessionEntityTypeRequest
 
-@typing_extensions.final
+@typing.final
 class UpdateSessionEntityTypeRequest(google.protobuf.message.Message):
     """The request message for
     [SessionEntityTypes.UpdateSessionEntityType][google.cloud.dialogflow.v2.SessionEntityTypes.UpdateSessionEntityType].
@@ -524,21 +537,23 @@ class UpdateSessionEntityTypeRequest(google.protobuf.message.Message):
     @property
     def session_entity_type(self) -> global___SessionEntityType:
         """Required. The session entity type to update."""
+
     @property
     def update_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields get updated."""
+
     def __init__(
         self,
         *,
         session_entity_type: global___SessionEntityType | None = ...,
         update_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["session_entity_type", b"session_entity_type", "update_mask", b"update_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["session_entity_type", b"session_entity_type", "update_mask", b"update_mask"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["session_entity_type", b"session_entity_type", "update_mask", b"update_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["session_entity_type", b"session_entity_type", "update_mask", b"update_mask"]) -> None: ...
 
 global___UpdateSessionEntityTypeRequest = UpdateSessionEntityTypeRequest
 
-@typing_extensions.final
+@typing.final
 class DeleteSessionEntityTypeRequest(google.protobuf.message.Message):
     """The request message for
     [SessionEntityTypes.DeleteSessionEntityType][google.cloud.dialogflow.v2.SessionEntityTypes.DeleteSessionEntityType].
@@ -561,6 +576,6 @@ class DeleteSessionEntityTypeRequest(google.protobuf.message.Message):
         *,
         name: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["name", b"name"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["name", b"name"]) -> None: ...
 
 global___DeleteSessionEntityTypeRequest = DeleteSessionEntityTypeRequest

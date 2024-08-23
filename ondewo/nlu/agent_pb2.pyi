@@ -35,6 +35,7 @@ This file contains a single service <a href="#ondewo.nlu.Agents">Agents</a>.
 
 The most important messages is <a href="#ondewo.nlu.Agent">Agent</a> and its most complicated field is <code>configs</code>.
 """
+
 import builtins
 import collections.abc
 import google.protobuf.descriptor
@@ -328,7 +329,7 @@ INACTIVE: AgentStatus.ValueType  # 1
 """
 global___AgentStatus = AgentStatus
 
-@typing_extensions.final
+@typing.final
 class Agent(google.protobuf.message.Message):
     """Project/Agent messages"""
 
@@ -361,11 +362,6 @@ class Agent(google.protobuf.message.Message):
     list of the currently supported language codes.
     This field cannot be set by the `Update` method.
     """
-    @property
-    def supported_language_codes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Optional. The list of all languages supported by this agent (except for the
-        `default_language_code`).
-        """
     time_zone: builtins.str
     """Required. The time zone of this agent from the
     [time zone database](https://www.iana.org/time-zones), e.g.,
@@ -373,9 +369,6 @@ class Agent(google.protobuf.message.Message):
     """
     nlu_platform: builtins.str
     """Required. Specifies the format of the agent data."""
-    @property
-    def configs(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. Agent configuration as OndewoConfig converted to Struct format."""
     owner_id: builtins.str
     """Optional. User id of the project owner. If empty, in CreateAgent call it is set to user id in the call
     metadata.
@@ -386,16 +379,28 @@ class Agent(google.protobuf.message.Message):
     Read-only in the Agent message
     """
     description: builtins.str
-    @property
-    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Creation date and time. Read-only field."""
-    @property
-    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Modification date and time. Read-only field."""
     created_by: builtins.str
     """User id in form of a valid UUID."""
     modified_by: builtins.str
     """User id in form of a valid UUID."""
+    @property
+    def supported_language_codes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. The list of all languages supported by this agent (except for the
+        `default_language_code`).
+        """
+
+    @property
+    def configs(self) -> google.protobuf.struct_pb2.Struct:
+        """Optional. Agent configuration as OndewoConfig converted to Struct format."""
+
+    @property
+    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Creation date and time. Read-only field."""
+
+    @property
+    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Modification date and time. Read-only field."""
+
     def __init__(
         self,
         *,
@@ -414,12 +419,12 @@ class Agent(google.protobuf.message.Message):
         created_by: builtins.str = ...,
         modified_by: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["configs", b"configs", "created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["configs", b"configs", "created_at", b"created_at", "created_by", b"created_by", "default_language_code", b"default_language_code", "description", b"description", "display_name", b"display_name", "modified_at", b"modified_at", "modified_by", b"modified_by", "nlu_platform", b"nlu_platform", "owner_id", b"owner_id", "parent", b"parent", "status", b"status", "supported_language_codes", b"supported_language_codes", "time_zone", b"time_zone"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["configs", b"configs", "created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["configs", b"configs", "created_at", b"created_at", "created_by", b"created_by", "default_language_code", b"default_language_code", "description", b"description", "display_name", b"display_name", "modified_at", b"modified_at", "modified_by", b"modified_by", "nlu_platform", b"nlu_platform", "owner_id", b"owner_id", "parent", b"parent", "status", b"status", "supported_language_codes", b"supported_language_codes", "time_zone", b"time_zone"]) -> None: ...
 
 global___Agent = Agent
 
-@typing_extensions.final
+@typing.final
 class AgentWithOwner(google.protobuf.message.Message):
     """This message contains the agent with owner"""
 
@@ -430,21 +435,23 @@ class AgentWithOwner(google.protobuf.message.Message):
     @property
     def agent(self) -> global___Agent:
         """The agent"""
+
     @property
     def owner(self) -> ondewo.nlu.user_pb2.User:
         """User who created the agent"""
+
     def __init__(
         self,
         *,
         agent: global___Agent | None = ...,
         owner: ondewo.nlu.user_pb2.User | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["agent", b"agent", "owner", b"owner"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["agent", b"agent", "owner", b"owner"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["agent", b"agent", "owner", b"owner"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["agent", b"agent", "owner", b"owner"]) -> None: ...
 
 global___AgentWithOwner = AgentWithOwner
 
-@typing_extensions.final
+@typing.final
 class AgentOfUserWithOwner(google.protobuf.message.Message):
     """This message contains the agent of user with owner"""
 
@@ -455,21 +462,23 @@ class AgentOfUserWithOwner(google.protobuf.message.Message):
     @property
     def agent_with_owner(self) -> global___AgentWithOwner:
         """Required. Agent message and User message of its owner."""
+
     @property
     def project_role(self) -> ondewo.nlu.project_role_pb2.ProjectRole:
         """Required. The role of the user in the project in SHALLOW view (only ID and name fields are populated)"""
+
     def __init__(
         self,
         *,
         agent_with_owner: global___AgentWithOwner | None = ...,
         project_role: ondewo.nlu.project_role_pb2.ProjectRole | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["agent_with_owner", b"agent_with_owner", "project_role", b"project_role"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["agent_with_owner", b"agent_with_owner", "project_role", b"project_role"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["agent_with_owner", b"agent_with_owner", "project_role", b"project_role"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["agent_with_owner", b"agent_with_owner", "project_role", b"project_role"]) -> None: ...
 
 global___AgentOfUserWithOwner = AgentOfUserWithOwner
 
-@typing_extensions.final
+@typing.final
 class CreateAgentRequest(google.protobuf.message.Message):
     """Request to create an agent"""
 
@@ -477,23 +486,24 @@ class CreateAgentRequest(google.protobuf.message.Message):
 
     AGENT_FIELD_NUMBER: builtins.int
     AGENT_VIEW_FIELD_NUMBER: builtins.int
+    agent_view: global___AgentView.ValueType
+    """Optional. Specify the view of the returned agent (sparse view by default)"""
     @property
     def agent(self) -> global___Agent:
         """The agent"""
-    agent_view: global___AgentView.ValueType
-    """Optional. Specify the view of the returned agent (sparse view by default)"""
+
     def __init__(
         self,
         *,
         agent: global___Agent | None = ...,
         agent_view: global___AgentView.ValueType = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["agent", b"agent"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["agent", b"agent", "agent_view", b"agent_view"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["agent", b"agent"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["agent", b"agent", "agent_view", b"agent_view"]) -> None: ...
 
 global___CreateAgentRequest = CreateAgentRequest
 
-@typing_extensions.final
+@typing.final
 class UpdateAgentRequest(google.protobuf.message.Message):
     """Request to update the agent"""
 
@@ -502,14 +512,16 @@ class UpdateAgentRequest(google.protobuf.message.Message):
     AGENT_FIELD_NUMBER: builtins.int
     AGENT_VIEW_FIELD_NUMBER: builtins.int
     UPDATE_MASK_FIELD_NUMBER: builtins.int
-    @property
-    def agent(self) -> global___Agent:
-        """The agent"""
     agent_view: global___AgentView.ValueType
     """Optional. Specify the view of the returned agent (sparse view by default)"""
     @property
+    def agent(self) -> global___Agent:
+        """The agent"""
+
+    @property
     def update_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields get updated."""
+
     def __init__(
         self,
         *,
@@ -517,12 +529,12 @@ class UpdateAgentRequest(google.protobuf.message.Message):
         agent_view: global___AgentView.ValueType = ...,
         update_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["agent", b"agent", "update_mask", b"update_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["agent", b"agent", "agent_view", b"agent_view", "update_mask", b"update_mask"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["agent", b"agent", "update_mask", b"update_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["agent", b"agent", "agent_view", b"agent_view", "update_mask", b"update_mask"]) -> None: ...
 
 global___UpdateAgentRequest = UpdateAgentRequest
 
-@typing_extensions.final
+@typing.final
 class DeleteAgentRequest(google.protobuf.message.Message):
     """Request to delete the agent"""
 
@@ -538,11 +550,11 @@ class DeleteAgentRequest(google.protobuf.message.Message):
         *,
         parent: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["parent", b"parent"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["parent", b"parent"]) -> None: ...
 
 global___DeleteAgentRequest = DeleteAgentRequest
 
-@typing_extensions.final
+@typing.final
 class GetAgentRequest(google.protobuf.message.Message):
     """The request message for [Agents.GetAgent][google.cloud.dialogflow.v2.Agents.GetAgent]."""
 
@@ -562,11 +574,11 @@ class GetAgentRequest(google.protobuf.message.Message):
         parent: builtins.str = ...,
         agent_view: global___AgentView.ValueType = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["agent_view", b"agent_view", "parent", b"parent"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["agent_view", b"agent_view", "parent", b"parent"]) -> None: ...
 
 global___GetAgentRequest = GetAgentRequest
 
-@typing_extensions.final
+@typing.final
 class ListAgentsRequest(google.protobuf.message.Message):
     """Request to get the list of agents"""
 
@@ -582,6 +594,7 @@ class ListAgentsRequest(google.protobuf.message.Message):
     @property
     def sort_by_field(self) -> global___AgentSorting:
         """Optional. Defines the sorting of the list. Default, no sorting."""
+
     def __init__(
         self,
         *,
@@ -589,12 +602,12 @@ class ListAgentsRequest(google.protobuf.message.Message):
         page_token: builtins.str = ...,
         sort_by_field: global___AgentSorting | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["sort_by_field", b"sort_by_field"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["agent_view", b"agent_view", "page_token", b"page_token", "sort_by_field", b"sort_by_field"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["sort_by_field", b"sort_by_field"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["agent_view", b"agent_view", "page_token", b"page_token", "sort_by_field", b"sort_by_field"]) -> None: ...
 
 global___ListAgentsRequest = ListAgentsRequest
 
-@typing_extensions.final
+@typing.final
 class ListAgentsResponse(google.protobuf.message.Message):
     """Get list of agents"""
 
@@ -602,26 +615,27 @@ class ListAgentsResponse(google.protobuf.message.Message):
 
     AGENTS_WITH_OWNERS_FIELD_NUMBER: builtins.int
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    next_page_token: builtins.str
+    """The next_page_token is used to retrieve the next page of a returned result,
+    e.g. next_page_token is current_index-2
+    """
     @property
     def agents_with_owners(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AgentWithOwner]:
         """The list of agent and their owners. There will be a maximum number of items
         returned based on the page_token field in the request.
         """
-    next_page_token: builtins.str
-    """The next_page_token is used to retrieve the next page of a returned result,
-    e.g. next_page_token is current_index-2
-    """
+
     def __init__(
         self,
         *,
         agents_with_owners: collections.abc.Iterable[global___AgentWithOwner] | None = ...,
         next_page_token: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["agents_with_owners", b"agents_with_owners", "next_page_token", b"next_page_token"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["agents_with_owners", b"agents_with_owners", "next_page_token", b"next_page_token"]) -> None: ...
 
 global___ListAgentsResponse = ListAgentsResponse
 
-@typing_extensions.final
+@typing.final
 class ListAgentsOfUserResponse(google.protobuf.message.Message):
     """Get list of agents of user"""
 
@@ -629,26 +643,27 @@ class ListAgentsOfUserResponse(google.protobuf.message.Message):
 
     AGENTS_OF_USER_WITH_OWNERS_FIELD_NUMBER: builtins.int
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    next_page_token: builtins.str
+    """The next_page_token is used to retrieve the next page of a returned result,
+    e.g. next_page_token is current_index-2
+    """
     @property
     def agents_of_user_with_owners(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AgentOfUserWithOwner]:
         """The list of agents with their owners of the given user. There will be a maximum number of items
         returned based on the page_token field in the request.
         """
-    next_page_token: builtins.str
-    """The next_page_token is used to retrieve the next page of a returned result,
-    e.g. next_page_token is current_index-2
-    """
+
     def __init__(
         self,
         *,
         agents_of_user_with_owners: collections.abc.Iterable[global___AgentOfUserWithOwner] | None = ...,
         next_page_token: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["agents_of_user_with_owners", b"agents_of_user_with_owners", "next_page_token", b"next_page_token"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["agents_of_user_with_owners", b"agents_of_user_with_owners", "next_page_token", b"next_page_token"]) -> None: ...
 
 global___ListAgentsOfUserResponse = ListAgentsOfUserResponse
 
-@typing_extensions.final
+@typing.final
 class TrainAgentRequest(google.protobuf.message.Message):
     """The request message for [Agents.TrainAgent][google.cloud.dialogflow.v2.Agents.TrainAgent]."""
 
@@ -672,11 +687,11 @@ class TrainAgentRequest(google.protobuf.message.Message):
         branch: builtins.str = ...,
         initiation_protocol: global___InitiationProtocol.ValueType = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["branch", b"branch", "initiation_protocol", b"initiation_protocol", "parent", b"parent"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["branch", b"branch", "initiation_protocol", b"initiation_protocol", "parent", b"parent"]) -> None: ...
 
 global___TrainAgentRequest = TrainAgentRequest
 
-@typing_extensions.final
+@typing.final
 class BuildCacheRequest(google.protobuf.message.Message):
     """The request message for [Agents.TrainAgentBuildCache][google.cloud.dialogflow.v2.Agents.BuildCache]."""
 
@@ -696,11 +711,11 @@ class BuildCacheRequest(google.protobuf.message.Message):
         parent: builtins.str = ...,
         branch: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["branch", b"branch", "parent", b"parent"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["branch", b"branch", "parent", b"parent"]) -> None: ...
 
 global___BuildCacheRequest = BuildCacheRequest
 
-@typing_extensions.final
+@typing.final
 class ExportAgentRequest(google.protobuf.message.Message):
     """The request message for [Agents.ExportAgent][google.cloud.dialogflow.v2.Agents.ExportAgent]."""
 
@@ -730,11 +745,11 @@ class ExportAgentRequest(google.protobuf.message.Message):
         agent_uri: builtins.str = ...,
         compression_level: builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["agent_uri", b"agent_uri", "compression_level", b"compression_level", "parent", b"parent"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["agent_uri", b"agent_uri", "compression_level", b"compression_level", "parent", b"parent"]) -> None: ...
 
 global___ExportAgentRequest = ExportAgentRequest
 
-@typing_extensions.final
+@typing.final
 class ExportAgentResponse(google.protobuf.message.Message):
     """The response message for [Agents.ExportAgent][google.cloud.dialogflow.v2.Agents.ExportAgent]."""
 
@@ -768,13 +783,13 @@ class ExportAgentResponse(google.protobuf.message.Message):
         agent_uri: builtins.str = ...,
         agent_content: builtins.bytes = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["agent", b"agent", "agent_content", b"agent_content", "agent_uri", b"agent_uri"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["agent", b"agent", "agent_content", b"agent_content", "agent_uri", b"agent_uri"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["agent", b"agent"]) -> typing_extensions.Literal["agent_uri", "agent_content"] | None: ...
+    def HasField(self, field_name: typing.Literal["agent", b"agent", "agent_content", b"agent_content", "agent_uri", b"agent_uri"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["agent", b"agent", "agent_content", b"agent_content", "agent_uri", b"agent_uri"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["agent", b"agent"]) -> typing.Literal["agent_uri", "agent_content"] | None: ...
 
 global___ExportAgentResponse = ExportAgentResponse
 
-@typing_extensions.final
+@typing.final
 class ExportBenchmarkAgentRequest(google.protobuf.message.Message):
     """Request to export benchmark agent"""
 
@@ -814,17 +829,17 @@ class ExportBenchmarkAgentRequest(google.protobuf.message.Message):
         train_size: builtins.float = ...,
         random_state: builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["compression_level", b"compression_level", "parent", b"parent", "random_state", b"random_state", "test_size", b"test_size", "train_size", b"train_size"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["compression_level", b"compression_level", "parent", b"parent", "random_state", b"random_state", "test_size", b"test_size", "train_size", b"train_size"]) -> None: ...
 
 global___ExportBenchmarkAgentRequest = ExportBenchmarkAgentRequest
 
-@typing_extensions.final
+@typing.final
 class ExportBenchmarkAgentResponse(google.protobuf.message.Message):
     """Response to export benchmark agent"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    @typing_extensions.final
+    @typing.final
     class TrainingPhrasesEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -839,8 +854,8 @@ class ExportBenchmarkAgentResponse(google.protobuf.message.Message):
             key: builtins.str = ...,
             value: ondewo.nlu.intent_pb2.ListTrainingPhrasesResponse | None = ...,
         ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["value", b"value"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
+        def HasField(self, field_name: typing.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["key", b"key", "value", b"value"]) -> None: ...
 
     AGENT_CONTENT_FIELD_NUMBER: builtins.int
     TRAINING_PHRASES_FIELD_NUMBER: builtins.int
@@ -849,17 +864,18 @@ class ExportBenchmarkAgentResponse(google.protobuf.message.Message):
     @property
     def training_phrases(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, ondewo.nlu.intent_pb2.ListTrainingPhrasesResponse]:
         """Key is the language code, value is the corresponding ListTrainingPhrasesResponse"""
+
     def __init__(
         self,
         *,
         agent_content: builtins.bytes = ...,
         training_phrases: collections.abc.Mapping[builtins.str, ondewo.nlu.intent_pb2.ListTrainingPhrasesResponse] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["agent_content", b"agent_content", "training_phrases", b"training_phrases"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["agent_content", b"agent_content", "training_phrases", b"training_phrases"]) -> None: ...
 
 global___ExportBenchmarkAgentResponse = ExportBenchmarkAgentResponse
 
-@typing_extensions.final
+@typing.final
 class OptimizeRankingMatchRequest(google.protobuf.message.Message):
     """This message is a request to run Optimize Ranking Match"""
 
@@ -873,16 +889,18 @@ class OptimizeRankingMatchRequest(google.protobuf.message.Message):
     """Required. The project that the agent to train is associated with.
     Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     """
-    @property
-    def language_codes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """languages that should be optimized"""
-    @property
-    def optimization_configs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RankingMatchOptimizationConfig]:
-        """optimization config will contain all possible optimizations, with which we will come up in the future"""
     in_place: builtins.bool
     """if in_place is true then the config of the agent on the server will be updated, if False then config
     with optimized thresholds will be returned but not updated on the server
     """
+    @property
+    def language_codes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """languages that should be optimized"""
+
+    @property
+    def optimization_configs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RankingMatchOptimizationConfig]:
+        """optimization config will contain all possible optimizations, with which we will come up in the future"""
+
     def __init__(
         self,
         *,
@@ -891,11 +909,11 @@ class OptimizeRankingMatchRequest(google.protobuf.message.Message):
         optimization_configs: collections.abc.Iterable[global___RankingMatchOptimizationConfig] | None = ...,
         in_place: builtins.bool = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["in_place", b"in_place", "language_codes", b"language_codes", "optimization_configs", b"optimization_configs", "parent", b"parent"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["in_place", b"in_place", "language_codes", b"language_codes", "optimization_configs", b"optimization_configs", "parent", b"parent"]) -> None: ...
 
 global___OptimizeRankingMatchRequest = OptimizeRankingMatchRequest
 
-@typing_extensions.final
+@typing.final
 class RankingMatchOptimizationConfig(google.protobuf.message.Message):
     """This message contains the configuration to run Optimize Ranking Match"""
 
@@ -916,6 +934,7 @@ class RankingMatchOptimizationConfig(google.protobuf.message.Message):
         """initial thresholds are optional, if not given will be taken from the current config
         example {'OndewoIntentSimilarityMatch': 0.59, 'OndewoIntentNamedSimilarityMatch': 0.39}
         """
+
     def __init__(
         self,
         *,
@@ -924,12 +943,12 @@ class RankingMatchOptimizationConfig(google.protobuf.message.Message):
         random_seed: builtins.int = ...,
         initial_thresholds: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["initial_thresholds", b"initial_thresholds"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["initial_thresholds", b"initial_thresholds", "language_code", b"language_code", "n_splits", b"n_splits", "random_seed", b"random_seed"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["initial_thresholds", b"initial_thresholds"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["initial_thresholds", b"initial_thresholds", "language_code", b"language_code", "n_splits", b"n_splits", "random_seed", b"random_seed"]) -> None: ...
 
 global___RankingMatchOptimizationConfig = RankingMatchOptimizationConfig
 
-@typing_extensions.final
+@typing.final
 class OptimizeRankingMatchResponse(google.protobuf.message.Message):
     """This message is a response of Optimize Ranking Match"""
 
@@ -940,21 +959,23 @@ class OptimizeRankingMatchResponse(google.protobuf.message.Message):
     @property
     def optimization_info(self) -> google.protobuf.struct_pb2.Struct:
         """info about optimization"""
+
     @property
     def optimized_ondewo_config(self) -> google.protobuf.struct_pb2.Struct:
         """the optimized configuration of the ondewo agent e.g., optimized parameters"""
+
     def __init__(
         self,
         *,
         optimization_info: google.protobuf.struct_pb2.Struct | None = ...,
         optimized_ondewo_config: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["optimization_info", b"optimization_info", "optimized_ondewo_config", b"optimized_ondewo_config"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["optimization_info", b"optimization_info", "optimized_ondewo_config", b"optimized_ondewo_config"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["optimization_info", b"optimization_info", "optimized_ondewo_config", b"optimized_ondewo_config"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["optimization_info", b"optimization_info", "optimized_ondewo_config", b"optimized_ondewo_config"]) -> None: ...
 
 global___OptimizeRankingMatchResponse = OptimizeRankingMatchResponse
 
-@typing_extensions.final
+@typing.final
 class ImportAgentRequest(google.protobuf.message.Message):
     """The request message for [Agents.ImportAgent][google.cloud.dialogflow.v2.Agents.ImportAgent]."""
 
@@ -994,13 +1015,13 @@ class ImportAgentRequest(google.protobuf.message.Message):
         agent_uri: builtins.str = ...,
         agent_content: builtins.bytes = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["agent", b"agent", "agent_content", b"agent_content", "agent_uri", b"agent_uri"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["agent", b"agent", "agent_content", b"agent_content", "agent_uri", b"agent_uri", "parent", b"parent"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["agent", b"agent"]) -> typing_extensions.Literal["agent_uri", "agent_content"] | None: ...
+    def HasField(self, field_name: typing.Literal["agent", b"agent", "agent_content", b"agent_content", "agent_uri", b"agent_uri"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["agent", b"agent", "agent_content", b"agent_content", "agent_uri", b"agent_uri", "parent", b"parent"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["agent", b"agent"]) -> typing.Literal["agent_uri", "agent_content"] | None: ...
 
 global___ImportAgentRequest = ImportAgentRequest
 
-@typing_extensions.final
+@typing.final
 class RestoreAgentRequest(google.protobuf.message.Message):
     """The request message for [Agents.RestoreAgent][google.cloud.dialogflow.v2.Agents.RestoreAgent]."""
 
@@ -1040,13 +1061,13 @@ class RestoreAgentRequest(google.protobuf.message.Message):
         agent_uri: builtins.str = ...,
         agent_content: builtins.bytes = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["agent", b"agent", "agent_content", b"agent_content", "agent_uri", b"agent_uri"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["agent", b"agent", "agent_content", b"agent_content", "agent_uri", b"agent_uri", "parent", b"parent"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["agent", b"agent"]) -> typing_extensions.Literal["agent_uri", "agent_content"] | None: ...
+    def HasField(self, field_name: typing.Literal["agent", b"agent", "agent_content", b"agent_content", "agent_uri", b"agent_uri"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["agent", b"agent", "agent_content", b"agent_content", "agent_uri", b"agent_uri", "parent", b"parent"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["agent", b"agent"]) -> typing.Literal["agent_uri", "agent_content"] | None: ...
 
 global___RestoreAgentRequest = RestoreAgentRequest
 
-@typing_extensions.final
+@typing.final
 class GetAgentStatisticsRequest(google.protobuf.message.Message):
     """Request statistics of the agent"""
 
@@ -1076,11 +1097,11 @@ class GetAgentStatisticsRequest(google.protobuf.message.Message):
         language_code: builtins.str = ...,
         type: global___ReportType.ValueType = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["format", b"format", "language_code", b"language_code", "parent", b"parent", "type", b"type"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["format", b"format", "language_code", b"language_code", "parent", b"parent", "type", b"type"]) -> None: ...
 
 global___GetAgentStatisticsRequest = GetAgentStatisticsRequest
 
-@typing_extensions.final
+@typing.final
 class GetAgentStatisticsResponse(google.protobuf.message.Message):
     """Response to get statistics of the agent"""
 
@@ -1102,11 +1123,11 @@ class GetAgentStatisticsResponse(google.protobuf.message.Message):
         format: global___ReportFormat.ValueType = ...,
         type: global___ReportType.ValueType = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["format", b"format", "reports", b"reports", "type", b"type"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["format", b"format", "reports", b"reports", "type", b"type"]) -> None: ...
 
 global___GetAgentStatisticsResponse = GetAgentStatisticsResponse
 
-@typing_extensions.final
+@typing.final
 class GetSessionsStatisticsRequest(google.protobuf.message.Message):
     """Request of the report of the statistics about sessions"""
 
@@ -1130,27 +1151,32 @@ class GetSessionsStatisticsRequest(google.protobuf.message.Message):
     """File formats for reports"""
     type: global___SessionsReportType.ValueType
     """Type of reports about the domain of the agent"""
+    limit: builtins.int
+    """Optional. limit the returned number of results"""
+    sql_query: builtins.str
+    """SQL Query - only usable with specific SessionsReportType such as SessionsReportType.SESSION_SQL_QUERY"""
     @property
     def session_filter(self) -> ondewo.nlu.session_pb2.SessionFilter:
         """Optional. A filter to narrow reports based on sessions"""
+
     @property
     def context_filters(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.session_pb2.ContextFilter]:
         """Optional. A filter to narrow reports based on contextual information (Coming soon! Not yet implemented)"""
-    limit: builtins.int
-    """Optional. limit the returned number of results"""
+
     @property
     def group_bys(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Optional. Grouping based on named properties"""
+
     @property
     def order_bys(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Optional. Order based on named properties"""
+
     @property
     def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
         """Optional. The mask to control which data fields will be added to the returned data.
         Example: paths=["duration_in_s_min", "id", "session_id", "project_id"]
         """
-    sql_query: builtins.str
-    """SQL Query - only usable with specific SessionsReportType such as SessionsReportType.SESSION_SQL_QUERY"""
+
     def __init__(
         self,
         *,
@@ -1165,12 +1191,12 @@ class GetSessionsStatisticsRequest(google.protobuf.message.Message):
         field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
         sql_query: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["context_filters", b"context_filters", "field_mask", b"field_mask", "format", b"format", "group_bys", b"group_bys", "limit", b"limit", "order_bys", b"order_bys", "parent", b"parent", "session_filter", b"session_filter", "sql_query", b"sql_query", "type", b"type"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["context_filters", b"context_filters", "field_mask", b"field_mask", "format", b"format", "group_bys", b"group_bys", "limit", b"limit", "order_bys", b"order_bys", "parent", b"parent", "session_filter", b"session_filter", "sql_query", b"sql_query", "type", b"type"]) -> None: ...
 
 global___GetSessionsStatisticsRequest = GetSessionsStatisticsRequest
 
-@typing_extensions.final
+@typing.final
 class GetSessionsStatisticsResponse(google.protobuf.message.Message):
     """Report of the statistics about sessions"""
 
@@ -1192,11 +1218,11 @@ class GetSessionsStatisticsResponse(google.protobuf.message.Message):
         format: global___ReportFormat.ValueType = ...,
         type: global___SessionsReportType.ValueType = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["format", b"format", "reports", b"reports", "type", b"type"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["format", b"format", "reports", b"reports", "type", b"type"]) -> None: ...
 
 global___GetSessionsStatisticsResponse = GetSessionsStatisticsResponse
 
-@typing_extensions.final
+@typing.final
 class AddUserToProjectRequest(google.protobuf.message.Message):
     """Request to add user to project."""
 
@@ -1220,11 +1246,11 @@ class AddUserToProjectRequest(google.protobuf.message.Message):
         user_id: builtins.str = ...,
         project_role_id: builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["parent", b"parent", "project_role_id", b"project_role_id", "user_id", b"user_id"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["parent", b"parent", "project_role_id", b"project_role_id", "user_id", b"user_id"]) -> None: ...
 
 global___AddUserToProjectRequest = AddUserToProjectRequest
 
-@typing_extensions.final
+@typing.final
 class RemoveUserFromProjectRequest(google.protobuf.message.Message):
     """Request to remove user from the project."""
 
@@ -1244,11 +1270,11 @@ class RemoveUserFromProjectRequest(google.protobuf.message.Message):
         parent: builtins.str = ...,
         user_id: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["parent", b"parent", "user_id", b"user_id"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["parent", b"parent", "user_id", b"user_id"]) -> None: ...
 
 global___RemoveUserFromProjectRequest = RemoveUserFromProjectRequest
 
-@typing_extensions.final
+@typing.final
 class ListUsersInProjectRequest(google.protobuf.message.Message):
     """Request to list users in the project"""
 
@@ -1292,11 +1318,11 @@ class ListUsersInProjectRequest(google.protobuf.message.Message):
         parent: builtins.str = ...,
         page_token: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["page_token", b"page_token", "parent", b"parent"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["page_token", b"page_token", "parent", b"parent"]) -> None: ...
 
 global___ListUsersInProjectRequest = ListUsersInProjectRequest
 
-@typing_extensions.final
+@typing.final
 class UserInProject(google.protobuf.message.Message):
     """Request to get user in project"""
 
@@ -1309,11 +1335,12 @@ class UserInProject(google.protobuf.message.Message):
     """Required. The project that the agent to train is associated with.
     Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     """
+    role_id: builtins.int
+    """ID of the project role of the user"""
     @property
     def user(self) -> ondewo.nlu.user_pb2.User:
         """User object"""
-    role_id: builtins.int
-    """ID of the project role of the user"""
+
     def __init__(
         self,
         *,
@@ -1321,12 +1348,12 @@ class UserInProject(google.protobuf.message.Message):
         user: ondewo.nlu.user_pb2.User | None = ...,
         role_id: builtins.int = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user", b"user"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["parent", b"parent", "role_id", b"role_id", "user", b"user"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["user", b"user"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["parent", b"parent", "role_id", b"role_id", "user", b"user"]) -> None: ...
 
 global___UserInProject = UserInProject
 
-@typing_extensions.final
+@typing.final
 class ListUsersInProjectResponse(google.protobuf.message.Message):
     """List the users in a project"""
 
@@ -1334,26 +1361,27 @@ class ListUsersInProjectResponse(google.protobuf.message.Message):
 
     USERS_FIELD_NUMBER: builtins.int
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    next_page_token: builtins.str
+    """The next_page_token is used to retrieve the next page of a returned result,
+    e.g. next_page_token is current_index-2
+    """
     @property
     def users(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___UserInProject]:
         """The list of users in a project. There will be a maximum number of items
         returned based on the page_token field in the request.
         """
-    next_page_token: builtins.str
-    """The next_page_token is used to retrieve the next page of a returned result,
-    e.g. next_page_token is current_index-2
-    """
+
     def __init__(
         self,
         *,
         users: collections.abc.Iterable[global___UserInProject] | None = ...,
         next_page_token: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["next_page_token", b"next_page_token", "users", b"users"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["next_page_token", b"next_page_token", "users", b"users"]) -> None: ...
 
 global___ListUsersInProjectResponse = ListUsersInProjectResponse
 
-@typing_extensions.final
+@typing.final
 class GetPlatformInfoResponse(google.protobuf.message.Message):
     """GIT information about the version of the server"""
 
@@ -1371,11 +1399,11 @@ class GetPlatformInfoResponse(google.protobuf.message.Message):
         version: builtins.str = ...,
         commit_hash: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["commit_hash", b"commit_hash", "version", b"version"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["commit_hash", b"commit_hash", "version", b"version"]) -> None: ...
 
 global___GetPlatformInfoResponse = GetPlatformInfoResponse
 
-@typing_extensions.final
+@typing.final
 class ListProjectPermissionsRequest(google.protobuf.message.Message):
     """Project permissions"""
 
@@ -1413,11 +1441,11 @@ class ListProjectPermissionsRequest(google.protobuf.message.Message):
         *,
         page_token: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["page_token", b"page_token"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["page_token", b"page_token"]) -> None: ...
 
 global___ListProjectPermissionsRequest = ListProjectPermissionsRequest
 
-@typing_extensions.final
+@typing.final
 class ListProjectPermissionsResponse(google.protobuf.message.Message):
     """List project permissions"""
 
@@ -1425,26 +1453,27 @@ class ListProjectPermissionsResponse(google.protobuf.message.Message):
 
     PERMISSIONS_FIELD_NUMBER: builtins.int
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    next_page_token: builtins.str
+    """The next_page_token is used to retrieve the next page of a returned result,
+    e.g. next_page_token is current_index-2
+    """
     @property
     def permissions(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """The list of project permissions. There will be a maximum number of items
         returned based on the page_token field in the request.
         """
-    next_page_token: builtins.str
-    """The next_page_token is used to retrieve the next page of a returned result,
-    e.g. next_page_token is current_index-2
-    """
+
     def __init__(
         self,
         *,
         permissions: collections.abc.Iterable[builtins.str] | None = ...,
         next_page_token: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["next_page_token", b"next_page_token", "permissions", b"permissions"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["next_page_token", b"next_page_token", "permissions", b"permissions"]) -> None: ...
 
 global___ListProjectPermissionsResponse = ListProjectPermissionsResponse
 
-@typing_extensions.final
+@typing.final
 class SetAgentStatusRequest(google.protobuf.message.Message):
     """Request to set status of the agent"""
 
@@ -1468,11 +1497,11 @@ class SetAgentStatusRequest(google.protobuf.message.Message):
         status: global___AgentStatus.ValueType = ...,
         agent_view: global___AgentView.ValueType = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["agent_view", b"agent_view", "parent", b"parent", "status", b"status"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["agent_view", b"agent_view", "parent", b"parent", "status", b"status"]) -> None: ...
 
 global___SetAgentStatusRequest = SetAgentStatusRequest
 
-@typing_extensions.final
+@typing.final
 class AgentSorting(google.protobuf.message.Message):
     """Sorting order of agent"""
 
@@ -1521,11 +1550,11 @@ class AgentSorting(google.protobuf.message.Message):
         sorting_field: global___AgentSorting.AgentSortingField.ValueType = ...,
         sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["sorting_field", b"sorting_field", "sorting_mode", b"sorting_mode"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["sorting_field", b"sorting_field", "sorting_mode", b"sorting_mode"]) -> None: ...
 
 global___AgentSorting = AgentSorting
 
-@typing_extensions.final
+@typing.final
 class SetResourcesRequest(google.protobuf.message.Message):
     """Request to set resources"""
 
@@ -1554,11 +1583,11 @@ class SetResourcesRequest(google.protobuf.message.Message):
         resource_file: builtins.bytes = ...,
         language_code: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["language_code", b"language_code", "name", b"name", "parent", b"parent", "resource_file", b"resource_file", "type", b"type"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["language_code", b"language_code", "name", b"name", "parent", b"parent", "resource_file", b"resource_file", "type", b"type"]) -> None: ...
 
 global___SetResourcesRequest = SetResourcesRequest
 
-@typing_extensions.final
+@typing.final
 class DeleteResourcesRequest(google.protobuf.message.Message):
     """Request to delete resources"""
 
@@ -1584,11 +1613,11 @@ class DeleteResourcesRequest(google.protobuf.message.Message):
         type: builtins.str = ...,
         language_code: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["language_code", b"language_code", "name", b"name", "parent", b"parent", "type", b"type"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["language_code", b"language_code", "name", b"name", "parent", b"parent", "type", b"type"]) -> None: ...
 
 global___DeleteResourcesRequest = DeleteResourcesRequest
 
-@typing_extensions.final
+@typing.final
 class ExportResourcesRequest(google.protobuf.message.Message):
     """Request to export resources"""
 
@@ -1614,11 +1643,11 @@ class ExportResourcesRequest(google.protobuf.message.Message):
         type: builtins.str = ...,
         language_code: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["language_code", b"language_code", "name", b"name", "parent", b"parent", "type", b"type"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["language_code", b"language_code", "name", b"name", "parent", b"parent", "type", b"type"]) -> None: ...
 
 global___ExportResourcesRequest = ExportResourcesRequest
 
-@typing_extensions.final
+@typing.final
 class ExportResourcesResponse(google.protobuf.message.Message):
     """Response to export resources"""
 
@@ -1647,11 +1676,11 @@ class ExportResourcesResponse(google.protobuf.message.Message):
         language_code: builtins.str = ...,
         resource_file: builtins.bytes = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["language_code", b"language_code", "name", b"name", "parent", b"parent", "resource_file", b"resource_file", "type", b"type"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["language_code", b"language_code", "name", b"name", "parent", b"parent", "resource_file", b"resource_file", "type", b"type"]) -> None: ...
 
 global___ExportResourcesResponse = ExportResourcesResponse
 
-@typing_extensions.final
+@typing.final
 class GetModelStatusesRequest(google.protobuf.message.Message):
     """Request to get model statuses"""
 
@@ -1677,11 +1706,11 @@ class GetModelStatusesRequest(google.protobuf.message.Message):
         language_code: builtins.str = ...,
         model_name: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["cache_version", b"cache_version", "language_code", b"language_code", "model_name", b"model_name", "parent", b"parent"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["cache_version", b"cache_version", "language_code", b"language_code", "model_name", b"model_name", "parent", b"parent"]) -> None: ...
 
 global___GetModelStatusesRequest = GetModelStatusesRequest
 
-@typing_extensions.final
+@typing.final
 class ModelStatus(google.protobuf.message.Message):
     """Status of model"""
 
@@ -1722,10 +1751,10 @@ class ModelStatus(google.protobuf.message.Message):
     """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
     model_name: builtins.str
     """The model name"""
-    @property
-    def status_set_time(self) -> google.protobuf.timestamp_pb2.Timestamp: ...
     config: builtins.str
     status: global___ModelStatus.StatusName.ValueType
+    @property
+    def status_set_time(self) -> google.protobuf.timestamp_pb2.Timestamp: ...
     def __init__(
         self,
         *,
@@ -1736,12 +1765,12 @@ class ModelStatus(google.protobuf.message.Message):
         config: builtins.str = ...,
         status: global___ModelStatus.StatusName.ValueType = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status_set_time", b"status_set_time"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["cache_version", b"cache_version", "config", b"config", "language_code", b"language_code", "model_name", b"model_name", "status", b"status", "status_set_time", b"status_set_time"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["status_set_time", b"status_set_time"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["cache_version", b"cache_version", "config", b"config", "language_code", b"language_code", "model_name", b"model_name", "status", b"status", "status_set_time", b"status_set_time"]) -> None: ...
 
 global___ModelStatus = ModelStatus
 
-@typing_extensions.final
+@typing.final
 class GetModelStatusesResponse(google.protobuf.message.Message):
     """Response to get model statuses"""
 
@@ -1755,11 +1784,11 @@ class GetModelStatusesResponse(google.protobuf.message.Message):
         *,
         model_statuses: collections.abc.Iterable[global___ModelStatus] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["model_statuses", b"model_statuses"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["model_statuses", b"model_statuses"]) -> None: ...
 
 global___GetModelStatusesResponse = GetModelStatusesResponse
 
-@typing_extensions.final
+@typing.final
 class CustomPlatformInfo(google.protobuf.message.Message):
     """This message contains the information of custom platform"""
 
@@ -1784,16 +1813,18 @@ class CustomPlatformInfo(google.protobuf.message.Message):
     """Optional.
     Sorting position of the GetPlatformMappingRequest.
     """
-    @property
-    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Creation date and time. Read-only field."""
-    @property
-    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Modification date and time. Read-only field."""
     created_by: builtins.str
     """User id in form of a valid UUID."""
     modified_by: builtins.str
     """User id in form of a valid UUID."""
+    @property
+    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Creation date and time. Read-only field."""
+
+    @property
+    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Modification date and time. Read-only field."""
+
     def __init__(
         self,
         *,
@@ -1805,12 +1836,12 @@ class CustomPlatformInfo(google.protobuf.message.Message):
         created_by: builtins.str = ...,
         modified_by: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "modified_at", b"modified_at", "modified_by", b"modified_by", "platform", b"platform", "position", b"position"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "modified_at", b"modified_at", "modified_by", b"modified_by", "platform", b"platform", "position", b"position"]) -> None: ...
 
 global___CustomPlatformInfo = CustomPlatformInfo
 
-@typing_extensions.final
+@typing.final
 class GetPlatformMappingRequest(google.protobuf.message.Message):
     """Request to get platform mapping"""
 
@@ -1826,11 +1857,11 @@ class GetPlatformMappingRequest(google.protobuf.message.Message):
         *,
         parent: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["parent", b"parent"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["parent", b"parent"]) -> None: ...
 
 global___GetPlatformMappingRequest = GetPlatformMappingRequest
 
-@typing_extensions.final
+@typing.final
 class PlatformMapping(google.protobuf.message.Message):
     """This message contains the mapping of platform"""
 
@@ -1845,17 +1876,18 @@ class PlatformMapping(google.protobuf.message.Message):
     @property
     def platform_info(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___CustomPlatformInfo]:
         """Required. If not set, it will set it empty."""
+
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
         platform_info: collections.abc.Iterable[global___CustomPlatformInfo] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["parent", b"parent", "platform_info", b"platform_info"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["parent", b"parent", "platform_info", b"platform_info"]) -> None: ...
 
 global___PlatformMapping = PlatformMapping
 
-@typing_extensions.final
+@typing.final
 class FullTextSearchRequest(google.protobuf.message.Message):
     """This message is a request to run full text search"""
 
@@ -1942,17 +1974,17 @@ class FullTextSearchRequest(google.protobuf.message.Message):
         term: builtins.str = ...,
         page_token: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["language_code", b"language_code", "page_token", b"page_token", "parent", b"parent", "term", b"term"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["language_code", b"language_code", "page_token", b"page_token", "parent", b"parent", "term", b"term"]) -> None: ...
 
 global___FullTextSearchRequest = FullTextSearchRequest
 
-@typing_extensions.final
+@typing.final
 class FullTextSearchResponseEntityType(google.protobuf.message.Message):
     """This message is a response of full text search of entity type"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    @typing_extensions.final
+    @typing.final
     class EntityTypeSearchResult(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1966,16 +1998,18 @@ class FullTextSearchResponseEntityType(google.protobuf.message.Message):
         name: builtins.str
         display_name: builtins.str
         language: builtins.str
-        @property
-        def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-            """Creation date and time. Read-only field."""
-        @property
-        def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-            """Modification date and time. Read-only field."""
         created_by: builtins.str
         """User id in form of a valid UUID."""
         modified_by: builtins.str
         """User id in form of a valid UUID."""
+        @property
+        def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Creation date and time. Read-only field."""
+
+        @property
+        def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Modification date and time. Read-only field."""
+
         def __init__(
             self,
             *,
@@ -1987,8 +2021,8 @@ class FullTextSearchResponseEntityType(google.protobuf.message.Message):
             created_by: builtins.str = ...,
             modified_by: builtins.str = ...,
         ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name"]) -> None: ...
+        def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name"]) -> None: ...
 
     PARENT_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
@@ -2003,8 +2037,6 @@ class FullTextSearchResponseEntityType(google.protobuf.message.Message):
     """
     language_code: builtins.str
     """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
-    @property
-    def entity_type_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseEntityType.EntityTypeSearchResult]: ...
     term: builtins.str
     elastic_query: builtins.str
     time: builtins.float
@@ -2012,6 +2044,8 @@ class FullTextSearchResponseEntityType(google.protobuf.message.Message):
     """The next_page_token is used to retrieve the next page of a returned result,
     e.g. next_page_token is current_index-2
     """
+    @property
+    def entity_type_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseEntityType.EntityTypeSearchResult]: ...
     def __init__(
         self,
         *,
@@ -2023,17 +2057,17 @@ class FullTextSearchResponseEntityType(google.protobuf.message.Message):
         time: builtins.float = ...,
         next_page_token: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["elastic_query", b"elastic_query", "entity_type_results", b"entity_type_results", "language_code", b"language_code", "next_page_token", b"next_page_token", "parent", b"parent", "term", b"term", "time", b"time"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["elastic_query", b"elastic_query", "entity_type_results", b"entity_type_results", "language_code", b"language_code", "next_page_token", b"next_page_token", "parent", b"parent", "term", b"term", "time", b"time"]) -> None: ...
 
 global___FullTextSearchResponseEntityType = FullTextSearchResponseEntityType
 
-@typing_extensions.final
+@typing.final
 class FullTextSearchResponseEntity(google.protobuf.message.Message):
     """This message is a response of full text search of entity"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    @typing_extensions.final
+    @typing.final
     class EntitySearchResult(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -2051,16 +2085,18 @@ class FullTextSearchResponseEntity(google.protobuf.message.Message):
         entity_type_name: builtins.str
         entity_type_display_name: builtins.str
         language: builtins.str
-        @property
-        def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-            """Creation date and time. Read-only field."""
-        @property
-        def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-            """Modification date and time. Read-only field."""
         created_by: builtins.str
         """User id in form of a valid UUID."""
         modified_by: builtins.str
         """User id in form of a valid UUID."""
+        @property
+        def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Creation date and time. Read-only field."""
+
+        @property
+        def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Modification date and time. Read-only field."""
+
         def __init__(
             self,
             *,
@@ -2074,8 +2110,8 @@ class FullTextSearchResponseEntity(google.protobuf.message.Message):
             created_by: builtins.str = ...,
             modified_by: builtins.str = ...,
         ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "entity_type_display_name", b"entity_type_display_name", "entity_type_name", b"entity_type_name", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name"]) -> None: ...
+        def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "entity_type_display_name", b"entity_type_display_name", "entity_type_name", b"entity_type_name", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name"]) -> None: ...
 
     PARENT_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
@@ -2090,8 +2126,6 @@ class FullTextSearchResponseEntity(google.protobuf.message.Message):
     """
     language_code: builtins.str
     """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
-    @property
-    def entity_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseEntity.EntitySearchResult]: ...
     term: builtins.str
     elastic_query: builtins.str
     time: builtins.float
@@ -2099,6 +2133,8 @@ class FullTextSearchResponseEntity(google.protobuf.message.Message):
     """The next_page_token is used to retrieve the next page of a returned result,
     e.g. next_page_token is current_index-2
     """
+    @property
+    def entity_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseEntity.EntitySearchResult]: ...
     def __init__(
         self,
         *,
@@ -2110,17 +2146,17 @@ class FullTextSearchResponseEntity(google.protobuf.message.Message):
         time: builtins.float = ...,
         next_page_token: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["elastic_query", b"elastic_query", "entity_results", b"entity_results", "language_code", b"language_code", "next_page_token", b"next_page_token", "parent", b"parent", "term", b"term", "time", b"time"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["elastic_query", b"elastic_query", "entity_results", b"entity_results", "language_code", b"language_code", "next_page_token", b"next_page_token", "parent", b"parent", "term", b"term", "time", b"time"]) -> None: ...
 
 global___FullTextSearchResponseEntity = FullTextSearchResponseEntity
 
-@typing_extensions.final
+@typing.final
 class FullTextSearchResponseEntitySynonym(google.protobuf.message.Message):
     """This message is a response of full text search of synonym entity"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    @typing_extensions.final
+    @typing.final
     class EntitySynonymSearchResult(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -2142,16 +2178,18 @@ class FullTextSearchResponseEntitySynonym(google.protobuf.message.Message):
         entity_name: builtins.str
         entity_display_name: builtins.str
         language: builtins.str
-        @property
-        def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-            """Creation date and time. Read-only field."""
-        @property
-        def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-            """Modification date and time. Read-only field."""
         created_by: builtins.str
         """User id in form of a valid UUID."""
         modified_by: builtins.str
         """User id in form of a valid UUID."""
+        @property
+        def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Creation date and time. Read-only field."""
+
+        @property
+        def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Modification date and time. Read-only field."""
+
         def __init__(
             self,
             *,
@@ -2167,8 +2205,8 @@ class FullTextSearchResponseEntitySynonym(google.protobuf.message.Message):
             created_by: builtins.str = ...,
             modified_by: builtins.str = ...,
         ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "entity_display_name", b"entity_display_name", "entity_name", b"entity_name", "entity_type_display_name", b"entity_type_display_name", "entity_type_name", b"entity_type_name", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name"]) -> None: ...
+        def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "entity_display_name", b"entity_display_name", "entity_name", b"entity_name", "entity_type_display_name", b"entity_type_display_name", "entity_type_name", b"entity_type_name", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name"]) -> None: ...
 
     PARENT_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
@@ -2183,8 +2221,6 @@ class FullTextSearchResponseEntitySynonym(google.protobuf.message.Message):
     """
     language_code: builtins.str
     """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
-    @property
-    def entity_synonym_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseEntitySynonym.EntitySynonymSearchResult]: ...
     term: builtins.str
     elastic_query: builtins.str
     time: builtins.float
@@ -2192,6 +2228,8 @@ class FullTextSearchResponseEntitySynonym(google.protobuf.message.Message):
     """The next_page_token is used to retrieve the next page of a returned result,
     e.g. next_page_token is current_index-2
     """
+    @property
+    def entity_synonym_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseEntitySynonym.EntitySynonymSearchResult]: ...
     def __init__(
         self,
         *,
@@ -2203,17 +2241,17 @@ class FullTextSearchResponseEntitySynonym(google.protobuf.message.Message):
         time: builtins.float = ...,
         next_page_token: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["elastic_query", b"elastic_query", "entity_synonym_results", b"entity_synonym_results", "language_code", b"language_code", "next_page_token", b"next_page_token", "parent", b"parent", "term", b"term", "time", b"time"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["elastic_query", b"elastic_query", "entity_synonym_results", b"entity_synonym_results", "language_code", b"language_code", "next_page_token", b"next_page_token", "parent", b"parent", "term", b"term", "time", b"time"]) -> None: ...
 
 global___FullTextSearchResponseEntitySynonym = FullTextSearchResponseEntitySynonym
 
-@typing_extensions.final
+@typing.final
 class FullTextSearchResponseIntent(google.protobuf.message.Message):
     """This message is a response of full text search of intent"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    @typing_extensions.final
+    @typing.final
     class IntentSearchResult(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -2229,19 +2267,21 @@ class FullTextSearchResponseIntent(google.protobuf.message.Message):
         name: builtins.str
         display_name: builtins.str
         domain_name: builtins.str
-        @property
-        def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
         language: builtins.str
-        @property
-        def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-            """Creation date and time. Read-only field."""
-        @property
-        def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-            """Modification date and time. Read-only field."""
         created_by: builtins.str
         """User id in form of a valid UUID."""
         modified_by: builtins.str
         """User id in form of a valid UUID."""
+        @property
+        def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+        @property
+        def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Creation date and time. Read-only field."""
+
+        @property
+        def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Modification date and time. Read-only field."""
+
         def __init__(
             self,
             *,
@@ -2255,8 +2295,8 @@ class FullTextSearchResponseIntent(google.protobuf.message.Message):
             created_by: builtins.str = ...,
             modified_by: builtins.str = ...,
         ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "domain_name", b"domain_name", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "tags", b"tags"]) -> None: ...
+        def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "domain_name", b"domain_name", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "tags", b"tags"]) -> None: ...
 
     PARENT_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
@@ -2271,8 +2311,6 @@ class FullTextSearchResponseIntent(google.protobuf.message.Message):
     """
     language_code: builtins.str
     """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
-    @property
-    def intent_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseIntent.IntentSearchResult]: ...
     term: builtins.str
     elastic_query: builtins.str
     time: builtins.float
@@ -2280,6 +2318,8 @@ class FullTextSearchResponseIntent(google.protobuf.message.Message):
     """The next_page_token is used to retrieve the next page of a returned result,
     e.g. next_page_token is current_index-2
     """
+    @property
+    def intent_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseIntent.IntentSearchResult]: ...
     def __init__(
         self,
         *,
@@ -2291,17 +2331,17 @@ class FullTextSearchResponseIntent(google.protobuf.message.Message):
         time: builtins.float = ...,
         next_page_token: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["elastic_query", b"elastic_query", "intent_results", b"intent_results", "language_code", b"language_code", "next_page_token", b"next_page_token", "parent", b"parent", "term", b"term", "time", b"time"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["elastic_query", b"elastic_query", "intent_results", b"intent_results", "language_code", b"language_code", "next_page_token", b"next_page_token", "parent", b"parent", "term", b"term", "time", b"time"]) -> None: ...
 
 global___FullTextSearchResponseIntent = FullTextSearchResponseIntent
 
-@typing_extensions.final
+@typing.final
 class FullTextSearchResponseIntentContextIn(google.protobuf.message.Message):
     """This message is a response of full text search of intent with context in"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    @typing_extensions.final
+    @typing.final
     class IntentContextInSearchResult(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -2317,19 +2357,21 @@ class FullTextSearchResponseIntentContextIn(google.protobuf.message.Message):
         name: builtins.str
         intent_name: builtins.str
         intent_display_name: builtins.str
-        @property
-        def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
         language: builtins.str
-        @property
-        def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-            """Creation date and time. Read-only field."""
-        @property
-        def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-            """Modification date and time. Read-only field."""
         created_by: builtins.str
         """User id in form of a valid UUID."""
         modified_by: builtins.str
         """User id in form of a valid UUID."""
+        @property
+        def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+        @property
+        def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Creation date and time. Read-only field."""
+
+        @property
+        def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Modification date and time. Read-only field."""
+
         def __init__(
             self,
             *,
@@ -2343,8 +2385,8 @@ class FullTextSearchResponseIntentContextIn(google.protobuf.message.Message):
             created_by: builtins.str = ...,
             modified_by: builtins.str = ...,
         ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "created_by", b"created_by", "intent_display_name", b"intent_display_name", "intent_name", b"intent_name", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "tags", b"tags"]) -> None: ...
+        def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["created_at", b"created_at", "created_by", b"created_by", "intent_display_name", b"intent_display_name", "intent_name", b"intent_name", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "tags", b"tags"]) -> None: ...
 
     PARENT_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
@@ -2359,8 +2401,6 @@ class FullTextSearchResponseIntentContextIn(google.protobuf.message.Message):
     """
     language_code: builtins.str
     """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
-    @property
-    def intent_context_in_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseIntentContextIn.IntentContextInSearchResult]: ...
     term: builtins.str
     elastic_query: builtins.str
     time: builtins.float
@@ -2368,6 +2408,8 @@ class FullTextSearchResponseIntentContextIn(google.protobuf.message.Message):
     """The next_page_token is used to retrieve the next page of a returned result,
     e.g. next_page_token is current_index-2
     """
+    @property
+    def intent_context_in_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseIntentContextIn.IntentContextInSearchResult]: ...
     def __init__(
         self,
         *,
@@ -2379,17 +2421,17 @@ class FullTextSearchResponseIntentContextIn(google.protobuf.message.Message):
         time: builtins.float = ...,
         next_page_token: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["elastic_query", b"elastic_query", "intent_context_in_results", b"intent_context_in_results", "language_code", b"language_code", "next_page_token", b"next_page_token", "parent", b"parent", "term", b"term", "time", b"time"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["elastic_query", b"elastic_query", "intent_context_in_results", b"intent_context_in_results", "language_code", b"language_code", "next_page_token", b"next_page_token", "parent", b"parent", "term", b"term", "time", b"time"]) -> None: ...
 
 global___FullTextSearchResponseIntentContextIn = FullTextSearchResponseIntentContextIn
 
-@typing_extensions.final
+@typing.final
 class FullTextSearchResponseIntentContextOut(google.protobuf.message.Message):
     """This message is a response of full text search of intent with context out"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    @typing_extensions.final
+    @typing.final
     class IntentContextOutSearchResult(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -2405,19 +2447,21 @@ class FullTextSearchResponseIntentContextOut(google.protobuf.message.Message):
         name: builtins.str
         intent_name: builtins.str
         intent_display_name: builtins.str
-        @property
-        def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
         language: builtins.str
-        @property
-        def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-            """Creation date and time. Read-only field."""
-        @property
-        def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-            """Modification date and time. Read-only field."""
         created_by: builtins.str
         """User id in form of a valid UUID."""
         modified_by: builtins.str
         """User id in form of a valid UUID."""
+        @property
+        def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+        @property
+        def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Creation date and time. Read-only field."""
+
+        @property
+        def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Modification date and time. Read-only field."""
+
         def __init__(
             self,
             *,
@@ -2431,8 +2475,8 @@ class FullTextSearchResponseIntentContextOut(google.protobuf.message.Message):
             created_by: builtins.str = ...,
             modified_by: builtins.str = ...,
         ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "created_by", b"created_by", "intent_display_name", b"intent_display_name", "intent_name", b"intent_name", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "tags", b"tags"]) -> None: ...
+        def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["created_at", b"created_at", "created_by", b"created_by", "intent_display_name", b"intent_display_name", "intent_name", b"intent_name", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "tags", b"tags"]) -> None: ...
 
     PARENT_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
@@ -2447,8 +2491,6 @@ class FullTextSearchResponseIntentContextOut(google.protobuf.message.Message):
     """
     language_code: builtins.str
     """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
-    @property
-    def intent_context_out_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseIntentContextOut.IntentContextOutSearchResult]: ...
     term: builtins.str
     elastic_query: builtins.str
     time: builtins.float
@@ -2456,6 +2498,8 @@ class FullTextSearchResponseIntentContextOut(google.protobuf.message.Message):
     """The next_page_token is used to retrieve the next page of a returned result,
     e.g. next_page_token is current_index-2
     """
+    @property
+    def intent_context_out_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseIntentContextOut.IntentContextOutSearchResult]: ...
     def __init__(
         self,
         *,
@@ -2467,17 +2511,17 @@ class FullTextSearchResponseIntentContextOut(google.protobuf.message.Message):
         time: builtins.float = ...,
         next_page_token: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["elastic_query", b"elastic_query", "intent_context_out_results", b"intent_context_out_results", "language_code", b"language_code", "next_page_token", b"next_page_token", "parent", b"parent", "term", b"term", "time", b"time"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["elastic_query", b"elastic_query", "intent_context_out_results", b"intent_context_out_results", "language_code", b"language_code", "next_page_token", b"next_page_token", "parent", b"parent", "term", b"term", "time", b"time"]) -> None: ...
 
 global___FullTextSearchResponseIntentContextOut = FullTextSearchResponseIntentContextOut
 
-@typing_extensions.final
+@typing.final
 class FullTextSearchResponseIntentUsersays(google.protobuf.message.Message):
     """This message is a response of full text search of intent with sentence"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    @typing_extensions.final
+    @typing.final
     class IntentUsersaysSearchResult(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -2501,19 +2545,21 @@ class FullTextSearchResponseIntentUsersays(google.protobuf.message.Message):
         type: builtins.str
         intent_name: builtins.str
         intent_display_name: builtins.str
-        @property
-        def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
         language: builtins.str
-        @property
-        def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-            """Creation date and time. Read-only field."""
-        @property
-        def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-            """Modification date and time. Read-only field."""
         created_by: builtins.str
         """User id in form of a valid UUID."""
         modified_by: builtins.str
         """User id in form of a valid UUID."""
+        @property
+        def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+        @property
+        def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Creation date and time. Read-only field."""
+
+        @property
+        def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Modification date and time. Read-only field."""
+
         def __init__(
             self,
             *,
@@ -2531,8 +2577,8 @@ class FullTextSearchResponseIntentUsersays(google.protobuf.message.Message):
             created_by: builtins.str = ...,
             modified_by: builtins.str = ...,
         ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "created_by", b"created_by", "intent_display_name", b"intent_display_name", "intent_name", b"intent_name", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "tags", b"tags", "text", b"text", "text_as_entity_types", b"text_as_entity_types", "text_as_entity_values", b"text_as_entity_values", "type", b"type"]) -> None: ...
+        def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["created_at", b"created_at", "created_by", b"created_by", "intent_display_name", b"intent_display_name", "intent_name", b"intent_name", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "tags", b"tags", "text", b"text", "text_as_entity_types", b"text_as_entity_types", "text_as_entity_values", b"text_as_entity_values", "type", b"type"]) -> None: ...
 
     PARENT_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
@@ -2547,8 +2593,6 @@ class FullTextSearchResponseIntentUsersays(google.protobuf.message.Message):
     """
     language_code: builtins.str
     """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
-    @property
-    def intent_usersays_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseIntentUsersays.IntentUsersaysSearchResult]: ...
     term: builtins.str
     elastic_query: builtins.str
     time: builtins.float
@@ -2556,6 +2600,8 @@ class FullTextSearchResponseIntentUsersays(google.protobuf.message.Message):
     """The next_page_token is used to retrieve the next page of a returned result,
     e.g. next_page_token is current_index-2
     """
+    @property
+    def intent_usersays_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseIntentUsersays.IntentUsersaysSearchResult]: ...
     def __init__(
         self,
         *,
@@ -2567,17 +2613,17 @@ class FullTextSearchResponseIntentUsersays(google.protobuf.message.Message):
         time: builtins.float = ...,
         next_page_token: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["elastic_query", b"elastic_query", "intent_usersays_results", b"intent_usersays_results", "language_code", b"language_code", "next_page_token", b"next_page_token", "parent", b"parent", "term", b"term", "time", b"time"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["elastic_query", b"elastic_query", "intent_usersays_results", b"intent_usersays_results", "language_code", b"language_code", "next_page_token", b"next_page_token", "parent", b"parent", "term", b"term", "time", b"time"]) -> None: ...
 
 global___FullTextSearchResponseIntentUsersays = FullTextSearchResponseIntentUsersays
 
-@typing_extensions.final
+@typing.final
 class FullTextSearchResponseIntentTags(google.protobuf.message.Message):
     """This message is a response of full text search of intent with tags"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    @typing_extensions.final
+    @typing.final
     class IntentTagsSearchResult(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -2595,19 +2641,21 @@ class FullTextSearchResponseIntentTags(google.protobuf.message.Message):
         text: builtins.str
         intent_name: builtins.str
         intent_display_name: builtins.str
-        @property
-        def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
         language: builtins.str
-        @property
-        def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-            """Creation date and time. Read-only field."""
-        @property
-        def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-            """Modification date and time. Read-only field."""
         created_by: builtins.str
         """User id in form of a valid UUID."""
         modified_by: builtins.str
         """User id in form of a valid UUID."""
+        @property
+        def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+        @property
+        def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Creation date and time. Read-only field."""
+
+        @property
+        def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Modification date and time. Read-only field."""
+
         def __init__(
             self,
             *,
@@ -2622,8 +2670,8 @@ class FullTextSearchResponseIntentTags(google.protobuf.message.Message):
             created_by: builtins.str = ...,
             modified_by: builtins.str = ...,
         ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "created_by", b"created_by", "intent_display_name", b"intent_display_name", "intent_name", b"intent_name", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "tags", b"tags", "text", b"text"]) -> None: ...
+        def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["created_at", b"created_at", "created_by", b"created_by", "intent_display_name", b"intent_display_name", "intent_name", b"intent_name", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "tags", b"tags", "text", b"text"]) -> None: ...
 
     PARENT_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
@@ -2638,8 +2686,6 @@ class FullTextSearchResponseIntentTags(google.protobuf.message.Message):
     """
     language_code: builtins.str
     """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
-    @property
-    def intent_tags_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseIntentTags.IntentTagsSearchResult]: ...
     term: builtins.str
     elastic_query: builtins.str
     time: builtins.float
@@ -2647,6 +2693,8 @@ class FullTextSearchResponseIntentTags(google.protobuf.message.Message):
     """The next_page_token is used to retrieve the next page of a returned result,
     e.g. next_page_token is current_index-2
     """
+    @property
+    def intent_tags_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseIntentTags.IntentTagsSearchResult]: ...
     def __init__(
         self,
         *,
@@ -2658,17 +2706,17 @@ class FullTextSearchResponseIntentTags(google.protobuf.message.Message):
         time: builtins.float = ...,
         next_page_token: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["elastic_query", b"elastic_query", "intent_tags_results", b"intent_tags_results", "language_code", b"language_code", "next_page_token", b"next_page_token", "parent", b"parent", "term", b"term", "time", b"time"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["elastic_query", b"elastic_query", "intent_tags_results", b"intent_tags_results", "language_code", b"language_code", "next_page_token", b"next_page_token", "parent", b"parent", "term", b"term", "time", b"time"]) -> None: ...
 
 global___FullTextSearchResponseIntentTags = FullTextSearchResponseIntentTags
 
-@typing_extensions.final
+@typing.final
 class FullTextSearchResponseIntentResponse(google.protobuf.message.Message):
     """This message is a response of full text search of intent response"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    @typing_extensions.final
+    @typing.final
     class IntentResponseSearchResult(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -2688,19 +2736,21 @@ class FullTextSearchResponseIntentResponse(google.protobuf.message.Message):
         response_type: builtins.str
         intent_name: builtins.str
         intent_display_name: builtins.str
-        @property
-        def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
         language: builtins.str
-        @property
-        def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-            """Creation date and time. Read-only field."""
-        @property
-        def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-            """Modification date and time. Read-only field."""
         created_by: builtins.str
         """User id in form of a valid UUID."""
         modified_by: builtins.str
         """User id in form of a valid UUID."""
+        @property
+        def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+        @property
+        def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Creation date and time. Read-only field."""
+
+        @property
+        def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Modification date and time. Read-only field."""
+
         def __init__(
             self,
             *,
@@ -2716,8 +2766,8 @@ class FullTextSearchResponseIntentResponse(google.protobuf.message.Message):
             created_by: builtins.str = ...,
             modified_by: builtins.str = ...,
         ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "created_by", b"created_by", "intent_display_name", b"intent_display_name", "intent_name", b"intent_name", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "platform", b"platform", "response_type", b"response_type", "tags", b"tags", "text", b"text"]) -> None: ...
+        def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["created_at", b"created_at", "created_by", b"created_by", "intent_display_name", b"intent_display_name", "intent_name", b"intent_name", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "platform", b"platform", "response_type", b"response_type", "tags", b"tags", "text", b"text"]) -> None: ...
 
     PARENT_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
@@ -2732,8 +2782,6 @@ class FullTextSearchResponseIntentResponse(google.protobuf.message.Message):
     """
     language_code: builtins.str
     """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
-    @property
-    def intent_response_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseIntentResponse.IntentResponseSearchResult]: ...
     term: builtins.str
     elastic_query: builtins.str
     time: builtins.float
@@ -2763,6 +2811,8 @@ class FullTextSearchResponseIntentResponse(google.protobuf.message.Message):
     * "current_index1--page_size-20"
     * "current_index-1--page_size--20"
     """
+    @property
+    def intent_response_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseIntentResponse.IntentResponseSearchResult]: ...
     def __init__(
         self,
         *,
@@ -2774,17 +2824,17 @@ class FullTextSearchResponseIntentResponse(google.protobuf.message.Message):
         time: builtins.float = ...,
         next_page_token: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["elastic_query", b"elastic_query", "intent_response_results", b"intent_response_results", "language_code", b"language_code", "next_page_token", b"next_page_token", "parent", b"parent", "term", b"term", "time", b"time"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["elastic_query", b"elastic_query", "intent_response_results", b"intent_response_results", "language_code", b"language_code", "next_page_token", b"next_page_token", "parent", b"parent", "term", b"term", "time", b"time"]) -> None: ...
 
 global___FullTextSearchResponseIntentResponse = FullTextSearchResponseIntentResponse
 
-@typing_extensions.final
+@typing.final
 class FullTextSearchResponseIntentParameters(google.protobuf.message.Message):
     """This message is a response of full text search of intent with parameters"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    @typing_extensions.final
+    @typing.final
     class IntentParametersSearchResult(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -2802,19 +2852,21 @@ class FullTextSearchResponseIntentParameters(google.protobuf.message.Message):
         parameter_display_name: builtins.str
         intent_name: builtins.str
         intent_display_name: builtins.str
-        @property
-        def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
         language: builtins.str
-        @property
-        def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-            """Creation date and time. Read-only field."""
-        @property
-        def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-            """Modification date and time. Read-only field."""
         created_by: builtins.str
         """User id in form of a valid UUID."""
         modified_by: builtins.str
         """User id in form of a valid UUID."""
+        @property
+        def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+        @property
+        def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Creation date and time. Read-only field."""
+
+        @property
+        def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Modification date and time. Read-only field."""
+
         def __init__(
             self,
             *,
@@ -2829,8 +2881,8 @@ class FullTextSearchResponseIntentParameters(google.protobuf.message.Message):
             created_by: builtins.str = ...,
             modified_by: builtins.str = ...,
         ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "created_by", b"created_by", "intent_display_name", b"intent_display_name", "intent_name", b"intent_name", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "parameter_display_name", b"parameter_display_name", "parameter_name", b"parameter_name", "tags", b"tags"]) -> None: ...
+        def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["created_at", b"created_at", "created_by", b"created_by", "intent_display_name", b"intent_display_name", "intent_name", b"intent_name", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "parameter_display_name", b"parameter_display_name", "parameter_name", b"parameter_name", "tags", b"tags"]) -> None: ...
 
     PARENT_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
@@ -2845,8 +2897,6 @@ class FullTextSearchResponseIntentParameters(google.protobuf.message.Message):
     """
     language_code: builtins.str
     """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
-    @property
-    def intent_parameters_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseIntentParameters.IntentParametersSearchResult]: ...
     term: builtins.str
     elastic_query: builtins.str
     time: builtins.float
@@ -2854,6 +2904,8 @@ class FullTextSearchResponseIntentParameters(google.protobuf.message.Message):
     """The next_page_token is used to retrieve the next page of a returned result,
     e.g. next_page_token is current_index-2
     """
+    @property
+    def intent_parameters_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseIntentParameters.IntentParametersSearchResult]: ...
     def __init__(
         self,
         *,
@@ -2865,11 +2917,11 @@ class FullTextSearchResponseIntentParameters(google.protobuf.message.Message):
         time: builtins.float = ...,
         next_page_token: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["elastic_query", b"elastic_query", "intent_parameters_results", b"intent_parameters_results", "language_code", b"language_code", "next_page_token", b"next_page_token", "parent", b"parent", "term", b"term", "time", b"time"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["elastic_query", b"elastic_query", "intent_parameters_results", b"intent_parameters_results", "language_code", b"language_code", "next_page_token", b"next_page_token", "parent", b"parent", "term", b"term", "time", b"time"]) -> None: ...
 
 global___FullTextSearchResponseIntentParameters = FullTextSearchResponseIntentParameters
 
-@typing_extensions.final
+@typing.final
 class ReindexAgentRequest(google.protobuf.message.Message):
     """This message is a request to reindex agent"""
 
@@ -2887,6 +2939,7 @@ class ReindexAgentRequest(google.protobuf.message.Message):
     @property
     def index_types(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[global___FullTextSearchRequest.QueryType.ValueType]:
         """Optional, useful for reindexing specific indices in the future"""
+
     def __init__(
         self,
         *,
@@ -2894,6 +2947,6 @@ class ReindexAgentRequest(google.protobuf.message.Message):
         branch_name: builtins.str = ...,
         index_types: collections.abc.Iterable[global___FullTextSearchRequest.QueryType.ValueType] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["branch_name", b"branch_name", "index_types", b"index_types", "parent", b"parent"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["branch_name", b"branch_name", "index_types", b"index_types", "parent", b"parent"]) -> None: ...
 
 global___ReindexAgentRequest = ReindexAgentRequest

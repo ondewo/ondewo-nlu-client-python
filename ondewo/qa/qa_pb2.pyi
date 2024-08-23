@@ -15,22 +15,18 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 """
+
 import builtins
 import collections.abc
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.message
 import ondewo.nlu.session_pb2
-import sys
-
-if sys.version_info >= (3, 8):
-    import typing as typing_extensions
-else:
-    import typing_extensions
+import typing
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
-@typing_extensions.final
+@typing.final
 class GetAnswerRequest(google.protobuf.message.Message):
     """The request message"""
 
@@ -51,11 +47,6 @@ class GetAnswerRequest(google.protobuf.message.Message):
     some type of user identifier (preferably hashed). The length of the session
     ID must not exceed 36 bytes.
     """
-    @property
-    def text(self) -> ondewo.nlu.session_pb2.TextInput:
-        """Required. The context of the request. A message containing a string (in the form of a sentence) and a
-        language code.
-        """
     max_num_answers: builtins.int
     """Maximal number of answers returned"""
     threshold_reader: builtins.float
@@ -67,8 +58,15 @@ class GetAnswerRequest(google.protobuf.message.Message):
     reader_model_name: builtins.str
     """Reader model name"""
     @property
+    def text(self) -> ondewo.nlu.session_pb2.TextInput:
+        """Required. The context of the request. A message containing a string (in the form of a sentence) and a
+        language code.
+        """
+
+    @property
     def url_filter(self) -> global___UrlFilter:
         """Optional. Filters applied to the urls, to restrict the retrieved documents."""
+
     def __init__(
         self,
         *,
@@ -81,12 +79,12 @@ class GetAnswerRequest(google.protobuf.message.Message):
         reader_model_name: builtins.str = ...,
         url_filter: global___UrlFilter | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["text", b"text", "url_filter", b"url_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["max_num_answers", b"max_num_answers", "reader_model_name", b"reader_model_name", "session_id", b"session_id", "text", b"text", "threshold_overall", b"threshold_overall", "threshold_reader", b"threshold_reader", "threshold_retriever", b"threshold_retriever", "url_filter", b"url_filter"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["text", b"text", "url_filter", b"url_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["max_num_answers", b"max_num_answers", "reader_model_name", b"reader_model_name", "session_id", b"session_id", "text", b"text", "threshold_overall", b"threshold_overall", "threshold_reader", b"threshold_reader", "threshold_retriever", b"threshold_retriever", "url_filter", b"url_filter"]) -> None: ...
 
 global___GetAnswerRequest = GetAnswerRequest
 
-@typing_extensions.final
+@typing.final
 class GetAnswerResponse(google.protobuf.message.Message):
     """Message containing the response for retrieving answers."""
 
@@ -96,17 +94,18 @@ class GetAnswerResponse(google.protobuf.message.Message):
     @property
     def query_result(self) -> ondewo.nlu.session_pb2.DetectIntentResponse:
         """The results of the conversational query or event processing."""
+
     def __init__(
         self,
         *,
         query_result: ondewo.nlu.session_pb2.DetectIntentResponse | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["query_result", b"query_result"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["query_result", b"query_result"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["query_result", b"query_result"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["query_result", b"query_result"]) -> None: ...
 
 global___GetAnswerResponse = GetAnswerResponse
 
-@typing_extensions.final
+@typing.final
 class RunScraperRequest(google.protobuf.message.Message):
     """Message for running a web scraper job."""
 
@@ -116,22 +115,23 @@ class RunScraperRequest(google.protobuf.message.Message):
     @property
     def project_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """List of project IDs to run the scraper on."""
+
     def __init__(
         self,
         *,
         project_ids: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["project_ids", b"project_ids"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["project_ids", b"project_ids"]) -> None: ...
 
 global___RunScraperRequest = RunScraperRequest
 
-@typing_extensions.final
+@typing.final
 class RunScraperResponse(google.protobuf.message.Message):
     """Message containing the response for running a web scraper job."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    @typing_extensions.final
+    @typing.final
     class ScraperContainer(google.protobuf.message.Message):
         """Message representing a scraper container."""
 
@@ -149,22 +149,23 @@ class RunScraperResponse(google.protobuf.message.Message):
             container_name: builtins.str = ...,
             container_id: builtins.str = ...,
         ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["container_id", b"container_id", "container_name", b"container_name"]) -> None: ...
+        def ClearField(self, field_name: typing.Literal["container_id", b"container_id", "container_name", b"container_name"]) -> None: ...
 
     SCRAPER_CONTAINERS_FIELD_NUMBER: builtins.int
     @property
     def scraper_containers(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RunScraperResponse.ScraperContainer]:
         """List of scraper containers running the jobs."""
+
     def __init__(
         self,
         *,
         scraper_containers: collections.abc.Iterable[global___RunScraperResponse.ScraperContainer] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["scraper_containers", b"scraper_containers"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["scraper_containers", b"scraper_containers"]) -> None: ...
 
 global___RunScraperResponse = RunScraperResponse
 
-@typing_extensions.final
+@typing.final
 class RunTrainingResponse(google.protobuf.message.Message):
     """Message containing the response for running a training job."""
 
@@ -182,11 +183,11 @@ class RunTrainingResponse(google.protobuf.message.Message):
         f1: builtins.float = ...,
         accuracy: builtins.float = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["accuracy", b"accuracy", "f1", b"f1"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["accuracy", b"accuracy", "f1", b"f1"]) -> None: ...
 
 global___RunTrainingResponse = RunTrainingResponse
 
-@typing_extensions.final
+@typing.final
 class UrlFilter(google.protobuf.message.Message):
     """Message for defining URL filters to include and exclude from the scraping process."""
 
@@ -195,13 +196,14 @@ class UrlFilter(google.protobuf.message.Message):
     ALLOWED_VALUES_FIELD_NUMBER: builtins.int
     REGEX_FILTER_INCLUDE_FIELD_NUMBER: builtins.int
     REGEX_FILTER_EXCLUDE_FIELD_NUMBER: builtins.int
-    @property
-    def allowed_values(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Optional. List of allowed values for the metadata field 'url'."""
     regex_filter_include: builtins.str
     """Optional. Regular expression that must be matched by the metadata."""
     regex_filter_exclude: builtins.str
     """Optional. Regular expression that must not be matched by the metadata."""
+    @property
+    def allowed_values(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. List of allowed values for the metadata field 'url'."""
+
     def __init__(
         self,
         *,
@@ -209,11 +211,11 @@ class UrlFilter(google.protobuf.message.Message):
         regex_filter_include: builtins.str = ...,
         regex_filter_exclude: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["allowed_values", b"allowed_values", "regex_filter_exclude", b"regex_filter_exclude", "regex_filter_include", b"regex_filter_include"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["allowed_values", b"allowed_values", "regex_filter_exclude", b"regex_filter_exclude", "regex_filter_include", b"regex_filter_include"]) -> None: ...
 
 global___UrlFilter = UrlFilter
 
-@typing_extensions.final
+@typing.final
 class GetServerStateResponse(google.protobuf.message.Message):
     """Message containing the response for checking the server state."""
 
@@ -227,11 +229,11 @@ class GetServerStateResponse(google.protobuf.message.Message):
         *,
         server_is_ready: builtins.bool = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["server_is_ready", b"server_is_ready"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["server_is_ready", b"server_is_ready"]) -> None: ...
 
 global___GetServerStateResponse = GetServerStateResponse
 
-@typing_extensions.final
+@typing.final
 class ListProjectIdsResponse(google.protobuf.message.Message):
     """Message for listing project IDs in the response."""
 
@@ -241,16 +243,17 @@ class ListProjectIdsResponse(google.protobuf.message.Message):
     @property
     def project_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """List of project IDs."""
+
     def __init__(
         self,
         *,
         project_ids: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["project_ids", b"project_ids"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["project_ids", b"project_ids"]) -> None: ...
 
 global___ListProjectIdsResponse = ListProjectIdsResponse
 
-@typing_extensions.final
+@typing.final
 class GetProjectConfigRequest(google.protobuf.message.Message):
     """Message for requesting the configuration of a specific project."""
 
@@ -264,11 +267,11 @@ class GetProjectConfigRequest(google.protobuf.message.Message):
         *,
         project_id: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["project_id", b"project_id"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["project_id", b"project_id"]) -> None: ...
 
 global___GetProjectConfigRequest = GetProjectConfigRequest
 
-@typing_extensions.final
+@typing.final
 class GetProjectConfigResponse(google.protobuf.message.Message):
     """Message containing the response for getting the configuration of a project."""
 
@@ -282,11 +285,11 @@ class GetProjectConfigResponse(google.protobuf.message.Message):
         *,
         config_serialized: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["config_serialized", b"config_serialized"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["config_serialized", b"config_serialized"]) -> None: ...
 
 global___GetProjectConfigResponse = GetProjectConfigResponse
 
-@typing_extensions.final
+@typing.final
 class UpdateDatabaseRequest(google.protobuf.message.Message):
     """Message for requesting a database update for specific projects."""
 
@@ -296,16 +299,17 @@ class UpdateDatabaseRequest(google.protobuf.message.Message):
     @property
     def project_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """List of project IDs for which to update the database."""
+
     def __init__(
         self,
         *,
         project_ids: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["project_ids", b"project_ids"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["project_ids", b"project_ids"]) -> None: ...
 
 global___UpdateDatabaseRequest = UpdateDatabaseRequest
 
-@typing_extensions.final
+@typing.final
 class UpdateDatabaseResponse(google.protobuf.message.Message):
     """Message containing the response for updating the database of specific projects."""
 
@@ -315,11 +319,12 @@ class UpdateDatabaseResponse(google.protobuf.message.Message):
     @property
     def error_messages(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """List of error messages encountered during the database update."""
+
     def __init__(
         self,
         *,
         error_messages: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["error_messages", b"error_messages"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["error_messages", b"error_messages"]) -> None: ...
 
 global___UpdateDatabaseResponse = UpdateDatabaseResponse

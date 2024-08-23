@@ -15,6 +15,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 """
+
 import builtins
 import collections.abc
 import google.protobuf.descriptor
@@ -32,7 +33,7 @@ else:
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
-@typing_extensions.final
+@typing.final
 class OperationMetadata(google.protobuf.message.Message):
     """Represents the metadata of the long-running operation that can be a parent operation for sub-operations or
     can be a sub-operation itself
@@ -156,18 +157,6 @@ class OperationMetadata(google.protobuf.message.Message):
     """long-running operation status code"""
     parent_operation_name: builtins.str
     """optional parent operation name"""
-    @property
-    def sub_operation_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """list of the sub-operations' names of the operation"""
-    @property
-    def create_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """the time the operation was submitted."""
-    @property
-    def start_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """the time operation processing started."""
-    @property
-    def end_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """the time operation processing completed."""
     is_cancellation_requested: builtins.bool
     """indicates whether a request to cancel this operation has been made."""
     cancel_command: builtins.str
@@ -188,21 +177,40 @@ class OperationMetadata(google.protobuf.message.Message):
     """maximum number of re-runs in case the operation fails"""
     description: builtins.str
     """description, normally needed for sub operations when type is OPERATION_TYPE_UNSPECIFIED"""
-    @property
-    def log(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """The log output of an operation"""
     log_limit: builtins.int
     """The log output of an operation limited to the last x log entries"""
-    @property
-    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Creation date and time. Read-only field."""
-    @property
-    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Modification date and time. Read-only field."""
     created_by: builtins.str
     """User id in form of a valid UUID."""
     modified_by: builtins.str
     """User id in form of a valid UUID."""
+    @property
+    def sub_operation_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """list of the sub-operations' names of the operation"""
+
+    @property
+    def create_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """the time the operation was submitted."""
+
+    @property
+    def start_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """the time operation processing started."""
+
+    @property
+    def end_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """the time operation processing completed."""
+
+    @property
+    def log(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """The log output of an operation"""
+
+    @property
+    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Creation date and time. Read-only field."""
+
+    @property
+    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Modification date and time. Read-only field."""
+
     def __init__(
         self,
         *,
@@ -229,7 +237,7 @@ class OperationMetadata(google.protobuf.message.Message):
         created_by: builtins.str = ...,
         modified_by: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["create_time", b"create_time", "created_at", b"created_at", "end_time", b"end_time", "modified_at", b"modified_at", "start_time", b"start_time"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["cancel_command", b"cancel_command", "create_time", b"create_time", "created_at", b"created_at", "created_by", b"created_by", "description", b"description", "end_time", b"end_time", "host_name", b"host_name", "is_cancellation_requested", b"is_cancellation_requested", "log", b"log", "log_limit", b"log_limit", "max_num_reruns", b"max_num_reruns", "modified_at", b"modified_at", "modified_by", b"modified_by", "num_reruns", b"num_reruns", "operation_type", b"operation_type", "parent_operation_name", b"parent_operation_name", "project_parent", b"project_parent", "start_time", b"start_time", "status", b"status", "sub_operation_names", b"sub_operation_names", "user_id_cancelled", b"user_id_cancelled", "user_id_created", b"user_id_created"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["create_time", b"create_time", "created_at", b"created_at", "end_time", b"end_time", "modified_at", b"modified_at", "start_time", b"start_time"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["cancel_command", b"cancel_command", "create_time", b"create_time", "created_at", b"created_at", "created_by", b"created_by", "description", b"description", "end_time", b"end_time", "host_name", b"host_name", "is_cancellation_requested", b"is_cancellation_requested", "log", b"log", "log_limit", b"log_limit", "max_num_reruns", b"max_num_reruns", "modified_at", b"modified_at", "modified_by", b"modified_by", "num_reruns", b"num_reruns", "operation_type", b"operation_type", "parent_operation_name", b"parent_operation_name", "project_parent", b"project_parent", "start_time", b"start_time", "status", b"status", "sub_operation_names", b"sub_operation_names", "user_id_cancelled", b"user_id_cancelled", "user_id_created", b"user_id_created"]) -> None: ...
 
 global___OperationMetadata = OperationMetadata

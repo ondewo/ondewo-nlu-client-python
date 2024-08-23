@@ -15,19 +15,15 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 """
+
 import builtins
 import google.protobuf.descriptor
 import google.protobuf.message
-import sys
-
-if sys.version_info >= (3, 8):
-    import typing as typing_extensions
-else:
-    import typing_extensions
+import typing
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
-@typing_extensions.final
+@typing.final
 class GetUserProjectCountRequest(google.protobuf.message.Message):
     """Request to get user project count"""
 
@@ -41,6 +37,6 @@ class GetUserProjectCountRequest(google.protobuf.message.Message):
         *,
         user_id: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["user_id", b"user_id"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["user_id", b"user_id"]) -> None: ...
 
 global___GetUserProjectCountRequest = GetUserProjectCountRequest

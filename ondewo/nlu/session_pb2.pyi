@@ -29,6 +29,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 """
+
 import builtins
 import collections.abc
 import google.protobuf.descriptor
@@ -262,7 +263,7 @@ AUDIO_FILE_RESOURCE_TYPE_S2T_AND_T2S: AudioFileResourceType.ValueType  # 3
 """Audio file from speech to text and text to speech"""
 global___AudioFileResourceType = AudioFileResourceType
 
-@typing_extensions.final
+@typing.final
 class DetectIntentRequest(google.protobuf.message.Message):
     """The request to detect user's intent."""
 
@@ -279,9 +280,15 @@ class DetectIntentRequest(google.protobuf.message.Message):
     some type of user identifier (preferably hashed). The length of the session
     ID must not exceed 36 bytes.
     """
+    input_audio: builtins.bytes
+    """Optional. The natural language speech audio to be processed. This field
+    should be populated iff `query_input` is set to an input audio config.
+    A single request can contain up to 1 minute of speech audio data.
+    """
     @property
     def query_params(self) -> global___QueryParameters:
         """Optional. The parameters of this query."""
+
     @property
     def query_input(self) -> global___QueryInput:
         """Required. The input specification. It can be set to:
@@ -293,11 +300,7 @@ class DetectIntentRequest(google.protobuf.message.Message):
 
         3.  an event that specifies which intent to trigger.
         """
-    input_audio: builtins.bytes
-    """Optional. The natural language speech audio to be processed. This field
-    should be populated iff `query_input` is set to an input audio config.
-    A single request can contain up to 1 minute of speech audio data.
-    """
+
     def __init__(
         self,
         *,
@@ -306,12 +309,12 @@ class DetectIntentRequest(google.protobuf.message.Message):
         query_input: global___QueryInput | None = ...,
         input_audio: builtins.bytes = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["query_input", b"query_input", "query_params", b"query_params"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["input_audio", b"input_audio", "query_input", b"query_input", "query_params", b"query_params", "session", b"session"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["query_input", b"query_input", "query_params", b"query_params"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["input_audio", b"input_audio", "query_input", b"query_input", "query_params", b"query_params", "session", b"session"]) -> None: ...
 
 global___DetectIntentRequest = DetectIntentRequest
 
-@typing_extensions.final
+@typing.final
 class DetectIntentResponse(google.protobuf.message.Message):
     """The message returned from the DetectIntent method."""
 
@@ -327,11 +330,13 @@ class DetectIntentResponse(google.protobuf.message.Message):
     @property
     def query_result(self) -> global___QueryResult:
         """The results of the conversational query or event processing."""
+
     @property
     def webhook_status(self) -> google.rpc.status_pb2.Status:
         """Specifies the status of the webhook request. `webhook_status`
         is never populated in webhook requests.
         """
+
     def __init__(
         self,
         *,
@@ -339,12 +344,12 @@ class DetectIntentResponse(google.protobuf.message.Message):
         query_result: global___QueryResult | None = ...,
         webhook_status: google.rpc.status_pb2.Status | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["query_result", b"query_result", "webhook_status", b"webhook_status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["query_result", b"query_result", "response_id", b"response_id", "webhook_status", b"webhook_status"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["query_result", b"query_result", "webhook_status", b"webhook_status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["query_result", b"query_result", "response_id", b"response_id", "webhook_status", b"webhook_status"]) -> None: ...
 
 global___DetectIntentResponse = DetectIntentResponse
 
-@typing_extensions.final
+@typing.final
 class QueryParameters(google.protobuf.message.Message):
     """Represents the parameters of the conversational query."""
 
@@ -369,35 +374,10 @@ class QueryParameters(google.protobuf.message.Message):
     America/New_York, Europe/Paris. If not provided, the time zone specified in
     agent settings is used.
     """
-    @property
-    def geo_location(self) -> google.type.latlng_pb2.LatLng:
-        """Optional. The geo location of this conversational query."""
-    @property
-    def contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]:
-        """Optional. The collection of contexts to be activated before this query is
-        executed.
-        """
     reset_contexts: builtins.bool
     """Optional. Specifies whether to delete all contexts in the current session
     before the new ones are activated.
     """
-    @property
-    def payload(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. This field can be used to pass custom data into the webhook
-        associated with the agent. Arbitrary JSON objects are supported.
-        key:<pre>language=LanguageCode.de.value</pre>
-        key:<pre>timestamp=time.time()</pre>
-        key:<pre>source='https://ondewo.com'</pre>
-        key:<pre>configuration='config_example_123'</pre>
-        """
-    @property
-    def labels(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """labels associated to this request"""
-    @property
-    def platforms(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[ondewo.nlu.intent_pb2.Intent.Message.Platform.ValueType]:
-        """Only messages for the specified Intent.Message.Platform platforms are sent to the user in the
-        <code>DetectIntentResponse</code>
-        """
     account_id: builtins.str
     """Id of the account, e.g. Company Ondewo"""
     property_id: builtins.str
@@ -422,8 +402,39 @@ class QueryParameters(google.protobuf.message.Message):
     This field can also be used for a customized tracking id or tag id
     """
     @property
+    def geo_location(self) -> google.type.latlng_pb2.LatLng:
+        """Optional. The geo location of this conversational query."""
+
+    @property
+    def contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]:
+        """Optional. The collection of contexts to be activated before this query is
+        executed.
+        """
+
+    @property
+    def payload(self) -> google.protobuf.struct_pb2.Struct:
+        """Optional. This field can be used to pass custom data into the webhook
+        associated with the agent. Arbitrary JSON objects are supported.
+        key:<pre>language=LanguageCode.de.value</pre>
+        key:<pre>timestamp=time.time()</pre>
+        key:<pre>source='https://ondewo.com'</pre>
+        key:<pre>configuration='config_example_123'</pre>
+        """
+
+    @property
+    def labels(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """labels associated to this request"""
+
+    @property
+    def platforms(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[ondewo.nlu.intent_pb2.Intent.Message.Platform.ValueType]:
+        """Only messages for the specified Intent.Message.Platform platforms are sent to the user in the
+        <code>DetectIntentResponse</code>
+        """
+
+    @property
     def transcriptions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___S2tTranscription]:
         """transcriptions of the user input sorted by score"""
+
     def __init__(
         self,
         *,
@@ -441,12 +452,12 @@ class QueryParameters(google.protobuf.message.Message):
         identified_user_id: builtins.str = ...,
         transcriptions: collections.abc.Iterable[global___S2tTranscription] | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["geo_location", b"geo_location", "payload", b"payload"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["account_id", b"account_id", "contexts", b"contexts", "datastream_id", b"datastream_id", "geo_location", b"geo_location", "identified_user_id", b"identified_user_id", "labels", b"labels", "origin_id", b"origin_id", "payload", b"payload", "platforms", b"platforms", "property_id", b"property_id", "reset_contexts", b"reset_contexts", "time_zone", b"time_zone", "transcriptions", b"transcriptions"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["geo_location", b"geo_location", "payload", b"payload"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["account_id", b"account_id", "contexts", b"contexts", "datastream_id", b"datastream_id", "geo_location", b"geo_location", "identified_user_id", b"identified_user_id", "labels", b"labels", "origin_id", b"origin_id", "payload", b"payload", "platforms", b"platforms", "property_id", b"property_id", "reset_contexts", b"reset_contexts", "time_zone", b"time_zone", "transcriptions", b"transcriptions"]) -> None: ...
 
 global___QueryParameters = QueryParameters
 
-@typing_extensions.final
+@typing.final
 class S2tTranscription(google.protobuf.message.Message):
     """Represents a speech-to-text transcription."""
 
@@ -485,16 +496,18 @@ class S2tTranscription(google.protobuf.message.Message):
     """Optional. Duration in seconds for transcription"""
     transcription_type: global___TranscriptionType.ValueType
     """Whether a speech-to-text engine or a human has transcribed the audio"""
-    @property
-    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Creation date and time. Read-only field."""
-    @property
-    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Modification date and time. Read-only field."""
     created_by: builtins.str
     """User id in form of a valid UUID."""
     modified_by: builtins.str
     """User id in form of a valid UUID."""
+    @property
+    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Creation date and time. Read-only field."""
+
+    @property
+    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Modification date and time. Read-only field."""
+
     def __init__(
         self,
         *,
@@ -511,12 +524,12 @@ class S2tTranscription(google.protobuf.message.Message):
         created_by: builtins.str = ...,
         modified_by: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["audio_resource_name", b"audio_resource_name", "created_at", b"created_at", "created_by", b"created_by", "duration_in_s", b"duration_in_s", "language_code", b"language_code", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "pipeline_id", b"pipeline_id", "score", b"score", "text", b"text", "transcription_type", b"transcription_type"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["audio_resource_name", b"audio_resource_name", "created_at", b"created_at", "created_by", b"created_by", "duration_in_s", b"duration_in_s", "language_code", b"language_code", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "pipeline_id", b"pipeline_id", "score", b"score", "text", b"text", "transcription_type", b"transcription_type"]) -> None: ...
 
 global___S2tTranscription = S2tTranscription
 
-@typing_extensions.final
+@typing.final
 class QueryInput(google.protobuf.message.Message):
     """Represents the query input. It can contain either:
 
@@ -536,12 +549,15 @@ class QueryInput(google.protobuf.message.Message):
     @property
     def audio_config(self) -> global___InputAudioConfig:
         """Instructs the speech recognizer how to process the speech audio."""
+
     @property
     def text(self) -> global___TextInput:
         """The natural language text to be processed."""
+
     @property
     def event(self) -> global___EventInput:
         """The event to be processed."""
+
     def __init__(
         self,
         *,
@@ -549,13 +565,13 @@ class QueryInput(google.protobuf.message.Message):
         text: global___TextInput | None = ...,
         event: global___EventInput | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["audio_config", b"audio_config", "event", b"event", "input", b"input", "text", b"text"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["audio_config", b"audio_config", "event", b"event", "input", b"input", "text", b"text"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["input", b"input"]) -> typing_extensions.Literal["audio_config", "text", "event"] | None: ...
+    def HasField(self, field_name: typing.Literal["audio_config", b"audio_config", "event", b"event", "input", b"input", "text", b"text"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["audio_config", b"audio_config", "event", b"event", "input", b"input", "text", b"text"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["input", b"input"]) -> typing.Literal["audio_config", "text", "event"] | None: ...
 
 global___QueryInput = QueryInput
 
-@typing_extensions.final
+@typing.final
 class QueryResult(google.protobuf.message.Message):
     """Represents the result of conversational query or event processing."""
 
@@ -598,9 +614,6 @@ class QueryResult(google.protobuf.message.Message):
     """
     action: builtins.str
     """The action name from the matched intent."""
-    @property
-    def parameters(self) -> google.protobuf.struct_pb2.Struct:
-        """The collection of extracted parameters."""
     all_required_params_present: builtins.bool
     """This field is set to:
     - `false` if the matched intent has required parameters and not all of
@@ -610,31 +623,10 @@ class QueryResult(google.protobuf.message.Message):
     """
     fulfillment_text: builtins.str
     """The text to be pronounced to the user or shown on the screen."""
-    @property
-    def fulfillment_messages(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.intent_pb2.Intent.Message]:
-        """The collection of rich messages to present to the user."""
     webhook_source: builtins.str
     """If the query was fulfilled by a webhook call, this field is set to the
     value of the `source` field returned in the webhook response.
     """
-    @property
-    def webhook_payload(self) -> google.protobuf.struct_pb2.Struct:
-        """If the query was fulfilled by a webhook call, this field is set to the
-        value of the `payload` field returned in the webhook response.
-        """
-    @property
-    def output_contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]:
-        """The collection of output contexts. If applicable,
-        `output_contexts.parameters` contains entries with name
-        `<parameter name>.original` containing the original parameter values
-        before the query.
-        """
-    @property
-    def intent(self) -> ondewo.nlu.intent_pb2.Intent:
-        """The intent that matched the conversational query. Some, not
-        all fields are filled in this message, including but not limited to:
-        `name`, `display_name` and `webhook_state`.
-        """
     intent_detection_confidence: builtins.float
     """The intent detection confidence. Values range from 0.0
     (completely uncertain) to 1.0 (completely certain).
@@ -643,16 +635,46 @@ class QueryResult(google.protobuf.message.Message):
     """The user input gets pre-processed by spelling correction, stop word removal etc. This property holds
     the string that is passed to the entity recognition and intent detection
     """
-    @property
-    def diagnostic_info(self) -> google.protobuf.struct_pb2.Struct:
-        """The free-form diagnostic info. For example, this field
-        could contain webhook call latency.
-        """
     language_code: builtins.str
     """The language that was triggered during intent detection.
     See [Language Support](https://dialogflow.com/docs/reference/language)
     for a list of the currently supported language codes.
     """
+    @property
+    def parameters(self) -> google.protobuf.struct_pb2.Struct:
+        """The collection of extracted parameters."""
+
+    @property
+    def fulfillment_messages(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.intent_pb2.Intent.Message]:
+        """The collection of rich messages to present to the user."""
+
+    @property
+    def webhook_payload(self) -> google.protobuf.struct_pb2.Struct:
+        """If the query was fulfilled by a webhook call, this field is set to the
+        value of the `payload` field returned in the webhook response.
+        """
+
+    @property
+    def output_contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]:
+        """The collection of output contexts. If applicable,
+        `output_contexts.parameters` contains entries with name
+        `<parameter name>.original` containing the original parameter values
+        before the query.
+        """
+
+    @property
+    def intent(self) -> ondewo.nlu.intent_pb2.Intent:
+        """The intent that matched the conversational query. Some, not
+        all fields are filled in this message, including but not limited to:
+        `name`, `display_name` and `webhook_state`.
+        """
+
+    @property
+    def diagnostic_info(self) -> google.protobuf.struct_pb2.Struct:
+        """The free-form diagnostic info. For example, this field
+        could contain webhook call latency.
+        """
+
     def __init__(
         self,
         *,
@@ -672,12 +694,12 @@ class QueryResult(google.protobuf.message.Message):
         diagnostic_info: google.protobuf.struct_pb2.Struct | None = ...,
         language_code: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["diagnostic_info", b"diagnostic_info", "intent", b"intent", "parameters", b"parameters", "webhook_payload", b"webhook_payload"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "all_required_params_present", b"all_required_params_present", "diagnostic_info", b"diagnostic_info", "fulfillment_messages", b"fulfillment_messages", "fulfillment_text", b"fulfillment_text", "intent", b"intent", "intent_detection_confidence", b"intent_detection_confidence", "language_code", b"language_code", "output_contexts", b"output_contexts", "parameters", b"parameters", "query_text", b"query_text", "query_text_original", b"query_text_original", "speech_recognition_confidence", b"speech_recognition_confidence", "webhook_payload", b"webhook_payload", "webhook_source", b"webhook_source"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["diagnostic_info", b"diagnostic_info", "intent", b"intent", "parameters", b"parameters", "webhook_payload", b"webhook_payload"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["action", b"action", "all_required_params_present", b"all_required_params_present", "diagnostic_info", b"diagnostic_info", "fulfillment_messages", b"fulfillment_messages", "fulfillment_text", b"fulfillment_text", "intent", b"intent", "intent_detection_confidence", b"intent_detection_confidence", "language_code", b"language_code", "output_contexts", b"output_contexts", "parameters", b"parameters", "query_text", b"query_text", "query_text_original", b"query_text_original", "speech_recognition_confidence", b"speech_recognition_confidence", "webhook_payload", b"webhook_payload", "webhook_source", b"webhook_source"]) -> None: ...
 
 global___QueryResult = QueryResult
 
-@typing_extensions.final
+@typing.final
 class StreamingDetectIntentRequest(google.protobuf.message.Message):
     """The top-level message sent by the client to the
     `StreamingDetectIntent` method.
@@ -707,20 +729,6 @@ class StreamingDetectIntentRequest(google.protobuf.message.Message):
     some type of user identifier (preferably hashed). The length of the session
     ID must not exceed 36 characters.
     """
-    @property
-    def query_params(self) -> global___QueryParameters:
-        """Optional. The parameters of this query."""
-    @property
-    def query_input(self) -> global___QueryInput:
-        """Required. The input specification. It can be set to:
-
-        1.  an audio config which instructs the speech recognizer how to process
-            the speech audio,
-
-        2.  a conversational query in the form of text, or
-
-        3.  an event that specifies which intent to trigger.
-        """
     single_utterance: builtins.bool
     """Optional. If `false` (default), recognition does not cease until the
     client closes the stream.
@@ -736,6 +744,22 @@ class StreamingDetectIntentRequest(google.protobuf.message.Message):
     `query_input` was set to a streaming input audio config. The complete audio
     over all streaming messages must not exceed 1 minute.
     """
+    @property
+    def query_params(self) -> global___QueryParameters:
+        """Optional. The parameters of this query."""
+
+    @property
+    def query_input(self) -> global___QueryInput:
+        """Required. The input specification. It can be set to:
+
+        1.  an audio config which instructs the speech recognizer how to process
+            the speech audio,
+
+        2.  a conversational query in the form of text, or
+
+        3.  an event that specifies which intent to trigger.
+        """
+
     def __init__(
         self,
         *,
@@ -745,12 +769,12 @@ class StreamingDetectIntentRequest(google.protobuf.message.Message):
         single_utterance: builtins.bool = ...,
         input_audio: builtins.bytes = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["query_input", b"query_input", "query_params", b"query_params"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["input_audio", b"input_audio", "query_input", b"query_input", "query_params", b"query_params", "session", b"session", "single_utterance", b"single_utterance"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["query_input", b"query_input", "query_params", b"query_params"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["input_audio", b"input_audio", "query_input", b"query_input", "query_params", b"query_params", "session", b"session", "single_utterance", b"single_utterance"]) -> None: ...
 
 global___StreamingDetectIntentRequest = StreamingDetectIntentRequest
 
-@typing_extensions.final
+@typing.final
 class StreamingDetectIntentResponse(google.protobuf.message.Message):
     """The top-level message returned from the
     `StreamingDetectIntent` method.
@@ -779,12 +803,15 @@ class StreamingDetectIntentResponse(google.protobuf.message.Message):
     @property
     def recognition_result(self) -> global___StreamingRecognitionResult:
         """The result of speech recognition."""
+
     @property
     def query_result(self) -> global___QueryResult:
         """The result of the conversational query or event processing."""
+
     @property
     def webhook_status(self) -> google.rpc.status_pb2.Status:
         """Specifies the status of the webhook request."""
+
     def __init__(
         self,
         *,
@@ -793,12 +820,12 @@ class StreamingDetectIntentResponse(google.protobuf.message.Message):
         query_result: global___QueryResult | None = ...,
         webhook_status: google.rpc.status_pb2.Status | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["query_result", b"query_result", "recognition_result", b"recognition_result", "webhook_status", b"webhook_status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["query_result", b"query_result", "recognition_result", b"recognition_result", "response_id", b"response_id", "webhook_status", b"webhook_status"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["query_result", b"query_result", "recognition_result", b"recognition_result", "webhook_status", b"webhook_status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["query_result", b"query_result", "recognition_result", b"recognition_result", "response_id", b"response_id", "webhook_status", b"webhook_status"]) -> None: ...
 
 global___StreamingDetectIntentResponse = StreamingDetectIntentResponse
 
-@typing_extensions.final
+@typing.final
 class StreamingRecognitionResult(google.protobuf.message.Message):
     """Contains a speech recognition result corresponding to a portion of the audio
     that is currently being processed or an indication that this is the end
@@ -908,11 +935,11 @@ class StreamingRecognitionResult(google.protobuf.message.Message):
         is_final: builtins.bool = ...,
         confidence: builtins.float = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["confidence", b"confidence", "is_final", b"is_final", "message_type", b"message_type", "transcript", b"transcript"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["confidence", b"confidence", "is_final", b"is_final", "message_type", b"message_type", "transcript", b"transcript"]) -> None: ...
 
 global___StreamingRecognitionResult = StreamingRecognitionResult
 
-@typing_extensions.final
+@typing.final
 class InputAudioConfig(google.protobuf.message.Message):
     """Instructs the speech recognizer how to process the audio content."""
 
@@ -943,6 +970,7 @@ class InputAudioConfig(google.protobuf.message.Message):
         Refer to [Cloud Speech API documentation](/speech/docs/basics#phrase-hints)
         for more details.
         """
+
     def __init__(
         self,
         *,
@@ -951,11 +979,11 @@ class InputAudioConfig(google.protobuf.message.Message):
         language_code: builtins.str = ...,
         phrase_hints: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["audio_encoding", b"audio_encoding", "language_code", b"language_code", "phrase_hints", b"phrase_hints", "sample_rate_hertz", b"sample_rate_hertz"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["audio_encoding", b"audio_encoding", "language_code", b"language_code", "phrase_hints", b"phrase_hints", "sample_rate_hertz", b"sample_rate_hertz"]) -> None: ...
 
 global___InputAudioConfig = InputAudioConfig
 
-@typing_extensions.final
+@typing.final
 class TextInput(google.protobuf.message.Message):
     """Represents the natural language text to be processed."""
 
@@ -979,11 +1007,11 @@ class TextInput(google.protobuf.message.Message):
         text: builtins.str = ...,
         language_code: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["language_code", b"language_code", "text", b"text"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["language_code", b"language_code", "text", b"text"]) -> None: ...
 
 global___TextInput = TextInput
 
-@typing_extensions.final
+@typing.final
 class EventInput(google.protobuf.message.Message):
     """Events allow for matching intents by event name instead of the natural
     language input. For instance, input `<event: { name: “welcome_event”,
@@ -999,15 +1027,16 @@ class EventInput(google.protobuf.message.Message):
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     name: builtins.str
     """Required. The unique identifier of the event."""
-    @property
-    def parameters(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. The collection of parameters associated with the event."""
     language_code: builtins.str
     """Required. The language of this query. See [Language
     Support](https://dialogflow.com/docs/languages) for a list of the
     currently supported language codes. Note that queries in the same session
     do not necessarily need to specify the same language.
     """
+    @property
+    def parameters(self) -> google.protobuf.struct_pb2.Struct:
+        """Optional. The collection of parameters associated with the event."""
+
     def __init__(
         self,
         *,
@@ -1015,12 +1044,12 @@ class EventInput(google.protobuf.message.Message):
         parameters: google.protobuf.struct_pb2.Struct | None = ...,
         language_code: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["parameters", b"parameters"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["language_code", b"language_code", "name", b"name", "parameters", b"parameters"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["parameters", b"parameters"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["language_code", b"language_code", "name", b"name", "parameters", b"parameters"]) -> None: ...
 
 global___EventInput = EventInput
 
-@typing_extensions.final
+@typing.final
 class Session(google.protobuf.message.Message):
     """*** SESSION RELATED MESSAGES *** //
 
@@ -1066,22 +1095,26 @@ class Session(google.protobuf.message.Message):
     """The unique identifier of the session
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
     """
-    @property
-    def session_steps(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___SessionStep]:
-        """The list of all the steps of the session"""
-    @property
-    def session_info(self) -> global___SessionInfo:
-        """session information"""
-    @property
-    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Creation date and time. Read-only field."""
-    @property
-    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Modification date and time. Read-only field."""
     created_by: builtins.str
     """User id in form of a valid UUID."""
     modified_by: builtins.str
     """User id in form of a valid UUID."""
+    @property
+    def session_steps(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___SessionStep]:
+        """The list of all the steps of the session"""
+
+    @property
+    def session_info(self) -> global___SessionInfo:
+        """session information"""
+
+    @property
+    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Creation date and time. Read-only field."""
+
+    @property
+    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Modification date and time. Read-only field."""
+
     def __init__(
         self,
         *,
@@ -1093,12 +1126,12 @@ class Session(google.protobuf.message.Message):
         created_by: builtins.str = ...,
         modified_by: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at", "session_info", b"session_info"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "created_by", b"created_by", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "session_info", b"session_info", "session_steps", b"session_steps"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at", "session_info", b"session_info"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["created_at", b"created_at", "created_by", b"created_by", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "session_info", b"session_info", "session_steps", b"session_steps"]) -> None: ...
 
 global___Session = Session
 
-@typing_extensions.final
+@typing.final
 class SessionStep(google.protobuf.message.Message):
     """SessionStep is a single user interaction as part of a session"""
 
@@ -1118,31 +1151,38 @@ class SessionStep(google.protobuf.message.Message):
     """The unique identifier for the given review
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;</code></pre>
     """
-    @property
-    def detect_intent_request(self) -> global___DetectIntentRequest:
-        """The detect intent request of the session step"""
-    @property
-    def detect_intent_response(self) -> global___DetectIntentResponse:
-        """The detect intent response  of the session step"""
-    @property
-    def contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]:
-        """The contexts which were active at the beginning of this step"""
-    @property
-    def timestamp(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Timestamp of session step"""
-    @property
-    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Creation date and time. Read-only field."""
-    @property
-    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Modification date and time. Read-only field."""
     created_by: builtins.str
     """User id in form of a valid UUID."""
     modified_by: builtins.str
     """User id in form of a valid UUID."""
     @property
+    def detect_intent_request(self) -> global___DetectIntentRequest:
+        """The detect intent request of the session step"""
+
+    @property
+    def detect_intent_response(self) -> global___DetectIntentResponse:
+        """The detect intent response  of the session step"""
+
+    @property
+    def contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]:
+        """The contexts which were active at the beginning of this step"""
+
+    @property
+    def timestamp(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Timestamp of session step"""
+
+    @property
+    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Creation date and time. Read-only field."""
+
+    @property
+    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Modification date and time. Read-only field."""
+
+    @property
     def audio_file_resources(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AudioFileResource]:
         """audio file resources associated with the session step"""
+
     def __init__(
         self,
         *,
@@ -1157,12 +1197,12 @@ class SessionStep(google.protobuf.message.Message):
         modified_by: builtins.str = ...,
         audio_file_resources: collections.abc.Iterable[global___AudioFileResource] | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "detect_intent_request", b"detect_intent_request", "detect_intent_response", b"detect_intent_response", "modified_at", b"modified_at", "timestamp", b"timestamp"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["audio_file_resources", b"audio_file_resources", "contexts", b"contexts", "created_at", b"created_at", "created_by", b"created_by", "detect_intent_request", b"detect_intent_request", "detect_intent_response", b"detect_intent_response", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "timestamp", b"timestamp"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["created_at", b"created_at", "detect_intent_request", b"detect_intent_request", "detect_intent_response", b"detect_intent_response", "modified_at", b"modified_at", "timestamp", b"timestamp"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["audio_file_resources", b"audio_file_resources", "contexts", b"contexts", "created_at", b"created_at", "created_by", b"created_by", "detect_intent_request", b"detect_intent_request", "detect_intent_response", b"detect_intent_response", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "timestamp", b"timestamp"]) -> None: ...
 
 global___SessionStep = SessionStep
 
-@typing_extensions.final
+@typing.final
 class TrackSessionStepRequest(google.protobuf.message.Message):
     """TrackSessionStepRequest stores a session step into the session"""
 
@@ -1175,11 +1215,12 @@ class TrackSessionStepRequest(google.protobuf.message.Message):
     """The unique identifier for the given review
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;</code></pre>.
     """
+    session_view: global___Session.View.ValueType
+    """Defines which fields of the session should be returned in the response"""
     @property
     def session_step(self) -> global___SessionStep:
         """The session step to be added"""
-    session_view: global___Session.View.ValueType
-    """Defines which fields of the session should be returned in the response"""
+
     def __init__(
         self,
         *,
@@ -1187,12 +1228,12 @@ class TrackSessionStepRequest(google.protobuf.message.Message):
         session_step: global___SessionStep | None = ...,
         session_view: global___Session.View.ValueType = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["session_step", b"session_step"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["session_id", b"session_id", "session_step", b"session_step", "session_view", b"session_view"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["session_step", b"session_step"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["session_id", b"session_id", "session_step", b"session_step", "session_view", b"session_view"]) -> None: ...
 
 global___TrackSessionStepRequest = TrackSessionStepRequest
 
-@typing_extensions.final
+@typing.final
 class GetSessionStepRequest(google.protobuf.message.Message):
     """This message is a request to get a session step"""
 
@@ -1209,18 +1250,19 @@ class GetSessionStepRequest(google.protobuf.message.Message):
         """Optional. The mask to control which fields will be filled with data.
         Example: path=["session_step.detect_intent_response.query_result.fulfillment_messages"]
         """
+
     def __init__(
         self,
         *,
         name: builtins.str = ...,
         field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["field_mask", b"field_mask", "name", b"name"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "name", b"name"]) -> None: ...
 
 global___GetSessionStepRequest = GetSessionStepRequest
 
-@typing_extensions.final
+@typing.final
 class UpdateSessionStepRequest(google.protobuf.message.Message):
     """UpdateSessionStepRequest stores a session step into the session"""
 
@@ -1232,16 +1274,19 @@ class UpdateSessionStepRequest(google.protobuf.message.Message):
     @property
     def session_step(self) -> global___SessionStep:
         """The session step to be updated"""
+
     @property
     def update_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields will be updated.
         Example: path=["session_step.detect_intent_response.query_result.fulfillment_messages"]
         """
+
     @property
     def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields will be filled with data.
         Example: path=["session_step.detect_intent_response.query_result.fulfillment_messages"]
         """
+
     def __init__(
         self,
         *,
@@ -1249,12 +1294,12 @@ class UpdateSessionStepRequest(google.protobuf.message.Message):
         update_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
         field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["field_mask", b"field_mask", "session_step", b"session_step", "update_mask", b"update_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["field_mask", b"field_mask", "session_step", b"session_step", "update_mask", b"update_mask"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask", "session_step", b"session_step", "update_mask", b"update_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "session_step", b"session_step", "update_mask", b"update_mask"]) -> None: ...
 
 global___UpdateSessionStepRequest = UpdateSessionStepRequest
 
-@typing_extensions.final
+@typing.final
 class DeleteSessionStepRequest(google.protobuf.message.Message):
     """This message is a request to delete a session step of a session"""
 
@@ -1270,11 +1315,11 @@ class DeleteSessionStepRequest(google.protobuf.message.Message):
         *,
         name: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["name", b"name"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["name", b"name"]) -> None: ...
 
 global___DeleteSessionStepRequest = DeleteSessionStepRequest
 
-@typing_extensions.final
+@typing.final
 class ListSessionsRequest(google.protobuf.message.Message):
     """This message is a request to list sessions"""
 
@@ -1319,11 +1364,13 @@ class ListSessionsRequest(google.protobuf.message.Message):
     @property
     def session_filter(self) -> global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
+
     @property
     def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields will be filled with data.
         Example: path=["session_info.duration_in_s_min"]
         """
+
     def __init__(
         self,
         *,
@@ -1333,12 +1380,12 @@ class ListSessionsRequest(google.protobuf.message.Message):
         session_filter: global___SessionFilter | None = ...,
         field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["field_mask", b"field_mask", "page_token", b"page_token", "parent", b"parent", "session_filter", b"session_filter", "session_view", b"session_view"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "page_token", b"page_token", "parent", b"parent", "session_filter", b"session_filter", "session_view", b"session_view"]) -> None: ...
 
 global___ListSessionsRequest = ListSessionsRequest
 
-@typing_extensions.final
+@typing.final
 class ContextFilter(google.protobuf.message.Message):
     """Message used to filter sessions based on contextual information"""
 
@@ -1363,11 +1410,11 @@ class ContextFilter(google.protobuf.message.Message):
         value: builtins.str = ...,
         operator: global___ComparisonOperator.ValueType = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["context_name", b"context_name", "key", b"key", "operator", b"operator", "value", b"value"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["context_name", b"context_name", "key", b"key", "operator", b"operator", "value", b"value"]) -> None: ...
 
 global___ContextFilter = ContextFilter
 
-@typing_extensions.final
+@typing.final
 class SessionFilter(google.protobuf.message.Message):
     """This message contains a session filter"""
 
@@ -1422,22 +1469,6 @@ class SessionFilter(google.protobuf.message.Message):
     IDENTIFIED_USER_IDS_FIELD_NUMBER: builtins.int
     DURATION_INTERVAL_60S_ROUNDED_MIN_FIELD_NUMBER: builtins.int
     DURATION_INTERVAL_60S_ROUNDED_MAX_FIELD_NUMBER: builtins.int
-    @property
-    def language_codes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """A SessionFilter can be used in some requests to return only sessions matching certain filter conditions.
-        All fields below are optional. Multiple fields specified at the same time are chained via AND.
-        Match only sessions with all of the following language_codes
-        """
-    @property
-    def matched_intents(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.intent_pb2.Intent]:
-        """Match only sessions during which all of the following intents were detected
-        NOTE: only name and display name fields are used for comparison
-        """
-    @property
-    def matched_entity_types(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.entity_type_pb2.EntityType]:
-        """Match only sessions during which all of the following entity types were recognized
-        NOTE: only name and display name fields are used for comparison
-        """
     min_intents_confidence_min: builtins.float
     """Match only sessions where the minimum confidence for intent detection along the session falls
     in the following range. Defaults to -1 if not set.
@@ -1470,26 +1501,6 @@ class SessionFilter(google.protobuf.message.Message):
     """Match only sessions for which the number of turns (interaction steps) falls in the following range
     Defaults to MAXINT if not set.
     """
-    @property
-    def labels(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Match only session which have all of the following labels assigned"""
-    @property
-    def user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Match only session which had all of the following user_ids interacting with them."""
-    @property
-    def intent_tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Match only session which have all of the following intent tags assigned"""
-    @property
-    def session_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Match only sessions whose IDs are specified here"""
-    @property
-    def input_contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]:
-        """Match only sessions whose session info contains at least one step having all the contexts specified here
-        The input contexts are pre-conditions for detecting intents
-        """
-    @property
-    def output_contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]:
-        """The output contexts are the result of the intent matching and track the contextual state of a conversation"""
     duration_in_s_min: builtins.float
     """Match only sessions for which the duration in seconds are larger or equal"""
     duration_in_s_max: builtins.float
@@ -1538,24 +1549,77 @@ class SessionFilter(google.protobuf.message.Message):
     """Match only sessions for which the duration in seconds rounded are larger or equal"""
     duration_in_s_rounded_max: builtins.float
     """Match only sessions for which the duration in seconds rounded are smaller or equal"""
+    duration_interval_60s_rounded_min: builtins.float
+    """Match only sessions for which the duration in 60 seconds rounded are larger or equal"""
+    duration_interval_60s_rounded_max: builtins.float
+    """Match only sessions for which the duration in 60 seconds rounded are smaller or equal"""
+    @property
+    def language_codes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """A SessionFilter can be used in some requests to return only sessions matching certain filter conditions.
+        All fields below are optional. Multiple fields specified at the same time are chained via AND.
+        Match only sessions with all of the following language_codes
+        """
+
+    @property
+    def matched_intents(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.intent_pb2.Intent]:
+        """Match only sessions during which all of the following intents were detected
+        NOTE: only name and display name fields are used for comparison
+        """
+
+    @property
+    def matched_entity_types(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.entity_type_pb2.EntityType]:
+        """Match only sessions during which all of the following entity types were recognized
+        NOTE: only name and display name fields are used for comparison
+        """
+
+    @property
+    def labels(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Match only session which have all of the following labels assigned"""
+
+    @property
+    def user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Match only session which had all of the following user_ids interacting with them."""
+
+    @property
+    def intent_tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Match only session which have all of the following intent tags assigned"""
+
+    @property
+    def session_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Match only sessions whose IDs are specified here"""
+
+    @property
+    def input_contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]:
+        """Match only sessions whose session info contains at least one step having all the contexts specified here
+        The input contexts are pre-conditions for detecting intents
+        """
+
+    @property
+    def output_contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]:
+        """The output contexts are the result of the intent matching and track the contextual state of a conversation"""
+
     @property
     def platforms(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[ondewo.nlu.intent_pb2.Intent.Message.Platform.ValueType]:
         """Messages for each of the Intent.Message.Platform were sent to the user"""
+
     @property
     def account_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Ids of the account, e.g. Company Ondewo,
         This field can also be used for customized tracking ids or tag ids
         """
+
     @property
     def property_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Ids of the property of the account, e.g. Domain ondewo.com
         This field can also be used for customized tracking ids or tag ids
         """
+
     @property
     def datastream_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Ids of the datastream of the property of the account, e.g. Subdomain sub1.ondewo.com or sub2.ondewo.com
         This field can also be used for customized tracking ids or tag ids
         """
+
     @property
     def origin_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Ids of the the origin of the user request
@@ -1564,13 +1628,11 @@ class SessionFilter(google.protobuf.message.Message):
         For a chatbot or voicebot on the web, this is the URL on which the bo, e.g. https://ondewo.com/webchat
         For a voice assistant device, this is the device-id or the app id
         """
+
     @property
     def identified_user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Ids of the "identified user" e.g. for a chatbot the email address or for a phone bot the phone number of the user"""
-    duration_interval_60s_rounded_min: builtins.float
-    """Match only sessions for which the duration in 60 seconds rounded are larger or equal"""
-    duration_interval_60s_rounded_max: builtins.float
-    """Match only sessions for which the duration in 60 seconds rounded are smaller or equal"""
+
     def __init__(
         self,
         *,
@@ -1624,17 +1686,17 @@ class SessionFilter(google.protobuf.message.Message):
         duration_interval_60s_rounded_min: builtins.float = ...,
         duration_interval_60s_rounded_max: builtins.float = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["account_ids", b"account_ids", "datastream_ids", b"datastream_ids", "duration_in_m_max", b"duration_in_m_max", "duration_in_m_min", b"duration_in_m_min", "duration_in_m_rounded_max", b"duration_in_m_rounded_max", "duration_in_m_rounded_min", b"duration_in_m_rounded_min", "duration_in_s_max", b"duration_in_s_max", "duration_in_s_min", b"duration_in_s_min", "duration_in_s_rounded_max", b"duration_in_s_rounded_max", "duration_in_s_rounded_min", b"duration_in_s_rounded_min", "duration_interval_15s_rounded_max", b"duration_interval_15s_rounded_max", "duration_interval_15s_rounded_min", b"duration_interval_15s_rounded_min", "duration_interval_30s_rounded_max", b"duration_interval_30s_rounded_max", "duration_interval_30s_rounded_min", b"duration_interval_30s_rounded_min", "duration_interval_45s_rounded_max", b"duration_interval_45s_rounded_max", "duration_interval_45s_rounded_min", b"duration_interval_45s_rounded_min", "duration_interval_60s_rounded_max", b"duration_interval_60s_rounded_max", "duration_interval_60s_rounded_min", b"duration_interval_60s_rounded_min", "earliest", b"earliest", "identified_user_ids", b"identified_user_ids", "input_contexts", b"input_contexts", "intent_tags", b"intent_tags", "labels", b"labels", "language_codes", b"language_codes", "latest", b"latest", "matched_entity_types", b"matched_entity_types", "matched_intents", b"matched_intents", "max_number_turns", b"max_number_turns", "min_entity_types_confidence_max", b"min_entity_types_confidence_max", "min_entity_types_confidence_min", b"min_entity_types_confidence_min", "min_intents_confidence_max", b"min_intents_confidence_max", "min_intents_confidence_min", b"min_intents_confidence_min", "min_number_turns", b"min_number_turns", "origin_ids", b"origin_ids", "output_contexts", b"output_contexts", "platforms", b"platforms", "property_ids", b"property_ids", "session_ids", b"session_ids", "started_time_slot_per_day_phase_max", b"started_time_slot_per_day_phase_max", "started_time_slot_per_day_phase_min", b"started_time_slot_per_day_phase_min", "started_time_slot_per_half_hour_max", b"started_time_slot_per_half_hour_max", "started_time_slot_per_half_hour_min", b"started_time_slot_per_half_hour_min", "started_time_slot_per_hour_max", b"started_time_slot_per_hour_max", "started_time_slot_per_hour_min", b"started_time_slot_per_hour_min", "started_time_slot_per_minute_max", b"started_time_slot_per_minute_max", "started_time_slot_per_minute_min", b"started_time_slot_per_minute_min", "started_time_slot_per_quarter_hour_max", b"started_time_slot_per_quarter_hour_max", "started_time_slot_per_quarter_hour_min", b"started_time_slot_per_quarter_hour_min", "user_ids", b"user_ids"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["account_ids", b"account_ids", "datastream_ids", b"datastream_ids", "duration_in_m_max", b"duration_in_m_max", "duration_in_m_min", b"duration_in_m_min", "duration_in_m_rounded_max", b"duration_in_m_rounded_max", "duration_in_m_rounded_min", b"duration_in_m_rounded_min", "duration_in_s_max", b"duration_in_s_max", "duration_in_s_min", b"duration_in_s_min", "duration_in_s_rounded_max", b"duration_in_s_rounded_max", "duration_in_s_rounded_min", b"duration_in_s_rounded_min", "duration_interval_15s_rounded_max", b"duration_interval_15s_rounded_max", "duration_interval_15s_rounded_min", b"duration_interval_15s_rounded_min", "duration_interval_30s_rounded_max", b"duration_interval_30s_rounded_max", "duration_interval_30s_rounded_min", b"duration_interval_30s_rounded_min", "duration_interval_45s_rounded_max", b"duration_interval_45s_rounded_max", "duration_interval_45s_rounded_min", b"duration_interval_45s_rounded_min", "duration_interval_60s_rounded_max", b"duration_interval_60s_rounded_max", "duration_interval_60s_rounded_min", b"duration_interval_60s_rounded_min", "earliest", b"earliest", "identified_user_ids", b"identified_user_ids", "input_contexts", b"input_contexts", "intent_tags", b"intent_tags", "labels", b"labels", "language_codes", b"language_codes", "latest", b"latest", "matched_entity_types", b"matched_entity_types", "matched_intents", b"matched_intents", "max_number_turns", b"max_number_turns", "min_entity_types_confidence_max", b"min_entity_types_confidence_max", "min_entity_types_confidence_min", b"min_entity_types_confidence_min", "min_intents_confidence_max", b"min_intents_confidence_max", "min_intents_confidence_min", b"min_intents_confidence_min", "min_number_turns", b"min_number_turns", "origin_ids", b"origin_ids", "output_contexts", b"output_contexts", "platforms", b"platforms", "property_ids", b"property_ids", "session_ids", b"session_ids", "started_time_slot_per_day_phase_max", b"started_time_slot_per_day_phase_max", "started_time_slot_per_day_phase_min", b"started_time_slot_per_day_phase_min", "started_time_slot_per_half_hour_max", b"started_time_slot_per_half_hour_max", "started_time_slot_per_half_hour_min", b"started_time_slot_per_half_hour_min", "started_time_slot_per_hour_max", b"started_time_slot_per_hour_max", "started_time_slot_per_hour_min", b"started_time_slot_per_hour_min", "started_time_slot_per_minute_max", b"started_time_slot_per_minute_max", "started_time_slot_per_minute_min", b"started_time_slot_per_minute_min", "started_time_slot_per_quarter_hour_max", b"started_time_slot_per_quarter_hour_max", "started_time_slot_per_quarter_hour_min", b"started_time_slot_per_quarter_hour_min", "user_ids", b"user_ids"]) -> None: ...
 
 global___SessionFilter = SessionFilter
 
-@typing_extensions.final
+@typing.final
 class SessionInfo(google.protobuf.message.Message):
     """This message contains information about session"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    @typing_extensions.final
+    @typing.final
     class ContextSteps(google.protobuf.message.Message):
         """The list of contexts of each step collected in an outer list"""
 
@@ -1648,7 +1710,7 @@ class SessionInfo(google.protobuf.message.Message):
             *,
             contexts: collections.abc.Iterable[ondewo.nlu.context_pb2.Context] | None = ...,
         ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["contexts", b"contexts"]) -> None: ...
+        def ClearField(self, field_name: typing.Literal["contexts", b"contexts"]) -> None: ...
 
     LANGUAGE_CODES_FIELD_NUMBER: builtins.int
     MATCHED_INTENTS_FIELD_NUMBER: builtins.int
@@ -1683,22 +1745,6 @@ class SessionInfo(google.protobuf.message.Message):
     IDENTIFIED_USER_IDS_FIELD_NUMBER: builtins.int
     DURATION_INTERVAL_60S_ROUNDED_FIELD_NUMBER: builtins.int
     PARENT_COMMENT_FIELD_NUMBER: builtins.int
-    @property
-    def language_codes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """A SessionInfo contains some general information about a session.
-
-        This information can be returned inside a Session object for consumption by a client.
-        Or it can be used by the backend to check whether the Session matches a given SessionFilter.
-
-        All fields below are optional. Multiple fields specified at the same time are chained
-        The language codes used in the given session.
-        """
-    @property
-    def matched_intents(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.intent_pb2.Intent]:
-        """A list of intents which have been matched"""
-    @property
-    def matched_entity_types(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.entity_type_pb2.EntityType]:
-        """A list of entity types which have been matched"""
     min_intents_confidence: builtins.float
     """The minimum confidence for intent recognition along the session"""
     min_entity_types_confidence: builtins.float
@@ -1713,25 +1759,6 @@ class SessionInfo(google.protobuf.message.Message):
     """
     number_turns: builtins.int
     """The number of turns (interaction steps) in the given session"""
-    @property
-    def labels(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """The list of labels of the given session"""
-    @property
-    def user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """The user_ids of the users which were interacting within the given session"""
-    @property
-    def intent_tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """The list of intent tags in the given session"""
-    @property
-    def input_context_steps(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___SessionInfo.ContextSteps]:
-        """The input contexts that are matched in the given session. The name of the context here is the short name
-        and not the full URL name including the project parent
-        """
-    @property
-    def output_context_steps(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___SessionInfo.ContextSteps]:
-        """The output contexts that are matched in the given session. The name of the context here is the short name
-        and not the full URL name including the project parent
-        """
     duration_in_s: builtins.float
     """ duration in seconds"""
     duration_in_m: builtins.float
@@ -1756,24 +1783,73 @@ class SessionInfo(google.protobuf.message.Message):
     """started_time_slot_per_minute (e.g. 14:00)"""
     duration_in_s_rounded: builtins.float
     """duration in seconds rounded"""
+    duration_interval_60s_rounded: builtins.float
+    """duration in 60 seconds intervals rounded"""
+    @property
+    def language_codes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """A SessionInfo contains some general information about a session.
+
+        This information can be returned inside a Session object for consumption by a client.
+        Or it can be used by the backend to check whether the Session matches a given SessionFilter.
+
+        All fields below are optional. Multiple fields specified at the same time are chained
+        The language codes used in the given session.
+        """
+
+    @property
+    def matched_intents(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.intent_pb2.Intent]:
+        """A list of intents which have been matched"""
+
+    @property
+    def matched_entity_types(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.entity_type_pb2.EntityType]:
+        """A list of entity types which have been matched"""
+
+    @property
+    def labels(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """The list of labels of the given session"""
+
+    @property
+    def user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """The user_ids of the users which were interacting within the given session"""
+
+    @property
+    def intent_tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """The list of intent tags in the given session"""
+
+    @property
+    def input_context_steps(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___SessionInfo.ContextSteps]:
+        """The input contexts that are matched in the given session. The name of the context here is the short name
+        and not the full URL name including the project parent
+        """
+
+    @property
+    def output_context_steps(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___SessionInfo.ContextSteps]:
+        """The output contexts that are matched in the given session. The name of the context here is the short name
+        and not the full URL name including the project parent
+        """
+
     @property
     def platforms(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[ondewo.nlu.intent_pb2.Intent.Message.Platform.ValueType]:
         """Messages for each of the Intent.Message.Platform were sent to the user"""
+
     @property
     def account_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Ids of the account, e.g. Company Ondewo,
         This field can also be used for customized tracking ids or tag ids
         """
+
     @property
     def property_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Ids of the property of the account, e.g. Domain ondewo.com
         This field can also be used for customized tracking ids or tag ids
         """
+
     @property
     def datastream_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Ids of the datastream of the property of the account, e.g. Subdomain sub1.ondewo.com or sub2.ondewo.com
         This field can also be used for customized tracking ids or tag ids
         """
+
     @property
     def origin_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Ids of the the origin of the user request
@@ -1782,14 +1858,15 @@ class SessionInfo(google.protobuf.message.Message):
         For a chatbot or voicebot on the web, this is the URL on which the bo, e.g. https://ondewo.com/webchat
         For a voice assistant device, this is the device-id or the app id
         """
+
     @property
     def identified_user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Ids of the "identified user" e.g. for a chatbot the email address or for a phone bot the phone number of the user"""
-    duration_interval_60s_rounded: builtins.float
-    """duration in 60 seconds intervals rounded"""
+
     @property
     def parent_comment(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.common_pb2.Comment]:
         """comments about a session"""
+
     def __init__(
         self,
         *,
@@ -1827,11 +1904,11 @@ class SessionInfo(google.protobuf.message.Message):
         duration_interval_60s_rounded: builtins.float = ...,
         parent_comment: collections.abc.Iterable[ondewo.nlu.common_pb2.Comment] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["account_ids", b"account_ids", "datastream_ids", b"datastream_ids", "duration_in_m", b"duration_in_m", "duration_in_m_rounded", b"duration_in_m_rounded", "duration_in_s", b"duration_in_s", "duration_in_s_rounded", b"duration_in_s_rounded", "duration_interval_15s_rounded", b"duration_interval_15s_rounded", "duration_interval_30s_rounded", b"duration_interval_30s_rounded", "duration_interval_45s_rounded", b"duration_interval_45s_rounded", "duration_interval_60s_rounded", b"duration_interval_60s_rounded", "earliest", b"earliest", "identified_user_ids", b"identified_user_ids", "input_context_steps", b"input_context_steps", "intent_tags", b"intent_tags", "labels", b"labels", "language_codes", b"language_codes", "latest", b"latest", "matched_entity_types", b"matched_entity_types", "matched_intents", b"matched_intents", "min_entity_types_confidence", b"min_entity_types_confidence", "min_intents_confidence", b"min_intents_confidence", "number_turns", b"number_turns", "origin_ids", b"origin_ids", "output_context_steps", b"output_context_steps", "parent_comment", b"parent_comment", "platforms", b"platforms", "property_ids", b"property_ids", "started_time_slot_per_day_phase", b"started_time_slot_per_day_phase", "started_time_slot_per_half_hour", b"started_time_slot_per_half_hour", "started_time_slot_per_hour", b"started_time_slot_per_hour", "started_time_slot_per_minute", b"started_time_slot_per_minute", "started_time_slot_per_quarter_hour", b"started_time_slot_per_quarter_hour", "user_ids", b"user_ids"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["account_ids", b"account_ids", "datastream_ids", b"datastream_ids", "duration_in_m", b"duration_in_m", "duration_in_m_rounded", b"duration_in_m_rounded", "duration_in_s", b"duration_in_s", "duration_in_s_rounded", b"duration_in_s_rounded", "duration_interval_15s_rounded", b"duration_interval_15s_rounded", "duration_interval_30s_rounded", b"duration_interval_30s_rounded", "duration_interval_45s_rounded", b"duration_interval_45s_rounded", "duration_interval_60s_rounded", b"duration_interval_60s_rounded", "earliest", b"earliest", "identified_user_ids", b"identified_user_ids", "input_context_steps", b"input_context_steps", "intent_tags", b"intent_tags", "labels", b"labels", "language_codes", b"language_codes", "latest", b"latest", "matched_entity_types", b"matched_entity_types", "matched_intents", b"matched_intents", "min_entity_types_confidence", b"min_entity_types_confidence", "min_intents_confidence", b"min_intents_confidence", "number_turns", b"number_turns", "origin_ids", b"origin_ids", "output_context_steps", b"output_context_steps", "parent_comment", b"parent_comment", "platforms", b"platforms", "property_ids", b"property_ids", "started_time_slot_per_day_phase", b"started_time_slot_per_day_phase", "started_time_slot_per_half_hour", b"started_time_slot_per_half_hour", "started_time_slot_per_hour", b"started_time_slot_per_hour", "started_time_slot_per_minute", b"started_time_slot_per_minute", "started_time_slot_per_quarter_hour", b"started_time_slot_per_quarter_hour", "user_ids", b"user_ids"]) -> None: ...
 
 global___SessionInfo = SessionInfo
 
-@typing_extensions.final
+@typing.final
 class ListSessionsResponse(google.protobuf.message.Message):
     """This message is a response including the listing of sessions"""
 
@@ -1839,24 +1916,25 @@ class ListSessionsResponse(google.protobuf.message.Message):
 
     SESSIONS_FIELD_NUMBER: builtins.int
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    @property
-    def sessions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Session]:
-        """The requested sessions"""
     next_page_token: builtins.str
     """The next_page_token is used to retrieve the next page of a returned result,
     e.g. next_page_token is current_index-2
     """
+    @property
+    def sessions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Session]:
+        """The requested sessions"""
+
     def __init__(
         self,
         *,
         sessions: collections.abc.Iterable[global___Session] | None = ...,
         next_page_token: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["next_page_token", b"next_page_token", "sessions", b"sessions"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["next_page_token", b"next_page_token", "sessions", b"sessions"]) -> None: ...
 
 global___ListSessionsResponse = ListSessionsResponse
 
-@typing_extensions.final
+@typing.final
 class GetSessionRequest(google.protobuf.message.Message):
     """This message is a request to get a session"""
 
@@ -1876,6 +1954,7 @@ class GetSessionRequest(google.protobuf.message.Message):
         """Optional. The mask to control which fields will be filled with data.
         Example: path=["session_info.duration_in_s_min"]
         """
+
     def __init__(
         self,
         *,
@@ -1883,12 +1962,12 @@ class GetSessionRequest(google.protobuf.message.Message):
         session_view: global___Session.View.ValueType = ...,
         field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["field_mask", b"field_mask", "session_id", b"session_id", "session_view", b"session_view"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "session_id", b"session_id", "session_view", b"session_view"]) -> None: ...
 
 global___GetSessionRequest = GetSessionRequest
 
-@typing_extensions.final
+@typing.final
 class CreateSessionRequest(google.protobuf.message.Message):
     """This message is a request to create a session"""
 
@@ -1910,9 +1989,11 @@ class CreateSessionRequest(google.protobuf.message.Message):
     @property
     def labels(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Optional. labels for the session."""
+
     @property
     def contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]:
         """Optional. The collection of contexts to be activated before this query is executed."""
+
     def __init__(
         self,
         *,
@@ -1921,11 +2002,11 @@ class CreateSessionRequest(google.protobuf.message.Message):
         labels: collections.abc.Iterable[builtins.str] | None = ...,
         contexts: collections.abc.Iterable[ondewo.nlu.context_pb2.Context] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["contexts", b"contexts", "labels", b"labels", "parent", b"parent", "session_uuid", b"session_uuid"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["contexts", b"contexts", "labels", b"labels", "parent", b"parent", "session_uuid", b"session_uuid"]) -> None: ...
 
 global___CreateSessionRequest = CreateSessionRequest
 
-@typing_extensions.final
+@typing.final
 class DeleteSessionRequest(google.protobuf.message.Message):
     """This message is a request to delete a session"""
 
@@ -1941,11 +2022,11 @@ class DeleteSessionRequest(google.protobuf.message.Message):
         *,
         session_id: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["session_id", b"session_id"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["session_id", b"session_id"]) -> None: ...
 
 global___DeleteSessionRequest = DeleteSessionRequest
 
-@typing_extensions.final
+@typing.final
 class CreateSessionReviewRequest(google.protobuf.message.Message):
     """*** SESSION-REVIEW RELATED MESSAGES *** //"""
 
@@ -1963,10 +2044,11 @@ class CreateSessionReviewRequest(google.protobuf.message.Message):
     """Optional: The unique identifier of the parent review
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/reviews/&lt;session_review_uuid&gt;</code></pre>
     """
+    session_review_view: global___SessionReview.View.ValueType
     @property
     def session_review(self) -> global___SessionReview:
         """The reviews for all steps in the session"""
-    session_review_view: global___SessionReview.View.ValueType
+
     def __init__(
         self,
         *,
@@ -1975,12 +2057,12 @@ class CreateSessionReviewRequest(google.protobuf.message.Message):
         session_review: global___SessionReview | None = ...,
         session_review_view: global___SessionReview.View.ValueType = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["session_review", b"session_review"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["parent_review_id", b"parent_review_id", "session_id", b"session_id", "session_review", b"session_review", "session_review_view", b"session_review_view"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["session_review", b"session_review"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["parent_review_id", b"parent_review_id", "session_id", b"session_id", "session_review", b"session_review", "session_review_view", b"session_review_view"]) -> None: ...
 
 global___CreateSessionReviewRequest = CreateSessionReviewRequest
 
-@typing_extensions.final
+@typing.final
 class SessionReview(google.protobuf.message.Message):
     """This message contains a session review"""
 
@@ -2022,19 +2104,22 @@ class SessionReview(google.protobuf.message.Message):
     """The unique identifier for the given review
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/reviews/&lt;session_review_uuid&gt;</code></pre>
     """
-    @property
-    def session_review_steps(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___SessionReviewStep]:
-        """The reviews for all steps in the session"""
-    @property
-    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Creation date and time. Read-only field."""
-    @property
-    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Modification date and time. Read-only field."""
     created_by: builtins.str
     """User id in form of a valid UUID."""
     modified_by: builtins.str
     """User id in form of a valid UUID."""
+    @property
+    def session_review_steps(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___SessionReviewStep]:
+        """The reviews for all steps in the session"""
+
+    @property
+    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Creation date and time. Read-only field."""
+
+    @property
+    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Modification date and time. Read-only field."""
+
     def __init__(
         self,
         *,
@@ -2045,12 +2130,12 @@ class SessionReview(google.protobuf.message.Message):
         created_by: builtins.str = ...,
         modified_by: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "created_by", b"created_by", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "session_review_steps", b"session_review_steps"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["created_at", b"created_at", "created_by", b"created_by", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "session_review_steps", b"session_review_steps"]) -> None: ...
 
 global___SessionReview = SessionReview
 
-@typing_extensions.final
+@typing.final
 class SessionReviewStep(google.protobuf.message.Message):
     """This message contains a session review step"""
 
@@ -2074,6 +2159,14 @@ class SessionReviewStep(google.protobuf.message.Message):
     """The unique identifier for the given review step
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/reviews/&lt;review_uuid&gt;/sessionreviewsteps/&lt;session_review_step_uuid&gt;</code></pre>
     """
+    language_code: builtins.str
+    """The language code"""
+    query_text_original: builtins.str
+    """User input without any pre-processing applied"""
+    created_by: builtins.str
+    """User id in form of a valid UUID."""
+    modified_by: builtins.str
+    """User id in form of a valid UUID."""
     @property
     def annotated_usersays(self) -> ondewo.nlu.intent_pb2.Intent.TrainingPhrase:
         """The user says with markup of the detected entity types after the preprocessing such as spelling correction,
@@ -2081,38 +2174,39 @@ class SessionReviewStep(google.protobuf.message.Message):
 
         This string represents what has been passed to the entity recognition and intent detection algorithms.
         """
-    language_code: builtins.str
-    """The language code"""
+
     @property
     def detected_intents(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___DetectedIntent]:
         """Unique detected intents ordered by descending confidence"""
+
     @property
     def contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]:
         """The contexts which were active at the beginning of this step"""
+
     @property
     def contexts_out(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]:
         """The output contexts of this step"""
-    query_text_original: builtins.str
-    """User input without any pre-processing applied"""
+
     @property
     def platforms(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[ondewo.nlu.intent_pb2.Intent.Message.Platform.ValueType]:
         """Messages for each of the Intent.Message.Platform were sent to the user"""
+
     @property
     def timestamp(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Timestamp of session review step"""
+
     @property
     def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Creation date and time. Read-only field."""
+
     @property
     def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Modification date and time. Read-only field."""
-    created_by: builtins.str
-    """User id in form of a valid UUID."""
-    modified_by: builtins.str
-    """User id in form of a valid UUID."""
+
     @property
     def audio_file_resources(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AudioFileResource]:
         """audio file resources associated with the session review step"""
+
     def __init__(
         self,
         *,
@@ -2131,12 +2225,12 @@ class SessionReviewStep(google.protobuf.message.Message):
         modified_by: builtins.str = ...,
         audio_file_resources: collections.abc.Iterable[global___AudioFileResource] | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["annotated_usersays", b"annotated_usersays", "created_at", b"created_at", "modified_at", b"modified_at", "timestamp", b"timestamp"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["annotated_usersays", b"annotated_usersays", "audio_file_resources", b"audio_file_resources", "contexts", b"contexts", "contexts_out", b"contexts_out", "created_at", b"created_at", "created_by", b"created_by", "detected_intents", b"detected_intents", "language_code", b"language_code", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "platforms", b"platforms", "query_text_original", b"query_text_original", "timestamp", b"timestamp"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["annotated_usersays", b"annotated_usersays", "created_at", b"created_at", "modified_at", b"modified_at", "timestamp", b"timestamp"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["annotated_usersays", b"annotated_usersays", "audio_file_resources", b"audio_file_resources", "contexts", b"contexts", "contexts_out", b"contexts_out", "created_at", b"created_at", "created_by", b"created_by", "detected_intents", b"detected_intents", "language_code", b"language_code", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "platforms", b"platforms", "query_text_original", b"query_text_original", "timestamp", b"timestamp"]) -> None: ...
 
 global___SessionReviewStep = SessionReviewStep
 
-@typing_extensions.final
+@typing.final
 class DetectedIntent(google.protobuf.message.Message):
     """This message contains a detected intent"""
 
@@ -2147,19 +2241,10 @@ class DetectedIntent(google.protobuf.message.Message):
     ALGORITHM_FIELD_NUMBER: builtins.int
     FULFILLMENT_MESSAGES_FIELD_NUMBER: builtins.int
     REQUIRED_PARAM_MISSING_FIELD_NUMBER: builtins.int
-    @property
-    def intent(self) -> ondewo.nlu.intent_pb2.Intent:
-        """intent"""
     score: builtins.float
     """score of intent detection"""
     algorithm: builtins.str
     """intent detection algorithm"""
-    @property
-    def fulfillment_messages(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.intent_pb2.Intent.Message]:
-        """collection of rich messages to present to the user
-        This field is set only for the first detected intent. For the rest of the intents the messages are not
-          resolved and the raw messages for the current language code are available in self.intent.messages
-        """
     required_param_missing: builtins.bool
     """This field is set to:
     - `true` if the matched intent has required parameters and not all of
@@ -2167,6 +2252,17 @@ class DetectedIntent(google.protobuf.message.Message):
     - `false` if all required parameter values have been collected, or if the
        matched intent doesn't contain any required parameters.
     """
+    @property
+    def intent(self) -> ondewo.nlu.intent_pb2.Intent:
+        """intent"""
+
+    @property
+    def fulfillment_messages(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.intent_pb2.Intent.Message]:
+        """collection of rich messages to present to the user
+        This field is set only for the first detected intent. For the rest of the intents the messages are not
+          resolved and the raw messages for the current language code are available in self.intent.messages
+        """
+
     def __init__(
         self,
         *,
@@ -2176,12 +2272,12 @@ class DetectedIntent(google.protobuf.message.Message):
         fulfillment_messages: collections.abc.Iterable[ondewo.nlu.intent_pb2.Intent.Message] | None = ...,
         required_param_missing: builtins.bool = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["intent", b"intent"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["algorithm", b"algorithm", "fulfillment_messages", b"fulfillment_messages", "intent", b"intent", "required_param_missing", b"required_param_missing", "score", b"score"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["intent", b"intent"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["algorithm", b"algorithm", "fulfillment_messages", b"fulfillment_messages", "intent", b"intent", "required_param_missing", b"required_param_missing", "score", b"score"]) -> None: ...
 
 global___DetectedIntent = DetectedIntent
 
-@typing_extensions.final
+@typing.final
 class ListSessionLabelsRequest(google.protobuf.message.Message):
     """This message is a request to list session labels"""
 
@@ -2195,11 +2291,11 @@ class ListSessionLabelsRequest(google.protobuf.message.Message):
         *,
         session_id: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["session_id", b"session_id"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["session_id", b"session_id"]) -> None: ...
 
 global___ListSessionLabelsRequest = ListSessionLabelsRequest
 
-@typing_extensions.final
+@typing.final
 class ListSessionLabelsOfAllSessionsRequest(google.protobuf.message.Message):
     """request to list all labels of all sessions"""
 
@@ -2214,18 +2310,19 @@ class ListSessionLabelsOfAllSessionsRequest(google.protobuf.message.Message):
     @property
     def session_filter(self) -> global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
+
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
         session_filter: global___SessionFilter | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["session_filter", b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
 
 global___ListSessionLabelsOfAllSessionsRequest = ListSessionLabelsOfAllSessionsRequest
 
-@typing_extensions.final
+@typing.final
 class ListSessionLabelsResponse(google.protobuf.message.Message):
     """This message is a response of listing session labels"""
 
@@ -2235,16 +2332,17 @@ class ListSessionLabelsResponse(google.protobuf.message.Message):
     @property
     def labels(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """The labels of the session"""
+
     def __init__(
         self,
         *,
         labels: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["labels", b"labels"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["labels", b"labels"]) -> None: ...
 
 global___ListSessionLabelsResponse = ListSessionLabelsResponse
 
-@typing_extensions.final
+@typing.final
 class ListLanguageCodesOfAllSessionsRequest(google.protobuf.message.Message):
     """request to list all language codes of all sessions"""
 
@@ -2259,18 +2357,19 @@ class ListLanguageCodesOfAllSessionsRequest(google.protobuf.message.Message):
     @property
     def session_filter(self) -> global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
+
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
         session_filter: global___SessionFilter | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["session_filter", b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
 
 global___ListLanguageCodesOfAllSessionsRequest = ListLanguageCodesOfAllSessionsRequest
 
-@typing_extensions.final
+@typing.final
 class ListLanguageCodesResponse(google.protobuf.message.Message):
     """This message is a response of listing session language_codes"""
 
@@ -2280,16 +2379,17 @@ class ListLanguageCodesResponse(google.protobuf.message.Message):
     @property
     def language_codes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """The language_codes of the session"""
+
     def __init__(
         self,
         *,
         language_codes: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["language_codes", b"language_codes"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["language_codes", b"language_codes"]) -> None: ...
 
 global___ListLanguageCodesResponse = ListLanguageCodesResponse
 
-@typing_extensions.final
+@typing.final
 class ListMatchedIntentsOfAllSessionsRequest(google.protobuf.message.Message):
     """request to list all matched_intents of all sessions"""
 
@@ -2304,18 +2404,19 @@ class ListMatchedIntentsOfAllSessionsRequest(google.protobuf.message.Message):
     @property
     def session_filter(self) -> global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
+
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
         session_filter: global___SessionFilter | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["session_filter", b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
 
 global___ListMatchedIntentsOfAllSessionsRequest = ListMatchedIntentsOfAllSessionsRequest
 
-@typing_extensions.final
+@typing.final
 class ListMatchedIntentsResponse(google.protobuf.message.Message):
     """This message is a response of listing session matched_intents"""
 
@@ -2325,16 +2426,17 @@ class ListMatchedIntentsResponse(google.protobuf.message.Message):
     @property
     def matched_intents(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """The matched_intents of the session"""
+
     def __init__(
         self,
         *,
         matched_intents: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["matched_intents", b"matched_intents"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["matched_intents", b"matched_intents"]) -> None: ...
 
 global___ListMatchedIntentsResponse = ListMatchedIntentsResponse
 
-@typing_extensions.final
+@typing.final
 class ListMatchedEntityTypesOfAllSessionsRequest(google.protobuf.message.Message):
     """request to list all matched_entity_types of all sessions"""
 
@@ -2349,18 +2451,19 @@ class ListMatchedEntityTypesOfAllSessionsRequest(google.protobuf.message.Message
     @property
     def session_filter(self) -> global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
+
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
         session_filter: global___SessionFilter | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["session_filter", b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
 
 global___ListMatchedEntityTypesOfAllSessionsRequest = ListMatchedEntityTypesOfAllSessionsRequest
 
-@typing_extensions.final
+@typing.final
 class ListMatchedEntityTypesResponse(google.protobuf.message.Message):
     """This message is a response of listing session matched_entity_types"""
 
@@ -2370,16 +2473,17 @@ class ListMatchedEntityTypesResponse(google.protobuf.message.Message):
     @property
     def matched_entity_types(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """The matched_entity_types of the session"""
+
     def __init__(
         self,
         *,
         matched_entity_types: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["matched_entity_types", b"matched_entity_types"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["matched_entity_types", b"matched_entity_types"]) -> None: ...
 
 global___ListMatchedEntityTypesResponse = ListMatchedEntityTypesResponse
 
-@typing_extensions.final
+@typing.final
 class ListUserIdsOfAllSessionsRequest(google.protobuf.message.Message):
     """request to list all user_ids of all sessions"""
 
@@ -2394,18 +2498,19 @@ class ListUserIdsOfAllSessionsRequest(google.protobuf.message.Message):
     @property
     def session_filter(self) -> global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
+
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
         session_filter: global___SessionFilter | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["session_filter", b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
 
 global___ListUserIdsOfAllSessionsRequest = ListUserIdsOfAllSessionsRequest
 
-@typing_extensions.final
+@typing.final
 class ListUserIdsResponse(google.protobuf.message.Message):
     """This message is a response of listing session user_ids"""
 
@@ -2415,16 +2520,17 @@ class ListUserIdsResponse(google.protobuf.message.Message):
     @property
     def user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """The user_ids of the session"""
+
     def __init__(
         self,
         *,
         user_ids: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["user_ids", b"user_ids"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["user_ids", b"user_ids"]) -> None: ...
 
 global___ListUserIdsResponse = ListUserIdsResponse
 
-@typing_extensions.final
+@typing.final
 class ListIdentifiedUserIdsOfAllSessionsRequest(google.protobuf.message.Message):
     """request to list all identified_user_ids of all sessions"""
 
@@ -2439,18 +2545,19 @@ class ListIdentifiedUserIdsOfAllSessionsRequest(google.protobuf.message.Message)
     @property
     def session_filter(self) -> global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
+
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
         session_filter: global___SessionFilter | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["session_filter", b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
 
 global___ListIdentifiedUserIdsOfAllSessionsRequest = ListIdentifiedUserIdsOfAllSessionsRequest
 
-@typing_extensions.final
+@typing.final
 class ListIdentifiedUserIdsResponse(google.protobuf.message.Message):
     """This message is a response of listing session identified_user_ids"""
 
@@ -2460,16 +2567,17 @@ class ListIdentifiedUserIdsResponse(google.protobuf.message.Message):
     @property
     def identified_user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """The identified_user_ids of the session"""
+
     def __init__(
         self,
         *,
         identified_user_ids: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["identified_user_ids", b"identified_user_ids"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["identified_user_ids", b"identified_user_ids"]) -> None: ...
 
 global___ListIdentifiedUserIdsResponse = ListIdentifiedUserIdsResponse
 
-@typing_extensions.final
+@typing.final
 class ListTagsOfAllSessionsRequest(google.protobuf.message.Message):
     """request to list all tags of all sessions"""
 
@@ -2484,18 +2592,19 @@ class ListTagsOfAllSessionsRequest(google.protobuf.message.Message):
     @property
     def session_filter(self) -> global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
+
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
         session_filter: global___SessionFilter | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["session_filter", b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
 
 global___ListTagsOfAllSessionsRequest = ListTagsOfAllSessionsRequest
 
-@typing_extensions.final
+@typing.final
 class ListTagsResponse(google.protobuf.message.Message):
     """This message is a response of listing session tags"""
 
@@ -2505,16 +2614,17 @@ class ListTagsResponse(google.protobuf.message.Message):
     @property
     def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """The tags of the session"""
+
     def __init__(
         self,
         *,
         tags: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["tags", b"tags"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["tags", b"tags"]) -> None: ...
 
 global___ListTagsResponse = ListTagsResponse
 
-@typing_extensions.final
+@typing.final
 class ListInputContextsOfAllSessionsRequest(google.protobuf.message.Message):
     """request to list all input_contexts of all sessions"""
 
@@ -2529,18 +2639,19 @@ class ListInputContextsOfAllSessionsRequest(google.protobuf.message.Message):
     @property
     def session_filter(self) -> global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
+
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
         session_filter: global___SessionFilter | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["session_filter", b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
 
 global___ListInputContextsOfAllSessionsRequest = ListInputContextsOfAllSessionsRequest
 
-@typing_extensions.final
+@typing.final
 class ListInputContextsResponse(google.protobuf.message.Message):
     """This message is a response of listing session input_contexts"""
 
@@ -2550,16 +2661,17 @@ class ListInputContextsResponse(google.protobuf.message.Message):
     @property
     def input_contexts(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """The input_contexts ids of the session"""
+
     def __init__(
         self,
         *,
         input_contexts: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["input_contexts", b"input_contexts"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["input_contexts", b"input_contexts"]) -> None: ...
 
 global___ListInputContextsResponse = ListInputContextsResponse
 
-@typing_extensions.final
+@typing.final
 class ListOutputContextsOfAllSessionsRequest(google.protobuf.message.Message):
     """request to list all output_contexts of all sessions"""
 
@@ -2574,18 +2686,19 @@ class ListOutputContextsOfAllSessionsRequest(google.protobuf.message.Message):
     @property
     def session_filter(self) -> global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
+
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
         session_filter: global___SessionFilter | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["session_filter", b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
 
 global___ListOutputContextsOfAllSessionsRequest = ListOutputContextsOfAllSessionsRequest
 
-@typing_extensions.final
+@typing.final
 class ListOutputContextsResponse(google.protobuf.message.Message):
     """This message is a response of listing session output_contexts"""
 
@@ -2595,16 +2708,17 @@ class ListOutputContextsResponse(google.protobuf.message.Message):
     @property
     def output_contexts(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """The output_contexts ids of the session"""
+
     def __init__(
         self,
         *,
         output_contexts: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["output_contexts", b"output_contexts"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["output_contexts", b"output_contexts"]) -> None: ...
 
 global___ListOutputContextsResponse = ListOutputContextsResponse
 
-@typing_extensions.final
+@typing.final
 class ListPlatformsOfAllSessionsRequest(google.protobuf.message.Message):
     """request to list all labels of all sessions"""
 
@@ -2619,18 +2733,19 @@ class ListPlatformsOfAllSessionsRequest(google.protobuf.message.Message):
     @property
     def session_filter(self) -> global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
+
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
         session_filter: global___SessionFilter | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["session_filter", b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
 
 global___ListPlatformsOfAllSessionsRequest = ListPlatformsOfAllSessionsRequest
 
-@typing_extensions.final
+@typing.final
 class ListPlatformsResponse(google.protobuf.message.Message):
     """This message is a response of listing session platforms"""
 
@@ -2640,16 +2755,17 @@ class ListPlatformsResponse(google.protobuf.message.Message):
     @property
     def platforms(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """The platforms of the session"""
+
     def __init__(
         self,
         *,
         platforms: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["platforms", b"platforms"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["platforms", b"platforms"]) -> None: ...
 
 global___ListPlatformsResponse = ListPlatformsResponse
 
-@typing_extensions.final
+@typing.final
 class ListAccountIdsOfAllSessionsRequest(google.protobuf.message.Message):
     """request to list all account_ids of all sessions"""
 
@@ -2664,18 +2780,19 @@ class ListAccountIdsOfAllSessionsRequest(google.protobuf.message.Message):
     @property
     def session_filter(self) -> global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
+
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
         session_filter: global___SessionFilter | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["session_filter", b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
 
 global___ListAccountIdsOfAllSessionsRequest = ListAccountIdsOfAllSessionsRequest
 
-@typing_extensions.final
+@typing.final
 class ListAccountIdsResponse(google.protobuf.message.Message):
     """This message is a response of listing session account_ids"""
 
@@ -2685,16 +2802,17 @@ class ListAccountIdsResponse(google.protobuf.message.Message):
     @property
     def account_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """The account_ids of the session"""
+
     def __init__(
         self,
         *,
         account_ids: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["account_ids", b"account_ids"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["account_ids", b"account_ids"]) -> None: ...
 
 global___ListAccountIdsResponse = ListAccountIdsResponse
 
-@typing_extensions.final
+@typing.final
 class ListPropertyIdsOfAllSessionsRequest(google.protobuf.message.Message):
     """request to list all property_ids of all sessions"""
 
@@ -2709,18 +2827,19 @@ class ListPropertyIdsOfAllSessionsRequest(google.protobuf.message.Message):
     @property
     def session_filter(self) -> global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
+
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
         session_filter: global___SessionFilter | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["session_filter", b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
 
 global___ListPropertyIdsOfAllSessionsRequest = ListPropertyIdsOfAllSessionsRequest
 
-@typing_extensions.final
+@typing.final
 class ListPropertyIdsResponse(google.protobuf.message.Message):
     """This message is a response of listing session property_ids"""
 
@@ -2730,16 +2849,17 @@ class ListPropertyIdsResponse(google.protobuf.message.Message):
     @property
     def property_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """The property_ids of the session"""
+
     def __init__(
         self,
         *,
         property_ids: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["property_ids", b"property_ids"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["property_ids", b"property_ids"]) -> None: ...
 
 global___ListPropertyIdsResponse = ListPropertyIdsResponse
 
-@typing_extensions.final
+@typing.final
 class ListDatastreamIdsOfAllSessionsRequest(google.protobuf.message.Message):
     """request to list all datastream_ids of all sessions"""
 
@@ -2754,18 +2874,19 @@ class ListDatastreamIdsOfAllSessionsRequest(google.protobuf.message.Message):
     @property
     def session_filter(self) -> global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
+
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
         session_filter: global___SessionFilter | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["session_filter", b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
 
 global___ListDatastreamIdsOfAllSessionsRequest = ListDatastreamIdsOfAllSessionsRequest
 
-@typing_extensions.final
+@typing.final
 class ListDatastreamIdsResponse(google.protobuf.message.Message):
     """This message is a response of listing session datastream_ids"""
 
@@ -2775,16 +2896,17 @@ class ListDatastreamIdsResponse(google.protobuf.message.Message):
     @property
     def datastream_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """The datastream_ids of the session"""
+
     def __init__(
         self,
         *,
         datastream_ids: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["datastream_ids", b"datastream_ids"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["datastream_ids", b"datastream_ids"]) -> None: ...
 
 global___ListDatastreamIdsResponse = ListDatastreamIdsResponse
 
-@typing_extensions.final
+@typing.final
 class ListOriginIdsOfAllSessionsRequest(google.protobuf.message.Message):
     """request to list all origin_ids of all sessions"""
 
@@ -2799,18 +2921,19 @@ class ListOriginIdsOfAllSessionsRequest(google.protobuf.message.Message):
     @property
     def session_filter(self) -> global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
+
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
         session_filter: global___SessionFilter | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["session_filter", b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
 
 global___ListOriginIdsOfAllSessionsRequest = ListOriginIdsOfAllSessionsRequest
 
-@typing_extensions.final
+@typing.final
 class ListOriginIdsResponse(google.protobuf.message.Message):
     """This message is a response of listing session origin_ids"""
 
@@ -2820,16 +2943,17 @@ class ListOriginIdsResponse(google.protobuf.message.Message):
     @property
     def origin_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """The origin_ids of the session"""
+
     def __init__(
         self,
         *,
         origin_ids: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["origin_ids", b"origin_ids"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["origin_ids", b"origin_ids"]) -> None: ...
 
 global___ListOriginIdsResponse = ListOriginIdsResponse
 
-@typing_extensions.final
+@typing.final
 class AddSessionLabelsRequest(google.protobuf.message.Message):
     """This message is a request to add session labels"""
 
@@ -2842,17 +2966,18 @@ class AddSessionLabelsRequest(google.protobuf.message.Message):
     @property
     def labels(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """The labels to add to the session"""
+
     def __init__(
         self,
         *,
         session_id: builtins.str = ...,
         labels: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["labels", b"labels", "session_id", b"session_id"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["labels", b"labels", "session_id", b"session_id"]) -> None: ...
 
 global___AddSessionLabelsRequest = AddSessionLabelsRequest
 
-@typing_extensions.final
+@typing.final
 class DeleteSessionLabelsRequest(google.protobuf.message.Message):
     """This message is a request to delete session labels"""
 
@@ -2865,17 +2990,18 @@ class DeleteSessionLabelsRequest(google.protobuf.message.Message):
     @property
     def labels(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """The labels to delete from the session"""
+
     def __init__(
         self,
         *,
         session_id: builtins.str = ...,
         labels: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["labels", b"labels", "session_id", b"session_id"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["labels", b"labels", "session_id", b"session_id"]) -> None: ...
 
 global___DeleteSessionLabelsRequest = DeleteSessionLabelsRequest
 
-@typing_extensions.final
+@typing.final
 class AddSessionCommentRequest(google.protobuf.message.Message):
     """This message is a request to add a comment to a session"""
 
@@ -2888,18 +3014,19 @@ class AddSessionCommentRequest(google.protobuf.message.Message):
     @property
     def comment(self) -> ondewo.nlu.common_pb2.Comment:
         """The comment to add to the session"""
+
     def __init__(
         self,
         *,
         session_id: builtins.str = ...,
         comment: ondewo.nlu.common_pb2.Comment | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["comment", b"comment"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["comment", b"comment", "session_id", b"session_id"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["comment", b"comment"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["comment", b"comment", "session_id", b"session_id"]) -> None: ...
 
 global___AddSessionCommentRequest = AddSessionCommentRequest
 
-@typing_extensions.final
+@typing.final
 class DeleteSessionCommentsRequest(google.protobuf.message.Message):
     """This message is a request to delete a session comment"""
 
@@ -2912,17 +3039,18 @@ class DeleteSessionCommentsRequest(google.protobuf.message.Message):
     @property
     def comment_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """The comment names to delete from the session"""
+
     def __init__(
         self,
         *,
         session_id: builtins.str = ...,
         comment_names: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["comment_names", b"comment_names", "session_id", b"session_id"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["comment_names", b"comment_names", "session_id", b"session_id"]) -> None: ...
 
 global___DeleteSessionCommentsRequest = DeleteSessionCommentsRequest
 
-@typing_extensions.final
+@typing.final
 class UpdateSessionCommentsRequest(google.protobuf.message.Message):
     """This message is a request to update a session comment"""
 
@@ -2935,18 +3063,19 @@ class UpdateSessionCommentsRequest(google.protobuf.message.Message):
     @property
     def comment(self) -> ondewo.nlu.common_pb2.Comment:
         """The comment of a session to be updated"""
+
     def __init__(
         self,
         *,
         session_id: builtins.str = ...,
         comment: ondewo.nlu.common_pb2.Comment | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["comment", b"comment"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["comment", b"comment", "session_id", b"session_id"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["comment", b"comment"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["comment", b"comment", "session_id", b"session_id"]) -> None: ...
 
 global___UpdateSessionCommentsRequest = UpdateSessionCommentsRequest
 
-@typing_extensions.final
+@typing.final
 class ListSessionCommentsRequest(google.protobuf.message.Message):
     """This message is a request to list comments of a session"""
 
@@ -2989,11 +3118,11 @@ class ListSessionCommentsRequest(google.protobuf.message.Message):
         session_id: builtins.str = ...,
         page_token: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["page_token", b"page_token", "session_id", b"session_id"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["page_token", b"page_token", "session_id", b"session_id"]) -> None: ...
 
 global___ListSessionCommentsRequest = ListSessionCommentsRequest
 
-@typing_extensions.final
+@typing.final
 class ListSessionCommentsResponse(google.protobuf.message.Message):
     """This message is a request to list comments of a session"""
 
@@ -3001,11 +3130,6 @@ class ListSessionCommentsResponse(google.protobuf.message.Message):
 
     COMMENT_FIELD_NUMBER: builtins.int
     PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    @property
-    def comment(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.common_pb2.Comment]:
-        """The comments of a specific session
-        Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/comments/&lt;comment_uuid&gt;</code></pre>
-        """
     page_token: builtins.str
     """Optional: The page token to support pagination.
     Pagination allows you to retrieve a large result set in smaller, more manageable portions.
@@ -3031,17 +3155,23 @@ class ListSessionCommentsResponse(google.protobuf.message.Message):
     * "current_index1--page_size-20"
     * "current_index-1--page_size--20"
     """
+    @property
+    def comment(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.common_pb2.Comment]:
+        """The comments of a specific session
+        Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/comments/&lt;comment_uuid&gt;</code></pre>
+        """
+
     def __init__(
         self,
         *,
         comment: collections.abc.Iterable[ondewo.nlu.common_pb2.Comment] | None = ...,
         page_token: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["comment", b"comment", "page_token", b"page_token"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["comment", b"comment", "page_token", b"page_token"]) -> None: ...
 
 global___ListSessionCommentsResponse = ListSessionCommentsResponse
 
-@typing_extensions.final
+@typing.final
 class ListSessionReviewsRequest(google.protobuf.message.Message):
     """This message is a request to list session reviews"""
 
@@ -3088,11 +3218,11 @@ class ListSessionReviewsRequest(google.protobuf.message.Message):
         session_review_view: global___SessionReview.View.ValueType = ...,
         page_token: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["page_token", b"page_token", "session_id", b"session_id", "session_review_view", b"session_review_view"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["page_token", b"page_token", "session_id", b"session_id", "session_review_view", b"session_review_view"]) -> None: ...
 
 global___ListSessionReviewsRequest = ListSessionReviewsRequest
 
-@typing_extensions.final
+@typing.final
 class ListSessionReviewsResponse(google.protobuf.message.Message):
     """This message is a response of listing session reviews"""
 
@@ -3100,24 +3230,25 @@ class ListSessionReviewsResponse(google.protobuf.message.Message):
 
     SESSION_REVIEWS_FIELD_NUMBER: builtins.int
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    @property
-    def session_reviews(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___SessionReview]:
-        """The requested session reviews"""
     next_page_token: builtins.str
     """The next_page_token is used to retrieve the next page of a returned result,
     e.g. next_page_token is current_index-2
     """
+    @property
+    def session_reviews(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___SessionReview]:
+        """The requested session reviews"""
+
     def __init__(
         self,
         *,
         session_reviews: collections.abc.Iterable[global___SessionReview] | None = ...,
         next_page_token: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["next_page_token", b"next_page_token", "session_reviews", b"session_reviews"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["next_page_token", b"next_page_token", "session_reviews", b"session_reviews"]) -> None: ...
 
 global___ListSessionReviewsResponse = ListSessionReviewsResponse
 
-@typing_extensions.final
+@typing.final
 class GetSessionReviewRequest(google.protobuf.message.Message):
     """This message is a request to get session review"""
 
@@ -3134,11 +3265,11 @@ class GetSessionReviewRequest(google.protobuf.message.Message):
         session_review_id: builtins.str = ...,
         session_review_view: global___SessionReview.View.ValueType = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["session_review_id", b"session_review_id", "session_review_view", b"session_review_view"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["session_review_id", b"session_review_id", "session_review_view", b"session_review_view"]) -> None: ...
 
 global___GetSessionReviewRequest = GetSessionReviewRequest
 
-@typing_extensions.final
+@typing.final
 class GetLatestSessionReviewRequest(google.protobuf.message.Message):
     """This message is a request to get latest session review"""
 
@@ -3158,11 +3289,11 @@ class GetLatestSessionReviewRequest(google.protobuf.message.Message):
         session_id: builtins.str = ...,
         session_review_view: global___SessionReview.View.ValueType = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["session_id", b"session_id", "session_review_view", b"session_review_view"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["session_id", b"session_id", "session_review_view", b"session_review_view"]) -> None: ...
 
 global___GetLatestSessionReviewRequest = GetLatestSessionReviewRequest
 
-@typing_extensions.final
+@typing.final
 class AudioFileResource(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -3191,21 +3322,24 @@ class AudioFileResource(google.protobuf.message.Message):
     """sample rate of the audio"""
     audio_file_resource_type: global___AudioFileResourceType.ValueType
     """File type of an audio resource"""
+    created_by: builtins.str
+    """User id in form of a valid UUID."""
+    modified_by: builtins.str
+    """User id in form of a valid UUID."""
     @property
     def transcriptions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___S2tTranscription]:
         """transcriptions of the user input sorted by score.
         A transcription can be from a speech-to-text system or a human
         """
+
     @property
     def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Creation date and time. Read-only field."""
+
     @property
     def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Modification date and time. Read-only field."""
-    created_by: builtins.str
-    """User id in form of a valid UUID."""
-    modified_by: builtins.str
-    """User id in form of a valid UUID."""
+
     def __init__(
         self,
         *,
@@ -3221,12 +3355,12 @@ class AudioFileResource(google.protobuf.message.Message):
         created_by: builtins.str = ...,
         modified_by: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["audio_file_resource_type", b"audio_file_resource_type", "bytes", b"bytes", "created_at", b"created_at", "created_by", b"created_by", "duration_in_s", b"duration_in_s", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "sample_rate", b"sample_rate", "transcriptions", b"transcriptions"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["audio_file_resource_type", b"audio_file_resource_type", "bytes", b"bytes", "created_at", b"created_at", "created_by", b"created_by", "duration_in_s", b"duration_in_s", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "sample_rate", b"sample_rate", "transcriptions", b"transcriptions"]) -> None: ...
 
 global___AudioFileResource = AudioFileResource
 
-@typing_extensions.final
+@typing.final
 class GetAudioFilesRequest(google.protobuf.message.Message):
     """This message is a request to get audio files specified"""
 
@@ -3241,11 +3375,6 @@ class GetAudioFilesRequest(google.protobuf.message.Message):
     """Required. The project of this agent.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
-    @property
-    def names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """The unique identifier of the audio file of the specific session
-        Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
-        """
     resource_view: global___ResourceView.ValueType
     """Represents the options for views of resources"""
     page_token: builtins.str
@@ -3275,6 +3404,12 @@ class GetAudioFilesRequest(google.protobuf.message.Message):
     """
     sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType
     """sorting mode"""
+    @property
+    def names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """The unique identifier of the audio file of the specific session
+        Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
+        """
+
     def __init__(
         self,
         *,
@@ -3284,11 +3419,11 @@ class GetAudioFilesRequest(google.protobuf.message.Message):
         page_token: builtins.str = ...,
         sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["names", b"names", "page_token", b"page_token", "parent", b"parent", "resource_view", b"resource_view", "sorting_mode", b"sorting_mode"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["names", b"names", "page_token", b"page_token", "parent", b"parent", "resource_view", b"resource_view", "sorting_mode", b"sorting_mode"]) -> None: ...
 
 global___GetAudioFilesRequest = GetAudioFilesRequest
 
-@typing_extensions.final
+@typing.final
 class GetAudioFilesResponse(google.protobuf.message.Message):
     """This message is a request to retrieve the audio files specified"""
 
@@ -3297,17 +3432,18 @@ class GetAudioFilesResponse(google.protobuf.message.Message):
     AUDIO_FILES_FIELD_NUMBER: builtins.int
     ERROR_MESSAGE_FIELD_NUMBER: builtins.int
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    @property
-    def audio_files(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AudioFileResource]:
-        """The unique identifier of the audio file for a specific session.
-        Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
-        """
     error_message: builtins.str
     """error message if there are any."""
     next_page_token: builtins.str
     """The next_page_token is used to retrieve the next page of a returned result,
     e.g. next_page_token is current_index-2
     """
+    @property
+    def audio_files(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AudioFileResource]:
+        """The unique identifier of the audio file for a specific session.
+        Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
+        """
+
     def __init__(
         self,
         *,
@@ -3315,11 +3451,11 @@ class GetAudioFilesResponse(google.protobuf.message.Message):
         error_message: builtins.str = ...,
         next_page_token: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["audio_files", b"audio_files", "error_message", b"error_message", "next_page_token", b"next_page_token"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["audio_files", b"audio_files", "error_message", b"error_message", "next_page_token", b"next_page_token"]) -> None: ...
 
 global___GetAudioFilesResponse = GetAudioFilesResponse
 
-@typing_extensions.final
+@typing.final
 class AddAudioFilesRequest(google.protobuf.message.Message):
     """This message is a request to add the audio files specified"""
 
@@ -3339,6 +3475,7 @@ class AddAudioFilesRequest(google.protobuf.message.Message):
     @property
     def audio_file_resources(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AudioFileResource]:
         """AudioFileResources to be added"""
+
     def __init__(
         self,
         *,
@@ -3346,11 +3483,11 @@ class AddAudioFilesRequest(google.protobuf.message.Message):
         session_id: builtins.str = ...,
         audio_file_resources: collections.abc.Iterable[global___AudioFileResource] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["audio_file_resources", b"audio_file_resources", "parent", b"parent", "session_id", b"session_id"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["audio_file_resources", b"audio_file_resources", "parent", b"parent", "session_id", b"session_id"]) -> None: ...
 
 global___AddAudioFilesRequest = AddAudioFilesRequest
 
-@typing_extensions.final
+@typing.final
 class AddAudioFilesResponse(google.protobuf.message.Message):
     """This message is a request to add the audio files specified"""
 
@@ -3358,24 +3495,25 @@ class AddAudioFilesResponse(google.protobuf.message.Message):
 
     AUDIO_FILE_RESOURCES_FIELD_NUMBER: builtins.int
     ERROR_MESSAGE_FIELD_NUMBER: builtins.int
+    error_message: builtins.str
+    """error message if there are any."""
     @property
     def audio_file_resources(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AudioFileResource]:
         """The unique identifier of the audio files for a specific session.
         Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
         """
-    error_message: builtins.str
-    """error message if there are any."""
+
     def __init__(
         self,
         *,
         audio_file_resources: collections.abc.Iterable[global___AudioFileResource] | None = ...,
         error_message: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["audio_file_resources", b"audio_file_resources", "error_message", b"error_message"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["audio_file_resources", b"audio_file_resources", "error_message", b"error_message"]) -> None: ...
 
 global___AddAudioFilesResponse = AddAudioFilesResponse
 
-@typing_extensions.final
+@typing.final
 class DeleteAudioFilesRequest(google.protobuf.message.Message):
     """This message is a request to the delete audio files specified"""
 
@@ -3392,17 +3530,18 @@ class DeleteAudioFilesRequest(google.protobuf.message.Message):
         """The unique identifier of the audio file of the specific session
         Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
         """
+
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
         names: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["names", b"names", "parent", b"parent"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["names", b"names", "parent", b"parent"]) -> None: ...
 
 global___DeleteAudioFilesRequest = DeleteAudioFilesRequest
 
-@typing_extensions.final
+@typing.final
 class DeleteAudioFilesResponse(google.protobuf.message.Message):
     """This message is a request to the delete audio files specified"""
 
@@ -3410,24 +3549,25 @@ class DeleteAudioFilesResponse(google.protobuf.message.Message):
 
     NAMES_FIELD_NUMBER: builtins.int
     ERROR_MESSAGE_FIELD_NUMBER: builtins.int
+    error_message: builtins.str
+    """error message if there are any."""
     @property
     def names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """The unique identifier of the audio file of the specific session
         Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
         """
-    error_message: builtins.str
-    """error message if there are any."""
+
     def __init__(
         self,
         *,
         names: collections.abc.Iterable[builtins.str] | None = ...,
         error_message: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["error_message", b"error_message", "names", b"names"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["error_message", b"error_message", "names", b"names"]) -> None: ...
 
 global___DeleteAudioFilesResponse = DeleteAudioFilesResponse
 
-@typing_extensions.final
+@typing.final
 class ListAudioFilesRequest(google.protobuf.message.Message):
     """This message is a request to list all available audio files of a session"""
 
@@ -3484,11 +3624,11 @@ class ListAudioFilesRequest(google.protobuf.message.Message):
         page_token: builtins.str = ...,
         sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["page_token", b"page_token", "parent", b"parent", "resource_view", b"resource_view", "session_id", b"session_id", "sorting_mode", b"sorting_mode"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["page_token", b"page_token", "parent", b"parent", "resource_view", b"resource_view", "session_id", b"session_id", "sorting_mode", b"sorting_mode"]) -> None: ...
 
 global___ListAudioFilesRequest = ListAudioFilesRequest
 
-@typing_extensions.final
+@typing.final
 class ListAudioFilesResponse(google.protobuf.message.Message):
     """This message is a request to retrieve the audio files specified"""
 
@@ -3497,17 +3637,18 @@ class ListAudioFilesResponse(google.protobuf.message.Message):
     AUDIO_FILES_FIELD_NUMBER: builtins.int
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
     ERROR_MESSAGE_FIELD_NUMBER: builtins.int
-    @property
-    def audio_files(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AudioFileResource]:
-        """The requested audio files .
-        Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
-        """
     next_page_token: builtins.str
     """The next_page_token is used to retrieve the next page of a returned result,
     e.g. next_page_token is current_index-2
     """
     error_message: builtins.str
     """error message if there are any."""
+    @property
+    def audio_files(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AudioFileResource]:
+        """The requested audio files .
+        Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
+        """
+
     def __init__(
         self,
         *,
@@ -3515,11 +3656,11 @@ class ListAudioFilesResponse(google.protobuf.message.Message):
         next_page_token: builtins.str = ...,
         error_message: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["audio_files", b"audio_files", "error_message", b"error_message", "next_page_token", b"next_page_token"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["audio_files", b"audio_files", "error_message", b"error_message", "next_page_token", b"next_page_token"]) -> None: ...
 
 global___ListAudioFilesResponse = ListAudioFilesResponse
 
-@typing_extensions.final
+@typing.final
 class GetAudioFileOfSessionRequest(google.protobuf.message.Message):
     """This message is a request to get one one file combining all audios of a specific session"""
 
@@ -3545,6 +3686,6 @@ class GetAudioFileOfSessionRequest(google.protobuf.message.Message):
         session_id: builtins.str = ...,
         resource_view: global___ResourceView.ValueType = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["parent", b"parent", "resource_view", b"resource_view", "session_id", b"session_id"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["parent", b"parent", "resource_view", b"resource_view", "session_id", b"session_id"]) -> None: ...
 
 global___GetAudioFileOfSessionRequest = GetAudioFileOfSessionRequest

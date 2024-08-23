@@ -15,21 +15,17 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 """
+
 import builtins
 import google.protobuf.descriptor
 import google.protobuf.message
 import ondewo.nlu.entity_type_pb2
 import ondewo.nlu.intent_pb2
-import sys
-
-if sys.version_info >= (3, 8):
-    import typing as typing_extensions
-else:
-    import typing_extensions
+import typing
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
-@typing_extensions.final
+@typing.final
 class GetIntentCountRequest(google.protobuf.message.Message):
     """Request to get the intent count"""
 
@@ -49,11 +45,11 @@ class GetIntentCountRequest(google.protobuf.message.Message):
         parent: builtins.str = ...,
         filter_by_category: ondewo.nlu.intent_pb2.IntentCategory.ValueType = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["filter_by_category", b"filter_by_category", "parent", b"parent"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["filter_by_category", b"filter_by_category", "parent", b"parent"]) -> None: ...
 
 global___GetIntentCountRequest = GetIntentCountRequest
 
-@typing_extensions.final
+@typing.final
 class GetEntityTypeCountRequest(google.protobuf.message.Message):
     """Request to get entity type count"""
 
@@ -73,11 +69,11 @@ class GetEntityTypeCountRequest(google.protobuf.message.Message):
         parent: builtins.str = ...,
         filter_by_category: ondewo.nlu.entity_type_pb2.EntityTypeCategory.ValueType = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["filter_by_category", b"filter_by_category", "parent", b"parent"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["filter_by_category", b"filter_by_category", "parent", b"parent"]) -> None: ...
 
 global___GetEntityTypeCountRequest = GetEntityTypeCountRequest
 
-@typing_extensions.final
+@typing.final
 class GetProjectStatRequest(google.protobuf.message.Message):
     """Request to get project statistics"""
 
@@ -93,11 +89,11 @@ class GetProjectStatRequest(google.protobuf.message.Message):
         *,
         parent: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["parent", b"parent"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["parent", b"parent"]) -> None: ...
 
 global___GetProjectStatRequest = GetProjectStatRequest
 
-@typing_extensions.final
+@typing.final
 class GetProjectElementStatRequest(google.protobuf.message.Message):
     """Request to get project element statistics"""
 
@@ -122,6 +118,6 @@ class GetProjectElementStatRequest(google.protobuf.message.Message):
         name: builtins.str = ...,
         language_code: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["language_code", b"language_code", "name", b"name"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["language_code", b"language_code", "name", b"name"]) -> None: ...
 
 global___GetProjectElementStatRequest = GetProjectElementStatRequest

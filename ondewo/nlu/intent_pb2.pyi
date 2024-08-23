@@ -29,6 +29,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 """
+
 import builtins
 import collections.abc
 import google.protobuf.descriptor
@@ -126,7 +127,7 @@ DATE_UPCOMING_INTENTS: IntentCategory.ValueType  # 5
 """represent the intents that are still expecting its start_date to begin"""
 global___IntentCategory = IntentCategory
 
-@typing_extensions.final
+@typing.final
 class Intent(google.protobuf.message.Message):
     """Represents an intent.
     Intents convert a number of user expressions or patterns into an action. An
@@ -177,7 +178,7 @@ class Intent(google.protobuf.message.Message):
     filling prompt is forwarded to the webhook.
     """
 
-    @typing_extensions.final
+    @typing.final
     class TrainingPhrase(google.protobuf.message.Message):
         """Represents an example or template that the agent is trained on."""
 
@@ -214,7 +215,7 @@ class Intent(google.protobuf.message.Message):
         @-prefixed entity type names as substrings.
         """
 
-        @typing_extensions.final
+        @typing.final
         class Entity(google.protobuf.message.Message):
             """Represents an entity annotation in a training phrase. The entity can be annotated on the level of
             entity type only or both entity type and entity value.
@@ -265,16 +266,18 @@ class Intent(google.protobuf.message.Message):
             """
             parameter_display_name: builtins.str
             """Optional. The parameter name."""
-            @property
-            def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-                """Creation date and time. Read-only field."""
-            @property
-            def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-                """Modification date and time. Read-only field."""
             created_by: builtins.str
             """User id in form of a valid UUID."""
             modified_by: builtins.str
             """User id in form of a valid UUID."""
+            @property
+            def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+                """Creation date and time. Read-only field."""
+
+            @property
+            def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+                """Modification date and time. Read-only field."""
+
             def __init__(
                 self,
                 *,
@@ -291,8 +294,8 @@ class Intent(google.protobuf.message.Message):
                 created_by: builtins.str = ...,
                 modified_by: builtins.str = ...,
             ) -> None: ...
-            def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-            def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "created_by", b"created_by", "end", b"end", "entity_type_display_name", b"entity_type_display_name", "entity_type_name", b"entity_type_name", "entity_value_display_name", b"entity_value_display_name", "entity_value_name", b"entity_value_name", "modified_at", b"modified_at", "modified_by", b"modified_by", "parameter_display_name", b"parameter_display_name", "parameter_name", b"parameter_name", "start", b"start"]) -> None: ...
+            def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+            def ClearField(self, field_name: typing.Literal["created_at", b"created_at", "created_by", b"created_by", "end", b"end", "entity_type_display_name", b"entity_type_display_name", "entity_type_name", b"entity_type_name", "entity_value_display_name", b"entity_value_display_name", "entity_value_name", b"entity_value_name", "modified_at", b"modified_at", "modified_by", b"modified_by", "parameter_display_name", b"parameter_display_name", "parameter_name", b"parameter_name", "start", b"start"]) -> None: ...
 
         NAME_FIELD_NUMBER: builtins.int
         TYPE_FIELD_NUMBER: builtins.int
@@ -312,9 +315,6 @@ class Intent(google.protobuf.message.Message):
         """Required. The type of the training phrase."""
         text: builtins.str
         """Required. The text of the training phrase."""
-        @property
-        def entities(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Intent.TrainingPhrase.Entity]:
-            """Optional. The collection of annotated entities in the training phrase."""
         times_added_count: builtins.int
         """Optional. Indicates how many times this example or template was added to
         the intent. Each time a developer adds an existing sample by editing an
@@ -322,16 +322,22 @@ class Intent(google.protobuf.message.Message):
         """
         language_code: builtins.str
         """Optional. The language of the training phrase."""
-        @property
-        def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-            """Creation date and time. Read-only field."""
-        @property
-        def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-            """Modification date and time. Read-only field."""
         created_by: builtins.str
         """User id in form of a valid UUID."""
         modified_by: builtins.str
         """User id in form of a valid UUID."""
+        @property
+        def entities(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Intent.TrainingPhrase.Entity]:
+            """Optional. The collection of annotated entities in the training phrase."""
+
+        @property
+        def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Creation date and time. Read-only field."""
+
+        @property
+        def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """Modification date and time. Read-only field."""
+
         def __init__(
             self,
             *,
@@ -346,16 +352,16 @@ class Intent(google.protobuf.message.Message):
             created_by: builtins.str = ...,
             modified_by: builtins.str = ...,
         ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "created_by", b"created_by", "entities", b"entities", "language_code", b"language_code", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "text", b"text", "times_added_count", b"times_added_count", "type", b"type"]) -> None: ...
+        def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["created_at", b"created_at", "created_by", b"created_by", "entities", b"entities", "language_code", b"language_code", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "text", b"text", "times_added_count", b"times_added_count", "type", b"type"]) -> None: ...
 
-    @typing_extensions.final
+    @typing.final
     class Parameter(google.protobuf.message.Message):
         """Represents intent parameters."""
 
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-        @typing_extensions.final
+        @typing.final
         class Prompt(google.protobuf.message.Message):
             """Represents the prompts in the parameters."""
 
@@ -376,16 +382,18 @@ class Intent(google.protobuf.message.Message):
             """Required. Text of the prompt"""
             language_code: builtins.str
             """The language of the prompts. If not specified, the default language code will be used."""
-            @property
-            def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-                """Creation date and time. Read-only field."""
-            @property
-            def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-                """Modification date and time. Read-only field."""
             created_by: builtins.str
             """User id in form of a valid UUID."""
             modified_by: builtins.str
             """User id in form of a valid UUID."""
+            @property
+            def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+                """Creation date and time. Read-only field."""
+
+            @property
+            def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+                """Modification date and time. Read-only field."""
+
             def __init__(
                 self,
                 *,
@@ -397,8 +405,8 @@ class Intent(google.protobuf.message.Message):
                 created_by: builtins.str = ...,
                 modified_by: builtins.str = ...,
             ) -> None: ...
-            def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-            def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "created_by", b"created_by", "language_code", b"language_code", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "text", b"text"]) -> None: ...
+            def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+            def ClearField(self, field_name: typing.Literal["created_at", b"created_at", "created_by", b"created_by", "language_code", b"language_code", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "text", b"text"]) -> None: ...
 
         NAME_FIELD_NUMBER: builtins.int
         DISPLAY_NAME_FIELD_NUMBER: builtins.int
@@ -447,23 +455,26 @@ class Intent(google.protobuf.message.Message):
         whether the intent cannot be completed without collecting the parameter
         value.
         """
+        is_list: builtins.bool
+        """Optional. Indicates whether the parameter represents a list of values."""
+        created_by: builtins.str
+        """User id in form of a valid UUID."""
+        modified_by: builtins.str
+        """User id in form of a valid UUID."""
         @property
         def prompts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Intent.Parameter.Prompt]:
             """Optional. The collection of prompts that the agent can present to the
             user in order to collect value for the parameter.
             """
-        is_list: builtins.bool
-        """Optional. Indicates whether the parameter represents a list of values."""
+
         @property
         def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
             """Creation date and time. Read-only field."""
+
         @property
         def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
             """Modification date and time. Read-only field."""
-        created_by: builtins.str
-        """User id in form of a valid UUID."""
-        modified_by: builtins.str
-        """User id in form of a valid UUID."""
+
         def __init__(
             self,
             *,
@@ -481,10 +492,10 @@ class Intent(google.protobuf.message.Message):
             created_by: builtins.str = ...,
             modified_by: builtins.str = ...,
         ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "created_by", b"created_by", "default_value", b"default_value", "display_name", b"display_name", "entity_type_display_name", b"entity_type_display_name", "entity_type_name", b"entity_type_name", "is_list", b"is_list", "mandatory", b"mandatory", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "prompts", b"prompts", "value", b"value"]) -> None: ...
+        def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["created_at", b"created_at", "created_by", b"created_by", "default_value", b"default_value", "display_name", b"display_name", "entity_type_display_name", b"entity_type_display_name", "entity_type_name", b"entity_type_name", "is_list", b"is_list", "mandatory", b"mandatory", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "prompts", b"prompts", "value", b"value"]) -> None: ...
 
-    @typing_extensions.final
+    @typing.final
     class Message(google.protobuf.message.Message):
         """Corresponds to the `Response` field in the Dialogflow console."""
 
@@ -699,7 +710,7 @@ class Intent(google.protobuf.message.Message):
         PLACEHOLDER_19: Intent.Message.Platform.ValueType  # 27
         PLACEHOLDER_20: Intent.Message.Platform.ValueType  # 28
 
-        @typing_extensions.final
+        @typing.final
         class Text(google.protobuf.message.Message):
             """The text response message."""
 
@@ -709,14 +720,15 @@ class Intent(google.protobuf.message.Message):
             @property
             def text(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
                 """Optional. The collection of the agent's responses."""
+
             def __init__(
                 self,
                 *,
                 text: collections.abc.Iterable[builtins.str] | None = ...,
             ) -> None: ...
-            def ClearField(self, field_name: typing_extensions.Literal["text", b"text"]) -> None: ...
+            def ClearField(self, field_name: typing.Literal["text", b"text"]) -> None: ...
 
-        @typing_extensions.final
+        @typing.final
         class Image(google.protobuf.message.Message):
             """The image response message."""
 
@@ -736,9 +748,9 @@ class Intent(google.protobuf.message.Message):
                 image_uri: builtins.str = ...,
                 accessibility_text: builtins.str = ...,
             ) -> None: ...
-            def ClearField(self, field_name: typing_extensions.Literal["accessibility_text", b"accessibility_text", "image_uri", b"image_uri"]) -> None: ...
+            def ClearField(self, field_name: typing.Literal["accessibility_text", b"accessibility_text", "image_uri", b"image_uri"]) -> None: ...
 
-        @typing_extensions.final
+        @typing.final
         class QuickReplies(google.protobuf.message.Message):
             """The quick replies response message."""
 
@@ -751,21 +763,22 @@ class Intent(google.protobuf.message.Message):
             @property
             def quick_replies(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
                 """Optional. The collection of quick replies."""
+
             def __init__(
                 self,
                 *,
                 title: builtins.str = ...,
                 quick_replies: collections.abc.Iterable[builtins.str] | None = ...,
             ) -> None: ...
-            def ClearField(self, field_name: typing_extensions.Literal["quick_replies", b"quick_replies", "title", b"title"]) -> None: ...
+            def ClearField(self, field_name: typing.Literal["quick_replies", b"quick_replies", "title", b"title"]) -> None: ...
 
-        @typing_extensions.final
+        @typing.final
         class Card(google.protobuf.message.Message):
             """The card response message."""
 
             DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-            @typing_extensions.final
+            @typing.final
             class Button(google.protobuf.message.Message):
                 """Optional. Contains information about a button."""
 
@@ -785,7 +798,7 @@ class Intent(google.protobuf.message.Message):
                     text: builtins.str = ...,
                     postback: builtins.str = ...,
                 ) -> None: ...
-                def ClearField(self, field_name: typing_extensions.Literal["postback", b"postback", "text", b"text"]) -> None: ...
+                def ClearField(self, field_name: typing.Literal["postback", b"postback", "text", b"text"]) -> None: ...
 
             TITLE_FIELD_NUMBER: builtins.int
             SUBTITLE_FIELD_NUMBER: builtins.int
@@ -800,6 +813,7 @@ class Intent(google.protobuf.message.Message):
             @property
             def buttons(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Intent.Message.Card.Button]:
                 """Optional. The collection of card buttons."""
+
             def __init__(
                 self,
                 *,
@@ -808,9 +822,9 @@ class Intent(google.protobuf.message.Message):
                 image_uri: builtins.str = ...,
                 buttons: collections.abc.Iterable[global___Intent.Message.Card.Button] | None = ...,
             ) -> None: ...
-            def ClearField(self, field_name: typing_extensions.Literal["buttons", b"buttons", "image_uri", b"image_uri", "subtitle", b"subtitle", "title", b"title"]) -> None: ...
+            def ClearField(self, field_name: typing.Literal["buttons", b"buttons", "image_uri", b"image_uri", "subtitle", b"subtitle", "title", b"title"]) -> None: ...
 
-        @typing_extensions.final
+        @typing.final
         class SimpleResponse(google.protobuf.message.Message):
             """The simple response message containing speech or text."""
 
@@ -837,9 +851,9 @@ class Intent(google.protobuf.message.Message):
                 ssml: builtins.str = ...,
                 display_text: builtins.str = ...,
             ) -> None: ...
-            def ClearField(self, field_name: typing_extensions.Literal["display_text", b"display_text", "ssml", b"ssml", "text_to_speech", b"text_to_speech"]) -> None: ...
+            def ClearField(self, field_name: typing.Literal["display_text", b"display_text", "ssml", b"ssml", "text_to_speech", b"text_to_speech"]) -> None: ...
 
-        @typing_extensions.final
+        @typing.final
         class SimpleResponses(google.protobuf.message.Message):
             """The collection of simple response candidates.
             This message in `QueryResult.fulfillment_messages` and
@@ -853,26 +867,27 @@ class Intent(google.protobuf.message.Message):
             @property
             def simple_responses(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Intent.Message.SimpleResponse]:
                 """Required. The list of simple responses."""
+
             def __init__(
                 self,
                 *,
                 simple_responses: collections.abc.Iterable[global___Intent.Message.SimpleResponse] | None = ...,
             ) -> None: ...
-            def ClearField(self, field_name: typing_extensions.Literal["simple_responses", b"simple_responses"]) -> None: ...
+            def ClearField(self, field_name: typing.Literal["simple_responses", b"simple_responses"]) -> None: ...
 
-        @typing_extensions.final
+        @typing.final
         class BasicCard(google.protobuf.message.Message):
             """The basic card message. Useful for displaying information."""
 
             DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-            @typing_extensions.final
+            @typing.final
             class Button(google.protobuf.message.Message):
                 """The button object that appears at the bottom of a card."""
 
                 DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-                @typing_extensions.final
+                @typing.final
                 class OpenUriAction(google.protobuf.message.Message):
                     """Opens the given URI."""
 
@@ -886,7 +901,7 @@ class Intent(google.protobuf.message.Message):
                         *,
                         uri: builtins.str = ...,
                     ) -> None: ...
-                    def ClearField(self, field_name: typing_extensions.Literal["uri", b"uri"]) -> None: ...
+                    def ClearField(self, field_name: typing.Literal["uri", b"uri"]) -> None: ...
 
                 TITLE_FIELD_NUMBER: builtins.int
                 OPEN_URI_ACTION_FIELD_NUMBER: builtins.int
@@ -895,14 +910,15 @@ class Intent(google.protobuf.message.Message):
                 @property
                 def open_uri_action(self) -> global___Intent.Message.BasicCard.Button.OpenUriAction:
                     """Required. Action to take when a user taps on the button."""
+
                 def __init__(
                     self,
                     *,
                     title: builtins.str = ...,
                     open_uri_action: global___Intent.Message.BasicCard.Button.OpenUriAction | None = ...,
                 ) -> None: ...
-                def HasField(self, field_name: typing_extensions.Literal["open_uri_action", b"open_uri_action"]) -> builtins.bool: ...
-                def ClearField(self, field_name: typing_extensions.Literal["open_uri_action", b"open_uri_action", "title", b"title"]) -> None: ...
+                def HasField(self, field_name: typing.Literal["open_uri_action", b"open_uri_action"]) -> builtins.bool: ...
+                def ClearField(self, field_name: typing.Literal["open_uri_action", b"open_uri_action", "title", b"title"]) -> None: ...
 
             TITLE_FIELD_NUMBER: builtins.int
             SUBTITLE_FIELD_NUMBER: builtins.int
@@ -918,9 +934,11 @@ class Intent(google.protobuf.message.Message):
             @property
             def image(self) -> global___Intent.Message.Image:
                 """Optional. The image for the card."""
+
             @property
             def buttons(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Intent.Message.BasicCard.Button]:
                 """Optional. The collection of card buttons."""
+
             def __init__(
                 self,
                 *,
@@ -930,10 +948,10 @@ class Intent(google.protobuf.message.Message):
                 image: global___Intent.Message.Image | None = ...,
                 buttons: collections.abc.Iterable[global___Intent.Message.BasicCard.Button] | None = ...,
             ) -> None: ...
-            def HasField(self, field_name: typing_extensions.Literal["image", b"image"]) -> builtins.bool: ...
-            def ClearField(self, field_name: typing_extensions.Literal["buttons", b"buttons", "formatted_text", b"formatted_text", "image", b"image", "subtitle", b"subtitle", "title", b"title"]) -> None: ...
+            def HasField(self, field_name: typing.Literal["image", b"image"]) -> builtins.bool: ...
+            def ClearField(self, field_name: typing.Literal["buttons", b"buttons", "formatted_text", b"formatted_text", "image", b"image", "subtitle", b"subtitle", "title", b"title"]) -> None: ...
 
-        @typing_extensions.final
+        @typing.final
         class Suggestion(google.protobuf.message.Message):
             """The suggestion chip message that the user can tap to quickly post a reply
             to the conversation.
@@ -949,9 +967,9 @@ class Intent(google.protobuf.message.Message):
                 *,
                 title: builtins.str = ...,
             ) -> None: ...
-            def ClearField(self, field_name: typing_extensions.Literal["title", b"title"]) -> None: ...
+            def ClearField(self, field_name: typing.Literal["title", b"title"]) -> None: ...
 
-        @typing_extensions.final
+        @typing.final
         class Suggestions(google.protobuf.message.Message):
             """The collection of suggestions."""
 
@@ -961,14 +979,15 @@ class Intent(google.protobuf.message.Message):
             @property
             def suggestions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Intent.Message.Suggestion]:
                 """Required. The list of suggested replies."""
+
             def __init__(
                 self,
                 *,
                 suggestions: collections.abc.Iterable[global___Intent.Message.Suggestion] | None = ...,
             ) -> None: ...
-            def ClearField(self, field_name: typing_extensions.Literal["suggestions", b"suggestions"]) -> None: ...
+            def ClearField(self, field_name: typing.Literal["suggestions", b"suggestions"]) -> None: ...
 
-        @typing_extensions.final
+        @typing.final
         class LinkOutSuggestion(google.protobuf.message.Message):
             """The suggestion chip message that allows the user to jump out to the app
             or website associated with this agent.
@@ -990,15 +1009,15 @@ class Intent(google.protobuf.message.Message):
                 destination_name: builtins.str = ...,
                 uri: builtins.str = ...,
             ) -> None: ...
-            def ClearField(self, field_name: typing_extensions.Literal["destination_name", b"destination_name", "uri", b"uri"]) -> None: ...
+            def ClearField(self, field_name: typing.Literal["destination_name", b"destination_name", "uri", b"uri"]) -> None: ...
 
-        @typing_extensions.final
+        @typing.final
         class ListSelect(google.protobuf.message.Message):
             """The card for presenting a list of options to select from."""
 
             DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-            @typing_extensions.final
+            @typing.final
             class Item(google.protobuf.message.Message):
                 """An item in the list."""
 
@@ -1008,16 +1027,18 @@ class Intent(google.protobuf.message.Message):
                 TITLE_FIELD_NUMBER: builtins.int
                 DESCRIPTION_FIELD_NUMBER: builtins.int
                 IMAGE_FIELD_NUMBER: builtins.int
-                @property
-                def info(self) -> global___Intent.Message.SelectItemInfo:
-                    """Required. Additional information about this option."""
                 title: builtins.str
                 """Required. The title of the list item."""
                 description: builtins.str
                 """Optional. The main text describing the item."""
                 @property
+                def info(self) -> global___Intent.Message.SelectItemInfo:
+                    """Required. Additional information about this option."""
+
+                @property
                 def image(self) -> global___Intent.Message.Image:
                     """Optional. The image to display."""
+
                 def __init__(
                     self,
                     *,
@@ -1026,8 +1047,8 @@ class Intent(google.protobuf.message.Message):
                     description: builtins.str = ...,
                     image: global___Intent.Message.Image | None = ...,
                 ) -> None: ...
-                def HasField(self, field_name: typing_extensions.Literal["image", b"image", "info", b"info"]) -> builtins.bool: ...
-                def ClearField(self, field_name: typing_extensions.Literal["description", b"description", "image", b"image", "info", b"info", "title", b"title"]) -> None: ...
+                def HasField(self, field_name: typing.Literal["image", b"image", "info", b"info"]) -> builtins.bool: ...
+                def ClearField(self, field_name: typing.Literal["description", b"description", "image", b"image", "info", b"info", "title", b"title"]) -> None: ...
 
             TITLE_FIELD_NUMBER: builtins.int
             ITEMS_FIELD_NUMBER: builtins.int
@@ -1036,21 +1057,22 @@ class Intent(google.protobuf.message.Message):
             @property
             def items(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Intent.Message.ListSelect.Item]:
                 """Required. List items."""
+
             def __init__(
                 self,
                 *,
                 title: builtins.str = ...,
                 items: collections.abc.Iterable[global___Intent.Message.ListSelect.Item] | None = ...,
             ) -> None: ...
-            def ClearField(self, field_name: typing_extensions.Literal["items", b"items", "title", b"title"]) -> None: ...
+            def ClearField(self, field_name: typing.Literal["items", b"items", "title", b"title"]) -> None: ...
 
-        @typing_extensions.final
+        @typing.final
         class CarouselSelect(google.protobuf.message.Message):
             """The card for presenting a carousel of options to select from."""
 
             DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-            @typing_extensions.final
+            @typing.final
             class Item(google.protobuf.message.Message):
                 """An item in the carousel."""
 
@@ -1060,16 +1082,18 @@ class Intent(google.protobuf.message.Message):
                 TITLE_FIELD_NUMBER: builtins.int
                 DESCRIPTION_FIELD_NUMBER: builtins.int
                 IMAGE_FIELD_NUMBER: builtins.int
-                @property
-                def info(self) -> global___Intent.Message.SelectItemInfo:
-                    """Required. Additional info about the option item."""
                 title: builtins.str
                 """Required. Title of the carousel item."""
                 description: builtins.str
                 """Optional. The body text of the card."""
                 @property
+                def info(self) -> global___Intent.Message.SelectItemInfo:
+                    """Required. Additional info about the option item."""
+
+                @property
                 def image(self) -> global___Intent.Message.Image:
                     """Optional. The image to display."""
+
                 def __init__(
                     self,
                     *,
@@ -1078,21 +1102,22 @@ class Intent(google.protobuf.message.Message):
                     description: builtins.str = ...,
                     image: global___Intent.Message.Image | None = ...,
                 ) -> None: ...
-                def HasField(self, field_name: typing_extensions.Literal["image", b"image", "info", b"info"]) -> builtins.bool: ...
-                def ClearField(self, field_name: typing_extensions.Literal["description", b"description", "image", b"image", "info", b"info", "title", b"title"]) -> None: ...
+                def HasField(self, field_name: typing.Literal["image", b"image", "info", b"info"]) -> builtins.bool: ...
+                def ClearField(self, field_name: typing.Literal["description", b"description", "image", b"image", "info", b"info", "title", b"title"]) -> None: ...
 
             ITEMS_FIELD_NUMBER: builtins.int
             @property
             def items(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Intent.Message.CarouselSelect.Item]:
                 """Required. Carousel items."""
+
             def __init__(
                 self,
                 *,
                 items: collections.abc.Iterable[global___Intent.Message.CarouselSelect.Item] | None = ...,
             ) -> None: ...
-            def ClearField(self, field_name: typing_extensions.Literal["items", b"items"]) -> None: ...
+            def ClearField(self, field_name: typing.Literal["items", b"items"]) -> None: ...
 
-        @typing_extensions.final
+        @typing.final
         class HTMLText(google.protobuf.message.Message):
             """This message contains HTML text"""
 
@@ -1102,14 +1127,15 @@ class Intent(google.protobuf.message.Message):
             @property
             def text(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
                 """Collection of the agent's responses in HTML format"""
+
             def __init__(
                 self,
                 *,
                 text: collections.abc.Iterable[builtins.str] | None = ...,
             ) -> None: ...
-            def ClearField(self, field_name: typing_extensions.Literal["text", b"text"]) -> None: ...
+            def ClearField(self, field_name: typing.Literal["text", b"text"]) -> None: ...
 
-        @typing_extensions.final
+        @typing.final
         class Video(google.protobuf.message.Message):
             """The Video response message."""
 
@@ -1129,9 +1155,9 @@ class Intent(google.protobuf.message.Message):
                 uri: builtins.str = ...,
                 accessibility_text: builtins.str = ...,
             ) -> None: ...
-            def ClearField(self, field_name: typing_extensions.Literal["accessibility_text", b"accessibility_text", "uri", b"uri"]) -> None: ...
+            def ClearField(self, field_name: typing.Literal["accessibility_text", b"accessibility_text", "uri", b"uri"]) -> None: ...
 
-        @typing_extensions.final
+        @typing.final
         class Audio(google.protobuf.message.Message):
             """The Audio response message."""
 
@@ -1151,9 +1177,9 @@ class Intent(google.protobuf.message.Message):
                 uri: builtins.str = ...,
                 accessibility_text: builtins.str = ...,
             ) -> None: ...
-            def ClearField(self, field_name: typing_extensions.Literal["accessibility_text", b"accessibility_text", "uri", b"uri"]) -> None: ...
+            def ClearField(self, field_name: typing.Literal["accessibility_text", b"accessibility_text", "uri", b"uri"]) -> None: ...
 
-        @typing_extensions.final
+        @typing.final
         class SelectItemInfo(google.protobuf.message.Message):
             """Additional info about the select item for when it is triggered in a
             dialog.
@@ -1172,13 +1198,14 @@ class Intent(google.protobuf.message.Message):
                 """Optional. A list of synonyms that can also be used to trigger this
                 item in dialog.
                 """
+
             def __init__(
                 self,
                 *,
                 key: builtins.str = ...,
                 synonyms: collections.abc.Iterable[builtins.str] | None = ...,
             ) -> None: ...
-            def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "synonyms", b"synonyms"]) -> None: ...
+            def ClearField(self, field_name: typing.Literal["key", b"key", "synonyms", b"synonyms"]) -> None: ...
 
         NAME_FIELD_NUMBER: builtins.int
         LANGUAGE_CODE_FIELD_NUMBER: builtins.int
@@ -1208,65 +1235,81 @@ class Intent(google.protobuf.message.Message):
         """
         language_code: builtins.str
         """Required. The language of the return message."""
+        platform: global___Intent.Message.Platform.ValueType
+        """Optional. The platform that this message is intended for."""
+        is_prompt: builtins.bool
+        """Read-only. States if a returned message is a prompt or not."""
+        created_by: builtins.str
+        """User id in form of a valid UUID."""
+        modified_by: builtins.str
+        """User id in form of a valid UUID."""
         @property
         def text(self) -> global___Intent.Message.Text:
             """The text response."""
+
         @property
         def image(self) -> global___Intent.Message.Image:
             """The image response."""
+
         @property
         def quick_replies(self) -> global___Intent.Message.QuickReplies:
             """The quick replies response."""
+
         @property
         def card(self) -> global___Intent.Message.Card:
             """The card response."""
+
         @property
         def payload(self) -> google.protobuf.struct_pb2.Struct:
             """Returns a response containing a custom, platform-specific payload.
             See the Intent.Message.Platform type for a description of the
             structure that may be required for your platform.
             """
+
         @property
         def simple_responses(self) -> global___Intent.Message.SimpleResponses:
             """The voice and text-only responses for Actions on Google."""
+
         @property
         def basic_card(self) -> global___Intent.Message.BasicCard:
             """The basic card response for Actions on Google."""
+
         @property
         def suggestions(self) -> global___Intent.Message.Suggestions:
             """The suggestion chips for Actions on Google."""
+
         @property
         def link_out_suggestion(self) -> global___Intent.Message.LinkOutSuggestion:
             """The link out suggestion chip for Actions on Google."""
+
         @property
         def list_select(self) -> global___Intent.Message.ListSelect:
             """The list card response for Actions on Google."""
+
         @property
         def carousel_select(self) -> global___Intent.Message.CarouselSelect:
             """The carousel card response for Actions on Google."""
+
         @property
         def html_text(self) -> global___Intent.Message.HTMLText:
             """The HTML text response"""
+
         @property
         def video(self) -> global___Intent.Message.Video:
             """The Video response"""
+
         @property
         def audio(self) -> global___Intent.Message.Audio:
             """The Audio response"""
-        platform: global___Intent.Message.Platform.ValueType
-        """Optional. The platform that this message is intended for."""
-        is_prompt: builtins.bool
-        """Read-only. States if a returned message is a prompt or not."""
+
         @property
         def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
             """Creation date and time. Read-only field."""
+
         @property
         def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
             """Modification date and time. Read-only field."""
-        created_by: builtins.str
-        """User id in form of a valid UUID."""
-        modified_by: builtins.str
-        """User id in form of a valid UUID."""
+
         def __init__(
             self,
             *,
@@ -1293,11 +1336,11 @@ class Intent(google.protobuf.message.Message):
             created_by: builtins.str = ...,
             modified_by: builtins.str = ...,
         ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["audio", b"audio", "basic_card", b"basic_card", "card", b"card", "carousel_select", b"carousel_select", "created_at", b"created_at", "html_text", b"html_text", "image", b"image", "link_out_suggestion", b"link_out_suggestion", "list_select", b"list_select", "message", b"message", "modified_at", b"modified_at", "payload", b"payload", "quick_replies", b"quick_replies", "simple_responses", b"simple_responses", "suggestions", b"suggestions", "text", b"text", "video", b"video"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["audio", b"audio", "basic_card", b"basic_card", "card", b"card", "carousel_select", b"carousel_select", "created_at", b"created_at", "created_by", b"created_by", "html_text", b"html_text", "image", b"image", "is_prompt", b"is_prompt", "language_code", b"language_code", "link_out_suggestion", b"link_out_suggestion", "list_select", b"list_select", "message", b"message", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "payload", b"payload", "platform", b"platform", "quick_replies", b"quick_replies", "simple_responses", b"simple_responses", "suggestions", b"suggestions", "text", b"text", "video", b"video"]) -> None: ...
-        def WhichOneof(self, oneof_group: typing_extensions.Literal["message", b"message"]) -> typing_extensions.Literal["text", "image", "quick_replies", "card", "payload", "simple_responses", "basic_card", "suggestions", "link_out_suggestion", "list_select", "carousel_select", "html_text", "video", "audio"] | None: ...
+        def HasField(self, field_name: typing.Literal["audio", b"audio", "basic_card", b"basic_card", "card", b"card", "carousel_select", b"carousel_select", "created_at", b"created_at", "html_text", b"html_text", "image", b"image", "link_out_suggestion", b"link_out_suggestion", "list_select", b"list_select", "message", b"message", "modified_at", b"modified_at", "payload", b"payload", "quick_replies", b"quick_replies", "simple_responses", b"simple_responses", "suggestions", b"suggestions", "text", b"text", "video", b"video"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["audio", b"audio", "basic_card", b"basic_card", "card", b"card", "carousel_select", b"carousel_select", "created_at", b"created_at", "created_by", b"created_by", "html_text", b"html_text", "image", b"image", "is_prompt", b"is_prompt", "language_code", b"language_code", "link_out_suggestion", b"link_out_suggestion", "list_select", b"list_select", "message", b"message", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "payload", b"payload", "platform", b"platform", "quick_replies", b"quick_replies", "simple_responses", b"simple_responses", "suggestions", b"suggestions", "text", b"text", "video", b"video"]) -> None: ...
+        def WhichOneof(self, oneof_group: typing.Literal["message", b"message"]) -> typing.Literal["text", "image", "quick_replies", "card", "payload", "simple_responses", "basic_card", "suggestions", "link_out_suggestion", "list_select", "carousel_select", "html_text", "video", "audio"] | None: ...
 
-    @typing_extensions.final
+    @typing.final
     class FollowupIntentInfo(google.protobuf.message.Message):
         """Represents a single followup intent in the chain."""
 
@@ -1319,7 +1362,7 @@ class Intent(google.protobuf.message.Message):
             followup_intent_name: builtins.str = ...,
             parent_followup_intent_name: builtins.str = ...,
         ) -> None: ...
-        def ClearField(self, field_name: typing_extensions.Literal["followup_intent_name", b"followup_intent_name", "parent_followup_intent_name", b"parent_followup_intent_name"]) -> None: ...
+        def ClearField(self, field_name: typing.Literal["followup_intent_name", b"followup_intent_name", "parent_followup_intent_name", b"parent_followup_intent_name"]) -> None: ...
 
     NAME_FIELD_NUMBER: builtins.int
     DISPLAY_NAME_FIELD_NUMBER: builtins.int
@@ -1374,50 +1417,12 @@ class Intent(google.protobuf.message.Message):
     taken into account during inference in `ML ONLY` match mode. Also,
     auto-markup in the UI is turned off.
     """
-    @property
-    def input_context_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Optional. The list of context names required for this intent to be
-        triggered.
-        Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/-/contexts/&lt;context_uuid&gt;</code></pre>
-        """
-    @property
-    def events(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Optional. The collection of event names that trigger the intent.
-        If the collection of input contexts is not empty, all of the contexts must
-        be present in the active user session for an event to trigger this intent.
-        """
-    @property
-    def training_phrases(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Intent.TrainingPhrase]:
-        """Optional. The collection of examples/templates that the agent is
-        trained on.
-        """
     action: builtins.str
     """Optional. The name of the action associated with the intent."""
-    @property
-    def output_contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]:
-        """Optional. The collection of contexts that are activated when the intent
-        is matched. Context messages in this collection should not set the
-        parameters field. Setting the `lifespan_count` to 0 will reset the context
-        when the intent is matched.
-        Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/-/contexts/&lt;context_uuid&gt;</code></pre>
-        """
     reset_contexts: builtins.bool
     """Optional. Indicates whether to delete all contexts in the current
     session when this intent is matched.
     """
-    @property
-    def parameters(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Intent.Parameter]:
-        """Optional. The collection of parameters associated with the intent."""
-    @property
-    def messages(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Intent.Message]:
-        """Optional. The collection of rich messages corresponding to the
-        `Response` field in the Dialogflow console.
-        """
-    @property
-    def default_response_platforms(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[global___Intent.Message.Platform.ValueType]:
-        """Optional. The list of platforms for which the first response will be
-        taken from among the messages assigned to the DEFAULT_PLATFORM.
-        """
     root_followup_intent_name: builtins.str
     """The unique identifier of the root intent in the chain of followup intents.
     It identifies the correct followup intents chain for this intent.
@@ -1429,11 +1434,6 @@ class Intent(google.protobuf.message.Message):
     It identifies the parent followup intent.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
     """
-    @property
-    def followup_intent_info(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Intent.FollowupIntentInfo]:
-        """Optional. Collection of information about all followup intents that have
-        name of this intent as a root_name.
-        """
     next_page_token: builtins.str
     """The next_page_token is used to retrieve the next page of a returned result,
     e.g. next_page_token is current_index-2
@@ -1448,25 +1448,81 @@ class Intent(google.protobuf.message.Message):
     """Optional. Total count of training phrases associated to the intent."""
     status: global___Intent.IntentStatus.ValueType
     """Indicates whether the intent is active or not"""
-    @property
-    def start_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Optional. Provides information that can be used in custom scripts"""
-    @property
-    def end_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Optional. Provides information that can be used in custom scripts"""
-    @property
-    def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Optional. Adds arbitrary "categories" for which one could filter the intents"""
-    @property
-    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Creation date and time. Read-only field."""
-    @property
-    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """Modification date and time. Read-only field."""
     created_by: builtins.str
     """User id in form of a valid UUID."""
     modified_by: builtins.str
     """User id in form of a valid UUID."""
+    @property
+    def input_context_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. The list of context names required for this intent to be
+        triggered.
+        Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/-/contexts/&lt;context_uuid&gt;</code></pre>
+        """
+
+    @property
+    def events(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. The collection of event names that trigger the intent.
+        If the collection of input contexts is not empty, all of the contexts must
+        be present in the active user session for an event to trigger this intent.
+        """
+
+    @property
+    def training_phrases(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Intent.TrainingPhrase]:
+        """Optional. The collection of examples/templates that the agent is
+        trained on.
+        """
+
+    @property
+    def output_contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]:
+        """Optional. The collection of contexts that are activated when the intent
+        is matched. Context messages in this collection should not set the
+        parameters field. Setting the `lifespan_count` to 0 will reset the context
+        when the intent is matched.
+        Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/-/contexts/&lt;context_uuid&gt;</code></pre>
+        """
+
+    @property
+    def parameters(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Intent.Parameter]:
+        """Optional. The collection of parameters associated with the intent."""
+
+    @property
+    def messages(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Intent.Message]:
+        """Optional. The collection of rich messages corresponding to the
+        `Response` field in the Dialogflow console.
+        """
+
+    @property
+    def default_response_platforms(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[global___Intent.Message.Platform.ValueType]:
+        """Optional. The list of platforms for which the first response will be
+        taken from among the messages assigned to the DEFAULT_PLATFORM.
+        """
+
+    @property
+    def followup_intent_info(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Intent.FollowupIntentInfo]:
+        """Optional. Collection of information about all followup intents that have
+        name of this intent as a root_name.
+        """
+
+    @property
+    def start_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Optional. Provides information that can be used in custom scripts"""
+
+    @property
+    def end_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Optional. Provides information that can be used in custom scripts"""
+
+    @property
+    def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Adds arbitrary "categories" for which one could filter the intents"""
+
+    @property
+    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Creation date and time. Read-only field."""
+
+    @property
+    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Modification date and time. Read-only field."""
+
     def __init__(
         self,
         *,
@@ -1502,12 +1558,12 @@ class Intent(google.protobuf.message.Message):
         created_by: builtins.str = ...,
         modified_by: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "end_date", b"end_date", "modified_at", b"modified_at", "start_date", b"start_date"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "created_at", b"created_at", "created_by", b"created_by", "default_response_platforms", b"default_response_platforms", "display_name", b"display_name", "domain_name", b"domain_name", "end_date", b"end_date", "events", b"events", "followup_intent_info", b"followup_intent_info", "input_context_names", b"input_context_names", "is_end_of_deviation", b"is_end_of_deviation", "is_fallback", b"is_fallback", "is_start_of_deviation", b"is_start_of_deviation", "messages", b"messages", "ml_disabled", b"ml_disabled", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "next_page_token", b"next_page_token", "output_contexts", b"output_contexts", "parameters", b"parameters", "parent_followup_intent_name", b"parent_followup_intent_name", "priority", b"priority", "reset_contexts", b"reset_contexts", "root_followup_intent_name", b"root_followup_intent_name", "start_date", b"start_date", "status", b"status", "tags", b"tags", "training_phrase_count", b"training_phrase_count", "training_phrases", b"training_phrases", "webhook_state", b"webhook_state"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["created_at", b"created_at", "end_date", b"end_date", "modified_at", b"modified_at", "start_date", b"start_date"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["action", b"action", "created_at", b"created_at", "created_by", b"created_by", "default_response_platforms", b"default_response_platforms", "display_name", b"display_name", "domain_name", b"domain_name", "end_date", b"end_date", "events", b"events", "followup_intent_info", b"followup_intent_info", "input_context_names", b"input_context_names", "is_end_of_deviation", b"is_end_of_deviation", "is_fallback", b"is_fallback", "is_start_of_deviation", b"is_start_of_deviation", "messages", b"messages", "ml_disabled", b"ml_disabled", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "next_page_token", b"next_page_token", "output_contexts", b"output_contexts", "parameters", b"parameters", "parent_followup_intent_name", b"parent_followup_intent_name", "priority", b"priority", "reset_contexts", b"reset_contexts", "root_followup_intent_name", b"root_followup_intent_name", "start_date", b"start_date", "status", b"status", "tags", b"tags", "training_phrase_count", b"training_phrase_count", "training_phrases", b"training_phrases", "webhook_state", b"webhook_state"]) -> None: ...
 
 global___Intent = Intent
 
-@typing_extensions.final
+@typing.final
 class ListIntentsRequest(google.protobuf.message.Message):
     """The request message for [Intents.ListIntents][google.cloud.dialogflow.v2.Intents.ListIntents]."""
 
@@ -1563,9 +1619,11 @@ class ListIntentsRequest(google.protobuf.message.Message):
     @property
     def sort_by_field(self) -> global___IntentSorting:
         """Optional. Defines the sorting of the list. Default, no sorting."""
+
     @property
     def filter_by_tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Optional. Applies a filter to the list by tags. Default, no filter."""
+
     def __init__(
         self,
         *,
@@ -1577,12 +1635,12 @@ class ListIntentsRequest(google.protobuf.message.Message):
         sort_by_field: global___IntentSorting | None = ...,
         filter_by_tags: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["sort_by_field", b"sort_by_field"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["filter_by_category", b"filter_by_category", "filter_by_tags", b"filter_by_tags", "intent_view", b"intent_view", "language_code", b"language_code", "page_token", b"page_token", "parent", b"parent", "sort_by_field", b"sort_by_field"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["sort_by_field", b"sort_by_field"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["filter_by_category", b"filter_by_category", "filter_by_tags", b"filter_by_tags", "intent_view", b"intent_view", "language_code", b"language_code", "page_token", b"page_token", "parent", b"parent", "sort_by_field", b"sort_by_field"]) -> None: ...
 
 global___ListIntentsRequest = ListIntentsRequest
 
-@typing_extensions.final
+@typing.final
 class ListIntentsResponse(google.protobuf.message.Message):
     """The response message for [Intents.ListIntents][google.cloud.dialogflow.v2.Intents.ListIntents]."""
 
@@ -1590,26 +1648,27 @@ class ListIntentsResponse(google.protobuf.message.Message):
 
     INTENTS_FIELD_NUMBER: builtins.int
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    next_page_token: builtins.str
+    """The next_page_token is used to retrieve the next page of a returned result,
+    e.g. next_page_token is current_index-2
+    """
     @property
     def intents(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Intent]:
         """The list of agent intents. There will be a maximum number of items
         returned based on the page_token field in the request.
         """
-    next_page_token: builtins.str
-    """The next_page_token is used to retrieve the next page of a returned result,
-    e.g. next_page_token is current_index-2
-    """
+
     def __init__(
         self,
         *,
         intents: collections.abc.Iterable[global___Intent] | None = ...,
         next_page_token: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["intents", b"intents", "next_page_token", b"next_page_token"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["intents", b"intents", "next_page_token", b"next_page_token"]) -> None: ...
 
 global___ListIntentsResponse = ListIntentsResponse
 
-@typing_extensions.final
+@typing.final
 class GetIntentRequest(google.protobuf.message.Message):
     """The request message for [Intents.GetIntent][google.cloud.dialogflow.v2.Intents.GetIntent]."""
 
@@ -1665,11 +1724,11 @@ class GetIntentRequest(google.protobuf.message.Message):
         intent_view: global___IntentView.ValueType = ...,
         page_token: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["intent_view", b"intent_view", "language_code", b"language_code", "name", b"name", "page_token", b"page_token"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["intent_view", b"intent_view", "language_code", b"language_code", "name", b"name", "page_token", b"page_token"]) -> None: ...
 
 global___GetIntentRequest = GetIntentRequest
 
-@typing_extensions.final
+@typing.final
 class CreateIntentRequest(google.protobuf.message.Message):
     """The request message for [Intents.CreateIntent][google.cloud.dialogflow.v2.Intents.CreateIntent]."""
 
@@ -1683,9 +1742,6 @@ class CreateIntentRequest(google.protobuf.message.Message):
     """Required. The agent to create a intent for.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
-    @property
-    def intent(self) -> global___Intent:
-        """Required. The intent to create."""
     language_code: builtins.str
     """Optional. The language of training phrases, parameters and rich messages
     defined in `intent`. If not specified, the agent's default language is
@@ -1695,6 +1751,10 @@ class CreateIntentRequest(google.protobuf.message.Message):
     """
     intent_view: global___IntentView.ValueType
     """Optional. The resource view to apply to the returned intent."""
+    @property
+    def intent(self) -> global___Intent:
+        """Required. The intent to create."""
+
     def __init__(
         self,
         *,
@@ -1703,12 +1763,12 @@ class CreateIntentRequest(google.protobuf.message.Message):
         language_code: builtins.str = ...,
         intent_view: global___IntentView.ValueType = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["intent", b"intent"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["intent", b"intent", "intent_view", b"intent_view", "language_code", b"language_code", "parent", b"parent"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["intent", b"intent"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["intent", b"intent", "intent_view", b"intent_view", "language_code", b"language_code", "parent", b"parent"]) -> None: ...
 
 global___CreateIntentRequest = CreateIntentRequest
 
-@typing_extensions.final
+@typing.final
 class UpdateIntentRequest(google.protobuf.message.Message):
     """The request message for [Intents.UpdateIntent][google.cloud.dialogflow.v2.Intents.UpdateIntent]."""
 
@@ -1718,11 +1778,6 @@ class UpdateIntentRequest(google.protobuf.message.Message):
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     UPDATE_MASK_FIELD_NUMBER: builtins.int
     INTENT_VIEW_FIELD_NUMBER: builtins.int
-    @property
-    def intent(self) -> global___Intent:
-        """Required. The intent to update.
-        Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
-        """
     language_code: builtins.str
     """Optional. The language of training phrases, parameters and rich messages
     defined in `intent`. If not specified, the agent's default language is
@@ -1730,11 +1785,18 @@ class UpdateIntentRequest(google.protobuf.message.Message):
     languages](https://dialogflow.com/docs/reference/language) are supported.
     Note: languages must be enabled in the agent, before they can be used.
     """
+    intent_view: global___IntentView.ValueType
+    """Optional. The resource view to apply to the returned intent."""
+    @property
+    def intent(self) -> global___Intent:
+        """Required. The intent to update.
+        Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
+        """
+
     @property
     def update_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields get updated."""
-    intent_view: global___IntentView.ValueType
-    """Optional. The resource view to apply to the returned intent."""
+
     def __init__(
         self,
         *,
@@ -1743,12 +1805,12 @@ class UpdateIntentRequest(google.protobuf.message.Message):
         update_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
         intent_view: global___IntentView.ValueType = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["intent", b"intent", "update_mask", b"update_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["intent", b"intent", "intent_view", b"intent_view", "language_code", b"language_code", "update_mask", b"update_mask"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["intent", b"intent", "update_mask", b"update_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["intent", b"intent", "intent_view", b"intent_view", "language_code", b"language_code", "update_mask", b"update_mask"]) -> None: ...
 
 global___UpdateIntentRequest = UpdateIntentRequest
 
-@typing_extensions.final
+@typing.final
 class DeleteIntentRequest(google.protobuf.message.Message):
     """The request message for [Intents.DeleteIntent][google.cloud.dialogflow.v2.Intents.DeleteIntent]."""
 
@@ -1764,11 +1826,11 @@ class DeleteIntentRequest(google.protobuf.message.Message):
         *,
         name: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["name", b"name"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["name", b"name"]) -> None: ...
 
 global___DeleteIntentRequest = DeleteIntentRequest
 
-@typing_extensions.final
+@typing.final
 class BatchUpdateIntentsRequest(google.protobuf.message.Message):
     """The request message for [Intents.BatchUpdateIntents][google.cloud.dialogflow.v2.Intents.BatchUpdateIntents]."""
 
@@ -1789,9 +1851,6 @@ class BatchUpdateIntentsRequest(google.protobuf.message.Message):
     create. The file format can either be a serialized proto (of IntentBatch
     type) or JSON object. Note: The URI must start with "gs://".
     """
-    @property
-    def intent_batch_inline(self) -> global___IntentBatch:
-        """The collection of intents to update or create."""
     language_code: builtins.str
     """Optional. The language of training phrases, parameters and rich messages
     defined in `intents`. If not specified, the agent's default language is
@@ -1799,11 +1858,16 @@ class BatchUpdateIntentsRequest(google.protobuf.message.Message):
     languages](https://dialogflow.com/docs/reference/language) are supported.
     Note: languages must be enabled in the agent, before they can be used.
     """
+    intent_view: global___IntentView.ValueType
+    """Optional. The resource view to apply to the returned intent."""
+    @property
+    def intent_batch_inline(self) -> global___IntentBatch:
+        """The collection of intents to update or create."""
+
     @property
     def update_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields get updated."""
-    intent_view: global___IntentView.ValueType
-    """Optional. The resource view to apply to the returned intent."""
+
     def __init__(
         self,
         *,
@@ -1814,13 +1878,13 @@ class BatchUpdateIntentsRequest(google.protobuf.message.Message):
         update_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
         intent_view: global___IntentView.ValueType = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["intent_batch", b"intent_batch", "intent_batch_inline", b"intent_batch_inline", "intent_batch_uri", b"intent_batch_uri", "update_mask", b"update_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["intent_batch", b"intent_batch", "intent_batch_inline", b"intent_batch_inline", "intent_batch_uri", b"intent_batch_uri", "intent_view", b"intent_view", "language_code", b"language_code", "parent", b"parent", "update_mask", b"update_mask"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["intent_batch", b"intent_batch"]) -> typing_extensions.Literal["intent_batch_uri", "intent_batch_inline"] | None: ...
+    def HasField(self, field_name: typing.Literal["intent_batch", b"intent_batch", "intent_batch_inline", b"intent_batch_inline", "intent_batch_uri", b"intent_batch_uri", "update_mask", b"update_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["intent_batch", b"intent_batch", "intent_batch_inline", b"intent_batch_inline", "intent_batch_uri", b"intent_batch_uri", "intent_view", b"intent_view", "language_code", b"language_code", "parent", b"parent", "update_mask", b"update_mask"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["intent_batch", b"intent_batch"]) -> typing.Literal["intent_batch_uri", "intent_batch_inline"] | None: ...
 
 global___BatchUpdateIntentsRequest = BatchUpdateIntentsRequest
 
-@typing_extensions.final
+@typing.final
 class BatchUpdateIntentsResponse(google.protobuf.message.Message):
     """The response message for [Intents.BatchUpdateIntents][google.cloud.dialogflow.v2.Intents.BatchUpdateIntents]."""
 
@@ -1830,16 +1894,17 @@ class BatchUpdateIntentsResponse(google.protobuf.message.Message):
     @property
     def intents(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Intent]:
         """The collection of updated or created intents."""
+
     def __init__(
         self,
         *,
         intents: collections.abc.Iterable[global___Intent] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["intents", b"intents"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["intents", b"intents"]) -> None: ...
 
 global___BatchUpdateIntentsResponse = BatchUpdateIntentsResponse
 
-@typing_extensions.final
+@typing.final
 class BatchDeleteIntentsRequest(google.protobuf.message.Message):
     """The request message for [Intents.BatchDeleteIntents][google.cloud.dialogflow.v2.Intents.BatchDeleteIntents]."""
 
@@ -1856,17 +1921,18 @@ class BatchDeleteIntentsRequest(google.protobuf.message.Message):
         """Required. The collection of intents to delete. Only intent `name` must be
         filled in.
         """
+
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
         intents: collections.abc.Iterable[global___Intent] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["intents", b"intents", "parent", b"parent"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["intents", b"intents", "parent", b"parent"]) -> None: ...
 
 global___BatchDeleteIntentsRequest = BatchDeleteIntentsRequest
 
-@typing_extensions.final
+@typing.final
 class IntentBatch(google.protobuf.message.Message):
     """This message is a wrapper around a collection of intents."""
 
@@ -1876,16 +1942,17 @@ class IntentBatch(google.protobuf.message.Message):
     @property
     def intents(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Intent]:
         """A collection of intents."""
+
     def __init__(
         self,
         *,
         intents: collections.abc.Iterable[global___Intent] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["intents", b"intents"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["intents", b"intents"]) -> None: ...
 
 global___IntentBatch = IntentBatch
 
-@typing_extensions.final
+@typing.final
 class IntentSorting(google.protobuf.message.Message):
     """This message contains sorting of an intent"""
 
@@ -1926,11 +1993,11 @@ class IntentSorting(google.protobuf.message.Message):
         sorting_field: global___IntentSorting.IntentSortingField.ValueType = ...,
         sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["sorting_field", b"sorting_field", "sorting_mode", b"sorting_mode"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["sorting_field", b"sorting_field", "sorting_mode", b"sorting_mode"]) -> None: ...
 
 global___IntentSorting = IntentSorting
 
-@typing_extensions.final
+@typing.final
 class IntentTagRequest(google.protobuf.message.Message):
     """This message is a request to get an intent tag"""
 
@@ -1945,17 +2012,18 @@ class IntentTagRequest(google.protobuf.message.Message):
     @property
     def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Intent tags for this intent to operate on"""
+
     def __init__(
         self,
         *,
         intent_name: builtins.str = ...,
         tags: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["intent_name", b"intent_name", "tags", b"tags"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["intent_name", b"intent_name", "tags", b"tags"]) -> None: ...
 
 global___IntentTagRequest = IntentTagRequest
 
-@typing_extensions.final
+@typing.final
 class GetIntentTagsRequest(google.protobuf.message.Message):
     """This message is a request to get intent tags"""
 
@@ -1971,11 +2039,11 @@ class GetIntentTagsRequest(google.protobuf.message.Message):
         *,
         intent_name: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["intent_name", b"intent_name"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["intent_name", b"intent_name"]) -> None: ...
 
 global___GetIntentTagsRequest = GetIntentTagsRequest
 
-@typing_extensions.final
+@typing.final
 class GetIntentTagsResponse(google.protobuf.message.Message):
     """This message is a response of getting intent tags"""
 
@@ -1985,16 +2053,17 @@ class GetIntentTagsResponse(google.protobuf.message.Message):
     @property
     def intent_tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """All the distinct intent tags sorted"""
+
     def __init__(
         self,
         *,
         intent_tags: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["intent_tags", b"intent_tags"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["intent_tags", b"intent_tags"]) -> None: ...
 
 global___GetIntentTagsResponse = GetIntentTagsResponse
 
-@typing_extensions.final
+@typing.final
 class GetAllIntentTagsRequest(google.protobuf.message.Message):
     """This message is a request to get all intent tags"""
 
@@ -2010,11 +2079,11 @@ class GetAllIntentTagsRequest(google.protobuf.message.Message):
         *,
         parent: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["parent", b"parent"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["parent", b"parent"]) -> None: ...
 
 global___GetAllIntentTagsRequest = GetAllIntentTagsRequest
 
-@typing_extensions.final
+@typing.final
 class BatchUpdateTrainingPhrasesRequest(google.protobuf.message.Message):
     """This message is a request to update a batch of training phrases"""
 
@@ -2024,16 +2093,17 @@ class BatchUpdateTrainingPhrasesRequest(google.protobuf.message.Message):
     @property
     def training_phrases(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Intent.TrainingPhrase]:
         """A list of training phrases"""
+
     def __init__(
         self,
         *,
         training_phrases: collections.abc.Iterable[global___Intent.TrainingPhrase] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["training_phrases", b"training_phrases"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["training_phrases", b"training_phrases"]) -> None: ...
 
 global___BatchUpdateTrainingPhrasesRequest = BatchUpdateTrainingPhrasesRequest
 
-@typing_extensions.final
+@typing.final
 class TrainingPhraseStatus(google.protobuf.message.Message):
     """This message containing the training phrases status"""
 
@@ -2041,22 +2111,22 @@ class TrainingPhraseStatus(google.protobuf.message.Message):
 
     TRAINING_PHRASE_FIELD_NUMBER: builtins.int
     ERROR_MESSAGE_FIELD_NUMBER: builtins.int
+    error_message: builtins.str
     @property
     def training_phrase(self) -> global___Intent.TrainingPhrase: ...
-    error_message: builtins.str
     def __init__(
         self,
         *,
         training_phrase: global___Intent.TrainingPhrase | None = ...,
         error_message: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["error_message", b"error_message", "phrase_or_status", b"phrase_or_status", "training_phrase", b"training_phrase"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["error_message", b"error_message", "phrase_or_status", b"phrase_or_status", "training_phrase", b"training_phrase"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["phrase_or_status", b"phrase_or_status"]) -> typing_extensions.Literal["training_phrase", "error_message"] | None: ...
+    def HasField(self, field_name: typing.Literal["error_message", b"error_message", "phrase_or_status", b"phrase_or_status", "training_phrase", b"training_phrase"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["error_message", b"error_message", "phrase_or_status", b"phrase_or_status", "training_phrase", b"training_phrase"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["phrase_or_status", b"phrase_or_status"]) -> typing.Literal["training_phrase", "error_message"] | None: ...
 
 global___TrainingPhraseStatus = TrainingPhraseStatus
 
-@typing_extensions.final
+@typing.final
 class BatchTrainingPhrasesStatusResponse(google.protobuf.message.Message):
     """This message is a response of the status of a batch of training phrases"""
 
@@ -2064,28 +2134,29 @@ class BatchTrainingPhrasesStatusResponse(google.protobuf.message.Message):
 
     TRAINING_PHRASE_STATUSES_FIELD_NUMBER: builtins.int
     HAS_ERRORS_FIELD_NUMBER: builtins.int
+    has_errors: builtins.bool
+    """indicates if statuses of some of the training phrases have errors"""
     @property
     def training_phrase_statuses(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___TrainingPhraseStatus]:
         """A list of training phrase statuses"""
-    has_errors: builtins.bool
-    """indicates if statuses of some of the training phrases have errors"""
+
     def __init__(
         self,
         *,
         training_phrase_statuses: collections.abc.Iterable[global___TrainingPhraseStatus] | None = ...,
         has_errors: builtins.bool = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["has_errors", b"has_errors", "training_phrase_statuses", b"training_phrase_statuses"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["has_errors", b"has_errors", "training_phrase_statuses", b"training_phrase_statuses"]) -> None: ...
 
 global___BatchTrainingPhrasesStatusResponse = BatchTrainingPhrasesStatusResponse
 
-@typing_extensions.final
+@typing.final
 class BatchCreateTrainingPhrasesRequest(google.protobuf.message.Message):
     """This message is a request of a creation of a batch of training phrases"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    @typing_extensions.final
+    @typing.final
     class CreateTrainingPhraseRequest(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -2096,14 +2167,15 @@ class BatchCreateTrainingPhrasesRequest(google.protobuf.message.Message):
         @property
         def training_phrase(self) -> global___Intent.TrainingPhrase:
             """Required. The training phrase to create."""
+
         def __init__(
             self,
             *,
             intent_name: builtins.str = ...,
             training_phrase: global___Intent.TrainingPhrase | None = ...,
         ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["training_phrase", b"training_phrase"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["intent_name", b"intent_name", "training_phrase", b"training_phrase"]) -> None: ...
+        def HasField(self, field_name: typing.Literal["training_phrase", b"training_phrase"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["intent_name", b"intent_name", "training_phrase", b"training_phrase"]) -> None: ...
 
     TRAINING_PHRASE_REQUESTS_FIELD_NUMBER: builtins.int
     @property
@@ -2113,11 +2185,11 @@ class BatchCreateTrainingPhrasesRequest(google.protobuf.message.Message):
         *,
         training_phrase_requests: collections.abc.Iterable[global___BatchCreateTrainingPhrasesRequest.CreateTrainingPhraseRequest] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["training_phrase_requests", b"training_phrase_requests"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["training_phrase_requests", b"training_phrase_requests"]) -> None: ...
 
 global___BatchCreateTrainingPhrasesRequest = BatchCreateTrainingPhrasesRequest
 
-@typing_extensions.final
+@typing.final
 class BatchGetTrainingPhrasesRequest(google.protobuf.message.Message):
     """This message is a request to get a batch training phrases"""
 
@@ -2129,16 +2201,17 @@ class BatchGetTrainingPhrasesRequest(google.protobuf.message.Message):
         """Required. The names of the training phrases.
         Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/trainingPhrases/&lt;training_phrase_uuid&gt;</code></pre>
         """
+
     def __init__(
         self,
         *,
         names: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["names", b"names"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["names", b"names"]) -> None: ...
 
 global___BatchGetTrainingPhrasesRequest = BatchGetTrainingPhrasesRequest
 
-@typing_extensions.final
+@typing.final
 class BatchDeleteTrainingPhrasesRequest(google.protobuf.message.Message):
     """This message is a request to delete a batch of training phrases"""
 
@@ -2150,56 +2223,57 @@ class BatchDeleteTrainingPhrasesRequest(google.protobuf.message.Message):
         """Required. The names of the training phrases.
         Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/trainingPhrases/&lt;training_phrase_uuid&gt;</code></pre>
         """
+
     def __init__(
         self,
         *,
         names: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["names", b"names"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["names", b"names"]) -> None: ...
 
 global___BatchDeleteTrainingPhrasesRequest = BatchDeleteTrainingPhrasesRequest
 
-@typing_extensions.final
+@typing.final
 class BatchDeleteTrainingPhrasesResponse(google.protobuf.message.Message):
     """This message is a response of deleting a batch of training phrases"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    @typing_extensions.final
+    @typing.final
     class DeleteTrainingPhraseStatus(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
         SUCCESSFULLY_DELETED_FIELD_NUMBER: builtins.int
         ERROR_MESSAGE_FIELD_NUMBER: builtins.int
+        error_message: builtins.str
         @property
         def successfully_deleted(self) -> google.protobuf.empty_pb2.Empty: ...
-        error_message: builtins.str
         def __init__(
             self,
             *,
             successfully_deleted: google.protobuf.empty_pb2.Empty | None = ...,
             error_message: builtins.str = ...,
         ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["delete_status", b"delete_status", "error_message", b"error_message", "successfully_deleted", b"successfully_deleted"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["delete_status", b"delete_status", "error_message", b"error_message", "successfully_deleted", b"successfully_deleted"]) -> None: ...
-        def WhichOneof(self, oneof_group: typing_extensions.Literal["delete_status", b"delete_status"]) -> typing_extensions.Literal["successfully_deleted", "error_message"] | None: ...
+        def HasField(self, field_name: typing.Literal["delete_status", b"delete_status", "error_message", b"error_message", "successfully_deleted", b"successfully_deleted"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["delete_status", b"delete_status", "error_message", b"error_message", "successfully_deleted", b"successfully_deleted"]) -> None: ...
+        def WhichOneof(self, oneof_group: typing.Literal["delete_status", b"delete_status"]) -> typing.Literal["successfully_deleted", "error_message"] | None: ...
 
     DELETE_STATUSES_FIELD_NUMBER: builtins.int
     HAS_ERRORS_FIELD_NUMBER: builtins.int
+    has_errors: builtins.bool
     @property
     def delete_statuses(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___BatchDeleteTrainingPhrasesResponse.DeleteTrainingPhraseStatus]: ...
-    has_errors: builtins.bool
     def __init__(
         self,
         *,
         delete_statuses: collections.abc.Iterable[global___BatchDeleteTrainingPhrasesResponse.DeleteTrainingPhraseStatus] | None = ...,
         has_errors: builtins.bool = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["delete_statuses", b"delete_statuses", "has_errors", b"has_errors"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["delete_statuses", b"delete_statuses", "has_errors", b"has_errors"]) -> None: ...
 
 global___BatchDeleteTrainingPhrasesResponse = BatchDeleteTrainingPhrasesResponse
 
-@typing_extensions.final
+@typing.final
 class ListTrainingPhrasesRequest(google.protobuf.message.Message):
     """The request message for TrainingPhraseRequest"""
 
@@ -2248,11 +2322,11 @@ class ListTrainingPhrasesRequest(google.protobuf.message.Message):
         language_code: builtins.str = ...,
         page_token: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["intent_name", b"intent_name", "language_code", b"language_code", "page_token", b"page_token"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["intent_name", b"intent_name", "language_code", b"language_code", "page_token", b"page_token"]) -> None: ...
 
 global___ListTrainingPhrasesRequest = ListTrainingPhrasesRequest
 
-@typing_extensions.final
+@typing.final
 class ListTrainingPhrasesResponse(google.protobuf.message.Message):
     """The response message for ListTrainingPhrase"""
 
@@ -2260,75 +2334,76 @@ class ListTrainingPhrasesResponse(google.protobuf.message.Message):
 
     TRAINING_PHRASES_FIELD_NUMBER: builtins.int
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    @property
-    def training_phrases(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Intent.TrainingPhrase]:
-        """The list of training phrases. There will be a maximum number of items
-        returned based on the page_token field in the request.
-        """
     next_page_token: builtins.str
     """Token to retrieve the next page of results, or empty if there are no
     more results in the list.
     Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>--sub_field-<SUB_FIELD>`
     where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `training_phrases`)
     """
+    @property
+    def training_phrases(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Intent.TrainingPhrase]:
+        """The list of training phrases. There will be a maximum number of items
+        returned based on the page_token field in the request.
+        """
+
     def __init__(
         self,
         *,
         training_phrases: collections.abc.Iterable[global___Intent.TrainingPhrase] | None = ...,
         next_page_token: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["next_page_token", b"next_page_token", "training_phrases", b"training_phrases"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["next_page_token", b"next_page_token", "training_phrases", b"training_phrases"]) -> None: ...
 
 global___ListTrainingPhrasesResponse = ListTrainingPhrasesResponse
 
-@typing_extensions.final
+@typing.final
 class BatchResponseMessagesStatusResponse(google.protobuf.message.Message):
     """This message is a response of a batch responses of message status"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    @typing_extensions.final
+    @typing.final
     class ResponseMessageStatus(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
         RESPONSE_MESSAGE_FIELD_NUMBER: builtins.int
         ERROR_MESSAGE_FIELD_NUMBER: builtins.int
+        error_message: builtins.str
         @property
         def response_message(self) -> global___Intent.Message: ...
-        error_message: builtins.str
         def __init__(
             self,
             *,
             response_message: global___Intent.Message | None = ...,
             error_message: builtins.str = ...,
         ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["error_message", b"error_message", "phrase_or_status", b"phrase_or_status", "response_message", b"response_message"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["error_message", b"error_message", "phrase_or_status", b"phrase_or_status", "response_message", b"response_message"]) -> None: ...
-        def WhichOneof(self, oneof_group: typing_extensions.Literal["phrase_or_status", b"phrase_or_status"]) -> typing_extensions.Literal["response_message", "error_message"] | None: ...
+        def HasField(self, field_name: typing.Literal["error_message", b"error_message", "phrase_or_status", b"phrase_or_status", "response_message", b"response_message"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["error_message", b"error_message", "phrase_or_status", b"phrase_or_status", "response_message", b"response_message"]) -> None: ...
+        def WhichOneof(self, oneof_group: typing.Literal["phrase_or_status", b"phrase_or_status"]) -> typing.Literal["response_message", "error_message"] | None: ...
 
     RESPONSE_MESSAGE_STATUSES_FIELD_NUMBER: builtins.int
     HAS_ERRORS_FIELD_NUMBER: builtins.int
-    @property
-    def response_message_statuses(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___BatchResponseMessagesStatusResponse.ResponseMessageStatus]: ...
     has_errors: builtins.bool
     """indicates if statuses of some of the response messages have errors"""
+    @property
+    def response_message_statuses(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___BatchResponseMessagesStatusResponse.ResponseMessageStatus]: ...
     def __init__(
         self,
         *,
         response_message_statuses: collections.abc.Iterable[global___BatchResponseMessagesStatusResponse.ResponseMessageStatus] | None = ...,
         has_errors: builtins.bool = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["has_errors", b"has_errors", "response_message_statuses", b"response_message_statuses"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["has_errors", b"has_errors", "response_message_statuses", b"response_message_statuses"]) -> None: ...
 
 global___BatchResponseMessagesStatusResponse = BatchResponseMessagesStatusResponse
 
-@typing_extensions.final
+@typing.final
 class BatchCreateResponseMessagesRequest(google.protobuf.message.Message):
     """Request to create a list of new response messages and adds it to an intent"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    @typing_extensions.final
+    @typing.final
     class CreateResponseMessageRequest(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -2339,14 +2414,15 @@ class BatchCreateResponseMessagesRequest(google.protobuf.message.Message):
         @property
         def response_message(self) -> global___Intent.Message:
             """Required. The response message."""
+
         def __init__(
             self,
             *,
             intent_name: builtins.str = ...,
             response_message: global___Intent.Message | None = ...,
         ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["response_message", b"response_message"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["intent_name", b"intent_name", "response_message", b"response_message"]) -> None: ...
+        def HasField(self, field_name: typing.Literal["response_message", b"response_message"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["intent_name", b"intent_name", "response_message", b"response_message"]) -> None: ...
 
     RESPONSE_MESSAGE_REQUESTS_FIELD_NUMBER: builtins.int
     @property
@@ -2356,11 +2432,11 @@ class BatchCreateResponseMessagesRequest(google.protobuf.message.Message):
         *,
         response_message_requests: collections.abc.Iterable[global___BatchCreateResponseMessagesRequest.CreateResponseMessageRequest] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["response_message_requests", b"response_message_requests"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["response_message_requests", b"response_message_requests"]) -> None: ...
 
 global___BatchCreateResponseMessagesRequest = BatchCreateResponseMessagesRequest
 
-@typing_extensions.final
+@typing.final
 class BatchUpdateResponseMessagesRequest(google.protobuf.message.Message):
     """Request to update a response message in the specified intent"""
 
@@ -2370,16 +2446,17 @@ class BatchUpdateResponseMessagesRequest(google.protobuf.message.Message):
     @property
     def response_messages(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Intent.Message]:
         """The response messages to update"""
+
     def __init__(
         self,
         *,
         response_messages: collections.abc.Iterable[global___Intent.Message] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["response_messages", b"response_messages"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["response_messages", b"response_messages"]) -> None: ...
 
 global___BatchUpdateResponseMessagesRequest = BatchUpdateResponseMessagesRequest
 
-@typing_extensions.final
+@typing.final
 class BatchGetResponseMessagesRequest(google.protobuf.message.Message):
     """Request to retrieve a response messages"""
 
@@ -2391,16 +2468,17 @@ class BatchGetResponseMessagesRequest(google.protobuf.message.Message):
         """Required. The names of the response messages.
         Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/responseMessages/&lt;message_uuid&gt;</code></pre>
         """
+
     def __init__(
         self,
         *,
         names: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["names", b"names"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["names", b"names"]) -> None: ...
 
 global___BatchGetResponseMessagesRequest = BatchGetResponseMessagesRequest
 
-@typing_extensions.final
+@typing.final
 class BatchDeleteResponseMessagesRequest(google.protobuf.message.Message):
     """Request to delete response messages specified by their names"""
 
@@ -2412,56 +2490,57 @@ class BatchDeleteResponseMessagesRequest(google.protobuf.message.Message):
         """Required. The names of the  response messages.
         Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/responseMessages/&lt;message_uuid&gt;</code></pre>
         """
+
     def __init__(
         self,
         *,
         names: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["names", b"names"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["names", b"names"]) -> None: ...
 
 global___BatchDeleteResponseMessagesRequest = BatchDeleteResponseMessagesRequest
 
-@typing_extensions.final
+@typing.final
 class BatchDeleteResponseMessagesResponse(google.protobuf.message.Message):
     """Response containing list with deleted response messages"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    @typing_extensions.final
+    @typing.final
     class DeleteResponseMessageStatus(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
         SUCCESSFULLY_DELETED_FIELD_NUMBER: builtins.int
         ERROR_MESSAGE_FIELD_NUMBER: builtins.int
+        error_message: builtins.str
         @property
         def successfully_deleted(self) -> google.protobuf.empty_pb2.Empty: ...
-        error_message: builtins.str
         def __init__(
             self,
             *,
             successfully_deleted: google.protobuf.empty_pb2.Empty | None = ...,
             error_message: builtins.str = ...,
         ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["delete_status", b"delete_status", "error_message", b"error_message", "successfully_deleted", b"successfully_deleted"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["delete_status", b"delete_status", "error_message", b"error_message", "successfully_deleted", b"successfully_deleted"]) -> None: ...
-        def WhichOneof(self, oneof_group: typing_extensions.Literal["delete_status", b"delete_status"]) -> typing_extensions.Literal["successfully_deleted", "error_message"] | None: ...
+        def HasField(self, field_name: typing.Literal["delete_status", b"delete_status", "error_message", b"error_message", "successfully_deleted", b"successfully_deleted"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["delete_status", b"delete_status", "error_message", b"error_message", "successfully_deleted", b"successfully_deleted"]) -> None: ...
+        def WhichOneof(self, oneof_group: typing.Literal["delete_status", b"delete_status"]) -> typing.Literal["successfully_deleted", "error_message"] | None: ...
 
     DELETE_STATUSES_FIELD_NUMBER: builtins.int
     HAS_ERRORS_FIELD_NUMBER: builtins.int
+    has_errors: builtins.bool
     @property
     def delete_statuses(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___BatchDeleteResponseMessagesResponse.DeleteResponseMessageStatus]: ...
-    has_errors: builtins.bool
     def __init__(
         self,
         *,
         delete_statuses: collections.abc.Iterable[global___BatchDeleteResponseMessagesResponse.DeleteResponseMessageStatus] | None = ...,
         has_errors: builtins.bool = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["delete_statuses", b"delete_statuses", "has_errors", b"has_errors"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["delete_statuses", b"delete_statuses", "has_errors", b"has_errors"]) -> None: ...
 
 global___BatchDeleteResponseMessagesResponse = BatchDeleteResponseMessagesResponse
 
-@typing_extensions.final
+@typing.final
 class ListResponseMessagesRequest(google.protobuf.message.Message):
     """The request message for ResponseMessageRequest"""
 
@@ -2510,11 +2589,11 @@ class ListResponseMessagesRequest(google.protobuf.message.Message):
         language_code: builtins.str = ...,
         page_token: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["intent_name", b"intent_name", "language_code", b"language_code", "page_token", b"page_token"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["intent_name", b"intent_name", "language_code", b"language_code", "page_token", b"page_token"]) -> None: ...
 
 global___ListResponseMessagesRequest = ListResponseMessagesRequest
 
-@typing_extensions.final
+@typing.final
 class ListResponseMessagesResponse(google.protobuf.message.Message):
     """The response message for ListResponseMessage"""
 
@@ -2522,75 +2601,76 @@ class ListResponseMessagesResponse(google.protobuf.message.Message):
 
     RESPONSE_MESSAGES_FIELD_NUMBER: builtins.int
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    @property
-    def response_messages(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Intent.Message]:
-        """The list of response messages. There will be a maximum number of items
-        returned based on the page_token field in the request.
-        """
     next_page_token: builtins.str
     """Token to retrieve the next page of results, or empty if there are no
     more results in the list.
     Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>--sub_field-<SUB_FIELD>`
     where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `messages`)
     """
+    @property
+    def response_messages(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Intent.Message]:
+        """The list of response messages. There will be a maximum number of items
+        returned based on the page_token field in the request.
+        """
+
     def __init__(
         self,
         *,
         response_messages: collections.abc.Iterable[global___Intent.Message] | None = ...,
         next_page_token: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["next_page_token", b"next_page_token", "response_messages", b"response_messages"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["next_page_token", b"next_page_token", "response_messages", b"response_messages"]) -> None: ...
 
 global___ListResponseMessagesResponse = ListResponseMessagesResponse
 
-@typing_extensions.final
+@typing.final
 class BatchParametersStatusResponse(google.protobuf.message.Message):
     """Response containing a batch of parameters in the specified intent"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    @typing_extensions.final
+    @typing.final
     class ParameterStatus(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
         PARAMETER_FIELD_NUMBER: builtins.int
         ERROR_MESSAGE_FIELD_NUMBER: builtins.int
+        error_message: builtins.str
         @property
         def parameter(self) -> global___Intent.Parameter: ...
-        error_message: builtins.str
         def __init__(
             self,
             *,
             parameter: global___Intent.Parameter | None = ...,
             error_message: builtins.str = ...,
         ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["error_message", b"error_message", "parameter", b"parameter", "phrase_or_status", b"phrase_or_status"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["error_message", b"error_message", "parameter", b"parameter", "phrase_or_status", b"phrase_or_status"]) -> None: ...
-        def WhichOneof(self, oneof_group: typing_extensions.Literal["phrase_or_status", b"phrase_or_status"]) -> typing_extensions.Literal["parameter", "error_message"] | None: ...
+        def HasField(self, field_name: typing.Literal["error_message", b"error_message", "parameter", b"parameter", "phrase_or_status", b"phrase_or_status"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["error_message", b"error_message", "parameter", b"parameter", "phrase_or_status", b"phrase_or_status"]) -> None: ...
+        def WhichOneof(self, oneof_group: typing.Literal["phrase_or_status", b"phrase_or_status"]) -> typing.Literal["parameter", "error_message"] | None: ...
 
     PARAMETER_STATUSES_FIELD_NUMBER: builtins.int
     HAS_ERRORS_FIELD_NUMBER: builtins.int
-    @property
-    def parameter_statuses(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___BatchParametersStatusResponse.ParameterStatus]: ...
     has_errors: builtins.bool
     """indicates if statuses of some of the parameters have errors"""
+    @property
+    def parameter_statuses(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___BatchParametersStatusResponse.ParameterStatus]: ...
     def __init__(
         self,
         *,
         parameter_statuses: collections.abc.Iterable[global___BatchParametersStatusResponse.ParameterStatus] | None = ...,
         has_errors: builtins.bool = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["has_errors", b"has_errors", "parameter_statuses", b"parameter_statuses"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["has_errors", b"has_errors", "parameter_statuses", b"parameter_statuses"]) -> None: ...
 
 global___BatchParametersStatusResponse = BatchParametersStatusResponse
 
-@typing_extensions.final
+@typing.final
 class BatchCreateParametersRequest(google.protobuf.message.Message):
     """Request to create a batch of parameters in the specified intent"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    @typing_extensions.final
+    @typing.final
     class CreateParameterRequest(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -2601,14 +2681,15 @@ class BatchCreateParametersRequest(google.protobuf.message.Message):
         @property
         def parameter(self) -> global___Intent.Parameter:
             """Required. The response message."""
+
         def __init__(
             self,
             *,
             intent_name: builtins.str = ...,
             parameter: global___Intent.Parameter | None = ...,
         ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["parameter", b"parameter"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["intent_name", b"intent_name", "parameter", b"parameter"]) -> None: ...
+        def HasField(self, field_name: typing.Literal["parameter", b"parameter"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["intent_name", b"intent_name", "parameter", b"parameter"]) -> None: ...
 
     PARAMETER_REQUESTS_FIELD_NUMBER: builtins.int
     @property
@@ -2618,11 +2699,11 @@ class BatchCreateParametersRequest(google.protobuf.message.Message):
         *,
         parameter_requests: collections.abc.Iterable[global___BatchCreateParametersRequest.CreateParameterRequest] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["parameter_requests", b"parameter_requests"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["parameter_requests", b"parameter_requests"]) -> None: ...
 
 global___BatchCreateParametersRequest = BatchCreateParametersRequest
 
-@typing_extensions.final
+@typing.final
 class BatchUpdateParametersRequest(google.protobuf.message.Message):
     """Request to update parameters and adds them to an intent"""
 
@@ -2632,16 +2713,17 @@ class BatchUpdateParametersRequest(google.protobuf.message.Message):
     @property
     def parameters(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Intent.Parameter]:
         """The response messages to update"""
+
     def __init__(
         self,
         *,
         parameters: collections.abc.Iterable[global___Intent.Parameter] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["parameters", b"parameters"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["parameters", b"parameters"]) -> None: ...
 
 global___BatchUpdateParametersRequest = BatchUpdateParametersRequest
 
-@typing_extensions.final
+@typing.final
 class BatchGetParametersRequest(google.protobuf.message.Message):
     """Request to get batch of parameters in a specified intent"""
 
@@ -2653,16 +2735,17 @@ class BatchGetParametersRequest(google.protobuf.message.Message):
         """Required. The names of the response messages.
         Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/parameters/&lt;parameter_uuid</code></pre>
         """
+
     def __init__(
         self,
         *,
         names: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["names", b"names"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["names", b"names"]) -> None: ...
 
 global___BatchGetParametersRequest = BatchGetParametersRequest
 
-@typing_extensions.final
+@typing.final
 class BatchDeleteParametersRequest(google.protobuf.message.Message):
     """Request to delete parameters specified by their names."""
 
@@ -2674,56 +2757,57 @@ class BatchDeleteParametersRequest(google.protobuf.message.Message):
         """Required. The names of the  response messages.
         Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/parameters/&lt;parameter_uuid</code></pre>
         """
+
     def __init__(
         self,
         *,
         names: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["names", b"names"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["names", b"names"]) -> None: ...
 
 global___BatchDeleteParametersRequest = BatchDeleteParametersRequest
 
-@typing_extensions.final
+@typing.final
 class BatchDeleteParametersResponse(google.protobuf.message.Message):
     """This message contains response of deleted parameters"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    @typing_extensions.final
+    @typing.final
     class DeleteParameterStatus(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
         SUCCESSFULLY_DELETED_FIELD_NUMBER: builtins.int
         ERROR_MESSAGE_FIELD_NUMBER: builtins.int
+        error_message: builtins.str
         @property
         def successfully_deleted(self) -> google.protobuf.empty_pb2.Empty: ...
-        error_message: builtins.str
         def __init__(
             self,
             *,
             successfully_deleted: google.protobuf.empty_pb2.Empty | None = ...,
             error_message: builtins.str = ...,
         ) -> None: ...
-        def HasField(self, field_name: typing_extensions.Literal["delete_status", b"delete_status", "error_message", b"error_message", "successfully_deleted", b"successfully_deleted"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["delete_status", b"delete_status", "error_message", b"error_message", "successfully_deleted", b"successfully_deleted"]) -> None: ...
-        def WhichOneof(self, oneof_group: typing_extensions.Literal["delete_status", b"delete_status"]) -> typing_extensions.Literal["successfully_deleted", "error_message"] | None: ...
+        def HasField(self, field_name: typing.Literal["delete_status", b"delete_status", "error_message", b"error_message", "successfully_deleted", b"successfully_deleted"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["delete_status", b"delete_status", "error_message", b"error_message", "successfully_deleted", b"successfully_deleted"]) -> None: ...
+        def WhichOneof(self, oneof_group: typing.Literal["delete_status", b"delete_status"]) -> typing.Literal["successfully_deleted", "error_message"] | None: ...
 
     DELETE_STATUSES_FIELD_NUMBER: builtins.int
     HAS_ERRORS_FIELD_NUMBER: builtins.int
+    has_errors: builtins.bool
     @property
     def delete_statuses(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___BatchDeleteParametersResponse.DeleteParameterStatus]: ...
-    has_errors: builtins.bool
     def __init__(
         self,
         *,
         delete_statuses: collections.abc.Iterable[global___BatchDeleteParametersResponse.DeleteParameterStatus] | None = ...,
         has_errors: builtins.bool = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["delete_statuses", b"delete_statuses", "has_errors", b"has_errors"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["delete_statuses", b"delete_statuses", "has_errors", b"has_errors"]) -> None: ...
 
 global___BatchDeleteParametersResponse = BatchDeleteParametersResponse
 
-@typing_extensions.final
+@typing.final
 class ListParametersRequest(google.protobuf.message.Message):
     """The request message for TrainingPhraseRequest"""
 
@@ -2770,11 +2854,11 @@ class ListParametersRequest(google.protobuf.message.Message):
         language_code: builtins.str = ...,
         page_token: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["intent_name", b"intent_name", "language_code", b"language_code", "page_token", b"page_token"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["intent_name", b"intent_name", "language_code", b"language_code", "page_token", b"page_token"]) -> None: ...
 
 global___ListParametersRequest = ListParametersRequest
 
-@typing_extensions.final
+@typing.final
 class ListParametersResponse(google.protobuf.message.Message):
     """The response message for ListTrainingPhrase"""
 
@@ -2782,28 +2866,29 @@ class ListParametersResponse(google.protobuf.message.Message):
 
     PARAMETERS_FIELD_NUMBER: builtins.int
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    @property
-    def parameters(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Intent.Parameter]:
-        """The list of parameters. There will be a maximum number of items
-        returned based on the page_token field in the request.
-        """
     next_page_token: builtins.str
     """Token to retrieve the next page of results, or empty if there are no
     more results in the list.
     Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>--sub_field-<SUB_FIELD>`
     where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `parameters`)
     """
+    @property
+    def parameters(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Intent.Parameter]:
+        """The list of parameters. There will be a maximum number of items
+        returned based on the page_token field in the request.
+        """
+
     def __init__(
         self,
         *,
         parameters: collections.abc.Iterable[global___Intent.Parameter] | None = ...,
         next_page_token: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["next_page_token", b"next_page_token", "parameters", b"parameters"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["next_page_token", b"next_page_token", "parameters", b"parameters"]) -> None: ...
 
 global___ListParametersResponse = ListParametersResponse
 
-@typing_extensions.final
+@typing.final
 class ListTrainingPhrasesofIntentsWithEnrichmentRequest(google.protobuf.message.Message):
     """The request message for TrainingPhraseRequest"""
 
@@ -2819,12 +2904,6 @@ class ListTrainingPhrasesofIntentsWithEnrichmentRequest(google.protobuf.message.
     """
     language_code: builtins.str
     """Optional. The language code used to filter out prompts."""
-    @property
-    def intent_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Optional. List of intent uuids to filter by. Only training phrases
-        that have this intent uuid will be returned
-        If not passed, returns all
-        """
     page_token: builtins.str
     """Optional: The page token to support pagination.
     Pagination allows you to retrieve a large result set in smaller, more manageable portions.
@@ -2850,6 +2929,13 @@ class ListTrainingPhrasesofIntentsWithEnrichmentRequest(google.protobuf.message.
     * "current_index1--page_size-20"
     * "current_index-1--page_size--20"
     """
+    @property
+    def intent_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. List of intent uuids to filter by. Only training phrases
+        that have this intent uuid will be returned
+        If not passed, returns all
+        """
+
     def __init__(
         self,
         *,
@@ -2858,11 +2944,11 @@ class ListTrainingPhrasesofIntentsWithEnrichmentRequest(google.protobuf.message.
         intent_ids: collections.abc.Iterable[builtins.str] | None = ...,
         page_token: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["intent_ids", b"intent_ids", "language_code", b"language_code", "page_token", b"page_token", "parent", b"parent"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["intent_ids", b"intent_ids", "language_code", b"language_code", "page_token", b"page_token", "parent", b"parent"]) -> None: ...
 
 global___ListTrainingPhrasesofIntentsWithEnrichmentRequest = ListTrainingPhrasesofIntentsWithEnrichmentRequest
 
-@typing_extensions.final
+@typing.final
 class ListTrainingPhrasesofIntentsWithEnrichmentResponse(google.protobuf.message.Message):
     """This message contains a list of training phrases filtered by intent ids, language code and parent passed through the request"""
 
@@ -2870,22 +2956,23 @@ class ListTrainingPhrasesofIntentsWithEnrichmentResponse(google.protobuf.message
 
     TRAINING_PHRASES_FIELD_NUMBER: builtins.int
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    @property
-    def training_phrases(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """List of user_says values. There will be a maximum number of items
-        returned based on the page_token field in the request.
-        """
     next_page_token: builtins.str
     """Optional. The next_page_token value returned from a previous list request.
     Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>--sub_field-<SUB_FIELD>`
     where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `parameters`)
     """
+    @property
+    def training_phrases(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """List of user_says values. There will be a maximum number of items
+        returned based on the page_token field in the request.
+        """
+
     def __init__(
         self,
         *,
         training_phrases: collections.abc.Iterable[builtins.str] | None = ...,
         next_page_token: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["next_page_token", b"next_page_token", "training_phrases", b"training_phrases"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["next_page_token", b"next_page_token", "training_phrases", b"training_phrases"]) -> None: ...
 
 global___ListTrainingPhrasesofIntentsWithEnrichmentResponse = ListTrainingPhrasesofIntentsWithEnrichmentResponse

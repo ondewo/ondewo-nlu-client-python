@@ -15,6 +15,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 """
+
 import builtins
 import collections.abc
 import google.protobuf.descriptor
@@ -139,7 +140,7 @@ OndewoIntentParameterMatch: IntentAlgorithms.ValueType  # 15
 """Matches the intent based on the parameter constellation and the current user context"""
 global___IntentAlgorithms = IntentAlgorithms
 
-@typing_extensions.final
+@typing.final
 class ExtractEntitiesRequest(google.protobuf.message.Message):
     """The request to detect parameters."""
 
@@ -170,11 +171,11 @@ class ExtractEntitiesRequest(google.protobuf.message.Message):
         language_code: builtins.str = ...,
         intent_name: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["intent_name", b"intent_name", "language_code", b"language_code", "parent", b"parent", "text", b"text"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["intent_name", b"intent_name", "language_code", b"language_code", "parent", b"parent", "text", b"text"]) -> None: ...
 
 global___ExtractEntitiesRequest = ExtractEntitiesRequest
 
-@typing_extensions.final
+@typing.final
 class ExtractEntitiesFuzzyRequest(google.protobuf.message.Message):
     """This message is a request to extract entities with Fuzzy Entity Recognizer"""
 
@@ -191,13 +192,14 @@ class ExtractEntitiesFuzzyRequest(google.protobuf.message.Message):
     """
     text: builtins.str
     """The text to be analyzed"""
-    @property
-    def potential_entities(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___EntityTypeFuzzyNerConfig]:
-        """Potential entities to be extracted from the text with entity-specific configs"""
     minimal_score: builtins.float
     """Minimal similarity score to consider entity as "matched" """
     allow_overlaps: builtins.bool
     """Optional. Whether or not entities are allowed to overlap."""
+    @property
+    def potential_entities(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___EntityTypeFuzzyNerConfig]:
+        """Potential entities to be extracted from the text with entity-specific configs"""
+
     def __init__(
         self,
         *,
@@ -207,11 +209,11 @@ class ExtractEntitiesFuzzyRequest(google.protobuf.message.Message):
         minimal_score: builtins.float = ...,
         allow_overlaps: builtins.bool = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["allow_overlaps", b"allow_overlaps", "minimal_score", b"minimal_score", "parent", b"parent", "potential_entities", b"potential_entities", "text", b"text"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["allow_overlaps", b"allow_overlaps", "minimal_score", b"minimal_score", "parent", b"parent", "potential_entities", b"potential_entities", "text", b"text"]) -> None: ...
 
 global___ExtractEntitiesFuzzyRequest = ExtractEntitiesFuzzyRequest
 
-@typing_extensions.final
+@typing.final
 class EntityTypeFuzzyNerConfig(google.protobuf.message.Message):
     """Configuration for Fuzzy Entity Recognizer"""
 
@@ -241,18 +243,20 @@ class EntityTypeFuzzyNerConfig(google.protobuf.message.Message):
     ENTITY_VALUES_FIELD_NUMBER: builtins.int
     ALGORITHM_FIELD_NUMBER: builtins.int
     ALLOW_OVERLAPS_FIELD_NUMBER: builtins.int
-    @property
-    def entity_type(self) -> ondewo.nlu.entity_type_pb2.EntityType:
-        """The Entity Type"""
     minimal_score: builtins.float
     """Optional. Overrides the minimal score in ExtractEntitiesFuzzyRequest."""
-    @property
-    def entity_values(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Optional. If defined, only entity value from this list are considered."""
     algorithm: global___EntityTypeFuzzyNerConfig.FuzzyNerAlgorithm.ValueType
     """Optional. Specify the Fuzzy Ner algorithm"""
     allow_overlaps: builtins.bool
     """Should not use allow_overlaps here, since its default value is False"""
+    @property
+    def entity_type(self) -> ondewo.nlu.entity_type_pb2.EntityType:
+        """The Entity Type"""
+
+    @property
+    def entity_values(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. If defined, only entity value from this list are considered."""
+
     def __init__(
         self,
         *,
@@ -262,12 +266,12 @@ class EntityTypeFuzzyNerConfig(google.protobuf.message.Message):
         algorithm: global___EntityTypeFuzzyNerConfig.FuzzyNerAlgorithm.ValueType = ...,
         allow_overlaps: builtins.bool = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["entity_type", b"entity_type"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["algorithm", b"algorithm", "allow_overlaps", b"allow_overlaps", "entity_type", b"entity_type", "entity_values", b"entity_values", "minimal_score", b"minimal_score"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["entity_type", b"entity_type"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["algorithm", b"algorithm", "allow_overlaps", b"allow_overlaps", "entity_type", b"entity_type", "entity_values", b"entity_values", "minimal_score", b"minimal_score"]) -> None: ...
 
 global___EntityTypeFuzzyNerConfig = EntityTypeFuzzyNerConfig
 
-@typing_extensions.final
+@typing.final
 class EntityDetected(google.protobuf.message.Message):
     """This message contains the entity detected"""
 
@@ -276,13 +280,14 @@ class EntityDetected(google.protobuf.message.Message):
     ENTITY_FIELD_NUMBER: builtins.int
     EXTRACTION_METHOD_FIELD_NUMBER: builtins.int
     SCORE_FIELD_NUMBER: builtins.int
-    @property
-    def entity(self) -> ondewo.nlu.intent_pb2.Intent.TrainingPhrase.Entity:
-        """The entity name that is detected"""
     extraction_method: builtins.str
     """The extractor name, e.g. SpacyNer"""
     score: builtins.float
     """The confidence score of the detected entity"""
+    @property
+    def entity(self) -> ondewo.nlu.intent_pb2.Intent.TrainingPhrase.Entity:
+        """The entity name that is detected"""
+
     def __init__(
         self,
         *,
@@ -290,12 +295,12 @@ class EntityDetected(google.protobuf.message.Message):
         extraction_method: builtins.str = ...,
         score: builtins.float = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["entity", b"entity"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["entity", b"entity", "extraction_method", b"extraction_method", "score", b"score"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["entity", b"entity"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["entity", b"entity", "extraction_method", b"extraction_method", "score", b"score"]) -> None: ...
 
 global___EntityDetected = EntityDetected
 
-@typing_extensions.final
+@typing.final
 class ExtractEntitiesResponse(google.protobuf.message.Message):
     """This message is a response of extracting entities"""
 
@@ -303,22 +308,23 @@ class ExtractEntitiesResponse(google.protobuf.message.Message):
 
     ENTITIES_DETECTED_FIELD_NUMBER: builtins.int
     TEXT_FIELD_NUMBER: builtins.int
+    text: builtins.str
+    """The text containing the entities detected"""
     @property
     def entities_detected(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___EntityDetected]:
         """A list of entities detected"""
-    text: builtins.str
-    """The text containing the entities detected"""
+
     def __init__(
         self,
         *,
         entities_detected: collections.abc.Iterable[global___EntityDetected] | None = ...,
         text: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["entities_detected", b"entities_detected", "text", b"text"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["entities_detected", b"entities_detected", "text", b"text"]) -> None: ...
 
 global___ExtractEntitiesResponse = ExtractEntitiesResponse
 
-@typing_extensions.final
+@typing.final
 class GetAlternativeSentencesRequest(google.protobuf.message.Message):
     """Request to get alternative sentences"""
 
@@ -330,9 +336,6 @@ class GetAlternativeSentencesRequest(google.protobuf.message.Message):
     PARENT_FIELD_NUMBER: builtins.int
     PROTECTED_WORDS_FIELD_NUMBER: builtins.int
     WORDS_TO_CHANGE_FIELD_NUMBER: builtins.int
-    @property
-    def config(self) -> global___DataEnrichmentConfig:
-        """Configuration type of the enricher"""
     sentence: builtins.str
     """The sentence from which it is desired to get alternative sentences"""
     language_code: builtins.str
@@ -342,11 +345,17 @@ class GetAlternativeSentencesRequest(google.protobuf.message.Message):
     Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     """
     @property
+    def config(self) -> global___DataEnrichmentConfig:
+        """Configuration type of the enricher"""
+
+    @property
     def protected_words(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Protected words in the augmentation process"""
+
     @property
     def words_to_change(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Words to be changed in the augmentation process"""
+
     def __init__(
         self,
         *,
@@ -357,12 +366,12 @@ class GetAlternativeSentencesRequest(google.protobuf.message.Message):
         protected_words: collections.abc.Iterable[builtins.str] | None = ...,
         words_to_change: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["config", b"config"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["config", b"config", "language_code", b"language_code", "parent", b"parent", "protected_words", b"protected_words", "sentence", b"sentence", "words_to_change", b"words_to_change"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["config", b"config"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["config", b"config", "language_code", b"language_code", "parent", b"parent", "protected_words", b"protected_words", "sentence", b"sentence", "words_to_change", b"words_to_change"]) -> None: ...
 
 global___GetAlternativeSentencesRequest = GetAlternativeSentencesRequest
 
-@typing_extensions.final
+@typing.final
 class GenerateUserSaysRequest(google.protobuf.message.Message):
     """Request to generate user sentences"""
 
@@ -390,11 +399,11 @@ class GenerateUserSaysRequest(google.protobuf.message.Message):
         n_repeat_synonym: builtins.int = ...,
         branch: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["branch", b"branch", "language_code", b"language_code", "n_repeat_synonym", b"n_repeat_synonym", "parent", b"parent"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["branch", b"branch", "language_code", b"language_code", "n_repeat_synonym", b"n_repeat_synonym", "parent", b"parent"]) -> None: ...
 
 global___GenerateUserSaysRequest = GenerateUserSaysRequest
 
-@typing_extensions.final
+@typing.final
 class GenerateResponsesRequest(google.protobuf.message.Message):
     """Request to generate responses"""
 
@@ -425,11 +434,11 @@ class GenerateResponsesRequest(google.protobuf.message.Message):
         branch: builtins.str = ...,
         drop_unknown_parameters: builtins.bool = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["branch", b"branch", "drop_unknown_parameters", b"drop_unknown_parameters", "language_code", b"language_code", "n_repeat_synonym", b"n_repeat_synonym", "parent", b"parent"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["branch", b"branch", "drop_unknown_parameters", b"drop_unknown_parameters", "language_code", b"language_code", "n_repeat_synonym", b"n_repeat_synonym", "parent", b"parent"]) -> None: ...
 
 global___GenerateResponsesRequest = GenerateResponsesRequest
 
-@typing_extensions.final
+@typing.final
 class GetAlternativeTrainingPhrasesRequest(google.protobuf.message.Message):
     """Request to get alternative training phrases"""
 
@@ -445,12 +454,6 @@ class GetAlternativeTrainingPhrasesRequest(google.protobuf.message.Message):
     PROTECTED_WORDS_FIELD_NUMBER: builtins.int
     WORDS_TO_CHANGE_FIELD_NUMBER: builtins.int
     BRANCH_FIELD_NUMBER: builtins.int
-    @property
-    def config(self) -> global___DataEnrichmentConfig:
-        """Configuration of the enricher"""
-    @property
-    def training_phrase(self) -> ondewo.nlu.intent_pb2.Intent.TrainingPhrase:
-        """Training phrase from which an alternative one is got"""
     intent_name: builtins.str
     """The intent tag attached to the training phrase"""
     language_code: builtins.str
@@ -465,14 +468,24 @@ class GetAlternativeTrainingPhrasesRequest(google.protobuf.message.Message):
     """similarity threshold defines how similar sentences should be to drop generated training phrase
     as duplicate. Meaningful values of similarity_threshold are between 0.95 and 1.0
     """
+    branch: builtins.str
+    """Git branch"""
+    @property
+    def config(self) -> global___DataEnrichmentConfig:
+        """Configuration of the enricher"""
+
+    @property
+    def training_phrase(self) -> ondewo.nlu.intent_pb2.Intent.TrainingPhrase:
+        """Training phrase from which an alternative one is got"""
+
     @property
     def protected_words(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Protected words in the augmentation process"""
+
     @property
     def words_to_change(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Words to be changed in the augmentation process"""
-    branch: builtins.str
-    """Git branch"""
+
     def __init__(
         self,
         *,
@@ -487,12 +500,12 @@ class GetAlternativeTrainingPhrasesRequest(google.protobuf.message.Message):
         words_to_change: collections.abc.Iterable[builtins.str] | None = ...,
         branch: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["config", b"config", "training_phrase", b"training_phrase"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["branch", b"branch", "config", b"config", "detect_entities", b"detect_entities", "intent_name", b"intent_name", "language_code", b"language_code", "parent", b"parent", "protected_words", b"protected_words", "similarity_threshold", b"similarity_threshold", "training_phrase", b"training_phrase", "words_to_change", b"words_to_change"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["config", b"config", "training_phrase", b"training_phrase"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["branch", b"branch", "config", b"config", "detect_entities", b"detect_entities", "intent_name", b"intent_name", "language_code", b"language_code", "parent", b"parent", "protected_words", b"protected_words", "similarity_threshold", b"similarity_threshold", "training_phrase", b"training_phrase", "words_to_change", b"words_to_change"]) -> None: ...
 
 global___GetAlternativeTrainingPhrasesRequest = GetAlternativeTrainingPhrasesRequest
 
-@typing_extensions.final
+@typing.final
 class GetSynonymsRequest(google.protobuf.message.Message):
     """Request to get synonyms"""
 
@@ -502,9 +515,6 @@ class GetSynonymsRequest(google.protobuf.message.Message):
     WORD_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     PARENT_FIELD_NUMBER: builtins.int
-    @property
-    def config(self) -> global___DataEnrichmentConfig:
-        """Configuration of the enricher"""
     word: builtins.str
     """Word from which a synonym is got"""
     language_code: builtins.str
@@ -513,6 +523,10 @@ class GetSynonymsRequest(google.protobuf.message.Message):
     """the parent of the request
     Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     """
+    @property
+    def config(self) -> global___DataEnrichmentConfig:
+        """Configuration of the enricher"""
+
     def __init__(
         self,
         *,
@@ -521,12 +535,12 @@ class GetSynonymsRequest(google.protobuf.message.Message):
         language_code: builtins.str = ...,
         parent: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["config", b"config"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["config", b"config", "language_code", b"language_code", "parent", b"parent", "word", b"word"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["config", b"config"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["config", b"config", "language_code", b"language_code", "parent", b"parent", "word", b"word"]) -> None: ...
 
 global___GetSynonymsRequest = GetSynonymsRequest
 
-@typing_extensions.final
+@typing.final
 class GetSynonymsResponse(google.protobuf.message.Message):
     """Response containing synonyms"""
 
@@ -536,16 +550,17 @@ class GetSynonymsResponse(google.protobuf.message.Message):
     @property
     def synonyms(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Synonym]:
         """A list of synonyms"""
+
     def __init__(
         self,
         *,
         synonyms: collections.abc.Iterable[global___Synonym] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["synonyms", b"synonyms"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["synonyms", b"synonyms"]) -> None: ...
 
 global___GetSynonymsResponse = GetSynonymsResponse
 
-@typing_extensions.final
+@typing.final
 class Synonym(google.protobuf.message.Message):
     """This message contains a Synonym"""
 
@@ -563,11 +578,11 @@ class Synonym(google.protobuf.message.Message):
         synonym: builtins.str = ...,
         score: builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["score", b"score", "synonym", b"synonym"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["score", b"score", "synonym", b"synonym"]) -> None: ...
 
 global___Synonym = Synonym
 
-@typing_extensions.final
+@typing.final
 class GetAlternativeSentencesResponse(google.protobuf.message.Message):
     """Response containing alternative sentences"""
 
@@ -577,16 +592,17 @@ class GetAlternativeSentencesResponse(google.protobuf.message.Message):
     @property
     def alternative_sentences(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AltSentence]:
         """A list of alternative sentences"""
+
     def __init__(
         self,
         *,
         alternative_sentences: collections.abc.Iterable[global___AltSentence] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["alternative_sentences", b"alternative_sentences"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["alternative_sentences", b"alternative_sentences"]) -> None: ...
 
 global___GetAlternativeSentencesResponse = GetAlternativeSentencesResponse
 
-@typing_extensions.final
+@typing.final
 class GenerateResponsesResponse(google.protobuf.message.Message):
     """Response containing responses"""
 
@@ -596,16 +612,17 @@ class GenerateResponsesResponse(google.protobuf.message.Message):
     @property
     def responses(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """A list of responses"""
+
     def __init__(
         self,
         *,
         responses: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["responses", b"responses"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["responses", b"responses"]) -> None: ...
 
 global___GenerateResponsesResponse = GenerateResponsesResponse
 
-@typing_extensions.final
+@typing.final
 class GenerateUserSaysResponse(google.protobuf.message.Message):
     """Response containing user sentences"""
 
@@ -615,16 +632,17 @@ class GenerateUserSaysResponse(google.protobuf.message.Message):
     @property
     def user_says(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """A list of sampled sentences"""
+
     def __init__(
         self,
         *,
         user_says: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["user_says", b"user_says"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["user_says", b"user_says"]) -> None: ...
 
 global___GenerateUserSaysResponse = GenerateUserSaysResponse
 
-@typing_extensions.final
+@typing.final
 class GetAlternativeTrainingPhrasesResponse(google.protobuf.message.Message):
     """Response containing alternative training phrases"""
 
@@ -634,16 +652,17 @@ class GetAlternativeTrainingPhrasesResponse(google.protobuf.message.Message):
     @property
     def alternative_training_phrases(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AltTrainingPhrase]:
         """A list of alternative training phrases"""
+
     def __init__(
         self,
         *,
         alternative_training_phrases: collections.abc.Iterable[global___AltTrainingPhrase] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["alternative_training_phrases", b"alternative_training_phrases"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["alternative_training_phrases", b"alternative_training_phrases"]) -> None: ...
 
 global___GetAlternativeTrainingPhrasesResponse = GetAlternativeTrainingPhrasesResponse
 
-@typing_extensions.final
+@typing.final
 class AltSentence(google.protobuf.message.Message):
     """This message contains an alternative sentence"""
 
@@ -661,11 +680,11 @@ class AltSentence(google.protobuf.message.Message):
         sentence: builtins.str = ...,
         score: builtins.float = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["score", b"score", "sentence", b"sentence"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["score", b"score", "sentence", b"sentence"]) -> None: ...
 
 global___AltSentence = AltSentence
 
-@typing_extensions.final
+@typing.final
 class AltTrainingPhrase(google.protobuf.message.Message):
     """This message contains an alternative training phrase"""
 
@@ -673,23 +692,24 @@ class AltTrainingPhrase(google.protobuf.message.Message):
 
     TRAINING_PHRASE_FIELD_NUMBER: builtins.int
     SCORE_FIELD_NUMBER: builtins.int
+    score: builtins.float
+    """Score associated to training_phrase"""
     @property
     def training_phrase(self) -> ondewo.nlu.intent_pb2.Intent.TrainingPhrase:
         """Alternative training phrase"""
-    score: builtins.float
-    """Score associated to training_phrase"""
+
     def __init__(
         self,
         *,
         training_phrase: ondewo.nlu.intent_pb2.Intent.TrainingPhrase | None = ...,
         score: builtins.float = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["training_phrase", b"training_phrase"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["score", b"score", "training_phrase", b"training_phrase"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["training_phrase", b"training_phrase"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["score", b"score", "training_phrase", b"training_phrase"]) -> None: ...
 
 global___AltTrainingPhrase = AltTrainingPhrase
 
-@typing_extensions.final
+@typing.final
 class DataEnrichmentConfig(google.protobuf.message.Message):
     """This message contains the configuration of data enrichment"""
 
@@ -706,27 +726,35 @@ class DataEnrichmentConfig(google.protobuf.message.Message):
     @property
     def entity_enrichment(self) -> global___EntityEnrichmentConfig:
         """Entity augmenter configuration"""
+
     @property
     def thesaurus_enrichment(self) -> global___ThesaurusEnrichmentConfig:
         """Thesaurus augmenter configuration"""
+
     @property
     def word2vec_enrichment(self) -> global___Word2VecEnrichmentConfig:
         """Word2Vec augmenter configuration"""
+
     @property
     def word_net_enrichment(self) -> global___WordNetAugEnrichmentConfig:
         """WordNet augmenter configuration"""
+
     @property
     def gpt2_enrichment(self) -> global___GPT2EnrichmentConfig:
         """GPT2 augmenter configuration"""
+
     @property
     def glove_enrichment(self) -> global___GloVeEnrichmentConfig:
         """GloVe augmenter configuration"""
+
     @property
     def bert_enrichment(self) -> global___BertAugEnrichmentConfig:
         """BERT augmenter configuration"""
+
     @property
     def xlnet_enrichment(self) -> global___XLNetAugEnrichmentConfig:
         """XLNet augmenter configuration"""
+
     def __init__(
         self,
         *,
@@ -739,12 +767,12 @@ class DataEnrichmentConfig(google.protobuf.message.Message):
         bert_enrichment: global___BertAugEnrichmentConfig | None = ...,
         xlnet_enrichment: global___XLNetAugEnrichmentConfig | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["bert_enrichment", b"bert_enrichment", "entity_enrichment", b"entity_enrichment", "glove_enrichment", b"glove_enrichment", "gpt2_enrichment", b"gpt2_enrichment", "thesaurus_enrichment", b"thesaurus_enrichment", "word2vec_enrichment", b"word2vec_enrichment", "word_net_enrichment", b"word_net_enrichment", "xlnet_enrichment", b"xlnet_enrichment"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["bert_enrichment", b"bert_enrichment", "entity_enrichment", b"entity_enrichment", "glove_enrichment", b"glove_enrichment", "gpt2_enrichment", b"gpt2_enrichment", "thesaurus_enrichment", b"thesaurus_enrichment", "word2vec_enrichment", b"word2vec_enrichment", "word_net_enrichment", b"word_net_enrichment", "xlnet_enrichment", b"xlnet_enrichment"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["bert_enrichment", b"bert_enrichment", "entity_enrichment", b"entity_enrichment", "glove_enrichment", b"glove_enrichment", "gpt2_enrichment", b"gpt2_enrichment", "thesaurus_enrichment", b"thesaurus_enrichment", "word2vec_enrichment", b"word2vec_enrichment", "word_net_enrichment", b"word_net_enrichment", "xlnet_enrichment", b"xlnet_enrichment"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["bert_enrichment", b"bert_enrichment", "entity_enrichment", b"entity_enrichment", "glove_enrichment", b"glove_enrichment", "gpt2_enrichment", b"gpt2_enrichment", "thesaurus_enrichment", b"thesaurus_enrichment", "word2vec_enrichment", b"word2vec_enrichment", "word_net_enrichment", b"word_net_enrichment", "xlnet_enrichment", b"xlnet_enrichment"]) -> None: ...
 
 global___DataEnrichmentConfig = DataEnrichmentConfig
 
-@typing_extensions.final
+@typing.final
 class EntityEnrichmentConfig(google.protobuf.message.Message):
     """Configuration for Entity enrichment"""
 
@@ -766,11 +794,11 @@ class EntityEnrichmentConfig(google.protobuf.message.Message):
         enrichment_factor: builtins.int = ...,
         execution_order: builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["enrichment_factor", b"enrichment_factor", "execution_order", b"execution_order", "is_active", b"is_active"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["enrichment_factor", b"enrichment_factor", "execution_order", b"execution_order", "is_active", b"is_active"]) -> None: ...
 
 global___EntityEnrichmentConfig = EntityEnrichmentConfig
 
-@typing_extensions.final
+@typing.final
 class ThesaurusEnrichmentConfig(google.protobuf.message.Message):
     """Configuration for Thesaurus enrichment"""
 
@@ -792,11 +820,11 @@ class ThesaurusEnrichmentConfig(google.protobuf.message.Message):
         enrichment_factor: builtins.int = ...,
         execution_order: builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["enrichment_factor", b"enrichment_factor", "execution_order", b"execution_order", "is_active", b"is_active"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["enrichment_factor", b"enrichment_factor", "execution_order", b"execution_order", "is_active", b"is_active"]) -> None: ...
 
 global___ThesaurusEnrichmentConfig = ThesaurusEnrichmentConfig
 
-@typing_extensions.final
+@typing.final
 class BertAugEnrichmentConfig(google.protobuf.message.Message):
     """Configuration for BERT augmenter enrichment"""
 
@@ -818,11 +846,11 @@ class BertAugEnrichmentConfig(google.protobuf.message.Message):
         enrichment_factor: builtins.int = ...,
         execution_order: builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["enrichment_factor", b"enrichment_factor", "execution_order", b"execution_order", "is_active", b"is_active"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["enrichment_factor", b"enrichment_factor", "execution_order", b"execution_order", "is_active", b"is_active"]) -> None: ...
 
 global___BertAugEnrichmentConfig = BertAugEnrichmentConfig
 
-@typing_extensions.final
+@typing.final
 class GloVeEnrichmentConfig(google.protobuf.message.Message):
     """Configuration for GloVe enrichment"""
 
@@ -844,11 +872,11 @@ class GloVeEnrichmentConfig(google.protobuf.message.Message):
         enrichment_factor: builtins.int = ...,
         execution_order: builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["enrichment_factor", b"enrichment_factor", "execution_order", b"execution_order", "is_active", b"is_active"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["enrichment_factor", b"enrichment_factor", "execution_order", b"execution_order", "is_active", b"is_active"]) -> None: ...
 
 global___GloVeEnrichmentConfig = GloVeEnrichmentConfig
 
-@typing_extensions.final
+@typing.final
 class GPT2EnrichmentConfig(google.protobuf.message.Message):
     """Configuration for GPT2 enrichment"""
 
@@ -870,11 +898,11 @@ class GPT2EnrichmentConfig(google.protobuf.message.Message):
         enrichment_factor: builtins.int = ...,
         execution_order: builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["enrichment_factor", b"enrichment_factor", "execution_order", b"execution_order", "is_active", b"is_active"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["enrichment_factor", b"enrichment_factor", "execution_order", b"execution_order", "is_active", b"is_active"]) -> None: ...
 
 global___GPT2EnrichmentConfig = GPT2EnrichmentConfig
 
-@typing_extensions.final
+@typing.final
 class Word2VecEnrichmentConfig(google.protobuf.message.Message):
     """Configuration for Word2Vec enrichment"""
 
@@ -896,11 +924,11 @@ class Word2VecEnrichmentConfig(google.protobuf.message.Message):
         enrichment_factor: builtins.int = ...,
         execution_order: builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["enrichment_factor", b"enrichment_factor", "execution_order", b"execution_order", "is_active", b"is_active"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["enrichment_factor", b"enrichment_factor", "execution_order", b"execution_order", "is_active", b"is_active"]) -> None: ...
 
 global___Word2VecEnrichmentConfig = Word2VecEnrichmentConfig
 
-@typing_extensions.final
+@typing.final
 class WordNetAugEnrichmentConfig(google.protobuf.message.Message):
     """Configuration for WordNet augmenter enrichment"""
 
@@ -922,11 +950,11 @@ class WordNetAugEnrichmentConfig(google.protobuf.message.Message):
         enrichment_factor: builtins.int = ...,
         execution_order: builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["enrichment_factor", b"enrichment_factor", "execution_order", b"execution_order", "is_active", b"is_active"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["enrichment_factor", b"enrichment_factor", "execution_order", b"execution_order", "is_active", b"is_active"]) -> None: ...
 
 global___WordNetAugEnrichmentConfig = WordNetAugEnrichmentConfig
 
-@typing_extensions.final
+@typing.final
 class XLNetAugEnrichmentConfig(google.protobuf.message.Message):
     """Configuration for Thesaurus enrichment"""
 
@@ -948,11 +976,11 @@ class XLNetAugEnrichmentConfig(google.protobuf.message.Message):
         enrichment_factor: builtins.int = ...,
         execution_order: builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["enrichment_factor", b"enrichment_factor", "execution_order", b"execution_order", "is_active", b"is_active"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["enrichment_factor", b"enrichment_factor", "execution_order", b"execution_order", "is_active", b"is_active"]) -> None: ...
 
 global___XLNetAugEnrichmentConfig = XLNetAugEnrichmentConfig
 
-@typing_extensions.final
+@typing.final
 class ClassifyIntentsRequest(google.protobuf.message.Message):
     """The request for intent classification."""
 
@@ -975,11 +1003,6 @@ class ClassifyIntentsRequest(google.protobuf.message.Message):
     """the input language"""
     active_contexts: builtins.bool
     """Optional: if restrict classification result with input contexts listed in the field `context_names`"""
-    @property
-    def context_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Optional: names of the input contexts to restrict the classification result with.
-        Intents can only be classified if the intent's input context set is the subset of the given context set.
-        """
     mode: global___Mode.ValueType
     """Optional: Which mode to use:
     EXCLUSIVE - skip algorithms listed in `algorithms` field,
@@ -987,8 +1010,15 @@ class ClassifyIntentsRequest(google.protobuf.message.Message):
     UNSPECIFIED - default mode, described in agent config
     """
     @property
+    def context_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional: names of the input contexts to restrict the classification result with.
+        Intents can only be classified if the intent's input context set is the subset of the given context set.
+        """
+
+    @property
     def algorithms(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[global___IntentAlgorithms.ValueType]:
         """Optional: Algorithm list"""
+
     def __init__(
         self,
         *,
@@ -1000,11 +1030,11 @@ class ClassifyIntentsRequest(google.protobuf.message.Message):
         mode: global___Mode.ValueType = ...,
         algorithms: collections.abc.Iterable[global___IntentAlgorithms.ValueType] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["active_contexts", b"active_contexts", "algorithms", b"algorithms", "context_names", b"context_names", "language_code", b"language_code", "mode", b"mode", "parent", b"parent", "text", b"text"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["active_contexts", b"active_contexts", "algorithms", b"algorithms", "context_names", b"context_names", "language_code", b"language_code", "mode", b"mode", "parent", b"parent", "text", b"text"]) -> None: ...
 
 global___ClassifyIntentsRequest = ClassifyIntentsRequest
 
-@typing_extensions.final
+@typing.final
 class IntentClassified(google.protobuf.message.Message):
     """Intent classified by a certain intent classifier"""
 
@@ -1032,11 +1062,11 @@ class IntentClassified(google.protobuf.message.Message):
         classifier: builtins.str = ...,
         score: builtins.float = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["classifier", b"classifier", "intent_display_name", b"intent_display_name", "intent_name", b"intent_name", "score", b"score"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["classifier", b"classifier", "intent_display_name", b"intent_display_name", "intent_name", b"intent_name", "score", b"score"]) -> None: ...
 
 global___IntentClassified = IntentClassified
 
-@typing_extensions.final
+@typing.final
 class ClassifyIntentsResponse(google.protobuf.message.Message):
     """Response containing the intents classified in a sentence"""
 
@@ -1046,16 +1076,18 @@ class ClassifyIntentsResponse(google.protobuf.message.Message):
     TEXT_FIELD_NUMBER: builtins.int
     ACTIVE_CONTEXTS_FIELD_NUMBER: builtins.int
     CONTEXT_NAMES_FIELD_NUMBER: builtins.int
-    @property
-    def intents_classified(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___IntentClassified]:
-        """A list of intents detected"""
     text: builtins.str
     """The text containing from which the intents were detected"""
     active_contexts: builtins.bool
     """Flag that enables the context through the conversation"""
     @property
+    def intents_classified(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___IntentClassified]:
+        """A list of intents detected"""
+
+    @property
     def context_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """The context tags associated to the intents"""
+
     def __init__(
         self,
         *,
@@ -1064,6 +1096,6 @@ class ClassifyIntentsResponse(google.protobuf.message.Message):
         active_contexts: builtins.bool = ...,
         context_names: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["active_contexts", b"active_contexts", "context_names", b"context_names", "intents_classified", b"intents_classified", "text", b"text"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["active_contexts", b"active_contexts", "context_names", b"context_names", "intents_classified", b"intents_classified", "text", b"text"]) -> None: ...
 
 global___ClassifyIntentsResponse = ClassifyIntentsResponse

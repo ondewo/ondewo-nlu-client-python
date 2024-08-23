@@ -15,6 +15,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 """
+
 import builtins
 import collections.abc
 import google.protobuf.any_pb2
@@ -24,17 +25,11 @@ import google.protobuf.message
 import google.protobuf.timestamp_pb2
 import google.rpc.status_pb2
 import ondewo.nlu.operation_metadata_pb2
-import sys
 import typing
-
-if sys.version_info >= (3, 8):
-    import typing as typing_extensions
-else:
-    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
-@typing_extensions.final
+@typing.final
 class Operation(google.protobuf.message.Message):
     """This resource represents a long-running operation that is the result of a
     network API call.
@@ -52,6 +47,11 @@ class Operation(google.protobuf.message.Message):
     originally returns it. If you use the default HTTP mapping, the
     `name` should have the format of `operations/some/unique/name`.
     """
+    done: builtins.bool
+    """If the value is `false`, it means the operation is still in progress.
+    If true, the operation is completed, and either `error` or `response` is
+    available.
+    """
     @property
     def metadata(self) -> ondewo.nlu.operation_metadata_pb2.OperationMetadata:
         """Service-specific metadata associated with the operation.  It typically
@@ -59,14 +59,11 @@ class Operation(google.protobuf.message.Message):
         Some services might not provide such metadata.  Any method that returns a
         long-running operation should document the metadata type, if any.
         """
-    done: builtins.bool
-    """If the value is `false`, it means the operation is still in progress.
-    If true, the operation is completed, and either `error` or `response` is
-    available.
-    """
+
     @property
     def error(self) -> google.rpc.status_pb2.Status:
         """The error result of the operation in case of failure or cancellation."""
+
     @property
     def response(self) -> google.protobuf.any_pb2.Any:
         """The normal response of the operation in case of success.  If the original
@@ -78,6 +75,7 @@ class Operation(google.protobuf.message.Message):
         is `TakeSnapshot()`, the inferred response type is
         `TakeSnapshotResponse`.
         """
+
     def __init__(
         self,
         *,
@@ -87,13 +85,13 @@ class Operation(google.protobuf.message.Message):
         error: google.rpc.status_pb2.Status | None = ...,
         response: google.protobuf.any_pb2.Any | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["error", b"error", "metadata", b"metadata", "response", b"response", "result", b"result"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["done", b"done", "error", b"error", "metadata", b"metadata", "name", b"name", "response", b"response", "result", b"result"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["result", b"result"]) -> typing_extensions.Literal["error", "response"] | None: ...
+    def HasField(self, field_name: typing.Literal["error", b"error", "metadata", b"metadata", "response", b"response", "result", b"result"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["done", b"done", "error", b"error", "metadata", b"metadata", "name", b"name", "response", b"response", "result", b"result"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["result", b"result"]) -> typing.Literal["error", "response"] | None: ...
 
 global___Operation = Operation
 
-@typing_extensions.final
+@typing.final
 class GetOperationRequest(google.protobuf.message.Message):
     """The request message for [Operations.GetOperation][ondewo.nlu.Operations.GetOperation]."""
 
@@ -107,11 +105,11 @@ class GetOperationRequest(google.protobuf.message.Message):
         *,
         name: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["name", b"name"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["name", b"name"]) -> None: ...
 
 global___GetOperationRequest = GetOperationRequest
 
-@typing_extensions.final
+@typing.final
 class ListOperationsRequest(google.protobuf.message.Message):
     """The request message for [Operations.ListOperations][ondewo.nlu.Operations.ListOperations]."""
 
@@ -156,6 +154,7 @@ class ListOperationsRequest(google.protobuf.message.Message):
     @property
     def operation_filter(self) -> global___OperationFilter:
         """Optional. A filter to narrow the response down to operations of interest."""
+
     def __init__(
         self,
         *,
@@ -165,12 +164,12 @@ class ListOperationsRequest(google.protobuf.message.Message):
         page_token: builtins.str = ...,
         operation_filter: global___OperationFilter | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["operation_filter", b"operation_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["filter", b"filter", "name", b"name", "operation_filter", b"operation_filter", "page_size", b"page_size", "page_token", b"page_token"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["operation_filter", b"operation_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["filter", b"filter", "name", b"name", "operation_filter", b"operation_filter", "page_size", b"page_size", "page_token", b"page_token"]) -> None: ...
 
 global___ListOperationsRequest = ListOperationsRequest
 
-@typing_extensions.final
+@typing.final
 class OperationFilter(google.protobuf.message.Message):
     """This message contains an operation filter"""
 
@@ -189,21 +188,27 @@ class OperationFilter(google.protobuf.message.Message):
         All fields below are  optional. Multiple fields specified at the same time are chained via OR.
         Match operations with any of the following project parents.
         """
+
     @property
     def statuses(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[ondewo.nlu.operation_metadata_pb2.OperationMetadata.Status.ValueType]:
         """Match operation which had any of the following operation statuses."""
+
     @property
     def types(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[ondewo.nlu.operation_metadata_pb2.OperationMetadata.OperationType.ValueType]:
         """Match operation which had any of the following operation types."""
+
     @property
     def start_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """The time operation processing started."""
+
     @property
     def end_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """The time operation processing completed."""
+
     @property
     def user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Match operation which had any of the following user_ids."""
+
     def __init__(
         self,
         *,
@@ -214,16 +219,16 @@ class OperationFilter(google.protobuf.message.Message):
         end_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         user_ids: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["end_time", b"end_time", "end_time_oneof", b"end_time_oneof", "start_time", b"start_time", "start_time_oneof", b"start_time_oneof"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["end_time", b"end_time", "end_time_oneof", b"end_time_oneof", "project_parents", b"project_parents", "start_time", b"start_time", "start_time_oneof", b"start_time_oneof", "statuses", b"statuses", "types", b"types", "user_ids", b"user_ids"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["end_time", b"end_time", "end_time_oneof", b"end_time_oneof", "start_time", b"start_time", "start_time_oneof", b"start_time_oneof"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["end_time", b"end_time", "end_time_oneof", b"end_time_oneof", "project_parents", b"project_parents", "start_time", b"start_time", "start_time_oneof", b"start_time_oneof", "statuses", b"statuses", "types", b"types", "user_ids", b"user_ids"]) -> None: ...
     @typing.overload
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["end_time_oneof", b"end_time_oneof"]) -> typing_extensions.Literal["end_time"] | None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["end_time_oneof", b"end_time_oneof"]) -> typing.Literal["end_time"] | None: ...
     @typing.overload
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["start_time_oneof", b"start_time_oneof"]) -> typing_extensions.Literal["start_time"] | None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["start_time_oneof", b"start_time_oneof"]) -> typing.Literal["start_time"] | None: ...
 
 global___OperationFilter = OperationFilter
 
-@typing_extensions.final
+@typing.final
 class ListOperationsResponse(google.protobuf.message.Message):
     """The response message for [Operations.ListOperations][ondewo.nlu.Operations.ListOperations]."""
 
@@ -231,24 +236,25 @@ class ListOperationsResponse(google.protobuf.message.Message):
 
     OPERATIONS_FIELD_NUMBER: builtins.int
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    @property
-    def operations(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Operation]:
-        """A list of operations that matches the specified filter in the request."""
     next_page_token: builtins.str
     """The next_page_token is used to retrieve the next page of a returned result,
     e.g. next_page_token is current_index-2
     """
+    @property
+    def operations(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Operation]:
+        """A list of operations that matches the specified filter in the request."""
+
     def __init__(
         self,
         *,
         operations: collections.abc.Iterable[global___Operation] | None = ...,
         next_page_token: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["next_page_token", b"next_page_token", "operations", b"operations"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["next_page_token", b"next_page_token", "operations", b"operations"]) -> None: ...
 
 global___ListOperationsResponse = ListOperationsResponse
 
-@typing_extensions.final
+@typing.final
 class CancelOperationRequest(google.protobuf.message.Message):
     """The request message for [Operations.CancelOperation][ondewo.nlu.Operations.CancelOperation]."""
 
@@ -262,11 +268,11 @@ class CancelOperationRequest(google.protobuf.message.Message):
         *,
         name: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["name", b"name"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["name", b"name"]) -> None: ...
 
 global___CancelOperationRequest = CancelOperationRequest
 
-@typing_extensions.final
+@typing.final
 class DeleteOperationRequest(google.protobuf.message.Message):
     """The request message for [Operations.DeleteOperation][ondewo.nlu.Operations.DeleteOperation]."""
 
@@ -280,6 +286,6 @@ class DeleteOperationRequest(google.protobuf.message.Message):
         *,
         name: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["name", b"name"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["name", b"name"]) -> None: ...
 
 global___DeleteOperationRequest = DeleteOperationRequest
