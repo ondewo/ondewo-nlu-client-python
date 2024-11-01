@@ -25,6 +25,7 @@ from ondewo.nlu.session_pb2 import (
     AudioFileResource,
     CreateSessionRequest,
     CreateSessionReviewRequest,
+    CreateSessionStepRequest,
     DeleteAudioFilesRequest,
     DeleteAudioFilesResponse,
     DeleteSessionCommentsRequest,
@@ -82,7 +83,6 @@ from ondewo.nlu.session_pb2 import (
     SessionStep,
     StreamingDetectIntentRequest,
     StreamingDetectIntentResponse,
-    AddSessionStepRequest,
     UpdateSessionCommentsRequest,
     UpdateSessionStepRequest,
 )
@@ -110,7 +110,8 @@ class Sessions(ServicesInterface):
         request_iterator: Iterator[StreamingDetectIntentRequest],
     ) -> Iterator[StreamingDetectIntentResponse]:
         response_iterator: Iterator[StreamingDetectIntentResponse] = self.stub.StreamingDetectIntent(
-            request_iterator, metadata=self.metadata
+            request_iterator=request_iterator,
+            metadata=self.metadata,
         )
         return response_iterator
 
@@ -126,8 +127,8 @@ class Sessions(ServicesInterface):
         response: Session = self.stub.CreateSession(request, metadata=self.metadata)
         return response
 
-    def track_session_step(self, request: AddSessionStepRequest) -> Session:
-        response: Session = self.stub.AddSessionStep(request, metadata=self.metadata)
+    def create_session_step(self, request: CreateSessionStepRequest) -> Session:
+        response: Session = self.stub.CreateSessionStep(request, metadata=self.metadata)
         return response
 
     def get_session_step(self, request: GetSessionStepRequest) -> SessionStep:

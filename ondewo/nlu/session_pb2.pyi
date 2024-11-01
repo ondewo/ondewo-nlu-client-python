@@ -1203,37 +1203,6 @@ class SessionStep(google.protobuf.message.Message):
 global___SessionStep = SessionStep
 
 @typing.final
-class AddSessionStepRequest(google.protobuf.message.Message):
-    """AddSessionStepRequest stores a session step into the session"""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    SESSION_ID_FIELD_NUMBER: builtins.int
-    SESSION_STEP_FIELD_NUMBER: builtins.int
-    SESSION_VIEW_FIELD_NUMBER: builtins.int
-    session_id: builtins.str
-    """The unique identifier for the given review
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;</code></pre>.
-    """
-    session_view: global___Session.View.ValueType
-    """Defines which fields of the session should be returned in the response"""
-    @property
-    def session_step(self) -> global___SessionStep:
-        """The session step to be added"""
-
-    def __init__(
-        self,
-        *,
-        session_id: builtins.str = ...,
-        session_step: global___SessionStep | None = ...,
-        session_view: global___Session.View.ValueType = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["session_step", b"session_step"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["session_id", b"session_id", "session_step", b"session_step", "session_view", b"session_view"]) -> None: ...
-
-global___AddSessionStepRequest = AddSessionStepRequest
-
-@typing.final
 class GetSessionStepRequest(google.protobuf.message.Message):
     """This message is a request to get a session step"""
 
@@ -1318,6 +1287,37 @@ class DeleteSessionStepRequest(google.protobuf.message.Message):
     def ClearField(self, field_name: typing.Literal["name", b"name"]) -> None: ...
 
 global___DeleteSessionStepRequest = DeleteSessionStepRequest
+
+@typing.final
+class CreateSessionStepRequest(google.protobuf.message.Message):
+    """CreateSessionStepRequest stores a session step into the session"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    SESSION_ID_FIELD_NUMBER: builtins.int
+    SESSION_STEP_FIELD_NUMBER: builtins.int
+    SESSION_VIEW_FIELD_NUMBER: builtins.int
+    session_id: builtins.str
+    """The unique identifier for the given review
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;</code></pre>.
+    """
+    session_view: global___Session.View.ValueType
+    """Defines which fields of the session should be returned in the response"""
+    @property
+    def session_step(self) -> global___SessionStep:
+        """The session step to be added"""
+
+    def __init__(
+        self,
+        *,
+        session_id: builtins.str = ...,
+        session_step: global___SessionStep | None = ...,
+        session_view: global___Session.View.ValueType = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["session_step", b"session_step"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["session_id", b"session_id", "session_step", b"session_step", "session_view", b"session_view"]) -> None: ...
+
+global___CreateSessionStepRequest = CreateSessionStepRequest
 
 @typing.final
 class ListSessionsRequest(google.protobuf.message.Message):

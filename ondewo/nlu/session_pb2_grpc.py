@@ -65,11 +65,6 @@ class SessionsStub(object):
                 request_serializer=ondewo_dot_nlu_dot_session__pb2.CreateSessionRequest.SerializeToString,
                 response_deserializer=ondewo_dot_nlu_dot_session__pb2.Session.FromString,
                 _registered_method=True)
-        self.AddSessionStep = channel.unary_unary(
-                '/ondewo.nlu.Sessions/AddSessionStep',
-                request_serializer=ondewo_dot_nlu_dot_session__pb2.AddSessionStepRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_session__pb2.Session.FromString,
-                _registered_method=True)
         self.GetSessionStep = channel.unary_unary(
                 '/ondewo.nlu.Sessions/GetSessionStep',
                 request_serializer=ondewo_dot_nlu_dot_session__pb2.GetSessionStepRequest.SerializeToString,
@@ -89,6 +84,11 @@ class SessionsStub(object):
                 '/ondewo.nlu.Sessions/DeleteSession',
                 request_serializer=ondewo_dot_nlu_dot_session__pb2.DeleteSessionRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                _registered_method=True)
+        self.CreateSessionStep = channel.unary_unary(
+                '/ondewo.nlu.Sessions/CreateSessionStep',
+                request_serializer=ondewo_dot_nlu_dot_session__pb2.CreateSessionStepRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_session__pb2.Session.FromString,
                 _registered_method=True)
         self.ListSessionLabels = channel.unary_unary(
                 '/ondewo.nlu.Sessions/ListSessionLabels',
@@ -290,13 +290,6 @@ class SessionsServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def AddSessionStep(self, request, context):
-        """AddSessionStep: append to an existing session; creates it if not existing
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
     def GetSessionStep(self, request, context):
         """GetSessionStep: gets an existing session step of a session
         """
@@ -320,6 +313,13 @@ class SessionsServicer(object):
 
     def DeleteSession(self, request, context):
         """DeleteSession: delete a session(=conversation) from ondewo-kb (for testing only)
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateSessionStep(self, request, context):
+        """CreateSessionStep: append to an existing session; creates it if not existing
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -558,11 +558,6 @@ def add_SessionsServicer_to_server(servicer, server):
                     request_deserializer=ondewo_dot_nlu_dot_session__pb2.CreateSessionRequest.FromString,
                     response_serializer=ondewo_dot_nlu_dot_session__pb2.Session.SerializeToString,
             ),
-            'AddSessionStep': grpc.unary_unary_rpc_method_handler(
-                    servicer.AddSessionStep,
-                    request_deserializer=ondewo_dot_nlu_dot_session__pb2.AddSessionStepRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_session__pb2.Session.SerializeToString,
-            ),
             'GetSessionStep': grpc.unary_unary_rpc_method_handler(
                     servicer.GetSessionStep,
                     request_deserializer=ondewo_dot_nlu_dot_session__pb2.GetSessionStepRequest.FromString,
@@ -582,6 +577,11 @@ def add_SessionsServicer_to_server(servicer, server):
                     servicer.DeleteSession,
                     request_deserializer=ondewo_dot_nlu_dot_session__pb2.DeleteSessionRequest.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'CreateSessionStep': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateSessionStep,
+                    request_deserializer=ondewo_dot_nlu_dot_session__pb2.CreateSessionStepRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_session__pb2.Session.SerializeToString,
             ),
             'ListSessionLabels': grpc.unary_unary_rpc_method_handler(
                     servicer.ListSessionLabels,
@@ -884,33 +884,6 @@ class Sessions(object):
             _registered_method=True)
 
     @staticmethod
-    def AddSessionStep(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/ondewo.nlu.Sessions/AddSessionStep',
-            ondewo_dot_nlu_dot_session__pb2.AddSessionStepRequest.SerializeToString,
-            ondewo_dot_nlu_dot_session__pb2.Session.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
     def GetSessionStep(request,
             target,
             options=(),
@@ -1008,6 +981,33 @@ class Sessions(object):
             '/ondewo.nlu.Sessions/DeleteSession',
             ondewo_dot_nlu_dot_session__pb2.DeleteSessionRequest.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def CreateSessionStep(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.Sessions/CreateSessionStep',
+            ondewo_dot_nlu_dot_session__pb2.CreateSessionStepRequest.SerializeToString,
+            ondewo_dot_nlu_dot_session__pb2.Session.FromString,
             options,
             channel_credentials,
             insecure,
