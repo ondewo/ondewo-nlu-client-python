@@ -65,9 +65,9 @@ class SessionsStub(object):
                 request_serializer=ondewo_dot_nlu_dot_session__pb2.CreateSessionRequest.SerializeToString,
                 response_deserializer=ondewo_dot_nlu_dot_session__pb2.Session.FromString,
                 _registered_method=True)
-        self.TrackSessionStep = channel.unary_unary(
-                '/ondewo.nlu.Sessions/TrackSessionStep',
-                request_serializer=ondewo_dot_nlu_dot_session__pb2.TrackSessionStepRequest.SerializeToString,
+        self.AddSessionStep = channel.unary_unary(
+                '/ondewo.nlu.Sessions/AddSessionStep',
+                request_serializer=ondewo_dot_nlu_dot_session__pb2.AddSessionStepRequest.SerializeToString,
                 response_deserializer=ondewo_dot_nlu_dot_session__pb2.Session.FromString,
                 _registered_method=True)
         self.GetSessionStep = channel.unary_unary(
@@ -290,8 +290,8 @@ class SessionsServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def TrackSessionStep(self, request, context):
-        """TrackSessionStep: append to an existing session; creates it if not existing
+    def AddSessionStep(self, request, context):
+        """AddSessionStep: append to an existing session; creates it if not existing
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -558,9 +558,9 @@ def add_SessionsServicer_to_server(servicer, server):
                     request_deserializer=ondewo_dot_nlu_dot_session__pb2.CreateSessionRequest.FromString,
                     response_serializer=ondewo_dot_nlu_dot_session__pb2.Session.SerializeToString,
             ),
-            'TrackSessionStep': grpc.unary_unary_rpc_method_handler(
-                    servicer.TrackSessionStep,
-                    request_deserializer=ondewo_dot_nlu_dot_session__pb2.TrackSessionStepRequest.FromString,
+            'AddSessionStep': grpc.unary_unary_rpc_method_handler(
+                    servicer.AddSessionStep,
+                    request_deserializer=ondewo_dot_nlu_dot_session__pb2.AddSessionStepRequest.FromString,
                     response_serializer=ondewo_dot_nlu_dot_session__pb2.Session.SerializeToString,
             ),
             'GetSessionStep': grpc.unary_unary_rpc_method_handler(
@@ -884,7 +884,7 @@ class Sessions(object):
             _registered_method=True)
 
     @staticmethod
-    def TrackSessionStep(request,
+    def AddSessionStep(request,
             target,
             options=(),
             channel_credentials=None,
@@ -897,8 +897,8 @@ class Sessions(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/ondewo.nlu.Sessions/TrackSessionStep',
-            ondewo_dot_nlu_dot_session__pb2.TrackSessionStepRequest.SerializeToString,
+            '/ondewo.nlu.Sessions/AddSessionStep',
+            ondewo_dot_nlu_dot_session__pb2.AddSessionStepRequest.SerializeToString,
             ondewo_dot_nlu_dot_session__pb2.Session.FromString,
             options,
             channel_credentials,

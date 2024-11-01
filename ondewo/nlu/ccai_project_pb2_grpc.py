@@ -26,7 +26,7 @@ if _version_not_supported:
 
 
 class CcaiProjectsStub(object):
-    """Service to manage Call Center AI (CCAI) Projects.
+    """Service to manage Call Center AI (CCAI service) Projects.
     """
 
     def __init__(self, channel):
@@ -60,42 +60,54 @@ class CcaiProjectsStub(object):
                 request_serializer=ondewo_dot_nlu_dot_ccai__project__pb2.UpdateCcaiProjectRequest.SerializeToString,
                 response_deserializer=ondewo_dot_nlu_dot_ccai__project__pb2.UpdateCcaiProjectResponse.FromString,
                 _registered_method=True)
+        self.GetCcaiService = channel.unary_unary(
+                '/ondewo.nlu.CcaiProjects/GetCcaiService',
+                request_serializer=ondewo_dot_nlu_dot_ccai__project__pb2.GetCcaiServiceRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_ccai__project__pb2.CcaiService.FromString,
+                _registered_method=True)
 
 
 class CcaiProjectsServicer(object):
-    """Service to manage Call Center AI (CCAI) Projects.
+    """Service to manage Call Center AI (CCAI service) Projects.
     """
 
     def GetCcaiProject(self, request, context):
-        """Retrieves information about a specific CCAI project.
+        """Retrieves information about a specific CCAI service project.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def CreateCcaiProject(self, request, context):
-        """Creates a new CCAI project based on the provided request.
+        """Creates a new CCAI service project based on the provided request.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def DeleteCcaiProject(self, request, context):
-        """Deletes a CCAI project identified by the provided request.
+        """Deletes a CCAI service project identified by the provided request.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ListCcaiProjects(self, request, context):
-        """Lists all CCAI projects based on the provided request.
+        """Lists all CCAI service projects based on the provided request.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def UpdateCcaiProject(self, request, context):
-        """Updates the information of an existing CCAI project.
+        """Updates the information of an existing CCAI service project.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetCcaiService(self, request, context):
+        """Retrieves information about a specific CCAI service.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -129,6 +141,11 @@ def add_CcaiProjectsServicer_to_server(servicer, server):
                     request_deserializer=ondewo_dot_nlu_dot_ccai__project__pb2.UpdateCcaiProjectRequest.FromString,
                     response_serializer=ondewo_dot_nlu_dot_ccai__project__pb2.UpdateCcaiProjectResponse.SerializeToString,
             ),
+            'GetCcaiService': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetCcaiService,
+                    request_deserializer=ondewo_dot_nlu_dot_ccai__project__pb2.GetCcaiServiceRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_ccai__project__pb2.CcaiService.SerializeToString,
+            ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
             'ondewo.nlu.CcaiProjects', rpc_method_handlers)
@@ -138,7 +155,7 @@ def add_CcaiProjectsServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class CcaiProjects(object):
-    """Service to manage Call Center AI (CCAI) Projects.
+    """Service to manage Call Center AI (CCAI service) Projects.
     """
 
     @staticmethod
@@ -266,6 +283,33 @@ class CcaiProjects(object):
             '/ondewo.nlu.CcaiProjects/UpdateCcaiProject',
             ondewo_dot_nlu_dot_ccai__project__pb2.UpdateCcaiProjectRequest.SerializeToString,
             ondewo_dot_nlu_dot_ccai__project__pb2.UpdateCcaiProjectResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetCcaiService(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.CcaiProjects/GetCcaiService',
+            ondewo_dot_nlu_dot_ccai__project__pb2.GetCcaiServiceRequest.SerializeToString,
+            ondewo_dot_nlu_dot_ccai__project__pb2.CcaiService.FromString,
             options,
             channel_credentials,
             insecure,

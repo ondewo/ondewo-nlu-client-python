@@ -82,7 +82,7 @@ from ondewo.nlu.session_pb2 import (
     SessionStep,
     StreamingDetectIntentRequest,
     StreamingDetectIntentResponse,
-    TrackSessionStepRequest,
+    AddSessionStepRequest,
     UpdateSessionCommentsRequest,
     UpdateSessionStepRequest,
 )
@@ -126,8 +126,8 @@ class Sessions(ServicesInterface):
         response: Session = self.stub.CreateSession(request, metadata=self.metadata)
         return response
 
-    def track_session_step(self, request: TrackSessionStepRequest) -> Session:
-        response: Session = self.stub.TrackSessionStep(request, metadata=self.metadata)
+    def track_session_step(self, request: AddSessionStepRequest) -> Session:
+        response: Session = self.stub.AddSessionStep(request, metadata=self.metadata)
         return response
 
     def get_session_step(self, request: GetSessionStepRequest) -> SessionStep:

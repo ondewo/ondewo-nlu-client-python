@@ -1203,8 +1203,8 @@ class SessionStep(google.protobuf.message.Message):
 global___SessionStep = SessionStep
 
 @typing.final
-class TrackSessionStepRequest(google.protobuf.message.Message):
-    """TrackSessionStepRequest stores a session step into the session"""
+class AddSessionStepRequest(google.protobuf.message.Message):
+    """AddSessionStepRequest stores a session step into the session"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1231,7 +1231,7 @@ class TrackSessionStepRequest(google.protobuf.message.Message):
     def HasField(self, field_name: typing.Literal["session_step", b"session_step"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing.Literal["session_id", b"session_id", "session_step", b"session_step", "session_view", b"session_view"]) -> None: ...
 
-global___TrackSessionStepRequest = TrackSessionStepRequest
+global___AddSessionStepRequest = AddSessionStepRequest
 
 @typing.final
 class GetSessionStepRequest(google.protobuf.message.Message):
