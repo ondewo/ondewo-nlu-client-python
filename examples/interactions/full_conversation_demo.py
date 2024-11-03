@@ -31,7 +31,7 @@ from ondewo.nlu.session_pb2 import (
 )
 
 
-def make_nlu_conversation(session):
+def make_nlu_conversation(session: str) -> None:
     context_flag_input = str(input('Do you want to activate context? (y/n)'))
     context_flag = True if context_flag_input == 'y' else False
     conversation_nlu_helper(session, context_flag=context_flag)
@@ -42,7 +42,7 @@ def make_nlu_conversation(session):
         conversation_nlu_helper(session, text)
 
 
-def conversation_nlu_helper(session: str, text: str = "Default Welcome Intent", context_flag: bool = False):
+def conversation_nlu_helper(session: str, text: str = "Default Welcome Intent", context_flag: bool = False) -> None:
     context_helper: Optional[context_pb2.Context] = make_context() if context_flag else None
     nlu_response: DetectIntentResponse = get_response_from_request(
         session=session,

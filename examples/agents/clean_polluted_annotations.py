@@ -112,8 +112,10 @@ async def check_all_annotations(
             for annotation in phrase.entities:
                 t: str = phrase.text[annotation.start:annotation.end]
 
-                if (not annotation.entity_type_display_name.startswith('sys.') and t not in
-                        entity_map[annotation.entity_type_name][annotation.entity_value_name]):
+                if (
+                    not annotation.entity_type_display_name.startswith('sys.') and
+                    t not in entity_map[annotation.entity_type_name][annotation.entity_value_name]
+                ):
                     log.debug(
                         f'Annotation! "{t}" '
                         f'on intent [{intent.display_name}] '

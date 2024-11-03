@@ -25,7 +25,7 @@ from ondewo.nlu.client import Client
 from ondewo.nlu.client_config import ClientConfig
 
 
-def get_agent_stats(client: Client, parent: str, language_code: str):
+def get_agent_stats(client: Client, parent: str, language_code: str) -> None:
     response: agent_pb2.GetAgentStatisticsResponse = client.services.agents.get_agent_statistics(
         agent_pb2.GetAgentStatisticsRequest(
             parent=parent,
@@ -39,7 +39,7 @@ def get_agent_stats(client: Client, parent: str, language_code: str):
     print('Done')
 
 
-def get_responses_per_intent(client: Client, parent: str, language_code: str):
+def get_responses_per_intent(client: Client, parent: str, language_code: str) -> None:
     response: intent_pb2.ListIntentsResponse = client.services.intents.list_intents(
         intent_pb2.ListIntentsRequest(
             parent=parent,

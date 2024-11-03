@@ -19,7 +19,7 @@ repos:
     rev: v1.13.0
     hooks:
       - id: mypy  # Run mypy type checker; note: runs with flag --missing-imports
-        exclude: ondewo
+        # exclude: ondewo
         args: [ --config-file=mypy.ini ]
         # Use language: system to run Mypy git repo's existing virtual environment
         # instead of mypy's own virtual environment. Necessary to find types-.* packages

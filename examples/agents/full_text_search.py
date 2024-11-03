@@ -119,7 +119,7 @@ def test_search_entity_synonym(term: str) -> FullTextSearchResponseEntitySynonym
     )
 
 
-def main():
+def main() -> None:
     test_search_intent("*are*")
     test_search_intent_context_in("one")
     test_search_intent_context_in("two")
