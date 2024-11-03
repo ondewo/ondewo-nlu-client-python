@@ -13,7 +13,6 @@ export
 # 		Variables
 ########################################################
 
-
 # MUST BE THE SAME AS API in Mayor and Minor Version Number
 # example: API 2.9.0 --> Client 2.9.X
 ONDEWO_NLU_VERSION = 5.0.1
@@ -28,7 +27,6 @@ GITHUB_GH_TOKEN?=ENTER_YOUR_TOKEN_HERE
 
 CURRENT_RELEASE_NOTES=`cat RELEASE.md \
 	| sed -n '/Release ONDEWO NLU Python Client ${ONDEWO_NLU_VERSION}/,/\*\*/p'`
-
 
 GH_REPO="https://github.com/ondewo/ondewo-nlu-client-python"
 DEVOPS_ACCOUNT_GIT="ondewo-devops-accounts"
@@ -62,7 +60,6 @@ install_dependencies_locally: ## Install dependencies locally
 
 flake8: ## Runs flake8
 	flake8 --config .flake8 .
-# flake8 --exculde 'ondewo'
 
 mypy: ## Run mypy static code checking
 	pre-commit run mypy --all-files
@@ -133,9 +130,8 @@ setup_conda_env: ## Checks for CONDA Environment
 	&& make create_conda_env)
 
 create_conda_env: ##Creates CONDA Environment
-	conda create -y --name ondewo-nlu-client-python python=3.8
+	conda create -y --name ondewo-nlu-client-python python=3.9
 	/bin/bash -c 'source `conda info --base`/bin/activate ondewo-nlu-client-python; make setup_developer_environment_locally && echo "\n PRECOMMIT INSTALLED \n"'
-
 
 ########################################################
 #		Release
@@ -270,4 +266,4 @@ spc: ## Checks if the Release Branch, Tag and Pypi version already exist
 	$(eval setuppy_version:= $(shell cat setup.py | grep "version"))
 	@if test "$(filtered_branches)" != ""; then echo "-- Test 1: Branch exists!!" & exit 1; else echo "-- Test 1: Branch is fine";fi
 	@if test "$(filtered_tags)" != ""; then echo "-- Test 2: Tag exists!!" & exit 1; else echo "-- Test 2: Tag is fine";fi
-#	@if test "$(setuppy_version)" != "version='${ONDEWO_NLU_VERSION}',"; then echo "-- Test 3: Setup.py not updated!!" & exit 1; else echo "-- Test 3: Setup.py is fine";fi
+	#	@if test "$(setuppy_version)" != "version='${ONDEWO_NLU_VERSION}',"; then echo "-- Test 3: Setup.py not updated!!" & exit 1; else echo "-- Test 3: Setup.py is fine";fi
