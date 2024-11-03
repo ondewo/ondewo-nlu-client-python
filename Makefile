@@ -2,6 +2,7 @@ export
 # ---------------- BEFORE RELEASE ----------------
 # 1 - Update Version Number
 # 2 - Update RELEASE.md
+# 3 - make update_setup
 # -------------- Release Process Steps --------------
 # 1 - Get Credentials from devops-accounts repo
 # 2 - Create Release Branch and push

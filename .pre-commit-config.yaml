@@ -1,7 +1,7 @@
 #############################################################################################
 # pre-commit is a "framework for managing and maintaining multi-language pre-commit hooks"  #
 # see https://pre-commit.com/#intro for an introduction to pre-commit                       #
-#                                                                                            #
+#                                                                                           #
 # - pre-commit hooks are run on staged files just before a commit or a push                 #
 # - to run a given hook on any file at any time, run the following on the command line:     #
 #    pre-commit run <HOOK_ID> --files <FILE1> <FILE2> ..., e.g.,                            #
