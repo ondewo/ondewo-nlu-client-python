@@ -13,11 +13,13 @@
 # limitations under the License.
 from ondewo.nlu.ccai_project_pb2 import (
     CcaiProject,
+    CcaiService,
     CreateCcaiProjectRequest,
     CreateCcaiProjectResponse,
     DeleteCcaiProjectRequest,
     DeleteCcaiProjectResponse,
     GetCcaiProjectRequest,
+    GetCcaiServiceRequest,
     ListCcaiProjectsRequest,
     ListCcaiProjectsResponse,
     UpdateCcaiProjectRequest,
@@ -136,4 +138,17 @@ class CcaiProjects(ServicesInterface):
             ListCcaiProjectsResponse: The response message containing a list of all CcaiProjects.
         """
         response: ListCcaiProjectsResponse = self.stub.ListCcaiProjects(request=request, metadata=self.metadata)
+        return response
+
+    def get_ccai_service(self, request: GetCcaiServiceRequest) -> CcaiService:
+        """
+        Get details of a specific CcaiService.
+
+        Args:
+            request (GetCcaiServiceRequest): The request message to get details of a CcaiService.
+
+        Returns:
+            CcaiService: The response message containing the details of the specified CcaiService.
+        """
+        response: CcaiService = self.stub.GetCcaiService(request=request, metadata=self.metadata)
         return response
