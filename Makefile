@@ -80,11 +80,11 @@ help: ## Print usage info about help targets
 makefile_chapters: ## Shows all sections of Makefile
 	@echo `cat Makefile| grep "########################################################" -A 1 | grep -v "########################################################"`
 
-TEST:
-	@echo ${GITHUB_GH_TOKEN}
-	@echo ${PYPI_USERNAME}
-	@echo ${PYPI_PASSWORD}
-	@echo "\n${CURRENT_RELEASE_NOTES}"
+TEST: ## Prints some important variables
+	@echo "Release Notes: \n \n$(CURRENT_RELEASE_NOTES)"
+	@echo "GH Token: \t $(GITHUB_GH_TOKEN)"
+	@echo "NPM Name: \t $(NPM_USERNAME)"
+	@echo "NPM Password: \t $(NPM_PASSWORD)"
 
 check_build: ## Checks if all built proto-code is there
 	@rm -rf build_check.txt
