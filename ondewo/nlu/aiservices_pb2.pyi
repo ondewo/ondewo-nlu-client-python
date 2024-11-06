@@ -22,8 +22,11 @@ import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.internal.enum_type_wrapper
 import google.protobuf.message
+import google.protobuf.struct_pb2
+import ondewo.nlu.ccai_project_pb2
 import ondewo.nlu.entity_type_pb2
 import ondewo.nlu.intent_pb2
+import ondewo.nlu.session_pb2
 import sys
 import typing
 
@@ -139,6 +142,196 @@ OndewoIntentExitDetector: IntentAlgorithms.ValueType  # 14
 OndewoIntentParameterMatch: IntentAlgorithms.ValueType  # 15
 """Matches the intent based on the parameter constellation and the current user context"""
 global___IntentAlgorithms = IntentAlgorithms
+
+@typing.final
+class ListLlmModelsRequest(google.protobuf.message.Message):
+    """The request message to list available LLM models for a specified CCAI service."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    CCAI_SERVICE_FIELD_NUMBER: builtins.int
+    @property
+    def ccai_service(self) -> ondewo.nlu.ccai_project_pb2.CcaiService:
+        """The CCAI service for which to list models.
+        Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;</code></pre>
+        This field specifies the service context in which the models are deployed and
+        should be in the specified format to identify the correct project and service.
+        """
+
+    def __init__(
+        self,
+        *,
+        ccai_service: ondewo.nlu.ccai_project_pb2.CcaiService | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["ccai_service", b"ccai_service"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["ccai_service", b"ccai_service"]) -> None: ...
+
+global___ListLlmModelsRequest = ListLlmModelsRequest
+
+@typing.final
+class ListLlmModelsResponse(google.protobuf.message.Message):
+    """The response message containing a list of available LLM models."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    LLM_MODELS_FIELD_NUMBER: builtins.int
+    @property
+    def llm_models(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmModel]:
+        """A list of LLM models associated with the specified CCAI service.
+        Each model in this list represents an individual language model that can
+        be used within the service, including details such as name, provider, and description.
+        """
+
+    def __init__(
+        self,
+        *,
+        llm_models: collections.abc.Iterable[global___LlmModel] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["llm_models", b"llm_models"]) -> None: ...
+
+global___ListLlmModelsResponse = ListLlmModelsResponse
+
+@typing.final
+class LlmModel(google.protobuf.message.Message):
+    """Represents an individual LLM model available within a CCAI service."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    NAME_FIELD_NUMBER: builtins.int
+    DISPLAY_NAME_FIELD_NUMBER: builtins.int
+    DESCRIPTION_FIELD_NUMBER: builtins.int
+    CCAI_SERVICE_NAME_FIELD_NUMBER: builtins.int
+    PROVIDER_FIELD_NUMBER: builtins.int
+    name: builtins.str
+    """The resource name of the model.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;/model/&lt;model_uuid&gt;</code></pre>
+    This is a unique identifier for the model, specifying its project, service, and model ID.
+    """
+    display_name: builtins.str
+    """The display name of the model.
+    This is a human-readable name used for identifying the model in other requests,
+    such as <pre><code>LlmGenerateRequest</code></pre> and <pre><code>StreamingLlmGenerateRequest</code></pre>.
+    """
+    description: builtins.str
+    """The description of the model.
+    Provides additional details about the model, such as its purpose, architecture, or any other relevant information.
+    """
+    ccai_service_name: builtins.str
+    """The resource name of the CCAI service to which the model belongs.
+    This field links the model to its service context, helping clients understand
+    which service hosts the model.
+    """
+    provider: ondewo.nlu.ccai_project_pb2.CcaiServiceProvider.ValueType
+    """The provider of the CCAI service that offers this model.
+    Specifies the LLM provider (e.g., Ollama, OpenAI, Google, etc.), indicating the origin or vendor of the model.
+    """
+    def __init__(
+        self,
+        *,
+        name: builtins.str = ...,
+        display_name: builtins.str = ...,
+        description: builtins.str = ...,
+        ccai_service_name: builtins.str = ...,
+        provider: ondewo.nlu.ccai_project_pb2.CcaiServiceProvider.ValueType = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["ccai_service_name", b"ccai_service_name", "description", b"description", "display_name", b"display_name", "name", b"name", "provider", b"provider"]) -> None: ...
+
+global___LlmModel = LlmModel
+
+@typing.final
+class LlmGenerateRequest(google.protobuf.message.Message):
+    """The request message to generate a response from a Large Language Model (LLM)."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    LLM_GENERATION_REQUEST_FIELD_NUMBER: builtins.int
+    CCAI_SERVICE_FIELD_NUMBER: builtins.int
+    FILE_RESOURCE_FIELD_NUMBER: builtins.int
+    @property
+    def llm_generation_request(self) -> google.protobuf.struct_pb2.Struct:
+        """The request payload for the LLM, structured according to the specific
+        requirements of the large language model provider.
+        The payload must fit the format expected by the specified LLM provider,
+        as defined by <pre><code>CcaiServiceProvider</code></pre>.
+        """
+
+    @property
+    def ccai_service(self) -> ondewo.nlu.ccai_project_pb2.CcaiService:
+        """The CCAI service to be used for processing the request.
+        This specifies which large language model provider and model settings
+        will handle the request.
+        Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;</code></pre>
+        """
+
+    @property
+    def file_resource(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.session_pb2.FileResource]:
+        """Files as input for the generation request"""
+
+    def __init__(
+        self,
+        *,
+        llm_generation_request: google.protobuf.struct_pb2.Struct | None = ...,
+        ccai_service: ondewo.nlu.ccai_project_pb2.CcaiService | None = ...,
+        file_resource: collections.abc.Iterable[ondewo.nlu.session_pb2.FileResource] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["ccai_service", b"ccai_service", "llm_generation_request", b"llm_generation_request"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["ccai_service", b"ccai_service", "file_resource", b"file_resource", "llm_generation_request", b"llm_generation_request"]) -> None: ...
+
+global___LlmGenerateRequest = LlmGenerateRequest
+
+@typing.final
+class LlmGenerateResponse(google.protobuf.message.Message):
+    """The response message containing the generated output from a Large Language Model (LLM)."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    LLM_GENERATION_RESPONSE_FIELD_NUMBER: builtins.int
+    FILE_RESOURCE_FIELD_NUMBER: builtins.int
+    @property
+    def llm_generation_response(self) -> google.protobuf.struct_pb2.Struct:
+        """The response data from the LLM, returned as a structured payload.
+        This can contain the text generation, embeddings, or other outputs
+        based on the specific request made to the LLM provider.
+        """
+
+    @property
+    def file_resource(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.session_pb2.FileResource]:
+        """Files as input for the generation request, e.g., generated pictures, audio or video"""
+
+    def __init__(
+        self,
+        *,
+        llm_generation_response: google.protobuf.struct_pb2.Struct | None = ...,
+        file_resource: collections.abc.Iterable[ondewo.nlu.session_pb2.FileResource] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["llm_generation_response", b"llm_generation_response"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["file_resource", b"file_resource", "llm_generation_response", b"llm_generation_response"]) -> None: ...
+
+global___LlmGenerateResponse = LlmGenerateResponse
+
+@typing.final
+class StreamingLlmGenerateResponse(google.protobuf.message.Message):
+    """The response message for streaming generation from a Large Language Model (LLM)."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    LLM_GENERATION_STREAM_RESPONSE_FIELD_NUMBER: builtins.int
+    @property
+    def llm_generation_stream_response(self) -> google.protobuf.struct_pb2.Struct:
+        """The response data from the LLM in a streaming format, returned as a structured payload.
+        This response is part of a continuous stream of data from the LLM, allowing
+        incremental results to be sent as they are generated.
+        """
+
+    def __init__(
+        self,
+        *,
+        llm_generation_stream_response: google.protobuf.struct_pb2.Struct | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["llm_generation_stream_response", b"llm_generation_stream_response"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["llm_generation_stream_response", b"llm_generation_stream_response"]) -> None: ...
+
+global___StreamingLlmGenerateResponse = StreamingLlmGenerateResponse
 
 @typing.final
 class ExtractEntitiesRequest(google.protobuf.message.Message):
@@ -339,7 +532,7 @@ class GetAlternativeSentencesRequest(google.protobuf.message.Message):
     sentence: builtins.str
     """The sentence from which it is desired to get alternative sentences"""
     language_code: builtins.str
-    """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+    """Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
     parent: builtins.str
     """the parent of the request
     Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
@@ -382,7 +575,7 @@ class GenerateUserSaysRequest(google.protobuf.message.Message):
     N_REPEAT_SYNONYM_FIELD_NUMBER: builtins.int
     BRANCH_FIELD_NUMBER: builtins.int
     language_code: builtins.str
-    """language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+    """language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
     parent: builtins.str
     """the parent of the request
     Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
@@ -415,7 +608,7 @@ class GenerateResponsesRequest(google.protobuf.message.Message):
     BRANCH_FIELD_NUMBER: builtins.int
     DROP_UNKNOWN_PARAMETERS_FIELD_NUMBER: builtins.int
     language_code: builtins.str
-    """language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+    """language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
     parent: builtins.str
     """the parent of the request
     Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
@@ -457,7 +650,7 @@ class GetAlternativeTrainingPhrasesRequest(google.protobuf.message.Message):
     intent_name: builtins.str
     """The intent tag attached to the training phrase"""
     language_code: builtins.str
-    """language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+    """language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
     parent: builtins.str
     """the parent of the request
     Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
@@ -518,7 +711,7 @@ class GetSynonymsRequest(google.protobuf.message.Message):
     word: builtins.str
     """Word from which a synonym is got"""
     language_code: builtins.str
-    """language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+    """language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
     parent: builtins.str
     """the parent of the request
     Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
@@ -723,6 +916,7 @@ class DataEnrichmentConfig(google.protobuf.message.Message):
     GLOVE_ENRICHMENT_FIELD_NUMBER: builtins.int
     BERT_ENRICHMENT_FIELD_NUMBER: builtins.int
     XLNET_ENRICHMENT_FIELD_NUMBER: builtins.int
+    LLM_ENRICHMENT_FIELD_NUMBER: builtins.int
     @property
     def entity_enrichment(self) -> global___EntityEnrichmentConfig:
         """Entity augmenter configuration"""
@@ -755,6 +949,10 @@ class DataEnrichmentConfig(google.protobuf.message.Message):
     def xlnet_enrichment(self) -> global___XLNetAugEnrichmentConfig:
         """XLNet augmenter configuration"""
 
+    @property
+    def llm_enrichment(self) -> global___LlmEnrichmentConfig:
+        """Large language model (LLM) augmenter configuration"""
+
     def __init__(
         self,
         *,
@@ -766,9 +964,10 @@ class DataEnrichmentConfig(google.protobuf.message.Message):
         glove_enrichment: global___GloVeEnrichmentConfig | None = ...,
         bert_enrichment: global___BertAugEnrichmentConfig | None = ...,
         xlnet_enrichment: global___XLNetAugEnrichmentConfig | None = ...,
+        llm_enrichment: global___LlmEnrichmentConfig | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["bert_enrichment", b"bert_enrichment", "entity_enrichment", b"entity_enrichment", "glove_enrichment", b"glove_enrichment", "gpt2_enrichment", b"gpt2_enrichment", "thesaurus_enrichment", b"thesaurus_enrichment", "word2vec_enrichment", b"word2vec_enrichment", "word_net_enrichment", b"word_net_enrichment", "xlnet_enrichment", b"xlnet_enrichment"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["bert_enrichment", b"bert_enrichment", "entity_enrichment", b"entity_enrichment", "glove_enrichment", b"glove_enrichment", "gpt2_enrichment", b"gpt2_enrichment", "thesaurus_enrichment", b"thesaurus_enrichment", "word2vec_enrichment", b"word2vec_enrichment", "word_net_enrichment", b"word_net_enrichment", "xlnet_enrichment", b"xlnet_enrichment"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["bert_enrichment", b"bert_enrichment", "entity_enrichment", b"entity_enrichment", "glove_enrichment", b"glove_enrichment", "gpt2_enrichment", b"gpt2_enrichment", "llm_enrichment", b"llm_enrichment", "thesaurus_enrichment", b"thesaurus_enrichment", "word2vec_enrichment", b"word2vec_enrichment", "word_net_enrichment", b"word_net_enrichment", "xlnet_enrichment", b"xlnet_enrichment"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["bert_enrichment", b"bert_enrichment", "entity_enrichment", b"entity_enrichment", "glove_enrichment", b"glove_enrichment", "gpt2_enrichment", b"gpt2_enrichment", "llm_enrichment", b"llm_enrichment", "thesaurus_enrichment", b"thesaurus_enrichment", "word2vec_enrichment", b"word2vec_enrichment", "word_net_enrichment", b"word_net_enrichment", "xlnet_enrichment", b"xlnet_enrichment"]) -> None: ...
 
 global___DataEnrichmentConfig = DataEnrichmentConfig
 
@@ -956,7 +1155,7 @@ global___WordNetAugEnrichmentConfig = WordNetAugEnrichmentConfig
 
 @typing.final
 class XLNetAugEnrichmentConfig(google.protobuf.message.Message):
-    """Configuration for Thesaurus enrichment"""
+    """Configuration for XLNet enrichment"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -979,6 +1178,39 @@ class XLNetAugEnrichmentConfig(google.protobuf.message.Message):
     def ClearField(self, field_name: typing.Literal["enrichment_factor", b"enrichment_factor", "execution_order", b"execution_order", "is_active", b"is_active"]) -> None: ...
 
 global___XLNetAugEnrichmentConfig = XLNetAugEnrichmentConfig
+
+@typing.final
+class LlmEnrichmentConfig(google.protobuf.message.Message):
+    """Configuration for large language model (LLM) enrichment"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    IS_ACTIVE_FIELD_NUMBER: builtins.int
+    ENRICHMENT_FACTOR_FIELD_NUMBER: builtins.int
+    EXECUTION_ORDER_FIELD_NUMBER: builtins.int
+    CCAI_SERVICE_FIELD_NUMBER: builtins.int
+    is_active: builtins.bool
+    """Activation flag"""
+    enrichment_factor: builtins.int
+    """Factor of enrichment"""
+    execution_order: builtins.int
+    """Order of augmenter execution"""
+    @property
+    def ccai_service(self) -> ondewo.nlu.ccai_project_pb2.CcaiService:
+        """The ccai service used to enrich"""
+
+    def __init__(
+        self,
+        *,
+        is_active: builtins.bool = ...,
+        enrichment_factor: builtins.int = ...,
+        execution_order: builtins.int = ...,
+        ccai_service: ondewo.nlu.ccai_project_pb2.CcaiService | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["ccai_service", b"ccai_service"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["ccai_service", b"ccai_service", "enrichment_factor", b"enrichment_factor", "execution_order", b"execution_order", "is_active", b"is_active"]) -> None: ...
+
+global___LlmEnrichmentConfig = LlmEnrichmentConfig
 
 @typing.final
 class ClassifyIntentsRequest(google.protobuf.message.Message):

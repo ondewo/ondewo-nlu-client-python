@@ -924,7 +924,7 @@ class RankingMatchOptimizationConfig(google.protobuf.message.Message):
     RANDOM_SEED_FIELD_NUMBER: builtins.int
     INITIAL_THRESHOLDS_FIELD_NUMBER: builtins.int
     language_code: builtins.str
-    """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+    """Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
     n_splits: builtins.int
     """number of splits for optimization"""
     random_seed: builtins.int
@@ -1084,7 +1084,7 @@ class GetAgentStatisticsRequest(google.protobuf.message.Message):
     format: global___ReportFormat.ValueType
     """File formats for reports"""
     language_code: builtins.str
-    """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru
+    """Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc.
     the language to calculate statistics about
     """
     type: global___ReportType.ValueType
@@ -1573,7 +1573,7 @@ class SetResourcesRequest(google.protobuf.message.Message):
     type: builtins.str
     resource_file: builtins.bytes
     language_code: builtins.str
-    """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+    """Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
     def __init__(
         self,
         *,
@@ -1604,7 +1604,7 @@ class DeleteResourcesRequest(google.protobuf.message.Message):
     name: builtins.str
     type: builtins.str
     language_code: builtins.str
-    """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+    """Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
     def __init__(
         self,
         *,
@@ -1634,7 +1634,7 @@ class ExportResourcesRequest(google.protobuf.message.Message):
     name: builtins.str
     type: builtins.str
     language_code: builtins.str
-    """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+    """Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
     def __init__(
         self,
         *,
@@ -1665,7 +1665,7 @@ class ExportResourcesResponse(google.protobuf.message.Message):
     name: builtins.str
     type: builtins.str
     language_code: builtins.str
-    """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+    """Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
     resource_file: builtins.bytes
     def __init__(
         self,
@@ -1696,7 +1696,7 @@ class GetModelStatusesRequest(google.protobuf.message.Message):
     """
     cache_version: builtins.int
     language_code: builtins.str
-    """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+    """Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
     model_name: builtins.str
     def __init__(
         self,
@@ -1748,7 +1748,7 @@ class ModelStatus(google.protobuf.message.Message):
     cache_version: builtins.int
     """Cache version that contains the correspondent model"""
     language_code: builtins.str
-    """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+    """Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
     model_name: builtins.str
     """The model name"""
     config: builtins.str
@@ -1937,7 +1937,7 @@ class FullTextSearchRequest(google.protobuf.message.Message):
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
     language_code: builtins.str
-    """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+    """Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
     term: builtins.str
     """What to search for in the elastic server"""
     page_token: builtins.str
@@ -2036,7 +2036,7 @@ class FullTextSearchResponseEntityType(google.protobuf.message.Message):
     Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
     language_code: builtins.str
-    """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+    """Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
     term: builtins.str
     elastic_query: builtins.str
     time: builtins.float
@@ -2125,7 +2125,7 @@ class FullTextSearchResponseEntity(google.protobuf.message.Message):
     Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
     language_code: builtins.str
-    """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+    """Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
     term: builtins.str
     elastic_query: builtins.str
     time: builtins.float
@@ -2220,7 +2220,7 @@ class FullTextSearchResponseEntitySynonym(google.protobuf.message.Message):
     Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
     language_code: builtins.str
-    """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+    """Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
     term: builtins.str
     elastic_query: builtins.str
     time: builtins.float
@@ -2310,7 +2310,7 @@ class FullTextSearchResponseIntent(google.protobuf.message.Message):
     Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
     language_code: builtins.str
-    """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+    """Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
     term: builtins.str
     elastic_query: builtins.str
     time: builtins.float
@@ -2400,7 +2400,7 @@ class FullTextSearchResponseIntentContextIn(google.protobuf.message.Message):
     Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
     language_code: builtins.str
-    """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+    """Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
     term: builtins.str
     elastic_query: builtins.str
     time: builtins.float
@@ -2490,7 +2490,7 @@ class FullTextSearchResponseIntentContextOut(google.protobuf.message.Message):
     Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
     language_code: builtins.str
-    """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+    """Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
     term: builtins.str
     elastic_query: builtins.str
     time: builtins.float
@@ -2592,7 +2592,7 @@ class FullTextSearchResponseIntentUsersays(google.protobuf.message.Message):
     Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
     language_code: builtins.str
-    """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+    """Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
     term: builtins.str
     elastic_query: builtins.str
     time: builtins.float
@@ -2685,7 +2685,7 @@ class FullTextSearchResponseIntentTags(google.protobuf.message.Message):
     Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
     language_code: builtins.str
-    """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+    """Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
     term: builtins.str
     elastic_query: builtins.str
     time: builtins.float
@@ -2781,7 +2781,7 @@ class FullTextSearchResponseIntentResponse(google.protobuf.message.Message):
     Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
     language_code: builtins.str
-    """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+    """Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
     term: builtins.str
     elastic_query: builtins.str
     time: builtins.float
@@ -2896,7 +2896,7 @@ class FullTextSearchResponseIntentParameters(google.protobuf.message.Message):
     Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
     language_code: builtins.str
-    """Language code specifies the language of the request, e.g. cz, de, en, es, fi, fr, it, nl, pl, pt, tr, ru"""
+    """Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
     term: builtins.str
     elastic_query: builtins.str
     time: builtins.float

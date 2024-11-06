@@ -546,6 +546,7 @@ class QueryInput(google.protobuf.message.Message):
     AUDIO_CONFIG_FIELD_NUMBER: builtins.int
     TEXT_FIELD_NUMBER: builtins.int
     EVENT_FIELD_NUMBER: builtins.int
+    FILE_RESOURCE_FIELD_NUMBER: builtins.int
     @property
     def audio_config(self) -> global___InputAudioConfig:
         """Instructs the speech recognizer how to process the speech audio."""
@@ -558,15 +559,20 @@ class QueryInput(google.protobuf.message.Message):
     def event(self) -> global___EventInput:
         """The event to be processed."""
 
+    @property
+    def file_resource(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FileResource]:
+        """Files as input for the detect intent request, e.g., image, document, audio, video etc."""
+
     def __init__(
         self,
         *,
         audio_config: global___InputAudioConfig | None = ...,
         text: global___TextInput | None = ...,
         event: global___EventInput | None = ...,
+        file_resource: collections.abc.Iterable[global___FileResource] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["audio_config", b"audio_config", "event", b"event", "input", b"input", "text", b"text"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["audio_config", b"audio_config", "event", b"event", "input", b"input", "text", b"text"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["audio_config", b"audio_config", "event", b"event", "file_resource", b"file_resource", "input", b"input", "text", b"text"]) -> None: ...
     def WhichOneof(self, oneof_group: typing.Literal["input", b"input"]) -> typing.Literal["audio_config", "text", "event"] | None: ...
 
 global___QueryInput = QueryInput
@@ -592,6 +598,7 @@ class QueryResult(google.protobuf.message.Message):
     QUERY_TEXT_ORIGINAL_FIELD_NUMBER: builtins.int
     DIAGNOSTIC_INFO_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    FILE_RESOURCE_FIELD_NUMBER: builtins.int
     query_text: builtins.str
     """The original conversational query text:
     - If natural language text was provided as input, `query_text` contains
@@ -675,6 +682,10 @@ class QueryResult(google.protobuf.message.Message):
         could contain webhook call latency.
         """
 
+    @property
+    def file_resource(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FileResource]:
+        """Generated or attached files, e.g., llm generates a picture or file attachment"""
+
     def __init__(
         self,
         *,
@@ -693,9 +704,10 @@ class QueryResult(google.protobuf.message.Message):
         query_text_original: builtins.str = ...,
         diagnostic_info: google.protobuf.struct_pb2.Struct | None = ...,
         language_code: builtins.str = ...,
+        file_resource: collections.abc.Iterable[global___FileResource] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["diagnostic_info", b"diagnostic_info", "intent", b"intent", "parameters", b"parameters", "webhook_payload", b"webhook_payload"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["action", b"action", "all_required_params_present", b"all_required_params_present", "diagnostic_info", b"diagnostic_info", "fulfillment_messages", b"fulfillment_messages", "fulfillment_text", b"fulfillment_text", "intent", b"intent", "intent_detection_confidence", b"intent_detection_confidence", "language_code", b"language_code", "output_contexts", b"output_contexts", "parameters", b"parameters", "query_text", b"query_text", "query_text_original", b"query_text_original", "speech_recognition_confidence", b"speech_recognition_confidence", "webhook_payload", b"webhook_payload", "webhook_source", b"webhook_source"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["action", b"action", "all_required_params_present", b"all_required_params_present", "diagnostic_info", b"diagnostic_info", "file_resource", b"file_resource", "fulfillment_messages", b"fulfillment_messages", "fulfillment_text", b"fulfillment_text", "intent", b"intent", "intent_detection_confidence", b"intent_detection_confidence", "language_code", b"language_code", "output_contexts", b"output_contexts", "parameters", b"parameters", "query_text", b"query_text", "query_text_original", b"query_text_original", "speech_recognition_confidence", b"speech_recognition_confidence", "webhook_payload", b"webhook_payload", "webhook_source", b"webhook_source"]) -> None: ...
 
 global___QueryResult = QueryResult
 
@@ -3295,6 +3307,144 @@ class GetLatestSessionReviewRequest(google.protobuf.message.Message):
 global___GetLatestSessionReviewRequest = GetLatestSessionReviewRequest
 
 @typing.final
+class FileResource(google.protobuf.message.Message):
+    """Represents a file resource that can either be an image, audio, document, or video file."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    DOCUMENT_FILE_RESOURCE_FIELD_NUMBER: builtins.int
+    AUDIO_FILE_RESOURCE_FIELD_NUMBER: builtins.int
+    IMAGE_FILE_RESOURCE_FIELD_NUMBER: builtins.int
+    VIDEO_FILE_RESOURCE_FIELD_NUMBER: builtins.int
+    @property
+    def document_file_resource(self) -> global___DocumentFileResource:
+        """Document file resource (e.g., markdown, text, word, powerpoint, pdf, excel etc.)."""
+
+    @property
+    def audio_file_resource(self) -> global___AudioFileResource:
+        """An audio file resource, such as a recording or sound file."""
+
+    @property
+    def image_file_resource(self) -> global___ImageFileResource:
+        """An image file resource, such as a JPEG, PNG, etc."""
+
+    @property
+    def video_file_resource(self) -> global___VideoFileResource:
+        """A video file resource, such as an MP4 or AVI file."""
+
+    def __init__(
+        self,
+        *,
+        document_file_resource: global___DocumentFileResource | None = ...,
+        audio_file_resource: global___AudioFileResource | None = ...,
+        image_file_resource: global___ImageFileResource | None = ...,
+        video_file_resource: global___VideoFileResource | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["audio_file_resource", b"audio_file_resource", "document_file_resource", b"document_file_resource", "file", b"file", "image_file_resource", b"image_file_resource", "video_file_resource", b"video_file_resource"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["audio_file_resource", b"audio_file_resource", "document_file_resource", b"document_file_resource", "file", b"file", "image_file_resource", b"image_file_resource", "video_file_resource", b"video_file_resource"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["file", b"file"]) -> typing.Literal["document_file_resource", "audio_file_resource", "image_file_resource", "video_file_resource"] | None: ...
+
+global___FileResource = FileResource
+
+@typing.final
+class DocumentFileResource(google.protobuf.message.Message):
+    """Represents a document file resource (e.g., text, markdown, PDF, DOCX)."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    NAME_FIELD_NUMBER: builtins.int
+    DISPLAY_NAME_FIELD_NUMBER: builtins.int
+    BYTES_FIELD_NUMBER: builtins.int
+    CREATED_AT_FIELD_NUMBER: builtins.int
+    MODIFIED_AT_FIELD_NUMBER: builtins.int
+    CREATED_BY_FIELD_NUMBER: builtins.int
+    MODIFIED_BY_FIELD_NUMBER: builtins.int
+    name: builtins.str
+    """The unique identifier for the document file resource.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/documents/&lt;document_uuid&gt;</code></pre>
+    """
+    display_name: builtins.str
+    """The display name of the document file, which can be the file name (e.g., "report.pdf")
+    or a user-assigned name.
+    """
+    bytes: builtins.bytes
+    """The raw bytes of the document file (e.g., PDF, DOCX, TXT)."""
+    created_by: builtins.str
+    """The UUID of the user who created the document file."""
+    modified_by: builtins.str
+    """The UUID of the user who last modified the document file."""
+    @property
+    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Creation date and time of the document file. This is a read-only field."""
+
+    @property
+    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """The last modification date and time of the document file. This is a read-only field."""
+
+    def __init__(
+        self,
+        *,
+        name: builtins.str = ...,
+        display_name: builtins.str = ...,
+        bytes: builtins.bytes = ...,
+        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        created_by: builtins.str = ...,
+        modified_by: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["bytes", b"bytes", "created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name"]) -> None: ...
+
+global___DocumentFileResource = DocumentFileResource
+
+@typing.final
+class ImageFileResource(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    NAME_FIELD_NUMBER: builtins.int
+    DISPLAY_NAME_FIELD_NUMBER: builtins.int
+    BYTES_FIELD_NUMBER: builtins.int
+    CREATED_AT_FIELD_NUMBER: builtins.int
+    MODIFIED_AT_FIELD_NUMBER: builtins.int
+    CREATED_BY_FIELD_NUMBER: builtins.int
+    MODIFIED_BY_FIELD_NUMBER: builtins.int
+    name: builtins.str
+    """The unique identifier of the session for which the latest review should be returned
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/images/&lt;image_uuid&gt;</code></pre>
+    """
+    display_name: builtins.str
+    """File name of the image, e.g., MyPicture.jpg, or a user assigned display name"""
+    bytes: builtins.bytes
+    """Bytes of the audio file"""
+    created_by: builtins.str
+    """User id in form of a valid UUID."""
+    modified_by: builtins.str
+    """User id in form of a valid UUID."""
+    @property
+    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Creation date and time. Read-only field."""
+
+    @property
+    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Modification date and time. Read-only field."""
+
+    def __init__(
+        self,
+        *,
+        name: builtins.str = ...,
+        display_name: builtins.str = ...,
+        bytes: builtins.bytes = ...,
+        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        created_by: builtins.str = ...,
+        modified_by: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["bytes", b"bytes", "created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name"]) -> None: ...
+
+global___ImageFileResource = ImageFileResource
+
+@typing.final
 class AudioFileResource(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -3309,6 +3459,7 @@ class AudioFileResource(google.protobuf.message.Message):
     MODIFIED_AT_FIELD_NUMBER: builtins.int
     CREATED_BY_FIELD_NUMBER: builtins.int
     MODIFIED_BY_FIELD_NUMBER: builtins.int
+    DISPLAY_NAME_FIELD_NUMBER: builtins.int
     name: builtins.str
     """The unique identifier of the session for which the latest review should be returned
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
@@ -3327,6 +3478,8 @@ class AudioFileResource(google.protobuf.message.Message):
     """User id in form of a valid UUID."""
     modified_by: builtins.str
     """User id in form of a valid UUID."""
+    display_name: builtins.str
+    """Bytes of the audio file"""
     @property
     def transcriptions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___S2tTranscription]:
         """transcriptions of the user input sorted by score.
@@ -3355,11 +3508,73 @@ class AudioFileResource(google.protobuf.message.Message):
         modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         created_by: builtins.str = ...,
         modified_by: builtins.str = ...,
+        display_name: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["audio_file_resource_type", b"audio_file_resource_type", "bytes", b"bytes", "created_at", b"created_at", "created_by", b"created_by", "duration_in_s", b"duration_in_s", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "sample_rate", b"sample_rate", "transcriptions", b"transcriptions"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["audio_file_resource_type", b"audio_file_resource_type", "bytes", b"bytes", "created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "duration_in_s", b"duration_in_s", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "sample_rate", b"sample_rate", "transcriptions", b"transcriptions"]) -> None: ...
 
 global___AudioFileResource = AudioFileResource
+
+@typing.final
+class VideoFileResource(google.protobuf.message.Message):
+    """Represents a video file resource (e.g., MP4, AVI)."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    NAME_FIELD_NUMBER: builtins.int
+    DISPLAY_NAME_FIELD_NUMBER: builtins.int
+    BYTES_FIELD_NUMBER: builtins.int
+    DURATION_IN_S_FIELD_NUMBER: builtins.int
+    RESOLUTION_FIELD_NUMBER: builtins.int
+    FRAME_RATE_FIELD_NUMBER: builtins.int
+    CREATED_AT_FIELD_NUMBER: builtins.int
+    MODIFIED_AT_FIELD_NUMBER: builtins.int
+    CREATED_BY_FIELD_NUMBER: builtins.int
+    MODIFIED_BY_FIELD_NUMBER: builtins.int
+    name: builtins.str
+    """The unique identifier for the video file resource.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/videos/&lt;video_uuid&gt;</code></pre>
+    """
+    display_name: builtins.str
+    """The display name of the video file, which can be a user-assigned label."""
+    bytes: builtins.bytes
+    """The raw bytes representing the video file (e.g., MP4, AVI)."""
+    duration_in_s: builtins.float
+    """The duration of the video file in seconds."""
+    resolution: builtins.str
+    """The resolution of the video (e.g., "1920x1080" for Full HD)."""
+    frame_rate: builtins.float
+    """The frame rate of the video (e.g., 30 fps)."""
+    created_by: builtins.str
+    """The UUID of the user who created the video file."""
+    modified_by: builtins.str
+    """The UUID of the user who last modified the video file."""
+    @property
+    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Creation date and time of the video file. This is a read-only field."""
+
+    @property
+    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """The last modification date and time of the video file. This is a read-only field."""
+
+    def __init__(
+        self,
+        *,
+        name: builtins.str = ...,
+        display_name: builtins.str = ...,
+        bytes: builtins.bytes = ...,
+        duration_in_s: builtins.float = ...,
+        resolution: builtins.str = ...,
+        frame_rate: builtins.float = ...,
+        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        created_by: builtins.str = ...,
+        modified_by: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["bytes", b"bytes", "created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "duration_in_s", b"duration_in_s", "frame_rate", b"frame_rate", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "resolution", b"resolution"]) -> None: ...
+
+global___VideoFileResource = VideoFileResource
 
 @typing.final
 class GetAudioFilesRequest(google.protobuf.message.Message):

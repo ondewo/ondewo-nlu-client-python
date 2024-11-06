@@ -75,6 +75,21 @@ class AiServicesStub(object):
                 request_serializer=ondewo_dot_nlu_dot_aiservices__pb2.ExtractEntitiesFuzzyRequest.SerializeToString,
                 response_deserializer=ondewo_dot_nlu_dot_aiservices__pb2.ExtractEntitiesResponse.FromString,
                 _registered_method=True)
+        self.LlmGenerate = channel.unary_unary(
+                '/ondewo.nlu.AiServices/LlmGenerate',
+                request_serializer=ondewo_dot_nlu_dot_aiservices__pb2.LlmGenerateRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_aiservices__pb2.LlmGenerateResponse.FromString,
+                _registered_method=True)
+        self.StreamingLlmGenerate = channel.unary_stream(
+                '/ondewo.nlu.AiServices/StreamingLlmGenerate',
+                request_serializer=ondewo_dot_nlu_dot_aiservices__pb2.LlmGenerateRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_aiservices__pb2.StreamingLlmGenerateResponse.FromString,
+                _registered_method=True)
+        self.ListLlmModels = channel.unary_unary(
+                '/ondewo.nlu.AiServices/ListLlmModels',
+                request_serializer=ondewo_dot_nlu_dot_aiservices__pb2.ListLlmModelsRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_aiservices__pb2.ListLlmModelsResponse.FromString,
+                _registered_method=True)
 
 
 class AiServicesServicer(object):
@@ -137,6 +152,33 @@ class AiServicesServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def LlmGenerate(self, request, context):
+        """Generates a single response from a Large Language Model (LLM).
+        This RPC method allows a client to make a request to the LLM and receive
+        a single complete response based on the input parameters provided.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def StreamingLlmGenerate(self, request, context):
+        """Generates a response from the LLM in a streaming format.
+        This RPC allows continuous streaming of responses from the model,
+        which is useful for real-time applications or large outputs.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListLlmModels(self, request, context):
+        """Lists available Large Language Models (LLMs) for a specified CCAI service.
+        This RPC method allows clients to retrieve metadata about all LLM models associated
+        with a particular service within a project, including model names, descriptions, and providers.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_AiServicesServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -179,6 +221,21 @@ def add_AiServicesServicer_to_server(servicer, server):
                     servicer.ExtractEntitiesFuzzy,
                     request_deserializer=ondewo_dot_nlu_dot_aiservices__pb2.ExtractEntitiesFuzzyRequest.FromString,
                     response_serializer=ondewo_dot_nlu_dot_aiservices__pb2.ExtractEntitiesResponse.SerializeToString,
+            ),
+            'LlmGenerate': grpc.unary_unary_rpc_method_handler(
+                    servicer.LlmGenerate,
+                    request_deserializer=ondewo_dot_nlu_dot_aiservices__pb2.LlmGenerateRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_aiservices__pb2.LlmGenerateResponse.SerializeToString,
+            ),
+            'StreamingLlmGenerate': grpc.unary_stream_rpc_method_handler(
+                    servicer.StreamingLlmGenerate,
+                    request_deserializer=ondewo_dot_nlu_dot_aiservices__pb2.LlmGenerateRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_aiservices__pb2.StreamingLlmGenerateResponse.SerializeToString,
+            ),
+            'ListLlmModels': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListLlmModels,
+                    request_deserializer=ondewo_dot_nlu_dot_aiservices__pb2.ListLlmModelsRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_aiservices__pb2.ListLlmModelsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -398,6 +455,87 @@ class AiServices(object):
             '/ondewo.nlu.AiServices/ExtractEntitiesFuzzy',
             ondewo_dot_nlu_dot_aiservices__pb2.ExtractEntitiesFuzzyRequest.SerializeToString,
             ondewo_dot_nlu_dot_aiservices__pb2.ExtractEntitiesResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def LlmGenerate(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.AiServices/LlmGenerate',
+            ondewo_dot_nlu_dot_aiservices__pb2.LlmGenerateRequest.SerializeToString,
+            ondewo_dot_nlu_dot_aiservices__pb2.LlmGenerateResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def StreamingLlmGenerate(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_stream(
+            request,
+            target,
+            '/ondewo.nlu.AiServices/StreamingLlmGenerate',
+            ondewo_dot_nlu_dot_aiservices__pb2.LlmGenerateRequest.SerializeToString,
+            ondewo_dot_nlu_dot_aiservices__pb2.StreamingLlmGenerateResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def ListLlmModels(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.AiServices/ListLlmModels',
+            ondewo_dot_nlu_dot_aiservices__pb2.ListLlmModelsRequest.SerializeToString,
+            ondewo_dot_nlu_dot_aiservices__pb2.ListLlmModelsResponse.FromString,
             options,
             channel_credentials,
             insecure,

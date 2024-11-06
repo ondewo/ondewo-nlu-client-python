@@ -179,6 +179,8 @@ class _CcaiServiceProviderEnumTypeWrapper(google.protobuf.internal.enum_type_wra
     """LangChain as the CCAI service provider"""
     CCAI_SERVICE_PROVIDER_AMAZON: _CcaiServiceProvider.ValueType  # 12
     """Amazon AWS as the CCAI service provider, using Amazon's AI/ML services"""
+    CCAI_SERVICE_PROVIDER_MISTRAL: _CcaiServiceProvider.ValueType  # 13
+    """Mistral as the CCAI service provider, using Mistrals services"""
 
 class CcaiServiceProvider(_CcaiServiceProvider, metaclass=_CcaiServiceProviderEnumTypeWrapper): ...
 
@@ -208,6 +210,8 @@ CCAI_SERVICE_PROVIDER_LANGCHAIN: CcaiServiceProvider.ValueType  # 11
 """LangChain as the CCAI service provider"""
 CCAI_SERVICE_PROVIDER_AMAZON: CcaiServiceProvider.ValueType  # 12
 """Amazon AWS as the CCAI service provider, using Amazon's AI/ML services"""
+CCAI_SERVICE_PROVIDER_MISTRAL: CcaiServiceProvider.ValueType  # 13
+"""Mistral as the CCAI service provider, using Mistrals services"""
 global___CcaiServiceProvider = CcaiServiceProvider
 
 class _CcaiProjectView:

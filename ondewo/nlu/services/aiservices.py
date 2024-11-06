@@ -11,6 +11,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+from typing import Iterator
+
 from ondewo.nlu.aiservices_pb2 import (
     ClassifyIntentsRequest,
     ClassifyIntentsResponse,
@@ -27,6 +29,11 @@ from ondewo.nlu.aiservices_pb2 import (
     GetAlternativeTrainingPhrasesResponse,
     GetSynonymsRequest,
     GetSynonymsResponse,
+    ListLlmModelsRequest,
+    ListLlmModelsResponse,
+    LlmGenerateRequest,
+    LlmGenerateResponse,
+    StreamingLlmGenerateResponse,
 )
 from ondewo.nlu.aiservices_pb2_grpc import AiServicesStub
 from ondewo.nlu.core.services_interface import ServicesInterface
@@ -91,3 +98,25 @@ class AIServices(ServicesInterface):
     def extract_entities_fuzzy(self, request: ExtractEntitiesFuzzyRequest) -> ExtractEntitiesResponse:
         response: ExtractEntitiesResponse = self.stub.ExtractEntitiesFuzzy(request, metadata=self.metadata)
         return response
+
+    # region large language model support
+
+    def llm_generate(self, request: LlmGenerateRequest) -> LlmGenerateResponse:
+        response: LlmGenerateResponse = self.stub.LlmGenerate(request, metadata=self.metadata)
+        return response
+
+    def llm_generate_stream(
+        self,
+        request_iterator: Iterator[LlmGenerateRequest],
+    ) -> Iterator[StreamingLlmGenerateResponse]:
+        response_iterator: Iterator[StreamingLlmGenerateResponse] = self.stub.StreamingLlmGenerate(
+            request_iterator=request_iterator,
+            metadata=self.metadata,
+        )
+        return response_iterator
+
+    def list_llm_models(self, request: ListLlmModelsRequest) -> ListLlmModelsResponse:
+        response: ListLlmModelsResponse = self.stub.ListLlmModels(request, metadata=self.metadata)
+        return response
+
+    # endregion large language model support
