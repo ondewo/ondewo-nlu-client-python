@@ -105,12 +105,9 @@ class AIServices(ServicesInterface):
         response: LlmGenerateResponse = self.stub.LlmGenerate(request, metadata=self.metadata)
         return response
 
-    def llm_generate_stream(
-        self,
-        request_iterator: Iterator[LlmGenerateRequest],
-    ) -> Iterator[StreamingLlmGenerateResponse]:
+    def llm_generate_stream(self, request: LlmGenerateRequest) -> Iterator[StreamingLlmGenerateResponse]:
         response_iterator: Iterator[StreamingLlmGenerateResponse] = self.stub.StreamingLlmGenerate(
-            request_iterator=request_iterator,
+            request=request,
             metadata=self.metadata,
         )
         return response_iterator
