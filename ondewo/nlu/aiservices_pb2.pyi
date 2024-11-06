@@ -149,22 +149,17 @@ class ListLlmModelsRequest(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    CCAI_SERVICE_FIELD_NUMBER: builtins.int
-    @property
-    def ccai_service(self) -> ondewo.nlu.ccai_project_pb2.CcaiService:
-        """The CCAI service for which to list models.
-        Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;</code></pre>
-        This field specifies the service context in which the models are deployed and
-        should be in the specified format to identify the correct project and service.
-        """
-
+    CCAI_SERVICE_NAME_FIELD_NUMBER: builtins.int
+    ccai_service_name: builtins.str
+    """The CCAI service for which to list models.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;</code></pre>
+    """
     def __init__(
         self,
         *,
-        ccai_service: ondewo.nlu.ccai_project_pb2.CcaiService | None = ...,
+        ccai_service_name: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["ccai_service", b"ccai_service"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["ccai_service", b"ccai_service"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["ccai_service_name", b"ccai_service_name"]) -> None: ...
 
 global___ListLlmModelsRequest = ListLlmModelsRequest
 
@@ -245,22 +240,19 @@ class LlmGenerateRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     LLM_GENERATION_REQUEST_FIELD_NUMBER: builtins.int
-    CCAI_SERVICE_FIELD_NUMBER: builtins.int
+    CCAI_SERVICE_NAME_FIELD_NUMBER: builtins.int
     FILE_RESOURCE_FIELD_NUMBER: builtins.int
+    ccai_service_name: builtins.str
+    """The CCAI service to be used for processing the request.
+    This specifies which large language model provider and model settings will handle the request.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;</code></pre>
+    """
     @property
     def llm_generation_request(self) -> google.protobuf.struct_pb2.Struct:
         """The request payload for the LLM, structured according to the specific
         requirements of the large language model provider.
         The payload must fit the format expected by the specified LLM provider,
         as defined by <pre><code>CcaiServiceProvider</code></pre>.
-        """
-
-    @property
-    def ccai_service(self) -> ondewo.nlu.ccai_project_pb2.CcaiService:
-        """The CCAI service to be used for processing the request.
-        This specifies which large language model provider and model settings
-        will handle the request.
-        Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;</code></pre>
         """
 
     @property
@@ -271,11 +263,11 @@ class LlmGenerateRequest(google.protobuf.message.Message):
         self,
         *,
         llm_generation_request: google.protobuf.struct_pb2.Struct | None = ...,
-        ccai_service: ondewo.nlu.ccai_project_pb2.CcaiService | None = ...,
+        ccai_service_name: builtins.str = ...,
         file_resource: collections.abc.Iterable[ondewo.nlu.session_pb2.FileResource] | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["ccai_service", b"ccai_service", "llm_generation_request", b"llm_generation_request"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["ccai_service", b"ccai_service", "file_resource", b"file_resource", "llm_generation_request", b"llm_generation_request"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["llm_generation_request", b"llm_generation_request"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["ccai_service_name", b"ccai_service_name", "file_resource", b"file_resource", "llm_generation_request", b"llm_generation_request"]) -> None: ...
 
 global___LlmGenerateRequest = LlmGenerateRequest
 
@@ -1188,27 +1180,27 @@ class LlmEnrichmentConfig(google.protobuf.message.Message):
     IS_ACTIVE_FIELD_NUMBER: builtins.int
     ENRICHMENT_FACTOR_FIELD_NUMBER: builtins.int
     EXECUTION_ORDER_FIELD_NUMBER: builtins.int
-    CCAI_SERVICE_FIELD_NUMBER: builtins.int
+    CCAI_SERVICE_NAME_FIELD_NUMBER: builtins.int
     is_active: builtins.bool
     """Activation flag"""
     enrichment_factor: builtins.int
     """Factor of enrichment"""
     execution_order: builtins.int
     """Order of augmenter execution"""
-    @property
-    def ccai_service(self) -> ondewo.nlu.ccai_project_pb2.CcaiService:
-        """The ccai service used to enrich"""
-
+    ccai_service_name: builtins.str
+    """The CCAI service to be used to enrich
+    This specifies which large language model provider and model settings will handle the request.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;</code></pre>
+    """
     def __init__(
         self,
         *,
         is_active: builtins.bool = ...,
         enrichment_factor: builtins.int = ...,
         execution_order: builtins.int = ...,
-        ccai_service: ondewo.nlu.ccai_project_pb2.CcaiService | None = ...,
+        ccai_service_name: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["ccai_service", b"ccai_service"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["ccai_service", b"ccai_service", "enrichment_factor", b"enrichment_factor", "execution_order", b"execution_order", "is_active", b"is_active"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["ccai_service_name", b"ccai_service_name", "enrichment_factor", b"enrichment_factor", "execution_order", b"execution_order", "is_active", b"is_active"]) -> None: ...
 
 global___LlmEnrichmentConfig = LlmEnrichmentConfig
 
