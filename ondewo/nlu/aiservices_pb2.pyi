@@ -196,7 +196,7 @@ class LlmModel(google.protobuf.message.Message):
     DISPLAY_NAME_FIELD_NUMBER: builtins.int
     DESCRIPTION_FIELD_NUMBER: builtins.int
     CCAI_SERVICE_NAME_FIELD_NUMBER: builtins.int
-    PROVIDER_FIELD_NUMBER: builtins.int
+    CCAI_SERVICE_PROVIDER_FIELD_NUMBER: builtins.int
     name: builtins.str
     """The resource name of the model.
     Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;/model/&lt;model_uuid&gt;</code></pre>
@@ -216,7 +216,7 @@ class LlmModel(google.protobuf.message.Message):
     This field links the model to its service context, helping clients understand
     which service hosts the model.
     """
-    provider: ondewo.nlu.ccai_project_pb2.CcaiServiceProvider.ValueType
+    ccai_service_provider: ondewo.nlu.ccai_project_pb2.CcaiServiceProvider.ValueType
     """The provider of the CCAI service that offers this model.
     Specifies the LLM provider (e.g., Ollama, OpenAI, Google, etc.), indicating the origin or vendor of the model.
     """
@@ -227,9 +227,9 @@ class LlmModel(google.protobuf.message.Message):
         display_name: builtins.str = ...,
         description: builtins.str = ...,
         ccai_service_name: builtins.str = ...,
-        provider: ondewo.nlu.ccai_project_pb2.CcaiServiceProvider.ValueType = ...,
+        ccai_service_provider: ondewo.nlu.ccai_project_pb2.CcaiServiceProvider.ValueType = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["ccai_service_name", b"ccai_service_name", "description", b"description", "display_name", b"display_name", "name", b"name", "provider", b"provider"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["ccai_service_name", b"ccai_service_name", "ccai_service_provider", b"ccai_service_provider", "description", b"description", "display_name", b"display_name", "name", b"name"]) -> None: ...
 
 global___LlmModel = LlmModel
 
