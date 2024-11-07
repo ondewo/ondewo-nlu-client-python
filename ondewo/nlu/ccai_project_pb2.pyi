@@ -114,6 +114,8 @@ class _CcaiServiceTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper
     """ondewo-survey service"""
     CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM: _CcaiServiceType.ValueType  # 13
     """ondewo-nlu-llm service"""
+    CCAI_SERVICE_TYPE_ONDEWO_NLU_WEBSEARCH: _CcaiServiceType.ValueType  # 14
+    """ondewo-nlu-websearch service"""
 
 class CcaiServiceType(_CcaiServiceType, metaclass=_CcaiServiceTypeEnumTypeWrapper): ...
 
@@ -145,6 +147,8 @@ CCAI_SERVICE_TYPE_ONDEWO_SURVEY: CcaiServiceType.ValueType  # 12
 """ondewo-survey service"""
 CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM: CcaiServiceType.ValueType  # 13
 """ondewo-nlu-llm service"""
+CCAI_SERVICE_TYPE_ONDEWO_NLU_WEBSEARCH: CcaiServiceType.ValueType  # 14
+"""ondewo-nlu-websearch service"""
 global___CcaiServiceType = CcaiServiceType
 
 class _CcaiServiceProvider:
@@ -181,6 +185,14 @@ class _CcaiServiceProviderEnumTypeWrapper(google.protobuf.internal.enum_type_wra
     """Amazon AWS as the CCAI service provider, using Amazon's AI/ML services"""
     CCAI_SERVICE_PROVIDER_MISTRAL: _CcaiServiceProvider.ValueType  # 13
     """Mistral as the CCAI service provider, using Mistrals services"""
+    CCAI_SERVICE_PROVIDER_DUCKDUCKGO: _CcaiServiceProvider.ValueType  # 14
+    """DuckDuckGo Websearch API"""
+    CCAI_SERVICE_PROVIDER_GOOGLE_PSE: _CcaiServiceProvider.ValueType  # 15
+    """Google PSE Websearch API"""
+    CCAI_SERVICE_PROVIDER_JINA: _CcaiServiceProvider.ValueType  # 16
+    """Jina Websearch API"""
+    CCAI_SERVICE_PROVIDER_TAVILY: _CcaiServiceProvider.ValueType  # 17
+    """Tavily Websearch API"""
 
 class CcaiServiceProvider(_CcaiServiceProvider, metaclass=_CcaiServiceProviderEnumTypeWrapper): ...
 
@@ -212,6 +224,14 @@ CCAI_SERVICE_PROVIDER_AMAZON: CcaiServiceProvider.ValueType  # 12
 """Amazon AWS as the CCAI service provider, using Amazon's AI/ML services"""
 CCAI_SERVICE_PROVIDER_MISTRAL: CcaiServiceProvider.ValueType  # 13
 """Mistral as the CCAI service provider, using Mistrals services"""
+CCAI_SERVICE_PROVIDER_DUCKDUCKGO: CcaiServiceProvider.ValueType  # 14
+"""DuckDuckGo Websearch API"""
+CCAI_SERVICE_PROVIDER_GOOGLE_PSE: CcaiServiceProvider.ValueType  # 15
+"""Google PSE Websearch API"""
+CCAI_SERVICE_PROVIDER_JINA: CcaiServiceProvider.ValueType  # 16
+"""Jina Websearch API"""
+CCAI_SERVICE_PROVIDER_TAVILY: CcaiServiceProvider.ValueType  # 17
+"""Tavily Websearch API"""
 global___CcaiServiceProvider = CcaiServiceProvider
 
 class _CcaiProjectView:
