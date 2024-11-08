@@ -116,6 +116,12 @@ class _CcaiServiceTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper
     """ondewo-nlu-llm service"""
     CCAI_SERVICE_TYPE_ONDEWO_NLU_WEBSEARCH: _CcaiServiceType.ValueType  # 14
     """ondewo-nlu-websearch service"""
+    CCAI_SERVICE_TYPE_ONDEWO_AIM_WEBCHAT: _CcaiServiceType.ValueType  # 15
+    """ondewo-aim-webchat service"""
+    CCAI_SERVICE_TYPE_ONDEWO_AIM_WEBPHONE: _CcaiServiceType.ValueType  # 16
+    """ondewo-aim-webphone service"""
+    CCAI_SERVICE_TYPE_ONDEWO_NLU_VECTORSTORE: _CcaiServiceType.ValueType  # 17
+    """ondewo-nlu-vectorstore service"""
 
 class CcaiServiceType(_CcaiServiceType, metaclass=_CcaiServiceTypeEnumTypeWrapper): ...
 
@@ -149,6 +155,12 @@ CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM: CcaiServiceType.ValueType  # 13
 """ondewo-nlu-llm service"""
 CCAI_SERVICE_TYPE_ONDEWO_NLU_WEBSEARCH: CcaiServiceType.ValueType  # 14
 """ondewo-nlu-websearch service"""
+CCAI_SERVICE_TYPE_ONDEWO_AIM_WEBCHAT: CcaiServiceType.ValueType  # 15
+"""ondewo-aim-webchat service"""
+CCAI_SERVICE_TYPE_ONDEWO_AIM_WEBPHONE: CcaiServiceType.ValueType  # 16
+"""ondewo-aim-webphone service"""
+CCAI_SERVICE_TYPE_ONDEWO_NLU_VECTORSTORE: CcaiServiceType.ValueType  # 17
+"""ondewo-nlu-vectorstore service"""
 global___CcaiServiceType = CcaiServiceType
 
 class _CcaiServiceProvider:
@@ -173,7 +185,7 @@ class _CcaiServiceProviderEnumTypeWrapper(google.protobuf.internal.enum_type_wra
     """OpenAI as the CCAI service provider, commonly used for models such as GPT"""
     CCAI_SERVICE_PROVIDER_ANTHROPIC: _CcaiServiceProvider.ValueType  # 7
     """Anthropic as the CCAI service provider, used with AI models from Anthropic"""
-    CCAI_SERVICE_PROVIDER_HUGGING_FACE: _CcaiServiceProvider.ValueType  # 8
+    CCAI_SERVICE_PROVIDER_HUGGINGFACE: _CcaiServiceProvider.ValueType  # 8
     """Hugging Face as the CCAI service provider, often used for open-source NLP models"""
     CCAI_SERVICE_PROVIDER_IBM: _CcaiServiceProvider.ValueType  # 9
     """IBM as the CCAI service provider, such as IBM Watson for conversational AI"""
@@ -193,6 +205,14 @@ class _CcaiServiceProviderEnumTypeWrapper(google.protobuf.internal.enum_type_wra
     """Jina Websearch API"""
     CCAI_SERVICE_PROVIDER_TAVILY: _CcaiServiceProvider.ValueType  # 17
     """Tavily Websearch API"""
+    CCAI_SERVICE_PROVIDER_ELASTICSEARCH: _CcaiServiceProvider.ValueType  # 18
+    """Elastic Search vector database service"""
+    CCAI_SERVICE_PROVIDER_MILVUS: _CcaiServiceProvider.ValueType  # 19
+    """Milvus vector database service"""
+    CCAI_SERVICE_PROVIDER_QDRANT: _CcaiServiceProvider.ValueType  # 20
+    """Qdrant vector database service"""
+    CCAI_SERVICE_PROVIDER_CHROMA: _CcaiServiceProvider.ValueType  # 21
+    """Chroma vector database service"""
 
 class CcaiServiceProvider(_CcaiServiceProvider, metaclass=_CcaiServiceProviderEnumTypeWrapper): ...
 
@@ -212,7 +232,7 @@ CCAI_SERVICE_PROVIDER_OPENAI: CcaiServiceProvider.ValueType  # 6
 """OpenAI as the CCAI service provider, commonly used for models such as GPT"""
 CCAI_SERVICE_PROVIDER_ANTHROPIC: CcaiServiceProvider.ValueType  # 7
 """Anthropic as the CCAI service provider, used with AI models from Anthropic"""
-CCAI_SERVICE_PROVIDER_HUGGING_FACE: CcaiServiceProvider.ValueType  # 8
+CCAI_SERVICE_PROVIDER_HUGGINGFACE: CcaiServiceProvider.ValueType  # 8
 """Hugging Face as the CCAI service provider, often used for open-source NLP models"""
 CCAI_SERVICE_PROVIDER_IBM: CcaiServiceProvider.ValueType  # 9
 """IBM as the CCAI service provider, such as IBM Watson for conversational AI"""
@@ -232,6 +252,14 @@ CCAI_SERVICE_PROVIDER_JINA: CcaiServiceProvider.ValueType  # 16
 """Jina Websearch API"""
 CCAI_SERVICE_PROVIDER_TAVILY: CcaiServiceProvider.ValueType  # 17
 """Tavily Websearch API"""
+CCAI_SERVICE_PROVIDER_ELASTICSEARCH: CcaiServiceProvider.ValueType  # 18
+"""Elastic Search vector database service"""
+CCAI_SERVICE_PROVIDER_MILVUS: CcaiServiceProvider.ValueType  # 19
+"""Milvus vector database service"""
+CCAI_SERVICE_PROVIDER_QDRANT: CcaiServiceProvider.ValueType  # 20
+"""Qdrant vector database service"""
+CCAI_SERVICE_PROVIDER_CHROMA: CcaiServiceProvider.ValueType  # 21
+"""Chroma vector database service"""
 global___CcaiServiceProvider = CcaiServiceProvider
 
 class _CcaiProjectView:
