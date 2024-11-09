@@ -1308,13 +1308,10 @@ class CreateSessionStepRequest(google.protobuf.message.Message):
 
     SESSION_ID_FIELD_NUMBER: builtins.int
     SESSION_STEP_FIELD_NUMBER: builtins.int
-    SESSION_VIEW_FIELD_NUMBER: builtins.int
     session_id: builtins.str
     """The unique identifier for the given review
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;</code></pre>.
     """
-    session_view: global___Session.View.ValueType
-    """Defines which fields of the session should be returned in the response"""
     @property
     def session_step(self) -> global___SessionStep:
         """The session step to be added"""
@@ -1324,11 +1321,9 @@ class CreateSessionStepRequest(google.protobuf.message.Message):
         *,
         session_id: builtins.str = ...,
         session_step: global___SessionStep | None = ...,
-        session_view: global___Session.View.ValueType | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_session_view", b"_session_view", "session_step", b"session_step", "session_view", b"session_view"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_session_view", b"_session_view", "session_id", b"session_id", "session_step", b"session_step", "session_view", b"session_view"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["_session_view", b"_session_view"]) -> typing.Literal["session_view"] | None: ...
+    def HasField(self, field_name: typing.Literal["session_step", b"session_step"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["session_id", b"session_id", "session_step", b"session_step"]) -> None: ...
 
 global___CreateSessionStepRequest = CreateSessionStepRequest
 
