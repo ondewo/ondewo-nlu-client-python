@@ -68,7 +68,7 @@ class SessionsStub(object):
         self.CreateSessionStep = channel.unary_unary(
                 '/ondewo.nlu.Sessions/CreateSessionStep',
                 request_serializer=ondewo_dot_nlu_dot_session__pb2.CreateSessionStepRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_session__pb2.Session.FromString,
+                response_deserializer=ondewo_dot_nlu_dot_session__pb2.SessionStep.FromString,
                 _registered_method=True)
         self.GetSessionStep = channel.unary_unary(
                 '/ondewo.nlu.Sessions/GetSessionStep',
@@ -561,7 +561,7 @@ def add_SessionsServicer_to_server(servicer, server):
             'CreateSessionStep': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateSessionStep,
                     request_deserializer=ondewo_dot_nlu_dot_session__pb2.CreateSessionStepRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_session__pb2.Session.SerializeToString,
+                    response_serializer=ondewo_dot_nlu_dot_session__pb2.SessionStep.SerializeToString,
             ),
             'GetSessionStep': grpc.unary_unary_rpc_method_handler(
                     servicer.GetSessionStep,
@@ -899,7 +899,7 @@ class Sessions(object):
             target,
             '/ondewo.nlu.Sessions/CreateSessionStep',
             ondewo_dot_nlu_dot_session__pb2.CreateSessionStepRequest.SerializeToString,
-            ondewo_dot_nlu_dot_session__pb2.Session.FromString,
+            ondewo_dot_nlu_dot_session__pb2.SessionStep.FromString,
             options,
             channel_credentials,
             insecure,

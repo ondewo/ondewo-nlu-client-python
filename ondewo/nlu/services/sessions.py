@@ -127,8 +127,8 @@ class Sessions(ServicesInterface):
         response: Session = self.stub.CreateSession(request, metadata=self.metadata)
         return response
 
-    def create_session_step(self, request: CreateSessionStepRequest) -> Session:
-        response: Session = self.stub.CreateSessionStep(request, metadata=self.metadata)
+    def create_session_step(self, request: CreateSessionStepRequest) -> SessionStep:
+        response: SessionStep = self.stub.CreateSessionStep(request, metadata=self.metadata)
         return response
 
     def get_session_step(self, request: GetSessionStepRequest) -> SessionStep:
