@@ -1,6 +1,9 @@
 global-include *.pyi py.typed
 include ondewo/*
 include LICENSE
-include requirements.txt
+include README.md
+include RELEASE.md
 include setup.py
+include requirements.txt
+include requirements-dev.txt
 global-exclude *.pyc
