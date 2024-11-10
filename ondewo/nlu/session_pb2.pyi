@@ -546,7 +546,7 @@ class QueryInput(google.protobuf.message.Message):
     AUDIO_CONFIG_FIELD_NUMBER: builtins.int
     TEXT_FIELD_NUMBER: builtins.int
     EVENT_FIELD_NUMBER: builtins.int
-    FILE_RESOURCE_FIELD_NUMBER: builtins.int
+    FILE_RESOURCES_FIELD_NUMBER: builtins.int
     @property
     def audio_config(self) -> global___InputAudioConfig:
         """Instructs the speech recognizer how to process the speech audio."""
@@ -560,7 +560,7 @@ class QueryInput(google.protobuf.message.Message):
         """The event to be processed."""
 
     @property
-    def file_resource(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FileResource]:
+    def file_resources(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FileResource]:
         """Files as input for the detect intent request, e.g., image, document, audio, video etc."""
 
     def __init__(
@@ -569,10 +569,10 @@ class QueryInput(google.protobuf.message.Message):
         audio_config: global___InputAudioConfig | None = ...,
         text: global___TextInput | None = ...,
         event: global___EventInput | None = ...,
-        file_resource: collections.abc.Iterable[global___FileResource] | None = ...,
+        file_resources: collections.abc.Iterable[global___FileResource] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["audio_config", b"audio_config", "event", b"event", "input", b"input", "text", b"text"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["audio_config", b"audio_config", "event", b"event", "file_resource", b"file_resource", "input", b"input", "text", b"text"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["audio_config", b"audio_config", "event", b"event", "file_resources", b"file_resources", "input", b"input", "text", b"text"]) -> None: ...
     def WhichOneof(self, oneof_group: typing.Literal["input", b"input"]) -> typing.Literal["audio_config", "text", "event"] | None: ...
 
 global___QueryInput = QueryInput
@@ -598,7 +598,7 @@ class QueryResult(google.protobuf.message.Message):
     QUERY_TEXT_ORIGINAL_FIELD_NUMBER: builtins.int
     DIAGNOSTIC_INFO_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
-    FILE_RESOURCE_FIELD_NUMBER: builtins.int
+    FILE_RESOURCES_FIELD_NUMBER: builtins.int
     query_text: builtins.str
     """The original conversational query text:
     - If natural language text was provided as input, `query_text` contains
@@ -683,7 +683,7 @@ class QueryResult(google.protobuf.message.Message):
         """
 
     @property
-    def file_resource(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FileResource]:
+    def file_resources(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FileResource]:
         """Generated or attached files, e.g., llm generates a picture or file attachment"""
 
     def __init__(
@@ -704,10 +704,10 @@ class QueryResult(google.protobuf.message.Message):
         query_text_original: builtins.str = ...,
         diagnostic_info: google.protobuf.struct_pb2.Struct | None = ...,
         language_code: builtins.str = ...,
-        file_resource: collections.abc.Iterable[global___FileResource] | None = ...,
+        file_resources: collections.abc.Iterable[global___FileResource] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["diagnostic_info", b"diagnostic_info", "intent", b"intent", "parameters", b"parameters", "webhook_payload", b"webhook_payload"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["action", b"action", "all_required_params_present", b"all_required_params_present", "diagnostic_info", b"diagnostic_info", "file_resource", b"file_resource", "fulfillment_messages", b"fulfillment_messages", "fulfillment_text", b"fulfillment_text", "intent", b"intent", "intent_detection_confidence", b"intent_detection_confidence", "language_code", b"language_code", "output_contexts", b"output_contexts", "parameters", b"parameters", "query_text", b"query_text", "query_text_original", b"query_text_original", "speech_recognition_confidence", b"speech_recognition_confidence", "webhook_payload", b"webhook_payload", "webhook_source", b"webhook_source"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["action", b"action", "all_required_params_present", b"all_required_params_present", "diagnostic_info", b"diagnostic_info", "file_resources", b"file_resources", "fulfillment_messages", b"fulfillment_messages", "fulfillment_text", b"fulfillment_text", "intent", b"intent", "intent_detection_confidence", b"intent_detection_confidence", "language_code", b"language_code", "output_contexts", b"output_contexts", "parameters", b"parameters", "query_text", b"query_text", "query_text_original", b"query_text_original", "speech_recognition_confidence", b"speech_recognition_confidence", "webhook_payload", b"webhook_payload", "webhook_source", b"webhook_source"]) -> None: ...
 
 global___QueryResult = QueryResult
 

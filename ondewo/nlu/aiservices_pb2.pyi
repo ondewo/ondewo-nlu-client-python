@@ -241,7 +241,7 @@ class LlmGenerateRequest(google.protobuf.message.Message):
 
     LLM_GENERATION_REQUEST_FIELD_NUMBER: builtins.int
     CCAI_SERVICE_NAME_FIELD_NUMBER: builtins.int
-    FILE_RESOURCE_FIELD_NUMBER: builtins.int
+    FILE_RESOURCES_FIELD_NUMBER: builtins.int
     ccai_service_name: builtins.str
     """The CCAI service to be used for processing the request.
     This specifies which large language model provider and model settings will handle the request.
@@ -256,7 +256,7 @@ class LlmGenerateRequest(google.protobuf.message.Message):
         """
 
     @property
-    def file_resource(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.session_pb2.FileResource]:
+    def file_resources(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.session_pb2.FileResource]:
         """Files as input for the generation request"""
 
     def __init__(
@@ -264,10 +264,10 @@ class LlmGenerateRequest(google.protobuf.message.Message):
         *,
         llm_generation_request: google.protobuf.struct_pb2.Struct | None = ...,
         ccai_service_name: builtins.str = ...,
-        file_resource: collections.abc.Iterable[ondewo.nlu.session_pb2.FileResource] | None = ...,
+        file_resources: collections.abc.Iterable[ondewo.nlu.session_pb2.FileResource] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["llm_generation_request", b"llm_generation_request"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["ccai_service_name", b"ccai_service_name", "file_resource", b"file_resource", "llm_generation_request", b"llm_generation_request"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["ccai_service_name", b"ccai_service_name", "file_resources", b"file_resources", "llm_generation_request", b"llm_generation_request"]) -> None: ...
 
 global___LlmGenerateRequest = LlmGenerateRequest
 
@@ -278,7 +278,7 @@ class LlmGenerateResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     LLM_GENERATION_RESPONSE_FIELD_NUMBER: builtins.int
-    FILE_RESOURCE_FIELD_NUMBER: builtins.int
+    FILE_RESOURCES_FIELD_NUMBER: builtins.int
     @property
     def llm_generation_response(self) -> google.protobuf.struct_pb2.Struct:
         """The response data from the LLM, returned as a structured payload.
@@ -287,17 +287,17 @@ class LlmGenerateResponse(google.protobuf.message.Message):
         """
 
     @property
-    def file_resource(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.session_pb2.FileResource]:
+    def file_resources(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.session_pb2.FileResource]:
         """Files as input for the generation request, e.g., generated pictures, audio or video"""
 
     def __init__(
         self,
         *,
         llm_generation_response: google.protobuf.struct_pb2.Struct | None = ...,
-        file_resource: collections.abc.Iterable[ondewo.nlu.session_pb2.FileResource] | None = ...,
+        file_resources: collections.abc.Iterable[ondewo.nlu.session_pb2.FileResource] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["llm_generation_response", b"llm_generation_response"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["file_resource", b"file_resource", "llm_generation_response", b"llm_generation_response"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["file_resources", b"file_resources", "llm_generation_response", b"llm_generation_response"]) -> None: ...
 
 global___LlmGenerateResponse = LlmGenerateResponse
 

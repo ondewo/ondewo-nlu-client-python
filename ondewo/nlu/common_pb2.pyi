@@ -440,17 +440,17 @@ class AddNotificationsRequest(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    NOTIFICATION_FIELD_NUMBER: builtins.int
+    NOTIFICATIONS_FIELD_NUMBER: builtins.int
     @property
-    def notification(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Notification]:
+    def notifications(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Notification]:
         """List of notifications to be added."""
 
     def __init__(
         self,
         *,
-        notification: collections.abc.Iterable[global___Notification] | None = ...,
+        notifications: collections.abc.Iterable[global___Notification] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["notification", b"notification"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["notifications", b"notifications"]) -> None: ...
 
 global___AddNotificationsRequest = AddNotificationsRequest
 
@@ -460,17 +460,17 @@ class AddNotificationsResponse(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    NOTIFICATION_FIELD_NUMBER: builtins.int
+    NOTIFICATIONS_FIELD_NUMBER: builtins.int
     @property
-    def notification(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Notification]:
+    def notifications(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Notification]:
         """List of notifications that have been added."""
 
     def __init__(
         self,
         *,
-        notification: collections.abc.Iterable[global___Notification] | None = ...,
+        notifications: collections.abc.Iterable[global___Notification] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["notification", b"notification"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["notifications", b"notifications"]) -> None: ...
 
 global___AddNotificationsResponse = AddNotificationsResponse
 
@@ -606,17 +606,17 @@ class ListNotificationsResponse(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    NOTIFICATION_FIELD_NUMBER: builtins.int
+    NOTIFICATIONS_FIELD_NUMBER: builtins.int
     @property
-    def notification(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Notification]:
+    def notifications(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Notification]:
         """List of notifications that meet the specified criteria."""
 
     def __init__(
         self,
         *,
-        notification: collections.abc.Iterable[global___Notification] | None = ...,
+        notifications: collections.abc.Iterable[global___Notification] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["notification", b"notification"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["notifications", b"notifications"]) -> None: ...
 
 global___ListNotificationsResponse = ListNotificationsResponse
 
@@ -626,10 +626,10 @@ class SetNotificationsFlaggedStatusRequest(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    NOTIFICATION_NAME_FIELD_NUMBER: builtins.int
+    NOTIFICATION_NAMES_FIELD_NUMBER: builtins.int
     FLAGGED_FIELD_NUMBER: builtins.int
     @property
-    def notification_name(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    def notification_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Names of notifications to set the flagged status for."""
 
     @property
@@ -639,10 +639,10 @@ class SetNotificationsFlaggedStatusRequest(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        notification_name: collections.abc.Iterable[builtins.str] | None = ...,
+        notification_names: collections.abc.Iterable[builtins.str] | None = ...,
         flagged: collections.abc.Iterable[builtins.bool] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["flagged", b"flagged", "notification_name", b"notification_name"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["flagged", b"flagged", "notification_names", b"notification_names"]) -> None: ...
 
 global___SetNotificationsFlaggedStatusRequest = SetNotificationsFlaggedStatusRequest
 
@@ -652,10 +652,10 @@ class SetNotificationsReadStatusRequest(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    NOTIFICATION_NAME_FIELD_NUMBER: builtins.int
+    NOTIFICATION_NAMES_FIELD_NUMBER: builtins.int
     FLAGGED_FIELD_NUMBER: builtins.int
     @property
-    def notification_name(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    def notification_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Names of notifications to set the read status for."""
 
     @property
@@ -665,10 +665,10 @@ class SetNotificationsReadStatusRequest(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        notification_name: collections.abc.Iterable[builtins.str] | None = ...,
+        notification_names: collections.abc.Iterable[builtins.str] | None = ...,
         flagged: collections.abc.Iterable[builtins.bool] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["flagged", b"flagged", "notification_name", b"notification_name"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["flagged", b"flagged", "notification_names", b"notification_names"]) -> None: ...
 
 global___SetNotificationsReadStatusRequest = SetNotificationsReadStatusRequest
 
