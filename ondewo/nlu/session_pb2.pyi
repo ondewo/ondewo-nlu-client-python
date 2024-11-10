@@ -3681,6 +3681,7 @@ class AddAudioFilesRequest(google.protobuf.message.Message):
     PARENT_FIELD_NUMBER: builtins.int
     SESSION_ID_FIELD_NUMBER: builtins.int
     AUDIO_FILE_RESOURCES_FIELD_NUMBER: builtins.int
+    SESSION_STEP_ID_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The project of this agent.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
@@ -3688,6 +3689,10 @@ class AddAudioFilesRequest(google.protobuf.message.Message):
     session_id: builtins.str
     """The unique identifier of the session for which the audio files should be listed
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/&lt</code></pre>
+    """
+    session_step_id: builtins.str
+    """The unique identifier of the session step for which the audio files should be listed
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;/&lt</code></pre>
     """
     @property
     def audio_file_resources(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AudioFileResource]:
@@ -3699,8 +3704,9 @@ class AddAudioFilesRequest(google.protobuf.message.Message):
         parent: builtins.str = ...,
         session_id: builtins.str = ...,
         audio_file_resources: collections.abc.Iterable[global___AudioFileResource] | None = ...,
+        session_step_id: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["audio_file_resources", b"audio_file_resources", "parent", b"parent", "session_id", b"session_id"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["audio_file_resources", b"audio_file_resources", "parent", b"parent", "session_id", b"session_id", "session_step_id", b"session_step_id"]) -> None: ...
 
 global___AddAudioFilesRequest = AddAudioFilesRequest
 
