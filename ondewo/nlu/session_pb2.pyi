@@ -1308,6 +1308,7 @@ class CreateSessionStepRequest(google.protobuf.message.Message):
 
     SESSION_ID_FIELD_NUMBER: builtins.int
     SESSION_STEP_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     session_id: builtins.str
     """The unique identifier for the given review
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;</code></pre>.
@@ -1316,14 +1317,19 @@ class CreateSessionStepRequest(google.protobuf.message.Message):
     def session_step(self) -> global___SessionStep:
         """The session step to be added"""
 
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """field mask specifying what the request should return, e.g. only name, created_at etc."""
+
     def __init__(
         self,
         *,
         session_id: builtins.str = ...,
         session_step: global___SessionStep | None = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["session_step", b"session_step"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["session_id", b"session_id", "session_step", b"session_step"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask", "session_step", b"session_step"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "session_id", b"session_id", "session_step", b"session_step"]) -> None: ...
 
 global___CreateSessionStepRequest = CreateSessionStepRequest
 
