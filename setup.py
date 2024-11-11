@@ -8,7 +8,7 @@ with open('requirements.txt') as f:
 
 setuptools.setup(
     name='ondewo-nlu-client',
-    version='5.0.1',
+    version='6.0.0',
     author='ONDEWO GmbH',
     author_email='office@ondewo.com',
     description='ONDEWO Natural Language Understanding (NLU) Client library for Python',
