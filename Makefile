@@ -161,6 +161,9 @@ create_async_services: ## Create async services for all synchronous services
 	            "$$file"; \
 	    done; \
 	done
+	-make precommit_hooks_run_all_files
+	make precommit_hooks_run_all_files
+
 ########################################################
 #		Release
 
