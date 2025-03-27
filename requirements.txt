@@ -3,7 +3,7 @@ google-api-core
 grpcio
 grpcio-reflection
 grpcio-tools
-ondewo-client-utils
+ondewo-client-utils>=3.1.0
 ondewo-logging
 polling
 protobuf
