@@ -16,7 +16,7 @@ fail_fast: false
 repos:
 
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.13.0
+    rev: v1.15.0
     hooks:
       - id: mypy  # Run mypy type checker; note: runs with flag --missing-imports
         exclude: ondewo
@@ -36,11 +36,21 @@ repos:
         verbose: true
         types: [ python ]
 
+  - repo: https://github.com/psf/black
+    rev: 25.1.0
+    hooks:
+      - id: black
+        args: [ --line-length=120 ]
+        exclude: |
+          (?x) (
+          ^.*_pb2*
+          )
+
   - repo: https://github.com/hhatto/autopep8
-    rev: v2.3.1
+    rev: v2.3.2
     hooks:
       - id: autopep8  # Perform pep8 auto-formatting
-        args: [ --max-line-length=120, --in-place ]
+        args: [ --max-line-length=120, --in-place, --aggressive, --recursive, --experimental ]
         exclude: |
           (?x) (
           ^.*_pb2*
@@ -70,7 +80,7 @@ repos:
         files: 'requirements/requirements.*\.txt$'
 
   - repo: https://github.com/pycqa/flake8
-    rev: 7.1.1
+    rev: 7.1.2
     hooks:
       - id: flake8
 

@@ -1,0 +1,59 @@
+# Copyright 2021-2024 ONDEWO GmbH
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+from google.protobuf.empty_pb2 import Empty
+
+from ondewo.nlu.core.services_interface import ServicesInterface
+from ondewo.nlu.project_role_pb2 import (
+    CreateProjectRoleRequest,
+    DeleteProjectRoleRequest,
+    GetProjectRoleRequest,
+    ListProjectRolesRequest,
+    ListProjectRolesResponse,
+    ProjectRole,
+    UpdateProjectRoleRequest,
+)
+from ondewo.nlu.project_role_pb2_grpc import ProjectRolesStub
+
+
+class ProjectRoles(ServicesInterface):
+    """
+    Exposes the project-role-related endpoints of ONDEWO NLU services in a user-friendly way.
+
+    See agent.proto.
+    """
+
+    @property
+    def stub(self) -> ProjectRolesStub:
+        stub: ProjectRolesStub = ProjectRolesStub(channel=self.grpc_channel)
+        return stub
+
+    async def create_project_role(self, request: CreateProjectRoleRequest) -> ProjectRole:
+        response: ProjectRole = await self.stub.CreateProjectRole(request, metadata=self.metadata)
+        return response
+
+    async def get_project_role(self, request: GetProjectRoleRequest) -> ProjectRole:
+        response: ProjectRole = await self.stub.GetProjectRole(request, metadata=self.metadata)
+        return response
+
+    async def delete_project_role(self, request: DeleteProjectRoleRequest) -> Empty:
+        response: Empty = await self.stub.DeleteProjectRole(request, metadata=self.metadata)
+        return response
+
+    async def update_project_role(self, request: UpdateProjectRoleRequest) -> ProjectRole:
+        response: ProjectRole = await self.stub.UpdateProjectRole(request, metadata=self.metadata)
+        return response
+
+    async def list_project_roles(self, request: ListProjectRolesRequest) -> ListProjectRolesResponse:
+        response: ListProjectRolesResponse = await self.stub.ListProjectRoles(request, metadata=self.metadata)
+        return response
