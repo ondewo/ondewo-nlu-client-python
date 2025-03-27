@@ -156,10 +156,11 @@ create_async_services: ## Create async services for all synchronous services
 	        sed -i -E \
 	            -e '/def stub/b' -e 's/^([[:space:]]*)def /\1async def /g' \
 	            -e 's/self\.stub/await self.stub/g' \
+	            -e 's/ServicesInterface/AsyncServicesInterface/g' \
+	            -e 's/services_interface/async_services_interface/g' \
 	            "$$file"; \
 	    done; \
 	done
-
 ########################################################
 #		Release
 
