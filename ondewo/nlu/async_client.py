@@ -22,7 +22,7 @@ from typing import (
 from ondewo.utils.async_base_client import AsyncBaseClient
 
 from ondewo.nlu.client_config import ClientConfig
-from ondewo.nlu.core.services_container import ServicesContainer
+from ondewo.nlu.core.async_services_container import AsyncServicesContainer
 from ondewo.nlu.services.async_agents import Agents
 from ondewo.nlu.services.async_aiservices import AIServices
 from ondewo.nlu.services.async_ccai_projects import CcaiProjects
@@ -69,7 +69,7 @@ class AsyncClient(AsyncBaseClient):
             'use_secure_channel': use_secure_channel,
             'options': options,
         }
-        self.services: ServicesContainer = ServicesContainer(
+        self.services: AsyncServicesContainer = AsyncServicesContainer(
             agents=Agents(**kwargs),
             aiservices=AIServices(**kwargs),
             ccai_projects=CcaiProjects(**kwargs),
