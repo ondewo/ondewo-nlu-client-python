@@ -36,10 +36,10 @@ from ondewo.nlu.aiservices_pb2 import (
     StreamingLlmGenerateResponse,
 )
 from ondewo.nlu.aiservices_pb2_grpc import AiServicesStub
-from ondewo.nlu.core.services_interface import ServicesInterface
+from ondewo.nlu.core.async_services_interface import AsyncServicesInterface
 
 
-class AIServices(ServicesInterface):
+class AIServices(AsyncServicesInterface):
     """
     Exposes the ai-services-related endpoints of ONDEWO NLU services in a user-friendly way.
 

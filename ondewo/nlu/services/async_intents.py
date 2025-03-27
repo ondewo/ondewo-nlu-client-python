@@ -17,7 +17,7 @@ from ondewo.nlu import (
     intent_pb2,
     operations_pb2,
 )
-from ondewo.nlu.core.services_interface import ServicesInterface
+from ondewo.nlu.core.async_services_interface import AsyncServicesInterface
 from ondewo.nlu.intent_pb2 import (
     BatchCreateParametersRequest,
     BatchCreateResponseMessagesRequest,
@@ -53,7 +53,7 @@ from ondewo.nlu.intent_pb2 import (
 from ondewo.nlu.intent_pb2_grpc import IntentsStub
 
 
-class Intents(ServicesInterface):
+class Intents(AsyncServicesInterface):
     """
     Exposes the intent-related endpoints of ONDEWO NLU services in a user-friendly way.
 

@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 from ondewo.nlu.common_pb2 import StatResponse
-from ondewo.nlu.core.services_interface import ServicesInterface
+from ondewo.nlu.core.async_services_interface import AsyncServicesInterface
 from ondewo.nlu.project_statistics_pb2 import (
     GetEntityTypeCountRequest,
     GetIntentCountRequest,
@@ -22,7 +22,7 @@ from ondewo.nlu.project_statistics_pb2 import (
 from ondewo.nlu.project_statistics_pb2_grpc import ProjectStatisticsStub
 
 
-class ProjectStatistics(ServicesInterface):
+class ProjectStatistics(AsyncServicesInterface):
     """
     Exposes the project-statistics-related endpoints of ONDEWO NLU services in a user-friendly way.
 

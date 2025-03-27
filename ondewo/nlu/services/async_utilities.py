@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from ondewo.nlu.core.services_interface import ServicesInterface
+from ondewo.nlu.core.async_services_interface import AsyncServicesInterface
 from ondewo.nlu.utility_pb2 import (
     AddTrainingPhrasesFromCSVRequest,
     AddTrainingPhrasesRequest,
@@ -32,7 +32,7 @@ from ondewo.nlu.utility_pb2 import (
 from ondewo.nlu.utility_pb2_grpc import UtilitiesStub
 
 
-class Utilities(ServicesInterface):
+class Utilities(AsyncServicesInterface):
     """
     Exposes the utilities endpoints of ONDEWO NLU services in a user-friendly way.
 

@@ -13,7 +13,7 @@
 # limitations under the License.
 from google.protobuf.empty_pb2 import Empty
 
-from ondewo.nlu.core.services_interface import ServicesInterface
+from ondewo.nlu.core.async_services_interface import AsyncServicesInterface
 from ondewo.nlu.project_role_pb2 import (
     CreateProjectRoleRequest,
     DeleteProjectRoleRequest,
@@ -26,7 +26,7 @@ from ondewo.nlu.project_role_pb2 import (
 from ondewo.nlu.project_role_pb2_grpc import ProjectRolesStub
 
 
-class ProjectRoles(ServicesInterface):
+class ProjectRoles(AsyncServicesInterface):
     """
     Exposes the project-role-related endpoints of ONDEWO NLU services in a user-friendly way.
 

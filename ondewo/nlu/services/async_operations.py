@@ -16,11 +16,11 @@ from typing import Optional
 from google.protobuf.empty_pb2 import Empty
 
 from ondewo.nlu import operations_pb2
-from ondewo.nlu.core.services_interface import ServicesInterface
+from ondewo.nlu.core.async_services_interface import AsyncServicesInterface
 from ondewo.nlu.operations_pb2_grpc import OperationsStub
 
 
-class Operations(ServicesInterface):
+class Operations(AsyncServicesInterface):
     """
     Exposes the operations-related endpoints of ONDEWO NLU services in a user-friendly way.
 

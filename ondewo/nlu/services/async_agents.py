@@ -64,10 +64,10 @@ from ondewo.nlu.agent_pb2 import (
     UpdateAgentRequest,
 )
 from ondewo.nlu.agent_pb2_grpc import AgentsStub
-from ondewo.nlu.core.services_interface import ServicesInterface
+from ondewo.nlu.core.async_services_interface import AsyncServicesInterface
 
 
-class Agents(ServicesInterface):
+class Agents(AsyncServicesInterface):
     """
     Exposes the agent-related endpoints of ONDEWO NLU services in a user-friendly way.
 

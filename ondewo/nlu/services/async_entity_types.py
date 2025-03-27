@@ -13,7 +13,7 @@
 # limitations under the License.
 from google.protobuf.empty_pb2 import Empty
 
-from ondewo.nlu.core.services_interface import ServicesInterface
+from ondewo.nlu.core.async_services_interface import AsyncServicesInterface
 from ondewo.nlu.entity_type_pb2 import (
     BatchCreateEntitiesRequest,
     BatchDeleteEntitiesRequest,
@@ -42,7 +42,7 @@ from ondewo.nlu.entity_type_pb2_grpc import EntityTypesStub
 from ondewo.nlu.operations_pb2 import Operation
 
 
-class EntityTypes(ServicesInterface):
+class EntityTypes(AsyncServicesInterface):
     """
     Exposes the entity=type-related endpoints of ONDEWO NLU services in a user-friendly way.
 

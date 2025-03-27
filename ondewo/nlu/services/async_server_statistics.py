@@ -14,12 +14,12 @@
 from google.protobuf.empty_pb2 import Empty
 
 from ondewo.nlu.common_pb2 import StatResponse
-from ondewo.nlu.core.services_interface import ServicesInterface
+from ondewo.nlu.core.async_services_interface import AsyncServicesInterface
 from ondewo.nlu.server_statistics_pb2 import GetUserProjectCountRequest
 from ondewo.nlu.server_statistics_pb2_grpc import ServerStatisticsStub
 
 
-class ServerStatistics(ServicesInterface):
+class ServerStatistics(AsyncServicesInterface):
     """
     Exposes the server-statistics-related endpoints of ONDEWO NLU services in a user-friendly way.
 

@@ -16,7 +16,7 @@ from typing import Iterator
 from google.protobuf.empty_pb2 import Empty
 
 from ondewo.nlu.common_pb2 import Comment
-from ondewo.nlu.core.services_interface import ServicesInterface
+from ondewo.nlu.core.async_services_interface import AsyncServicesInterface
 from ondewo.nlu.session_pb2 import (
     AddAudioFilesRequest,
     AddAudioFilesResponse,
@@ -89,7 +89,7 @@ from ondewo.nlu.session_pb2 import (
 from ondewo.nlu.session_pb2_grpc import SessionsStub
 
 
-class Sessions(ServicesInterface):
+class Sessions(AsyncServicesInterface):
     """
     Exposes the sessions-related endpoints of ONDEWO NLU services in a user-friendly way.
 

@@ -26,10 +26,10 @@ from ondewo.nlu.ccai_project_pb2 import (
     UpdateCcaiProjectResponse,
 )
 from ondewo.nlu.ccai_project_pb2_grpc import CcaiProjectsStub
-from ondewo.nlu.core.services_interface import ServicesInterface
+from ondewo.nlu.core.async_services_interface import AsyncServicesInterface
 
 
-class CcaiProjects(ServicesInterface):
+class CcaiProjects(AsyncServicesInterface):
     """
     Exposes the ccai projects endpoints of ONDEWO NLU services in a user-friendly way.
     See ccai_project.proto.

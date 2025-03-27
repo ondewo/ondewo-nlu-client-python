@@ -19,7 +19,7 @@ from ondewo.nlu.common_pb2 import (
     SetNotificationsFlaggedStatusRequest,
     SetNotificationsReadStatusRequest,
 )
-from ondewo.nlu.core.services_interface import ServicesInterface
+from ondewo.nlu.core.async_services_interface import AsyncServicesInterface
 from ondewo.nlu.user_pb2 import (
     CreateServerRoleRequest,
     CreateUserRequest,
@@ -51,7 +51,7 @@ from ondewo.nlu.user_pb2 import (
 from ondewo.nlu.user_pb2_grpc import UsersStub
 
 
-class Users(ServicesInterface):
+class Users(AsyncServicesInterface):
     """
     Exposes the user-related endpoints of ONDEWO NLU services in a user-friendly way.
 

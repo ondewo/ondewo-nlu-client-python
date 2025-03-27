@@ -16,11 +16,11 @@
 from google.protobuf.empty_pb2 import Empty
 
 from ondewo.qa import qa_pb2
-from ondewo.qa.core.services_interface import ServicesInterface
+from ondewo.qa.core.async_services_interface import AsyncServicesInterface
 from ondewo.qa.qa_pb2_grpc import QAStub
 
 
-class QA(ServicesInterface):
+class QA(AsyncServicesInterface):
     """
     Exposes the qa-related endpoints of ONDEWO NLU services in a user-friendly way.
 

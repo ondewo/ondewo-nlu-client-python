@@ -17,10 +17,10 @@ from ondewo.nlu import (
     context_pb2,
     context_pb2_grpc,
 )
-from ondewo.nlu.core.services_interface import ServicesInterface
+from ondewo.nlu.core.async_services_interface import AsyncServicesInterface
 
 
-class Contexts(ServicesInterface):
+class Contexts(AsyncServicesInterface):
     """
     Exposes the contexts-related endpoints of ONDEWO NLU services in a user-friendly way.
 

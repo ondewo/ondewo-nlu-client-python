@@ -19,7 +19,7 @@ from typing import (
     Tuple,
 )
 
-from ondewo.utils.base_client import BaseClient
+from ondewo.utils.async_base_client import AsyncBaseClient
 
 from ondewo.nlu.client_config import ClientConfig
 from ondewo.nlu.core.services_container import ServicesContainer
@@ -36,15 +36,15 @@ from ondewo.nlu.services.async_server_statistics import ServerStatistics
 from ondewo.nlu.services.async_sessions import Sessions
 from ondewo.nlu.services.async_users import Users
 from ondewo.nlu.services.async_utilities import Utilities
-from ondewo.nlu.utils.async_login import login
+from ondewo.nlu.utils.login import login
 
 
-class AsyncClient(BaseClient):
+class AsyncClient(AsyncBaseClient):
     """
     The core asynchronous Python client for interacting with ONDEWO NLU services.
     """
 
-    async def _initialize_services(
+    def _initialize_services(
         self,
         config: ClientConfig,
         use_secure_channel: bool,
@@ -62,7 +62,7 @@ class AsyncClient(BaseClient):
         if not isinstance(config, ClientConfig):
             raise ValueError('The provided config must be of type `ondewo.nlu.client_config.ClientConfig`')
 
-        nlu_token: str = await login(config=config, use_secure_channel=use_secure_channel, options=options)
+        nlu_token: str = login(config=config, use_secure_channel=use_secure_channel, options=options)
         kwargs: Dict[str, Any] = {
             'config': config,
             'nlu_token': nlu_token,
