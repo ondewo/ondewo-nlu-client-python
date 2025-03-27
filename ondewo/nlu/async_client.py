@@ -21,8 +21,8 @@ from typing import (
 
 from ondewo.utils.base_client import BaseClient
 
-from nlu.core.services_container import ServicesContainer
-from nlu.utils.async_login import login
+from ondewo.nlu.core.services_container import ServicesContainer
+from ondewo.nlu.utils.async_login import login
 from ondewo.nlu.client_config import ClientConfig
 from ondewo.nlu.services.async_agents import Agents
 from ondewo.nlu.services.async_aiservices import AIServices
