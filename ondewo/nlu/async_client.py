@@ -21,9 +21,8 @@ from typing import (
 
 from ondewo.utils.base_client import BaseClient
 
-from ondewo.nlu.core.services_container import ServicesContainer
-from ondewo.nlu.utils.async_login import login
 from ondewo.nlu.client_config import ClientConfig
+from ondewo.nlu.core.services_container import ServicesContainer
 from ondewo.nlu.services.async_agents import Agents
 from ondewo.nlu.services.async_aiservices import AIServices
 from ondewo.nlu.services.async_ccai_projects import CcaiProjects
@@ -37,6 +36,7 @@ from ondewo.nlu.services.async_server_statistics import ServerStatistics
 from ondewo.nlu.services.async_sessions import Sessions
 from ondewo.nlu.services.async_users import Users
 from ondewo.nlu.services.async_utilities import Utilities
+from ondewo.nlu.utils.async_login import login
 
 
 class AsyncClient(BaseClient):
