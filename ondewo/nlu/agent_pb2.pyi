@@ -1068,6 +1068,24 @@ class RestoreAgentRequest(google.protobuf.message.Message):
 global___RestoreAgentRequest = RestoreAgentRequest
 
 @typing.final
+class MigrateAgentRequest(google.protobuf.message.Message):
+    """Request to migrate an agent"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    AGENT_CONTENT_FIELD_NUMBER: builtins.int
+    agent_content: builtins.bytes
+    """The agent to migrate as zip file"""
+    def __init__(
+        self,
+        *,
+        agent_content: builtins.bytes = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["agent_content", b"agent_content"]) -> None: ...
+
+global___MigrateAgentRequest = MigrateAgentRequest
+
+@typing.final
 class GetAgentStatisticsRequest(google.protobuf.message.Message):
     """Request statistics of the agent"""
 

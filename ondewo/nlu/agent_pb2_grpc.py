@@ -137,6 +137,11 @@ class AgentsStub(object):
                 request_serializer=ondewo_dot_nlu_dot_agent__pb2.ImportAgentRequest.SerializeToString,
                 response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
                 _registered_method=True)
+        self.MigrateAgent = channel.unary_unary(
+                '/ondewo.nlu.Agents/MigrateAgent',
+                request_serializer=ondewo_dot_nlu_dot_agent__pb2.MigrateAgentRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
+                _registered_method=True)
         self.OptimizeRankingMatch = channel.unary_unary(
                 '/ondewo.nlu.Agents/OptimizeRankingMatch',
                 request_serializer=ondewo_dot_nlu_dot_agent__pb2.OptimizeRankingMatchRequest.SerializeToString,
@@ -584,9 +589,14 @@ class AgentsServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def MigrateAgent(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def OptimizeRankingMatch(self, request, context):
-        """Runs optimize ranking match
-        """
+        """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -834,6 +844,11 @@ def add_AgentsServicer_to_server(servicer, server):
             'ImportAgent': grpc.unary_unary_rpc_method_handler(
                     servicer.ImportAgent,
                     request_deserializer=ondewo_dot_nlu_dot_agent__pb2.ImportAgentRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
+            ),
+            'MigrateAgent': grpc.unary_unary_rpc_method_handler(
+                    servicer.MigrateAgent,
+                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.MigrateAgentRequest.FromString,
                     response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
             ),
             'OptimizeRankingMatch': grpc.unary_unary_rpc_method_handler(
@@ -1443,6 +1458,33 @@ class Agents(object):
             target,
             '/ondewo.nlu.Agents/ImportAgent',
             ondewo_dot_nlu_dot_agent__pb2.ImportAgentRequest.SerializeToString,
+            ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def MigrateAgent(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.Agents/MigrateAgent',
+            ondewo_dot_nlu_dot_agent__pb2.MigrateAgentRequest.SerializeToString,
             ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
             options,
             channel_credentials,
