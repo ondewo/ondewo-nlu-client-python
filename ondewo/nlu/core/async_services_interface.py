@@ -20,12 +20,12 @@ from typing import (
     Tuple,
 )
 
-from ondewo.utils.base_services_interface import BaseServicesInterface
+from ondewo.utils.async_base_services_interface import AsyncBaseServicesInterface
 
 from ondewo.nlu.client_config import ClientConfig
 
 
-class ServicesInterface(BaseServicesInterface, ABC):
+class AsyncServicesInterface(AsyncBaseServicesInterface, ABC):
     def __init__(
         self,
         config: ClientConfig,
@@ -33,7 +33,11 @@ class ServicesInterface(BaseServicesInterface, ABC):
         use_secure_channel: bool,
         options: Optional[Set[Tuple[str, Any]]] = None,
     ) -> None:
-        super(ServicesInterface, self).__init__(config=config, use_secure_channel=use_secure_channel, options=options)
+        super(AsyncServicesInterface, self).__init__(
+            config=config,
+            use_secure_channel=use_secure_channel,
+            options=options,
+        )
         self.metadata: List[Tuple[str, str]] = [
             ('cai-token', nlu_token if nlu_token else 'null'),
             ('authorization', config.http_token),

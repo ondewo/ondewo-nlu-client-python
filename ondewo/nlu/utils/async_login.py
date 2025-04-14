@@ -18,46 +18,39 @@ from typing import (
     Tuple,
 )
 
+import ondewo.nlu.services.async_users
 from ondewo.nlu.client_config import ClientConfig
-from ondewo.nlu.services.users import Users
 from ondewo.nlu.user_pb2 import (
     LoginRequest,
     LoginResponse,
 )
 
 
-def login(
+async def login(
     config: ClientConfig,
     use_secure_channel: bool,
     options: Optional[Set[Tuple[str, Any]]] = None,
 ) -> str:
     """
-    Log in using the user and password in the client config and returns the auth token, i.e. "cai-token".
+    Asynchronously log in using the user and password in the client config and return the auth token, i.e. "cai-token".
 
     Args:
-        config (BaseClientConfig):
-            Configuration for the client.
-        use_secure_channel (bool):
-            Whether to use a secure gRPC channel.
-        options (Optional[Set[Tuple[str, Any]]]):
-            Additional options for the gRPC channel.
+        config (ClientConfig): Configuration for the client.
+        use_secure_channel (bool): Whether to use a secure gRPC channel.
+        options (Optional[Set[Tuple[str, Any]]]): Additional options for the gRPC channel.
 
-    Returns
-        str: returns the auth token, i.e. "cai-token"
+    Returns:
+        str: The auth token, i.e. "cai-token".
     """
-    request: LoginRequest = LoginRequest(
-        user_email=config.user_name,
-        password=config.password,
-    )
+    request = LoginRequest(user_email=config.user_name, password=config.password)
 
-    user_service: Users = Users(
+    user_service = ondewo.nlu.services.async_users.Users(
         config=config,
         nlu_token='',
         use_secure_channel=use_secure_channel,
         options=options,
     )
-    response: LoginResponse = user_service.login(request)
-    # retrieve the "cai-token"
+    response: LoginResponse = await user_service.login(request)
     nlu_token: str = response.auth_token
     user_service.grpc_channel.close()
 

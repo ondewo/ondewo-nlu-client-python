@@ -14,12 +14,12 @@
 from google.protobuf.empty_pb2 import Empty
 
 from ondewo.nlu.common_pb2 import StatResponse
-from ondewo.nlu.core.services_interface import ServicesInterface
+from ondewo.nlu.core.async_services_interface import AsyncServicesInterface
 from ondewo.nlu.server_statistics_pb2 import GetUserProjectCountRequest
 from ondewo.nlu.server_statistics_pb2_grpc import ServerStatisticsStub
 
 
-class ServerStatistics(ServicesInterface):
+class ServerStatistics(AsyncServicesInterface):
     """
     Exposes the server-statistics-related endpoints of ONDEWO NLU services in a user-friendly way.
 
@@ -31,14 +31,14 @@ class ServerStatistics(ServicesInterface):
         stub: ServerStatisticsStub = ServerStatisticsStub(channel=self.grpc_channel)
         return stub
 
-    def get_project_count(self) -> StatResponse:
-        response: StatResponse = self.stub.GetProjectCount(Empty(), metadata=self.metadata)
+    async def get_project_count(self) -> StatResponse:
+        response: StatResponse = await self.stub.GetProjectCount(Empty(), metadata=self.metadata)
         return response
 
-    def get_user_project_count(self, request: GetUserProjectCountRequest) -> StatResponse:
-        response: StatResponse = self.stub.GetUserProjectCount(request, metadata=self.metadata)
+    async def get_user_project_count(self, request: GetUserProjectCountRequest) -> StatResponse:
+        response: StatResponse = await self.stub.GetUserProjectCount(request, metadata=self.metadata)
         return response
 
-    def get_user_count(self) -> StatResponse:
-        response: StatResponse = self.stub.GetUserCount(Empty(), metadata=self.metadata)
+    async def get_user_count(self) -> StatResponse:
+        response: StatResponse = await self.stub.GetUserCount(Empty(), metadata=self.metadata)
         return response

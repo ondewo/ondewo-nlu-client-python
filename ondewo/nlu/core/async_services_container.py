@@ -15,23 +15,23 @@ from dataclasses import dataclass
 
 from ondewo.utils.base_service_container import BaseServicesContainer
 
-from ondewo.nlu.services.agents import Agents
-from ondewo.nlu.services.aiservices import AIServices
-from ondewo.nlu.services.ccai_projects import CcaiProjects
-from ondewo.nlu.services.contexts import Contexts
-from ondewo.nlu.services.entity_types import EntityTypes
-from ondewo.nlu.services.intents import Intents
-from ondewo.nlu.services.operations import Operations
-from ondewo.nlu.services.project_roles import ProjectRoles
-from ondewo.nlu.services.project_statistics import ProjectStatistics
-from ondewo.nlu.services.server_statistics import ServerStatistics
-from ondewo.nlu.services.sessions import Sessions
-from ondewo.nlu.services.users import Users
-from ondewo.nlu.services.utilities import Utilities
+from ondewo.nlu.services.async_agents import Agents
+from ondewo.nlu.services.async_aiservices import AIServices
+from ondewo.nlu.services.async_ccai_projects import CcaiProjects
+from ondewo.nlu.services.async_contexts import Contexts
+from ondewo.nlu.services.async_entity_types import EntityTypes
+from ondewo.nlu.services.async_intents import Intents
+from ondewo.nlu.services.async_operations import Operations
+from ondewo.nlu.services.async_project_roles import ProjectRoles
+from ondewo.nlu.services.async_project_statistics import ProjectStatistics
+from ondewo.nlu.services.async_server_statistics import ServerStatistics
+from ondewo.nlu.services.async_sessions import Sessions
+from ondewo.nlu.services.async_users import Users
+from ondewo.nlu.services.async_utilities import Utilities
 
 
 @dataclass
-class ServicesContainer(BaseServicesContainer):
+class AsyncServicesContainer(BaseServicesContainer):
     agents: Agents
     aiservices: AIServices
     ccai_projects: CcaiProjects

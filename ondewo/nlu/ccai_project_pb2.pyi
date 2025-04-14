@@ -122,6 +122,8 @@ class _CcaiServiceTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper
     """ondewo-aim-webphone service"""
     CCAI_SERVICE_TYPE_ONDEWO_NLU_VECTORSTORE: _CcaiServiceType.ValueType  # 17
     """ondewo-nlu-vectorstore service"""
+    CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM_AGENT: _CcaiServiceType.ValueType  # 18
+    """ondewo-nlu-llm-agent service"""
 
 class CcaiServiceType(_CcaiServiceType, metaclass=_CcaiServiceTypeEnumTypeWrapper): ...
 
@@ -161,6 +163,8 @@ CCAI_SERVICE_TYPE_ONDEWO_AIM_WEBPHONE: CcaiServiceType.ValueType  # 16
 """ondewo-aim-webphone service"""
 CCAI_SERVICE_TYPE_ONDEWO_NLU_VECTORSTORE: CcaiServiceType.ValueType  # 17
 """ondewo-nlu-vectorstore service"""
+CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM_AGENT: CcaiServiceType.ValueType  # 18
+"""ondewo-nlu-llm-agent service"""
 global___CcaiServiceType = CcaiServiceType
 
 class _CcaiServiceProvider:
@@ -172,94 +176,234 @@ class _CcaiServiceProviderEnumTypeWrapper(google.protobuf.internal.enum_type_wra
     NO_CCAI_SERVICE_PROVIDER: _CcaiServiceProvider.ValueType  # 0
     """No specified provider or placeholder"""
     CCAI_SERVICE_PROVIDER_ONDEWO: _CcaiServiceProvider.ValueType  # 1
-    """ONDEWO provider for CCAI service services"""
+    """ONDEWO provider for CCAI service services
+    [ONDEWO](https://www.ondewo.com/)
+    """
     CCAI_SERVICE_PROVIDER_GOOGLE_GEMINI: _CcaiServiceProvider.ValueType  # 2
-    """Google as the CCAI service provider, utilizing Google’s conversational AI capabilities"""
+    """Google as the CCAI service provider, utilizing Google’s conversational AI capabilities
+    [Google Gemini](https://deepmind.google/technologies/gemini/)
+    """
     CCAI_SERVICE_PROVIDER_MICROSOFT_AZURE_OPENAI: _CcaiServiceProvider.ValueType  # 3
-    """Microsoft Azure as the CCAI service provider, using Microsoft's Azure cognitive services"""
+    """Microsoft Azure as the CCAI service provider, using Microsoft's Azure cognitive services
+    [Azure OpenAI](https://azure.microsoft.com/en-us/products/cognitive-services/openai-service/)
+    """
     CCAI_SERVICE_PROVIDER_MICROSOFT_AUTOGEN: _CcaiServiceProvider.ValueType  # 4
-    """LangChain as the CCAI service provider"""
+    """Microsoft AutoGen as the CCAI service provider
+    [AutoGen](https://github.com/microsoft/autogen)
+    """
     CCAI_SERVICE_PROVIDER_OLLAMA: _CcaiServiceProvider.ValueType  # 5
-    """Ollama as the CCAI service provider, typically associated with specific OLLAMA AI tools"""
+    """Ollama as the CCAI service provider, typically associated with specific OLLAMA AI tools
+    [Ollama](https://github.com/ollama/ollama)
+    """
     CCAI_SERVICE_PROVIDER_OPENAI: _CcaiServiceProvider.ValueType  # 6
-    """OpenAI as the CCAI service provider, commonly used for models such as GPT"""
+    """OpenAI as the CCAI service provider, commonly used for models such as GPT
+    [OpenAI](https://openai.com/)
+    """
     CCAI_SERVICE_PROVIDER_ANTHROPIC: _CcaiServiceProvider.ValueType  # 7
-    """Anthropic as the CCAI service provider, used with AI models from Anthropic"""
+    """Anthropic as the CCAI service provider, used with AI models from Anthropic
+    [Anthropic](https://www.anthropic.com/)
+    """
     CCAI_SERVICE_PROVIDER_HUGGINGFACE: _CcaiServiceProvider.ValueType  # 8
-    """Hugging Face as the CCAI service provider, often used for open-source NLP models"""
+    """Hugging Face as the CCAI service provider, often used for open-source NLP models
+    [Hugging Face](https://huggingface.co/)
+    """
     CCAI_SERVICE_PROVIDER_IBM: _CcaiServiceProvider.ValueType  # 9
-    """IBM as the CCAI service provider, such as IBM Watson for conversational AI"""
+    """IBM as the CCAI service provider, such as IBM Watson for conversational AI
+    [IBM Watson](https://www.ibm.com/watson)
+    """
     CCAI_SERVICE_PROVIDER_HAYSTACK: _CcaiServiceProvider.ValueType  # 10
-    """Haystack as the CCAI service provider, e.g. for question and answering, conversations"""
+    """Haystack as the CCAI service provider, e.g., for question answering and conversations
+    [Haystack](https://github.com/deepset-ai/haystack)
+    """
     CCAI_SERVICE_PROVIDER_LANGCHAIN: _CcaiServiceProvider.ValueType  # 11
-    """LangChain as the CCAI service provider"""
+    """LangChain as the CCAI service provider
+    [LangChain](https://github.com/langchain-ai/langchain)
+    """
     CCAI_SERVICE_PROVIDER_AMAZON: _CcaiServiceProvider.ValueType  # 12
-    """Amazon AWS as the CCAI service provider, using Amazon's AI/ML services"""
+    """Amazon AWS as the CCAI service provider, using Amazon's AI/ML services
+    [AWS AI Services](https://aws.amazon.com/machine-learning/)
+    """
     CCAI_SERVICE_PROVIDER_MISTRAL: _CcaiServiceProvider.ValueType  # 13
-    """Mistral as the CCAI service provider, using Mistrals services"""
+    """Mistral as the CCAI service provider, using Mistral’s services
+    [Mistral](https://mistral.ai/)
+    """
     CCAI_SERVICE_PROVIDER_DUCKDUCKGO: _CcaiServiceProvider.ValueType  # 14
-    """DuckDuckGo Websearch API"""
+    """DuckDuckGo Websearch API
+    [DuckDuckGo API](https://duckduckgo.com/api)
+    """
     CCAI_SERVICE_PROVIDER_GOOGLE_PSE: _CcaiServiceProvider.ValueType  # 15
-    """Google PSE Websearch API"""
+    """Google PSE Websearch API
+    [Google Programmable Search Engine](https://programmablesearchengine.google.com/)
+    """
     CCAI_SERVICE_PROVIDER_JINA: _CcaiServiceProvider.ValueType  # 16
-    """Jina Websearch API"""
+    """Jina Websearch API
+    [Jina AI](https://github.com/jina-ai/jina)
+    """
     CCAI_SERVICE_PROVIDER_TAVILY: _CcaiServiceProvider.ValueType  # 17
-    """Tavily Websearch API"""
+    """Tavily Websearch API
+    [Tavily API](https://tavily.com/)
+    """
     CCAI_SERVICE_PROVIDER_ELASTICSEARCH: _CcaiServiceProvider.ValueType  # 18
-    """Elastic Search vector database service"""
+    """ElasticSearch vector database service
+    [ElasticSearch](https://www.elastic.co/)
+    """
     CCAI_SERVICE_PROVIDER_MILVUS: _CcaiServiceProvider.ValueType  # 19
-    """Milvus vector database service"""
+    """Milvus vector database service
+    [Milvus](https://milvus.io/)
+    """
     CCAI_SERVICE_PROVIDER_QDRANT: _CcaiServiceProvider.ValueType  # 20
-    """Qdrant vector database service"""
+    """Qdrant vector database service
+    [Qdrant](https://qdrant.tech/)
+    """
     CCAI_SERVICE_PROVIDER_CHROMA: _CcaiServiceProvider.ValueType  # 21
-    """Chroma vector database service"""
+    """Chroma vector database service
+    [ChromaDB](https://github.com/chroma-core/chroma)
+    """
+    CCAI_SERVICE_PROVIDER_GOOGLE: _CcaiServiceProvider.ValueType  # 22
+    """Google CCAI service provider
+    [Google Cloud AI](https://cloud.google.com/ai)
+    """
+    CCAI_SERVICE_PROVIDER_MICROSOFT: _CcaiServiceProvider.ValueType  # 23
+    """Microsoft CCAI service provider
+    [Microsoft AI](https://www.microsoft.com/en-us/ai)
+    """
+    CCAI_SERVICE_PROVIDER_DEEPGRAM: _CcaiServiceProvider.ValueType  # 24
+    """Deepgram as the CCAI service provider for speech processing
+    [Deepgram](https://deepgram.com/)
+    """
+    CCAI_SERVICE_PROVIDER_ELEVENLABS: _CcaiServiceProvider.ValueType  # 25
+    """ElevenLabs as the CCAI service provider for voice synthesis
+    [ElevenLabs](https://elevenlabs.io/)
+    """
+    CCAI_SERVICE_PROVIDER_HUGGINGFACE_TGI: _CcaiServiceProvider.ValueType  # 26
+    """Hugging Face Text Generation Inference (TGI) as the CCAI service provider
+    [Text Generation Inference](https://github.com/huggingface/text-generation-inference)
+    """
+    CCAI_SERVICE_PROVIDER_HUGGINGFACE_TGE: _CcaiServiceProvider.ValueType  # 27
+    """Hugging Face Text Embedding Inference (TGE) as the CCAI service provider
+    [Text Embeddings Inference](https://github.com/huggingface/text-embeddings-inference)
+    """
+    CCAI_SERVICE_PROVIDER_HUGGINGFACE_SMOLAGENTS: _CcaiServiceProvider.ValueType  # 28
+    """Hugging Face SmolAgents as the CCAI service provider
+    [SmolAgents](https://github.com/huggingface/smolagents)
+    """
 
 class CcaiServiceProvider(_CcaiServiceProvider, metaclass=_CcaiServiceProviderEnumTypeWrapper): ...
 
 NO_CCAI_SERVICE_PROVIDER: CcaiServiceProvider.ValueType  # 0
 """No specified provider or placeholder"""
 CCAI_SERVICE_PROVIDER_ONDEWO: CcaiServiceProvider.ValueType  # 1
-"""ONDEWO provider for CCAI service services"""
+"""ONDEWO provider for CCAI service services
+[ONDEWO](https://www.ondewo.com/)
+"""
 CCAI_SERVICE_PROVIDER_GOOGLE_GEMINI: CcaiServiceProvider.ValueType  # 2
-"""Google as the CCAI service provider, utilizing Google’s conversational AI capabilities"""
+"""Google as the CCAI service provider, utilizing Google’s conversational AI capabilities
+[Google Gemini](https://deepmind.google/technologies/gemini/)
+"""
 CCAI_SERVICE_PROVIDER_MICROSOFT_AZURE_OPENAI: CcaiServiceProvider.ValueType  # 3
-"""Microsoft Azure as the CCAI service provider, using Microsoft's Azure cognitive services"""
+"""Microsoft Azure as the CCAI service provider, using Microsoft's Azure cognitive services
+[Azure OpenAI](https://azure.microsoft.com/en-us/products/cognitive-services/openai-service/)
+"""
 CCAI_SERVICE_PROVIDER_MICROSOFT_AUTOGEN: CcaiServiceProvider.ValueType  # 4
-"""LangChain as the CCAI service provider"""
+"""Microsoft AutoGen as the CCAI service provider
+[AutoGen](https://github.com/microsoft/autogen)
+"""
 CCAI_SERVICE_PROVIDER_OLLAMA: CcaiServiceProvider.ValueType  # 5
-"""Ollama as the CCAI service provider, typically associated with specific OLLAMA AI tools"""
+"""Ollama as the CCAI service provider, typically associated with specific OLLAMA AI tools
+[Ollama](https://github.com/ollama/ollama)
+"""
 CCAI_SERVICE_PROVIDER_OPENAI: CcaiServiceProvider.ValueType  # 6
-"""OpenAI as the CCAI service provider, commonly used for models such as GPT"""
+"""OpenAI as the CCAI service provider, commonly used for models such as GPT
+[OpenAI](https://openai.com/)
+"""
 CCAI_SERVICE_PROVIDER_ANTHROPIC: CcaiServiceProvider.ValueType  # 7
-"""Anthropic as the CCAI service provider, used with AI models from Anthropic"""
+"""Anthropic as the CCAI service provider, used with AI models from Anthropic
+[Anthropic](https://www.anthropic.com/)
+"""
 CCAI_SERVICE_PROVIDER_HUGGINGFACE: CcaiServiceProvider.ValueType  # 8
-"""Hugging Face as the CCAI service provider, often used for open-source NLP models"""
+"""Hugging Face as the CCAI service provider, often used for open-source NLP models
+[Hugging Face](https://huggingface.co/)
+"""
 CCAI_SERVICE_PROVIDER_IBM: CcaiServiceProvider.ValueType  # 9
-"""IBM as the CCAI service provider, such as IBM Watson for conversational AI"""
+"""IBM as the CCAI service provider, such as IBM Watson for conversational AI
+[IBM Watson](https://www.ibm.com/watson)
+"""
 CCAI_SERVICE_PROVIDER_HAYSTACK: CcaiServiceProvider.ValueType  # 10
-"""Haystack as the CCAI service provider, e.g. for question and answering, conversations"""
+"""Haystack as the CCAI service provider, e.g., for question answering and conversations
+[Haystack](https://github.com/deepset-ai/haystack)
+"""
 CCAI_SERVICE_PROVIDER_LANGCHAIN: CcaiServiceProvider.ValueType  # 11
-"""LangChain as the CCAI service provider"""
+"""LangChain as the CCAI service provider
+[LangChain](https://github.com/langchain-ai/langchain)
+"""
 CCAI_SERVICE_PROVIDER_AMAZON: CcaiServiceProvider.ValueType  # 12
-"""Amazon AWS as the CCAI service provider, using Amazon's AI/ML services"""
+"""Amazon AWS as the CCAI service provider, using Amazon's AI/ML services
+[AWS AI Services](https://aws.amazon.com/machine-learning/)
+"""
 CCAI_SERVICE_PROVIDER_MISTRAL: CcaiServiceProvider.ValueType  # 13
-"""Mistral as the CCAI service provider, using Mistrals services"""
+"""Mistral as the CCAI service provider, using Mistral’s services
+[Mistral](https://mistral.ai/)
+"""
 CCAI_SERVICE_PROVIDER_DUCKDUCKGO: CcaiServiceProvider.ValueType  # 14
-"""DuckDuckGo Websearch API"""
+"""DuckDuckGo Websearch API
+[DuckDuckGo API](https://duckduckgo.com/api)
+"""
 CCAI_SERVICE_PROVIDER_GOOGLE_PSE: CcaiServiceProvider.ValueType  # 15
-"""Google PSE Websearch API"""
+"""Google PSE Websearch API
+[Google Programmable Search Engine](https://programmablesearchengine.google.com/)
+"""
 CCAI_SERVICE_PROVIDER_JINA: CcaiServiceProvider.ValueType  # 16
-"""Jina Websearch API"""
+"""Jina Websearch API
+[Jina AI](https://github.com/jina-ai/jina)
+"""
 CCAI_SERVICE_PROVIDER_TAVILY: CcaiServiceProvider.ValueType  # 17
-"""Tavily Websearch API"""
+"""Tavily Websearch API
+[Tavily API](https://tavily.com/)
+"""
 CCAI_SERVICE_PROVIDER_ELASTICSEARCH: CcaiServiceProvider.ValueType  # 18
-"""Elastic Search vector database service"""
+"""ElasticSearch vector database service
+[ElasticSearch](https://www.elastic.co/)
+"""
 CCAI_SERVICE_PROVIDER_MILVUS: CcaiServiceProvider.ValueType  # 19
-"""Milvus vector database service"""
+"""Milvus vector database service
+[Milvus](https://milvus.io/)
+"""
 CCAI_SERVICE_PROVIDER_QDRANT: CcaiServiceProvider.ValueType  # 20
-"""Qdrant vector database service"""
+"""Qdrant vector database service
+[Qdrant](https://qdrant.tech/)
+"""
 CCAI_SERVICE_PROVIDER_CHROMA: CcaiServiceProvider.ValueType  # 21
-"""Chroma vector database service"""
+"""Chroma vector database service
+[ChromaDB](https://github.com/chroma-core/chroma)
+"""
+CCAI_SERVICE_PROVIDER_GOOGLE: CcaiServiceProvider.ValueType  # 22
+"""Google CCAI service provider
+[Google Cloud AI](https://cloud.google.com/ai)
+"""
+CCAI_SERVICE_PROVIDER_MICROSOFT: CcaiServiceProvider.ValueType  # 23
+"""Microsoft CCAI service provider
+[Microsoft AI](https://www.microsoft.com/en-us/ai)
+"""
+CCAI_SERVICE_PROVIDER_DEEPGRAM: CcaiServiceProvider.ValueType  # 24
+"""Deepgram as the CCAI service provider for speech processing
+[Deepgram](https://deepgram.com/)
+"""
+CCAI_SERVICE_PROVIDER_ELEVENLABS: CcaiServiceProvider.ValueType  # 25
+"""ElevenLabs as the CCAI service provider for voice synthesis
+[ElevenLabs](https://elevenlabs.io/)
+"""
+CCAI_SERVICE_PROVIDER_HUGGINGFACE_TGI: CcaiServiceProvider.ValueType  # 26
+"""Hugging Face Text Generation Inference (TGI) as the CCAI service provider
+[Text Generation Inference](https://github.com/huggingface/text-generation-inference)
+"""
+CCAI_SERVICE_PROVIDER_HUGGINGFACE_TGE: CcaiServiceProvider.ValueType  # 27
+"""Hugging Face Text Embedding Inference (TGE) as the CCAI service provider
+[Text Embeddings Inference](https://github.com/huggingface/text-embeddings-inference)
+"""
+CCAI_SERVICE_PROVIDER_HUGGINGFACE_SMOLAGENTS: CcaiServiceProvider.ValueType  # 28
+"""Hugging Face SmolAgents as the CCAI service provider
+[SmolAgents](https://github.com/huggingface/smolagents)
+"""
 global___CcaiServiceProvider = CcaiServiceProvider
 
 class _CcaiProjectView:

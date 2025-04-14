@@ -26,10 +26,10 @@ from ondewo.nlu.ccai_project_pb2 import (
     UpdateCcaiProjectResponse,
 )
 from ondewo.nlu.ccai_project_pb2_grpc import CcaiProjectsStub
-from ondewo.nlu.core.services_interface import ServicesInterface
+from ondewo.nlu.core.async_services_interface import AsyncServicesInterface
 
 
-class CcaiProjects(ServicesInterface):
+class CcaiProjects(AsyncServicesInterface):
     """
     Exposes the ccai projects endpoints of ONDEWO NLU services in a user-friendly way.
     See ccai_project.proto.
@@ -40,7 +40,7 @@ class CcaiProjects(ServicesInterface):
         stub: CcaiProjectsStub = CcaiProjectsStub(channel=self.grpc_channel)
         return stub
 
-    def create_ccai_project(self, request: CreateCcaiProjectRequest) -> CreateCcaiProjectResponse:
+    async def create_ccai_project(self, request: CreateCcaiProjectRequest) -> CreateCcaiProjectResponse:
         """
         Create a new CcaiProject.
 
@@ -51,10 +51,10 @@ class CcaiProjects(ServicesInterface):
             CreateCcaiProjectResponse:
                 The response message containing the details of the created CcaiProject.
         """
-        response: CreateCcaiProjectResponse = self.stub.CreateCcaiProject(request=request, metadata=self.metadata)
+        response: CreateCcaiProjectResponse = await self.stub.CreateCcaiProject(request=request, metadata=self.metadata)
         return response
 
-    def get_ccai_project(self, request: GetCcaiProjectRequest) -> CcaiProject:
+    async def get_ccai_project(self, request: GetCcaiProjectRequest) -> CcaiProject:
         """
         Get details of a specific CcaiProject.
 
@@ -64,10 +64,10 @@ class CcaiProjects(ServicesInterface):
         Returns:
             CcaiProject: The response message containing the details of the specified CcaiProject.
         """
-        response: CcaiProject = self.stub.GetCcaiProject(request=request, metadata=self.metadata)
+        response: CcaiProject = await self.stub.GetCcaiProject(request=request, metadata=self.metadata)
         return response
 
-    def update_ccai_project(self, request: UpdateCcaiProjectRequest) -> UpdateCcaiProjectResponse:
+    async def update_ccai_project(self, request: UpdateCcaiProjectRequest) -> UpdateCcaiProjectResponse:
         """
         Update an existing CcaiProject.
 
@@ -78,10 +78,10 @@ class CcaiProjects(ServicesInterface):
             UpdateCcaiProjectResponse:
                 The response message containing the details of the updated CcaiProject.
         """
-        response: UpdateCcaiProjectResponse = self.stub.UpdateCcaiProject(request=request, metadata=self.metadata)
+        response: UpdateCcaiProjectResponse = await self.stub.UpdateCcaiProject(request=request, metadata=self.metadata)
         return response
 
-    def delete_ccai_project(self, request: DeleteCcaiProjectRequest) -> DeleteCcaiProjectResponse:
+    async def delete_ccai_project(self, request: DeleteCcaiProjectRequest) -> DeleteCcaiProjectResponse:
         """
         Delete an existing CcaiProject.
 
@@ -92,7 +92,7 @@ class CcaiProjects(ServicesInterface):
             DeleteCcaiProjectResponse:
                 The response message containing the details of the deleted CcaiProject.
         """
-        response: DeleteCcaiProjectResponse = self.stub.DeleteCcaiProject(request=request, metadata=self.metadata)
+        response: DeleteCcaiProjectResponse = await self.stub.DeleteCcaiProject(request=request, metadata=self.metadata)
         return response
 
     # def deploy_ccai_project(
@@ -109,7 +109,7 @@ class CcaiProjects(ServicesInterface):
     #         DeployCcaiProjectResponse: The response message containing the details of the
     #          deployed CcaiProject.
     #     """
-    #     return self.stub.DeployCcaiProject(request=request, metadata=self.metadata)
+    #     return await self.stub.DeployCcaiProject(request=request, metadata=self.metadata)
     #
     # def undeploy_ccai_project(
     #     self,
@@ -125,9 +125,9 @@ class CcaiProjects(ServicesInterface):
     #         UndeployCcaiProjectResponse: The response message containing the details
     #         of the undeployed CcaiProject.
     #     """
-    #     return self.stub.UndeployCcaiProject(request=request, metadata=self.metadata)
+    #     return await self.stub.UndeployCcaiProject(request=request, metadata=self.metadata)
 
-    def list_ccai_projects(self, request: ListCcaiProjectsRequest) -> ListCcaiProjectsResponse:
+    async def list_ccai_projects(self, request: ListCcaiProjectsRequest) -> ListCcaiProjectsResponse:
         """
         List all CcaiProjects.
 
@@ -137,10 +137,10 @@ class CcaiProjects(ServicesInterface):
         Returns:
             ListCcaiProjectsResponse: The response message containing a list of all CcaiProjects.
         """
-        response: ListCcaiProjectsResponse = self.stub.ListCcaiProjects(request=request, metadata=self.metadata)
+        response: ListCcaiProjectsResponse = await self.stub.ListCcaiProjects(request=request, metadata=self.metadata)
         return response
 
-    def get_ccai_service(self, request: GetCcaiServiceRequest) -> CcaiService:
+    async def get_ccai_service(self, request: GetCcaiServiceRequest) -> CcaiService:
         """
         Get details of a specific CcaiService.
 
@@ -150,5 +150,5 @@ class CcaiProjects(ServicesInterface):
         Returns:
             CcaiService: The response message containing the details of the specified CcaiService.
         """
-        response: CcaiService = self.stub.GetCcaiService(request=request, metadata=self.metadata)
+        response: CcaiService = await self.stub.GetCcaiService(request=request, metadata=self.metadata)
         return response

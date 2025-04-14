@@ -19,29 +19,29 @@ from typing import (
     Tuple,
 )
 
-from ondewo.utils.base_client import BaseClient
+from ondewo.utils.async_base_client import AsyncBaseClient
 
 from ondewo.nlu.client_config import ClientConfig
-from ondewo.nlu.core.services_container import ServicesContainer
-from ondewo.nlu.services.agents import Agents
-from ondewo.nlu.services.aiservices import AIServices
-from ondewo.nlu.services.ccai_projects import CcaiProjects
-from ondewo.nlu.services.contexts import Contexts
-from ondewo.nlu.services.entity_types import EntityTypes
-from ondewo.nlu.services.intents import Intents
-from ondewo.nlu.services.operations import Operations
-from ondewo.nlu.services.project_roles import ProjectRoles
-from ondewo.nlu.services.project_statistics import ProjectStatistics
-from ondewo.nlu.services.server_statistics import ServerStatistics
-from ondewo.nlu.services.sessions import Sessions
-from ondewo.nlu.services.users import Users
-from ondewo.nlu.services.utilities import Utilities
+from ondewo.nlu.core.async_services_container import AsyncServicesContainer
+from ondewo.nlu.services.async_agents import Agents
+from ondewo.nlu.services.async_aiservices import AIServices
+from ondewo.nlu.services.async_ccai_projects import CcaiProjects
+from ondewo.nlu.services.async_contexts import Contexts
+from ondewo.nlu.services.async_entity_types import EntityTypes
+from ondewo.nlu.services.async_intents import Intents
+from ondewo.nlu.services.async_operations import Operations
+from ondewo.nlu.services.async_project_roles import ProjectRoles
+from ondewo.nlu.services.async_project_statistics import ProjectStatistics
+from ondewo.nlu.services.async_server_statistics import ServerStatistics
+from ondewo.nlu.services.async_sessions import Sessions
+from ondewo.nlu.services.async_users import Users
+from ondewo.nlu.services.async_utilities import Utilities
 from ondewo.nlu.utils.login import login
 
 
-class Client(BaseClient):
+class AsyncClient(AsyncBaseClient):
     """
-    The core python client for interacting with ONDEWO NLU services.
+    The core asynchronous Python client for interacting with ONDEWO NLU services.
     """
 
     def _initialize_services(
@@ -51,16 +51,13 @@ class Client(BaseClient):
         options: Optional[Set[Tuple[str, Any]]] = None,
     ) -> None:
         """
-
-        Initialize the service clients and lLogin with the current config and set up the services in self.services
+        Initialize the asynchronous service clients, login with the current config,
+        and set up the services in self.services.
 
         Args:
-            config (BaseClientConfig):
-                Configuration for the client.
-            use_secure_channel (bool):
-                Whether to use a secure gRPC channel.
-            options (Optional[Set[Tuple[str, Any]]]):
-                Additional options for the gRPC channel.
+            config (ClientConfig): Configuration for the client.
+            use_secure_channel (bool): Whether to use a secure gRPC channel.
+            options (Optional[Set[Tuple[str, Any]]]): Additional options for the gRPC channel.
         """
         if not isinstance(config, ClientConfig):
             raise ValueError('The provided config must be of type `ondewo.nlu.client_config.ClientConfig`')
@@ -72,7 +69,7 @@ class Client(BaseClient):
             'use_secure_channel': use_secure_channel,
             'options': options,
         }
-        self.services: ServicesContainer = ServicesContainer(
+        self.services: AsyncServicesContainer = AsyncServicesContainer(
             agents=Agents(**kwargs),
             aiservices=AIServices(**kwargs),
             ccai_projects=CcaiProjects(**kwargs),
