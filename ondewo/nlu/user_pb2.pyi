@@ -183,20 +183,26 @@ class CreateUserRequest(google.protobuf.message.Message):
 
     USER_FIELD_NUMBER: builtins.int
     PASSWORD_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     password: builtins.str
     """password"""
     @property
     def user(self) -> global___User:
         """user_id in the User message should be given, if empty will throw an error in the backend"""
 
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Field mask to specify which fields to return"""
+
     def __init__(
         self,
         *,
         user: global___User | None = ...,
         password: builtins.str = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["user", b"user"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["password", b"password", "user", b"user"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask", "user", b"user"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "password", b"password", "user", b"user"]) -> None: ...
 
 global___CreateUserRequest = CreateUserRequest
 
