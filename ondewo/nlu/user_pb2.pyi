@@ -241,18 +241,24 @@ class GetUserRequest(google.protobuf.message.Message):
 
     USER_ID_FIELD_NUMBER: builtins.int
     USER_EMAIL_FIELD_NUMBER: builtins.int
+    RESPONSE_FIELD_MASK_FIELD_NUMBER: builtins.int
     user_id: builtins.str
     """the user is identified by user id"""
     user_email: builtins.str
     """the user can identified by their email"""
+    @property
+    def response_field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional field mask to specify which fields to return in the response"""
+
     def __init__(
         self,
         *,
         user_id: builtins.str = ...,
         user_email: builtins.str = ...,
+        response_field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["user_email", b"user_email", "user_id", b"user_id", "user_identifier", b"user_identifier"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["user_email", b"user_email", "user_id", b"user_id", "user_identifier", b"user_identifier"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["response_field_mask", b"response_field_mask", "user_email", b"user_email", "user_id", b"user_id", "user_identifier", b"user_identifier"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["response_field_mask", b"response_field_mask", "user_email", b"user_email", "user_id", b"user_id", "user_identifier", b"user_identifier"]) -> None: ...
     def WhichOneof(self, oneof_group: typing.Literal["user_identifier", b"user_identifier"]) -> typing.Literal["user_id", "user_email"] | None: ...
 
 global___GetUserRequest = GetUserRequest
