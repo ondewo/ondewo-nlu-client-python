@@ -124,6 +124,8 @@ class _CcaiServiceTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper
     """ondewo-nlu-vectorstore service"""
     CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM_AGENT: _CcaiServiceType.ValueType  # 18
     """ondewo-nlu-llm-agent service"""
+    CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM_MCP: _CcaiServiceType.ValueType  # 19
+    """ondewo-nlu-llm-mcp service"""
 
 class CcaiServiceType(_CcaiServiceType, metaclass=_CcaiServiceTypeEnumTypeWrapper): ...
 
@@ -165,6 +167,8 @@ CCAI_SERVICE_TYPE_ONDEWO_NLU_VECTORSTORE: CcaiServiceType.ValueType  # 17
 """ondewo-nlu-vectorstore service"""
 CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM_AGENT: CcaiServiceType.ValueType  # 18
 """ondewo-nlu-llm-agent service"""
+CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM_MCP: CcaiServiceType.ValueType  # 19
+"""ondewo-nlu-llm-mcp service"""
 global___CcaiServiceType = CcaiServiceType
 
 class _CcaiServiceProvider:
@@ -287,6 +291,15 @@ class _CcaiServiceProviderEnumTypeWrapper(google.protobuf.internal.enum_type_wra
     """Hugging Face SmolAgents as the CCAI service provider
     [SmolAgents](https://github.com/huggingface/smolagents)
     """
+    CCAI_SERVICE_PROVIDER_GOOGLE_AGENT_DEVELOPMENT_KIT: _CcaiServiceProvider.ValueType  # 29
+    """Google Agent Development Kit (ADK) as the CCAI service provider
+    [Google Agent Development Kit (ADK)](https://google.github.io/adk-docs/)
+    """
+    CCAI_SERVICE_PROVIDER_MODEL_CONTEXT_PROTOCOL: _CcaiServiceProvider.ValueType  # 30
+    """Model Context Protocol as the CCAI service provider, enabling integration with services following
+    the Model Context Protocol standard.
+    [MCP](https://modelcontextprotocol.io/introduction)
+    """
 
 class CcaiServiceProvider(_CcaiServiceProvider, metaclass=_CcaiServiceProviderEnumTypeWrapper): ...
 
@@ -403,6 +416,15 @@ CCAI_SERVICE_PROVIDER_HUGGINGFACE_TGE: CcaiServiceProvider.ValueType  # 27
 CCAI_SERVICE_PROVIDER_HUGGINGFACE_SMOLAGENTS: CcaiServiceProvider.ValueType  # 28
 """Hugging Face SmolAgents as the CCAI service provider
 [SmolAgents](https://github.com/huggingface/smolagents)
+"""
+CCAI_SERVICE_PROVIDER_GOOGLE_AGENT_DEVELOPMENT_KIT: CcaiServiceProvider.ValueType  # 29
+"""Google Agent Development Kit (ADK) as the CCAI service provider
+[Google Agent Development Kit (ADK)](https://google.github.io/adk-docs/)
+"""
+CCAI_SERVICE_PROVIDER_MODEL_CONTEXT_PROTOCOL: CcaiServiceProvider.ValueType  # 30
+"""Model Context Protocol as the CCAI service provider, enabling integration with services following
+the Model Context Protocol standard.
+[MCP](https://modelcontextprotocol.io/introduction)
 """
 global___CcaiServiceProvider = CcaiServiceProvider
 
