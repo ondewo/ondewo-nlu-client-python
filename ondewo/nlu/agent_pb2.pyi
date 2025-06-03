@@ -562,19 +562,26 @@ class GetAgentRequest(google.protobuf.message.Message):
 
     PARENT_FIELD_NUMBER: builtins.int
     AGENT_VIEW_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The project that the agent to fetch is associated with.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
     agent_view: global___AgentView.ValueType
     """Optional. Specify the view of the returned agent (full view by default)"""
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. A mask to control which fields are returned in the response."""
+
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
         agent_view: global___AgentView.ValueType = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["agent_view", b"agent_view", "parent", b"parent"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["agent_view", b"agent_view", "field_mask", b"field_mask", "parent", b"parent"]) -> None: ...
 
 global___GetAgentRequest = GetAgentRequest
 
