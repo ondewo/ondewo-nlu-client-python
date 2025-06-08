@@ -2317,6 +2317,7 @@ class ListSessionLabelsOfAllSessionsRequest(google.protobuf.message.Message):
 
     PARENT_FIELD_NUMBER: builtins.int
     SESSION_FILTER_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """The parent for which the labels for all sessions should be listed
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
@@ -2325,14 +2326,20 @@ class ListSessionLabelsOfAllSessionsRequest(google.protobuf.message.Message):
     def session_filter(self) -> global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
 
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
         session_filter: global___SessionFilter | None = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___ListSessionLabelsOfAllSessionsRequest = ListSessionLabelsOfAllSessionsRequest
 
@@ -2364,6 +2371,7 @@ class ListLanguageCodesOfAllSessionsRequest(google.protobuf.message.Message):
 
     PARENT_FIELD_NUMBER: builtins.int
     SESSION_FILTER_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """The parent for which the language_codes for all sessions should be listed
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
@@ -2372,14 +2380,20 @@ class ListLanguageCodesOfAllSessionsRequest(google.protobuf.message.Message):
     def session_filter(self) -> global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
 
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
         session_filter: global___SessionFilter | None = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___ListLanguageCodesOfAllSessionsRequest = ListLanguageCodesOfAllSessionsRequest
 
@@ -2411,6 +2425,7 @@ class ListMatchedIntentsOfAllSessionsRequest(google.protobuf.message.Message):
 
     PARENT_FIELD_NUMBER: builtins.int
     SESSION_FILTER_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """The parent for which the matched_intents for all sessions should be listed
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
@@ -2419,14 +2434,20 @@ class ListMatchedIntentsOfAllSessionsRequest(google.protobuf.message.Message):
     def session_filter(self) -> global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
 
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
         session_filter: global___SessionFilter | None = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___ListMatchedIntentsOfAllSessionsRequest = ListMatchedIntentsOfAllSessionsRequest
 
@@ -2458,6 +2479,7 @@ class ListMatchedEntityTypesOfAllSessionsRequest(google.protobuf.message.Message
 
     PARENT_FIELD_NUMBER: builtins.int
     SESSION_FILTER_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """The parent for which the matched_entity_types for all sessions should be listed
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
@@ -2466,14 +2488,20 @@ class ListMatchedEntityTypesOfAllSessionsRequest(google.protobuf.message.Message
     def session_filter(self) -> global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
 
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
         session_filter: global___SessionFilter | None = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___ListMatchedEntityTypesOfAllSessionsRequest = ListMatchedEntityTypesOfAllSessionsRequest
 
@@ -2505,6 +2533,7 @@ class ListUserIdsOfAllSessionsRequest(google.protobuf.message.Message):
 
     PARENT_FIELD_NUMBER: builtins.int
     SESSION_FILTER_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """The parent for which the user_ids for all sessions should be listed
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
@@ -2513,14 +2542,20 @@ class ListUserIdsOfAllSessionsRequest(google.protobuf.message.Message):
     def session_filter(self) -> global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
 
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
         session_filter: global___SessionFilter | None = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___ListUserIdsOfAllSessionsRequest = ListUserIdsOfAllSessionsRequest
 
@@ -2552,6 +2587,7 @@ class ListIdentifiedUserIdsOfAllSessionsRequest(google.protobuf.message.Message)
 
     PARENT_FIELD_NUMBER: builtins.int
     SESSION_FILTER_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """The parent for which the identified_user_ids for all sessions should be listed
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
@@ -2560,14 +2596,20 @@ class ListIdentifiedUserIdsOfAllSessionsRequest(google.protobuf.message.Message)
     def session_filter(self) -> global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
 
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
         session_filter: global___SessionFilter | None = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___ListIdentifiedUserIdsOfAllSessionsRequest = ListIdentifiedUserIdsOfAllSessionsRequest
 
@@ -2599,6 +2641,7 @@ class ListTagsOfAllSessionsRequest(google.protobuf.message.Message):
 
     PARENT_FIELD_NUMBER: builtins.int
     SESSION_FILTER_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """The parent for which the tags for all sessions should be listed
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
@@ -2607,14 +2650,20 @@ class ListTagsOfAllSessionsRequest(google.protobuf.message.Message):
     def session_filter(self) -> global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
 
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
         session_filter: global___SessionFilter | None = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___ListTagsOfAllSessionsRequest = ListTagsOfAllSessionsRequest
 
@@ -2646,6 +2695,7 @@ class ListInputContextsOfAllSessionsRequest(google.protobuf.message.Message):
 
     PARENT_FIELD_NUMBER: builtins.int
     SESSION_FILTER_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """The parent for which the input_contexts for all sessions should be listed
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
@@ -2654,14 +2704,20 @@ class ListInputContextsOfAllSessionsRequest(google.protobuf.message.Message):
     def session_filter(self) -> global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
 
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
         session_filter: global___SessionFilter | None = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___ListInputContextsOfAllSessionsRequest = ListInputContextsOfAllSessionsRequest
 
@@ -2693,6 +2749,7 @@ class ListOutputContextsOfAllSessionsRequest(google.protobuf.message.Message):
 
     PARENT_FIELD_NUMBER: builtins.int
     SESSION_FILTER_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """The parent for which the output_contexts for all sessions should be listed
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
@@ -2701,14 +2758,20 @@ class ListOutputContextsOfAllSessionsRequest(google.protobuf.message.Message):
     def session_filter(self) -> global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
 
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
         session_filter: global___SessionFilter | None = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___ListOutputContextsOfAllSessionsRequest = ListOutputContextsOfAllSessionsRequest
 
@@ -2740,6 +2803,7 @@ class ListPlatformsOfAllSessionsRequest(google.protobuf.message.Message):
 
     PARENT_FIELD_NUMBER: builtins.int
     SESSION_FILTER_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """The parent for which the platforms for all sessions should be listed
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
@@ -2748,14 +2812,20 @@ class ListPlatformsOfAllSessionsRequest(google.protobuf.message.Message):
     def session_filter(self) -> global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
 
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
         session_filter: global___SessionFilter | None = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___ListPlatformsOfAllSessionsRequest = ListPlatformsOfAllSessionsRequest
 
@@ -2787,6 +2857,7 @@ class ListAccountIdsOfAllSessionsRequest(google.protobuf.message.Message):
 
     PARENT_FIELD_NUMBER: builtins.int
     SESSION_FILTER_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """The parent for which the account_ids for all sessions should be listed
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
@@ -2795,14 +2866,20 @@ class ListAccountIdsOfAllSessionsRequest(google.protobuf.message.Message):
     def session_filter(self) -> global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
 
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
         session_filter: global___SessionFilter | None = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___ListAccountIdsOfAllSessionsRequest = ListAccountIdsOfAllSessionsRequest
 
@@ -2928,6 +3005,7 @@ class ListOriginIdsOfAllSessionsRequest(google.protobuf.message.Message):
 
     PARENT_FIELD_NUMBER: builtins.int
     SESSION_FILTER_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """The parent for which the origin_ids for all sessions should be listed
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
@@ -2936,14 +3014,20 @@ class ListOriginIdsOfAllSessionsRequest(google.protobuf.message.Message):
     def session_filter(self) -> global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
 
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
         session_filter: global___SessionFilter | None = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___ListOriginIdsOfAllSessionsRequest = ListOriginIdsOfAllSessionsRequest
 
@@ -3097,6 +3181,7 @@ class ListSessionCommentsRequest(google.protobuf.message.Message):
 
     SESSION_ID_FIELD_NUMBER: builtins.int
     PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     session_id: builtins.str
     """The unique identifier for the session for which reviews should be listed
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
@@ -3126,13 +3211,20 @@ class ListSessionCommentsRequest(google.protobuf.message.Message):
     * "current_index1--page_size-20"
     * "current_index-1--page_size--20"
     """
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
     def __init__(
         self,
         *,
         session_id: builtins.str = ...,
         page_token: builtins.str = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["page_token", b"page_token", "session_id", b"session_id"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "page_token", b"page_token", "session_id", b"session_id"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___ListSessionCommentsRequest = ListSessionCommentsRequest
 
@@ -3270,16 +3362,25 @@ class GetSessionReviewRequest(google.protobuf.message.Message):
 
     SESSION_REVIEW_ID_FIELD_NUMBER: builtins.int
     SESSION_REVIEW_VIEW_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     session_review_id: builtins.str
     """The unique identifier of the session review to be returned"""
     session_review_view: global___SessionReview.View.ValueType
+    """The view of the session review to be returned"""
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
     def __init__(
         self,
         *,
         session_review_id: builtins.str = ...,
         session_review_view: global___SessionReview.View.ValueType = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["session_review_id", b"session_review_id", "session_review_view", b"session_review_view"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "session_review_id", b"session_review_id", "session_review_view", b"session_review_view"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___GetSessionReviewRequest = GetSessionReviewRequest
 
@@ -3291,19 +3392,27 @@ class GetLatestSessionReviewRequest(google.protobuf.message.Message):
 
     SESSION_ID_FIELD_NUMBER: builtins.int
     SESSION_REVIEW_VIEW_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     session_id: builtins.str
     """The unique identifier of the session for which the latest review should be returned
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
     """
     session_review_view: global___SessionReview.View.ValueType
     """An enum specifying the amount of information to be returned for the desired session review"""
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
     def __init__(
         self,
         *,
         session_id: builtins.str = ...,
         session_review_view: global___SessionReview.View.ValueType = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["session_id", b"session_id", "session_review_view", b"session_review_view"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "session_id", b"session_id", "session_review_view", b"session_review_view"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___GetLatestSessionReviewRequest = GetLatestSessionReviewRequest
 
@@ -3588,6 +3697,7 @@ class GetAudioFilesRequest(google.protobuf.message.Message):
     RESOURCE_VIEW_FIELD_NUMBER: builtins.int
     PAGE_TOKEN_FIELD_NUMBER: builtins.int
     SORTING_MODE_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The project of this agent.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
@@ -3627,6 +3737,10 @@ class GetAudioFilesRequest(google.protobuf.message.Message):
         Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
         """
 
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
     def __init__(
         self,
         *,
@@ -3635,8 +3749,11 @@ class GetAudioFilesRequest(google.protobuf.message.Message):
         resource_view: global___ResourceView.ValueType = ...,
         page_token: builtins.str = ...,
         sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["names", b"names", "page_token", b"page_token", "parent", b"parent", "resource_view", b"resource_view", "sorting_mode", b"sorting_mode"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "names", b"names", "page_token", b"page_token", "parent", b"parent", "resource_view", b"resource_view", "sorting_mode", b"sorting_mode"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___GetAudioFilesRequest = GetAudioFilesRequest
 
@@ -3801,6 +3918,7 @@ class ListAudioFilesRequest(google.protobuf.message.Message):
     RESOURCE_VIEW_FIELD_NUMBER: builtins.int
     PAGE_TOKEN_FIELD_NUMBER: builtins.int
     SORTING_MODE_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The project of this agent.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
@@ -3838,6 +3956,10 @@ class ListAudioFilesRequest(google.protobuf.message.Message):
     """
     sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType
     """sorting mode"""
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
     def __init__(
         self,
         *,
@@ -3846,8 +3968,11 @@ class ListAudioFilesRequest(google.protobuf.message.Message):
         resource_view: global___ResourceView.ValueType = ...,
         page_token: builtins.str = ...,
         sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["page_token", b"page_token", "parent", b"parent", "resource_view", b"resource_view", "session_id", b"session_id", "sorting_mode", b"sorting_mode"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "page_token", b"page_token", "parent", b"parent", "resource_view", b"resource_view", "session_id", b"session_id", "sorting_mode", b"sorting_mode"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___ListAudioFilesRequest = ListAudioFilesRequest
 
@@ -3892,6 +4017,7 @@ class GetAudioFileOfSessionRequest(google.protobuf.message.Message):
     PARENT_FIELD_NUMBER: builtins.int
     SESSION_ID_FIELD_NUMBER: builtins.int
     RESOURCE_VIEW_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The project of this agent.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
@@ -3902,13 +4028,20 @@ class GetAudioFileOfSessionRequest(google.protobuf.message.Message):
     """
     resource_view: global___ResourceView.ValueType
     """Represents the options for views of resources"""
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
         session_id: builtins.str = ...,
         resource_view: global___ResourceView.ValueType = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["parent", b"parent", "resource_view", b"resource_view", "session_id", b"session_id"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "parent", b"parent", "resource_view", b"resource_view", "session_id", b"session_id"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___GetAudioFileOfSessionRequest = GetAudioFileOfSessionRequest

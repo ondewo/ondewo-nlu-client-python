@@ -126,6 +126,12 @@ class _CcaiServiceTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper
     """ondewo-nlu-llm-agent service"""
     CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM_MCP: _CcaiServiceType.ValueType  # 19
     """ondewo-nlu-llm-mcp service"""
+    CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM_RAG: _CcaiServiceType.ValueType  # 20
+    """ondewo-nlu-llm-rag service"""
+    CCAI_SERVICE_TYPE_ONDEWO_ANALYTICS: _CcaiServiceType.ValueType  # 21
+    """ondewo-analytics service"""
+    CCAI_SERVICE_TYPE_ONDEWO_ANALYTICS_DASHBOARD: _CcaiServiceType.ValueType  # 22
+    """ondewo-analytics-dashboard service"""
 
 class CcaiServiceType(_CcaiServiceType, metaclass=_CcaiServiceTypeEnumTypeWrapper): ...
 
@@ -169,6 +175,12 @@ CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM_AGENT: CcaiServiceType.ValueType  # 18
 """ondewo-nlu-llm-agent service"""
 CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM_MCP: CcaiServiceType.ValueType  # 19
 """ondewo-nlu-llm-mcp service"""
+CCAI_SERVICE_TYPE_ONDEWO_NLU_LLM_RAG: CcaiServiceType.ValueType  # 20
+"""ondewo-nlu-llm-rag service"""
+CCAI_SERVICE_TYPE_ONDEWO_ANALYTICS: CcaiServiceType.ValueType  # 21
+"""ondewo-analytics service"""
+CCAI_SERVICE_TYPE_ONDEWO_ANALYTICS_DASHBOARD: CcaiServiceType.ValueType  # 22
+"""ondewo-analytics-dashboard service"""
 global___CcaiServiceType = CcaiServiceType
 
 class _CcaiServiceProvider:
@@ -300,6 +312,18 @@ class _CcaiServiceProviderEnumTypeWrapper(google.protobuf.internal.enum_type_wra
     the Model Context Protocol standard.
     [MCP](https://modelcontextprotocol.io/introduction)
     """
+    CCAI_SERVICE_PROVIDER_OPENSEARCH: _CcaiServiceProvider.ValueType  # 31
+    """Opensearch as the CCAI service provider, enabling integration with Opensearch vector database and search services
+    [Opensearch](https://opensearch.org/)
+    """
+    CCAI_SERVICE_PROVIDER_GROK: _CcaiServiceProvider.ValueType  # 32
+    """Grok as the CCAI service provider, commonly used for models such as Grok-1
+    [Grok](https://grok.x.ai/)
+    """
+    CCAI_SERVICE_PROVIDER_POSTGRES: _CcaiServiceProvider.ValueType  # 33
+    """PostgreSQL as the CCAI service provider, enabling integration with PostgreSQL databases
+    [PostgreSQL](https://www.postgresql.org/)
+    """
 
 class CcaiServiceProvider(_CcaiServiceProvider, metaclass=_CcaiServiceProviderEnumTypeWrapper): ...
 
@@ -425,6 +449,18 @@ CCAI_SERVICE_PROVIDER_MODEL_CONTEXT_PROTOCOL: CcaiServiceProvider.ValueType  # 3
 """Model Context Protocol as the CCAI service provider, enabling integration with services following
 the Model Context Protocol standard.
 [MCP](https://modelcontextprotocol.io/introduction)
+"""
+CCAI_SERVICE_PROVIDER_OPENSEARCH: CcaiServiceProvider.ValueType  # 31
+"""Opensearch as the CCAI service provider, enabling integration with Opensearch vector database and search services
+[Opensearch](https://opensearch.org/)
+"""
+CCAI_SERVICE_PROVIDER_GROK: CcaiServiceProvider.ValueType  # 32
+"""Grok as the CCAI service provider, commonly used for models such as Grok-1
+[Grok](https://grok.x.ai/)
+"""
+CCAI_SERVICE_PROVIDER_POSTGRES: CcaiServiceProvider.ValueType  # 33
+"""PostgreSQL as the CCAI service provider, enabling integration with PostgreSQL databases
+[PostgreSQL](https://www.postgresql.org/)
 """
 global___CcaiServiceProvider = CcaiServiceProvider
 
@@ -769,6 +805,7 @@ class GetCcaiProjectRequest(google.protobuf.message.Message):
     CCAI_PROJECT_VIEW_FIELD_NUMBER: builtins.int
     CCAI_SERVICE_FILTER_FIELD_NUMBER: builtins.int
     NLU_PROJECT_NAME_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     name: builtins.str
     """CCAI service project name with which to perform the call of the form <pre><code>projects/&lt;project_uuid&gt;/project</code></pre>"""
     ccai_project_view: global___CcaiProjectView.ValueType
@@ -781,6 +818,10 @@ class GetCcaiProjectRequest(google.protobuf.message.Message):
     def ccai_service_filter(self) -> global___CcaiServiceFilter:
         """Filter which services should be included in the returned CcaiProject"""
 
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
     def __init__(
         self,
         *,
@@ -788,13 +829,16 @@ class GetCcaiProjectRequest(google.protobuf.message.Message):
         ccai_project_view: global___CcaiProjectView.ValueType | None = ...,
         ccai_service_filter: global___CcaiServiceFilter | None = ...,
         nlu_project_name: builtins.str = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_ccai_project_view", b"_ccai_project_view", "_ccai_service_filter", b"_ccai_service_filter", "ccai_project_view", b"ccai_project_view", "ccai_service_filter", b"ccai_service_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_ccai_project_view", b"_ccai_project_view", "_ccai_service_filter", b"_ccai_service_filter", "ccai_project_view", b"ccai_project_view", "ccai_service_filter", b"ccai_service_filter", "name", b"name", "nlu_project_name", b"nlu_project_name"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_ccai_project_view", b"_ccai_project_view", "_ccai_service_filter", b"_ccai_service_filter", "_field_mask", b"_field_mask", "ccai_project_view", b"ccai_project_view", "ccai_service_filter", b"ccai_service_filter", "field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_ccai_project_view", b"_ccai_project_view", "_ccai_service_filter", b"_ccai_service_filter", "_field_mask", b"_field_mask", "ccai_project_view", b"ccai_project_view", "ccai_service_filter", b"ccai_service_filter", "field_mask", b"field_mask", "name", b"name", "nlu_project_name", b"nlu_project_name"]) -> None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_ccai_project_view", b"_ccai_project_view"]) -> typing.Literal["ccai_project_view"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_ccai_service_filter", b"_ccai_service_filter"]) -> typing.Literal["ccai_service_filter"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___GetCcaiProjectRequest = GetCcaiProjectRequest
 
@@ -806,6 +850,7 @@ class GetCcaiServiceRequest(google.protobuf.message.Message):
 
     NAME_FIELD_NUMBER: builtins.int
     NLU_PROJECT_NAME_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     name: builtins.str
     """CCAI service project name with which to perform the call of the form
     <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;</code></pre>
@@ -814,13 +859,20 @@ class GetCcaiServiceRequest(google.protobuf.message.Message):
     """Required. The nlu agent project of this CcaiProject.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
     def __init__(
         self,
         *,
         name: builtins.str = ...,
         nlu_project_name: builtins.str = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["name", b"name", "nlu_project_name", b"nlu_project_name"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "name", b"name", "nlu_project_name", b"nlu_project_name"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___GetCcaiServiceRequest = GetCcaiServiceRequest
 
@@ -835,6 +887,7 @@ class ListCcaiProjectsRequest(google.protobuf.message.Message):
     CCAI_PROJECT_SORTING_FIELD_NUMBER: builtins.int
     PAGE_TOKEN_FIELD_NUMBER: builtins.int
     NLU_PROJECT_NAME_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     ccai_project_view: global___CcaiProjectView.ValueType
     """Optional. Specify the view of the returned CcaiProject (full view by default)"""
     page_token: builtins.str
@@ -878,6 +931,10 @@ class ListCcaiProjectsRequest(google.protobuf.message.Message):
         If not specified, the default behavior is to have no sorting.
         """
 
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
     def __init__(
         self,
         *,
@@ -886,13 +943,16 @@ class ListCcaiProjectsRequest(google.protobuf.message.Message):
         ccai_project_sorting: global___CcaiProjectSorting | None = ...,
         page_token: builtins.str | None = ...,
         nlu_project_name: builtins.str = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_ccai_project_sorting", b"_ccai_project_sorting", "_ccai_service_filter", b"_ccai_service_filter", "_page_token", b"_page_token", "ccai_project_sorting", b"ccai_project_sorting", "ccai_service_filter", b"ccai_service_filter", "page_token", b"page_token"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_ccai_project_sorting", b"_ccai_project_sorting", "_ccai_service_filter", b"_ccai_service_filter", "_page_token", b"_page_token", "ccai_project_sorting", b"ccai_project_sorting", "ccai_project_view", b"ccai_project_view", "ccai_service_filter", b"ccai_service_filter", "nlu_project_name", b"nlu_project_name", "page_token", b"page_token"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_ccai_project_sorting", b"_ccai_project_sorting", "_ccai_service_filter", b"_ccai_service_filter", "_field_mask", b"_field_mask", "_page_token", b"_page_token", "ccai_project_sorting", b"ccai_project_sorting", "ccai_service_filter", b"ccai_service_filter", "field_mask", b"field_mask", "page_token", b"page_token"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_ccai_project_sorting", b"_ccai_project_sorting", "_ccai_service_filter", b"_ccai_service_filter", "_field_mask", b"_field_mask", "_page_token", b"_page_token", "ccai_project_sorting", b"ccai_project_sorting", "ccai_project_view", b"ccai_project_view", "ccai_service_filter", b"ccai_service_filter", "field_mask", b"field_mask", "nlu_project_name", b"nlu_project_name", "page_token", b"page_token"]) -> None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_ccai_project_sorting", b"_ccai_project_sorting"]) -> typing.Literal["ccai_project_sorting"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_ccai_service_filter", b"_ccai_service_filter"]) -> typing.Literal["ccai_service_filter"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_page_token", b"_page_token"]) -> typing.Literal["page_token"] | None: ...
 
@@ -992,6 +1052,7 @@ class CcaiServiceFilter(google.protobuf.message.Message):
 
     LANGUAGE_CODES_FIELD_NUMBER: builtins.int
     CCAI_SERVICE_TYPES_FIELD_NUMBER: builtins.int
+    CCAI_SERVICE_PROVIDERS_FIELD_NUMBER: builtins.int
     @property
     def language_codes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Language codes of the projects for which services are filtered."""
@@ -1000,13 +1061,18 @@ class CcaiServiceFilter(google.protobuf.message.Message):
     def ccai_service_types(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[global___CcaiServiceType.ValueType]:
         """Type of CCAI service service"""
 
+    @property
+    def ccai_service_providers(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[global___CcaiServiceProvider.ValueType]:
+        """Type of CCAI service providers"""
+
     def __init__(
         self,
         *,
         language_codes: collections.abc.Iterable[builtins.str] | None = ...,
         ccai_service_types: collections.abc.Iterable[global___CcaiServiceType.ValueType] | None = ...,
+        ccai_service_providers: collections.abc.Iterable[global___CcaiServiceProvider.ValueType] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["ccai_service_types", b"ccai_service_types", "language_codes", b"language_codes"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["ccai_service_providers", b"ccai_service_providers", "ccai_service_types", b"ccai_service_types", "language_codes", b"language_codes"]) -> None: ...
 
 global___CcaiServiceFilter = CcaiServiceFilter
 
@@ -1034,9 +1100,7 @@ class UpdateCcaiProjectRequest(google.protobuf.message.Message):
 
     @property
     def update_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
-        """Optional. The mask to control which fields get updated.
-        Note: Not implemented yet
-        """
+        """Optional. The mask to control which fields get updated."""
 
     def __init__(
         self,

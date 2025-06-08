@@ -236,6 +236,7 @@ class GetProjectRoleRequest(google.protobuf.message.Message):
     ROLE_ID_FIELD_NUMBER: builtins.int
     ROLE_NAME_FIELD_NUMBER: builtins.int
     PROJECT_ROLE_VIEW_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The project that the agent to fetch is associated with.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
@@ -246,6 +247,10 @@ class GetProjectRoleRequest(google.protobuf.message.Message):
     """role can also be uniquely identified by its name"""
     project_role_view: global___ProjectRoleView.ValueType
     """Optional. specify the view of the project role, PROJECT_ROLE_VIEW_FULL by default"""
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
     def __init__(
         self,
         *,
@@ -253,9 +258,13 @@ class GetProjectRoleRequest(google.protobuf.message.Message):
         role_id: builtins.int = ...,
         role_name: builtins.str = ...,
         project_role_view: global___ProjectRoleView.ValueType = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["project_role_identifier", b"project_role_identifier", "role_id", b"role_id", "role_name", b"role_name"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["parent", b"parent", "project_role_identifier", b"project_role_identifier", "project_role_view", b"project_role_view", "role_id", b"role_id", "role_name", b"role_name"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "project_role_identifier", b"project_role_identifier", "role_id", b"role_id", "role_name", b"role_name"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "parent", b"parent", "project_role_identifier", b"project_role_identifier", "project_role_view", b"project_role_view", "role_id", b"role_id", "role_name", b"role_name"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
+    @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["project_role_identifier", b"project_role_identifier"]) -> typing.Literal["role_id", "role_name"] | None: ...
 
 global___GetProjectRoleRequest = GetProjectRoleRequest
@@ -293,6 +302,7 @@ class ListProjectRolesRequest(google.protobuf.message.Message):
     PARENT_FIELD_NUMBER: builtins.int
     PAGE_TOKEN_FIELD_NUMBER: builtins.int
     PROJECT_ROLE_VIEW_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The project that the agent to fetch is associated with.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
@@ -324,14 +334,21 @@ class ListProjectRolesRequest(google.protobuf.message.Message):
     """
     project_role_view: global___ProjectRoleView.ValueType
     """Optional. specify the view of the project roles, PROJECT_ROLE_VIEW_FULL by default"""
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
         page_token: builtins.str = ...,
         project_role_view: global___ProjectRoleView.ValueType = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["page_token", b"page_token", "parent", b"parent", "project_role_view", b"project_role_view"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "page_token", b"page_token", "parent", b"parent", "project_role_view", b"project_role_view"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___ListProjectRolesRequest = ListProjectRolesRequest
 

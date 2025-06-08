@@ -19,6 +19,7 @@ limitations under the License.
 import builtins
 import collections.abc
 import google.protobuf.descriptor
+import google.protobuf.field_mask_pb2
 import google.protobuf.internal.containers
 import google.protobuf.internal.enum_type_wrapper
 import google.protobuf.message
@@ -150,16 +151,24 @@ class ListLlmModelsRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     CCAI_SERVICE_NAME_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     ccai_service_name: builtins.str
     """The CCAI service for which to list models.
     Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;</code></pre>
     """
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
     def __init__(
         self,
         *,
         ccai_service_name: builtins.str = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["ccai_service_name", b"ccai_service_name"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "ccai_service_name", b"ccai_service_name", "field_mask", b"field_mask"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___ListLlmModelsRequest = ListLlmModelsRequest
 
@@ -242,6 +251,7 @@ class LlmGenerateRequest(google.protobuf.message.Message):
     LLM_GENERATION_REQUEST_FIELD_NUMBER: builtins.int
     CCAI_SERVICE_NAME_FIELD_NUMBER: builtins.int
     FILE_RESOURCES_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     ccai_service_name: builtins.str
     """The CCAI service to be used for processing the request.
     This specifies which large language model provider and model settings will handle the request.
@@ -259,15 +269,21 @@ class LlmGenerateRequest(google.protobuf.message.Message):
     def file_resources(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.session_pb2.FileResource]:
         """Files as input for the generation request"""
 
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
     def __init__(
         self,
         *,
         llm_generation_request: google.protobuf.struct_pb2.Struct | None = ...,
         ccai_service_name: builtins.str = ...,
         file_resources: collections.abc.Iterable[ondewo.nlu.session_pb2.FileResource] | None = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["llm_generation_request", b"llm_generation_request"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["ccai_service_name", b"ccai_service_name", "file_resources", b"file_resources", "llm_generation_request", b"llm_generation_request"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "llm_generation_request", b"llm_generation_request"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "ccai_service_name", b"ccai_service_name", "field_mask", b"field_mask", "file_resources", b"file_resources", "llm_generation_request", b"llm_generation_request"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___LlmGenerateRequest = LlmGenerateRequest
 
@@ -335,6 +351,7 @@ class ExtractEntitiesRequest(google.protobuf.message.Message):
     TEXT_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     INTENT_NAME_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """the parent of the request
     Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
@@ -348,6 +365,10 @@ class ExtractEntitiesRequest(google.protobuf.message.Message):
     hierarchy for entities that correspond to intent parameters
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
     """
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
     def __init__(
         self,
         *,
@@ -355,8 +376,11 @@ class ExtractEntitiesRequest(google.protobuf.message.Message):
         text: builtins.str = ...,
         language_code: builtins.str = ...,
         intent_name: builtins.str = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["intent_name", b"intent_name", "language_code", b"language_code", "parent", b"parent", "text", b"text"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "intent_name", b"intent_name", "language_code", b"language_code", "parent", b"parent", "text", b"text"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___ExtractEntitiesRequest = ExtractEntitiesRequest
 
@@ -371,6 +395,7 @@ class ExtractEntitiesFuzzyRequest(google.protobuf.message.Message):
     POTENTIAL_ENTITIES_FIELD_NUMBER: builtins.int
     MINIMAL_SCORE_FIELD_NUMBER: builtins.int
     ALLOW_OVERLAPS_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """the parent of the request
     Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
@@ -385,6 +410,10 @@ class ExtractEntitiesFuzzyRequest(google.protobuf.message.Message):
     def potential_entities(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___EntityTypeFuzzyNerConfig]:
         """Potential entities to be extracted from the text with entity-specific configs"""
 
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
     def __init__(
         self,
         *,
@@ -393,8 +422,11 @@ class ExtractEntitiesFuzzyRequest(google.protobuf.message.Message):
         potential_entities: collections.abc.Iterable[global___EntityTypeFuzzyNerConfig] | None = ...,
         minimal_score: builtins.float = ...,
         allow_overlaps: builtins.bool = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["allow_overlaps", b"allow_overlaps", "minimal_score", b"minimal_score", "parent", b"parent", "potential_entities", b"potential_entities", "text", b"text"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "allow_overlaps", b"allow_overlaps", "field_mask", b"field_mask", "minimal_score", b"minimal_score", "parent", b"parent", "potential_entities", b"potential_entities", "text", b"text"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___ExtractEntitiesFuzzyRequest = ExtractEntitiesFuzzyRequest
 
@@ -521,6 +553,7 @@ class GetAlternativeSentencesRequest(google.protobuf.message.Message):
     PARENT_FIELD_NUMBER: builtins.int
     PROTECTED_WORDS_FIELD_NUMBER: builtins.int
     WORDS_TO_CHANGE_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     sentence: builtins.str
     """The sentence from which it is desired to get alternative sentences"""
     language_code: builtins.str
@@ -541,6 +574,10 @@ class GetAlternativeSentencesRequest(google.protobuf.message.Message):
     def words_to_change(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Words to be changed in the augmentation process"""
 
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
     def __init__(
         self,
         *,
@@ -550,9 +587,11 @@ class GetAlternativeSentencesRequest(google.protobuf.message.Message):
         parent: builtins.str = ...,
         protected_words: collections.abc.Iterable[builtins.str] | None = ...,
         words_to_change: collections.abc.Iterable[builtins.str] | None = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["config", b"config"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["config", b"config", "language_code", b"language_code", "parent", b"parent", "protected_words", b"protected_words", "sentence", b"sentence", "words_to_change", b"words_to_change"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "config", b"config", "field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "config", b"config", "field_mask", b"field_mask", "language_code", b"language_code", "parent", b"parent", "protected_words", b"protected_words", "sentence", b"sentence", "words_to_change", b"words_to_change"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___GetAlternativeSentencesRequest = GetAlternativeSentencesRequest
 
@@ -566,6 +605,7 @@ class GenerateUserSaysRequest(google.protobuf.message.Message):
     PARENT_FIELD_NUMBER: builtins.int
     N_REPEAT_SYNONYM_FIELD_NUMBER: builtins.int
     BRANCH_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     language_code: builtins.str
     """language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
     parent: builtins.str
@@ -576,6 +616,10 @@ class GenerateUserSaysRequest(google.protobuf.message.Message):
     """The number of synonyms desired"""
     branch: builtins.str
     """Git branch"""
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
     def __init__(
         self,
         *,
@@ -583,8 +627,11 @@ class GenerateUserSaysRequest(google.protobuf.message.Message):
         parent: builtins.str = ...,
         n_repeat_synonym: builtins.int = ...,
         branch: builtins.str = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["branch", b"branch", "language_code", b"language_code", "n_repeat_synonym", b"n_repeat_synonym", "parent", b"parent"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "branch", b"branch", "field_mask", b"field_mask", "language_code", b"language_code", "n_repeat_synonym", b"n_repeat_synonym", "parent", b"parent"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___GenerateUserSaysRequest = GenerateUserSaysRequest
 
@@ -599,6 +646,7 @@ class GenerateResponsesRequest(google.protobuf.message.Message):
     N_REPEAT_SYNONYM_FIELD_NUMBER: builtins.int
     BRANCH_FIELD_NUMBER: builtins.int
     DROP_UNKNOWN_PARAMETERS_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     language_code: builtins.str
     """language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
     parent: builtins.str
@@ -610,6 +658,10 @@ class GenerateResponsesRequest(google.protobuf.message.Message):
     branch: builtins.str
     """Git branch"""
     drop_unknown_parameters: builtins.bool
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
     def __init__(
         self,
         *,
@@ -618,8 +670,11 @@ class GenerateResponsesRequest(google.protobuf.message.Message):
         n_repeat_synonym: builtins.int = ...,
         branch: builtins.str = ...,
         drop_unknown_parameters: builtins.bool = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["branch", b"branch", "drop_unknown_parameters", b"drop_unknown_parameters", "language_code", b"language_code", "n_repeat_synonym", b"n_repeat_synonym", "parent", b"parent"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "branch", b"branch", "drop_unknown_parameters", b"drop_unknown_parameters", "field_mask", b"field_mask", "language_code", b"language_code", "n_repeat_synonym", b"n_repeat_synonym", "parent", b"parent"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___GenerateResponsesRequest = GenerateResponsesRequest
 
@@ -639,6 +694,7 @@ class GetAlternativeTrainingPhrasesRequest(google.protobuf.message.Message):
     PROTECTED_WORDS_FIELD_NUMBER: builtins.int
     WORDS_TO_CHANGE_FIELD_NUMBER: builtins.int
     BRANCH_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     intent_name: builtins.str
     """The intent tag attached to the training phrase"""
     language_code: builtins.str
@@ -671,6 +727,10 @@ class GetAlternativeTrainingPhrasesRequest(google.protobuf.message.Message):
     def words_to_change(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Words to be changed in the augmentation process"""
 
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
     def __init__(
         self,
         *,
@@ -684,9 +744,11 @@ class GetAlternativeTrainingPhrasesRequest(google.protobuf.message.Message):
         protected_words: collections.abc.Iterable[builtins.str] | None = ...,
         words_to_change: collections.abc.Iterable[builtins.str] | None = ...,
         branch: builtins.str = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["config", b"config", "training_phrase", b"training_phrase"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["branch", b"branch", "config", b"config", "detect_entities", b"detect_entities", "intent_name", b"intent_name", "language_code", b"language_code", "parent", b"parent", "protected_words", b"protected_words", "similarity_threshold", b"similarity_threshold", "training_phrase", b"training_phrase", "words_to_change", b"words_to_change"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "config", b"config", "field_mask", b"field_mask", "training_phrase", b"training_phrase"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "branch", b"branch", "config", b"config", "detect_entities", b"detect_entities", "field_mask", b"field_mask", "intent_name", b"intent_name", "language_code", b"language_code", "parent", b"parent", "protected_words", b"protected_words", "similarity_threshold", b"similarity_threshold", "training_phrase", b"training_phrase", "words_to_change", b"words_to_change"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___GetAlternativeTrainingPhrasesRequest = GetAlternativeTrainingPhrasesRequest
 
@@ -700,6 +762,7 @@ class GetSynonymsRequest(google.protobuf.message.Message):
     WORD_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     PARENT_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     word: builtins.str
     """Word from which a synonym is got"""
     language_code: builtins.str
@@ -712,6 +775,10 @@ class GetSynonymsRequest(google.protobuf.message.Message):
     def config(self) -> global___DataEnrichmentConfig:
         """Configuration of the enricher"""
 
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
     def __init__(
         self,
         *,
@@ -719,9 +786,11 @@ class GetSynonymsRequest(google.protobuf.message.Message):
         word: builtins.str = ...,
         language_code: builtins.str = ...,
         parent: builtins.str = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["config", b"config"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["config", b"config", "language_code", b"language_code", "parent", b"parent", "word", b"word"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "config", b"config", "field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "config", b"config", "field_mask", b"field_mask", "language_code", b"language_code", "parent", b"parent", "word", b"word"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___GetSynonymsRequest = GetSynonymsRequest
 
@@ -1217,6 +1286,7 @@ class ClassifyIntentsRequest(google.protobuf.message.Message):
     CONTEXT_NAMES_FIELD_NUMBER: builtins.int
     MODE_FIELD_NUMBER: builtins.int
     ALGORITHMS_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The project of this agent.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
@@ -1243,6 +1313,10 @@ class ClassifyIntentsRequest(google.protobuf.message.Message):
     def algorithms(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[global___IntentAlgorithms.ValueType]:
         """Optional: Algorithm list"""
 
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
     def __init__(
         self,
         *,
@@ -1253,8 +1327,11 @@ class ClassifyIntentsRequest(google.protobuf.message.Message):
         context_names: collections.abc.Iterable[builtins.str] | None = ...,
         mode: global___Mode.ValueType = ...,
         algorithms: collections.abc.Iterable[global___IntentAlgorithms.ValueType] | None = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["active_contexts", b"active_contexts", "algorithms", b"algorithms", "context_names", b"context_names", "language_code", b"language_code", "mode", b"mode", "parent", b"parent", "text", b"text"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "active_contexts", b"active_contexts", "algorithms", b"algorithms", "context_names", b"context_names", "field_mask", b"field_mask", "language_code", b"language_code", "mode", b"mode", "parent", b"parent", "text", b"text"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___ClassifyIntentsRequest = ClassifyIntentsRequest
 

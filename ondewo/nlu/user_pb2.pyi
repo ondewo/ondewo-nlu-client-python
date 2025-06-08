@@ -288,6 +288,7 @@ class ListUsersRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     page_token: builtins.str
     """Optional: The page token to support pagination.
     Pagination allows you to retrieve a large result set in smaller, more manageable portions.
@@ -313,12 +314,19 @@ class ListUsersRequest(google.protobuf.message.Message):
     * "current_index1--page_size-20"
     * "current_index-1--page_size--20"
     """
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
     def __init__(
         self,
         *,
         page_token: builtins.str = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["page_token", b"page_token"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "page_token", b"page_token"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___ListUsersRequest = ListUsersRequest
 
@@ -506,18 +514,27 @@ class GetServerRoleRequest(google.protobuf.message.Message):
 
     ROLE_ID_FIELD_NUMBER: builtins.int
     ROLE_NAME_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     role_id: builtins.int
     """role is identified by role id"""
     role_name: builtins.str
     """role can also be uniquely identified by its name"""
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
     def __init__(
         self,
         *,
         role_id: builtins.int = ...,
         role_name: builtins.str = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["role_id", b"role_id", "role_name", b"role_name", "server_role_identifier", b"server_role_identifier"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["role_id", b"role_id", "role_name", b"role_name", "server_role_identifier", b"server_role_identifier"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "role_id", b"role_id", "role_name", b"role_name", "server_role_identifier", b"server_role_identifier"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "role_id", b"role_id", "role_name", b"role_name", "server_role_identifier", b"server_role_identifier"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
+    @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["server_role_identifier", b"server_role_identifier"]) -> typing.Literal["role_id", "role_name"] | None: ...
 
 global___GetServerRoleRequest = GetServerRoleRequest
@@ -529,6 +546,7 @@ class ListServerRolesRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     page_token: builtins.str
     """Optional: The page token to support pagination.
     Pagination allows you to retrieve a large result set in smaller, more manageable portions.
@@ -554,12 +572,19 @@ class ListServerRolesRequest(google.protobuf.message.Message):
     * "current_index1--page_size-20"
     * "current_index-1--page_size--20"
     """
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
     def __init__(
         self,
         *,
         page_token: builtins.str = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["page_token", b"page_token"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "page_token", b"page_token"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___ListServerRolesRequest = ListServerRolesRequest
 
@@ -598,6 +623,7 @@ class ListServerPermissionsRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     page_token: builtins.str
     """Optional: The page token to support pagination.
     Pagination allows you to retrieve a large result set in smaller, more manageable portions.
@@ -623,12 +649,19 @@ class ListServerPermissionsRequest(google.protobuf.message.Message):
     * "current_index1--page_size-20"
     * "current_index-1--page_size--20"
     """
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
     def __init__(
         self,
         *,
         page_token: builtins.str = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["page_token", b"page_token"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "page_token", b"page_token"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___ListServerPermissionsRequest = ListServerPermissionsRequest
 
@@ -668,17 +701,25 @@ class LoginRequest(google.protobuf.message.Message):
 
     USER_EMAIL_FIELD_NUMBER: builtins.int
     PASSWORD_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     user_email: builtins.str
     """user email"""
     password: builtins.str
     """user password"""
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
     def __init__(
         self,
         *,
         user_email: builtins.str = ...,
         password: builtins.str = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["password", b"password", "user_email", b"user_email"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "password", b"password", "user_email", b"user_email"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___LoginRequest = LoginRequest
 
@@ -716,6 +757,7 @@ class GetUserPreferencesRequest(google.protobuf.message.Message):
     USER_NAME_FIELD_NUMBER: builtins.int
     KEYS_FIELD_NUMBER: builtins.int
     REGEX_INCLUDE_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     user_name: builtins.str
     """The name of the user.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre>
@@ -733,14 +775,21 @@ class GetUserPreferencesRequest(google.protobuf.message.Message):
         If keys are specified multiple times then only one KeyValue pair is returned
         """
 
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
     def __init__(
         self,
         *,
         user_name: builtins.str = ...,
         keys: collections.abc.Iterable[builtins.str] | None = ...,
         regex_include: builtins.str = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["keys", b"keys", "regex_include", b"regex_include", "user_name", b"user_name"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "keys", b"keys", "regex_include", b"regex_include", "user_name", b"user_name"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___GetUserPreferencesRequest = GetUserPreferencesRequest
 
@@ -931,19 +980,27 @@ class ListUserPreferencesRequest(google.protobuf.message.Message):
 
     USER_NAME_FIELD_NUMBER: builtins.int
     REGEX_FILTER_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     user_name: builtins.str
     """The name of the user.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre>
     """
     regex_filter: builtins.str
     """Optional: Only list keys that match the provided regular expression"""
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
     def __init__(
         self,
         *,
         user_name: builtins.str = ...,
         regex_filter: builtins.str = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["regex_filter", b"regex_filter", "user_name", b"user_name"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "regex_filter", b"regex_filter", "user_name", b"user_name"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___ListUserPreferencesRequest = ListUserPreferencesRequest
 

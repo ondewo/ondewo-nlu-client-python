@@ -25,12 +25,13 @@ _sym_db = _symbol_database.Default()
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from google.protobuf import any_pb2 as google_dot_protobuf_dot_any__pb2
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
+from google.protobuf import field_mask_pb2 as google_dot_protobuf_dot_field__mask__pb2
 from google.rpc import status_pb2 as google_dot_rpc_dot_status__pb2
 from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2
 from ondewo.nlu import operation_metadata_pb2 as ondewo_dot_nlu_dot_operation__metadata__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1bondewo/nlu/operations.proto\x12\nondewo.nlu\x1a\x1cgoogle/api/annotations.proto\x1a\x19google/protobuf/any.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x17google/rpc/status.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#ondewo/nlu/operation_metadata.proto\"\xb1\x01\n\tOperation\x12\x0c\n\x04name\x18\x01 \x01(\t\x12/\n\x08metadata\x18\x02 \x01(\x0b\x32\x1d.ondewo.nlu.OperationMetadata\x12\x0c\n\x04\x64one\x18\x03 \x01(\x08\x12#\n\x05\x65rror\x18\x04 \x01(\x0b\x32\x12.google.rpc.StatusH\x00\x12(\n\x08response\x18\x05 \x01(\x0b\x32\x14.google.protobuf.AnyH\x00\x42\x08\n\x06result\"#\n\x13GetOperationRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"\x93\x01\n\x15ListOperationsRequest\x12\x0c\n\x04name\x18\x04 \x01(\t\x12\x0e\n\x06\x66ilter\x18\x01 \x01(\t\x12\x11\n\tpage_size\x18\x02 \x01(\x05\x12\x12\n\npage_token\x18\x03 \x01(\t\x12\x35\n\x10operation_filter\x18\x05 \x01(\x0b\x32\x1b.ondewo.nlu.OperationFilter\"\xb8\x02\n\x0fOperationFilter\x12\x17\n\x0fproject_parents\x18\x01 \x03(\t\x12\x36\n\x08statuses\x18\x02 \x03(\x0e\x32$.ondewo.nlu.OperationMetadata.Status\x12:\n\x05types\x18\x03 \x03(\x0e\x32+.ondewo.nlu.OperationMetadata.OperationType\x12\x30\n\nstart_time\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.TimestampH\x00\x12.\n\x08\x65nd_time\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.TimestampH\x01\x12\x10\n\x08user_ids\x18\x06 \x03(\tB\x12\n\x10start_time_oneofB\x10\n\x0e\x65nd_time_oneof\"\\\n\x16ListOperationsResponse\x12)\n\noperations\x18\x01 \x03(\x0b\x32\x15.ondewo.nlu.Operation\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t\"&\n\x16\x43\x61ncelOperationRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"&\n\x16\x44\x65leteOperationRequest\x12\x0c\n\x04name\x18\x01 \x01(\t2\xda\x03\n\nOperations\x12v\n\x0eListOperations\x12!.ondewo.nlu.ListOperationsRequest\x1a\".ondewo.nlu.ListOperationsResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/v1/{name=operations}\x12h\n\x0cGetOperation\x12\x1f.ondewo.nlu.GetOperationRequest\x1a\x15.ondewo.nlu.Operation\" \x82\xd3\xe4\x93\x02\x1a\x12\x18/v1/{name=operations/**}\x12o\n\x0f\x44\x65leteOperation\x12\".ondewo.nlu.DeleteOperationRequest\x1a\x16.google.protobuf.Empty\" \x82\xd3\xe4\x93\x02\x1a*\x18/v1/{name=operations/**}\x12y\n\x0f\x43\x61ncelOperation\x12\".ondewo.nlu.CancelOperationRequest\x1a\x16.google.protobuf.Empty\"*\x82\xd3\xe4\x93\x02$\"\x1f/v1/{name=operations/**}:cancel:\x01*b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1bondewo/nlu/operations.proto\x12\nondewo.nlu\x1a\x1cgoogle/api/annotations.proto\x1a\x19google/protobuf/any.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a google/protobuf/field_mask.proto\x1a\x17google/rpc/status.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a#ondewo/nlu/operation_metadata.proto\"\xb1\x01\n\tOperation\x12\x0c\n\x04name\x18\x01 \x01(\t\x12/\n\x08metadata\x18\x02 \x01(\x0b\x32\x1d.ondewo.nlu.OperationMetadata\x12\x0c\n\x04\x64one\x18\x03 \x01(\x08\x12#\n\x05\x65rror\x18\x04 \x01(\x0b\x32\x12.google.rpc.StatusH\x00\x12(\n\x08response\x18\x05 \x01(\x0b\x32\x14.google.protobuf.AnyH\x00\x42\x08\n\x06result\"g\n\x13GetOperationRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x33\n\nfield_mask\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.FieldMaskH\x00\x88\x01\x01\x42\r\n\x0b_field_mask\"\xd7\x01\n\x15ListOperationsRequest\x12\x0c\n\x04name\x18\x04 \x01(\t\x12\x0e\n\x06\x66ilter\x18\x01 \x01(\t\x12\x11\n\tpage_size\x18\x02 \x01(\x05\x12\x12\n\npage_token\x18\x03 \x01(\t\x12\x35\n\x10operation_filter\x18\x05 \x01(\x0b\x32\x1b.ondewo.nlu.OperationFilter\x12\x33\n\nfield_mask\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.FieldMaskH\x00\x88\x01\x01\x42\r\n\x0b_field_mask\"\xb8\x02\n\x0fOperationFilter\x12\x17\n\x0fproject_parents\x18\x01 \x03(\t\x12\x36\n\x08statuses\x18\x02 \x03(\x0e\x32$.ondewo.nlu.OperationMetadata.Status\x12:\n\x05types\x18\x03 \x03(\x0e\x32+.ondewo.nlu.OperationMetadata.OperationType\x12\x30\n\nstart_time\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.TimestampH\x00\x12.\n\x08\x65nd_time\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.TimestampH\x01\x12\x10\n\x08user_ids\x18\x06 \x03(\tB\x12\n\x10start_time_oneofB\x10\n\x0e\x65nd_time_oneof\"\\\n\x16ListOperationsResponse\x12)\n\noperations\x18\x01 \x03(\x0b\x32\x15.ondewo.nlu.Operation\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t\"&\n\x16\x43\x61ncelOperationRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"&\n\x16\x44\x65leteOperationRequest\x12\x0c\n\x04name\x18\x01 \x01(\t2\xda\x03\n\nOperations\x12v\n\x0eListOperations\x12!.ondewo.nlu.ListOperationsRequest\x1a\".ondewo.nlu.ListOperationsResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/v1/{name=operations}\x12h\n\x0cGetOperation\x12\x1f.ondewo.nlu.GetOperationRequest\x1a\x15.ondewo.nlu.Operation\" \x82\xd3\xe4\x93\x02\x1a\x12\x18/v1/{name=operations/**}\x12o\n\x0f\x44\x65leteOperation\x12\".ondewo.nlu.DeleteOperationRequest\x1a\x16.google.protobuf.Empty\" \x82\xd3\xe4\x93\x02\x1a*\x18/v1/{name=operations/**}\x12y\n\x0f\x43\x61ncelOperation\x12\".ondewo.nlu.CancelOperationRequest\x1a\x16.google.protobuf.Empty\"*\x82\xd3\xe4\x93\x02$\"\x1f/v1/{name=operations/**}:cancel:\x01*b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -45,20 +46,20 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_OPERATIONS'].methods_by_name['DeleteOperation']._serialized_options = b'\202\323\344\223\002\032*\030/v1/{name=operations/**}'
   _globals['_OPERATIONS'].methods_by_name['CancelOperation']._loaded_options = None
   _globals['_OPERATIONS'].methods_by_name['CancelOperation']._serialized_options = b'\202\323\344\223\002$\"\037/v1/{name=operations/**}:cancel:\001*'
-  _globals['_OPERATION']._serialized_start=225
-  _globals['_OPERATION']._serialized_end=402
-  _globals['_GETOPERATIONREQUEST']._serialized_start=404
-  _globals['_GETOPERATIONREQUEST']._serialized_end=439
-  _globals['_LISTOPERATIONSREQUEST']._serialized_start=442
-  _globals['_LISTOPERATIONSREQUEST']._serialized_end=589
-  _globals['_OPERATIONFILTER']._serialized_start=592
-  _globals['_OPERATIONFILTER']._serialized_end=904
-  _globals['_LISTOPERATIONSRESPONSE']._serialized_start=906
-  _globals['_LISTOPERATIONSRESPONSE']._serialized_end=998
-  _globals['_CANCELOPERATIONREQUEST']._serialized_start=1000
-  _globals['_CANCELOPERATIONREQUEST']._serialized_end=1038
-  _globals['_DELETEOPERATIONREQUEST']._serialized_start=1040
-  _globals['_DELETEOPERATIONREQUEST']._serialized_end=1078
-  _globals['_OPERATIONS']._serialized_start=1081
-  _globals['_OPERATIONS']._serialized_end=1555
+  _globals['_OPERATION']._serialized_start=259
+  _globals['_OPERATION']._serialized_end=436
+  _globals['_GETOPERATIONREQUEST']._serialized_start=438
+  _globals['_GETOPERATIONREQUEST']._serialized_end=541
+  _globals['_LISTOPERATIONSREQUEST']._serialized_start=544
+  _globals['_LISTOPERATIONSREQUEST']._serialized_end=759
+  _globals['_OPERATIONFILTER']._serialized_start=762
+  _globals['_OPERATIONFILTER']._serialized_end=1074
+  _globals['_LISTOPERATIONSRESPONSE']._serialized_start=1076
+  _globals['_LISTOPERATIONSRESPONSE']._serialized_end=1168
+  _globals['_CANCELOPERATIONREQUEST']._serialized_start=1170
+  _globals['_CANCELOPERATIONREQUEST']._serialized_end=1208
+  _globals['_DELETEOPERATIONREQUEST']._serialized_start=1210
+  _globals['_DELETEOPERATIONREQUEST']._serialized_end=1248
+  _globals['_OPERATIONS']._serialized_start=1251
+  _globals['_OPERATIONS']._serialized_end=1725
 # @@protoc_insertion_point(module_scope)

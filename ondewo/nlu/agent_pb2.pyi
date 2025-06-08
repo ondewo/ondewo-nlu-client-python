@@ -562,19 +562,26 @@ class GetAgentRequest(google.protobuf.message.Message):
 
     PARENT_FIELD_NUMBER: builtins.int
     AGENT_VIEW_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The project that the agent to fetch is associated with.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
     agent_view: global___AgentView.ValueType
     """Optional. Specify the view of the returned agent (full view by default)"""
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. A mask to control which fields are returned in the response."""
+
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
         agent_view: global___AgentView.ValueType = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["agent_view", b"agent_view", "parent", b"parent"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["agent_view", b"agent_view", "field_mask", b"field_mask", "parent", b"parent"]) -> None: ...
 
 global___GetAgentRequest = GetAgentRequest
 
@@ -587,6 +594,7 @@ class ListAgentsRequest(google.protobuf.message.Message):
     AGENT_VIEW_FIELD_NUMBER: builtins.int
     PAGE_TOKEN_FIELD_NUMBER: builtins.int
     SORT_BY_FIELD_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     agent_view: global___AgentView.ValueType
     """Optional. Specify the view of the returned agent (full view by default)"""
     page_token: builtins.str
@@ -595,15 +603,21 @@ class ListAgentsRequest(google.protobuf.message.Message):
     def sort_by_field(self) -> global___AgentSorting:
         """Optional. Defines the sorting of the list. Default, no sorting."""
 
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
     def __init__(
         self,
         *,
         agent_view: global___AgentView.ValueType = ...,
         page_token: builtins.str = ...,
         sort_by_field: global___AgentSorting | None = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["sort_by_field", b"sort_by_field"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["agent_view", b"agent_view", "page_token", b"page_token", "sort_by_field", b"sort_by_field"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "sort_by_field", b"sort_by_field"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "agent_view", b"agent_view", "field_mask", b"field_mask", "page_token", b"page_token", "sort_by_field", b"sort_by_field"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___ListAgentsRequest = ListAgentsRequest
 
@@ -1300,6 +1314,7 @@ class ListUsersInProjectRequest(google.protobuf.message.Message):
 
     PARENT_FIELD_NUMBER: builtins.int
     PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The project that the agent to train is associated with.
     Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
@@ -1330,13 +1345,20 @@ class ListUsersInProjectRequest(google.protobuf.message.Message):
     * "current_index1--page_size-20"
     * "current_index-1--page_size--20"
     """
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
         page_token: builtins.str = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["page_token", b"page_token", "parent", b"parent"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "page_token", b"page_token", "parent", b"parent"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___ListUsersInProjectRequest = ListUsersInProjectRequest
 
@@ -1428,6 +1450,7 @@ class ListProjectPermissionsRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     page_token: builtins.str
     """Optional. The next_page_token value returned from a previous list request.
     The page token to support pagination.
@@ -1454,12 +1477,19 @@ class ListProjectPermissionsRequest(google.protobuf.message.Message):
     * "current_index1--page_size-20"
     * "current_index-1--page_size--20"
     """
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
     def __init__(
         self,
         *,
         page_token: builtins.str = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["page_token", b"page_token"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "page_token", b"page_token"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___ListProjectPermissionsRequest = ListProjectPermissionsRequest
 
