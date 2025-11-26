@@ -414,11 +414,55 @@ class QueryParameters(google.protobuf.message.Message):
     @property
     def payload(self) -> google.protobuf.struct_pb2.Struct:
         """Optional. This field can be used to pass custom data into the webhook
-        associated with the agent. Arbitrary JSON objects are supported.
-        key:<pre>language=LanguageCode.de.value</pre>
-        key:<pre>timestamp=time.time()</pre>
-        key:<pre>source='https://ondewo.com'</pre>
-        key:<pre>configuration='config_example_123'</pre>
+        associated with the agent.
+
+        Following <code>key:value</code> pairs are supported in the JSON objects:
+
+        key: <code>language</code>
+        <pre>language=LanguageCode.de.value</pre>
+        key: <code>timestamp</code>
+        <pre>timestamp=time.time() # float python timestamp in seconds since epoch </pre>
+        key: <code>source</code>
+        <pre>source='https://ondewo.com'</pre>
+        key: <code>configuration</code>
+        <pre>configuration='config_example_123'</pre>
+        key: <code>single_intent_algorithm</code>
+        <pre>single_intent_algorithm='IntentClassifierType.OndewoIntentAgent'</pre>
+        => allowed other values for <code>single_intent_algorithm</code>:
+        <pre>
+         IntentClassifierType.DefaultFallBackAlgorithm
+         IntentClassifierType.DeviationEndingDetection
+         IntentClassifierType.IntentExitDetector
+         IntentClassifierType.OndewoIntentAgent
+         IntentClassifierType.OndewoIntentBertClassifier
+         IntentClassifierType.OndewoIntentExactContextDetector
+         IntentClassifierType.OndewoIntentExactMatch
+         IntentClassifierType.OndewoIntentExitDetector
+         IntentClassifierType.OndewoIntentLogisticRegression
+         IntentClassifierType.OndewoIntentMetaClassifier
+         IntentClassifierType.OndewoIntentNamedExactMatch
+         IntentClassifierType.OndewoIntentNamedSimilarityMatch
+         IntentClassifierType.OndewoIntentParameterMatch
+         IntentClassifierType.OndewoIntentRandomForestClassifier
+         IntentClassifierType.OndewoIntentRankingMatch
+         IntentClassifierType.OndewoIntentSimilarityMatch
+         IntentClassifierType.OndewoIntentSupportVectorClassifier
+         IntentClassifierType.OndewoWeightedEnsemble
+        </pre>
+        key: <code>single_ner_algorithm</code>
+        <pre>single_ner_algorithm='NerMethodType.OndewoNerRegex'</pre>
+        <pre>
+        => allowed other values for <code>single_ner_algorithm</code>:
+         NerMethodType.OndewoNerBert
+         NerMethodType.OndewoNerDateNer
+         NerMethodType.OndewoNerDictionary
+         NerMethodType.OndewoNerDuckling
+         NerMethodType.OndewoNerFuzzy
+         NerMethodType.OndewoNerHybrid
+         NerMethodType.OndewoNerRegex
+         NerMethodType.OndewoNerSpacy
+         NerMethodType.OndewoNerTfNer
+        </pre>
         """
 
     @property
