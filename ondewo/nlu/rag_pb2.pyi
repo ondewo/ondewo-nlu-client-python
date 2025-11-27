@@ -706,9 +706,7 @@ class ListDatasetsRequest(google.protobuf.message.Message):
     name: builtins.str
     """Optional. Filter by dataset name."""
     orderby: builtins.str
-    """Optional. Sort field (default: <code>"create_time"</code>).
-    TODO: Define enum for valid orderby values or document accepted field names.
-    """
+    """Optional. Sort field (default: <code>create_time</code>)."""
     desc: builtins.bool
     """Optional. Sort descending (default: <code>true</code>)."""
     @property
@@ -893,9 +891,7 @@ class Document(google.protobuf.message.Message):
     chunk_method: global___ChunkMethod.ValueType
     """Chunking method used for this document."""
     source_type: builtins.str
-    """TODO: Define enum for source_type values or document accepted values.
-    Source type indicating how the document was added (e.g., <code>"local"</code> for direct uploads, <code>"knowledgebase"</code> for file system imports).
-    """
+    """Source type indicating how the document was added (e.g., <code>"local"</code> for direct uploads, <code>"knowledgebase"</code> for file system imports)."""
     run: global___DocumentStatus.ValueType
     """Document processing status."""
     progress: builtins.float
@@ -921,9 +917,7 @@ class Document(google.protobuf.message.Message):
     suffix: builtins.str
     """Actual file extension extracted from the file (may differ from filename extension)."""
     status: builtins.str
-    """TODO: Define enum for status values or document accepted values.
-    Validation status indicating if document is enabled (<code>"1"</code>=valid/enabled, <code>"0"</code>=invalid/disabled).
-    """
+    """Validation status indicating if document is enabled (<code>"1"</code>=valid/enabled, <code>"0"</code>=invalid/disabled)."""
     @property
     def parser_config(self) -> global___ParserConfig:
         """Parser configuration used for chunking this document."""
@@ -1166,9 +1160,7 @@ class ListDocumentsRequest(google.protobuf.message.Message):
     keywords: builtins.str
     """Optional. Search keywords to filter documents (searches in document name and metadata)."""
     orderby: builtins.str
-    """TODO: Define enum for orderby values or document accepted field names.
-    Optional. Sort field (default: <code>"create_time"</code>). Accepted values include <code>"create_time"</code> and <code>"update_time"</code>.
-    """
+    """Optional. Sort field (default: <code>"create_time"</code>). Accepted values include <code>"create_time"</code> and <code>"update_time"</code>."""
     desc: builtins.bool
     """Optional. Sort in descending order (default: <code>true</code>)."""
     create_time_from: builtins.int
@@ -1861,13 +1853,13 @@ class Chat(google.protobuf.message.Message):
     update_date: builtins.str
     """Last update date (ISO 8601 datetime)."""
     do_refer: builtins.str
-    """TODO: Document this field - reference mode setting returned by RAGFlow API."""
+    """Whether to insert reference index into answer. <code>"1"</code> yes, <code>"0"</code> no"""
     language: builtins.str
-    """TODO: Document this field - language setting returned by RAGFlow API."""
+    """Lanugage of the chat"""
     prompt_type: builtins.str
-    """TODO: Document this field - prompt type setting returned by RAGFlow API."""
+    """Prompt type. Either <code>"simple"</code> or <code>"advanced"</code>"""
     status: builtins.str
-    """TODO: Document this field - chat status returned by RAGFlow API."""
+    """Validation status indicating if chat is enabled (<code>"1"</code>=valid/enabled, <code>"0"</code>=invalid/disabled)."""
     tenant_id: builtins.str
     """Tenant ID."""
     top_k: builtins.int
@@ -2234,7 +2226,7 @@ class ListChatsRequest(google.protobuf.message.Message):
     name: builtins.str
     """Optional. Filter by chat assistant name."""
     orderby: builtins.str
-    """TODO: Document this field - sort field specification returned by RAGFlow API (default: <code>"create_time"</code>)."""
+    """Sort field (default: <code>"create_time"</code>)."""
     desc: builtins.bool
     """Optional. Sort in descending order (default: <code>true</code>)."""
     @property
@@ -2428,7 +2420,7 @@ class AgentSession(google.protobuf.message.Message):
     user_id: builtins.str
     """User identifier."""
     source: builtins.str
-    """TODO: Document this field - session source returned by RAGFlow API."""
+    """Session source."""
     create_time: builtins.int
     """Creation timestamp (Unix timestamp in milliseconds)."""
     create_date: builtins.str
@@ -2569,7 +2561,7 @@ class ListChatSessionsRequest(google.protobuf.message.Message):
     chat_id: builtins.str
     """Required. Chat assistant UUID."""
     orderby: builtins.str
-    """TODO: Document this field - sort field specification returned by RAGFlow API (default: <code>"create_time"</code>)."""
+    """Sort field (default: <code>"create_time"</code>)."""
     desc: builtins.bool
     """Optional. Sort in descending order (default: <code>true</code>)."""
     name: builtins.str
@@ -2647,7 +2639,7 @@ class ListAgentSessionsRequest(google.protobuf.message.Message):
     agent_id: builtins.str
     """Required. RAGFlow agent UUID."""
     orderby: builtins.str
-    """TODO: Document this field - sort field specification returned by RAGFlow API (default: <code>"update_time"</code>)."""
+    """Sort field (default: <code>"update_time"</code>)."""
     desc: builtins.bool
     """Optional. Sort in descending order (default: <code>true</code>)."""
     id: builtins.str
@@ -3421,9 +3413,7 @@ class RagAgent(google.protobuf.message.Message):
     user_id: builtins.str
     """User ID of the agent owner."""
     canvas_type: builtins.str
-    """Canvas type for the agent's workflow visualization.
-    TODO: Document possible canvas type values from RAGFlow documentation.
-    """
+    """Canvas type for the agent's workflow visualization."""
     @property
     def dsl(self) -> google.protobuf.struct_pb2.Struct:
         """Domain Specific Language (DSL) configuration defining the agent's workflow, logic, and behavior.
@@ -3592,10 +3582,7 @@ class ListRagAgentsRequest(google.protobuf.message.Message):
     title: builtins.str
     """Optional. Filter results by agent title. Only agents with matching titles will be returned."""
     orderby: builtins.str
-    """Optional. Sort field for ordering results.
-    Default: <code>"update_time"</code>.
-    TODO: Document available sort fields from RAGFlow documentation.
-    """
+    """Optional. Sort field for ordering results. Default: <code>"update_time"</code>."""
     desc: builtins.bool
     """Optional. Sort in descending order. If <code>true</code>, results are sorted from highest to lowest.
     Default: <code>true</code>.
@@ -3678,9 +3665,7 @@ class File(google.protobuf.message.Message):
     name: builtins.str
     """File or folder name."""
     type: builtins.str
-    """File type/extension or <code>"folder"</code> for directories. Check <code>type == "folder"</code> to distinguish folders from files.
-    TODO(RAGFlow): Document complete list of supported file types/extensions.
-    """
+    """File type/extension or <code>"folder"</code> for directories. Check <code>type == "folder"</code> to distinguish folders from files."""
     size: builtins.int
     """File size in bytes (0 for folders)."""
     parent_id: builtins.str
@@ -3696,9 +3681,7 @@ class File(google.protobuf.message.Message):
     location: builtins.str
     """Storage location path within the RAGFlow file system."""
     source_type: builtins.str
-    """Source type indicating file origin (e.g., <code>"local"</code> for uploaded files).
-    TODO(RAGFlow): Document complete list of possible source_type values.
-    """
+    """Source type indicating file origin (e.g., <code>"local"</code> for uploaded files)."""
     @property
     def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
         """Additional fields returned by RAGFlow."""
@@ -3823,9 +3806,7 @@ class CreateFileRequest(google.protobuf.message.Message):
     parent_id: builtins.str
     """Optional. Parent folder ID. If not provided, creates in root directory."""
     type: builtins.str
-    """Required. Type of item to create: <code>"folder"</code> for directories or <code>"virtual"</code> for virtual files.
-    TODO(RAGFlow): Document the purpose and behavior of "virtual" file type.
-    """
+    """Required. Type of item to create: <code>"folder"</code> for directories or <code>"virtual"</code> for virtual files."""
     @property
     def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
         """Optional. Additional fields to pass through to RAGFlow."""
@@ -3866,9 +3847,7 @@ class ListFilesRequest(google.protobuf.message.Message):
     keywords: builtins.str
     """Optional. Search keywords to filter files by name or other searchable attributes."""
     orderby: builtins.str
-    """Optional. Field to sort results by. Common values include <code>"create_time"</code> (default) and <code>"update_time"</code>.
-    TODO(RAGFlow): Document complete list of valid orderby field values.
-    """
+    """Optional. Field to sort results by. Common values include <code>"create_time"</code> (default) and <code>"update_time"</code>."""
     desc: builtins.bool
     """Optional. Sort in descending order. Default is <code>true</code> (newest first)."""
     @property
@@ -4318,7 +4297,6 @@ class DifyRetrievalRequest(google.protobuf.message.Message):
     parent: builtins.str
     """Required. The agent to retrieve data for.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    TODO: Verify exact resource path format for RAG operations.
     """
     knowledge_id: builtins.str
     """Required. Dataset ID (called <code>knowledge_id</code> in Dify API format).
@@ -4476,7 +4454,6 @@ class AskRequest(google.protobuf.message.Message):
     parent: builtins.str
     """Required. The agent to ask the question for.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    TODO: Verify exact resource path format for RAG operations.
     """
     question: builtins.str
     """Required. User question to be answered."""
@@ -4553,7 +4530,6 @@ class RelatedQuestionsRequest(google.protobuf.message.Message):
     parent: builtins.str
     """Required. The agent to generate related questions for.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    TODO: Verify exact resource path format for RAG operations.
     """
     question: builtins.str
     """Required. Original user question to generate related questions from."""
@@ -4617,7 +4593,6 @@ class ChatbotCompletionRequest(google.protobuf.message.Message):
     parent: builtins.str
     """Required. The agent to generate chatbot completion for.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    TODO: Verify exact resource path format for RAG operations.
     """
     dialog_id: builtins.str
     """Required. Chat dialog ID identifying the specific chatbot configuration.
@@ -4666,7 +4641,6 @@ class ChatbotInfoRequest(google.protobuf.message.Message):
     parent: builtins.str
     """Required. The agent to get chatbot information for.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    TODO: Verify exact resource path format for RAG operations.
     """
     dialog_id: builtins.str
     """Required. Chat dialog ID identifying the chatbot."""
@@ -4724,7 +4698,6 @@ class AgentbotCompletionRequest(google.protobuf.message.Message):
     parent: builtins.str
     """Required. The agent to generate agentbot completion for.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    TODO: Verify exact resource path format for RAG operations.
     """
     agent_id: builtins.str
     """Required. RAGFlow agent ID identifying the specific agent configuration.
@@ -4773,7 +4746,6 @@ class AgentbotInputsRequest(google.protobuf.message.Message):
     parent: builtins.str
     """Required. The agent to get agentbot input configuration for.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    TODO: Verify exact resource path format for RAG operations.
     """
     agent_id: builtins.str
     """Required. RAGFlow agent ID to retrieve input configuration for."""
@@ -4805,9 +4777,7 @@ class AgentbotInputsResponse(google.protobuf.message.Message):
     prologue: builtins.str
     """Opening greeting message displayed when starting a new agent session."""
     mode: builtins.str
-    """Agent operational mode.
-    TODO: Document possible mode values and their meanings.
-    """
+    """Agent operational mode."""
     @property
     def inputs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[google.protobuf.struct_pb2.Struct]:
         """Input form field configurations extracted from the "begin" component in agent DSL.
@@ -4843,7 +4813,6 @@ class SearchbotAskRequest(google.protobuf.message.Message):
     parent: builtins.str
     """Required. The agent to ask searchbot question for.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    TODO: Verify exact resource path format for RAG operations.
     """
     question: builtins.str
     """Required. User question to search for and answer."""
@@ -4902,7 +4871,6 @@ class SearchbotRetrievalRequest(google.protobuf.message.Message):
     parent: builtins.str
     """Required. The agent to retrieve searchbot results for.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    TODO: Verify exact resource path format for RAG operations.
     """
     question: builtins.str
     """Required. Search query string."""
@@ -5056,7 +5024,6 @@ class SearchbotRelatedQuestionsRequest(google.protobuf.message.Message):
     parent: builtins.str
     """Required. The agent to generate searchbot related questions for.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    TODO: Verify exact resource path format for RAG operations.
     """
     question: builtins.str
     """Required. Original user question to generate related questions from."""
@@ -5092,7 +5059,6 @@ class SearchbotDetailRequest(google.protobuf.message.Message):
     parent: builtins.str
     """Required. The agent to get searchbot detail for.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    TODO: Verify exact resource path format for RAG operations.
     """
     search_id: builtins.str
     """Required. Search application ID to retrieve details for."""
@@ -5185,7 +5151,6 @@ class SearchbotMindmapRequest(google.protobuf.message.Message):
     parent: builtins.str
     """Required. The agent to generate searchbot mindmap for.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    TODO: Verify exact resource path format for RAG operations.
     """
     question: builtins.str
     """Required. User question to generate mindmap around."""
@@ -5226,7 +5191,6 @@ class SearchbotMindmapResponse(google.protobuf.message.Message):
     def mindmap(self) -> google.protobuf.struct_pb2.Struct:
         """Generated mindmap structure in hierarchical format.
         The structure organizes retrieved information into nodes and relationships.
-        TODO: Document the expected schema of the mindmap structure.
         """
 
     def __init__(
