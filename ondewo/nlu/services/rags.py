@@ -17,101 +17,101 @@ from google.protobuf.empty_pb2 import Empty
 from google.protobuf.struct_pb2 import Struct
 
 from ondewo.nlu.rag_pb2 import (
-    AddChunkRequest,
-    AddChunkResponse,
-    AgentCompletionRequest,
-    AgentCompletionResponse,
-    AgentSession,
-    AgentSessionList,
-    AgentbotCompletionRequest,
-    AgentbotInputsRequest,
-    AgentbotInputsResponse,
-    AskRequest,
-    AskResponse,
-    Chat,
-    ChatCompletionRequest,
-    ChatCompletionResponse,
-    ChatList,
-    ChatSession,
-    ChatSessionList,
-    ChatbotCompletionRequest,
-    ChatbotInfoRequest,
-    ChatbotInfoResponse,
-    CreateAgentSessionRequest,
-    CreateChatRequest,
-    CreateChatSessionRequest,
-    CreateDatasetRequest,
-    CreateFileRequest,
-    CreateRagAgentRequest,
-    Dataset,
-    DatasetList,
-    DeleteAgentSessionsRequest,
-    DeleteChatSessionsRequest,
-    DeleteChatsRequest,
-    DeleteDatasetsRequest,
-    DeleteDocumentsRequest,
-    DeleteFilesRequest,
-    DeleteKnowledgeGraphRequest,
-    DeleteRagAgentRequest,
-    DifyRecordList,
-    DifyRetrievalRequest,
-    Document,
-    DocumentList,
-    DownloadDocumentRequest,
-    File,
-    FileChunk,
-    FileList,
-    FileToDocumentList,
-    FileToDocumentRequest,
-    GetAllParentFoldersRequest,
-    GetAllParentFoldersResponse,
-    GetFileRequest,
-    GetKnowledgeGraphRequest,
-    GetKnowledgeGraphResponse,
-    GetParentFolderRequest,
-    GetParentFolderResponse,
-    GetRootFolderRequest,
-    GetRootFolderResponse,
-    ListAgentSessionsRequest,
-    ListChatSessionsRequest,
-    ListChatsRequest,
-    ListChunksRequest,
-    ListChunksResponse,
-    ListDatasetsRequest,
-    ListDocumentsRequest,
-    ListDocumentsResponse,
-    ListFilesRequest,
-    ListFilesResponse,
-    ListRagAgentsRequest,
-    MoveFileRequest,
-    OpenAIAgentCompletionRequest,
-    OpenAIChatCompletionRequest,
-    OpenAIChatCompletionResponse,
-    ParseDocumentsRequest,
-    PartialSuccess,
+    RagAddChunkRequest,
+    RagAddChunkResponse,
+    RagAgentCompletionRequest,
+    RagAgentCompletionResponse,
+    RagAgentSession,
+    RagAgentSessionList,
+    RagAgentbotCompletionRequest,
+    RagAgentbotInputsRequest,
+    RagAgentbotInputsResponse,
+    RagAskRequest,
+    RagAskResponse,
+    RagChat,
+    RagChatCompletionRequest,
+    RagChatCompletionResponse,
+    RagChatList,
+    RagChatSession,
+    RagChatSessionList,
+    RagChatbotCompletionRequest,
+    RagChatbotInfoRequest,
+    RagChatbotInfoResponse,
+    RagCreateAgentSessionRequest,
+    RagCreateChatRequest,
+    RagCreateChatSessionRequest,
+    RagCreateDatasetRequest,
+    RagCreateFileRequest,
+    RagCreateAgentRequest,
+    RagDataset,
+    RagDatasetList,
+    RagDeleteAgentSessionsRequest,
+    RagDeleteChatSessionsRequest,
+    RagDeleteChatsRequest,
+    RagDeleteDatasetsRequest,
+    RagDeleteDocumentsRequest,
+    RagDeleteFilesRequest,
+    RagDeleteKnowledgeGraphRequest,
+    RagDeleteAgentRequest,
+    RagDifyRecordList,
+    RagDifyRetrievalRequest,
+    RagDocument,
+    RagDocumentList,
+    RagDownloadDocumentRequest,
+    RagFile,
+    RagFileChunk,
+    RagFileList,
+    RagFileToDocumentList,
+    RagFileToDocumentRequest,
+    RagGetAllParentFoldersRequest,
+    RagGetAllParentFoldersResponse,
+    RagGetFileRequest,
+    RagGetKnowledgeGraphRequest,
+    RagGetKnowledgeGraphResponse,
+    RagGetParentFolderRequest,
+    RagGetParentFolderResponse,
+    RagGetRootFolderRequest,
+    RagGetRootFolderResponse,
+    RagListAgentSessionsRequest,
+    RagListChatSessionsRequest,
+    RagListChatsRequest,
+    RagListChunksRequest,
+    RagListChunksResponse,
+    RagListDatasetsRequest,
+    RagListDocumentsRequest,
+    RagListDocumentsResponse,
+    RagListFilesRequest,
+    RagListFilesResponse,
+    RagListAgentsRequest,
+    RagMoveFileRequest,
+    RagOpenAiAgentCompletionRequest,
+    RagOpenAiChatCompletionRequest,
+    RagOpenAiChatCompletionResponse,
+    RagParseDocumentsRequest,
+    RagPartialSuccess,
     RagAgentList,
-    RelatedQuestionsRequest,
-    RelatedQuestionsResponse,
-    RemoveChunksRequest,
-    RenameFileRequest,
-    RetrievalRequest,
-    RetrievalResponse,
-    SearchbotAskRequest,
-    SearchbotDetailRequest,
-    SearchbotDetailResponse,
-    SearchbotMindmapRequest,
-    SearchbotRelatedQuestionsRequest,
-    SearchbotRetrievalRequest,
-    SearchbotRetrievalResponse,
-    StopParsingRequest,
-    UpdateChatRequest,
-    UpdateChatSessionRequest,
-    UpdateChunkRequest,
-    UpdateDatasetRequest,
-    UpdateDocumentRequest,
-    UpdateRagAgentRequest,
-    UploadDocumentsRequest,
-    UploadFilesRequest
+    RagRelatedQuestionsRequest,
+    RagRelatedQuestionsResponse,
+    RagRemoveChunksRequest,
+    RagRenameFileRequest,
+    RagRetrievalRequest,
+    RagRetrievalResponse,
+    RagSearchbotAskRequest,
+    RagSearchbotDetailRequest,
+    RagSearchbotDetailResponse,
+    RagSearchbotMindmapRequest,
+    RagSearchbotRelatedQuestionsRequest,
+    RagSearchbotRetrievalRequest,
+    RagSearchbotRetrievalResponse,
+    RagStopParsingRequest,
+    RagUpdateChatRequest,
+    RagUpdateChatSessionRequest,
+    RagUpdateChunkRequest,
+    RagUpdateDatasetRequest,
+    RagUpdateDocumentRequest,
+    RagUpdateAgentRequest,
+    RagUploadDocumentsRequest,
+    RagUploadFilesRequest
 )
 from ondewo.nlu.rag_pb2_grpc import RagsStub
 from ondewo.nlu.core.services_interface import ServicesInterface
@@ -129,245 +129,248 @@ class Rags(ServicesInterface):
         stub: RagsStub = RagsStub(channel=self.grpc_channel)
         return stub
 
-    def create_dataset(self, request: CreateDatasetRequest) -> Dataset:
-        response: Dataset = self.stub.CreateDataset(request, metadata=self.metadata)
+    def rag_create_dataset(self, request: RagCreateDatasetRequest) -> RagDataset:
+        response: RagDataset = self.stub.RagCreateDataset(request, metadata=self.metadata)
         return response
 
-    def update_dataset(self, request: UpdateDatasetRequest) -> Dataset:
-        response: Dataset = self.stub.UpdateDataset(request, metadata=self.metadata)
+    def rag_update_dataset(self, request: RagUpdateDatasetRequest) -> RagDataset:
+        response: RagDataset = self.stub.RagUpdateDataset(request, metadata=self.metadata)
         return response
 
-    def delete_datasets(self, request: DeleteDatasetsRequest) -> PartialSuccess:
-        response: PartialSuccess = self.stub.DeleteDatasets(request, metadata=self.metadata)
+    def rag_delete_datasets(self, request: RagDeleteDatasetsRequest) -> RagPartialSuccess:
+        response: RagPartialSuccess = self.stub.RagDeleteDatasets(request, metadata=self.metadata)
         return response
 
-    def list_datasets(self, request: ListDatasetsRequest) -> DatasetList:
-        response: DatasetList = self.stub.ListDatasets(request, metadata=self.metadata)
+    def rag_list_datasets(self, request: RagListDatasetsRequest) -> RagDatasetList:
+        response: RagDatasetList = self.stub.RagListDatasets(request, metadata=self.metadata)
         return response
 
-    def get_knowledge_graph(self, request: GetKnowledgeGraphRequest) -> GetKnowledgeGraphResponse:
-        response: GetKnowledgeGraphResponse = self.stub.GetKnowledgeGraph(request, metadata=self.metadata)
+    def rag_get_knowledge_graph(self, request: RagGetKnowledgeGraphRequest) -> RagGetKnowledgeGraphResponse:
+        response: RagGetKnowledgeGraphResponse = self.stub.RagGetKnowledgeGraph(request, metadata=self.metadata)
         return response
 
-    def delete_knowledge_graph(self, request: DeleteKnowledgeGraphRequest) -> Empty:
-        response: Empty = self.stub.DeleteKnowledgeGraph(request, metadata=self.metadata)
+    def rag_delete_knowledge_graph(self, request: RagDeleteKnowledgeGraphRequest) -> Empty:
+        response: Empty = self.stub.RagDeleteKnowledgeGraph(request, metadata=self.metadata)
         return response
 
-    def upload_documents(self, request_iterator: Iterator[UploadDocumentsRequest]) -> DocumentList:
-        response: DocumentList = self.stub.UploadDocuments(request_iterator, metadata=self.metadata)
+    def rag_upload_documents(self, request_iterator: Iterator[RagUploadDocumentsRequest]) -> RagDocumentList:
+        response: RagDocumentList = self.stub.RagUploadDocuments(request_iterator, metadata=self.metadata)
         return response
 
-    def update_document(self, request: UpdateDocumentRequest) -> Document:
-        response: Document = self.stub.UpdateDocument(request, metadata=self.metadata)
+    def rag_update_document(self, request: RagUpdateDocumentRequest) -> RagDocument:
+        response: RagDocument = self.stub.RagUpdateDocument(request, metadata=self.metadata)
         return response
 
-    def download_document(self, request: DownloadDocumentRequest) -> Iterator[FileChunk]:
-        response: Iterator[FileChunk] = self.stub.DownloadDocument(request, metadata=self.metadata)
+    def rag_download_document(self, request: RagDownloadDocumentRequest) -> Iterator[RagFileChunk]:
+        response: Iterator[RagFileChunk] = self.stub.RagDownloadDocument(request, metadata=self.metadata)
         return response
 
-    def list_documents(self, request: ListDocumentsRequest) -> ListDocumentsResponse:
-        response: ListDocumentsResponse = self.stub.ListDocuments(request, metadata=self.metadata)
+    def rag_list_documents(self, request: RagListDocumentsRequest) -> RagListDocumentsResponse:
+        response: RagListDocumentsResponse = self.stub.RagListDocuments(request, metadata=self.metadata)
         return response
 
-    def delete_documents(self, request: DeleteDocumentsRequest) -> PartialSuccess:
-        response: PartialSuccess = self.stub.DeleteDocuments(request, metadata=self.metadata)
+    def rag_delete_documents(self, request: RagDeleteDocumentsRequest) -> RagPartialSuccess:
+        response: RagPartialSuccess = self.stub.RagDeleteDocuments(request, metadata=self.metadata)
         return response
 
-    def parse_documents(self, request: ParseDocumentsRequest) -> PartialSuccess:
-        response: PartialSuccess = self.stub.ParseDocuments(request, metadata=self.metadata)
+    def rag_parse_documents(self, request: RagParseDocumentsRequest) -> RagPartialSuccess:
+        response: RagPartialSuccess = self.stub.RagParseDocuments(request, metadata=self.metadata)
         return response
 
-    def stop_parsing(self, request: StopParsingRequest) -> PartialSuccess:
-        response: PartialSuccess = self.stub.StopParsing(request, metadata=self.metadata)
+    def rag_stop_parsing(self, request: RagStopParsingRequest) -> RagPartialSuccess:
+        response: RagPartialSuccess = self.stub.RagStopParsing(request, metadata=self.metadata)
         return response
 
-    def list_chunks(self, request: ListChunksRequest) -> ListChunksResponse:
-        response: ListChunksResponse = self.stub.ListChunks(request, metadata=self.metadata)
+    def rag_list_chunks(self, request: RagListChunksRequest) -> RagListChunksResponse:
+        response: RagListChunksResponse = self.stub.RagListChunks(request, metadata=self.metadata)
         return response
 
-    def add_chunk(self, request: AddChunkRequest) -> AddChunkResponse:
-        response: AddChunkResponse = self.stub.AddChunk(request, metadata=self.metadata)
+    def rag_add_chunk(self, request: RagAddChunkRequest) -> RagAddChunkResponse:
+        response: RagAddChunkResponse = self.stub.RagAddChunk(request, metadata=self.metadata)
         return response
 
-    def remove_chunks(self, request: RemoveChunksRequest) -> PartialSuccess:
-        response: PartialSuccess = self.stub.RemoveChunks(request, metadata=self.metadata)
+    def rag_remove_chunks(self, request: RagRemoveChunksRequest) -> RagPartialSuccess:
+        response: RagPartialSuccess = self.stub.RagRemoveChunks(request, metadata=self.metadata)
         return response
 
-    def update_chunk(self, request: UpdateChunkRequest) -> Empty:
-        response: Empty = self.stub.UpdateChunk(request, metadata=self.metadata)
+    def rag_update_chunk(self, request: RagUpdateChunkRequest) -> Empty:
+        response: Empty = self.stub.RagUpdateChunk(request, metadata=self.metadata)
         return response
 
-    def retrieval(self, request: RetrievalRequest) -> RetrievalResponse:
-        response: RetrievalResponse = self.stub.Retrieval(request, metadata=self.metadata)
+    def rag_retrieval(self, request: RagRetrievalRequest) -> RagRetrievalResponse:
+        response: RagRetrievalResponse = self.stub.RagRetrieval(request, metadata=self.metadata)
         return response
 
-    def create_chat(self, request: CreateChatRequest) -> Chat:
-        response: Chat = self.stub.CreateChat(request, metadata=self.metadata)
+    def rag_create_chat(self, request: RagCreateChatRequest) -> RagChat:
+        response: RagChat = self.stub.RagCreateChat(request, metadata=self.metadata)
         return response
 
-    def update_chat(self, request: UpdateChatRequest) -> Empty:
-        response: Empty = self.stub.UpdateChat(request, metadata=self.metadata)
+    def rag_update_chat(self, request: RagUpdateChatRequest) -> Empty:
+        response: Empty = self.stub.RagUpdateChat(request, metadata=self.metadata)
         return response
 
-    def delete_chats(self, request: DeleteChatsRequest) -> PartialSuccess:
-        response: PartialSuccess = self.stub.DeleteChats(request, metadata=self.metadata)
+    def rag_delete_chats(self, request: RagDeleteChatsRequest) -> RagPartialSuccess:
+        response: RagPartialSuccess = self.stub.RagDeleteChats(request, metadata=self.metadata)
         return response
 
-    def list_chats(self, request: ListChatsRequest) -> ChatList:
-        response: ChatList = self.stub.ListChats(request, metadata=self.metadata)
+    def rag_list_chats(self, request: RagListChatsRequest) -> RagChatList:
+        response: RagChatList = self.stub.RagListChats(request, metadata=self.metadata)
         return response
 
-    def create_chat_session(self, request: CreateChatSessionRequest) -> ChatSession:
-        response: ChatSession = self.stub.CreateChatSession(request, metadata=self.metadata)
+    def rag_create_chat_session(self, request: RagCreateChatSessionRequest) -> RagChatSession:
+        response: RagChatSession = self.stub.RagCreateChatSession(request, metadata=self.metadata)
         return response
 
-    def create_agent_session(self, request: CreateAgentSessionRequest) -> AgentSession:
-        response: AgentSession = self.stub.CreateAgentSession(request, metadata=self.metadata)
+    def rag_create_agent_session(self, request: RagCreateAgentSessionRequest) -> RagAgentSession:
+        response: RagAgentSession = self.stub.RagCreateAgentSession(request, metadata=self.metadata)
         return response
 
-    def update_chat_session(self, request: UpdateChatSessionRequest) -> Empty:
-        response: Empty = self.stub.UpdateChatSession(request, metadata=self.metadata)
+    def rag_update_chat_session(self, request: RagUpdateChatSessionRequest) -> Empty:
+        response: Empty = self.stub.RagUpdateChatSession(request, metadata=self.metadata)
         return response
 
-    def list_chat_sessions(self, request: ListChatSessionsRequest) -> ChatSessionList:
-        response: ChatSessionList = self.stub.ListChatSessions(request, metadata=self.metadata)
+    def rag_list_chat_sessions(self, request: RagListChatSessionsRequest) -> RagChatSessionList:
+        response: RagChatSessionList = self.stub.RagListChatSessions(request, metadata=self.metadata)
         return response
 
-    def list_agent_sessions(self, request: ListAgentSessionsRequest) -> AgentSessionList:
-        response: AgentSessionList = self.stub.ListAgentSessions(request, metadata=self.metadata)
+    def rag_list_agent_sessions(self, request: RagListAgentSessionsRequest) -> RagAgentSessionList:
+        response: RagAgentSessionList = self.stub.RagListAgentSessions(request, metadata=self.metadata)
         return response
 
-    def delete_chat_sessions(self, request: DeleteChatSessionsRequest) -> PartialSuccess:
-        response: PartialSuccess = self.stub.DeleteChatSessions(request, metadata=self.metadata)
+    def rag_delete_chat_sessions(self, request: RagDeleteChatSessionsRequest) -> RagPartialSuccess:
+        response: RagPartialSuccess = self.stub.RagDeleteChatSessions(request, metadata=self.metadata)
         return response
 
-    def delete_agent_sessions(self, request: DeleteAgentSessionsRequest) -> PartialSuccess:
-        response: PartialSuccess = self.stub.DeleteAgentSessions(request, metadata=self.metadata)
+    def rag_delete_agent_sessions(self, request: RagDeleteAgentSessionsRequest) -> RagPartialSuccess:
+        response: RagPartialSuccess = self.stub.RagDeleteAgentSessions(request, metadata=self.metadata)
         return response
 
-    def chat_completion(self, request: ChatCompletionRequest) -> Iterator[ChatCompletionResponse]:
-        response: Iterator[ChatCompletionResponse] = self.stub.ChatCompletion(request, metadata=self.metadata)
+    def rag_chat_completion(self, request: RagChatCompletionRequest) -> Iterator[RagChatCompletionResponse]:
+        response: Iterator[RagChatCompletionResponse] = self.stub.RagChatCompletion(request, metadata=self.metadata)
         return response
 
-    def open_ai_chat_completion(self, request: OpenAIChatCompletionRequest) -> Iterator[OpenAIChatCompletionResponse]:
-        response: Iterator[OpenAIChatCompletionResponse] = self.stub.OpenAIChatCompletion(
+    def rag_open_ai_chat_completion(
+            self, request: RagOpenAiChatCompletionRequest) -> Iterator[RagOpenAiChatCompletionResponse]:
+        response: Iterator[RagOpenAiChatCompletionResponse] = self.stub.RagOpenAiChatCompletion(
             request, metadata=self.metadata)
         return response
 
-    def agent_completion(self, request: AgentCompletionRequest) -> Iterator[AgentCompletionResponse]:
-        response: Iterator[AgentCompletionResponse] = self.stub.AgentCompletion(request, metadata=self.metadata)
+    def rag_agent_completion(self, request: RagAgentCompletionRequest) -> Iterator[RagAgentCompletionResponse]:
+        response: Iterator[RagAgentCompletionResponse] = self.stub.RagAgentCompletion(request, metadata=self.metadata)
         return response
 
-    def open_ai_agent_completion(
-            self, request: OpenAIAgentCompletionRequest) -> Iterator[OpenAIChatCompletionResponse]:
-        response: Iterator[OpenAIChatCompletionResponse] = self.stub.OpenAIAgentCompletion(
+    def rag_open_ai_agent_completion(
+            self, request: RagOpenAiAgentCompletionRequest) -> Iterator[RagOpenAiChatCompletionResponse]:
+        response: Iterator[RagOpenAiChatCompletionResponse] = self.stub.RagOpenAiAgentCompletion(
             request, metadata=self.metadata)
         return response
 
-    def create_agent(self, request: CreateRagAgentRequest) -> Empty:
-        response: Empty = self.stub.CreateAgent(request, metadata=self.metadata)
+    def rag_create_agent(self, request: RagCreateAgentRequest) -> Empty:
+        response: Empty = self.stub.RagCreateAgent(request, metadata=self.metadata)
         return response
 
-    def update_agent(self, request: UpdateRagAgentRequest) -> Empty:
-        response: Empty = self.stub.UpdateAgent(request, metadata=self.metadata)
+    def rag_update_agent(self, request: RagUpdateAgentRequest) -> Empty:
+        response: Empty = self.stub.RagUpdateAgent(request, metadata=self.metadata)
         return response
 
-    def delete_agent(self, request: DeleteRagAgentRequest) -> Empty:
-        response: Empty = self.stub.DeleteAgent(request, metadata=self.metadata)
+    def rag_delete_agent(self, request: RagDeleteAgentRequest) -> Empty:
+        response: Empty = self.stub.RagDeleteAgent(request, metadata=self.metadata)
         return response
 
-    def list_agents(self, request: ListRagAgentsRequest) -> RagAgentList:
-        response: RagAgentList = self.stub.ListAgents(request, metadata=self.metadata)
+    def rag_list_agents(self, request: RagListAgentsRequest) -> RagAgentList:
+        response: RagAgentList = self.stub.RagListAgents(request, metadata=self.metadata)
         return response
 
-    def upload_files(self, request_iterator: Iterator[UploadFilesRequest]) -> FileList:
-        response: FileList = self.stub.UploadFiles(request_iterator, metadata=self.metadata)
+    def rag_upload_files(self, request_iterator: Iterator[RagUploadFilesRequest]) -> RagFileList:
+        response: RagFileList = self.stub.RagUploadFiles(request_iterator, metadata=self.metadata)
         return response
 
-    def create_file(self, request: CreateFileRequest) -> File:
-        response: File = self.stub.CreateFile(request, metadata=self.metadata)
+    def rag_create_file(self, request: RagCreateFileRequest) -> RagFile:
+        response: RagFile = self.stub.RagCreateFile(request, metadata=self.metadata)
         return response
 
-    def list_files(self, request: ListFilesRequest) -> ListFilesResponse:
-        response: ListFilesResponse = self.stub.ListFiles(request, metadata=self.metadata)
+    def rag_list_files(self, request: RagListFilesRequest) -> RagListFilesResponse:
+        response: RagListFilesResponse = self.stub.RagListFiles(request, metadata=self.metadata)
         return response
 
-    def get_root_folder(self, request: GetRootFolderRequest) -> GetRootFolderResponse:
-        response: GetRootFolderResponse = self.stub.GetRootFolder(request, metadata=self.metadata)
+    def rag_get_root_folder(self, request: RagGetRootFolderRequest) -> RagGetRootFolderResponse:
+        response: RagGetRootFolderResponse = self.stub.RagGetRootFolder(request, metadata=self.metadata)
         return response
 
-    def get_parent_folder(self, request: GetParentFolderRequest) -> GetParentFolderResponse:
-        response: GetParentFolderResponse = self.stub.GetParentFolder(request, metadata=self.metadata)
+    def rag_get_parent_folder(self, request: RagGetParentFolderRequest) -> RagGetParentFolderResponse:
+        response: RagGetParentFolderResponse = self.stub.RagGetParentFolder(request, metadata=self.metadata)
         return response
 
-    def get_all_parent_folders(self, request: GetAllParentFoldersRequest) -> GetAllParentFoldersResponse:
-        response: GetAllParentFoldersResponse = self.stub.GetAllParentFolders(request, metadata=self.metadata)
+    def rag_get_all_parent_folders(self, request: RagGetAllParentFoldersRequest) -> RagGetAllParentFoldersResponse:
+        response: RagGetAllParentFoldersResponse = self.stub.RagGetAllParentFolders(request, metadata=self.metadata)
         return response
 
-    def delete_files(self, request: DeleteFilesRequest) -> Empty:
-        response: Empty = self.stub.DeleteFiles(request, metadata=self.metadata)
+    def rag_delete_files(self, request: RagDeleteFilesRequest) -> Empty:
+        response: Empty = self.stub.RagDeleteFiles(request, metadata=self.metadata)
         return response
 
-    def rename_file(self, request: RenameFileRequest) -> Empty:
-        response: Empty = self.stub.RenameFile(request, metadata=self.metadata)
+    def rag_rename_file(self, request: RagRenameFileRequest) -> Empty:
+        response: Empty = self.stub.RagRenameFile(request, metadata=self.metadata)
         return response
 
-    def get_file(self, request: GetFileRequest) -> Iterator[FileChunk]:
-        response: Iterator[FileChunk] = self.stub.GetFile(request, metadata=self.metadata)
+    def rag_get_file(self, request: RagGetFileRequest) -> Iterator[RagFileChunk]:
+        response: Iterator[RagFileChunk] = self.stub.RagGetFile(request, metadata=self.metadata)
         return response
 
-    def move_file(self, request: MoveFileRequest) -> Empty:
-        response: Empty = self.stub.MoveFile(request, metadata=self.metadata)
+    def rag_move_file(self, request: RagMoveFileRequest) -> Empty:
+        response: Empty = self.stub.RagMoveFile(request, metadata=self.metadata)
         return response
 
-    def file_to_document(self, request: FileToDocumentRequest) -> FileToDocumentList:
-        response: FileToDocumentList = self.stub.FileToDocument(request, metadata=self.metadata)
+    def rag_file_to_document(self, request: RagFileToDocumentRequest) -> RagFileToDocumentList:
+        response: RagFileToDocumentList = self.stub.RagFileToDocument(request, metadata=self.metadata)
         return response
 
-    def dify_retrieval(self, request: DifyRetrievalRequest) -> DifyRecordList:
-        response: DifyRecordList = self.stub.DifyRetrieval(request, metadata=self.metadata)
+    def rag_dify_retrieval(self, request: RagDifyRetrievalRequest) -> RagDifyRecordList:
+        response: RagDifyRecordList = self.stub.RagDifyRetrieval(request, metadata=self.metadata)
         return response
 
-    def ask(self, request: AskRequest) -> Iterator[AskResponse]:
-        response: Iterator[AskResponse] = self.stub.Ask(request, metadata=self.metadata)
+    def rag_ask(self, request: RagAskRequest) -> Iterator[RagAskResponse]:
+        response: Iterator[RagAskResponse] = self.stub.RagAsk(request, metadata=self.metadata)
         return response
 
-    def related_questions(self, request: RelatedQuestionsRequest) -> RelatedQuestionsResponse:
-        response: RelatedQuestionsResponse = self.stub.RelatedQuestions(request, metadata=self.metadata)
+    def rag_related_questions(self, request: RagRelatedQuestionsRequest) -> RagRelatedQuestionsResponse:
+        response: RagRelatedQuestionsResponse = self.stub.RagRelatedQuestions(request, metadata=self.metadata)
         return response
 
-    def chatbot_completion(self, request: ChatbotCompletionRequest) -> Iterator[ChatCompletionResponse]:
-        response: Iterator[ChatCompletionResponse] = self.stub.ChatbotCompletion(request, metadata=self.metadata)
+    def rag_chatbot_completion(self, request: RagChatbotCompletionRequest) -> Iterator[RagChatCompletionResponse]:
+        response: Iterator[RagChatCompletionResponse] = self.stub.RagChatbotCompletion(request, metadata=self.metadata)
         return response
 
-    def chatbot_info(self, request: ChatbotInfoRequest) -> ChatbotInfoResponse:
-        response: ChatbotInfoResponse = self.stub.ChatbotInfo(request, metadata=self.metadata)
+    def rag_chatbot_info(self, request: RagChatbotInfoRequest) -> RagChatbotInfoResponse:
+        response: RagChatbotInfoResponse = self.stub.RagChatbotInfo(request, metadata=self.metadata)
         return response
 
-    def agentbot_completion(self, request: AgentbotCompletionRequest) -> Iterator[AgentCompletionResponse]:
-        response: Iterator[AgentCompletionResponse] = self.stub.AgentbotCompletion(request, metadata=self.metadata)
+    def rag_agentbot_completion(self, request: RagAgentbotCompletionRequest) -> Iterator[RagAgentCompletionResponse]:
+        response: Iterator[RagAgentCompletionResponse] = self.stub.RagAgentbotCompletion(
+            request, metadata=self.metadata)
         return response
 
-    def agentbot_inputs(self, request: AgentbotInputsRequest) -> AgentbotInputsResponse:
-        response: AgentbotInputsResponse = self.stub.AgentbotInputs(request, metadata=self.metadata)
+    def rag_agentbot_inputs(self, request: RagAgentbotInputsRequest) -> RagAgentbotInputsResponse:
+        response: RagAgentbotInputsResponse = self.stub.RagAgentbotInputs(request, metadata=self.metadata)
         return response
 
-    def searchbot_ask(self, request: SearchbotAskRequest) -> Iterator[AskResponse]:
-        response: Iterator[AskResponse] = self.stub.SearchbotAsk(request, metadata=self.metadata)
+    def rag_searchbot_ask(self, request: RagSearchbotAskRequest) -> Iterator[RagAskResponse]:
+        response: Iterator[RagAskResponse] = self.stub.RagSearchbotAsk(request, metadata=self.metadata)
         return response
 
-    def searchbot_retrieval(self, request: SearchbotRetrievalRequest) -> SearchbotRetrievalResponse:
-        response: SearchbotRetrievalResponse = self.stub.SearchbotRetrieval(request, metadata=self.metadata)
+    def rag_searchbot_retrieval(self, request: RagSearchbotRetrievalRequest) -> RagSearchbotRetrievalResponse:
+        response: RagSearchbotRetrievalResponse = self.stub.RagSearchbotRetrieval(request, metadata=self.metadata)
         return response
 
-    def searchbot_related_questions(self, request: SearchbotRelatedQuestionsRequest) -> RelatedQuestionsResponse:
-        response: RelatedQuestionsResponse = self.stub.SearchbotRelatedQuestions(request, metadata=self.metadata)
+    def rag_searchbot_related_questions(
+            self, request: RagSearchbotRelatedQuestionsRequest) -> RagRelatedQuestionsResponse:
+        response: RagRelatedQuestionsResponse = self.stub.RagSearchbotRelatedQuestions(request, metadata=self.metadata)
         return response
 
-    def searchbot_detail(self, request: SearchbotDetailRequest) -> SearchbotDetailResponse:
-        response: SearchbotDetailResponse = self.stub.SearchbotDetail(request, metadata=self.metadata)
+    def rag_searchbot_detail(self, request: RagSearchbotDetailRequest) -> RagSearchbotDetailResponse:
+        response: RagSearchbotDetailResponse = self.stub.RagSearchbotDetail(request, metadata=self.metadata)
         return response
 
-    def searchbot_mindmap(self, request: SearchbotMindmapRequest) -> Struct:
-        response: Struct = self.stub.SearchbotMindmap(request, metadata=self.metadata)
+    def rag_searchbot_mindmap(self, request: RagSearchbotMindmapRequest) -> Struct:
+        response: Struct = self.stub.RagSearchbotMindmap(request, metadata=self.metadata)
         return response
