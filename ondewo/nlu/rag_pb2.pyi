@@ -532,7 +532,7 @@ class RagParserConfig(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    AUTO_KEYWORD_FIELD_NUMBER: builtins.int
+    AUTO_KEYWORDS_FIELD_NUMBER: builtins.int
     AUTO_QUESTIONS_FIELD_NUMBER: builtins.int
     CHUNK_TOKEN_NUM_FIELD_NUMBER: builtins.int
     DELIMITER_FIELD_NUMBER: builtins.int
@@ -542,7 +542,7 @@ class RagParserConfig(google.protobuf.message.Message):
     TASK_PAGE_SIZE_FIELD_NUMBER: builtins.int
     RAPTOR_FIELD_NUMBER: builtins.int
     GRAPHRAG_FIELD_NUMBER: builtins.int
-    auto_keyword: builtins.int
+    auto_keywords: builtins.int
     """Optional. Minimum 0, maximum 32, default 0. See <a href="https://ragflow.io/docs/dev/autokeyword_autoquestion">https://ragflow.io/docs/dev/autokeyword_autoquestion</a> for details."""
     auto_questions: builtins.int
     """Optional. Minimum 0, maximum 10, default 0. See <a href="https://ragflow.io/docs/dev/autokeyword_autoquestion">https://ragflow.io/docs/dev/autokeyword_autoquestion</a> for details."""
@@ -571,7 +571,7 @@ class RagParserConfig(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        auto_keyword: builtins.int = ...,
+        auto_keywords: builtins.int = ...,
         auto_questions: builtins.int = ...,
         chunk_token_num: builtins.int = ...,
         delimiter: builtins.str = ...,
@@ -583,7 +583,7 @@ class RagParserConfig(google.protobuf.message.Message):
         graphrag: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["graphrag", b"graphrag", "raptor", b"raptor"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["auto_keyword", b"auto_keyword", "auto_questions", b"auto_questions", "chunk_token_num", b"chunk_token_num", "delimiter", b"delimiter", "graphrag", b"graphrag", "html4excel", b"html4excel", "layout_recognize", b"layout_recognize", "raptor", b"raptor", "tag_kb_ids", b"tag_kb_ids", "task_page_size", b"task_page_size"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["auto_keywords", b"auto_keywords", "auto_questions", b"auto_questions", "chunk_token_num", b"chunk_token_num", "delimiter", b"delimiter", "graphrag", b"graphrag", "html4excel", b"html4excel", "layout_recognize", b"layout_recognize", "raptor", b"raptor", "tag_kb_ids", b"tag_kb_ids", "task_page_size", b"task_page_size"]) -> None: ...
 
 global___RagParserConfig = RagParserConfig
 
