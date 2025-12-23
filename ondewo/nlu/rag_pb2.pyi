@@ -605,7 +605,7 @@ class RagRaptorConfig(google.protobuf.message.Message):
 
     USE_RAPTOR_FIELD_NUMBER: builtins.int
     PROMPT_FIELD_NUMBER: builtins.int
-    MAX_TOKENS_FIELD_NUMBER: builtins.int
+    MAX_TOKEN_FIELD_NUMBER: builtins.int
     THRESHOLD_FIELD_NUMBER: builtins.int
     MAX_CLUSTER_FIELD_NUMBER: builtins.int
     RANDOM_SEED_FIELD_NUMBER: builtins.int
@@ -615,7 +615,7 @@ class RagRaptorConfig(google.protobuf.message.Message):
     """Optional. Prompt to use for RAPTOR. Default:<br>
     <code>"Please summarize the following paragraphs. Be careful with the numbers, do not make things up. Paragraphs as following:\\n      {cluster_content}\\nThe above is the content you need to summarize."</code>
     """
-    max_tokens: builtins.int
+    max_token: builtins.int
     """Optional. Minimum 1. Maximum 2048. Default 256."""
     threshold: builtins.float
     """Optional. Minimum 0.0. Maximum 1.0. Default 0.1."""
@@ -628,12 +628,12 @@ class RagRaptorConfig(google.protobuf.message.Message):
         *,
         use_raptor: builtins.bool = ...,
         prompt: builtins.str = ...,
-        max_tokens: builtins.int = ...,
+        max_token: builtins.int = ...,
         threshold: builtins.float = ...,
         max_cluster: builtins.int = ...,
         random_seed: builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["max_cluster", b"max_cluster", "max_tokens", b"max_tokens", "prompt", b"prompt", "random_seed", b"random_seed", "threshold", b"threshold", "use_raptor", b"use_raptor"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["max_cluster", b"max_cluster", "max_token", b"max_token", "prompt", b"prompt", "random_seed", b"random_seed", "threshold", b"threshold", "use_raptor", b"use_raptor"]) -> None: ...
 
 global___RagRaptorConfig = RagRaptorConfig
 
