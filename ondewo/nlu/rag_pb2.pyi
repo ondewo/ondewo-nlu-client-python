@@ -130,25 +130,25 @@ tag: RagChunkMethod.ValueType  # 11
 """Tag."""
 global___RagChunkMethod = RagChunkMethod
 
-class _GraphRagMethod:
+class _RagGraphRagMethod:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _GraphRagMethodEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_GraphRagMethod.ValueType], builtins.type):
+class _RagGraphRagMethodEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_RagGraphRagMethod.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-    light: _GraphRagMethod.ValueType  # 0
+    light: _RagGraphRagMethod.ValueType  # 0
     """Use prompts provided by <a href="https://github.com/HKUDS/LightRAG">LightRAG</a>."""
-    general: _GraphRagMethod.ValueType  # 1
+    general: _RagGraphRagMethod.ValueType  # 1
     """Use prompts provided by <a href="https://github.com/microsoft/graphrag">GraphRAG</a>."""
 
-class GraphRagMethod(_GraphRagMethod, metaclass=_GraphRagMethodEnumTypeWrapper):
+class RagGraphRagMethod(_RagGraphRagMethod, metaclass=_RagGraphRagMethodEnumTypeWrapper):
     """Knowledge graph construction methods."""
 
-light: GraphRagMethod.ValueType  # 0
+light: RagGraphRagMethod.ValueType  # 0
 """Use prompts provided by <a href="https://github.com/HKUDS/LightRAG">LightRAG</a>."""
-general: GraphRagMethod.ValueType  # 1
+general: RagGraphRagMethod.ValueType  # 1
 """Use prompts provided by <a href="https://github.com/microsoft/graphrag">GraphRAG</a>."""
-global___GraphRagMethod = GraphRagMethod
+global___RagGraphRagMethod = RagGraphRagMethod
 
 class _RagDocumentStatus:
     ValueType = typing.NewType("ValueType", builtins.int)
@@ -486,7 +486,7 @@ class RagCreateDatasetRequest(google.protobuf.message.Message):
     chunk_method: global___RagChunkMethod.ValueType
     """Optional. Default chunking method for documents in this dataset."""
     embedding_model: builtins.str
-    """Optional. Embedding model name in the format "&lt;model_name&gt;@&lt;factory_name&gt;" (uses user's default if not specified)."""
+    """Optional. Embedding model name in the format "&lt;model_name&gt;@&lt;factory_name&gt;" (uses user's default if not specified). Maximum length 255."""
     @property
     def parser_config(self) -> global___RagParserConfig:
         """Optional. Configuration settings for the dataset parser. The used fields vary depending on the selected <code>chunk_method</code>."""
@@ -569,11 +569,11 @@ class RagParserConfig(google.protobuf.message.Message):
         """Optional. List of dataset IDs. See <a href="https://ragflow.io/docs/dev/use_tag_sets">https://ragflow.io/docs/dev/use_tag_sets</a> for details."""
 
     @property
-    def raptor(self) -> global___RaptorConfig:
+    def raptor(self) -> global___RagRaptorConfig:
         """Optional. RAPTOR-specific settings. Default <code>{ "use_raptor": false }</code>."""
 
     @property
-    def graphrag(self) -> global___GraphRagConfig:
+    def graphrag(self) -> global___RagGraphRagConfig:
         """Optional. GRAPHRAG-specific settings. Default <code>{ "use_graphrag": false }</code>."""
 
     def __init__(
@@ -589,8 +589,8 @@ class RagParserConfig(google.protobuf.message.Message):
         topn_tags: builtins.int = ...,
         filename_embd_weight: builtins.float = ...,
         task_page_size: builtins.int = ...,
-        raptor: global___RaptorConfig | None = ...,
-        graphrag: global___GraphRagConfig | None = ...,
+        raptor: global___RagRaptorConfig | None = ...,
+        graphrag: global___RagGraphRagConfig | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["graphrag", b"graphrag", "raptor", b"raptor"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing.Literal["auto_keywords", b"auto_keywords", "auto_questions", b"auto_questions", "chunk_token_num", b"chunk_token_num", "delimiter", b"delimiter", "filename_embd_weight", b"filename_embd_weight", "graphrag", b"graphrag", "html4excel", b"html4excel", "layout_recognize", b"layout_recognize", "raptor", b"raptor", "tag_kb_ids", b"tag_kb_ids", "task_page_size", b"task_page_size", "topn_tags", b"topn_tags"]) -> None: ...
@@ -598,7 +598,7 @@ class RagParserConfig(google.protobuf.message.Message):
 global___RagParserConfig = RagParserConfig
 
 @typing.final
-class RaptorConfig(google.protobuf.message.Message):
+class RagRaptorConfig(google.protobuf.message.Message):
     """RAPTOR configuration. Refer to <a href="https://arxiv.org/html/2401.18059v1">RAPTOR paper</a> for more information about RAPTOR."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -635,10 +635,10 @@ class RaptorConfig(google.protobuf.message.Message):
     ) -> None: ...
     def ClearField(self, field_name: typing.Literal["max_cluster", b"max_cluster", "max_tokens", b"max_tokens", "prompt", b"prompt", "random_seed", b"random_seed", "threshold", b"threshold", "use_raptor", b"use_raptor"]) -> None: ...
 
-global___RaptorConfig = RaptorConfig
+global___RagRaptorConfig = RagRaptorConfig
 
 @typing.final
-class GraphRagConfig(google.protobuf.message.Message):
+class RagGraphRagConfig(google.protobuf.message.Message):
     """GraphRAG configuration."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -650,7 +650,7 @@ class GraphRagConfig(google.protobuf.message.Message):
     RESOLUTION_FIELD_NUMBER: builtins.int
     use_graphrag: builtins.bool
     """Optional. Default <code>false</code>."""
-    method: global___GraphRagMethod.ValueType
+    method: global___RagGraphRagMethod.ValueType
     """Optional. Default <code>light</code>."""
     community: builtins.bool
     """Optional. Default <code>false</code>."""
@@ -665,13 +665,13 @@ class GraphRagConfig(google.protobuf.message.Message):
         *,
         use_graphrag: builtins.bool = ...,
         entity_types: collections.abc.Iterable[builtins.str] | None = ...,
-        method: global___GraphRagMethod.ValueType = ...,
+        method: global___RagGraphRagMethod.ValueType = ...,
         community: builtins.bool = ...,
         resolution: builtins.bool = ...,
     ) -> None: ...
     def ClearField(self, field_name: typing.Literal["community", b"community", "entity_types", b"entity_types", "method", b"method", "resolution", b"resolution", "use_graphrag", b"use_graphrag"]) -> None: ...
 
-global___GraphRagConfig = GraphRagConfig
+global___RagGraphRagConfig = RagGraphRagConfig
 
 @typing.final
 class RagDataset(google.protobuf.message.Message):
@@ -869,7 +869,7 @@ global___RagUpdateDatasetRequest = RagUpdateDatasetRequest
 
 @typing.final
 class RagDeleteRequest(google.protobuf.message.Message):
-    """Request message for deleting one or more datasets."""
+    """Request message for deleting one or more of a RAGFlow resource."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -881,10 +881,10 @@ class RagDeleteRequest(google.protobuf.message.Message):
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
     delete_all: builtins.bool
-    """Optional. Delete all datasets (needed because protobuf cannot represent <code>ids=null</code>)."""
+    """Optional. Delete all (needed because protobuf cannot represent <code>ids=null</code>)."""
     @property
     def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Optional. Dataset IDs to delete. If empty and <code>delete_all</code> is <code>true</code>, deletes all datasets. Duplicate IDs are not allowed."""
+        """Optional. IDs of resources to delete. If empty and <code>delete_all</code> is <code>true</code>, deletes all. Duplicate IDs are not allowed."""
 
     def __init__(
         self,
@@ -2005,7 +2005,7 @@ class RagRetrievalRequest(google.protobuf.message.Message):
         """Optional. Cross-language translation codes to enable multilingual retrieval."""
 
     @property
-    def metadata_condition(self) -> global___MetadataConditions:
+    def metadata_condition(self) -> global___RagMetadataConditions:
         """Optional. Metadata filter condition to restrict results based on document metadata."""
 
     def __init__(
@@ -2018,7 +2018,7 @@ class RagRetrievalRequest(google.protobuf.message.Message):
         document_ids: collections.abc.Iterable[builtins.str] | None = ...,
         use_kg: builtins.bool | None = ...,
         cross_languages: collections.abc.Iterable[builtins.str] | None = ...,
-        metadata_condition: global___MetadataConditions | None = ...,
+        metadata_condition: global___RagMetadataConditions | None = ...,
         similarity_threshold: builtins.float = ...,
         vector_similarity_weight: builtins.float = ...,
         top_k: builtins.int = ...,
@@ -2038,27 +2038,27 @@ class RagRetrievalRequest(google.protobuf.message.Message):
 global___RagRetrievalRequest = RagRetrievalRequest
 
 @typing.final
-class MetadataConditions(google.protobuf.message.Message):
+class RagMetadataConditions(google.protobuf.message.Message):
     """List of document metadata conditions."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     CONDITIONS_FIELD_NUMBER: builtins.int
     @property
-    def conditions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___MetadataCondition]:
+    def conditions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagMetadataCondition]:
         """Optional. List of conditions."""
 
     def __init__(
         self,
         *,
-        conditions: collections.abc.Iterable[global___MetadataCondition] | None = ...,
+        conditions: collections.abc.Iterable[global___RagMetadataCondition] | None = ...,
     ) -> None: ...
     def ClearField(self, field_name: typing.Literal["conditions", b"conditions"]) -> None: ...
 
-global___MetadataConditions = MetadataConditions
+global___RagMetadataConditions = RagMetadataConditions
 
 @typing.final
-class MetadataCondition(google.protobuf.message.Message):
+class RagMetadataCondition(google.protobuf.message.Message):
     """Condition to filter document metadata on."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -2081,7 +2081,7 @@ class MetadataCondition(google.protobuf.message.Message):
     ) -> None: ...
     def ClearField(self, field_name: typing.Literal["comparison_operator", b"comparison_operator", "name", b"name", "value", b"value"]) -> None: ...
 
-global___MetadataCondition = MetadataCondition
+global___RagMetadataCondition = RagMetadataCondition
 
 @typing.final
 class RagRetrievalResponse(google.protobuf.message.Message):
