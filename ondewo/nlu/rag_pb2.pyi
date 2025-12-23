@@ -31,6 +31,7 @@ limitations under the License.
 
 File-level comment for <code>ondewo/nlu/rag.proto</code>.
 This file contains a single service <a href="#ondewo.nlu.Rags">Rags</a>. The Rags service provides integration with RAGFlow for Retrieval-Augmented Generation (RAG), including dataset management, document processing, chunk retrieval, conversational AI with chat and agent assistants, and file management. Key message types include <a href="#ondewo.nlu.RagDataset">RagDataset</a>, <a href="#ondewo.nlu.RagChat">RagChat</a>, and <a href="#ondewo.nlu.RagAgent">RagAgent</a>.
+All message fields that are marked as <code>optional</code> are not actually optional but marked as such to enable presence tracking so that it is possible to distinguish between null and default value fields. Without the <code>optional</code> keyword it would for instance not be possible to distinguish between an integer <code>0</code> and <code>null</code>.
 """
 
 import builtins
@@ -325,9 +326,9 @@ class RagPagination(google.protobuf.message.Message):
     PAGE_FIELD_NUMBER: builtins.int
     PAGE_SIZE_FIELD_NUMBER: builtins.int
     page: builtins.int
-    """Optional. Page number (1-indexed, default: 1)."""
+    """Optional. Minimum 1. Page number (1-indexed, default: 1)."""
     page_size: builtins.int
-    """Optional. Number of items per page (default varies by endpoint)."""
+    """Optional. Minimum 1. Number of items per page (default varies by endpoint)."""
     def __init__(
         self,
         *,
@@ -498,13 +499,17 @@ class RagCreateDatasetRequest(google.protobuf.message.Message):
         name: builtins.str = ...,
         description: builtins.str = ...,
         avatar: builtins.str = ...,
-        permission: global___RagPermission.ValueType = ...,
-        chunk_method: global___RagChunkMethod.ValueType = ...,
+        permission: global___RagPermission.ValueType | None = ...,
+        chunk_method: global___RagChunkMethod.ValueType | None = ...,
         parser_config: global___RagParserConfig | None = ...,
         embedding_model: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["parser_config", b"parser_config"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["avatar", b"avatar", "chunk_method", b"chunk_method", "description", b"description", "embedding_model", b"embedding_model", "name", b"name", "parent", b"parent", "parser_config", b"parser_config", "permission", b"permission"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_chunk_method", b"_chunk_method", "_permission", b"_permission", "chunk_method", b"chunk_method", "parser_config", b"parser_config", "permission", b"permission"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_chunk_method", b"_chunk_method", "_permission", b"_permission", "avatar", b"avatar", "chunk_method", b"chunk_method", "description", b"description", "embedding_model", b"embedding_model", "name", b"name", "parent", b"parent", "parser_config", b"parser_config", "permission", b"permission"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_chunk_method", b"_chunk_method"]) -> typing.Literal["chunk_method"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_permission", b"_permission"]) -> typing.Literal["permission"] | None: ...
 
 global___RagCreateDatasetRequest = RagCreateDatasetRequest
 
@@ -580,20 +585,24 @@ class RagParserConfig(google.protobuf.message.Message):
         self,
         *,
         auto_keywords: builtins.int = ...,
-        auto_questions: builtins.int = ...,
+        auto_questions: builtins.int | None = ...,
         chunk_token_num: builtins.int = ...,
         delimiter: builtins.str = ...,
         html4excel: builtins.bool = ...,
         layout_recognize: builtins.str = ...,
         tag_kb_ids: collections.abc.Iterable[builtins.str] | None = ...,
         topn_tags: builtins.int = ...,
-        filename_embd_weight: builtins.float = ...,
+        filename_embd_weight: builtins.float | None = ...,
         task_page_size: builtins.int = ...,
         raptor: global___RagRaptorConfig | None = ...,
         graphrag: global___RagGraphRagConfig | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["graphrag", b"graphrag", "raptor", b"raptor"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["auto_keywords", b"auto_keywords", "auto_questions", b"auto_questions", "chunk_token_num", b"chunk_token_num", "delimiter", b"delimiter", "filename_embd_weight", b"filename_embd_weight", "graphrag", b"graphrag", "html4excel", b"html4excel", "layout_recognize", b"layout_recognize", "raptor", b"raptor", "tag_kb_ids", b"tag_kb_ids", "task_page_size", b"task_page_size", "topn_tags", b"topn_tags"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_auto_questions", b"_auto_questions", "_filename_embd_weight", b"_filename_embd_weight", "auto_questions", b"auto_questions", "filename_embd_weight", b"filename_embd_weight", "graphrag", b"graphrag", "raptor", b"raptor"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_auto_questions", b"_auto_questions", "_filename_embd_weight", b"_filename_embd_weight", "auto_keywords", b"auto_keywords", "auto_questions", b"auto_questions", "chunk_token_num", b"chunk_token_num", "delimiter", b"delimiter", "filename_embd_weight", b"filename_embd_weight", "graphrag", b"graphrag", "html4excel", b"html4excel", "layout_recognize", b"layout_recognize", "raptor", b"raptor", "tag_kb_ids", b"tag_kb_ids", "task_page_size", b"task_page_size", "topn_tags", b"topn_tags"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_auto_questions", b"_auto_questions"]) -> typing.Literal["auto_questions"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_filename_embd_weight", b"_filename_embd_weight"]) -> typing.Literal["filename_embd_weight"] | None: ...
 
 global___RagParserConfig = RagParserConfig
 
@@ -629,11 +638,16 @@ class RagRaptorConfig(google.protobuf.message.Message):
         use_raptor: builtins.bool = ...,
         prompt: builtins.str = ...,
         max_token: builtins.int = ...,
-        threshold: builtins.float = ...,
+        threshold: builtins.float | None = ...,
         max_cluster: builtins.int = ...,
-        random_seed: builtins.int = ...,
+        random_seed: builtins.int | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["max_cluster", b"max_cluster", "max_token", b"max_token", "prompt", b"prompt", "random_seed", b"random_seed", "threshold", b"threshold", "use_raptor", b"use_raptor"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_random_seed", b"_random_seed", "_threshold", b"_threshold", "random_seed", b"random_seed", "threshold", b"threshold"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_random_seed", b"_random_seed", "_threshold", b"_threshold", "max_cluster", b"max_cluster", "max_token", b"max_token", "prompt", b"prompt", "random_seed", b"random_seed", "threshold", b"threshold", "use_raptor", b"use_raptor"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_random_seed", b"_random_seed"]) -> typing.Literal["random_seed"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_threshold", b"_threshold"]) -> typing.Literal["threshold"] | None: ...
 
 global___RagRaptorConfig = RagRaptorConfig
 
@@ -665,11 +679,13 @@ class RagGraphRagConfig(google.protobuf.message.Message):
         *,
         use_graphrag: builtins.bool = ...,
         entity_types: collections.abc.Iterable[builtins.str] | None = ...,
-        method: global___RagGraphRagMethod.ValueType = ...,
+        method: global___RagGraphRagMethod.ValueType | None = ...,
         community: builtins.bool = ...,
         resolution: builtins.bool = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["community", b"community", "entity_types", b"entity_types", "method", b"method", "resolution", b"resolution", "use_graphrag", b"use_graphrag"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_method", b"_method", "method", b"method"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_method", b"_method", "community", b"community", "entity_types", b"entity_types", "method", b"method", "resolution", b"resolution", "use_graphrag", b"use_graphrag"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_method", b"_method"]) -> typing.Literal["method"] | None: ...
 
 global___RagGraphRagConfig = RagGraphRagConfig
 
@@ -778,31 +794,49 @@ class RagDataset(google.protobuf.message.Message):
         language: builtins.str = ...,
         description: builtins.str = ...,
         embedding_model: builtins.str = ...,
-        permission: global___RagPermission.ValueType = ...,
+        permission: global___RagPermission.ValueType | None = ...,
         created_by: builtins.str = ...,
-        document_count: builtins.int = ...,
-        token_num: builtins.int = ...,
-        chunk_count: builtins.int = ...,
-        similarity_threshold: builtins.float = ...,
-        vector_similarity_weight: builtins.float = ...,
-        chunk_method: global___RagChunkMethod.ValueType = ...,
+        document_count: builtins.int | None = ...,
+        token_num: builtins.int | None = ...,
+        chunk_count: builtins.int | None = ...,
+        similarity_threshold: builtins.float | None = ...,
+        vector_similarity_weight: builtins.float | None = ...,
+        chunk_method: global___RagChunkMethod.ValueType | None = ...,
         pipeline_id: builtins.str = ...,
         parser_config: global___RagParserConfig | None = ...,
-        pagerank: builtins.int = ...,
+        pagerank: builtins.int | None = ...,
         graphrag_task_id: builtins.str = ...,
         graphrag_task_finish_at: builtins.str = ...,
         raptor_task_id: builtins.str = ...,
         raptor_task_finish_at: builtins.str = ...,
         mindmap_task_id: builtins.str = ...,
         mindmap_task_finish_at: builtins.str = ...,
-        status: builtins.str = ...,
+        status: builtins.str | None = ...,
         create_time: builtins.int = ...,
         create_date: builtins.str = ...,
         update_time: builtins.int = ...,
         update_date: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["parser_config", b"parser_config"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["avatar", b"avatar", "chunk_count", b"chunk_count", "chunk_method", b"chunk_method", "create_date", b"create_date", "create_time", b"create_time", "created_by", b"created_by", "description", b"description", "document_count", b"document_count", "embedding_model", b"embedding_model", "graphrag_task_finish_at", b"graphrag_task_finish_at", "graphrag_task_id", b"graphrag_task_id", "id", b"id", "language", b"language", "mindmap_task_finish_at", b"mindmap_task_finish_at", "mindmap_task_id", b"mindmap_task_id", "name", b"name", "pagerank", b"pagerank", "parser_config", b"parser_config", "permission", b"permission", "pipeline_id", b"pipeline_id", "raptor_task_finish_at", b"raptor_task_finish_at", "raptor_task_id", b"raptor_task_id", "similarity_threshold", b"similarity_threshold", "status", b"status", "tenant_id", b"tenant_id", "token_num", b"token_num", "update_date", b"update_date", "update_time", b"update_time", "vector_similarity_weight", b"vector_similarity_weight"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_chunk_count", b"_chunk_count", "_chunk_method", b"_chunk_method", "_document_count", b"_document_count", "_pagerank", b"_pagerank", "_permission", b"_permission", "_similarity_threshold", b"_similarity_threshold", "_status", b"_status", "_token_num", b"_token_num", "_vector_similarity_weight", b"_vector_similarity_weight", "chunk_count", b"chunk_count", "chunk_method", b"chunk_method", "document_count", b"document_count", "pagerank", b"pagerank", "parser_config", b"parser_config", "permission", b"permission", "similarity_threshold", b"similarity_threshold", "status", b"status", "token_num", b"token_num", "vector_similarity_weight", b"vector_similarity_weight"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_chunk_count", b"_chunk_count", "_chunk_method", b"_chunk_method", "_document_count", b"_document_count", "_pagerank", b"_pagerank", "_permission", b"_permission", "_similarity_threshold", b"_similarity_threshold", "_status", b"_status", "_token_num", b"_token_num", "_vector_similarity_weight", b"_vector_similarity_weight", "avatar", b"avatar", "chunk_count", b"chunk_count", "chunk_method", b"chunk_method", "create_date", b"create_date", "create_time", b"create_time", "created_by", b"created_by", "description", b"description", "document_count", b"document_count", "embedding_model", b"embedding_model", "graphrag_task_finish_at", b"graphrag_task_finish_at", "graphrag_task_id", b"graphrag_task_id", "id", b"id", "language", b"language", "mindmap_task_finish_at", b"mindmap_task_finish_at", "mindmap_task_id", b"mindmap_task_id", "name", b"name", "pagerank", b"pagerank", "parser_config", b"parser_config", "permission", b"permission", "pipeline_id", b"pipeline_id", "raptor_task_finish_at", b"raptor_task_finish_at", "raptor_task_id", b"raptor_task_id", "similarity_threshold", b"similarity_threshold", "status", b"status", "tenant_id", b"tenant_id", "token_num", b"token_num", "update_date", b"update_date", "update_time", b"update_time", "vector_similarity_weight", b"vector_similarity_weight"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_chunk_count", b"_chunk_count"]) -> typing.Literal["chunk_count"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_chunk_method", b"_chunk_method"]) -> typing.Literal["chunk_method"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_document_count", b"_document_count"]) -> typing.Literal["document_count"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_pagerank", b"_pagerank"]) -> typing.Literal["pagerank"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_permission", b"_permission"]) -> typing.Literal["permission"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_similarity_threshold", b"_similarity_threshold"]) -> typing.Literal["similarity_threshold"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_status", b"_status"]) -> typing.Literal["status"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_token_num", b"_token_num"]) -> typing.Literal["token_num"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_vector_similarity_weight", b"_vector_similarity_weight"]) -> typing.Literal["vector_similarity_weight"] | None: ...
 
 global___RagDataset = RagDataset
 
@@ -856,14 +890,20 @@ class RagUpdateDatasetRequest(google.protobuf.message.Message):
         name: builtins.str = ...,
         description: builtins.str = ...,
         avatar: builtins.str = ...,
-        permission: global___RagPermission.ValueType = ...,
-        chunk_method: global___RagChunkMethod.ValueType = ...,
+        permission: global___RagPermission.ValueType | None = ...,
+        chunk_method: global___RagChunkMethod.ValueType | None = ...,
         parser_config: global___RagParserConfig | None = ...,
         embedding_model: builtins.str = ...,
-        pagerank: builtins.int = ...,
+        pagerank: builtins.int | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["parser_config", b"parser_config"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["avatar", b"avatar", "chunk_method", b"chunk_method", "dataset_id", b"dataset_id", "description", b"description", "embedding_model", b"embedding_model", "name", b"name", "pagerank", b"pagerank", "parent", b"parent", "parser_config", b"parser_config", "permission", b"permission"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_chunk_method", b"_chunk_method", "_pagerank", b"_pagerank", "_permission", b"_permission", "chunk_method", b"chunk_method", "pagerank", b"pagerank", "parser_config", b"parser_config", "permission", b"permission"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_chunk_method", b"_chunk_method", "_pagerank", b"_pagerank", "_permission", b"_permission", "avatar", b"avatar", "chunk_method", b"chunk_method", "dataset_id", b"dataset_id", "description", b"description", "embedding_model", b"embedding_model", "name", b"name", "pagerank", b"pagerank", "parent", b"parent", "parser_config", b"parser_config", "permission", b"permission"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_chunk_method", b"_chunk_method"]) -> typing.Literal["chunk_method"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_pagerank", b"_pagerank"]) -> typing.Literal["pagerank"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_permission", b"_permission"]) -> typing.Literal["permission"] | None: ...
 
 global___RagUpdateDatasetRequest = RagUpdateDatasetRequest
 
@@ -1090,19 +1130,32 @@ class RagTaskStatus(google.protobuf.message.Message):
         *,
         id: builtins.str = ...,
         doc_id: builtins.str = ...,
-        from_page: builtins.int = ...,
-        to_page: builtins.int = ...,
+        from_page: builtins.int | None = ...,
+        to_page: builtins.int | None = ...,
         task_type: builtins.str = ...,
-        priority: builtins.int = ...,
+        priority: builtins.int | None = ...,
         begin_at: builtins.str = ...,
-        process_duration: builtins.float = ...,
-        progress: builtins.float = ...,
+        process_duration: builtins.float | None = ...,
+        progress: builtins.float | None = ...,
         progress_msg: builtins.str = ...,
-        retry_count: builtins.int = ...,
+        retry_count: builtins.int | None = ...,
         digest: builtins.str = ...,
         chunk_ids: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["begin_at", b"begin_at", "chunk_ids", b"chunk_ids", "digest", b"digest", "doc_id", b"doc_id", "from_page", b"from_page", "id", b"id", "priority", b"priority", "process_duration", b"process_duration", "progress", b"progress", "progress_msg", b"progress_msg", "retry_count", b"retry_count", "task_type", b"task_type", "to_page", b"to_page"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_from_page", b"_from_page", "_priority", b"_priority", "_process_duration", b"_process_duration", "_progress", b"_progress", "_retry_count", b"_retry_count", "_to_page", b"_to_page", "from_page", b"from_page", "priority", b"priority", "process_duration", b"process_duration", "progress", b"progress", "retry_count", b"retry_count", "to_page", b"to_page"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_from_page", b"_from_page", "_priority", b"_priority", "_process_duration", b"_process_duration", "_progress", b"_progress", "_retry_count", b"_retry_count", "_to_page", b"_to_page", "begin_at", b"begin_at", "chunk_ids", b"chunk_ids", "digest", b"digest", "doc_id", b"doc_id", "from_page", b"from_page", "id", b"id", "priority", b"priority", "process_duration", b"process_duration", "progress", b"progress", "progress_msg", b"progress_msg", "retry_count", b"retry_count", "task_type", b"task_type", "to_page", b"to_page"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_from_page", b"_from_page"]) -> typing.Literal["from_page"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_priority", b"_priority"]) -> typing.Literal["priority"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_process_duration", b"_process_duration"]) -> typing.Literal["process_duration"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_progress", b"_progress"]) -> typing.Literal["progress"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_retry_count", b"_retry_count"]) -> typing.Literal["retry_count"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_to_page", b"_to_page"]) -> typing.Literal["to_page"] | None: ...
 
 global___RagTaskStatus = RagTaskStatus
 
@@ -1300,7 +1353,7 @@ class RagDocument(google.protobuf.message.Message):
         id: builtins.str = ...,
         thumbnail: builtins.str = ...,
         dataset_id: builtins.str = ...,
-        chunk_method: global___RagChunkMethod.ValueType = ...,
+        chunk_method: global___RagChunkMethod.ValueType | None = ...,
         pipeline_id: builtins.str = ...,
         parser_config: global___RagParserConfig | None = ...,
         source_type: builtins.str = ...,
@@ -1308,24 +1361,38 @@ class RagDocument(google.protobuf.message.Message):
         created_by: builtins.str = ...,
         name: builtins.str = ...,
         location: builtins.str = ...,
-        size: builtins.int = ...,
-        chunk_count: builtins.int = ...,
-        token_count: builtins.int = ...,
-        progress: builtins.float = ...,
+        size: builtins.int | None = ...,
+        chunk_count: builtins.int | None = ...,
+        token_count: builtins.int | None = ...,
+        progress: builtins.float | None = ...,
         progress_msg: builtins.str = ...,
         process_begin_at: builtins.str = ...,
-        process_duration: builtins.float = ...,
+        process_duration: builtins.float | None = ...,
         meta_fields: google.protobuf.struct_pb2.Struct | None = ...,
         suffix: builtins.str = ...,
-        run: global___RagDocumentStatus.ValueType = ...,
+        run: global___RagDocumentStatus.ValueType | None = ...,
         status: builtins.str = ...,
         create_time: builtins.int = ...,
         create_date: builtins.str = ...,
         update_time: builtins.int = ...,
         update_date: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["meta_fields", b"meta_fields", "parser_config", b"parser_config"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["chunk_count", b"chunk_count", "chunk_method", b"chunk_method", "create_date", b"create_date", "create_time", b"create_time", "created_by", b"created_by", "dataset_id", b"dataset_id", "id", b"id", "location", b"location", "meta_fields", b"meta_fields", "name", b"name", "parser_config", b"parser_config", "pipeline_id", b"pipeline_id", "process_begin_at", b"process_begin_at", "process_duration", b"process_duration", "progress", b"progress", "progress_msg", b"progress_msg", "run", b"run", "size", b"size", "source_type", b"source_type", "status", b"status", "suffix", b"suffix", "thumbnail", b"thumbnail", "token_count", b"token_count", "type", b"type", "update_date", b"update_date", "update_time", b"update_time"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_chunk_count", b"_chunk_count", "_chunk_method", b"_chunk_method", "_process_duration", b"_process_duration", "_progress", b"_progress", "_run", b"_run", "_size", b"_size", "_token_count", b"_token_count", "chunk_count", b"chunk_count", "chunk_method", b"chunk_method", "meta_fields", b"meta_fields", "parser_config", b"parser_config", "process_duration", b"process_duration", "progress", b"progress", "run", b"run", "size", b"size", "token_count", b"token_count"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_chunk_count", b"_chunk_count", "_chunk_method", b"_chunk_method", "_process_duration", b"_process_duration", "_progress", b"_progress", "_run", b"_run", "_size", b"_size", "_token_count", b"_token_count", "chunk_count", b"chunk_count", "chunk_method", b"chunk_method", "create_date", b"create_date", "create_time", b"create_time", "created_by", b"created_by", "dataset_id", b"dataset_id", "id", b"id", "location", b"location", "meta_fields", b"meta_fields", "name", b"name", "parser_config", b"parser_config", "pipeline_id", b"pipeline_id", "process_begin_at", b"process_begin_at", "process_duration", b"process_duration", "progress", b"progress", "progress_msg", b"progress_msg", "run", b"run", "size", b"size", "source_type", b"source_type", "status", b"status", "suffix", b"suffix", "thumbnail", b"thumbnail", "token_count", b"token_count", "type", b"type", "update_date", b"update_date", "update_time", b"update_time"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_chunk_count", b"_chunk_count"]) -> typing.Literal["chunk_count"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_chunk_method", b"_chunk_method"]) -> typing.Literal["chunk_method"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_process_duration", b"_process_duration"]) -> typing.Literal["process_duration"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_progress", b"_progress"]) -> typing.Literal["progress"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_run", b"_run"]) -> typing.Literal["run"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_size", b"_size"]) -> typing.Literal["size"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_token_count", b"_token_count"]) -> typing.Literal["token_count"] | None: ...
 
 global___RagDocument = RagDocument
 
@@ -1372,13 +1439,16 @@ class RagUpdateDocumentRequest(google.protobuf.message.Message):
         dataset_id: builtins.str = ...,
         document_id: builtins.str = ...,
         name: builtins.str = ...,
-        chunk_method: global___RagChunkMethod.ValueType = ...,
+        chunk_method: global___RagChunkMethod.ValueType | None = ...,
         parser_config: global___RagParserConfig | None = ...,
         enabled: builtins.bool | None = ...,
         meta_fields: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_enabled", b"_enabled", "enabled", b"enabled", "meta_fields", b"meta_fields", "parser_config", b"parser_config"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_enabled", b"_enabled", "chunk_method", b"chunk_method", "dataset_id", b"dataset_id", "document_id", b"document_id", "enabled", b"enabled", "meta_fields", b"meta_fields", "name", b"name", "parent", b"parent", "parser_config", b"parser_config"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_chunk_method", b"_chunk_method", "_enabled", b"_enabled", "chunk_method", b"chunk_method", "enabled", b"enabled", "meta_fields", b"meta_fields", "parser_config", b"parser_config"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_chunk_method", b"_chunk_method", "_enabled", b"_enabled", "chunk_method", b"chunk_method", "dataset_id", b"dataset_id", "document_id", b"document_id", "enabled", b"enabled", "meta_fields", b"meta_fields", "name", b"name", "parent", b"parent", "parser_config", b"parser_config"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_chunk_method", b"_chunk_method"]) -> typing.Literal["chunk_method"] | None: ...
+    @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_enabled", b"_enabled"]) -> typing.Literal["enabled"] | None: ...
 
 global___RagUpdateDocumentRequest = RagUpdateDocumentRequest
@@ -1500,10 +1570,12 @@ class RagListDocumentsResponse(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        total: builtins.int = ...,
+        total: builtins.int | None = ...,
         docs: collections.abc.Iterable[global___RagDocument] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["docs", b"docs", "total", b"total"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_total", b"_total", "total", b"total"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_total", b"_total", "docs", b"docs", "total", b"total"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_total", b"_total"]) -> typing.Literal["total"] | None: ...
 
 global___RagListDocumentsResponse = RagListDocumentsResponse
 
@@ -1676,12 +1748,13 @@ class RagListChunksResponse(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        total: builtins.int = ...,
+        total: builtins.int | None = ...,
         chunks: collections.abc.Iterable[global___RagChunk] | None = ...,
         doc: global___RagDocument | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["doc", b"doc"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["chunks", b"chunks", "doc", b"doc", "total", b"total"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_total", b"_total", "doc", b"doc", "total", b"total"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_total", b"_total", "chunks", b"chunks", "doc", b"doc", "total", b"total"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_total", b"_total"]) -> typing.Literal["total"] | None: ...
 
 global___RagListChunksResponse = RagListChunksResponse
 
@@ -1769,13 +1842,16 @@ class RagChunk(google.protobuf.message.Message):
         create_time: builtins.str = ...,
         create_timestamp: builtins.float = ...,
         document_keyword: builtins.str = ...,
-        similarity: builtins.float = ...,
+        similarity: builtins.float | None = ...,
         vector: google.protobuf.struct_pb2.Struct | None = ...,
         additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_available", b"_available", "additional_fields", b"additional_fields", "available", b"available", "vector", b"vector"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_available", b"_available", "additional_fields", b"additional_fields", "available", b"available", "content", b"content", "create_time", b"create_time", "create_timestamp", b"create_timestamp", "dataset_id", b"dataset_id", "docnm_kwd", b"docnm_kwd", "document_id", b"document_id", "document_keyword", b"document_keyword", "id", b"id", "image_id", b"image_id", "important_keywords", b"important_keywords", "positions", b"positions", "questions", b"questions", "similarity", b"similarity", "vector", b"vector"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_available", b"_available", "_similarity", b"_similarity", "additional_fields", b"additional_fields", "available", b"available", "similarity", b"similarity", "vector", b"vector"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_available", b"_available", "_similarity", b"_similarity", "additional_fields", b"additional_fields", "available", b"available", "content", b"content", "create_time", b"create_time", "create_timestamp", b"create_timestamp", "dataset_id", b"dataset_id", "docnm_kwd", b"docnm_kwd", "document_id", b"document_id", "document_keyword", b"document_keyword", "id", b"id", "image_id", b"image_id", "important_keywords", b"important_keywords", "positions", b"positions", "questions", b"questions", "similarity", b"similarity", "vector", b"vector"]) -> None: ...
+    @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_available", b"_available"]) -> typing.Literal["available"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_similarity", b"_similarity"]) -> typing.Literal["similarity"] | None: ...
 
 global___RagChunk = RagChunk
 
@@ -1981,7 +2057,7 @@ class RagRetrievalRequest(google.protobuf.message.Message):
     Higher values favor vector similarity, lower values favor keyword matching.
     """
     top_k: builtins.int
-    """Optional. Maximum number of chunks to retrieve before reranking (default: <code>1024</code>)."""
+    """Optional. Minimum 1. Maximum number of chunks to retrieve before reranking (default: <code>1024</code>)."""
     rerank_id: builtins.str
     """Optional. Rerank model ID to reorder results after initial retrieval."""
     highlight: builtins.bool
@@ -2020,20 +2096,22 @@ class RagRetrievalRequest(google.protobuf.message.Message):
         cross_languages: collections.abc.Iterable[builtins.str] | None = ...,
         metadata_condition: global___RagMetadataConditions | None = ...,
         similarity_threshold: builtins.float = ...,
-        vector_similarity_weight: builtins.float = ...,
+        vector_similarity_weight: builtins.float | None = ...,
         top_k: builtins.int = ...,
         rerank_id: builtins.str = ...,
         highlight: builtins.bool | None = ...,
         keyword: builtins.bool | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_highlight", b"_highlight", "_keyword", b"_keyword", "_use_kg", b"_use_kg", "highlight", b"highlight", "keyword", b"keyword", "metadata_condition", b"metadata_condition", "pagination", b"pagination", "use_kg", b"use_kg"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_highlight", b"_highlight", "_keyword", b"_keyword", "_use_kg", b"_use_kg", "cross_languages", b"cross_languages", "dataset_ids", b"dataset_ids", "document_ids", b"document_ids", "highlight", b"highlight", "keyword", b"keyword", "metadata_condition", b"metadata_condition", "pagination", b"pagination", "parent", b"parent", "question", b"question", "rerank_id", b"rerank_id", "similarity_threshold", b"similarity_threshold", "top_k", b"top_k", "use_kg", b"use_kg", "vector_similarity_weight", b"vector_similarity_weight"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_highlight", b"_highlight", "_keyword", b"_keyword", "_use_kg", b"_use_kg", "_vector_similarity_weight", b"_vector_similarity_weight", "highlight", b"highlight", "keyword", b"keyword", "metadata_condition", b"metadata_condition", "pagination", b"pagination", "use_kg", b"use_kg", "vector_similarity_weight", b"vector_similarity_weight"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_highlight", b"_highlight", "_keyword", b"_keyword", "_use_kg", b"_use_kg", "_vector_similarity_weight", b"_vector_similarity_weight", "cross_languages", b"cross_languages", "dataset_ids", b"dataset_ids", "document_ids", b"document_ids", "highlight", b"highlight", "keyword", b"keyword", "metadata_condition", b"metadata_condition", "pagination", b"pagination", "parent", b"parent", "question", b"question", "rerank_id", b"rerank_id", "similarity_threshold", b"similarity_threshold", "top_k", b"top_k", "use_kg", b"use_kg", "vector_similarity_weight", b"vector_similarity_weight"]) -> None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_highlight", b"_highlight"]) -> typing.Literal["highlight"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_keyword", b"_keyword"]) -> typing.Literal["keyword"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_use_kg", b"_use_kg"]) -> typing.Literal["use_kg"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_vector_similarity_weight", b"_vector_similarity_weight"]) -> typing.Literal["vector_similarity_weight"] | None: ...
 
 global___RagRetrievalRequest = RagRetrievalRequest
 
@@ -2112,11 +2190,12 @@ class RagRetrievalResponse(google.protobuf.message.Message):
         *,
         chunks: collections.abc.Iterable[global___RagChunk] | None = ...,
         doc_aggs: collections.abc.Iterable[google.protobuf.struct_pb2.Struct] | None = ...,
-        total: builtins.int = ...,
+        total: builtins.int | None = ...,
         additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "chunks", b"chunks", "doc_aggs", b"doc_aggs", "total", b"total"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_total", b"_total", "additional_fields", b"additional_fields", "total", b"total"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_total", b"_total", "additional_fields", b"additional_fields", "chunks", b"chunks", "doc_aggs", b"doc_aggs", "total", b"total"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_total", b"_total"]) -> typing.Literal["total"] | None: ...
 
 global___RagRetrievalResponse = RagRetrievalResponse
 
@@ -2256,7 +2335,7 @@ class RagFile(google.protobuf.message.Message):
         created_by: builtins.str = ...,
         name: builtins.str = ...,
         location: builtins.str = ...,
-        size: builtins.int = ...,
+        size: builtins.int | None = ...,
         type: builtins.str = ...,
         source_type: builtins.str = ...,
         create_time: builtins.int = ...,
@@ -2264,7 +2343,9 @@ class RagFile(google.protobuf.message.Message):
         update_time: builtins.int = ...,
         update_date: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["create_date", b"create_date", "create_time", b"create_time", "created_by", b"created_by", "id", b"id", "location", b"location", "name", b"name", "parent_id", b"parent_id", "size", b"size", "source_type", b"source_type", "tenant_id", b"tenant_id", "type", b"type", "update_date", b"update_date", "update_time", b"update_time"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_size", b"_size", "size", b"size"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_size", b"_size", "create_date", b"create_date", "create_time", b"create_time", "created_by", b"created_by", "id", b"id", "location", b"location", "name", b"name", "parent_id", b"parent_id", "size", b"size", "source_type", b"source_type", "tenant_id", b"tenant_id", "type", b"type", "update_date", b"update_date", "update_time", b"update_time"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_size", b"_size"]) -> typing.Literal["size"] | None: ...
 
 global___RagFile = RagFile
 
@@ -2294,9 +2375,11 @@ class RagCreateFileRequest(google.protobuf.message.Message):
         parent: builtins.str = ...,
         name: builtins.str = ...,
         parent_id: builtins.str = ...,
-        type: global___RagCreateFileFileType.ValueType = ...,
+        type: global___RagCreateFileFileType.ValueType | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["name", b"name", "parent", b"parent", "parent_id", b"parent_id", "type", b"type"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_type", b"_type", "type", b"type"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_type", b"_type", "name", b"name", "parent", b"parent", "parent_id", b"parent_id", "type", b"type"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_type", b"_type"]) -> typing.Literal["type"] | None: ...
 
 global___RagCreateFileRequest = RagCreateFileRequest
 
@@ -2366,12 +2449,13 @@ class RagListFilesResponse(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        total: builtins.int = ...,
+        total: builtins.int | None = ...,
         files: collections.abc.Iterable[global___RagFile] | None = ...,
         parent_folder: global___RagFile | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["parent_folder", b"parent_folder"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["files", b"files", "parent_folder", b"parent_folder", "total", b"total"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_total", b"_total", "parent_folder", b"parent_folder", "total", b"total"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_total", b"_total", "files", b"files", "parent_folder", b"parent_folder", "total", b"total"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_total", b"_total"]) -> typing.Literal["total"] | None: ...
 
 global___RagListFilesResponse = RagListFilesResponse
 
@@ -2749,7 +2833,7 @@ class RagLlmSetting(google.protobuf.message.Message):
     presence_penalty: builtins.float
     """Optional. Minimum -2.0. Maximum 2.0. Default 0.7. Presence penalty. Reduces repetition of any tokens already used."""
     max_tokens: builtins.int
-    """Optional. Maximum number of tokens to generate."""
+    """Optional. Minimum 1. Maximum number of tokens to generate."""
     @property
     def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
         """Optional. Additional fields to pass through to RAGFlow."""
@@ -2758,15 +2842,23 @@ class RagLlmSetting(google.protobuf.message.Message):
         self,
         *,
         model_name: builtins.str = ...,
-        temperature: builtins.float = ...,
-        top_p: builtins.float = ...,
-        frequency_penalty: builtins.float = ...,
-        presence_penalty: builtins.float = ...,
+        temperature: builtins.float | None = ...,
+        top_p: builtins.float | None = ...,
+        frequency_penalty: builtins.float | None = ...,
+        presence_penalty: builtins.float | None = ...,
         max_tokens: builtins.int = ...,
         additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "frequency_penalty", b"frequency_penalty", "max_tokens", b"max_tokens", "model_name", b"model_name", "presence_penalty", b"presence_penalty", "temperature", b"temperature", "top_p", b"top_p"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_frequency_penalty", b"_frequency_penalty", "_presence_penalty", b"_presence_penalty", "_temperature", b"_temperature", "_top_p", b"_top_p", "additional_fields", b"additional_fields", "frequency_penalty", b"frequency_penalty", "presence_penalty", b"presence_penalty", "temperature", b"temperature", "top_p", b"top_p"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_frequency_penalty", b"_frequency_penalty", "_presence_penalty", b"_presence_penalty", "_temperature", b"_temperature", "_top_p", b"_top_p", "additional_fields", b"additional_fields", "frequency_penalty", b"frequency_penalty", "max_tokens", b"max_tokens", "model_name", b"model_name", "presence_penalty", b"presence_penalty", "temperature", b"temperature", "top_p", b"top_p"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_frequency_penalty", b"_frequency_penalty"]) -> typing.Literal["frequency_penalty"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_presence_penalty", b"_presence_penalty"]) -> typing.Literal["presence_penalty"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_temperature", b"_temperature"]) -> typing.Literal["temperature"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_top_p", b"_top_p"]) -> typing.Literal["top_p"] | None: ...
 
 global___RagLlmSetting = RagLlmSetting
 
@@ -2806,9 +2898,9 @@ class RagPromptConfig(google.protobuf.message.Message):
     keywords_similarity_weight: builtins.float
     """Optional. Minimum 0.0. Maximum 1.0. Default 0.7. Weight for keywords versus vector similarity in hybrid search."""
     top_n: builtins.int
-    """Optional. Default 6. Number of chunks to retrieve after reranking."""
+    """Optional. Minimum 1. Default 6. Number of chunks to retrieve after reranking."""
     top_k: builtins.int
-    """Optional. Default 1024. Maximum chunks to retrieve before reranking."""
+    """Optional. Minimum 1. Default 1024. Maximum chunks to retrieve before reranking."""
     rerank_model: builtins.str
     """Optional. Rerank model ID for reordering retrieved chunks. If not specified, cosine similarity is used."""
     @property
@@ -2829,19 +2921,23 @@ class RagPromptConfig(google.protobuf.message.Message):
         empty_response: builtins.str = ...,
         tts: builtins.bool | None = ...,
         refine_multiturn: builtins.bool | None = ...,
-        similarity_threshold: builtins.float = ...,
-        keywords_similarity_weight: builtins.float = ...,
+        similarity_threshold: builtins.float | None = ...,
+        keywords_similarity_weight: builtins.float | None = ...,
         top_n: builtins.int = ...,
         top_k: builtins.int = ...,
         rerank_model: builtins.str = ...,
         additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_refine_multiturn", b"_refine_multiturn", "_show_quote", b"_show_quote", "_tts", b"_tts", "additional_fields", b"additional_fields", "refine_multiturn", b"refine_multiturn", "show_quote", b"show_quote", "tts", b"tts"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_refine_multiturn", b"_refine_multiturn", "_show_quote", b"_show_quote", "_tts", b"_tts", "additional_fields", b"additional_fields", "empty_response", b"empty_response", "keywords_similarity_weight", b"keywords_similarity_weight", "opener", b"opener", "prompt", b"prompt", "refine_multiturn", b"refine_multiturn", "rerank_model", b"rerank_model", "show_quote", b"show_quote", "similarity_threshold", b"similarity_threshold", "top_k", b"top_k", "top_n", b"top_n", "tts", b"tts", "variables", b"variables"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_keywords_similarity_weight", b"_keywords_similarity_weight", "_refine_multiturn", b"_refine_multiturn", "_show_quote", b"_show_quote", "_similarity_threshold", b"_similarity_threshold", "_tts", b"_tts", "additional_fields", b"additional_fields", "keywords_similarity_weight", b"keywords_similarity_weight", "refine_multiturn", b"refine_multiturn", "show_quote", b"show_quote", "similarity_threshold", b"similarity_threshold", "tts", b"tts"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_keywords_similarity_weight", b"_keywords_similarity_weight", "_refine_multiturn", b"_refine_multiturn", "_show_quote", b"_show_quote", "_similarity_threshold", b"_similarity_threshold", "_tts", b"_tts", "additional_fields", b"additional_fields", "empty_response", b"empty_response", "keywords_similarity_weight", b"keywords_similarity_weight", "opener", b"opener", "prompt", b"prompt", "refine_multiturn", b"refine_multiturn", "rerank_model", b"rerank_model", "show_quote", b"show_quote", "similarity_threshold", b"similarity_threshold", "top_k", b"top_k", "top_n", b"top_n", "tts", b"tts", "variables", b"variables"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_keywords_similarity_weight", b"_keywords_similarity_weight"]) -> typing.Literal["keywords_similarity_weight"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_refine_multiturn", b"_refine_multiturn"]) -> typing.Literal["refine_multiturn"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_show_quote", b"_show_quote"]) -> typing.Literal["show_quote"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_similarity_threshold", b"_similarity_threshold"]) -> typing.Literal["similarity_threshold"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_tts", b"_tts"]) -> typing.Literal["tts"] | None: ...
 
@@ -2953,7 +3049,7 @@ class RagChatAssistant(google.protobuf.message.Message):
         dataset_ids: collections.abc.Iterable[builtins.str] | None = ...,
         datasets: collections.abc.Iterable[global___RagDataset] | None = ...,
         llm: global___RagLlmSetting | None = ...,
-        prompt_type: global___RagPromptType.ValueType = ...,
+        prompt_type: global___RagPromptType.ValueType | None = ...,
         prompt: global___RagPromptConfig | None = ...,
         meta_data_filter: google.protobuf.struct_pb2.Struct | None = ...,
         do_refer: builtins.str = ...,
@@ -2963,8 +3059,9 @@ class RagChatAssistant(google.protobuf.message.Message):
         update_time: builtins.int = ...,
         update_date: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["llm", b"llm", "meta_data_filter", b"meta_data_filter", "prompt", b"prompt"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["avatar", b"avatar", "create_date", b"create_date", "create_time", b"create_time", "dataset_ids", b"dataset_ids", "datasets", b"datasets", "description", b"description", "do_refer", b"do_refer", "id", b"id", "language", b"language", "llm", b"llm", "meta_data_filter", b"meta_data_filter", "name", b"name", "prompt", b"prompt", "prompt_type", b"prompt_type", "status", b"status", "tenant_id", b"tenant_id", "update_date", b"update_date", "update_time", b"update_time"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_prompt_type", b"_prompt_type", "llm", b"llm", "meta_data_filter", b"meta_data_filter", "prompt", b"prompt", "prompt_type", b"prompt_type"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_prompt_type", b"_prompt_type", "avatar", b"avatar", "create_date", b"create_date", "create_time", b"create_time", "dataset_ids", b"dataset_ids", "datasets", b"datasets", "description", b"description", "do_refer", b"do_refer", "id", b"id", "language", b"language", "llm", b"llm", "meta_data_filter", b"meta_data_filter", "name", b"name", "prompt", b"prompt", "prompt_type", b"prompt_type", "status", b"status", "tenant_id", b"tenant_id", "update_date", b"update_date", "update_time", b"update_time"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_prompt_type", b"_prompt_type"]) -> typing.Literal["prompt_type"] | None: ...
 
 global___RagChatAssistant = RagChatAssistant
 
@@ -3144,14 +3241,20 @@ class RagCreateAgentRequest(google.protobuf.message.Message):
         parent: builtins.str = ...,
         avatar: builtins.str = ...,
         title: builtins.str = ...,
-        permission: global___RagPermission.ValueType = ...,
+        permission: global___RagPermission.ValueType | None = ...,
         description: builtins.str = ...,
-        canvas_type: builtins.str = ...,
-        canvas_category: global___RagCanvasCategory.ValueType = ...,
+        canvas_type: builtins.str | None = ...,
+        canvas_category: global___RagCanvasCategory.ValueType | None = ...,
         dsl: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["dsl", b"dsl"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["avatar", b"avatar", "canvas_category", b"canvas_category", "canvas_type", b"canvas_type", "description", b"description", "dsl", b"dsl", "parent", b"parent", "permission", b"permission", "title", b"title"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_canvas_category", b"_canvas_category", "_canvas_type", b"_canvas_type", "_permission", b"_permission", "canvas_category", b"canvas_category", "canvas_type", b"canvas_type", "dsl", b"dsl", "permission", b"permission"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_canvas_category", b"_canvas_category", "_canvas_type", b"_canvas_type", "_permission", b"_permission", "avatar", b"avatar", "canvas_category", b"canvas_category", "canvas_type", b"canvas_type", "description", b"description", "dsl", b"dsl", "parent", b"parent", "permission", b"permission", "title", b"title"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_canvas_category", b"_canvas_category"]) -> typing.Literal["canvas_category"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_canvas_type", b"_canvas_type"]) -> typing.Literal["canvas_type"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_permission", b"_permission"]) -> typing.Literal["permission"] | None: ...
 
 global___RagCreateAgentRequest = RagCreateAgentRequest
 
@@ -3199,14 +3302,20 @@ class RagUpdateAgentRequest(google.protobuf.message.Message):
         agent_id: builtins.str = ...,
         avatar: builtins.str = ...,
         title: builtins.str = ...,
-        permission: global___RagPermission.ValueType = ...,
+        permission: global___RagPermission.ValueType | None = ...,
         description: builtins.str = ...,
-        canvas_type: builtins.str = ...,
-        canvas_category: global___RagCanvasCategory.ValueType = ...,
+        canvas_type: builtins.str | None = ...,
+        canvas_category: global___RagCanvasCategory.ValueType | None = ...,
         dsl: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["dsl", b"dsl"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["agent_id", b"agent_id", "avatar", b"avatar", "canvas_category", b"canvas_category", "canvas_type", b"canvas_type", "description", b"description", "dsl", b"dsl", "parent", b"parent", "permission", b"permission", "title", b"title"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_canvas_category", b"_canvas_category", "_canvas_type", b"_canvas_type", "_permission", b"_permission", "canvas_category", b"canvas_category", "canvas_type", b"canvas_type", "dsl", b"dsl", "permission", b"permission"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_canvas_category", b"_canvas_category", "_canvas_type", b"_canvas_type", "_permission", b"_permission", "agent_id", b"agent_id", "avatar", b"avatar", "canvas_category", b"canvas_category", "canvas_type", b"canvas_type", "description", b"description", "dsl", b"dsl", "parent", b"parent", "permission", b"permission", "title", b"title"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_canvas_category", b"_canvas_category"]) -> typing.Literal["canvas_category"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_canvas_type", b"_canvas_type"]) -> typing.Literal["canvas_type"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_permission", b"_permission"]) -> typing.Literal["permission"] | None: ...
 
 global___RagUpdateAgentRequest = RagUpdateAgentRequest
 
@@ -3356,18 +3465,24 @@ class RagAgent(google.protobuf.message.Message):
         avatar: builtins.str = ...,
         user_id: builtins.str = ...,
         title: builtins.str = ...,
-        permission: global___RagPermission.ValueType = ...,
+        permission: global___RagPermission.ValueType | None = ...,
         description: builtins.str = ...,
-        canvas_type: builtins.str = ...,
-        canvas_category: global___RagCanvasCategory.ValueType = ...,
+        canvas_type: builtins.str | None = ...,
+        canvas_category: global___RagCanvasCategory.ValueType | None = ...,
         dsl: google.protobuf.struct_pb2.Struct | None = ...,
         create_time: builtins.int = ...,
         create_date: builtins.str = ...,
         update_time: builtins.int = ...,
         update_date: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["dsl", b"dsl"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["avatar", b"avatar", "canvas_category", b"canvas_category", "canvas_type", b"canvas_type", "create_date", b"create_date", "create_time", b"create_time", "description", b"description", "dsl", b"dsl", "id", b"id", "permission", b"permission", "title", b"title", "update_date", b"update_date", "update_time", b"update_time", "user_id", b"user_id"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_canvas_category", b"_canvas_category", "_canvas_type", b"_canvas_type", "_permission", b"_permission", "canvas_category", b"canvas_category", "canvas_type", b"canvas_type", "dsl", b"dsl", "permission", b"permission"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_canvas_category", b"_canvas_category", "_canvas_type", b"_canvas_type", "_permission", b"_permission", "avatar", b"avatar", "canvas_category", b"canvas_category", "canvas_type", b"canvas_type", "create_date", b"create_date", "create_time", b"create_time", "description", b"description", "dsl", b"dsl", "id", b"id", "permission", b"permission", "title", b"title", "update_date", b"update_date", "update_time", b"update_time", "user_id", b"user_id"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_canvas_category", b"_canvas_category"]) -> typing.Literal["canvas_category"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_canvas_type", b"_canvas_type"]) -> typing.Literal["canvas_type"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_permission", b"_permission"]) -> typing.Literal["permission"] | None: ...
 
 global___RagAgent = RagAgent
 
@@ -3476,12 +3591,13 @@ class RagMessage(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        role: global___RagMessageRole.ValueType = ...,
+        role: global___RagMessageRole.ValueType | None = ...,
         content: builtins.str = ...,
         additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "content", b"content", "role", b"role"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_role", b"_role", "additional_fields", b"additional_fields", "role", b"role"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_role", b"_role", "additional_fields", b"additional_fields", "content", b"content", "role", b"role"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_role", b"_role"]) -> typing.Literal["role"] | None: ...
 
 global___RagMessage = RagMessage
 
@@ -3766,20 +3882,28 @@ class RagAgentSession(google.protobuf.message.Message):
         agent_id: builtins.str = ...,
         user_id: builtins.str = ...,
         messages: collections.abc.Iterable[global___RagMessage] | None = ...,
-        tokens: builtins.int = ...,
-        source: global___RagSessionSource.ValueType = ...,
+        tokens: builtins.int | None = ...,
+        source: global___RagSessionSource.ValueType | None = ...,
         dsl: google.protobuf.struct_pb2.Struct | None = ...,
         duration: builtins.float = ...,
-        round: builtins.int = ...,
-        thumb_up: builtins.int = ...,
+        round: builtins.int | None = ...,
+        thumb_up: builtins.int | None = ...,
         errors: builtins.str = ...,
         create_time: builtins.int = ...,
         create_date: builtins.str = ...,
         update_time: builtins.int = ...,
         update_date: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["dsl", b"dsl"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["agent_id", b"agent_id", "create_date", b"create_date", "create_time", b"create_time", "dsl", b"dsl", "duration", b"duration", "errors", b"errors", "id", b"id", "messages", b"messages", "round", b"round", "source", b"source", "thumb_up", b"thumb_up", "tokens", b"tokens", "update_date", b"update_date", "update_time", b"update_time", "user_id", b"user_id"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_round", b"_round", "_source", b"_source", "_thumb_up", b"_thumb_up", "_tokens", b"_tokens", "dsl", b"dsl", "round", b"round", "source", b"source", "thumb_up", b"thumb_up", "tokens", b"tokens"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_round", b"_round", "_source", b"_source", "_thumb_up", b"_thumb_up", "_tokens", b"_tokens", "agent_id", b"agent_id", "create_date", b"create_date", "create_time", b"create_time", "dsl", b"dsl", "duration", b"duration", "errors", b"errors", "id", b"id", "messages", b"messages", "round", b"round", "source", b"source", "thumb_up", b"thumb_up", "tokens", b"tokens", "update_date", b"update_date", "update_time", b"update_time", "user_id", b"user_id"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_round", b"_round"]) -> typing.Literal["round"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_source", b"_source"]) -> typing.Literal["source"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_thumb_up", b"_thumb_up"]) -> typing.Literal["thumb_up"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_tokens", b"_tokens"]) -> typing.Literal["tokens"] | None: ...
 
 global___RagAgentSession = RagAgentSession
 
@@ -4039,7 +4163,7 @@ class RagAgentCompletionResponse(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        event: global___RagAgentEventType.ValueType = ...,
+        event: global___RagAgentEventType.ValueType | None = ...,
         message_id: builtins.str = ...,
         created_at: builtins.int = ...,
         task_id: builtins.str = ...,
@@ -4047,8 +4171,9 @@ class RagAgentCompletionResponse(google.protobuf.message.Message):
         session_id: builtins.str = ...,
         additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "data", b"data"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "created_at", b"created_at", "data", b"data", "event", b"event", "message_id", b"message_id", "session_id", b"session_id", "task_id", b"task_id"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_event", b"_event", "additional_fields", b"additional_fields", "data", b"data", "event", b"event"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_event", b"_event", "additional_fields", b"additional_fields", "created_at", b"created_at", "data", b"data", "event", b"event", "message_id", b"message_id", "session_id", b"session_id", "task_id", b"task_id"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_event", b"_event"]) -> typing.Literal["event"] | None: ...
 
 global___RagAgentCompletionResponse = RagAgentCompletionResponse
 
