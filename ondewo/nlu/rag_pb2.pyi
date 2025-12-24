@@ -1197,8 +1197,13 @@ class RagUploadDocumentsRequest(google.protobuf.message.Message):
 
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
+        PARENT_FIELD_NUMBER: builtins.int
         DATASET_ID_FIELD_NUMBER: builtins.int
         FILES_FIELD_NUMBER: builtins.int
+        parent: builtins.str
+        """Required. The agent to upload documents for.
+        Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+        """
         dataset_id: builtins.str
         """Required. Target dataset ID to upload documents to."""
         @property
@@ -1208,18 +1213,14 @@ class RagUploadDocumentsRequest(google.protobuf.message.Message):
         def __init__(
             self,
             *,
+            parent: builtins.str = ...,
             dataset_id: builtins.str = ...,
             files: collections.abc.Iterable[global___RagFileMetadata] | None = ...,
         ) -> None: ...
-        def ClearField(self, field_name: typing.Literal["dataset_id", b"dataset_id", "files", b"files"]) -> None: ...
+        def ClearField(self, field_name: typing.Literal["dataset_id", b"dataset_id", "files", b"files", "parent", b"parent"]) -> None: ...
 
-    PARENT_FIELD_NUMBER: builtins.int
     METADATA_FIELD_NUMBER: builtins.int
     CHUNK_FIELD_NUMBER: builtins.int
-    parent: builtins.str
-    """Required. The agent to upload documents for.
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    """
     @property
     def metadata(self) -> global___RagUploadDocumentsRequest.RagMetadata:
         """First message: declares all files to be uploaded."""
@@ -1231,12 +1232,11 @@ class RagUploadDocumentsRequest(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
         metadata: global___RagUploadDocumentsRequest.RagMetadata | None = ...,
         chunk: global___RagUploadChunk | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["chunk", b"chunk", "metadata", b"metadata", "payload", b"payload"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["chunk", b"chunk", "metadata", b"metadata", "parent", b"parent", "payload", b"payload"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["chunk", b"chunk", "metadata", b"metadata", "payload", b"payload"]) -> None: ...
     def WhichOneof(self, oneof_group: typing.Literal["payload", b"payload"]) -> typing.Literal["metadata", "chunk"] | None: ...
 
 global___RagUploadDocumentsRequest = RagUploadDocumentsRequest
@@ -2219,8 +2219,13 @@ class RagUploadFilesRequest(google.protobuf.message.Message):
 
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
+        PARENT_FIELD_NUMBER: builtins.int
         PARENT_ID_FIELD_NUMBER: builtins.int
         FILES_FIELD_NUMBER: builtins.int
+        parent: builtins.str
+        """Required. The agent to upload files for.
+        Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+        """
         parent_id: builtins.str
         """Optional. Parent folder ID. If not provided, files will be uploaded to root directory."""
         @property
@@ -2230,18 +2235,14 @@ class RagUploadFilesRequest(google.protobuf.message.Message):
         def __init__(
             self,
             *,
+            parent: builtins.str = ...,
             parent_id: builtins.str = ...,
             files: collections.abc.Iterable[global___RagFileMetadata] | None = ...,
         ) -> None: ...
-        def ClearField(self, field_name: typing.Literal["files", b"files", "parent_id", b"parent_id"]) -> None: ...
+        def ClearField(self, field_name: typing.Literal["files", b"files", "parent", b"parent", "parent_id", b"parent_id"]) -> None: ...
 
-    PARENT_FIELD_NUMBER: builtins.int
     METADATA_FIELD_NUMBER: builtins.int
     CHUNK_FIELD_NUMBER: builtins.int
-    parent: builtins.str
-    """Required. The agent to upload files for.
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    """
     @property
     def metadata(self) -> global___RagUploadFilesRequest.RagMetadata:
         """First message: declares all files to be uploaded."""
@@ -2253,12 +2254,11 @@ class RagUploadFilesRequest(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
         metadata: global___RagUploadFilesRequest.RagMetadata | None = ...,
         chunk: global___RagUploadChunk | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["chunk", b"chunk", "metadata", b"metadata", "payload", b"payload"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["chunk", b"chunk", "metadata", b"metadata", "parent", b"parent", "payload", b"payload"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["chunk", b"chunk", "metadata", b"metadata", "payload", b"payload"]) -> None: ...
     def WhichOneof(self, oneof_group: typing.Literal["payload", b"payload"]) -> typing.Literal["metadata", "chunk"] | None: ...
 
 global___RagUploadFilesRequest = RagUploadFilesRequest
