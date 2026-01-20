@@ -47,7 +47,7 @@ class _DefaultServerRoleEnumTypeWrapper(google.protobuf.internal.enum_type_wrapp
     SERVER_USER: _DefaultServerRole.ValueType  # 1
     """read-only access"""
     SERVER_MANAGER: _DefaultServerRole.ValueType  # 2
-    """SERVER_USER's permissions + CRUD of projects and Users"""
+    """SERVER_USER&apos;s permissions + CRUD of projects and Users"""
     SERVER_ADMIN: _DefaultServerRole.ValueType  # 3
     """this role can do everything"""
     SERVER_INACTIVE: _DefaultServerRole.ValueType  # 4
@@ -61,7 +61,7 @@ SERVER_UNSPECIFIED: DefaultServerRole.ValueType  # 0
 SERVER_USER: DefaultServerRole.ValueType  # 1
 """read-only access"""
 SERVER_MANAGER: DefaultServerRole.ValueType  # 2
-"""SERVER_USER's permissions + CRUD of projects and Users"""
+"""SERVER_USER&apos;s permissions + CRUD of projects and Users"""
 SERVER_ADMIN: DefaultServerRole.ValueType  # 3
 """this role can do everything"""
 SERVER_INACTIVE: DefaultServerRole.ValueType  # 4
@@ -90,7 +90,7 @@ class User(google.protobuf.message.Message):
     """when creating user user_id is empty, then it will be generated on creation time on backend"""
     display_name: builtins.str
     """Optional field display_name is the name that will be used on the frontend to interact with the user
-    it shouldn't be unique. If not provided user_name will also be used as display name
+    it shouldn&apos;t be unique. If not provided user_name will also be used as display name
     """
     server_role_id: builtins.int
     """server role type of the given user. If nothing is provided, the user is set to USER (minimum access)"""
@@ -295,24 +295,30 @@ class ListUsersRequest(google.protobuf.message.Message):
     The page token is a string representing the current index and page size.
 
     Valid page token strings:
-    * "" (empty string) - Retrieves the first page.
-    * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    <ul>
+        <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li>
+        <li><code>&quot;current_index-0--page_size-20&quot;</code> - Retrieves the first page with a page size of 20.</li>
+        <li><code>&quot;current_index-1--page_size-20&quot;</code> - Retrieves the second page with a page size of 20.</li>
+    </ul>
 
     Index starts at 0.
 
     Examples of valid page token strings:
-    * ""
-    * "current_index-0--page_size-20"
-    * "current_index-1--page_size-20"
-    * "current_index-10--page_size-20"
+    <ul>
+        <li><code>&quot;&quot;</code></li>
+        <li><code>&quot;current_index-0--page_size-20&quot;</code></li>
+        <li><code>&quot;current_index-1--page_size-20&quot;</code></li>
+        <li><code>&quot;current_index-10--page_size-20&quot;</code></li>
+    </ul>
 
     Examples of invalid page token strings:
-    * "1"
-    * "current_index-0--page_size-20"
-    * "current_index--1--page_size-20"
-    * "current_index1--page_size-20"
-    * "current_index-1--page_size--20"
+    <ul>
+        <li><code>&quot;1&quot;</code></li>
+        <li><code>&quot;current_index-0--page_size-20&quot;</code></li>
+        <li><code>&quot;current_index--1--page_size-20&quot;</code></li>
+        <li><code>&quot;current_index1--page_size-20&quot;</code></li>
+        <li><code>&quot;current_index-1--page_size--20&quot;</code></li>
+    </ul>
     """
     @property
     def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
@@ -445,7 +451,7 @@ class CreateServerRoleRequest(google.protobuf.message.Message):
     @property
     def role(self) -> global___ServerRole:
         """If the role_id is not provided, an incremental value will be assigned
-        The "name" and "role_type" are mandatory values
+        The &quot;name&quot; and &quot;role_type&quot; are mandatory values
         The permissions all default to False if not provided specifically
         """
 
@@ -553,24 +559,30 @@ class ListServerRolesRequest(google.protobuf.message.Message):
     The page token is a string representing the current index and page size.
 
     Valid page token strings:
-    * "" (empty string) - Retrieves the first page.
-    * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    <ul>
+        <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li>
+        <li><code>&quot;current_index-0--page_size-20&quot;</code> - Retrieves the first page with a page size of 20.</li>
+        <li><code>&quot;current_index-1--page_size-20&quot;</code> - Retrieves the second page with a page size of 20.</li>
+    </ul>
 
     Index starts at 0.
 
     Examples of valid page token strings:
-    * ""
-    * "current_index-0--page_size-20"
-    * "current_index-1--page_size-20"
-    * "current_index-10--page_size-20"
+    <ul>
+        <li><code>&quot;&quot;</code></li>
+        <li><code>&quot;current_index-0--page_size-20&quot;</code></li>
+        <li><code>&quot;current_index-1--page_size-20&quot;</code></li>
+        <li><code>&quot;current_index-10--page_size-20&quot;</code></li>
+    </ul>
 
     Examples of invalid page token strings:
-    * "1"
-    * "current_index-0--page_size-20"
-    * "current_index--1--page_size-20"
-    * "current_index1--page_size-20"
-    * "current_index-1--page_size--20"
+    <ul>
+        <li><code>&quot;1&quot;</code></li>
+        <li><code>&quot;current_index-0--page_size-20&quot;</code></li>
+        <li><code>&quot;current_index--1--page_size-20&quot;</code></li>
+        <li><code>&quot;current_index1--page_size-20&quot;</code></li>
+        <li><code>&quot;current_index-1--page_size--20&quot;</code></li>
+    </ul>
     """
     @property
     def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
@@ -630,24 +642,30 @@ class ListServerPermissionsRequest(google.protobuf.message.Message):
     The page token is a string representing the current index and page size.
 
     Valid page token strings:
-    * "" (empty string) - Retrieves the first page.
-    * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    <ul>
+        <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li>
+        <li><code>&quot;current_index-0--page_size-20&quot;</code> - Retrieves the first page with a page size of 20.</li>
+        <li><code>&quot;current_index-1--page_size-20&quot;</code> - Retrieves the second page with a page size of 20.</li>
+    </ul>
 
     Index starts at 0.
 
     Examples of valid page token strings:
-    * ""
-    * "current_index-0--page_size-20"
-    * "current_index-1--page_size-20"
-    * "current_index-10--page_size-20"
+    <ul>
+        <li><code>&quot;&quot;</code></li>
+        <li><code>&quot;current_index-0--page_size-20&quot;</code></li>
+        <li><code>&quot;current_index-1--page_size-20&quot;</code></li>
+        <li><code>&quot;current_index-10--page_size-20&quot;</code></li>
+    </ul>
 
     Examples of invalid page token strings:
-    * "1"
-    * "current_index-0--page_size-20"
-    * "current_index--1--page_size-20"
-    * "current_index1--page_size-20"
-    * "current_index-1--page_size--20"
+    <ul>
+        <li><code>&quot;1&quot;</code></li>
+        <li><code>&quot;current_index-0--page_size-20&quot;</code></li>
+        <li><code>&quot;current_index--1--page_size-20&quot;</code></li>
+        <li><code>&quot;current_index1--page_size-20&quot;</code></li>
+        <li><code>&quot;current_index-1--page_size--20&quot;</code></li>
+    </ul>
     """
     @property
     def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
@@ -763,11 +781,11 @@ class GetUserPreferencesRequest(google.protobuf.message.Message):
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre>
     """
     regex_include: builtins.str
-    """Optional: In addition to the keys specified also include all <pre>keys</pre> that match the provided
-    <pre>regex_include</pre> regular expression.
+    """Optional: In addition to the keys specified also include all <code>keys</code> that match the provided
+    <code>regex_include</code> regular expression.
     If user does not add regex_filter, then only the keys specified in the keys field are returned.
     If both, a key in the keys field and in the regex_include will be matched than only a single
-    <pre>KeyValuePair</pre> is returned.
+    <code>KeyValuePair</code> is returned.
     """
     @property
     def keys(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
@@ -893,8 +911,8 @@ class DeleteUserPreferencesRequest(google.protobuf.message.Message):
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre>
     """
     regex_include: builtins.str
-    """Optional: In addition to the keys specified also include all <pre>keys</pre> that match the provided
-    <pre>regex_include</pre> regular expression.
+    """Optional: In addition to the keys specified also include all <code>keys</code> that match the provided
+    <code>regex_include</code> regular expression.
     If user does not add regex_filter, then only the keys specified in the keys field are deleted.
     If both, a key in the keys field and in the regex_include is matched then the key is deleted without raising an error.
     """

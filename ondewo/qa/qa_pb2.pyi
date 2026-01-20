@@ -42,8 +42,8 @@ class GetAnswerRequest(google.protobuf.message.Message):
     URL_FILTER_FIELD_NUMBER: builtins.int
     session_id: builtins.str
     """Required. The name of the session this query is sent to. Format:
-    `projects/<Project ID>/agent/sessions/<Session ID>`. It's up to the API
-    caller to choose an appropriate session ID. It can be a random number or
+    <code>projects/&lt;Project ID&gt;/agent/sessions/&lt;Session ID&gt;</code>.
+    It&apos;s up to the API caller to choose an appropriate session ID. It can be a random number or
     some type of user identifier (preferably hashed). The length of the session
     ID must not exceed 36 bytes.
     """
@@ -202,7 +202,7 @@ class UrlFilter(google.protobuf.message.Message):
     """Optional. Regular expression that must not be matched by the metadata."""
     @property
     def allowed_values(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Optional. List of allowed values for the metadata field 'url'."""
+        """Optional. List of allowed values for the metadata field <code>&apos;url&apos;</code>."""
 
     def __init__(
         self,

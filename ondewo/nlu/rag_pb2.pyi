@@ -353,7 +353,7 @@ class RagFileMetadata(google.protobuf.message.Message):
     content_type: builtins.str
     """Optional. MIME type (e.g., <code>"application/pdf"</code>, <code>"image/png"</code>)."""
     size: builtins.int
-    """Optional. File size in bytes (if known, 0 if unknown)."""
+    """Optional. Minimum 0. File size in bytes (if known, 0 if unknown)."""
     def __init__(
         self,
         *,
@@ -1944,7 +1944,7 @@ class RagRemoveChunksRequest(google.protobuf.message.Message):
     """Required. Document ID to remove chunks from."""
     @property
     def chunk_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Required. Chunk IDs to remove. If empty, removes all chunks from the document."""
+        """Optional. Chunk IDs to remove. If empty, removes all chunks from the document."""
 
     def __init__(
         self,
@@ -2954,9 +2954,9 @@ class RagPromptVariable(google.protobuf.message.Message):
     KEY_FIELD_NUMBER: builtins.int
     OPTIONAL_FIELD_NUMBER: builtins.int
     key: builtins.str
-    """Variable name used in prompt template."""
+    """Required. Variable name used in prompt template."""
     optional: builtins.bool
-    """Whether this variable is optional in the template."""
+    """Required. Whether this variable is optional in the template."""
     def __init__(
         self,
         *,
@@ -3583,12 +3583,12 @@ class RagMessage(google.protobuf.message.Message):
     CONTENT_FIELD_NUMBER: builtins.int
     ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
     role: global___RagMessageRole.ValueType
-    """Role of the message sender."""
+    """Required. Role of the message sender."""
     content: builtins.str
-    """Message content text."""
+    """Required. Message content text."""
     @property
     def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Additional fields returned by RAGFlow."""
+        """Additional fields provided to or returned by RAGFlow."""
 
     def __init__(
         self,
@@ -3958,12 +3958,11 @@ class RagChatCompletionRequest(google.protobuf.message.Message):
 
     PARENT_FIELD_NUMBER: builtins.int
     CHAT_ID_FIELD_NUMBER: builtins.int
+    MESSAGES_FIELD_NUMBER: builtins.int
     SESSION_ID_FIELD_NUMBER: builtins.int
     NAME_FIELD_NUMBER: builtins.int
     USER_ID_FIELD_NUMBER: builtins.int
-    QUESTION_FIELD_NUMBER: builtins.int
     STREAM_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The agent to generate the chat completion for.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
@@ -3971,35 +3970,34 @@ class RagChatCompletionRequest(google.protobuf.message.Message):
     chat_id: builtins.str
     """Required. Chat assistant ID to use for generating the completion."""
     session_id: builtins.str
-    """Optional. Session ID to continue an existing conversation. If not provided, a new session will be created."""
+    """Optional. Session ID to continue an existing conversation. If not provided and <code>messages</code> contains only one message, a new session will be created."""
     name: builtins.str
-    """Optional. Maximum length 255. Name for new session. Ignored if <code>session_id</code> is provided."""
+    """Optional. Maximum length 255. Name for new session. Ignored if <code>session_id</code> is provided or <code>messages</code> contains more than one message."""
     user_id: builtins.str
-    """Optional. Maximum length 255. User defined ID for new session. Ignored if <code>session_id</code> is provided."""
-    question: builtins.str
-    """Optional. User question or message to send to the chat assistant."""
+    """Optional. Maximum length 255. User defined ID for new session. Ignored if <code>session_id</code> is provided or <code>messages</code> contains more than one message."""
     stream: builtins.bool
     """Optional. Enable streaming mode. If <code>true</code>, the response will be streamed as Server-Sent Events (SSE).
     Default: <code>true</code>.
     """
     @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. Additional fields to pass through to RAGFlow API."""
+    def messages(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagMessage]:
+        """Required. Message history. Must contain at least one <code>"user"</code> message.<br>
+        If <code>session_id</code> is provided, the message history is ignored and only the last <code>"user"</code> message is taken and added to the existing session.
+        """
 
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
         chat_id: builtins.str = ...,
+        messages: collections.abc.Iterable[global___RagMessage] | None = ...,
         session_id: builtins.str = ...,
         name: builtins.str = ...,
         user_id: builtins.str = ...,
-        question: builtins.str = ...,
         stream: builtins.bool | None = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_stream", b"_stream", "additional_fields", b"additional_fields", "stream", b"stream"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_stream", b"_stream", "additional_fields", b"additional_fields", "chat_id", b"chat_id", "name", b"name", "parent", b"parent", "question", b"question", "session_id", b"session_id", "stream", b"stream", "user_id", b"user_id"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_stream", b"_stream", "stream", b"stream"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_stream", b"_stream", "chat_id", b"chat_id", "messages", b"messages", "name", b"name", "parent", b"parent", "session_id", b"session_id", "stream", b"stream", "user_id", b"user_id"]) -> None: ...
     def WhichOneof(self, oneof_group: typing.Literal["_stream", b"_stream"]) -> typing.Literal["stream"] | None: ...
 
 global___RagChatCompletionRequest = RagChatCompletionRequest
@@ -4022,9 +4020,8 @@ class RagChatCompletionResponse(google.protobuf.message.Message):
     SESSION_ID_FIELD_NUMBER: builtins.int
     PROMPT_FIELD_NUMBER: builtins.int
     CREATED_AT_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
     answer: builtins.str
-    """Response text. Incremental for streaming mode, complete for non-streaming mode."""
+    """Response text. Delta of response for streaming mode, complete for non-streaming mode."""
     audio_binary: builtins.str
     """Optional. Base64-encoded audio response when text-to-speech is enabled."""
     id: builtins.str
@@ -4032,35 +4029,163 @@ class RagChatCompletionResponse(google.protobuf.message.Message):
     session_id: builtins.str
     """Session ID for the conversation."""
     prompt: builtins.str
-    """Prompt used for generation. Usually empty string."""
+    """String containing the prompt used for generating an answer plus statistics of the generation."""
     created_at: builtins.float
     """Creation timestamp (Unix timestamp in seconds)."""
     @property
-    def reference(self) -> google.protobuf.struct_pb2.Struct:
-        """Source references including document chunks used to generate the response.
-        Contains a <code>chunks</code> array with metadata about retrieved documents.
-        """
-
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Additional fields returned by RAGFlow API."""
+    def reference(self) -> global___RagReference:
+        """Source references including document chunks used to generate the response."""
 
     def __init__(
         self,
         *,
         answer: builtins.str = ...,
-        reference: google.protobuf.struct_pb2.Struct | None = ...,
+        reference: global___RagReference | None = ...,
         audio_binary: builtins.str = ...,
         id: builtins.str = ...,
         session_id: builtins.str = ...,
         prompt: builtins.str = ...,
         created_at: builtins.float = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "reference", b"reference"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "answer", b"answer", "audio_binary", b"audio_binary", "created_at", b"created_at", "id", b"id", "prompt", b"prompt", "reference", b"reference", "session_id", b"session_id"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["reference", b"reference"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["answer", b"answer", "audio_binary", b"audio_binary", "created_at", b"created_at", "id", b"id", "prompt", b"prompt", "reference", b"reference", "session_id", b"session_id"]) -> None: ...
 
 global___RagChatCompletionResponse = RagChatCompletionResponse
+
+@typing.final
+class RagReference(google.protobuf.message.Message):
+    """Reference object containing list of reference document chunks."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    CHUNKS_FIELD_NUMBER: builtins.int
+    DOC_AGGS_FIELD_NUMBER: builtins.int
+    TOTAL_FIELD_NUMBER: builtins.int
+    total: builtins.int
+    """Total number of retrieved documents"""
+    @property
+    def chunks(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagReferenceChunk]:
+        """List of retrieved chunks"""
+
+    @property
+    def doc_aggs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagDocAgg]:
+        """List summarizing retrieved documents"""
+
+    def __init__(
+        self,
+        *,
+        chunks: collections.abc.Iterable[global___RagReferenceChunk] | None = ...,
+        doc_aggs: collections.abc.Iterable[global___RagDocAgg] | None = ...,
+        total: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["chunks", b"chunks", "doc_aggs", b"doc_aggs", "total", b"total"]) -> None: ...
+
+global___RagReference = RagReference
+
+@typing.final
+class RagReferenceChunk(google.protobuf.message.Message):
+    """Retrieved chunk returned as reference with chat/agent completions"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ID_FIELD_NUMBER: builtins.int
+    CONTENT_FIELD_NUMBER: builtins.int
+    DOCUMENT_ID_FIELD_NUMBER: builtins.int
+    DOCUMENT_NAME_FIELD_NUMBER: builtins.int
+    DATASET_ID_FIELD_NUMBER: builtins.int
+    IMAGE_ID_FIELD_NUMBER: builtins.int
+    POSITIONS_FIELD_NUMBER: builtins.int
+    VECTOR_SIMILARITY_FIELD_NUMBER: builtins.int
+    TERM_SIMILARITY_FIELD_NUMBER: builtins.int
+    SIMILARITY_FIELD_NUMBER: builtins.int
+    id: builtins.str
+    """Chunk ID"""
+    content: builtins.str
+    """Chunk content"""
+    document_id: builtins.str
+    """Document ID of the chunk"""
+    document_name: builtins.str
+    """Document name"""
+    dataset_id: builtins.str
+    """Dataset ID"""
+    image_id: builtins.str
+    """Image ID if the chunk refers to an image"""
+    vector_similarity: builtins.float
+    """Chunk embedding similarity"""
+    term_similarity: builtins.float
+    """Keyword similarity"""
+    similarity: builtins.float
+    """Overall similarity score (weighted sum of embedding and keyword similarity)"""
+    @property
+    def positions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagIntList]:
+        """Positions of the chunk in the document. Mostly useful for PDFs to determine the position of a chunk on a page.<br>
+        For text documents this is always <code>[[i + 1, i, i, i, i]]</code> where <code>i</code> is the 1-based index of the chunk in the sequence of chunks in the document.<br>
+        For PDFs the <code>positions</code> list contains the bounding box(es) of the chunk as <code>[[page_nr, left, right, top, bottom], ...]</code> with the <code>page_nr</code> being 1-indexed and the positions being in 72 DPI points. Multiple lists are returned if the chunks spans multiple bounding boxes (multiple pages).
+        """
+
+    def __init__(
+        self,
+        *,
+        id: builtins.str = ...,
+        content: builtins.str = ...,
+        document_id: builtins.str = ...,
+        document_name: builtins.str = ...,
+        dataset_id: builtins.str = ...,
+        image_id: builtins.str = ...,
+        positions: collections.abc.Iterable[global___RagIntList] | None = ...,
+        vector_similarity: builtins.float = ...,
+        term_similarity: builtins.float = ...,
+        similarity: builtins.float = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["content", b"content", "dataset_id", b"dataset_id", "document_id", b"document_id", "document_name", b"document_name", "id", b"id", "image_id", b"image_id", "positions", b"positions", "similarity", b"similarity", "term_similarity", b"term_similarity", "vector_similarity", b"vector_similarity"]) -> None: ...
+
+global___RagReferenceChunk = RagReferenceChunk
+
+@typing.final
+class RagIntList(google.protobuf.message.Message):
+    """List of integers"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    INT_LIST_FIELD_NUMBER: builtins.int
+    @property
+    def int_list(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
+        """Integer list"""
+
+    def __init__(
+        self,
+        *,
+        int_list: collections.abc.Iterable[builtins.int] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["int_list", b"int_list"]) -> None: ...
+
+global___RagIntList = RagIntList
+
+@typing.final
+class RagDocAgg(google.protobuf.message.Message):
+    """Aggregated document retrieval results containing how many chunks of the given document where retrieved"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    DOC_NAME_FIELD_NUMBER: builtins.int
+    DOC_ID_FIELD_NUMBER: builtins.int
+    COUNT_FIELD_NUMBER: builtins.int
+    doc_name: builtins.str
+    """Document name"""
+    doc_id: builtins.str
+    """Document ID"""
+    count: builtins.int
+    """Number of retrieved chunks"""
+    def __init__(
+        self,
+        *,
+        doc_name: builtins.str = ...,
+        doc_id: builtins.str = ...,
+        count: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["count", b"count", "doc_id", b"doc_id", "doc_name", b"doc_name"]) -> None: ...
+
+global___RagDocAgg = RagDocAgg
 
 @typing.final
 class RagAgentCompletionRequest(google.protobuf.message.Message):

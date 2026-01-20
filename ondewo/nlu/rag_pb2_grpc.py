@@ -609,7 +609,7 @@ class RagsServicer(object):
     def RagDeleteFiles(self, request, context):
         """RAGFlow endpoint: POST /api/v1/file/rm
 
-        Delete one or more files/folders (hard delete).<br>
+        Delete one or more files/folders.<br>
         Recursively deletes folder contents. Removes from storage.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -689,7 +689,7 @@ class RagsServicer(object):
         """RAGFlow endpoint: DELETE /api/v1/chats
 
         Delete one or more chat assistants (batch operation).<br>
-        If ids empty, deletes all user's chats (soft delete).
+        If ids empty, deletes all user's chats.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -733,7 +733,7 @@ class RagsServicer(object):
     def RagDeleteAgent(self, request, context):
         """RAGFlow endpoint: DELETE /api/v1/agents/<agent_id>
 
-        Delete an agent (hard delete).<br>
+        Delete an agent.<br>
         Only owner can delete.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -789,7 +789,7 @@ class RagsServicer(object):
         """RAGFlow endpoint: DELETE /api/v1/chats/<chat_id>/sessions
 
         Delete one or more chat sessions (batch operation).<br>
-        If ids empty, deletes all sessions for the chat (hard delete).
+        If ids empty, deletes all sessions for the chat.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -809,7 +809,7 @@ class RagsServicer(object):
         """RAGFlow endpoint: DELETE /api/v1/agents/<agent_id>/sessions
 
         Delete one or more agent sessions (batch operation).<br>
-        If ids empty, deletes all sessions for the agent (hard delete).
+        If ids empty, deletes all sessions for the agent.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -821,10 +821,15 @@ class RagsServicer(object):
         REST: /api/v1/chats/<id>/completions, /api/v1/agents/<id>/completions, /api/v1/sessions
         ========================================================================
 
-        RAGFlow endpoint: POST /api/v1/chats/<chat_id>/completions
+        RAGFlow endpoint: POST /api/v1/chats/<chat_id>/completions or POST /api/v1/chats_openai/<chat_id>/completions
 
         Generate chat completion with RAG (server streaming).<br>
-        Creates new session if session_id not provided.
+        This endpoint either
+        <ul>
+        <li>creates a new session if no <code>session_id</code> is provided and <code>messages</code> contains only one message</li>
+        <li>uses an exising session if <code>session_id</code> is provided (ignores message history in <code>messages</code>)</li>
+        <li>continues a conversion with the message history from <code>messages</code> without creating a session if no <code>session_id</code> is provided and <code>messages</code> contains multiple messages</li>
+        </ul>
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')

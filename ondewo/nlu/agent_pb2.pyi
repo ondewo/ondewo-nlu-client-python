@@ -31,9 +31,9 @@ limitations under the License.
 
 File-level comment for <code>ondewo/nlu/agent.proto</code>.
 
-This file contains a single service <a href="#ondewo.nlu.Agents">Agents</a>.
+This file contains a single service <a href="index.html#ondewo.nlu.Agents">Agents</a>.
 
-The most important messages is <a href="#ondewo.nlu.Agent">Agent</a> and its most complicated field is <code>configs</code>.
+The most important messages is <a href="index.html#ondewo.nlu.Agent">Agent</a> and its most complicated field is <code>configs</code>.
 """
 
 import builtins
@@ -68,10 +68,12 @@ class _AgentViewEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enum
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     AGENT_VIEW_UNSPECIFIED: _AgentView.ValueType  # 0
     """Unspecified agent view: the view is defined by the call:
-    - CreateAgent: AGENT_VIEW_SHALLOW
-    - UpdateAgent: AGENT_VIEW_SHALLOW
-    - GetAgent: AGENT_VIEW_FULL
-    - ListAgents: AGENT_VIEW_SHALLOW
+    <ul>
+      <li>CreateAgent: AGENT_VIEW_SHALLOW</li>
+      <li>UpdateAgent: AGENT_VIEW_SHALLOW</li>
+      <li>GetAgent: AGENT_VIEW_FULL</li>
+      <li>ListAgents: AGENT_VIEW_SHALLOW</li>
+    </ul>
     """
     AGENT_VIEW_FULL: _AgentView.ValueType  # 1
     """Full agent view: populate all the fields of the Agent message including configs."""
@@ -85,10 +87,12 @@ class AgentView(_AgentView, metaclass=_AgentViewEnumTypeWrapper):
 
 AGENT_VIEW_UNSPECIFIED: AgentView.ValueType  # 0
 """Unspecified agent view: the view is defined by the call:
-- CreateAgent: AGENT_VIEW_SHALLOW
-- UpdateAgent: AGENT_VIEW_SHALLOW
-- GetAgent: AGENT_VIEW_FULL
-- ListAgents: AGENT_VIEW_SHALLOW
+<ul>
+  <li>CreateAgent: AGENT_VIEW_SHALLOW</li>
+  <li>UpdateAgent: AGENT_VIEW_SHALLOW</li>
+  <li>GetAgent: AGENT_VIEW_FULL</li>
+  <li>ListAgents: AGENT_VIEW_SHALLOW</li>
+</ul>
 """
 AGENT_VIEW_FULL: AgentView.ValueType  # 1
 """Full agent view: populate all the fields of the Agent message including configs."""
@@ -185,21 +189,23 @@ class _SessionsReportTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrap
     Requires to define <code>sql_query</code> in request.
 
     Allowed tables to query are:
-    * session
-    * session_context
-    * session_step
-    * session_step_context
-    * session_step_detect_entity
-    * session_step_detect_intent
-    * session_step_detect_intent_context_in
-    * session_step_detect_intent_context_out
-    * session_step_detect_intent_context_out
-    * session_step_detect_intent_label
-    * session_step_detect_intent_tag
+    <ul>
+      <li>session</li>
+      <li>session_context</li>
+      <li>session_step</li>
+      <li>session_step_context</li>
+      <li>session_step_detect_entity</li>
+      <li>session_step_detect_intent</li>
+      <li>session_step_detect_intent_context_in</li>
+      <li>session_step_detect_intent_context_out</li>
+      <li>session_step_detect_intent_context_out</li>
+      <li>session_step_detect_intent_label</li>
+      <li>session_step_detect_intent_tag</li>
+    </ul>
 
     Example:
-      <code>SELECT ... FROM session</code>
-      <code>SELECT ... FROM session, session_steps</code>
+    <pre><code>SELECT ... FROM session</code></pre>
+    <pre><code>SELECT ... FROM session, session_steps</code></pre>
     """
     SESSION_LEAST_X_INTENTS: _SessionsReportType.ValueType  # 11
     """report least x detected intents in session. Supports SessionFilter to filter"""
@@ -244,21 +250,23 @@ SESSION_SQL_QUERY: SessionsReportType.ValueType  # 10
 Requires to define <code>sql_query</code> in request.
 
 Allowed tables to query are:
-* session
-* session_context
-* session_step
-* session_step_context
-* session_step_detect_entity
-* session_step_detect_intent
-* session_step_detect_intent_context_in
-* session_step_detect_intent_context_out
-* session_step_detect_intent_context_out
-* session_step_detect_intent_label
-* session_step_detect_intent_tag
+<ul>
+  <li>session</li>
+  <li>session_context</li>
+  <li>session_step</li>
+  <li>session_step_context</li>
+  <li>session_step_detect_entity</li>
+  <li>session_step_detect_intent</li>
+  <li>session_step_detect_intent_context_in</li>
+  <li>session_step_detect_intent_context_out</li>
+  <li>session_step_detect_intent_context_out</li>
+  <li>session_step_detect_intent_label</li>
+  <li>session_step_detect_intent_tag</li>
+</ul>
 
 Example:
-  <code>SELECT ... FROM session</code>
-  <code>SELECT ... FROM session, session_steps</code>
+<pre><code>SELECT ... FROM session</code></pre>
+<pre><code>SELECT ... FROM session, session_steps</code></pre>
 """
 SESSION_LEAST_X_INTENTS: SessionsReportType.ValueType  # 11
 """report least x detected intents in session. Supports SessionFilter to filter"""
@@ -310,8 +318,10 @@ class _AgentStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._En
     """If project is active, all its endpoints are active"""
     INACTIVE: _AgentStatus.ValueType  # 1
     """If project is inactive:
-    * members of the project do not see the project anymore except users with project role "PROJECT_ADMIN" and users with server role "SERVER_ADMIN"
-    * nothing is allowed (no endpoint) on the project except "SetAgentStatus" by PROJECT_ADMIN or SERVER_ADMIN
+    <ul>
+      <li>members of the project do not see the project anymore except users with project role &quot;PROJECT_ADMIN&quot; and users with server role &quot;SERVER_ADMIN&quot;</li>
+      <li>nothing is allowed (no endpoint) on the project except &quot;SetAgentStatus&quot; by PROJECT_ADMIN or SERVER_ADMIN</li>
+    </ul>
     """
 
 class AgentStatus(_AgentStatus, metaclass=_AgentStatusEnumTypeWrapper):
@@ -324,8 +334,10 @@ ACTIVE: AgentStatus.ValueType  # 0
 """If project is active, all its endpoints are active"""
 INACTIVE: AgentStatus.ValueType  # 1
 """If project is inactive:
-* members of the project do not see the project anymore except users with project role "PROJECT_ADMIN" and users with server role "SERVER_ADMIN"
-* nothing is allowed (no endpoint) on the project except "SetAgentStatus" by PROJECT_ADMIN or SERVER_ADMIN
+<ul>
+  <li>members of the project do not see the project anymore except users with project role &quot;PROJECT_ADMIN&quot; and users with server role &quot;SERVER_ADMIN&quot;</li>
+  <li>nothing is allowed (no endpoint) on the project except &quot;SetAgentStatus&quot; by PROJECT_ADMIN or SERVER_ADMIN</li>
+</ul>
 """
 global___AgentStatus = AgentStatus
 
@@ -358,13 +370,13 @@ class Agent(google.protobuf.message.Message):
     """Required. The name of this agent."""
     default_language_code: builtins.str
     """Required. The default language of the agent as a language tag. See
-    [Language Support](https://dialogflow.com/docs/reference/language) for a
+    <a href="https://dialogflow.com/docs/reference/language">Language Support</a> for a
     list of the currently supported language codes.
-    This field cannot be set by the `Update` method.
+    This field cannot be set by the <code>Update</code> method.
     """
     time_zone: builtins.str
     """Required. The time zone of this agent from the
-    [time zone database](https://www.iana.org/time-zones), e.g.,
+    <a href="https://www.iana.org/time-zones">time zone database</a>, e.g.,
     America/New_York, Europe/Paris.
     """
     nlu_platform: builtins.str
@@ -379,6 +391,7 @@ class Agent(google.protobuf.message.Message):
     Read-only in the Agent message
     """
     description: builtins.str
+    """Optional. Description of the agent."""
     created_by: builtins.str
     """User id in form of a valid UUID."""
     modified_by: builtins.str
@@ -386,7 +399,7 @@ class Agent(google.protobuf.message.Message):
     @property
     def supported_language_codes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Optional. The list of all languages supported by this agent (except for the
-        `default_language_code`).
+        <code>default_language_code</code>).
         """
 
     @property
@@ -556,7 +569,7 @@ global___DeleteAgentRequest = DeleteAgentRequest
 
 @typing.final
 class GetAgentRequest(google.protobuf.message.Message):
-    """The request message for [Agents.GetAgent][google.cloud.dialogflow.v2.Agents.GetAgent]."""
+    """The request message for <a href="index.html#ondewo.nlu.Agents.GetAgent">Agents.GetAgent</a>."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -679,7 +692,7 @@ global___ListAgentsOfUserResponse = ListAgentsOfUserResponse
 
 @typing.final
 class TrainAgentRequest(google.protobuf.message.Message):
-    """The request message for [Agents.TrainAgent][google.cloud.dialogflow.v2.Agents.TrainAgent]."""
+    """The request message for <a href="index.html#ondewo.nlu.Agents.TrainAgent">Agents.TrainAgent</a>."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -707,7 +720,7 @@ global___TrainAgentRequest = TrainAgentRequest
 
 @typing.final
 class BuildCacheRequest(google.protobuf.message.Message):
-    """The request message for [Agents.TrainAgentBuildCache][google.cloud.dialogflow.v2.Agents.BuildCache]."""
+    """The request message for <a href="index.html#ondewo.nlu.Agents.BuildCache">Agents.TrainAgentBuildCache</a>."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -731,7 +744,7 @@ global___BuildCacheRequest = BuildCacheRequest
 
 @typing.final
 class ExportAgentRequest(google.protobuf.message.Message):
-    """The request message for [Agents.ExportAgent][google.cloud.dialogflow.v2.Agents.ExportAgent]."""
+    """The request message for <a href="index.html#ondewo.nlu.Agents.ExportAgent">Agents.ExportAgent</a>."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -765,7 +778,7 @@ global___ExportAgentRequest = ExportAgentRequest
 
 @typing.final
 class ExportAgentResponse(google.protobuf.message.Message):
-    """The response message for [Agents.ExportAgent][google.cloud.dialogflow.v2.Agents.ExportAgent]."""
+    """The response message for <a href="index.html#ondewo.nlu.Agents.ExportAgent">Agents.ExportAgent</a>."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -773,14 +786,14 @@ class ExportAgentResponse(google.protobuf.message.Message):
     AGENT_CONTENT_FIELD_NUMBER: builtins.int
     agent_uri: builtins.str
     """The URI to a file containing the exported agent. This field is populated
-    only if `agent_uri` is specified in `ExportAgentRequest`.
+    only if <code>agent_uri</code> is specified in <code>ExportAgentRequest</code>.
     """
     agent_content: builtins.bytes
     """The exported agent.
 
     Example for how to export an agent to a zip file via a command line:
-
-    curl \\
+    <br/>
+    <pre><code>curl \\
       'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:export'\\
       -X POST \\
       -H 'Authorization: Bearer '$(gcloud auth print-access-token) \\
@@ -790,6 +803,7 @@ class ExportAgentResponse(google.protobuf.message.Message):
       --data-binary '{}' \\
     | grep agentContent | sed -e 's/.*"agentContent": "\\([^"]*\\)".*/\\1/' \\
     | base64 --decode > <agent zip file>
+    </code></pre>
     """
     def __init__(
         self,
@@ -826,7 +840,7 @@ class ExportBenchmarkAgentRequest(google.protobuf.message.Message):
     """
     test_size: builtins.float
     """Train-test split related parameters, for further info,
-    check https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html
+    check <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html">https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html</a>
     default values come from API definition above
     Optional: bigger than zero
     """
@@ -946,7 +960,9 @@ class RankingMatchOptimizationConfig(google.protobuf.message.Message):
     @property
     def initial_thresholds(self) -> google.protobuf.struct_pb2.Struct:
         """initial thresholds are optional, if not given will be taken from the current config
+        <br>
         example {'OndewoIntentSimilarityMatch': 0.59, 'OndewoIntentNamedSimilarityMatch': 0.39}
+        <br>
         """
 
     def __init__(
@@ -972,11 +988,15 @@ class OptimizeRankingMatchResponse(google.protobuf.message.Message):
     OPTIMIZED_ONDEWO_CONFIG_FIELD_NUMBER: builtins.int
     @property
     def optimization_info(self) -> google.protobuf.struct_pb2.Struct:
-        """info about optimization"""
+        """info about optimization
+        <br>
+        """
 
     @property
     def optimized_ondewo_config(self) -> google.protobuf.struct_pb2.Struct:
-        """the optimized configuration of the ondewo agent e.g., optimized parameters"""
+        """the optimized configuration of the ondewo agent e.g., optimized parameters
+        <br>
+        """
 
     def __init__(
         self,
@@ -991,7 +1011,7 @@ global___OptimizeRankingMatchResponse = OptimizeRankingMatchResponse
 
 @typing.final
 class ImportAgentRequest(google.protobuf.message.Message):
-    """The request message for [Agents.ImportAgent][google.cloud.dialogflow.v2.Agents.ImportAgent]."""
+    """The request message for <a href="index.html#ondewo.nlu.Agents.ImportAgent">Agents.ImportAgent</a>."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1008,10 +1028,10 @@ class ImportAgentRequest(google.protobuf.message.Message):
     """
     agent_content: builtins.bytes
     """The agent to import.
-
+    <br>
     Example for how to import an agent via the command line:
-
-    curl \\
+    <br>
+    <pre><code>curl \\
       'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:import\\
        -X POST \\
        -H 'Authorization: Bearer '$(gcloud auth print-access-token) \\
@@ -1021,6 +1041,7 @@ class ImportAgentRequest(google.protobuf.message.Message):
        --data-binary "{
           'agentContent': '$(cat <agent zip file> | base64 -w 0)'
        }"
+    </code></pre>
     """
     def __init__(
         self,
@@ -1037,7 +1058,7 @@ global___ImportAgentRequest = ImportAgentRequest
 
 @typing.final
 class RestoreAgentRequest(google.protobuf.message.Message):
-    """The request message for [Agents.RestoreAgent][google.cloud.dialogflow.v2.Agents.RestoreAgent]."""
+    """The request message for <a href="index.html#ondewo.nlu.Agents.RestoreAgent">Agents.RestoreAgent</a>."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1054,10 +1075,9 @@ class RestoreAgentRequest(google.protobuf.message.Message):
     """
     agent_content: builtins.bytes
     """The agent to restore.
-
+    <br>
     Example for how to restore an agent via the command line:
-
-    curl \\
+    <pre><code>curl \\
       'https://dialogflow.googleapis.com/v2/projects/<project_name>/agent:restore\\
        -X POST \\
        -H 'Authorization: Bearer '$(gcloud auth print-access-token) \\
@@ -1067,6 +1087,7 @@ class RestoreAgentRequest(google.protobuf.message.Message):
        --data-binary "{
            'agentContent': '$(cat <agent zip file> | base64 -w 0)'
        }" \\
+    </code></pre>
     """
     def __init__(
         self,
@@ -1206,7 +1227,9 @@ class GetSessionsStatisticsRequest(google.protobuf.message.Message):
     @property
     def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
         """Optional. The mask to control which data fields will be added to the returned data.
-        Example: paths=["duration_in_s_min", "id", "session_id", "project_id"]
+        <br>
+        Example: paths=[&quot;duration_in_s_min&quot;, &quot;id&quot;, &quot;session_id&quot;, &quot;project_id&quot;]
+        <br>
         """
 
     def __init__(
@@ -1326,28 +1349,36 @@ class ListUsersInProjectRequest(google.protobuf.message.Message):
     The page token is a string representing the current index and page size.
 
     Valid page token strings:
-    * "" (empty string) - Retrieves the first page.
-    * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    <ul>
+      <li>&quot;&quot; (empty string) - Retrieves the first page.</li>
+      <li>&quot;current_index-0--page_size-20&quot; - Retrieves the first page with a page size of 20.</li>
+      <li>&quot;current_index-1--page_size-20&quot; - Retrieves the second page with a page size of 20.</li>
+    </ul>
 
     Index starts at 0.
 
     Examples of valid page token strings:
-    * ""
-    * "current_index-0--page_size-20"
-    * "current_index-1--page_size-20"
-    * "current_index-10--page_size-20"
+    <ul>
+      <li>&quot;&quot;</li>
+      <li>&quot;current_index-0--page_size-20&quot;</li>
+      <li>&quot;current_index-1--page_size-20&quot;</li>
+      <li>&quot;current_index-10--page_size-20&quot;</li>
+    </ul>
 
     Examples of invalid page token strings:
-    * "1"
-    * "current_index-0--page_size-20"
-    * "current_index--1--page_size-20"
-    * "current_index1--page_size-20"
-    * "current_index-1--page_size--20"
+    <ul>
+      <li>&quot;1&quot;</li>
+      <li>&quot;current_index-0--page_size-20&quot;</li>
+      <li>&quot;current_index--1--page_size-20&quot;</li>
+      <li>&quot;current_index1--page_size-20&quot;</li>
+      <li>&quot;current_index-1--page_size--20&quot;</li>
+    </ul>
     """
     @property
     def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
-        """Optional. The mask to control which fields gets returned."""
+        """Optional. The mask to control which fields gets returned.
+        <br>
+        """
 
     def __init__(
         self,
@@ -1458,24 +1489,30 @@ class ListProjectPermissionsRequest(google.protobuf.message.Message):
     The page token is a string representing the current index and page size.
 
     Valid page token strings:
-    * "" (empty string) - Retrieves the first page.
-    * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    <ul>
+      <li>&quot;&quot; (empty string) - Retrieves the first page.</li>
+      <li>&quot;current_index-0--page_size-20&quot; - Retrieves the first page with a page size of 20.</li>
+      <li>&quot;current_index-1--page_size-20&quot; - Retrieves the second page with a page size of 20.</li>
+    </ul>
 
     Index starts at 0.
 
     Examples of valid page token strings:
-    * ""
-    * "current_index-0--page_size-20"
-    * "current_index-1--page_size-20"
-    * "current_index-10--page_size-20"
+    <ul>
+      <li>&quot;&quot;</li>
+      <li>&quot;current_index-0--page_size-20&quot;</li>
+      <li>&quot;current_index-1--page_size-20&quot;</li>
+      <li>&quot;current_index-10--page_size-20&quot;</li>
+    </ul>
 
     Examples of invalid page token strings:
-    * "1"
-    * "current_index-0--page_size-20"
-    * "current_index--1--page_size-20"
-    * "current_index1--page_size-20"
-    * "current_index-1--page_size--20"
+    <ul>
+      <li>&quot;1&quot;</li>
+      <li>&quot;current_index-0--page_size-20&quot;</li>
+      <li>&quot;current_index--1--page_size-20&quot;</li>
+      <li>&quot;current_index1--page_size-20&quot;</li>
+      <li>&quot;current_index-1--page_size--20&quot;</li>
+    </ul>
     """
     @property
     def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
@@ -1618,8 +1655,11 @@ class SetResourcesRequest(google.protobuf.message.Message):
     Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
     name: builtins.str
+    """Required. Name of the resource."""
     type: builtins.str
+    """Required. Type of the resource (e.g., "audio", "image", "file")."""
     resource_file: builtins.bytes
+    """Required. The resource file content as bytes."""
     language_code: builtins.str
     """Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
     def __init__(
@@ -1650,7 +1690,9 @@ class DeleteResourcesRequest(google.protobuf.message.Message):
     Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
     name: builtins.str
+    """Required. Name of the resource to delete."""
     type: builtins.str
+    """Required. Type of the resource (e.g., "audio", "image", "file")."""
     language_code: builtins.str
     """Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
     def __init__(
@@ -1680,7 +1722,9 @@ class ExportResourcesRequest(google.protobuf.message.Message):
     Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
     name: builtins.str
+    """Required. Name of the resource to export."""
     type: builtins.str
+    """Required. Type of the resource (e.g., "audio", "image", "file")."""
     language_code: builtins.str
     """Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
     def __init__(
@@ -1711,10 +1755,13 @@ class ExportResourcesResponse(google.protobuf.message.Message):
     Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
     name: builtins.str
+    """Required. Name of the exported resource."""
     type: builtins.str
+    """Required. Type of the resource (e.g., "audio", "image", "file")."""
     language_code: builtins.str
     """Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
     resource_file: builtins.bytes
+    """Required. The exported resource file content as bytes."""
     def __init__(
         self,
         *,
@@ -1743,9 +1790,11 @@ class GetModelStatusesRequest(google.protobuf.message.Message):
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
     cache_version: builtins.int
+    """Optional. Cache version to filter model statuses. If not specified, returns statuses for all cache versions."""
     language_code: builtins.str
     """Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
     model_name: builtins.str
+    """Optional. Model name to filter model statuses. If not specified, returns statuses for all models."""
     def __init__(
         self,
         *,
@@ -1771,21 +1820,37 @@ class ModelStatus(google.protobuf.message.Message):
     class _StatusNameEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[ModelStatus._StatusName.ValueType], builtins.type):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         UNKNOWN: ModelStatus._StatusName.ValueType  # 0
+        """Unknown status"""
         INITIALIZING: ModelStatus._StatusName.ValueType  # 1
+        """Model is initializing"""
         INITIALIZED: ModelStatus._StatusName.ValueType  # 2
+        """Model has been initialized"""
         LOADING_DATA: ModelStatus._StatusName.ValueType  # 3
+        """Model is loading data"""
         TRAINING: ModelStatus._StatusName.ValueType  # 4
+        """Model is training"""
         TESTING: ModelStatus._StatusName.ValueType  # 5
+        """Model is being tested"""
         TRAINED: ModelStatus._StatusName.ValueType  # 6
+        """Model training is complete"""
 
-    class StatusName(_StatusName, metaclass=_StatusNameEnumTypeWrapper): ...
+    class StatusName(_StatusName, metaclass=_StatusNameEnumTypeWrapper):
+        """Status name of the model."""
+
     UNKNOWN: ModelStatus.StatusName.ValueType  # 0
+    """Unknown status"""
     INITIALIZING: ModelStatus.StatusName.ValueType  # 1
+    """Model is initializing"""
     INITIALIZED: ModelStatus.StatusName.ValueType  # 2
+    """Model has been initialized"""
     LOADING_DATA: ModelStatus.StatusName.ValueType  # 3
+    """Model is loading data"""
     TRAINING: ModelStatus.StatusName.ValueType  # 4
+    """Model is training"""
     TESTING: ModelStatus.StatusName.ValueType  # 5
+    """Model is being tested"""
     TRAINED: ModelStatus.StatusName.ValueType  # 6
+    """Model training is complete"""
 
     CACHE_VERSION_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
@@ -1800,9 +1865,13 @@ class ModelStatus(google.protobuf.message.Message):
     model_name: builtins.str
     """The model name"""
     config: builtins.str
+    """Configuration of the model as a string."""
     status: global___ModelStatus.StatusName.ValueType
+    """Current status of the model."""
     @property
-    def status_set_time(self) -> google.protobuf.timestamp_pb2.Timestamp: ...
+    def status_set_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Timestamp when the status was set. Read-only field."""
+
     def __init__(
         self,
         *,
@@ -1826,7 +1895,9 @@ class GetModelStatusesResponse(google.protobuf.message.Message):
 
     MODEL_STATUSES_FIELD_NUMBER: builtins.int
     @property
-    def model_statuses(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___ModelStatus]: ...
+    def model_statuses(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___ModelStatus]:
+        """List of model statuses matching the request filters."""
+
     def __init__(
         self,
         *,
@@ -1948,33 +2019,53 @@ class FullTextSearchRequest(google.protobuf.message.Message):
     class _QueryTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[FullTextSearchRequest._QueryType.ValueType], builtins.type):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         ALL: FullTextSearchRequest._QueryType.ValueType  # 0
-        """just a placeholder, has to start with zero"""
+        """Placeholder value, has to start with zero"""
         OndewoEntityQuery: FullTextSearchRequest._QueryType.ValueType  # 1
+        """Query for entities"""
         OndewoEntityTypeQuery: FullTextSearchRequest._QueryType.ValueType  # 2
+        """Query for entity types"""
         OndewoEntitySynonymQuery: FullTextSearchRequest._QueryType.ValueType  # 3
+        """Query for entity synonyms"""
         OndewoIntentQuery: FullTextSearchRequest._QueryType.ValueType  # 4
+        """Query for intents"""
         OndewoIntentContextInQuery: FullTextSearchRequest._QueryType.ValueType  # 5
+        """Query for intent input contexts"""
         OndewoIntentContextOutQuery: FullTextSearchRequest._QueryType.ValueType  # 6
+        """Query for intent output contexts"""
         OndewoIntentUsersaysQuery: FullTextSearchRequest._QueryType.ValueType  # 7
+        """Query for intent training phrases (user says)"""
         OndewoIntentTagsQuery: FullTextSearchRequest._QueryType.ValueType  # 8
+        """Query for intent tags"""
         OndewoIntentParametersQuery: FullTextSearchRequest._QueryType.ValueType  # 9
+        """Query for intent parameters"""
         OndewoIntentResponseQuery: FullTextSearchRequest._QueryType.ValueType  # 10
+        """Query for intent responses"""
 
     class QueryType(_QueryType, metaclass=_QueryTypeEnumTypeWrapper):
         """Type of query"""
 
     ALL: FullTextSearchRequest.QueryType.ValueType  # 0
-    """just a placeholder, has to start with zero"""
+    """Placeholder value, has to start with zero"""
     OndewoEntityQuery: FullTextSearchRequest.QueryType.ValueType  # 1
+    """Query for entities"""
     OndewoEntityTypeQuery: FullTextSearchRequest.QueryType.ValueType  # 2
+    """Query for entity types"""
     OndewoEntitySynonymQuery: FullTextSearchRequest.QueryType.ValueType  # 3
+    """Query for entity synonyms"""
     OndewoIntentQuery: FullTextSearchRequest.QueryType.ValueType  # 4
+    """Query for intents"""
     OndewoIntentContextInQuery: FullTextSearchRequest.QueryType.ValueType  # 5
+    """Query for intent input contexts"""
     OndewoIntentContextOutQuery: FullTextSearchRequest.QueryType.ValueType  # 6
+    """Query for intent output contexts"""
     OndewoIntentUsersaysQuery: FullTextSearchRequest.QueryType.ValueType  # 7
+    """Query for intent training phrases (user says)"""
     OndewoIntentTagsQuery: FullTextSearchRequest.QueryType.ValueType  # 8
+    """Query for intent tags"""
     OndewoIntentParametersQuery: FullTextSearchRequest.QueryType.ValueType  # 9
+    """Query for intent parameters"""
     OndewoIntentResponseQuery: FullTextSearchRequest.QueryType.ValueType  # 10
+    """Query for intent responses"""
 
     PARENT_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
@@ -1995,24 +2086,30 @@ class FullTextSearchRequest(google.protobuf.message.Message):
     The page token is a string representing the current index and page size.
 
     Valid page token strings:
-    * "" (empty string) - Retrieves the first page.
-    * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    <ul>
+      <li>&quot;&quot; (empty string) - Retrieves the first page.</li>
+      <li>&quot;current_index-0--page_size-20&quot; - Retrieves the first page with a page size of 20.</li>
+      <li>&quot;current_index-1--page_size-20&quot; - Retrieves the second page with a page size of 20.</li>
+    </ul>
 
     Index starts at 0.
 
     Examples of valid page token strings:
-    * ""
-    * "current_index-0--page_size-20"
-    * "current_index-1--page_size-20"
-    * "current_index-10--page_size-20"
+    <ul>
+      <li>&quot;&quot;</li>
+      <li>&quot;current_index-0--page_size-20&quot;</li>
+      <li>&quot;current_index-1--page_size-20&quot;</li>
+      <li>&quot;current_index-10--page_size-20&quot;</li>
+    </ul>
 
     Examples of invalid page token strings:
-    * "1"
-    * "current_index-0--page_size-20"
-    * "current_index--1--page_size-20"
-    * "current_index1--page_size-20"
-    * "current_index-1--page_size--20"
+    <ul>
+      <li>&quot;1&quot;</li>
+      <li>&quot;current_index-0--page_size-20&quot;</li>
+      <li>&quot;current_index--1--page_size-20&quot;</li>
+      <li>&quot;current_index1--page_size-20&quot;</li>
+      <li>&quot;current_index-1--page_size--20&quot;</li>
+    </ul>
     """
     def __init__(
         self,
@@ -2034,6 +2131,8 @@ class FullTextSearchResponseEntityType(google.protobuf.message.Message):
 
     @typing.final
     class EntityTypeSearchResult(google.protobuf.message.Message):
+        """Search result for an entity type"""
+
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
         NAME_FIELD_NUMBER: builtins.int
@@ -2044,8 +2143,11 @@ class FullTextSearchResponseEntityType(google.protobuf.message.Message):
         CREATED_BY_FIELD_NUMBER: builtins.int
         MODIFIED_BY_FIELD_NUMBER: builtins.int
         name: builtins.str
+        """Name of the entity type"""
         display_name: builtins.str
+        """Display name of the entity type"""
         language: builtins.str
+        """Language code of the entity type"""
         created_by: builtins.str
         """User id in form of a valid UUID."""
         modified_by: builtins.str
@@ -2086,14 +2188,19 @@ class FullTextSearchResponseEntityType(google.protobuf.message.Message):
     language_code: builtins.str
     """Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
     term: builtins.str
+    """Search term used in the query"""
     elastic_query: builtins.str
+    """Elasticsearch query that was executed"""
     time: builtins.float
+    """Time taken to execute the query in seconds"""
     next_page_token: builtins.str
     """The next_page_token is used to retrieve the next page of a returned result,
     e.g. next_page_token is current_index-2
     """
     @property
-    def entity_type_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseEntityType.EntityTypeSearchResult]: ...
+    def entity_type_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseEntityType.EntityTypeSearchResult]:
+        """List of entity type search results"""
+
     def __init__(
         self,
         *,
@@ -2117,6 +2224,8 @@ class FullTextSearchResponseEntity(google.protobuf.message.Message):
 
     @typing.final
     class EntitySearchResult(google.protobuf.message.Message):
+        """Search result for an entity"""
+
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
         NAME_FIELD_NUMBER: builtins.int
@@ -2129,10 +2238,15 @@ class FullTextSearchResponseEntity(google.protobuf.message.Message):
         CREATED_BY_FIELD_NUMBER: builtins.int
         MODIFIED_BY_FIELD_NUMBER: builtins.int
         name: builtins.str
+        """Name of the entity"""
         display_name: builtins.str
+        """Display name of the entity"""
         entity_type_name: builtins.str
+        """Name of the entity type this entity belongs to"""
         entity_type_display_name: builtins.str
+        """Display name of the entity type"""
         language: builtins.str
+        """Language code of the entity"""
         created_by: builtins.str
         """User id in form of a valid UUID."""
         modified_by: builtins.str
@@ -2175,14 +2289,19 @@ class FullTextSearchResponseEntity(google.protobuf.message.Message):
     language_code: builtins.str
     """Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
     term: builtins.str
+    """Search term used in the query"""
     elastic_query: builtins.str
+    """Elasticsearch query that was executed"""
     time: builtins.float
+    """Time taken to execute the query in seconds"""
     next_page_token: builtins.str
     """The next_page_token is used to retrieve the next page of a returned result,
     e.g. next_page_token is current_index-2
     """
     @property
-    def entity_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseEntity.EntitySearchResult]: ...
+    def entity_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseEntity.EntitySearchResult]:
+        """List of entity search results"""
+
     def __init__(
         self,
         *,
@@ -2206,6 +2325,8 @@ class FullTextSearchResponseEntitySynonym(google.protobuf.message.Message):
 
     @typing.final
     class EntitySynonymSearchResult(google.protobuf.message.Message):
+        """Search result for an entity synonym"""
+
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
         NAME_FIELD_NUMBER: builtins.int
@@ -2220,12 +2341,19 @@ class FullTextSearchResponseEntitySynonym(google.protobuf.message.Message):
         CREATED_BY_FIELD_NUMBER: builtins.int
         MODIFIED_BY_FIELD_NUMBER: builtins.int
         name: builtins.str
+        """Name of the entity synonym"""
         display_name: builtins.str
+        """Display name of the entity synonym"""
         entity_type_name: builtins.str
+        """Name of the entity type"""
         entity_type_display_name: builtins.str
+        """Display name of the entity type"""
         entity_name: builtins.str
+        """Name of the entity this synonym belongs to"""
         entity_display_name: builtins.str
+        """Display name of the entity"""
         language: builtins.str
+        """Language code of the entity synonym"""
         created_by: builtins.str
         """User id in form of a valid UUID."""
         modified_by: builtins.str
@@ -2270,14 +2398,19 @@ class FullTextSearchResponseEntitySynonym(google.protobuf.message.Message):
     language_code: builtins.str
     """Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
     term: builtins.str
+    """Search term used in the query"""
     elastic_query: builtins.str
+    """Elasticsearch query that was executed"""
     time: builtins.float
+    """Time taken to execute the query in seconds"""
     next_page_token: builtins.str
     """The next_page_token is used to retrieve the next page of a returned result,
     e.g. next_page_token is current_index-2
     """
     @property
-    def entity_synonym_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseEntitySynonym.EntitySynonymSearchResult]: ...
+    def entity_synonym_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseEntitySynonym.EntitySynonymSearchResult]:
+        """List of entity synonym search results"""
+
     def __init__(
         self,
         *,
@@ -2301,6 +2434,8 @@ class FullTextSearchResponseIntent(google.protobuf.message.Message):
 
     @typing.final
     class IntentSearchResult(google.protobuf.message.Message):
+        """Search result for an intent"""
+
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
         NAME_FIELD_NUMBER: builtins.int
@@ -2313,15 +2448,21 @@ class FullTextSearchResponseIntent(google.protobuf.message.Message):
         CREATED_BY_FIELD_NUMBER: builtins.int
         MODIFIED_BY_FIELD_NUMBER: builtins.int
         name: builtins.str
+        """Name of the intent"""
         display_name: builtins.str
+        """Display name of the intent"""
         domain_name: builtins.str
+        """Domain name of the intent"""
         language: builtins.str
+        """Language code of the intent"""
         created_by: builtins.str
         """User id in form of a valid UUID."""
         modified_by: builtins.str
         """User id in form of a valid UUID."""
         @property
-        def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+        def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+            """Tags associated with the intent"""
+
         @property
         def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
             """Creation date and time. Read-only field."""
@@ -2360,14 +2501,19 @@ class FullTextSearchResponseIntent(google.protobuf.message.Message):
     language_code: builtins.str
     """Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
     term: builtins.str
+    """Search term used in the query"""
     elastic_query: builtins.str
+    """Elasticsearch query that was executed"""
     time: builtins.float
+    """Time taken to execute the query in seconds"""
     next_page_token: builtins.str
     """The next_page_token is used to retrieve the next page of a returned result,
     e.g. next_page_token is current_index-2
     """
     @property
-    def intent_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseIntent.IntentSearchResult]: ...
+    def intent_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseIntent.IntentSearchResult]:
+        """List of intent search results"""
+
     def __init__(
         self,
         *,
@@ -2391,6 +2537,8 @@ class FullTextSearchResponseIntentContextIn(google.protobuf.message.Message):
 
     @typing.final
     class IntentContextInSearchResult(google.protobuf.message.Message):
+        """Search result for an intent input context"""
+
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
         NAME_FIELD_NUMBER: builtins.int
@@ -2403,15 +2551,21 @@ class FullTextSearchResponseIntentContextIn(google.protobuf.message.Message):
         CREATED_BY_FIELD_NUMBER: builtins.int
         MODIFIED_BY_FIELD_NUMBER: builtins.int
         name: builtins.str
+        """Name of the input context"""
         intent_name: builtins.str
+        """Name of the intent this context belongs to"""
         intent_display_name: builtins.str
+        """Display name of the intent"""
         language: builtins.str
+        """Language code of the context"""
         created_by: builtins.str
         """User id in form of a valid UUID."""
         modified_by: builtins.str
         """User id in form of a valid UUID."""
         @property
-        def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+        def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+            """Tags associated with the intent"""
+
         @property
         def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
             """Creation date and time. Read-only field."""
@@ -2450,14 +2604,19 @@ class FullTextSearchResponseIntentContextIn(google.protobuf.message.Message):
     language_code: builtins.str
     """Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
     term: builtins.str
+    """Search term used in the query"""
     elastic_query: builtins.str
+    """Elasticsearch query that was executed"""
     time: builtins.float
+    """Time taken to execute the query in seconds"""
     next_page_token: builtins.str
     """The next_page_token is used to retrieve the next page of a returned result,
     e.g. next_page_token is current_index-2
     """
     @property
-    def intent_context_in_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseIntentContextIn.IntentContextInSearchResult]: ...
+    def intent_context_in_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseIntentContextIn.IntentContextInSearchResult]:
+        """List of intent input context search results"""
+
     def __init__(
         self,
         *,
@@ -2481,6 +2640,8 @@ class FullTextSearchResponseIntentContextOut(google.protobuf.message.Message):
 
     @typing.final
     class IntentContextOutSearchResult(google.protobuf.message.Message):
+        """Search result for an intent output context"""
+
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
         NAME_FIELD_NUMBER: builtins.int
@@ -2493,15 +2654,21 @@ class FullTextSearchResponseIntentContextOut(google.protobuf.message.Message):
         CREATED_BY_FIELD_NUMBER: builtins.int
         MODIFIED_BY_FIELD_NUMBER: builtins.int
         name: builtins.str
+        """Name of the output context"""
         intent_name: builtins.str
+        """Name of the intent this context belongs to"""
         intent_display_name: builtins.str
+        """Display name of the intent"""
         language: builtins.str
+        """Language code of the context"""
         created_by: builtins.str
         """User id in form of a valid UUID."""
         modified_by: builtins.str
         """User id in form of a valid UUID."""
         @property
-        def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+        def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+            """Tags associated with the intent"""
+
         @property
         def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
             """Creation date and time. Read-only field."""
@@ -2540,14 +2707,19 @@ class FullTextSearchResponseIntentContextOut(google.protobuf.message.Message):
     language_code: builtins.str
     """Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
     term: builtins.str
+    """Search term used in the query"""
     elastic_query: builtins.str
+    """Elasticsearch query that was executed"""
     time: builtins.float
+    """Time taken to execute the query in seconds"""
     next_page_token: builtins.str
     """The next_page_token is used to retrieve the next page of a returned result,
     e.g. next_page_token is current_index-2
     """
     @property
-    def intent_context_out_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseIntentContextOut.IntentContextOutSearchResult]: ...
+    def intent_context_out_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseIntentContextOut.IntentContextOutSearchResult]:
+        """List of intent output context search results"""
+
     def __init__(
         self,
         *,
@@ -2571,6 +2743,8 @@ class FullTextSearchResponseIntentUsersays(google.protobuf.message.Message):
 
     @typing.final
     class IntentUsersaysSearchResult(google.protobuf.message.Message):
+        """Search result for an intent training phrase (user says)"""
+
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
         NAME_FIELD_NUMBER: builtins.int
@@ -2587,19 +2761,29 @@ class FullTextSearchResponseIntentUsersays(google.protobuf.message.Message):
         CREATED_BY_FIELD_NUMBER: builtins.int
         MODIFIED_BY_FIELD_NUMBER: builtins.int
         name: builtins.str
+        """Name of the training phrase"""
         text: builtins.str
+        """Text of the training phrase"""
         text_as_entity_types: builtins.str
+        """Text with entity types annotated"""
         text_as_entity_values: builtins.str
+        """Text with entity values annotated"""
         type: builtins.str
+        """Type of the training phrase part"""
         intent_name: builtins.str
+        """Name of the intent this training phrase belongs to"""
         intent_display_name: builtins.str
+        """Display name of the intent"""
         language: builtins.str
+        """Language code of the training phrase"""
         created_by: builtins.str
         """User id in form of a valid UUID."""
         modified_by: builtins.str
         """User id in form of a valid UUID."""
         @property
-        def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+        def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+            """Tags associated with the intent"""
+
         @property
         def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
             """Creation date and time. Read-only field."""
@@ -2642,14 +2826,19 @@ class FullTextSearchResponseIntentUsersays(google.protobuf.message.Message):
     language_code: builtins.str
     """Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
     term: builtins.str
+    """Search term used in the query"""
     elastic_query: builtins.str
+    """Elasticsearch query that was executed"""
     time: builtins.float
+    """Time taken to execute the query in seconds"""
     next_page_token: builtins.str
     """The next_page_token is used to retrieve the next page of a returned result,
     e.g. next_page_token is current_index-2
     """
     @property
-    def intent_usersays_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseIntentUsersays.IntentUsersaysSearchResult]: ...
+    def intent_usersays_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseIntentUsersays.IntentUsersaysSearchResult]:
+        """List of intent training phrase search results"""
+
     def __init__(
         self,
         *,
@@ -2673,6 +2862,8 @@ class FullTextSearchResponseIntentTags(google.protobuf.message.Message):
 
     @typing.final
     class IntentTagsSearchResult(google.protobuf.message.Message):
+        """Search result for an intent tag"""
+
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
         NAME_FIELD_NUMBER: builtins.int
@@ -2686,16 +2877,23 @@ class FullTextSearchResponseIntentTags(google.protobuf.message.Message):
         CREATED_BY_FIELD_NUMBER: builtins.int
         MODIFIED_BY_FIELD_NUMBER: builtins.int
         name: builtins.str
+        """Name of the tag"""
         text: builtins.str
+        """Text content of the tag"""
         intent_name: builtins.str
+        """Name of the intent this tag belongs to"""
         intent_display_name: builtins.str
+        """Display name of the intent"""
         language: builtins.str
+        """Language code of the tag"""
         created_by: builtins.str
         """User id in form of a valid UUID."""
         modified_by: builtins.str
         """User id in form of a valid UUID."""
         @property
-        def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+        def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+            """Tags associated with the intent"""
+
         @property
         def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
             """Creation date and time. Read-only field."""
@@ -2735,14 +2933,19 @@ class FullTextSearchResponseIntentTags(google.protobuf.message.Message):
     language_code: builtins.str
     """Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
     term: builtins.str
+    """Search term used in the query"""
     elastic_query: builtins.str
+    """Elasticsearch query that was executed"""
     time: builtins.float
+    """Time taken to execute the query in seconds"""
     next_page_token: builtins.str
     """The next_page_token is used to retrieve the next page of a returned result,
     e.g. next_page_token is current_index-2
     """
     @property
-    def intent_tags_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseIntentTags.IntentTagsSearchResult]: ...
+    def intent_tags_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseIntentTags.IntentTagsSearchResult]:
+        """List of intent tag search results"""
+
     def __init__(
         self,
         *,
@@ -2766,6 +2969,8 @@ class FullTextSearchResponseIntentResponse(google.protobuf.message.Message):
 
     @typing.final
     class IntentResponseSearchResult(google.protobuf.message.Message):
+        """Search result for an intent response"""
+
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
         TEXT_FIELD_NUMBER: builtins.int
@@ -2780,17 +2985,25 @@ class FullTextSearchResponseIntentResponse(google.protobuf.message.Message):
         CREATED_BY_FIELD_NUMBER: builtins.int
         MODIFIED_BY_FIELD_NUMBER: builtins.int
         text: builtins.str
+        """Text content of the response"""
         platform: builtins.str
+        """Platform for which this response is intended"""
         response_type: builtins.str
+        """Type of the response"""
         intent_name: builtins.str
+        """Name of the intent this response belongs to"""
         intent_display_name: builtins.str
+        """Display name of the intent"""
         language: builtins.str
+        """Language code of the response"""
         created_by: builtins.str
         """User id in form of a valid UUID."""
         modified_by: builtins.str
         """User id in form of a valid UUID."""
         @property
-        def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+        def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+            """Tags associated with the intent"""
+
         @property
         def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
             """Creation date and time. Read-only field."""
@@ -2831,8 +3044,11 @@ class FullTextSearchResponseIntentResponse(google.protobuf.message.Message):
     language_code: builtins.str
     """Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
     term: builtins.str
+    """Search term used in the query"""
     elastic_query: builtins.str
+    """Elasticsearch query that was executed"""
     time: builtins.float
+    """Time taken to execute the query in seconds"""
     next_page_token: builtins.str
     """The next_page_token is used to retrieve the next page of a returned result.
     The page token to support pagination.
@@ -2840,27 +3056,35 @@ class FullTextSearchResponseIntentResponse(google.protobuf.message.Message):
     The page token is a string representing the current index and page size.
 
     Valid page token strings:
-    * "" (empty string) - Retrieves the first page.
-    * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    <ul>
+      <li>&quot;&quot; (empty string) - Retrieves the first page.</li>
+      <li>&quot;current_index-0--page_size-20&quot; - Retrieves the first page with a page size of 20.</li>
+      <li>&quot;current_index-1--page_size-20&quot; - Retrieves the second page with a page size of 20.</li>
+    </ul>
 
     Index starts at 0.
 
     Examples of valid page token strings:
-    * ""
-    * "current_index-0--page_size-20"
-    * "current_index-1--page_size-20"
-    * "current_index-10--page_size-20"
+    <ul>
+      <li>&quot;&quot;</li>
+      <li>&quot;current_index-0--page_size-20&quot;</li>
+      <li>&quot;current_index-1--page_size-20&quot;</li>
+      <li>&quot;current_index-10--page_size-20&quot;</li>
+    </ul>
 
     Examples of invalid page token strings:
-    * "1"
-    * "current_index-0--page_size-20"
-    * "current_index--1--page_size-20"
-    * "current_index1--page_size-20"
-    * "current_index-1--page_size--20"
+    <ul>
+      <li>&quot;1&quot;</li>
+      <li>&quot;current_index-0--page_size-20&quot;</li>
+      <li>&quot;current_index--1--page_size-20&quot;</li>
+      <li>&quot;current_index1--page_size-20&quot;</li>
+      <li>&quot;current_index-1--page_size--20&quot;</li>
+    </ul>
     """
     @property
-    def intent_response_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseIntentResponse.IntentResponseSearchResult]: ...
+    def intent_response_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseIntentResponse.IntentResponseSearchResult]:
+        """List of intent response search results"""
+
     def __init__(
         self,
         *,
@@ -2884,6 +3108,8 @@ class FullTextSearchResponseIntentParameters(google.protobuf.message.Message):
 
     @typing.final
     class IntentParametersSearchResult(google.protobuf.message.Message):
+        """Search result for an intent parameter"""
+
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
         PARAMETER_NAME_FIELD_NUMBER: builtins.int
@@ -2897,16 +3123,23 @@ class FullTextSearchResponseIntentParameters(google.protobuf.message.Message):
         CREATED_BY_FIELD_NUMBER: builtins.int
         MODIFIED_BY_FIELD_NUMBER: builtins.int
         parameter_name: builtins.str
+        """Name of the parameter"""
         parameter_display_name: builtins.str
+        """Display name of the parameter"""
         intent_name: builtins.str
+        """Name of the intent this parameter belongs to"""
         intent_display_name: builtins.str
+        """Display name of the intent"""
         language: builtins.str
+        """Language code of the parameter"""
         created_by: builtins.str
         """User id in form of a valid UUID."""
         modified_by: builtins.str
         """User id in form of a valid UUID."""
         @property
-        def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+        def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+            """Tags associated with the intent"""
+
         @property
         def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
             """Creation date and time. Read-only field."""
@@ -2946,14 +3179,19 @@ class FullTextSearchResponseIntentParameters(google.protobuf.message.Message):
     language_code: builtins.str
     """Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
     term: builtins.str
+    """Search term used in the query"""
     elastic_query: builtins.str
+    """Elasticsearch query that was executed"""
     time: builtins.float
+    """Time taken to execute the query in seconds"""
     next_page_token: builtins.str
     """The next_page_token is used to retrieve the next page of a returned result,
     e.g. next_page_token is current_index-2
     """
     @property
-    def intent_parameters_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseIntentParameters.IntentParametersSearchResult]: ...
+    def intent_parameters_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FullTextSearchResponseIntentParameters.IntentParametersSearchResult]:
+        """List of intent parameter search results"""
+
     def __init__(
         self,
         *,

@@ -89,43 +89,42 @@ class _AudioEncodingEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._
     AUDIO_ENCODING_LINEAR_16: _AudioEncoding.ValueType  # 1
     """Uncompressed 16-bit signed little-endian samples (Linear PCM)."""
     AUDIO_ENCODING_FLAC: _AudioEncoding.ValueType  # 2
-    """[`FLAC`](https://xiph.org/flac/documentation.html) (Free Lossless Audio
+    """<a href="https://xiph.org/flac/documentation.html">FLAC</a> (Free Lossless Audio
     Codec) is the recommended encoding because it is lossless (therefore
     recognition is not compromised) and requires only about half the
-    bandwidth of `LINEAR16`. `FLAC` stream encoding supports 16-bit and
-    24-bit samples, however, not all fields in `STREAMINFO` are supported.
+    bandwidth of <code>LINEAR16</code>. <code>FLAC</code> stream encoding supports 16-bit and
+    24-bit samples, however, not all fields in <code>STREAMINFO</code> are supported.
     """
     AUDIO_ENCODING_MULAW: _AudioEncoding.ValueType  # 3
     """8-bit samples that compand 14-bit audio samples using G.711 PCMU/mu-law."""
     AUDIO_ENCODING_AMR: _AudioEncoding.ValueType  # 4
-    """Adaptive Multi-Rate Narrowband codec. `sample_rate_hertz` must be 8000."""
+    """Adaptive Multi-Rate Narrowband codec. <code>sample_rate_hertz</code> must be 8000."""
     AUDIO_ENCODING_AMR_WB: _AudioEncoding.ValueType  # 5
-    """Adaptive Multi-Rate wideband codec. `sample_rate_hertz` must be 16000."""
+    """Adaptive Multi-Rate wideband codec. <code>sample_rate_hertz</code> must be 16000."""
     AUDIO_ENCODING_OGG_OPUS: _AudioEncoding.ValueType  # 6
     """Opus encoded audio frames in Ogg container
-    ([OggOpus](https://wiki.xiph.org/OggOpus)).
-    `sample_rate_hertz` must be 16000.
+    (<a href="https://wiki.xiph.org/OggOpus">OggOpus</a>).
+    <code>sample_rate_hertz</code> must be 16000.
     """
     AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE: _AudioEncoding.ValueType  # 7
     """Although the use of lossy encodings is not recommended, if a very low
-    bitrate encoding is required, `OGG_OPUS` is highly preferred over
-    Speex encoding. The [Speex](https://speex.org/) encoding supported by
+    bitrate encoding is required, <code>OGG_OPUS</code> is highly preferred over
+    Speex encoding. The <a href="https://speex.org/">Speex</a> encoding supported by
     Dialogflow API has a header byte in each block, as in MIME type
-    `audio/x-speex-with-header-byte`.
+    <code>audio/x-speex-with-header-byte</code>.
     It is a variant of the RTP Speex encoding defined in
-    [RFC 5574](https://tools.ietf.org/html/rfc5574).
+    <a href="https://tools.ietf.org/html/rfc5574">RFC 5574</a>.
     The stream is a sequence of blocks, one block per RTP packet. Each block
     starts with a byte containing the length of the block, in bytes, followed
     by one or more frames of Speex data, padded to an integral number of
     bytes (octets) as specified in RFC 5574. In other words, each RTP header
     is replaced with a single byte containing the block length. Only Speex
-    wideband is supported. `sample_rate_hertz` must be 16000.
+    wideband is supported. <code>sample_rate_hertz</code> must be 16000.
     """
 
 class AudioEncoding(_AudioEncoding, metaclass=_AudioEncodingEnumTypeWrapper):
     """Audio encoding of the audio content sent in the conversational query request.
-    Refer to the [Cloud Speech API documentation](/speech/docs/basics) for more
-    details.
+    Refer to the <a href="/speech/docs/basics">Cloud Speech API documentation</a> for more details.
     """
 
 AUDIO_ENCODING_UNSPECIFIED: AudioEncoding.ValueType  # 0
@@ -133,37 +132,37 @@ AUDIO_ENCODING_UNSPECIFIED: AudioEncoding.ValueType  # 0
 AUDIO_ENCODING_LINEAR_16: AudioEncoding.ValueType  # 1
 """Uncompressed 16-bit signed little-endian samples (Linear PCM)."""
 AUDIO_ENCODING_FLAC: AudioEncoding.ValueType  # 2
-"""[`FLAC`](https://xiph.org/flac/documentation.html) (Free Lossless Audio
+"""<a href="https://xiph.org/flac/documentation.html">FLAC</a> (Free Lossless Audio
 Codec) is the recommended encoding because it is lossless (therefore
 recognition is not compromised) and requires only about half the
-bandwidth of `LINEAR16`. `FLAC` stream encoding supports 16-bit and
-24-bit samples, however, not all fields in `STREAMINFO` are supported.
+bandwidth of <code>LINEAR16</code>. <code>FLAC</code> stream encoding supports 16-bit and
+24-bit samples, however, not all fields in <code>STREAMINFO</code> are supported.
 """
 AUDIO_ENCODING_MULAW: AudioEncoding.ValueType  # 3
 """8-bit samples that compand 14-bit audio samples using G.711 PCMU/mu-law."""
 AUDIO_ENCODING_AMR: AudioEncoding.ValueType  # 4
-"""Adaptive Multi-Rate Narrowband codec. `sample_rate_hertz` must be 8000."""
+"""Adaptive Multi-Rate Narrowband codec. <code>sample_rate_hertz</code> must be 8000."""
 AUDIO_ENCODING_AMR_WB: AudioEncoding.ValueType  # 5
-"""Adaptive Multi-Rate wideband codec. `sample_rate_hertz` must be 16000."""
+"""Adaptive Multi-Rate wideband codec. <code>sample_rate_hertz</code> must be 16000."""
 AUDIO_ENCODING_OGG_OPUS: AudioEncoding.ValueType  # 6
 """Opus encoded audio frames in Ogg container
-([OggOpus](https://wiki.xiph.org/OggOpus)).
-`sample_rate_hertz` must be 16000.
+(<a href="https://wiki.xiph.org/OggOpus">OggOpus</a>).
+<code>sample_rate_hertz</code> must be 16000.
 """
 AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE: AudioEncoding.ValueType  # 7
 """Although the use of lossy encodings is not recommended, if a very low
-bitrate encoding is required, `OGG_OPUS` is highly preferred over
-Speex encoding. The [Speex](https://speex.org/) encoding supported by
+bitrate encoding is required, <code>OGG_OPUS</code> is highly preferred over
+Speex encoding. The <a href="https://speex.org/">Speex</a> encoding supported by
 Dialogflow API has a header byte in each block, as in MIME type
-`audio/x-speex-with-header-byte`.
+<code>audio/x-speex-with-header-byte</code>.
 It is a variant of the RTP Speex encoding defined in
-[RFC 5574](https://tools.ietf.org/html/rfc5574).
+<a href="https://tools.ietf.org/html/rfc5574">RFC 5574</a>.
 The stream is a sequence of blocks, one block per RTP packet. Each block
 starts with a byte containing the length of the block, in bytes, followed
 by one or more frames of Speex data, padded to an integral number of
 bytes (octets) as specified in RFC 5574. In other words, each RTP header
 is replaced with a single byte containing the block length. Only Speex
-wideband is supported. `sample_rate_hertz` must be 16000.
+wideband is supported. <code>sample_rate_hertz</code> must be 16000.
 """
 global___AudioEncoding = AudioEncoding
 
@@ -265,7 +264,7 @@ global___AudioFileResourceType = AudioFileResourceType
 
 @typing.final
 class DetectIntentRequest(google.protobuf.message.Message):
-    """The request to detect user's intent."""
+    """The request to detect user&apos;s intent."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -275,14 +274,14 @@ class DetectIntentRequest(google.protobuf.message.Message):
     INPUT_AUDIO_FIELD_NUMBER: builtins.int
     session: builtins.str
     """Required. The name of the session this query is sent to. Format:
-    `projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;`. It's up to the API
+    <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code>. It&apos;s up to the API
     caller to choose an appropriate session ID. It can be a random number or
     some type of user identifier (preferably hashed). The length of the session
     ID must not exceed 36 bytes.
     """
     input_audio: builtins.bytes
     """Optional. The natural language speech audio to be processed. This field
-    should be populated iff `query_input` is set to an input audio config.
+    should be populated iff <code>query_input</code> is set to an input audio config.
     A single request can contain up to 1 minute of speech audio data.
     """
     @property
@@ -292,13 +291,11 @@ class DetectIntentRequest(google.protobuf.message.Message):
     @property
     def query_input(self) -> global___QueryInput:
         """Required. The input specification. It can be set to:
-
-        1.  an audio config
-            which instructs the speech recognizer how to process the speech audio,
-
-        2.  a conversational query in the form of text, or
-
-        3.  an event that specifies which intent to trigger.
+        <ol>
+          <li>an audio config which instructs the speech recognizer how to process the speech audio,</li>
+          <li>a conversational query in the form of text, or</li>
+          <li>an event that specifies which intent to trigger.</li>
+        </ol>
         """
 
     def __init__(
@@ -333,7 +330,7 @@ class DetectIntentResponse(google.protobuf.message.Message):
 
     @property
     def webhook_status(self) -> google.rpc.status_pb2.Status:
-        """Specifies the status of the webhook request. `webhook_status`
+        """Specifies the status of the webhook request. <code>webhook_status</code>
         is never populated in webhook requests.
         """
 
@@ -370,7 +367,7 @@ class QueryParameters(google.protobuf.message.Message):
     TRANSCRIPTIONS_FIELD_NUMBER: builtins.int
     time_zone: builtins.str
     """Optional. The time zone of this conversational query from the
-    [time zone database](https://www.iana.org/time-zones), e.g.,
+    <a href="https://www.iana.org/time-zones">time zone database</a>, e.g.,
     America/New_York, Europe/Paris. If not provided, the time zone specified in
     agent settings is used.
     """
@@ -391,14 +388,14 @@ class QueryParameters(google.protobuf.message.Message):
     origin_id: builtins.str
     """Id of the the origin of the user request
 
-    For a phone bot, this is the phone number +123456789 the user called (Note: This is not the user's phone number)
+    For a phone bot, this is the phone number +123456789 the user called (Note: This is not the user&apos;s phone number)
     For a chatbot or voicebot on the web, this is the URL on which the bo, e.g. https://ondewo.com/webchat
     For a voice assistant device, this is the device-id or the app id
     This field can also be used for a customized tracking id or tag id
     https://aim-develop.ondewo.com/
     """
     identified_user_id: builtins.str
-    """Id of the "identified user" e.g. for a chatbot the email address or for a phone bot the phone number of the user
+    """Id of the &quot;identified user&quot; e.g. for a chatbot the email address or for a phone bot the phone number of the user
     This field can also be used for a customized tracking id or tag id
     """
     @property
@@ -423,12 +420,12 @@ class QueryParameters(google.protobuf.message.Message):
         key: <code>timestamp</code>
         <pre>timestamp=time.time() # float python timestamp in seconds since epoch </pre>
         key: <code>source</code>
-        <pre>source='https://ondewo.com'</pre>
+        <pre>source=&apos;https://ondewo.com&apos;</pre>
         key: <code>configuration</code>
-        <pre>configuration='config_example_123'</pre>
+        <pre>configuration=&apos;config_example_123&apos;</pre>
         key: <code>single_intent_algorithm</code>
-        <pre>single_intent_algorithm='IntentClassifierType.OndewoIntentAgent'</pre>
-        => allowed other values for <code>single_intent_algorithm</code>:
+        <pre>single_intent_algorithm=&apos;IntentClassifierType.OndewoIntentAgent&apos;</pre>
+        =&gt; allowed other values for <code>single_intent_algorithm</code>:
         <pre>
          IntentClassifierType.DefaultFallBackAlgorithm
          IntentClassifierType.DeviationEndingDetection
@@ -450,9 +447,9 @@ class QueryParameters(google.protobuf.message.Message):
          IntentClassifierType.OndewoWeightedEnsemble
         </pre>
         key: <code>single_ner_algorithm</code>
-        <pre>single_ner_algorithm='NerMethodType.OndewoNerRegex'</pre>
+        <pre>single_ner_algorithm=&apos;NerMethodType.OndewoNerRegex&apos;</pre>
         <pre>
-        => allowed other values for <code>single_ner_algorithm</code>:
+        =&gt; allowed other values for <code>single_ner_algorithm</code>:
          NerMethodType.OndewoNerBert
          NerMethodType.OndewoNerDateNer
          NerMethodType.OndewoNerDictionary
@@ -577,8 +574,7 @@ global___S2tTranscription = S2tTranscription
 class QueryInput(google.protobuf.message.Message):
     """Represents the query input. It can contain either:
 
-    1.  An audio config which
-        instructs the speech recognizer how to process the speech audio.
+    1.  An audio config which instructs the speech recognizer how to process the speech audio.
 
     2.  A conversational query in the form of text,.
 
@@ -645,12 +641,14 @@ class QueryResult(google.protobuf.message.Message):
     FILE_RESOURCES_FIELD_NUMBER: builtins.int
     query_text: builtins.str
     """The original conversational query text:
-    - If natural language text was provided as input, `query_text` contains
-      a copy of the input.
-    - If natural language speech audio was provided as input, `query_text`
+    <ul>
+        <li>If natural language text was provided as input, <code>query_text</code> contains
+      a copy of the input.</li>
+        <li>If natural language speech audio was provided as input, <code>query_text</code>
       contains the speech recognition result. If speech recognizer produced
-      multiple alternatives, a particular one is picked.
-    - If an event was provided as input, `query_text` is not set.
+      multiple alternatives, a particular one is picked.</li>
+        <li>If an event was provided as input, <code>query_text</code> is not set.</li>
+    </ul>
     """
     speech_recognition_confidence: builtins.float
     """The Speech recognition confidence between 0.0 and 1.0. A higher number
@@ -658,8 +656,8 @@ class QueryResult(google.protobuf.message.Message):
     correct. The default of 0.0 is a sentinel value indicating that confidence
     was not set.
 
-    You should not rely on this field as it isn't guaranteed to be accurate, or
-    even set. In particular this field isn't set in Webhook calls and for
+    You should not rely on this field as it isn&apos;t guaranteed to be accurate, or
+    even set. In particular this field isn&apos;t set in Webhook calls and for
     StreamingDetectIntent since the streaming endpoint has separate confidence
     estimates per portion of the audio in StreamingRecognitionResult.
     """
@@ -667,16 +665,18 @@ class QueryResult(google.protobuf.message.Message):
     """The action name from the matched intent."""
     all_required_params_present: builtins.bool
     """This field is set to:
-    - `false` if the matched intent has required parameters and not all of
-       the required parameter values have been collected.
-    - `true` if all required parameter values have been collected, or if the
-       matched intent doesn't contain any required parameters.
+    <ul>
+        <li><code>false</code> if the matched intent has required parameters and not all of
+       the required parameter values have been collected.</li>
+        <li><code>true</code> if all required parameter values have been collected, or if the
+       matched intent doesn&apos;t contain any required parameters.</li>
+    </ul>
     """
     fulfillment_text: builtins.str
     """The text to be pronounced to the user or shown on the screen."""
     webhook_source: builtins.str
     """If the query was fulfilled by a webhook call, this field is set to the
-    value of the `source` field returned in the webhook response.
+    value of the <code>source</code> field returned in the webhook response.
     """
     intent_detection_confidence: builtins.float
     """The intent detection confidence. Values range from 0.0
@@ -688,7 +688,7 @@ class QueryResult(google.protobuf.message.Message):
     """
     language_code: builtins.str
     """The language that was triggered during intent detection.
-    See [Language Support](https://dialogflow.com/docs/reference/language)
+    See <a href="https://dialogflow.com/docs/reference/language">Language Support</a>
     for a list of the currently supported language codes.
     """
     @property
@@ -702,14 +702,14 @@ class QueryResult(google.protobuf.message.Message):
     @property
     def webhook_payload(self) -> google.protobuf.struct_pb2.Struct:
         """If the query was fulfilled by a webhook call, this field is set to the
-        value of the `payload` field returned in the webhook response.
+        value of the <code>payload</code> field returned in the webhook response.
         """
 
     @property
     def output_contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]:
         """The collection of output contexts. If applicable,
-        `output_contexts.parameters` contains entries with name
-        `<parameter name>.original` containing the original parameter values
+        <code>output_contexts.parameters</code> contains entries with name
+        <code>&lt;parameter name&gt;.original</code> containing the original parameter values
         before the query.
         """
 
@@ -717,7 +717,7 @@ class QueryResult(google.protobuf.message.Message):
     def intent(self) -> ondewo.nlu.intent_pb2.Intent:
         """The intent that matched the conversational query. Some, not
         all fields are filled in this message, including but not limited to:
-        `name`, `display_name` and `webhook_state`.
+        <code>name</code>, <code>display_name</code> and <code>webhook_state</code>.
         """
 
     @property
@@ -757,17 +757,10 @@ global___QueryResult = QueryResult
 
 @typing.final
 class StreamingDetectIntentRequest(google.protobuf.message.Message):
-    """The top-level message sent by the client to the
-    `StreamingDetectIntent` method.
-
+    """The top-level message sent by the client to the <code>StreamingDetectIntent</code> method.
     Multiple request messages should be sent in order:
-
-    1.  The first message must contain `session`, `query_input` plus optionally
-        `query_params` and/or `single_utterance`. The message must not contain `input_audio`.
-
-    2.  If `query_input` was set to a streaming input audio config,
-        all subsequent messages must contain only `input_audio`.
-        Otherwise, finish the request stream.
+    1.  The first message must contain <code>session</code>, <code>query_input</code> plus optionally <code>query_params</code> and/or <code>single_utterance</code>. The message must not contain <code>input_audio</code>.
+    2.  If <code>query_input</code> was set to a streaming input audio config, all subsequent messages must contain only <code>input_audio</code>. Otherwise, finish the request stream.
     """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -780,24 +773,24 @@ class StreamingDetectIntentRequest(google.protobuf.message.Message):
     session: builtins.str
     """Required. The name of the session the query is sent to.
     Format of the session name:
-    `projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;`. It’s up to the API
+    <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code>. It&apos;s up to the API
     caller to choose an appropriate &lt;session_uuid&gt;. It can be a random number or
     some type of user identifier (preferably hashed). The length of the session
     ID must not exceed 36 characters.
     """
     single_utterance: builtins.bool
-    """Optional. If `false` (default), recognition does not cease until the
+    """Optional. If <code>false</code> (default), recognition does not cease until the
     client closes the stream.
-    If `true`, the recognizer will detect a single spoken utterance in input
-    audio. Recognition ceases when it detects the audio's voice has
+    If <code>true</code>, the recognizer will detect a single spoken utterance in input
+    audio. Recognition ceases when it detects the audio&apos;s voice has
     stopped or paused. In this case, once a detected intent is received, the
     client should close the stream and start a new request with a new stream as
     needed.
-    This setting is ignored when `query_input` is a piece of text or an event.
+    This setting is ignored when <code>query_input</code> is a piece of text or an event.
     """
     input_audio: builtins.bytes
     """Optional. The input audio content to be recognized. Must be sent if
-    `query_input` was set to a streaming input audio config. The complete audio
+    <code>query_input</code> was set to a streaming input audio config. The complete audio
     over all streaming messages must not exceed 1 minute.
     """
     @property
@@ -807,13 +800,11 @@ class StreamingDetectIntentRequest(google.protobuf.message.Message):
     @property
     def query_input(self) -> global___QueryInput:
         """Required. The input specification. It can be set to:
-
-        1.  an audio config which instructs the speech recognizer how to process
-            the speech audio,
-
-        2.  a conversational query in the form of text, or
-
-        3.  an event that specifies which intent to trigger.
+        <ol>
+          <li>an audio config which instructs the speech recognizer how to process the speech audio,</li>
+          <li>a conversational query in the form of text, or</li>
+          <li>an event that specifies which intent to trigger.</li>
+        </ol>
         """
 
     def __init__(
@@ -832,18 +823,10 @@ global___StreamingDetectIntentRequest = StreamingDetectIntentRequest
 
 @typing.final
 class StreamingDetectIntentResponse(google.protobuf.message.Message):
-    """The top-level message returned from the
-    `StreamingDetectIntent` method.
-
+    """The top-level message returned from the <code>StreamingDetectIntent</code> method.
     Multiple response messages can be returned in order:
-
-    1.  If the input was set to streaming audio, the first one or more messages
-        contain `recognition_result`. Each `recognition_result` represents a more
-        complete transcript of what the user said. The last `recognition_result`
-        has `is_final` set to `true`.
-
-    2.  The next message contains `response_id`, `query_result`
-        and optionally `webhook_status` if a WebHook was called.
+    1.  If the input was set to streaming audio, the first one or more messages contain <code>recognition_result</code>. Each <code>recognition_result</code> represents a more complete transcript of what the user said. The last <code>recognition_result</code> has <code>is_final</code> set to <code>true</code>.
+    2.  The next message contains <code>response_id</code>, <code>query_result</code> and optionally <code>webhook_status</code> if a WebHook was called.
     """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -883,39 +866,36 @@ global___StreamingDetectIntentResponse = StreamingDetectIntentResponse
 
 @typing.final
 class StreamingRecognitionResult(google.protobuf.message.Message):
-    """Contains a speech recognition result corresponding to a portion of the audio
-    that is currently being processed or an indication that this is the end
-    of the single requested utterance.
+    """Contains a speech recognition result corresponding to a portion of the audio that is currently being processed or an indication that this is the end of the single requested utterance.
 
     Example:
 
-    1.  transcript: "tube"
+    1.  transcript: &quot;tube&quot;
 
-    2.  transcript: "to be a"
+    2.  transcript: &quot;to be a&quot;
 
-    3.  transcript: "to be"
+    3.  transcript: &quot;to be&quot;
 
-    4.  transcript: "to be or not to be"
+    4.  transcript: &quot;to be or not to be&quot;
         is_final: true
 
-    5.  transcript: " that's"
+    5.  transcript: &quot; that&apos;s&quot;
 
-    6.  transcript: " that is"
+    6.  transcript: &quot; that is&quot;
 
-    7.  recognition_event_type: `RECOGNITION_EVENT_END_OF_SINGLE_UTTERANCE`
+    7.  recognition_event_type: <code>RECOGNITION_EVENT_END_OF_SINGLE_UTTERANCE</code>
 
-    8.  transcript: " that is the question"
+    8.  transcript: &quot; that is the question&quot;
         is_final: true
 
-    Only two of the responses contain final results (#4 and #8 indicated by
-    `is_final: true`). Concatenating these generates the full transcript: "to be
-    or not to be that is the question".
+    Only two of the responses contain final results (#4 and #8 indicated by <code>is_final: true</code>). Concatenating these generates the full transcript: <code>"to be or not to be that is the question"</code>.
 
     In each response we populate:
 
-    *  for `MESSAGE_TYPE_TRANSCRIPT`: `transcript` and possibly `is_final`.
-
-    *  for `MESSAGE_TYPE_END_OF_SINGLE_UTTERANCE`: only `event_type`.
+    <ul>
+        <li>for <code>MESSAGE_TYPE_TRANSCRIPT</code>: <code>transcript</code> and possibly <code>is_final</code>.</li>
+        <li>for <code>MESSAGE_TYPE_END_OF_SINGLE_UTTERANCE</code>: only <code>event_type</code>.</li>
+    </ul>
     """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -931,13 +911,13 @@ class StreamingRecognitionResult(google.protobuf.message.Message):
         TRANSCRIPT: StreamingRecognitionResult._MessageType.ValueType  # 1
         """Message contains a (possibly partial) transcript."""
         END_OF_SINGLE_UTTERANCE: StreamingRecognitionResult._MessageType.ValueType  # 2
-        """Event indicates that the server has detected the end of the user's speech
+        """Event indicates that the server has detected the end of the user&apos;s speech
         utterance and expects no additional speech. Therefore, the server will
         not process additional audio (although it may subsequently return
         additional results). The client should stop sending additional audio
         data, half-close the gRPC connection, and wait for any additional results
         until the server closes the gRPC connection. This message is only sent if
-        `single_utterance` was set to `true`, and is not used otherwise.
+        <code>single_utterance</code> was set to <code>true</code>, and is not used otherwise.
         """
 
     class MessageType(_MessageType, metaclass=_MessageTypeEnumTypeWrapper):
@@ -948,13 +928,13 @@ class StreamingRecognitionResult(google.protobuf.message.Message):
     TRANSCRIPT: StreamingRecognitionResult.MessageType.ValueType  # 1
     """Message contains a (possibly partial) transcript."""
     END_OF_SINGLE_UTTERANCE: StreamingRecognitionResult.MessageType.ValueType  # 2
-    """Event indicates that the server has detected the end of the user's speech
+    """Event indicates that the server has detected the end of the user&apos;s speech
     utterance and expects no additional speech. Therefore, the server will
     not process additional audio (although it may subsequently return
     additional results). The client should stop sending additional audio
     data, half-close the gRPC connection, and wait for any additional results
     until the server closes the gRPC connection. This message is only sent if
-    `single_utterance` was set to `true`, and is not used otherwise.
+    <code>single_utterance</code> was set to <code>true</code>, and is not used otherwise.
     """
 
     MESSAGE_TYPE_FIELD_NUMBER: builtins.int
@@ -965,14 +945,14 @@ class StreamingRecognitionResult(google.protobuf.message.Message):
     """Type of the result message."""
     transcript: builtins.str
     """Transcript text representing the words that the user spoke.
-    Populated if and only if `event_type` = `RECOGNITION_EVENT_TRANSCRIPT`.
+    Populated if and only if <code>event_type</code> = <code>RECOGNITION_EVENT_TRANSCRIPT</code>.
     """
     is_final: builtins.bool
-    """The default of 0.0 is a sentinel value indicating `confidence` was not set.
-    If `false`, the `StreamingRecognitionResult` represents an
-    interim result that may change. If `true`, the recognizer will not return
+    """The default of 0.0 is a sentinel value indicating <code>confidence</code> was not set.
+    If <code>false</code>, the <code>StreamingRecognitionResult</code> represents an
+    interim result that may change. If <code>true</code>, the recognizer will not return
     any further hypotheses about this piece of the audio. May only be populated
-    for `event_type` = `RECOGNITION_EVENT_TRANSCRIPT`.
+    for <code>event_type</code> = <code>RECOGNITION_EVENT_TRANSCRIPT</code>.
     """
     confidence: builtins.float
     """The Speech confidence between 0.0 and 1.0 for the current portion of audio.
@@ -980,7 +960,7 @@ class StreamingRecognitionResult(google.protobuf.message.Message):
     recognized words are correct. The default of 0.0 is a sentinel value
     indicating that confidence was not set.
 
-    This field is typically only provided if `is_final` is true and you should
+    This field is typically only provided if <code>is_final</code> is true and you should
     not rely on it being accurate or even set.
     """
     def __init__(
@@ -1009,13 +989,13 @@ class InputAudioConfig(google.protobuf.message.Message):
     """Required. Audio encoding of the audio content to process."""
     sample_rate_hertz: builtins.int
     """Required. Sample rate (in Hertz) of the audio content sent in the query.
-    Refer to [Cloud Speech API documentation](/speech/docs/basics) for more
+    Refer to <a href="/speech/docs/basics">Cloud Speech API documentation</a> for more
     details.
     """
     language_code: builtins.str
     """Required. The language of the supplied audio. Dialogflow does not do
-    translations. See [Language
-    Support](https://dialogflow.com/docs/languages) for a list of the
+    translations. See <a href="https://dialogflow.com/docs/languages">Language
+    Support</a> for a list of the
     currently supported language codes. Note that queries in the same session
     do not necessarily need to specify the same language.
     """
@@ -1023,7 +1003,7 @@ class InputAudioConfig(google.protobuf.message.Message):
     def phrase_hints(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Optional. The collection of phrase hints which are used to boost accuracy
         of speech recognition.
-        Refer to [Cloud Speech API documentation](/speech/docs/basics#phrase-hints)
+        Refer to <a href="/speech/docs/basics#phrase-hints">Cloud Speech API documentation</a>
         for more details.
         """
 
@@ -1052,8 +1032,8 @@ class TextInput(google.protobuf.message.Message):
     Text length must not exceed 256 bytes.
     """
     language_code: builtins.str
-    """Required. The language of this conversational query. See [Language
-    Support](https://dialogflow.com/docs/languages) for a list of the
+    """Required. The language of this conversational query. See <a href="https://dialogflow.com/docs/languages">Language
+    Support</a> for a list of the
     currently supported language codes. Note that queries in the same session
     do not necessarily need to specify the same language.
     """
@@ -1069,11 +1049,9 @@ global___TextInput = TextInput
 
 @typing.final
 class EventInput(google.protobuf.message.Message):
-    """Events allow for matching intents by event name instead of the natural
-    language input. For instance, input `<event: { name: “welcome_event”,
-    parameters: { name: “Sam” } }>` can trigger a personalized welcome response.
-    The parameter `name` may be used by the agent in the response:
-    `“Hello #welcome_event.name! What can I do for you today?”`.
+    """Events allow for matching intents by event name instead of the natural language input.
+    For instance, input <code>&lt;event: { name: &quot;welcome_event&quot;, parameters: { name: &quot;Sam&quot; } }&gt;</code> can trigger a personalized welcome response.
+    The parameter <code>name</code> may be used by the agent in the response: <code>&quot;Hello #welcome_event.name! What can I do for you today?&quot;</code>.
     """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -1084,8 +1062,8 @@ class EventInput(google.protobuf.message.Message):
     name: builtins.str
     """Required. The unique identifier of the event."""
     language_code: builtins.str
-    """Required. The language of this query. See [Language
-    Support](https://dialogflow.com/docs/languages) for a list of the
+    """Required. The language of this query. See <a href="https://dialogflow.com/docs/languages">Language
+    Support</a> for a list of the
     currently supported language codes. Note that queries in the same session
     do not necessarily need to specify the same language.
     """
@@ -1129,8 +1107,7 @@ class Session(google.protobuf.message.Message):
 
     class View(_View, metaclass=_ViewEnumTypeWrapper):
         """Represents the options for views of a session.
-        A session can be a sizable object. Therefore, we provide a resource view that
-        does not return all data
+        A session can be a sizable object. Therefore, we provide a resource view that does not return all data
         """
 
     VIEW_UNSPECIFIED: Session.View.ValueType  # 0
@@ -1400,24 +1377,30 @@ class ListSessionsRequest(google.protobuf.message.Message):
     The page token is a string representing the current index and page size.
 
     Valid page token strings:
-    * "" (empty string) - Retrieves the first page.
-    * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    <ul>
+      <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li>
+      <li><code>&quot;current_index-0--page_size-20&quot;</code> - Retrieves the first page with a page size of 20.</li>
+      <li><code>&quot;current_index-1--page_size-20&quot;</code> - Retrieves the second page with a page size of 20.</li>
+    </ul>
 
     Index starts at 0.
 
     Examples of valid page token strings:
-    * ""
-    * "current_index-0--page_size-20"
-    * "current_index-1--page_size-20"
-    * "current_index-10--page_size-20"
+    <ul>
+      <li><code>&quot;&quot;</code></li>
+      <li><code>&quot;current_index-0--page_size-20&quot;</code></li>
+      <li><code>&quot;current_index-1--page_size-20&quot;</code></li>
+      <li><code>&quot;current_index-10--page_size-20&quot;</code></li>
+    </ul>
 
     Examples of invalid page token strings:
-    * "1"
-    * "current_index-0--page_size-20"
-    * "current_index--1--page_size-20"
-    * "current_index1--page_size-20"
-    * "current_index-1--page_size--20"
+    <ul>
+      <li><code>&quot;1&quot;</code></li>
+      <li><code>&quot;current_index-0--page_size-20&quot;</code></li>
+      <li><code>&quot;current_index--1--page_size-20&quot;</code></li>
+      <li><code>&quot;current_index1--page_size-20&quot;</code></li>
+      <li><code>&quot;current_index-1--page_size--20&quot;</code></li>
+    </ul>
     """
     @property
     def session_filter(self) -> global___SessionFilter:
@@ -1460,6 +1443,7 @@ class ContextFilter(google.protobuf.message.Message):
     value: builtins.str
     """value of the parameter"""
     operator: global___ComparisonOperator.ValueType
+    """comparison operator to use for filtering"""
     def __init__(
         self,
         *,
@@ -1762,7 +1746,9 @@ class SessionInfo(google.protobuf.message.Message):
 
         CONTEXTS_FIELD_NUMBER: builtins.int
         @property
-        def contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]: ...
+        def contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]:
+            """List of contexts for a session step"""
+
         def __init__(
             self,
             *,
@@ -2103,6 +2089,9 @@ class CreateSessionReviewRequest(google.protobuf.message.Message):
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/reviews/&lt;session_review_uuid&gt;</code></pre>
     """
     session_review_view: global___SessionReview.View.ValueType
+    """Represents the options for views of a session_review.
+    A session_review can be a sizable object. Therefore, we provide a resource view that does not return all data
+    """
     @property
     def session_review(self) -> global___SessionReview:
         """The reviews for all steps in the session"""
@@ -2141,8 +2130,7 @@ class SessionReview(google.protobuf.message.Message):
 
     class View(_View, metaclass=_ViewEnumTypeWrapper):
         """Represents the options for views of a session_review.
-        A session_review can be a sizable object. Therefore, we provide a resource view that
-        does not return all data
+        A session_review can be a sizable object. Therefore, we provide a resource view that does not return all data
         """
 
     VIEW_UNSPECIFIED: SessionReview.View.ValueType  # 0
@@ -2305,10 +2293,10 @@ class DetectedIntent(google.protobuf.message.Message):
     """intent detection algorithm"""
     required_param_missing: builtins.bool
     """This field is set to:
-    - `true` if the matched intent has required parameters and not all of
-       the required parameter values have been collected.
-    - `false` if all required parameter values have been collected, or if the
-       matched intent doesn't contain any required parameters.
+    <ul>
+      <li><code>true</code> if the matched intent has required parameters and not all of the required parameter values have been collected.</li>
+      <li><code>false</code> if all required parameter values have been collected, or if the matched intent doesn&apos;t contain any required parameters.</li>
+    </ul>
     """
     @property
     def intent(self) -> ondewo.nlu.intent_pb2.Intent:
@@ -3236,24 +3224,30 @@ class ListSessionCommentsRequest(google.protobuf.message.Message):
     The page token is a string representing the current index and page size.
 
     Valid page token strings:
-    * "" (empty string) - Retrieves the first page.
-    * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    <ul>
+      <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li>
+      <li><code>&quot;current_index-0--page_size-20&quot;</code> - Retrieves the first page with a page size of 20.</li>
+      <li><code>&quot;current_index-1--page_size-20&quot;</code> - Retrieves the second page with a page size of 20.</li>
+    </ul>
 
     Index starts at 0.
 
     Examples of valid page token strings:
-    * ""
-    * "current_index-0--page_size-20"
-    * "current_index-1--page_size-20"
-    * "current_index-10--page_size-20"
+    <ul>
+      <li><code>&quot;&quot;</code></li>
+      <li><code>&quot;current_index-0--page_size-20&quot;</code></li>
+      <li><code>&quot;current_index-1--page_size-20&quot;</code></li>
+      <li><code>&quot;current_index-10--page_size-20&quot;</code></li>
+    </ul>
 
     Examples of invalid page token strings:
-    * "1"
-    * "current_index-0--page_size-20"
-    * "current_index--1--page_size-20"
-    * "current_index1--page_size-20"
-    * "current_index-1--page_size--20"
+    <ul>
+      <li><code>&quot;1&quot;</code></li>
+      <li><code>&quot;current_index-0--page_size-20&quot;</code></li>
+      <li><code>&quot;current_index--1--page_size-20&quot;</code></li>
+      <li><code>&quot;current_index1--page_size-20&quot;</code></li>
+      <li><code>&quot;current_index-1--page_size--20&quot;</code></li>
+    </ul>
     """
     @property
     def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
@@ -3286,24 +3280,30 @@ class ListSessionCommentsResponse(google.protobuf.message.Message):
     The page token is a string representing the current index and page size.
 
     Valid page token strings:
-    * "" (empty string) - Retrieves the first page.
-    * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    <ul>
+      <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li>
+      <li><code>&quot;current_index-0--page_size-20&quot;</code> - Retrieves the first page with a page size of 20.</li>
+      <li><code>&quot;current_index-1--page_size-20&quot;</code> - Retrieves the second page with a page size of 20.</li>
+    </ul>
 
     Index starts at 0.
 
     Examples of valid page token strings:
-    * ""
-    * "current_index-0--page_size-20"
-    * "current_index-1--page_size-20"
-    * "current_index-10--page_size-20"
+    <ul>
+      <li><code>&quot;&quot;</code></li>
+      <li><code>&quot;current_index-0--page_size-20&quot;</code></li>
+      <li><code>&quot;current_index-1--page_size-20&quot;</code></li>
+      <li><code>&quot;current_index-10--page_size-20&quot;</code></li>
+    </ul>
 
     Examples of invalid page token strings:
-    * "1"
-    * "current_index-0--page_size-20"
-    * "current_index--1--page_size-20"
-    * "current_index1--page_size-20"
-    * "current_index-1--page_size--20"
+    <ul>
+      <li><code>&quot;1&quot;</code></li>
+      <li><code>&quot;current_index-0--page_size-20&quot;</code></li>
+      <li><code>&quot;current_index--1--page_size-20&quot;</code></li>
+      <li><code>&quot;current_index1--page_size-20&quot;</code></li>
+      <li><code>&quot;current_index-1--page_size--20&quot;</code></li>
+    </ul>
     """
     @property
     def comment(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.common_pb2.Comment]:
@@ -3342,24 +3342,30 @@ class ListSessionReviewsRequest(google.protobuf.message.Message):
     The page token is a string representing the current index and page size.
 
     Valid page token strings:
-    * "" (empty string) - Retrieves the first page.
-    * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    <ul>
+      <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li>
+      <li><code>&quot;current_index-0--page_size-20&quot;</code> - Retrieves the first page with a page size of 20.</li>
+      <li><code>&quot;current_index-1--page_size-20&quot;</code> - Retrieves the second page with a page size of 20.</li>
+    </ul>
 
     Index starts at 0.
 
     Examples of valid page token strings:
-    * ""
-    * "current_index-0--page_size-20"
-    * "current_index-1--page_size-20"
-    * "current_index-10--page_size-20"
+    <ul>
+      <li><code>&quot;&quot;</code></li>
+      <li><code>&quot;current_index-0--page_size-20&quot;</code></li>
+      <li><code>&quot;current_index-1--page_size-20&quot;</code></li>
+      <li><code>&quot;current_index-10--page_size-20&quot;</code></li>
+    </ul>
 
     Examples of invalid page token strings:
-    * "1"
-    * "current_index-0--page_size-20"
-    * "current_index--1--page_size-20"
-    * "current_index1--page_size-20"
-    * "current_index-1--page_size--20"
+    <ul>
+      <li><code>&quot;1&quot;</code></li>
+      <li><code>&quot;current_index-0--page_size-20&quot;</code></li>
+      <li><code>&quot;current_index--1--page_size-20&quot;</code></li>
+      <li><code>&quot;current_index1--page_size-20&quot;</code></li>
+      <li><code>&quot;current_index-1--page_size--20&quot;</code></li>
+    </ul>
     """
     def __init__(
         self,
@@ -3754,24 +3760,30 @@ class GetAudioFilesRequest(google.protobuf.message.Message):
     The page token is a string representing the current index and page size.
 
     Valid page token strings:
-    * "" (empty string) - Retrieves the first page.
-    * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    <ul>
+      <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li>
+      <li><code>&quot;current_index-0--page_size-20&quot;</code> - Retrieves the first page with a page size of 20.</li>
+      <li><code>&quot;current_index-1--page_size-20&quot;</code> - Retrieves the second page with a page size of 20.</li>
+    </ul>
 
     Index starts at 0.
 
     Examples of valid page token strings:
-    * ""
-    * "current_index-0--page_size-20"
-    * "current_index-1--page_size-20"
-    * "current_index-10--page_size-20"
+    <ul>
+      <li><code>&quot;&quot;</code></li>
+      <li><code>&quot;current_index-0--page_size-20&quot;</code></li>
+      <li><code>&quot;current_index-1--page_size-20&quot;</code></li>
+      <li><code>&quot;current_index-10--page_size-20&quot;</code></li>
+    </ul>
 
     Examples of invalid page token strings:
-    * "1"
-    * "current_index-0--page_size-20"
-    * "current_index--1--page_size-20"
-    * "current_index1--page_size-20"
-    * "current_index-1--page_size--20"
+    <ul>
+      <li><code>&quot;1&quot;</code></li>
+      <li><code>&quot;current_index-0--page_size-20&quot;</code></li>
+      <li><code>&quot;current_index--1--page_size-20&quot;</code></li>
+      <li><code>&quot;current_index1--page_size-20&quot;</code></li>
+      <li><code>&quot;current_index-1--page_size--20&quot;</code></li>
+    </ul>
     """
     sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType
     """sorting mode"""
@@ -3979,24 +3991,30 @@ class ListAudioFilesRequest(google.protobuf.message.Message):
     The page token is a string representing the current index and page size.
 
     Valid page token strings:
-    * "" (empty string) - Retrieves the first page.
-    * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    <ul>
+      <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li>
+      <li><code>&quot;current_index-0--page_size-20&quot;</code> - Retrieves the first page with a page size of 20.</li>
+      <li><code>&quot;current_index-1--page_size-20&quot;</code> - Retrieves the second page with a page size of 20.</li>
+    </ul>
 
     Index starts at 0.
 
     Examples of valid page token strings:
-    * ""
-    * "current_index-0--page_size-20"
-    * "current_index-1--page_size-20"
-    * "current_index-10--page_size-20"
+    <ul>
+      <li><code>&quot;&quot;</code></li>
+      <li><code>&quot;current_index-0--page_size-20&quot;</code></li>
+      <li><code>&quot;current_index-1--page_size-20&quot;</code></li>
+      <li><code>&quot;current_index-10--page_size-20&quot;</code></li>
+    </ul>
 
     Examples of invalid page token strings:
-    * "1"
-    * "current_index-0--page_size-20"
-    * "current_index--1--page_size-20"
-    * "current_index1--page_size-20"
-    * "current_index-1--page_size--20"
+    <ul>
+      <li><code>&quot;1&quot;</code></li>
+      <li><code>&quot;current_index-0--page_size-20&quot;</code></li>
+      <li><code>&quot;current_index--1--page_size-20&quot;</code></li>
+      <li><code>&quot;current_index1--page_size-20&quot;</code></li>
+      <li><code>&quot;current_index-1--page_size--20&quot;</code></li>
+    </ul>
     """
     sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType
     """sorting mode"""

@@ -26,9 +26,7 @@ if _version_not_supported:
 
 
 class UtilitiesStub(object):
-    """This is collection of utility endpoints, intended to language-independent operations,
-    such as code checks, regex checks, etc.
-    Holds a collection of utility functions
+    """This is collection of utility endpoints, intended to language-independent operations, such as code checks, regex checks, etc. Holds a collection of utility functions
     """
 
     def __init__(self, channel):
@@ -80,9 +78,7 @@ class UtilitiesStub(object):
 
 
 class UtilitiesServicer(object):
-    """This is collection of utility endpoints, intended to language-independent operations,
-    such as code checks, regex checks, etc.
-    Holds a collection of utility functions
+    """This is collection of utility endpoints, intended to language-independent operations, such as code checks, regex checks, etc. Holds a collection of utility functions
     """
 
     def ValidateRegex(self, request, context):
@@ -194,9 +190,7 @@ def add_UtilitiesServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class Utilities(object):
-    """This is collection of utility endpoints, intended to language-independent operations,
-    such as code checks, regex checks, etc.
-    Holds a collection of utility functions
+    """This is collection of utility endpoints, intended to language-independent operations, such as code checks, regex checks, etc. Holds a collection of utility functions
     """
 
     @staticmethod

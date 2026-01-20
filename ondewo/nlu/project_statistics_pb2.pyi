@@ -104,11 +104,11 @@ class GetProjectElementStatRequest(google.protobuf.message.Message):
     name: builtins.str
     """Required. The name/path of the concept to get the statistic from.
     Example:
-    <pre><code>
-    * projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;
-    * projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;
-    * projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entityValues&lt;entity_value_uuid&gt;
-    </code></pre>
+    <ul>
+      <li><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></li>
+      <li><code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;</code></li>
+      <li><code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entityValues/&lt;entity_value_uuid&gt;</code></li>
+    </ul>
     """
     language_code: builtins.str
     """Language code"""
