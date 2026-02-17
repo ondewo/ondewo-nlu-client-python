@@ -15,7 +15,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-Modifications Copyright 2020-2023 ONDEWO GmbH
+Modifications Copyright 2020-2026 ONDEWO GmbH
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -99,7 +99,7 @@ class _EntityTypeCategoryEnumTypeWrapper(google.protobuf.internal.enum_type_wrap
     """represent the user defined (custom) entity types"""
 
 class EntityTypeCategory(_EntityTypeCategory, metaclass=_EntityTypeCategoryEnumTypeWrapper):
-    """Represents the category of entity types to filter by in the "List Entity Types" request"""
+    """Represents the category of entity types to filter by in the &quot;List Entity Types&quot; request"""
 
 ALL_ENTITY_TYPES: EntityTypeCategory.ValueType  # 0
 """represent all entity types"""
@@ -158,11 +158,15 @@ class EntityType(google.protobuf.message.Message):
     class _EntityTypeStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[EntityType._EntityTypeStatus.ValueType], builtins.type):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         ACTIVE: EntityType._EntityTypeStatus.ValueType  # 0
+        """Entity type is active"""
         INACTIVE: EntityType._EntityTypeStatus.ValueType  # 1
+        """Entity type is inactive"""
 
     class EntityTypeStatus(_EntityTypeStatus, metaclass=_EntityTypeStatusEnumTypeWrapper): ...
     ACTIVE: EntityType.EntityTypeStatus.ValueType  # 0
+    """Entity type is active"""
     INACTIVE: EntityType.EntityTypeStatus.ValueType  # 1
+    """Entity type is inactive"""
 
     class _AutoExpansionMode:
         ValueType = typing.NewType("ValueType", builtins.int)
@@ -192,7 +196,7 @@ class EntityType(google.protobuf.message.Message):
 
     @typing.final
     class Entity(google.protobuf.message.Message):
-        """Optional. Represents an entity."""
+        """Represents an entity value within an entity type"""
 
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -208,38 +212,36 @@ class EntityType(google.protobuf.message.Message):
         MODIFIED_BY_FIELD_NUMBER: builtins.int
         value: builtins.str
         """Required.
-        For `KIND_MAP` entity types: </br>
-          A canonical name to be used in place of synonyms.</br>
-        For `KIND_LIST` entity types:</br>
-          A string that can contain references to other entity types (with or without aliases). </br>
+        For <code>KIND_MAP</code> entity types: A canonical name to be used in place of synonyms.
+        For <code>KIND_LIST</code> entity types: A string that can contain references to other entity types (with or without aliases).
 
         Values can also be described as regexes with postprocessing options such as:
 
-          <pre><code>
-           * regex('//1') => references the first group match of the regex defined as a synonym
-           * regex('//2') => references the second group match of the regex defined as a synonym
-           * regex('//1') => references the first group match of the regex defined as a synonym
-          </code></pre>
+        <pre><code>
+         * regex('//1') => references the first group match of the regex defined as a synonym
+         * regex('//2') => references the second group match of the regex defined as a synonym
+         * regex('//1') => references the first group match of the regex defined as a synonym
+        </code></pre>
 
         Values can also be described as regexes with one or more postprocessing options such as one postprocessing
         option to remove all whitespaces <code>regex('&lt;#RW#&gt;\\\\1')</code> or by a combination of several
         postprocessing options such as remove all whitespaces and lower casing
-        <code>regex('&lt;#RW#&gt;&lt;#LC#&gt;\\\\1') </code>.
+        <code>regex('&lt;#RW#&gt;&lt;#LC#&gt;\\\\1')</code>.
 
         All processing options are:
 
-          <pre><code>
-           * regex('&lt;#TW&gt;//1') => matches 1st group and trims duplicated whitespaces to one single space
-           * regex('&lt;#RW&gt;//1') => matches 1st group and removes all whitespaces
-           * regex('&lt;#UC&gt;//1') => matches 1st group and converts to upper case
-           * regex('&lt;#LC&gt;//1') => matches 1st group and converts to lower case
-           * regex('&lt;#CC&gt;//1') => matches 1st group and converts to camelCase
-           * regex('&lt;#SC&gt;//1') => matches 1st group and converts to snake_case
-          </code></pre>
+        <pre><code>
+         * regex('&lt;#TW&gt;//1') => matches 1st group and trims duplicated whitespaces to one single space
+         * regex('&lt;#RW&gt;//1') => matches 1st group and removes all whitespaces
+         * regex('&lt;#UC&gt;//1') => matches 1st group and converts to upper case
+         * regex('&lt;#LC&gt;//1') => matches 1st group and converts to lower case
+         * regex('&lt;#CC&gt;//1') => matches 1st group and converts to camelCase
+         * regex('&lt;#SC&gt;//1') => matches 1st group and converts to snake_case
+        </code></pre>
         """
         name: builtins.str
         """The unique identifier of the entity. Format:
-        `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;`.
+        <code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;</code>.
         """
         display_name: builtins.str
         """The name of the entity."""
@@ -253,18 +255,18 @@ class EntityType(google.protobuf.message.Message):
         """User id in form of a valid UUID."""
         @property
         def synonyms(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-            """Required. A collection of synonyms. For `KIND_LIST` entity types this
-            must contain exactly one synonym equal to `value`.
+            """Required. A collection of synonyms. For <code>KIND_LIST</code> entity types this
+            must contain exactly one synonym equal to <code>value</code>.
             Synonyms can be regex expressions, i.e. regular expressions, that are python compatible.
-            See here for supported regex: https://docs.python.org/3/library/re.html
+            See here for supported regex: <a href="https://docs.python.org/3/library/re.html">https://docs.python.org/3/library/re.html</a>
             Examples are:
 
-             <pre><code>
-              * regex('[a-zA-Z]+') => just letters
-              * regex('\\d{1,5}') => just numbers
-              * regex('^[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$') => mix of numbers, letters and dot
-              * regex('(?i)(^|\\s)(0\\s{0,3}') => with matching groups and case insensitivity
-             </code></pre>
+            <pre><code>
+             * regex('[a-zA-Z]+') => just letters
+             * regex('\\d{1,5}') => just numbers
+             * regex('^[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$') => mix of numbers, letters and dot
+             * regex('(?i)(^|\\s)(0\\s{0,3}') => with matching groups and case insensitivity
+            </code></pre>
             """
 
         @property
@@ -306,10 +308,10 @@ class EntityType(google.protobuf.message.Message):
     CREATED_BY_FIELD_NUMBER: builtins.int
     MODIFIED_BY_FIELD_NUMBER: builtins.int
     name: builtins.str
-    """Required for all methods except `create` (`create` populates the name
+    """Required for all methods except <code>create</code> (<code>create</code> populates the name
     automatically.
     The unique identifier of the entity type. Format:
-    `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;`.
+    <code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;</code>.
     """
     display_name: builtins.str
     """Required. The name of the entity type."""
@@ -369,7 +371,7 @@ global___EntityType = EntityType
 
 @typing.final
 class ListEntityTypesRequest(google.protobuf.message.Message):
-    """The request message for [EntityTypes.ListEntityTypes][google.cloud.dialogflow.v2.EntityTypes.ListEntityTypes]."""
+    """The request message for <a href="index.html#ondewo.nlu.EntityTypes.ListEntityTypes">EntityTypes.ListEntityTypes</a>."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -385,9 +387,9 @@ class ListEntityTypesRequest(google.protobuf.message.Message):
     """
     language_code: builtins.str
     """Optional. The language to list entity synonyms for. If not specified,
-    the agent's default language is used.
-    [More than a dozen
-    languages](https://dialogflow.com/docs/reference/language) are supported.
+    the agent&apos;s default language is used.
+    <a href="https://dialogflow.com/docs/reference/language">More than a dozen
+    languages</a> are supported.
     Note: languages must be enabled in the agent, before they can be used.
     """
     page_token: builtins.str
@@ -397,24 +399,30 @@ class ListEntityTypesRequest(google.protobuf.message.Message):
     The page token is a string representing the current index and page size.
 
     Valid page token strings:
-    * "" (empty string) - Retrieves the first page.
-    * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    <ul>
+      <li>&quot;&quot; (empty string) - Retrieves the first page.</li>
+      <li>&quot;current_index-0--page_size-20&quot; - Retrieves the first page with a page size of 20.</li>
+      <li>&quot;current_index-1--page_size-20&quot; - Retrieves the second page with a page size of 20.</li>
+    </ul>
 
     Index starts at 0.
 
     Examples of valid page token strings:
-    * ""
-    * "current_index-0--page_size-20"
-    * "current_index-1--page_size-20"
-    * "current_index-10--page_size-20"
+    <ul>
+      <li>&quot;&quot;</li>
+      <li>&quot;current_index-0--page_size-20&quot;</li>
+      <li>&quot;current_index-1--page_size-20&quot;</li>
+      <li>&quot;current_index-10--page_size-20&quot;</li>
+    </ul>
 
     Examples of invalid page token strings:
-    * "1"
-    * "current_index-0--page_size-20"
-    * "current_index--1--page_size-20"
-    * "current_index1--page_size-20"
-    * "current_index-1--page_size--20"
+    <ul>
+      <li>&quot;1&quot;</li>
+      <li>&quot;current_index-0--page_size-20&quot;</li>
+      <li>&quot;current_index--1--page_size-20&quot;</li>
+      <li>&quot;current_index1--page_size-20&quot;</li>
+      <li>&quot;current_index-1--page_size--20&quot;</li>
+    </ul>
     """
     entity_type_view: global___EntityTypeView.ValueType
     """Optional. The resource view to apply to the returned entity type."""
@@ -441,7 +449,7 @@ global___ListEntityTypesRequest = ListEntityTypesRequest
 
 @typing.final
 class ListEntityTypesResponse(google.protobuf.message.Message):
-    """The response message for [EntityTypes.ListEntityTypes][google.cloud.dialogflow.v2.EntityTypes.ListEntityTypes]."""
+    """The response message for <a href="index.html#ondewo.nlu.EntityTypes.ListEntityTypes">EntityTypes.ListEntityTypes</a>."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -469,7 +477,7 @@ global___ListEntityTypesResponse = ListEntityTypesResponse
 
 @typing.final
 class GetEntityTypeRequest(google.protobuf.message.Message):
-    """The request message for [EntityTypes.GetEntityType][google.cloud.dialogflow.v2.EntityTypes.GetEntityType]."""
+    """The request message for <a href="index.html#ondewo.nlu.EntityTypes.GetEntityType">EntityTypes.GetEntityType</a>."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -483,9 +491,9 @@ class GetEntityTypeRequest(google.protobuf.message.Message):
     """
     language_code: builtins.str
     """Optional. The language to retrieve entity synonyms for. If not specified,
-    the agent's default language is used.
-    [More than a dozen
-    languages](https://dialogflow.com/docs/reference/language) are supported.
+    the agent&apos;s default language is used.
+    <a href="https://dialogflow.com/docs/reference/language">More than a dozen
+    languages</a> are supported.
     Note: languages must be enabled in the agent, before they can be used.
     """
     page_token: builtins.str
@@ -494,24 +502,30 @@ class GetEntityTypeRequest(google.protobuf.message.Message):
     The page token is a string representing the current index and page size.
 
     Valid page token strings:
-    * "" (empty string) - Retrieves the first page.
-    * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    <ul>
+      <li>&quot;&quot; (empty string) - Retrieves the first page.</li>
+      <li>&quot;current_index-0--page_size-20&quot; - Retrieves the first page with a page size of 20.</li>
+      <li>&quot;current_index-1--page_size-20&quot; - Retrieves the second page with a page size of 20.</li>
+    </ul>
 
     Index starts at 0.
 
     Examples of valid page token strings:
-    * ""
-    * "current_index-0--page_size-20"
-    * "current_index-1--page_size-20"
-    * "current_index-10--page_size-20"
+    <ul>
+      <li>&quot;&quot;</li>
+      <li>&quot;current_index-0--page_size-20&quot;</li>
+      <li>&quot;current_index-1--page_size-20&quot;</li>
+      <li>&quot;current_index-10--page_size-20&quot;</li>
+    </ul>
 
     Examples of invalid page token strings:
-    * "1"
-    * "current_index-0--page_size-20"
-    * "current_index--1--page_size-20"
-    * "current_index1--page_size-20"
-    * "current_index-1--page_size--20"
+    <ul>
+      <li>&quot;1&quot;</li>
+      <li>&quot;current_index-0--page_size-20&quot;</li>
+      <li>&quot;current_index--1--page_size-20&quot;</li>
+      <li>&quot;current_index1--page_size-20&quot;</li>
+      <li>&quot;current_index-1--page_size--20&quot;</li>
+    </ul>
     """
     entity_type_view: global___EntityTypeView.ValueType
     """Optional. The resource view to apply to the returned Entity Type"""
@@ -529,7 +543,7 @@ global___GetEntityTypeRequest = GetEntityTypeRequest
 
 @typing.final
 class CreateEntityTypeRequest(google.protobuf.message.Message):
-    """The request message for [EntityTypes.CreateEntityType][google.cloud.dialogflow.v2.EntityTypes.CreateEntityType]."""
+    """The request message for <a href="index.html#ondewo.nlu.EntityTypes.CreateEntityType">EntityTypes.CreateEntityType</a>."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -542,10 +556,10 @@ class CreateEntityTypeRequest(google.protobuf.message.Message):
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
     language_code: builtins.str
-    """Optional. The language of entity synonyms defined in `entity_type`. If not
-    specified, the agent's default language is used.
-    [More than a dozen
-    languages](https://dialogflow.com/docs/reference/language) are supported.
+    """Optional. The language of entity synonyms defined in <code>entity_type</code>. If not
+    specified, the agent&apos;s default language is used.
+    <a href="https://dialogflow.com/docs/reference/language">More than a dozen
+    languages</a> are supported.
     Note: languages must be enabled in the agent, before they can be used.
     """
     entity_type_view: global___EntityTypeView.ValueType
@@ -569,7 +583,7 @@ global___CreateEntityTypeRequest = CreateEntityTypeRequest
 
 @typing.final
 class UpdateEntityTypeRequest(google.protobuf.message.Message):
-    """The request message for [EntityTypes.UpdateEntityType][google.cloud.dialogflow.v2.EntityTypes.UpdateEntityType]."""
+    """The request message for <a href="index.html#ondewo.nlu.EntityTypes.UpdateEntityType">EntityTypes.UpdateEntityType</a>."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -578,10 +592,10 @@ class UpdateEntityTypeRequest(google.protobuf.message.Message):
     UPDATE_MASK_FIELD_NUMBER: builtins.int
     ENTITY_TYPE_VIEW_FIELD_NUMBER: builtins.int
     language_code: builtins.str
-    """Optional. The language of entity synonyms defined in `entity_type`. If not
-    specified, the agent's default language is used.
-    [More than a dozen
-    languages](https://dialogflow.com/docs/reference/language) are supported.
+    """Optional. The language of entity synonyms defined in <code>entity_type</code>. If not
+    specified, the agent&apos;s default language is used.
+    <a href="https://dialogflow.com/docs/reference/language">More than a dozen
+    languages</a> are supported.
     Note: languages must be enabled in the agent, before they can be used.
     """
     entity_type_view: global___EntityTypeView.ValueType
@@ -611,7 +625,7 @@ global___UpdateEntityTypeRequest = UpdateEntityTypeRequest
 
 @typing.final
 class DeleteEntityTypeRequest(google.protobuf.message.Message):
-    """The request message for [EntityTypes.DeleteEntityType][google.cloud.dialogflow.v2.EntityTypes.DeleteEntityType]."""
+    """The request message for <a href="index.html#ondewo.nlu.EntityTypes.DeleteEntityType">EntityTypes.DeleteEntityType</a>."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -631,7 +645,7 @@ global___DeleteEntityTypeRequest = DeleteEntityTypeRequest
 
 @typing.final
 class BatchUpdateEntityTypesRequest(google.protobuf.message.Message):
-    """The request message for [EntityTypes.BatchUpdateEntityTypes][google.cloud.dialogflow.v2.EntityTypes.BatchUpdateEntityTypes]."""
+    """The request message for <a href="index.html#ondewo.nlu.EntityTypes.BatchUpdateEntityTypes">EntityTypes.BatchUpdateEntityTypes</a>."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -648,13 +662,13 @@ class BatchUpdateEntityTypesRequest(google.protobuf.message.Message):
     """The URI to a Google Cloud Storage file containing entity types to update
     or create. The file format can either be a serialized proto (of
     EntityBatch type) or a JSON object. Note: The URI must start with
-    "gs://".
+    &quot;gs://&quot;.
     """
     language_code: builtins.str
-    """Optional. The language of entity synonyms defined in `entity_types`. If not
-    specified, the agent's default language is used.
-    [More than a dozen
-    languages](https://dialogflow.com/docs/reference/language) are supported.
+    """Optional. The language of entity synonyms defined in <code>entity_types</code>. If not
+    specified, the agent&apos;s default language is used.
+    <a href="https://dialogflow.com/docs/reference/language">More than a dozen
+    languages</a> are supported.
     Note: languages must be enabled in the agent, before they can be used.
     """
     @property
@@ -682,7 +696,7 @@ global___BatchUpdateEntityTypesRequest = BatchUpdateEntityTypesRequest
 
 @typing.final
 class BatchUpdateEntityTypesResponse(google.protobuf.message.Message):
-    """The response message for [EntityTypes.BatchUpdateEntityTypes][google.cloud.dialogflow.v2.EntityTypes.BatchUpdateEntityTypes]."""
+    """The response message for <a href="index.html#ondewo.nlu.EntityTypes.BatchUpdateEntityTypes">EntityTypes.BatchUpdateEntityTypes</a>."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -702,7 +716,7 @@ global___BatchUpdateEntityTypesResponse = BatchUpdateEntityTypesResponse
 
 @typing.final
 class BatchDeleteEntityTypesRequest(google.protobuf.message.Message):
-    """The request message for [EntityTypes.BatchDeleteEntityTypes][google.cloud.dialogflow.v2.EntityTypes.BatchDeleteEntityTypes]."""
+    """The request message for <a href="index.html#ondewo.nlu.EntityTypes.BatchDeleteEntityTypes">EntityTypes.BatchDeleteEntityTypes</a>."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -710,7 +724,7 @@ class BatchDeleteEntityTypesRequest(google.protobuf.message.Message):
     ENTITY_TYPE_NAMES_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The name of the agent to delete all entities types for. Format:
-    `projects/&lt;project_uuid&gt;/agent`.
+    <code>projects/&lt;project_uuid&gt;/agent</code>.
     """
     @property
     def entity_type_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
@@ -761,21 +775,33 @@ class EntityTypeSorting(google.protobuf.message.Message):
     class _EntityTypeSortingFieldEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[EntityTypeSorting._EntityTypeSortingField.ValueType], builtins.type):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         NO_ENTITY_TYPE_SORTING: EntityTypeSorting._EntityTypeSortingField.ValueType  # 0
+        """No sorting applied"""
         SORT_ENTITY_TYPE_BY_NAME: EntityTypeSorting._EntityTypeSortingField.ValueType  # 1
+        """Sort by entity type name"""
         SORT_ENTITY_TYPE_BY_CREATION_DATE: EntityTypeSorting._EntityTypeSortingField.ValueType  # 2
+        """Sort by creation date"""
         SORT_ENTITY_TYPE_BY_LAST_UPDATED: EntityTypeSorting._EntityTypeSortingField.ValueType  # 3
+        """Sort by last updated date"""
         SORT_ENTITY_TYPE_BY_ENTITY_VALUE_COUNT: EntityTypeSorting._EntityTypeSortingField.ValueType  # 4
+        """Sort by entity value count"""
         SORT_ENTITY_TYPE_BY_SYNONYM_COUNT: EntityTypeSorting._EntityTypeSortingField.ValueType  # 5
+        """Sort by synonym count"""
 
     class EntityTypeSortingField(_EntityTypeSortingField, metaclass=_EntityTypeSortingFieldEnumTypeWrapper):
         """Structure of Entity type sorting field"""
 
     NO_ENTITY_TYPE_SORTING: EntityTypeSorting.EntityTypeSortingField.ValueType  # 0
+    """No sorting applied"""
     SORT_ENTITY_TYPE_BY_NAME: EntityTypeSorting.EntityTypeSortingField.ValueType  # 1
+    """Sort by entity type name"""
     SORT_ENTITY_TYPE_BY_CREATION_DATE: EntityTypeSorting.EntityTypeSortingField.ValueType  # 2
+    """Sort by creation date"""
     SORT_ENTITY_TYPE_BY_LAST_UPDATED: EntityTypeSorting.EntityTypeSortingField.ValueType  # 3
+    """Sort by last updated date"""
     SORT_ENTITY_TYPE_BY_ENTITY_VALUE_COUNT: EntityTypeSorting.EntityTypeSortingField.ValueType  # 4
+    """Sort by entity value count"""
     SORT_ENTITY_TYPE_BY_SYNONYM_COUNT: EntityTypeSorting.EntityTypeSortingField.ValueType  # 5
+    """Sort by synonym count"""
 
     SORTING_FIELD_FIELD_NUMBER: builtins.int
     SORTING_MODE_FIELD_NUMBER: builtins.int
@@ -849,7 +875,7 @@ class CreateEntityRequest(google.protobuf.message.Message):
     ENTITY_FIELD_NUMBER: builtins.int
     entity_type_name: builtins.str
     """Required. Name of the entity type in which to create the entity value. Format:
-    `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;`.
+    <code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;</code>.
     """
     @property
     def entity(self) -> global___EntityType.Entity:
@@ -936,7 +962,7 @@ class GetEntityRequest(google.protobuf.message.Message):
     NAME_FIELD_NUMBER: builtins.int
     name: builtins.str
     """The unique identifiers of the entities. Format:
-    `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;`.
+    <code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;</code>.
     """
     def __init__(
         self,
@@ -957,7 +983,7 @@ class BatchGetEntitiesRequest(google.protobuf.message.Message):
     @property
     def names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """The unique identifiers of the entities. Format:
-        `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;`.
+        <code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;</code>.
         """
 
     def __init__(
@@ -979,7 +1005,7 @@ class BatchDeleteEntitiesRequest(google.protobuf.message.Message):
     @property
     def names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """The unique identifiers of the entities. Format:
-        `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;`.
+        <code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;</code>.
         """
 
     def __init__(
@@ -1000,7 +1026,7 @@ class DeleteEntityRequest(google.protobuf.message.Message):
     NAME_FIELD_NUMBER: builtins.int
     name: builtins.str
     """The unique identifiers of the entities. Format:
-    `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;`.
+    <code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;</code>.
     """
     def __init__(
         self,
@@ -1071,11 +1097,11 @@ class ListEntitiesRequest(google.protobuf.message.Message):
     SEARCH_BY_PATTERN_FIELD_NUMBER: builtins.int
     entity_type_name: builtins.str
     """The unique identifier of the entity type. Format:
-    `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;
+    <code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;</code>
     """
     language_code: builtins.str
     """Optional. The language to list training phrases, parameters and rich
-    messages for. If not specified, the agent's default language is used.
+    messages for. If not specified, the agent&apos;s default language is used.
     """
     page_token: builtins.str
     """Optional. The next_page_token value returned from a previous list request.
@@ -1084,34 +1110,42 @@ class ListEntitiesRequest(google.protobuf.message.Message):
     The page token is a string representing the current index and page size.
 
     Valid page token strings:
-    * "" (empty string) - Retrieves the first page.
-    * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    <ul>
+      <li>&quot;&quot; (empty string) - Retrieves the first page.</li>
+      <li>&quot;current_index-0--page_size-20&quot; - Retrieves the first page with a page size of 20.</li>
+      <li>&quot;current_index-1--page_size-20&quot; - Retrieves the second page with a page size of 20.</li>
+    </ul>
 
     Index starts at 0.
 
     Examples of valid page token strings:
-    * ""
-    * "current_index-0--page_size-20"
-    * "current_index-1--page_size-20"
-    * "current_index-10--page_size-20"
+    <ul>
+      <li>&quot;&quot;</li>
+      <li>&quot;current_index-0--page_size-20&quot;</li>
+      <li>&quot;current_index-1--page_size-20&quot;</li>
+      <li>&quot;current_index-10--page_size-20&quot;</li>
+    </ul>
 
     Examples of invalid page token strings:
-    * "1"
-    * "current_index-0--page_size-20"
-    * "current_index--1--page_size-20"
-    * "current_index1--page_size-20"
-    * "current_index-1--page_size--20"
+    <ul>
+      <li>&quot;1&quot;</li>
+      <li>&quot;current_index-0--page_size-20&quot;</li>
+      <li>&quot;current_index--1--page_size-20&quot;</li>
+      <li>&quot;current_index1--page_size-20&quot;</li>
+      <li>&quot;current_index-1--page_size--20&quot;</li>
+    </ul>
     """
     search_by_pattern: builtins.str
-    """Optional. Defines a pattern to search for in the entity type "values" and "synonyms"
+    """Optional. Defines a pattern to search for in the entity type &quot;values&quot; and &quot;synonyms&quot;
     Example:
-         Pattern: "dark"
+    <pre><code>
+         Pattern: &quot;dark&quot;
          Results:
                  [Entity Value]          [Entity Synonyms]
                  Red                     red, scarlett, dark red, ...
                  Blue                    blue, indico, dark blue, sky blue, ...
                  Dark                    obscure, black, opaque, ...
+    </code></pre>
     """
     @property
     def sort_by_field(self) -> global___EntityValueSorting:
@@ -1172,8 +1206,11 @@ class EntityValueSorting(google.protobuf.message.Message):
         NO_ENTITY_VALUE_SORTING: EntityValueSorting._EntityValueSortingField.ValueType  # 0
         """Default behaviour: Sorts by value"""
         SORT_ENTITY_VALUE_BY_DISPLAY_NAME: EntityValueSorting._EntityValueSortingField.ValueType  # 1
+        """Sort by display name"""
         SORT_ENTITY_VALUE_BY_VALUE: EntityValueSorting._EntityValueSortingField.ValueType  # 2
+        """Sort by value"""
         SORT_ENTITY_VALUE_BY_SYNONYM_COUNT: EntityValueSorting._EntityValueSortingField.ValueType  # 3
+        """Sort by synonym count"""
 
     class EntityValueSortingField(_EntityValueSortingField, metaclass=_EntityValueSortingFieldEnumTypeWrapper):
         """Structure of Entity value sorting field"""
@@ -1181,8 +1218,11 @@ class EntityValueSorting(google.protobuf.message.Message):
     NO_ENTITY_VALUE_SORTING: EntityValueSorting.EntityValueSortingField.ValueType  # 0
     """Default behaviour: Sorts by value"""
     SORT_ENTITY_VALUE_BY_DISPLAY_NAME: EntityValueSorting.EntityValueSortingField.ValueType  # 1
+    """Sort by display name"""
     SORT_ENTITY_VALUE_BY_VALUE: EntityValueSorting.EntityValueSortingField.ValueType  # 2
+    """Sort by value"""
     SORT_ENTITY_VALUE_BY_SYNONYM_COUNT: EntityValueSorting.EntityValueSortingField.ValueType  # 3
+    """Sort by synonym count"""
 
     SORTING_FIELD_FIELD_NUMBER: builtins.int
     SORTING_MODE_FIELD_NUMBER: builtins.int

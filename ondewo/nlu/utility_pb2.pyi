@@ -15,7 +15,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-Modifications Copyright 2020-2023 ONDEWO GmbH
+Modifications Copyright 2020-2026 ONDEWO GmbH
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -177,12 +177,12 @@ class CleanAllIntentsRequest(google.protobuf.message.Message):
     """
     language_code: builtins.str
     """Optional. The language to list training phrases, parameters and rich
-    messages for. If not specified, the agent's default language is used.
+    messages for. If not specified, the agent&apos;s default language is used.
     Note: languages must be enabled in the agent before they can be used.
     """
     special_characters: builtins.str
     """Optional. Characters to be recognized as special characters for cleaning.
-    Overrides the default: '.,;!?:'
+    Overrides the default: <code>&apos;.,;!?:&apos;</code>
     """
     dry_run: builtins.bool
     """Required. Do not apply changes to the database if set to True"""
@@ -193,7 +193,7 @@ class CleanAllIntentsRequest(google.protobuf.message.Message):
     @property
     def substring_white_list(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Optional. List of substring that shall not be cleaned/deleted.
-        Example: ['St.', 'U.S.', 'sys.', '24.12.', 'Nr.', 'TelNr.']
+        Example: <code>[&apos;St.&apos;, &apos;U.S.&apos;, &apos;sys.&apos;, &apos;24.12.&apos;, &apos;Nr.&apos;, &apos;TelNr.&apos;]</code>
         Default = None
         """
 
@@ -268,12 +268,12 @@ class CleanIntentRequest(google.protobuf.message.Message):
     """
     language_code: builtins.str
     """Optional. The language to list training phrases, parameters and rich
-    messages for. If not specified, the agent's default language is used.
+    messages for. If not specified, the agent&apos;s default language is used.
     Note: languages must be enabled in the agent before they can be used.
     """
     special_characters: builtins.str
     """Optional. Characters to be recognized as special characters for cleaning.
-    Overrides the default: '.,;!?:'
+    Overrides the default: <code>&apos;.,;!?:&apos;</code>
     """
     dry_run: builtins.bool
     """Required. Do not apply changes to the database if set to True"""
@@ -282,7 +282,7 @@ class CleanIntentRequest(google.protobuf.message.Message):
     @property
     def substring_white_list(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Optional. List of substring that shall not be cleaned/deleted.
-        Example: ['St.', 'U.S.', 'sys.', '24.12.', 'Nr.', 'TelNr.']
+        Example: <code>[&apos;St.&apos;, &apos;U.S.&apos;, &apos;sys.&apos;, &apos;24.12.&apos;, &apos;Nr.&apos;, &apos;TelNr.&apos;]</code>
         Default = None
         """
 
@@ -516,12 +516,12 @@ class CleanAllEntityTypesRequest(google.protobuf.message.Message):
     """
     language_code: builtins.str
     """Optional. The language to list training phrases, parameters and rich
-    messages for. If not specified, the agent's default language is used.
+    messages for. If not specified, the agent&apos;s default language is used.
     Note: languages must be enabled in the agent before they can be used.
     """
     special_characters: builtins.str
     """Optional. Characters to be recognized as special characters for cleaning.
-    Overrides the default: '.,;!?:'
+    Overrides the default: <code>&apos;.,;!?:&apos;</code>
     """
     max_entity_count_update: builtins.int
     """Optional. Entity type that contain more than max_entity_count_update entities will
@@ -535,14 +535,14 @@ class CleanAllEntityTypesRequest(google.protobuf.message.Message):
     @property
     def substring_white_list(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Optional. List of substring that shall not be cleaned/deleted.
-        Example: ['St.', 'U.S.', 'sys.', '24.12.', 'Nr.', 'TelNr.']
+        Example: <code>[&apos;St.&apos;, &apos;U.S.&apos;, &apos;sys.&apos;, &apos;24.12.&apos;, &apos;Nr.&apos;, &apos;TelNr.&apos;]</code>
         """
 
     @property
     def forbidden_entity_type_patterns(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Optional. List of strings or regexes. Entity types will be deleted if their display
         name matches an element of this list
-        Example: ['sys.ignore.'] -> would delete entity types with display names sys.ignore.*
+        Example: <code>[&apos;sys.ignore.&apos;]</code> -&gt; would delete entity types with display names sys.ignore.*
         """
 
     def __init__(
@@ -620,12 +620,12 @@ class CleanEntityTypeRequest(google.protobuf.message.Message):
     """Required. The name of the entity_type"""
     language_code: builtins.str
     """Optional. The language to list training phrases, parameters and rich
-    messages for. If not specified, the agent's default language is used.
+    messages for. If not specified, the agent&apos;s default language is used.
     Note: languages must be enabled in the agent before they can be used.
     """
     special_characters: builtins.str
     """Optional. Characters to be recognized as special characters for cleaning.
-    Overrides the default: '.,;!?:'
+    Overrides the default: <code>&apos;.,;!?:&apos;</code>
     """
     max_entity_count_update: builtins.int
     """Optional. Entity type that contain more than max_entity_count_update entities will
@@ -637,7 +637,7 @@ class CleanEntityTypeRequest(google.protobuf.message.Message):
     @property
     def substring_white_list(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Optional. List of substring that shall not be cleaned/deleted.
-        Example: ['St.', 'U.S.', 'sys.', '24.12.', 'Nr.', 'TelNr.']
+        Example: <code>[&apos;St.&apos;, &apos;U.S.&apos;, &apos;sys.&apos;, &apos;24.12.&apos;, &apos;Nr.&apos;, &apos;TelNr.&apos;]</code>
         """
 
     def __init__(
@@ -690,9 +690,7 @@ class AddTrainingPhrasesRequest(google.protobuf.message.Message):
 
     @typing.final
     class TrainingPhraseForIntent(google.protobuf.message.Message):
-        """Message that contains the new training phrase, together with the intent display name
-        and, optionally the entity annotations
-        """
+        """Message that contains the new training phrase, together with the intent display name and, optionally the entity annotations"""
 
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -729,14 +727,14 @@ class AddTrainingPhrasesRequest(google.protobuf.message.Message):
     """
     language_code: builtins.str
     """Required. The language to list training phrases, parameters and rich
-    messages for. If not specified, the agent's default language is used.
+    messages for. If not specified, the agent&apos;s default language is used.
     Note: languages must be enabled in the agent before they can be used.
     """
     extract_entities: builtins.bool
     """Optional. Whether or not to extract entities for the new training phrases"""
     special_characters: builtins.str
     """Optional. Characters to be recognized as special characters for cleaning
-    the training phrases. Overrides the default: '.,;!?:'
+    the training phrases. Overrides the default: <code>&apos;.,;!?:&apos;</code>
     """
     number_of_workers: builtins.int
     """Optional. Number of threads used to accomplish the task"""
@@ -803,7 +801,7 @@ class AddTrainingPhrasesFromCSVRequest(google.protobuf.message.Message):
     """
     language_code: builtins.str
     """Required. The language to list training phrases, parameters and rich
-    messages for. If not specified, the agent's default language is used.
+    messages for. If not specified, the agent&apos;s default language is used.
     Note: languages must be enabled in the agent before they can be used.
     """
     csv_contents: builtins.bytes
@@ -814,7 +812,7 @@ class AddTrainingPhrasesFromCSVRequest(google.protobuf.message.Message):
     """Optional. Before new training phrases are added to their corresponding intent,
     they are cleaned with cleaning scripts. These cleaning scripts remove certain special characters,
     if they are found at the beginning of the text or if they appear in annotations.
-    Overrides the default: '.,;!?:'
+    Overrides the default: <code>&apos;.,;!?:&apos;</code>
     """
     number_of_workers: builtins.int
     """Optional. Number of threads used to accomplish the task"""

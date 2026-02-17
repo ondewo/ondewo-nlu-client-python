@@ -28,33 +28,21 @@ if _version_not_supported:
 
 
 class EntityTypesStub(object):
-    """Entities are extracted from user input and represent parameters that are
-    meaningful to your application. For example, a date range, a proper name
-    such as a geographic location or landmark, and so on. Entities represent
-    actionable data for your application.
+    """Entities are extracted from user input and represent parameters that are meaningful to your application. For example, a date range, a proper name such as a geographic location or landmark, and so on. Entities represent actionable data for your application.
 
-    When you define an entity, you can also include synonyms that all map to
-    that entity. For example, "soft drink", "soda", "pop", and so on.
+    When you define an entity, you can also include synonyms that all map to that entity. For example, &quot;soft drink&quot;, &quot;soda&quot;, &quot;pop&quot;, and so on.
 
     There are three types of entities:
 
-    *   **System** - entities that are defined by the Dialogflow API for common
-    data types such as date, time, currency, and so on. A system entity is
-    represented by the `EntityType` type.
+    <ul>
+    <li><strong>System</strong> - entities that are defined by the Dialogflow API for common data types such as date, time, currency, and so on. A system entity is represented by the <code>EntityType</code> type.</li>
 
-    *   **Developer** - entities that are defined by you that represent
-    actionable data that is meaningful to your application. For example,
-    you could define a `pizza.sauce` entity for red or white pizza sauce,
-    a `pizza.cheese` entity for the different types of cheese on a pizza,
-    a `pizza.topping` entity for different toppings, and so on. A developer
-    entity is represented by the `EntityType` type.
+    <li><strong>Developer</strong> - entities that are defined by you that represent actionable data that is meaningful to your application. For example, you could define a <code>pizza.sauce</code> entity for red or white pizza sauce, a <code>pizza.cheese</code> entity for the different types of cheese on a pizza, a <code>pizza.topping</code> entity for different toppings, and so on. A developer entity is represented by the <code>EntityType</code> type.</li>
 
-    *   **User** - entities that are built for an individual user such as
-    favorites, preferences, playlists, and so on. A user entity is
-    represented by the [SessionEntityType][google.cloud.dialogflow.v2.SessionEntityType] type.
+    <li><strong>User</strong> - entities that are built for an individual user such as favorites, preferences, playlists, and so on. A user entity is represented by the <a href="index.html#ondewo.nlu.SessionEntityType">SessionEntityType</a> type.</li>
+    </ul>
 
-    For more information about entity types, see the
-    [Dialogflow documentation](https://dialogflow.com/docs/entities).
+    For more information about entity types, see the <a href="https://dialogflow.com/docs/entities">Dialogflow documentation</a>.
     """
 
     def __init__(self, channel):
@@ -146,33 +134,21 @@ class EntityTypesStub(object):
 
 
 class EntityTypesServicer(object):
-    """Entities are extracted from user input and represent parameters that are
-    meaningful to your application. For example, a date range, a proper name
-    such as a geographic location or landmark, and so on. Entities represent
-    actionable data for your application.
+    """Entities are extracted from user input and represent parameters that are meaningful to your application. For example, a date range, a proper name such as a geographic location or landmark, and so on. Entities represent actionable data for your application.
 
-    When you define an entity, you can also include synonyms that all map to
-    that entity. For example, "soft drink", "soda", "pop", and so on.
+    When you define an entity, you can also include synonyms that all map to that entity. For example, &quot;soft drink&quot;, &quot;soda&quot;, &quot;pop&quot;, and so on.
 
     There are three types of entities:
 
-    *   **System** - entities that are defined by the Dialogflow API for common
-    data types such as date, time, currency, and so on. A system entity is
-    represented by the `EntityType` type.
+    <ul>
+    <li><strong>System</strong> - entities that are defined by the Dialogflow API for common data types such as date, time, currency, and so on. A system entity is represented by the <code>EntityType</code> type.</li>
 
-    *   **Developer** - entities that are defined by you that represent
-    actionable data that is meaningful to your application. For example,
-    you could define a `pizza.sauce` entity for red or white pizza sauce,
-    a `pizza.cheese` entity for the different types of cheese on a pizza,
-    a `pizza.topping` entity for different toppings, and so on. A developer
-    entity is represented by the `EntityType` type.
+    <li><strong>Developer</strong> - entities that are defined by you that represent actionable data that is meaningful to your application. For example, you could define a <code>pizza.sauce</code> entity for red or white pizza sauce, a <code>pizza.cheese</code> entity for the different types of cheese on a pizza, a <code>pizza.topping</code> entity for different toppings, and so on. A developer entity is represented by the <code>EntityType</code> type.</li>
 
-    *   **User** - entities that are built for an individual user such as
-    favorites, preferences, playlists, and so on. A user entity is
-    represented by the [SessionEntityType][google.cloud.dialogflow.v2.SessionEntityType] type.
+    <li><strong>User</strong> - entities that are built for an individual user such as favorites, preferences, playlists, and so on. A user entity is represented by the <a href="index.html#ondewo.nlu.SessionEntityType">SessionEntityType</a> type.</li>
+    </ul>
 
-    For more information about entity types, see the
-    [Dialogflow documentation](https://dialogflow.com/docs/entities).
+    For more information about entity types, see the <a href="https://dialogflow.com/docs/entities">Dialogflow documentation</a>.
     """
 
     def ListEntityTypes(self, request, context):
@@ -213,8 +189,8 @@ class EntityTypesServicer(object):
     def BatchUpdateEntityTypes(self, request, context):
         """Updates/Creates multiple entity types in the specified agent.
 
-        Operation <response: [BatchUpdateEntityTypesResponse][google.cloud.dialogflow.v2.BatchUpdateEntityTypesResponse],
-        metadata: [google.protobuf.Struct][google.protobuf.Struct]>
+        Operation &lt;response: <a href="index.html#ondewo.nlu.BatchUpdateEntityTypesResponse">BatchUpdateEntityTypesResponse</a>,
+        metadata: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a>&gt;
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -223,8 +199,8 @@ class EntityTypesServicer(object):
     def BatchDeleteEntityTypes(self, request, context):
         """Deletes entity types in the specified agent.
 
-        Operation <response: [google.protobuf.Empty][google.protobuf.Empty],
-        metadata: [google.protobuf.Struct][google.protobuf.Struct]>
+        Operation &lt;response: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.Empty</a>,
+        metadata: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#struct">google.protobuf.Struct</a>&gt;
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -385,33 +361,21 @@ def add_EntityTypesServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class EntityTypes(object):
-    """Entities are extracted from user input and represent parameters that are
-    meaningful to your application. For example, a date range, a proper name
-    such as a geographic location or landmark, and so on. Entities represent
-    actionable data for your application.
+    """Entities are extracted from user input and represent parameters that are meaningful to your application. For example, a date range, a proper name such as a geographic location or landmark, and so on. Entities represent actionable data for your application.
 
-    When you define an entity, you can also include synonyms that all map to
-    that entity. For example, "soft drink", "soda", "pop", and so on.
+    When you define an entity, you can also include synonyms that all map to that entity. For example, &quot;soft drink&quot;, &quot;soda&quot;, &quot;pop&quot;, and so on.
 
     There are three types of entities:
 
-    *   **System** - entities that are defined by the Dialogflow API for common
-    data types such as date, time, currency, and so on. A system entity is
-    represented by the `EntityType` type.
+    <ul>
+    <li><strong>System</strong> - entities that are defined by the Dialogflow API for common data types such as date, time, currency, and so on. A system entity is represented by the <code>EntityType</code> type.</li>
 
-    *   **Developer** - entities that are defined by you that represent
-    actionable data that is meaningful to your application. For example,
-    you could define a `pizza.sauce` entity for red or white pizza sauce,
-    a `pizza.cheese` entity for the different types of cheese on a pizza,
-    a `pizza.topping` entity for different toppings, and so on. A developer
-    entity is represented by the `EntityType` type.
+    <li><strong>Developer</strong> - entities that are defined by you that represent actionable data that is meaningful to your application. For example, you could define a <code>pizza.sauce</code> entity for red or white pizza sauce, a <code>pizza.cheese</code> entity for the different types of cheese on a pizza, a <code>pizza.topping</code> entity for different toppings, and so on. A developer entity is represented by the <code>EntityType</code> type.</li>
 
-    *   **User** - entities that are built for an individual user such as
-    favorites, preferences, playlists, and so on. A user entity is
-    represented by the [SessionEntityType][google.cloud.dialogflow.v2.SessionEntityType] type.
+    <li><strong>User</strong> - entities that are built for an individual user such as favorites, preferences, playlists, and so on. A user entity is represented by the <a href="index.html#ondewo.nlu.SessionEntityType">SessionEntityType</a> type.</li>
+    </ul>
 
-    For more information about entity types, see the
-    [Dialogflow documentation](https://dialogflow.com/docs/entities).
+    For more information about entity types, see the <a href="https://dialogflow.com/docs/entities">Dialogflow documentation</a>.
     """
 
     @staticmethod

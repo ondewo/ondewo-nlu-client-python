@@ -15,7 +15,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-Modifications Copyright 2020-2023 ONDEWO GmbH
+Modifications Copyright 2020-2026 ONDEWO GmbH
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -111,7 +111,7 @@ class _IntentCategoryEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper.
     """represent the intents that are still expecting its start_date to begin"""
 
 class IntentCategory(_IntentCategory, metaclass=_IntentCategoryEnumTypeWrapper):
-    """Represents the type of intents to filter by in the "List Intents" request"""
+    """Represents the type of intents to filter by in the &quot;List Intents&quot; request"""
 
 ALL_INTENTS: IntentCategory.ValueType  # 0
 """represent all intents"""
@@ -130,8 +130,7 @@ global___IntentCategory = IntentCategory
 @typing.final
 class Intent(google.protobuf.message.Message):
     """Represents an intent.
-    Intents convert a number of user expressions or patterns into an action. An
-    action is an extraction of a user command or sentence semantics.
+    Intents convert a number of user expressions or patterns into an action. An action is an extraction of a user command or sentence semantics.
     """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -143,13 +142,17 @@ class Intent(google.protobuf.message.Message):
     class _IntentStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[Intent._IntentStatus.ValueType], builtins.type):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         ACTIVE: Intent._IntentStatus.ValueType  # 0
+        """Intent is active"""
         INACTIVE: Intent._IntentStatus.ValueType  # 1
+        """Intent is inactive"""
 
     class IntentStatus(_IntentStatus, metaclass=_IntentStatusEnumTypeWrapper):
         """Structure of status of an Intent"""
 
     ACTIVE: Intent.IntentStatus.ValueType  # 0
+    """Intent is active"""
     INACTIVE: Intent.IntentStatus.ValueType  # 1
+    """Intent is inactive"""
 
     class _WebhookState:
         ValueType = typing.NewType("ValueType", builtins.int)
@@ -237,13 +240,13 @@ class Intent(google.protobuf.message.Message):
             MODIFIED_BY_FIELD_NUMBER: builtins.int
             entity_type_name: builtins.str
             """Required. The unique entity type identifier in format
-            `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;`.
+            <code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;</code>.
             """
             entity_type_display_name: builtins.str
             """Optional. The entity type name."""
             entity_value_name: builtins.str
             """Optional. The unique entity value identifier in format
-            `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;`.
+            <code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;</code>.
             The entity value must belong to the entity type defined in entity_type_name.
             """
             entity_value_display_name: builtins.str
@@ -254,11 +257,11 @@ class Intent(google.protobuf.message.Message):
             """
             end: builtins.int
             """Required. Defines a character position + 1, where the entity ends in the training phrase.
-            Example: "Meet you tomorrow" -> Entity(entity_type_display_name="sys.date", start=9, end=17)
+            Example: &quot;Meet you tomorrow&quot; -&gt; Entity(entity_type_display_name=&quot;sys.date&quot;, start=9, end=17)
             """
             parameter_name: builtins.str
             """Optional. The unique parameter identifier in format
-            `projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/parameters/&lt;parameter_uuid&gt;`
+            <code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/parameters/&lt;parameter_uuid&gt;</code>
             for the value extracted from the annotated part of the example. The parameter must be one of the
             parameters defined in the top-level intent message.
             Can be unset if the parameter is created in the same create/update intent request as the
@@ -429,21 +432,23 @@ class Intent(google.protobuf.message.Message):
         """Required. The name of the parameter."""
         value: builtins.str
         """Optional. The definition of the parameter value. It can be:
-        - a constant string,
-        - a parameter value defined as `$parameter_name`,
-        - an original parameter value defined as `$parameter_name.original`,
-        - a parameter value from some context defined as
-          `#context_name.parameter_name`.
+        <ul>
+          <li>a constant string,</li>
+          <li>a parameter value defined as <code>$parameter_name</code>,</li>
+          <li>an original parameter value defined as <code>$parameter_name.original</code>,</li>
+          <li>a parameter value from some context defined as
+            <code>#context_name.parameter_name</code>.</li>
+        </ul>
         """
         default_value: builtins.str
-        """Optional. The default value to use when the `value` yields an empty
+        """Optional. The default value to use when the <code>value</code> yields an empty
         result.
         Default values can be extracted from contexts by using the following
-        syntax: `#context_name.parameter_name`.
+        syntax: <code>#context_name.parameter_name</code>.
         """
         entity_type_name: builtins.str
         """Optional. The unique identifier of the entity type in format
-        `projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;` that describes values
+        <code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;</code> that describes values
         of the parameter. If the parameter is required, this must be provided.
         """
         entity_type_display_name: builtins.str
@@ -497,7 +502,7 @@ class Intent(google.protobuf.message.Message):
 
     @typing.final
     class Message(google.protobuf.message.Message):
-        """Corresponds to the `Response` field in the Dialogflow console."""
+        """Corresponds to the <code>Response</code> field in the Dialogflow console."""
 
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -532,80 +537,100 @@ class Intent(google.protobuf.message.Message):
             specific message types.
             If using the Intent.Message.payload field, it should have a structure
             similar to the JSON message shown here. For more information, see
-            [Actions on Google Webhook
-            Format](https://developers.google.com/actions/dialogflow/webhook)
-            <pre>{
-              "expectUserResponse": true,
-              "isSsml": false,
-              "noInputPrompts": [],
-              "richResponse": {
-                "items": [
+            <a href="https://developers.google.com/actions/dialogflow/webhook">Actions on Google Webhook
+            Format</a>
+            <pre><code>{
+              &quot;expectUserResponse&quot;: true,
+              &quot;isSsml&quot;: false,
+              &quot;noInputPrompts&quot;: [],
+              &quot;richResponse&quot;: {
+                &quot;items&quot;: [
                   {
-                    "simpleResponse": {
-                      "displayText": "hi",
-                      "textToSpeech": "hello"
+                    &quot;simpleResponse&quot;: {
+                      &quot;displayText&quot;: &quot;hi&quot;,
+                      &quot;textToSpeech&quot;: &quot;hello&quot;
                     }
                   }
                 ],
-                "suggestions": [
+                &quot;suggestions&quot;: [
                   {
-                    "title": "Say this"
+                    &quot;title&quot;: &quot;Say this&quot;
                   },
                   {
-                    "title": "or this"
+                    &quot;title&quot;: &quot;or this&quot;
                   }
                 ]
               },
-              "systemIntent": {
-                "data": {
-                  "@type": "type.googleapis.com/google.actions.v2.OptionValueSpec",
-                  "listSelect": {
-                    "items": [
+              &quot;systemIntent&quot;: {
+                &quot;data&quot;: {
+                  &quot;@type&quot;: &quot;type.googleapis.com/google.actions.v2.OptionValueSpec&quot;,
+                  &quot;listSelect&quot;: {
+                    &quot;items&quot;: [
                       {
-                        "optionInfo": {
-                          "key": "key1",
-                          "synonyms": [
-                            "key one"
+                        &quot;optionInfo&quot;: {
+                          &quot;key&quot;: &quot;key1&quot;,
+                          &quot;synonyms&quot;: [
+                            &quot;key one&quot;
                           ]
                         },
-                        "title": "must not be empty, but unique"
+                        &quot;title&quot;: &quot;must not be empty, but unique&quot;
                       },
                       {
-                        "optionInfo": {
-                          "key": "key2",
-                          "synonyms": [
-                            "key two"
+                        &quot;optionInfo&quot;: {
+                          &quot;key&quot;: &quot;key2&quot;,
+                          &quot;synonyms&quot;: [
+                            &quot;key two&quot;
                           ]
                         },
-                        "title": "must not be empty, but unique"
+                        &quot;title&quot;: &quot;must not be empty, but unique&quot;
                       }
                     ]
                   }
                 },
-                "intent": "actions.intent.OPTION"
+                &quot;intent&quot;: &quot;actions.intent.OPTION&quot;
               }
-            }</pre>
+            }</code></pre>
             """
             PLACEHOLDER_1: Intent.Message._Platform.ValueType  # 9
+            """Placeholder platform 1"""
             PLACEHOLDER_2: Intent.Message._Platform.ValueType  # 10
+            """Placeholder platform 2"""
             PLACEHOLDER_3: Intent.Message._Platform.ValueType  # 11
+            """Placeholder platform 3"""
             PLACEHOLDER_4: Intent.Message._Platform.ValueType  # 12
+            """Placeholder platform 4"""
             PLACEHOLDER_5: Intent.Message._Platform.ValueType  # 13
+            """Placeholder platform 5"""
             PLACEHOLDER_6: Intent.Message._Platform.ValueType  # 14
+            """Placeholder platform 6"""
             PLACEHOLDER_7: Intent.Message._Platform.ValueType  # 15
+            """Placeholder platform 7"""
             PLACEHOLDER_8: Intent.Message._Platform.ValueType  # 16
+            """Placeholder platform 8"""
             PLACEHOLDER_9: Intent.Message._Platform.ValueType  # 17
+            """Placeholder platform 9"""
             PLACEHOLDER_10: Intent.Message._Platform.ValueType  # 18
+            """Placeholder platform 10"""
             PLACEHOLDER_11: Intent.Message._Platform.ValueType  # 19
+            """Placeholder platform 11"""
             PLACEHOLDER_12: Intent.Message._Platform.ValueType  # 20
+            """Placeholder platform 12"""
             PLACEHOLDER_13: Intent.Message._Platform.ValueType  # 21
+            """Placeholder platform 13"""
             PLACEHOLDER_14: Intent.Message._Platform.ValueType  # 22
+            """Placeholder platform 14"""
             PLACEHOLDER_15: Intent.Message._Platform.ValueType  # 23
+            """Placeholder platform 15"""
             PLACEHOLDER_16: Intent.Message._Platform.ValueType  # 24
+            """Placeholder platform 16"""
             PLACEHOLDER_17: Intent.Message._Platform.ValueType  # 25
+            """Placeholder platform 17"""
             PLACEHOLDER_18: Intent.Message._Platform.ValueType  # 26
+            """Placeholder platform 18"""
             PLACEHOLDER_19: Intent.Message._Platform.ValueType  # 27
+            """Placeholder platform 19"""
             PLACEHOLDER_20: Intent.Message._Platform.ValueType  # 28
+            """Placeholder platform 20"""
 
         class Platform(_Platform, metaclass=_PlatformEnumTypeWrapper):
             """Represents different platforms that a rich message can be intended for."""
@@ -635,80 +660,100 @@ class Intent(google.protobuf.message.Message):
         specific message types.
         If using the Intent.Message.payload field, it should have a structure
         similar to the JSON message shown here. For more information, see
-        [Actions on Google Webhook
-        Format](https://developers.google.com/actions/dialogflow/webhook)
-        <pre>{
-          "expectUserResponse": true,
-          "isSsml": false,
-          "noInputPrompts": [],
-          "richResponse": {
-            "items": [
+        <a href="https://developers.google.com/actions/dialogflow/webhook">Actions on Google Webhook
+        Format</a>
+        <pre><code>{
+          &quot;expectUserResponse&quot;: true,
+          &quot;isSsml&quot;: false,
+          &quot;noInputPrompts&quot;: [],
+          &quot;richResponse&quot;: {
+            &quot;items&quot;: [
               {
-                "simpleResponse": {
-                  "displayText": "hi",
-                  "textToSpeech": "hello"
+                &quot;simpleResponse&quot;: {
+                  &quot;displayText&quot;: &quot;hi&quot;,
+                  &quot;textToSpeech&quot;: &quot;hello&quot;
                 }
               }
             ],
-            "suggestions": [
+            &quot;suggestions&quot;: [
               {
-                "title": "Say this"
+                &quot;title&quot;: &quot;Say this&quot;
               },
               {
-                "title": "or this"
+                &quot;title&quot;: &quot;or this&quot;
               }
             ]
           },
-          "systemIntent": {
-            "data": {
-              "@type": "type.googleapis.com/google.actions.v2.OptionValueSpec",
-              "listSelect": {
-                "items": [
+          &quot;systemIntent&quot;: {
+            &quot;data&quot;: {
+              &quot;@type&quot;: &quot;type.googleapis.com/google.actions.v2.OptionValueSpec&quot;,
+              &quot;listSelect&quot;: {
+                &quot;items&quot;: [
                   {
-                    "optionInfo": {
-                      "key": "key1",
-                      "synonyms": [
-                        "key one"
+                    &quot;optionInfo&quot;: {
+                      &quot;key&quot;: &quot;key1&quot;,
+                      &quot;synonyms&quot;: [
+                        &quot;key one&quot;
                       ]
                     },
-                    "title": "must not be empty, but unique"
+                    &quot;title&quot;: &quot;must not be empty, but unique&quot;
                   },
                   {
-                    "optionInfo": {
-                      "key": "key2",
-                      "synonyms": [
-                        "key two"
+                    &quot;optionInfo&quot;: {
+                      &quot;key&quot;: &quot;key2&quot;,
+                      &quot;synonyms&quot;: [
+                        &quot;key two&quot;
                       ]
                     },
-                    "title": "must not be empty, but unique"
+                    &quot;title&quot;: &quot;must not be empty, but unique&quot;
                   }
                 ]
               }
             },
-            "intent": "actions.intent.OPTION"
+            &quot;intent&quot;: &quot;actions.intent.OPTION&quot;
           }
-        }</pre>
+        }</code></pre>
         """
         PLACEHOLDER_1: Intent.Message.Platform.ValueType  # 9
+        """Placeholder platform 1"""
         PLACEHOLDER_2: Intent.Message.Platform.ValueType  # 10
+        """Placeholder platform 2"""
         PLACEHOLDER_3: Intent.Message.Platform.ValueType  # 11
+        """Placeholder platform 3"""
         PLACEHOLDER_4: Intent.Message.Platform.ValueType  # 12
+        """Placeholder platform 4"""
         PLACEHOLDER_5: Intent.Message.Platform.ValueType  # 13
+        """Placeholder platform 5"""
         PLACEHOLDER_6: Intent.Message.Platform.ValueType  # 14
+        """Placeholder platform 6"""
         PLACEHOLDER_7: Intent.Message.Platform.ValueType  # 15
+        """Placeholder platform 7"""
         PLACEHOLDER_8: Intent.Message.Platform.ValueType  # 16
+        """Placeholder platform 8"""
         PLACEHOLDER_9: Intent.Message.Platform.ValueType  # 17
+        """Placeholder platform 9"""
         PLACEHOLDER_10: Intent.Message.Platform.ValueType  # 18
+        """Placeholder platform 10"""
         PLACEHOLDER_11: Intent.Message.Platform.ValueType  # 19
+        """Placeholder platform 11"""
         PLACEHOLDER_12: Intent.Message.Platform.ValueType  # 20
+        """Placeholder platform 12"""
         PLACEHOLDER_13: Intent.Message.Platform.ValueType  # 21
+        """Placeholder platform 13"""
         PLACEHOLDER_14: Intent.Message.Platform.ValueType  # 22
+        """Placeholder platform 14"""
         PLACEHOLDER_15: Intent.Message.Platform.ValueType  # 23
+        """Placeholder platform 15"""
         PLACEHOLDER_16: Intent.Message.Platform.ValueType  # 24
+        """Placeholder platform 16"""
         PLACEHOLDER_17: Intent.Message.Platform.ValueType  # 25
+        """Placeholder platform 17"""
         PLACEHOLDER_18: Intent.Message.Platform.ValueType  # 26
+        """Placeholder platform 18"""
         PLACEHOLDER_19: Intent.Message.Platform.ValueType  # 27
+        """Placeholder platform 19"""
         PLACEHOLDER_20: Intent.Message.Platform.ValueType  # 28
+        """Placeholder platform 20"""
 
         @typing.final
         class Text(google.protobuf.message.Message):
@@ -719,7 +764,7 @@ class Intent(google.protobuf.message.Message):
             TEXT_FIELD_NUMBER: builtins.int
             @property
             def text(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-                """Optional. The collection of the agent's responses."""
+                """Optional. The collection of the agent&apos;s responses."""
 
             def __init__(
                 self,
@@ -855,11 +900,7 @@ class Intent(google.protobuf.message.Message):
 
         @typing.final
         class SimpleResponses(google.protobuf.message.Message):
-            """The collection of simple response candidates.
-            This message in `QueryResult.fulfillment_messages` and
-            `WebhookResponse.fulfillment_messages` should contain only one
-            `SimpleResponse`.
-            """
+            """The collection of simple response candidates. This message in <code>QueryResult.fulfillment_messages</code> and <code>WebhookResponse.fulfillment_messages</code> should contain only one <code>SimpleResponse</code>."""
 
             DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -953,9 +994,7 @@ class Intent(google.protobuf.message.Message):
 
         @typing.final
         class Suggestion(google.protobuf.message.Message):
-            """The suggestion chip message that the user can tap to quickly post a reply
-            to the conversation.
-            """
+            """The suggestion chip message that the user can tap to quickly post a reply to the conversation."""
 
             DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -989,9 +1028,7 @@ class Intent(google.protobuf.message.Message):
 
         @typing.final
         class LinkOutSuggestion(google.protobuf.message.Message):
-            """The suggestion chip message that allows the user to jump out to the app
-            or website associated with this agent.
-            """
+            """The suggestion chip message that allows the user to jump out to the app or website associated with this agent."""
 
             DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1126,7 +1163,7 @@ class Intent(google.protobuf.message.Message):
             TEXT_FIELD_NUMBER: builtins.int
             @property
             def text(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-                """Collection of the agent's responses in HTML format"""
+                """Collection of the agent&apos;s responses in HTML format"""
 
             def __init__(
                 self,
@@ -1181,23 +1218,17 @@ class Intent(google.protobuf.message.Message):
 
         @typing.final
         class SelectItemInfo(google.protobuf.message.Message):
-            """Additional info about the select item for when it is triggered in a
-            dialog.
-            """
+            """Additional info about the select item for when it is triggered in a dialog."""
 
             DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
             KEY_FIELD_NUMBER: builtins.int
             SYNONYMS_FIELD_NUMBER: builtins.int
             key: builtins.str
-            """Required. A unique key that will be sent back to the agent if this
-            response is given.
-            """
+            """Required. A unique key that will be sent back to the agent if this response is given."""
             @property
             def synonyms(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-                """Optional. A list of synonyms that can also be used to trigger this
-                item in dialog.
-                """
+                """Optional. A list of synonyms that can also be used to trigger this item in dialog."""
 
             def __init__(
                 self,
@@ -1396,7 +1427,7 @@ class Intent(google.protobuf.message.Message):
     CREATED_BY_FIELD_NUMBER: builtins.int
     MODIFIED_BY_FIELD_NUMBER: builtins.int
     name: builtins.str
-    """Required for all methods except `create` (`create` populates the name
+    """Required for all methods except <code>create</code> (<code>create</code> populates the name
     automatically.
     The unique identifier of this intent.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
@@ -1413,8 +1444,8 @@ class Intent(google.protobuf.message.Message):
     """Optional. Indicates whether this is a fallback intent."""
     ml_disabled: builtins.bool
     """Optional. Indicates whether Machine Learning is disabled for the intent.
-    Note: If `ml_disabled` setting is set to true, then this intent is not
-    taken into account during inference in `ML ONLY` match mode. Also,
+    Note: If <code>ml_disabled</code> setting is set to true, then this intent is not
+    taken into account during inference in <code>ML ONLY</code> match mode. Also,
     auto-markup in the UI is turned off.
     """
     action: builtins.str
@@ -1476,7 +1507,7 @@ class Intent(google.protobuf.message.Message):
     def output_contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]:
         """Optional. The collection of contexts that are activated when the intent
         is matched. Context messages in this collection should not set the
-        parameters field. Setting the `lifespan_count` to 0 will reset the context
+        parameters field. Setting the <code>lifespan_count</code> to 0 will reset the context
         when the intent is matched.
         Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/-/contexts/&lt;context_uuid&gt;</code></pre>
         """
@@ -1488,7 +1519,7 @@ class Intent(google.protobuf.message.Message):
     @property
     def messages(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Intent.Message]:
         """Optional. The collection of rich messages corresponding to the
-        `Response` field in the Dialogflow console.
+        <code>Response</code> field in the Dialogflow console.
         """
 
     @property
@@ -1513,7 +1544,7 @@ class Intent(google.protobuf.message.Message):
 
     @property
     def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Optional. Adds arbitrary "categories" for which one could filter the intents"""
+        """Optional. Adds arbitrary &quot;categories&quot; for which one could filter the intents"""
 
     @property
     def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
@@ -1565,7 +1596,7 @@ global___Intent = Intent
 
 @typing.final
 class ListIntentsRequest(google.protobuf.message.Message):
-    """The request message for [Intents.ListIntents][google.cloud.dialogflow.v2.Intents.ListIntents]."""
+    """The request message for <a href="index.html#ondewo.nlu.Intents.ListIntents">Intents.ListIntents</a>."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1582,9 +1613,9 @@ class ListIntentsRequest(google.protobuf.message.Message):
     """
     language_code: builtins.str
     """Optional. The language to list training phrases, parameters and rich
-    messages for. If not specified, the agent's default language is used.
-    [More than a dozen
-    languages](https://dialogflow.com/docs/reference/language) are supported.
+    messages for. If not specified, the agent&apos;s default language is used.
+    <a href="https://dialogflow.com/docs/reference/language">More than a dozen
+    languages</a> are supported.
     Note: languages must be enabled in the agent before they can be used.
     """
     intent_view: global___IntentView.ValueType
@@ -1595,24 +1626,30 @@ class ListIntentsRequest(google.protobuf.message.Message):
     The page token is a string representing the current index and page size.
 
     Valid page token strings:
-    * "" (empty string) - Retrieves the first page.
-    * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    <ul>
+      <li>&quot;&quot; (empty string) - Retrieves the first page.</li>
+      <li>&quot;current_index-0--page_size-20&quot; - Retrieves the first page with a page size of 20.</li>
+      <li>&quot;current_index-1--page_size-20&quot; - Retrieves the second page with a page size of 20.</li>
+    </ul>
 
     Index starts at 0.
 
     Examples of valid page token strings:
-    * ""
-    * "current_index-0--page_size-20"
-    * "current_index-1--page_size-20"
-    * "current_index-10--page_size-20"
+    <ul>
+      <li>&quot;&quot;</li>
+      <li>&quot;current_index-0--page_size-20&quot;</li>
+      <li>&quot;current_index-1--page_size-20&quot;</li>
+      <li>&quot;current_index-10--page_size-20&quot;</li>
+    </ul>
 
     Examples of invalid page token strings:
-    * "1"
-    * "current_index-0--page_size-20"
-    * "current_index--1--page_size-20"
-    * "current_index1--page_size-20"
-    * "current_index-1--page_size--20"
+    <ul>
+      <li>&quot;1&quot;</li>
+      <li>&quot;current_index-0--page_size-20&quot;</li>
+      <li>&quot;current_index--1--page_size-20&quot;</li>
+      <li>&quot;current_index1--page_size-20&quot;</li>
+      <li>&quot;current_index-1--page_size--20&quot;</li>
+    </ul>
     """
     filter_by_category: global___IntentCategory.ValueType
     """Optional. Applies a filter to the list. Default, no filter."""
@@ -1642,7 +1679,7 @@ global___ListIntentsRequest = ListIntentsRequest
 
 @typing.final
 class ListIntentsResponse(google.protobuf.message.Message):
-    """The response message for [Intents.ListIntents][google.cloud.dialogflow.v2.Intents.ListIntents]."""
+    """The response message for <a href="index.html#ondewo.nlu.Intents.ListIntents">Intents.ListIntents</a>."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1670,7 +1707,7 @@ global___ListIntentsResponse = ListIntentsResponse
 
 @typing.final
 class GetIntentRequest(google.protobuf.message.Message):
-    """The request message for [Intents.GetIntent][google.cloud.dialogflow.v2.Intents.GetIntent]."""
+    """The request message for <a href="index.html#ondewo.nlu.Intents.GetIntent">Intents.GetIntent</a>."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1684,9 +1721,9 @@ class GetIntentRequest(google.protobuf.message.Message):
     """
     language_code: builtins.str
     """Optional. The language to retrieve training phrases, parameters and rich
-    messages for. If not specified, the agent's default language is used.
-    [More than a dozen
-    languages](https://dialogflow.com/docs/reference/language) are supported.
+    messages for. If not specified, the agent&apos;s default language is used.
+    <a href="https://dialogflow.com/docs/reference/language">More than a dozen
+    languages</a> are supported.
     Note: languages must be enabled in the agent, before they can be used.
     """
     intent_view: global___IntentView.ValueType
@@ -1697,24 +1734,30 @@ class GetIntentRequest(google.protobuf.message.Message):
     The page token is a string representing the current index and page size.
 
     Valid page token strings:
-    * "" (empty string) - Retrieves the first page.
-    * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    <ul>
+      <li>&quot;&quot; (empty string) - Retrieves the first page.</li>
+      <li>&quot;current_index-0--page_size-20&quot; - Retrieves the first page with a page size of 20.</li>
+      <li>&quot;current_index-1--page_size-20&quot; - Retrieves the second page with a page size of 20.</li>
+    </ul>
 
     Index starts at 0.
 
     Examples of valid page token strings:
-    * ""
-    * "current_index-0--page_size-20"
-    * "current_index-1--page_size-20"
-    * "current_index-10--page_size-20"
+    <ul>
+      <li>&quot;&quot;</li>
+      <li>&quot;current_index-0--page_size-20&quot;</li>
+      <li>&quot;current_index-1--page_size-20&quot;</li>
+      <li>&quot;current_index-10--page_size-20&quot;</li>
+    </ul>
 
     Examples of invalid page token strings:
-    * "1"
-    * "current_index-0--page_size-20"
-    * "current_index--1--page_size-20"
-    * "current_index1--page_size-20"
-    * "current_index-1--page_size--20"
+    <ul>
+      <li>&quot;1&quot;</li>
+      <li>&quot;current_index-0--page_size-20&quot;</li>
+      <li>&quot;current_index--1--page_size-20&quot;</li>
+      <li>&quot;current_index1--page_size-20&quot;</li>
+      <li>&quot;current_index-1--page_size--20&quot;</li>
+    </ul>
     """
     def __init__(
         self,
@@ -1730,7 +1773,7 @@ global___GetIntentRequest = GetIntentRequest
 
 @typing.final
 class CreateIntentRequest(google.protobuf.message.Message):
-    """The request message for [Intents.CreateIntent][google.cloud.dialogflow.v2.Intents.CreateIntent]."""
+    """The request message for <a href="index.html#ondewo.nlu.Intents.CreateIntent">Intents.CreateIntent</a>."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1744,9 +1787,10 @@ class CreateIntentRequest(google.protobuf.message.Message):
     """
     language_code: builtins.str
     """Optional. The language of training phrases, parameters and rich messages
-    defined in `intent`. If not specified, the agent's default language is
-    used. [More than a dozen
-    languages](https://dialogflow.com/docs/reference/language) are supported.
+    defined in <code>intent</code>. If not specified, the agent&apos;s default language is
+    used.
+    <a href="https://dialogflow.com/docs/reference/language">More than a dozen
+    languages</a> are supported.
     Note: languages must be enabled in the agent, before they can be used.
     """
     intent_view: global___IntentView.ValueType
@@ -1770,7 +1814,7 @@ global___CreateIntentRequest = CreateIntentRequest
 
 @typing.final
 class UpdateIntentRequest(google.protobuf.message.Message):
-    """The request message for [Intents.UpdateIntent][google.cloud.dialogflow.v2.Intents.UpdateIntent]."""
+    """The request message for <a href="index.html#ondewo.nlu.Intents.UpdateIntent">Intents.UpdateIntent</a>."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1780,9 +1824,10 @@ class UpdateIntentRequest(google.protobuf.message.Message):
     INTENT_VIEW_FIELD_NUMBER: builtins.int
     language_code: builtins.str
     """Optional. The language of training phrases, parameters and rich messages
-    defined in `intent`. If not specified, the agent's default language is
-    used. [More than a dozen
-    languages](https://dialogflow.com/docs/reference/language) are supported.
+    defined in <code>intent</code>. If not specified, the agent&apos;s default language is
+    used.
+    <a href="https://dialogflow.com/docs/reference/language">More than a dozen
+    languages</a> are supported.
     Note: languages must be enabled in the agent, before they can be used.
     """
     intent_view: global___IntentView.ValueType
@@ -1812,7 +1857,7 @@ global___UpdateIntentRequest = UpdateIntentRequest
 
 @typing.final
 class DeleteIntentRequest(google.protobuf.message.Message):
-    """The request message for [Intents.DeleteIntent][google.cloud.dialogflow.v2.Intents.DeleteIntent]."""
+    """The request message for <a href="index.html#ondewo.nlu.Intents.DeleteIntent">Intents.DeleteIntent</a>."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1832,7 +1877,7 @@ global___DeleteIntentRequest = DeleteIntentRequest
 
 @typing.final
 class BatchUpdateIntentsRequest(google.protobuf.message.Message):
-    """The request message for [Intents.BatchUpdateIntents][google.cloud.dialogflow.v2.Intents.BatchUpdateIntents]."""
+    """The request message for <a href="index.html#ondewo.nlu.Intents.BatchUpdateIntents">Intents.BatchUpdateIntents</a>."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1849,13 +1894,14 @@ class BatchUpdateIntentsRequest(google.protobuf.message.Message):
     intent_batch_uri: builtins.str
     """The URI to a Google Cloud Storage file containing intents to update or
     create. The file format can either be a serialized proto (of IntentBatch
-    type) or JSON object. Note: The URI must start with "gs://".
+    type) or JSON object. Note: The URI must start with &quot;gs://&quot;.
     """
     language_code: builtins.str
     """Optional. The language of training phrases, parameters and rich messages
-    defined in `intents`. If not specified, the agent's default language is
-    used. [More than a dozen
-    languages](https://dialogflow.com/docs/reference/language) are supported.
+    defined in <code>intents</code>. If not specified, the agent&apos;s default language is
+    used.
+    <a href="https://dialogflow.com/docs/reference/language">More than a dozen
+    languages</a> are supported.
     Note: languages must be enabled in the agent, before they can be used.
     """
     intent_view: global___IntentView.ValueType
@@ -1886,7 +1932,7 @@ global___BatchUpdateIntentsRequest = BatchUpdateIntentsRequest
 
 @typing.final
 class BatchUpdateIntentsResponse(google.protobuf.message.Message):
-    """The response message for [Intents.BatchUpdateIntents][google.cloud.dialogflow.v2.Intents.BatchUpdateIntents]."""
+    """The response message for <a href="index.html#ondewo.nlu.Intents.BatchUpdateIntents">Intents.BatchUpdateIntents</a>."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1906,7 +1952,7 @@ global___BatchUpdateIntentsResponse = BatchUpdateIntentsResponse
 
 @typing.final
 class BatchDeleteIntentsRequest(google.protobuf.message.Message):
-    """The request message for [Intents.BatchDeleteIntents][google.cloud.dialogflow.v2.Intents.BatchDeleteIntents]."""
+    """The request message for <a href="index.html#ondewo.nlu.Intents.BatchDeleteIntents">Intents.BatchDeleteIntents</a>."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1914,11 +1960,11 @@ class BatchDeleteIntentsRequest(google.protobuf.message.Message):
     INTENTS_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The name of the agent to delete all entities types for. Format:
-    `projects/&lt;project_uuid&gt;/agent`.
+    <code>projects/&lt;project_uuid&gt;/agent</code>.
     """
     @property
     def intents(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Intent]:
-        """Required. The collection of intents to delete. Only intent `name` must be
+        """Required. The collection of intents to delete. Only intent <code>name</code> must be
         filled in.
         """
 
@@ -1965,23 +2011,37 @@ class IntentSorting(google.protobuf.message.Message):
     class _IntentSortingFieldEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[IntentSorting._IntentSortingField.ValueType], builtins.type):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         NO_INTENT_SORTING: IntentSorting._IntentSortingField.ValueType  # 0
+        """No sorting applied"""
         SORT_INTENT_BY_NAME: IntentSorting._IntentSortingField.ValueType  # 1
+        """Sort by intent name"""
         SORT_INTENT_BY_CREATION_DATE: IntentSorting._IntentSortingField.ValueType  # 2
+        """Sort by creation date"""
         SORT_INTENT_BY_LAST_UPDATED: IntentSorting._IntentSortingField.ValueType  # 3
+        """Sort by last updated date"""
         SORT_INTENT_BY_USERSAYS_COUNT: IntentSorting._IntentSortingField.ValueType  # 4
+        """Sort by training phrase (user says) count"""
         SORT_INTENT_BY_START_DATE: IntentSorting._IntentSortingField.ValueType  # 5
+        """Sort by start date"""
         SORT_INTENT_BY_END_DATE: IntentSorting._IntentSortingField.ValueType  # 6
+        """Sort by end date"""
 
     class IntentSortingField(_IntentSortingField, metaclass=_IntentSortingFieldEnumTypeWrapper):
         """Structure of intent sorting field"""
 
     NO_INTENT_SORTING: IntentSorting.IntentSortingField.ValueType  # 0
+    """No sorting applied"""
     SORT_INTENT_BY_NAME: IntentSorting.IntentSortingField.ValueType  # 1
+    """Sort by intent name"""
     SORT_INTENT_BY_CREATION_DATE: IntentSorting.IntentSortingField.ValueType  # 2
+    """Sort by creation date"""
     SORT_INTENT_BY_LAST_UPDATED: IntentSorting.IntentSortingField.ValueType  # 3
+    """Sort by last updated date"""
     SORT_INTENT_BY_USERSAYS_COUNT: IntentSorting.IntentSortingField.ValueType  # 4
+    """Sort by training phrase (user says) count"""
     SORT_INTENT_BY_START_DATE: IntentSorting.IntentSortingField.ValueType  # 5
+    """Sort by start date"""
     SORT_INTENT_BY_END_DATE: IntentSorting.IntentSortingField.ValueType  # 6
+    """Sort by end date"""
 
     SORTING_FIELD_FIELD_NUMBER: builtins.int
     SORTING_MODE_FIELD_NUMBER: builtins.int
@@ -2072,7 +2132,7 @@ class GetAllIntentTagsRequest(google.protobuf.message.Message):
     PARENT_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The name of the agent to delete all entities types for. Format:
-    `projects/&lt;project_uuid&gt;/agent`.
+    <code>projects/&lt;project_uuid&gt;/agent</code>.
     """
     def __init__(
         self,
@@ -2158,6 +2218,8 @@ class BatchCreateTrainingPhrasesRequest(google.protobuf.message.Message):
 
     @typing.final
     class CreateTrainingPhraseRequest(google.protobuf.message.Message):
+        """Request to create a single training phrase"""
+
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
         INTENT_NAME_FIELD_NUMBER: builtins.int
@@ -2241,6 +2303,8 @@ class BatchDeleteTrainingPhrasesResponse(google.protobuf.message.Message):
 
     @typing.final
     class DeleteTrainingPhraseStatus(google.protobuf.message.Message):
+        """Status of a training phrase deletion operation"""
+
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
         SUCCESSFULLY_DELETED_FIELD_NUMBER: builtins.int
@@ -2288,7 +2352,7 @@ class ListTrainingPhrasesRequest(google.protobuf.message.Message):
     """
     language_code: builtins.str
     """Optional. The language to list training phrases, parameters and rich
-    messages for. If not specified, the agent's default language is used.
+    messages for. If not specified, the agent&apos;s default language is used.
     """
     page_token: builtins.str
     """Optional: The page token to support pagination.
@@ -2296,24 +2360,30 @@ class ListTrainingPhrasesRequest(google.protobuf.message.Message):
     The page token is a string representing the current index and page size.
 
     Valid page token strings:
-    * "" (empty string) - Retrieves the first page.
-    * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    <ul>
+      <li>&quot;&quot; (empty string) - Retrieves the first page.</li>
+      <li>&quot;current_index-0--page_size-20&quot; - Retrieves the first page with a page size of 20.</li>
+      <li>&quot;current_index-1--page_size-20&quot; - Retrieves the second page with a page size of 20.</li>
+    </ul>
 
     Index starts at 0.
 
     Examples of valid page token strings:
-    * ""
-    * "current_index-0--page_size-20"
-    * "current_index-1--page_size-20"
-    * "current_index-10--page_size-20"
+    <ul>
+      <li>&quot;&quot;</li>
+      <li>&quot;current_index-0--page_size-20&quot;</li>
+      <li>&quot;current_index-1--page_size-20&quot;</li>
+      <li>&quot;current_index-10--page_size-20&quot;</li>
+    </ul>
 
     Examples of invalid page token strings:
-    * "1"
-    * "current_index-0--page_size-20"
-    * "current_index--1--page_size-20"
-    * "current_index1--page_size-20"
-    * "current_index-1--page_size--20"
+    <ul>
+      <li>&quot;1&quot;</li>
+      <li>&quot;current_index-0--page_size-20&quot;</li>
+      <li>&quot;current_index--1--page_size-20&quot;</li>
+      <li>&quot;current_index1--page_size-20&quot;</li>
+      <li>&quot;current_index-1--page_size--20&quot;</li>
+    </ul>
     """
     def __init__(
         self,
@@ -2337,8 +2407,8 @@ class ListTrainingPhrasesResponse(google.protobuf.message.Message):
     next_page_token: builtins.str
     """Token to retrieve the next page of results, or empty if there are no
     more results in the list.
-    Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>--sub_field-<SUB_FIELD>`
-    where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `training_phrases`)
+    Format: <code>current_index-&lt;CURRENT_INDEX&gt;--page_size-&lt;PAGE_SIZE&gt;--sub_field-&lt;SUB_FIELD&gt;</code>
+    where &lt;CURRENT_INDEX&gt; and &lt;PAGE_SIZE&gt; are of type int, &lt;SUB_FIELD&gt; is of type str (example: <code>training_phrases</code>)
     """
     @property
     def training_phrases(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Intent.TrainingPhrase]:
@@ -2364,6 +2434,8 @@ class BatchResponseMessagesStatusResponse(google.protobuf.message.Message):
 
     @typing.final
     class ResponseMessageStatus(google.protobuf.message.Message):
+        """Status of a response message operation"""
+
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
         RESPONSE_MESSAGE_FIELD_NUMBER: builtins.int
@@ -2405,6 +2477,8 @@ class BatchCreateResponseMessagesRequest(google.protobuf.message.Message):
 
     @typing.final
     class CreateResponseMessageRequest(google.protobuf.message.Message):
+        """Request to create a single response message"""
+
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
         INTENT_NAME_FIELD_NUMBER: builtins.int
@@ -2508,6 +2582,8 @@ class BatchDeleteResponseMessagesResponse(google.protobuf.message.Message):
 
     @typing.final
     class DeleteResponseMessageStatus(google.protobuf.message.Message):
+        """Status of a response message deletion operation"""
+
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
         SUCCESSFULLY_DELETED_FIELD_NUMBER: builtins.int
@@ -2555,7 +2631,7 @@ class ListResponseMessagesRequest(google.protobuf.message.Message):
     """
     language_code: builtins.str
     """Optional. The language to list response messages, parameters and rich
-    messages for. If not specified, the agent's default language is used.
+    messages for. If not specified, the agent&apos;s default language is used.
     """
     page_token: builtins.str
     """Optional: The page token to support pagination.
@@ -2563,24 +2639,30 @@ class ListResponseMessagesRequest(google.protobuf.message.Message):
     The page token is a string representing the current index and page size.
 
     Valid page token strings:
-    * "" (empty string) - Retrieves the first page.
-    * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    <ul>
+      <li>&quot;&quot; (empty string) - Retrieves the first page.</li>
+      <li>&quot;current_index-0--page_size-20&quot; - Retrieves the first page with a page size of 20.</li>
+      <li>&quot;current_index-1--page_size-20&quot; - Retrieves the second page with a page size of 20.</li>
+    </ul>
 
     Index starts at 0.
 
     Examples of valid page token strings:
-    * ""
-    * "current_index-0--page_size-20"
-    * "current_index-1--page_size-20"
-    * "current_index-10--page_size-20"
+    <ul>
+      <li>&quot;&quot;</li>
+      <li>&quot;current_index-0--page_size-20&quot;</li>
+      <li>&quot;current_index-1--page_size-20&quot;</li>
+      <li>&quot;current_index-10--page_size-20&quot;</li>
+    </ul>
 
     Examples of invalid page token strings:
-    * "1"
-    * "current_index-0--page_size-20"
-    * "current_index--1--page_size-20"
-    * "current_index1--page_size-20"
-    * "current_index-1--page_size--20"
+    <ul>
+      <li>&quot;1&quot;</li>
+      <li>&quot;current_index-0--page_size-20&quot;</li>
+      <li>&quot;current_index--1--page_size-20&quot;</li>
+      <li>&quot;current_index1--page_size-20&quot;</li>
+      <li>&quot;current_index-1--page_size--20&quot;</li>
+    </ul>
     """
     def __init__(
         self,
@@ -2604,8 +2686,8 @@ class ListResponseMessagesResponse(google.protobuf.message.Message):
     next_page_token: builtins.str
     """Token to retrieve the next page of results, or empty if there are no
     more results in the list.
-    Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>--sub_field-<SUB_FIELD>`
-    where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `messages`)
+    Format: <code>current_index-&lt;CURRENT_INDEX&gt;--page_size-&lt;PAGE_SIZE&gt;--sub_field-&lt;SUB_FIELD&gt;</code>
+    where &lt;CURRENT_INDEX&gt; and &lt;PAGE_SIZE&gt; are of type int, &lt;SUB_FIELD&gt; is of type str (example: <code>messages</code>)
     """
     @property
     def response_messages(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Intent.Message]:
@@ -2631,6 +2713,8 @@ class BatchParametersStatusResponse(google.protobuf.message.Message):
 
     @typing.final
     class ParameterStatus(google.protobuf.message.Message):
+        """Status of a parameter operation"""
+
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
         PARAMETER_FIELD_NUMBER: builtins.int
@@ -2672,6 +2756,8 @@ class BatchCreateParametersRequest(google.protobuf.message.Message):
 
     @typing.final
     class CreateParameterRequest(google.protobuf.message.Message):
+        """Request to create a single parameter"""
+
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
         INTENT_NAME_FIELD_NUMBER: builtins.int
@@ -2693,7 +2779,9 @@ class BatchCreateParametersRequest(google.protobuf.message.Message):
 
     PARAMETER_REQUESTS_FIELD_NUMBER: builtins.int
     @property
-    def parameter_requests(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___BatchCreateParametersRequest.CreateParameterRequest]: ...
+    def parameter_requests(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___BatchCreateParametersRequest.CreateParameterRequest]:
+        """List of parameters to create"""
+
     def __init__(
         self,
         *,
@@ -2733,7 +2821,7 @@ class BatchGetParametersRequest(google.protobuf.message.Message):
     @property
     def names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Required. The names of the response messages.
-        Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/parameters/&lt;parameter_uuid</code></pre>
+        Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;/parameters/&lt;parameter_uuid&gt;</code></pre>
         """
 
     def __init__(
@@ -2775,6 +2863,8 @@ class BatchDeleteParametersResponse(google.protobuf.message.Message):
 
     @typing.final
     class DeleteParameterStatus(google.protobuf.message.Message):
+        """Status of a parameter deletion operation"""
+
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
         SUCCESSFULLY_DELETED_FIELD_NUMBER: builtins.int
@@ -2828,24 +2918,30 @@ class ListParametersRequest(google.protobuf.message.Message):
     The page token is a string representing the current index and page size.
 
     Valid page token strings:
-    * "" (empty string) - Retrieves the first page.
-    * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    <ul>
+      <li>&quot;&quot; (empty string) - Retrieves the first page.</li>
+      <li>&quot;current_index-0--page_size-20&quot; - Retrieves the first page with a page size of 20.</li>
+      <li>&quot;current_index-1--page_size-20&quot; - Retrieves the second page with a page size of 20.</li>
+    </ul>
 
     Index starts at 0.
 
     Examples of valid page token strings:
-    * ""
-    * "current_index-0--page_size-20"
-    * "current_index-1--page_size-20"
-    * "current_index-10--page_size-20"
+    <ul>
+      <li>&quot;&quot;</li>
+      <li>&quot;current_index-0--page_size-20&quot;</li>
+      <li>&quot;current_index-1--page_size-20&quot;</li>
+      <li>&quot;current_index-10--page_size-20&quot;</li>
+    </ul>
 
     Examples of invalid page token strings:
-    * "1"
-    * "current_index-0--page_size-20"
-    * "current_index--1--page_size-20"
-    * "current_index1--page_size-20"
-    * "current_index-1--page_size--20"
+    <ul>
+      <li>&quot;1&quot;</li>
+      <li>&quot;current_index-0--page_size-20&quot;</li>
+      <li>&quot;current_index--1--page_size-20&quot;</li>
+      <li>&quot;current_index1--page_size-20&quot;</li>
+      <li>&quot;current_index-1--page_size--20&quot;</li>
+    </ul>
     """
     def __init__(
         self,
@@ -2869,8 +2965,8 @@ class ListParametersResponse(google.protobuf.message.Message):
     next_page_token: builtins.str
     """Token to retrieve the next page of results, or empty if there are no
     more results in the list.
-    Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>--sub_field-<SUB_FIELD>`
-    where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `parameters`)
+    Format: <code>current_index-&lt;CURRENT_INDEX&gt;--page_size-&lt;PAGE_SIZE&gt;--sub_field-&lt;SUB_FIELD&gt;</code>
+    where &lt;CURRENT_INDEX&gt; and &lt;PAGE_SIZE&gt; are of type int, &lt;SUB_FIELD&gt; is of type str (example: <code>parameters</code>)
     """
     @property
     def parameters(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Intent.Parameter]:
@@ -2900,7 +2996,7 @@ class ListTrainingPhrasesofIntentsWithEnrichmentRequest(google.protobuf.message.
     PAGE_TOKEN_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The name of the agent to delete all entities types for. Format:
-    `projects/&lt;project_uuid&gt;/agent`.
+    <code>projects/&lt;project_uuid&gt;/agent</code>.
     """
     language_code: builtins.str
     """Optional. The language code used to filter out prompts."""
@@ -2910,24 +3006,30 @@ class ListTrainingPhrasesofIntentsWithEnrichmentRequest(google.protobuf.message.
     The page token is a string representing the current index and page size.
 
     Valid page token strings:
-    * "" (empty string) - Retrieves the first page.
-    * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    <ul>
+      <li>&quot;&quot; (empty string) - Retrieves the first page.</li>
+      <li>&quot;current_index-0--page_size-20&quot; - Retrieves the first page with a page size of 20.</li>
+      <li>&quot;current_index-1--page_size-20&quot; - Retrieves the second page with a page size of 20.</li>
+    </ul>
 
     Index starts at 0.
 
     Examples of valid page token strings:
-    * ""
-    * "current_index-0--page_size-20"
-    * "current_index-1--page_size-20"
-    * "current_index-10--page_size-20"
+    <ul>
+      <li>&quot;&quot;</li>
+      <li>&quot;current_index-0--page_size-20&quot;</li>
+      <li>&quot;current_index-1--page_size-20&quot;</li>
+      <li>&quot;current_index-10--page_size-20&quot;</li>
+    </ul>
 
     Examples of invalid page token strings:
-    * "1"
-    * "current_index-0--page_size-20"
-    * "current_index--1--page_size-20"
-    * "current_index1--page_size-20"
-    * "current_index-1--page_size--20"
+    <ul>
+      <li>&quot;1&quot;</li>
+      <li>&quot;current_index-0--page_size-20&quot;</li>
+      <li>&quot;current_index--1--page_size-20&quot;</li>
+      <li>&quot;current_index1--page_size-20&quot;</li>
+      <li>&quot;current_index-1--page_size--20&quot;</li>
+    </ul>
     """
     @property
     def intent_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
@@ -2958,8 +3060,8 @@ class ListTrainingPhrasesofIntentsWithEnrichmentResponse(google.protobuf.message
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
     next_page_token: builtins.str
     """Optional. The next_page_token value returned from a previous list request.
-    Format: `current_index-<CURRENT_INDEX>--page_size-<PAGE_SIZE>--sub_field-<SUB_FIELD>`
-    where <CURRENT_INDEX> and <PAGE_SIZE> are of type int, <SUB_FIELD> is of type str (example: `parameters`)
+    Format: <code>current_index-&lt;CURRENT_INDEX&gt;--page_size-&lt;PAGE_SIZE&gt;--sub_field-&lt;SUB_FIELD&gt;</code>
+    where &lt;CURRENT_INDEX&gt; and &lt;PAGE_SIZE&gt; are of type int, &lt;SUB_FIELD&gt; is of type str (example: <code>parameters</code>)
     """
     @property
     def training_phrases(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:

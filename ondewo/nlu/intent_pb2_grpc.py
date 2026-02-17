@@ -28,37 +28,19 @@ if _version_not_supported:
 
 
 class IntentsStub(object):
-    """An intent represents a mapping between input from a user and an action to
-    be taken by your application. When you pass user input to the
-    [DetectIntent][google.cloud.dialogflow.v2.Sessions.DetectIntent] (or
-    [StreamingDetectIntent][google.cloud.dialogflow.v2.Sessions.StreamingDetectIntent]) method, the
-    Dialogflow API analyzes the input and searches
-    for a matching intent. If no match is found, the Dialogflow API returns a
-    fallback intent (`is_fallback` = true).
+    """An intent represents a mapping between input from a user and an action to be taken by your application. When you pass user input to the <a href="index.html#ondewo.nlu.Sessions.DetectIntent">DetectIntent</a> (or <a href="index.html#ondewo.nlu.Sessions.StreamingDetectIntent">StreamingDetectIntent</a>) method, the Dialogflow API analyzes the input and searches for a matching intent. If no match is found, the Dialogflow API returns a fallback intent (<code>is_fallback</code> = true).
 
-    You can provide additional information for the Dialogflow API to use to
-    match user input to an intent by adding the following to your intent.
+    You can provide additional information for the Dialogflow API to use to match user input to an intent by adding the following to your intent.
 
-    *   **Contexts** - provide additional context for intent analysis. For
-    example, if an intent is related to an object in your application that
-    plays music, you can provide a context to determine when to match the
-    intent if the user input is “turn it off”.  You can include a context
-    that matches the intent when there is previous user input of
-    "play music", and not when there is previous user input of
-    "turn on the light".
+    <ul>
+    <li><strong>Contexts</strong> - provide additional context for intent analysis. For example, if an intent is related to an object in your application that plays music, you can provide a context to determine when to match the intent if the user input is &quot;turn it off&quot;.  You can include a context that matches the intent when there is previous user input of &quot;play music&quot;, and not when there is previous user input of &quot;turn on the light&quot;.</li>
 
-    *   **Events** - allow for matching an intent by using an event name
-    instead of user input. Your application can provide an event name and
-    related parameters to the Dialogflow API to match an intent. For
-    example, when your application starts, you can send a welcome event
-    with a user name parameter to the Dialogflow API to match an intent with
-    a personalized welcome message for the user.
+    <li><strong>Events</strong> - allow for matching an intent by using an event name instead of user input. Your application can provide an event name and related parameters to the Dialogflow API to match an intent. For example, when your application starts, you can send a welcome event with a user name parameter to the Dialogflow API to match an intent with a personalized welcome message for the user.</li>
 
-    *   **Training phrases** - provide examples of user input to train the
-    Dialogflow API agent to better match intents.
+    <li><strong>Training phrases</strong> - provide examples of user input to train the Dialogflow API agent to better match intents.</li>
+    </ul>
 
-    For more information about intents, see the
-    [Dialogflow documentation](https://dialogflow.com/docs/intents).
+    For more information about intents, see the <a href="https://dialogflow.com/docs/intents">Dialogflow documentation</a>.
     """
 
     def __init__(self, channel):
@@ -205,37 +187,19 @@ class IntentsStub(object):
 
 
 class IntentsServicer(object):
-    """An intent represents a mapping between input from a user and an action to
-    be taken by your application. When you pass user input to the
-    [DetectIntent][google.cloud.dialogflow.v2.Sessions.DetectIntent] (or
-    [StreamingDetectIntent][google.cloud.dialogflow.v2.Sessions.StreamingDetectIntent]) method, the
-    Dialogflow API analyzes the input and searches
-    for a matching intent. If no match is found, the Dialogflow API returns a
-    fallback intent (`is_fallback` = true).
+    """An intent represents a mapping between input from a user and an action to be taken by your application. When you pass user input to the <a href="index.html#ondewo.nlu.Sessions.DetectIntent">DetectIntent</a> (or <a href="index.html#ondewo.nlu.Sessions.StreamingDetectIntent">StreamingDetectIntent</a>) method, the Dialogflow API analyzes the input and searches for a matching intent. If no match is found, the Dialogflow API returns a fallback intent (<code>is_fallback</code> = true).
 
-    You can provide additional information for the Dialogflow API to use to
-    match user input to an intent by adding the following to your intent.
+    You can provide additional information for the Dialogflow API to use to match user input to an intent by adding the following to your intent.
 
-    *   **Contexts** - provide additional context for intent analysis. For
-    example, if an intent is related to an object in your application that
-    plays music, you can provide a context to determine when to match the
-    intent if the user input is “turn it off”.  You can include a context
-    that matches the intent when there is previous user input of
-    "play music", and not when there is previous user input of
-    "turn on the light".
+    <ul>
+    <li><strong>Contexts</strong> - provide additional context for intent analysis. For example, if an intent is related to an object in your application that plays music, you can provide a context to determine when to match the intent if the user input is &quot;turn it off&quot;.  You can include a context that matches the intent when there is previous user input of &quot;play music&quot;, and not when there is previous user input of &quot;turn on the light&quot;.</li>
 
-    *   **Events** - allow for matching an intent by using an event name
-    instead of user input. Your application can provide an event name and
-    related parameters to the Dialogflow API to match an intent. For
-    example, when your application starts, you can send a welcome event
-    with a user name parameter to the Dialogflow API to match an intent with
-    a personalized welcome message for the user.
+    <li><strong>Events</strong> - allow for matching an intent by using an event name instead of user input. Your application can provide an event name and related parameters to the Dialogflow API to match an intent. For example, when your application starts, you can send a welcome event with a user name parameter to the Dialogflow API to match an intent with a personalized welcome message for the user.</li>
 
-    *   **Training phrases** - provide examples of user input to train the
-    Dialogflow API agent to better match intents.
+    <li><strong>Training phrases</strong> - provide examples of user input to train the Dialogflow API agent to better match intents.</li>
+    </ul>
 
-    For more information about intents, see the
-    [Dialogflow documentation](https://dialogflow.com/docs/intents).
+    For more information about intents, see the <a href="https://dialogflow.com/docs/intents">Dialogflow documentation</a>.
     """
 
     def ListIntents(self, request, context):
@@ -276,7 +240,7 @@ class IntentsServicer(object):
     def BatchUpdateIntents(self, request, context):
         """Updates/Creates multiple intents in the specified agent.
 
-        Operation <response: [BatchUpdateIntentsResponse][google.cloud.dialogflow.v2.BatchUpdateIntentsResponse]>
+        Operation &lt;response: <a href="index.html#ondewo.nlu.BatchUpdateIntentsResponse">BatchUpdateIntentsResponse</a>&gt;
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -284,8 +248,8 @@ class IntentsServicer(object):
 
     def BatchDeleteIntents(self, request, context):
         """Deletes intents in the specified agent.
-
-        Operation <response: [google.protobuf.Empty][google.protobuf.Empty]>
+        <br>
+        Operation &lt;response: <a href="https://protobuf.dev/reference/protobuf/google.protobuf/#empty">google.protobuf.Empty</a>&gt;
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -584,37 +548,19 @@ def add_IntentsServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class Intents(object):
-    """An intent represents a mapping between input from a user and an action to
-    be taken by your application. When you pass user input to the
-    [DetectIntent][google.cloud.dialogflow.v2.Sessions.DetectIntent] (or
-    [StreamingDetectIntent][google.cloud.dialogflow.v2.Sessions.StreamingDetectIntent]) method, the
-    Dialogflow API analyzes the input and searches
-    for a matching intent. If no match is found, the Dialogflow API returns a
-    fallback intent (`is_fallback` = true).
+    """An intent represents a mapping between input from a user and an action to be taken by your application. When you pass user input to the <a href="index.html#ondewo.nlu.Sessions.DetectIntent">DetectIntent</a> (or <a href="index.html#ondewo.nlu.Sessions.StreamingDetectIntent">StreamingDetectIntent</a>) method, the Dialogflow API analyzes the input and searches for a matching intent. If no match is found, the Dialogflow API returns a fallback intent (<code>is_fallback</code> = true).
 
-    You can provide additional information for the Dialogflow API to use to
-    match user input to an intent by adding the following to your intent.
+    You can provide additional information for the Dialogflow API to use to match user input to an intent by adding the following to your intent.
 
-    *   **Contexts** - provide additional context for intent analysis. For
-    example, if an intent is related to an object in your application that
-    plays music, you can provide a context to determine when to match the
-    intent if the user input is “turn it off”.  You can include a context
-    that matches the intent when there is previous user input of
-    "play music", and not when there is previous user input of
-    "turn on the light".
+    <ul>
+    <li><strong>Contexts</strong> - provide additional context for intent analysis. For example, if an intent is related to an object in your application that plays music, you can provide a context to determine when to match the intent if the user input is &quot;turn it off&quot;.  You can include a context that matches the intent when there is previous user input of &quot;play music&quot;, and not when there is previous user input of &quot;turn on the light&quot;.</li>
 
-    *   **Events** - allow for matching an intent by using an event name
-    instead of user input. Your application can provide an event name and
-    related parameters to the Dialogflow API to match an intent. For
-    example, when your application starts, you can send a welcome event
-    with a user name parameter to the Dialogflow API to match an intent with
-    a personalized welcome message for the user.
+    <li><strong>Events</strong> - allow for matching an intent by using an event name instead of user input. Your application can provide an event name and related parameters to the Dialogflow API to match an intent. For example, when your application starts, you can send a welcome event with a user name parameter to the Dialogflow API to match an intent with a personalized welcome message for the user.</li>
 
-    *   **Training phrases** - provide examples of user input to train the
-    Dialogflow API agent to better match intents.
+    <li><strong>Training phrases</strong> - provide examples of user input to train the Dialogflow API agent to better match intents.</li>
+    </ul>
 
-    For more information about intents, see the
-    [Dialogflow documentation](https://dialogflow.com/docs/intents).
+    For more information about intents, see the <a href="https://dialogflow.com/docs/intents">Dialogflow documentation</a>.
     """
 
     @staticmethod

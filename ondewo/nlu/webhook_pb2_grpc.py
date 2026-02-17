@@ -82,7 +82,7 @@ class WebhookServicer(object):
 
     def SlotFilling(self, request, context):
         """send a request for /slot_filling/ to the webhook server
-        parameter values can be provided &
+        parameter values can be provided &amp;
         context information can be changed by the webhook server
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -103,7 +103,7 @@ class WebhookServicer(object):
         If the specified session entity type already exists, overrides the session
         entity type.
 
-        This method doesn't work with Google Assistant integration.
+        This method doesn&apos;t work with Google Assistant integration.
         Contact Dialogflow support if you need to use session entities
         with Google Assistant integration.
         """
@@ -114,7 +114,7 @@ class WebhookServicer(object):
     def UpdateSessionEntityType(self, request, context):
         """Updates the specified session entity type.
 
-        This method doesn't work with Google Assistant integration.
+        This method doesn&apos;t work with Google Assistant integration.
         Contact Dialogflow support if you need to use session entities
         with Google Assistant integration.
         """
@@ -125,7 +125,7 @@ class WebhookServicer(object):
     def DeleteSessionEntityType(self, request, context):
         """Deletes the specified session entity type.
 
-        This method doesn't work with Google Assistant integration.
+        This method doesn&apos;t work with Google Assistant integration.
         Contact Dialogflow support if you need to use session entities
         with Google Assistant integration.
         """

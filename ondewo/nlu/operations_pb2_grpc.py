@@ -29,13 +29,7 @@ if _version_not_supported:
 class OperationsStub(object):
     """Manages long-running operations with an API service.
 
-    When an API method normally takes long time to complete, it can be designed
-    to return [Operation][ondewo.nlu.Operation] to the client, and the client can use this
-    interface to receive the real response asynchronously by polling the
-    operation resource, or pass the operation resource to another API (such as
-    Google Cloud Pub/Sub API) to receive the response.  Any API service that
-    returns long-running operations should implement the `Operations` interface
-    so developers can have a consistent client experience.
+    When an API method normally takes long time to complete, it can be designed to return <a href="index.html#ondewo.nlu.Operation">Operation</a> to the client, and the client can use this interface to receive the real response asynchronously by polling the operation resource, or pass the operation resource to another API (such as Google Cloud Pub/Sub API) to receive the response.  Any API service that returns long-running operations should implement the <code>Operations</code> interface so developers can have a consistent client experience.
     """
 
     def __init__(self, channel):
@@ -69,21 +63,15 @@ class OperationsStub(object):
 class OperationsServicer(object):
     """Manages long-running operations with an API service.
 
-    When an API method normally takes long time to complete, it can be designed
-    to return [Operation][ondewo.nlu.Operation] to the client, and the client can use this
-    interface to receive the real response asynchronously by polling the
-    operation resource, or pass the operation resource to another API (such as
-    Google Cloud Pub/Sub API) to receive the response.  Any API service that
-    returns long-running operations should implement the `Operations` interface
-    so developers can have a consistent client experience.
+    When an API method normally takes long time to complete, it can be designed to return <a href="index.html#ondewo.nlu.Operation">Operation</a> to the client, and the client can use this interface to receive the real response asynchronously by polling the operation resource, or pass the operation resource to another API (such as Google Cloud Pub/Sub API) to receive the response.  Any API service that returns long-running operations should implement the <code>Operations</code> interface so developers can have a consistent client experience.
     """
 
     def ListOperations(self, request, context):
         """Lists operations that match the specified filter in the request. If the
-        server doesn't support this method, it returns `UNIMPLEMENTED`.
-
-        NOTE: the `name` binding below allows API services to override the binding
-        to use different resource name schemes, such as `users/*/operations`.
+        server doesn&apos;t support this method, it returns <code>UNIMPLEMENTED</code>.
+        <br>
+        NOTE: the <code>name</code> binding below allows API services to override the binding
+        to use different resource name schemes, such as <code>users/*/operations</code>.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -101,8 +89,8 @@ class OperationsServicer(object):
     def DeleteOperation(self, request, context):
         """Deletes a long-running operation. This method indicates that the client is
         no longer interested in the operation result. It does not cancel the
-        operation. If the server doesn't support this method, it returns
-        `google.rpc.Code.UNIMPLEMENTED`.
+        operation. If the server doesn&apos;t support this method, it returns
+        <code>google.rpc.Code.UNIMPLEMENTED</code>
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -111,14 +99,14 @@ class OperationsServicer(object):
     def CancelOperation(self, request, context):
         """Starts asynchronous cancellation on a long-running operation.  The server
         makes a best effort to cancel the operation, but success is not
-        guaranteed.  If the server doesn't support this method, it returns
-        `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
-        [Operations.GetOperation][ondewo.nlu.Operations.GetOperation] or
+        guaranteed.  If the server doesn&apos;t support this method, it returns
+        <code>google.rpc.Code.UNIMPLEMENTED</code>.  Clients can use
+        <a href="index.html#ondewo.nlu.Operations.GetOperation">Operations.GetOperation</a> or
         other methods to verify whether the cancellation succeeded or whether the
         operation completed despite cancellation. On successful cancellation,
         the operation is not deleted; instead, it becomes an operation with
-        an [Operation.error][ondewo.nlu.Operation.error] value with a [google.rpc.Status.code][google.rpc.Status.code]
-        of 1, corresponding to `Code.CANCELLED`.
+        an <a href="index.html#ondewo.nlu.Operation">Operation.error</a> value with a <a href="https://developers.google.com/actions-center/reference/grpc-api/status_codes">google.rpc.Status.code</a>
+        of 1, corresponding to <code>Code.CANCELLED</code>.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -158,13 +146,7 @@ def add_OperationsServicer_to_server(servicer, server):
 class Operations(object):
     """Manages long-running operations with an API service.
 
-    When an API method normally takes long time to complete, it can be designed
-    to return [Operation][ondewo.nlu.Operation] to the client, and the client can use this
-    interface to receive the real response asynchronously by polling the
-    operation resource, or pass the operation resource to another API (such as
-    Google Cloud Pub/Sub API) to receive the response.  Any API service that
-    returns long-running operations should implement the `Operations` interface
-    so developers can have a consistent client experience.
+    When an API method normally takes long time to complete, it can be designed to return <a href="index.html#ondewo.nlu.Operation">Operation</a> to the client, and the client can use this interface to receive the real response asynchronously by polling the operation resource, or pass the operation resource to another API (such as Google Cloud Pub/Sub API) to receive the response.  Any API service that returns long-running operations should implement the <code>Operations</code> interface so developers can have a consistent client experience.
     """
 
     @staticmethod

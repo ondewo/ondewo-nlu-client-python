@@ -28,10 +28,7 @@ if _version_not_supported:
 
 
 class SessionsStub(object):
-    """A session represents an interaction with a user. You retrieve user input
-    and pass it to the [DetectIntent][google.cloud.dialogflow.v2.Sessions.DetectIntent] (or
-    [StreamingDetectIntent][google.cloud.dialogflow.v2.Sessions.StreamingDetectIntent]) method to determine
-    user intent and respond.
+    """A session represents an interaction with a user. You retrieve user input and pass it to the <a href="index.html#ondewo.nlu.Sessions.DetectIntent">DetectIntent</a> (or <a href="index.html#ondewo.nlu.Sessions.StreamingDetectIntent">StreamingDetectIntent</a>) method to determine user intent and respond.
     """
 
     def __init__(self, channel):
@@ -243,10 +240,7 @@ class SessionsStub(object):
 
 
 class SessionsServicer(object):
-    """A session represents an interaction with a user. You retrieve user input
-    and pass it to the [DetectIntent][google.cloud.dialogflow.v2.Sessions.DetectIntent] (or
-    [StreamingDetectIntent][google.cloud.dialogflow.v2.Sessions.StreamingDetectIntent]) method to determine
-    user intent and respond.
+    """A session represents an interaction with a user. You retrieve user input and pass it to the <a href="index.html#ondewo.nlu.Sessions.DetectIntent">DetectIntent</a> (or <a href="index.html#ondewo.nlu.Sessions.StreamingDetectIntent">StreamingDetectIntent</a>) method to determine user intent and respond.
     """
 
     def DetectIntent(self, request, context):
@@ -270,6 +264,7 @@ class SessionsServicer(object):
 
     def ListSessions(self, request, context):
         """*** SESSION RELATED ENDPOINTS *** //
+
         ListSessions: returns list of sessions from ondewo-kb; by default returns only session IDs
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -327,6 +322,7 @@ class SessionsServicer(object):
 
     def ListSessionLabels(self, request, context):
         """*** SESSION-LABEL RELATED ENDPOINTS *** //
+
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -454,6 +450,7 @@ class SessionsServicer(object):
 
     def ListSessionReviews(self, request, context):
         """*** SESSION-REVIEW RELATED ENDPOINTS *** //
+
         ListSessionReviews:
         returns list of session reviews from ondewo-kb; by default only returns session review IDs
         """
@@ -742,10 +739,7 @@ def add_SessionsServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class Sessions(object):
-    """A session represents an interaction with a user. You retrieve user input
-    and pass it to the [DetectIntent][google.cloud.dialogflow.v2.Sessions.DetectIntent] (or
-    [StreamingDetectIntent][google.cloud.dialogflow.v2.Sessions.StreamingDetectIntent]) method to determine
-    user intent and respond.
+    """A session represents an interaction with a user. You retrieve user input and pass it to the <a href="index.html#ondewo.nlu.Sessions.DetectIntent">DetectIntent</a> (or <a href="index.html#ondewo.nlu.Sessions.StreamingDetectIntent">StreamingDetectIntent</a>) method to determine user intent and respond.
     """
 
     @staticmethod

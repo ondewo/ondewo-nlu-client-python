@@ -15,7 +15,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-Modifications Copyright 2020-2023 ONDEWO GmbH
+Modifications Copyright 2020-2026 ONDEWO GmbH
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -83,7 +83,7 @@ class WebhookRequest(google.protobuf.message.Message):
     HEADERS_FIELD_NUMBER: builtins.int
     response_id: builtins.str
     """The unique identifier of the response. Contains the same value as
-    `[Streaming]DetectIntentResponse.response_id`.
+    <code>[Streaming]DetectIntentResponse.response_id</code>.
     """
     session: builtins.str
     """The unique identifier of detectIntent request session.
@@ -93,14 +93,12 @@ class WebhookRequest(google.protobuf.message.Message):
     @property
     def query_result(self) -> ondewo.nlu.session_pb2.QueryResult:
         """The result of the conversational query or event processing. Contains the
-        same value as `[Streaming]DetectIntentResponse.query_result`.
+        same value as <code>[Streaming]DetectIntentResponse.query_result</code>.
         """
 
     @property
     def original_detect_intent_request(self) -> global___OriginalDetectIntentRequest:
-        """Optional. The contents of the original request that was passed to
-        `[Streaming]DetectIntent` call.
-        """
+        """Optional. The contents of the original request that was passed to <code>[Streaming]DetectIntent</code> call."""
 
     @property
     def headers(self) -> google.protobuf.struct_pb2.Struct:
@@ -135,35 +133,35 @@ class WebhookResponse(google.protobuf.message.Message):
     SESSION_ENTITY_TYPES_FIELD_NUMBER: builtins.int
     fulfillment_text: builtins.str
     """Optional. The text to be shown on the screen. This value is passed directly
-    to `QueryResult.fulfillment_text`.
+    to <code>QueryResult.fulfillment_text</code>.
     """
     source: builtins.str
-    """Optional. This value is passed directly to `QueryResult.webhook_source`."""
+    """Optional. This value is passed directly to <code>QueryResult.webhook_source</code>."""
     @property
     def fulfillment_messages(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.intent_pb2.Intent.Message]:
         """Optional. The collection of rich messages to present to the user. This
-        value is passed directly to `QueryResult.fulfillment_messages`.
+        value is passed directly to <code>QueryResult.fulfillment_messages</code>.
         """
 
     @property
     def payload(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. This value is passed directly to `QueryResult.webhook_payload`.
-        See the related `fulfillment_messages[i].payload field`, which may be used
+        """Optional. This value is passed directly to <code>QueryResult.webhook_payload</code>.
+        See the related <code>fulfillment_messages[i].payload field</code>, which may be used
         as an alternative to this field.
 
         This field can be used for Actions on Google responses.
         It should have a structure similar to the JSON message shown here. For more
         information, see
-        [Actions on Google Webhook
-        Format](https://developers.google.com/actions/dialogflow/webhook)
+        <a href="https://developers.google.com/actions/dialogflow/webhook">Actions on Google Webhook
+        Format</a>
         <pre>{
-          "google": {
-            "expectUserResponse": true,
-            "richResponse": {
-              "items": [
+          &quot;google&quot;: {
+            &quot;expectUserResponse&quot;: true,
+            &quot;richResponse&quot;: {
+              &quot;items&quot;: [
                 {
-                  "simpleResponse": {
-                    "textToSpeech": "this is a simple response"
+                  &quot;simpleResponse&quot;: {
+                    &quot;textToSpeech&quot;: &quot;this is a simple response&quot;
                   }
                 }
               ]
@@ -175,12 +173,12 @@ class WebhookResponse(google.protobuf.message.Message):
     @property
     def output_contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]:
         """Optional. The collection of output contexts. This value is passed directly
-        to `QueryResult.output_contexts`.
+        to <code>QueryResult.output_contexts</code>.
         """
 
     @property
     def followup_event_input(self) -> ondewo.nlu.session_pb2.EventInput:
-        """Optional. Makes the platform immediately invoke another `DetectIntent` call
+        """Optional. Makes the platform immediately invoke another <code>DetectIntent</code> call
         internally with the specified event as input.
         """
 
@@ -189,7 +187,7 @@ class WebhookResponse(google.protobuf.message.Message):
         """Optional. Additional session entity types to replace or extend developer
         entity types with. The entity synonyms apply to all languages and persist
         for the session. Setting this data from a webhook overwrites
-        the session entity types that have been set using `detectIntent` method.
+        the session entity types that have been set using <code>detectIntent</code> method.
         """
 
     def __init__(
@@ -210,28 +208,26 @@ global___WebhookResponse = WebhookResponse
 
 @typing.final
 class OriginalDetectIntentRequest(google.protobuf.message.Message):
-    """Represents the contents of the original request that was passed to
-    the `[Streaming]DetectIntent` call.
-    """
+    """Represents the contents of the original request that was passed to the <code>[Streaming]DetectIntent</code> call."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     SOURCE_FIELD_NUMBER: builtins.int
     PAYLOAD_FIELD_NUMBER: builtins.int
     source: builtins.str
-    """The source of this request, e.g., `google`, `facebook`, `slack` or other "platforms". .
-    Used to identify the "platform"
+    """The source of this request, e.g., <code>google</code>, <code>facebook</code>, <code>slack</code> or other &quot;platforms&quot;. .
+    Used to identify the &quot;platform&quot;
     """
     @property
     def payload(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. This field is set to the value of the `QueryParameters.payload`
+        """Optional. This field is set to the value of the <code>QueryParameters.payload</code>
         field passed in the request. Some integrations that query an
         agent may provide additional data in the payload.
 
         In particular this can be of the form:
         <pre>{
-         "a": {
-           "b": "c"
+         &quot;a&quot;: {
+           &quot;b&quot;: &quot;c&quot;
          }
         }</pre>
         """
@@ -256,7 +252,7 @@ class PingResponse(google.protobuf.message.Message):
     IS_REACHABLE_FIELD_NUMBER: builtins.int
     is_reachable: builtins.bool
     """This is the response message of a Ping request.
-    It's purpose is to report the reachability of a Webhook server.
+    It&apos;s purpose is to report the reachability of a Webhook server.
     """
     def __init__(
         self,
@@ -269,14 +265,9 @@ global___PingResponse = PingResponse
 
 @typing.final
 class SessionEntityType(google.protobuf.message.Message):
-    """A session represents a conversation between a Dialogflow agent and an
-    end-user. You can create special entities, called session entities, during a
-    session. Session entities can extend or replace custom entity types and only
-    exist during the session that they were created for. All session data,
-    including session entities, is stored by Dialogflow for 20 minutes.
+    """A session represents a conversation between a Dialogflow agent and an end-user. You can create special entities, called session entities, during a session. Session entities can extend or replace custom entity types and only exist during the session that they were created for. All session data, including session entities, is stored by Dialogflow for 20 minutes.
 
-    For more information, see the [session entity
-    guide](https://cloud.google.com/dialogflow/docs/entities-session).
+    For more information, see the <a href="https://cloud.google.com/dialogflow/docs/entities-session">session entity guide</a>.
     """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -297,12 +288,12 @@ class SessionEntityType(google.protobuf.message.Message):
         """The collection of session entities extends the collection of entities in
         the corresponding custom entity type.
 
-        Note: Even in this override mode calls to `ListSessionEntityTypes`,
-        `GetSessionEntityType`, `CreateSessionEntityType` and
-        `UpdateSessionEntityType` only return the additional entities added in
+        Note: Even in this override mode calls to <code>ListSessionEntityTypes</code>,
+        <code>GetSessionEntityType</code>, <code>CreateSessionEntityType</code> and
+        <code>UpdateSessionEntityType</code> only return the additional entities added in
         this session entity type. If you want to get the supplemented list,
         please call
-        [EntityTypes.GetEntityType][google.cloud.dialogflow.v2.EntityTypes.GetEntityType]
+        <a href="index.html#ondewo.nlu.EntityTypes.GetEntityType">EntityTypes.GetEntityType</a>
         on the custom entity type and merge.
         """
 
@@ -319,12 +310,12 @@ class SessionEntityType(google.protobuf.message.Message):
     """The collection of session entities extends the collection of entities in
     the corresponding custom entity type.
 
-    Note: Even in this override mode calls to `ListSessionEntityTypes`,
-    `GetSessionEntityType`, `CreateSessionEntityType` and
-    `UpdateSessionEntityType` only return the additional entities added in
+    Note: Even in this override mode calls to <code>ListSessionEntityTypes</code>,
+    <code>GetSessionEntityType</code>, <code>CreateSessionEntityType</code> and
+    <code>UpdateSessionEntityType</code> only return the additional entities added in
     this session entity type. If you want to get the supplemented list,
     please call
-    [EntityTypes.GetEntityType][google.cloud.dialogflow.v2.EntityTypes.GetEntityType]
+    <a href="index.html#ondewo.nlu.EntityTypes.GetEntityType">EntityTypes.GetEntityType</a>
     on the custom entity type and merge.
     """
 
@@ -333,14 +324,14 @@ class SessionEntityType(google.protobuf.message.Message):
     ENTITIES_FIELD_NUMBER: builtins.int
     name: builtins.str
     """Required. The unique identifier of this session entity type. Format:
-    `projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/entityTypes/<Entity Type
-    Display Name>`, or `projects/&lt;project_uuid&gt;/agent/environments/
-    <&lt;environment_uuid&gt;/users/&lt;user_uuid&gt;/sessions/&lt;session_uuid&gt;/entityTypes/<Entity Type Display
-    Name>`.
-    If `Environment ID` is not specified, we assume default 'draft'
-    environment. If `User ID` is not specified, we assume default '-' user.
+    <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/entityTypes/&lt;Entity Type
+    Display Name&gt;</code>, or <code>projects/&lt;project_uuid&gt;/agent/environments/
+    &lt;&lt;environment_uuid&gt;/users/&lt;user_uuid&gt;/sessions/&lt;session_uuid&gt;/entityTypes/&lt;Entity Type Display
+    Name&gt;</code>.
+    If <code>Environment ID</code> is not specified, we assume default <code>&apos;draft&apos;</code>
+    environment. If <code>User ID</code> is not specified, we assume default <code>&apos;-&apos;</code> user.
 
-    `<Entity Type Display Name>` must be the display name of an existing entity
+    <code>&lt;Entity Type Display Name&gt;</code> must be the display name of an existing entity
     type in the same agent that will be overridden or supplemented.
     """
     entity_override_mode: global___SessionEntityType.EntityOverrideMode.ValueType
@@ -366,9 +357,7 @@ global___SessionEntityType = SessionEntityType
 
 @typing.final
 class ListSessionEntityTypesRequest(google.protobuf.message.Message):
-    """The request message for
-    [SessionEntityTypes.ListSessionEntityTypes][google.cloud.dialogflow.v2.SessionEntityTypes.ListSessionEntityTypes].
-    """
+    """The request message for <a href="index.html#ondewo.nlu.Webhook.ListSessionEntityTypes">Webhook.ListSessionEntityTypes</a>."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -377,11 +366,11 @@ class ListSessionEntityTypesRequest(google.protobuf.message.Message):
     PAGE_TOKEN_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The session to list all session entity types from.
-    Format: `projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;` or
-    `projects/&lt;project_uuid&gt;/agent/environments/&lt;environment_uuid&gt;/users/&lt;user_uuid&gt;/
-    sessions/&lt;session_uuid&gt;`.
-    If `Environment ID` is not specified, we assume default 'draft'
-    environment. If `User ID` is not specified, we assume default '-' user.
+    Format: <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code> or
+    <code>projects/&lt;project_uuid&gt;/agent/environments/&lt;environment_uuid&gt;/users/&lt;user_uuid&gt;/
+    sessions/&lt;session_uuid&gt;</code>.
+    If <code>Environment ID</code> is not specified, we assume default <code>&apos;draft&apos;</code>
+    environment. If <code>User ID</code> is not specified, we assume default <code>&apos;-&apos;</code> user.
     """
     page_size: builtins.int
     """Optional. The maximum number of items to return in a single page. By
@@ -393,24 +382,30 @@ class ListSessionEntityTypesRequest(google.protobuf.message.Message):
     The page token is a string representing the current index and page size.
 
     Valid page token strings:
-    * "" (empty string) - Retrieves the first page.
-    * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    <ul>
+        <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li>
+        <li><code>&quot;current_index-0--page_size-20&quot;</code> - Retrieves the first page with a page size of 20.</li>
+        <li><code>&quot;current_index-1--page_size-20&quot;</code> - Retrieves the second page with a page size of 20.</li>
+    </ul>
 
     Index starts at 0.
 
     Examples of valid page token strings:
-    * ""
-    * "current_index-0--page_size-20"
-    * "current_index-1--page_size-20"
-    * "current_index-10--page_size-20"
+    <ul>
+        <li><code>&quot;&quot;</code></li>
+        <li><code>&quot;current_index-0--page_size-20&quot;</code></li>
+        <li><code>&quot;current_index-1--page_size-20&quot;</code></li>
+        <li><code>&quot;current_index-10--page_size-20&quot;</code></li>
+    </ul>
 
     Examples of invalid page token strings:
-    * "1"
-    * "current_index-0--page_size-20"
-    * "current_index--1--page_size-20"
-    * "current_index1--page_size-20"
-    * "current_index-1--page_size--20"
+    <ul>
+        <li><code>&quot;1&quot;</code></li>
+        <li><code>&quot;current_index-0--page_size-20&quot;</code></li>
+        <li><code>&quot;current_index--1--page_size-20&quot;</code></li>
+        <li><code>&quot;current_index1--page_size-20&quot;</code></li>
+        <li><code>&quot;current_index-1--page_size--20&quot;</code></li>
+    </ul>
     """
     def __init__(
         self,
@@ -425,9 +420,7 @@ global___ListSessionEntityTypesRequest = ListSessionEntityTypesRequest
 
 @typing.final
 class ListSessionEntityTypesResponse(google.protobuf.message.Message):
-    """The response message for
-    [SessionEntityTypes.ListSessionEntityTypes][google.cloud.dialogflow.v2.SessionEntityTypes.ListSessionEntityTypes].
-    """
+    """The response message for <a href="index.html#ondewo.nlu.Webhook.ListSessionEntityTypes">Webhook.ListSessionEntityTypes</a>."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -455,21 +448,19 @@ global___ListSessionEntityTypesResponse = ListSessionEntityTypesResponse
 
 @typing.final
 class GetSessionEntityTypeRequest(google.protobuf.message.Message):
-    """The request message for
-    [SessionEntityTypes.GetSessionEntityType][google.cloud.dialogflow.v2.SessionEntityTypes.GetSessionEntityType].
-    """
+    """The request message for <a href="index.html#ondewo.nlu.Webhook.GetSessionEntityType">Webhook.GetSessionEntityType</a>."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     NAME_FIELD_NUMBER: builtins.int
     name: builtins.str
     """Required. The name of the session entity type. Format:
-    `projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/entityTypes/<Entity Type
-    Display Name>` or `projects/&lt;project_uuid&gt;/agent/environments/
-    <&lt;environment_uuid&gt;/users/&lt;user_uuid&gt;/sessions/&lt;session_uuid&gt;/entityTypes/<Entity Type Display
-    Name>`.
-    If `Environment ID` is not specified, we assume default 'draft'
-    environment. If `User ID` is not specified, we assume default '-' user.
+    <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/entityTypes/&lt;Entity Type
+    Display Name&gt;</code> or <code>projects/&lt;project_uuid&gt;/agent/environments/
+    &lt;&lt;environment_uuid&gt;/users/&lt;user_uuid&gt;/sessions/&lt;session_uuid&gt;/entityTypes/&lt;Entity Type Display
+    Name&gt;</code>.
+    If <code>Environment ID</code> is not specified, we assume default <code>&apos;draft&apos;</code>
+    environment. If <code>User ID</code> is not specified, we assume default <code>&apos;-&apos;</code> user.
     """
     def __init__(
         self,
@@ -482,9 +473,7 @@ global___GetSessionEntityTypeRequest = GetSessionEntityTypeRequest
 
 @typing.final
 class CreateSessionEntityTypeRequest(google.protobuf.message.Message):
-    """The request message for
-    [SessionEntityTypes.CreateSessionEntityType][google.cloud.dialogflow.v2.SessionEntityTypes.CreateSessionEntityType].
-    """
+    """The request message for <a href="index.html#ondewo.nlu.Webhook.CreateSessionEntityType">Webhook.CreateSessionEntityType</a>"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -500,10 +489,10 @@ class CreateSessionEntityTypeRequest(google.protobuf.message.Message):
     Format: <pre><code>projects/&lt;project_uuid&gt;/agents/sessions/&lt;session_uuid&gt;</code></pre>
     or
     <pre><code>projects/&lt;project_uuid&gt;/agents/sessions/&lt;session_uuid&gt;</code></pre>
-    `projects/&lt;project_uuid&gt;/agent/environments/&lt;environment_uuid&gt;/users/&lt;user_uuid&gt;/
-    sessions/&lt;session_uuid&gt;`.
-    If `Environment ID` is not specified, we assume default 'draft'
-    environment. If `User ID` is not specified, we assume default '-' user.
+    <code>projects/&lt;project_uuid&gt;/agent/environments/&lt;environment_uuid&gt;/users/&lt;user_uuid&gt;/
+    sessions/&lt;session_uuid&gt;</code>.
+    If <code>Environment ID</code> is not specified, we assume default <code>&apos;draft&apos;</code>
+    environment. If <code>User ID</code> is not specified, we assume default <code>&apos;-&apos;</code> user.
     Required. The project that the agent to fetch is associated with.
     The session to create a session entity type for.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agents/sessions/&lt;session_uuid&gt;</code></pre>
@@ -526,9 +515,7 @@ global___CreateSessionEntityTypeRequest = CreateSessionEntityTypeRequest
 
 @typing.final
 class UpdateSessionEntityTypeRequest(google.protobuf.message.Message):
-    """The request message for
-    [SessionEntityTypes.UpdateSessionEntityType][google.cloud.dialogflow.v2.SessionEntityTypes.UpdateSessionEntityType].
-    """
+    """The request message for <a href="index.html#ondewo.nlu.Webhook.UpdateSessionEntityType">Webhook.UpdateSessionEntityType</a>."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -555,21 +542,19 @@ global___UpdateSessionEntityTypeRequest = UpdateSessionEntityTypeRequest
 
 @typing.final
 class DeleteSessionEntityTypeRequest(google.protobuf.message.Message):
-    """The request message for
-    [SessionEntityTypes.DeleteSessionEntityType][google.cloud.dialogflow.v2.SessionEntityTypes.DeleteSessionEntityType].
-    """
+    """The request message for <a href="index.html#ondewo.nlu.Webhook.DeleteSessionEntityType">Webhook.DeleteSessionEntityType</a>."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     NAME_FIELD_NUMBER: builtins.int
     name: builtins.str
     """Required. The name of the entity type to delete. Format:
-    `projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/entityTypes/<Entity Type
-    Display Name>` or `projects/&lt;project_uuid&gt;/agent/environments/
-    <&lt;environment_uuid&gt;/users/&lt;user_uuid&gt;/sessions/&lt;session_uuid&gt;/entityTypes/<Entity Type Display
-    Name>`.
-    If `Environment ID` is not specified, we assume default 'draft'
-    environment. If `User ID` is not specified, we assume default '-' user.
+    <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/entityTypes/&lt;Entity Type
+    Display Name&gt;</code> or <code>projects/&lt;project_uuid&gt;/agent/environments/
+    &lt;&lt;environment_uuid&gt;/users/&lt;user_uuid&gt;/sessions/&lt;session_uuid&gt;/entityTypes/&lt;Entity Type Display
+    Name&gt;</code>.
+    If <code>Environment ID</code> is not specified, we assume default <code>&apos;draft&apos;</code>
+    environment. If <code>User ID</code> is not specified, we assume default <code>&apos;-&apos;</code> user.
     """
     def __init__(
         self,

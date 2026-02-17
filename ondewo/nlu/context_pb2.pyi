@@ -15,7 +15,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-Modifications Copyright 2020-2023 ONDEWO GmbH
+Modifications Copyright 2020-2026 ONDEWO GmbH
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -49,6 +49,8 @@ class Context(google.protobuf.message.Message):
 
     @typing.final
     class Parameter(google.protobuf.message.Message):
+        """Represents a parameter associated with a context"""
+
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
         NAME_FIELD_NUMBER: builtins.int
@@ -124,18 +126,26 @@ class Context(google.protobuf.message.Message):
     """Required. The display name of the context (must be unique per session).
 
     Note: we are deviating from the dialogflow format
-    `projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/contexts/&lt;context_uuid&gt;`.
+    <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/contexts/&lt;context_uuid&gt;</code>.
 
-    - DetectIntent only returns
-       - the short display name in the "name" field in query_result.output_contexts
-       - only expects the short display name in the "name" field in query_parameters.contexts
-    - Also inside the persisted session object only the short display name is used.
-       - SessionStep.contexts only contains the short display name
-       - SessionReviewStep.contexts only contains the short display name
+    <ul>
+      <li>DetectIntent only returns
+        <ul>
+          <li>the short display name in the &quot;name&quot; field in query_result.output_contexts</li>
+          <li>only expects the short display name in the &quot;name&quot; field in query_parameters.contexts</li>
+        </ul>
+      </li>
+      <li>Also inside the persisted session object only the short display name is used.
+        <ul>
+          <li>SessionStep.contexts only contains the short display name</li>
+          <li>SessionReviewStep.contexts only contains the short display name</li>
+        </ul>
+      </li>
+    </ul>
     """
     lifespan_count: builtins.int
     """Optional. The number of conversational query requests after which the
-    context expires. If set to `0` (the default) the context expires
+    context expires. If set to <code>0</code> (the default) the context expires
     immediately. Contexts expire automatically after 10 minutes even if there
     are no matching queries.
     """
@@ -148,7 +158,7 @@ class Context(google.protobuf.message.Message):
     @property
     def parameters(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, global___Context.Parameter]:
         """Optional. The collection of parameters associated with this context.
-        Refer to [this doc](https://dialogflow.com/docs/actions-and-parameters) for
+        Refer to <a href="https://dialogflow.com/docs/actions-and-parameters">this doc</a> for
         syntax.
         Keys are the display names of context parameters.
         """
@@ -180,7 +190,7 @@ global___Context = Context
 
 @typing.final
 class ListContextsRequest(google.protobuf.message.Message):
-    """The request message for [Contexts.ListContexts][google.cloud.dialogflow.v2.Contexts.ListContexts]."""
+    """The request message for <a href="index.html#ondewo.nlu.Contexts.ListContexts">Contexts.ListContexts</a>."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -197,24 +207,30 @@ class ListContextsRequest(google.protobuf.message.Message):
     The page token is a string representing the current index and page size.
 
     Valid page token strings:
-    * "" (empty string) - Retrieves the first page.
-    * "current_index-0--page_size-20" - Retrieves the first page with a page size of 20.
-    * "current_index-1--page_size-20" - Retrieves the second page with a page size of 20.
+    <ul>
+      <li>&quot;&quot; (empty string) - Retrieves the first page.</li>
+      <li>&quot;current_index-0--page_size-20&quot; - Retrieves the first page with a page size of 20.</li>
+      <li>&quot;current_index-1--page_size-20&quot; - Retrieves the second page with a page size of 20.</li>
+    </ul>
 
     Index starts at 0.
 
     Examples of valid page token strings:
-    * ""
-    * "current_index-0--page_size-20"
-    * "current_index-1--page_size-20"
-    * "current_index-10--page_size-20"
+    <ul>
+      <li>&quot;&quot;</li>
+      <li>&quot;current_index-0--page_size-20&quot;</li>
+      <li>&quot;current_index-1--page_size-20&quot;</li>
+      <li>&quot;current_index-10--page_size-20&quot;</li>
+    </ul>
 
     Examples of invalid page token strings:
-    * "1"
-    * "current_index-0--page_size-20"
-    * "current_index--1--page_size-20"
-    * "current_index1--page_size-20"
-    * "current_index-1--page_size--20"
+    <ul>
+      <li>&quot;1&quot;</li>
+      <li>&quot;current_index-0--page_size-20&quot;</li>
+      <li>&quot;current_index--1--page_size-20&quot;</li>
+      <li>&quot;current_index1--page_size-20&quot;</li>
+      <li>&quot;current_index-1--page_size--20&quot;</li>
+    </ul>
     """
     def __init__(
         self,
@@ -228,7 +244,7 @@ global___ListContextsRequest = ListContextsRequest
 
 @typing.final
 class ListContextsResponse(google.protobuf.message.Message):
-    """The response message for [Contexts.ListContexts][google.cloud.dialogflow.v2.Contexts.ListContexts]."""
+    """The response message for <a href="index.html#ondewo.nlu.Contexts.ListContexts">Contexts.ListContexts</a>."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -256,14 +272,14 @@ global___ListContextsResponse = ListContextsResponse
 
 @typing.final
 class GetContextRequest(google.protobuf.message.Message):
-    """The request message for [Contexts.GetContext][google.cloud.dialogflow.v2.Contexts.GetContext]."""
+    """The request message for <a href="index.html#ondewo.nlu.Contexts.GetContext">Contexts.GetContext</a>."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     NAME_FIELD_NUMBER: builtins.int
     name: builtins.str
     """Required. The name of the context. Format:
-    `projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/contexts/&lt;context_uuid&gt;`.
+    <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/contexts/&lt;context_uuid&gt;</code>.
     """
     def __init__(
         self,
@@ -276,7 +292,7 @@ global___GetContextRequest = GetContextRequest
 
 @typing.final
 class CreateContextRequest(google.protobuf.message.Message):
-    """The request message for [Contexts.CreateContext][google.cloud.dialogflow.v2.Contexts.CreateContext]."""
+    """The request message for <a href="index.html#ondewo.nlu.Contexts.CreateContext">Contexts.CreateContext</a>."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -303,7 +319,7 @@ global___CreateContextRequest = CreateContextRequest
 
 @typing.final
 class UpdateContextRequest(google.protobuf.message.Message):
-    """The request message for [Contexts.UpdateContext][google.cloud.dialogflow.v2.Contexts.UpdateContext]."""
+    """The request message for <a href="index.html#ondewo.nlu.Contexts.UpdateContext">Contexts.UpdateContext</a>."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -330,14 +346,14 @@ global___UpdateContextRequest = UpdateContextRequest
 
 @typing.final
 class DeleteContextRequest(google.protobuf.message.Message):
-    """The request message for [Contexts.DeleteContext][google.cloud.dialogflow.v2.Contexts.DeleteContext]."""
+    """The request message for <a href="index.html#ondewo.nlu.Contexts.DeleteContext">Contexts.DeleteContext</a>."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     NAME_FIELD_NUMBER: builtins.int
     name: builtins.str
     """Required. The name of the context to delete. Format:
-    `projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/contexts/&lt;context_uuid&gt;`.
+    <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/contexts/&lt;context_uuid&gt;</code>.
     """
     def __init__(
         self,
@@ -350,15 +366,15 @@ global___DeleteContextRequest = DeleteContextRequest
 
 @typing.final
 class DeleteAllContextsRequest(google.protobuf.message.Message):
-    """The request message for [Contexts.DeleteAllContexts][google.cloud.dialogflow.v2.Contexts.DeleteAllContexts].
-    Required. The name of the session to delete all contexts from.
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
-    """
+    """The request message for <a href="index.html#ondewo.nlu.Contexts.DeleteAllContexts">Contexts.DeleteAllContexts</a>."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     SESSION_ID_FIELD_NUMBER: builtins.int
     session_id: builtins.str
+    """Required. The name of the session to delete all contexts from.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
+    """
     def __init__(
         self,
         *,
