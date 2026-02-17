@@ -551,6 +551,7 @@ class RagParserConfig(google.protobuf.message.Message):
     TASK_PAGE_SIZE_FIELD_NUMBER: builtins.int
     RAPTOR_FIELD_NUMBER: builtins.int
     GRAPHRAG_FIELD_NUMBER: builtins.int
+    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
     auto_keywords: builtins.int
     """Optional. Minimum 0, maximum 32, default 0. See <a href="https://ragflow.io/docs/dev/autokeyword_autoquestion">https://ragflow.io/docs/dev/autokeyword_autoquestion</a> for details."""
     auto_questions: builtins.int
@@ -581,6 +582,10 @@ class RagParserConfig(google.protobuf.message.Message):
     def graphrag(self) -> global___RagGraphRagConfig:
         """Optional. GRAPHRAG-specific settings. Default <code>{ "use_graphrag": false }</code>."""
 
+    @property
+    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
+        """Additional fields returned by RAGFlow."""
+
     def __init__(
         self,
         *,
@@ -596,9 +601,10 @@ class RagParserConfig(google.protobuf.message.Message):
         task_page_size: builtins.int = ...,
         raptor: global___RagRaptorConfig | None = ...,
         graphrag: global___RagGraphRagConfig | None = ...,
+        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_auto_keywords", b"_auto_keywords", "_auto_questions", b"_auto_questions", "_filename_embd_weight", b"_filename_embd_weight", "auto_keywords", b"auto_keywords", "auto_questions", b"auto_questions", "filename_embd_weight", b"filename_embd_weight", "graphrag", b"graphrag", "raptor", b"raptor"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_auto_keywords", b"_auto_keywords", "_auto_questions", b"_auto_questions", "_filename_embd_weight", b"_filename_embd_weight", "auto_keywords", b"auto_keywords", "auto_questions", b"auto_questions", "chunk_token_num", b"chunk_token_num", "delimiter", b"delimiter", "filename_embd_weight", b"filename_embd_weight", "graphrag", b"graphrag", "html4excel", b"html4excel", "layout_recognize", b"layout_recognize", "raptor", b"raptor", "tag_kb_ids", b"tag_kb_ids", "task_page_size", b"task_page_size", "topn_tags", b"topn_tags"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_auto_keywords", b"_auto_keywords", "_auto_questions", b"_auto_questions", "_filename_embd_weight", b"_filename_embd_weight", "additional_fields", b"additional_fields", "auto_keywords", b"auto_keywords", "auto_questions", b"auto_questions", "filename_embd_weight", b"filename_embd_weight", "graphrag", b"graphrag", "raptor", b"raptor"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_auto_keywords", b"_auto_keywords", "_auto_questions", b"_auto_questions", "_filename_embd_weight", b"_filename_embd_weight", "additional_fields", b"additional_fields", "auto_keywords", b"auto_keywords", "auto_questions", b"auto_questions", "chunk_token_num", b"chunk_token_num", "delimiter", b"delimiter", "filename_embd_weight", b"filename_embd_weight", "graphrag", b"graphrag", "html4excel", b"html4excel", "layout_recognize", b"layout_recognize", "raptor", b"raptor", "tag_kb_ids", b"tag_kb_ids", "task_page_size", b"task_page_size", "topn_tags", b"topn_tags"]) -> None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_auto_keywords", b"_auto_keywords"]) -> typing.Literal["auto_keywords"] | None: ...
     @typing.overload
@@ -4021,7 +4027,13 @@ class RagChatCompletionResponse(google.protobuf.message.Message):
     PROMPT_FIELD_NUMBER: builtins.int
     CREATED_AT_FIELD_NUMBER: builtins.int
     answer: builtins.str
-    """Response text. Delta of response for streaming mode, complete for non-streaming mode."""
+    """Response text. Delta of response for streaming mode, complete for non-streaming mode.<br>
+    The answer text can contain:
+    <ul>
+        <li>reasoning content: this is always enclosed in <code><think>...</think></code> tags</li>
+        <li>citations of retrieved chunks: these are in the format <code>[ID:X]</code> where <code>X</code> is the index of the referenced chunk in the <code>chunks</code> list of the <code>reference</code>s</li>
+    </ul>
+    """
     audio_binary: builtins.str
     """Optional. Base64-encoded audio response when text-to-speech is enabled."""
     id: builtins.str
@@ -4062,7 +4074,7 @@ class RagReference(google.protobuf.message.Message):
     DOC_AGGS_FIELD_NUMBER: builtins.int
     TOTAL_FIELD_NUMBER: builtins.int
     total: builtins.int
-    """Total number of retrieved documents"""
+    """Total number of retrieved chunks"""
     @property
     def chunks(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagReferenceChunk]:
         """List of retrieved chunks"""

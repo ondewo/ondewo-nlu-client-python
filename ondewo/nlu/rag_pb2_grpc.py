@@ -821,7 +821,7 @@ class RagsServicer(object):
         REST: /api/v1/chats/<id>/completions, /api/v1/agents/<id>/completions, /api/v1/sessions
         ========================================================================
 
-        RAGFlow endpoint: POST /api/v1/chats/<chat_id>/completions or POST /api/v1/chats_openai/<chat_id>/completions
+        RAGFlow endpoint: POST /api/v1/chats/<chat_id>/completions or POST /api/v1/chats_openai/<chat_id>/chat/completions
 
         Generate chat completion with RAG (server streaming).<br>
         This endpoint either
@@ -830,6 +830,7 @@ class RagsServicer(object):
         <li>uses an exising session if <code>session_id</code> is provided (ignores message history in <code>messages</code>)</li>
         <li>continues a conversion with the message history from <code>messages</code> without creating a session if no <code>session_id</code> is provided and <code>messages</code> contains multiple messages</li>
         </ul>
+        At this point the endpoint is not fully implemented and does not support sessions. This means the full message history must always be passed.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
