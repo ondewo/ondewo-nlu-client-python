@@ -626,6 +626,7 @@ class RagRaptorConfig(google.protobuf.message.Message):
     THRESHOLD_FIELD_NUMBER: builtins.int
     MAX_CLUSTER_FIELD_NUMBER: builtins.int
     RANDOM_SEED_FIELD_NUMBER: builtins.int
+    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
     use_raptor: builtins.bool
     """Optional. Default <code>false</code>. Whether to use RAPTOR for this dataset."""
     prompt: builtins.str
@@ -640,6 +641,10 @@ class RagRaptorConfig(google.protobuf.message.Message):
     """Optional. Minimum 1. Maximum 1024. Default 64."""
     random_seed: builtins.int
     """Optional. Minimum 0. Default 0."""
+    @property
+    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
+        """Additional fields returned by RAGFlow not explicitly defined above."""
+
     def __init__(
         self,
         *,
@@ -649,9 +654,10 @@ class RagRaptorConfig(google.protobuf.message.Message):
         threshold: builtins.float | None = ...,
         max_cluster: builtins.int = ...,
         random_seed: builtins.int | None = ...,
+        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_random_seed", b"_random_seed", "_threshold", b"_threshold", "random_seed", b"random_seed", "threshold", b"threshold"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_random_seed", b"_random_seed", "_threshold", b"_threshold", "max_cluster", b"max_cluster", "max_token", b"max_token", "prompt", b"prompt", "random_seed", b"random_seed", "threshold", b"threshold", "use_raptor", b"use_raptor"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_random_seed", b"_random_seed", "_threshold", b"_threshold", "additional_fields", b"additional_fields", "random_seed", b"random_seed", "threshold", b"threshold"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_random_seed", b"_random_seed", "_threshold", b"_threshold", "additional_fields", b"additional_fields", "max_cluster", b"max_cluster", "max_token", b"max_token", "prompt", b"prompt", "random_seed", b"random_seed", "threshold", b"threshold", "use_raptor", b"use_raptor"]) -> None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_random_seed", b"_random_seed"]) -> typing.Literal["random_seed"] | None: ...
     @typing.overload
@@ -670,6 +676,7 @@ class RagGraphRagConfig(google.protobuf.message.Message):
     METHOD_FIELD_NUMBER: builtins.int
     COMMUNITY_FIELD_NUMBER: builtins.int
     RESOLUTION_FIELD_NUMBER: builtins.int
+    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
     use_graphrag: builtins.bool
     """Optional. Default <code>false</code>."""
     method: global___RagGraphRagMethod.ValueType
@@ -682,6 +689,10 @@ class RagGraphRagConfig(google.protobuf.message.Message):
     def entity_types(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Optional. Default <code>["organization", "person", "geo", "event", "category"]</code>."""
 
+    @property
+    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
+        """Additional fields returned by RAGFlow not explicitly defined above."""
+
     def __init__(
         self,
         *,
@@ -690,9 +701,10 @@ class RagGraphRagConfig(google.protobuf.message.Message):
         method: global___RagGraphRagMethod.ValueType | None = ...,
         community: builtins.bool = ...,
         resolution: builtins.bool = ...,
+        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_method", b"_method", "method", b"method"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_method", b"_method", "community", b"community", "entity_types", b"entity_types", "method", b"method", "resolution", b"resolution", "use_graphrag", b"use_graphrag"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_method", b"_method", "additional_fields", b"additional_fields", "method", b"method"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_method", b"_method", "additional_fields", b"additional_fields", "community", b"community", "entity_types", b"entity_types", "method", b"method", "resolution", b"resolution", "use_graphrag", b"use_graphrag"]) -> None: ...
     def WhichOneof(self, oneof_group: typing.Literal["_method", b"_method"]) -> typing.Literal["method"] | None: ...
 
 global___RagGraphRagConfig = RagGraphRagConfig
