@@ -897,7 +897,7 @@ class RagUpdateDatasetRequest(google.protobuf.message.Message):
     embedding_model: builtins.str
     """Optional. New embedding model (cannot change if chunk_count > 0)."""
     pagerank: builtins.int
-    """Optional. PageRank value."""
+    """Optional. Minimum 0. Maximum 100. PageRank value."""
     @property
     def parser_config(self) -> global___RagParserConfig:
         """Optional. New parser config (deep merged with existing)."""
