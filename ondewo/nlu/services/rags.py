@@ -47,7 +47,6 @@ from ondewo.nlu.rag_pb2 import (
     RagDeleteFilesRequest,
     RagDeleteRequest,
     RagDocument,
-    RagDocumentList,
     RagDownloadDocumentRequest,
     RagFile,
     RagFileChunk,
@@ -88,7 +87,7 @@ from ondewo.nlu.rag_pb2 import (
     RagUpdateChunkRequest,
     RagUpdateDatasetRequest,
     RagUpdateDocumentRequest,
-    RagUploadDocumentsRequest,
+    RagUploadDocumentRequest,
     RagUploadFilesRequest,
 )
 from ondewo.nlu.rag_pb2_grpc import RagsStub
@@ -148,8 +147,8 @@ class Rags(ServicesInterface):
         response: RagTaskStatus = self.stub.RagRaptorStatus(request, metadata=self.metadata)
         return response
 
-    def rag_upload_documents(self, request: Iterator[RagUploadDocumentsRequest]) -> RagDocumentList:
-        response: RagDocumentList = self.stub.RagUploadDocuments(request, metadata=self.metadata)
+    def rag_upload_document(self, request: RagUploadDocumentRequest) -> RagDocument:
+        response: RagDocument = self.stub.RagUploadDocument(request, metadata=self.metadata)
         return response
 
     def rag_update_document(self, request: RagUpdateDocumentRequest) -> RagDocument:

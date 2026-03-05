@@ -89,9 +89,9 @@ class RagsStub(object):
                 request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagDatasetIdRequest.SerializeToString,
                 response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagTaskStatus.FromString,
                 _registered_method=True)
-        self.RagUploadDocuments = channel.unary_unary(
-                '/ondewo.nlu.Rags/RagUploadDocuments',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagUploadDocumentsRequest.SerializeToString,
+        self.RagUploadDocument = channel.unary_unary(
+                '/ondewo.nlu.Rags/RagUploadDocument',
+                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagUploadDocumentRequest.SerializeToString,
                 response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagDocument.FromString,
                 _registered_method=True)
         self.RagUpdateDocument = channel.unary_unary(
@@ -407,7 +407,7 @@ class RagsServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def RagUploadDocuments(self, request, context):
+    def RagUploadDocument(self, request, context):
         """========================================================================
         Document Management (5 methods)
         REST: /api/v1/datasets/<dataset_id>/documents
@@ -919,9 +919,9 @@ def add_RagsServicer_to_server(servicer, server):
                     request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagDatasetIdRequest.FromString,
                     response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagTaskStatus.SerializeToString,
             ),
-            'RagUploadDocuments': grpc.unary_unary_rpc_method_handler(
-                    servicer.RagUploadDocuments,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagUploadDocumentsRequest.FromString,
+            'RagUploadDocument': grpc.unary_unary_rpc_method_handler(
+                    servicer.RagUploadDocument,
+                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagUploadDocumentRequest.FromString,
                     response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagDocument.SerializeToString,
             ),
             'RagUpdateDocument': grpc.unary_unary_rpc_method_handler(
@@ -1410,7 +1410,7 @@ class Rags(object):
             _registered_method=True)
 
     @staticmethod
-    def RagUploadDocuments(request,
+    def RagUploadDocument(request,
             target,
             options=(),
             channel_credentials=None,
@@ -1423,8 +1423,8 @@ class Rags(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/ondewo.nlu.Rags/RagUploadDocuments',
-            ondewo_dot_nlu_dot_rag__pb2.RagUploadDocumentsRequest.SerializeToString,
+            '/ondewo.nlu.Rags/RagUploadDocument',
+            ondewo_dot_nlu_dot_rag__pb2.RagUploadDocumentRequest.SerializeToString,
             ondewo_dot_nlu_dot_rag__pb2.RagDocument.FromString,
             options,
             channel_credentials,

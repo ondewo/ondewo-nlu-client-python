@@ -1198,7 +1198,7 @@ class RagConstructRaptorResponse(google.protobuf.message.Message):
 global___RagConstructRaptorResponse = RagConstructRaptorResponse
 
 @typing.final
-class RagUploadDocumentsRequest(google.protobuf.message.Message):
+class RagUploadDocumentRequest(google.protobuf.message.Message):
     """============================================================================
     Document Management Types
     ============================================================================
@@ -1235,7 +1235,7 @@ class RagUploadDocumentsRequest(google.protobuf.message.Message):
     def HasField(self, field_name: typing.Literal["metadata", b"metadata"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing.Literal["data", b"data", "dataset_id", b"dataset_id", "metadata", b"metadata", "parent", b"parent"]) -> None: ...
 
-global___RagUploadDocumentsRequest = RagUploadDocumentsRequest
+global___RagUploadDocumentRequest = RagUploadDocumentRequest
 
 @typing.final
 class RagDocumentList(google.protobuf.message.Message):
