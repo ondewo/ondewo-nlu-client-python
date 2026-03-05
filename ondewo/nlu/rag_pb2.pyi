@@ -1203,59 +1203,37 @@ class RagUploadDocumentsRequest(google.protobuf.message.Message):
     Document Management Types
     ============================================================================
 
-    Request message for uploading documents to a dataset.<br>
-    Documents are uploaded via streaming multipart form data.
+    Request message for uploading a document to a dataset.
     """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    @typing.final
-    class RagMetadata(google.protobuf.message.Message):
-        """Metadata for the upload (first message only)."""
-
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-        PARENT_FIELD_NUMBER: builtins.int
-        DATASET_ID_FIELD_NUMBER: builtins.int
-        FILES_FIELD_NUMBER: builtins.int
-        parent: builtins.str
-        """Required. The agent to upload documents for.
-        Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-        """
-        dataset_id: builtins.str
-        """Required. Target dataset ID to upload documents to."""
-        @property
-        def files(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagFileMetadata]:
-            """Required. Metadata for all files being uploaded in this stream."""
-
-        def __init__(
-            self,
-            *,
-            parent: builtins.str = ...,
-            dataset_id: builtins.str = ...,
-            files: collections.abc.Iterable[global___RagFileMetadata] | None = ...,
-        ) -> None: ...
-        def ClearField(self, field_name: typing.Literal["dataset_id", b"dataset_id", "files", b"files", "parent", b"parent"]) -> None: ...
-
+    PARENT_FIELD_NUMBER: builtins.int
+    DATASET_ID_FIELD_NUMBER: builtins.int
     METADATA_FIELD_NUMBER: builtins.int
-    CHUNK_FIELD_NUMBER: builtins.int
+    DATA_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Required. The agent to upload documents for.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
+    dataset_id: builtins.str
+    """Required. Target dataset ID to upload documents to."""
+    data: builtins.bytes
+    """Required. File data (raw bytes)."""
     @property
-    def metadata(self) -> global___RagUploadDocumentsRequest.RagMetadata:
-        """First message: declares all files to be uploaded."""
-
-    @property
-    def chunk(self) -> global___RagUploadChunk:
-        """Subsequent messages: stream file data chunks."""
+    def metadata(self) -> global___RagFileMetadata:
+        """Required. Metadata of the uploaded file."""
 
     def __init__(
         self,
         *,
-        metadata: global___RagUploadDocumentsRequest.RagMetadata | None = ...,
-        chunk: global___RagUploadChunk | None = ...,
+        parent: builtins.str = ...,
+        dataset_id: builtins.str = ...,
+        metadata: global___RagFileMetadata | None = ...,
+        data: builtins.bytes = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["chunk", b"chunk", "metadata", b"metadata", "payload", b"payload"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["chunk", b"chunk", "metadata", b"metadata", "payload", b"payload"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["payload", b"payload"]) -> typing.Literal["metadata", "chunk"] | None: ...
+    def HasField(self, field_name: typing.Literal["metadata", b"metadata"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["data", b"data", "dataset_id", b"dataset_id", "metadata", b"metadata", "parent", b"parent"]) -> None: ...
 
 global___RagUploadDocumentsRequest = RagUploadDocumentsRequest
 
