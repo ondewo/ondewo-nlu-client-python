@@ -1229,6 +1229,7 @@ class RagUploadDocumentRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     DATASET_ID_FIELD_NUMBER: builtins.int
     METADATA_FIELD_NUMBER: builtins.int
     DATA_FIELD_NUMBER: builtins.int
@@ -1236,6 +1237,8 @@ class RagUploadDocumentRequest(google.protobuf.message.Message):
     """Required. The agent to upload documents for.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
     dataset_id: builtins.str
     """Required. Target dataset ID to upload documents to."""
     data: builtins.bytes
@@ -1248,12 +1251,13 @@ class RagUploadDocumentRequest(google.protobuf.message.Message):
         self,
         *,
         parent: builtins.str = ...,
+        language_code: builtins.str = ...,
         dataset_id: builtins.str = ...,
         metadata: global___RagFileMetadata | None = ...,
         data: builtins.bytes = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["metadata", b"metadata"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["data", b"data", "dataset_id", b"dataset_id", "metadata", b"metadata", "parent", b"parent"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["data", b"data", "dataset_id", b"dataset_id", "language_code", b"language_code", "metadata", b"metadata", "parent", b"parent"]) -> None: ...
 
 global___RagUploadDocumentRequest = RagUploadDocumentRequest
 
