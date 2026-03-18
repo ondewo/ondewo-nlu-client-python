@@ -147,7 +147,7 @@ class Rags(ServicesInterface):
         response: RagTaskStatus = self.stub.RagRaptorStatus(request, metadata=self.metadata)
         return response
 
-    def rag_upload_document(self, request: RagUploadDocumentRequest) -> RagDocument:
+    def rag_upload_document(self, request: Iterator[RagUploadDocumentRequest]) -> RagDocument:
         response: RagDocument = self.stub.RagUploadDocument(request, metadata=self.metadata)
         return response
 

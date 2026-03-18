@@ -148,7 +148,7 @@ class Rags(AsyncServicesInterface):
         response: RagTaskStatus = await self.stub.RagRaptorStatus(request, metadata=self.metadata)
         return response
 
-    async def rag_upload_document(self, request: RagUploadDocumentRequest) -> RagDocument:
+    async def rag_upload_document(self, request: Iterator[RagUploadDocumentRequest]) -> RagDocument:
         response: RagDocument = await self.stub.RagUploadDocument(request, metadata=self.metadata)
         return response
 
