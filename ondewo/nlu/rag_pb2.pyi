@@ -448,7 +448,7 @@ global___RagAgentEventType = RagAgentEventType
 class RagFileMetadata(google.protobuf.message.Message):
     """============================================================================
     Common Types
-    Shared types used across multiple services.
+    Shared types used across multiple endpoints.
     ============================================================================
 
     File metadata for streaming uploads/downloads.
@@ -636,7 +636,7 @@ class RagParserConfig(google.protobuf.message.Message):
         auto_questions: builtins.int | None = ...,
         chunk_token_num: builtins.int = ...,
         delimiter: builtins.str = ...,
-        html4excel: builtins.bool = ...,
+        html4excel: builtins.bool | None = ...,
         layout_recognize: builtins.str = ...,
         tag_kb_ids: collections.abc.Iterable[builtins.str] | None = ...,
         topn_tags: builtins.int = ...,
@@ -645,14 +645,16 @@ class RagParserConfig(google.protobuf.message.Message):
         raptor: global___RagRaptorConfig | None = ...,
         graphrag: global___RagGraphRagConfig | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_auto_keywords", b"_auto_keywords", "_auto_questions", b"_auto_questions", "_filename_embd_weight", b"_filename_embd_weight", "auto_keywords", b"auto_keywords", "auto_questions", b"auto_questions", "filename_embd_weight", b"filename_embd_weight", "graphrag", b"graphrag", "raptor", b"raptor"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_auto_keywords", b"_auto_keywords", "_auto_questions", b"_auto_questions", "_filename_embd_weight", b"_filename_embd_weight", "auto_keywords", b"auto_keywords", "auto_questions", b"auto_questions", "chunk_token_num", b"chunk_token_num", "delimiter", b"delimiter", "filename_embd_weight", b"filename_embd_weight", "graphrag", b"graphrag", "html4excel", b"html4excel", "layout_recognize", b"layout_recognize", "raptor", b"raptor", "tag_kb_ids", b"tag_kb_ids", "task_page_size", b"task_page_size", "topn_tags", b"topn_tags"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_auto_keywords", b"_auto_keywords", "_auto_questions", b"_auto_questions", "_filename_embd_weight", b"_filename_embd_weight", "_html4excel", b"_html4excel", "auto_keywords", b"auto_keywords", "auto_questions", b"auto_questions", "filename_embd_weight", b"filename_embd_weight", "graphrag", b"graphrag", "html4excel", b"html4excel", "raptor", b"raptor"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_auto_keywords", b"_auto_keywords", "_auto_questions", b"_auto_questions", "_filename_embd_weight", b"_filename_embd_weight", "_html4excel", b"_html4excel", "auto_keywords", b"auto_keywords", "auto_questions", b"auto_questions", "chunk_token_num", b"chunk_token_num", "delimiter", b"delimiter", "filename_embd_weight", b"filename_embd_weight", "graphrag", b"graphrag", "html4excel", b"html4excel", "layout_recognize", b"layout_recognize", "raptor", b"raptor", "tag_kb_ids", b"tag_kb_ids", "task_page_size", b"task_page_size", "topn_tags", b"topn_tags"]) -> None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_auto_keywords", b"_auto_keywords"]) -> typing.Literal["auto_keywords"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_auto_questions", b"_auto_questions"]) -> typing.Literal["auto_questions"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_filename_embd_weight", b"_filename_embd_weight"]) -> typing.Literal["filename_embd_weight"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_html4excel", b"_html4excel"]) -> typing.Literal["html4excel"] | None: ...
 
 global___RagParserConfig = RagParserConfig
 
@@ -959,7 +961,7 @@ class RagListDatasetsRequest(google.protobuf.message.Message):
     name: builtins.str
     """Optional. Filter by dataset name."""
     orderby: builtins.str
-    """Optional. Sort field. Must be a field of <code>RagDataset</code> (default: <code>create_time</code>)."""
+    """Optional. Sort field. Can be <code>create_time</code> or <code>update_time</code> (default: <code>create_time</code>)."""
     desc: builtins.bool
     """Optional. Sort descending (default: <code>true</code>)."""
     def __init__(
@@ -1428,7 +1430,9 @@ class RagMetadataCondition(google.protobuf.message.Message):
     comparison_operator: global___RagComparisonOperator.ValueType
     """Required. Comparison operator."""
     value: builtins.str
-    """Required. Value to compare to."""
+    """Required. Value to compare to.<br>
+    Must always be a string, but can also be the string representation of a different type, e.g. string representation of a dict <code>"{"key1": 3, "key2": "value"}"</code>.
+    """
     def __init__(
         self,
         *,
