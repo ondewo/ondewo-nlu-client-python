@@ -766,7 +766,6 @@ class RagDataset(google.protobuf.message.Message):
     CHUNK_METHOD_FIELD_NUMBER: builtins.int
     PARSER_CONFIG_FIELD_NUMBER: builtins.int
     PAGERANK_FIELD_NUMBER: builtins.int
-    STATUS_FIELD_NUMBER: builtins.int
     CREATE_TIME_FIELD_NUMBER: builtins.int
     UPDATE_TIME_FIELD_NUMBER: builtins.int
     id: builtins.str
@@ -787,8 +786,6 @@ class RagDataset(google.protobuf.message.Message):
     """Default chunking method for documents in this dataset."""
     pagerank: builtins.int
     """Pagerank."""
-    status: builtins.str
-    """Optional. Status of dataset (<code>"0"</code>: inactive, <code>"1"</code>: active)."""
     @property
     def parser_config(self) -> global___RagParserConfig:
         """Document parser configuration (auto-generated based on chunk_method)."""
@@ -814,12 +811,11 @@ class RagDataset(google.protobuf.message.Message):
         chunk_method: global___RagChunkMethod.ValueType | None = ...,
         parser_config: global___RagParserConfig | None = ...,
         pagerank: builtins.int | None = ...,
-        status: builtins.str | None = ...,
         create_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         update_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_chunk_count", b"_chunk_count", "_chunk_method", b"_chunk_method", "_document_count", b"_document_count", "_pagerank", b"_pagerank", "_status", b"_status", "_token_num", b"_token_num", "chunk_count", b"chunk_count", "chunk_method", b"chunk_method", "create_time", b"create_time", "document_count", b"document_count", "pagerank", b"pagerank", "parser_config", b"parser_config", "status", b"status", "token_num", b"token_num", "update_time", b"update_time"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_chunk_count", b"_chunk_count", "_chunk_method", b"_chunk_method", "_document_count", b"_document_count", "_pagerank", b"_pagerank", "_status", b"_status", "_token_num", b"_token_num", "avatar", b"avatar", "chunk_count", b"chunk_count", "chunk_method", b"chunk_method", "create_time", b"create_time", "description", b"description", "document_count", b"document_count", "id", b"id", "name", b"name", "pagerank", b"pagerank", "parser_config", b"parser_config", "status", b"status", "token_num", b"token_num", "update_time", b"update_time"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_chunk_count", b"_chunk_count", "_chunk_method", b"_chunk_method", "_document_count", b"_document_count", "_pagerank", b"_pagerank", "_token_num", b"_token_num", "chunk_count", b"chunk_count", "chunk_method", b"chunk_method", "create_time", b"create_time", "document_count", b"document_count", "pagerank", b"pagerank", "parser_config", b"parser_config", "token_num", b"token_num", "update_time", b"update_time"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_chunk_count", b"_chunk_count", "_chunk_method", b"_chunk_method", "_document_count", b"_document_count", "_pagerank", b"_pagerank", "_token_num", b"_token_num", "avatar", b"avatar", "chunk_count", b"chunk_count", "chunk_method", b"chunk_method", "create_time", b"create_time", "description", b"description", "document_count", b"document_count", "id", b"id", "name", b"name", "pagerank", b"pagerank", "parser_config", b"parser_config", "token_num", b"token_num", "update_time", b"update_time"]) -> None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_chunk_count", b"_chunk_count"]) -> typing.Literal["chunk_count"] | None: ...
     @typing.overload
@@ -828,8 +824,6 @@ class RagDataset(google.protobuf.message.Message):
     def WhichOneof(self, oneof_group: typing.Literal["_document_count", b"_document_count"]) -> typing.Literal["document_count"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_pagerank", b"_pagerank"]) -> typing.Literal["pagerank"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_status", b"_status"]) -> typing.Literal["status"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_token_num", b"_token_num"]) -> typing.Literal["token_num"] | None: ...
 
