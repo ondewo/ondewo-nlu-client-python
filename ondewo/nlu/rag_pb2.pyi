@@ -1029,13 +1029,13 @@ class RagUploadDocumentRequest(google.protobuf.message.Message):
     METADATA_FIELD_NUMBER: builtins.int
     DATA_FIELD_NUMBER: builtins.int
     parent: builtins.str
-    """Required. The agent to upload documents for.
+    """Required in first chunk, ignored in later chunks. The agent to upload documents for.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
     language_code: builtins.str
-    """Required. The language of the project to use."""
+    """Required in first chunk, ignored in later chunks. The language of the project to use."""
     dataset_id: builtins.str
-    """Required. Target dataset ID to upload documents to."""
+    """Required in first chunk, ignored in later chunks. Target dataset ID to upload documents to."""
     data: builtins.bytes
     """Optional. Chunk of file content."""
     @property
