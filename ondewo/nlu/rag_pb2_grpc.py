@@ -4,6 +4,7 @@ import grpc
 import warnings
 
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
+from ondewo.nlu import operations_pb2 as ondewo_dot_nlu_dot_operations__pb2
 from ondewo.nlu import rag_pb2 as ondewo_dot_nlu_dot_rag__pb2
 
 GRPC_GENERATED_VERSION = '1.67.1'
@@ -238,6 +239,81 @@ class RagsStub(object):
                 '/ondewo.nlu.Rags/RagRelatedQuestions',
                 request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagRelatedQuestionsRequest.SerializeToString,
                 response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagRelatedQuestionsResponse.FromString,
+                _registered_method=True)
+        self.RagCreateCrawler = channel.unary_unary(
+                '/ondewo.nlu.Rags/RagCreateCrawler',
+                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagCreateCrawlerRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagCrawler.FromString,
+                _registered_method=True)
+        self.RagGetCrawler = channel.unary_unary(
+                '/ondewo.nlu.Rags/RagGetCrawler',
+                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagGetCrawlerRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagCrawler.FromString,
+                _registered_method=True)
+        self.RagListCrawlers = channel.unary_unary(
+                '/ondewo.nlu.Rags/RagListCrawlers',
+                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagListCrawlersRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagListCrawlersResponse.FromString,
+                _registered_method=True)
+        self.RagUpdateCrawler = channel.unary_unary(
+                '/ondewo.nlu.Rags/RagUpdateCrawler',
+                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagUpdateCrawlerRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagCrawler.FromString,
+                _registered_method=True)
+        self.RagDeleteCrawler = channel.unary_unary(
+                '/ondewo.nlu.Rags/RagDeleteCrawler',
+                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagDeleteCrawlerRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagDeleteCrawlerResponse.FromString,
+                _registered_method=True)
+        self.RagRunCrawler = channel.unary_unary(
+                '/ondewo.nlu.Rags/RagRunCrawler',
+                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagRunCrawlerRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
+                _registered_method=True)
+        self.RagStopCrawlerRun = channel.unary_unary(
+                '/ondewo.nlu.Rags/RagStopCrawlerRun',
+                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagStopCrawlerRunRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
+                _registered_method=True)
+        self.RagGetCrawlerRun = channel.unary_unary(
+                '/ondewo.nlu.Rags/RagGetCrawlerRun',
+                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagGetCrawlerRunRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
+                _registered_method=True)
+        self.RagListCrawlerRuns = channel.unary_unary(
+                '/ondewo.nlu.Rags/RagListCrawlerRuns',
+                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagListCrawlerRunsRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagListCrawlerRunsResponse.FromString,
+                _registered_method=True)
+        self.RagDeleteCrawlerRuns = channel.unary_unary(
+                '/ondewo.nlu.Rags/RagDeleteCrawlerRuns',
+                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagDeleteCrawlerRunsRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagDeleteCrawlerRunsResponse.FromString,
+                _registered_method=True)
+        self.RagGetCrawlerResult = channel.unary_unary(
+                '/ondewo.nlu.Rags/RagGetCrawlerResult',
+                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagGetCrawlerResultRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagCrawlerResult.FromString,
+                _registered_method=True)
+        self.RagGetCrawlerResults = channel.unary_unary(
+                '/ondewo.nlu.Rags/RagGetCrawlerResults',
+                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagGetCrawlerResultsRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagGetCrawlerResultsResponse.FromString,
+                _registered_method=True)
+        self.RagAddCrawlerOutputToDatasets = channel.unary_unary(
+                '/ondewo.nlu.Rags/RagAddCrawlerOutputToDatasets',
+                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagAddCrawlerOutputToDatasetsRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
+                _registered_method=True)
+        self.RagRemoveCrawlerOutputFromDatasets = channel.unary_unary(
+                '/ondewo.nlu.Rags/RagRemoveCrawlerOutputFromDatasets',
+                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagRemoveCrawlerOutputFromDatasetsRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
+                _registered_method=True)
+        self.RagGetCrawlerAttachedDatasets = channel.unary_unary(
+                '/ondewo.nlu.Rags/RagGetCrawlerAttachedDatasets',
+                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagGetCrawlerAttachedDatasetsRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagGetCrawlerAttachedDatasetsResponse.FromString,
                 _registered_method=True)
 
 
@@ -706,6 +782,126 @@ class RagsServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def RagCreateCrawler(self, request, context):
+        """========================================================================
+        Crawler (15 methods)
+        ========================================================================
+
+        Create a rag crawler for a dataset of an agent.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def RagGetCrawler(self, request, context):
+        """Get a rag crawler by resource name.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def RagListCrawlers(self, request, context):
+        """List rag crawlers of a dataset for the specified agent.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def RagUpdateCrawler(self, request, context):
+        """Update a rag crawler (partial update of configuration fields).
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def RagDeleteCrawler(self, request, context):
+        """Delete a rag crawler of a dataset for the specified agent.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def RagRunCrawler(self, request, context):
+        """Run a crawler.
+
+        Returns immediately with a long-running `Operation`.
+        Use `RagGetCrawlerRun` or `RagListCrawlerRuns` to monitor status.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def RagStopCrawlerRun(self, request, context):
+        """Stop a pending or running crawler run.
+
+        This requests cancellation and marks the run operation as cancelled.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def RagGetCrawlerRun(self, request, context):
+        """Get a crawler run by resource name.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def RagListCrawlerRuns(self, request, context):
+        """List crawler runs for a crawler.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def RagDeleteCrawlerRuns(self, request, context):
+        """Delete crawler runs by explicit run names and/or crawler names.
+
+        If both lists are empty, this call succeeds and deletes nothing.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def RagGetCrawlerResult(self, request, context):
+        """Get a single crawler result by crawler run resource name and URL.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def RagGetCrawlerResults(self, request, context):
+        """Get crawler results by crawler run resource name.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def RagAddCrawlerOutputToDatasets(self, request, context):
+        """Add rag crawler output to one or more datasets.
+
+        This RPC is under active development and may be unavailable in MVP deployments.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def RagRemoveCrawlerOutputFromDatasets(self, request, context):
+        """Remove previously imported crawler output from one or more datasets.
+
+        This RPC is under active development and may be unavailable in MVP deployments.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def RagGetCrawlerAttachedDatasets(self, request, context):
+        """Get datasets currently attached to a crawler.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_RagsServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -908,6 +1104,81 @@ def add_RagsServicer_to_server(servicer, server):
                     servicer.RagRelatedQuestions,
                     request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagRelatedQuestionsRequest.FromString,
                     response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagRelatedQuestionsResponse.SerializeToString,
+            ),
+            'RagCreateCrawler': grpc.unary_unary_rpc_method_handler(
+                    servicer.RagCreateCrawler,
+                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagCreateCrawlerRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagCrawler.SerializeToString,
+            ),
+            'RagGetCrawler': grpc.unary_unary_rpc_method_handler(
+                    servicer.RagGetCrawler,
+                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagGetCrawlerRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagCrawler.SerializeToString,
+            ),
+            'RagListCrawlers': grpc.unary_unary_rpc_method_handler(
+                    servicer.RagListCrawlers,
+                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagListCrawlersRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagListCrawlersResponse.SerializeToString,
+            ),
+            'RagUpdateCrawler': grpc.unary_unary_rpc_method_handler(
+                    servicer.RagUpdateCrawler,
+                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagUpdateCrawlerRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagCrawler.SerializeToString,
+            ),
+            'RagDeleteCrawler': grpc.unary_unary_rpc_method_handler(
+                    servicer.RagDeleteCrawler,
+                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagDeleteCrawlerRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagDeleteCrawlerResponse.SerializeToString,
+            ),
+            'RagRunCrawler': grpc.unary_unary_rpc_method_handler(
+                    servicer.RagRunCrawler,
+                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagRunCrawlerRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
+            ),
+            'RagStopCrawlerRun': grpc.unary_unary_rpc_method_handler(
+                    servicer.RagStopCrawlerRun,
+                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagStopCrawlerRunRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
+            ),
+            'RagGetCrawlerRun': grpc.unary_unary_rpc_method_handler(
+                    servicer.RagGetCrawlerRun,
+                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagGetCrawlerRunRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
+            ),
+            'RagListCrawlerRuns': grpc.unary_unary_rpc_method_handler(
+                    servicer.RagListCrawlerRuns,
+                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagListCrawlerRunsRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagListCrawlerRunsResponse.SerializeToString,
+            ),
+            'RagDeleteCrawlerRuns': grpc.unary_unary_rpc_method_handler(
+                    servicer.RagDeleteCrawlerRuns,
+                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagDeleteCrawlerRunsRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagDeleteCrawlerRunsResponse.SerializeToString,
+            ),
+            'RagGetCrawlerResult': grpc.unary_unary_rpc_method_handler(
+                    servicer.RagGetCrawlerResult,
+                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagGetCrawlerResultRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagCrawlerResult.SerializeToString,
+            ),
+            'RagGetCrawlerResults': grpc.unary_unary_rpc_method_handler(
+                    servicer.RagGetCrawlerResults,
+                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagGetCrawlerResultsRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagGetCrawlerResultsResponse.SerializeToString,
+            ),
+            'RagAddCrawlerOutputToDatasets': grpc.unary_unary_rpc_method_handler(
+                    servicer.RagAddCrawlerOutputToDatasets,
+                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagAddCrawlerOutputToDatasetsRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
+            ),
+            'RagRemoveCrawlerOutputFromDatasets': grpc.unary_unary_rpc_method_handler(
+                    servicer.RagRemoveCrawlerOutputFromDatasets,
+                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagRemoveCrawlerOutputFromDatasetsRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
+            ),
+            'RagGetCrawlerAttachedDatasets': grpc.unary_unary_rpc_method_handler(
+                    servicer.RagGetCrawlerAttachedDatasets,
+                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagGetCrawlerAttachedDatasetsRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagGetCrawlerAttachedDatasetsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -1994,6 +2265,411 @@ class Rags(object):
             '/ondewo.nlu.Rags/RagRelatedQuestions',
             ondewo_dot_nlu_dot_rag__pb2.RagRelatedQuestionsRequest.SerializeToString,
             ondewo_dot_nlu_dot_rag__pb2.RagRelatedQuestionsResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def RagCreateCrawler(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.Rags/RagCreateCrawler',
+            ondewo_dot_nlu_dot_rag__pb2.RagCreateCrawlerRequest.SerializeToString,
+            ondewo_dot_nlu_dot_rag__pb2.RagCrawler.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def RagGetCrawler(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.Rags/RagGetCrawler',
+            ondewo_dot_nlu_dot_rag__pb2.RagGetCrawlerRequest.SerializeToString,
+            ondewo_dot_nlu_dot_rag__pb2.RagCrawler.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def RagListCrawlers(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.Rags/RagListCrawlers',
+            ondewo_dot_nlu_dot_rag__pb2.RagListCrawlersRequest.SerializeToString,
+            ondewo_dot_nlu_dot_rag__pb2.RagListCrawlersResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def RagUpdateCrawler(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.Rags/RagUpdateCrawler',
+            ondewo_dot_nlu_dot_rag__pb2.RagUpdateCrawlerRequest.SerializeToString,
+            ondewo_dot_nlu_dot_rag__pb2.RagCrawler.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def RagDeleteCrawler(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.Rags/RagDeleteCrawler',
+            ondewo_dot_nlu_dot_rag__pb2.RagDeleteCrawlerRequest.SerializeToString,
+            ondewo_dot_nlu_dot_rag__pb2.RagDeleteCrawlerResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def RagRunCrawler(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.Rags/RagRunCrawler',
+            ondewo_dot_nlu_dot_rag__pb2.RagRunCrawlerRequest.SerializeToString,
+            ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def RagStopCrawlerRun(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.Rags/RagStopCrawlerRun',
+            ondewo_dot_nlu_dot_rag__pb2.RagStopCrawlerRunRequest.SerializeToString,
+            ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def RagGetCrawlerRun(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.Rags/RagGetCrawlerRun',
+            ondewo_dot_nlu_dot_rag__pb2.RagGetCrawlerRunRequest.SerializeToString,
+            ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def RagListCrawlerRuns(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.Rags/RagListCrawlerRuns',
+            ondewo_dot_nlu_dot_rag__pb2.RagListCrawlerRunsRequest.SerializeToString,
+            ondewo_dot_nlu_dot_rag__pb2.RagListCrawlerRunsResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def RagDeleteCrawlerRuns(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.Rags/RagDeleteCrawlerRuns',
+            ondewo_dot_nlu_dot_rag__pb2.RagDeleteCrawlerRunsRequest.SerializeToString,
+            ondewo_dot_nlu_dot_rag__pb2.RagDeleteCrawlerRunsResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def RagGetCrawlerResult(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.Rags/RagGetCrawlerResult',
+            ondewo_dot_nlu_dot_rag__pb2.RagGetCrawlerResultRequest.SerializeToString,
+            ondewo_dot_nlu_dot_rag__pb2.RagCrawlerResult.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def RagGetCrawlerResults(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.Rags/RagGetCrawlerResults',
+            ondewo_dot_nlu_dot_rag__pb2.RagGetCrawlerResultsRequest.SerializeToString,
+            ondewo_dot_nlu_dot_rag__pb2.RagGetCrawlerResultsResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def RagAddCrawlerOutputToDatasets(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.Rags/RagAddCrawlerOutputToDatasets',
+            ondewo_dot_nlu_dot_rag__pb2.RagAddCrawlerOutputToDatasetsRequest.SerializeToString,
+            ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def RagRemoveCrawlerOutputFromDatasets(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.Rags/RagRemoveCrawlerOutputFromDatasets',
+            ondewo_dot_nlu_dot_rag__pb2.RagRemoveCrawlerOutputFromDatasetsRequest.SerializeToString,
+            ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def RagGetCrawlerAttachedDatasets(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.Rags/RagGetCrawlerAttachedDatasets',
+            ondewo_dot_nlu_dot_rag__pb2.RagGetCrawlerAttachedDatasetsRequest.SerializeToString,
+            ondewo_dot_nlu_dot_rag__pb2.RagGetCrawlerAttachedDatasetsResponse.FromString,
             options,
             channel_credentials,
             insecure,
