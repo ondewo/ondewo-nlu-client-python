@@ -124,6 +124,13 @@ clean_python_api:  ## Clear generated python files
 build_compiler:  ## Build proto compiler docker image
 	make -C ondewo-proto-compiler/python build
 
+generate_services: ## Generate service wrapper files from proto definitions
+	python3 ondewo/nlu/scripts/generate_services.py \
+		${ONDEWO_NLU_API_DIR}/ondewo/nlu \
+		ondewo/nlu/services
+	-make precommit_hooks_run_all_files
+	make precommit_hooks_run_all_files
+
 generate_ondewo_protos:  ## Generate python code from proto files
 	make -f ondewo-proto-compiler/python/Makefile run \
 		PROTO_DIR=${ONDEWO_PROTOS_DIR} \
@@ -157,6 +164,10 @@ create_async_services: ## Create async services for all synchronous services
 	            -e 's/self\.stub/await self.stub/g' \
 	            -e 's/ServicesInterface/AsyncServicesInterface/g' \
 	            -e 's/services_interface/async_services_interface/g' \
+	            "$$file"; \
+	        sed -i -E \
+	            -e 's/\bIterator\b/AsyncIterator/g' \
+	            -e 's/(response: AsyncIterator\[[^]]+\] = )await (self\.stub)/\1\2/g' \
 	            "$$file"; \
 	    done; \
 	done
