@@ -24,6 +24,7 @@ from ondewo.nlu.services.async_intents import Intents
 from ondewo.nlu.services.async_operations import Operations
 from ondewo.nlu.services.async_project_roles import ProjectRoles
 from ondewo.nlu.services.async_project_statistics import ProjectStatistics
+from ondewo.nlu.services.async_rags import Rags
 from ondewo.nlu.services.async_server_statistics import ServerStatistics
 from ondewo.nlu.services.async_sessions import Sessions
 from ondewo.nlu.services.async_users import Users
@@ -41,6 +42,7 @@ class AsyncServicesContainer(BaseServicesContainer):
     operations: Operations
     project_roles: ProjectRoles
     project_statistics: ProjectStatistics
+    rags: Rags
     server_statistics: ServerStatistics
     sessions: Sessions
     users: Users

@@ -62,17 +62,11 @@ make setup_developer_environment_locally
 │   │   ├── services
 │   │   │   ├── agents.py
 │   │   │   ├── aiservices.py
-│   │   │   ├── contexts.py
-│   │   │   ├── entity_types.py
+│   │   │   ├── async_agents.py
+│   │   │   ├── async_aiservices.py
+│   │   │   ├── ...
 │   │   │   ├── __init__.py
-│   │   │   ├── intents.py
-│   │   │   ├── operations.py
-│   │   │   ├── project_roles.py
-│   │   │   ├── project_statistics.py
-│   │   │   ├── server_statistics.py
-│   │   │   ├── sessions.py
-│   │   │   ├── users.py
-│   │   │   └── utilities.py
+│   │   │   ├── ...
 │   │   ├── utils
 │   │   │   ├── __init__.py
 │   │   │   └── login.py

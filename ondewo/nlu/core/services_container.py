@@ -24,6 +24,7 @@ from ondewo.nlu.services.intents import Intents
 from ondewo.nlu.services.operations import Operations
 from ondewo.nlu.services.project_roles import ProjectRoles
 from ondewo.nlu.services.project_statistics import ProjectStatistics
+from ondewo.nlu.services.rags import Rags
 from ondewo.nlu.services.server_statistics import ServerStatistics
 from ondewo.nlu.services.sessions import Sessions
 from ondewo.nlu.services.users import Users
@@ -41,6 +42,7 @@ class ServicesContainer(BaseServicesContainer):
     operations: Operations
     project_roles: ProjectRoles
     project_statistics: ProjectStatistics
+    rags: Rags
     server_statistics: ServerStatistics
     sessions: Sessions
     users: Users

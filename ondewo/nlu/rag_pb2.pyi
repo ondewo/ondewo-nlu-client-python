@@ -29,8 +29,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-File-level comment for <code>ondewo/nlu/rags.proto</code>.
-This file contains a single service <a href="index.html#ondewo.nlu.Rags">Rags</a>. The Rags service provides integration with RAGFlow for Retrieval-Augmented Generation (RAG), including dataset management, document processing, chunk retrieval, conversational AI with chat and agent assistants, and file management. Key message types include <a href="index.html#ondewo.nlu.RagDataset">RagDataset</a>, <a href="index.html#ondewo.nlu.RagChat">RagChat</a>, and <a href="index.html#ondewo.nlu.RagAgent">RagAgent</a>.
+File-level comment for <code>ondewo/nlu/rag.proto</code>.
+This file contains a single service <a href="#ondewo.nlu.Rags">Rags</a>. The Rags service provides integration with RAGFlow for Retrieval-Augmented Generation (RAG), including dataset management, document processing, chunk retrieval, conversational AI with chat and agent assistants, and file management. Key message types include <a href="#ondewo.nlu.RagDataset">RagDataset</a>, <a href="#ondewo.nlu.RagChat">RagChat</a>, and <a href="#ondewo.nlu.RagAgent">RagAgent</a>.
+All message fields that are marked as <code>optional</code> are not actually optional but marked as such to enable presence tracking so that it is possible to distinguish between null and default value fields. Without the <code>optional</code> keyword it would for instance not be possible to distinguish between an integer <code>0</code> and <code>null</code>.
 """
 
 import builtins
@@ -40,6 +41,7 @@ import google.protobuf.internal.containers
 import google.protobuf.internal.enum_type_wrapper
 import google.protobuf.message
 import google.protobuf.struct_pb2
+import google.protobuf.timestamp_pb2
 import sys
 import typing
 
@@ -50,85 +52,125 @@ else:
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
-class _RagPermission:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
-
-class _RagPermissionEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_RagPermission.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-    me: _RagPermission.ValueType  # 0
-    """Only the current user can manage the dataset (default)."""
-    team: _RagPermission.ValueType  # 1
-    """All team members of the current user can manage the dataset."""
-
-class RagPermission(_RagPermission, metaclass=_RagPermissionEnumTypeWrapper):
-    """Access permissions for a dataset"""
-
-me: RagPermission.ValueType  # 0
-"""Only the current user can manage the dataset (default)."""
-team: RagPermission.ValueType  # 1
-"""All team members of the current user can manage the dataset."""
-global___RagPermission = RagPermission
-
 class _RagChunkMethod:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
 class _RagChunkMethodEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_RagChunkMethod.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-    naive: _RagChunkMethod.ValueType  # 0
+    RAG_CHUNK_METHOD_NAIVE: _RagChunkMethod.ValueType  # 0
     """General (default)."""
-    book: _RagChunkMethod.ValueType  # 1
+    RAG_CHUNK_METHOD_BOOK: _RagChunkMethod.ValueType  # 1
     """Book."""
-    email: _RagChunkMethod.ValueType  # 2
+    RAG_CHUNK_METHOD_EMAIL: _RagChunkMethod.ValueType  # 2
     """Email."""
-    laws: _RagChunkMethod.ValueType  # 3
+    RAG_CHUNK_METHOD_LAWS: _RagChunkMethod.ValueType  # 3
     """Laws."""
-    manual: _RagChunkMethod.ValueType  # 4
+    RAG_CHUNK_METHOD_MANUAL: _RagChunkMethod.ValueType  # 4
     """Manual."""
-    one: _RagChunkMethod.ValueType  # 5
+    RAG_CHUNK_METHOD_ONE: _RagChunkMethod.ValueType  # 5
     """One."""
-    paper: _RagChunkMethod.ValueType  # 6
+    RAG_CHUNK_METHOD_PAPER: _RagChunkMethod.ValueType  # 6
     """Paper."""
-    picture: _RagChunkMethod.ValueType  # 7
+    RAG_CHUNK_METHOD_PICTURE: _RagChunkMethod.ValueType  # 7
     """Picture."""
-    presentation: _RagChunkMethod.ValueType  # 8
+    RAG_CHUNK_METHOD_PRESENTATION: _RagChunkMethod.ValueType  # 8
     """Presentation."""
-    qa: _RagChunkMethod.ValueType  # 9
-    """Q&amp;A."""
-    table: _RagChunkMethod.ValueType  # 10
+    RAG_CHUNK_METHOD_QA: _RagChunkMethod.ValueType  # 9
+    """Q&A."""
+    RAG_CHUNK_METHOD_TABLE: _RagChunkMethod.ValueType  # 10
     """Table."""
-    tag: _RagChunkMethod.ValueType  # 11
+    RAG_CHUNK_METHOD_TAG: _RagChunkMethod.ValueType  # 11
     """Tag."""
 
 class RagChunkMethod(_RagChunkMethod, metaclass=_RagChunkMethodEnumTypeWrapper):
     """Chunking method for documents. See <a href="https://ragflow.io/docs/dev/configure_knowledge_base#select-chunking-method">https://ragflow.io/docs/dev/configure_knowledge_base#select-chunking-method</a> for details."""
 
-naive: RagChunkMethod.ValueType  # 0
+RAG_CHUNK_METHOD_NAIVE: RagChunkMethod.ValueType  # 0
 """General (default)."""
-book: RagChunkMethod.ValueType  # 1
+RAG_CHUNK_METHOD_BOOK: RagChunkMethod.ValueType  # 1
 """Book."""
-email: RagChunkMethod.ValueType  # 2
+RAG_CHUNK_METHOD_EMAIL: RagChunkMethod.ValueType  # 2
 """Email."""
-laws: RagChunkMethod.ValueType  # 3
+RAG_CHUNK_METHOD_LAWS: RagChunkMethod.ValueType  # 3
 """Laws."""
-manual: RagChunkMethod.ValueType  # 4
+RAG_CHUNK_METHOD_MANUAL: RagChunkMethod.ValueType  # 4
 """Manual."""
-one: RagChunkMethod.ValueType  # 5
+RAG_CHUNK_METHOD_ONE: RagChunkMethod.ValueType  # 5
 """One."""
-paper: RagChunkMethod.ValueType  # 6
+RAG_CHUNK_METHOD_PAPER: RagChunkMethod.ValueType  # 6
 """Paper."""
-picture: RagChunkMethod.ValueType  # 7
+RAG_CHUNK_METHOD_PICTURE: RagChunkMethod.ValueType  # 7
 """Picture."""
-presentation: RagChunkMethod.ValueType  # 8
+RAG_CHUNK_METHOD_PRESENTATION: RagChunkMethod.ValueType  # 8
 """Presentation."""
-qa: RagChunkMethod.ValueType  # 9
-"""Q&amp;A."""
-table: RagChunkMethod.ValueType  # 10
+RAG_CHUNK_METHOD_QA: RagChunkMethod.ValueType  # 9
+"""Q&A."""
+RAG_CHUNK_METHOD_TABLE: RagChunkMethod.ValueType  # 10
 """Table."""
-tag: RagChunkMethod.ValueType  # 11
+RAG_CHUNK_METHOD_TAG: RagChunkMethod.ValueType  # 11
 """Tag."""
 global___RagChunkMethod = RagChunkMethod
+
+class _RagGraphRagMethod:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _RagGraphRagMethodEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_RagGraphRagMethod.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    RAG_GRAPH_RAG_METHOD_LIGHT: _RagGraphRagMethod.ValueType  # 0
+    """Use prompts provided by <a href="https://github.com/HKUDS/LightRAG">LightRAG</a>."""
+    RAG_GRAPH_RAG_METHOD_GENERAL: _RagGraphRagMethod.ValueType  # 1
+    """Use prompts provided by <a href="https://github.com/microsoft/graphrag">GraphRAG</a>."""
+
+class RagGraphRagMethod(_RagGraphRagMethod, metaclass=_RagGraphRagMethodEnumTypeWrapper):
+    """Knowledge graph construction methods."""
+
+RAG_GRAPH_RAG_METHOD_LIGHT: RagGraphRagMethod.ValueType  # 0
+"""Use prompts provided by <a href="https://github.com/HKUDS/LightRAG">LightRAG</a>."""
+RAG_GRAPH_RAG_METHOD_GENERAL: RagGraphRagMethod.ValueType  # 1
+"""Use prompts provided by <a href="https://github.com/microsoft/graphrag">GraphRAG</a>."""
+global___RagGraphRagMethod = RagGraphRagMethod
+
+class _RagDocumentType:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _RagDocumentTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_RagDocumentType.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    RAG_DOCUMENT_TYPE_PDF: _RagDocumentType.ValueType  # 0
+    """PDF"""
+    RAG_DOCUMENT_TYPE_DOC: _RagDocumentType.ValueType  # 1
+    """general documents (e.g. text, slides, spreadsheets, code, ...)"""
+    RAG_DOCUMENT_TYPE_VISUAL: _RagDocumentType.ValueType  # 2
+    """images and videos"""
+    RAG_DOCUMENT_TYPE_AURAL: _RagDocumentType.ValueType  # 3
+    """audio"""
+    RAG_DOCUMENT_TYPE_VIRTUAL: _RagDocumentType.ValueType  # 4
+    """empty virtual files"""
+    RAG_DOCUMENT_TYPE_FOLDER: _RagDocumentType.ValueType  # 5
+    """folders"""
+    RAG_DOCUMENT_TYPE_OTHER: _RagDocumentType.ValueType  # 6
+    """unrecognized document types"""
+
+class RagDocumentType(_RagDocumentType, metaclass=_RagDocumentTypeEnumTypeWrapper):
+    """Broad document category."""
+
+RAG_DOCUMENT_TYPE_PDF: RagDocumentType.ValueType  # 0
+"""PDF"""
+RAG_DOCUMENT_TYPE_DOC: RagDocumentType.ValueType  # 1
+"""general documents (e.g. text, slides, spreadsheets, code, ...)"""
+RAG_DOCUMENT_TYPE_VISUAL: RagDocumentType.ValueType  # 2
+"""images and videos"""
+RAG_DOCUMENT_TYPE_AURAL: RagDocumentType.ValueType  # 3
+"""audio"""
+RAG_DOCUMENT_TYPE_VIRTUAL: RagDocumentType.ValueType  # 4
+"""empty virtual files"""
+RAG_DOCUMENT_TYPE_FOLDER: RagDocumentType.ValueType  # 5
+"""folders"""
+RAG_DOCUMENT_TYPE_OTHER: RagDocumentType.ValueType  # 6
+"""unrecognized document types"""
+global___RagDocumentType = RagDocumentType
 
 class _RagDocumentStatus:
     ValueType = typing.NewType("ValueType", builtins.int)
@@ -136,31 +178,203 @@ class _RagDocumentStatus:
 
 class _RagDocumentStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_RagDocumentStatus.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-    UNSTART: _RagDocumentStatus.ValueType  # 0
+    RAG_DOCUMENT_STATUS_UNSTART: _RagDocumentStatus.ValueType  # 0
     """Document has not started processing."""
-    RUNNING: _RagDocumentStatus.ValueType  # 1
+    RAG_DOCUMENT_STATUS_RUNNING: _RagDocumentStatus.ValueType  # 1
     """Document is currently being processed."""
-    CANCEL: _RagDocumentStatus.ValueType  # 2
+    RAG_DOCUMENT_STATUS_CANCEL: _RagDocumentStatus.ValueType  # 2
     """Document processing was cancelled."""
-    DONE: _RagDocumentStatus.ValueType  # 3
+    RAG_DOCUMENT_STATUS_DONE: _RagDocumentStatus.ValueType  # 3
     """Document processing completed successfully."""
-    FAIL: _RagDocumentStatus.ValueType  # 4
+    RAG_DOCUMENT_STATUS_FAIL: _RagDocumentStatus.ValueType  # 4
     """Document processing failed."""
 
 class RagDocumentStatus(_RagDocumentStatus, metaclass=_RagDocumentStatusEnumTypeWrapper):
     """Document processing status."""
 
-UNSTART: RagDocumentStatus.ValueType  # 0
+RAG_DOCUMENT_STATUS_UNSTART: RagDocumentStatus.ValueType  # 0
 """Document has not started processing."""
-RUNNING: RagDocumentStatus.ValueType  # 1
+RAG_DOCUMENT_STATUS_RUNNING: RagDocumentStatus.ValueType  # 1
 """Document is currently being processed."""
-CANCEL: RagDocumentStatus.ValueType  # 2
+RAG_DOCUMENT_STATUS_CANCEL: RagDocumentStatus.ValueType  # 2
 """Document processing was cancelled."""
-DONE: RagDocumentStatus.ValueType  # 3
+RAG_DOCUMENT_STATUS_DONE: RagDocumentStatus.ValueType  # 3
 """Document processing completed successfully."""
-FAIL: RagDocumentStatus.ValueType  # 4
+RAG_DOCUMENT_STATUS_FAIL: RagDocumentStatus.ValueType  # 4
 """Document processing failed."""
 global___RagDocumentStatus = RagDocumentStatus
+
+class _RagLogic:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _RagLogicEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_RagLogic.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    RAG_LOGIC_AND: _RagLogic.ValueType  # 0
+    """Return results that match <em>all</em> conditions."""
+    RAG_LOGIC_OR: _RagLogic.ValueType  # 1
+    """Return results that match <em>any</em> condition."""
+
+class RagLogic(_RagLogic, metaclass=_RagLogicEnumTypeWrapper):
+    """Metadata conditions logical operators"""
+
+RAG_LOGIC_AND: RagLogic.ValueType  # 0
+"""Return results that match <em>all</em> conditions."""
+RAG_LOGIC_OR: RagLogic.ValueType  # 1
+"""Return results that match <em>any</em> condition."""
+global___RagLogic = RagLogic
+
+class _RagComparisonOperator:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _RagComparisonOperatorEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_RagComparisonOperator.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    RAG_COMPARISON_OPERATOR_CONTAINS: _RagComparisonOperator.ValueType  # 0
+    """String representation of metadata field contains value.<br>
+    If metadata field is a list, checks if the string representation of <em>any</em> field contains value.
+    """
+    RAG_COMPARISON_OPERATOR_NOT_CONTAINS: _RagComparisonOperator.ValueType  # 1
+    """String representation of metadata field does not contain value.<br>
+    If metadata field is a list, checks if the string representation of <em>no</em> fields contains value.
+    """
+    RAG_COMPARISON_OPERATOR_IN: _RagComparisonOperator.ValueType  # 2
+    """Checks with Python's <code>in</code> opertor.<br>
+    If metadata field is a list, <em>all</em> elements must satisfy the condition.
+    """
+    RAG_COMPARISON_OPERATOR_NOT_IN: _RagComparisonOperator.ValueType  # 3
+    """Checks with Python's <code>not in</code> opertor.<br>
+    If metadata field is a list, <em>all</em> elements must satisfy the condition.
+    """
+    RAG_COMPARISON_OPERATOR_START_WITH: _RagComparisonOperator.ValueType  # 4
+    """String representation fo metadata field starts with value.<br>
+    If metadata field is a list, checks if the joined string of the string representations of all list elements starts with the value.
+    """
+    RAG_COMPARISON_OPERATOR_ENDS_WITH: _RagComparisonOperator.ValueType  # 5
+    """String representation fo metadata field ends with value.<br>
+    If metadata field is a list, checks if the joined string of the string representations of all list elements ends with the value.
+    """
+    RAG_COMPARISON_OPERATOR_EMPTY: _RagComparisonOperator.ValueType  # 6
+    """Is empty (Python <em>falsy</em>)."""
+    RAG_COMPARISON_OPERATOR_NOT_EMPTY: _RagComparisonOperator.ValueType  # 7
+    """Is not empty (Python <em>truthy</em>)."""
+    RAG_COMPARISON_OPERATOR_EQ: _RagComparisonOperator.ValueType  # 8
+    """Equals."""
+    RAG_COMPARISON_OPERATOR_NEQ: _RagComparisonOperator.ValueType  # 9
+    """Does not equal."""
+    RAG_COMPARISON_OPERATOR_GT: _RagComparisonOperator.ValueType  # 10
+    """Greater than."""
+    RAG_COMPARISON_OPERATOR_LT: _RagComparisonOperator.ValueType  # 11
+    """Less than."""
+    RAG_COMPARISON_OPERATOR_GEQ: _RagComparisonOperator.ValueType  # 12
+    """Greater than or equal."""
+    RAG_COMPARISON_OPERATOR_LEQ: _RagComparisonOperator.ValueType  # 13
+    """Less than or equal."""
+
+class RagComparisonOperator(_RagComparisonOperator, metaclass=_RagComparisonOperatorEnumTypeWrapper):
+    """Vaild metadata condition comparison operators"""
+
+RAG_COMPARISON_OPERATOR_CONTAINS: RagComparisonOperator.ValueType  # 0
+"""String representation of metadata field contains value.<br>
+If metadata field is a list, checks if the string representation of <em>any</em> field contains value.
+"""
+RAG_COMPARISON_OPERATOR_NOT_CONTAINS: RagComparisonOperator.ValueType  # 1
+"""String representation of metadata field does not contain value.<br>
+If metadata field is a list, checks if the string representation of <em>no</em> fields contains value.
+"""
+RAG_COMPARISON_OPERATOR_IN: RagComparisonOperator.ValueType  # 2
+"""Checks with Python's <code>in</code> opertor.<br>
+If metadata field is a list, <em>all</em> elements must satisfy the condition.
+"""
+RAG_COMPARISON_OPERATOR_NOT_IN: RagComparisonOperator.ValueType  # 3
+"""Checks with Python's <code>not in</code> opertor.<br>
+If metadata field is a list, <em>all</em> elements must satisfy the condition.
+"""
+RAG_COMPARISON_OPERATOR_START_WITH: RagComparisonOperator.ValueType  # 4
+"""String representation fo metadata field starts with value.<br>
+If metadata field is a list, checks if the joined string of the string representations of all list elements starts with the value.
+"""
+RAG_COMPARISON_OPERATOR_ENDS_WITH: RagComparisonOperator.ValueType  # 5
+"""String representation fo metadata field ends with value.<br>
+If metadata field is a list, checks if the joined string of the string representations of all list elements ends with the value.
+"""
+RAG_COMPARISON_OPERATOR_EMPTY: RagComparisonOperator.ValueType  # 6
+"""Is empty (Python <em>falsy</em>)."""
+RAG_COMPARISON_OPERATOR_NOT_EMPTY: RagComparisonOperator.ValueType  # 7
+"""Is not empty (Python <em>truthy</em>)."""
+RAG_COMPARISON_OPERATOR_EQ: RagComparisonOperator.ValueType  # 8
+"""Equals."""
+RAG_COMPARISON_OPERATOR_NEQ: RagComparisonOperator.ValueType  # 9
+"""Does not equal."""
+RAG_COMPARISON_OPERATOR_GT: RagComparisonOperator.ValueType  # 10
+"""Greater than."""
+RAG_COMPARISON_OPERATOR_LT: RagComparisonOperator.ValueType  # 11
+"""Less than."""
+RAG_COMPARISON_OPERATOR_GEQ: RagComparisonOperator.ValueType  # 12
+"""Greater than or equal."""
+RAG_COMPARISON_OPERATOR_LEQ: RagComparisonOperator.ValueType  # 13
+"""Less than or equal."""
+global___RagComparisonOperator = RagComparisonOperator
+
+class _RagPromptType:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _RagPromptTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_RagPromptType.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    RAG_PROMPT_TYPE_SIMPLE: _RagPromptType.ValueType  # 0
+    """simple"""
+    RAG_PROMPT_TYPE_ADVANCED: _RagPromptType.ValueType  # 1
+    """advanced"""
+
+class RagPromptType(_RagPromptType, metaclass=_RagPromptTypeEnumTypeWrapper):
+    """Chat assistant prompt type."""
+
+RAG_PROMPT_TYPE_SIMPLE: RagPromptType.ValueType  # 0
+"""simple"""
+RAG_PROMPT_TYPE_ADVANCED: RagPromptType.ValueType  # 1
+"""advanced"""
+global___RagPromptType = RagPromptType
+
+class _RagPermission:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _RagPermissionEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_RagPermission.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    RAG_PERMISSION_ME: _RagPermission.ValueType  # 0
+    """Only the current user can manage the dataset (default)."""
+    RAG_PERMISSION_TEAM: _RagPermission.ValueType  # 1
+    """All team members of the current user can manage the dataset."""
+
+class RagPermission(_RagPermission, metaclass=_RagPermissionEnumTypeWrapper):
+    """Access permissions for a dataset."""
+
+RAG_PERMISSION_ME: RagPermission.ValueType  # 0
+"""Only the current user can manage the dataset (default)."""
+RAG_PERMISSION_TEAM: RagPermission.ValueType  # 1
+"""All team members of the current user can manage the dataset."""
+global___RagPermission = RagPermission
+
+class _RagCanvasCategory:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _RagCanvasCategoryEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_RagCanvasCategory.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    RAG_CANVAS_CATEGORY_AGENT_CANVAS: _RagCanvasCategory.ValueType  # 0
+    """agent canvas"""
+    RAG_CANVAS_CATEGORY_DATAFLOW_CANVAS: _RagCanvasCategory.ValueType  # 1
+    """dataflow canvas"""
+
+class RagCanvasCategory(_RagCanvasCategory, metaclass=_RagCanvasCategoryEnumTypeWrapper):
+    """Agent canvas category."""
+
+RAG_CANVAS_CATEGORY_AGENT_CANVAS: RagCanvasCategory.ValueType  # 0
+"""agent canvas"""
+RAG_CANVAS_CATEGORY_DATAFLOW_CANVAS: RagCanvasCategory.ValueType  # 1
+"""dataflow canvas"""
+global___RagCanvasCategory = RagCanvasCategory
 
 class _RagMessageRole:
     ValueType = typing.NewType("ValueType", builtins.int)
@@ -168,23 +382,47 @@ class _RagMessageRole:
 
 class _RagMessageRoleEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_RagMessageRole.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-    user: _RagMessageRole.ValueType  # 0
+    RAG_MESSAGE_ROLE_USER: _RagMessageRole.ValueType  # 0
     """Message from user."""
-    assistant: _RagMessageRole.ValueType  # 1
+    RAG_MESSAGE_ROLE_ASSISTANT: _RagMessageRole.ValueType  # 1
     """Message from AI assistant."""
-    system: _RagMessageRole.ValueType  # 2
+    RAG_MESSAGE_ROLE_SYSTEM: _RagMessageRole.ValueType  # 2
     """System message."""
 
 class RagMessageRole(_RagMessageRole, metaclass=_RagMessageRoleEnumTypeWrapper):
     """Role of message sender in conversation."""
 
-user: RagMessageRole.ValueType  # 0
+RAG_MESSAGE_ROLE_USER: RagMessageRole.ValueType  # 0
 """Message from user."""
-assistant: RagMessageRole.ValueType  # 1
+RAG_MESSAGE_ROLE_ASSISTANT: RagMessageRole.ValueType  # 1
 """Message from AI assistant."""
-system: RagMessageRole.ValueType  # 2
+RAG_MESSAGE_ROLE_SYSTEM: RagMessageRole.ValueType  # 2
 """System message."""
 global___RagMessageRole = RagMessageRole
+
+class _RagSessionSource:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _RagSessionSourceEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_RagSessionSource.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    RAG_SESSION_SOURCE_NONE: _RagSessionSource.ValueType  # 0
+    """none"""
+    RAG_SESSION_SOURCE_AGENT: _RagSessionSource.ValueType  # 1
+    """agent"""
+    RAG_SESSION_SOURCE_DIALOG: _RagSessionSource.ValueType  # 2
+    """dialog"""
+
+class RagSessionSource(_RagSessionSource, metaclass=_RagSessionSourceEnumTypeWrapper):
+    """Session source"""
+
+RAG_SESSION_SOURCE_NONE: RagSessionSource.ValueType  # 0
+"""none"""
+RAG_SESSION_SOURCE_AGENT: RagSessionSource.ValueType  # 1
+"""agent"""
+RAG_SESSION_SOURCE_DIALOG: RagSessionSource.ValueType  # 2
+"""dialog"""
+global___RagSessionSource = RagSessionSource
 
 class _RagAgentEventType:
     ValueType = typing.NewType("ValueType", builtins.int)
@@ -192,51 +430,29 @@ class _RagAgentEventType:
 
 class _RagAgentEventTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_RagAgentEventType.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-    message: _RagAgentEventType.ValueType  # 0
+    RAG_AGENT_EVENT_TYPE_MESSAGE: _RagAgentEventType.ValueType  # 0
     """Regular message event."""
-    message_end: _RagAgentEventType.ValueType  # 1
+    RAG_AGENT_EVENT_TYPE_MESSAGE_END: _RagAgentEventType.ValueType  # 1
     """Message completion event."""
 
 class RagAgentEventType(_RagAgentEventType, metaclass=_RagAgentEventTypeEnumTypeWrapper):
     """Agent completion event type."""
 
-message: RagAgentEventType.ValueType  # 0
+RAG_AGENT_EVENT_TYPE_MESSAGE: RagAgentEventType.ValueType  # 0
 """Regular message event."""
-message_end: RagAgentEventType.ValueType  # 1
+RAG_AGENT_EVENT_TYPE_MESSAGE_END: RagAgentEventType.ValueType  # 1
 """Message completion event."""
 global___RagAgentEventType = RagAgentEventType
 
 @typing.final
-class RagPagination(google.protobuf.message.Message):
+class RagFileMetadata(google.protobuf.message.Message):
     """============================================================================
     Common Types
-    Shared types used across multiple services.
+    Shared types used across multiple endpoints.
     ============================================================================
 
-    Pagination parameters for list requests.
+    File metadata for streaming uploads/downloads.
     """
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    PAGE_FIELD_NUMBER: builtins.int
-    PAGE_SIZE_FIELD_NUMBER: builtins.int
-    page: builtins.int
-    """Page number (1-indexed, default: 1)."""
-    page_size: builtins.int
-    """Number of items per page (default varies by endpoint)."""
-    def __init__(
-        self,
-        *,
-        page: builtins.int = ...,
-        page_size: builtins.int = ...,
-    ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["page", b"page", "page_size", b"page_size"]) -> None: ...
-
-global___RagPagination = RagPagination
-
-@typing.final
-class RagFileMetadata(google.protobuf.message.Message):
-    """File metadata for streaming uploads/downloads."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -244,11 +460,11 @@ class RagFileMetadata(google.protobuf.message.Message):
     CONTENT_TYPE_FIELD_NUMBER: builtins.int
     SIZE_FIELD_NUMBER: builtins.int
     file_name: builtins.str
-    """Filename."""
+    """Required. Filename. Maximum length 255."""
     content_type: builtins.str
-    """MIME type (e.g., <code>&quot;application/pdf&quot;</code>, <code>&quot;image/png&quot;</code>)."""
+    """Optional. MIME type (e.g., <code>"application/pdf"</code>, <code>"image/png"</code>)."""
     size: builtins.int
-    """File size in bytes (if known, 0 if unknown)."""
+    """Optional. Minimum 0. File size in bytes (if known, 0 if unknown)."""
     def __init__(
         self,
         *,
@@ -259,62 +475,6 @@ class RagFileMetadata(google.protobuf.message.Message):
     def ClearField(self, field_name: typing.Literal["content_type", b"content_type", "file_name", b"file_name", "size", b"size"]) -> None: ...
 
 global___RagFileMetadata = RagFileMetadata
-
-@typing.final
-class RagFileChunk(google.protobuf.message.Message):
-    """File chunk for streaming downloads.<br>
-    First chunk contains metadata, subsequent chunks only contain data.
-    """
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    DATA_FIELD_NUMBER: builtins.int
-    METADATA_FIELD_NUMBER: builtins.int
-    data: builtins.bytes
-    """Chunk of file content."""
-    @property
-    def metadata(self) -> global___RagFileMetadata:
-        """File metadata (only in first chunk)."""
-
-    def __init__(
-        self,
-        *,
-        data: builtins.bytes = ...,
-        metadata: global___RagFileMetadata | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["metadata", b"metadata"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["data", b"data", "metadata", b"metadata"]) -> None: ...
-
-global___RagFileChunk = RagFileChunk
-
-@typing.final
-class RagUploadChunk(google.protobuf.message.Message):
-    """Upload chunk for streaming uploads.
-    Used to stream file data after metadata is sent in first message.
-    """
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    FILE_INDEX_FIELD_NUMBER: builtins.int
-    DATA_FIELD_NUMBER: builtins.int
-    file_index: builtins.int
-    """Not actually optional but <code>optional</code> keyword is needed to enable presence tracking.
-    Without it, it is impossible to distinguish between <code>0</code> and not present.
-    Index into metadata.files array (0-based).
-    """
-    data: builtins.bytes
-    """Chunk of file content, null indicates EOF."""
-    def __init__(
-        self,
-        *,
-        file_index: builtins.int | None = ...,
-        data: builtins.bytes = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_file_index", b"_file_index", "file_index", b"file_index"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_file_index", b"_file_index", "data", b"data", "file_index", b"file_index"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["_file_index", b"_file_index"]) -> typing.Literal["file_index"] | None: ...
-
-global___RagUploadChunk = RagUploadChunk
 
 @typing.final
 class RagPartialSuccess(google.protobuf.message.Message):
@@ -343,125 +503,29 @@ class RagPartialSuccess(google.protobuf.message.Message):
 global___RagPartialSuccess = RagPartialSuccess
 
 @typing.final
-class RagDataset(google.protobuf.message.Message):
+class RagCreateDatasetRequest(google.protobuf.message.Message):
     """============================================================================
     Dataset Management Types
-    Datasets are knowledge bases containing documents and their chunks.
     ============================================================================
 
-    Dataset containing documents for RAG.
+    Request message for creating a new dataset.
     """
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    ID_FIELD_NUMBER: builtins.int
-    NAME_FIELD_NUMBER: builtins.int
-    DESCRIPTION_FIELD_NUMBER: builtins.int
-    AVATAR_FIELD_NUMBER: builtins.int
-    LANGUAGE_FIELD_NUMBER: builtins.int
-    PERMISSION_FIELD_NUMBER: builtins.int
-    DOCUMENT_COUNT_FIELD_NUMBER: builtins.int
-    CHUNK_COUNT_FIELD_NUMBER: builtins.int
-    CHUNK_METHOD_FIELD_NUMBER: builtins.int
-    PARSER_CONFIG_FIELD_NUMBER: builtins.int
-    EMBEDDING_MODEL_FIELD_NUMBER: builtins.int
-    CREATE_TIME_FIELD_NUMBER: builtins.int
-    CREATE_DATE_FIELD_NUMBER: builtins.int
-    UPDATE_TIME_FIELD_NUMBER: builtins.int
-    UPDATE_DATE_FIELD_NUMBER: builtins.int
-    TOKEN_COUNT_FIELD_NUMBER: builtins.int
-    SIMILARITY_THRESHOLD_FIELD_NUMBER: builtins.int
-    VECTOR_SIMILARITY_WEIGHT_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
-    id: builtins.str
-    """Dataset UUID."""
-    name: builtins.str
-    """Dataset name."""
-    description: builtins.str
-    """Dataset description."""
-    avatar: builtins.str
-    """Base64-encoded avatar image."""
-    language: builtins.str
-    """Dataset language (e.g. <code>&quot;English&quot;</code>)."""
-    permission: global___RagPermission.ValueType
-    """Access permission."""
-    document_count: builtins.int
-    """Number of documents in the dataset."""
-    chunk_count: builtins.int
-    """Number of chunks of all documents in the dataset."""
-    chunk_method: global___RagChunkMethod.ValueType
-    """Default chunking method for documents in this dataset."""
-    embedding_model: builtins.str
-    """Embedding model name."""
-    create_time: builtins.int
-    """Creation timestamp (Unix timestamp in milliseconds)."""
-    create_date: builtins.str
-    """Creation date (ISO 8601 datetime)."""
-    update_time: builtins.int
-    """Last update timestamp (Unix timestamp in milliseconds)."""
-    update_date: builtins.str
-    """Last update date (ISO 8601 datetime)."""
-    token_count: builtins.int
-    """Number of tokens across all documents."""
-    similarity_threshold: builtins.float
-    """Default similarity threshold (0.0-1.0)."""
-    vector_similarity_weight: builtins.float
-    """Default vector similarity weight (0.0-1.0)."""
-    @property
-    def parser_config(self) -> global___RagParserConfig:
-        """Document parser configuration (auto-generated based on chunk_method)."""
-
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Additional fields returned by RAGFlow."""
-
-    def __init__(
-        self,
-        *,
-        id: builtins.str = ...,
-        name: builtins.str = ...,
-        description: builtins.str = ...,
-        avatar: builtins.str = ...,
-        language: builtins.str = ...,
-        permission: global___RagPermission.ValueType = ...,
-        document_count: builtins.int = ...,
-        chunk_count: builtins.int = ...,
-        chunk_method: global___RagChunkMethod.ValueType = ...,
-        parser_config: global___RagParserConfig | None = ...,
-        embedding_model: builtins.str = ...,
-        create_time: builtins.int = ...,
-        create_date: builtins.str = ...,
-        update_time: builtins.int = ...,
-        update_date: builtins.str = ...,
-        token_count: builtins.int = ...,
-        similarity_threshold: builtins.float = ...,
-        vector_similarity_weight: builtins.float = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "parser_config", b"parser_config"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "avatar", b"avatar", "chunk_count", b"chunk_count", "chunk_method", b"chunk_method", "create_date", b"create_date", "create_time", b"create_time", "description", b"description", "document_count", b"document_count", "embedding_model", b"embedding_model", "id", b"id", "language", b"language", "name", b"name", "parser_config", b"parser_config", "permission", b"permission", "similarity_threshold", b"similarity_threshold", "token_count", b"token_count", "update_date", b"update_date", "update_time", b"update_time", "vector_similarity_weight", b"vector_similarity_weight"]) -> None: ...
-
-global___RagDataset = RagDataset
-
-@typing.final
-class RagCreateDatasetRequest(google.protobuf.message.Message):
-    """Request message for creating a new dataset."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     NAME_FIELD_NUMBER: builtins.int
     DESCRIPTION_FIELD_NUMBER: builtins.int
     AVATAR_FIELD_NUMBER: builtins.int
-    PERMISSION_FIELD_NUMBER: builtins.int
     CHUNK_METHOD_FIELD_NUMBER: builtins.int
     PARSER_CONFIG_FIELD_NUMBER: builtins.int
-    EMBEDDING_MODEL_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The agent to create the dataset for.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
     name: builtins.str
     """Required. Unique name of the dataset to create. Must follow these requirements:
     <ul>
@@ -473,36 +537,27 @@ class RagCreateDatasetRequest(google.protobuf.message.Message):
     description: builtins.str
     """Optional. Dataset description. Maximum 65,535 characters."""
     avatar: builtins.str
-    """Optional. Base64-encoded avatar image. Maximum 65,535 characters."""
-    permission: global___RagPermission.ValueType
-    """Optional. Access permission for new dataset"""
+    """Optional. Base64-encoded avatar image in the format <code>"data:image/[png|jpeg];base64,&lt;base64_string&gt;"</code>. Maximum 65,535 characters."""
     chunk_method: global___RagChunkMethod.ValueType
     """Optional. Default chunking method for documents in this dataset."""
-    embedding_model: builtins.str
-    """Optional. Embedding model name (uses user&apos;s default if not specified)."""
     @property
     def parser_config(self) -> global___RagParserConfig:
         """Optional. Configuration settings for the dataset parser. The used fields vary depending on the selected <code>chunk_method</code>."""
-
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. Additional fields to pass through to RAGFlow."""
 
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
+        language_code: builtins.str = ...,
         name: builtins.str = ...,
         description: builtins.str = ...,
         avatar: builtins.str = ...,
-        permission: global___RagPermission.ValueType = ...,
-        chunk_method: global___RagChunkMethod.ValueType = ...,
+        chunk_method: global___RagChunkMethod.ValueType | None = ...,
         parser_config: global___RagParserConfig | None = ...,
-        embedding_model: builtins.str = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "parser_config", b"parser_config"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "avatar", b"avatar", "chunk_method", b"chunk_method", "description", b"description", "embedding_model", b"embedding_model", "name", b"name", "parent", b"parent", "parser_config", b"parser_config", "permission", b"permission"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_chunk_method", b"_chunk_method", "chunk_method", b"chunk_method", "parser_config", b"parser_config"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_chunk_method", b"_chunk_method", "avatar", b"avatar", "chunk_method", b"chunk_method", "description", b"description", "language_code", b"language_code", "name", b"name", "parent", b"parent", "parser_config", b"parser_config"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_chunk_method", b"_chunk_method"]) -> typing.Literal["chunk_method"] | None: ...
 
 global___RagCreateDatasetRequest = RagCreateDatasetRequest
 
@@ -522,7 +577,7 @@ class RagParserConfig(google.protobuf.message.Message):
             <li><code>layout_recognize</code></li>
             <li><code>tag_kb_ids</code></li>
             <li><code>task_page_size</code></li>
-            <li><code>rapter</code></li>
+            <li><code>raptor</code></li>
             <li><code>graphrag</code></li>
         </ul>
         <li><code>qa</code>, <code>manual</code>, <code>paper</code>, <code>book</code>, <code>laws</code>, <code>presentation</code>: uses only the <code>raptor</code> field</li>
@@ -532,28 +587,34 @@ class RagParserConfig(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    AUTO_KEYWORD_FIELD_NUMBER: builtins.int
+    AUTO_KEYWORDS_FIELD_NUMBER: builtins.int
     AUTO_QUESTIONS_FIELD_NUMBER: builtins.int
     CHUNK_TOKEN_NUM_FIELD_NUMBER: builtins.int
     DELIMITER_FIELD_NUMBER: builtins.int
     HTML4EXCEL_FIELD_NUMBER: builtins.int
     LAYOUT_RECOGNIZE_FIELD_NUMBER: builtins.int
     TAG_KB_IDS_FIELD_NUMBER: builtins.int
+    TOPN_TAGS_FIELD_NUMBER: builtins.int
+    FILENAME_EMBD_WEIGHT_FIELD_NUMBER: builtins.int
     TASK_PAGE_SIZE_FIELD_NUMBER: builtins.int
     RAPTOR_FIELD_NUMBER: builtins.int
     GRAPHRAG_FIELD_NUMBER: builtins.int
-    auto_keyword: builtins.int
+    auto_keywords: builtins.int
     """Optional. Minimum 0, maximum 32, default 0. See <a href="https://ragflow.io/docs/dev/autokeyword_autoquestion">https://ragflow.io/docs/dev/autokeyword_autoquestion</a> for details."""
     auto_questions: builtins.int
     """Optional. Minimum 0, maximum 10, default 0. See <a href="https://ragflow.io/docs/dev/autokeyword_autoquestion">https://ragflow.io/docs/dev/autokeyword_autoquestion</a> for details."""
     chunk_token_num: builtins.int
     """Optional. Minimum 1, maximum 2048, default 512."""
     delimiter: builtins.str
-    """Optional. Default <code>&quot;\\n&quot;</code>."""
+    """Optional. Default <code>"\\n"</code>."""
     html4excel: builtins.bool
     """Optional. Convert Excel documents to HTML. Default <code>false</code>."""
     layout_recognize: builtins.str
-    """Optional. Default <code>&quot;DeepDOC&quot;</code>"""
+    """Optional. Default <code>"DeepDOC"</code>."""
+    topn_tags: builtins.int
+    """Optional. Minimum 1. Maximum 10. Default 1."""
+    filename_embd_weight: builtins.float
+    """Optional. Minimum 0.0. Maximum 1.0. Default 0.1."""
     task_page_size: builtins.int
     """Optional. Minimum 1, default 12. Only applies to PDFs."""
     @property
@@ -561,53 +622,236 @@ class RagParserConfig(google.protobuf.message.Message):
         """Optional. List of dataset IDs. See <a href="https://ragflow.io/docs/dev/use_tag_sets">https://ragflow.io/docs/dev/use_tag_sets</a> for details."""
 
     @property
-    def raptor(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. RAPTOR-specific settings. Default <code>{ &quot;use_raptor&quot;: false }</code>."""
+    def raptor(self) -> global___RagRaptorConfig:
+        """Optional. RAPTOR-specific settings. Default <code>{ "use_raptor": false }</code>."""
 
     @property
-    def graphrag(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. GRAPHRAG-specific settings. Default <code>{ &quot;use_graphrag&quot;: false }</code>."""
+    def graphrag(self) -> global___RagGraphRagConfig:
+        """Optional. GRAPHRAG-specific settings. Default <code>{ "use_graphrag": false }</code>."""
 
     def __init__(
         self,
         *,
-        auto_keyword: builtins.int = ...,
-        auto_questions: builtins.int = ...,
+        auto_keywords: builtins.int | None = ...,
+        auto_questions: builtins.int | None = ...,
         chunk_token_num: builtins.int = ...,
         delimiter: builtins.str = ...,
-        html4excel: builtins.bool = ...,
+        html4excel: builtins.bool | None = ...,
         layout_recognize: builtins.str = ...,
         tag_kb_ids: collections.abc.Iterable[builtins.str] | None = ...,
+        topn_tags: builtins.int = ...,
+        filename_embd_weight: builtins.float | None = ...,
         task_page_size: builtins.int = ...,
-        raptor: google.protobuf.struct_pb2.Struct | None = ...,
-        graphrag: google.protobuf.struct_pb2.Struct | None = ...,
+        raptor: global___RagRaptorConfig | None = ...,
+        graphrag: global___RagGraphRagConfig | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["graphrag", b"graphrag", "raptor", b"raptor"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["auto_keyword", b"auto_keyword", "auto_questions", b"auto_questions", "chunk_token_num", b"chunk_token_num", "delimiter", b"delimiter", "graphrag", b"graphrag", "html4excel", b"html4excel", "layout_recognize", b"layout_recognize", "raptor", b"raptor", "tag_kb_ids", b"tag_kb_ids", "task_page_size", b"task_page_size"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_auto_keywords", b"_auto_keywords", "_auto_questions", b"_auto_questions", "_filename_embd_weight", b"_filename_embd_weight", "_html4excel", b"_html4excel", "auto_keywords", b"auto_keywords", "auto_questions", b"auto_questions", "filename_embd_weight", b"filename_embd_weight", "graphrag", b"graphrag", "html4excel", b"html4excel", "raptor", b"raptor"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_auto_keywords", b"_auto_keywords", "_auto_questions", b"_auto_questions", "_filename_embd_weight", b"_filename_embd_weight", "_html4excel", b"_html4excel", "auto_keywords", b"auto_keywords", "auto_questions", b"auto_questions", "chunk_token_num", b"chunk_token_num", "delimiter", b"delimiter", "filename_embd_weight", b"filename_embd_weight", "graphrag", b"graphrag", "html4excel", b"html4excel", "layout_recognize", b"layout_recognize", "raptor", b"raptor", "tag_kb_ids", b"tag_kb_ids", "task_page_size", b"task_page_size", "topn_tags", b"topn_tags"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_auto_keywords", b"_auto_keywords"]) -> typing.Literal["auto_keywords"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_auto_questions", b"_auto_questions"]) -> typing.Literal["auto_questions"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_filename_embd_weight", b"_filename_embd_weight"]) -> typing.Literal["filename_embd_weight"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_html4excel", b"_html4excel"]) -> typing.Literal["html4excel"] | None: ...
 
 global___RagParserConfig = RagParserConfig
 
 @typing.final
+class RagRaptorConfig(google.protobuf.message.Message):
+    """RAPTOR configuration. Refer to <a href="https://arxiv.org/html/2401.18059v1">RAPTOR paper</a> for more information about RAPTOR."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USE_RAPTOR_FIELD_NUMBER: builtins.int
+    PROMPT_FIELD_NUMBER: builtins.int
+    MAX_TOKEN_FIELD_NUMBER: builtins.int
+    THRESHOLD_FIELD_NUMBER: builtins.int
+    MAX_CLUSTER_FIELD_NUMBER: builtins.int
+    RANDOM_SEED_FIELD_NUMBER: builtins.int
+    use_raptor: builtins.bool
+    """Optional. Default <code>false</code>. Whether to use RAPTOR for this dataset."""
+    prompt: builtins.str
+    """Optional. Prompt to use for RAPTOR. Default:<br>
+    <code>"Please summarize the following paragraphs. Be careful with the numbers, do not make things up. Paragraphs as following:\\n      {cluster_content}\\nThe above is the content you need to summarize."</code>
+    """
+    max_token: builtins.int
+    """Optional. Minimum 1. Maximum 2048. Default 256."""
+    threshold: builtins.float
+    """Optional. Minimum 0.0. Maximum 1.0. Default 0.1."""
+    max_cluster: builtins.int
+    """Optional. Minimum 1. Maximum 1024. Default 64."""
+    random_seed: builtins.int
+    """Optional. Minimum 0. Default 0."""
+    def __init__(
+        self,
+        *,
+        use_raptor: builtins.bool | None = ...,
+        prompt: builtins.str = ...,
+        max_token: builtins.int = ...,
+        threshold: builtins.float | None = ...,
+        max_cluster: builtins.int = ...,
+        random_seed: builtins.int | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_random_seed", b"_random_seed", "_threshold", b"_threshold", "_use_raptor", b"_use_raptor", "random_seed", b"random_seed", "threshold", b"threshold", "use_raptor", b"use_raptor"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_random_seed", b"_random_seed", "_threshold", b"_threshold", "_use_raptor", b"_use_raptor", "max_cluster", b"max_cluster", "max_token", b"max_token", "prompt", b"prompt", "random_seed", b"random_seed", "threshold", b"threshold", "use_raptor", b"use_raptor"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_random_seed", b"_random_seed"]) -> typing.Literal["random_seed"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_threshold", b"_threshold"]) -> typing.Literal["threshold"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_use_raptor", b"_use_raptor"]) -> typing.Literal["use_raptor"] | None: ...
+
+global___RagRaptorConfig = RagRaptorConfig
+
+@typing.final
+class RagGraphRagConfig(google.protobuf.message.Message):
+    """GraphRAG configuration."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USE_GRAPHRAG_FIELD_NUMBER: builtins.int
+    ENTITY_TYPES_FIELD_NUMBER: builtins.int
+    METHOD_FIELD_NUMBER: builtins.int
+    COMMUNITY_FIELD_NUMBER: builtins.int
+    RESOLUTION_FIELD_NUMBER: builtins.int
+    use_graphrag: builtins.bool
+    """Optional. Default <code>false</code>."""
+    method: global___RagGraphRagMethod.ValueType
+    """Optional. Default <code>light</code>."""
+    community: builtins.bool
+    """Optional. Default <code>false</code>."""
+    resolution: builtins.bool
+    """Optional. Default <code>false</code>."""
+    @property
+    def entity_types(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Default <code>["organization", "person", "geo", "event", "category"]</code>."""
+
+    def __init__(
+        self,
+        *,
+        use_graphrag: builtins.bool | None = ...,
+        entity_types: collections.abc.Iterable[builtins.str] | None = ...,
+        method: global___RagGraphRagMethod.ValueType | None = ...,
+        community: builtins.bool | None = ...,
+        resolution: builtins.bool | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_community", b"_community", "_method", b"_method", "_resolution", b"_resolution", "_use_graphrag", b"_use_graphrag", "community", b"community", "method", b"method", "resolution", b"resolution", "use_graphrag", b"use_graphrag"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_community", b"_community", "_method", b"_method", "_resolution", b"_resolution", "_use_graphrag", b"_use_graphrag", "community", b"community", "entity_types", b"entity_types", "method", b"method", "resolution", b"resolution", "use_graphrag", b"use_graphrag"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_community", b"_community"]) -> typing.Literal["community"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_method", b"_method"]) -> typing.Literal["method"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_resolution", b"_resolution"]) -> typing.Literal["resolution"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_use_graphrag", b"_use_graphrag"]) -> typing.Literal["use_graphrag"] | None: ...
+
+global___RagGraphRagConfig = RagGraphRagConfig
+
+@typing.final
+class RagDataset(google.protobuf.message.Message):
+    """Dataset containing documents for RAG."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ID_FIELD_NUMBER: builtins.int
+    AVATAR_FIELD_NUMBER: builtins.int
+    NAME_FIELD_NUMBER: builtins.int
+    DESCRIPTION_FIELD_NUMBER: builtins.int
+    DOCUMENT_COUNT_FIELD_NUMBER: builtins.int
+    TOKEN_NUM_FIELD_NUMBER: builtins.int
+    CHUNK_COUNT_FIELD_NUMBER: builtins.int
+    CHUNK_METHOD_FIELD_NUMBER: builtins.int
+    PARSER_CONFIG_FIELD_NUMBER: builtins.int
+    PAGERANK_FIELD_NUMBER: builtins.int
+    CREATE_TIME_FIELD_NUMBER: builtins.int
+    UPDATE_TIME_FIELD_NUMBER: builtins.int
+    id: builtins.str
+    """Dataset UUID."""
+    avatar: builtins.str
+    """Base64-encoded avatar image."""
+    name: builtins.str
+    """Dataset name."""
+    description: builtins.str
+    """Dataset description."""
+    document_count: builtins.int
+    """Number of documents in the dataset."""
+    token_num: builtins.int
+    """Number of tokens in the dataset."""
+    chunk_count: builtins.int
+    """Number of chunks of all documents in the dataset."""
+    chunk_method: global___RagChunkMethod.ValueType
+    """Default chunking method for documents in this dataset."""
+    pagerank: builtins.int
+    """Pagerank."""
+    @property
+    def parser_config(self) -> global___RagParserConfig:
+        """Document parser configuration (auto-generated based on chunk_method)."""
+
+    @property
+    def create_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Creation date and time."""
+
+    @property
+    def update_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Last update date and time."""
+
+    def __init__(
+        self,
+        *,
+        id: builtins.str = ...,
+        avatar: builtins.str = ...,
+        name: builtins.str = ...,
+        description: builtins.str = ...,
+        document_count: builtins.int | None = ...,
+        token_num: builtins.int | None = ...,
+        chunk_count: builtins.int | None = ...,
+        chunk_method: global___RagChunkMethod.ValueType | None = ...,
+        parser_config: global___RagParserConfig | None = ...,
+        pagerank: builtins.int | None = ...,
+        create_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        update_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_chunk_count", b"_chunk_count", "_chunk_method", b"_chunk_method", "_document_count", b"_document_count", "_pagerank", b"_pagerank", "_token_num", b"_token_num", "chunk_count", b"chunk_count", "chunk_method", b"chunk_method", "create_time", b"create_time", "document_count", b"document_count", "pagerank", b"pagerank", "parser_config", b"parser_config", "token_num", b"token_num", "update_time", b"update_time"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_chunk_count", b"_chunk_count", "_chunk_method", b"_chunk_method", "_document_count", b"_document_count", "_pagerank", b"_pagerank", "_token_num", b"_token_num", "avatar", b"avatar", "chunk_count", b"chunk_count", "chunk_method", b"chunk_method", "create_time", b"create_time", "description", b"description", "document_count", b"document_count", "id", b"id", "name", b"name", "pagerank", b"pagerank", "parser_config", b"parser_config", "token_num", b"token_num", "update_time", b"update_time"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_chunk_count", b"_chunk_count"]) -> typing.Literal["chunk_count"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_chunk_method", b"_chunk_method"]) -> typing.Literal["chunk_method"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_document_count", b"_document_count"]) -> typing.Literal["document_count"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_pagerank", b"_pagerank"]) -> typing.Literal["pagerank"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_token_num", b"_token_num"]) -> typing.Literal["token_num"] | None: ...
+
+global___RagDataset = RagDataset
+
+@typing.final
 class RagUpdateDatasetRequest(google.protobuf.message.Message):
-    """Request message for updating an existing dataset."""
+    """Request message for updating an existing dataset.
+    The same field constraints as for <code>RagCreateDatasetRequest</code> apply here.
+    """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     DATASET_ID_FIELD_NUMBER: builtins.int
     NAME_FIELD_NUMBER: builtins.int
     DESCRIPTION_FIELD_NUMBER: builtins.int
     AVATAR_FIELD_NUMBER: builtins.int
-    PERMISSION_FIELD_NUMBER: builtins.int
     CHUNK_METHOD_FIELD_NUMBER: builtins.int
     PARSER_CONFIG_FIELD_NUMBER: builtins.int
-    EMBEDDING_MODEL_FIELD_NUMBER: builtins.int
     PAGERANK_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The agent to update the dataset for.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
     dataset_id: builtins.str
     """Required. Dataset ID."""
     name: builtins.str
@@ -616,73 +860,65 @@ class RagUpdateDatasetRequest(google.protobuf.message.Message):
     """Optional. New dataset description."""
     avatar: builtins.str
     """Optional. New avatar image."""
-    permission: global___RagPermission.ValueType
-    """Optional. New access permission."""
     chunk_method: global___RagChunkMethod.ValueType
     """Optional. New chunk method."""
-    embedding_model: builtins.str
-    """Optional. New embedding model (cannot change if chunk_count &gt; 0)."""
     pagerank: builtins.int
-    """Optional. PageRank value (only for elasticsearch)."""
+    """Optional. Minimum 0. Maximum 100. PageRank value."""
     @property
     def parser_config(self) -> global___RagParserConfig:
         """Optional. New parser config (deep merged with existing)."""
 
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. Additional fields to pass through to RAGFlow."""
-
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
+        language_code: builtins.str = ...,
         dataset_id: builtins.str = ...,
         name: builtins.str = ...,
         description: builtins.str = ...,
         avatar: builtins.str = ...,
-        permission: global___RagPermission.ValueType = ...,
-        chunk_method: global___RagChunkMethod.ValueType = ...,
+        chunk_method: global___RagChunkMethod.ValueType | None = ...,
         parser_config: global___RagParserConfig | None = ...,
-        embedding_model: builtins.str = ...,
-        pagerank: builtins.int = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
+        pagerank: builtins.int | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "parser_config", b"parser_config"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "avatar", b"avatar", "chunk_method", b"chunk_method", "dataset_id", b"dataset_id", "description", b"description", "embedding_model", b"embedding_model", "name", b"name", "pagerank", b"pagerank", "parent", b"parent", "parser_config", b"parser_config", "permission", b"permission"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_chunk_method", b"_chunk_method", "_pagerank", b"_pagerank", "chunk_method", b"chunk_method", "pagerank", b"pagerank", "parser_config", b"parser_config"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_chunk_method", b"_chunk_method", "_pagerank", b"_pagerank", "avatar", b"avatar", "chunk_method", b"chunk_method", "dataset_id", b"dataset_id", "description", b"description", "language_code", b"language_code", "name", b"name", "pagerank", b"pagerank", "parent", b"parent", "parser_config", b"parser_config"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_chunk_method", b"_chunk_method"]) -> typing.Literal["chunk_method"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_pagerank", b"_pagerank"]) -> typing.Literal["pagerank"] | None: ...
 
 global___RagUpdateDatasetRequest = RagUpdateDatasetRequest
 
 @typing.final
-class RagDeleteDatasetsRequest(google.protobuf.message.Message):
-    """Request message for deleting one or more datasets."""
+class RagDeleteRequest(google.protobuf.message.Message):
+    """Request message for deleting one or more of a RAGFlow resource."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     IDS_FIELD_NUMBER: builtins.int
-    DELETE_ALL_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The agent to delete datasets from.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
-    delete_all: builtins.bool
-    """Optional. Delete all datasets (needed because protobuf cannot represent <code>ids=null</code>)."""
+    language_code: builtins.str
+    """Required. The language of the project to use."""
     @property
     def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Optional. Dataset IDs to delete. If empty and <code>delete_all</code> is <code>true</code>, deletes all datasets."""
+        """Optional. IDs of resources to delete. If empty all are deleted. Duplicate IDs are ignored."""
 
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
+        language_code: builtins.str = ...,
         ids: collections.abc.Iterable[builtins.str] | None = ...,
-        delete_all: builtins.bool | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_delete_all", b"_delete_all", "delete_all", b"delete_all"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_delete_all", b"_delete_all", "delete_all", b"delete_all", "ids", b"ids", "parent", b"parent"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["_delete_all", b"_delete_all"]) -> typing.Literal["delete_all"] | None: ...
+    def ClearField(self, field_name: typing.Literal["ids", b"ids", "language_code", b"language_code", "parent", b"parent"]) -> None: ...
 
-global___RagDeleteDatasetsRequest = RagDeleteDatasetsRequest
+global___RagDeleteRequest = RagDeleteRequest
 
 @typing.final
 class RagListDatasetsRequest(google.protobuf.message.Message):
@@ -691,45 +927,59 @@ class RagListDatasetsRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     PARENT_FIELD_NUMBER: builtins.int
-    PAGINATION_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    PAGE_TOKEN_FIELD_NUMBER: builtins.int
     ID_FIELD_NUMBER: builtins.int
     NAME_FIELD_NUMBER: builtins.int
     ORDERBY_FIELD_NUMBER: builtins.int
     DESC_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The agent to list all datasets from.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
+    page_token: builtins.str
+    """Optional. Specifies which page to return. The page token is a string of the format
+    <pre><code>current_index-&lt;idx&gt;--page_size-&lt;size&gt;</code></pre>
+
+    <ul>
+        <li><code>&lt;size&gt;</code> must be an integer &geq; <code>1</code>. The maximum number of results to return.</li>
+        <li><code>&lt;idx&gt;</code> must be an interger &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li>
+    </ul>
+
+    <em>Important note</em>: The <code>&lt;idx&gt;</code> is the index in the requested sequence NOT the page number. E.g. if the requested list has 100 elements then <code>current_index-5--page_size-15</code> returns the elements at index 5-19 and not the 5-th page of 15 elements.
+    <br>
+    Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</code> are optional and default to <code>0</code> and <code>10</code> respectively. The following are all valid <code>page_token</code>s
+
+    <ul>
+        <li><code> </code> (empty string/missing value) - index 0, page size 10</li>
+        <li><code>current_index-3</code> - index 3, page size 10</li>
+        <li><code>page_size-20</code> - index 0, page size 20</li>
+        <li><code>current_index-3--page_size-20</code> - index 3, page size 20</li>
+    </ul>
     """
     id: builtins.str
     """Optional. Filter by dataset ID."""
     name: builtins.str
     """Optional. Filter by dataset name."""
     orderby: builtins.str
-    """Optional. Sort field (default: <code>create_time</code>)."""
+    """Optional. Sort field. Can be <code>create_time</code> or <code>update_time</code> (default: <code>create_time</code>)."""
     desc: builtins.bool
     """Optional. Sort descending (default: <code>true</code>)."""
-    @property
-    def pagination(self) -> global___RagPagination:
-        """Optional. Pagination parameters."""
-
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. Additional fields to pass through to RAGFlow."""
-
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
-        pagination: global___RagPagination | None = ...,
+        language_code: builtins.str = ...,
+        page_token: builtins.str = ...,
         id: builtins.str = ...,
         name: builtins.str = ...,
         orderby: builtins.str = ...,
         desc: builtins.bool | None = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_desc", b"_desc", "additional_fields", b"additional_fields", "desc", b"desc", "pagination", b"pagination"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_desc", b"_desc", "additional_fields", b"additional_fields", "desc", b"desc", "id", b"id", "name", b"name", "orderby", b"orderby", "pagination", b"pagination", "parent", b"parent"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_desc", b"_desc", "desc", b"desc"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_desc", b"_desc", "desc", b"desc", "id", b"id", "language_code", b"language_code", "name", b"name", "orderby", b"orderby", "page_token", b"page_token", "parent", b"parent"]) -> None: ...
     def WhichOneof(self, oneof_group: typing.Literal["_desc", b"_desc"]) -> typing.Literal["desc"] | None: ...
 
 global___RagListDatasetsRequest = RagListDatasetsRequest
@@ -741,6 +991,12 @@ class RagDatasetList(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     DATASETS_FIELD_NUMBER: builtins.int
+    TOTAL_FIELD_NUMBER: builtins.int
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    total: builtins.int
+    """Total number of datasets that match the given filters"""
+    next_page_token: builtins.str
+    """Page token string (following the format described in <code>RagListDatasetsRequest</code>) for retrieving the next results page"""
     @property
     def datasets(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagDataset]:
         """List of datasets."""
@@ -749,34 +1005,802 @@ class RagDatasetList(google.protobuf.message.Message):
         self,
         *,
         datasets: collections.abc.Iterable[global___RagDataset] | None = ...,
+        total: builtins.int = ...,
+        next_page_token: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["datasets", b"datasets"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["datasets", b"datasets", "next_page_token", b"next_page_token", "total", b"total"]) -> None: ...
 
 global___RagDatasetList = RagDatasetList
 
 @typing.final
-class RagGetKnowledgeGraphRequest(google.protobuf.message.Message):
-    """Request message for getting a dataset's knowledge graph."""
+class RagUploadDocumentRequest(google.protobuf.message.Message):
+    """============================================================================
+    Document Management Types
+    ============================================================================
+
+    Request message for uploading a document to a dataset.
+    """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     DATASET_ID_FIELD_NUMBER: builtins.int
+    METADATA_FIELD_NUMBER: builtins.int
+    DATA_FIELD_NUMBER: builtins.int
     parent: builtins.str
-    """Required. The agent to get knowledge graph for.
+    """Required in first chunk, ignored in later chunks. The agent to upload documents for.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
+    language_code: builtins.str
+    """Required in first chunk, ignored in later chunks. The language of the project to use."""
+    dataset_id: builtins.str
+    """Required in first chunk, ignored in later chunks. Target dataset ID to upload documents to."""
+    data: builtins.bytes
+    """Optional. Chunk of file content."""
+    @property
+    def metadata(self) -> global___RagFileMetadata:
+        """Required in first chunk, ignored in later chunks. File metadata."""
+
+    def __init__(
+        self,
+        *,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
+        dataset_id: builtins.str = ...,
+        metadata: global___RagFileMetadata | None = ...,
+        data: builtins.bytes = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["metadata", b"metadata"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["data", b"data", "dataset_id", b"dataset_id", "language_code", b"language_code", "metadata", b"metadata", "parent", b"parent"]) -> None: ...
+
+global___RagUploadDocumentRequest = RagUploadDocumentRequest
+
+@typing.final
+class RagDocument(google.protobuf.message.Message):
+    """Document uploaded to a dataset."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ID_FIELD_NUMBER: builtins.int
+    THUMBNAIL_FIELD_NUMBER: builtins.int
+    DATASET_ID_FIELD_NUMBER: builtins.int
+    CHUNK_METHOD_FIELD_NUMBER: builtins.int
+    PARSER_CONFIG_FIELD_NUMBER: builtins.int
+    TYPE_FIELD_NUMBER: builtins.int
+    NAME_FIELD_NUMBER: builtins.int
+    SIZE_FIELD_NUMBER: builtins.int
+    CHUNK_COUNT_FIELD_NUMBER: builtins.int
+    TOKEN_COUNT_FIELD_NUMBER: builtins.int
+    PROGRESS_FIELD_NUMBER: builtins.int
+    PROGRESS_MSG_FIELD_NUMBER: builtins.int
+    PROCESS_BEGIN_AT_FIELD_NUMBER: builtins.int
+    PROCESS_DURATION_FIELD_NUMBER: builtins.int
+    META_FIELDS_FIELD_NUMBER: builtins.int
+    RUN_FIELD_NUMBER: builtins.int
+    STATUS_FIELD_NUMBER: builtins.int
+    CREATE_TIME_FIELD_NUMBER: builtins.int
+    UPDATE_TIME_FIELD_NUMBER: builtins.int
+    id: builtins.str
+    """Document UUID."""
+    thumbnail: builtins.str
+    """Base64-encoded thumbnail image in the format <code>"data:image/[png|jpeg];base64,&lt;base64_string&gt;"</code>. Maximum 65,535 characters."""
+    dataset_id: builtins.str
+    """Parent dataset ID."""
+    chunk_method: global___RagChunkMethod.ValueType
+    """Chunking method used for this document."""
+    type: global___RagDocumentType.ValueType
+    """Broad file category"""
+    name: builtins.str
+    """Document filename."""
+    size: builtins.int
+    """File size in bytes."""
+    chunk_count: builtins.int
+    """Number of chunks extracted from this document (initially <code>0</code> until parsed)."""
+    token_count: builtins.int
+    """Number of tokens across all chunks in this document."""
+    progress: builtins.float
+    """Processing progress as a decimal value between <code>0.0</code> (not started) and <code>1.0</code> (complete)."""
+    progress_msg: builtins.str
+    """Human-readable progress message describing current processing state."""
+    process_duration: builtins.float
+    """Total processing duration in seconds."""
+    run: global___RagDocumentStatus.ValueType
+    """Document processing status."""
+    status: builtins.str
+    """Status indicating if document is enabled (<code>"1"</code>=enabled, <code>"0"</code>=disabled)."""
+    @property
+    def parser_config(self) -> global___RagParserConfig:
+        """Parser configuration used for chunking this document."""
+
+    @property
+    def process_begin_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Processing start date and time."""
+
+    @property
+    def meta_fields(self) -> google.protobuf.struct_pb2.Struct:
+        """Custom metadata fields specific to this document (arbitrary key-value pairs)."""
+
+    @property
+    def create_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Creation date and time."""
+
+    @property
+    def update_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Last update date and time."""
+
+    def __init__(
+        self,
+        *,
+        id: builtins.str = ...,
+        thumbnail: builtins.str = ...,
+        dataset_id: builtins.str = ...,
+        chunk_method: global___RagChunkMethod.ValueType | None = ...,
+        parser_config: global___RagParserConfig | None = ...,
+        type: global___RagDocumentType.ValueType = ...,
+        name: builtins.str = ...,
+        size: builtins.int | None = ...,
+        chunk_count: builtins.int | None = ...,
+        token_count: builtins.int | None = ...,
+        progress: builtins.float | None = ...,
+        progress_msg: builtins.str = ...,
+        process_begin_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        process_duration: builtins.float | None = ...,
+        meta_fields: google.protobuf.struct_pb2.Struct | None = ...,
+        run: global___RagDocumentStatus.ValueType | None = ...,
+        status: builtins.str = ...,
+        create_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        update_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_chunk_count", b"_chunk_count", "_chunk_method", b"_chunk_method", "_process_duration", b"_process_duration", "_progress", b"_progress", "_run", b"_run", "_size", b"_size", "_token_count", b"_token_count", "chunk_count", b"chunk_count", "chunk_method", b"chunk_method", "create_time", b"create_time", "meta_fields", b"meta_fields", "parser_config", b"parser_config", "process_begin_at", b"process_begin_at", "process_duration", b"process_duration", "progress", b"progress", "run", b"run", "size", b"size", "token_count", b"token_count", "update_time", b"update_time"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_chunk_count", b"_chunk_count", "_chunk_method", b"_chunk_method", "_process_duration", b"_process_duration", "_progress", b"_progress", "_run", b"_run", "_size", b"_size", "_token_count", b"_token_count", "chunk_count", b"chunk_count", "chunk_method", b"chunk_method", "create_time", b"create_time", "dataset_id", b"dataset_id", "id", b"id", "meta_fields", b"meta_fields", "name", b"name", "parser_config", b"parser_config", "process_begin_at", b"process_begin_at", "process_duration", b"process_duration", "progress", b"progress", "progress_msg", b"progress_msg", "run", b"run", "size", b"size", "status", b"status", "thumbnail", b"thumbnail", "token_count", b"token_count", "type", b"type", "update_time", b"update_time"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_chunk_count", b"_chunk_count"]) -> typing.Literal["chunk_count"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_chunk_method", b"_chunk_method"]) -> typing.Literal["chunk_method"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_process_duration", b"_process_duration"]) -> typing.Literal["process_duration"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_progress", b"_progress"]) -> typing.Literal["progress"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_run", b"_run"]) -> typing.Literal["run"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_size", b"_size"]) -> typing.Literal["size"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_token_count", b"_token_count"]) -> typing.Literal["token_count"] | None: ...
+
+global___RagDocument = RagDocument
+
+@typing.final
+class RagUpdateDocumentRequest(google.protobuf.message.Message):
+    """Request message for updating an existing document's metadata and configuration."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    DATASET_ID_FIELD_NUMBER: builtins.int
+    DOCUMENT_ID_FIELD_NUMBER: builtins.int
+    NAME_FIELD_NUMBER: builtins.int
+    CHUNK_METHOD_FIELD_NUMBER: builtins.int
+    PARSER_CONFIG_FIELD_NUMBER: builtins.int
+    ENABLED_FIELD_NUMBER: builtins.int
+    META_FIELDS_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Required. The agent to update the document for.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
+    dataset_id: builtins.str
+    """Required. Dataset ID containing the document."""
+    document_id: builtins.str
+    """Required. Document ID to update."""
+    name: builtins.str
+    """Optional. Maximum length 255. New document name (file extension must remain the same)."""
+    chunk_method: global___RagChunkMethod.ValueType
+    """Optional. New chunking method (resets document to <code>UNSTART</code> status and deletes all existing chunks)."""
+    enabled: builtins.bool
+    """Optional. Document enabled/disabled status."""
+    @property
+    def parser_config(self) -> global___RagParserConfig:
+        """Optional. New parser configuration (deep merged with existing configuration)."""
+
+    @property
+    def meta_fields(self) -> google.protobuf.struct_pb2.Struct:
+        """Optional. Custom metadata fields for document-specific metadata (replaces existing metadata)."""
+
+    def __init__(
+        self,
+        *,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
+        dataset_id: builtins.str = ...,
+        document_id: builtins.str = ...,
+        name: builtins.str = ...,
+        chunk_method: global___RagChunkMethod.ValueType | None = ...,
+        parser_config: global___RagParserConfig | None = ...,
+        enabled: builtins.bool | None = ...,
+        meta_fields: google.protobuf.struct_pb2.Struct | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_chunk_method", b"_chunk_method", "_enabled", b"_enabled", "chunk_method", b"chunk_method", "enabled", b"enabled", "meta_fields", b"meta_fields", "parser_config", b"parser_config"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_chunk_method", b"_chunk_method", "_enabled", b"_enabled", "chunk_method", b"chunk_method", "dataset_id", b"dataset_id", "document_id", b"document_id", "enabled", b"enabled", "language_code", b"language_code", "meta_fields", b"meta_fields", "name", b"name", "parent", b"parent", "parser_config", b"parser_config"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_chunk_method", b"_chunk_method"]) -> typing.Literal["chunk_method"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_enabled", b"_enabled"]) -> typing.Literal["enabled"] | None: ...
+
+global___RagUpdateDocumentRequest = RagUpdateDocumentRequest
+
+@typing.final
+class RagDownloadDocumentRequest(google.protobuf.message.Message):
+    """Request message for downloading the document file."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    DATASET_ID_FIELD_NUMBER: builtins.int
+    DOCUMENT_ID_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Required. The agent to download the document from.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
+    dataset_id: builtins.str
+    """Required. Dataset ID containing the document."""
+    document_id: builtins.str
+    """Required. Document ID to download."""
+    def __init__(
+        self,
+        *,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
+        dataset_id: builtins.str = ...,
+        document_id: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["dataset_id", b"dataset_id", "document_id", b"document_id", "language_code", b"language_code", "parent", b"parent"]) -> None: ...
+
+global___RagDownloadDocumentRequest = RagDownloadDocumentRequest
+
+@typing.final
+class RagFileChunk(google.protobuf.message.Message):
+    """File chunk for streaming downloads.<br>
+    First chunk contains metadata, subsequent chunks only contain data.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    METADATA_FIELD_NUMBER: builtins.int
+    DATA_FIELD_NUMBER: builtins.int
+    data: builtins.bytes
+    """Optional. Chunk of file content."""
+    @property
+    def metadata(self) -> global___RagFileMetadata:
+        """Required in first chunk, ignored in later chunks. File metadata."""
+
+    def __init__(
+        self,
+        *,
+        metadata: global___RagFileMetadata | None = ...,
+        data: builtins.bytes = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["metadata", b"metadata"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["data", b"data", "metadata", b"metadata"]) -> None: ...
+
+global___RagFileChunk = RagFileChunk
+
+@typing.final
+class RagListDocumentsRequest(google.protobuf.message.Message):
+    """Request message for listing documents in a dataset with pagination and filtering."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    DATASET_ID_FIELD_NUMBER: builtins.int
+    ID_FIELD_NUMBER: builtins.int
+    NAME_FIELD_NUMBER: builtins.int
+    PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    ORDERBY_FIELD_NUMBER: builtins.int
+    DESC_FIELD_NUMBER: builtins.int
+    KEYWORDS_FIELD_NUMBER: builtins.int
+    SUFFIX_FIELD_NUMBER: builtins.int
+    RUN_STATUS_FIELD_NUMBER: builtins.int
+    CREATE_TIME_FROM_FIELD_NUMBER: builtins.int
+    CREATE_TIME_TO_FIELD_NUMBER: builtins.int
+    METADATA_CONDITION_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Required. The agent to list documents from.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
+    dataset_id: builtins.str
+    """Required. Dataset ID to list documents from."""
+    id: builtins.str
+    """Optional. Filter by specific document ID."""
+    name: builtins.str
+    """Optional. Filter by document name (exact match)."""
+    page_token: builtins.str
+    """Optional. Specifies which page to return. The page token is a string of the format
+    <pre><code>current_index-&lt;idx&gt;--page_size-&lt;size&gt;</code></pre>
+
+    <ul>
+        <li><code>&lt;size&gt;</code> must be an integer &geq; <code>1</code>. The maximum number of results to return.</li>
+        <li><code>&lt;idx&gt;</code> must be an interger &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li>
+    </ul>
+
+    <em>Important note</em>: The <code>&lt;idx&gt;</code> is the index in the requested sequence NOT the page number. E.g. if the requested list has 100 elements then <code>current_index-5--page_size-15</code> returns the elements at index 5-19 and not the 5-th page of 15 elements.
+
+    Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</code> are optional and default to <code>0</code> and <code>10</code> respectively. The following are all valid <code>page_token</code>s
+    <br>
+    <ul>
+        <li><code> </code> (empty string/missing value) - index 0, page size 10</li>
+        <li><code>current_index-3</code> - index 3, page size 10</li>
+        <li><code>page_size-20</code> - index 0, page size 20</li>
+        <li><code>current_index-3--page_size-20</code> - index 3, page size 20</li>
+    </ul>
+    """
+    orderby: builtins.str
+    """Optional. Sort field (default: <code>"create_time"</code>). Accept any field of <code>RagDocument</code>."""
+    desc: builtins.bool
+    """Optional. Sort in descending order (default: <code>true</code>)."""
+    keywords: builtins.str
+    """Optional. Filter by document names containing <code>keywords</code>."""
+    @property
+    def suffix(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Suffixes to filter by (e.g. <code>["pdf", "png", "docx"]</code>)."""
+
+    @property
+    def run_status(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[global___RagDocumentStatus.ValueType]:
+        """Optional. Document status to filter by."""
+
+    @property
+    def create_time_from(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Optional. Filter by creation time start."""
+
+    @property
+    def create_time_to(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Optional. Filter by creation time end."""
+
+    @property
+    def metadata_condition(self) -> global___RagMetadataConditions:
+        """Optional. Metadata filter condition to restrict results based on document metadata.<br>"""
+
+    def __init__(
+        self,
+        *,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
+        dataset_id: builtins.str = ...,
+        id: builtins.str = ...,
+        name: builtins.str = ...,
+        page_token: builtins.str = ...,
+        orderby: builtins.str = ...,
+        desc: builtins.bool | None = ...,
+        keywords: builtins.str = ...,
+        suffix: collections.abc.Iterable[builtins.str] | None = ...,
+        run_status: collections.abc.Iterable[global___RagDocumentStatus.ValueType] | None = ...,
+        create_time_from: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        create_time_to: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        metadata_condition: global___RagMetadataConditions | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_desc", b"_desc", "create_time_from", b"create_time_from", "create_time_to", b"create_time_to", "desc", b"desc", "metadata_condition", b"metadata_condition"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_desc", b"_desc", "create_time_from", b"create_time_from", "create_time_to", b"create_time_to", "dataset_id", b"dataset_id", "desc", b"desc", "id", b"id", "keywords", b"keywords", "language_code", b"language_code", "metadata_condition", b"metadata_condition", "name", b"name", "orderby", b"orderby", "page_token", b"page_token", "parent", b"parent", "run_status", b"run_status", "suffix", b"suffix"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_desc", b"_desc"]) -> typing.Literal["desc"] | None: ...
+
+global___RagListDocumentsRequest = RagListDocumentsRequest
+
+@typing.final
+class RagMetadataConditions(google.protobuf.message.Message):
+    """List of document metadata conditions."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    LOGIC_FIELD_NUMBER: builtins.int
+    CONDITIONS_FIELD_NUMBER: builtins.int
+    logic: global___RagLogic.ValueType
+    """Optional. Whether to apply the conditions with a logical <em>and</em> or logical <em>or</em>."""
+    @property
+    def conditions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagMetadataCondition]:
+        """Optional. List of conditions."""
+
+    def __init__(
+        self,
+        *,
+        logic: global___RagLogic.ValueType = ...,
+        conditions: collections.abc.Iterable[global___RagMetadataCondition] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["conditions", b"conditions", "logic", b"logic"]) -> None: ...
+
+global___RagMetadataConditions = RagMetadataConditions
+
+@typing.final
+class RagMetadataCondition(google.protobuf.message.Message):
+    """Condition to filter document metadata on.
+    String comparison is always case-insensitive.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    NAME_FIELD_NUMBER: builtins.int
+    COMPARISON_OPERATOR_FIELD_NUMBER: builtins.int
+    VALUE_FIELD_NUMBER: builtins.int
+    name: builtins.str
+    """Required. Metadata field name."""
+    comparison_operator: global___RagComparisonOperator.ValueType
+    """Required. Comparison operator."""
+    value: builtins.str
+    """Required. Value to compare to.<br>
+    Must always be a string, but can also be the string representation of a different type, e.g. string representation of a dict <code>"{"key1": 3, "key2": "value"}"</code>.
+    """
+    def __init__(
+        self,
+        *,
+        name: builtins.str = ...,
+        comparison_operator: global___RagComparisonOperator.ValueType = ...,
+        value: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["comparison_operator", b"comparison_operator", "name", b"name", "value", b"value"]) -> None: ...
+
+global___RagMetadataCondition = RagMetadataCondition
+
+@typing.final
+class RagDocumentList(google.protobuf.message.Message):
+    """Response message for listing documents."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    DOCUMENTS_FIELD_NUMBER: builtins.int
+    TOTAL_FIELD_NUMBER: builtins.int
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    total: builtins.int
+    """Total number of documents matching the filter criteria (not limited by pagination)."""
+    next_page_token: builtins.str
+    """Page token string (following the format described in <code>RagListDocumentsRequest</code>) for retrieving the next results page"""
+    @property
+    def documents(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagDocument]:
+        """List of documents for the current page."""
+
+    def __init__(
+        self,
+        *,
+        documents: collections.abc.Iterable[global___RagDocument] | None = ...,
+        total: builtins.int = ...,
+        next_page_token: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["documents", b"documents", "next_page_token", b"next_page_token", "total", b"total"]) -> None: ...
+
+global___RagDocumentList = RagDocumentList
+
+@typing.final
+class RagDeleteDocumentsRequest(google.protobuf.message.Message):
+    """Request message for deleting one or more documents from a dataset."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    DATASET_ID_FIELD_NUMBER: builtins.int
+    IDS_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Required. The agent to delete documents from.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
+    dataset_id: builtins.str
+    """Required. Dataset ID containing the documents to delete."""
+    @property
+    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Document IDs to delete. If empty, deletes all documents in the dataset."""
+
+    def __init__(
+        self,
+        *,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
+        dataset_id: builtins.str = ...,
+        ids: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["dataset_id", b"dataset_id", "ids", b"ids", "language_code", b"language_code", "parent", b"parent"]) -> None: ...
+
+global___RagDeleteDocumentsRequest = RagDeleteDocumentsRequest
+
+@typing.final
+class RagRetrievalRequest(google.protobuf.message.Message):
+    """============================================================================
+    Chunk Management Types
+    ============================================================================
+
+    Request message for retrieving chunks using vector similarity search.<br>
+    Supports hybrid search combining vector similarity with keyword matching.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    DATASET_IDS_FIELD_NUMBER: builtins.int
+    PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    QUESTION_FIELD_NUMBER: builtins.int
+    DOCUMENT_IDS_FIELD_NUMBER: builtins.int
+    USE_KG_FIELD_NUMBER: builtins.int
+    CROSS_LANGUAGES_FIELD_NUMBER: builtins.int
+    METADATA_CONDITION_FIELD_NUMBER: builtins.int
+    SIMILARITY_THRESHOLD_FIELD_NUMBER: builtins.int
+    VECTOR_SIMILARITY_WEIGHT_FIELD_NUMBER: builtins.int
+    TOP_K_FIELD_NUMBER: builtins.int
+    HIGHLIGHT_FIELD_NUMBER: builtins.int
+    KEYWORD_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Required. The agent to retrieve chunks for.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
+    page_token: builtins.str
+    """Optional. Specifies which page to return. The page token is a string of the format
+    <pre><code>current_index-&lt;idx&gt;--page_size-&lt;size&gt;</code></pre>
+
+    <ul>
+        <li><code>&lt;size&gt;</code> must be an integer &geq; <code>1</code>. The maximum number of results to return.</li>
+        <li><code>&lt;idx&gt;</code> must be an interger &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li>
+    </ul>
+
+    <em>Important note</em>: The <code>&lt;idx&gt;</code> is the index in the requested sequence NOT the page number. E.g. if the requested list has 100 elements then <code>current_index-5--page_size-15</code> returns the elements at index 5-19 and not the 5-th page of 15 elements.
+
+    Both <code>current_index-&lt;idx&gt;</code> and <code>page_size-&lt;size&gt;</code> are optional and default to <code>0</code> and <code>10</code> respectively. The following are all valid <code>page_token</code>s
+    <br>
+    <ul>
+        <li><code> </code> (empty string/missing value) - index 0, page size 10</li>
+        <li><code>current_index-3</code> - index 3, page size 10</li>
+        <li><code>page_size-20</code> - index 0, page size 20</li>
+        <li><code>current_index-3--page_size-20</code> - index 3, page size 20</li>
+    </ul>
+    """
+    question: builtins.str
+    """Required. Query string to search for."""
+    use_kg: builtins.bool
+    """Optional. Include knowledge graph retrieval to enhance results with graph relationships."""
+    similarity_threshold: builtins.float
+    """Optional. Minimum similarity score threshold between <code>0.0</code> and <code>1.0</code> (default: <code>0.2</code>)."""
+    vector_similarity_weight: builtins.float
+    """Optional. Weight for vector similarity versus keyword matching between <code>0.0</code> and <code>1.0</code> (default: <code>0.3</code>).<br>
+    Higher values favor vector similarity, lower values favor keyword matching.
+    """
+    top_k: builtins.int
+    """Optional. Minimum 1. Maximum number of chunks to retrieve before reranking (default: <code>1024</code>)."""
+    highlight: builtins.bool
+    """Optional. Whether to highlight matched content in the returned chunks."""
+    keyword: builtins.bool
+    """Optional. Extract additional keywords from the query to improve retrieval."""
+    @property
+    def dataset_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Required. Dataset IDs to search (all datasets must use the same embedding model)."""
+
+    @property
+    def document_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Filter by specific document IDs within the datasets."""
+
+    @property
+    def cross_languages(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Cross-language translation codes to enable multilingual retrieval.<br>
+        List elements can be any form of language name/code (parsed by LLM).
+        """
+
+    @property
+    def metadata_condition(self) -> global___RagMetadataConditions:
+        """Optional. Metadata filter condition to restrict results based on document metadata."""
+
+    def __init__(
+        self,
+        *,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
+        dataset_ids: collections.abc.Iterable[builtins.str] | None = ...,
+        page_token: builtins.str = ...,
+        question: builtins.str = ...,
+        document_ids: collections.abc.Iterable[builtins.str] | None = ...,
+        use_kg: builtins.bool | None = ...,
+        cross_languages: collections.abc.Iterable[builtins.str] | None = ...,
+        metadata_condition: global___RagMetadataConditions | None = ...,
+        similarity_threshold: builtins.float = ...,
+        vector_similarity_weight: builtins.float | None = ...,
+        top_k: builtins.int = ...,
+        highlight: builtins.bool | None = ...,
+        keyword: builtins.bool | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_highlight", b"_highlight", "_keyword", b"_keyword", "_use_kg", b"_use_kg", "_vector_similarity_weight", b"_vector_similarity_weight", "highlight", b"highlight", "keyword", b"keyword", "metadata_condition", b"metadata_condition", "use_kg", b"use_kg", "vector_similarity_weight", b"vector_similarity_weight"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_highlight", b"_highlight", "_keyword", b"_keyword", "_use_kg", b"_use_kg", "_vector_similarity_weight", b"_vector_similarity_weight", "cross_languages", b"cross_languages", "dataset_ids", b"dataset_ids", "document_ids", b"document_ids", "highlight", b"highlight", "keyword", b"keyword", "language_code", b"language_code", "metadata_condition", b"metadata_condition", "page_token", b"page_token", "parent", b"parent", "question", b"question", "similarity_threshold", b"similarity_threshold", "top_k", b"top_k", "use_kg", b"use_kg", "vector_similarity_weight", b"vector_similarity_weight"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_highlight", b"_highlight"]) -> typing.Literal["highlight"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_keyword", b"_keyword"]) -> typing.Literal["keyword"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_use_kg", b"_use_kg"]) -> typing.Literal["use_kg"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_vector_similarity_weight", b"_vector_similarity_weight"]) -> typing.Literal["vector_similarity_weight"] | None: ...
+
+global___RagRetrievalRequest = RagRetrievalRequest
+
+@typing.final
+class RagRetrievalResponse(google.protobuf.message.Message):
+    """Response message for chunk retrieval."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    CHUNKS_FIELD_NUMBER: builtins.int
+    DOC_AGGS_FIELD_NUMBER: builtins.int
+    TOTAL_FIELD_NUMBER: builtins.int
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    total: builtins.int
+    """Total number of chunks matching the query (before pagination)."""
+    next_page_token: builtins.str
+    """Page token string (following the format described in <code>RagRetrievalRequest</code>) for retrieving the next results page"""
+    @property
+    def chunks(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagChunk]:
+        """Retrieved chunks with similarity scores populated (ordered by relevance)."""
+
+    @property
+    def doc_aggs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagDocAgg]:
+        """Statistics of the matched documents."""
+
+    def __init__(
+        self,
+        *,
+        chunks: collections.abc.Iterable[global___RagChunk] | None = ...,
+        doc_aggs: collections.abc.Iterable[global___RagDocAgg] | None = ...,
+        total: builtins.int = ...,
+        next_page_token: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["chunks", b"chunks", "doc_aggs", b"doc_aggs", "next_page_token", b"next_page_token", "total", b"total"]) -> None: ...
+
+global___RagRetrievalResponse = RagRetrievalResponse
+
+@typing.final
+class RagChunk(google.protobuf.message.Message):
+    """Chunk of text extracted from a document.<br>
+    Chunks are the basic retrieval units used for vector similarity search in RAG.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ID_FIELD_NUMBER: builtins.int
+    DATASET_ID_FIELD_NUMBER: builtins.int
+    DOCUMENT_ID_FIELD_NUMBER: builtins.int
+    CONTENT_FIELD_NUMBER: builtins.int
+    DOCNM_KWD_FIELD_NUMBER: builtins.int
+    IMPORTANT_KEYWORDS_FIELD_NUMBER: builtins.int
+    QUESTIONS_FIELD_NUMBER: builtins.int
+    IMAGE_ID_FIELD_NUMBER: builtins.int
+    AVAILABLE_FIELD_NUMBER: builtins.int
+    POSITIONS_FIELD_NUMBER: builtins.int
+    CREATE_TIME_FIELD_NUMBER: builtins.int
+    DOCUMENT_KEYWORD_FIELD_NUMBER: builtins.int
+    SIMILARITY_FIELD_NUMBER: builtins.int
+    id: builtins.str
+    """Chunk ID (computed as xxhash of content combined with document_id)."""
+    dataset_id: builtins.str
+    """Parent dataset ID."""
+    document_id: builtins.str
+    """Parent document ID."""
+    content: builtins.str
+    """Chunk text content (the actual text segment extracted from the document)."""
+    docnm_kwd: builtins.str
+    """Document name keyword used for filtering and identification."""
+    image_id: builtins.str
+    """Associated image ID if this chunk references an image."""
+    available: builtins.bool
+    """Availability status indicating if the chunk is active and can be retrieved (can be disabled without deletion)."""
+    document_keyword: builtins.str
+    """Document name used as a keyword for retrieval."""
+    similarity: builtins.float
+    """Similarity score between <code>0.0</code> and <code>1.0</code> (only populated in retrieval responses)."""
+    @property
+    def important_keywords(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Important keywords extracted from or manually assigned to this chunk."""
+
+    @property
+    def questions(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Associated questions for Q&amp;A chunks (used when <code>chunk_method=qa</code>)."""
+
+    @property
+    def positions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[google.protobuf.struct_pb2.ListValue]:
+        """Position information in the original document.<br>
+        Each position is an array of 5 integers representing location data (format varies by document type).
+        """
+
+    @property
+    def create_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Creation date and time."""
+
+    def __init__(
+        self,
+        *,
+        id: builtins.str = ...,
+        dataset_id: builtins.str = ...,
+        document_id: builtins.str = ...,
+        content: builtins.str = ...,
+        docnm_kwd: builtins.str = ...,
+        important_keywords: collections.abc.Iterable[builtins.str] | None = ...,
+        questions: collections.abc.Iterable[builtins.str] | None = ...,
+        image_id: builtins.str = ...,
+        available: builtins.bool | None = ...,
+        positions: collections.abc.Iterable[google.protobuf.struct_pb2.ListValue] | None = ...,
+        create_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        document_keyword: builtins.str = ...,
+        similarity: builtins.float | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_available", b"_available", "_similarity", b"_similarity", "available", b"available", "create_time", b"create_time", "similarity", b"similarity"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_available", b"_available", "_similarity", b"_similarity", "available", b"available", "content", b"content", "create_time", b"create_time", "dataset_id", b"dataset_id", "docnm_kwd", b"docnm_kwd", "document_id", b"document_id", "document_keyword", b"document_keyword", "id", b"id", "image_id", b"image_id", "important_keywords", b"important_keywords", "positions", b"positions", "questions", b"questions", "similarity", b"similarity"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_available", b"_available"]) -> typing.Literal["available"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_similarity", b"_similarity"]) -> typing.Literal["similarity"] | None: ...
+
+global___RagChunk = RagChunk
+
+@typing.final
+class RagDocAgg(google.protobuf.message.Message):
+    """Aggregated document retrieval results containing how many chunks of the given document where retrieved"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    DOC_NAME_FIELD_NUMBER: builtins.int
+    DOC_ID_FIELD_NUMBER: builtins.int
+    COUNT_FIELD_NUMBER: builtins.int
+    doc_name: builtins.str
+    """Document name"""
+    doc_id: builtins.str
+    """Document ID"""
+    count: builtins.int
+    """Number of retrieved chunks"""
+    def __init__(
+        self,
+        *,
+        doc_name: builtins.str = ...,
+        doc_id: builtins.str = ...,
+        count: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["count", b"count", "doc_id", b"doc_id", "doc_name", b"doc_name"]) -> None: ...
+
+global___RagDocAgg = RagDocAgg
+
+@typing.final
+class RagDatasetIdRequest(google.protobuf.message.Message):
+    """----------------------------------------------------------------------------
+    Dataset Management Types
+    ----------------------------------------------------------------------------
+
+    Request message with a single dataset ID.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    DATASET_ID_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Required. The agent to list all datasets from.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
     dataset_id: builtins.str
     """Required. Dataset ID."""
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
+        language_code: builtins.str = ...,
         dataset_id: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["dataset_id", b"dataset_id", "parent", b"parent"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["dataset_id", b"dataset_id", "language_code", b"language_code", "parent", b"parent"]) -> None: ...
 
-global___RagGetKnowledgeGraphRequest = RagGetKnowledgeGraphRequest
+global___RagDatasetIdRequest = RagDatasetIdRequest
 
 @typing.final
 class RagGetKnowledgeGraphResponse(google.protobuf.message.Message):
@@ -814,562 +1838,142 @@ class RagGetKnowledgeGraphResponse(google.protobuf.message.Message):
 global___RagGetKnowledgeGraphResponse = RagGetKnowledgeGraphResponse
 
 @typing.final
-class RagDeleteKnowledgeGraphRequest(google.protobuf.message.Message):
-    """Request message for deleting a dataset's knowledge graph."""
+class RagConstructKnowledgeGraphResponse(google.protobuf.message.Message):
+    """Response message for starting construction of a knowledge graph."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    DATASET_ID_FIELD_NUMBER: builtins.int
-    parent: builtins.str
-    """Required. The agent to delete knowledge graph for.
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    """
-    dataset_id: builtins.str
-    """Required. Dataset ID."""
+    GRAPHRAG_TASK_ID_FIELD_NUMBER: builtins.int
+    graphrag_task_id: builtins.str
+    """ID of the GraphRAG task."""
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        dataset_id: builtins.str = ...,
+        graphrag_task_id: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["dataset_id", b"dataset_id", "parent", b"parent"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["graphrag_task_id", b"graphrag_task_id"]) -> None: ...
 
-global___RagDeleteKnowledgeGraphRequest = RagDeleteKnowledgeGraphRequest
+global___RagConstructKnowledgeGraphResponse = RagConstructKnowledgeGraphResponse
 
 @typing.final
-class RagDocument(google.protobuf.message.Message):
-    """============================================================================
-    Document Management Types
-    Documents are files uploaded to datasets that are parsed into chunks.
-    ============================================================================
-
-    Document uploaded to a dataset.
-    """
+class RagTaskStatus(google.protobuf.message.Message):
+    """Status of a task."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     ID_FIELD_NUMBER: builtins.int
-    DATASET_ID_FIELD_NUMBER: builtins.int
-    NAME_FIELD_NUMBER: builtins.int
-    TYPE_FIELD_NUMBER: builtins.int
-    SIZE_FIELD_NUMBER: builtins.int
-    CHUNK_COUNT_FIELD_NUMBER: builtins.int
-    TOKEN_COUNT_FIELD_NUMBER: builtins.int
-    CHUNK_METHOD_FIELD_NUMBER: builtins.int
-    PARSER_CONFIG_FIELD_NUMBER: builtins.int
-    SOURCE_TYPE_FIELD_NUMBER: builtins.int
-    RUN_FIELD_NUMBER: builtins.int
+    DOC_ID_FIELD_NUMBER: builtins.int
+    FROM_PAGE_FIELD_NUMBER: builtins.int
+    TO_PAGE_FIELD_NUMBER: builtins.int
+    TASK_TYPE_FIELD_NUMBER: builtins.int
+    PRIORITY_FIELD_NUMBER: builtins.int
+    BEGIN_AT_FIELD_NUMBER: builtins.int
+    PROCESS_DURATION_FIELD_NUMBER: builtins.int
     PROGRESS_FIELD_NUMBER: builtins.int
     PROGRESS_MSG_FIELD_NUMBER: builtins.int
-    PROCESS_DURATION_FIELD_NUMBER: builtins.int
-    CREATE_TIME_FIELD_NUMBER: builtins.int
-    CREATE_DATE_FIELD_NUMBER: builtins.int
-    UPDATE_TIME_FIELD_NUMBER: builtins.int
-    UPDATE_DATE_FIELD_NUMBER: builtins.int
-    META_FIELDS_FIELD_NUMBER: builtins.int
-    THUMBNAIL_FIELD_NUMBER: builtins.int
-    LOCATION_FIELD_NUMBER: builtins.int
-    PROCESS_BEGIN_AT_FIELD_NUMBER: builtins.int
-    SUFFIX_FIELD_NUMBER: builtins.int
-    STATUS_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
+    RETRY_COUNT_FIELD_NUMBER: builtins.int
+    DIGEST_FIELD_NUMBER: builtins.int
+    CHUNK_IDS_FIELD_NUMBER: builtins.int
     id: builtins.str
-    """Document UUID."""
-    dataset_id: builtins.str
-    """Parent dataset ID."""
-    name: builtins.str
-    """Document filename."""
-    type: builtins.str
-    """File type or extension (e.g., <code>&quot;pdf&quot;</code>, <code>&quot;docx&quot;</code>, <code>&quot;txt&quot;</code>)."""
-    size: builtins.int
-    """File size in bytes."""
-    chunk_count: builtins.int
-    """Number of chunks extracted from this document (initially <code>0</code> until parsed)."""
-    token_count: builtins.int
-    """Number of tokens across all chunks in this document."""
-    chunk_method: global___RagChunkMethod.ValueType
-    """Chunking method used for this document."""
-    source_type: builtins.str
-    """Source type indicating how the document was added (e.g., <code>&quot;local&quot;</code> for direct uploads, <code>&quot;knowledgebase&quot;</code> for file system imports)."""
-    run: global___RagDocumentStatus.ValueType
-    """Document processing status."""
-    progress: builtins.float
-    """Processing progress as a decimal value between <code>0.0</code> (not started) and <code>1.0</code> (complete)."""
-    progress_msg: builtins.str
-    """Human-readable progress message describing current processing state."""
+    """Task ID."""
+    doc_id: builtins.str
+    """Document ID."""
+    from_page: builtins.int
+    """Start page."""
+    to_page: builtins.int
+    """End page."""
+    task_type: builtins.str
+    """Task type."""
+    priority: builtins.int
+    """Priority."""
+    begin_at: builtins.str
+    """Optional. Start time of the task (ISO 8601 datetime)."""
     process_duration: builtins.float
-    """Total processing duration in seconds."""
-    create_time: builtins.int
-    """Creation timestamp (Unix timestamp in milliseconds)."""
-    create_date: builtins.str
-    """Creation date (ISO 8601 datetime string)."""
-    update_time: builtins.int
-    """Last update timestamp (Unix timestamp in milliseconds)."""
-    update_date: builtins.str
-    """Last update date (ISO 8601 datetime string)."""
-    thumbnail: builtins.str
-    """Base64-encoded thumbnail image for preview."""
-    location: builtins.str
-    """Storage location path in the backend file system or object storage."""
-    process_begin_at: builtins.str
-    """Processing start timestamp (ISO 8601 datetime string)."""
-    suffix: builtins.str
-    """Actual file extension extracted from the file (may differ from filename extension)."""
-    status: builtins.str
-    """Validation status indicating if document is enabled (<code>&quot;1&quot;</code>=valid/enabled, <code>&quot;0&quot;</code>=invalid/disabled)."""
-    @property
-    def parser_config(self) -> global___RagParserConfig:
-        """Parser configuration used for chunking this document."""
-
-    @property
-    def meta_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Custom metadata fields specific to this document (arbitrary key-value pairs)."""
-
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Additional fields returned by RAGFlow not explicitly defined above."""
-
+    """Current duration of the task (in seconds)."""
+    progress: builtins.float
+    """Task progress (0.0 - 1.0)."""
+    progress_msg: builtins.str
+    """Task progress message."""
+    retry_count: builtins.int
+    """Retry count."""
+    digest: builtins.str
+    """Digest."""
+    chunk_ids: builtins.str
+    """List of document chunk IDs as a string."""
     def __init__(
         self,
         *,
         id: builtins.str = ...,
-        dataset_id: builtins.str = ...,
-        name: builtins.str = ...,
-        type: builtins.str = ...,
-        size: builtins.int = ...,
-        chunk_count: builtins.int = ...,
-        token_count: builtins.int = ...,
-        chunk_method: global___RagChunkMethod.ValueType = ...,
-        parser_config: global___RagParserConfig | None = ...,
-        source_type: builtins.str = ...,
-        run: global___RagDocumentStatus.ValueType = ...,
-        progress: builtins.float = ...,
+        doc_id: builtins.str = ...,
+        from_page: builtins.int | None = ...,
+        to_page: builtins.int | None = ...,
+        task_type: builtins.str = ...,
+        priority: builtins.int | None = ...,
+        begin_at: builtins.str = ...,
+        process_duration: builtins.float | None = ...,
+        progress: builtins.float | None = ...,
         progress_msg: builtins.str = ...,
-        process_duration: builtins.float = ...,
-        create_time: builtins.int = ...,
-        create_date: builtins.str = ...,
-        update_time: builtins.int = ...,
-        update_date: builtins.str = ...,
-        meta_fields: google.protobuf.struct_pb2.Struct | None = ...,
-        thumbnail: builtins.str = ...,
-        location: builtins.str = ...,
-        process_begin_at: builtins.str = ...,
-        suffix: builtins.str = ...,
-        status: builtins.str = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
+        retry_count: builtins.int | None = ...,
+        digest: builtins.str = ...,
+        chunk_ids: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "meta_fields", b"meta_fields", "parser_config", b"parser_config"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "chunk_count", b"chunk_count", "chunk_method", b"chunk_method", "create_date", b"create_date", "create_time", b"create_time", "dataset_id", b"dataset_id", "id", b"id", "location", b"location", "meta_fields", b"meta_fields", "name", b"name", "parser_config", b"parser_config", "process_begin_at", b"process_begin_at", "process_duration", b"process_duration", "progress", b"progress", "progress_msg", b"progress_msg", "run", b"run", "size", b"size", "source_type", b"source_type", "status", b"status", "suffix", b"suffix", "thumbnail", b"thumbnail", "token_count", b"token_count", "type", b"type", "update_date", b"update_date", "update_time", b"update_time"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_from_page", b"_from_page", "_priority", b"_priority", "_process_duration", b"_process_duration", "_progress", b"_progress", "_retry_count", b"_retry_count", "_to_page", b"_to_page", "from_page", b"from_page", "priority", b"priority", "process_duration", b"process_duration", "progress", b"progress", "retry_count", b"retry_count", "to_page", b"to_page"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_from_page", b"_from_page", "_priority", b"_priority", "_process_duration", b"_process_duration", "_progress", b"_progress", "_retry_count", b"_retry_count", "_to_page", b"_to_page", "begin_at", b"begin_at", "chunk_ids", b"chunk_ids", "digest", b"digest", "doc_id", b"doc_id", "from_page", b"from_page", "id", b"id", "priority", b"priority", "process_duration", b"process_duration", "progress", b"progress", "progress_msg", b"progress_msg", "retry_count", b"retry_count", "task_type", b"task_type", "to_page", b"to_page"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_from_page", b"_from_page"]) -> typing.Literal["from_page"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_priority", b"_priority"]) -> typing.Literal["priority"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_process_duration", b"_process_duration"]) -> typing.Literal["process_duration"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_progress", b"_progress"]) -> typing.Literal["progress"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_retry_count", b"_retry_count"]) -> typing.Literal["retry_count"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_to_page", b"_to_page"]) -> typing.Literal["to_page"] | None: ...
 
-global___RagDocument = RagDocument
+global___RagTaskStatus = RagTaskStatus
 
 @typing.final
-class RagUploadDocumentsRequest(google.protobuf.message.Message):
-    """Request message for uploading documents to a dataset.<br>
-    Documents are uploaded via streaming multipart form data.
-    """
+class RagConstructRaptorResponse(google.protobuf.message.Message):
+    """Response message for starting RAPTOR construction."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    @typing.final
-    class RagMetadata(google.protobuf.message.Message):
-        """Metadata for the upload (first message only)."""
-
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-        DATASET_ID_FIELD_NUMBER: builtins.int
-        FILES_FIELD_NUMBER: builtins.int
-        dataset_id: builtins.str
-        """Required. Target dataset ID to upload documents to."""
-        @property
-        def files(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagFileMetadata]:
-            """Required. Metadata for all files being uploaded in this stream."""
-
-        def __init__(
-            self,
-            *,
-            dataset_id: builtins.str = ...,
-            files: collections.abc.Iterable[global___RagFileMetadata] | None = ...,
-        ) -> None: ...
-        def ClearField(self, field_name: typing.Literal["dataset_id", b"dataset_id", "files", b"files"]) -> None: ...
-
-    PARENT_FIELD_NUMBER: builtins.int
-    METADATA_FIELD_NUMBER: builtins.int
-    CHUNK_FIELD_NUMBER: builtins.int
-    parent: builtins.str
-    """Required. The agent to upload documents for.
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    """
-    @property
-    def metadata(self) -> global___RagUploadDocumentsRequest.RagMetadata:
-        """First message: declares all files to be uploaded."""
-
-    @property
-    def chunk(self) -> global___RagUploadChunk:
-        """Subsequent messages: stream file data chunks."""
-
+    RAPTOR_TASK_ID_FIELD_NUMBER: builtins.int
+    raptor_task_id: builtins.str
+    """ID of the GraphRAG task."""
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        metadata: global___RagUploadDocumentsRequest.RagMetadata | None = ...,
-        chunk: global___RagUploadChunk | None = ...,
+        raptor_task_id: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["chunk", b"chunk", "metadata", b"metadata", "payload", b"payload"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["chunk", b"chunk", "metadata", b"metadata", "parent", b"parent", "payload", b"payload"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["payload", b"payload"]) -> typing.Literal["metadata", "chunk"] | None: ...
+    def ClearField(self, field_name: typing.Literal["raptor_task_id", b"raptor_task_id"]) -> None: ...
 
-global___RagUploadDocumentsRequest = RagUploadDocumentsRequest
-
-@typing.final
-class RagDocumentList(google.protobuf.message.Message):
-    """Response message containing a list of documents."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    DOCUMENTS_FIELD_NUMBER: builtins.int
-    @property
-    def documents(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagDocument]:
-        """List of documents."""
-
-    def __init__(
-        self,
-        *,
-        documents: collections.abc.Iterable[global___RagDocument] | None = ...,
-    ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["documents", b"documents"]) -> None: ...
-
-global___RagDocumentList = RagDocumentList
-
-@typing.final
-class RagUpdateDocumentRequest(google.protobuf.message.Message):
-    """Request message for updating an existing document's metadata and configuration."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    PARENT_FIELD_NUMBER: builtins.int
-    DATASET_ID_FIELD_NUMBER: builtins.int
-    DOCUMENT_ID_FIELD_NUMBER: builtins.int
-    NAME_FIELD_NUMBER: builtins.int
-    CHUNK_METHOD_FIELD_NUMBER: builtins.int
-    PARSER_CONFIG_FIELD_NUMBER: builtins.int
-    ENABLED_FIELD_NUMBER: builtins.int
-    META_FIELDS_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
-    parent: builtins.str
-    """Required. The agent to update the document for.
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    """
-    dataset_id: builtins.str
-    """Required. Dataset ID containing the document."""
-    document_id: builtins.str
-    """Required. Document ID to update."""
-    name: builtins.str
-    """Optional. New document name (file extension must remain the same)."""
-    chunk_method: global___RagChunkMethod.ValueType
-    """Optional. New chunking method (resets document to <code>UNSTART</code> status and deletes all existing chunks)."""
-    enabled: builtins.bool
-    """Optional. Document enabled/disabled status."""
-    @property
-    def parser_config(self) -> global___RagParserConfig:
-        """Optional. New parser configuration (deep merged with existing configuration)."""
-
-    @property
-    def meta_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. Custom metadata fields for document-specific metadata (replaces existing metadata)."""
-
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. Additional fields to pass through to RAGFlow."""
-
-    def __init__(
-        self,
-        *,
-        parent: builtins.str = ...,
-        dataset_id: builtins.str = ...,
-        document_id: builtins.str = ...,
-        name: builtins.str = ...,
-        chunk_method: global___RagChunkMethod.ValueType = ...,
-        parser_config: global___RagParserConfig | None = ...,
-        enabled: builtins.bool | None = ...,
-        meta_fields: google.protobuf.struct_pb2.Struct | None = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_enabled", b"_enabled", "additional_fields", b"additional_fields", "enabled", b"enabled", "meta_fields", b"meta_fields", "parser_config", b"parser_config"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_enabled", b"_enabled", "additional_fields", b"additional_fields", "chunk_method", b"chunk_method", "dataset_id", b"dataset_id", "document_id", b"document_id", "enabled", b"enabled", "meta_fields", b"meta_fields", "name", b"name", "parent", b"parent", "parser_config", b"parser_config"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["_enabled", b"_enabled"]) -> typing.Literal["enabled"] | None: ...
-
-global___RagUpdateDocumentRequest = RagUpdateDocumentRequest
-
-@typing.final
-class RagDownloadDocumentRequest(google.protobuf.message.Message):
-    """Request message for downloading the original document file."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    PARENT_FIELD_NUMBER: builtins.int
-    DATASET_ID_FIELD_NUMBER: builtins.int
-    DOCUMENT_ID_FIELD_NUMBER: builtins.int
-    parent: builtins.str
-    """Required. The agent to download the document from.
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    """
-    dataset_id: builtins.str
-    """Required. Dataset ID containing the document."""
-    document_id: builtins.str
-    """Required. Document ID to download."""
-    def __init__(
-        self,
-        *,
-        parent: builtins.str = ...,
-        dataset_id: builtins.str = ...,
-        document_id: builtins.str = ...,
-    ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["dataset_id", b"dataset_id", "document_id", b"document_id", "parent", b"parent"]) -> None: ...
-
-global___RagDownloadDocumentRequest = RagDownloadDocumentRequest
-
-@typing.final
-class RagListDocumentsRequest(google.protobuf.message.Message):
-    """Request message for listing documents in a dataset with pagination and filtering."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    PARENT_FIELD_NUMBER: builtins.int
-    DATASET_ID_FIELD_NUMBER: builtins.int
-    PAGINATION_FIELD_NUMBER: builtins.int
-    ID_FIELD_NUMBER: builtins.int
-    NAME_FIELD_NUMBER: builtins.int
-    KEYWORDS_FIELD_NUMBER: builtins.int
-    ORDERBY_FIELD_NUMBER: builtins.int
-    DESC_FIELD_NUMBER: builtins.int
-    CREATE_TIME_FROM_FIELD_NUMBER: builtins.int
-    CREATE_TIME_TO_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
-    parent: builtins.str
-    """Required. The agent to list documents from.
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    """
-    dataset_id: builtins.str
-    """Required. Dataset ID to list documents from."""
-    id: builtins.str
-    """Optional. Filter by specific document ID."""
-    name: builtins.str
-    """Optional. Filter by document name (exact match)."""
-    keywords: builtins.str
-    """Optional. Search keywords to filter documents (searches in document name and metadata)."""
-    orderby: builtins.str
-    """Optional. Sort field (default: <code>"create_time"</code>). Accepted values include <code>"create_time"</code> and <code>"update_time"</code>."""
-    desc: builtins.bool
-    """Optional. Sort in descending order (default: <code>true</code>)."""
-    create_time_from: builtins.int
-    """Optional. Filter by creation time start (Unix timestamp in milliseconds, <code>0</code> = no filter)."""
-    create_time_to: builtins.int
-    """Optional. Filter by creation time end (Unix timestamp in milliseconds, <code>0</code> = no filter)."""
-    @property
-    def pagination(self) -> global___RagPagination:
-        """Optional. Pagination parameters."""
-
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. Additional fields to pass through to RAGFlow."""
-
-    def __init__(
-        self,
-        *,
-        parent: builtins.str = ...,
-        dataset_id: builtins.str = ...,
-        pagination: global___RagPagination | None = ...,
-        id: builtins.str = ...,
-        name: builtins.str = ...,
-        keywords: builtins.str = ...,
-        orderby: builtins.str = ...,
-        desc: builtins.bool | None = ...,
-        create_time_from: builtins.int = ...,
-        create_time_to: builtins.int = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_desc", b"_desc", "additional_fields", b"additional_fields", "desc", b"desc", "pagination", b"pagination"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_desc", b"_desc", "additional_fields", b"additional_fields", "create_time_from", b"create_time_from", "create_time_to", b"create_time_to", "dataset_id", b"dataset_id", "desc", b"desc", "id", b"id", "keywords", b"keywords", "name", b"name", "orderby", b"orderby", "pagination", b"pagination", "parent", b"parent"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["_desc", b"_desc"]) -> typing.Literal["desc"] | None: ...
-
-global___RagListDocumentsRequest = RagListDocumentsRequest
-
-@typing.final
-class RagListDocumentsResponse(google.protobuf.message.Message):
-    """Response message for listing documents."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    TOTAL_FIELD_NUMBER: builtins.int
-    DOCS_FIELD_NUMBER: builtins.int
-    total: builtins.int
-    """Total number of documents matching the filter criteria (not limited by pagination)."""
-    @property
-    def docs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagDocument]:
-        """List of documents for the current page."""
-
-    def __init__(
-        self,
-        *,
-        total: builtins.int = ...,
-        docs: collections.abc.Iterable[global___RagDocument] | None = ...,
-    ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["docs", b"docs", "total", b"total"]) -> None: ...
-
-global___RagListDocumentsResponse = RagListDocumentsResponse
-
-@typing.final
-class RagDeleteDocumentsRequest(google.protobuf.message.Message):
-    """Request message for deleting one or more documents from a dataset."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    PARENT_FIELD_NUMBER: builtins.int
-    DATASET_ID_FIELD_NUMBER: builtins.int
-    IDS_FIELD_NUMBER: builtins.int
-    DELETE_ALL_FIELD_NUMBER: builtins.int
-    parent: builtins.str
-    """Required. The agent to delete documents from.
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    """
-    dataset_id: builtins.str
-    """Required. Dataset ID containing the documents to delete."""
-    delete_all: builtins.bool
-    """Optional. Delete all documents in the dataset (needed because protobuf cannot represent <code>ids=null</code>)."""
-    @property
-    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Optional. Document IDs to delete. If empty and <code>delete_all</code> is <code>true</code>, deletes all documents in the dataset."""
-
-    def __init__(
-        self,
-        *,
-        parent: builtins.str = ...,
-        dataset_id: builtins.str = ...,
-        ids: collections.abc.Iterable[builtins.str] | None = ...,
-        delete_all: builtins.bool | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_delete_all", b"_delete_all", "delete_all", b"delete_all"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_delete_all", b"_delete_all", "dataset_id", b"dataset_id", "delete_all", b"delete_all", "ids", b"ids", "parent", b"parent"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["_delete_all", b"_delete_all"]) -> typing.Literal["delete_all"] | None: ...
-
-global___RagDeleteDocumentsRequest = RagDeleteDocumentsRequest
-
-@typing.final
-class RagChunk(google.protobuf.message.Message):
-    """============================================================================
-    Chunk Management Types
-    Chunks are text segments extracted from documents for vector retrieval.
-    ============================================================================
-
-    Chunk of text extracted from a document.<br>
-    Chunks are the basic retrieval units used for vector similarity search in RAG.
-    """
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    ID_FIELD_NUMBER: builtins.int
-    DATASET_ID_FIELD_NUMBER: builtins.int
-    DOCUMENT_ID_FIELD_NUMBER: builtins.int
-    CONTENT_FIELD_NUMBER: builtins.int
-    DOCNM_KWD_FIELD_NUMBER: builtins.int
-    IMPORTANT_KEYWORDS_FIELD_NUMBER: builtins.int
-    QUESTIONS_FIELD_NUMBER: builtins.int
-    IMAGE_ID_FIELD_NUMBER: builtins.int
-    AVAILABLE_FIELD_NUMBER: builtins.int
-    POSITIONS_FIELD_NUMBER: builtins.int
-    CREATE_TIME_FIELD_NUMBER: builtins.int
-    CREATE_TIMESTAMP_FIELD_NUMBER: builtins.int
-    DOCUMENT_KEYWORD_FIELD_NUMBER: builtins.int
-    SIMILARITY_FIELD_NUMBER: builtins.int
-    VECTOR_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
-    id: builtins.str
-    """Chunk ID (computed as xxhash of content combined with document_id)."""
-    dataset_id: builtins.str
-    """Parent dataset ID."""
-    document_id: builtins.str
-    """Parent document ID."""
-    content: builtins.str
-    """Chunk text content (the actual text segment extracted from the document)."""
-    docnm_kwd: builtins.str
-    """Document name keyword used for filtering and identification."""
-    image_id: builtins.str
-    """Associated image ID if this chunk references an image."""
-    available: builtins.bool
-    """Availability status indicating if the chunk is active and can be retrieved (can be disabled without deletion)."""
-    create_time: builtins.str
-    """Creation timestamp (ISO 8601 datetime string)."""
-    create_timestamp: builtins.float
-    """Creation timestamp as a floating-point Unix timestamp."""
-    document_keyword: builtins.str
-    """Document name used as a keyword for retrieval."""
-    similarity: builtins.float
-    """Similarity score between <code>0.0</code> and <code>1.0</code> (only populated in retrieval responses)."""
-    @property
-    def important_keywords(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Important keywords extracted from or manually assigned to this chunk."""
-
-    @property
-    def questions(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Associated questions for Q&amp;A chunks (used when <code>chunk_method=qa</code>)."""
-
-    @property
-    def positions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[google.protobuf.struct_pb2.ListValue]:
-        """Position information in the original document.<br>
-        Each position is an array of 5 integers representing location data (format varies by document type).
-        """
-
-    @property
-    def vector(self) -> google.protobuf.struct_pb2.Struct:
-        """Embedding vector for this chunk (optional, rarely included in responses for performance reasons)."""
-
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Additional fields returned by RAGFlow not explicitly defined above."""
-
-    def __init__(
-        self,
-        *,
-        id: builtins.str = ...,
-        dataset_id: builtins.str = ...,
-        document_id: builtins.str = ...,
-        content: builtins.str = ...,
-        docnm_kwd: builtins.str = ...,
-        important_keywords: collections.abc.Iterable[builtins.str] | None = ...,
-        questions: collections.abc.Iterable[builtins.str] | None = ...,
-        image_id: builtins.str = ...,
-        available: builtins.bool | None = ...,
-        positions: collections.abc.Iterable[google.protobuf.struct_pb2.ListValue] | None = ...,
-        create_time: builtins.str = ...,
-        create_timestamp: builtins.float = ...,
-        document_keyword: builtins.str = ...,
-        similarity: builtins.float = ...,
-        vector: google.protobuf.struct_pb2.Struct | None = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_available", b"_available", "additional_fields", b"additional_fields", "available", b"available", "vector", b"vector"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_available", b"_available", "additional_fields", b"additional_fields", "available", b"available", "content", b"content", "create_time", b"create_time", "create_timestamp", b"create_timestamp", "dataset_id", b"dataset_id", "docnm_kwd", b"docnm_kwd", "document_id", b"document_id", "document_keyword", b"document_keyword", "id", b"id", "image_id", b"image_id", "important_keywords", b"important_keywords", "positions", b"positions", "questions", b"questions", "similarity", b"similarity", "vector", b"vector"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["_available", b"_available"]) -> typing.Literal["available"] | None: ...
-
-global___RagChunk = RagChunk
+global___RagConstructRaptorResponse = RagConstructRaptorResponse
 
 @typing.final
 class RagParseDocumentsRequest(google.protobuf.message.Message):
-    """Request message for starting document parsing.<br>
+    """----------------------------------------------------------------------------
+    Chunk Management Types
+    ----------------------------------------------------------------------------
+
+    Request message for starting document parsing.<br>
     Parsing extracts chunks from documents using the configured chunk method.
     """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     DATASET_ID_FIELD_NUMBER: builtins.int
     DOCUMENT_IDS_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The agent to parse documents for.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
     dataset_id: builtins.str
     """Required. Dataset ID containing the documents to parse."""
     @property
@@ -1380,10 +1984,11 @@ class RagParseDocumentsRequest(google.protobuf.message.Message):
         self,
         *,
         parent: builtins.str = ...,
+        language_code: builtins.str = ...,
         dataset_id: builtins.str = ...,
         document_ids: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["dataset_id", b"dataset_id", "document_ids", b"document_ids", "parent", b"parent"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["dataset_id", b"dataset_id", "document_ids", b"document_ids", "language_code", b"language_code", "parent", b"parent"]) -> None: ...
 
 global___RagParseDocumentsRequest = RagParseDocumentsRequest
 
@@ -1396,12 +2001,15 @@ class RagStopParsingRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     DATASET_ID_FIELD_NUMBER: builtins.int
     DOCUMENT_IDS_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The agent to stop parsing for.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
     dataset_id: builtins.str
     """Required. Dataset ID containing the documents to stop parsing."""
     @property
@@ -1412,10 +2020,11 @@ class RagStopParsingRequest(google.protobuf.message.Message):
         self,
         *,
         parent: builtins.str = ...,
+        language_code: builtins.str = ...,
         dataset_id: builtins.str = ...,
         document_ids: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["dataset_id", b"dataset_id", "document_ids", b"document_ids", "parent", b"parent"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["dataset_id", b"dataset_id", "document_ids", b"document_ids", "language_code", b"language_code", "parent", b"parent"]) -> None: ...
 
 global___RagStopParsingRequest = RagStopParsingRequest
 
@@ -1426,45 +2035,40 @@ class RagListChunksRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     DATASET_ID_FIELD_NUMBER: builtins.int
     DOCUMENT_ID_FIELD_NUMBER: builtins.int
     PAGINATION_FIELD_NUMBER: builtins.int
     KEYWORDS_FIELD_NUMBER: builtins.int
     ID_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The agent to list chunks from.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
     dataset_id: builtins.str
     """Required. Dataset ID containing the document."""
     document_id: builtins.str
     """Required. Document ID to list chunks from."""
+    pagination: builtins.str
+    """Optional. Pagination parameters."""
     keywords: builtins.str
     """Optional. Search keywords to filter chunks (supports content highlighting in results)."""
     id: builtins.str
     """Optional. Filter by specific chunk ID."""
-    @property
-    def pagination(self) -> global___RagPagination:
-        """Optional. Pagination parameters."""
-
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. Additional fields to pass through to RAGFlow."""
-
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
+        language_code: builtins.str = ...,
         dataset_id: builtins.str = ...,
         document_id: builtins.str = ...,
-        pagination: global___RagPagination | None = ...,
+        pagination: builtins.str = ...,
         keywords: builtins.str = ...,
         id: builtins.str = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "pagination", b"pagination"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "dataset_id", b"dataset_id", "document_id", b"document_id", "id", b"id", "keywords", b"keywords", "pagination", b"pagination", "parent", b"parent"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["dataset_id", b"dataset_id", "document_id", b"document_id", "id", b"id", "keywords", b"keywords", "language_code", b"language_code", "pagination", b"pagination", "parent", b"parent"]) -> None: ...
 
 global___RagListChunksRequest = RagListChunksRequest
 
@@ -1478,7 +2082,7 @@ class RagListChunksResponse(google.protobuf.message.Message):
     CHUNKS_FIELD_NUMBER: builtins.int
     DOC_FIELD_NUMBER: builtins.int
     total: builtins.int
-    """Total number of chunks matching the filter criteria (not limited by pagination)."""
+    """Total number of chunks matching the filter criteria (before pagination)."""
     @property
     def chunks(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagChunk]:
         """List of chunks for the current page."""
@@ -1490,12 +2094,13 @@ class RagListChunksResponse(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        total: builtins.int = ...,
+        total: builtins.int | None = ...,
         chunks: collections.abc.Iterable[global___RagChunk] | None = ...,
         doc: global___RagDocument | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["doc", b"doc"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["chunks", b"chunks", "doc", b"doc", "total", b"total"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_total", b"_total", "doc", b"doc", "total", b"total"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_total", b"_total", "chunks", b"chunks", "doc", b"doc", "total", b"total"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_total", b"_total"]) -> typing.Literal["total"] | None: ...
 
 global___RagListChunksResponse = RagListChunksResponse
 
@@ -1508,16 +2113,18 @@ class RagAddChunkRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     DATASET_ID_FIELD_NUMBER: builtins.int
     DOCUMENT_ID_FIELD_NUMBER: builtins.int
     CONTENT_FIELD_NUMBER: builtins.int
     IMPORTANT_KEYWORDS_FIELD_NUMBER: builtins.int
     QUESTIONS_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The agent to add the chunk for.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
     dataset_id: builtins.str
     """Required. Dataset ID containing the document."""
     document_id: builtins.str
@@ -1532,23 +2139,18 @@ class RagAddChunkRequest(google.protobuf.message.Message):
     def questions(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Optional. Associated questions for this chunk (useful for Q&amp;A-style retrieval)."""
 
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. Additional fields to pass through to RAGFlow."""
-
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
+        language_code: builtins.str = ...,
         dataset_id: builtins.str = ...,
         document_id: builtins.str = ...,
         content: builtins.str = ...,
         important_keywords: collections.abc.Iterable[builtins.str] | None = ...,
         questions: collections.abc.Iterable[builtins.str] | None = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "content", b"content", "dataset_id", b"dataset_id", "document_id", b"document_id", "important_keywords", b"important_keywords", "parent", b"parent", "questions", b"questions"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["content", b"content", "dataset_id", b"dataset_id", "document_id", b"document_id", "important_keywords", b"important_keywords", "language_code", b"language_code", "parent", b"parent", "questions", b"questions"]) -> None: ...
 
 global___RagAddChunkRequest = RagAddChunkRequest
 
@@ -1580,6 +2182,7 @@ class RagRemoveChunksRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     DATASET_ID_FIELD_NUMBER: builtins.int
     DOCUMENT_ID_FIELD_NUMBER: builtins.int
     CHUNK_IDS_FIELD_NUMBER: builtins.int
@@ -1587,35 +2190,39 @@ class RagRemoveChunksRequest(google.protobuf.message.Message):
     """Required. The agent to remove chunks from.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
     dataset_id: builtins.str
     """Required. Dataset ID containing the document."""
     document_id: builtins.str
     """Required. Document ID to remove chunks from."""
     @property
     def chunk_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Required. Chunk IDs to remove. If empty, removes all chunks from the document."""
+        """Optional. Chunk IDs to remove. If empty, removes all chunks from the document."""
 
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
+        language_code: builtins.str = ...,
         dataset_id: builtins.str = ...,
         document_id: builtins.str = ...,
         chunk_ids: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["chunk_ids", b"chunk_ids", "dataset_id", b"dataset_id", "document_id", b"document_id", "parent", b"parent"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["chunk_ids", b"chunk_ids", "dataset_id", b"dataset_id", "document_id", b"document_id", "language_code", b"language_code", "parent", b"parent"]) -> None: ...
 
 global___RagRemoveChunksRequest = RagRemoveChunksRequest
 
 @typing.final
 class RagUpdateChunkRequest(google.protobuf.message.Message):
-    """Request message for updating an existing chunk&apos;s content and metadata.<br>
+    """Request message for updating an existing chunk's content and metadata.<br>
     Content changes trigger re-tokenization and re-generation of embeddings.
     """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     DATASET_ID_FIELD_NUMBER: builtins.int
     DOCUMENT_ID_FIELD_NUMBER: builtins.int
     CHUNK_ID_FIELD_NUMBER: builtins.int
@@ -1623,11 +2230,13 @@ class RagUpdateChunkRequest(google.protobuf.message.Message):
     IMPORTANT_KEYWORDS_FIELD_NUMBER: builtins.int
     QUESTIONS_FIELD_NUMBER: builtins.int
     AVAILABLE_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
+    POSITIONS_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The agent to update the chunk for.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
     dataset_id: builtins.str
     """Required. Dataset ID containing the document."""
     document_id: builtins.str
@@ -1647,13 +2256,16 @@ class RagUpdateChunkRequest(google.protobuf.message.Message):
         """Optional. Updated questions associated with this chunk."""
 
     @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. Additional fields to pass through to RAGFlow."""
+    def positions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[google.protobuf.struct_pb2.ListValue]:
+        """Position information in the original document.<br>
+        Each position is an array of 5 integers representing location data (format varies by document type).
+        """
 
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
+        language_code: builtins.str = ...,
         dataset_id: builtins.str = ...,
         document_id: builtins.str = ...,
         chunk_id: builtins.str = ...,
@@ -1661,78 +2273,57 @@ class RagUpdateChunkRequest(google.protobuf.message.Message):
         important_keywords: collections.abc.Iterable[builtins.str] | None = ...,
         questions: collections.abc.Iterable[builtins.str] | None = ...,
         available: builtins.bool | None = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
+        positions: collections.abc.Iterable[google.protobuf.struct_pb2.ListValue] | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_available", b"_available", "additional_fields", b"additional_fields", "available", b"available"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_available", b"_available", "additional_fields", b"additional_fields", "available", b"available", "chunk_id", b"chunk_id", "content", b"content", "dataset_id", b"dataset_id", "document_id", b"document_id", "important_keywords", b"important_keywords", "parent", b"parent", "questions", b"questions"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_available", b"_available", "available", b"available"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_available", b"_available", "available", b"available", "chunk_id", b"chunk_id", "content", b"content", "dataset_id", b"dataset_id", "document_id", b"document_id", "important_keywords", b"important_keywords", "language_code", b"language_code", "parent", b"parent", "positions", b"positions", "questions", b"questions"]) -> None: ...
     def WhichOneof(self, oneof_group: typing.Literal["_available", b"_available"]) -> typing.Literal["available"] | None: ...
 
 global___RagUpdateChunkRequest = RagUpdateChunkRequest
 
 @typing.final
-class RagRetrievalRequest(google.protobuf.message.Message):
-    """Request message for retrieving chunks using vector similarity search.<br>
-    Supports hybrid search combining vector similarity with keyword matching.
+class RagCreateChatAssistantRequest(google.protobuf.message.Message):
+    """----------------------------------------------------------------------------
+    Chat Management Types
+    ----------------------------------------------------------------------------
+
+    Request message for creating a new chat assistant.
     """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     PARENT_FIELD_NUMBER: builtins.int
-    PAGINATION_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    NAME_FIELD_NUMBER: builtins.int
+    DESCRIPTION_FIELD_NUMBER: builtins.int
+    AVATAR_FIELD_NUMBER: builtins.int
     DATASET_IDS_FIELD_NUMBER: builtins.int
-    QUESTION_FIELD_NUMBER: builtins.int
-    DOCUMENT_IDS_FIELD_NUMBER: builtins.int
-    SIMILARITY_THRESHOLD_FIELD_NUMBER: builtins.int
-    VECTOR_SIMILARITY_WEIGHT_FIELD_NUMBER: builtins.int
-    TOP_K_FIELD_NUMBER: builtins.int
-    HIGHLIGHT_FIELD_NUMBER: builtins.int
-    METADATA_CONDITION_FIELD_NUMBER: builtins.int
-    USE_KG_FIELD_NUMBER: builtins.int
-    CROSS_LANGUAGES_FIELD_NUMBER: builtins.int
-    KEYWORD_FIELD_NUMBER: builtins.int
-    RERANK_ID_FIELD_NUMBER: builtins.int
+    LLM_FIELD_NUMBER: builtins.int
+    PROMPT_FIELD_NUMBER: builtins.int
     ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
     parent: builtins.str
-    """Required. The agent to retrieve chunks for.
+    """Required. The agent to create a chat assistant for.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
-    question: builtins.str
-    """Required. Query string to search for."""
-    similarity_threshold: builtins.float
-    """Optional. Minimum similarity score threshold between <code>0.0</code> and <code>1.0</code> (default: <code>0.2</code>)."""
-    vector_similarity_weight: builtins.float
-    """Optional. Weight for vector similarity versus keyword matching between <code>0.0</code> and <code>1.0</code> (default: <code>0.3</code>).<br>
-    Higher values favor vector similarity, lower values favor keyword matching.
-    """
-    top_k: builtins.int
-    """Optional. Maximum number of chunks to retrieve before reranking (default: <code>1024</code>)."""
-    highlight: builtins.bool
-    """Optional. Whether to highlight matched content in the returned chunks."""
-    use_kg: builtins.bool
-    """Optional. Include knowledge graph retrieval to enhance results with graph relationships."""
-    keyword: builtins.bool
-    """Optional. Extract additional keywords from the query to improve retrieval."""
-    rerank_id: builtins.str
-    """Optional. Rerank model ID to reorder results after initial retrieval."""
-    @property
-    def pagination(self) -> global___RagPagination:
-        """Optional. Pagination parameters."""
-
+    language_code: builtins.str
+    """Required. The language of the project to use."""
+    name: builtins.str
+    """Required. Maximum length 255. Unique name for the chat assistant."""
+    description: builtins.str
+    """Optional. Description of the chat assistant's purpose."""
+    avatar: builtins.str
+    """Optional. Base64-encoded icon in the format <code>"data:image/[png|jpeg];base64,&lt;base64_string&gt;"</code>."""
     @property
     def dataset_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Required. Dataset IDs to search (all datasets must use the same embedding model)."""
+        """Optional. Dataset IDs to use as knowledge base (all datasets must have parsed files and use the same embedding model)."""
 
     @property
-    def document_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Optional. Filter by specific document IDs within the datasets."""
+    def llm(self) -> global___RagLlmSetting:
+        """Optional. LLM configuration settings."""
 
     @property
-    def metadata_condition(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. Metadata filter condition to restrict results based on document metadata."""
-
-    @property
-    def cross_languages(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Optional. Cross-language translation codes to enable multilingual retrieval."""
+    def prompt(self) -> global___RagPromptConfig:
+        """Optional. Prompt and retrieval configuration settings."""
 
     @property
     def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
@@ -1742,178 +2333,22 @@ class RagRetrievalRequest(google.protobuf.message.Message):
         self,
         *,
         parent: builtins.str = ...,
-        pagination: global___RagPagination | None = ...,
-        dataset_ids: collections.abc.Iterable[builtins.str] | None = ...,
-        question: builtins.str = ...,
-        document_ids: collections.abc.Iterable[builtins.str] | None = ...,
-        similarity_threshold: builtins.float = ...,
-        vector_similarity_weight: builtins.float = ...,
-        top_k: builtins.int = ...,
-        highlight: builtins.bool | None = ...,
-        metadata_condition: google.protobuf.struct_pb2.Struct | None = ...,
-        use_kg: builtins.bool | None = ...,
-        cross_languages: collections.abc.Iterable[builtins.str] | None = ...,
-        keyword: builtins.bool | None = ...,
-        rerank_id: builtins.str = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_highlight", b"_highlight", "_keyword", b"_keyword", "_use_kg", b"_use_kg", "additional_fields", b"additional_fields", "highlight", b"highlight", "keyword", b"keyword", "metadata_condition", b"metadata_condition", "pagination", b"pagination", "use_kg", b"use_kg"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_highlight", b"_highlight", "_keyword", b"_keyword", "_use_kg", b"_use_kg", "additional_fields", b"additional_fields", "cross_languages", b"cross_languages", "dataset_ids", b"dataset_ids", "document_ids", b"document_ids", "highlight", b"highlight", "keyword", b"keyword", "metadata_condition", b"metadata_condition", "pagination", b"pagination", "parent", b"parent", "question", b"question", "rerank_id", b"rerank_id", "similarity_threshold", b"similarity_threshold", "top_k", b"top_k", "use_kg", b"use_kg", "vector_similarity_weight", b"vector_similarity_weight"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_highlight", b"_highlight"]) -> typing.Literal["highlight"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_keyword", b"_keyword"]) -> typing.Literal["keyword"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_use_kg", b"_use_kg"]) -> typing.Literal["use_kg"] | None: ...
-
-global___RagRetrievalRequest = RagRetrievalRequest
-
-@typing.final
-class RagRetrievalResponse(google.protobuf.message.Message):
-    """Response message for chunk retrieval."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    CHUNKS_FIELD_NUMBER: builtins.int
-    DOC_AGGS_FIELD_NUMBER: builtins.int
-    TOTAL_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
-    total: builtins.int
-    """Total number of chunks matching the query (not limited by pagination)."""
-    @property
-    def chunks(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagChunk]:
-        """Retrieved chunks with similarity scores populated (ordered by relevance)."""
-
-    @property
-    def doc_aggs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[google.protobuf.struct_pb2.Struct]:
-        """Document aggregations providing statistics about which documents matched."""
-
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Additional fields returned by RAGFlow not explicitly defined above."""
-
-    def __init__(
-        self,
-        *,
-        chunks: collections.abc.Iterable[global___RagChunk] | None = ...,
-        doc_aggs: collections.abc.Iterable[google.protobuf.struct_pb2.Struct] | None = ...,
-        total: builtins.int = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "chunks", b"chunks", "doc_aggs", b"doc_aggs", "total", b"total"]) -> None: ...
-
-global___RagRetrievalResponse = RagRetrievalResponse
-
-@typing.final
-class RagChat(google.protobuf.message.Message):
-    """============================================================================
-    Chat Management Types
-    Chat assistants are RAG-powered conversational agents.
-    ============================================================================
-
-    Chat assistant configuration.
-    """
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    ID_FIELD_NUMBER: builtins.int
-    NAME_FIELD_NUMBER: builtins.int
-    DESCRIPTION_FIELD_NUMBER: builtins.int
-    AVATAR_FIELD_NUMBER: builtins.int
-    DATASET_IDS_FIELD_NUMBER: builtins.int
-    DATASETS_FIELD_NUMBER: builtins.int
-    LLM_FIELD_NUMBER: builtins.int
-    PROMPT_FIELD_NUMBER: builtins.int
-    CREATE_TIME_FIELD_NUMBER: builtins.int
-    CREATE_DATE_FIELD_NUMBER: builtins.int
-    UPDATE_TIME_FIELD_NUMBER: builtins.int
-    UPDATE_DATE_FIELD_NUMBER: builtins.int
-    DO_REFER_FIELD_NUMBER: builtins.int
-    LANGUAGE_FIELD_NUMBER: builtins.int
-    PROMPT_TYPE_FIELD_NUMBER: builtins.int
-    STATUS_FIELD_NUMBER: builtins.int
-    TENANT_ID_FIELD_NUMBER: builtins.int
-    TOP_K_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
-    id: builtins.str
-    """Chat UUID."""
-    name: builtins.str
-    """Chat name (required, unique)."""
-    description: builtins.str
-    """Optional description."""
-    avatar: builtins.str
-    """Base64-encoded avatar image."""
-    create_time: builtins.int
-    """Creation timestamp (Unix timestamp in milliseconds)."""
-    create_date: builtins.str
-    """Creation date (ISO 8601 datetime)."""
-    update_time: builtins.int
-    """Last update timestamp (Unix timestamp in milliseconds)."""
-    update_date: builtins.str
-    """Last update date (ISO 8601 datetime)."""
-    do_refer: builtins.str
-    """Whether to insert reference index into answer. <code>"1"</code> yes, <code>"0"</code> no"""
-    language: builtins.str
-    """Lanugage of the chat"""
-    prompt_type: builtins.str
-    """Prompt type. Either <code>"simple"</code> or <code>"advanced"</code>"""
-    status: builtins.str
-    """Validation status indicating if chat is enabled (<code>&quot;1&quot;</code>=valid/enabled, <code>&quot;0&quot;</code>=invalid/disabled)."""
-    tenant_id: builtins.str
-    """Tenant ID."""
-    top_k: builtins.int
-    """Top K setting for retrieval."""
-    @property
-    def dataset_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Dataset IDs (used for requests)."""
-
-    @property
-    def datasets(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagDataset]:
-        """Full dataset objects (used for list responses)."""
-
-    @property
-    def llm(self) -> global___RagLLMSetting:
-        """LLM configuration."""
-
-    @property
-    def prompt(self) -> global___RagPromptConfig:
-        """Prompt and retrieval configuration."""
-
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Additional fields returned by RAGFlow."""
-
-    def __init__(
-        self,
-        *,
-        id: builtins.str = ...,
+        language_code: builtins.str = ...,
         name: builtins.str = ...,
         description: builtins.str = ...,
         avatar: builtins.str = ...,
         dataset_ids: collections.abc.Iterable[builtins.str] | None = ...,
-        datasets: collections.abc.Iterable[global___RagDataset] | None = ...,
-        llm: global___RagLLMSetting | None = ...,
+        llm: global___RagLlmSetting | None = ...,
         prompt: global___RagPromptConfig | None = ...,
-        create_time: builtins.int = ...,
-        create_date: builtins.str = ...,
-        update_time: builtins.int = ...,
-        update_date: builtins.str = ...,
-        do_refer: builtins.str = ...,
-        language: builtins.str = ...,
-        prompt_type: builtins.str = ...,
-        status: builtins.str = ...,
-        tenant_id: builtins.str = ...,
-        top_k: builtins.int = ...,
         additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "llm", b"llm", "prompt", b"prompt"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "avatar", b"avatar", "create_date", b"create_date", "create_time", b"create_time", "dataset_ids", b"dataset_ids", "datasets", b"datasets", "description", b"description", "do_refer", b"do_refer", "id", b"id", "language", b"language", "llm", b"llm", "name", b"name", "prompt", b"prompt", "prompt_type", b"prompt_type", "status", b"status", "tenant_id", b"tenant_id", "top_k", b"top_k", "update_date", b"update_date", "update_time", b"update_time"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "avatar", b"avatar", "dataset_ids", b"dataset_ids", "description", b"description", "language_code", b"language_code", "llm", b"llm", "name", b"name", "parent", b"parent", "prompt", b"prompt"]) -> None: ...
 
-global___RagChat = RagChat
+global___RagCreateChatAssistantRequest = RagCreateChatAssistantRequest
 
 @typing.final
-class RagLLMSetting(google.protobuf.message.Message):
+class RagLlmSetting(google.protobuf.message.Message):
     """LLM configuration for chat assistant."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -1923,35 +2358,47 @@ class RagLLMSetting(google.protobuf.message.Message):
     TOP_P_FIELD_NUMBER: builtins.int
     FREQUENCY_PENALTY_FIELD_NUMBER: builtins.int
     PRESENCE_PENALTY_FIELD_NUMBER: builtins.int
+    MAX_TOKENS_FIELD_NUMBER: builtins.int
     ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
     model_name: builtins.str
-    """LLM model name (required)."""
+    """Optional. LLM model name. If not set, the user's default model will be used."""
     temperature: builtins.float
-    """Sampling temperature (0.0-2.0). Controls randomness in responses."""
+    """Optional. Minimum 0.0. Maximum 2.0. Default 0.1. Sampling temperature. Controls randomness in responses."""
     top_p: builtins.float
-    """Nucleus sampling parameter (0.0-1.0). Filters token choices by cumulative probability."""
+    """Optional. Minimum 0.0. Maximum 1.0. Default 0.3. Nucleus sampling parameter. Filters token choices by cumulative probability."""
     frequency_penalty: builtins.float
-    """Frequency penalty (-2.0 to 2.0). Reduces repetition of frequent tokens."""
+    """Optional. Minimum -2.0. Maximum 2.0. Default 0.4. Frequency penalty. Reduces repetition of frequent tokens."""
     presence_penalty: builtins.float
-    """Presence penalty (-2.0 to 2.0). Reduces repetition of any tokens already used."""
+    """Optional. Minimum -2.0. Maximum 2.0. Default 0.7. Presence penalty. Reduces repetition of any tokens already used."""
+    max_tokens: builtins.int
+    """Optional. Minimum 1. Maximum number of tokens to generate."""
     @property
     def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Additional fields to pass through to RAGFlow."""
+        """Optional. Additional fields to pass through to RAGFlow."""
 
     def __init__(
         self,
         *,
         model_name: builtins.str = ...,
-        temperature: builtins.float = ...,
-        top_p: builtins.float = ...,
-        frequency_penalty: builtins.float = ...,
-        presence_penalty: builtins.float = ...,
+        temperature: builtins.float | None = ...,
+        top_p: builtins.float | None = ...,
+        frequency_penalty: builtins.float | None = ...,
+        presence_penalty: builtins.float | None = ...,
+        max_tokens: builtins.int = ...,
         additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "frequency_penalty", b"frequency_penalty", "model_name", b"model_name", "presence_penalty", b"presence_penalty", "temperature", b"temperature", "top_p", b"top_p"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_frequency_penalty", b"_frequency_penalty", "_presence_penalty", b"_presence_penalty", "_temperature", b"_temperature", "_top_p", b"_top_p", "additional_fields", b"additional_fields", "frequency_penalty", b"frequency_penalty", "presence_penalty", b"presence_penalty", "temperature", b"temperature", "top_p", b"top_p"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_frequency_penalty", b"_frequency_penalty", "_presence_penalty", b"_presence_penalty", "_temperature", b"_temperature", "_top_p", b"_top_p", "additional_fields", b"additional_fields", "frequency_penalty", b"frequency_penalty", "max_tokens", b"max_tokens", "model_name", b"model_name", "presence_penalty", b"presence_penalty", "temperature", b"temperature", "top_p", b"top_p"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_frequency_penalty", b"_frequency_penalty"]) -> typing.Literal["frequency_penalty"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_presence_penalty", b"_presence_penalty"]) -> typing.Literal["presence_penalty"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_temperature", b"_temperature"]) -> typing.Literal["temperature"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_top_p", b"_top_p"]) -> typing.Literal["top_p"] | None: ...
 
-global___RagLLMSetting = RagLLMSetting
+global___RagLlmSetting = RagLlmSetting
 
 @typing.final
 class RagPromptConfig(google.protobuf.message.Message):
@@ -1973,34 +2420,34 @@ class RagPromptConfig(google.protobuf.message.Message):
     RERANK_MODEL_FIELD_NUMBER: builtins.int
     ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
     prompt: builtins.str
-    """System prompt (RAGFlow provides default if not specified)."""
+    """Optional. System prompt (RAGFlow provides default if not specified)."""
     opener: builtins.str
-    """Opening message displayed at conversation start."""
+    """Optional. Opening message displayed at conversation start."""
     show_quote: builtins.bool
-    """Show quotations from retrieved source chunks in responses."""
+    """Optional. Default <code>true</code>. Show quotations from retrieved source chunks in responses."""
     empty_response: builtins.str
-    """Response to return when no relevant chunks are found in the knowledge base."""
+    """Optional. Response to return when no relevant chunks are found in the knowledge base."""
     tts: builtins.bool
-    """Enable text-to-speech for responses."""
+    """Optional. Default <code>false</code>. Enable text-to-speech for responses."""
     refine_multiturn: builtins.bool
-    """Refine and optimize multi-turn conversation context."""
+    """Optional. Default <code>true</code>. Refine and optimize multi-turn conversation context."""
     similarity_threshold: builtins.float
-    """Minimum similarity score for chunk retrieval (0.0-1.0)."""
+    """Optional. Minimum 0.0. Maximum 1.0. Default 0.2. Minimum similarity score for chunk retrieval."""
     keywords_similarity_weight: builtins.float
-    """Weight for keywords versus vector similarity in hybrid search (0.0-1.0)."""
+    """Optional. Minimum 0.0. Maximum 1.0. Default 0.7. Weight for keywords versus vector similarity in hybrid search."""
     top_n: builtins.int
-    """Number of chunks to retrieve after reranking."""
+    """Optional. Minimum 1. Default 6. Number of chunks to retrieve after reranking."""
     top_k: builtins.int
-    """Maximum chunks to retrieve before reranking."""
+    """Optional. Minimum 1. Default 1024. Maximum chunks to retrieve before reranking."""
     rerank_model: builtins.str
-    """Rerank model ID for reordering retrieved chunks."""
+    """Optional. Rerank model ID for reordering retrieved chunks. If not specified, cosine similarity is used."""
     @property
     def variables(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagPromptVariable]:
-        """Prompt template variables for dynamic content insertion."""
+        """Optional. Prompt template variables for dynamic content insertion."""
 
     @property
     def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Additional fields to pass through to RAGFlow."""
+        """Optional. Additional fields to pass through to RAGFlow."""
 
     def __init__(
         self,
@@ -2012,19 +2459,23 @@ class RagPromptConfig(google.protobuf.message.Message):
         empty_response: builtins.str = ...,
         tts: builtins.bool | None = ...,
         refine_multiturn: builtins.bool | None = ...,
-        similarity_threshold: builtins.float = ...,
-        keywords_similarity_weight: builtins.float = ...,
+        similarity_threshold: builtins.float | None = ...,
+        keywords_similarity_weight: builtins.float | None = ...,
         top_n: builtins.int = ...,
         top_k: builtins.int = ...,
         rerank_model: builtins.str = ...,
         additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_refine_multiturn", b"_refine_multiturn", "_show_quote", b"_show_quote", "_tts", b"_tts", "additional_fields", b"additional_fields", "refine_multiturn", b"refine_multiturn", "show_quote", b"show_quote", "tts", b"tts"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_refine_multiturn", b"_refine_multiturn", "_show_quote", b"_show_quote", "_tts", b"_tts", "additional_fields", b"additional_fields", "empty_response", b"empty_response", "keywords_similarity_weight", b"keywords_similarity_weight", "opener", b"opener", "prompt", b"prompt", "refine_multiturn", b"refine_multiturn", "rerank_model", b"rerank_model", "show_quote", b"show_quote", "similarity_threshold", b"similarity_threshold", "top_k", b"top_k", "top_n", b"top_n", "tts", b"tts", "variables", b"variables"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_keywords_similarity_weight", b"_keywords_similarity_weight", "_refine_multiturn", b"_refine_multiturn", "_show_quote", b"_show_quote", "_similarity_threshold", b"_similarity_threshold", "_tts", b"_tts", "additional_fields", b"additional_fields", "keywords_similarity_weight", b"keywords_similarity_weight", "refine_multiturn", b"refine_multiturn", "show_quote", b"show_quote", "similarity_threshold", b"similarity_threshold", "tts", b"tts"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_keywords_similarity_weight", b"_keywords_similarity_weight", "_refine_multiturn", b"_refine_multiturn", "_show_quote", b"_show_quote", "_similarity_threshold", b"_similarity_threshold", "_tts", b"_tts", "additional_fields", b"additional_fields", "empty_response", b"empty_response", "keywords_similarity_weight", b"keywords_similarity_weight", "opener", b"opener", "prompt", b"prompt", "refine_multiturn", b"refine_multiturn", "rerank_model", b"rerank_model", "show_quote", b"show_quote", "similarity_threshold", b"similarity_threshold", "top_k", b"top_k", "top_n", b"top_n", "tts", b"tts", "variables", b"variables"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_keywords_similarity_weight", b"_keywords_similarity_weight"]) -> typing.Literal["keywords_similarity_weight"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_refine_multiturn", b"_refine_multiturn"]) -> typing.Literal["refine_multiturn"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_show_quote", b"_show_quote"]) -> typing.Literal["show_quote"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_similarity_threshold", b"_similarity_threshold"]) -> typing.Literal["similarity_threshold"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_tts", b"_tts"]) -> typing.Literal["tts"] | None: ...
 
@@ -2039,9 +2490,9 @@ class RagPromptVariable(google.protobuf.message.Message):
     KEY_FIELD_NUMBER: builtins.int
     OPTIONAL_FIELD_NUMBER: builtins.int
     key: builtins.str
-    """Variable name used in prompt template."""
+    """Required. Variable name used in prompt template."""
     optional: builtins.bool
-    """Whether this variable is optional in the template."""
+    """Required. Whether this variable is optional in the template."""
     def __init__(
         self,
         *,
@@ -2055,12 +2506,112 @@ class RagPromptVariable(google.protobuf.message.Message):
 global___RagPromptVariable = RagPromptVariable
 
 @typing.final
-class RagCreateChatRequest(google.protobuf.message.Message):
-    """Request message for creating a new chat assistant."""
+class RagChatAssistant(google.protobuf.message.Message):
+    """Chat assistant configuration."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ID_FIELD_NUMBER: builtins.int
+    TENANT_ID_FIELD_NUMBER: builtins.int
+    NAME_FIELD_NUMBER: builtins.int
+    DESCRIPTION_FIELD_NUMBER: builtins.int
+    AVATAR_FIELD_NUMBER: builtins.int
+    LANGUAGE_FIELD_NUMBER: builtins.int
+    DATASET_IDS_FIELD_NUMBER: builtins.int
+    DATASETS_FIELD_NUMBER: builtins.int
+    LLM_FIELD_NUMBER: builtins.int
+    PROMPT_TYPE_FIELD_NUMBER: builtins.int
+    PROMPT_FIELD_NUMBER: builtins.int
+    META_DATA_FILTER_FIELD_NUMBER: builtins.int
+    DO_REFER_FIELD_NUMBER: builtins.int
+    STATUS_FIELD_NUMBER: builtins.int
+    CREATE_TIME_FIELD_NUMBER: builtins.int
+    CREATE_DATE_FIELD_NUMBER: builtins.int
+    UPDATE_TIME_FIELD_NUMBER: builtins.int
+    UPDATE_DATE_FIELD_NUMBER: builtins.int
+    id: builtins.str
+    """Chat UUID."""
+    tenant_id: builtins.str
+    """Tenant ID."""
+    name: builtins.str
+    """Chat name (required, unique)."""
+    description: builtins.str
+    """Optional description."""
+    avatar: builtins.str
+    """Base64-encoded avatar image."""
+    language: builtins.str
+    """Language of the chat."""
+    prompt_type: global___RagPromptType.ValueType
+    """Prompt type."""
+    do_refer: builtins.str
+    """Whether to insert reference index into answer. <code>"1"</code> yes, <code>"0"</code> no."""
+    status: builtins.str
+    """Validation status indicating if chat is enabled (<code>"1"</code>=valid/enabled, <code>"0"</code>=invalid/disabled)."""
+    create_time: builtins.int
+    """Creation timestamp (Unix timestamp in milliseconds)."""
+    create_date: builtins.str
+    """Creation date (ISO 8601 datetime)."""
+    update_time: builtins.int
+    """Last update timestamp (Unix timestamp in milliseconds)."""
+    update_date: builtins.str
+    """Last update date (ISO 8601 datetime)."""
+    @property
+    def dataset_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Dataset IDs."""
+
+    @property
+    def datasets(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagDataset]:
+        """Full dataset objects."""
+
+    @property
+    def llm(self) -> global___RagLlmSetting:
+        """LLM configuration."""
+
+    @property
+    def prompt(self) -> global___RagPromptConfig:
+        """Prompt and retrieval configuration."""
+
+    @property
+    def meta_data_filter(self) -> google.protobuf.struct_pb2.Struct:
+        """Metadata filter."""
+
+    def __init__(
+        self,
+        *,
+        id: builtins.str = ...,
+        tenant_id: builtins.str = ...,
+        name: builtins.str = ...,
+        description: builtins.str = ...,
+        avatar: builtins.str = ...,
+        language: builtins.str = ...,
+        dataset_ids: collections.abc.Iterable[builtins.str] | None = ...,
+        datasets: collections.abc.Iterable[global___RagDataset] | None = ...,
+        llm: global___RagLlmSetting | None = ...,
+        prompt_type: global___RagPromptType.ValueType | None = ...,
+        prompt: global___RagPromptConfig | None = ...,
+        meta_data_filter: google.protobuf.struct_pb2.Struct | None = ...,
+        do_refer: builtins.str = ...,
+        status: builtins.str = ...,
+        create_time: builtins.int = ...,
+        create_date: builtins.str = ...,
+        update_time: builtins.int = ...,
+        update_date: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_prompt_type", b"_prompt_type", "llm", b"llm", "meta_data_filter", b"meta_data_filter", "prompt", b"prompt", "prompt_type", b"prompt_type"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_prompt_type", b"_prompt_type", "avatar", b"avatar", "create_date", b"create_date", "create_time", b"create_time", "dataset_ids", b"dataset_ids", "datasets", b"datasets", "description", b"description", "do_refer", b"do_refer", "id", b"id", "language", b"language", "llm", b"llm", "meta_data_filter", b"meta_data_filter", "name", b"name", "prompt", b"prompt", "prompt_type", b"prompt_type", "status", b"status", "tenant_id", b"tenant_id", "update_date", b"update_date", "update_time", b"update_time"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_prompt_type", b"_prompt_type"]) -> typing.Literal["prompt_type"] | None: ...
+
+global___RagChatAssistant = RagChatAssistant
+
+@typing.final
+class RagUpdateChatAssistantRequest(google.protobuf.message.Message):
+    """Request message for updating an existing chat assistant."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    CHAT_ID_FIELD_NUMBER: builtins.int
     NAME_FIELD_NUMBER: builtins.int
     DESCRIPTION_FIELD_NUMBER: builtins.int
     AVATAR_FIELD_NUMBER: builtins.int
@@ -2069,21 +2620,25 @@ class RagCreateChatRequest(google.protobuf.message.Message):
     PROMPT_FIELD_NUMBER: builtins.int
     ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
     parent: builtins.str
-    """Required. The agent to create a chat assistant for.
+    """Required. The agent containing the chat assistant to update.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
+    chat_id: builtins.str
+    """Required. UUID of the chat assistant to update."""
     name: builtins.str
-    """Required. Unique name for the chat assistant. Must be unique within the agent."""
+    """Required. Maximum length 255. Unique name for the chat assistant."""
     description: builtins.str
     """Optional. Description of the chat assistant's purpose."""
     avatar: builtins.str
-    """Optional. Base64-encoded avatar image."""
+    """Optional. Base64-encoded icon in the format <code>"data:image/[png|jpeg];base64,&lt;base64_string&gt;"</code>."""
     @property
     def dataset_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Required. Dataset IDs to use as knowledge base (all datasets must have parsed files and use the same embedding model)."""
+        """Optional. Dataset IDs to use as knowledge base (all datasets must have parsed files and use the same embedding model)."""
 
     @property
-    def llm(self) -> global___RagLLMSetting:
+    def llm(self) -> global___RagLlmSetting:
         """Optional. LLM configuration settings."""
 
     @property
@@ -2098,119 +2653,29 @@ class RagCreateChatRequest(google.protobuf.message.Message):
         self,
         *,
         parent: builtins.str = ...,
-        name: builtins.str = ...,
-        description: builtins.str = ...,
-        avatar: builtins.str = ...,
-        dataset_ids: collections.abc.Iterable[builtins.str] | None = ...,
-        llm: global___RagLLMSetting | None = ...,
-        prompt: global___RagPromptConfig | None = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "llm", b"llm", "prompt", b"prompt"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "avatar", b"avatar", "dataset_ids", b"dataset_ids", "description", b"description", "llm", b"llm", "name", b"name", "parent", b"parent", "prompt", b"prompt"]) -> None: ...
-
-global___RagCreateChatRequest = RagCreateChatRequest
-
-@typing.final
-class RagUpdateChatRequest(google.protobuf.message.Message):
-    """Request message for updating an existing chat assistant."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    PARENT_FIELD_NUMBER: builtins.int
-    CHAT_ID_FIELD_NUMBER: builtins.int
-    NAME_FIELD_NUMBER: builtins.int
-    DESCRIPTION_FIELD_NUMBER: builtins.int
-    AVATAR_FIELD_NUMBER: builtins.int
-    DATASET_IDS_FIELD_NUMBER: builtins.int
-    LLM_FIELD_NUMBER: builtins.int
-    PROMPT_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
-    parent: builtins.str
-    """Required. The agent containing the chat assistant to update.
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    """
-    chat_id: builtins.str
-    """Required. UUID of the chat assistant to update."""
-    name: builtins.str
-    """Optional. New name (must be unique within the agent)."""
-    description: builtins.str
-    """Optional. New description."""
-    avatar: builtins.str
-    """Optional. New base64-encoded avatar image."""
-    @property
-    def dataset_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Optional. New dataset IDs (all datasets must have parsed files and use the same embedding model)."""
-
-    @property
-    def llm(self) -> global___RagLLMSetting:
-        """Optional. New LLM configuration settings (merged with existing configuration)."""
-
-    @property
-    def prompt(self) -> global___RagPromptConfig:
-        """Optional. New prompt configuration settings (merged with existing configuration)."""
-
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. Additional fields to pass through to RAGFlow."""
-
-    def __init__(
-        self,
-        *,
-        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
         chat_id: builtins.str = ...,
         name: builtins.str = ...,
         description: builtins.str = ...,
         avatar: builtins.str = ...,
         dataset_ids: collections.abc.Iterable[builtins.str] | None = ...,
-        llm: global___RagLLMSetting | None = ...,
+        llm: global___RagLlmSetting | None = ...,
         prompt: global___RagPromptConfig | None = ...,
         additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "llm", b"llm", "prompt", b"prompt"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "avatar", b"avatar", "chat_id", b"chat_id", "dataset_ids", b"dataset_ids", "description", b"description", "llm", b"llm", "name", b"name", "parent", b"parent", "prompt", b"prompt"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "avatar", b"avatar", "chat_id", b"chat_id", "dataset_ids", b"dataset_ids", "description", b"description", "language_code", b"language_code", "llm", b"llm", "name", b"name", "parent", b"parent", "prompt", b"prompt"]) -> None: ...
 
-global___RagUpdateChatRequest = RagUpdateChatRequest
-
-@typing.final
-class RagDeleteChatsRequest(google.protobuf.message.Message):
-    """Request message for deleting chat assistants."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    PARENT_FIELD_NUMBER: builtins.int
-    IDS_FIELD_NUMBER: builtins.int
-    DELETE_ALL_FIELD_NUMBER: builtins.int
-    parent: builtins.str
-    """Required. The agent to delete chat assistants from.
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    """
-    delete_all: builtins.bool
-    """Optional. Delete all chat assistants (needed because protobuf cannot represent <code>ids=null</code>)."""
-    @property
-    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Optional. Chat assistant IDs to delete. Specify either this field or <code>delete_all</code>."""
-
-    def __init__(
-        self,
-        *,
-        parent: builtins.str = ...,
-        ids: collections.abc.Iterable[builtins.str] | None = ...,
-        delete_all: builtins.bool | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_delete_all", b"_delete_all", "delete_all", b"delete_all"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_delete_all", b"_delete_all", "delete_all", b"delete_all", "ids", b"ids", "parent", b"parent"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["_delete_all", b"_delete_all"]) -> typing.Literal["delete_all"] | None: ...
-
-global___RagDeleteChatsRequest = RagDeleteChatsRequest
+global___RagUpdateChatAssistantRequest = RagUpdateChatAssistantRequest
 
 @typing.final
-class RagListChatsRequest(google.protobuf.message.Message):
+class RagListChatAssistantsRequest(google.protobuf.message.Message):
     """Request message for listing chat assistants."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     PAGINATION_FIELD_NUMBER: builtins.int
     ID_FIELD_NUMBER: builtins.int
     NAME_FIELD_NUMBER: builtins.int
@@ -2221,18 +2686,18 @@ class RagListChatsRequest(google.protobuf.message.Message):
     """Required. The agent to list chat assistants from.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
+    pagination: builtins.str
+    """Optional. Pagination parameters for paging through results."""
     id: builtins.str
     """Optional. Filter by chat assistant UUID."""
     name: builtins.str
     """Optional. Filter by chat assistant name."""
     orderby: builtins.str
-    """Sort field (default: <code>&quot;create_time&quot;</code>)."""
+    """Sort field (default: <code>"create_time"</code>)."""
     desc: builtins.bool
     """Optional. Sort in descending order (default: <code>true</code>)."""
-    @property
-    def pagination(self) -> global___RagPagination:
-        """Optional. Pagination parameters for paging through results."""
-
     @property
     def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
         """Optional. Additional fields to pass through to RAGFlow."""
@@ -2241,48 +2706,388 @@ class RagListChatsRequest(google.protobuf.message.Message):
         self,
         *,
         parent: builtins.str = ...,
-        pagination: global___RagPagination | None = ...,
+        language_code: builtins.str = ...,
+        pagination: builtins.str = ...,
         id: builtins.str = ...,
         name: builtins.str = ...,
         orderby: builtins.str = ...,
         desc: builtins.bool | None = ...,
         additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_desc", b"_desc", "additional_fields", b"additional_fields", "desc", b"desc", "pagination", b"pagination"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_desc", b"_desc", "additional_fields", b"additional_fields", "desc", b"desc", "id", b"id", "name", b"name", "orderby", b"orderby", "pagination", b"pagination", "parent", b"parent"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_desc", b"_desc", "additional_fields", b"additional_fields", "desc", b"desc"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_desc", b"_desc", "additional_fields", b"additional_fields", "desc", b"desc", "id", b"id", "language_code", b"language_code", "name", b"name", "orderby", b"orderby", "pagination", b"pagination", "parent", b"parent"]) -> None: ...
     def WhichOneof(self, oneof_group: typing.Literal["_desc", b"_desc"]) -> typing.Literal["desc"] | None: ...
 
-global___RagListChatsRequest = RagListChatsRequest
+global___RagListChatAssistantsRequest = RagListChatAssistantsRequest
 
 @typing.final
-class RagChatList(google.protobuf.message.Message):
+class RagChatAssistantList(google.protobuf.message.Message):
     """Response message for listing chat assistants."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     CHATS_FIELD_NUMBER: builtins.int
     @property
-    def chats(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagChat]:
+    def chats(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagChatAssistant]:
         """List of chat assistants (with full dataset objects embedded)."""
 
     def __init__(
         self,
         *,
-        chats: collections.abc.Iterable[global___RagChat] | None = ...,
+        chats: collections.abc.Iterable[global___RagChatAssistant] | None = ...,
     ) -> None: ...
     def ClearField(self, field_name: typing.Literal["chats", b"chats"]) -> None: ...
 
-global___RagChatList = RagChatList
+global___RagChatAssistantList = RagChatAssistantList
+
+@typing.final
+class RagCreateAgentRequest(google.protobuf.message.Message):
+    """----------------------------------------------------------------------------
+    Agent Management Types
+    ----------------------------------------------------------------------------
+
+    Request message for creating a new RAGFlow agent.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    AVATAR_FIELD_NUMBER: builtins.int
+    TITLE_FIELD_NUMBER: builtins.int
+    PERMISSION_FIELD_NUMBER: builtins.int
+    DESCRIPTION_FIELD_NUMBER: builtins.int
+    CANVAS_TYPE_FIELD_NUMBER: builtins.int
+    CANVAS_CATEGORY_FIELD_NUMBER: builtins.int
+    DSL_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Required. The agent to create the RAGFlow agent for.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
+    avatar: builtins.str
+    """Optional. Base64-encoded icon in the format <code>"data:image/[png|jpeg];base64,&lt;base64_string&gt;"</code>."""
+    title: builtins.str
+    """Required. Maximum length 255. Unique agent title. Must be unique within the project."""
+    permission: global___RagPermission.ValueType
+    """Optional. Default <code>me</code>"""
+    description: builtins.str
+    """Optional. Agent description providing details about the agent's purpose and functionality."""
+    canvas_type: builtins.str
+    """Optional. Max length 32. Canvas type."""
+    canvas_category: global___RagCanvasCategory.ValueType
+    """Optional. Canvas category."""
+    @property
+    def dsl(self) -> google.protobuf.struct_pb2.Struct:
+        """Required. Canvas DSL configuration defining the agent's workflow."""
+
+    def __init__(
+        self,
+        *,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
+        avatar: builtins.str = ...,
+        title: builtins.str = ...,
+        permission: global___RagPermission.ValueType | None = ...,
+        description: builtins.str = ...,
+        canvas_type: builtins.str | None = ...,
+        canvas_category: global___RagCanvasCategory.ValueType | None = ...,
+        dsl: google.protobuf.struct_pb2.Struct | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_canvas_category", b"_canvas_category", "_canvas_type", b"_canvas_type", "_permission", b"_permission", "canvas_category", b"canvas_category", "canvas_type", b"canvas_type", "dsl", b"dsl", "permission", b"permission"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_canvas_category", b"_canvas_category", "_canvas_type", b"_canvas_type", "_permission", b"_permission", "avatar", b"avatar", "canvas_category", b"canvas_category", "canvas_type", b"canvas_type", "description", b"description", "dsl", b"dsl", "language_code", b"language_code", "parent", b"parent", "permission", b"permission", "title", b"title"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_canvas_category", b"_canvas_category"]) -> typing.Literal["canvas_category"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_canvas_type", b"_canvas_type"]) -> typing.Literal["canvas_type"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_permission", b"_permission"]) -> typing.Literal["permission"] | None: ...
+
+global___RagCreateAgentRequest = RagCreateAgentRequest
+
+@typing.final
+class RagUpdateAgentRequest(google.protobuf.message.Message):
+    """Request message for updating an existing RAGFlow agent."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    AGENT_ID_FIELD_NUMBER: builtins.int
+    AVATAR_FIELD_NUMBER: builtins.int
+    TITLE_FIELD_NUMBER: builtins.int
+    PERMISSION_FIELD_NUMBER: builtins.int
+    DESCRIPTION_FIELD_NUMBER: builtins.int
+    CANVAS_TYPE_FIELD_NUMBER: builtins.int
+    CANVAS_CATEGORY_FIELD_NUMBER: builtins.int
+    DSL_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Required. The agent to update the RAGFlow agent for.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
+    agent_id: builtins.str
+    """Required. ID of the RAGFlow agent to update."""
+    avatar: builtins.str
+    """Optional. Base64-encoded icon in the format <code>"data:image/[png|jpeg];base64,&lt;base64_string&gt;"</code>."""
+    title: builtins.str
+    """Optional. Maximum length 255. Unique agent title. Must be unique within the project."""
+    permission: global___RagPermission.ValueType
+    """Optional. Default <code>me</code>"""
+    description: builtins.str
+    """Optional. Agent description providing details about the agent's purpose and functionality."""
+    canvas_type: builtins.str
+    """Optional. Max length 32. Canvas type."""
+    canvas_category: global___RagCanvasCategory.ValueType
+    """Optional. Canvas category."""
+    @property
+    def dsl(self) -> google.protobuf.struct_pb2.Struct:
+        """Optional. Canvas DSL configuration defining the agent's workflow."""
+
+    def __init__(
+        self,
+        *,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
+        agent_id: builtins.str = ...,
+        avatar: builtins.str = ...,
+        title: builtins.str = ...,
+        permission: global___RagPermission.ValueType | None = ...,
+        description: builtins.str = ...,
+        canvas_type: builtins.str | None = ...,
+        canvas_category: global___RagCanvasCategory.ValueType | None = ...,
+        dsl: google.protobuf.struct_pb2.Struct | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_canvas_category", b"_canvas_category", "_canvas_type", b"_canvas_type", "_permission", b"_permission", "canvas_category", b"canvas_category", "canvas_type", b"canvas_type", "dsl", b"dsl", "permission", b"permission"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_canvas_category", b"_canvas_category", "_canvas_type", b"_canvas_type", "_permission", b"_permission", "agent_id", b"agent_id", "avatar", b"avatar", "canvas_category", b"canvas_category", "canvas_type", b"canvas_type", "description", b"description", "dsl", b"dsl", "language_code", b"language_code", "parent", b"parent", "permission", b"permission", "title", b"title"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_canvas_category", b"_canvas_category"]) -> typing.Literal["canvas_category"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_canvas_type", b"_canvas_type"]) -> typing.Literal["canvas_type"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_permission", b"_permission"]) -> typing.Literal["permission"] | None: ...
+
+global___RagUpdateAgentRequest = RagUpdateAgentRequest
+
+@typing.final
+class RagDeleteAgentRequest(google.protobuf.message.Message):
+    """Request message for deleting a RAGFlow agent."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    AGENT_ID_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Required. The agent to delete the RAGFlow agent from.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
+    agent_id: builtins.str
+    """Required. ID of the RAGFlow agent to delete."""
+    def __init__(
+        self,
+        *,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
+        agent_id: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["agent_id", b"agent_id", "language_code", b"language_code", "parent", b"parent"]) -> None: ...
+
+global___RagDeleteAgentRequest = RagDeleteAgentRequest
+
+@typing.final
+class RagListAgentsRequest(google.protobuf.message.Message):
+    """Request message for listing RAGFlow agents."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    PAGINATION_FIELD_NUMBER: builtins.int
+    TITLE_FIELD_NUMBER: builtins.int
+    ORDERBY_FIELD_NUMBER: builtins.int
+    DESC_FIELD_NUMBER: builtins.int
+    ID_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Required. The agent to list RAGFlow agents from.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
+    pagination: builtins.str
+    """Optional. Pagination parameters to control the number and offset of results."""
+    title: builtins.str
+    """Optional. Filter results by agent title. Only agents with matching titles will be returned."""
+    orderby: builtins.str
+    """Optional. Sort field for ordering results. Default: <code>"update_time"</code>."""
+    desc: builtins.bool
+    """Optional. Sort in descending order. If <code>true</code>, results are sorted from highest to lowest.
+    Default: <code>true</code>.
+    """
+    id: builtins.str
+    """Optional. Filter results by specific agent ID."""
+    def __init__(
+        self,
+        *,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
+        pagination: builtins.str = ...,
+        title: builtins.str = ...,
+        orderby: builtins.str = ...,
+        desc: builtins.bool | None = ...,
+        id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_desc", b"_desc", "desc", b"desc"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_desc", b"_desc", "desc", b"desc", "id", b"id", "language_code", b"language_code", "orderby", b"orderby", "pagination", b"pagination", "parent", b"parent", "title", b"title"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_desc", b"_desc"]) -> typing.Literal["desc"] | None: ...
+
+global___RagListAgentsRequest = RagListAgentsRequest
+
+@typing.final
+class RagAgentList(google.protobuf.message.Message):
+    """Response message containing a list of RAGFlow agents."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    AGENTS_FIELD_NUMBER: builtins.int
+    @property
+    def agents(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagAgent]:
+        """List of RAGFlow agents."""
+
+    def __init__(
+        self,
+        *,
+        agents: collections.abc.Iterable[global___RagAgent] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["agents", b"agents"]) -> None: ...
+
+global___RagAgentList = RagAgentList
+
+@typing.final
+class RagAgent(google.protobuf.message.Message):
+    """RAGFlow agent (workflow-based AI assistant).
+    Agents are workflow-based AI assistants configured using Canvas DSL.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ID_FIELD_NUMBER: builtins.int
+    AVATAR_FIELD_NUMBER: builtins.int
+    USER_ID_FIELD_NUMBER: builtins.int
+    TITLE_FIELD_NUMBER: builtins.int
+    PERMISSION_FIELD_NUMBER: builtins.int
+    DESCRIPTION_FIELD_NUMBER: builtins.int
+    CANVAS_TYPE_FIELD_NUMBER: builtins.int
+    CANVAS_CATEGORY_FIELD_NUMBER: builtins.int
+    DSL_FIELD_NUMBER: builtins.int
+    CREATE_TIME_FIELD_NUMBER: builtins.int
+    CREATE_DATE_FIELD_NUMBER: builtins.int
+    UPDATE_TIME_FIELD_NUMBER: builtins.int
+    UPDATE_DATE_FIELD_NUMBER: builtins.int
+    id: builtins.str
+    """Agent UUID uniquely identifying this agent."""
+    avatar: builtins.str
+    """Optional. Base64-encoded icon in the format <code>"data:image/[png|jpeg];base64,&lt;base64_string&gt;"</code>."""
+    user_id: builtins.str
+    """User ID of the agent owner."""
+    title: builtins.str
+    """Unique agent title."""
+    permission: global___RagPermission.ValueType
+    """Agent access permissions"""
+    description: builtins.str
+    """Agent description providing details about the agent's purpose and functionality."""
+    canvas_type: builtins.str
+    """Canvas type."""
+    canvas_category: global___RagCanvasCategory.ValueType
+    """Canvas category."""
+    create_time: builtins.int
+    """Creation timestamp (Unix timestamp in milliseconds)."""
+    create_date: builtins.str
+    """Creation date in ISO 8601 datetime format."""
+    update_time: builtins.int
+    """Last update timestamp (Unix timestamp in milliseconds)."""
+    update_date: builtins.str
+    """Last update date in ISO 8601 datetime format."""
+    @property
+    def dsl(self) -> google.protobuf.struct_pb2.Struct:
+        """Canvas DSL configuration defining the agent's workflow."""
+
+    def __init__(
+        self,
+        *,
+        id: builtins.str = ...,
+        avatar: builtins.str = ...,
+        user_id: builtins.str = ...,
+        title: builtins.str = ...,
+        permission: global___RagPermission.ValueType | None = ...,
+        description: builtins.str = ...,
+        canvas_type: builtins.str | None = ...,
+        canvas_category: global___RagCanvasCategory.ValueType | None = ...,
+        dsl: google.protobuf.struct_pb2.Struct | None = ...,
+        create_time: builtins.int = ...,
+        create_date: builtins.str = ...,
+        update_time: builtins.int = ...,
+        update_date: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_canvas_category", b"_canvas_category", "_canvas_type", b"_canvas_type", "_permission", b"_permission", "canvas_category", b"canvas_category", "canvas_type", b"canvas_type", "dsl", b"dsl", "permission", b"permission"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_canvas_category", b"_canvas_category", "_canvas_type", b"_canvas_type", "_permission", b"_permission", "avatar", b"avatar", "canvas_category", b"canvas_category", "canvas_type", b"canvas_type", "create_date", b"create_date", "create_time", b"create_time", "description", b"description", "dsl", b"dsl", "id", b"id", "permission", b"permission", "title", b"title", "update_date", b"update_date", "update_time", b"update_time", "user_id", b"user_id"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_canvas_category", b"_canvas_category"]) -> typing.Literal["canvas_category"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_canvas_type", b"_canvas_type"]) -> typing.Literal["canvas_type"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_permission", b"_permission"]) -> typing.Literal["permission"] | None: ...
+
+global___RagAgent = RagAgent
+
+@typing.final
+class RagCreateChatSessionRequest(google.protobuf.message.Message):
+    """----------------------------------------------------------------------------
+    Session Management Types
+    ----------------------------------------------------------------------------
+
+    Request message for creating a new chat session.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    CHAT_ID_FIELD_NUMBER: builtins.int
+    NAME_FIELD_NUMBER: builtins.int
+    USER_ID_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Required. The agent to create a chat session for.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
+    chat_id: builtins.str
+    """Required. Parent chat assistant UUID."""
+    name: builtins.str
+    """Optional. Maximum length 255. Session name (default: <code>"New session"</code>)."""
+    user_id: builtins.str
+    """Optional. Maximum length 255. User identifier for tracking conversation ownership."""
+    def __init__(
+        self,
+        *,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
+        chat_id: builtins.str = ...,
+        name: builtins.str = ...,
+        user_id: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["chat_id", b"chat_id", "language_code", b"language_code", "name", b"name", "parent", b"parent", "user_id", b"user_id"]) -> None: ...
+
+global___RagCreateChatSessionRequest = RagCreateChatSessionRequest
 
 @typing.final
 class RagChatSession(google.protobuf.message.Message):
-    """============================================================================
-    Session Management Types
-    Sessions are conversation instances for chats and agents.
-    ============================================================================
-
-    Chat session containing conversation history for a chat assistant.
-    """
+    """Chat session containing conversation history for a chat assistant."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -2294,13 +3099,12 @@ class RagChatSession(google.protobuf.message.Message):
     CREATE_DATE_FIELD_NUMBER: builtins.int
     UPDATE_TIME_FIELD_NUMBER: builtins.int
     UPDATE_DATE_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
     id: builtins.str
     """Session UUID."""
     chat_id: builtins.str
     """Parent chat assistant UUID."""
     name: builtins.str
-    """Session name (default: <code>&quot;New session&quot;</code>)."""
+    """Session name (default: <code>"New session"</code>)."""
     create_time: builtins.int
     """Creation timestamp (Unix timestamp in milliseconds)."""
     create_date: builtins.str
@@ -2313,10 +3117,6 @@ class RagChatSession(google.protobuf.message.Message):
     def messages(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagMessage]:
         """Message history in chronological order."""
 
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Additional fields returned by RAGFlow."""
-
     def __init__(
         self,
         *,
@@ -2328,10 +3128,8 @@ class RagChatSession(google.protobuf.message.Message):
         create_date: builtins.str = ...,
         update_time: builtins.int = ...,
         update_date: builtins.str = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "chat_id", b"chat_id", "create_date", b"create_date", "create_time", b"create_time", "id", b"id", "messages", b"messages", "name", b"name", "update_date", b"update_date", "update_time", b"update_time"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["chat_id", b"chat_id", "create_date", b"create_date", "create_time", b"create_time", "id", b"id", "messages", b"messages", "name", b"name", "update_date", b"update_date", "update_time", b"update_time"]) -> None: ...
 
 global___RagChatSession = RagChatSession
 
@@ -2343,158 +3141,27 @@ class RagMessage(google.protobuf.message.Message):
 
     ROLE_FIELD_NUMBER: builtins.int
     CONTENT_FIELD_NUMBER: builtins.int
+    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
     role: global___RagMessageRole.ValueType
-    """Role of the message sender."""
+    """Required. Role of the message sender."""
     content: builtins.str
-    """Message content text."""
+    """Required. Message content text."""
+    @property
+    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
+        """Additional fields provided to or returned by RAGFlow."""
+
     def __init__(
         self,
         *,
-        role: global___RagMessageRole.ValueType = ...,
+        role: global___RagMessageRole.ValueType | None = ...,
         content: builtins.str = ...,
+        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["content", b"content", "role", b"role"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_role", b"_role", "additional_fields", b"additional_fields", "role", b"role"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_role", b"_role", "additional_fields", b"additional_fields", "content", b"content", "role", b"role"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_role", b"_role"]) -> typing.Literal["role"] | None: ...
 
 global___RagMessage = RagMessage
-
-@typing.final
-class RagCreateChatSessionRequest(google.protobuf.message.Message):
-    """Request message for creating a new chat session."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    PARENT_FIELD_NUMBER: builtins.int
-    CHAT_ID_FIELD_NUMBER: builtins.int
-    NAME_FIELD_NUMBER: builtins.int
-    USER_ID_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
-    parent: builtins.str
-    """Required. The agent to create a chat session for.
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    """
-    chat_id: builtins.str
-    """Required. Parent chat assistant UUID."""
-    name: builtins.str
-    """Optional. Session name (default: <code>"New session"</code>)."""
-    user_id: builtins.str
-    """Optional. User identifier for tracking conversation ownership."""
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. Additional fields to pass through to RAGFlow."""
-
-    def __init__(
-        self,
-        *,
-        parent: builtins.str = ...,
-        chat_id: builtins.str = ...,
-        name: builtins.str = ...,
-        user_id: builtins.str = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "chat_id", b"chat_id", "name", b"name", "parent", b"parent", "user_id", b"user_id"]) -> None: ...
-
-global___RagCreateChatSessionRequest = RagCreateChatSessionRequest
-
-@typing.final
-class RagAgentSession(google.protobuf.message.Message):
-    """Agent session containing conversation history for an agent workflow."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    ID_FIELD_NUMBER: builtins.int
-    AGENT_ID_FIELD_NUMBER: builtins.int
-    USER_ID_FIELD_NUMBER: builtins.int
-    MESSAGE_FIELD_NUMBER: builtins.int
-    SOURCE_FIELD_NUMBER: builtins.int
-    DSL_FIELD_NUMBER: builtins.int
-    CREATE_TIME_FIELD_NUMBER: builtins.int
-    CREATE_DATE_FIELD_NUMBER: builtins.int
-    UPDATE_TIME_FIELD_NUMBER: builtins.int
-    UPDATE_DATE_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
-    id: builtins.str
-    """Session UUID."""
-    agent_id: builtins.str
-    """RAGFlow agent UUID."""
-    user_id: builtins.str
-    """User identifier."""
-    source: builtins.str
-    """Session source."""
-    create_time: builtins.int
-    """Creation timestamp (Unix timestamp in milliseconds)."""
-    create_date: builtins.str
-    """Creation date (ISO 8601 datetime)."""
-    update_time: builtins.int
-    """Last update timestamp (Unix timestamp in milliseconds)."""
-    update_date: builtins.str
-    """Last update date (ISO 8601 datetime)."""
-    @property
-    def message(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagMessage]:
-        """Message history in chronological order."""
-
-    @property
-    def dsl(self) -> google.protobuf.struct_pb2.Struct:
-        """Agent DSL (Domain Specific Language) workflow configuration."""
-
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Additional fields returned by RAGFlow."""
-
-    def __init__(
-        self,
-        *,
-        id: builtins.str = ...,
-        agent_id: builtins.str = ...,
-        user_id: builtins.str = ...,
-        message: collections.abc.Iterable[global___RagMessage] | None = ...,
-        source: builtins.str = ...,
-        dsl: google.protobuf.struct_pb2.Struct | None = ...,
-        create_time: builtins.int = ...,
-        create_date: builtins.str = ...,
-        update_time: builtins.int = ...,
-        update_date: builtins.str = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "dsl", b"dsl"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "agent_id", b"agent_id", "create_date", b"create_date", "create_time", b"create_time", "dsl", b"dsl", "id", b"id", "message", b"message", "source", b"source", "update_date", b"update_date", "update_time", b"update_time", "user_id", b"user_id"]) -> None: ...
-
-global___RagAgentSession = RagAgentSession
-
-@typing.final
-class RagCreateAgentSessionRequest(google.protobuf.message.Message):
-    """Request message for creating a new agent session."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    PARENT_FIELD_NUMBER: builtins.int
-    AGENT_ID_FIELD_NUMBER: builtins.int
-    USER_ID_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
-    parent: builtins.str
-    """Required. The agent to create an agent session for.
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    """
-    agent_id: builtins.str
-    """Required. RAGFlow agent UUID."""
-    user_id: builtins.str
-    """Optional. User identifier (defaults to <code>tenant_id</code> if not specified)."""
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. Additional fields to pass through to RAGFlow."""
-
-    def __init__(
-        self,
-        *,
-        parent: builtins.str = ...,
-        agent_id: builtins.str = ...,
-        user_id: builtins.str = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "agent_id", b"agent_id", "parent", b"parent", "user_id", b"user_id"]) -> None: ...
-
-global___RagCreateAgentSessionRequest = RagCreateAgentSessionRequest
 
 @typing.final
 class RagUpdateChatSessionRequest(google.protobuf.message.Message):
@@ -2503,39 +3170,36 @@ class RagUpdateChatSessionRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     CHAT_ID_FIELD_NUMBER: builtins.int
     SESSION_ID_FIELD_NUMBER: builtins.int
     NAME_FIELD_NUMBER: builtins.int
     USER_ID_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The agent containing the chat session to update.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
     chat_id: builtins.str
     """Required. Chat assistant UUID."""
     session_id: builtins.str
     """Required. Session UUID to update."""
     name: builtins.str
-    """Optional. New session name."""
+    """Optional. Maximum length 255. New session name."""
     user_id: builtins.str
-    """Optional. User identifier."""
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. Additional fields to pass through to RAGFlow."""
-
+    """Optional. Maximum length 255.  User identifier."""
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
+        language_code: builtins.str = ...,
         chat_id: builtins.str = ...,
         session_id: builtins.str = ...,
         name: builtins.str = ...,
         user_id: builtins.str = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "chat_id", b"chat_id", "name", b"name", "parent", b"parent", "session_id", b"session_id", "user_id", b"user_id"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["chat_id", b"chat_id", "language_code", b"language_code", "name", b"name", "parent", b"parent", "session_id", b"session_id", "user_id", b"user_id"]) -> None: ...
 
 global___RagUpdateChatSessionRequest = RagUpdateChatSessionRequest
 
@@ -2546,6 +3210,7 @@ class RagListChatSessionsRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     CHAT_ID_FIELD_NUMBER: builtins.int
     PAGINATION_FIELD_NUMBER: builtins.int
     ORDERBY_FIELD_NUMBER: builtins.int
@@ -2553,15 +3218,18 @@ class RagListChatSessionsRequest(google.protobuf.message.Message):
     NAME_FIELD_NUMBER: builtins.int
     ID_FIELD_NUMBER: builtins.int
     USER_ID_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The agent to list chat sessions from.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
     chat_id: builtins.str
     """Required. Chat assistant UUID."""
+    pagination: builtins.str
+    """Optional. Pagination parameters for paging through results."""
     orderby: builtins.str
-    """Sort field (default: <code>&quot;create_time&quot;</code>)."""
+    """Sort field (default: <code>"create_time"</code>)."""
     desc: builtins.bool
     """Optional. Sort in descending order (default: <code>true</code>)."""
     name: builtins.str
@@ -2570,29 +3238,21 @@ class RagListChatSessionsRequest(google.protobuf.message.Message):
     """Optional. Filter by session UUID."""
     user_id: builtins.str
     """Optional. Filter by user identifier."""
-    @property
-    def pagination(self) -> global___RagPagination:
-        """Optional. Pagination parameters for paging through results."""
-
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. Additional fields to pass through to RAGFlow."""
-
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
+        language_code: builtins.str = ...,
         chat_id: builtins.str = ...,
-        pagination: global___RagPagination | None = ...,
+        pagination: builtins.str = ...,
         orderby: builtins.str = ...,
         desc: builtins.bool | None = ...,
         name: builtins.str = ...,
         id: builtins.str = ...,
         user_id: builtins.str = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_desc", b"_desc", "additional_fields", b"additional_fields", "desc", b"desc", "pagination", b"pagination"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_desc", b"_desc", "additional_fields", b"additional_fields", "chat_id", b"chat_id", "desc", b"desc", "id", b"id", "name", b"name", "orderby", b"orderby", "pagination", b"pagination", "parent", b"parent", "user_id", b"user_id"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_desc", b"_desc", "desc", b"desc"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_desc", b"_desc", "chat_id", b"chat_id", "desc", b"desc", "id", b"id", "language_code", b"language_code", "name", b"name", "orderby", b"orderby", "pagination", b"pagination", "parent", b"parent", "user_id", b"user_id"]) -> None: ...
     def WhichOneof(self, oneof_group: typing.Literal["_desc", b"_desc"]) -> typing.Literal["desc"] | None: ...
 
 global___RagListChatSessionsRequest = RagListChatSessionsRequest
@@ -2606,7 +3266,7 @@ class RagChatSessionList(google.protobuf.message.Message):
     CHAT_SESSIONS_FIELD_NUMBER: builtins.int
     @property
     def chat_sessions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagChatSession]:
-        """List of chat sessions (no pagination metadata included)."""
+        """List of chat sessions."""
 
     def __init__(
         self,
@@ -2618,12 +3278,53 @@ class RagChatSessionList(google.protobuf.message.Message):
 global___RagChatSessionList = RagChatSessionList
 
 @typing.final
+class RagDeleteChatSessionsRequest(google.protobuf.message.Message):
+    """Request message for deleting chat sessions."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    CHAT_ID_FIELD_NUMBER: builtins.int
+    IDS_FIELD_NUMBER: builtins.int
+    DELETE_ALL_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Required. The agent to delete chat sessions from.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
+    chat_id: builtins.str
+    """Required. Chat assistant UUID."""
+    delete_all: builtins.bool
+    """Optional. Delete all sessions for this chat (needed because protobuf cannot represent <code>ids=null</code>)."""
+    @property
+    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Session UUIDs to delete. Specify either this field or <code>delete_all</code>."""
+
+    def __init__(
+        self,
+        *,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
+        chat_id: builtins.str = ...,
+        ids: collections.abc.Iterable[builtins.str] | None = ...,
+        delete_all: builtins.bool | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_delete_all", b"_delete_all", "delete_all", b"delete_all"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_delete_all", b"_delete_all", "chat_id", b"chat_id", "delete_all", b"delete_all", "ids", b"ids", "language_code", b"language_code", "parent", b"parent"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_delete_all", b"_delete_all"]) -> typing.Literal["delete_all"] | None: ...
+
+global___RagDeleteChatSessionsRequest = RagDeleteChatSessionsRequest
+
+@typing.final
 class RagListAgentSessionsRequest(google.protobuf.message.Message):
     """Request message for listing agent sessions."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     AGENT_ID_FIELD_NUMBER: builtins.int
     PAGINATION_FIELD_NUMBER: builtins.int
     ORDERBY_FIELD_NUMBER: builtins.int
@@ -2631,15 +3332,18 @@ class RagListAgentSessionsRequest(google.protobuf.message.Message):
     ID_FIELD_NUMBER: builtins.int
     USER_ID_FIELD_NUMBER: builtins.int
     DSL_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The agent to list agent sessions from.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
     agent_id: builtins.str
     """Required. RAGFlow agent UUID."""
+    pagination: builtins.str
+    """Optional. Pagination parameters for paging through results."""
     orderby: builtins.str
-    """Sort field (default: <code>&quot;update_time&quot;</code>)."""
+    """Sort field (default: <code>"update_time"</code>)."""
     desc: builtins.bool
     """Optional. Sort in descending order (default: <code>true</code>)."""
     id: builtins.str
@@ -2647,30 +3351,22 @@ class RagListAgentSessionsRequest(google.protobuf.message.Message):
     user_id: builtins.str
     """Optional. Filter by user identifier."""
     dsl: builtins.bool
-    """Optional. Include DSL (Domain Specific Language) workflow configuration in response."""
-    @property
-    def pagination(self) -> global___RagPagination:
-        """Optional. Pagination parameters for paging through results."""
-
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. Additional fields to pass through to RAGFlow."""
-
+    """Optional. Include DSL workflow configuration in response."""
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
+        language_code: builtins.str = ...,
         agent_id: builtins.str = ...,
-        pagination: global___RagPagination | None = ...,
+        pagination: builtins.str = ...,
         orderby: builtins.str = ...,
         desc: builtins.bool | None = ...,
         id: builtins.str = ...,
         user_id: builtins.str = ...,
         dsl: builtins.bool | None = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_desc", b"_desc", "_dsl", b"_dsl", "additional_fields", b"additional_fields", "desc", b"desc", "dsl", b"dsl", "pagination", b"pagination"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_desc", b"_desc", "_dsl", b"_dsl", "additional_fields", b"additional_fields", "agent_id", b"agent_id", "desc", b"desc", "dsl", b"dsl", "id", b"id", "orderby", b"orderby", "pagination", b"pagination", "parent", b"parent", "user_id", b"user_id"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_desc", b"_desc", "_dsl", b"_dsl", "desc", b"desc", "dsl", b"dsl"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_desc", b"_desc", "_dsl", b"_dsl", "agent_id", b"agent_id", "desc", b"desc", "dsl", b"dsl", "id", b"id", "language_code", b"language_code", "orderby", b"orderby", "pagination", b"pagination", "parent", b"parent", "user_id", b"user_id"]) -> None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_desc", b"_desc"]) -> typing.Literal["desc"] | None: ...
     @typing.overload
@@ -2687,7 +3383,7 @@ class RagAgentSessionList(google.protobuf.message.Message):
     AGENT_SESSIONS_FIELD_NUMBER: builtins.int
     @property
     def agent_sessions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagAgentSession]:
-        """List of agent sessions (no pagination metadata included)."""
+        """List of agent sessions."""
 
     def __init__(
         self,
@@ -2699,40 +3395,91 @@ class RagAgentSessionList(google.protobuf.message.Message):
 global___RagAgentSessionList = RagAgentSessionList
 
 @typing.final
-class RagDeleteChatSessionsRequest(google.protobuf.message.Message):
-    """Request message for deleting chat sessions."""
+class RagAgentSession(google.protobuf.message.Message):
+    """Agent session containing conversation history for an agent workflow."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    CHAT_ID_FIELD_NUMBER: builtins.int
-    IDS_FIELD_NUMBER: builtins.int
-    DELETE_ALL_FIELD_NUMBER: builtins.int
-    parent: builtins.str
-    """Required. The agent to delete chat sessions from.
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    """
-    chat_id: builtins.str
-    """Required. Chat assistant UUID."""
-    delete_all: builtins.bool
-    """Optional. Delete all sessions for this chat (needed because protobuf cannot represent <code>ids=null</code>)."""
+    ID_FIELD_NUMBER: builtins.int
+    AGENT_ID_FIELD_NUMBER: builtins.int
+    USER_ID_FIELD_NUMBER: builtins.int
+    MESSAGES_FIELD_NUMBER: builtins.int
+    TOKENS_FIELD_NUMBER: builtins.int
+    SOURCE_FIELD_NUMBER: builtins.int
+    DSL_FIELD_NUMBER: builtins.int
+    DURATION_FIELD_NUMBER: builtins.int
+    ROUND_FIELD_NUMBER: builtins.int
+    THUMB_UP_FIELD_NUMBER: builtins.int
+    ERRORS_FIELD_NUMBER: builtins.int
+    CREATE_TIME_FIELD_NUMBER: builtins.int
+    CREATE_DATE_FIELD_NUMBER: builtins.int
+    UPDATE_TIME_FIELD_NUMBER: builtins.int
+    UPDATE_DATE_FIELD_NUMBER: builtins.int
+    id: builtins.str
+    """Session UUID."""
+    agent_id: builtins.str
+    """RAGFlow agent UUID."""
+    user_id: builtins.str
+    """User identifier."""
+    tokens: builtins.int
+    """Number of tokens used."""
+    source: global___RagSessionSource.ValueType
+    """Session source."""
+    duration: builtins.float
+    """Session duration in seconds."""
+    round: builtins.int
+    """Conversation round."""
+    thumb_up: builtins.int
+    """Number of likes."""
+    errors: builtins.str
+    """Optional. Error messages."""
+    create_time: builtins.int
+    """Creation timestamp (Unix timestamp in milliseconds)."""
+    create_date: builtins.str
+    """Creation date (ISO 8601 datetime)."""
+    update_time: builtins.int
+    """Last update timestamp (Unix timestamp in milliseconds)."""
+    update_date: builtins.str
+    """Last update date (ISO 8601 datetime)."""
     @property
-    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Optional. Session UUIDs to delete. Specify either this field or <code>delete_all</code>."""
+    def messages(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagMessage]:
+        """Message history in chronological order."""
+
+    @property
+    def dsl(self) -> google.protobuf.struct_pb2.Struct:
+        """Agent DSL (Domain Specific Language) workflow configuration."""
 
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        chat_id: builtins.str = ...,
-        ids: collections.abc.Iterable[builtins.str] | None = ...,
-        delete_all: builtins.bool | None = ...,
+        id: builtins.str = ...,
+        agent_id: builtins.str = ...,
+        user_id: builtins.str = ...,
+        messages: collections.abc.Iterable[global___RagMessage] | None = ...,
+        tokens: builtins.int | None = ...,
+        source: global___RagSessionSource.ValueType | None = ...,
+        dsl: google.protobuf.struct_pb2.Struct | None = ...,
+        duration: builtins.float = ...,
+        round: builtins.int | None = ...,
+        thumb_up: builtins.int | None = ...,
+        errors: builtins.str = ...,
+        create_time: builtins.int = ...,
+        create_date: builtins.str = ...,
+        update_time: builtins.int = ...,
+        update_date: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_delete_all", b"_delete_all", "delete_all", b"delete_all"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_delete_all", b"_delete_all", "chat_id", b"chat_id", "delete_all", b"delete_all", "ids", b"ids", "parent", b"parent"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["_delete_all", b"_delete_all"]) -> typing.Literal["delete_all"] | None: ...
+    def HasField(self, field_name: typing.Literal["_round", b"_round", "_source", b"_source", "_thumb_up", b"_thumb_up", "_tokens", b"_tokens", "dsl", b"dsl", "round", b"round", "source", b"source", "thumb_up", b"thumb_up", "tokens", b"tokens"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_round", b"_round", "_source", b"_source", "_thumb_up", b"_thumb_up", "_tokens", b"_tokens", "agent_id", b"agent_id", "create_date", b"create_date", "create_time", b"create_time", "dsl", b"dsl", "duration", b"duration", "errors", b"errors", "id", b"id", "messages", b"messages", "round", b"round", "source", b"source", "thumb_up", b"thumb_up", "tokens", b"tokens", "update_date", b"update_date", "update_time", b"update_time", "user_id", b"user_id"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_round", b"_round"]) -> typing.Literal["round"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_source", b"_source"]) -> typing.Literal["source"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_thumb_up", b"_thumb_up"]) -> typing.Literal["thumb_up"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_tokens", b"_tokens"]) -> typing.Literal["tokens"] | None: ...
 
-global___RagDeleteChatSessionsRequest = RagDeleteChatSessionsRequest
+global___RagAgentSession = RagAgentSession
 
 @typing.final
 class RagDeleteAgentSessionsRequest(google.protobuf.message.Message):
@@ -2741,6 +3488,7 @@ class RagDeleteAgentSessionsRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     AGENT_ID_FIELD_NUMBER: builtins.int
     IDS_FIELD_NUMBER: builtins.int
     DELETE_ALL_FIELD_NUMBER: builtins.int
@@ -2748,6 +3496,8 @@ class RagDeleteAgentSessionsRequest(google.protobuf.message.Message):
     """Required. The agent to delete agent sessions from.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
     agent_id: builtins.str
     """Required. RAGFlow agent UUID."""
     delete_all: builtins.bool
@@ -2760,22 +3510,22 @@ class RagDeleteAgentSessionsRequest(google.protobuf.message.Message):
         self,
         *,
         parent: builtins.str = ...,
+        language_code: builtins.str = ...,
         agent_id: builtins.str = ...,
         ids: collections.abc.Iterable[builtins.str] | None = ...,
         delete_all: builtins.bool | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["_delete_all", b"_delete_all", "delete_all", b"delete_all"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_delete_all", b"_delete_all", "agent_id", b"agent_id", "delete_all", b"delete_all", "ids", b"ids", "parent", b"parent"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["_delete_all", b"_delete_all", "agent_id", b"agent_id", "delete_all", b"delete_all", "ids", b"ids", "language_code", b"language_code", "parent", b"parent"]) -> None: ...
     def WhichOneof(self, oneof_group: typing.Literal["_delete_all", b"_delete_all"]) -> typing.Literal["delete_all"] | None: ...
 
 global___RagDeleteAgentSessionsRequest = RagDeleteAgentSessionsRequest
 
 @typing.final
 class RagChatCompletionRequest(google.protobuf.message.Message):
-    """============================================================================
+    """----------------------------------------------------------------------------
     Completion Types (Streaming)
-    Generate responses using RAG and LLMs. All methods support streaming.
-    ============================================================================
+    ----------------------------------------------------------------------------
 
     Request message for generating a chat completion.
     """
@@ -2783,41 +3533,51 @@ class RagChatCompletionRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     CHAT_ID_FIELD_NUMBER: builtins.int
+    MESSAGES_FIELD_NUMBER: builtins.int
     SESSION_ID_FIELD_NUMBER: builtins.int
-    QUESTION_FIELD_NUMBER: builtins.int
+    NAME_FIELD_NUMBER: builtins.int
+    USER_ID_FIELD_NUMBER: builtins.int
     STREAM_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The agent to generate the chat completion for.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
     chat_id: builtins.str
     """Required. Chat assistant ID to use for generating the completion."""
     session_id: builtins.str
-    """Optional. Session ID to continue an existing conversation. If not provided, a new session will be created."""
-    question: builtins.str
-    """Required. User question or message to send to the chat assistant."""
+    """Optional. Session ID to continue an existing conversation. If not provided and <code>messages</code> contains only one message, a new session will be created."""
+    name: builtins.str
+    """Optional. Maximum length 255. Name for new session. Ignored if <code>session_id</code> is provided or <code>messages</code> contains more than one message."""
+    user_id: builtins.str
+    """Optional. Maximum length 255. User defined ID for new session. Ignored if <code>session_id</code> is provided or <code>messages</code> contains more than one message."""
     stream: builtins.bool
     """Optional. Enable streaming mode. If <code>true</code>, the response will be streamed as Server-Sent Events (SSE).
     Default: <code>true</code>.
     """
     @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. Additional fields to pass through to RAGFlow API."""
+    def messages(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagMessage]:
+        """Required. Message history. Must contain at least one <code>"user"</code> message.<br>
+        If <code>session_id</code> is provided, the message history is ignored and only the last <code>"user"</code> message is taken and added to the existing session.
+        """
 
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
+        language_code: builtins.str = ...,
         chat_id: builtins.str = ...,
+        messages: collections.abc.Iterable[global___RagMessage] | None = ...,
         session_id: builtins.str = ...,
-        question: builtins.str = ...,
+        name: builtins.str = ...,
+        user_id: builtins.str = ...,
         stream: builtins.bool | None = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_stream", b"_stream", "additional_fields", b"additional_fields", "stream", b"stream"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_stream", b"_stream", "additional_fields", b"additional_fields", "chat_id", b"chat_id", "parent", b"parent", "question", b"question", "session_id", b"session_id", "stream", b"stream"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_stream", b"_stream", "stream", b"stream"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_stream", b"_stream", "chat_id", b"chat_id", "language_code", b"language_code", "messages", b"messages", "name", b"name", "parent", b"parent", "session_id", b"session_id", "stream", b"stream", "user_id", b"user_id"]) -> None: ...
     def WhichOneof(self, oneof_group: typing.Literal["_stream", b"_stream"]) -> typing.Literal["stream"] | None: ...
 
 global___RagChatCompletionRequest = RagChatCompletionRequest
@@ -2826,7 +3586,7 @@ global___RagChatCompletionRequest = RagChatCompletionRequest
 class RagChatCompletionResponse(google.protobuf.message.Message):
     """Response message for chat completion.
     <ul>
-        <li>For streaming: Each message represents one Server-Sent Event's data field with incremental content.</li>
+        <li>For streaming: Each message contains a partial response with incremental content.</li>
         <li>For non-streaming: Single message containing the complete response.</li>
     </ul>
     """
@@ -2840,9 +3600,14 @@ class RagChatCompletionResponse(google.protobuf.message.Message):
     SESSION_ID_FIELD_NUMBER: builtins.int
     PROMPT_FIELD_NUMBER: builtins.int
     CREATED_AT_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
     answer: builtins.str
-    """Response text. Incremental for streaming mode, complete for non-streaming mode."""
+    """Response text. Delta of response for streaming mode, complete for non-streaming mode.<br>
+    The answer text can contain:
+    <ul>
+        <li>reasoning content: this is always enclosed in <code><think>...</think></code> tags</li>
+        <li>citations of retrieved chunks: these are in the format <code>[ID:X]</code> where <code>X</code> is the index of the referenced chunk in the <code>chunks</code> list of the <code>reference</code>s</li>
+    </ul>
+    """
     audio_binary: builtins.str
     """Optional. Base64-encoded audio response when text-to-speech is enabled."""
     id: builtins.str
@@ -2850,306 +3615,137 @@ class RagChatCompletionResponse(google.protobuf.message.Message):
     session_id: builtins.str
     """Session ID for the conversation."""
     prompt: builtins.str
-    """Prompt used for generation. Usually empty string."""
+    """String containing the prompt used for generating an answer plus statistics of the generation."""
     created_at: builtins.float
     """Creation timestamp (Unix timestamp in seconds)."""
     @property
-    def reference(self) -> google.protobuf.struct_pb2.Struct:
-        """Source references including document chunks used to generate the response.
-        Contains a <code>chunks</code> array with metadata about retrieved documents.
-        """
-
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Additional fields returned by RAGFlow API."""
+    def reference(self) -> global___RagReference:
+        """Source references including document chunks used to generate the response."""
 
     def __init__(
         self,
         *,
         answer: builtins.str = ...,
-        reference: google.protobuf.struct_pb2.Struct | None = ...,
+        reference: global___RagReference | None = ...,
         audio_binary: builtins.str = ...,
         id: builtins.str = ...,
         session_id: builtins.str = ...,
         prompt: builtins.str = ...,
         created_at: builtins.float = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "reference", b"reference"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "answer", b"answer", "audio_binary", b"audio_binary", "created_at", b"created_at", "id", b"id", "prompt", b"prompt", "reference", b"reference", "session_id", b"session_id"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["reference", b"reference"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["answer", b"answer", "audio_binary", b"audio_binary", "created_at", b"created_at", "id", b"id", "prompt", b"prompt", "reference", b"reference", "session_id", b"session_id"]) -> None: ...
 
 global___RagChatCompletionResponse = RagChatCompletionResponse
 
 @typing.final
-class RagOpenAiChatCompletionRequest(google.protobuf.message.Message):
-    """Request message for OpenAI-compatible chat completion.
-    Follows OpenAI Chat Completions API format. All string fields must remain as strings to maintain OpenAI API compatibility.
-    """
+class RagReference(google.protobuf.message.Message):
+    """Reference object containing list of reference document chunks."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    CHAT_ID_FIELD_NUMBER: builtins.int
-    MODEL_FIELD_NUMBER: builtins.int
-    MESSAGES_FIELD_NUMBER: builtins.int
-    STREAM_FIELD_NUMBER: builtins.int
-    REFERENCE_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
-    parent: builtins.str
-    """Required. The agent to generate the chat completion for.
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    """
-    chat_id: builtins.str
-    """Required. Chat assistant ID to use for generating the completion."""
-    model: builtins.str
-    """Required. Model identifier. Required for OpenAI API compatibility but value is typically ignored by RAGFlow."""
-    stream: builtins.bool
-    """Optional. Enable streaming mode. If <code>true</code>, the response will be streamed as Server-Sent Events (SSE).
-    Default: <code>true</code>.
-    """
-    reference: builtins.bool
-    """Optional. Include source references in the response. If <code>true</code>, the <code>reference</code> field will be populated in the last message.
-    Default: <code>false</code>.
-    """
+    CHUNKS_FIELD_NUMBER: builtins.int
+    DOC_AGGS_FIELD_NUMBER: builtins.int
+    TOTAL_FIELD_NUMBER: builtins.int
+    total: builtins.int
+    """Total number of retrieved chunks"""
     @property
-    def messages(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagMessage]:
-        """Required. Conversation history as an array of messages with roles (system, user, assistant)."""
+    def chunks(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagReferenceChunk]:
+        """List of retrieved chunks"""
 
     @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. Additional fields to pass through to RAGFlow API (e.g., <code>temperature</code>, <code>max_tokens</code>)."""
+    def doc_aggs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagDocAgg]:
+        """List summarizing retrieved documents"""
 
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        chat_id: builtins.str = ...,
-        model: builtins.str = ...,
-        messages: collections.abc.Iterable[global___RagMessage] | None = ...,
-        stream: builtins.bool | None = ...,
-        reference: builtins.bool | None = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
+        chunks: collections.abc.Iterable[global___RagReferenceChunk] | None = ...,
+        doc_aggs: collections.abc.Iterable[global___RagDocAgg] | None = ...,
+        total: builtins.int = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_reference", b"_reference", "_stream", b"_stream", "additional_fields", b"additional_fields", "reference", b"reference", "stream", b"stream"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_reference", b"_reference", "_stream", b"_stream", "additional_fields", b"additional_fields", "chat_id", b"chat_id", "messages", b"messages", "model", b"model", "parent", b"parent", "reference", b"reference", "stream", b"stream"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_reference", b"_reference"]) -> typing.Literal["reference"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_stream", b"_stream"]) -> typing.Literal["stream"] | None: ...
+    def ClearField(self, field_name: typing.Literal["chunks", b"chunks", "doc_aggs", b"doc_aggs", "total", b"total"]) -> None: ...
 
-global___RagOpenAiChatCompletionRequest = RagOpenAiChatCompletionRequest
+global___RagReference = RagReference
 
 @typing.final
-class RagOpenAiChatCompletionResponse(google.protobuf.message.Message):
-    """Response message for OpenAI-compatible chat completion.
-    Follows OpenAI Chat Completions API format. All string fields must remain as strings to maintain OpenAI API compatibility.
-    <ul>
-        <li>For streaming: Each message represents one Server-Sent Event with <code>delta</code> populated in choices.</li>
-        <li>For non-streaming: Single message with <code>message</code> populated in choices containing the complete response.</li>
-    </ul>
-    """
+class RagReferenceChunk(google.protobuf.message.Message):
+    """Retrieved chunk returned as reference with chat/agent completions"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     ID_FIELD_NUMBER: builtins.int
-    OBJECT_FIELD_NUMBER: builtins.int
-    CREATED_FIELD_NUMBER: builtins.int
-    MODEL_FIELD_NUMBER: builtins.int
-    SYSTEM_FINGERPRINT_FIELD_NUMBER: builtins.int
-    CHOICES_FIELD_NUMBER: builtins.int
-    USAGE_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
+    CONTENT_FIELD_NUMBER: builtins.int
+    DOCUMENT_ID_FIELD_NUMBER: builtins.int
+    DOCUMENT_NAME_FIELD_NUMBER: builtins.int
+    DATASET_ID_FIELD_NUMBER: builtins.int
+    IMAGE_ID_FIELD_NUMBER: builtins.int
+    POSITIONS_FIELD_NUMBER: builtins.int
+    VECTOR_SIMILARITY_FIELD_NUMBER: builtins.int
+    TERM_SIMILARITY_FIELD_NUMBER: builtins.int
+    SIMILARITY_FIELD_NUMBER: builtins.int
     id: builtins.str
-    """Completion ID in format <code>&quot;chatcmpl-{chat_id}&quot;</code>."""
-    object: builtins.str
-    """Object type indicating response format. Value is <code>&quot;chat.completion.chunk&quot;</code> for streaming or <code>&quot;chat.completion&quot;</code> for non-streaming.
-    This field must remain a string for OpenAI API compatibility.
-    """
-    created: builtins.int
-    """Creation timestamp (Unix timestamp in seconds)."""
-    model: builtins.str
-    """Model name used for completion."""
-    system_fingerprint: builtins.str
-    """System fingerprint for backend configuration. Usually empty string."""
+    """Chunk ID"""
+    content: builtins.str
+    """Chunk content"""
+    document_id: builtins.str
+    """Document ID of the chunk"""
+    document_name: builtins.str
+    """Document name"""
+    dataset_id: builtins.str
+    """Dataset ID"""
+    image_id: builtins.str
+    """Image ID if the chunk refers to an image"""
+    vector_similarity: builtins.float
+    """Chunk embedding similarity"""
+    term_similarity: builtins.float
+    """Keyword similarity"""
+    similarity: builtins.float
+    """Overall similarity score (weighted sum of embedding and keyword similarity)"""
     @property
-    def choices(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagOpenAiChatChoice]:
-        """Array of generated choices. Typically contains one choice."""
-
-    @property
-    def usage(self) -> global___RagOpenAiChatUsage:
-        """Token usage statistics. Only populated in the final chunk for streaming mode or in the single response for non-streaming mode."""
-
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Additional fields returned by RAGFlow API."""
+    def positions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagIntList]:
+        """Positions of the chunk in the document. Mostly useful for PDFs to determine the position of a chunk on a page.<br>
+        For text documents this is always <code>[[i + 1, i, i, i, i]]</code> where <code>i</code> is the 1-based index of the chunk in the sequence of chunks in the document.<br>
+        For PDFs the <code>positions</code> list contains the bounding box(es) of the chunk as <code>[[page_nr, left, right, top, bottom], ...]</code> with the <code>page_nr</code> being 1-indexed and the positions being in 72 DPI points. Multiple lists are returned if the chunks spans multiple bounding boxes (multiple pages).
+        """
 
     def __init__(
         self,
         *,
         id: builtins.str = ...,
-        object: builtins.str = ...,
-        created: builtins.int = ...,
-        model: builtins.str = ...,
-        system_fingerprint: builtins.str = ...,
-        choices: collections.abc.Iterable[global___RagOpenAiChatChoice] | None = ...,
-        usage: global___RagOpenAiChatUsage | None = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "usage", b"usage"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "choices", b"choices", "created", b"created", "id", b"id", "model", b"model", "object", b"object", "system_fingerprint", b"system_fingerprint", "usage", b"usage"]) -> None: ...
-
-global___RagOpenAiChatCompletionResponse = RagOpenAiChatCompletionResponse
-
-@typing.final
-class RagOpenAiChatChoice(google.protobuf.message.Message):
-    """Choice in OpenAI-compatible chat completion response.
-    Follows OpenAI Chat Completions API format.
-    """
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    INDEX_FIELD_NUMBER: builtins.int
-    MESSAGE_FIELD_NUMBER: builtins.int
-    DELTA_FIELD_NUMBER: builtins.int
-    FINISH_REASON_FIELD_NUMBER: builtins.int
-    LOGPROBS_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
-    index: builtins.int
-    """Choice index in the array. Zero-based."""
-    finish_reason: builtins.str
-    """Reason why the completion finished. Common values include <code>&quot;stop&quot;</code> (natural completion), <code>&quot;length&quot;</code> (max tokens reached).
-    Only present in the final chunk for streaming mode or in the single response for non-streaming mode.
-    This field must remain a string for OpenAI API compatibility.
-    """
-    @property
-    def message(self) -> global___RagOpenAiChatContent:
-        """Non-streaming: Complete message with full content."""
-
-    @property
-    def delta(self) -> global___RagOpenAiChatContent:
-        """Streaming: Incremental delta containing partial content."""
-
-    @property
-    def logprobs(self) -> google.protobuf.struct_pb2.Value:
-        """Log probabilities for the generated tokens. Usually <code>null</code>."""
-
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Additional fields returned by RAGFlow API."""
-
-    def __init__(
-        self,
-        *,
-        index: builtins.int = ...,
-        message: global___RagOpenAiChatContent | None = ...,
-        delta: global___RagOpenAiChatContent | None = ...,
-        finish_reason: builtins.str = ...,
-        logprobs: google.protobuf.struct_pb2.Value | None = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "content", b"content", "delta", b"delta", "logprobs", b"logprobs", "message", b"message"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "content", b"content", "delta", b"delta", "finish_reason", b"finish_reason", "index", b"index", "logprobs", b"logprobs", "message", b"message"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["content", b"content"]) -> typing.Literal["message", "delta"] | None: ...
-
-global___RagOpenAiChatChoice = RagOpenAiChatChoice
-
-@typing.final
-class RagOpenAiChatContent(google.protobuf.message.Message):
-    """Message or delta content in OpenAI-compatible response.
-    Follows OpenAI Chat Completions API format.
-    <ul>
-        <li>For streaming (delta): Contains incremental content. The <code>role</code> field is only present in the first chunk.</li>
-        <li>For non-streaming (message): Contains complete content with all fields populated.</li>
-    </ul>
-    """
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    ROLE_FIELD_NUMBER: builtins.int
-    CONTENT_FIELD_NUMBER: builtins.int
-    REASONING_CONTENT_FIELD_NUMBER: builtins.int
-    FUNCTION_CALL_FIELD_NUMBER: builtins.int
-    TOOL_CALLS_FIELD_NUMBER: builtins.int
-    REFERENCE_FIELD_NUMBER: builtins.int
-    FINAL_CONTENT_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
-    role: builtins.str
-    """Message role. Value is typically <code>&quot;assistant&quot;</code>. For streaming, only present in the first chunk.
-    This field must remain a string for OpenAI API compatibility (not the <code>MessageRole</code> enum).
-    """
-    content: builtins.str
-    """Response text content. Incremental for streaming mode, complete for non-streaming mode."""
-    reasoning_content: builtins.str
-    """Reasoning content extracted from <code>&lt;think&gt;...&lt;/think&gt;</code> tags if present in the model&apos;s response."""
-    final_content: builtins.str
-    """Complete accumulated response text. Only present in the last chunk for streaming mode."""
-    @property
-    def function_call(self) -> google.protobuf.struct_pb2.Value:
-        """Function call information. Usually <code>null</code>."""
-
-    @property
-    def tool_calls(self) -> google.protobuf.struct_pb2.Value:
-        """Tool calls information. Usually <code>null</code>."""
-
-    @property
-    def reference(self) -> google.protobuf.struct_pb2.Value:
-        """Source references including document chunks. Only present in the last chunk if <code>reference=true</code> was set in the request."""
-
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Additional fields returned by RAGFlow API."""
-
-    def __init__(
-        self,
-        *,
-        role: builtins.str = ...,
         content: builtins.str = ...,
-        reasoning_content: builtins.str = ...,
-        function_call: google.protobuf.struct_pb2.Value | None = ...,
-        tool_calls: google.protobuf.struct_pb2.Value | None = ...,
-        reference: google.protobuf.struct_pb2.Value | None = ...,
-        final_content: builtins.str = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
+        document_id: builtins.str = ...,
+        document_name: builtins.str = ...,
+        dataset_id: builtins.str = ...,
+        image_id: builtins.str = ...,
+        positions: collections.abc.Iterable[global___RagIntList] | None = ...,
+        vector_similarity: builtins.float = ...,
+        term_similarity: builtins.float = ...,
+        similarity: builtins.float = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "function_call", b"function_call", "reference", b"reference", "tool_calls", b"tool_calls"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "content", b"content", "final_content", b"final_content", "function_call", b"function_call", "reasoning_content", b"reasoning_content", "reference", b"reference", "role", b"role", "tool_calls", b"tool_calls"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["content", b"content", "dataset_id", b"dataset_id", "document_id", b"document_id", "document_name", b"document_name", "id", b"id", "image_id", b"image_id", "positions", b"positions", "similarity", b"similarity", "term_similarity", b"term_similarity", "vector_similarity", b"vector_similarity"]) -> None: ...
 
-global___RagOpenAiChatContent = RagOpenAiChatContent
+global___RagReferenceChunk = RagReferenceChunk
 
 @typing.final
-class RagOpenAiChatUsage(google.protobuf.message.Message):
-    """Token usage statistics in OpenAI format.
-    Only populated in the final chunk for streaming mode or in the single response for non-streaming mode.
-    """
+class RagIntList(google.protobuf.message.Message):
+    """List of integers"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    PROMPT_TOKENS_FIELD_NUMBER: builtins.int
-    COMPLETION_TOKENS_FIELD_NUMBER: builtins.int
-    TOTAL_TOKENS_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
-    prompt_tokens: builtins.int
-    """Number of tokens in the prompt (input)."""
-    completion_tokens: builtins.int
-    """Number of tokens in the completion (output)."""
-    total_tokens: builtins.int
-    """Total tokens used (sum of <code>prompt_tokens</code> and <code>completion_tokens</code>)."""
+    INT_LIST_FIELD_NUMBER: builtins.int
     @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Additional fields returned by RAGFlow API."""
+    def int_list(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
+        """Integer list"""
 
     def __init__(
         self,
         *,
-        prompt_tokens: builtins.int = ...,
-        completion_tokens: builtins.int = ...,
-        total_tokens: builtins.int = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
+        int_list: collections.abc.Iterable[builtins.int] | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "completion_tokens", b"completion_tokens", "prompt_tokens", b"prompt_tokens", "total_tokens", b"total_tokens"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["int_list", b"int_list"]) -> None: ...
 
-global___RagOpenAiChatUsage = RagOpenAiChatUsage
+global___RagIntList = RagIntList
 
 @typing.final
 class RagAgentCompletionRequest(google.protobuf.message.Message):
@@ -3160,6 +3756,7 @@ class RagAgentCompletionRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     AGENT_ID_FIELD_NUMBER: builtins.int
     SESSION_ID_FIELD_NUMBER: builtins.int
     QUESTION_FIELD_NUMBER: builtins.int
@@ -3172,6 +3769,8 @@ class RagAgentCompletionRequest(google.protobuf.message.Message):
     """Required. The agent to generate the completion for.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
     agent_id: builtins.str
     """Required. RAGFlow agent ID to use for generating the completion."""
     session_id: builtins.str
@@ -3183,7 +3782,7 @@ class RagAgentCompletionRequest(google.protobuf.message.Message):
     Default: <code>true</code>.
     """
     user_id: builtins.str
-    """Optional. User identifier for tracking and personalization."""
+    """Optional. User identifier for tracking and personalization. Ignored if <code>session_id</code> is given."""
     @property
     def files(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagFile]:
         """Optional. Files to include in the agent's context for processing."""
@@ -3200,6 +3799,7 @@ class RagAgentCompletionRequest(google.protobuf.message.Message):
         self,
         *,
         parent: builtins.str = ...,
+        language_code: builtins.str = ...,
         agent_id: builtins.str = ...,
         session_id: builtins.str = ...,
         question: builtins.str = ...,
@@ -3210,16 +3810,84 @@ class RagAgentCompletionRequest(google.protobuf.message.Message):
         additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["_stream", b"_stream", "additional_fields", b"additional_fields", "inputs", b"inputs", "stream", b"stream"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_stream", b"_stream", "additional_fields", b"additional_fields", "agent_id", b"agent_id", "files", b"files", "inputs", b"inputs", "parent", b"parent", "question", b"question", "session_id", b"session_id", "stream", b"stream", "user_id", b"user_id"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["_stream", b"_stream", "additional_fields", b"additional_fields", "agent_id", b"agent_id", "files", b"files", "inputs", b"inputs", "language_code", b"language_code", "parent", b"parent", "question", b"question", "session_id", b"session_id", "stream", b"stream", "user_id", b"user_id"]) -> None: ...
     def WhichOneof(self, oneof_group: typing.Literal["_stream", b"_stream"]) -> typing.Literal["stream"] | None: ...
 
 global___RagAgentCompletionRequest = RagAgentCompletionRequest
 
 @typing.final
+class RagFile(google.protobuf.message.Message):
+    """File or folder in RAGFlow file system."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ID_FIELD_NUMBER: builtins.int
+    PARENT_ID_FIELD_NUMBER: builtins.int
+    TENANT_ID_FIELD_NUMBER: builtins.int
+    CREATED_BY_FIELD_NUMBER: builtins.int
+    NAME_FIELD_NUMBER: builtins.int
+    LOCATION_FIELD_NUMBER: builtins.int
+    SIZE_FIELD_NUMBER: builtins.int
+    TYPE_FIELD_NUMBER: builtins.int
+    SOURCE_TYPE_FIELD_NUMBER: builtins.int
+    CREATE_TIME_FIELD_NUMBER: builtins.int
+    CREATE_DATE_FIELD_NUMBER: builtins.int
+    UPDATE_TIME_FIELD_NUMBER: builtins.int
+    UPDATE_DATE_FIELD_NUMBER: builtins.int
+    id: builtins.str
+    """File or folder UUID."""
+    parent_id: builtins.str
+    """Parent folder ID. Empty string for root-level items."""
+    tenant_id: builtins.str
+    """Tenant ID."""
+    created_by: builtins.str
+    """ID of the user who created the file."""
+    name: builtins.str
+    """File or folder name."""
+    location: builtins.str
+    """Storage location path within the RAGFlow file system."""
+    size: builtins.int
+    """File size in bytes (0 for folders)."""
+    type: builtins.str
+    """File type/extension or <code>"folder"</code> for directories. Check <code>type == "folder"</code> to distinguish folders from files."""
+    source_type: builtins.str
+    """Source type indicating file origin (e.g., <code>"local"</code> for uploaded files)."""
+    create_time: builtins.int
+    """Creation timestamp (Unix timestamp in milliseconds)."""
+    create_date: builtins.str
+    """Creation date (ISO 8601 datetime format)."""
+    update_time: builtins.int
+    """Last update timestamp (Unix timestamp in milliseconds)."""
+    update_date: builtins.str
+    """Last update date (ISO 8601 datetime format)."""
+    def __init__(
+        self,
+        *,
+        id: builtins.str = ...,
+        parent_id: builtins.str = ...,
+        tenant_id: builtins.str = ...,
+        created_by: builtins.str = ...,
+        name: builtins.str = ...,
+        location: builtins.str = ...,
+        size: builtins.int | None = ...,
+        type: builtins.str = ...,
+        source_type: builtins.str = ...,
+        create_time: builtins.int = ...,
+        create_date: builtins.str = ...,
+        update_time: builtins.int = ...,
+        update_date: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_size", b"_size", "size", b"size"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_size", b"_size", "create_date", b"create_date", "create_time", b"create_time", "created_by", b"created_by", "id", b"id", "location", b"location", "name", b"name", "parent_id", b"parent_id", "size", b"size", "source_type", b"source_type", "tenant_id", b"tenant_id", "type", b"type", "update_date", b"update_date", "update_time", b"update_time"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_size", b"_size"]) -> typing.Literal["size"] | None: ...
+
+global___RagFile = RagFile
+
+@typing.final
 class RagAgentCompletionResponse(google.protobuf.message.Message):
     """Response message for agent completion.
     <ul>
-        <li>For streaming: Each message represents one Server-Sent Event with <code>event</code> indicating the event type (e.g., <code>"message"</code>, <code>"message_end"</code>).</li>
+        <li>For streaming: Each message contains a partial response with <code>event</code> indicating the event type (e.g., <code>"message"</code>, <code>"message_end"</code>).</li>
         <li>For non-streaming: Single message with accumulated content.</li>
     </ul>
     """
@@ -3254,7 +3922,7 @@ class RagAgentCompletionResponse(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        event: global___RagAgentEventType.ValueType = ...,
+        event: global___RagAgentEventType.ValueType | None = ...,
         message_id: builtins.str = ...,
         created_at: builtins.int = ...,
         task_id: builtins.str = ...,
@@ -3262,8 +3930,9 @@ class RagAgentCompletionResponse(google.protobuf.message.Message):
         session_id: builtins.str = ...,
         additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "data", b"data"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "created_at", b"created_at", "data", b"data", "event", b"event", "message_id", b"message_id", "session_id", b"session_id", "task_id", b"task_id"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_event", b"_event", "additional_fields", b"additional_fields", "data", b"data", "event", b"event"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_event", b"_event", "additional_fields", b"additional_fields", "created_at", b"created_at", "data", b"data", "event", b"event", "message_id", b"message_id", "session_id", b"session_id", "task_id", b"task_id"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_event", b"_event"]) -> typing.Literal["event"] | None: ...
 
 global___RagAgentCompletionResponse = RagAgentCompletionResponse
 
@@ -3311,1150 +3980,21 @@ class RagAgentCompletionData(google.protobuf.message.Message):
 global___RagAgentCompletionData = RagAgentCompletionData
 
 @typing.final
-class RagOpenAiAgentCompletionRequest(google.protobuf.message.Message):
-    """Request message for OpenAI-compatible agent completion.
-    Follows OpenAI Chat Completions API format. All string fields must remain as strings to maintain OpenAI API compatibility.
-    Agents are workflow-based AI assistants with Domain Specific Language (DSL) configuration.
-    """
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    PARENT_FIELD_NUMBER: builtins.int
-    AGENT_ID_FIELD_NUMBER: builtins.int
-    MODEL_FIELD_NUMBER: builtins.int
-    MESSAGES_FIELD_NUMBER: builtins.int
-    STREAM_FIELD_NUMBER: builtins.int
-    SESSION_ID_FIELD_NUMBER: builtins.int
-    ID_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
-    parent: builtins.str
-    """Required. The agent to generate the completion for.
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    """
-    agent_id: builtins.str
-    """Required. RAGFlow agent ID to use for generating the completion."""
-    model: builtins.str
-    """Required. Model identifier. Required for OpenAI API compatibility but value is typically ignored by RAGFlow."""
-    stream: builtins.bool
-    """Optional. Enable streaming mode. If <code>true</code>, the response will be streamed as Server-Sent Events (SSE).
-    Default: <code>true</code>.
-    """
-    session_id: builtins.str
-    """Optional. Session ID to continue an existing conversation. Can alternatively be passed in <code>additional_fields.metadata.id</code>."""
-    id: builtins.str
-    """Optional. Custom identifier field for the request."""
-    @property
-    def messages(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagMessage]:
-        """Required. Conversation history as an array of messages. Only user and assistant role messages are processed; system messages are filtered out."""
-
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. Additional fields to pass through to RAGFlow API (e.g., <code>temperature</code>, <code>max_tokens</code>, <code>metadata</code> with session info)."""
-
-    def __init__(
-        self,
-        *,
-        parent: builtins.str = ...,
-        agent_id: builtins.str = ...,
-        model: builtins.str = ...,
-        messages: collections.abc.Iterable[global___RagMessage] | None = ...,
-        stream: builtins.bool | None = ...,
-        session_id: builtins.str = ...,
-        id: builtins.str = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_stream", b"_stream", "additional_fields", b"additional_fields", "stream", b"stream"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_stream", b"_stream", "additional_fields", b"additional_fields", "agent_id", b"agent_id", "id", b"id", "messages", b"messages", "model", b"model", "parent", b"parent", "session_id", b"session_id", "stream", b"stream"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["_stream", b"_stream"]) -> typing.Literal["stream"] | None: ...
-
-global___RagOpenAiAgentCompletionRequest = RagOpenAiAgentCompletionRequest
-
-@typing.final
-class RagAgent(google.protobuf.message.Message):
-    """============================================================================
-    Agent Management Types
-    Agents are workflow-based AI assistants with DSL configuration.
-    ============================================================================
-
-    RAGFlow agent (workflow-based AI assistant).
-    Agents are workflow-based AI assistants configured using Domain Specific Language (DSL).
-    """
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    ID_FIELD_NUMBER: builtins.int
-    TITLE_FIELD_NUMBER: builtins.int
-    DESCRIPTION_FIELD_NUMBER: builtins.int
-    AVATAR_FIELD_NUMBER: builtins.int
-    DSL_FIELD_NUMBER: builtins.int
-    CREATE_TIME_FIELD_NUMBER: builtins.int
-    CREATE_DATE_FIELD_NUMBER: builtins.int
-    UPDATE_TIME_FIELD_NUMBER: builtins.int
-    UPDATE_DATE_FIELD_NUMBER: builtins.int
-    USER_ID_FIELD_NUMBER: builtins.int
-    CANVAS_TYPE_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
-    id: builtins.str
-    """Agent UUID uniquely identifying this agent."""
-    title: builtins.str
-    """Agent title. Must be unique within the project."""
-    description: builtins.str
-    """Optional. Agent description providing details about the agent's purpose and functionality."""
-    avatar: builtins.str
-    """Optional. Base64-encoded avatar image for visual identification."""
-    create_time: builtins.int
-    """Creation timestamp (Unix timestamp in milliseconds)."""
-    create_date: builtins.str
-    """Creation date in ISO 8601 datetime format."""
-    update_time: builtins.int
-    """Last update timestamp (Unix timestamp in milliseconds)."""
-    update_date: builtins.str
-    """Last update date in ISO 8601 datetime format."""
-    user_id: builtins.str
-    """User ID of the agent owner."""
-    canvas_type: builtins.str
-    """Canvas type for the agent's workflow visualization."""
-    @property
-    def dsl(self) -> google.protobuf.struct_pb2.Struct:
-        """Domain Specific Language (DSL) configuration defining the agent's workflow, logic, and behavior.
-        The DSL structure determines how the agent processes requests and generates responses.
-        """
-
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Additional fields returned by RAGFlow API."""
-
-    def __init__(
-        self,
-        *,
-        id: builtins.str = ...,
-        title: builtins.str = ...,
-        description: builtins.str = ...,
-        avatar: builtins.str = ...,
-        dsl: google.protobuf.struct_pb2.Struct | None = ...,
-        create_time: builtins.int = ...,
-        create_date: builtins.str = ...,
-        update_time: builtins.int = ...,
-        update_date: builtins.str = ...,
-        user_id: builtins.str = ...,
-        canvas_type: builtins.str = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "dsl", b"dsl"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "avatar", b"avatar", "canvas_type", b"canvas_type", "create_date", b"create_date", "create_time", b"create_time", "description", b"description", "dsl", b"dsl", "id", b"id", "title", b"title", "update_date", b"update_date", "update_time", b"update_time", "user_id", b"user_id"]) -> None: ...
-
-global___RagAgent = RagAgent
-
-@typing.final
-class RagCreateAgentRequest(google.protobuf.message.Message):
-    """Request message for creating a new RAGFlow agent."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    PARENT_FIELD_NUMBER: builtins.int
-    TITLE_FIELD_NUMBER: builtins.int
-    DESCRIPTION_FIELD_NUMBER: builtins.int
-    DSL_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
-    parent: builtins.str
-    """Required. The agent to create the RAGFlow agent for.
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    """
-    title: builtins.str
-    """Required. Unique agent title. Must be unique within the project."""
-    description: builtins.str
-    """Optional. Agent description providing details about the agent's purpose and functionality."""
-    @property
-    def dsl(self) -> google.protobuf.struct_pb2.Struct:
-        """Required. Domain Specific Language (DSL) configuration defining the agent's workflow.
-        A version snapshot is automatically created when the agent is created.
-        """
-
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. Additional fields to pass through to RAGFlow API."""
-
-    def __init__(
-        self,
-        *,
-        parent: builtins.str = ...,
-        title: builtins.str = ...,
-        description: builtins.str = ...,
-        dsl: google.protobuf.struct_pb2.Struct | None = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "dsl", b"dsl"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "description", b"description", "dsl", b"dsl", "parent", b"parent", "title", b"title"]) -> None: ...
-
-global___RagCreateAgentRequest = RagCreateAgentRequest
-
-@typing.final
-class RagUpdateAgentRequest(google.protobuf.message.Message):
-    """Request message for updating an existing RAGFlow agent."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    PARENT_FIELD_NUMBER: builtins.int
-    AGENT_ID_FIELD_NUMBER: builtins.int
-    TITLE_FIELD_NUMBER: builtins.int
-    DESCRIPTION_FIELD_NUMBER: builtins.int
-    DSL_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
-    parent: builtins.str
-    """Required. The agent to update the RAGFlow agent for.
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    """
-    agent_id: builtins.str
-    """Required. ID of the RAGFlow agent to update."""
-    title: builtins.str
-    """Optional. New agent title. If provided, must be unique within the project."""
-    description: builtins.str
-    """Optional. New agent description."""
-    @property
-    def dsl(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. New Domain Specific Language (DSL) configuration.
-        A version snapshot is automatically created when the DSL is updated.
-        Only the agent owner can update the DSL.
-        """
-
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. Additional fields to pass through to RAGFlow API."""
-
-    def __init__(
-        self,
-        *,
-        parent: builtins.str = ...,
-        agent_id: builtins.str = ...,
-        title: builtins.str = ...,
-        description: builtins.str = ...,
-        dsl: google.protobuf.struct_pb2.Struct | None = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "dsl", b"dsl"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "agent_id", b"agent_id", "description", b"description", "dsl", b"dsl", "parent", b"parent", "title", b"title"]) -> None: ...
-
-global___RagUpdateAgentRequest = RagUpdateAgentRequest
-
-@typing.final
-class RagDeleteAgentRequest(google.protobuf.message.Message):
-    """Request message for deleting a RAGFlow agent."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    PARENT_FIELD_NUMBER: builtins.int
-    AGENT_ID_FIELD_NUMBER: builtins.int
-    parent: builtins.str
-    """Required. The agent to delete the RAGFlow agent from.
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    """
-    agent_id: builtins.str
-    """Required. ID of the RAGFlow agent to delete.
-    Only the agent owner can delete the agent.
-    """
-    def __init__(
-        self,
-        *,
-        parent: builtins.str = ...,
-        agent_id: builtins.str = ...,
-    ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["agent_id", b"agent_id", "parent", b"parent"]) -> None: ...
-
-global___RagDeleteAgentRequest = RagDeleteAgentRequest
-
-@typing.final
-class RagListAgentsRequest(google.protobuf.message.Message):
-    """Request message for listing RAGFlow agents."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    PARENT_FIELD_NUMBER: builtins.int
-    PAGINATION_FIELD_NUMBER: builtins.int
-    TITLE_FIELD_NUMBER: builtins.int
-    ORDERBY_FIELD_NUMBER: builtins.int
-    DESC_FIELD_NUMBER: builtins.int
-    ID_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
-    parent: builtins.str
-    """Required. The agent to list RAGFlow agents from.
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    """
-    title: builtins.str
-    """Optional. Filter results by agent title. Only agents with matching titles will be returned."""
-    orderby: builtins.str
-    """Optional. Sort field for ordering results. Default: <code>"update_time"</code>."""
-    desc: builtins.bool
-    """Optional. Sort in descending order. If <code>true</code>, results are sorted from highest to lowest.
-    Default: <code>true</code>.
-    """
-    id: builtins.str
-    """Optional. Filter results by specific agent ID."""
-    @property
-    def pagination(self) -> global___RagPagination:
-        """Optional. Pagination parameters to control the number and offset of results."""
-
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. Additional fields to pass through to RAGFlow API."""
-
-    def __init__(
-        self,
-        *,
-        parent: builtins.str = ...,
-        pagination: global___RagPagination | None = ...,
-        title: builtins.str = ...,
-        orderby: builtins.str = ...,
-        desc: builtins.bool | None = ...,
-        id: builtins.str = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_desc", b"_desc", "additional_fields", b"additional_fields", "desc", b"desc", "pagination", b"pagination"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_desc", b"_desc", "additional_fields", b"additional_fields", "desc", b"desc", "id", b"id", "orderby", b"orderby", "pagination", b"pagination", "parent", b"parent", "title", b"title"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["_desc", b"_desc"]) -> typing.Literal["desc"] | None: ...
-
-global___RagListAgentsRequest = RagListAgentsRequest
-
-@typing.final
-class RagAgentList(google.protobuf.message.Message):
-    """Response message containing a list of RAGFlow agents."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    AGENTS_FIELD_NUMBER: builtins.int
-    @property
-    def agents(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagAgent]:
-        """List of RAGFlow agents owned by the user.
-        Note: No pagination metadata is included in this response.
-        """
-
-    def __init__(
-        self,
-        *,
-        agents: collections.abc.Iterable[global___RagAgent] | None = ...,
-    ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["agents", b"agents"]) -> None: ...
-
-global___RagAgentList = RagAgentList
-
-@typing.final
-class RagFile(google.protobuf.message.Message):
-    """============================================================================
-    File Management Types
-    Files and folders in RAGFlow&apos;s file system. Can be converted to documents.
-    ============================================================================
-
-    File or folder in RAGFlow file system.
-    """
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    ID_FIELD_NUMBER: builtins.int
-    NAME_FIELD_NUMBER: builtins.int
-    TYPE_FIELD_NUMBER: builtins.int
-    SIZE_FIELD_NUMBER: builtins.int
-    PARENT_ID_FIELD_NUMBER: builtins.int
-    CREATE_TIME_FIELD_NUMBER: builtins.int
-    CREATE_DATE_FIELD_NUMBER: builtins.int
-    UPDATE_TIME_FIELD_NUMBER: builtins.int
-    UPDATE_DATE_FIELD_NUMBER: builtins.int
-    LOCATION_FIELD_NUMBER: builtins.int
-    SOURCE_TYPE_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
-    id: builtins.str
-    """File or folder UUID."""
-    name: builtins.str
-    """File or folder name."""
-    type: builtins.str
-    """File type/extension or <code>&quot;folder&quot;</code> for directories. Check <code>type == &quot;folder&quot;</code> to distinguish folders from files."""
-    size: builtins.int
-    """File size in bytes (0 for folders)."""
-    parent_id: builtins.str
-    """Parent folder ID. Empty string for root-level items."""
-    create_time: builtins.int
-    """Creation timestamp (Unix timestamp in milliseconds)."""
-    create_date: builtins.str
-    """Creation date (ISO 8601 datetime format)."""
-    update_time: builtins.int
-    """Last update timestamp (Unix timestamp in milliseconds)."""
-    update_date: builtins.str
-    """Last update date (ISO 8601 datetime format)."""
-    location: builtins.str
-    """Storage location path within the RAGFlow file system."""
-    source_type: builtins.str
-    """Source type indicating file origin (e.g., <code>&quot;local&quot;</code> for uploaded files)."""
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Additional fields returned by RAGFlow."""
-
-    def __init__(
-        self,
-        *,
-        id: builtins.str = ...,
-        name: builtins.str = ...,
-        type: builtins.str = ...,
-        size: builtins.int = ...,
-        parent_id: builtins.str = ...,
-        create_time: builtins.int = ...,
-        create_date: builtins.str = ...,
-        update_time: builtins.int = ...,
-        update_date: builtins.str = ...,
-        location: builtins.str = ...,
-        source_type: builtins.str = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "create_date", b"create_date", "create_time", b"create_time", "id", b"id", "location", b"location", "name", b"name", "parent_id", b"parent_id", "size", b"size", "source_type", b"source_type", "type", b"type", "update_date", b"update_date", "update_time", b"update_time"]) -> None: ...
-
-global___RagFile = RagFile
-
-@typing.final
-class RagUploadFilesRequest(google.protobuf.message.Message):
-    """Request message for uploading files via streaming multipart form data.
-    RAGFlow supports individual and bulk file uploads. Files can be uploaded to a specific folder
-    or to the root directory if no parent folder is specified.
-    """
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    @typing.final
-    class RagMetadata(google.protobuf.message.Message):
-        """Metadata for the upload operation (must be sent in first message only)."""
-
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-        PARENT_ID_FIELD_NUMBER: builtins.int
-        FILES_FIELD_NUMBER: builtins.int
-        parent_id: builtins.str
-        """Optional. Parent folder ID. If not provided, files will be uploaded to root directory."""
-        @property
-        def files(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagFileMetadata]:
-            """Required. Metadata for all files being uploaded in this request."""
-
-        def __init__(
-            self,
-            *,
-            parent_id: builtins.str = ...,
-            files: collections.abc.Iterable[global___RagFileMetadata] | None = ...,
-        ) -> None: ...
-        def ClearField(self, field_name: typing.Literal["files", b"files", "parent_id", b"parent_id"]) -> None: ...
-
-    PARENT_FIELD_NUMBER: builtins.int
-    METADATA_FIELD_NUMBER: builtins.int
-    CHUNK_FIELD_NUMBER: builtins.int
-    parent: builtins.str
-    """Required. The agent to upload files for.
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    """
-    @property
-    def metadata(self) -> global___RagUploadFilesRequest.RagMetadata:
-        """First message: declares all files to be uploaded."""
-
-    @property
-    def chunk(self) -> global___RagUploadChunk:
-        """Subsequent messages: stream file data in chunks."""
-
-    def __init__(
-        self,
-        *,
-        parent: builtins.str = ...,
-        metadata: global___RagUploadFilesRequest.RagMetadata | None = ...,
-        chunk: global___RagUploadChunk | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["chunk", b"chunk", "metadata", b"metadata", "payload", b"payload"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["chunk", b"chunk", "metadata", b"metadata", "parent", b"parent", "payload", b"payload"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["payload", b"payload"]) -> typing.Literal["metadata", "chunk"] | None: ...
-
-global___RagUploadFilesRequest = RagUploadFilesRequest
-
-@typing.final
-class RagFileList(google.protobuf.message.Message):
-    """Response message containing a list of files."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    FILES_FIELD_NUMBER: builtins.int
-    @property
-    def files(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagFile]:
-        """Uploaded files. RAGFlow automatically creates intermediate folders as needed during upload."""
-
-    def __init__(
-        self,
-        *,
-        files: collections.abc.Iterable[global___RagFile] | None = ...,
-    ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["files", b"files"]) -> None: ...
-
-global___RagFileList = RagFileList
-
-@typing.final
-class RagCreateFileRequest(google.protobuf.message.Message):
-    """Request message for creating a file or folder in RAGFlow."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    PARENT_FIELD_NUMBER: builtins.int
-    NAME_FIELD_NUMBER: builtins.int
-    PARENT_ID_FIELD_NUMBER: builtins.int
-    TYPE_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
-    parent: builtins.str
-    """Required. The agent to create the file for.
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    """
-    name: builtins.str
-    """Required. Name of the file or folder to create."""
-    parent_id: builtins.str
-    """Optional. Parent folder ID. If not provided, creates in root directory."""
-    type: builtins.str
-    """Required. Type of item to create: <code>&quot;folder&quot;</code> for directories or <code>&quot;virtual&quot;</code> for virtual files."""
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. Additional fields to pass through to RAGFlow."""
-
-    def __init__(
-        self,
-        *,
-        parent: builtins.str = ...,
-        name: builtins.str = ...,
-        parent_id: builtins.str = ...,
-        type: builtins.str = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "name", b"name", "parent", b"parent", "parent_id", b"parent_id", "type", b"type"]) -> None: ...
-
-global___RagCreateFileRequest = RagCreateFileRequest
-
-@typing.final
-class RagListFilesRequest(google.protobuf.message.Message):
-    """Request message for listing files and folders."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    PARENT_FIELD_NUMBER: builtins.int
-    PARENT_ID_FIELD_NUMBER: builtins.int
-    PAGINATION_FIELD_NUMBER: builtins.int
-    KEYWORDS_FIELD_NUMBER: builtins.int
-    ORDERBY_FIELD_NUMBER: builtins.int
-    DESC_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
-    parent: builtins.str
-    """Required. The agent to list files from.
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    """
-    parent_id: builtins.str
-    """Optional. Folder ID to list contents from. If not provided, lists root directory contents."""
-    keywords: builtins.str
-    """Optional. Search keywords to filter files by name or other searchable attributes."""
-    orderby: builtins.str
-    """Optional. Field to sort results by. Common values include <code>"create_time"</code> (default) and <code>"update_time"</code>."""
-    desc: builtins.bool
-    """Optional. Sort in descending order. Default is <code>true</code> (newest first)."""
-    @property
-    def pagination(self) -> global___RagPagination:
-        """Optional. Pagination parameters. Default page size is 15 items per page."""
-
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. Additional fields to pass through to RAGFlow."""
-
-    def __init__(
-        self,
-        *,
-        parent: builtins.str = ...,
-        parent_id: builtins.str = ...,
-        pagination: global___RagPagination | None = ...,
-        keywords: builtins.str = ...,
-        orderby: builtins.str = ...,
-        desc: builtins.bool | None = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_desc", b"_desc", "additional_fields", b"additional_fields", "desc", b"desc", "pagination", b"pagination"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_desc", b"_desc", "additional_fields", b"additional_fields", "desc", b"desc", "keywords", b"keywords", "orderby", b"orderby", "pagination", b"pagination", "parent", b"parent", "parent_id", b"parent_id"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["_desc", b"_desc"]) -> typing.Literal["desc"] | None: ...
-
-global___RagListFilesRequest = RagListFilesRequest
-
-@typing.final
-class RagListFilesResponse(google.protobuf.message.Message):
-    """Response message for listing files and folders."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    TOTAL_FIELD_NUMBER: builtins.int
-    FILES_FIELD_NUMBER: builtins.int
-    PARENT_FOLDER_FIELD_NUMBER: builtins.int
-    total: builtins.int
-    """Total number of files and folders matching the query (before pagination)."""
-    @property
-    def files(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagFile]:
-        """List of files and folders in the current page."""
-
-    @property
-    def parent_folder(self) -> global___RagFile:
-        """Information about the parent folder being listed."""
-
-    def __init__(
-        self,
-        *,
-        total: builtins.int = ...,
-        files: collections.abc.Iterable[global___RagFile] | None = ...,
-        parent_folder: global___RagFile | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["parent_folder", b"parent_folder"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["files", b"files", "parent_folder", b"parent_folder", "total", b"total"]) -> None: ...
-
-global___RagListFilesResponse = RagListFilesResponse
-
-@typing.final
-class RagGetRootFolderResponse(google.protobuf.message.Message):
-    """Response message for getting the root folder."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    ROOT_FOLDER_FIELD_NUMBER: builtins.int
-    @property
-    def root_folder(self) -> global___RagFile:
-        """The root folder of the file system."""
-
-    def __init__(
-        self,
-        *,
-        root_folder: global___RagFile | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["root_folder", b"root_folder"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["root_folder", b"root_folder"]) -> None: ...
-
-global___RagGetRootFolderResponse = RagGetRootFolderResponse
-
-@typing.final
-class RagGetParentFolderResponse(google.protobuf.message.Message):
-    """Response message for getting the parent folder of a file."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    PARENT_FOLDER_FIELD_NUMBER: builtins.int
-    @property
-    def parent_folder(self) -> global___RagFile:
-        """The immediate parent folder of the requested file."""
-
-    def __init__(
-        self,
-        *,
-        parent_folder: global___RagFile | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["parent_folder", b"parent_folder"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["parent_folder", b"parent_folder"]) -> None: ...
-
-global___RagGetParentFolderResponse = RagGetParentFolderResponse
-
-@typing.final
-class RagGetAllParentFoldersResponse(google.protobuf.message.Message):
-    """Response message for getting all parent folders in the hierarchy."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    PARENT_FOLDERS_FIELD_NUMBER: builtins.int
-    @property
-    def parent_folders(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagFile]:
-        """All parent folders in the hierarchy, from immediate parent to root folder."""
-
-    def __init__(
-        self,
-        *,
-        parent_folders: collections.abc.Iterable[global___RagFile] | None = ...,
-    ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["parent_folders", b"parent_folders"]) -> None: ...
-
-global___RagGetAllParentFoldersResponse = RagGetAllParentFoldersResponse
-
-@typing.final
-class RagGetRootFolderRequest(google.protobuf.message.Message):
-    """Request message for getting the root folder of the project"""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    PARENT_FIELD_NUMBER: builtins.int
-    parent: builtins.str
-    """Required. The agent to get the parent folder for.
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    """
-    def __init__(
-        self,
-        *,
-        parent: builtins.str = ...,
-    ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["parent", b"parent"]) -> None: ...
-
-global___RagGetRootFolderRequest = RagGetRootFolderRequest
-
-@typing.final
-class RagGetParentFolderRequest(google.protobuf.message.Message):
-    """Request message for getting the parent folder of a file."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    PARENT_FIELD_NUMBER: builtins.int
-    FILE_ID_FIELD_NUMBER: builtins.int
-    parent: builtins.str
-    """Required. The agent to get the parent folder for.
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    """
-    file_id: builtins.str
-    """Required. UUID of the file to get the parent folder for."""
-    def __init__(
-        self,
-        *,
-        parent: builtins.str = ...,
-        file_id: builtins.str = ...,
-    ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["file_id", b"file_id", "parent", b"parent"]) -> None: ...
-
-global___RagGetParentFolderRequest = RagGetParentFolderRequest
-
-@typing.final
-class RagGetAllParentFoldersRequest(google.protobuf.message.Message):
-    """Request message for getting all parent folders in the hierarchy."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    PARENT_FIELD_NUMBER: builtins.int
-    FILE_ID_FIELD_NUMBER: builtins.int
-    parent: builtins.str
-    """Required. The agent to get all parent folders for.
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    """
-    file_id: builtins.str
-    """Required. UUID of the file to get all parent folders for."""
-    def __init__(
-        self,
-        *,
-        parent: builtins.str = ...,
-        file_id: builtins.str = ...,
-    ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["file_id", b"file_id", "parent", b"parent"]) -> None: ...
-
-global___RagGetAllParentFoldersRequest = RagGetAllParentFoldersRequest
-
-@typing.final
-class RagGetFileRequest(google.protobuf.message.Message):
-    """Request message for getting file details."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    PARENT_FIELD_NUMBER: builtins.int
-    FILE_ID_FIELD_NUMBER: builtins.int
-    parent: builtins.str
-    """Required. The agent to get the file from.
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    """
-    file_id: builtins.str
-    """Required. UUID of the file to retrieve."""
-    def __init__(
-        self,
-        *,
-        parent: builtins.str = ...,
-        file_id: builtins.str = ...,
-    ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["file_id", b"file_id", "parent", b"parent"]) -> None: ...
-
-global___RagGetFileRequest = RagGetFileRequest
-
-@typing.final
-class RagFileID(google.protobuf.message.Message):
-    """Deprecated: Use GetParentFolderRequest, GetAllParentFoldersRequest, or GetFileRequest instead."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    FILE_ID_FIELD_NUMBER: builtins.int
-    file_id: builtins.str
-    """File ID (required)."""
-    def __init__(
-        self,
-        *,
-        file_id: builtins.str = ...,
-    ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["file_id", b"file_id"]) -> None: ...
-
-global___RagFileID = RagFileID
-
-@typing.final
-class RagDeleteFilesRequest(google.protobuf.message.Message):
-    """Request message for deleting files or folders."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    PARENT_FIELD_NUMBER: builtins.int
-    FILE_IDS_FIELD_NUMBER: builtins.int
-    parent: builtins.str
-    """Required. The agent to delete files from.
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    """
-    @property
-    def file_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Required. UUIDs of files or folders to delete. Supports batch deletion."""
-
-    def __init__(
-        self,
-        *,
-        parent: builtins.str = ...,
-        file_ids: collections.abc.Iterable[builtins.str] | None = ...,
-    ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["file_ids", b"file_ids", "parent", b"parent"]) -> None: ...
-
-global___RagDeleteFilesRequest = RagDeleteFilesRequest
-
-@typing.final
-class RagRenameFileRequest(google.protobuf.message.Message):
-    """Request message for renaming a file or folder."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    PARENT_FIELD_NUMBER: builtins.int
-    FILE_ID_FIELD_NUMBER: builtins.int
-    NAME_FIELD_NUMBER: builtins.int
-    parent: builtins.str
-    """Required. The agent to rename the file for.
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    """
-    file_id: builtins.str
-    """Required. UUID of the file or folder to rename."""
-    name: builtins.str
-    """Required. New name for the file or folder. For files, the extension must remain the same."""
-    def __init__(
-        self,
-        *,
-        parent: builtins.str = ...,
-        file_id: builtins.str = ...,
-        name: builtins.str = ...,
-    ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["file_id", b"file_id", "name", b"name", "parent", b"parent"]) -> None: ...
-
-global___RagRenameFileRequest = RagRenameFileRequest
-
-@typing.final
-class RagMoveFileRequest(google.protobuf.message.Message):
-    """Request message for moving files or folders."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    PARENT_FIELD_NUMBER: builtins.int
-    SRC_FILE_IDS_FIELD_NUMBER: builtins.int
-    DEST_FILE_ID_FIELD_NUMBER: builtins.int
-    parent: builtins.str
-    """Required. The agent to move files for.
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    """
-    dest_file_id: builtins.str
-    """Required. UUID of the destination folder."""
-    @property
-    def src_file_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Required. UUIDs of source files or folders to move. Supports batch move operations."""
-
-    def __init__(
-        self,
-        *,
-        parent: builtins.str = ...,
-        src_file_ids: collections.abc.Iterable[builtins.str] | None = ...,
-        dest_file_id: builtins.str = ...,
-    ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["dest_file_id", b"dest_file_id", "parent", b"parent", "src_file_ids", b"src_file_ids"]) -> None: ...
-
-global___RagMoveFileRequest = RagMoveFileRequest
-
-@typing.final
-class RagFileToDocumentRequest(google.protobuf.message.Message):
-    """Request message for converting files to documents and linking them to datasets.
-    RAGFlow allows linking uploaded files to multiple target datasets for RAG operations.
-    """
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    PARENT_FIELD_NUMBER: builtins.int
-    FILE_IDS_FIELD_NUMBER: builtins.int
-    KB_IDS_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
-    parent: builtins.str
-    """Required. The agent to convert files to documents for.
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    """
-    @property
-    def file_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Required. UUIDs of files to convert. If folders are provided, processes contents recursively."""
-
-    @property
-    def kb_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Required. Target dataset IDs (knowledge base IDs). A single file can be linked to multiple datasets."""
-
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. Additional fields to pass through to RAGFlow."""
-
-    def __init__(
-        self,
-        *,
-        parent: builtins.str = ...,
-        file_ids: collections.abc.Iterable[builtins.str] | None = ...,
-        kb_ids: collections.abc.Iterable[builtins.str] | None = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "file_ids", b"file_ids", "kb_ids", b"kb_ids", "parent", b"parent"]) -> None: ...
-
-global___RagFileToDocumentRequest = RagFileToDocumentRequest
-
-@typing.final
-class RagFileToDocument(google.protobuf.message.Message):
-    """Association between a file and a document in a dataset.
-    Tracks the relationship when files are converted to documents for use in RAG operations.
-    """
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    ID_FIELD_NUMBER: builtins.int
-    FILE_ID_FIELD_NUMBER: builtins.int
-    DOCUMENT_ID_FIELD_NUMBER: builtins.int
-    CREATE_TIME_FIELD_NUMBER: builtins.int
-    CREATE_DATE_FIELD_NUMBER: builtins.int
-    UPDATE_TIME_FIELD_NUMBER: builtins.int
-    UPDATE_DATE_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
-    id: builtins.str
-    """UUID of the file-to-document association."""
-    file_id: builtins.str
-    """UUID of the source file."""
-    document_id: builtins.str
-    """UUID of the generated document in the dataset."""
-    create_time: builtins.int
-    """Creation timestamp (Unix timestamp in milliseconds)."""
-    create_date: builtins.str
-    """Creation date (ISO 8601 datetime format)."""
-    update_time: builtins.int
-    """Last update timestamp (Unix timestamp in milliseconds)."""
-    update_date: builtins.str
-    """Last update date (ISO 8601 datetime format)."""
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Additional fields returned by RAGFlow."""
-
-    def __init__(
-        self,
-        *,
-        id: builtins.str = ...,
-        file_id: builtins.str = ...,
-        document_id: builtins.str = ...,
-        create_time: builtins.int = ...,
-        create_date: builtins.str = ...,
-        update_time: builtins.int = ...,
-        update_date: builtins.str = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "create_date", b"create_date", "create_time", b"create_time", "document_id", b"document_id", "file_id", b"file_id", "id", b"id", "update_date", b"update_date", "update_time", b"update_time"]) -> None: ...
-
-global___RagFileToDocument = RagFileToDocument
-
-@typing.final
-class RagFileToDocumentList(google.protobuf.message.Message):
-    """Response message containing a list of file-to-document associations."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    FILESTODOCUMENTS_FIELD_NUMBER: builtins.int
-    @property
-    def filesToDocuments(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagFileToDocument]:
-        """List of file-to-document associations created during the conversion operation."""
-
-    def __init__(
-        self,
-        *,
-        filesToDocuments: collections.abc.Iterable[global___RagFileToDocument] | None = ...,
-    ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["filesToDocuments", b"filesToDocuments"]) -> None: ...
-
-global___RagFileToDocumentList = RagFileToDocumentList
-
-@typing.final
-class RagDifyRetrievalRequest(google.protobuf.message.Message):
-    """============================================================================
-    Dify Integration Types
-    Integration with Dify platform (uses API key authentication).
-    ============================================================================
-
-    Request message for retrieving data from RAGFlow using Dify-compatible format.
-    This provides compatibility with Dify&apos;s knowledge retrieval API structure.
-    """
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    PARENT_FIELD_NUMBER: builtins.int
-    KNOWLEDGE_ID_FIELD_NUMBER: builtins.int
-    QUERY_FIELD_NUMBER: builtins.int
-    RETRIEVAL_SETTING_FIELD_NUMBER: builtins.int
-    METADATA_CONDITION_FIELD_NUMBER: builtins.int
-    USE_KG_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
-    parent: builtins.str
-    """Required. The agent to retrieve data for.
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    """
-    knowledge_id: builtins.str
-    """Required. Dataset ID (called <code>knowledge_id</code> in Dify API format).
-    This is the UUID of the dataset to search within.
-    """
-    query: builtins.str
-    """Required. Search query string for retrieving relevant chunks."""
-    use_kg: builtins.bool
-    """Optional. Whether to use knowledge graph for enhanced retrieval.
-    Knowledge graphs can improve context and relationships between entities.
-    """
-    @property
-    def retrieval_setting(self) -> global___RagDifyRetrievalSetting:
-        """Optional. Retrieval configuration settings including score threshold and result limit."""
-
-    @property
-    def metadata_condition(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. Metadata filter conditions to narrow down search results.
-        Structure depends on your metadata schema.
-        """
-
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. Additional fields to pass through to RAGFlow."""
-
-    def __init__(
-        self,
-        *,
-        parent: builtins.str = ...,
-        knowledge_id: builtins.str = ...,
-        query: builtins.str = ...,
-        retrieval_setting: global___RagDifyRetrievalSetting | None = ...,
-        metadata_condition: google.protobuf.struct_pb2.Struct | None = ...,
-        use_kg: builtins.bool | None = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_use_kg", b"_use_kg", "additional_fields", b"additional_fields", "metadata_condition", b"metadata_condition", "retrieval_setting", b"retrieval_setting", "use_kg", b"use_kg"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_use_kg", b"_use_kg", "additional_fields", b"additional_fields", "knowledge_id", b"knowledge_id", "metadata_condition", b"metadata_condition", "parent", b"parent", "query", b"query", "retrieval_setting", b"retrieval_setting", "use_kg", b"use_kg"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["_use_kg", b"_use_kg"]) -> typing.Literal["use_kg"] | None: ...
-
-global___RagDifyRetrievalRequest = RagDifyRetrievalRequest
-
-@typing.final
-class RagDifyRetrievalSetting(google.protobuf.message.Message):
-    """Configuration settings for Dify-compatible retrieval operations."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    SCORE_THRESHOLD_FIELD_NUMBER: builtins.int
-    TOP_K_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
-    score_threshold: builtins.float
-    """Minimum similarity score threshold for including results (0.0-1.0).
-    Default: 0.0 (no filtering by score).
-    """
-    top_k: builtins.int
-    """Maximum number of results to return.
-    Default: 1024.
-    """
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. Additional fields to pass through to RAGFlow."""
-
-    def __init__(
-        self,
-        *,
-        score_threshold: builtins.float = ...,
-        top_k: builtins.int = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "score_threshold", b"score_threshold", "top_k", b"top_k"]) -> None: ...
-
-global___RagDifyRetrievalSetting = RagDifyRetrievalSetting
-
-@typing.final
-class RagDifyRecordList(google.protobuf.message.Message):
-    """Response message containing a list of retrieved records in Dify-compatible format."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    RECORDS_FIELD_NUMBER: builtins.int
-    @property
-    def records(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagDifyRecord]:
-        """List of retrieved records matching the query."""
-
-    def __init__(
-        self,
-        *,
-        records: collections.abc.Iterable[global___RagDifyRecord] | None = ...,
-    ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["records", b"records"]) -> None: ...
-
-global___RagDifyRecordList = RagDifyRecordList
-
-@typing.final
-class RagDifyRecord(google.protobuf.message.Message):
-    """Individual record structure in Dify-compatible format representing a retrieved chunk."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    CONTENT_FIELD_NUMBER: builtins.int
-    SCORE_FIELD_NUMBER: builtins.int
-    TITLE_FIELD_NUMBER: builtins.int
-    METADATA_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
-    content: builtins.str
-    """Text content of the retrieved chunk."""
-    score: builtins.float
-    """Similarity score indicating relevance to the query (0.0-1.0).
-    Higher scores indicate better matches.
-    """
-    title: builtins.str
-    """Title of the source document containing this chunk."""
-    @property
-    def metadata(self) -> google.protobuf.struct_pb2.Struct:
-        """Additional metadata associated with this chunk.
-        May include document ID, page numbers, timestamps, or custom fields.
-        """
-
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. Additional fields to pass through to RAGFlow."""
-
-    def __init__(
-        self,
-        *,
-        content: builtins.str = ...,
-        score: builtins.float = ...,
-        title: builtins.str = ...,
-        metadata: google.protobuf.struct_pb2.Struct | None = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "metadata", b"metadata"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "content", b"content", "metadata", b"metadata", "score", b"score", "title", b"title"]) -> None: ...
-
-global___RagDifyRecord = RagDifyRecord
-
-@typing.final
 class RagAskRequest(google.protobuf.message.Message):
-    """============================================================================
-    Bot API Types
-    ============================================================================
-
-    Request message for asking a question using RAGFlow&apos;s basic QA endpoint.
-    This endpoint searches specified datasets and returns an answer.
-    """
+    """Request message for asking a question using RAGFlow's basic QA endpoint."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     QUESTION_FIELD_NUMBER: builtins.int
     DATASET_IDS_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The agent to ask the question for.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
     question: builtins.str
     """Required. User question to be answered."""
     @property
@@ -4463,20 +4003,15 @@ class RagAskRequest(google.protobuf.message.Message):
         The system will search across all specified datasets.
         """
 
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. Additional fields to pass through to RAGFlow."""
-
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
+        language_code: builtins.str = ...,
         question: builtins.str = ...,
         dataset_ids: collections.abc.Iterable[builtins.str] | None = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "dataset_ids", b"dataset_ids", "parent", b"parent", "question", b"question"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["dataset_ids", b"dataset_ids", "language_code", b"language_code", "parent", b"parent", "question", b"question"]) -> None: ...
 
 global___RagAskRequest = RagAskRequest
 
@@ -4488,7 +4023,6 @@ class RagAskResponse(google.protobuf.message.Message):
 
     ANSWER_FIELD_NUMBER: builtins.int
     REFERENCE_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
     answer: builtins.str
     """Generated answer text based on the retrieved information.
     When streaming is enabled, this field contains incremental text chunks.
@@ -4499,58 +4033,48 @@ class RagAskResponse(google.protobuf.message.Message):
         Typically includes chunk information, document titles, and similarity scores.
         """
 
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. Additional fields returned by RAGFlow."""
-
     def __init__(
         self,
         *,
         answer: builtins.str = ...,
         reference: google.protobuf.struct_pb2.Struct | None = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "reference", b"reference"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "answer", b"answer", "reference", b"reference"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["reference", b"reference"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["answer", b"answer", "reference", b"reference"]) -> None: ...
 
 global___RagAskResponse = RagAskResponse
 
 @typing.final
 class RagRelatedQuestionsRequest(google.protobuf.message.Message):
-    """Request message for generating related questions based on a user&apos;s query.
-    This helps improve user experience by suggesting follow-up questions.
-    """
+    """Request message for generating related questions based on a user's query."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     QUESTION_FIELD_NUMBER: builtins.int
     INDUSTRY_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The agent to generate related questions for.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
     question: builtins.str
     """Required. Original user question to generate related questions from."""
     industry: builtins.str
     """Optional. Industry context to focus the related questions.
     Helps tailor suggestions to specific domains (e.g., "healthcare", "finance").
     """
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. Additional fields to pass through to RAGFlow."""
-
     def __init__(
         self,
         *,
         parent: builtins.str = ...,
+        language_code: builtins.str = ...,
         question: builtins.str = ...,
         industry: builtins.str = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "industry", b"industry", "parent", b"parent", "question", b"question"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["industry", b"industry", "language_code", b"language_code", "parent", b"parent", "question", b"question"]) -> None: ...
 
 global___RagRelatedQuestionsRequest = RagRelatedQuestionsRequest
 
@@ -4563,9 +4087,7 @@ class RagRelatedQuestionsResponse(google.protobuf.message.Message):
     QUESTIONS_FIELD_NUMBER: builtins.int
     @property
     def questions(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """List of 5-10 related question suggestions based on the original query.
-        These can be used to guide users toward additional relevant information.
-        """
+        """List of 5-10 related question suggestions based on the original query."""
 
     def __init__(
         self,
@@ -4575,630 +4097,3 @@ class RagRelatedQuestionsResponse(google.protobuf.message.Message):
     def ClearField(self, field_name: typing.Literal["questions", b"questions"]) -> None: ...
 
 global___RagRelatedQuestionsResponse = RagRelatedQuestionsResponse
-
-@typing.final
-class RagChatbotCompletionRequest(google.protobuf.message.Message):
-    """Request message for generating chat completions using a configured chatbot.
-    Corresponds to RAGFlow&apos;s <code>POST /api/v1/chats/{chat_id}/completions</code> endpoint.
-    """
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    PARENT_FIELD_NUMBER: builtins.int
-    DIALOG_ID_FIELD_NUMBER: builtins.int
-    QUESTION_FIELD_NUMBER: builtins.int
-    STREAM_FIELD_NUMBER: builtins.int
-    SESSION_ID_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
-    parent: builtins.str
-    """Required. The agent to generate chatbot completion for.
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    """
-    dialog_id: builtins.str
-    """Required. Chat dialog ID identifying the specific chatbot configuration.
-    This corresponds to <code>chat_id</code> in RAGFlow&apos;s API.
-    """
-    question: builtins.str
-    """Required. User question or message to be processed by the chatbot."""
-    stream: builtins.bool
-    """Optional. Enable streaming responses for real-time interaction.
-    Default: true. When enabled, response chunks are sent incrementally.
-    """
-    session_id: builtins.str
-    """Optional. Session ID for maintaining conversation context across multiple turns.
-    If not provided, a new session will be created.
-    """
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. Additional fields to pass through to RAGFlow."""
-
-    def __init__(
-        self,
-        *,
-        parent: builtins.str = ...,
-        dialog_id: builtins.str = ...,
-        question: builtins.str = ...,
-        stream: builtins.bool | None = ...,
-        session_id: builtins.str = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_stream", b"_stream", "additional_fields", b"additional_fields", "stream", b"stream"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_stream", b"_stream", "additional_fields", b"additional_fields", "dialog_id", b"dialog_id", "parent", b"parent", "question", b"question", "session_id", b"session_id", "stream", b"stream"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["_stream", b"_stream"]) -> typing.Literal["stream"] | None: ...
-
-global___RagChatbotCompletionRequest = RagChatbotCompletionRequest
-
-@typing.final
-class RagChatbotInfoRequest(google.protobuf.message.Message):
-    """Request message for retrieving chatbot configuration and initialization data.
-    Used to obtain display information for the chat interface.
-    """
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    PARENT_FIELD_NUMBER: builtins.int
-    DIALOG_ID_FIELD_NUMBER: builtins.int
-    parent: builtins.str
-    """Required. The agent to get chatbot information for.
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    """
-    dialog_id: builtins.str
-    """Required. Chat dialog ID identifying the chatbot."""
-    def __init__(
-        self,
-        *,
-        parent: builtins.str = ...,
-        dialog_id: builtins.str = ...,
-    ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["dialog_id", b"dialog_id", "parent", b"parent"]) -> None: ...
-
-global___RagChatbotInfoRequest = RagChatbotInfoRequest
-
-@typing.final
-class RagChatbotInfoResponse(google.protobuf.message.Message):
-    """Response message containing chatbot display and initialization information."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    TITLE_FIELD_NUMBER: builtins.int
-    AVATAR_FIELD_NUMBER: builtins.int
-    PROLOGUE_FIELD_NUMBER: builtins.int
-    title: builtins.str
-    """Chat display name for UI presentation."""
-    avatar: builtins.str
-    """Base64-encoded avatar image or URL for the chatbot."""
-    prologue: builtins.str
-    """Opening greeting message displayed when starting a new conversation."""
-    def __init__(
-        self,
-        *,
-        title: builtins.str = ...,
-        avatar: builtins.str = ...,
-        prologue: builtins.str = ...,
-    ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["avatar", b"avatar", "prologue", b"prologue", "title", b"title"]) -> None: ...
-
-global___RagChatbotInfoResponse = RagChatbotInfoResponse
-
-@typing.final
-class RagAgentbotCompletionRequest(google.protobuf.message.Message):
-    """Request message for generating completions using a RAGFlow agent.
-    Agents are workflow-based systems that can combine multiple operations and tools.
-    Corresponds to RAGFlow&apos;s <code>POST /api/v1/agents/{agent_id}/completions</code> endpoint.
-    """
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    PARENT_FIELD_NUMBER: builtins.int
-    AGENT_ID_FIELD_NUMBER: builtins.int
-    QUESTION_FIELD_NUMBER: builtins.int
-    STREAM_FIELD_NUMBER: builtins.int
-    SESSION_ID_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
-    parent: builtins.str
-    """Required. The agent to generate agentbot completion for.
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    """
-    agent_id: builtins.str
-    """Required. RAGFlow agent ID identifying the specific agent configuration.
-    Agents support workflow-based processing with multiple steps.
-    """
-    question: builtins.str
-    """Required. User question or input to be processed by the agent."""
-    stream: builtins.bool
-    """Optional. Enable streaming responses for real-time interaction.
-    Default: true. When enabled, response chunks are sent incrementally.
-    """
-    session_id: builtins.str
-    """Optional. Session ID for maintaining conversation context across multiple turns.
-    Agents maintain session state for multi-turn interactions.
-    """
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. Additional fields to pass through to RAGFlow."""
-
-    def __init__(
-        self,
-        *,
-        parent: builtins.str = ...,
-        agent_id: builtins.str = ...,
-        question: builtins.str = ...,
-        stream: builtins.bool | None = ...,
-        session_id: builtins.str = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_stream", b"_stream", "additional_fields", b"additional_fields", "stream", b"stream"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_stream", b"_stream", "additional_fields", b"additional_fields", "agent_id", b"agent_id", "parent", b"parent", "question", b"question", "session_id", b"session_id", "stream", b"stream"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["_stream", b"_stream"]) -> typing.Literal["stream"] | None: ...
-
-global___RagAgentbotCompletionRequest = RagAgentbotCompletionRequest
-
-@typing.final
-class RagAgentbotInputsRequest(google.protobuf.message.Message):
-    """Request message for retrieving agent input configuration.
-    Returns the form configuration and initialization data for an agent.
-    """
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    PARENT_FIELD_NUMBER: builtins.int
-    AGENT_ID_FIELD_NUMBER: builtins.int
-    parent: builtins.str
-    """Required. The agent to get agentbot input configuration for.
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    """
-    agent_id: builtins.str
-    """Required. RAGFlow agent ID to retrieve input configuration for."""
-    def __init__(
-        self,
-        *,
-        parent: builtins.str = ...,
-        agent_id: builtins.str = ...,
-    ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["agent_id", b"agent_id", "parent", b"parent"]) -> None: ...
-
-global___RagAgentbotInputsRequest = RagAgentbotInputsRequest
-
-@typing.final
-class RagAgentbotInputsResponse(google.protobuf.message.Message):
-    """Response message containing agent input configuration and display information."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    TITLE_FIELD_NUMBER: builtins.int
-    AVATAR_FIELD_NUMBER: builtins.int
-    INPUTS_FIELD_NUMBER: builtins.int
-    PROLOGUE_FIELD_NUMBER: builtins.int
-    MODE_FIELD_NUMBER: builtins.int
-    title: builtins.str
-    """Agent display name for UI presentation."""
-    avatar: builtins.str
-    """Base64-encoded avatar image or URL for the agent."""
-    prologue: builtins.str
-    """Opening greeting message displayed when starting a new agent session."""
-    mode: builtins.str
-    """Agent operational mode."""
-    @property
-    def inputs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[google.protobuf.struct_pb2.Struct]:
-        """Input form field configurations extracted from the "begin" component in agent DSL.
-        Each struct defines form fields that users must provide before starting interaction.
-        """
-
-    def __init__(
-        self,
-        *,
-        title: builtins.str = ...,
-        avatar: builtins.str = ...,
-        inputs: collections.abc.Iterable[google.protobuf.struct_pb2.Struct] | None = ...,
-        prologue: builtins.str = ...,
-        mode: builtins.str = ...,
-    ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["avatar", b"avatar", "inputs", b"inputs", "mode", b"mode", "prologue", b"prologue", "title", b"title"]) -> None: ...
-
-global___RagAgentbotInputsResponse = RagAgentbotInputsResponse
-
-@typing.final
-class RagSearchbotAskRequest(google.protobuf.message.Message):
-    """Request message for asking questions using RAGFlow&apos;s search application.
-    Search apps provide advanced retrieval with configurable settings.
-    """
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    PARENT_FIELD_NUMBER: builtins.int
-    QUESTION_FIELD_NUMBER: builtins.int
-    KB_IDS_FIELD_NUMBER: builtins.int
-    SEARCH_ID_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
-    parent: builtins.str
-    """Required. The agent to ask searchbot question for.
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    """
-    question: builtins.str
-    """Required. User question to search for and answer."""
-    search_id: builtins.str
-    """Optional. Search application ID to load predefined configuration.
-    If provided, uses the search app's retrieval settings and metadata filters.
-    """
-    @property
-    def kb_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Required. List of dataset IDs (knowledge base IDs) to search within.
-        Called <code>kb_ids</code> in RAGFlow&apos;s internal API.
-        """
-
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. Additional fields to pass through to RAGFlow."""
-
-    def __init__(
-        self,
-        *,
-        parent: builtins.str = ...,
-        question: builtins.str = ...,
-        kb_ids: collections.abc.Iterable[builtins.str] | None = ...,
-        search_id: builtins.str = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "kb_ids", b"kb_ids", "parent", b"parent", "question", b"question", "search_id", b"search_id"]) -> None: ...
-
-global___RagSearchbotAskRequest = RagSearchbotAskRequest
-
-@typing.final
-class RagSearchbotRetrievalRequest(google.protobuf.message.Message):
-    """Request message for advanced search retrieval with extensive configuration options.
-    Provides fine-grained control over the search and ranking process.
-    """
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    PARENT_FIELD_NUMBER: builtins.int
-    KB_ID_FIELD_NUMBER: builtins.int
-    QUESTION_FIELD_NUMBER: builtins.int
-    PAGE_FIELD_NUMBER: builtins.int
-    SIZE_FIELD_NUMBER: builtins.int
-    DOC_IDS_FIELD_NUMBER: builtins.int
-    SIMILARITY_THRESHOLD_FIELD_NUMBER: builtins.int
-    VECTOR_SIMILARITY_WEIGHT_FIELD_NUMBER: builtins.int
-    USE_KG_FIELD_NUMBER: builtins.int
-    TOP_K_FIELD_NUMBER: builtins.int
-    CROSS_LANGUAGES_FIELD_NUMBER: builtins.int
-    KEYWORD_FIELD_NUMBER: builtins.int
-    RERANK_ID_FIELD_NUMBER: builtins.int
-    SEARCH_ID_FIELD_NUMBER: builtins.int
-    HIGHLIGHT_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
-    parent: builtins.str
-    """Required. The agent to retrieve searchbot results for.
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    """
-    question: builtins.str
-    """Required. Search query string."""
-    page: builtins.int
-    """Optional. Page number for pagination.
-    Default: 1.
-    """
-    size: builtins.int
-    """Optional. Number of results per page.
-    Default: 30.
-    """
-    similarity_threshold: builtins.float
-    """Optional. Minimum similarity score threshold (0.0-1.0).
-    Default: 0.0 (no filtering by score).
-    """
-    vector_similarity_weight: builtins.float
-    """Optional. Weight balance between vector similarity and keyword matching (0.0-1.0).
-    Higher values favor vector similarity, lower values favor keyword matching.
-    Default: 0.3.
-    """
-    use_kg: builtins.bool
-    """Optional. Whether to use knowledge graph for enhanced retrieval.
-    Knowledge graphs can improve context and entity relationships.
-    """
-    top_k: builtins.int
-    """Optional. Maximum number of results to retrieve before reranking.
-    Default: 1024.
-    """
-    keyword: builtins.bool
-    """Optional. Whether to extract and return additional keywords from the query."""
-    rerank_id: builtins.str
-    """Optional. Rerank model ID for post-processing retrieved results.
-    Reranking can improve relevance of final results.
-    """
-    search_id: builtins.str
-    """Optional. Search application ID to load predefined metadata filters."""
-    highlight: builtins.bool
-    """Optional. Whether to highlight matched content in the returned chunks."""
-    @property
-    def kb_id(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Required. List of dataset IDs (knowledge base IDs) to search.
-        Called <code>dataset_ids</code> in RAGFlow&apos;s response format.
-        """
-
-    @property
-    def doc_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Optional. Filter results to specific document IDs only.
-        Useful for searching within a subset of documents.
-        """
-
-    @property
-    def cross_languages(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Optional. Languages to enable cross-language translation.
-        Called <code>langs</code> in RAGFlow&apos;s internal API.
-        """
-
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. Additional fields to pass through to RAGFlow."""
-
-    def __init__(
-        self,
-        *,
-        parent: builtins.str = ...,
-        kb_id: collections.abc.Iterable[builtins.str] | None = ...,
-        question: builtins.str = ...,
-        page: builtins.int = ...,
-        size: builtins.int = ...,
-        doc_ids: collections.abc.Iterable[builtins.str] | None = ...,
-        similarity_threshold: builtins.float = ...,
-        vector_similarity_weight: builtins.float = ...,
-        use_kg: builtins.bool | None = ...,
-        top_k: builtins.int = ...,
-        cross_languages: collections.abc.Iterable[builtins.str] | None = ...,
-        keyword: builtins.bool | None = ...,
-        rerank_id: builtins.str = ...,
-        search_id: builtins.str = ...,
-        highlight: builtins.bool | None = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_highlight", b"_highlight", "_keyword", b"_keyword", "_use_kg", b"_use_kg", "additional_fields", b"additional_fields", "highlight", b"highlight", "keyword", b"keyword", "use_kg", b"use_kg"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_highlight", b"_highlight", "_keyword", b"_keyword", "_use_kg", b"_use_kg", "additional_fields", b"additional_fields", "cross_languages", b"cross_languages", "doc_ids", b"doc_ids", "highlight", b"highlight", "kb_id", b"kb_id", "keyword", b"keyword", "page", b"page", "parent", b"parent", "question", b"question", "rerank_id", b"rerank_id", "search_id", b"search_id", "similarity_threshold", b"similarity_threshold", "size", b"size", "top_k", b"top_k", "use_kg", b"use_kg", "vector_similarity_weight", b"vector_similarity_weight"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_highlight", b"_highlight"]) -> typing.Literal["highlight"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_keyword", b"_keyword"]) -> typing.Literal["keyword"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_use_kg", b"_use_kg"]) -> typing.Literal["use_kg"] | None: ...
-
-global___RagSearchbotRetrievalRequest = RagSearchbotRetrievalRequest
-
-@typing.final
-class RagSearchbotRetrievalResponse(google.protobuf.message.Message):
-    """Response message containing search retrieval results with metadata."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    CHUNKS_FIELD_NUMBER: builtins.int
-    DOC_AGGS_FIELD_NUMBER: builtins.int
-    TOTAL_FIELD_NUMBER: builtins.int
-    LABELS_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
-    total: builtins.int
-    """Total number of matching chunks across all pages.
-    Used for pagination calculations.
-    """
-    @property
-    def chunks(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagChunk]:
-        """List of retrieved chunks with similarity scores and content."""
-
-    @property
-    def doc_aggs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[google.protobuf.struct_pb2.Struct]:
-        """Document aggregations providing statistics per source document.
-        Typically includes document IDs and match counts.
-        """
-
-    @property
-    def labels(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Extracted labels or categories from the results."""
-
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. Additional fields returned by RAGFlow."""
-
-    def __init__(
-        self,
-        *,
-        chunks: collections.abc.Iterable[global___RagChunk] | None = ...,
-        doc_aggs: collections.abc.Iterable[google.protobuf.struct_pb2.Struct] | None = ...,
-        total: builtins.int = ...,
-        labels: collections.abc.Iterable[builtins.str] | None = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "chunks", b"chunks", "doc_aggs", b"doc_aggs", "labels", b"labels", "total", b"total"]) -> None: ...
-
-global___RagSearchbotRetrievalResponse = RagSearchbotRetrievalResponse
-
-@typing.final
-class RagSearchbotRelatedQuestionsRequest(google.protobuf.message.Message):
-    """Request message for generating related questions using a search application.
-    Uses the search app&apos;s LLM configuration for question generation.
-    """
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    PARENT_FIELD_NUMBER: builtins.int
-    QUESTION_FIELD_NUMBER: builtins.int
-    SEARCH_ID_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
-    parent: builtins.str
-    """Required. The agent to generate searchbot related questions for.
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    """
-    question: builtins.str
-    """Required. Original user question to generate related questions from."""
-    search_id: builtins.str
-    """Optional. Search application ID to load LLM configuration.
-    If provided, uses the search app's configured language model for generation.
-    """
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. Additional fields to pass through to RAGFlow."""
-
-    def __init__(
-        self,
-        *,
-        parent: builtins.str = ...,
-        question: builtins.str = ...,
-        search_id: builtins.str = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "parent", b"parent", "question", b"question", "search_id", b"search_id"]) -> None: ...
-
-global___RagSearchbotRelatedQuestionsRequest = RagSearchbotRelatedQuestionsRequest
-
-@typing.final
-class RagSearchbotDetailRequest(google.protobuf.message.Message):
-    """Request message for retrieving detailed information about a search application."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    PARENT_FIELD_NUMBER: builtins.int
-    SEARCH_ID_FIELD_NUMBER: builtins.int
-    parent: builtins.str
-    """Required. The agent to get searchbot detail for.
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    """
-    search_id: builtins.str
-    """Required. Search application ID to retrieve details for."""
-    def __init__(
-        self,
-        *,
-        parent: builtins.str = ...,
-        search_id: builtins.str = ...,
-    ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["parent", b"parent", "search_id", b"search_id"]) -> None: ...
-
-global___RagSearchbotDetailRequest = RagSearchbotDetailRequest
-
-@typing.final
-class RagSearchbotDetailResponse(google.protobuf.message.Message):
-    """Response message containing detailed information about a search application."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    ID_FIELD_NUMBER: builtins.int
-    AVATAR_FIELD_NUMBER: builtins.int
-    TENANT_ID_FIELD_NUMBER: builtins.int
-    NAME_FIELD_NUMBER: builtins.int
-    DESCRIPTION_FIELD_NUMBER: builtins.int
-    CREATE_BY_FIELD_NUMBER: builtins.int
-    SEARCH_CONFIG_FIELD_NUMBER: builtins.int
-    UPDATE_TIME_FIELD_NUMBER: builtins.int
-    NICKNAME_FIELD_NUMBER: builtins.int
-    TENANT_AVATAR_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
-    id: builtins.str
-    """Search application UUID."""
-    avatar: builtins.str
-    """Base64-encoded avatar image or URL for the search app."""
-    tenant_id: builtins.str
-    """Tenant ID that owns this search application."""
-    name: builtins.str
-    """Search application name."""
-    description: builtins.str
-    """Search application description."""
-    create_by: builtins.str
-    """User ID of the creator."""
-    update_time: builtins.int
-    """Last update timestamp (Unix timestamp in milliseconds)."""
-    nickname: builtins.str
-    """Display name (nickname) of the creator."""
-    tenant_avatar: builtins.str
-    """Base64-encoded avatar image or URL for the tenant."""
-    @property
-    def search_config(self) -> google.protobuf.struct_pb2.Struct:
-        """Complete search configuration including retrieval settings, filters, and LLM configuration."""
-
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. Additional fields returned by RAGFlow."""
-
-    def __init__(
-        self,
-        *,
-        id: builtins.str = ...,
-        avatar: builtins.str = ...,
-        tenant_id: builtins.str = ...,
-        name: builtins.str = ...,
-        description: builtins.str = ...,
-        create_by: builtins.str = ...,
-        search_config: google.protobuf.struct_pb2.Struct | None = ...,
-        update_time: builtins.int = ...,
-        nickname: builtins.str = ...,
-        tenant_avatar: builtins.str = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "search_config", b"search_config"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "avatar", b"avatar", "create_by", b"create_by", "description", b"description", "id", b"id", "name", b"name", "nickname", b"nickname", "search_config", b"search_config", "tenant_avatar", b"tenant_avatar", "tenant_id", b"tenant_id", "update_time", b"update_time"]) -> None: ...
-
-global___RagSearchbotDetailResponse = RagSearchbotDetailResponse
-
-@typing.final
-class RagSearchbotMindmapRequest(google.protobuf.message.Message):
-    """Request message for generating a mindmap visualization from search results.
-    Mindmaps organize retrieved information into hierarchical visual structures.
-    """
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    PARENT_FIELD_NUMBER: builtins.int
-    QUESTION_FIELD_NUMBER: builtins.int
-    KB_IDS_FIELD_NUMBER: builtins.int
-    SEARCH_ID_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
-    parent: builtins.str
-    """Required. The agent to generate searchbot mindmap for.
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    """
-    question: builtins.str
-    """Required. User question to generate mindmap around."""
-    search_id: builtins.str
-    """Optional. Search application ID to load predefined configuration.
-    If provided, uses the search app's retrieval and LLM settings.
-    """
-    @property
-    def kb_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Required. List of dataset IDs (knowledge base IDs) to search for mindmap content."""
-
-    @property
-    def additional_fields(self) -> google.protobuf.struct_pb2.Struct:
-        """Optional. Additional fields to pass through to RAGFlow."""
-
-    def __init__(
-        self,
-        *,
-        parent: builtins.str = ...,
-        question: builtins.str = ...,
-        kb_ids: collections.abc.Iterable[builtins.str] | None = ...,
-        search_id: builtins.str = ...,
-        additional_fields: google.protobuf.struct_pb2.Struct | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["additional_fields", b"additional_fields"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["additional_fields", b"additional_fields", "kb_ids", b"kb_ids", "parent", b"parent", "question", b"question", "search_id", b"search_id"]) -> None: ...
-
-global___RagSearchbotMindmapRequest = RagSearchbotMindmapRequest
-
-@typing.final
-class RagSearchbotMindmapResponse(google.protobuf.message.Message):
-    """Response message containing the generated mindmap structure."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    MINDMAP_FIELD_NUMBER: builtins.int
-    @property
-    def mindmap(self) -> google.protobuf.struct_pb2.Struct:
-        """Generated mindmap structure in hierarchical format.
-        The structure organizes retrieved information into nodes and relationships.
-        """
-
-    def __init__(
-        self,
-        *,
-        mindmap: google.protobuf.struct_pb2.Struct | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["mindmap", b"mindmap"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["mindmap", b"mindmap"]) -> None: ...
-
-global___RagSearchbotMindmapResponse = RagSearchbotMindmapResponse

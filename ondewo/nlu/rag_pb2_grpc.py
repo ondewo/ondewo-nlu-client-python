@@ -4,7 +4,6 @@ import grpc
 import warnings
 
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
-from google.protobuf import struct_pb2 as google_dot_protobuf_dot_struct__pb2
 from ondewo.nlu import rag_pb2 as ondewo_dot_nlu_dot_rag__pb2
 
 GRPC_GENERATED_VERSION = '1.67.1'
@@ -31,7 +30,7 @@ class RagsStub(object):
     """TODO change Github link if changes to RAGFlow are merged to upstream
 
     Provides an interface for interacting with the RAGFlow RAG engine.
-    Covers all entpoints of the <a href="https://github.com/ondewo/ragflow">RAGFlow</a> HTTP API. For more information on RAGFlow refer to the <a href="https://ragflow.io/docs/dev/">official documentation</a>
+    Covers all endpoints of the <a href="https://github.com/ondewo/ragflow">RAGFlow</a> HTTP API. For more information on RAGFlow refer to the <a href="https://ragflow.io/docs/dev/">official documentation</a>
     """
 
     def __init__(self, channel):
@@ -52,7 +51,7 @@ class RagsStub(object):
                 _registered_method=True)
         self.RagDeleteDatasets = channel.unary_unary(
                 '/ondewo.nlu.Rags/RagDeleteDatasets',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagDeleteDatasetsRequest.SerializeToString,
+                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagDeleteRequest.SerializeToString,
                 response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagPartialSuccess.FromString,
                 _registered_method=True)
         self.RagListDatasets = channel.unary_unary(
@@ -60,20 +59,10 @@ class RagsStub(object):
                 request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagListDatasetsRequest.SerializeToString,
                 response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagDatasetList.FromString,
                 _registered_method=True)
-        self.RagGetKnowledgeGraph = channel.unary_unary(
-                '/ondewo.nlu.Rags/RagGetKnowledgeGraph',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagGetKnowledgeGraphRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagGetKnowledgeGraphResponse.FromString,
-                _registered_method=True)
-        self.RagDeleteKnowledgeGraph = channel.unary_unary(
-                '/ondewo.nlu.Rags/RagDeleteKnowledgeGraph',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagDeleteKnowledgeGraphRequest.SerializeToString,
-                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                _registered_method=True)
-        self.RagUploadDocuments = channel.stream_unary(
-                '/ondewo.nlu.Rags/RagUploadDocuments',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagUploadDocumentsRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagDocumentList.FromString,
+        self.RagUploadDocument = channel.stream_unary(
+                '/ondewo.nlu.Rags/RagUploadDocument',
+                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagUploadDocumentRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagDocument.FromString,
                 _registered_method=True)
         self.RagUpdateDocument = channel.unary_unary(
                 '/ondewo.nlu.Rags/RagUpdateDocument',
@@ -88,12 +77,47 @@ class RagsStub(object):
         self.RagListDocuments = channel.unary_unary(
                 '/ondewo.nlu.Rags/RagListDocuments',
                 request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagListDocumentsRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagListDocumentsResponse.FromString,
+                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagDocumentList.FromString,
                 _registered_method=True)
         self.RagDeleteDocuments = channel.unary_unary(
                 '/ondewo.nlu.Rags/RagDeleteDocuments',
                 request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagDeleteDocumentsRequest.SerializeToString,
                 response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagPartialSuccess.FromString,
+                _registered_method=True)
+        self.RagRetrieval = channel.unary_unary(
+                '/ondewo.nlu.Rags/RagRetrieval',
+                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagRetrievalRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagRetrievalResponse.FromString,
+                _registered_method=True)
+        self.RagGetKnowledgeGraph = channel.unary_unary(
+                '/ondewo.nlu.Rags/RagGetKnowledgeGraph',
+                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagDatasetIdRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagGetKnowledgeGraphResponse.FromString,
+                _registered_method=True)
+        self.RagDeleteKnowledgeGraph = channel.unary_unary(
+                '/ondewo.nlu.Rags/RagDeleteKnowledgeGraph',
+                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagDatasetIdRequest.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                _registered_method=True)
+        self.RagConstructKnowledgeGraph = channel.unary_unary(
+                '/ondewo.nlu.Rags/RagConstructKnowledgeGraph',
+                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagDatasetIdRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagConstructKnowledgeGraphResponse.FromString,
+                _registered_method=True)
+        self.RagKnowledgeGraphStatus = channel.unary_unary(
+                '/ondewo.nlu.Rags/RagKnowledgeGraphStatus',
+                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagDatasetIdRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagTaskStatus.FromString,
+                _registered_method=True)
+        self.RagConstructRaptor = channel.unary_unary(
+                '/ondewo.nlu.Rags/RagConstructRaptor',
+                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagDatasetIdRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagConstructRaptorResponse.FromString,
+                _registered_method=True)
+        self.RagRaptorStatus = channel.unary_unary(
+                '/ondewo.nlu.Rags/RagRaptorStatus',
+                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagDatasetIdRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagTaskStatus.FromString,
                 _registered_method=True)
         self.RagParseDocuments = channel.unary_unary(
                 '/ondewo.nlu.Rags/RagParseDocuments',
@@ -125,85 +149,25 @@ class RagsStub(object):
                 request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagUpdateChunkRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 _registered_method=True)
-        self.RagRetrieval = channel.unary_unary(
-                '/ondewo.nlu.Rags/RagRetrieval',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagRetrievalRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagRetrievalResponse.FromString,
+        self.RagCreateChatAssistant = channel.unary_unary(
+                '/ondewo.nlu.Rags/RagCreateChatAssistant',
+                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagCreateChatAssistantRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagChatAssistant.FromString,
                 _registered_method=True)
-        self.RagCreateChat = channel.unary_unary(
-                '/ondewo.nlu.Rags/RagCreateChat',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagCreateChatRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagChat.FromString,
-                _registered_method=True)
-        self.RagUpdateChat = channel.unary_unary(
-                '/ondewo.nlu.Rags/RagUpdateChat',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagUpdateChatRequest.SerializeToString,
+        self.RagUpdateChatAssistant = channel.unary_unary(
+                '/ondewo.nlu.Rags/RagUpdateChatAssistant',
+                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagUpdateChatAssistantRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 _registered_method=True)
-        self.RagDeleteChats = channel.unary_unary(
-                '/ondewo.nlu.Rags/RagDeleteChats',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagDeleteChatsRequest.SerializeToString,
+        self.RagDeleteChatAssistants = channel.unary_unary(
+                '/ondewo.nlu.Rags/RagDeleteChatAssistants',
+                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagDeleteRequest.SerializeToString,
                 response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagPartialSuccess.FromString,
                 _registered_method=True)
-        self.RagListChats = channel.unary_unary(
-                '/ondewo.nlu.Rags/RagListChats',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagListChatsRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagChatList.FromString,
-                _registered_method=True)
-        self.RagCreateChatSession = channel.unary_unary(
-                '/ondewo.nlu.Rags/RagCreateChatSession',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagCreateChatSessionRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagChatSession.FromString,
-                _registered_method=True)
-        self.RagCreateAgentSession = channel.unary_unary(
-                '/ondewo.nlu.Rags/RagCreateAgentSession',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagCreateAgentSessionRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagAgentSession.FromString,
-                _registered_method=True)
-        self.RagUpdateChatSession = channel.unary_unary(
-                '/ondewo.nlu.Rags/RagUpdateChatSession',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagUpdateChatSessionRequest.SerializeToString,
-                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-                _registered_method=True)
-        self.RagListChatSessions = channel.unary_unary(
-                '/ondewo.nlu.Rags/RagListChatSessions',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagListChatSessionsRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagChatSessionList.FromString,
-                _registered_method=True)
-        self.RagListAgentSessions = channel.unary_unary(
-                '/ondewo.nlu.Rags/RagListAgentSessions',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagListAgentSessionsRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagAgentSessionList.FromString,
-                _registered_method=True)
-        self.RagDeleteChatSessions = channel.unary_unary(
-                '/ondewo.nlu.Rags/RagDeleteChatSessions',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagDeleteChatSessionsRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagPartialSuccess.FromString,
-                _registered_method=True)
-        self.RagDeleteAgentSessions = channel.unary_unary(
-                '/ondewo.nlu.Rags/RagDeleteAgentSessions',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagDeleteAgentSessionsRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagPartialSuccess.FromString,
-                _registered_method=True)
-        self.RagChatCompletion = channel.unary_stream(
-                '/ondewo.nlu.Rags/RagChatCompletion',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagChatCompletionRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagChatCompletionResponse.FromString,
-                _registered_method=True)
-        self.RagOpenAiChatCompletion = channel.unary_stream(
-                '/ondewo.nlu.Rags/RagOpenAiChatCompletion',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagOpenAiChatCompletionRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagOpenAiChatCompletionResponse.FromString,
-                _registered_method=True)
-        self.RagAgentCompletion = channel.unary_stream(
-                '/ondewo.nlu.Rags/RagAgentCompletion',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagAgentCompletionRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagAgentCompletionResponse.FromString,
-                _registered_method=True)
-        self.RagOpenAiAgentCompletion = channel.unary_stream(
-                '/ondewo.nlu.Rags/RagOpenAiAgentCompletion',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagOpenAiAgentCompletionRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagOpenAiChatCompletionResponse.FromString,
+        self.RagListChatAssistants = channel.unary_unary(
+                '/ondewo.nlu.Rags/RagListChatAssistants',
+                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagListChatAssistantsRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagChatAssistantList.FromString,
                 _registered_method=True)
         self.RagCreateAgent = channel.unary_unary(
                 '/ondewo.nlu.Rags/RagCreateAgent',
@@ -225,65 +189,45 @@ class RagsStub(object):
                 request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagListAgentsRequest.SerializeToString,
                 response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagAgentList.FromString,
                 _registered_method=True)
-        self.RagUploadFiles = channel.stream_unary(
-                '/ondewo.nlu.Rags/RagUploadFiles',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagUploadFilesRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagFileList.FromString,
+        self.RagCreateChatSession = channel.unary_unary(
+                '/ondewo.nlu.Rags/RagCreateChatSession',
+                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagCreateChatSessionRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagChatSession.FromString,
                 _registered_method=True)
-        self.RagCreateFile = channel.unary_unary(
-                '/ondewo.nlu.Rags/RagCreateFile',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagCreateFileRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagFile.FromString,
-                _registered_method=True)
-        self.RagListFiles = channel.unary_unary(
-                '/ondewo.nlu.Rags/RagListFiles',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagListFilesRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagListFilesResponse.FromString,
-                _registered_method=True)
-        self.RagGetRootFolder = channel.unary_unary(
-                '/ondewo.nlu.Rags/RagGetRootFolder',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagGetRootFolderRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagGetRootFolderResponse.FromString,
-                _registered_method=True)
-        self.RagGetParentFolder = channel.unary_unary(
-                '/ondewo.nlu.Rags/RagGetParentFolder',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagGetParentFolderRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagGetParentFolderResponse.FromString,
-                _registered_method=True)
-        self.RagGetAllParentFolders = channel.unary_unary(
-                '/ondewo.nlu.Rags/RagGetAllParentFolders',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagGetAllParentFoldersRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagGetAllParentFoldersResponse.FromString,
-                _registered_method=True)
-        self.RagDeleteFiles = channel.unary_unary(
-                '/ondewo.nlu.Rags/RagDeleteFiles',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagDeleteFilesRequest.SerializeToString,
+        self.RagUpdateChatSession = channel.unary_unary(
+                '/ondewo.nlu.Rags/RagUpdateChatSession',
+                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagUpdateChatSessionRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 _registered_method=True)
-        self.RagRenameFile = channel.unary_unary(
-                '/ondewo.nlu.Rags/RagRenameFile',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagRenameFileRequest.SerializeToString,
-                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+        self.RagListChatSessions = channel.unary_unary(
+                '/ondewo.nlu.Rags/RagListChatSessions',
+                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagListChatSessionsRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagChatSessionList.FromString,
                 _registered_method=True)
-        self.RagGetFile = channel.unary_stream(
-                '/ondewo.nlu.Rags/RagGetFile',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagGetFileRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagFileChunk.FromString,
+        self.RagDeleteChatSessions = channel.unary_unary(
+                '/ondewo.nlu.Rags/RagDeleteChatSessions',
+                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagDeleteChatSessionsRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagPartialSuccess.FromString,
                 _registered_method=True)
-        self.RagMoveFile = channel.unary_unary(
-                '/ondewo.nlu.Rags/RagMoveFile',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagMoveFileRequest.SerializeToString,
-                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+        self.RagListAgentSessions = channel.unary_unary(
+                '/ondewo.nlu.Rags/RagListAgentSessions',
+                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagListAgentSessionsRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagAgentSessionList.FromString,
                 _registered_method=True)
-        self.RagFileToDocument = channel.unary_unary(
-                '/ondewo.nlu.Rags/RagFileToDocument',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagFileToDocumentRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagFileToDocumentList.FromString,
+        self.RagDeleteAgentSessions = channel.unary_unary(
+                '/ondewo.nlu.Rags/RagDeleteAgentSessions',
+                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagDeleteAgentSessionsRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagPartialSuccess.FromString,
                 _registered_method=True)
-        self.RagDifyRetrieval = channel.unary_unary(
-                '/ondewo.nlu.Rags/RagDifyRetrieval',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagDifyRetrievalRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagDifyRecordList.FromString,
+        self.RagChatCompletion = channel.unary_stream(
+                '/ondewo.nlu.Rags/RagChatCompletion',
+                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagChatCompletionRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagChatCompletionResponse.FromString,
+                _registered_method=True)
+        self.RagAgentCompletion = channel.unary_stream(
+                '/ondewo.nlu.Rags/RagAgentCompletion',
+                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagAgentCompletionRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagAgentCompletionResponse.FromString,
                 _registered_method=True)
         self.RagAsk = channel.unary_stream(
                 '/ondewo.nlu.Rags/RagAsk',
@@ -295,79 +239,34 @@ class RagsStub(object):
                 request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagRelatedQuestionsRequest.SerializeToString,
                 response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagRelatedQuestionsResponse.FromString,
                 _registered_method=True)
-        self.RagChatbotCompletion = channel.unary_stream(
-                '/ondewo.nlu.Rags/RagChatbotCompletion',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagChatbotCompletionRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagChatCompletionResponse.FromString,
-                _registered_method=True)
-        self.RagChatbotInfo = channel.unary_unary(
-                '/ondewo.nlu.Rags/RagChatbotInfo',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagChatbotInfoRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagChatbotInfoResponse.FromString,
-                _registered_method=True)
-        self.RagAgentbotCompletion = channel.unary_stream(
-                '/ondewo.nlu.Rags/RagAgentbotCompletion',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagAgentbotCompletionRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagAgentCompletionResponse.FromString,
-                _registered_method=True)
-        self.RagAgentbotInputs = channel.unary_unary(
-                '/ondewo.nlu.Rags/RagAgentbotInputs',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagAgentbotInputsRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagAgentbotInputsResponse.FromString,
-                _registered_method=True)
-        self.RagSearchbotAsk = channel.unary_stream(
-                '/ondewo.nlu.Rags/RagSearchbotAsk',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagSearchbotAskRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagAskResponse.FromString,
-                _registered_method=True)
-        self.RagSearchbotRetrieval = channel.unary_unary(
-                '/ondewo.nlu.Rags/RagSearchbotRetrieval',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagSearchbotRetrievalRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagSearchbotRetrievalResponse.FromString,
-                _registered_method=True)
-        self.RagSearchbotRelatedQuestions = channel.unary_unary(
-                '/ondewo.nlu.Rags/RagSearchbotRelatedQuestions',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagSearchbotRelatedQuestionsRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagRelatedQuestionsResponse.FromString,
-                _registered_method=True)
-        self.RagSearchbotDetail = channel.unary_unary(
-                '/ondewo.nlu.Rags/RagSearchbotDetail',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagSearchbotDetailRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagSearchbotDetailResponse.FromString,
-                _registered_method=True)
-        self.RagSearchbotMindmap = channel.unary_unary(
-                '/ondewo.nlu.Rags/RagSearchbotMindmap',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagSearchbotMindmapRequest.SerializeToString,
-                response_deserializer=google_dot_protobuf_dot_struct__pb2.Struct.FromString,
-                _registered_method=True)
 
 
 class RagsServicer(object):
     """TODO change Github link if changes to RAGFlow are merged to upstream
 
     Provides an interface for interacting with the RAGFlow RAG engine.
-    Covers all entpoints of the <a href="https://github.com/ondewo/ragflow">RAGFlow</a> HTTP API. For more information on RAGFlow refer to the <a href="https://ragflow.io/docs/dev/">official documentation</a>
+    Covers all endpoints of the <a href="https://github.com/ondewo/ragflow">RAGFlow</a> HTTP API. For more information on RAGFlow refer to the <a href="https://ragflow.io/docs/dev/">official documentation</a>
     """
 
     def RagCreateDataset(self, request, context):
         """===========================================
-        Dataset Management (6 methods)
+        Dataset Management
         REST: /api/v1/datasets
         ===========================================
 
         RAGFlow endpoint: POST /api/v1/datasets
 
         Create a new dataset (knowledge base).<br>
-        Uses tenant&apos;s default embedding model if not specified.
+        Uses tenant's default embedding model if not specified.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def RagUpdateDataset(self, request, context):
-        """RAGFlow endpoint: PUT /api/v1/datasets/&lt;dataset_id&gt;
+        """RAGFlow endpoint: PUT /api/v1/datasets/<dataset_id>
 
-        Update an existing dataset&apos;s configuration.<br>
+        Update an existing dataset's configuration.<br>
         Cannot change embedding_model if dataset has chunks.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -378,7 +277,7 @@ class RagsServicer(object):
         """RAGFlow endpoint: DELETE /api/v1/datasets
 
         Delete one or more datasets (batch operation).<br>
-        If ids is null or empty, deletes all user&apos;s datasets.<br>
+        If ids is null or empty, deletes all user's datasets.<br>
         Deletes all associated documents, files, and chunks.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -395,33 +294,13 @@ class RagsServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def RagGetKnowledgeGraph(self, request, context):
-        """RAGFlow endpoint: GET /api/v1/datasets/&lt;dataset_id&gt;/knowledge_graph
-
-        Get the knowledge graph for a dataset.<br>
-        Returns graph structure with nodes (max 256) and edges (max 128).
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def RagDeleteKnowledgeGraph(self, request, context):
-        """RAGFlow endpoint: DELETE /api/v1/datasets/&lt;dataset_id&gt;/knowledge_graph
-
-        Delete the knowledge graph for a dataset.<br>
-        Deletes graph-related chunks but not the dataset itself.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def RagUploadDocuments(self, request_iterator, context):
+    def RagUploadDocument(self, request_iterator, context):
         """========================================================================
-        Document Management (5 methods)
+        Document Management
         REST: /api/v1/datasets/<dataset_id>/documents
         ========================================================================
 
-        RAGFlow endpoint: POST /api/v1/datasets/&lt;dataset_id&gt;/documents
+        RAGFlow endpoint: POST /api/v1/datasets/<dataset_id>/documents
 
         Upload one or more documents to a dataset.<br>
         Documents start in UNSTART state and must be parsed.
@@ -431,7 +310,7 @@ class RagsServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def RagUpdateDocument(self, request, context):
-        """RAGFlow endpoint: PUT /api/v1/datasets/&lt;dataset_id&gt;/documents/&lt;document_id&gt;
+        """RAGFlow endpoint: PUT /api/v1/datasets/<dataset_id>/documents/<document_id>
 
         Update document metadata and configuration.<br>
         Changing chunk_method resets document to UNSTART and deletes chunks.
@@ -441,7 +320,7 @@ class RagsServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def RagDownloadDocument(self, request, context):
-        """RAGFlow endpoint: GET /api/v1/datasets/&lt;dataset_id&gt;/documents/&lt;document_id&gt;
+        """RAGFlow endpoint: GET /api/v1/datasets/<dataset_id>/documents/<document_id>
 
         Download the original document file.<br>
         Returns binary file stream from storage.<br>
@@ -452,7 +331,7 @@ class RagsServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def RagListDocuments(self, request, context):
-        """RAGFlow endpoint: GET /api/v1/datasets/&lt;dataset_id&gt;/documents
+        """RAGFlow endpoint: GET /api/v1/datasets/<dataset_id>/documents
 
         List documents in a dataset with pagination and filtering.<br>
         Supports time range filtering and keyword search.
@@ -462,7 +341,7 @@ class RagsServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def RagDeleteDocuments(self, request, context):
-        """RAGFlow endpoint: DELETE /api/v1/datasets/&lt;dataset_id&gt;/documents
+        """RAGFlow endpoint: DELETE /api/v1/datasets/<dataset_id>/documents
 
         Delete one or more documents from a dataset (batch operation).<br>
         If ids empty, deletes all documents. Removes chunks and storage files.
@@ -471,75 +350,13 @@ class RagsServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def RagParseDocuments(self, request, context):
+    def RagRetrieval(self, request, context):
         """========================================================================
-        Chunk Management (7 methods)
-        Chunks are text segments extracted from documents for retrieval.
-        REST: /api/v1/datasets/&lt;dataset_id&gt;/chunks
+        Chunk Management
+        REST: /api/v1/datasets/<dataset_id>/chunks, /api/v1/datasets/<dataset_id>/documents/<document_id>/chunks, /api/v1/retrieval
         ========================================================================
 
-        RAGFlow endpoint: POST /api/v1/datasets/&lt;dataset_id&gt;/chunks
-
-        Start parsing documents into chunks.<br>
-        Cannot parse documents currently being processed (0 &lt; progress &lt; 1).<br>
-        Queues documents for background processing.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def RagStopParsing(self, request, context):
-        """RAGFlow endpoint: DELETE /api/v1/datasets/&lt;dataset_id&gt;/chunks
-
-        Stop parsing documents.<br>
-        Can only stop documents with progress between 0 and 1.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def RagListChunks(self, request, context):
-        """RAGFlow endpoint: GET /api/v1/datasets/&lt;dataset_id&gt;/documents/&lt;document_id&gt;/chunks
-
-        List chunks of a document with pagination.<br>
-        Supports keyword search with content highlighting.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def RagAddChunk(self, request, context):
-        """RAGFlow endpoint: POST /api/v1/datasets/&lt;dataset_id&gt;/documents/&lt;document_id&gt;/chunks
-
-        Manually add a chunk to a document.<br>
-        Automatically tokenizes content and generates embeddings.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def RagRemoveChunks(self, request, context):
-        """RAGFlow endpoint: DELETE /api/v1/datasets/&lt;dataset_id&gt;/documents/&lt;document_id&gt;/chunks
-
-        Remove one or more chunks from a document.<br>
-        If chunk_ids empty, removes all chunks from document.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def RagUpdateChunk(self, request, context):
-        """RAGFlow endpoint: PUT /api/v1/datasets/&lt;dataset_id&gt;/documents/&lt;document_id&gt;/chunks/&lt;chunk_id&gt;
-
-        Update an existing chunk&apos;s content and metadata.<br>
-        Re-tokenizes content and re-generates embeddings if content changed.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def RagRetrieval(self, request, context):
-        """RAGFlow endpoint: POST /api/v1/retrieval
+        RAGFlow endpoint: POST /api/v1/retrieval
 
         Retrieve chunks using vector similarity search.<br>
         All datasets must use the same embedding model.<br>
@@ -549,44 +366,176 @@ class RagsServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def RagCreateChat(self, request, context):
+    def RagGetKnowledgeGraph(self, request, context):
         """========================================================================
-        Chat Management (4 methods)
-        Chat assistants are RAG-powered conversational agents.
-        REST: /api/v1/chats
+        Currently unused endpoints
         ========================================================================
+
+        -------------------------------------------
+        Dataset Management
+        REST: /api/v1/datasets
+        -------------------------------------------
+
+        RAGFlow endpoint: GET /api/v1/datasets/<dataset_id>/knowledge_graph
+
+        Get the knowledge graph for a dataset.<br>
+        Returns graph structure with nodes (max 256) and edges (max 128).
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def RagDeleteKnowledgeGraph(self, request, context):
+        """RAGFlow endpoint: DELETE /api/v1/datasets/<dataset_id>/knowledge_graph
+
+        Delete the knowledge graph for a dataset.<br>
+        Deletes graph-related chunks but not the dataset itself.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def RagConstructKnowledgeGraph(self, request, context):
+        """RAGFlow endpoint: POST /api/v1/datasets/<dataset_id>/run_graphrag
+
+        Construct a knowledge graph for a dataset.<br>
+        Uses the dataset's GraphRAG settings.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def RagKnowledgeGraphStatus(self, request, context):
+        """RAGFlow endpoint: GET /api/v1/datasets/<dataset_id>/trace_graphrag
+
+        Get the knowledge graph construction status of a dataset.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def RagConstructRaptor(self, request, context):
+        """RAGFlow endpoint: POST /api/v1/datasets/<dataset_id>/run_raptor
+
+        Construct a RAPTOR for a dataset.<br>
+        Uses the dataset's RAPTOR settings.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def RagRaptorStatus(self, request, context):
+        """RAGFlow endpoint: GET /api/v1/datasets/<dataset_id>/trace_raptor
+
+        Get the RAPTOR construction status of a dataset.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def RagParseDocuments(self, request, context):
+        """------------------------------------------------------------------------
+        Chunk Management
+        REST: /api/v1/datasets/<dataset_id>/chunks, /api/v1/datasets/<dataset_id>/documents/<document_id>/chunks, /api/v1/retrieval
+        ------------------------------------------------------------------------
+
+        RAGFlow endpoint: POST /api/v1/datasets/<dataset_id>/chunks
+
+        Start parsing documents into chunks.<br>
+        Cannot parse documents currently being processed (0 < progress < 1).<br>
+        Queues documents for background processing.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def RagStopParsing(self, request, context):
+        """RAGFlow endpoint: DELETE /api/v1/datasets/<dataset_id>/chunks
+
+        Stop parsing documents.<br>
+        Can only stop documents with progress between 0 and 1.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def RagListChunks(self, request, context):
+        """RAGFlow endpoint: GET /api/v1/datasets/<dataset_id>/documents/<document_id>/chunks
+
+        List chunks of a document with pagination.<br>
+        Supports keyword search with content highlighting.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def RagAddChunk(self, request, context):
+        """RAGFlow endpoint: POST /api/v1/datasets/<dataset_id>/documents/<document_id>/chunks
+
+        Manually add a chunk to a document.<br>
+        Automatically tokenizes content and generates embeddings.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def RagRemoveChunks(self, request, context):
+        """RAGFlow endpoint: DELETE /api/v1/datasets/<dataset_id>/documents/<document_id>/chunks
+
+        Remove one or more chunks from a document.<br>
+        If chunk_ids empty, removes all chunks from document.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def RagUpdateChunk(self, request, context):
+        """RAGFlow endpoint: PUT /api/v1/datasets/<dataset_id>/documents/<document_id>/chunks/<chunk_id>
+
+        Update an existing chunk's content and metadata.<br>
+        Re-tokenizes content and re-generates embeddings if content changed.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def RagCreateChatAssistant(self, request, context):
+        """------------------------------------------------------------------------
+        Chat Assistant Management
+        REST: /api/v1/chats
+        ------------------------------------------------------------------------
 
         RAGFlow endpoint: POST /api/v1/chats
 
         Create a new chat assistant.<br>
-        All datasets must have parsed files (chunk_num &gt; 0).<br>
+        All datasets must have parsed files (chunk_num > 0).<br>
         All datasets must use the same embedding model.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def RagUpdateChat(self, request, context):
-        """RAGFlow endpoint: PUT /api/v1/chats/&lt;chat_id&gt;
+    def RagUpdateChatAssistant(self, request, context):
+        """RAGFlow endpoint: PUT /api/v1/chats/<chat_id>
 
-        Update an existing chat assistant&apos;s configuration.<br>
+        Update an existing chat assistant's configuration.<br>
         LLM and prompt configs are merged with existing values.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def RagDeleteChats(self, request, context):
+    def RagDeleteChatAssistants(self, request, context):
         """RAGFlow endpoint: DELETE /api/v1/chats
 
         Delete one or more chat assistants (batch operation).<br>
-        If ids empty, deletes all user&apos;s chats (soft delete).
+        If ids empty, deletes all user's chats.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def RagListChats(self, request, context):
+    def RagListChatAssistants(self, request, context):
         """RAGFlow endpoint: GET /api/v1/chats
 
         List chat assistants with pagination.<br>
@@ -596,138 +545,11 @@ class RagsServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def RagCreateChatSession(self, request, context):
-        """========================================================================
-        Session Management (7 methods)
-        Sessions are conversation instances for chats and agents.
-        REST: /api/v1/chats/&lt;chat_id&gt;/sessions,
-        /api/v1/agents/&lt;agent_id&gt;/sessions
-        ========================================================================
-
-        RAGFlow endpoint: POST /api/v1/chats/&lt;chat_id&gt;/sessions
-
-        Create a new chat session (conversation).<br>
-        Session initialized with assistant&apos;s prologue message.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def RagCreateAgentSession(self, request, context):
-        """RAGFlow endpoint: POST /api/v1/agents/&lt;agent_id&gt;/sessions
-
-        Create a new agent session.<br>
-        Initializes Canvas with agent&apos;s DSL configuration.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def RagUpdateChatSession(self, request, context):
-        """RAGFlow endpoint: PUT /api/v1/chats/&lt;chat_id&gt;/sessions/&lt;session_id&gt;
-
-        Update a chat session&apos;s metadata (name only).<br>
-        Cannot update message or reference fields.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def RagListChatSessions(self, request, context):
-        """RAGFlow endpoint: GET /api/v1/chats/&lt;chat_id&gt;/sessions
-
-        List sessions for a chat assistant.<br>
-        Returns message history with embedded chunk references.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def RagListAgentSessions(self, request, context):
-        """RAGFlow endpoint: GET /api/v1/agents/&lt;agent_id&gt;/sessions
-
-        List sessions for an agent.<br>
-        Can optionally exclude DSL from response for performance.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def RagDeleteChatSessions(self, request, context):
-        """RAGFlow endpoint: DELETE /api/v1/chats/&lt;chat_id&gt;/sessions
-
-        Delete one or more chat sessions (batch operation).<br>
-        If ids empty, deletes all sessions for the chat (hard delete).
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def RagDeleteAgentSessions(self, request, context):
-        """RAGFlow endpoint: DELETE /api/v1/agents/&lt;agent_id&gt;/sessions
-
-        Delete one or more agent sessions (batch operation).<br>
-        If ids empty, deletes all sessions for the agent (hard delete).
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def RagChatCompletion(self, request, context):
-        """========================================================================
-        Completion (4 streaming methods)
-        Generate responses using RAG and LLMs.
-        All methods support server-side streaming.
-        REST: /api/v1/chats/&lt;id&gt;/completions,
-        /api/v1/agents/&lt;id&gt;/completions
-        ========================================================================
-
-        RAGFlow endpoint: POST /api/v1/chats/&lt;chat_id&gt;/completions
-
-        Generate chat completion with RAG (server streaming).<br>
-        Creates new session if session_id not provided.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def RagOpenAiChatCompletion(self, request, context):
-        """RAGFlow endpoint: POST /api/v1/chats_openai/&lt;chat_id&gt;/chat/completions
-
-        OpenAI-compatible chat completion endpoint (server streaming).<br>
-        Compatible with OpenAI Python client.<br>
-        Supports reasoning content in &lt;redacted_reasoning&gt; tags.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def RagAgentCompletion(self, request, context):
-        """RAGFlow endpoint: POST /api/v1/agents/&lt;agent_id&gt;/completions
-
-        Generate agent completion (server streaming).<br>
-        Filters events to only return message-related events.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def RagOpenAiAgentCompletion(self, request, context):
-        """RAGFlow endpoint: POST /api/v1/agents_openai/&lt;agent_id&gt;/chat/completions
-
-        OpenAI-compatible agent completion endpoint (server streaming).<br>
-        Uses tiktoken for token counting.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
     def RagCreateAgent(self, request, context):
-        """========================================================================
-        Agent Management (4 methods)
-        Agents are workflow-based AI assistants with DSL configuration.
+        """------------------------------------------------------------------------
+        Agent Management
         REST: /api/v1/agents
-        ========================================================================
+        ------------------------------------------------------------------------
 
         RAGFlow endpoint: POST /api/v1/agents
 
@@ -739,7 +561,7 @@ class RagsServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def RagUpdateAgent(self, request, context):
-        """RAGFlow endpoint: PUT /api/v1/agents/&lt;agent_id&gt;
+        """RAGFlow endpoint: PUT /api/v1/agents/<agent_id>
 
         Update an existing agent.<br>
         DSL updates create new version snapshot. Only owner can update.
@@ -749,9 +571,9 @@ class RagsServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def RagDeleteAgent(self, request, context):
-        """RAGFlow endpoint: DELETE /api/v1/agents/&lt;agent_id&gt;
+        """RAGFlow endpoint: DELETE /api/v1/agents/<agent_id>
 
-        Delete an agent (hard delete).<br>
+        Delete an agent.<br>
         Only owner can delete.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -762,156 +584,110 @@ class RagsServicer(object):
         """RAGFlow endpoint: GET /api/v1/agents
 
         List agents with pagination.<br>
-        Only returns user&apos;s own agents.
+        Only returns user's own agents.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def RagUploadFiles(self, request_iterator, context):
-        """========================================================================
-        File Management (11 methods)
-        Manage files and folders in RAGFlow&apos;s file system.
-        Files can be converted to dataset documents.
-        REST: /api/v1/file/*
-        ========================================================================
+    def RagCreateChatSession(self, request, context):
+        """------------------------------------------------------------------------
+        Session Management
+        REST: /api/v1/chats/<chat_id>/sessions, /api/v1/agents/<agent_id>/sessions
+        ------------------------------------------------------------------------
 
-        RAGFlow endpoint: POST /api/v1/file/upload
+        RAGFlow endpoint: POST /api/v1/chats/<chat_id>/sessions
 
-        Upload one or more files via multipart form data.<br>
-        Supports nested folder paths in filename.<br>
-        Auto-creates intermediate folders.
+        Create a new chat session (conversation).<br>
+        Session initialized with assistant's prologue message.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def RagCreateFile(self, request, context):
-        """RAGFlow endpoint: POST /api/v1/file/create
+    def RagUpdateChatSession(self, request, context):
+        """RAGFlow endpoint: PUT /api/v1/chats/<chat_id>/sessions/<session_id>
 
-        Create a new folder.<br>
-        Duplicate names in same folder not allowed.
+        Update a chat session's metadata (name only).<br>
+        Cannot update message or reference fields.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def RagListFiles(self, request, context):
-        """RAGFlow endpoint: GET /api/v1/file/list
+    def RagListChatSessions(self, request, context):
+        """RAGFlow endpoint: GET /api/v1/chats/<chat_id>/sessions
 
-        List files in a folder with pagination.<br>
-        Supports keyword search. Auto-initializes knowledgebase docs folder.
+        List sessions for a chat assistant.<br>
+        Returns message history with embedded chunk references.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def RagGetRootFolder(self, request, context):
-        """RAGFlow endpoint: GET /api/v1/file/root_folder
+    def RagDeleteChatSessions(self, request, context):
+        """RAGFlow endpoint: DELETE /api/v1/chats/<chat_id>/sessions
 
-        Get user&apos;s root folder information.<br>
-        Each tenant has a unique root folder.
+        Delete one or more chat sessions (batch operation).<br>
+        If ids empty, deletes all sessions for the chat.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def RagGetParentFolder(self, request, context):
-        """RAGFlow endpoint: GET /api/v1/file/parent_folder
+    def RagListAgentSessions(self, request, context):
+        """RAGFlow endpoint: GET /api/v1/agents/<agent_id>/sessions
 
-        Get the parent folder of a file.<br>
-        Returns 404 if file or parent not found.
+        List sessions for an agent.<br>
+        Can optionally exclude DSL from response for performance.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def RagGetAllParentFolders(self, request, context):
-        """RAGFlow endpoint: GET /api/v1/file/all_parent_folder
+    def RagDeleteAgentSessions(self, request, context):
+        """RAGFlow endpoint: DELETE /api/v1/agents/<agent_id>/sessions
 
-        Get all parent folders (breadcrumb path) of a file.<br>
-        Returns array from file itself to root (includes the file, ordered deepest to root).
+        Delete one or more agent sessions (batch operation).<br>
+        If ids empty, deletes all sessions for the agent.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def RagDeleteFiles(self, request, context):
-        """RAGFlow endpoint: POST /api/v1/file/rm
+    def RagChatCompletion(self, request, context):
+        """------------------------------------------------------------------------
+        Completion
+        REST: /api/v1/chats/<id>/completions, /api/v1/agents/<id>/completions, /api/v1/sessions
+        ------------------------------------------------------------------------
 
-        Delete one or more files/folders (hard delete).<br>
-        Recursively deletes folder contents. Removes from storage.
+        RAGFlow endpoint: POST /api/v1/chats/<chat_id>/completions or POST /api/v1/chats_openai/<chat_id>/chat/completions
+
+        Generate chat completion with RAG (server streaming).<br>
+        This endpoint either
+        <ul>
+        <li>creates a new session if no <code>session_id</code> is provided and <code>messages</code> contains only one message</li>
+        <li>uses an exising session if <code>session_id</code> is provided (ignores message history in <code>messages</code>)</li>
+        <li>continues a conversion with the message history from <code>messages</code> without creating a session if no <code>session_id</code> is provided and <code>messages</code> contains multiple messages</li>
+        </ul>
+        At this point the endpoint is not fully implemented and does not support sessions. This means the full message history must always be passed.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def RagRenameFile(self, request, context):
-        """RAGFlow endpoint: POST /api/v1/file/rename
+    def RagAgentCompletion(self, request, context):
+        """RAGFlow endpoint: POST /api/v1/agents/<agent_id>/completions
 
-        Rename a file or folder.<br>
-        Cannot change file extension. Duplicate names not allowed.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def RagGetFile(self, request, context):
-        """RAGFlow endpoint: GET /api/v1/file/get/&lt;file_id&gt;
-
-        Download a file.<br>
-        Retrieves from MinIO/S3 storage.<br>
-        First chunk contains metadata, subsequent chunks only contain data.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def RagMoveFile(self, request, context):
-        """RAGFlow endpoint: POST /api/v1/file/mv
-
-        Move one or more files to another folder.<br>
-        Validates all files and destination exist.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def RagFileToDocument(self, request, context):
-        """RAGFlow endpoint: POST /api/v1/file/convert
-
-        Convert files to documents and add to datasets.<br>
-        Handles folders recursively (converts all inner files).<br>
-        Links files to multiple datasets if multiple dataset_ids provided.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def RagDifyRetrieval(self, request, context):
-        """========================================================================
-        Dify Integration (1 method)
-        Integration with Dify platform.
-        REST: /api/v1/dify/retrieval
-        ========================================================================
-
-        RAGFlow endpoint: POST /api/v1/dify/retrieval
-
-        Retrieve chunks in Dify-compatible format.<br>
-        Uses API key authentication (not Bearer token).
+        Generate agent completion (server streaming).<br>
+        Filters events to only return message-related events.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def RagAsk(self, request, context):
-        """========================================================================
-        Bot API (11 methods)
-        Use API key authentication (not Bearer token).
-        REST: /api/v1/chatbots/*, /api/v1/agentbots/*, /api/v1/searchbots/*
-        ========================================================================
-
-        RAGFlow endpoint: POST /api/v1/sessions/ask
+        """RAGFlow endpoint: POST /api/v1/sessions/ask
 
         Ask a question across datasets without a chat assistant.<br>
         Streaming only. All datasets must have parsed files.
@@ -925,96 +701,6 @@ class RagsServicer(object):
 
         Generate related search terms for a question.<br>
         Returns 5-10 suggestions considering industry context.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def RagChatbotCompletion(self, request, context):
-        """RAGFlow endpoint: POST /api/v1/chatbots/&lt;dialog_id&gt;/completions
-
-        Chat completion for iframe/embedded chatbot (server streaming).<br>
-        Uses API key from APIToken table.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def RagChatbotInfo(self, request, context):
-        """RAGFlow endpoint: GET /api/v1/chatbots/&lt;dialog_id&gt;/info
-
-        Get chatbot information for embedded UI initialization.<br>
-        Returns title, avatar, and prologue.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def RagAgentbotCompletion(self, request, context):
-        """RAGFlow endpoint: POST /api/v1/agentbots/&lt;agent_id&gt;/completions
-
-        Agent completion for iframe/embedded agentbot (server streaming).<br>
-        Uses API key authentication.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def RagAgentbotInputs(self, request, context):
-        """RAGFlow endpoint: GET /api/v1/agentbots/&lt;agent_id&gt;/inputs
-
-        Get agent input form configuration for embedded UI.<br>
-        Returns input schema from &quot;begin&quot; component in DSL.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def RagSearchbotAsk(self, request, context):
-        """RAGFlow endpoint: POST /api/v1/searchbots/ask
-
-        Ask question in searchbot with search app configuration.<br>
-        Uses search app config if provided.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def RagSearchbotRetrieval(self, request, context):
-        """RAGFlow endpoint: POST /api/v1/searchbots/retrieval_test
-
-        Test retrieval with searchbot configuration.<br>
-        Supports search app configuration with auto metadata filtering.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def RagSearchbotRelatedQuestions(self, request, context):
-        """RAGFlow endpoint: POST /api/v1/searchbots/related_questions
-
-        Generate related questions for searchbot.<br>
-        Uses search app LLM config if available.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def RagSearchbotDetail(self, request, context):
-        """RAGFlow endpoint: GET /api/v1/searchbots/detail
-
-        Get search app configuration details.<br>
-        Requires user to have access to search app.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def RagSearchbotMindmap(self, request, context):
-        """RAGFlow endpoint: POST /api/v1/searchbots/mindmap
-
-        Generate mindmap for a question.<br>
-        Uses search app config if provided.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1035,7 +721,7 @@ def add_RagsServicer_to_server(servicer, server):
             ),
             'RagDeleteDatasets': grpc.unary_unary_rpc_method_handler(
                     servicer.RagDeleteDatasets,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagDeleteDatasetsRequest.FromString,
+                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagDeleteRequest.FromString,
                     response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagPartialSuccess.SerializeToString,
             ),
             'RagListDatasets': grpc.unary_unary_rpc_method_handler(
@@ -1043,20 +729,10 @@ def add_RagsServicer_to_server(servicer, server):
                     request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagListDatasetsRequest.FromString,
                     response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagDatasetList.SerializeToString,
             ),
-            'RagGetKnowledgeGraph': grpc.unary_unary_rpc_method_handler(
-                    servicer.RagGetKnowledgeGraph,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagGetKnowledgeGraphRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagGetKnowledgeGraphResponse.SerializeToString,
-            ),
-            'RagDeleteKnowledgeGraph': grpc.unary_unary_rpc_method_handler(
-                    servicer.RagDeleteKnowledgeGraph,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagDeleteKnowledgeGraphRequest.FromString,
-                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-            ),
-            'RagUploadDocuments': grpc.stream_unary_rpc_method_handler(
-                    servicer.RagUploadDocuments,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagUploadDocumentsRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagDocumentList.SerializeToString,
+            'RagUploadDocument': grpc.stream_unary_rpc_method_handler(
+                    servicer.RagUploadDocument,
+                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagUploadDocumentRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagDocument.SerializeToString,
             ),
             'RagUpdateDocument': grpc.unary_unary_rpc_method_handler(
                     servicer.RagUpdateDocument,
@@ -1071,12 +747,47 @@ def add_RagsServicer_to_server(servicer, server):
             'RagListDocuments': grpc.unary_unary_rpc_method_handler(
                     servicer.RagListDocuments,
                     request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagListDocumentsRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagListDocumentsResponse.SerializeToString,
+                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagDocumentList.SerializeToString,
             ),
             'RagDeleteDocuments': grpc.unary_unary_rpc_method_handler(
                     servicer.RagDeleteDocuments,
                     request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagDeleteDocumentsRequest.FromString,
                     response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagPartialSuccess.SerializeToString,
+            ),
+            'RagRetrieval': grpc.unary_unary_rpc_method_handler(
+                    servicer.RagRetrieval,
+                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagRetrievalRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagRetrievalResponse.SerializeToString,
+            ),
+            'RagGetKnowledgeGraph': grpc.unary_unary_rpc_method_handler(
+                    servicer.RagGetKnowledgeGraph,
+                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagDatasetIdRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagGetKnowledgeGraphResponse.SerializeToString,
+            ),
+            'RagDeleteKnowledgeGraph': grpc.unary_unary_rpc_method_handler(
+                    servicer.RagDeleteKnowledgeGraph,
+                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagDatasetIdRequest.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'RagConstructKnowledgeGraph': grpc.unary_unary_rpc_method_handler(
+                    servicer.RagConstructKnowledgeGraph,
+                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagDatasetIdRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagConstructKnowledgeGraphResponse.SerializeToString,
+            ),
+            'RagKnowledgeGraphStatus': grpc.unary_unary_rpc_method_handler(
+                    servicer.RagKnowledgeGraphStatus,
+                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagDatasetIdRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagTaskStatus.SerializeToString,
+            ),
+            'RagConstructRaptor': grpc.unary_unary_rpc_method_handler(
+                    servicer.RagConstructRaptor,
+                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagDatasetIdRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagConstructRaptorResponse.SerializeToString,
+            ),
+            'RagRaptorStatus': grpc.unary_unary_rpc_method_handler(
+                    servicer.RagRaptorStatus,
+                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagDatasetIdRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagTaskStatus.SerializeToString,
             ),
             'RagParseDocuments': grpc.unary_unary_rpc_method_handler(
                     servicer.RagParseDocuments,
@@ -1108,85 +819,25 @@ def add_RagsServicer_to_server(servicer, server):
                     request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagUpdateChunkRequest.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
-            'RagRetrieval': grpc.unary_unary_rpc_method_handler(
-                    servicer.RagRetrieval,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagRetrievalRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagRetrievalResponse.SerializeToString,
+            'RagCreateChatAssistant': grpc.unary_unary_rpc_method_handler(
+                    servicer.RagCreateChatAssistant,
+                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagCreateChatAssistantRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagChatAssistant.SerializeToString,
             ),
-            'RagCreateChat': grpc.unary_unary_rpc_method_handler(
-                    servicer.RagCreateChat,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagCreateChatRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagChat.SerializeToString,
-            ),
-            'RagUpdateChat': grpc.unary_unary_rpc_method_handler(
-                    servicer.RagUpdateChat,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagUpdateChatRequest.FromString,
+            'RagUpdateChatAssistant': grpc.unary_unary_rpc_method_handler(
+                    servicer.RagUpdateChatAssistant,
+                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagUpdateChatAssistantRequest.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
-            'RagDeleteChats': grpc.unary_unary_rpc_method_handler(
-                    servicer.RagDeleteChats,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagDeleteChatsRequest.FromString,
+            'RagDeleteChatAssistants': grpc.unary_unary_rpc_method_handler(
+                    servicer.RagDeleteChatAssistants,
+                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagDeleteRequest.FromString,
                     response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagPartialSuccess.SerializeToString,
             ),
-            'RagListChats': grpc.unary_unary_rpc_method_handler(
-                    servicer.RagListChats,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagListChatsRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagChatList.SerializeToString,
-            ),
-            'RagCreateChatSession': grpc.unary_unary_rpc_method_handler(
-                    servicer.RagCreateChatSession,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagCreateChatSessionRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagChatSession.SerializeToString,
-            ),
-            'RagCreateAgentSession': grpc.unary_unary_rpc_method_handler(
-                    servicer.RagCreateAgentSession,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagCreateAgentSessionRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagAgentSession.SerializeToString,
-            ),
-            'RagUpdateChatSession': grpc.unary_unary_rpc_method_handler(
-                    servicer.RagUpdateChatSession,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagUpdateChatSessionRequest.FromString,
-                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-            ),
-            'RagListChatSessions': grpc.unary_unary_rpc_method_handler(
-                    servicer.RagListChatSessions,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagListChatSessionsRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagChatSessionList.SerializeToString,
-            ),
-            'RagListAgentSessions': grpc.unary_unary_rpc_method_handler(
-                    servicer.RagListAgentSessions,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagListAgentSessionsRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagAgentSessionList.SerializeToString,
-            ),
-            'RagDeleteChatSessions': grpc.unary_unary_rpc_method_handler(
-                    servicer.RagDeleteChatSessions,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagDeleteChatSessionsRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagPartialSuccess.SerializeToString,
-            ),
-            'RagDeleteAgentSessions': grpc.unary_unary_rpc_method_handler(
-                    servicer.RagDeleteAgentSessions,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagDeleteAgentSessionsRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagPartialSuccess.SerializeToString,
-            ),
-            'RagChatCompletion': grpc.unary_stream_rpc_method_handler(
-                    servicer.RagChatCompletion,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagChatCompletionRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagChatCompletionResponse.SerializeToString,
-            ),
-            'RagOpenAiChatCompletion': grpc.unary_stream_rpc_method_handler(
-                    servicer.RagOpenAiChatCompletion,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagOpenAiChatCompletionRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagOpenAiChatCompletionResponse.SerializeToString,
-            ),
-            'RagAgentCompletion': grpc.unary_stream_rpc_method_handler(
-                    servicer.RagAgentCompletion,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagAgentCompletionRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagAgentCompletionResponse.SerializeToString,
-            ),
-            'RagOpenAiAgentCompletion': grpc.unary_stream_rpc_method_handler(
-                    servicer.RagOpenAiAgentCompletion,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagOpenAiAgentCompletionRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagOpenAiChatCompletionResponse.SerializeToString,
+            'RagListChatAssistants': grpc.unary_unary_rpc_method_handler(
+                    servicer.RagListChatAssistants,
+                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagListChatAssistantsRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagChatAssistantList.SerializeToString,
             ),
             'RagCreateAgent': grpc.unary_unary_rpc_method_handler(
                     servicer.RagCreateAgent,
@@ -1208,65 +859,45 @@ def add_RagsServicer_to_server(servicer, server):
                     request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagListAgentsRequest.FromString,
                     response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagAgentList.SerializeToString,
             ),
-            'RagUploadFiles': grpc.stream_unary_rpc_method_handler(
-                    servicer.RagUploadFiles,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagUploadFilesRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagFileList.SerializeToString,
+            'RagCreateChatSession': grpc.unary_unary_rpc_method_handler(
+                    servicer.RagCreateChatSession,
+                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagCreateChatSessionRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagChatSession.SerializeToString,
             ),
-            'RagCreateFile': grpc.unary_unary_rpc_method_handler(
-                    servicer.RagCreateFile,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagCreateFileRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagFile.SerializeToString,
-            ),
-            'RagListFiles': grpc.unary_unary_rpc_method_handler(
-                    servicer.RagListFiles,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagListFilesRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagListFilesResponse.SerializeToString,
-            ),
-            'RagGetRootFolder': grpc.unary_unary_rpc_method_handler(
-                    servicer.RagGetRootFolder,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagGetRootFolderRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagGetRootFolderResponse.SerializeToString,
-            ),
-            'RagGetParentFolder': grpc.unary_unary_rpc_method_handler(
-                    servicer.RagGetParentFolder,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagGetParentFolderRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagGetParentFolderResponse.SerializeToString,
-            ),
-            'RagGetAllParentFolders': grpc.unary_unary_rpc_method_handler(
-                    servicer.RagGetAllParentFolders,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagGetAllParentFoldersRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagGetAllParentFoldersResponse.SerializeToString,
-            ),
-            'RagDeleteFiles': grpc.unary_unary_rpc_method_handler(
-                    servicer.RagDeleteFiles,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagDeleteFilesRequest.FromString,
+            'RagUpdateChatSession': grpc.unary_unary_rpc_method_handler(
+                    servicer.RagUpdateChatSession,
+                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagUpdateChatSessionRequest.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
-            'RagRenameFile': grpc.unary_unary_rpc_method_handler(
-                    servicer.RagRenameFile,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagRenameFileRequest.FromString,
-                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            'RagListChatSessions': grpc.unary_unary_rpc_method_handler(
+                    servicer.RagListChatSessions,
+                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagListChatSessionsRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagChatSessionList.SerializeToString,
             ),
-            'RagGetFile': grpc.unary_stream_rpc_method_handler(
-                    servicer.RagGetFile,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagGetFileRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagFileChunk.SerializeToString,
+            'RagDeleteChatSessions': grpc.unary_unary_rpc_method_handler(
+                    servicer.RagDeleteChatSessions,
+                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagDeleteChatSessionsRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagPartialSuccess.SerializeToString,
             ),
-            'RagMoveFile': grpc.unary_unary_rpc_method_handler(
-                    servicer.RagMoveFile,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagMoveFileRequest.FromString,
-                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            'RagListAgentSessions': grpc.unary_unary_rpc_method_handler(
+                    servicer.RagListAgentSessions,
+                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagListAgentSessionsRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagAgentSessionList.SerializeToString,
             ),
-            'RagFileToDocument': grpc.unary_unary_rpc_method_handler(
-                    servicer.RagFileToDocument,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagFileToDocumentRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagFileToDocumentList.SerializeToString,
+            'RagDeleteAgentSessions': grpc.unary_unary_rpc_method_handler(
+                    servicer.RagDeleteAgentSessions,
+                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagDeleteAgentSessionsRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagPartialSuccess.SerializeToString,
             ),
-            'RagDifyRetrieval': grpc.unary_unary_rpc_method_handler(
-                    servicer.RagDifyRetrieval,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagDifyRetrievalRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagDifyRecordList.SerializeToString,
+            'RagChatCompletion': grpc.unary_stream_rpc_method_handler(
+                    servicer.RagChatCompletion,
+                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagChatCompletionRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagChatCompletionResponse.SerializeToString,
+            ),
+            'RagAgentCompletion': grpc.unary_stream_rpc_method_handler(
+                    servicer.RagAgentCompletion,
+                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagAgentCompletionRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagAgentCompletionResponse.SerializeToString,
             ),
             'RagAsk': grpc.unary_stream_rpc_method_handler(
                     servicer.RagAsk,
@@ -1277,51 +908,6 @@ def add_RagsServicer_to_server(servicer, server):
                     servicer.RagRelatedQuestions,
                     request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagRelatedQuestionsRequest.FromString,
                     response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagRelatedQuestionsResponse.SerializeToString,
-            ),
-            'RagChatbotCompletion': grpc.unary_stream_rpc_method_handler(
-                    servicer.RagChatbotCompletion,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagChatbotCompletionRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagChatCompletionResponse.SerializeToString,
-            ),
-            'RagChatbotInfo': grpc.unary_unary_rpc_method_handler(
-                    servicer.RagChatbotInfo,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagChatbotInfoRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagChatbotInfoResponse.SerializeToString,
-            ),
-            'RagAgentbotCompletion': grpc.unary_stream_rpc_method_handler(
-                    servicer.RagAgentbotCompletion,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagAgentbotCompletionRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagAgentCompletionResponse.SerializeToString,
-            ),
-            'RagAgentbotInputs': grpc.unary_unary_rpc_method_handler(
-                    servicer.RagAgentbotInputs,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagAgentbotInputsRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagAgentbotInputsResponse.SerializeToString,
-            ),
-            'RagSearchbotAsk': grpc.unary_stream_rpc_method_handler(
-                    servicer.RagSearchbotAsk,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagSearchbotAskRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagAskResponse.SerializeToString,
-            ),
-            'RagSearchbotRetrieval': grpc.unary_unary_rpc_method_handler(
-                    servicer.RagSearchbotRetrieval,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagSearchbotRetrievalRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagSearchbotRetrievalResponse.SerializeToString,
-            ),
-            'RagSearchbotRelatedQuestions': grpc.unary_unary_rpc_method_handler(
-                    servicer.RagSearchbotRelatedQuestions,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagSearchbotRelatedQuestionsRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagRelatedQuestionsResponse.SerializeToString,
-            ),
-            'RagSearchbotDetail': grpc.unary_unary_rpc_method_handler(
-                    servicer.RagSearchbotDetail,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagSearchbotDetailRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagSearchbotDetailResponse.SerializeToString,
-            ),
-            'RagSearchbotMindmap': grpc.unary_unary_rpc_method_handler(
-                    servicer.RagSearchbotMindmap,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagSearchbotMindmapRequest.FromString,
-                    response_serializer=google_dot_protobuf_dot_struct__pb2.Struct.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -1335,7 +921,7 @@ class Rags(object):
     """TODO change Github link if changes to RAGFlow are merged to upstream
 
     Provides an interface for interacting with the RAGFlow RAG engine.
-    Covers all entpoints of the <a href="https://github.com/ondewo/ragflow">RAGFlow</a> HTTP API. For more information on RAGFlow refer to the <a href="https://ragflow.io/docs/dev/">official documentation</a>
+    Covers all endpoints of the <a href="https://github.com/ondewo/ragflow">RAGFlow</a> HTTP API. For more information on RAGFlow refer to the <a href="https://ragflow.io/docs/dev/">official documentation</a>
     """
 
     @staticmethod
@@ -1407,7 +993,7 @@ class Rags(object):
             request,
             target,
             '/ondewo.nlu.Rags/RagDeleteDatasets',
-            ondewo_dot_nlu_dot_rag__pb2.RagDeleteDatasetsRequest.SerializeToString,
+            ondewo_dot_nlu_dot_rag__pb2.RagDeleteRequest.SerializeToString,
             ondewo_dot_nlu_dot_rag__pb2.RagPartialSuccess.FromString,
             options,
             channel_credentials,
@@ -1447,61 +1033,7 @@ class Rags(object):
             _registered_method=True)
 
     @staticmethod
-    def RagGetKnowledgeGraph(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/ondewo.nlu.Rags/RagGetKnowledgeGraph',
-            ondewo_dot_nlu_dot_rag__pb2.RagGetKnowledgeGraphRequest.SerializeToString,
-            ondewo_dot_nlu_dot_rag__pb2.RagGetKnowledgeGraphResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def RagDeleteKnowledgeGraph(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/ondewo.nlu.Rags/RagDeleteKnowledgeGraph',
-            ondewo_dot_nlu_dot_rag__pb2.RagDeleteKnowledgeGraphRequest.SerializeToString,
-            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def RagUploadDocuments(request_iterator,
+    def RagUploadDocument(request_iterator,
             target,
             options=(),
             channel_credentials=None,
@@ -1514,9 +1046,9 @@ class Rags(object):
         return grpc.experimental.stream_unary(
             request_iterator,
             target,
-            '/ondewo.nlu.Rags/RagUploadDocuments',
-            ondewo_dot_nlu_dot_rag__pb2.RagUploadDocumentsRequest.SerializeToString,
-            ondewo_dot_nlu_dot_rag__pb2.RagDocumentList.FromString,
+            '/ondewo.nlu.Rags/RagUploadDocument',
+            ondewo_dot_nlu_dot_rag__pb2.RagUploadDocumentRequest.SerializeToString,
+            ondewo_dot_nlu_dot_rag__pb2.RagDocument.FromString,
             options,
             channel_credentials,
             insecure,
@@ -1597,7 +1129,7 @@ class Rags(object):
             target,
             '/ondewo.nlu.Rags/RagListDocuments',
             ondewo_dot_nlu_dot_rag__pb2.RagListDocumentsRequest.SerializeToString,
-            ondewo_dot_nlu_dot_rag__pb2.RagListDocumentsResponse.FromString,
+            ondewo_dot_nlu_dot_rag__pb2.RagDocumentList.FromString,
             options,
             channel_credentials,
             insecure,
@@ -1625,6 +1157,195 @@ class Rags(object):
             '/ondewo.nlu.Rags/RagDeleteDocuments',
             ondewo_dot_nlu_dot_rag__pb2.RagDeleteDocumentsRequest.SerializeToString,
             ondewo_dot_nlu_dot_rag__pb2.RagPartialSuccess.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def RagRetrieval(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.Rags/RagRetrieval',
+            ondewo_dot_nlu_dot_rag__pb2.RagRetrievalRequest.SerializeToString,
+            ondewo_dot_nlu_dot_rag__pb2.RagRetrievalResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def RagGetKnowledgeGraph(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.Rags/RagGetKnowledgeGraph',
+            ondewo_dot_nlu_dot_rag__pb2.RagDatasetIdRequest.SerializeToString,
+            ondewo_dot_nlu_dot_rag__pb2.RagGetKnowledgeGraphResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def RagDeleteKnowledgeGraph(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.Rags/RagDeleteKnowledgeGraph',
+            ondewo_dot_nlu_dot_rag__pb2.RagDatasetIdRequest.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def RagConstructKnowledgeGraph(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.Rags/RagConstructKnowledgeGraph',
+            ondewo_dot_nlu_dot_rag__pb2.RagDatasetIdRequest.SerializeToString,
+            ondewo_dot_nlu_dot_rag__pb2.RagConstructKnowledgeGraphResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def RagKnowledgeGraphStatus(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.Rags/RagKnowledgeGraphStatus',
+            ondewo_dot_nlu_dot_rag__pb2.RagDatasetIdRequest.SerializeToString,
+            ondewo_dot_nlu_dot_rag__pb2.RagTaskStatus.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def RagConstructRaptor(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.Rags/RagConstructRaptor',
+            ondewo_dot_nlu_dot_rag__pb2.RagDatasetIdRequest.SerializeToString,
+            ondewo_dot_nlu_dot_rag__pb2.RagConstructRaptorResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def RagRaptorStatus(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.Rags/RagRaptorStatus',
+            ondewo_dot_nlu_dot_rag__pb2.RagDatasetIdRequest.SerializeToString,
+            ondewo_dot_nlu_dot_rag__pb2.RagTaskStatus.FromString,
             options,
             channel_credentials,
             insecure,
@@ -1798,7 +1519,7 @@ class Rags(object):
             _registered_method=True)
 
     @staticmethod
-    def RagRetrieval(request,
+    def RagCreateChatAssistant(request,
             target,
             options=(),
             channel_credentials=None,
@@ -1811,9 +1532,9 @@ class Rags(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/ondewo.nlu.Rags/RagRetrieval',
-            ondewo_dot_nlu_dot_rag__pb2.RagRetrievalRequest.SerializeToString,
-            ondewo_dot_nlu_dot_rag__pb2.RagRetrievalResponse.FromString,
+            '/ondewo.nlu.Rags/RagCreateChatAssistant',
+            ondewo_dot_nlu_dot_rag__pb2.RagCreateChatAssistantRequest.SerializeToString,
+            ondewo_dot_nlu_dot_rag__pb2.RagChatAssistant.FromString,
             options,
             channel_credentials,
             insecure,
@@ -1825,7 +1546,7 @@ class Rags(object):
             _registered_method=True)
 
     @staticmethod
-    def RagCreateChat(request,
+    def RagUpdateChatAssistant(request,
             target,
             options=(),
             channel_credentials=None,
@@ -1838,35 +1559,8 @@ class Rags(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/ondewo.nlu.Rags/RagCreateChat',
-            ondewo_dot_nlu_dot_rag__pb2.RagCreateChatRequest.SerializeToString,
-            ondewo_dot_nlu_dot_rag__pb2.RagChat.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def RagUpdateChat(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/ondewo.nlu.Rags/RagUpdateChat',
-            ondewo_dot_nlu_dot_rag__pb2.RagUpdateChatRequest.SerializeToString,
+            '/ondewo.nlu.Rags/RagUpdateChatAssistant',
+            ondewo_dot_nlu_dot_rag__pb2.RagUpdateChatAssistantRequest.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options,
             channel_credentials,
@@ -1879,7 +1573,7 @@ class Rags(object):
             _registered_method=True)
 
     @staticmethod
-    def RagDeleteChats(request,
+    def RagDeleteChatAssistants(request,
             target,
             options=(),
             channel_credentials=None,
@@ -1892,8 +1586,8 @@ class Rags(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/ondewo.nlu.Rags/RagDeleteChats',
-            ondewo_dot_nlu_dot_rag__pb2.RagDeleteChatsRequest.SerializeToString,
+            '/ondewo.nlu.Rags/RagDeleteChatAssistants',
+            ondewo_dot_nlu_dot_rag__pb2.RagDeleteRequest.SerializeToString,
             ondewo_dot_nlu_dot_rag__pb2.RagPartialSuccess.FromString,
             options,
             channel_credentials,
@@ -1906,7 +1600,7 @@ class Rags(object):
             _registered_method=True)
 
     @staticmethod
-    def RagListChats(request,
+    def RagListChatAssistants(request,
             target,
             options=(),
             channel_credentials=None,
@@ -1919,306 +1613,9 @@ class Rags(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/ondewo.nlu.Rags/RagListChats',
-            ondewo_dot_nlu_dot_rag__pb2.RagListChatsRequest.SerializeToString,
-            ondewo_dot_nlu_dot_rag__pb2.RagChatList.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def RagCreateChatSession(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/ondewo.nlu.Rags/RagCreateChatSession',
-            ondewo_dot_nlu_dot_rag__pb2.RagCreateChatSessionRequest.SerializeToString,
-            ondewo_dot_nlu_dot_rag__pb2.RagChatSession.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def RagCreateAgentSession(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/ondewo.nlu.Rags/RagCreateAgentSession',
-            ondewo_dot_nlu_dot_rag__pb2.RagCreateAgentSessionRequest.SerializeToString,
-            ondewo_dot_nlu_dot_rag__pb2.RagAgentSession.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def RagUpdateChatSession(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/ondewo.nlu.Rags/RagUpdateChatSession',
-            ondewo_dot_nlu_dot_rag__pb2.RagUpdateChatSessionRequest.SerializeToString,
-            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def RagListChatSessions(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/ondewo.nlu.Rags/RagListChatSessions',
-            ondewo_dot_nlu_dot_rag__pb2.RagListChatSessionsRequest.SerializeToString,
-            ondewo_dot_nlu_dot_rag__pb2.RagChatSessionList.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def RagListAgentSessions(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/ondewo.nlu.Rags/RagListAgentSessions',
-            ondewo_dot_nlu_dot_rag__pb2.RagListAgentSessionsRequest.SerializeToString,
-            ondewo_dot_nlu_dot_rag__pb2.RagAgentSessionList.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def RagDeleteChatSessions(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/ondewo.nlu.Rags/RagDeleteChatSessions',
-            ondewo_dot_nlu_dot_rag__pb2.RagDeleteChatSessionsRequest.SerializeToString,
-            ondewo_dot_nlu_dot_rag__pb2.RagPartialSuccess.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def RagDeleteAgentSessions(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/ondewo.nlu.Rags/RagDeleteAgentSessions',
-            ondewo_dot_nlu_dot_rag__pb2.RagDeleteAgentSessionsRequest.SerializeToString,
-            ondewo_dot_nlu_dot_rag__pb2.RagPartialSuccess.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def RagChatCompletion(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_stream(
-            request,
-            target,
-            '/ondewo.nlu.Rags/RagChatCompletion',
-            ondewo_dot_nlu_dot_rag__pb2.RagChatCompletionRequest.SerializeToString,
-            ondewo_dot_nlu_dot_rag__pb2.RagChatCompletionResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def RagOpenAiChatCompletion(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_stream(
-            request,
-            target,
-            '/ondewo.nlu.Rags/RagOpenAiChatCompletion',
-            ondewo_dot_nlu_dot_rag__pb2.RagOpenAiChatCompletionRequest.SerializeToString,
-            ondewo_dot_nlu_dot_rag__pb2.RagOpenAiChatCompletionResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def RagAgentCompletion(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_stream(
-            request,
-            target,
-            '/ondewo.nlu.Rags/RagAgentCompletion',
-            ondewo_dot_nlu_dot_rag__pb2.RagAgentCompletionRequest.SerializeToString,
-            ondewo_dot_nlu_dot_rag__pb2.RagAgentCompletionResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def RagOpenAiAgentCompletion(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_stream(
-            request,
-            target,
-            '/ondewo.nlu.Rags/RagOpenAiAgentCompletion',
-            ondewo_dot_nlu_dot_rag__pb2.RagOpenAiAgentCompletionRequest.SerializeToString,
-            ondewo_dot_nlu_dot_rag__pb2.RagOpenAiChatCompletionResponse.FromString,
+            '/ondewo.nlu.Rags/RagListChatAssistants',
+            ondewo_dot_nlu_dot_rag__pb2.RagListChatAssistantsRequest.SerializeToString,
+            ondewo_dot_nlu_dot_rag__pb2.RagChatAssistantList.FromString,
             options,
             channel_credentials,
             insecure,
@@ -2338,34 +1735,7 @@ class Rags(object):
             _registered_method=True)
 
     @staticmethod
-    def RagUploadFiles(request_iterator,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.stream_unary(
-            request_iterator,
-            target,
-            '/ondewo.nlu.Rags/RagUploadFiles',
-            ondewo_dot_nlu_dot_rag__pb2.RagUploadFilesRequest.SerializeToString,
-            ondewo_dot_nlu_dot_rag__pb2.RagFileList.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def RagCreateFile(request,
+    def RagCreateChatSession(request,
             target,
             options=(),
             channel_credentials=None,
@@ -2378,9 +1748,9 @@ class Rags(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/ondewo.nlu.Rags/RagCreateFile',
-            ondewo_dot_nlu_dot_rag__pb2.RagCreateFileRequest.SerializeToString,
-            ondewo_dot_nlu_dot_rag__pb2.RagFile.FromString,
+            '/ondewo.nlu.Rags/RagCreateChatSession',
+            ondewo_dot_nlu_dot_rag__pb2.RagCreateChatSessionRequest.SerializeToString,
+            ondewo_dot_nlu_dot_rag__pb2.RagChatSession.FromString,
             options,
             channel_credentials,
             insecure,
@@ -2392,7 +1762,7 @@ class Rags(object):
             _registered_method=True)
 
     @staticmethod
-    def RagListFiles(request,
+    def RagUpdateChatSession(request,
             target,
             options=(),
             channel_credentials=None,
@@ -2405,116 +1775,8 @@ class Rags(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/ondewo.nlu.Rags/RagListFiles',
-            ondewo_dot_nlu_dot_rag__pb2.RagListFilesRequest.SerializeToString,
-            ondewo_dot_nlu_dot_rag__pb2.RagListFilesResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def RagGetRootFolder(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/ondewo.nlu.Rags/RagGetRootFolder',
-            ondewo_dot_nlu_dot_rag__pb2.RagGetRootFolderRequest.SerializeToString,
-            ondewo_dot_nlu_dot_rag__pb2.RagGetRootFolderResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def RagGetParentFolder(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/ondewo.nlu.Rags/RagGetParentFolder',
-            ondewo_dot_nlu_dot_rag__pb2.RagGetParentFolderRequest.SerializeToString,
-            ondewo_dot_nlu_dot_rag__pb2.RagGetParentFolderResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def RagGetAllParentFolders(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/ondewo.nlu.Rags/RagGetAllParentFolders',
-            ondewo_dot_nlu_dot_rag__pb2.RagGetAllParentFoldersRequest.SerializeToString,
-            ondewo_dot_nlu_dot_rag__pb2.RagGetAllParentFoldersResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def RagDeleteFiles(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/ondewo.nlu.Rags/RagDeleteFiles',
-            ondewo_dot_nlu_dot_rag__pb2.RagDeleteFilesRequest.SerializeToString,
+            '/ondewo.nlu.Rags/RagUpdateChatSession',
+            ondewo_dot_nlu_dot_rag__pb2.RagUpdateChatSessionRequest.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options,
             channel_credentials,
@@ -2527,7 +1789,7 @@ class Rags(object):
             _registered_method=True)
 
     @staticmethod
-    def RagRenameFile(request,
+    def RagListChatSessions(request,
             target,
             options=(),
             channel_credentials=None,
@@ -2540,9 +1802,9 @@ class Rags(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/ondewo.nlu.Rags/RagRenameFile',
-            ondewo_dot_nlu_dot_rag__pb2.RagRenameFileRequest.SerializeToString,
-            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            '/ondewo.nlu.Rags/RagListChatSessions',
+            ondewo_dot_nlu_dot_rag__pb2.RagListChatSessionsRequest.SerializeToString,
+            ondewo_dot_nlu_dot_rag__pb2.RagChatSessionList.FromString,
             options,
             channel_credentials,
             insecure,
@@ -2554,7 +1816,88 @@ class Rags(object):
             _registered_method=True)
 
     @staticmethod
-    def RagGetFile(request,
+    def RagDeleteChatSessions(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.Rags/RagDeleteChatSessions',
+            ondewo_dot_nlu_dot_rag__pb2.RagDeleteChatSessionsRequest.SerializeToString,
+            ondewo_dot_nlu_dot_rag__pb2.RagPartialSuccess.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def RagListAgentSessions(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.Rags/RagListAgentSessions',
+            ondewo_dot_nlu_dot_rag__pb2.RagListAgentSessionsRequest.SerializeToString,
+            ondewo_dot_nlu_dot_rag__pb2.RagAgentSessionList.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def RagDeleteAgentSessions(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.Rags/RagDeleteAgentSessions',
+            ondewo_dot_nlu_dot_rag__pb2.RagDeleteAgentSessionsRequest.SerializeToString,
+            ondewo_dot_nlu_dot_rag__pb2.RagPartialSuccess.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def RagChatCompletion(request,
             target,
             options=(),
             channel_credentials=None,
@@ -2567,9 +1910,9 @@ class Rags(object):
         return grpc.experimental.unary_stream(
             request,
             target,
-            '/ondewo.nlu.Rags/RagGetFile',
-            ondewo_dot_nlu_dot_rag__pb2.RagGetFileRequest.SerializeToString,
-            ondewo_dot_nlu_dot_rag__pb2.RagFileChunk.FromString,
+            '/ondewo.nlu.Rags/RagChatCompletion',
+            ondewo_dot_nlu_dot_rag__pb2.RagChatCompletionRequest.SerializeToString,
+            ondewo_dot_nlu_dot_rag__pb2.RagChatCompletionResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -2581,7 +1924,7 @@ class Rags(object):
             _registered_method=True)
 
     @staticmethod
-    def RagMoveFile(request,
+    def RagAgentCompletion(request,
             target,
             options=(),
             channel_credentials=None,
@@ -2591,66 +1934,12 @@ class Rags(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(
+        return grpc.experimental.unary_stream(
             request,
             target,
-            '/ondewo.nlu.Rags/RagMoveFile',
-            ondewo_dot_nlu_dot_rag__pb2.RagMoveFileRequest.SerializeToString,
-            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def RagFileToDocument(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/ondewo.nlu.Rags/RagFileToDocument',
-            ondewo_dot_nlu_dot_rag__pb2.RagFileToDocumentRequest.SerializeToString,
-            ondewo_dot_nlu_dot_rag__pb2.RagFileToDocumentList.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def RagDifyRetrieval(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/ondewo.nlu.Rags/RagDifyRetrieval',
-            ondewo_dot_nlu_dot_rag__pb2.RagDifyRetrievalRequest.SerializeToString,
-            ondewo_dot_nlu_dot_rag__pb2.RagDifyRecordList.FromString,
+            '/ondewo.nlu.Rags/RagAgentCompletion',
+            ondewo_dot_nlu_dot_rag__pb2.RagAgentCompletionRequest.SerializeToString,
+            ondewo_dot_nlu_dot_rag__pb2.RagAgentCompletionResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -2705,249 +1994,6 @@ class Rags(object):
             '/ondewo.nlu.Rags/RagRelatedQuestions',
             ondewo_dot_nlu_dot_rag__pb2.RagRelatedQuestionsRequest.SerializeToString,
             ondewo_dot_nlu_dot_rag__pb2.RagRelatedQuestionsResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def RagChatbotCompletion(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_stream(
-            request,
-            target,
-            '/ondewo.nlu.Rags/RagChatbotCompletion',
-            ondewo_dot_nlu_dot_rag__pb2.RagChatbotCompletionRequest.SerializeToString,
-            ondewo_dot_nlu_dot_rag__pb2.RagChatCompletionResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def RagChatbotInfo(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/ondewo.nlu.Rags/RagChatbotInfo',
-            ondewo_dot_nlu_dot_rag__pb2.RagChatbotInfoRequest.SerializeToString,
-            ondewo_dot_nlu_dot_rag__pb2.RagChatbotInfoResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def RagAgentbotCompletion(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_stream(
-            request,
-            target,
-            '/ondewo.nlu.Rags/RagAgentbotCompletion',
-            ondewo_dot_nlu_dot_rag__pb2.RagAgentbotCompletionRequest.SerializeToString,
-            ondewo_dot_nlu_dot_rag__pb2.RagAgentCompletionResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def RagAgentbotInputs(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/ondewo.nlu.Rags/RagAgentbotInputs',
-            ondewo_dot_nlu_dot_rag__pb2.RagAgentbotInputsRequest.SerializeToString,
-            ondewo_dot_nlu_dot_rag__pb2.RagAgentbotInputsResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def RagSearchbotAsk(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_stream(
-            request,
-            target,
-            '/ondewo.nlu.Rags/RagSearchbotAsk',
-            ondewo_dot_nlu_dot_rag__pb2.RagSearchbotAskRequest.SerializeToString,
-            ondewo_dot_nlu_dot_rag__pb2.RagAskResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def RagSearchbotRetrieval(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/ondewo.nlu.Rags/RagSearchbotRetrieval',
-            ondewo_dot_nlu_dot_rag__pb2.RagSearchbotRetrievalRequest.SerializeToString,
-            ondewo_dot_nlu_dot_rag__pb2.RagSearchbotRetrievalResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def RagSearchbotRelatedQuestions(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/ondewo.nlu.Rags/RagSearchbotRelatedQuestions',
-            ondewo_dot_nlu_dot_rag__pb2.RagSearchbotRelatedQuestionsRequest.SerializeToString,
-            ondewo_dot_nlu_dot_rag__pb2.RagRelatedQuestionsResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def RagSearchbotDetail(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/ondewo.nlu.Rags/RagSearchbotDetail',
-            ondewo_dot_nlu_dot_rag__pb2.RagSearchbotDetailRequest.SerializeToString,
-            ondewo_dot_nlu_dot_rag__pb2.RagSearchbotDetailResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def RagSearchbotMindmap(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/ondewo.nlu.Rags/RagSearchbotMindmap',
-            ondewo_dot_nlu_dot_rag__pb2.RagSearchbotMindmapRequest.SerializeToString,
-            google_dot_protobuf_dot_struct__pb2.Struct.FromString,
             options,
             channel_credentials,
             insecure,
