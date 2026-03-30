@@ -32,10 +32,19 @@ from ondewo.nlu.rag_pb2 import (
     RagChatSessionList,
     RagConstructKnowledgeGraphResponse,
     RagConstructRaptorResponse,
+    RagCrawler,
+    RagCrawlerResult,
     RagCreateAgentRequest,
+    RagCreateCrawlerRequest,
     RagCreateChatAssistantRequest,
     RagCreateChatSessionRequest,
     RagCreateDatasetRequest,
+    RagDeleteCrawlerRequest,
+    RagDeleteCrawlerResponse,
+    RagDeleteCrawlersRequest,
+    RagDeleteCrawlersResponse,
+    RagDeleteCrawlerRunsRequest,
+    RagDeleteCrawlerRunsResponse,
     RagDataset,
     RagDatasetIdRequest,
     RagDatasetList,
@@ -48,10 +57,21 @@ from ondewo.nlu.rag_pb2 import (
     RagDownloadDocumentRequest,
     RagFileChunk,
     RagGetKnowledgeGraphResponse,
+    RagGetCrawlerAttachedDatasetsRequest,
+    RagGetCrawlerAttachedDatasetsResponse,
+    RagGetCrawlerRequest,
+    RagGetCrawlerResultRequest,
+    RagGetCrawlerResultsRequest,
+    RagGetCrawlerResultsResponse,
+    RagGetCrawlerRunRequest,
     RagListAgentSessionsRequest,
     RagListAgentsRequest,
     RagListChatAssistantsRequest,
     RagListChatSessionsRequest,
+    RagListCrawlerRunsRequest,
+    RagListCrawlerRunsResponse,
+    RagListCrawlersRequest,
+    RagListCrawlersResponse,
     RagListChunksRequest,
     RagListChunksResponse,
     RagListDatasetsRequest,
@@ -61,21 +81,28 @@ from ondewo.nlu.rag_pb2 import (
     RagPartialSuccess,
     RagRelatedQuestionsRequest,
     RagRelatedQuestionsResponse,
+    RagAddCrawlerResultsToDatasetsRequest,
+    RagRemoveCrawlerResultsFromDatasetsRequest,
     RagRemoveChunksRequest,
     RagRetrievalRequest,
     RagRetrievalResponse,
+    RagStartCrawlerRequest,
+    RagStopCrawlerRequest,
+    RagStopCrawlerResponse,
     RagStopParsingRequest,
     RagTaskStatus,
     RagUpdateAgentRequest,
     RagUpdateChatAssistantRequest,
     RagUpdateChatSessionRequest,
     RagUpdateChunkRequest,
+    RagUpdateCrawlerRequest,
     RagUpdateDatasetRequest,
     RagUpdateDocumentRequest,
     RagUploadDocumentRequest,
 )
 from ondewo.nlu.rag_pb2_grpc import RagsStub
 from ondewo.nlu.core.services_interface import ServicesInterface
+from ondewo.nlu.operations_pb2 import Operation
 
 
 class Rags(ServicesInterface):
@@ -251,4 +278,71 @@ class Rags(ServicesInterface):
 
     def rag_related_questions(self, request: RagRelatedQuestionsRequest) -> RagRelatedQuestionsResponse:
         response: RagRelatedQuestionsResponse = self.stub.RagRelatedQuestions(request, metadata=self.metadata)
+        return response
+
+    def rag_create_crawler(self, request: RagCreateCrawlerRequest) -> RagCrawler:
+        response: RagCrawler = self.stub.RagCreateCrawler(request, metadata=self.metadata)
+        return response
+
+    def rag_get_crawler(self, request: RagGetCrawlerRequest) -> RagCrawler:
+        response: RagCrawler = self.stub.RagGetCrawler(request, metadata=self.metadata)
+        return response
+
+    def rag_list_crawlers(self, request: RagListCrawlersRequest) -> RagListCrawlersResponse:
+        response: RagListCrawlersResponse = self.stub.RagListCrawlers(request, metadata=self.metadata)
+        return response
+
+    def rag_update_crawler(self, request: RagUpdateCrawlerRequest) -> RagCrawler:
+        response: RagCrawler = self.stub.RagUpdateCrawler(request, metadata=self.metadata)
+        return response
+
+    def rag_delete_crawler(self, request: RagDeleteCrawlerRequest) -> RagDeleteCrawlerResponse:
+        response: RagDeleteCrawlerResponse = self.stub.RagDeleteCrawler(request, metadata=self.metadata)
+        return response
+
+    def rag_start_crawler(self, request: RagStartCrawlerRequest) -> Operation:
+        response: Operation = self.stub.RagStartCrawler(request, metadata=self.metadata)
+        return response
+
+    def rag_stop_crawler(self, request: RagStopCrawlerRequest) -> RagStopCrawlerResponse:
+        response: RagStopCrawlerResponse = self.stub.RagStopCrawler(request, metadata=self.metadata)
+        return response
+
+    def rag_get_crawler_run(self, request: RagGetCrawlerRunRequest) -> Operation:
+        response: Operation = self.stub.RagGetCrawlerRun(request, metadata=self.metadata)
+        return response
+
+    def rag_list_crawler_runs(self, request: RagListCrawlerRunsRequest) -> RagListCrawlerRunsResponse:
+        response: RagListCrawlerRunsResponse = self.stub.RagListCrawlerRuns(request, metadata=self.metadata)
+        return response
+
+    def rag_delete_crawler_runs(self, request: RagDeleteCrawlerRunsRequest) -> RagDeleteCrawlerRunsResponse:
+        response: RagDeleteCrawlerRunsResponse = self.stub.RagDeleteCrawlerRuns(request, metadata=self.metadata)
+        return response
+
+    def rag_get_crawler_result(self, request: RagGetCrawlerResultRequest) -> RagCrawlerResult:
+        response: RagCrawlerResult = self.stub.RagGetCrawlerResult(request, metadata=self.metadata)
+        return response
+
+    def rag_get_crawler_results(self, request: RagGetCrawlerResultsRequest) -> RagGetCrawlerResultsResponse:
+        response: RagGetCrawlerResultsResponse = self.stub.RagGetCrawlerResults(request, metadata=self.metadata)
+        return response
+
+    def rag_add_crawler_results_to_datasets(self, request: RagAddCrawlerResultsToDatasetsRequest) -> Operation:
+        response: Operation = self.stub.RagAddCrawlerResultsToDatasets(request, metadata=self.metadata)
+        return response
+
+    def rag_remove_crawler_results_from_datasets(
+            self, request: RagRemoveCrawlerResultsFromDatasetsRequest) -> Operation:
+        response: Operation = self.stub.RagRemoveCrawlerResultsFromDatasets(request, metadata=self.metadata)
+        return response
+
+    def rag_get_crawler_attached_datasets(
+            self, request: RagGetCrawlerAttachedDatasetsRequest) -> RagGetCrawlerAttachedDatasetsResponse:
+        response: RagGetCrawlerAttachedDatasetsResponse = self.stub.RagGetCrawlerAttachedDatasets(
+            request, metadata=self.metadata)
+        return response
+
+    def rag_delete_crawlers(self, request: RagDeleteCrawlersRequest) -> RagDeleteCrawlersResponse:
+        response: RagDeleteCrawlersResponse = self.stub.RagDeleteCrawlers(request, metadata=self.metadata)
         return response

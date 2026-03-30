@@ -37,11 +37,16 @@ All message fields that are marked as <code>optional</code> are not actually opt
 import builtins
 import collections.abc
 import google.protobuf.descriptor
+import google.protobuf.field_mask_pb2
 import google.protobuf.internal.containers
 import google.protobuf.internal.enum_type_wrapper
 import google.protobuf.message
 import google.protobuf.struct_pb2
 import google.protobuf.timestamp_pb2
+import ondewo.nlu.common_pb2
+import ondewo.nlu.operation_metadata_pb2
+import ondewo.nlu.operations_pb2
+import ondewo.nlu.session_pb2
 import sys
 import typing
 
@@ -239,11 +244,11 @@ class _RagComparisonOperatorEnumTypeWrapper(google.protobuf.internal.enum_type_w
     If metadata field is a list, checks if the string representation of <em>no</em> fields contains value.
     """
     RAG_COMPARISON_OPERATOR_IN: _RagComparisonOperator.ValueType  # 2
-    """Checks with Python's <code>in</code> opertor.<br>
+    """Checks with Python's <code>in</code> operator.<br>
     If metadata field is a list, <em>all</em> elements must satisfy the condition.
     """
     RAG_COMPARISON_OPERATOR_NOT_IN: _RagComparisonOperator.ValueType  # 3
-    """Checks with Python's <code>not in</code> opertor.<br>
+    """Checks with Python's <code>not in</code> operator.<br>
     If metadata field is a list, <em>all</em> elements must satisfy the condition.
     """
     RAG_COMPARISON_OPERATOR_START_WITH: _RagComparisonOperator.ValueType  # 4
@@ -272,7 +277,7 @@ class _RagComparisonOperatorEnumTypeWrapper(google.protobuf.internal.enum_type_w
     """Less than or equal."""
 
 class RagComparisonOperator(_RagComparisonOperator, metaclass=_RagComparisonOperatorEnumTypeWrapper):
-    """Vaild metadata condition comparison operators"""
+    """Valid metadata condition comparison operators"""
 
 RAG_COMPARISON_OPERATOR_CONTAINS: RagComparisonOperator.ValueType  # 0
 """String representation of metadata field contains value.<br>
@@ -283,11 +288,11 @@ RAG_COMPARISON_OPERATOR_NOT_CONTAINS: RagComparisonOperator.ValueType  # 1
 If metadata field is a list, checks if the string representation of <em>no</em> fields contains value.
 """
 RAG_COMPARISON_OPERATOR_IN: RagComparisonOperator.ValueType  # 2
-"""Checks with Python's <code>in</code> opertor.<br>
+"""Checks with Python's <code>in</code> operator.<br>
 If metadata field is a list, <em>all</em> elements must satisfy the condition.
 """
 RAG_COMPARISON_OPERATOR_NOT_IN: RagComparisonOperator.ValueType  # 3
-"""Checks with Python's <code>not in</code> opertor.<br>
+"""Checks with Python's <code>not in</code> operator.<br>
 If metadata field is a list, <em>all</em> elements must satisfy the condition.
 """
 RAG_COMPARISON_OPERATOR_START_WITH: RagComparisonOperator.ValueType  # 4
@@ -443,6 +448,164 @@ RAG_AGENT_EVENT_TYPE_MESSAGE: RagAgentEventType.ValueType  # 0
 RAG_AGENT_EVENT_TYPE_MESSAGE_END: RagAgentEventType.ValueType  # 1
 """Message completion event."""
 global___RagAgentEventType = RagAgentEventType
+
+class _RagCrawlerSelectorType:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _RagCrawlerSelectorTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_RagCrawlerSelectorType.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    RAG_CRAWLER_SELECTOR_TYPE_ID: _RagCrawlerSelectorType.ValueType  # 0
+    """ID selector."""
+    RAG_CRAWLER_SELECTOR_TYPE_CSS_CLASS: _RagCrawlerSelectorType.ValueType  # 1
+    """CSS class selector."""
+    RAG_CRAWLER_SELECTOR_TYPE_XPATH: _RagCrawlerSelectorType.ValueType  # 2
+    """XPath selector."""
+
+class RagCrawlerSelectorType(_RagCrawlerSelectorType, metaclass=_RagCrawlerSelectorTypeEnumTypeWrapper): ...
+
+RAG_CRAWLER_SELECTOR_TYPE_ID: RagCrawlerSelectorType.ValueType  # 0
+"""ID selector."""
+RAG_CRAWLER_SELECTOR_TYPE_CSS_CLASS: RagCrawlerSelectorType.ValueType  # 1
+"""CSS class selector."""
+RAG_CRAWLER_SELECTOR_TYPE_XPATH: RagCrawlerSelectorType.ValueType  # 2
+"""XPath selector."""
+global___RagCrawlerSelectorType = RagCrawlerSelectorType
+
+class _RagCrawlerCacheMode:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _RagCrawlerCacheModeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_RagCrawlerCacheMode.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    RAG_CRAWLER_CACHE_MODE_ENABLED: _RagCrawlerCacheMode.ValueType  # 0
+    """Normal cache behavior (read/write)."""
+    RAG_CRAWLER_CACHE_MODE_DISABLED: _RagCrawlerCacheMode.ValueType  # 1
+    """Disable all cache reads/writes."""
+    RAG_CRAWLER_CACHE_MODE_READ_ONLY: _RagCrawlerCacheMode.ValueType  # 2
+    """Read from cache only."""
+    RAG_CRAWLER_CACHE_MODE_WRITE_ONLY: _RagCrawlerCacheMode.ValueType  # 3
+    """Write to cache only."""
+    RAG_CRAWLER_CACHE_MODE_BYPASS: _RagCrawlerCacheMode.ValueType  # 4
+    """Bypass cache for this operation."""
+
+class RagCrawlerCacheMode(_RagCrawlerCacheMode, metaclass=_RagCrawlerCacheModeEnumTypeWrapper):
+    """Cache mode for crawler runs."""
+
+RAG_CRAWLER_CACHE_MODE_ENABLED: RagCrawlerCacheMode.ValueType  # 0
+"""Normal cache behavior (read/write)."""
+RAG_CRAWLER_CACHE_MODE_DISABLED: RagCrawlerCacheMode.ValueType  # 1
+"""Disable all cache reads/writes."""
+RAG_CRAWLER_CACHE_MODE_READ_ONLY: RagCrawlerCacheMode.ValueType  # 2
+"""Read from cache only."""
+RAG_CRAWLER_CACHE_MODE_WRITE_ONLY: RagCrawlerCacheMode.ValueType  # 3
+"""Write to cache only."""
+RAG_CRAWLER_CACHE_MODE_BYPASS: RagCrawlerCacheMode.ValueType  # 4
+"""Bypass cache for this operation."""
+global___RagCrawlerCacheMode = RagCrawlerCacheMode
+
+class _RagCrawlerMetaDataExtractorType:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _RagCrawlerMetaDataExtractorTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_RagCrawlerMetaDataExtractorType.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_REGEX: _RagCrawlerMetaDataExtractorType.ValueType  # 0
+    """Regex pattern."""
+    RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_FIXED_VALUE: _RagCrawlerMetaDataExtractorType.ValueType  # 1
+    """Fixed value."""
+    RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_CSS_SELECTOR: _RagCrawlerMetaDataExtractorType.ValueType  # 2
+    """CSS selector."""
+    RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_XPATH_SELECTOR: _RagCrawlerMetaDataExtractorType.ValueType  # 3
+    """XPath selector."""
+    RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_ID_SELECTOR: _RagCrawlerMetaDataExtractorType.ValueType  # 4
+    """ID selector."""
+
+class RagCrawlerMetaDataExtractorType(_RagCrawlerMetaDataExtractorType, metaclass=_RagCrawlerMetaDataExtractorTypeEnumTypeWrapper): ...
+
+RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_REGEX: RagCrawlerMetaDataExtractorType.ValueType  # 0
+"""Regex pattern."""
+RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_FIXED_VALUE: RagCrawlerMetaDataExtractorType.ValueType  # 1
+"""Fixed value."""
+RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_CSS_SELECTOR: RagCrawlerMetaDataExtractorType.ValueType  # 2
+"""CSS selector."""
+RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_XPATH_SELECTOR: RagCrawlerMetaDataExtractorType.ValueType  # 3
+"""XPath selector."""
+RAG_CRAWLER_META_DATA_EXTRACTOR_TYPE_ID_SELECTOR: RagCrawlerMetaDataExtractorType.ValueType  # 4
+"""ID selector."""
+global___RagCrawlerMetaDataExtractorType = RagCrawlerMetaDataExtractorType
+
+class _RagCrawlerCrawlStrategy:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _RagCrawlerCrawlStrategyEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_RagCrawlerCrawlStrategy.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    RAG_CRAWLER_CRAWL_STRATEGY_BFS: _RagCrawlerCrawlStrategy.ValueType  # 0
+    """Breadth-first traversal."""
+    RAG_CRAWLER_CRAWL_STRATEGY_DFS: _RagCrawlerCrawlStrategy.ValueType  # 1
+    """Depth-first traversal."""
+    RAG_CRAWLER_CRAWL_STRATEGY_BEST_FIRST: _RagCrawlerCrawlStrategy.ValueType  # 2
+    """Best-first traversal based on relevance scoring."""
+
+class RagCrawlerCrawlStrategy(_RagCrawlerCrawlStrategy, metaclass=_RagCrawlerCrawlStrategyEnumTypeWrapper):
+    """Crawl traversal strategy."""
+
+RAG_CRAWLER_CRAWL_STRATEGY_BFS: RagCrawlerCrawlStrategy.ValueType  # 0
+"""Breadth-first traversal."""
+RAG_CRAWLER_CRAWL_STRATEGY_DFS: RagCrawlerCrawlStrategy.ValueType  # 1
+"""Depth-first traversal."""
+RAG_CRAWLER_CRAWL_STRATEGY_BEST_FIRST: RagCrawlerCrawlStrategy.ValueType  # 2
+"""Best-first traversal based on relevance scoring."""
+global___RagCrawlerCrawlStrategy = RagCrawlerCrawlStrategy
+
+class _RagCrawlerFilterContentType:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _RagCrawlerFilterContentTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_RagCrawlerFilterContentType.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    RAG_CRAWLER_FILTER_CONTENT_TYPE_UNSPECIFIED: _RagCrawlerFilterContentType.ValueType  # 0
+    """Unspecified content type."""
+    RAG_CRAWLER_FILTER_CONTENT_TYPE_TEXT_HTML: _RagCrawlerFilterContentType.ValueType  # 1
+    """HTML documents."""
+    RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_JSON: _RagCrawlerFilterContentType.ValueType  # 2
+    """JSON payloads."""
+    RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_XML: _RagCrawlerFilterContentType.ValueType  # 3
+    """XML payloads."""
+    RAG_CRAWLER_FILTER_CONTENT_TYPE_TEXT_PLAIN: _RagCrawlerFilterContentType.ValueType  # 4
+    """Plain text documents."""
+    RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_PDF: _RagCrawlerFilterContentType.ValueType  # 5
+    """PDF documents."""
+    RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_POWERPOINT: _RagCrawlerFilterContentType.ValueType  # 6
+    """PowerPoint documents."""
+    RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_EXCEL: _RagCrawlerFilterContentType.ValueType  # 7
+    """Excel documents."""
+    RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_WORD: _RagCrawlerFilterContentType.ValueType  # 8
+    """Word documents."""
+
+class RagCrawlerFilterContentType(_RagCrawlerFilterContentType, metaclass=_RagCrawlerFilterContentTypeEnumTypeWrapper):
+    """Supported content types for deep-crawl content-type filters."""
+
+RAG_CRAWLER_FILTER_CONTENT_TYPE_UNSPECIFIED: RagCrawlerFilterContentType.ValueType  # 0
+"""Unspecified content type."""
+RAG_CRAWLER_FILTER_CONTENT_TYPE_TEXT_HTML: RagCrawlerFilterContentType.ValueType  # 1
+"""HTML documents."""
+RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_JSON: RagCrawlerFilterContentType.ValueType  # 2
+"""JSON payloads."""
+RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_XML: RagCrawlerFilterContentType.ValueType  # 3
+"""XML payloads."""
+RAG_CRAWLER_FILTER_CONTENT_TYPE_TEXT_PLAIN: RagCrawlerFilterContentType.ValueType  # 4
+"""Plain text documents."""
+RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_PDF: RagCrawlerFilterContentType.ValueType  # 5
+"""PDF documents."""
+RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_POWERPOINT: RagCrawlerFilterContentType.ValueType  # 6
+"""PowerPoint documents."""
+RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_EXCEL: RagCrawlerFilterContentType.ValueType  # 7
+"""Excel documents."""
+RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_WORD: RagCrawlerFilterContentType.ValueType  # 8
+"""Word documents."""
+global___RagCrawlerFilterContentType = RagCrawlerFilterContentType
 
 @typing.final
 class RagFileMetadata(google.protobuf.message.Message):
@@ -945,7 +1108,7 @@ class RagListDatasetsRequest(google.protobuf.message.Message):
 
     <ul>
         <li><code>&lt;size&gt;</code> must be an integer &geq; <code>1</code>. The maximum number of results to return.</li>
-        <li><code>&lt;idx&gt;</code> must be an interger &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li>
+        <li><code>&lt;idx&gt;</code> must be an integer &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li>
     </ul>
 
     <em>Important note</em>: The <code>&lt;idx&gt;</code> is the index in the requested sequence NOT the page number. E.g. if the requested list has 100 elements then <code>current_index-5--page_size-15</code> returns the elements at index 5-19 and not the 5-th page of 15 elements.
@@ -1329,7 +1492,7 @@ class RagListDocumentsRequest(google.protobuf.message.Message):
 
     <ul>
         <li><code>&lt;size&gt;</code> must be an integer &geq; <code>1</code>. The maximum number of results to return.</li>
-        <li><code>&lt;idx&gt;</code> must be an interger &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li>
+        <li><code>&lt;idx&gt;</code> must be an integer &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li>
     </ul>
 
     <em>Important note</em>: The <code>&lt;idx&gt;</code> is the index in the requested sequence NOT the page number. E.g. if the requested list has 100 elements then <code>current_index-5--page_size-15</code> returns the elements at index 5-19 and not the 5-th page of 15 elements.
@@ -1547,7 +1710,7 @@ class RagRetrievalRequest(google.protobuf.message.Message):
 
     <ul>
         <li><code>&lt;size&gt;</code> must be an integer &geq; <code>1</code>. The maximum number of results to return.</li>
-        <li><code>&lt;idx&gt;</code> must be an interger &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li>
+        <li><code>&lt;idx&gt;</code> must be an integer &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li>
     </ul>
 
     <em>Important note</em>: The <code>&lt;idx&gt;</code> is the index in the requested sequence NOT the page number. E.g. if the requested list has 100 elements then <code>current_index-5--page_size-15</code> returns the elements at index 5-19 and not the 5-th page of 15 elements.
@@ -4097,3 +4260,1602 @@ class RagRelatedQuestionsResponse(google.protobuf.message.Message):
     def ClearField(self, field_name: typing.Literal["questions", b"questions"]) -> None: ...
 
 global___RagRelatedQuestionsResponse = RagRelatedQuestionsResponse
+
+@typing.final
+class RagCreateCrawlerRequest(google.protobuf.message.Message):
+    """Request message for creating a crawler for a dataset of an agent."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    CRAWLER_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Required. The agent to create crawlers for.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
+    @property
+    def crawler(self) -> global___RagCrawler:
+        """Required. Crawler definition to create.
+        If <code>crawler.name</code> is empty, backend will generate it.
+        Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
+        """
+
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which RagCrawler fields get returned."""
+
+    def __init__(
+        self,
+        *,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
+        crawler: global___RagCrawler | None = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["crawler", b"crawler", "field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["crawler", b"crawler", "field_mask", b"field_mask", "language_code", b"language_code", "parent", b"parent"]) -> None: ...
+
+global___RagCreateCrawlerRequest = RagCreateCrawlerRequest
+
+@typing.final
+class RagDeleteCrawlerRequest(google.protobuf.message.Message):
+    """Request message for deleting a crawler of a dataset for the specified agent."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    NAME_FIELD_NUMBER: builtins.int
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    name: builtins.str
+    """Resource name of the RagCrawler
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
+    """
+    parent: builtins.str
+    """Required. The agent owning the crawler.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
+    def __init__(
+        self,
+        *,
+        name: builtins.str = ...,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["language_code", b"language_code", "name", b"name", "parent", b"parent"]) -> None: ...
+
+global___RagDeleteCrawlerRequest = RagDeleteCrawlerRequest
+
+@typing.final
+class RagDeleteCrawlerResponse(google.protobuf.message.Message):
+    """Response message for deleting a crawler of a dataset for the specified agent."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    NAME_FIELD_NUMBER: builtins.int
+    ERROR_MESSAGE_FIELD_NUMBER: builtins.int
+    name: builtins.str
+    """Resource name of the RagCrawler
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
+    """
+    error_message: builtins.str
+    """Error message if there are any."""
+    def __init__(
+        self,
+        *,
+        name: builtins.str = ...,
+        error_message: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["error_message", b"error_message", "name", b"name"]) -> None: ...
+
+global___RagDeleteCrawlerResponse = RagDeleteCrawlerResponse
+
+@typing.final
+class RagDeleteCrawlersRequest(google.protobuf.message.Message):
+    """Request message for deleting multiple crawlers of a dataset for the specified agent."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    NAMES_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Required. The agent owning the crawlers.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
+    @property
+    def names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Crawler resource names to delete.
+        Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
+        """
+
+    def __init__(
+        self,
+        *,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
+        names: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["language_code", b"language_code", "names", b"names", "parent", b"parent"]) -> None: ...
+
+global___RagDeleteCrawlersRequest = RagDeleteCrawlersRequest
+
+@typing.final
+class RagDeleteCrawlersResponse(google.protobuf.message.Message):
+    """Response message for deleting multiple crawlers of a dataset for the specified agent."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    DELETE_CRAWLER_RESPONSES_FIELD_NUMBER: builtins.int
+    ERROR_MESSAGE_FIELD_NUMBER: builtins.int
+    error_message: builtins.str
+    """error message if there are any"""
+    @property
+    def delete_crawler_responses(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagDeleteCrawlerResponse]:
+        """responses to delete crawlers"""
+
+    def __init__(
+        self,
+        *,
+        delete_crawler_responses: collections.abc.Iterable[global___RagDeleteCrawlerResponse] | None = ...,
+        error_message: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["delete_crawler_responses", b"delete_crawler_responses", "error_message", b"error_message"]) -> None: ...
+
+global___RagDeleteCrawlersResponse = RagDeleteCrawlersResponse
+
+@typing.final
+class RagListCrawlersRequest(google.protobuf.message.Message):
+    """Request message for listing crawlers of a dataset for the specified agent."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    DATASET_NAME_FIELD_NUMBER: builtins.int
+    CRAWLER_NAME_FIELD_NUMBER: builtins.int
+    ORDERBY_FIELD_NUMBER: builtins.int
+    SORTING_MODE_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Required. The agent to list crawlers for.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
+    language_code: builtins.str
+    """Required. The language of the agent of the dataset."""
+    page_token: builtins.str
+    """Optional. Opaque pagination cursor from a previous list response.
+    Leave empty for the first page.
+    """
+    dataset_name: builtins.str
+    """Optional. Filter by dataset name."""
+    crawler_name: builtins.str
+    """Optional. Filter by crawler name."""
+    orderby: builtins.str
+    """Optional. Sort field (default: <code>create_time</code>)."""
+    sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType
+    """Optional. Sort descending."""
+    def __init__(
+        self,
+        *,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
+        page_token: builtins.str = ...,
+        dataset_name: builtins.str = ...,
+        crawler_name: builtins.str = ...,
+        orderby: builtins.str = ...,
+        sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_sorting_mode", b"_sorting_mode", "sorting_mode", b"sorting_mode"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_sorting_mode", b"_sorting_mode", "crawler_name", b"crawler_name", "dataset_name", b"dataset_name", "language_code", b"language_code", "orderby", b"orderby", "page_token", b"page_token", "parent", b"parent", "sorting_mode", b"sorting_mode"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_sorting_mode", b"_sorting_mode"]) -> typing.Literal["sorting_mode"] | None: ...
+
+global___RagListCrawlersRequest = RagListCrawlersRequest
+
+@typing.final
+class RagListCrawlersResponse(google.protobuf.message.Message):
+    """Response message for listing crawlers."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    CRAWLERS_FIELD_NUMBER: builtins.int
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    next_page_token: builtins.str
+    """Opaque pagination cursor for the next page.
+    Pass this value unchanged as request <code>page_token</code>.
+    Empty means no further pages.
+    """
+    @property
+    def crawlers(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagCrawler]:
+        """List of crawlers."""
+
+    def __init__(
+        self,
+        *,
+        crawlers: collections.abc.Iterable[global___RagCrawler] | None = ...,
+        next_page_token: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["crawlers", b"crawlers", "next_page_token", b"next_page_token"]) -> None: ...
+
+global___RagListCrawlersResponse = RagListCrawlersResponse
+
+@typing.final
+class RagGetCrawlerRequest(google.protobuf.message.Message):
+    """Request message for getting a crawler."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    NAME_FIELD_NUMBER: builtins.int
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
+    name: builtins.str
+    """Required. Resource name of the RagCrawler.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
+    """
+    parent: builtins.str
+    """Required. The agent owning the crawler.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which RagCrawler fields get returned."""
+
+    def __init__(
+        self,
+        *,
+        name: builtins.str = ...,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "language_code", b"language_code", "name", b"name", "parent", b"parent"]) -> None: ...
+
+global___RagGetCrawlerRequest = RagGetCrawlerRequest
+
+@typing.final
+class RagUpdateCrawlerRequest(google.protobuf.message.Message):
+    """Request message for updating a crawler (partial update)."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    CRAWLER_FIELD_NUMBER: builtins.int
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    UPDATE_MASK_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Required. The agent owning the crawler.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
+    @property
+    def crawler(self) -> global___RagCrawler:
+        """Required. The crawler to update. Only configuration fields can be updated.
+        The name field must be set and must match an existing crawler.
+        Timestamps and audit fields are auto-managed by the service.
+        """
+
+    @property
+    def update_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. FieldMask to specify which fields to update.
+        If not provided, all configuration fields in crawler are updated.
+        """
+
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which crawler fields get returned."""
+
+    def __init__(
+        self,
+        *,
+        crawler: global___RagCrawler | None = ...,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
+        update_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["crawler", b"crawler", "field_mask", b"field_mask", "update_mask", b"update_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["crawler", b"crawler", "field_mask", b"field_mask", "language_code", b"language_code", "parent", b"parent", "update_mask", b"update_mask"]) -> None: ...
+
+global___RagUpdateCrawlerRequest = RagUpdateCrawlerRequest
+
+@typing.final
+class RagCrawler(google.protobuf.message.Message):
+    """RagCrawler definition.
+
+    This object represents a reusable crawler profile that can be run multiple times.
+    It is modeled after Crawl4AI concepts:
+    <ul>
+        <li>seed/sitemap discovery (<code>RagCrawlerSources</code>)</li>
+        <li>URL/domain constraints (<code>RagCrawlerFilters</code>)</li>
+        <li>authentication/session bootstrap (<code>RagCrawlerAuth</code>, <code>RagCrawlerBrowserConfig</code>)</li>
+        <li>run behavior and extraction output (<code>RagCrawlerConfig</code>)</li>
+    </ul>
+
+    The same crawler can be executed multiple times; each execution creates
+    a separate crawler run and result set.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    NAME_FIELD_NUMBER: builtins.int
+    DISPLAY_NAME_FIELD_NUMBER: builtins.int
+    CRAWLER_SOURCES_FIELD_NUMBER: builtins.int
+    CRAWLER_SEED_URL_FILTERS_FIELD_NUMBER: builtins.int
+    CRAWLER_AUTH_FIELD_NUMBER: builtins.int
+    CRAWLER_BROWSER_CONFIG_FIELD_NUMBER: builtins.int
+    CRAWLER_CONFIG_FIELD_NUMBER: builtins.int
+    CREATED_AT_FIELD_NUMBER: builtins.int
+    MODIFIED_AT_FIELD_NUMBER: builtins.int
+    CREATED_BY_FIELD_NUMBER: builtins.int
+    MODIFIED_BY_FIELD_NUMBER: builtins.int
+    name: builtins.str
+    """Resource name of the RagCrawler
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
+    Automatically generated in backend if empty
+    """
+    display_name: builtins.str
+    """Optional. Human-readable crawler name shown in UIs/logs.
+    Should be unique per agent to simplify operational troubleshooting.
+    """
+    created_by: builtins.str
+    """User id in form of a valid UUID."""
+    modified_by: builtins.str
+    """User id in form of a valid UUID."""
+    @property
+    def crawler_sources(self) -> global___RagCrawlerSources:
+        """Optional. Crawl entry points.
+        Configure crawl entry points: URL seeds and/or sitemap sources.
+        """
+
+    @property
+    def crawler_seed_url_filters(self) -> global___RagCrawlerSeedUrlFilters:
+        """Optional. Seed URL filters.
+        Filters are applied to the seed URLs before they are crawled.
+        """
+
+    @property
+    def crawler_auth(self) -> global___RagCrawlerAuth:
+        """Optional. Login/auth setup used before crawl requests."""
+
+    @property
+    def crawler_browser_config(self) -> global___RagCrawlerBrowserConfig:
+        """Optional. Browser runtime setup (engine, viewport, cookies, proxy, headers).
+        Roughly corresponds to Crawl4AI <code>BrowserConfig</code>.
+        Use this when target sites require JS, custom headers, session cookies, or proxy routing.
+        """
+
+    @property
+    def crawler_config(self) -> global___RagCrawlerConfig:
+        """Optional. Crawl execution behavior and extraction settings.
+        Roughly corresponds to Crawl4AI <code>CrawlerRunConfig</code>.
+        """
+
+    @property
+    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Creation date and time. Read-only field."""
+
+    @property
+    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Modification date and time. Read-only field."""
+
+    def __init__(
+        self,
+        *,
+        name: builtins.str = ...,
+        display_name: builtins.str = ...,
+        crawler_sources: global___RagCrawlerSources | None = ...,
+        crawler_seed_url_filters: global___RagCrawlerSeedUrlFilters | None = ...,
+        crawler_auth: global___RagCrawlerAuth | None = ...,
+        crawler_browser_config: global___RagCrawlerBrowserConfig | None = ...,
+        crawler_config: global___RagCrawlerConfig | None = ...,
+        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        created_by: builtins.str = ...,
+        modified_by: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["crawler_auth", b"crawler_auth", "crawler_browser_config", b"crawler_browser_config", "crawler_config", b"crawler_config", "crawler_seed_url_filters", b"crawler_seed_url_filters", "crawler_sources", b"crawler_sources", "created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["crawler_auth", b"crawler_auth", "crawler_browser_config", b"crawler_browser_config", "crawler_config", b"crawler_config", "crawler_seed_url_filters", b"crawler_seed_url_filters", "crawler_sources", b"crawler_sources", "created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name"]) -> None: ...
+
+global___RagCrawler = RagCrawler
+
+@typing.final
+class RagCrawlerSources(google.protobuf.message.Message):
+    """Crawl entry points.
+
+    Both inputs can be provided at the same time:
+    - Sitemaps are expanded into a crawl URL list (in discovery order)
+    - Seed URLs are appended afterwards (in the order provided)
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    URLS_FIELD_NUMBER: builtins.int
+    SITEMAPS_FIELD_NUMBER: builtins.int
+    @property
+    def urls(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Direct seed URLs to enqueue as starting points."""
+
+    @property
+    def sitemaps(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Sitemap URLs used for URL discovery.
+        Typical values are <code>/sitemap.xml</code> or sitemap index files.
+        """
+
+    def __init__(
+        self,
+        *,
+        urls: collections.abc.Iterable[builtins.str] | None = ...,
+        sitemaps: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["sitemaps", b"sitemaps", "urls", b"urls"]) -> None: ...
+
+global___RagCrawlerSources = RagCrawlerSources
+
+@typing.final
+class RagCrawlerFilters(google.protobuf.message.Message):
+    """URL and domain restrictions.
+
+    Filters are evaluated during link discovery/scheduling and help avoid
+    crawling irrelevant, duplicate, or unsafe sections (auth/logout pages,
+    marketing subdomains, binary downloads, etc.).
+    These include domains to be excluded in the sources (e.g. through sitemaps or seed URLs)
+    and domains to be excluded in the deep crawl or extraction of pages to be crawled.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ALLOWED_DOMAINS_FIELD_NUMBER: builtins.int
+    DISALLOWED_DOMAINS_FIELD_NUMBER: builtins.int
+    ALLOW_INTERNAL_LINKS_FIELD_NUMBER: builtins.int
+    ALLOW_EXTERNAL_LINKS_FIELD_NUMBER: builtins.int
+    ALLOW_SOCIAL_MEDIA_LINKS_FIELD_NUMBER: builtins.int
+    allow_internal_links: builtins.bool
+    """Optional. Include internal links."""
+    allow_external_links: builtins.bool
+    """Optional. Exclude external links."""
+    allow_social_media_links: builtins.bool
+    """Optional. Include social media links."""
+    @property
+    def allowed_domains(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Domain allow-list (host-level gating)."""
+
+    @property
+    def disallowed_domains(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Domain block-list."""
+
+    def __init__(
+        self,
+        *,
+        allowed_domains: collections.abc.Iterable[builtins.str] | None = ...,
+        disallowed_domains: collections.abc.Iterable[builtins.str] | None = ...,
+        allow_internal_links: builtins.bool = ...,
+        allow_external_links: builtins.bool = ...,
+        allow_social_media_links: builtins.bool = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["allow_external_links", b"allow_external_links", "allow_internal_links", b"allow_internal_links", "allow_social_media_links", b"allow_social_media_links", "allowed_domains", b"allowed_domains", "disallowed_domains", b"disallowed_domains"]) -> None: ...
+
+global___RagCrawlerFilters = RagCrawlerFilters
+
+@typing.final
+class RagCrawlerSeedUrlFilters(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ALLOWED_REGEX_FIELD_NUMBER: builtins.int
+    DISALLOWED_REGEX_FIELD_NUMBER: builtins.int
+    ALLOWED_DOMAINS_FIELD_NUMBER: builtins.int
+    DISALLOWED_DOMAINS_FIELD_NUMBER: builtins.int
+    @property
+    def allowed_regex(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Regex allow-list for full URLs."""
+
+    @property
+    def disallowed_regex(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Regex block-list for full URLs."""
+
+    @property
+    def allowed_domains(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Domain allow-list (host-level gating)."""
+
+    @property
+    def disallowed_domains(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Domain block-list."""
+
+    def __init__(
+        self,
+        *,
+        allowed_regex: collections.abc.Iterable[builtins.str] | None = ...,
+        disallowed_regex: collections.abc.Iterable[builtins.str] | None = ...,
+        allowed_domains: collections.abc.Iterable[builtins.str] | None = ...,
+        disallowed_domains: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["allowed_domains", b"allowed_domains", "allowed_regex", b"allowed_regex", "disallowed_domains", b"disallowed_domains", "disallowed_regex", b"disallowed_regex"]) -> None: ...
+
+global___RagCrawlerSeedUrlFilters = RagCrawlerSeedUrlFilters
+
+@typing.final
+class RagCrawlerAuth(google.protobuf.message.Message):
+    """Authentication configuration.
+
+    Supports both browser/form login and HTTP auth patterns used by Crawl4AI
+    pipelines when crawling protected content.
+    HTTP Auth is used on all pages of the sources, while html_auth is a separate authentication flow used in the beginning of the crawl
+    to extract the cookies. This is done through a login screen. If HTTP Auth is set, this would ALSO be used on the HTML auth page,
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    HTTP_AUTH_FIELD_NUMBER: builtins.int
+    HTML_AUTH_FIELD_NUMBER: builtins.int
+    @property
+    def http_auth(self) -> global___RagCrawlerHttpAuth:
+        """Optional. HTTP Basic auth settings."""
+
+    @property
+    def html_auth(self) -> global___RagCrawlerHtmlAuth:
+        """Optional. Form/HTML login selector and credential settings."""
+
+    def __init__(
+        self,
+        *,
+        http_auth: global___RagCrawlerHttpAuth | None = ...,
+        html_auth: global___RagCrawlerHtmlAuth | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["html_auth", b"html_auth", "http_auth", b"http_auth"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["html_auth", b"html_auth", "http_auth", b"http_auth"]) -> None: ...
+
+global___RagCrawlerAuth = RagCrawlerAuth
+
+@typing.final
+class RagCrawlerHtmlAuth(google.protobuf.message.Message):
+    """Form/HTML login configuration.
+
+    Selector types and selector strings identify login form fields in the page
+    DOM. Credentials are then filled before form submission.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    HTML_AUTH_BASE_URL_FIELD_NUMBER: builtins.int
+    HTML_AUTH_USERNAME_SELECTOR_TYPE_FIELD_NUMBER: builtins.int
+    HTML_AUTH_USERNAME_SELECTOR_FIELD_NUMBER: builtins.int
+    HTML_AUTH_USERNAME_FIELD_NUMBER: builtins.int
+    HTML_AUTH_PASSWORD_SELECTOR_TYPE_FIELD_NUMBER: builtins.int
+    HTML_AUTH_PASSWORD_SELECTOR_FIELD_NUMBER: builtins.int
+    HTML_AUTH_PASSWORD_FIELD_NUMBER: builtins.int
+    html_auth_base_url: builtins.str
+    """Optional. Base URL used for auth/login navigation."""
+    html_auth_username_selector_type: global___RagCrawlerSelectorType.ValueType
+    """Optional. Username field selector type."""
+    html_auth_username_selector: builtins.str
+    """Optional. Username field selector value."""
+    html_auth_username: builtins.str
+    """Optional. Username credential."""
+    html_auth_password_selector_type: global___RagCrawlerSelectorType.ValueType
+    """Optional. Password field selector type."""
+    html_auth_password_selector: builtins.str
+    """Optional. Password field selector value."""
+    html_auth_password: builtins.str
+    """Optional. Password credential."""
+    def __init__(
+        self,
+        *,
+        html_auth_base_url: builtins.str = ...,
+        html_auth_username_selector_type: global___RagCrawlerSelectorType.ValueType = ...,
+        html_auth_username_selector: builtins.str = ...,
+        html_auth_username: builtins.str = ...,
+        html_auth_password_selector_type: global___RagCrawlerSelectorType.ValueType = ...,
+        html_auth_password_selector: builtins.str = ...,
+        html_auth_password: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["html_auth_base_url", b"html_auth_base_url", "html_auth_password", b"html_auth_password", "html_auth_password_selector", b"html_auth_password_selector", "html_auth_password_selector_type", b"html_auth_password_selector_type", "html_auth_username", b"html_auth_username", "html_auth_username_selector", b"html_auth_username_selector", "html_auth_username_selector_type", b"html_auth_username_selector_type"]) -> None: ...
+
+global___RagCrawlerHtmlAuth = RagCrawlerHtmlAuth
+
+@typing.final
+class RagCrawlerHttpAuth(google.protobuf.message.Message):
+    """HTTP Basic authentication settings."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    HTTP_AUTH_USERNAME_FIELD_NUMBER: builtins.int
+    HTTP_AUTH_PASSWORD_FIELD_NUMBER: builtins.int
+    HTTP_AUTH_USER_AGENT_FIELD_NUMBER: builtins.int
+    http_auth_username: builtins.str
+    """HTTP Basic Authentication username."""
+    http_auth_password: builtins.str
+    """HTTP Basic Authentication password."""
+    http_auth_user_agent: builtins.str
+    """Optional. User-Agent sent with basic-auth requests."""
+    def __init__(
+        self,
+        *,
+        http_auth_username: builtins.str = ...,
+        http_auth_password: builtins.str = ...,
+        http_auth_user_agent: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["http_auth_password", b"http_auth_password", "http_auth_user_agent", b"http_auth_user_agent", "http_auth_username", b"http_auth_username"]) -> None: ...
+
+global___RagCrawlerHttpAuth = RagCrawlerHttpAuth
+
+@typing.final
+class RagCrawlerBrowserConfig(google.protobuf.message.Message):
+    """Browser runtime configuration.
+
+    This block maps closely to Crawl4AI BrowserConfig and controls browser
+    process setup (engine, headless mode, viewport, context, proxy, cookies,
+    user-agent behavior, and launch arguments).
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    CRAWLER_HEADERS_FIELD_NUMBER: builtins.int
+    CRAWLER_COOKIES_FIELD_NUMBER: builtins.int
+    @property
+    def crawler_headers(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[google.protobuf.struct_pb2.Struct]:
+        """Optional. HTTP headers sent on page/resource requests.
+        Repeated entries allow duplicate header names and preserve order.
+        """
+
+    @property
+    def crawler_cookies(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagCrawlerCookie]:
+        """Optional. Initial cookies."""
+
+    def __init__(
+        self,
+        *,
+        crawler_headers: collections.abc.Iterable[google.protobuf.struct_pb2.Struct] | None = ...,
+        crawler_cookies: collections.abc.Iterable[global___RagCrawlerCookie] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["crawler_cookies", b"crawler_cookies", "crawler_headers", b"crawler_headers"]) -> None: ...
+
+global___RagCrawlerBrowserConfig = RagCrawlerBrowserConfig
+
+@typing.final
+class RagCrawlerCookie(google.protobuf.message.Message):
+    """Cookie representation for initial browser session state."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    COOKIE_NAME_FIELD_NUMBER: builtins.int
+    COOKIE_VALUE_FIELD_NUMBER: builtins.int
+    COOKIE_DOMAIN_FIELD_NUMBER: builtins.int
+    cookie_name: builtins.str
+    """Required. Cookie name."""
+    cookie_value: builtins.str
+    """Required. Cookie value."""
+    cookie_domain: builtins.str
+    """Optional. Cookie domain."""
+    def __init__(
+        self,
+        *,
+        cookie_name: builtins.str = ...,
+        cookie_value: builtins.str = ...,
+        cookie_domain: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["cookie_domain", b"cookie_domain", "cookie_name", b"cookie_name", "cookie_value", b"cookie_value"]) -> None: ...
+
+global___RagCrawlerCookie = RagCrawlerCookie
+
+@typing.final
+class RagCrawlerConcurrencyConfig(google.protobuf.message.Message):
+    """Concurrency and pacing controls for crawler runs."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    MAX_CONCURRENT_REQUESTS_FIELD_NUMBER: builtins.int
+    max_concurrent_requests: builtins.int
+    """Optional. Max number of concurrent in-flight requests/pages.
+    Increase for throughput; reduce for fragile sites/rate limits.
+    """
+    def __init__(
+        self,
+        *,
+        max_concurrent_requests: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["max_concurrent_requests", b"max_concurrent_requests"]) -> None: ...
+
+global___RagCrawlerConcurrencyConfig = RagCrawlerConcurrencyConfig
+
+@typing.final
+class RagCrawlerConfig(google.protobuf.message.Message):
+    """Crawl run behavior.
+
+    This block controls scheduling, traversal, extraction outputs, retries,
+    diagnostics capture, and deep crawling options for each crawler run.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    CONCURRENCY_CONFIG_FIELD_NUMBER: builtins.int
+    DEEP_CRAWLER_CONFIG_FIELD_NUMBER: builtins.int
+    OUTPUT_CONFIG_FIELD_NUMBER: builtins.int
+    @property
+    def concurrency_config(self) -> global___RagCrawlerConcurrencyConfig:
+        """Optional. Concurrency and pacing controls for crawler requests."""
+
+    @property
+    def deep_crawler_config(self) -> global___RagCrawlerDeepCrawlerConfig:
+        """Optional. Deep crawler behavior (enable + depth/pages/scoring/filter chain)."""
+
+    @property
+    def output_config(self) -> global___RagCrawlerResultsConfig:
+        """Optional. Structured output configuration (format + metadata policy)."""
+
+    def __init__(
+        self,
+        *,
+        concurrency_config: global___RagCrawlerConcurrencyConfig | None = ...,
+        deep_crawler_config: global___RagCrawlerDeepCrawlerConfig | None = ...,
+        output_config: global___RagCrawlerResultsConfig | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["concurrency_config", b"concurrency_config", "deep_crawler_config", b"deep_crawler_config", "output_config", b"output_config"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["concurrency_config", b"concurrency_config", "deep_crawler_config", b"deep_crawler_config", "output_config", b"output_config"]) -> None: ...
+
+global___RagCrawlerConfig = RagCrawlerConfig
+
+@typing.final
+class RagCrawlerDeepCrawlerConfig(google.protobuf.message.Message):
+    """Deep crawler options grouped under one config node."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    IS_ACTIVE_FIELD_NUMBER: builtins.int
+    CRAWL_STRATEGY_FIELD_NUMBER: builtins.int
+    MAX_DEPTH_FIELD_NUMBER: builtins.int
+    MAX_PAGES_FIELD_NUMBER: builtins.int
+    DEEP_CRAWLER_FILTERS_FIELD_NUMBER: builtins.int
+    is_active: builtins.bool
+    """Optional. Enable deep crawler behavior (link following beyond seeds).
+    Default <code>false</code>. If <code>false</code>, <code>config</code> is ignored.
+    """
+    crawl_strategy: global___RagCrawlerCrawlStrategy.ValueType
+    """Optional. Crawl traversal strategy.
+    BFS is often best for broad site coverage; DFS for deep section traversal.
+    Default <code>RAG_CRAWLER_CRAWL_STRATEGY_BFS</code>.
+    """
+    max_depth: builtins.int
+    """Optional. Maximum link depth from seed URLs.
+    <code>0</code> usually means only seed pages.
+    """
+    max_pages: builtins.int
+    """Optional. Hard cap on total processed pages for this run."""
+    @property
+    def deep_crawler_filters(self) -> global___RagCrawlerFilters:
+        """Optional. URL and domain restrictions."""
+
+    def __init__(
+        self,
+        *,
+        is_active: builtins.bool = ...,
+        crawl_strategy: global___RagCrawlerCrawlStrategy.ValueType = ...,
+        max_depth: builtins.int = ...,
+        max_pages: builtins.int = ...,
+        deep_crawler_filters: global___RagCrawlerFilters | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["deep_crawler_filters", b"deep_crawler_filters"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["crawl_strategy", b"crawl_strategy", "deep_crawler_filters", b"deep_crawler_filters", "is_active", b"is_active", "max_depth", b"max_depth", "max_pages", b"max_pages"]) -> None: ...
+
+global___RagCrawlerDeepCrawlerConfig = RagCrawlerDeepCrawlerConfig
+
+@typing.final
+class RagCrawlerDiagnosticsConfig(google.protobuf.message.Message):
+    """Diagnostics capture toggles."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    SSL_CERTIFICATE_FIELD_NUMBER: builtins.int
+    NETWORK_REQUESTS_FIELD_NUMBER: builtins.int
+    CONSOLE_MESSAGES_FIELD_NUMBER: builtins.int
+    ssl_certificate: builtins.bool
+    """Optional. Collect SSL certificate details for HTTPS targets."""
+    network_requests: builtins.bool
+    """Optional. Capture browser network events for diagnostics."""
+    console_messages: builtins.bool
+    """Optional. Capture browser console messages for diagnostics."""
+    def __init__(
+        self,
+        *,
+        ssl_certificate: builtins.bool = ...,
+        network_requests: builtins.bool = ...,
+        console_messages: builtins.bool = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["console_messages", b"console_messages", "network_requests", b"network_requests", "ssl_certificate", b"ssl_certificate"]) -> None: ...
+
+global___RagCrawlerDiagnosticsConfig = RagCrawlerDiagnosticsConfig
+
+@typing.final
+class RagCrawlerInteractionConfig(google.protobuf.message.Message):
+    """Wait/scroll/DOM interaction settings."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    WAIT_FOR_FIELD_NUMBER: builtins.int
+    WAIT_FOR_TIMEOUT_FIELD_NUMBER: builtins.int
+    wait_for: builtins.str
+    """Optional. Wait condition for the page to be loaded."""
+    wait_for_timeout: builtins.int
+    """Optional. Timeout in milliseconds for the wait condition."""
+    def __init__(
+        self,
+        *,
+        wait_for: builtins.str = ...,
+        wait_for_timeout: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["wait_for", b"wait_for", "wait_for_timeout", b"wait_for_timeout"]) -> None: ...
+
+global___RagCrawlerInteractionConfig = RagCrawlerInteractionConfig
+
+@typing.final
+class RagCrawlerResultsConfig(google.protobuf.message.Message):
+    """Structured output configuration.
+
+    Use this block to define result payload shape and metadata behavior,
+    similar to Crawl4AI markdown/output-generation toggles.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    INJECT_FRONTMATTER_FIELD_NUMBER: builtins.int
+    META_DATA_EXTRACTORS_FIELD_NUMBER: builtins.int
+    inject_frontmatter: builtins.bool
+    """Optional. Inject YAML frontmatter into markdown output.
+    If the content is HTML based, it will automatically be converted to markdown.
+    Optionally, you can inject YAML frontmatter into the markdown output.
+    Default <code>true</code>.
+    """
+    @property
+    def meta_data_extractors(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagCrawlerMetaDataExtractor]:
+        """Optional. Metadata extractors."""
+
+    def __init__(
+        self,
+        *,
+        inject_frontmatter: builtins.bool = ...,
+        meta_data_extractors: collections.abc.Iterable[global___RagCrawlerMetaDataExtractor] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["inject_frontmatter", b"inject_frontmatter", "meta_data_extractors", b"meta_data_extractors"]) -> None: ...
+
+global___RagCrawlerResultsConfig = RagCrawlerResultsConfig
+
+@typing.final
+class RagCrawlerMetaDataExtractor(google.protobuf.message.Message):
+    """Metadata extractor configuration."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TYPE_FIELD_NUMBER: builtins.int
+    VALUE_FIELD_NUMBER: builtins.int
+    KEY_FIELD_NUMBER: builtins.int
+    type: global___RagCrawlerMetaDataExtractorType.ValueType
+    """Optional. Regex pattern to match metadata field names."""
+    value: builtins.str
+    """Optional. Value to extract (e.g. regex pattern, fixed value, CSS selector, XPath selector, ID selector)."""
+    key: builtins.str
+    """Optional. Metadata field name to extract (e.g. url, title, description, author, keywords, tags, created_date, modified_date, scraped_at)."""
+    def __init__(
+        self,
+        *,
+        type: global___RagCrawlerMetaDataExtractorType.ValueType = ...,
+        value: builtins.str = ...,
+        key: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["key", b"key", "type", b"type", "value", b"value"]) -> None: ...
+
+global___RagCrawlerMetaDataExtractor = RagCrawlerMetaDataExtractor
+
+@typing.final
+class RagCrawlerRetryConfig(google.protobuf.message.Message):
+    """Timeout settings for crawler operations."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PAGE_LOAD_TIMEOUT_SECONDS_FIELD_NUMBER: builtins.int
+    RETRY_MAX_ATTEMPTS_FIELD_NUMBER: builtins.int
+    page_load_timeout_seconds: builtins.int
+    """Optional. Page load/render timeout in seconds."""
+    retry_max_attempts: builtins.int
+    """Optional. Maximum retry attempts per page source."""
+    def __init__(
+        self,
+        *,
+        page_load_timeout_seconds: builtins.int = ...,
+        retry_max_attempts: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["page_load_timeout_seconds", b"page_load_timeout_seconds", "retry_max_attempts", b"retry_max_attempts"]) -> None: ...
+
+global___RagCrawlerRetryConfig = RagCrawlerRetryConfig
+
+@typing.final
+class RagCrawlerContentResult(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    METADATA_FIELD_NUMBER: builtins.int
+    MARKDOWN_FIELD_NUMBER: builtins.int
+    markdown: builtins.str
+    """Optional. Extracted markdown output."""
+    @property
+    def metadata(self) -> google.protobuf.struct_pb2.Struct:
+        """Optional. Extracted page metadata.
+        Includes only fields configured in <code>crawler_config.output_config.metadata.fields</code>.
+        """
+
+    def __init__(
+        self,
+        *,
+        metadata: google.protobuf.struct_pb2.Struct | None = ...,
+        markdown: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["metadata", b"metadata"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["markdown", b"markdown", "metadata", b"metadata"]) -> None: ...
+
+global___RagCrawlerContentResult = RagCrawlerContentResult
+
+@typing.final
+class RagCrawlerExecutionInfo(google.protobuf.message.Message):
+    """Consolidated diagnostics and HTTP execution metadata for a crawl result."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    SSL_CERTIFICATE_FIELD_NUMBER: builtins.int
+    SUCCESS_FIELD_NUMBER: builtins.int
+    ERROR_MESSAGE_FIELD_NUMBER: builtins.int
+    success: builtins.bool
+    """Optional. Crawl status flag."""
+    error_message: builtins.str
+    """Optional. Error details if crawl failed."""
+    @property
+    def ssl_certificate(self) -> google.protobuf.struct_pb2.Struct:
+        """Optional. SSL certificate details."""
+
+    def __init__(
+        self,
+        *,
+        ssl_certificate: google.protobuf.struct_pb2.Struct | None = ...,
+        success: builtins.bool = ...,
+        error_message: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["ssl_certificate", b"ssl_certificate"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["error_message", b"error_message", "ssl_certificate", b"ssl_certificate", "success", b"success"]) -> None: ...
+
+global___RagCrawlerExecutionInfo = RagCrawlerExecutionInfo
+
+@typing.final
+class RagCrawlerResult(google.protobuf.message.Message):
+    """Crawler result entity.
+
+    Each result corresponds to one crawled URL in a crawler run and includes
+    extracted content, metadata, diagnostics, and optional binary artifacts.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    NAME_FIELD_NUMBER: builtins.int
+    CRAWLER_NAME_FIELD_NUMBER: builtins.int
+    OPERATION_NAME_FIELD_NUMBER: builtins.int
+    SOURCE_URL_FIELD_NUMBER: builtins.int
+    FILE_RESOURCE_FIELD_NUMBER: builtins.int
+    LAST_CRAWLED_DATE_FIELD_NUMBER: builtins.int
+    CONTENT_RESULT_FIELD_NUMBER: builtins.int
+    PAGE_LAST_UPDATED_DATE_FIELD_NUMBER: builtins.int
+    name: builtins.str
+    """Resource name of the crawler result.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_results/&lt;crawler_result_uuid&gt;</code></pre>
+    """
+    crawler_name: builtins.str
+    """Resource name of the source crawler profile."""
+    operation_name: builtins.str
+    """Resource name of the crawler run that produced this result."""
+    source_url: builtins.str
+    """URL this content came from."""
+    @property
+    def file_resource(self) -> ondewo.nlu.session_pb2.FileResource:
+        """Classified primary file resource built from source URL and detected MIME/type.
+        If its a HTML page, it will be stored in the DocumentFileResource Bytes.
+        See FileResource Documentation for all other file types.
+        """
+
+    @property
+    def last_crawled_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Timestamp when this URL was last processed by crawler."""
+
+    @property
+    def content_result(self) -> global___RagCrawlerContentResult:
+        """Optional. Consolidated extracted content for this page."""
+
+    @property
+    def page_last_updated_date(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Optional. Timestamp when source page was last updated.
+        Source precedence: HTTP Last-Modified header, then sitemap <lastmod> fallback.
+        """
+
+    def __init__(
+        self,
+        *,
+        name: builtins.str = ...,
+        crawler_name: builtins.str = ...,
+        operation_name: builtins.str = ...,
+        source_url: builtins.str = ...,
+        file_resource: ondewo.nlu.session_pb2.FileResource | None = ...,
+        last_crawled_date: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        content_result: global___RagCrawlerContentResult | None = ...,
+        page_last_updated_date: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["content_result", b"content_result", "file_resource", b"file_resource", "last_crawled_date", b"last_crawled_date", "page_last_updated_date", b"page_last_updated_date"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["content_result", b"content_result", "crawler_name", b"crawler_name", "file_resource", b"file_resource", "last_crawled_date", b"last_crawled_date", "name", b"name", "operation_name", b"operation_name", "page_last_updated_date", b"page_last_updated_date", "source_url", b"source_url"]) -> None: ...
+
+global___RagCrawlerResult = RagCrawlerResult
+
+@typing.final
+class RagStartCrawlerRequest(google.protobuf.message.Message):
+    """Request message for running a crawler.
+
+    This starts a long-running operation and returns immediately.
+    Clients should poll operation status via <code>RagGetCrawlerRun</code>.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    CRAWLER_NAME_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Required. The agent that owns the crawler.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
+    crawler_name: builtins.str
+    """Required. Resource name of the crawler to run.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
+    """
+    def __init__(
+        self,
+        *,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
+        crawler_name: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["crawler_name", b"crawler_name", "language_code", b"language_code", "parent", b"parent"]) -> None: ...
+
+global___RagStartCrawlerRequest = RagStartCrawlerRequest
+
+@typing.final
+class RagGetCrawlerRunRequest(google.protobuf.message.Message):
+    """Request message for getting a crawler run."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    CRAWLER_RUN_NAME_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Required. The agent that owns the crawler run.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
+    crawler_run_name: builtins.str
+    """Required. Resource name of the crawler run.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_run_uuid&gt;</code></pre>
+    """
+    def __init__(
+        self,
+        *,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
+        crawler_run_name: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["crawler_run_name", b"crawler_run_name", "language_code", b"language_code", "parent", b"parent"]) -> None: ...
+
+global___RagGetCrawlerRunRequest = RagGetCrawlerRunRequest
+
+@typing.final
+class RagListCrawlerRunsRequest(google.protobuf.message.Message):
+    """Request message for listing crawler runs."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    CRAWLER_NAME_FIELD_NUMBER: builtins.int
+    PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    STATE_FIELD_NUMBER: builtins.int
+    ORDERBY_FIELD_NUMBER: builtins.int
+    SORTING_MODE_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Required. The agent that owns the crawler runs.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
+    crawler_name: builtins.str
+    """Optional. Restrict to one crawler.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
+    """
+    page_token: builtins.str
+    """Optional. Opaque pagination cursor from a previous list response.
+    Leave empty for the first page.
+    """
+    state: ondewo.nlu.operation_metadata_pb2.OperationMetadata.Status.ValueType
+    """Optional. Filter by operation state."""
+    orderby: builtins.str
+    """Optional. Sort field (default: <code>created_at</code>)."""
+    sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType
+    """Optional. Sort descending."""
+    def __init__(
+        self,
+        *,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
+        crawler_name: builtins.str = ...,
+        page_token: builtins.str = ...,
+        state: ondewo.nlu.operation_metadata_pb2.OperationMetadata.Status.ValueType = ...,
+        orderby: builtins.str = ...,
+        sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_sorting_mode", b"_sorting_mode", "sorting_mode", b"sorting_mode"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_sorting_mode", b"_sorting_mode", "crawler_name", b"crawler_name", "language_code", b"language_code", "orderby", b"orderby", "page_token", b"page_token", "parent", b"parent", "sorting_mode", b"sorting_mode", "state", b"state"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_sorting_mode", b"_sorting_mode"]) -> typing.Literal["sorting_mode"] | None: ...
+
+global___RagListCrawlerRunsRequest = RagListCrawlerRunsRequest
+
+@typing.final
+class RagListCrawlerRunsResponse(google.protobuf.message.Message):
+    """Response message for listing crawler runs."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    CRAWLER_RUNS_FIELD_NUMBER: builtins.int
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    next_page_token: builtins.str
+    """Opaque pagination cursor for the next page.
+    Pass this value unchanged as request <code>page_token</code>.
+    Empty means no further pages.
+    """
+    @property
+    def crawler_runs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.operations_pb2.Operation]:
+        """List of crawler run operations."""
+
+    def __init__(
+        self,
+        *,
+        crawler_runs: collections.abc.Iterable[ondewo.nlu.operations_pb2.Operation] | None = ...,
+        next_page_token: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["crawler_runs", b"crawler_runs", "next_page_token", b"next_page_token"]) -> None: ...
+
+global___RagListCrawlerRunsResponse = RagListCrawlerRunsResponse
+
+@typing.final
+class RagDeleteCrawlerRunsRequest(google.protobuf.message.Message):
+    """Request message for deleting crawler runs.
+
+    Deletion candidates are the union of:
+    - explicit run names in <code>crawler_run_names</code>
+    - all runs belonging to crawlers listed in <code>crawler_names</code>
+
+    If both lists are empty, the call is a no-op.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    CRAWLER_RUN_NAMES_FIELD_NUMBER: builtins.int
+    CRAWLER_NAMES_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Required. The agent that owns the crawler runs.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
+    @property
+    def crawler_run_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Explicit crawler run names to delete.
+        Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_run_uuid&gt;</code></pre>
+        """
+
+    @property
+    def crawler_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Crawler names whose runs should be deleted.
+        Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
+        """
+
+    def __init__(
+        self,
+        *,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
+        crawler_run_names: collections.abc.Iterable[builtins.str] | None = ...,
+        crawler_names: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["crawler_names", b"crawler_names", "crawler_run_names", b"crawler_run_names", "language_code", b"language_code", "parent", b"parent"]) -> None: ...
+
+global___RagDeleteCrawlerRunsRequest = RagDeleteCrawlerRunsRequest
+
+@typing.final
+class RagDeleteCrawlerRunsResponse(google.protobuf.message.Message):
+    """Response message for deleting crawler runs."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    DELETED_COUNT_FIELD_NUMBER: builtins.int
+    DELETED_RUN_NAMES_FIELD_NUMBER: builtins.int
+    deleted_count: builtins.int
+    """Number of deleted crawler runs."""
+    @property
+    def deleted_run_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Resource names of deleted crawler runs."""
+
+    def __init__(
+        self,
+        *,
+        deleted_count: builtins.int = ...,
+        deleted_run_names: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["deleted_count", b"deleted_count", "deleted_run_names", b"deleted_run_names"]) -> None: ...
+
+global___RagDeleteCrawlerRunsResponse = RagDeleteCrawlerRunsResponse
+
+@typing.final
+class RagStopCrawlerRequest(google.protobuf.message.Message):
+    """Request message for stopping a crawler run."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    NAME_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Required. The agent that owns the crawler run.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
+    name: builtins.str
+    """Required. Resource name of the crawler run.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_run_uuid&gt;</code></pre>
+    """
+    def __init__(
+        self,
+        *,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
+        name: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["language_code", b"language_code", "name", b"name", "parent", b"parent"]) -> None: ...
+
+global___RagStopCrawlerRequest = RagStopCrawlerRequest
+
+@typing.final
+class RagStopCrawlerResponse(google.protobuf.message.Message):
+    """Result of stopping a crawler run"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    NAME_FIELD_NUMBER: builtins.int
+    ERROR_MESSAGE_FIELD_NUMBER: builtins.int
+    name: builtins.str
+    """Resource name of the crawler run that was stopped.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_run_uuid&gt;</code></pre>
+    """
+    error_message: builtins.str
+    """Error message if there are any; empty when the stop request was accepted successfully."""
+    def __init__(
+        self,
+        *,
+        name: builtins.str = ...,
+        error_message: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["error_message", b"error_message", "name", b"name"]) -> None: ...
+
+global___RagStopCrawlerResponse = RagStopCrawlerResponse
+
+@typing.final
+class RagGetCrawlerResultsRequest(google.protobuf.message.Message):
+    """Request message for getting crawler results of a crawler run.
+
+    Results are returned in pages. Request the first page with an empty
+    <code>page_token</code>, then continue with each response <code>next_page_token</code>.
+
+    Example:
+    <pre><code>RagGetCrawlerResults(run_name, page_token="")
+    -> next_page_token="..."
+    RagGetCrawlerResults(run_name, page_token="...")
+    </code></pre>
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    OPERATION_NAME_FIELD_NUMBER: builtins.int
+    PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    URL_QUERY_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Required. The agent that owns the crawler run.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
+    operation_name: builtins.str
+    """Required. Resource name of the crawler run.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_run_uuid&gt;</code></pre>
+    """
+    page_token: builtins.str
+    """Optional. Opaque pagination cursor from a previous response.
+    Leave empty for the first page.
+    """
+    url_query: builtins.str
+    """Optional. Filter by URL substring."""
+    def __init__(
+        self,
+        *,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
+        operation_name: builtins.str = ...,
+        page_token: builtins.str = ...,
+        url_query: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["language_code", b"language_code", "operation_name", b"operation_name", "page_token", b"page_token", "parent", b"parent", "url_query", b"url_query"]) -> None: ...
+
+global___RagGetCrawlerResultsRequest = RagGetCrawlerResultsRequest
+
+@typing.final
+class RagGetCrawlerResultsResponse(google.protobuf.message.Message):
+    """Response message for getting crawler results."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    CRAWLER_RESULTS_FIELD_NUMBER: builtins.int
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    TOTAL_SIZE_FIELD_NUMBER: builtins.int
+    next_page_token: builtins.str
+    """Opaque pagination cursor for the next page.
+    Pass this value unchanged as request <code>page_token</code>.
+    Empty means no further pages.
+    """
+    total_size: builtins.int
+    """Total number of crawler results available after applying request filters
+    (for example <code>url_query</code>).
+    """
+    @property
+    def crawler_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagCrawlerResult]:
+        """List of crawler results for the crawler run."""
+
+    def __init__(
+        self,
+        *,
+        crawler_results: collections.abc.Iterable[global___RagCrawlerResult] | None = ...,
+        next_page_token: builtins.str = ...,
+        total_size: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["crawler_results", b"crawler_results", "next_page_token", b"next_page_token", "total_size", b"total_size"]) -> None: ...
+
+global___RagGetCrawlerResultsResponse = RagGetCrawlerResultsResponse
+
+@typing.final
+class RagGetCrawlerResultRequest(google.protobuf.message.Message):
+    """Request message for getting a single crawler result from a crawler run."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    OPERATION_NAME_FIELD_NUMBER: builtins.int
+    URL_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Required. The agent that owns the crawler run.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
+    operation_name: builtins.str
+    """Required. Resource name of the crawler run.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_runs/&lt;crawler_run_uuid&gt;</code></pre>
+    """
+    url: builtins.str
+    """Required. Exact URL of the crawler result to retrieve."""
+    def __init__(
+        self,
+        *,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
+        operation_name: builtins.str = ...,
+        url: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["language_code", b"language_code", "operation_name", b"operation_name", "parent", b"parent", "url", b"url"]) -> None: ...
+
+global___RagGetCrawlerResultRequest = RagGetCrawlerResultRequest
+
+@typing.final
+class RagAddCrawlerResultsToDatasetsRequest(google.protobuf.message.Message):
+    """Request message for adding crawler output to one or more datasets."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    CRAWLER_NAMES_FIELD_NUMBER: builtins.int
+    CRAWLER_RESULT_NAMES_FIELD_NUMBER: builtins.int
+    DATASET_IDS_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Required. The agent that owns the crawler.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
+    @property
+    def crawler_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Required. Resource names of crawlers whose results should be imported.
+        Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
+        """
+
+    @property
+    def crawler_result_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Required. Resource names of crawler results to import.
+        Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_results/&lt;crawler_result_uuid&gt;</code></pre>
+        """
+
+    @property
+    def dataset_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Required. Dataset IDs to receive the imported crawler outputs.
+
+        Example:
+        <pre><code>crawler_names = ["projects/p/agent/crawlers/c1"]
+        crawler_result_names = ["projects/p/agent/crawler_results/r1", "projects/p/agent/crawler_results/r2"]
+        dataset_ids = ["dataset-a", "dataset-b"]</code></pre>
+        """
+
+    def __init__(
+        self,
+        *,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
+        crawler_names: collections.abc.Iterable[builtins.str] | None = ...,
+        crawler_result_names: collections.abc.Iterable[builtins.str] | None = ...,
+        dataset_ids: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["crawler_names", b"crawler_names", "crawler_result_names", b"crawler_result_names", "dataset_ids", b"dataset_ids", "language_code", b"language_code", "parent", b"parent"]) -> None: ...
+
+global___RagAddCrawlerResultsToDatasetsRequest = RagAddCrawlerResultsToDatasetsRequest
+
+@typing.final
+class RagRemoveCrawlerResultsFromDatasetsRequest(google.protobuf.message.Message):
+    """Request message for removing previously imported crawler output from one or more datasets."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    CRAWLER_NAME_FIELD_NUMBER: builtins.int
+    CRAWLER_RESULT_NAMES_FIELD_NUMBER: builtins.int
+    DATASET_IDS_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Required. The agent that owns the crawler.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
+    crawler_name: builtins.str
+    """Required. Resource names of crawlers whose results should be removed.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
+    """
+    @property
+    def crawler_result_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Required. Resource names of crawler results to remove.
+        Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawler_results/&lt;crawler_result_uuid&gt;</code></pre>
+        """
+
+    @property
+    def dataset_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Required. Dataset IDs from which the crawler outputs should be removed.
+
+        Example:
+        <pre><code>crawler_names = ["projects/p/agent/crawlers/c1"]
+        crawler_result_names = ["projects/p/agent/crawler_results/r1", "projects/p/agent/crawler_results/r2"]
+        dataset_ids = ["dataset-a", "dataset-b"]</code></pre>
+        """
+
+    def __init__(
+        self,
+        *,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
+        crawler_name: builtins.str = ...,
+        crawler_result_names: collections.abc.Iterable[builtins.str] | None = ...,
+        dataset_ids: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["crawler_name", b"crawler_name", "crawler_result_names", b"crawler_result_names", "dataset_ids", b"dataset_ids", "language_code", b"language_code", "parent", b"parent"]) -> None: ...
+
+global___RagRemoveCrawlerResultsFromDatasetsRequest = RagRemoveCrawlerResultsFromDatasetsRequest
+
+@typing.final
+class RagGetCrawlerAttachedDatasetsRequest(google.protobuf.message.Message):
+    """Request message for getting datasets attached to a crawler."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    CRAWLER_NAME_FIELD_NUMBER: builtins.int
+    PAGE_SIZE_FIELD_NUMBER: builtins.int
+    PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Required. The agent owning the crawler.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
+    language_code: builtins.str
+    """Required. The language of the project to use."""
+    crawler_name: builtins.str
+    """Required. Resource name of the crawler.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
+    """
+    page_size: builtins.int
+    """Optional. Maximum number of datasets to return.
+
+    If unset or non-positive, backend default is used.
+    """
+    page_token: builtins.str
+    """Optional. Opaque pagination cursor from a previous response.
+    Leave empty for the first page.
+    """
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which <code>RagDataset</code> fields get returned."""
+
+    def __init__(
+        self,
+        *,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
+        crawler_name: builtins.str = ...,
+        page_size: builtins.int = ...,
+        page_token: builtins.str = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["crawler_name", b"crawler_name", "field_mask", b"field_mask", "language_code", b"language_code", "page_size", b"page_size", "page_token", b"page_token", "parent", b"parent"]) -> None: ...
+
+global___RagGetCrawlerAttachedDatasetsRequest = RagGetCrawlerAttachedDatasetsRequest
+
+@typing.final
+class RagGetCrawlerAttachedDatasetsResponse(google.protobuf.message.Message):
+    """Response message for getting datasets attached to a crawler."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    DATASETS_FIELD_NUMBER: builtins.int
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    next_page_token: builtins.str
+    """Opaque pagination cursor for the next page.
+    Pass this value unchanged as request <code>page_token</code>.
+    Empty means no further pages.
+    """
+    @property
+    def datasets(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagDataset]:
+        """Datasets attached to the crawler."""
+
+    def __init__(
+        self,
+        *,
+        datasets: collections.abc.Iterable[global___RagDataset] | None = ...,
+        next_page_token: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["datasets", b"datasets", "next_page_token", b"next_page_token"]) -> None: ...
+
+global___RagGetCrawlerAttachedDatasetsResponse = RagGetCrawlerAttachedDatasetsResponse

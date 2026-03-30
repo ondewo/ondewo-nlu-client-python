@@ -32,6 +32,7 @@ from ondewo.nlu.services.async_intents import Intents
 from ondewo.nlu.services.async_operations import Operations
 from ondewo.nlu.services.async_project_roles import ProjectRoles
 from ondewo.nlu.services.async_project_statistics import ProjectStatistics
+from ondewo.nlu.services.async_rags import Rags
 from ondewo.nlu.services.async_server_statistics import ServerStatistics
 from ondewo.nlu.services.async_sessions import Sessions
 from ondewo.nlu.services.async_users import Users
@@ -79,6 +80,7 @@ class AsyncClient(AsyncBaseClient):
             operations=Operations(**kwargs),
             project_roles=ProjectRoles(**kwargs),
             project_statistics=ProjectStatistics(**kwargs),
+            rags=Rags(**kwargs),
             server_statistics=ServerStatistics(**kwargs),
             sessions=Sessions(**kwargs),
             users=Users(**kwargs),
