@@ -39,7 +39,7 @@ from ondewo.nlu.aiservices_pb2_grpc import AiServicesStub
 from ondewo.nlu.core.services_interface import ServicesInterface
 
 
-class AIServices(ServicesInterface):
+class AiServices(ServicesInterface):
     """
     Exposes the ai-services-related endpoints of ONDEWO NLU services in a user-friendly way.
 
@@ -51,69 +51,91 @@ class AIServices(ServicesInterface):
         stub: AiServicesStub = AiServicesStub(channel=self.grpc_channel)
         return stub
 
-    def extract_entities(self, request: ExtractEntitiesRequest) -> ExtractEntitiesResponse:
-        response: ExtractEntitiesResponse = self.stub.ExtractEntities(request, metadata=self.metadata)
+    def extract_entities(
+        self, request: ExtractEntitiesRequest
+    ) -> ExtractEntitiesResponse:
+        response: ExtractEntitiesResponse = self.stub.ExtractEntities(
+            request, metadata=self.metadata
+        )
         return response
 
     def generate_user_says(
-        self,
-        request: GenerateUserSaysRequest
+        self, request: GenerateUserSaysRequest
     ) -> GenerateUserSaysResponse:
-        response: GenerateUserSaysResponse = \
-            self.stub.GenerateUserSays(request, metadata=self.metadata)
+        response: GenerateUserSaysResponse = self.stub.GenerateUserSays(
+            request, metadata=self.metadata
+        )
         return response
 
     def generate_responses(
-        self,
-        request: GenerateResponsesRequest
+        self, request: GenerateResponsesRequest
     ) -> GenerateResponsesResponse:
-        response: GenerateResponsesResponse = \
-            self.stub.GenerateResponses(request, metadata=self.metadata)
+        response: GenerateResponsesResponse = self.stub.GenerateResponses(
+            request, metadata=self.metadata
+        )
         return response
 
     def get_alternative_sentences(
-        self,
-        request: GetAlternativeSentencesRequest
+        self, request: GetAlternativeSentencesRequest
     ) -> GetAlternativeSentencesResponse:
-        response: GetAlternativeSentencesResponse = \
-            self.stub.GetAlternativeSentences(request, metadata=self.metadata)
+        response: GetAlternativeSentencesResponse = self.stub.GetAlternativeSentences(
+            request, metadata=self.metadata
+        )
         return response
 
     def get_alternative_training_phrases(
-        self,
-        request: GetAlternativeTrainingPhrasesRequest
+        self, request: GetAlternativeTrainingPhrasesRequest
     ) -> GetAlternativeTrainingPhrasesResponse:
-        response: GetAlternativeTrainingPhrasesResponse = \
+        response: GetAlternativeTrainingPhrasesResponse = (
             self.stub.GetAlternativeTrainingPhrases(request, metadata=self.metadata)
+        )
         return response
 
     def get_synonyms(self, request: GetSynonymsRequest) -> GetSynonymsResponse:
-        response: GetSynonymsResponse = self.stub.GetSynonyms(request, metadata=self.metadata)
+        response: GetSynonymsResponse = self.stub.GetSynonyms(
+            request, metadata=self.metadata
+        )
         return response
 
-    def classify_intents(self, request: ClassifyIntentsRequest) -> ClassifyIntentsResponse:
-        response: ClassifyIntentsResponse = self.stub.ClassifyIntents(request, metadata=self.metadata)
+    def classify_intents(
+        self, request: ClassifyIntentsRequest
+    ) -> ClassifyIntentsResponse:
+        response: ClassifyIntentsResponse = self.stub.ClassifyIntents(
+            request, metadata=self.metadata
+        )
         return response
 
-    def extract_entities_fuzzy(self, request: ExtractEntitiesFuzzyRequest) -> ExtractEntitiesResponse:
-        response: ExtractEntitiesResponse = self.stub.ExtractEntitiesFuzzy(request, metadata=self.metadata)
+    def extract_entities_fuzzy(
+        self, request: ExtractEntitiesFuzzyRequest
+    ) -> ExtractEntitiesResponse:
+        response: ExtractEntitiesResponse = self.stub.ExtractEntitiesFuzzy(
+            request, metadata=self.metadata
+        )
         return response
 
     # region large language model support
 
     def llm_generate(self, request: LlmGenerateRequest) -> LlmGenerateResponse:
-        response: LlmGenerateResponse = self.stub.LlmGenerate(request, metadata=self.metadata)
+        response: LlmGenerateResponse = self.stub.LlmGenerate(
+            request, metadata=self.metadata
+        )
         return response
 
-    def llm_generate_stream(self, request: LlmGenerateRequest) -> Iterator[StreamingLlmGenerateResponse]:
-        response_iterator: Iterator[StreamingLlmGenerateResponse] = self.stub.StreamingLlmGenerate(
-            request=request,
-            metadata=self.metadata,
+    def llm_generate_stream(
+        self, request: LlmGenerateRequest
+    ) -> Iterator[StreamingLlmGenerateResponse]:
+        response_iterator: Iterator[StreamingLlmGenerateResponse] = (
+            self.stub.StreamingLlmGenerate(
+                request=request,
+                metadata=self.metadata,
+            )
         )
         return response_iterator
 
     def list_llm_models(self, request: ListLlmModelsRequest) -> ListLlmModelsResponse:
-        response: ListLlmModelsResponse = self.stub.ListLlmModels(request, metadata=self.metadata)
+        response: ListLlmModelsResponse = self.stub.ListLlmModels(
+            request, metadata=self.metadata
+        )
         return response
 
     # endregion large language model support

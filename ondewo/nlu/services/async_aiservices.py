@@ -39,7 +39,7 @@ from ondewo.nlu.aiservices_pb2_grpc import AiServicesStub
 from ondewo.nlu.core.async_services_interface import AsyncServicesInterface
 
 
-class AIServices(AsyncServicesInterface):
+class AiServices(AsyncServicesInterface):
     """
     Exposes the ai-services-related endpoints of ONDEWO NLU services in a user-friendly way.
 
