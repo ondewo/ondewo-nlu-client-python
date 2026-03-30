@@ -104,6 +104,12 @@ class OperationMetadata(google.protobuf.message.Message):
         """export benchmark agent to a zip file"""
         INDEX_AGENT: OperationMetadata._OperationType.ValueType  # 9
         """force loading agent data for full text search"""
+        RUN_RAG_CRAWLER: OperationMetadata._OperationType.ValueType  # 10
+        """run a rag crawler"""
+        ADD_RAG_CRAWLER_RESULT_TO_DATASET: OperationMetadata._OperationType.ValueType  # 11
+        """add a rag crawler result to a dataset"""
+        REMOVE_RAG_CRAWLER_RESULT_FROM_DATASET: OperationMetadata._OperationType.ValueType  # 12
+        """remove a rag crawler result from a dataset"""
 
     class OperationType(_OperationType, metaclass=_OperationTypeEnumTypeWrapper):
         """Type of operation.
@@ -130,6 +136,12 @@ class OperationMetadata(google.protobuf.message.Message):
     """export benchmark agent to a zip file"""
     INDEX_AGENT: OperationMetadata.OperationType.ValueType  # 9
     """force loading agent data for full text search"""
+    RUN_RAG_CRAWLER: OperationMetadata.OperationType.ValueType  # 10
+    """run a rag crawler"""
+    ADD_RAG_CRAWLER_RESULT_TO_DATASET: OperationMetadata.OperationType.ValueType  # 11
+    """add a rag crawler result to a dataset"""
+    REMOVE_RAG_CRAWLER_RESULT_FROM_DATASET: OperationMetadata.OperationType.ValueType  # 12
+    """remove a rag crawler result from a dataset"""
 
     STATUS_FIELD_NUMBER: builtins.int
     PARENT_OPERATION_NAME_FIELD_NUMBER: builtins.int
