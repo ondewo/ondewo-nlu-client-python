@@ -24,7 +24,7 @@ from ondewo.utils.async_base_client import AsyncBaseClient
 from ondewo.nlu.client_config import ClientConfig
 from ondewo.nlu.core.async_services_container import AsyncServicesContainer
 from ondewo.nlu.services.async_agents import Agents
-from ondewo.nlu.services.async_aiservices import AIServices
+from ondewo.nlu.services.async_aiservices import AiServices
 from ondewo.nlu.services.async_ccai_projects import CcaiProjects
 from ondewo.nlu.services.async_contexts import Contexts
 from ondewo.nlu.services.async_entity_types import EntityTypes
@@ -72,7 +72,7 @@ class AsyncClient(AsyncBaseClient):
         }
         self.services: AsyncServicesContainer = AsyncServicesContainer(
             agents=Agents(**kwargs),
-            aiservices=AIServices(**kwargs),
+            aiservices=AiServices(**kwargs),
             ccai_projects=CcaiProjects(**kwargs),
             contexts=Contexts(**kwargs),
             entity_types=EntityTypes(**kwargs),

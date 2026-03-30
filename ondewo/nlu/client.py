@@ -24,7 +24,7 @@ from ondewo.utils.base_client import BaseClient
 from ondewo.nlu.client_config import ClientConfig
 from ondewo.nlu.core.services_container import ServicesContainer
 from ondewo.nlu.services.agents import Agents
-from ondewo.nlu.services.aiservices import AIServices
+from ondewo.nlu.services.aiservices import AiServices
 from ondewo.nlu.services.ccai_projects import CcaiProjects
 from ondewo.nlu.services.contexts import Contexts
 from ondewo.nlu.services.entity_types import EntityTypes
@@ -75,7 +75,7 @@ class Client(BaseClient):
         }
         self.services: ServicesContainer = ServicesContainer(
             agents=Agents(**kwargs),
-            aiservices=AIServices(**kwargs),
+            aiservices=AiServices(**kwargs),
             ccai_projects=CcaiProjects(**kwargs),
             contexts=Contexts(**kwargs),
             entity_types=EntityTypes(**kwargs),
