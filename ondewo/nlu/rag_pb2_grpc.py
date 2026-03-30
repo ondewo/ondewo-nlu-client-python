@@ -748,7 +748,7 @@ class RagsServicer(object):
         This endpoint either
         <ul>
         <li>creates a new session if no <code>session_id</code> is provided and <code>messages</code> contains only one message</li>
-        <li>uses an exising session if <code>session_id</code> is provided (ignores message history in <code>messages</code>)</li>
+        <li>uses an existing session if <code>session_id</code> is provided (ignores message history in <code>messages</code>)</li>
         <li>continues a conversion with the message history from <code>messages</code> without creating a session if no <code>session_id</code> is provided and <code>messages</code> contains multiple messages</li>
         </ul>
         At this point the endpoint is not fully implemented and does not support sessions. This means the full message history must always be passed.

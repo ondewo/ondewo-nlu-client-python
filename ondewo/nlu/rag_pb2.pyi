@@ -43,6 +43,7 @@ import google.protobuf.internal.enum_type_wrapper
 import google.protobuf.message
 import google.protobuf.struct_pb2
 import google.protobuf.timestamp_pb2
+import ondewo.nlu.common_pb2
 import ondewo.nlu.operation_metadata_pb2
 import ondewo.nlu.operations_pb2
 import ondewo.nlu.session_pb2
@@ -243,11 +244,11 @@ class _RagComparisonOperatorEnumTypeWrapper(google.protobuf.internal.enum_type_w
     If metadata field is a list, checks if the string representation of <em>no</em> fields contains value.
     """
     RAG_COMPARISON_OPERATOR_IN: _RagComparisonOperator.ValueType  # 2
-    """Checks with Python's <code>in</code> opertor.<br>
+    """Checks with Python's <code>in</code> operator.<br>
     If metadata field is a list, <em>all</em> elements must satisfy the condition.
     """
     RAG_COMPARISON_OPERATOR_NOT_IN: _RagComparisonOperator.ValueType  # 3
-    """Checks with Python's <code>not in</code> opertor.<br>
+    """Checks with Python's <code>not in</code> operator.<br>
     If metadata field is a list, <em>all</em> elements must satisfy the condition.
     """
     RAG_COMPARISON_OPERATOR_START_WITH: _RagComparisonOperator.ValueType  # 4
@@ -276,7 +277,7 @@ class _RagComparisonOperatorEnumTypeWrapper(google.protobuf.internal.enum_type_w
     """Less than or equal."""
 
 class RagComparisonOperator(_RagComparisonOperator, metaclass=_RagComparisonOperatorEnumTypeWrapper):
-    """Vaild metadata condition comparison operators"""
+    """Valid metadata condition comparison operators"""
 
 RAG_COMPARISON_OPERATOR_CONTAINS: RagComparisonOperator.ValueType  # 0
 """String representation of metadata field contains value.<br>
@@ -287,11 +288,11 @@ RAG_COMPARISON_OPERATOR_NOT_CONTAINS: RagComparisonOperator.ValueType  # 1
 If metadata field is a list, checks if the string representation of <em>no</em> fields contains value.
 """
 RAG_COMPARISON_OPERATOR_IN: RagComparisonOperator.ValueType  # 2
-"""Checks with Python's <code>in</code> opertor.<br>
+"""Checks with Python's <code>in</code> operator.<br>
 If metadata field is a list, <em>all</em> elements must satisfy the condition.
 """
 RAG_COMPARISON_OPERATOR_NOT_IN: RagComparisonOperator.ValueType  # 3
-"""Checks with Python's <code>not in</code> opertor.<br>
+"""Checks with Python's <code>not in</code> operator.<br>
 If metadata field is a list, <em>all</em> elements must satisfy the condition.
 """
 RAG_COMPARISON_OPERATOR_START_WITH: RagComparisonOperator.ValueType  # 4
@@ -576,6 +577,12 @@ class _RagCrawlerFilterContentTypeEnumTypeWrapper(google.protobuf.internal.enum_
     """Plain text documents."""
     RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_PDF: _RagCrawlerFilterContentType.ValueType  # 5
     """PDF documents."""
+    RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_POWERPOINT: _RagCrawlerFilterContentType.ValueType  # 6
+    """PowerPoint documents."""
+    RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_EXCEL: _RagCrawlerFilterContentType.ValueType  # 7
+    """Excel documents."""
+    RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_WORD: _RagCrawlerFilterContentType.ValueType  # 8
+    """Word documents."""
 
 class RagCrawlerFilterContentType(_RagCrawlerFilterContentType, metaclass=_RagCrawlerFilterContentTypeEnumTypeWrapper):
     """Supported content types for deep-crawl content-type filters."""
@@ -592,6 +599,12 @@ RAG_CRAWLER_FILTER_CONTENT_TYPE_TEXT_PLAIN: RagCrawlerFilterContentType.ValueTyp
 """Plain text documents."""
 RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_PDF: RagCrawlerFilterContentType.ValueType  # 5
 """PDF documents."""
+RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_POWERPOINT: RagCrawlerFilterContentType.ValueType  # 6
+"""PowerPoint documents."""
+RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_EXCEL: RagCrawlerFilterContentType.ValueType  # 7
+"""Excel documents."""
+RAG_CRAWLER_FILTER_CONTENT_TYPE_APPLICATION_WORD: RagCrawlerFilterContentType.ValueType  # 8
+"""Word documents."""
 global___RagCrawlerFilterContentType = RagCrawlerFilterContentType
 
 @typing.final
@@ -1095,7 +1108,7 @@ class RagListDatasetsRequest(google.protobuf.message.Message):
 
     <ul>
         <li><code>&lt;size&gt;</code> must be an integer &geq; <code>1</code>. The maximum number of results to return.</li>
-        <li><code>&lt;idx&gt;</code> must be an interger &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li>
+        <li><code>&lt;idx&gt;</code> must be an integer &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li>
     </ul>
 
     <em>Important note</em>: The <code>&lt;idx&gt;</code> is the index in the requested sequence NOT the page number. E.g. if the requested list has 100 elements then <code>current_index-5--page_size-15</code> returns the elements at index 5-19 and not the 5-th page of 15 elements.
@@ -1479,7 +1492,7 @@ class RagListDocumentsRequest(google.protobuf.message.Message):
 
     <ul>
         <li><code>&lt;size&gt;</code> must be an integer &geq; <code>1</code>. The maximum number of results to return.</li>
-        <li><code>&lt;idx&gt;</code> must be an interger &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li>
+        <li><code>&lt;idx&gt;</code> must be an integer &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li>
     </ul>
 
     <em>Important note</em>: The <code>&lt;idx&gt;</code> is the index in the requested sequence NOT the page number. E.g. if the requested list has 100 elements then <code>current_index-5--page_size-15</code> returns the elements at index 5-19 and not the 5-th page of 15 elements.
@@ -1697,7 +1710,7 @@ class RagRetrievalRequest(google.protobuf.message.Message):
 
     <ul>
         <li><code>&lt;size&gt;</code> must be an integer &geq; <code>1</code>. The maximum number of results to return.</li>
-        <li><code>&lt;idx&gt;</code> must be an interger &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li>
+        <li><code>&lt;idx&gt;</code> must be an integer &geq; <code>0</code>. The start index in the requested list, starting from which a maximum of <code>&lt;size&gt;</code> elements are returned.</li>
     </ul>
 
     <em>Important note</em>: The <code>&lt;idx&gt;</code> is the index in the requested sequence NOT the page number. E.g. if the requested list has 100 elements then <code>current_index-5--page_size-15</code> returns the elements at index 5-19 and not the 5-th page of 15 elements.
@@ -4324,9 +4337,9 @@ class RagDeleteCrawlerResponse(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    CRAWLER_NAME_FIELD_NUMBER: builtins.int
+    NAME_FIELD_NUMBER: builtins.int
     ERROR_MESSAGE_FIELD_NUMBER: builtins.int
-    crawler_name: builtins.str
+    name: builtins.str
     """Resource name of the RagCrawler
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
     """
@@ -4335,10 +4348,10 @@ class RagDeleteCrawlerResponse(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        crawler_name: builtins.str = ...,
+        name: builtins.str = ...,
         error_message: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["crawler_name", b"crawler_name", "error_message", b"error_message"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["error_message", b"error_message", "name", b"name"]) -> None: ...
 
 global___RagDeleteCrawlerResponse = RagDeleteCrawlerResponse
 
@@ -4350,7 +4363,7 @@ class RagDeleteCrawlersRequest(google.protobuf.message.Message):
 
     PARENT_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
-    CRAWLER_NAMES_FIELD_NUMBER: builtins.int
+    NAMES_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The agent owning the crawlers.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
@@ -4358,7 +4371,7 @@ class RagDeleteCrawlersRequest(google.protobuf.message.Message):
     language_code: builtins.str
     """Required. The language of the project to use."""
     @property
-    def crawler_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    def names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Optional. Crawler resource names to delete.
         Format: <pre><code>projects/&lt;project_uuid&gt;/agent/crawlers/&lt;crawler_uuid&gt;</code></pre>
         """
@@ -4368,9 +4381,9 @@ class RagDeleteCrawlersRequest(google.protobuf.message.Message):
         *,
         parent: builtins.str = ...,
         language_code: builtins.str = ...,
-        crawler_names: collections.abc.Iterable[builtins.str] | None = ...,
+        names: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["crawler_names", b"crawler_names", "language_code", b"language_code", "parent", b"parent"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["language_code", b"language_code", "names", b"names", "parent", b"parent"]) -> None: ...
 
 global___RagDeleteCrawlersRequest = RagDeleteCrawlersRequest
 
@@ -4410,7 +4423,7 @@ class RagListCrawlersRequest(google.protobuf.message.Message):
     DATASET_NAME_FIELD_NUMBER: builtins.int
     CRAWLER_NAME_FIELD_NUMBER: builtins.int
     ORDERBY_FIELD_NUMBER: builtins.int
-    DESC_FIELD_NUMBER: builtins.int
+    SORTING_MODE_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The agent to list crawlers for.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
@@ -4427,8 +4440,8 @@ class RagListCrawlersRequest(google.protobuf.message.Message):
     """Optional. Filter by crawler name."""
     orderby: builtins.str
     """Optional. Sort field (default: <code>create_time</code>)."""
-    desc: builtins.bool
-    """Optional. Sort descending (default: <code>true</code>)."""
+    sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType
+    """Optional. Sort descending."""
     def __init__(
         self,
         *,
@@ -4438,9 +4451,11 @@ class RagListCrawlersRequest(google.protobuf.message.Message):
         dataset_name: builtins.str = ...,
         crawler_name: builtins.str = ...,
         orderby: builtins.str = ...,
-        desc: builtins.bool = ...,
+        sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["crawler_name", b"crawler_name", "dataset_name", b"dataset_name", "desc", b"desc", "language_code", b"language_code", "orderby", b"orderby", "page_token", b"page_token", "parent", b"parent"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_sorting_mode", b"_sorting_mode", "sorting_mode", b"sorting_mode"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_sorting_mode", b"_sorting_mode", "crawler_name", b"crawler_name", "dataset_name", b"dataset_name", "language_code", b"language_code", "orderby", b"orderby", "page_token", b"page_token", "parent", b"parent", "sorting_mode", b"sorting_mode"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_sorting_mode", b"_sorting_mode"]) -> typing.Literal["sorting_mode"] | None: ...
 
 global___RagListCrawlersRequest = RagListCrawlersRequest
 
@@ -4776,7 +4791,7 @@ class RagCrawlerAuth(google.protobuf.message.Message):
 
     Supports both browser/form login and HTTP auth patterns used by Crawl4AI
     pipelines when crawling protected content.
-    HTTP Auth is used on all pages of the sources, while html_auth is a seperate authentication flow used in the beginning of the crawl
+    HTTP Auth is used on all pages of the sources, while html_auth is a separate authentication flow used in the beginning of the crawl
     to extract the cookies. This is done through a login screen. If HTTP Auth is set, this would ALSO be used on the HTML auth page,
     """
 
@@ -5165,8 +5180,6 @@ global___RagCrawlerRetryConfig = RagCrawlerRetryConfig
 
 @typing.final
 class RagCrawlerContentResult(google.protobuf.message.Message):
-    """Consolidated extraction output for a crawled page."""
-
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     METADATA_FIELD_NUMBER: builtins.int
@@ -5361,7 +5374,7 @@ class RagListCrawlerRunsRequest(google.protobuf.message.Message):
     PAGE_TOKEN_FIELD_NUMBER: builtins.int
     STATE_FIELD_NUMBER: builtins.int
     ORDERBY_FIELD_NUMBER: builtins.int
-    DESC_FIELD_NUMBER: builtins.int
+    SORTING_MODE_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The agent that owns the crawler runs.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
@@ -5380,8 +5393,8 @@ class RagListCrawlerRunsRequest(google.protobuf.message.Message):
     """Optional. Filter by operation state."""
     orderby: builtins.str
     """Optional. Sort field (default: <code>created_at</code>)."""
-    desc: builtins.bool
-    """Optional. Sort descending (default: <code>true</code>)."""
+    sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType
+    """Optional. Sort descending."""
     def __init__(
         self,
         *,
@@ -5391,9 +5404,11 @@ class RagListCrawlerRunsRequest(google.protobuf.message.Message):
         page_token: builtins.str = ...,
         state: ondewo.nlu.operation_metadata_pb2.OperationMetadata.Status.ValueType = ...,
         orderby: builtins.str = ...,
-        desc: builtins.bool = ...,
+        sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["crawler_name", b"crawler_name", "desc", b"desc", "language_code", b"language_code", "orderby", b"orderby", "page_token", b"page_token", "parent", b"parent", "state", b"state"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_sorting_mode", b"_sorting_mode", "sorting_mode", b"sorting_mode"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_sorting_mode", b"_sorting_mode", "crawler_name", b"crawler_name", "language_code", b"language_code", "orderby", b"orderby", "page_token", b"page_token", "parent", b"parent", "sorting_mode", b"sorting_mode", "state", b"state"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_sorting_mode", b"_sorting_mode"]) -> typing.Literal["sorting_mode"] | None: ...
 
 global___RagListCrawlerRunsRequest = RagListCrawlerRunsRequest
 
@@ -5527,7 +5542,7 @@ global___RagStopCrawlerRequest = RagStopCrawlerRequest
 
 @typing.final
 class RagStopCrawlerResponse(google.protobuf.message.Message):
-    """Result of stopping a crawler run (aligned with VTSI <code>StopCallerResponse</code>)."""
+    """Result of stopping a crawler run"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
