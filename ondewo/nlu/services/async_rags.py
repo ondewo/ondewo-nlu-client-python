@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from typing import Iterator
+from typing import AsyncIterator
 
 from google.protobuf.empty_pb2 import Empty
 
@@ -159,7 +159,7 @@ class Rags(AsyncServicesInterface):
         response: RagTaskStatus = await self.stub.RagRaptorStatus(request, metadata=self.metadata)
         return response
 
-    async def rag_upload_document(self, request: Iterator[RagUploadDocumentRequest]) -> RagDocument:
+    async def rag_upload_document(self, request: AsyncIterator[RagUploadDocumentRequest]) -> RagDocument:
         response: RagDocument = await self.stub.RagUploadDocument(request, metadata=self.metadata)
         return response
 
@@ -167,8 +167,8 @@ class Rags(AsyncServicesInterface):
         response: RagDocument = await self.stub.RagUpdateDocument(request, metadata=self.metadata)
         return response
 
-    async def rag_download_document(self, request: RagDownloadDocumentRequest) -> Iterator[RagFileChunk]:
-        response: Iterator[RagFileChunk] = await self.stub.RagDownloadDocument(request, metadata=self.metadata)
+    async def rag_download_document(self, request: RagDownloadDocumentRequest) -> AsyncIterator[RagFileChunk]:
+        response: AsyncIterator[RagFileChunk] = self.stub.RagDownloadDocument(request, metadata=self.metadata)
         return response
 
     async def rag_list_documents(self, request: RagListDocumentsRequest) -> RagDocumentList:
@@ -263,20 +263,22 @@ class Rags(AsyncServicesInterface):
         response: RagPartialSuccess = await self.stub.RagDeleteAgentSessions(request, metadata=self.metadata)
         return response
 
-    async def rag_chat_completion(self, request: RagChatCompletionRequest) -> Iterator[RagChatCompletionResponse]:
-        response: Iterator[RagChatCompletionResponse] = await self.stub.RagChatCompletion(
+    async def rag_chat_completion(self, request: RagChatCompletionRequest) -> AsyncIterator[RagChatCompletionResponse]:
+        response: AsyncIterator[RagChatCompletionResponse] = self.stub.RagChatCompletion(
             request, metadata=self.metadata
         )
         return response
 
-    async def rag_agent_completion(self, request: RagAgentCompletionRequest) -> Iterator[RagAgentCompletionResponse]:
-        response: Iterator[RagAgentCompletionResponse] = await self.stub.RagAgentCompletion(
+    async def rag_agent_completion(
+        self, request: RagAgentCompletionRequest
+    ) -> AsyncIterator[RagAgentCompletionResponse]:
+        response: AsyncIterator[RagAgentCompletionResponse] = self.stub.RagAgentCompletion(
             request, metadata=self.metadata
         )
         return response
 
-    async def rag_ask(self, request: RagAskRequest) -> Iterator[RagAskResponse]:
-        response: Iterator[RagAskResponse] = await self.stub.RagAsk(request, metadata=self.metadata)
+    async def rag_ask(self, request: RagAskRequest) -> AsyncIterator[RagAskResponse]:
+        response: AsyncIterator[RagAskResponse] = self.stub.RagAsk(request, metadata=self.metadata)
         return response
 
     async def rag_related_questions(self, request: RagRelatedQuestionsRequest) -> RagRelatedQuestionsResponse:

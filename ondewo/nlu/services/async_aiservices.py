@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from typing import Iterator
+from typing import AsyncIterator
 
 from ondewo.nlu.aiservices_pb2 import (
     ClassifyIntentsRequest,
@@ -97,8 +97,8 @@ class AiServices(AsyncServicesInterface):
         response: LlmGenerateResponse = await self.stub.LlmGenerate(request, metadata=self.metadata)
         return response
 
-    async def llm_generate_stream(self, request: LlmGenerateRequest) -> Iterator[StreamingLlmGenerateResponse]:
-        response_iterator: Iterator[StreamingLlmGenerateResponse] = await self.stub.StreamingLlmGenerate(
+    async def llm_generate_stream(self, request: LlmGenerateRequest) -> AsyncIterator[StreamingLlmGenerateResponse]:
+        response_iterator: AsyncIterator[StreamingLlmGenerateResponse] = await self.stub.StreamingLlmGenerate(
             request=request,
             metadata=self.metadata,
         )
