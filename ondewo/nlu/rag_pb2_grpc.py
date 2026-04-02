@@ -237,8 +237,8 @@ class RagsServicer(object):
 
         RAGFlow endpoint: POST /api/v1/datasets/<dataset_id>/documents
 
-        Upload one or more documents to a dataset.<br>
-        Documents start in UNSTART state and must be parsed.
+        Uploads a document to a dataset and starts parsing it.<br>
+        If the <code>run</code> field of the returned document is not <code>RAG_DOCUMENT_STATUS_RUNNING</code> this indicates a failure to start parsing the document.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -248,7 +248,8 @@ class RagsServicer(object):
         """RAGFlow endpoint: PUT /api/v1/datasets/<dataset_id>/documents/<document_id>
 
         Update document metadata and configuration.<br>
-        Changing chunk_method resets document to UNSTART and deletes chunks.
+        If the chunk method is changed, the document is automatically re-parsed.<br>
+        If the <code>run</code> field of the returned document is not <code>RAG_DOCUMENT_STATUS_RUNNING</code> this indicates a failure to start parsing the document.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')

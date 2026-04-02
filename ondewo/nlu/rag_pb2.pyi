@@ -801,9 +801,9 @@ class RagDataset(google.protobuf.message.Message):
     CHUNK_METHOD_FIELD_NUMBER: builtins.int
     PARSER_CONFIG_FIELD_NUMBER: builtins.int
     PAGERANK_FIELD_NUMBER: builtins.int
+    PARSING_STATUS_FIELD_NUMBER: builtins.int
     CREATE_TIME_FIELD_NUMBER: builtins.int
     UPDATE_TIME_FIELD_NUMBER: builtins.int
-    PARSING_STATUS_FIELD_NUMBER: builtins.int
     id: builtins.str
     """Dataset UUID."""
     avatar: builtins.str
@@ -827,16 +827,16 @@ class RagDataset(google.protobuf.message.Message):
         """Document parser configuration (auto-generated based on chunk_method)."""
 
     @property
+    def parsing_status(self) -> global___RagDatasetParsingStatus:
+        """Parsing status of all documents in the dataset. Might be empty if the system failed to get the parsing statistics."""
+
+    @property
     def create_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Creation date and time."""
 
     @property
     def update_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Last update date and time."""
-
-    @property
-    def parsing_status(self) -> global___RagDatasetParsingStatus:
-        """Parsing status of all documents in the dataset"""
 
     def __init__(
         self,
@@ -851,9 +851,9 @@ class RagDataset(google.protobuf.message.Message):
         chunk_method: global___RagChunkMethod.ValueType | None = ...,
         parser_config: global___RagParserConfig | None = ...,
         pagerank: builtins.int | None = ...,
+        parsing_status: global___RagDatasetParsingStatus | None = ...,
         create_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         update_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        parsing_status: global___RagDatasetParsingStatus | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["_chunk_count", b"_chunk_count", "_chunk_method", b"_chunk_method", "_document_count", b"_document_count", "_pagerank", b"_pagerank", "_token_num", b"_token_num", "chunk_count", b"chunk_count", "chunk_method", b"chunk_method", "create_time", b"create_time", "document_count", b"document_count", "pagerank", b"pagerank", "parser_config", b"parser_config", "parsing_status", b"parsing_status", "token_num", b"token_num", "update_time", b"update_time"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing.Literal["_chunk_count", b"_chunk_count", "_chunk_method", b"_chunk_method", "_document_count", b"_document_count", "_pagerank", b"_pagerank", "_token_num", b"_token_num", "avatar", b"avatar", "chunk_count", b"chunk_count", "chunk_method", b"chunk_method", "create_time", b"create_time", "description", b"description", "document_count", b"document_count", "id", b"id", "name", b"name", "pagerank", b"pagerank", "parser_config", b"parser_config", "parsing_status", b"parsing_status", "token_num", b"token_num", "update_time", b"update_time"]) -> None: ...
@@ -1751,7 +1751,6 @@ class RagChunk(google.protobuf.message.Message):
     IMPORTANT_KEYWORDS_FIELD_NUMBER: builtins.int
     QUESTIONS_FIELD_NUMBER: builtins.int
     IMAGE_ID_FIELD_NUMBER: builtins.int
-    AVAILABLE_FIELD_NUMBER: builtins.int
     POSITIONS_FIELD_NUMBER: builtins.int
     CREATE_TIME_FIELD_NUMBER: builtins.int
     DOCUMENT_KEYWORD_FIELD_NUMBER: builtins.int
@@ -1768,8 +1767,6 @@ class RagChunk(google.protobuf.message.Message):
     """Document name keyword used for filtering and identification."""
     image_id: builtins.str
     """Associated image ID if this chunk references an image."""
-    available: builtins.bool
-    """Availability status indicating if the chunk is active and can be retrieved (can be disabled without deletion)."""
     document_keyword: builtins.str
     """Document name used as a keyword for retrieval."""
     similarity: builtins.float
@@ -1803,17 +1800,13 @@ class RagChunk(google.protobuf.message.Message):
         important_keywords: collections.abc.Iterable[builtins.str] | None = ...,
         questions: collections.abc.Iterable[builtins.str] | None = ...,
         image_id: builtins.str = ...,
-        available: builtins.bool | None = ...,
         positions: collections.abc.Iterable[google.protobuf.struct_pb2.ListValue] | None = ...,
         create_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         document_keyword: builtins.str = ...,
         similarity: builtins.float | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_available", b"_available", "_similarity", b"_similarity", "available", b"available", "create_time", b"create_time", "similarity", b"similarity"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_available", b"_available", "_similarity", b"_similarity", "available", b"available", "content", b"content", "create_time", b"create_time", "dataset_id", b"dataset_id", "docnm_kwd", b"docnm_kwd", "document_id", b"document_id", "document_keyword", b"document_keyword", "id", b"id", "image_id", b"image_id", "important_keywords", b"important_keywords", "positions", b"positions", "questions", b"questions", "similarity", b"similarity"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_available", b"_available"]) -> typing.Literal["available"] | None: ...
-    @typing.overload
+    def HasField(self, field_name: typing.Literal["_similarity", b"_similarity", "create_time", b"create_time", "similarity", b"similarity"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_similarity", b"_similarity", "content", b"content", "create_time", b"create_time", "dataset_id", b"dataset_id", "docnm_kwd", b"docnm_kwd", "document_id", b"document_id", "document_keyword", b"document_keyword", "id", b"id", "image_id", b"image_id", "important_keywords", b"important_keywords", "positions", b"positions", "questions", b"questions", "similarity", b"similarity"]) -> None: ...
     def WhichOneof(self, oneof_group: typing.Literal["_similarity", b"_similarity"]) -> typing.Literal["similarity"] | None: ...
 
 global___RagChunk = RagChunk
