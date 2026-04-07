@@ -1551,15 +1551,15 @@ class RagDocumentList(google.protobuf.message.Message):
 global___RagDocumentList = RagDocumentList
 
 @typing.final
-class RagDeleteDocumentsRequest(google.protobuf.message.Message):
-    """Request message for deleting one or more documents from a dataset."""
+class RagDocumentIdsRequest(google.protobuf.message.Message):
+    """Request message for any endpoints that need a list of document IDs as input, e.g. delete documents, parse documents, stop parsing documents."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     PARENT_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     DATASET_ID_FIELD_NUMBER: builtins.int
-    IDS_FIELD_NUMBER: builtins.int
+    DOCUMENT_IDS_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The agent to delete documents from.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
@@ -1567,10 +1567,10 @@ class RagDeleteDocumentsRequest(google.protobuf.message.Message):
     language_code: builtins.str
     """Required. The language of the project to use."""
     dataset_id: builtins.str
-    """Required. Dataset ID containing the documents to delete."""
+    """Required. Dataset ID of the dataset containing the documents in <code>document_ids</code>."""
     @property
-    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Optional. Document IDs to delete. If empty, deletes all documents in the dataset."""
+    def document_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Document IDs for the request."""
 
     def __init__(
         self,
@@ -1578,11 +1578,11 @@ class RagDeleteDocumentsRequest(google.protobuf.message.Message):
         parent: builtins.str = ...,
         language_code: builtins.str = ...,
         dataset_id: builtins.str = ...,
-        ids: collections.abc.Iterable[builtins.str] | None = ...,
+        document_ids: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["dataset_id", b"dataset_id", "ids", b"ids", "language_code", b"language_code", "parent", b"parent"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["dataset_id", b"dataset_id", "document_ids", b"document_ids", "language_code", b"language_code", "parent", b"parent"]) -> None: ...
 
-global___RagDeleteDocumentsRequest = RagDeleteDocumentsRequest
+global___RagDocumentIdsRequest = RagDocumentIdsRequest
 
 @typing.final
 class RagRetrievalRequest(google.protobuf.message.Message):
@@ -1654,7 +1654,7 @@ class RagRetrievalRequest(google.protobuf.message.Message):
     """Optional. Extract additional keywords from the query to improve retrieval."""
     @property
     def dataset_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Required. Dataset IDs to search (all datasets must use the same embedding model)."""
+        """Required. Dataset IDs to search."""
 
     @property
     def document_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
@@ -1836,42 +1836,6 @@ class RagDocAgg(google.protobuf.message.Message):
     def ClearField(self, field_name: typing.Literal["count", b"count", "doc_id", b"doc_id", "doc_name", b"doc_name"]) -> None: ...
 
 global___RagDocAgg = RagDocAgg
-
-@typing.final
-class RagParseDocumentsRequest(google.protobuf.message.Message):
-    """Request message for starting document parsing.<br>
-    Parsing extracts chunks from documents using the configured chunk method.
-    """
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    PARENT_FIELD_NUMBER: builtins.int
-    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
-    DATASET_ID_FIELD_NUMBER: builtins.int
-    DOCUMENT_IDS_FIELD_NUMBER: builtins.int
-    parent: builtins.str
-    """Required. The agent to parse documents for.
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
-    """
-    language_code: builtins.str
-    """Required. The language of the project to use."""
-    dataset_id: builtins.str
-    """Required. Dataset ID containing the documents to parse."""
-    @property
-    def document_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Required. Document IDs to parse into chunks (queues documents for background processing)."""
-
-    def __init__(
-        self,
-        *,
-        parent: builtins.str = ...,
-        language_code: builtins.str = ...,
-        dataset_id: builtins.str = ...,
-        document_ids: collections.abc.Iterable[builtins.str] | None = ...,
-    ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["dataset_id", b"dataset_id", "document_ids", b"document_ids", "language_code", b"language_code", "parent", b"parent"]) -> None: ...
-
-global___RagParseDocumentsRequest = RagParseDocumentsRequest
 
 @typing.final
 class RagCreateCrawlerRequest(google.protobuf.message.Message):

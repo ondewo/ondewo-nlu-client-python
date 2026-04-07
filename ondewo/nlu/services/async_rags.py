@@ -14,21 +14,23 @@
 from typing import AsyncIterator
 
 from ondewo.nlu.rag_pb2 import (
+    RagAddCrawlerResultsToDatasetsRequest,
     RagCrawler,
     RagCrawlerResult,
     RagCreateCrawlerRequest,
     RagCreateDatasetRequest,
-    RagDeleteCrawlerRequest,
-    RagDeleteCrawlerResponse,
-    RagDeleteCrawlersRequest,
-    RagDeleteCrawlersResponse,
-    RagDeleteCrawlerRunsRequest,
-    RagDeleteCrawlerRunsResponse,
     RagDataset,
     RagDatasetList,
-    RagDeleteDocumentsRequest,
+    RagDeleteCrawlerRequest,
+    RagDeleteCrawlerResponse,
+    RagDeleteCrawlerRunsRequest,
+    RagDeleteCrawlerRunsResponse,
+    RagDeleteCrawlersRequest,
+    RagDeleteCrawlersResponse,
     RagDeleteRequest,
     RagDocument,
+    RagDocumentIdsRequest,
+    RagDocumentList,
     RagDownloadDocumentRequest,
     RagFileChunk,
     RagGetCrawlerAttachedDatasetsRequest,
@@ -44,10 +46,7 @@ from ondewo.nlu.rag_pb2 import (
     RagListCrawlersResponse,
     RagListDatasetsRequest,
     RagListDocumentsRequest,
-    RagDocumentList,
-    RagParseDocumentsRequest,
     RagPartialSuccess,
-    RagAddCrawlerResultsToDatasetsRequest,
     RagRemoveCrawlerResultsFromDatasetsRequest,
     RagRetrievalRequest,
     RagRetrievalResponse,
@@ -108,12 +107,16 @@ class Rags(AsyncServicesInterface):
         response: RagDocumentList = await self.stub.RagListDocuments(request, metadata=self.metadata)
         return response
 
-    async def rag_delete_documents(self, request: RagDeleteDocumentsRequest) -> RagPartialSuccess:
+    async def rag_delete_documents(self, request: RagDocumentIdsRequest) -> RagPartialSuccess:
         response: RagPartialSuccess = await self.stub.RagDeleteDocuments(request, metadata=self.metadata)
         return response
 
-    async def rag_parse_documents(self, request: RagParseDocumentsRequest) -> RagPartialSuccess:
+    async def rag_parse_documents(self, request: RagDocumentIdsRequest) -> RagPartialSuccess:
         response: RagPartialSuccess = await self.stub.RagParseDocuments(request, metadata=self.metadata)
+        return response
+
+    async def rag_stop_parsing(self, request: RagDocumentIdsRequest) -> RagPartialSuccess:
+        response: RagPartialSuccess = await self.stub.RagStopParsing(request, metadata=self.metadata)
         return response
 
     async def rag_retrieval(self, request: RagRetrievalRequest) -> RagRetrievalResponse:

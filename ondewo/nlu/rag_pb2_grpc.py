@@ -81,7 +81,7 @@ class RagsStub(object):
                 _registered_method=True)
         self.RagDeleteDocuments = channel.unary_unary(
                 '/ondewo.nlu.Rags/RagDeleteDocuments',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagDeleteDocumentsRequest.SerializeToString,
+                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagDocumentIdsRequest.SerializeToString,
                 response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagPartialSuccess.FromString,
                 _registered_method=True)
         self.RagRetrieval = channel.unary_unary(
@@ -91,7 +91,12 @@ class RagsStub(object):
                 _registered_method=True)
         self.RagParseDocuments = channel.unary_unary(
                 '/ondewo.nlu.Rags/RagParseDocuments',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagParseDocumentsRequest.SerializeToString,
+                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagDocumentIdsRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagPartialSuccess.FromString,
+                _registered_method=True)
+        self.RagStopParsing = channel.unary_unary(
+                '/ondewo.nlu.Rags/RagStopParsing',
+                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagDocumentIdsRequest.SerializeToString,
                 response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagPartialSuccess.FromString,
                 _registered_method=True)
         self.RagCreateCrawler = channel.unary_unary(
@@ -192,7 +197,6 @@ class RagsServicer(object):
         RAGFlow endpoint: POST /api/v1/datasets
 
         Create a new dataset (knowledge base).<br>
-        Uses tenant's default embedding model if not specified.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -202,7 +206,6 @@ class RagsServicer(object):
         """RAGFlow endpoint: PUT /api/v1/datasets/<dataset_id>
 
         Update an existing dataset's configuration.<br>
-        Cannot change embedding_model if dataset has chunks.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -295,7 +298,6 @@ class RagsServicer(object):
         RAGFlow endpoint: POST /api/v1/retrieval
 
         Retrieve chunks using vector similarity search.<br>
-        All datasets must use the same embedding model.<br>
         Supports reranking, metadata filtering, and knowledge graph retrieval.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -307,6 +309,15 @@ class RagsServicer(object):
 
         Start parsing documents into chunks.<br>
         Queues documents for background processing.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def RagStopParsing(self, request, context):
+        """RAGFlow endpoint: DELETE /api/v1/datasets/<dataset_id>/chunks
+
+        Stop parsing documents.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -473,7 +484,7 @@ def add_RagsServicer_to_server(servicer, server):
             ),
             'RagDeleteDocuments': grpc.unary_unary_rpc_method_handler(
                     servicer.RagDeleteDocuments,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagDeleteDocumentsRequest.FromString,
+                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagDocumentIdsRequest.FromString,
                     response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagPartialSuccess.SerializeToString,
             ),
             'RagRetrieval': grpc.unary_unary_rpc_method_handler(
@@ -483,7 +494,12 @@ def add_RagsServicer_to_server(servicer, server):
             ),
             'RagParseDocuments': grpc.unary_unary_rpc_method_handler(
                     servicer.RagParseDocuments,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagParseDocumentsRequest.FromString,
+                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagDocumentIdsRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagPartialSuccess.SerializeToString,
+            ),
+            'RagStopParsing': grpc.unary_unary_rpc_method_handler(
+                    servicer.RagStopParsing,
+                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagDocumentIdsRequest.FromString,
                     response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagPartialSuccess.SerializeToString,
             ),
             'RagCreateCrawler': grpc.unary_unary_rpc_method_handler(
@@ -812,7 +828,7 @@ class Rags(object):
             request,
             target,
             '/ondewo.nlu.Rags/RagDeleteDocuments',
-            ondewo_dot_nlu_dot_rag__pb2.RagDeleteDocumentsRequest.SerializeToString,
+            ondewo_dot_nlu_dot_rag__pb2.RagDocumentIdsRequest.SerializeToString,
             ondewo_dot_nlu_dot_rag__pb2.RagPartialSuccess.FromString,
             options,
             channel_credentials,
@@ -866,7 +882,34 @@ class Rags(object):
             request,
             target,
             '/ondewo.nlu.Rags/RagParseDocuments',
-            ondewo_dot_nlu_dot_rag__pb2.RagParseDocumentsRequest.SerializeToString,
+            ondewo_dot_nlu_dot_rag__pb2.RagDocumentIdsRequest.SerializeToString,
+            ondewo_dot_nlu_dot_rag__pb2.RagPartialSuccess.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def RagStopParsing(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.Rags/RagStopParsing',
+            ondewo_dot_nlu_dot_rag__pb2.RagDocumentIdsRequest.SerializeToString,
             ondewo_dot_nlu_dot_rag__pb2.RagPartialSuccess.FromString,
             options,
             channel_credentials,
