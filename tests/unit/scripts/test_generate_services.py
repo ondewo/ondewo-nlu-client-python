@@ -99,40 +99,53 @@ class TestProtoStemToFileName:
 # ---------------------------------------------------------------------------
 
 class TestResolveType:
-    def test_bare_name_no_import(self) -> None:
-        bare, imp = resolve_type('RagAskRequest')
-        assert bare == 'RagAskRequest'
-        assert imp is None
+    def test_bare_name_local(self) -> None:
+        annot, local, ext = resolve_type('RagAskRequest', 'rag', {'RagAskRequest': 'rag'})
+        assert annot == 'RagAskRequest'
+        assert local == 'RagAskRequest'
+        assert ext is None
 
     def test_google_protobuf_empty(self) -> None:
-        bare, imp = resolve_type('google.protobuf.Empty')
-        assert bare == 'Empty'
-        assert imp == 'from google.protobuf.empty_pb2 import Empty'
+        annot, local, ext = resolve_type('google.protobuf.Empty', 'rag', {})
+        assert annot == 'Empty'
+        assert local is None
+        assert ext == 'from google.protobuf.empty_pb2 import Empty'
 
     def test_google_protobuf_field_mask(self) -> None:
-        bare, imp = resolve_type('google.protobuf.FieldMask')
-        assert bare == 'FieldMask'
-        assert imp == 'from google.protobuf.field_mask_pb2 import FieldMask'
+        annot, local, ext = resolve_type('google.protobuf.FieldMask', 'rag', {})
+        assert annot == 'FieldMask'
+        assert local is None
+        assert ext == 'from google.protobuf.field_mask_pb2 import FieldMask'
 
     def test_google_protobuf_timestamp(self) -> None:
-        bare, imp = resolve_type('google.protobuf.Timestamp')
-        assert bare == 'Timestamp'
-        assert imp == 'from google.protobuf.timestamp_pb2 import Timestamp'
+        annot, local, ext = resolve_type('google.protobuf.Timestamp', 'rag', {})
+        assert annot == 'Timestamp'
+        assert local is None
+        assert ext == 'from google.protobuf.timestamp_pb2 import Timestamp'
 
     def test_ondewo_nlu_operation(self) -> None:
-        bare, imp = resolve_type('ondewo.nlu.Operation')
-        assert bare == 'Operation'
-        assert imp == 'from ondewo.nlu.operations_pb2 import Operation'
+        annot, local, ext = resolve_type('ondewo.nlu.Operation', 'rag', {'Operation': 'operations'})
+        assert annot == 'Operation'
+        assert local is None
+        assert ext == 'from ondewo.nlu.operations_pb2 import Operation'
 
     def test_ondewo_nlu_unknown_falls_back_to_local(self) -> None:
-        bare, imp = resolve_type('ondewo.nlu.SomeUnknownType')
-        assert bare == 'SomeUnknownType'
-        assert imp is None  # best-effort fallback
+        annot, local, ext = resolve_type('ondewo.nlu.SomeUnknownType', 'user', {})
+        assert annot == 'SomeUnknownType'
+        assert ext is None  # best-effort fallback
 
-    def test_unknown_namespace_strips_prefix(self) -> None:
-        bare, imp = resolve_type('foo.bar.Baz')
-        assert bare == 'Baz'
-        assert imp is None
+    def test_cross_proto_type_resolves_correctly(self) -> None:
+        annot, local, ext = resolve_type('StatResponse', 'server_statistics', {'StatResponse': 'common'})
+        assert annot == 'StatResponse'
+        assert local is None
+        assert ext == 'from ondewo.nlu.common_pb2 import StatResponse'
+
+    def test_nested_message_type(self) -> None:
+        registry = {'EntityType': 'entity_type'}
+        annot, local, ext = resolve_type('EntityType.Entity', 'entity_type', registry)
+        assert annot == 'EntityType.Entity'
+        assert local == 'EntityType'
+        assert ext is None
 
 
 # ---------------------------------------------------------------------------
@@ -152,9 +165,9 @@ class TestParseProtoFile:
                 rpc RagAsk (RagAskRequest) returns (RagAskResponse);
             }
         """)
-        services = parse_proto_file(proto)
-        assert len(services) == 1
-        svc = services[0]
+        pf = parse_proto_file(proto)
+        assert len(pf.services) == 1
+        svc = pf.services[0]
         assert svc.name == 'Rags'
         assert svc.proto_stem == 'rag'
         assert len(svc.rpcs) == 1
@@ -172,7 +185,7 @@ class TestParseProtoFile:
                 rpc RagAsk (RagAskRequest) returns (stream RagAskResponse);
             }
         """)
-        rpc = parse_proto_file(proto)[0].rpcs[0]
+        rpc = parse_proto_file(proto).services[0].rpcs[0]
         assert rpc.server_streaming is True
         assert rpc.client_streaming is False
 
@@ -183,7 +196,7 @@ class TestParseProtoFile:
                 rpc RagUpload (stream RagUploadRequest) returns (RagDocument);
             }
         """)
-        rpc = parse_proto_file(proto)[0].rpcs[0]
+        rpc = parse_proto_file(proto).services[0].rpcs[0]
         assert rpc.client_streaming is True
         assert rpc.server_streaming is False
 
@@ -196,7 +209,7 @@ class TestParseProtoFile:
                 rpc RagList   (RagListRequest)   returns (RagDatasetList);
             }
         """)
-        rpcs = parse_proto_file(proto)[0].rpcs
+        rpcs = parse_proto_file(proto).services[0].rpcs
         assert [r.name for r in rpcs] == ['RagCreate', 'RagDelete', 'RagList']
 
     def test_external_type_full_qualified_name_stored(self, tmp_path: Path) -> None:
@@ -209,7 +222,7 @@ class TestParseProtoFile:
                 rpc RagStart  (RagStartRequest)     returns (ondewo.nlu.Operation);
             }
         """)
-        rpcs = parse_proto_file(proto)[0].rpcs
+        rpcs = parse_proto_file(proto).services[0].rpcs
         assert rpcs[0].response_type == 'google.protobuf.Empty'
         assert rpcs[1].response_type == 'ondewo.nlu.Operation'
 
@@ -218,7 +231,7 @@ class TestParseProtoFile:
             syntax = "proto3";
             message MyMessage { string value = 1; }
         """)
-        assert parse_proto_file(proto) == []
+        assert parse_proto_file(proto).services == []
 
     def test_duplicate_rpc_name_is_skipped(self, tmp_path: Path, capsys: pytest.CaptureFixture) -> None:
         proto = self._write_proto(tmp_path, 'rag.proto', """
@@ -228,8 +241,8 @@ class TestParseProtoFile:
                 rpc RagAsk (RagAskRequest) returns (RagAskResponse);
             }
         """)
-        services = parse_proto_file(proto)
-        rpcs = services[0].rpcs
+        pf = parse_proto_file(proto)
+        rpcs = pf.services[0].rpcs
         # Only one method despite the duplicate
         assert len(rpcs) == 1
         assert rpcs[0].name == 'RagAsk'
@@ -248,10 +261,10 @@ class TestParseProtoFile:
                 rpc MethodB (RequestB) returns (ResponseB);
             }
         """)
-        services = parse_proto_file(proto)
-        assert len(services) == 2
-        assert services[0].name == 'ServiceA'
-        assert services[1].name == 'ServiceB'
+        pf = parse_proto_file(proto)
+        assert len(pf.services) == 2
+        assert pf.services[0].name == 'ServiceA'
+        assert pf.services[1].name == 'ServiceB'
 
     def test_service_body_with_nested_braces(self, tmp_path: Path) -> None:
         # option blocks contain braces and must not confuse the brace counter
@@ -263,9 +276,28 @@ class TestParseProtoFile:
                 }
             }
         """)
-        services = parse_proto_file(proto)
-        assert len(services) == 1
-        assert services[0].rpcs[0].name == 'RagAsk'
+        pf = parse_proto_file(proto)
+        assert len(pf.services) == 1
+        assert pf.services[0].rpcs[0].name == 'RagAsk'
+
+    def test_extracts_messages(self, tmp_path: Path) -> None:
+        proto = self._write_proto(tmp_path, 'entity_type.proto', """
+            syntax = "proto3";
+            message EntityType {
+                message Entity {
+                    string value = 1;
+                }
+                string name = 1;
+            }
+            message GetEntityTypeRequest {
+                string name = 1;
+            }
+        """)
+        pf = parse_proto_file(proto)
+        assert 'EntityType' in pf.top_messages
+        assert 'GetEntityTypeRequest' in pf.top_messages
+        assert 'EntityType.Entity' in pf.messages
+        assert 'EntityType' in pf.messages
 
 
 # ---------------------------------------------------------------------------
@@ -273,6 +305,18 @@ class TestParseProtoFile:
 # ---------------------------------------------------------------------------
 
 class TestBuildFileContent:
+    # A small default registry mapping common test types to the 'rag' proto stem.
+    _RAG_TYPES = {
+        'RagAskRequest': 'rag', 'RagAskResponse': 'rag',
+        'RagStreamRequest': 'rag', 'RagStreamResponse': 'rag',
+        'RagUploadRequest': 'rag', 'RagDocument': 'rag',
+        'RagDeleteRequest': 'rag', 'RagGetRequest': 'rag',
+        'RagStartRequest': 'rag', 'RagListRequest': 'rag', 'RagListResponse': 'rag',
+        'RagCreateRequest': 'rag', 'RagDataset': 'rag', 'RagUpdateRequest': 'rag',
+        'RagDatasetIdRequest': 'rag', 'RagConstructKnowledgeGraphResponse': 'rag',
+        'Operation': 'operations',
+    }
+
     def _make_svc(self, rpcs: list, proto_stem: str = 'rag', name: str = 'Rags') -> ServiceDef:
         return ServiceDef(name=name, rpcs=rpcs, proto_stem=proto_stem)
 
@@ -280,14 +324,14 @@ class TestBuildFileContent:
         svc = self._make_svc([
             RpcMethod('RagAsk', 'RagAskRequest', 'RagAskResponse', False, False),
         ])
-        content = _build_file_content(svc)
+        content = _build_file_content(svc, self._RAG_TYPES)
         assert 'def rag_ask(self, request: RagAskRequest) -> RagAskResponse:' in content
 
     def test_server_streaming_uses_iterator_return(self) -> None:
         svc = self._make_svc([
             RpcMethod('RagStream', 'RagStreamRequest', 'RagStreamResponse', False, True),
         ])
-        content = _build_file_content(svc)
+        content = _build_file_content(svc, self._RAG_TYPES)
         assert 'def rag_stream(self, request: RagStreamRequest) -> Iterator[RagStreamResponse]:' in content
         assert 'from typing import Iterator' in content
 
@@ -295,7 +339,7 @@ class TestBuildFileContent:
         svc = self._make_svc([
             RpcMethod('RagUpload', 'RagUploadRequest', 'RagDocument', True, False),
         ])
-        content = _build_file_content(svc)
+        content = _build_file_content(svc, self._RAG_TYPES)
         assert 'def rag_upload(self, request: Iterator[RagUploadRequest]) -> RagDocument:' in content
         assert 'from typing import Iterator' in content
 
@@ -303,7 +347,7 @@ class TestBuildFileContent:
         svc = self._make_svc([
             RpcMethod('RagDelete', 'RagDeleteRequest', 'google.protobuf.Empty', False, False),
         ])
-        content = _build_file_content(svc)
+        content = _build_file_content(svc, self._RAG_TYPES)
         assert 'from google.protobuf.empty_pb2 import Empty' in content
         # Empty must NOT appear in the pb2 import block
         assert 'Empty,' not in content.split('from ondewo.nlu.rag_pb2 import')[1].split(')')[0]
@@ -312,7 +356,7 @@ class TestBuildFileContent:
         svc = self._make_svc([
             RpcMethod('RagGet', 'RagGetRequest', 'google.protobuf.FieldMask', False, False),
         ])
-        content = _build_file_content(svc)
+        content = _build_file_content(svc, self._RAG_TYPES)
         assert 'from google.protobuf.field_mask_pb2 import FieldMask' in content
         assert 'FieldMask,' not in content.split('from ondewo.nlu.rag_pb2 import')[1].split(')')[0]
 
@@ -320,7 +364,7 @@ class TestBuildFileContent:
         svc = self._make_svc([
             RpcMethod('RagStart', 'RagStartRequest', 'ondewo.nlu.Operation', False, False),
         ])
-        content = _build_file_content(svc)
+        content = _build_file_content(svc, self._RAG_TYPES)
         assert 'from ondewo.nlu.operations_pb2 import Operation' in content
         assert 'Operation,' not in content.split('from ondewo.nlu.rag_pb2 import')[1].split(')')[0]
 
@@ -330,7 +374,7 @@ class TestBuildFileContent:
             RpcMethod('RagList', 'RagListRequest', 'RagListResponse', False, False),
             RpcMethod('RagCreate', 'RagCreateRequest', 'RagDataset', False, False),
         ])
-        content = _build_file_content(svc)
+        content = _build_file_content(svc, self._RAG_TYPES)
         method_lines = [line for line in content.splitlines() if line.strip().startswith('def ') and 'stub' not in line]
         names = [line.split('def ')[1].split('(')[0] for line in method_lines]
         assert len(names) == len(set(names)), f'Duplicate method names found: {names}'
@@ -341,7 +385,7 @@ class TestBuildFileContent:
             RpcMethod('RagCreate', 'RagCreateRequest', 'RagDataset', False, False),
             RpcMethod('RagUpdate', 'RagUpdateRequest', 'RagDataset', False, False),
         ])
-        content = _build_file_content(svc)
+        content = _build_file_content(svc, self._RAG_TYPES)
         pb2_block = content.split('from ondewo.nlu.rag_pb2 import')[1].split(')')[0]
         assert pb2_block.count('RagDataset') == 1
 
@@ -349,7 +393,7 @@ class TestBuildFileContent:
         svc = self._make_svc([
             RpcMethod('RagAsk', 'RagAskRequest', 'RagAskResponse', False, False),
         ])
-        content = _build_file_content(svc)
+        content = _build_file_content(svc, self._RAG_TYPES)
         assert 'def stub(self) -> RagsStub:' in content
         assert 'RagsStub(channel=self.grpc_channel)' in content
 
@@ -357,21 +401,21 @@ class TestBuildFileContent:
         svc = self._make_svc([
             RpcMethod('RagAsk', 'RagAskRequest', 'RagAskResponse', False, False),
         ])
-        content = _build_file_content(svc)
+        content = _build_file_content(svc, self._RAG_TYPES)
         assert 'class Rags(ServicesInterface):' in content
         assert 'See rag.proto.' in content
 
     def test_stub_call_uses_rpc_pascal_name(self) -> None:
         svc = self._make_svc([RpcMethod('RagConstructKnowledgeGraph', 'RagDatasetIdRequest',
                              'RagConstructKnowledgeGraphResponse', False, False), ])
-        content = _build_file_content(svc)
+        content = _build_file_content(svc, self._RAG_TYPES)
         assert 'self.stub.RagConstructKnowledgeGraph(request' in content
 
     def test_no_iterator_import_when_not_streaming(self) -> None:
         svc = self._make_svc([
             RpcMethod('RagAsk', 'RagAskRequest', 'RagAskResponse', False, False),
         ])
-        content = _build_file_content(svc)
+        content = _build_file_content(svc, self._RAG_TYPES)
         assert 'from typing import Iterator' not in content
 
 

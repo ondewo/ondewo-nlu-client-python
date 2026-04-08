@@ -109,7 +109,7 @@ update_setup: ## Update Version in setup.py
 	@sed -i "s/version='[0-9]*.[0-9]*.[0-9]*'/version='${ONDEWO_NLU_VERSION}'/g" setup.py
 	@sed -i "s/version=\"[0-9]*.[0-9]*.[0-9]*\"/version='${ONDEWO_NLU_VERSION}'/g" setup.py
 
-build: clear_package_data init_submodules checkout_defined_submodule_versions build_compiler generate_ondewo_protos create_async_services update_setup ## Build source code
+build: clear_package_data init_submodules checkout_defined_submodule_versions build_compiler generate_ondewo_protos generate_services create_async_services update_setup ## Build source code
 
 push_to_pypi_via_docker: push_to_pypi_via_docker_image  ## Release automation for building and pushing to pypi via a docker image
 
@@ -138,7 +138,6 @@ generate_ondewo_protos:  ## Generate python code from proto files
 		TARGET_DIR='ondewo' \
 		OUTPUT_DIR=${OUTPUT_DIR}
 	-make precommit_hooks_run_all_files
-	make precommit_hooks_run_all_files
 
 setup_conda_env: ## Checks for CONDA Environment
 	@echo "\n START SETTING UP CONDA ENV \n"
@@ -171,6 +170,20 @@ create_async_services: ## Create async services for all synchronous services
 	            "$$file"; \
 	    done; \
 	done
+	cp ondewo/nlu/client.py ondewo/nlu/async_client.py
+	sed -i -E \
+	    -e 's/from ondewo\.nlu\.services\.([a-z_]+) import/from ondewo.nlu.services.async_\1 import/g' \
+	    -e 's/from ondewo\.utils\.base_client import BaseClient/from ondewo.utils.async_base_client import AsyncBaseClient/g' \
+	    -e 's/from ondewo\.nlu\.core\.services_container import ServicesContainer/from ondewo.nlu.core.async_services_container import AsyncServicesContainer/g' \
+	    -e 's/\bServicesContainer\b/AsyncServicesContainer/g' \
+	    -e 's/\bBaseClient\b/AsyncBaseClient/g' \
+	    -e 's/class Client\b/class AsyncClient/g' \
+	    ondewo/nlu/async_client.py
+	cp ondewo/nlu/core/services_container.py ondewo/nlu/core/async_services_container.py
+	sed -i -E \
+	    -e 's/from ondewo\.nlu\.services\.([a-z_]+) import/from ondewo.nlu.services.async_\1 import/g' \
+	    -e 's/class ServicesContainer\b/class AsyncServicesContainer/g' \
+	    ondewo/nlu/core/async_services_container.py
 	-make precommit_hooks_run_all_files
 	make precommit_hooks_run_all_files
 
