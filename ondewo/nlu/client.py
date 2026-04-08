@@ -32,6 +32,7 @@ from ondewo.nlu.services.intents import Intents
 from ondewo.nlu.services.operations import Operations
 from ondewo.nlu.services.project_roles import ProjectRoles
 from ondewo.nlu.services.project_statistics import ProjectStatistics
+from ondewo.nlu.services.rags import Rags
 from ondewo.nlu.services.server_statistics import ServerStatistics
 from ondewo.nlu.services.sessions import Sessions
 from ondewo.nlu.services.users import Users
@@ -82,6 +83,7 @@ class Client(BaseClient):
             operations=Operations(**kwargs),
             project_roles=ProjectRoles(**kwargs),
             project_statistics=ProjectStatistics(**kwargs),
+            rags=Rags(**kwargs),
             server_statistics=ServerStatistics(**kwargs),
             sessions=Sessions(**kwargs),
             users=Users(**kwargs),

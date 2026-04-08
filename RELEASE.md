@@ -2,166 +2,206 @@
 
 *****************
 
-## Release ONDEWO NLU Python Client 7.0.0
-
-### Improvements
- * Tracking API Version [7.0.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/7.0.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
-
-*****************
 ## Release ONDEWO NLU Python Client 6.3.0
 
 ### Improvements
- * Tracking API Version [6.3.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/6.3.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+
+* Tracking API Version [6.3.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/6.3.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 
 *****************
+
 ## Release ONDEWO NLU Python Client 6.2.0
 
 ### Improvements
- * Tracking API Version [6.2.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/6.2.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+
+* Tracking API Version [6.2.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/6.2.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 
 *****************
+
 ## Release ONDEWO NLU Python Client 6.1.0
 
 ### Improvements
- * Tracking API Version [6.1.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/6.1.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 
+* Tracking API Version [6.1.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/6.1.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 
 *****************
+
 ## Release ONDEWO NLU Python Client 6.0.0
 
 ### Improvements
- * Tracking API Version [6.0.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/6.0.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 
+* Tracking API Version [6.0.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/6.0.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 
 *****************
+
 ## Release ONDEWO NLU Python Client 5.0.1
 
 ### Improvements
- * Added functionality to pass grpc options to grpc clients based on [ONDEWO CLIENT UTILS PYTHON 2.0.0](https://github.com/ondewo/ondewo-client-utils-python/releases/tag/2.0.0)
+
+* Added functionality to pass grpc options to grpc clients based on [ONDEWO CLIENT UTILS PYTHON 2.0.0](https://github.com/ondewo/ondewo-client-utils-python/releases/tag/2.0.0)
 
 *****************
+
 ## Release ONDEWO NLU Python Client 5.0.0
 
 ### Improvements
- * Tracking API Version [5.0.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/5.0.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+
+* Tracking API Version [5.0.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/5.0.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 
 *****************
+
 ## Release ONDEWO NLU Python Client 4.9.0
 
 ### Improvements
- * Tracking API Version [4.9.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/4.9.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+
+* Tracking API Version [4.9.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/4.9.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 
 *****************
+
 ## Release ONDEWO NLU Python Client 4.8.0
 
 ### Improvements
- * Tracking API Version [4.8.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/4.8.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+
+* Tracking API Version [4.8.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/4.8.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 
 *****************
+
 ## Release ONDEWO NLU Python Client 4.8.0
 
 ### Improvements
- * Tracking API Version [4.8.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/4.8.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+
+* Tracking API Version [4.8.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/4.8.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 
 *****************
+
 ## Release ONDEWO NLU Python Client 4.8.0
 
 ### Improvements
- * Tracking API Version [4.8.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/4.8.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+
+* Tracking API Version [4.8.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/4.8.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 
 *****************
+
 ## Release ONDEWO NLU Python Client 4.7.0
 
 ### Improvements
- * Tracking API Version [4.7.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/4.7.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+
+* Tracking API Version [4.7.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/4.7.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 
 *****************
+
 ## Release ONDEWO NLU Python Client 4.6.0
 
 ### Improvements
- * Tracking API Version [4.6.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/4.6.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+
+* Tracking API Version [4.6.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/4.6.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 
 *****************
+
 ## Release ONDEWO NLU Python Client 4.5.0
 
 ### Improvements
- * Tracking API Version [4.5.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/4.5.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+
+* Tracking API Version [4.5.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/4.5.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 
 *****************
+
 ## Release ONDEWO NLU Python Client 4.4.0
 
 ### Improvements
- * Tracking API Version [4.4.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/4.4.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+
+* Tracking API Version [4.4.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/4.4.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 
 *****************
+
 ## Release ONDEWO NLU Python Client 4.3.0
 
 ### Improvements
- * Tracking API Version [4.3.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/4.3.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+
+* Tracking API Version [4.3.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/4.3.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 
 *****************
+
 ## Release ONDEWO NLU Python Client 4.2.0
 
 ### Improvements
- * Tracking API Version [4.2.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/4.2.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+
+* Tracking API Version [4.2.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/4.2.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 
 *****************
+
 ## Release ONDEWO NLU Python Client 4.1.0
 
 ### Improvements
- * Tracking API Version [4.1.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/4.1.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+
+* Tracking API Version [4.1.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/4.1.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 
 *****************
+
 ## Release ONDEWO NLU Python Client 4.0.0
 
 ### Improvements
- * Tracking API Version [4.0.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/4.0.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+
+* Tracking API Version [4.0.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/4.0.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 
 *****************
+
 ## Release ONDEWO NLU Python Client 3.5.0
 
 ### Improvements
- * Tracking API Version [3.5.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/3.5.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+
+* Tracking API Version [3.5.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/3.5.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 
 *****************
+
 ## Release ONDEWO NLU Python Client 3.4.0
 
 ### Improvements
- * Tracking API Version [3.4.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/3.4.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+
+* Tracking API Version [3.4.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/3.4.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 
 *****************
+
 ## Release ONDEWO NLU Python Client 3.3.0
 
 ### Improvements
- * Tracking API Version [3.3.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/3.3.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+
+* Tracking API Version [3.3.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/3.3.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 
 *****************
+
 ## Release ONDEWO NLU Python Client 3.2.0
 
 ### Improvements
- * Tracking API Version [3.2.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/3.2.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+
+* Tracking API Version [3.2.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/3.2.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 
 *****************
+
 ## Release ONDEWO NLU Python Client 3.1.0
 
 ### Improvements
- * Tracking API Version [3.1.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/3.1.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+
+* Tracking API Version [3.1.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/3.1.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 
 *****************
 
 ## Release ONDEWO NLU Python Client 3.0.1
 
 ### Improvements
- * [[OND211-2044]](https://ondewo.atlassian.net/browse/OND211-2044) - Added Reindex Agent Endpoint
+
+* [[OND211-2044]](https://ondewo.atlassian.net/browse/OND211-2044) - Added Reindex Agent Endpoint
 
 *****************
 
 ## Release ONDEWO NLU Python Client 3.0.0
 
 ### Improvements
- * Tracking API Version [3.0.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/3.0.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+
+* Tracking API Version [3.0.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/3.0.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 
 *****************
+
 ## Release ONDEWO NLU Python Client 2.15.0
 
 ### Improvements
@@ -169,6 +209,7 @@
 * Upgraded to NLU API Version 2.15.0 and Proto-Compiler Version 4.1.1
 
 *****************
+
 ## Release ONDEWO NLU Python Client 2.14.0
 
 ### Improvements
@@ -176,6 +217,7 @@
 * Upgraded to NLU API Version 2.14.0 and Proto-Compiler Version 4.0.0
 
 *****************
+
 ## Release ONDEWO NLU Python Client 2.10.0
 
 ### Improvements
@@ -184,6 +226,7 @@
 * Upgraded to NLU API Version 2.10.0
 
 *****************
+
 ## Release ONDEWO NLU Python Client 2.9.0
 
 ### Improvements
