@@ -109,7 +109,7 @@ update_setup: ## Update Version in setup.py
 	@sed -i "s/version='[0-9]*.[0-9]*.[0-9]*'/version='${ONDEWO_NLU_VERSION}'/g" setup.py
 	@sed -i "s/version=\"[0-9]*.[0-9]*.[0-9]*\"/version='${ONDEWO_NLU_VERSION}'/g" setup.py
 
-build: clear_package_data init_submodules checkout_defined_submodule_versions build_compiler generate_ondewo_protos generate_services create_async_services update_setup ## Build source code
+build: clear_package_data init_submodules checkout_defined_submodule_versions build_compiler generate_ondewo_protos generate_services update_setup ## Build source code
 
 push_to_pypi_via_docker: push_to_pypi_via_docker_image  ## Release automation for building and pushing to pypi via a docker image
 
@@ -129,6 +129,7 @@ generate_services: ## Generate service wrapper files from proto definitions
 		${ONDEWO_NLU_API_DIR}/ondewo/nlu \
 		ondewo/nlu/services
 	-make precommit_hooks_run_all_files
+	make create_async_services
 	make precommit_hooks_run_all_files
 
 generate_ondewo_protos:  ## Generate python code from proto files
@@ -185,7 +186,6 @@ create_async_services: ## Create async services for all synchronous services
 	    -e 's/class ServicesContainer\b/class AsyncServicesContainer/g' \
 	    ondewo/nlu/core/async_services_container.py
 	-make precommit_hooks_run_all_files
-	make precommit_hooks_run_all_files
 
 ########################################################
 #		Release
