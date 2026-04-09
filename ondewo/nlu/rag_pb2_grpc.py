@@ -27,10 +27,8 @@ if _version_not_supported:
 
 
 class RagsStub(object):
-    """TODO change Github link if changes to RAGFlow are merged to upstream
-
-    Provides an interface for interacting with the RAGFlow RAG engine.
-    Covers all endpoints of the <a href="https://github.com/ondewo/ragflow">RAGFlow</a> HTTP API. For more information on RAGFlow refer to the <a href="https://ragflow.io/docs/dev/">official documentation</a>
+    """Provides RAG and web crawler endpoints.
+    Most of the RAG related endpoints largely mirror <a href="https://github.com/ondewo/ragflow">RAGFlow's</a> HTTP API endpoints. For more information on RAGFlow refer to the <a href="https://ragflow.io/docs/dev/">official documentation</a>
     """
 
     def __init__(self, channel):
@@ -81,7 +79,7 @@ class RagsStub(object):
                 _registered_method=True)
         self.RagDeleteDocuments = channel.unary_unary(
                 '/ondewo.nlu.Rags/RagDeleteDocuments',
-                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagDocumentIdsRequest.SerializeToString,
+                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagDeleteDocumentsRequest.SerializeToString,
                 response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagPartialSuccess.FromString,
                 _registered_method=True)
         self.RagRetrieval = channel.unary_unary(
@@ -182,10 +180,8 @@ class RagsStub(object):
 
 
 class RagsServicer(object):
-    """TODO change Github link if changes to RAGFlow are merged to upstream
-
-    Provides an interface for interacting with the RAGFlow RAG engine.
-    Covers all endpoints of the <a href="https://github.com/ondewo/ragflow">RAGFlow</a> HTTP API. For more information on RAGFlow refer to the <a href="https://ragflow.io/docs/dev/">official documentation</a>
+    """Provides RAG and web crawler endpoints.
+    Most of the RAG related endpoints largely mirror <a href="https://github.com/ondewo/ragflow">RAGFlow's</a> HTTP API endpoints. For more information on RAGFlow refer to the <a href="https://ragflow.io/docs/dev/">official documentation</a>
     """
 
     def RagCreateDataset(self, request, context):
@@ -484,7 +480,7 @@ def add_RagsServicer_to_server(servicer, server):
             ),
             'RagDeleteDocuments': grpc.unary_unary_rpc_method_handler(
                     servicer.RagDeleteDocuments,
-                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagDocumentIdsRequest.FromString,
+                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagDeleteDocumentsRequest.FromString,
                     response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagPartialSuccess.SerializeToString,
             ),
             'RagRetrieval': grpc.unary_unary_rpc_method_handler(
@@ -591,10 +587,8 @@ def add_RagsServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class Rags(object):
-    """TODO change Github link if changes to RAGFlow are merged to upstream
-
-    Provides an interface for interacting with the RAGFlow RAG engine.
-    Covers all endpoints of the <a href="https://github.com/ondewo/ragflow">RAGFlow</a> HTTP API. For more information on RAGFlow refer to the <a href="https://ragflow.io/docs/dev/">official documentation</a>
+    """Provides RAG and web crawler endpoints.
+    Most of the RAG related endpoints largely mirror <a href="https://github.com/ondewo/ragflow">RAGFlow's</a> HTTP API endpoints. For more information on RAGFlow refer to the <a href="https://ragflow.io/docs/dev/">official documentation</a>
     """
 
     @staticmethod
@@ -828,7 +822,7 @@ class Rags(object):
             request,
             target,
             '/ondewo.nlu.Rags/RagDeleteDocuments',
-            ondewo_dot_nlu_dot_rag__pb2.RagDocumentIdsRequest.SerializeToString,
+            ondewo_dot_nlu_dot_rag__pb2.RagDeleteDocumentsRequest.SerializeToString,
             ondewo_dot_nlu_dot_rag__pb2.RagPartialSuccess.FromString,
             options,
             channel_credentials,
