@@ -50,6 +50,8 @@ from ondewo.nlu.rag_pb2 import (
     RagGetCrawlerResultRequest,
     RagGetCrawlerResultsRequest,
     RagGetCrawlerResultsResponse,
+    RagGetCrawlerRunLogsRequest,
+    RagGetCrawlerRunLogsResponse,
     RagGetCrawlerRunRequest,
     RagListCrawlerRunsRequest,
     RagListCrawlerRunsResponse,
@@ -204,4 +206,8 @@ class Rags(AsyncServicesInterface):
 
     async def rag_delete_crawlers(self, request: RagDeleteCrawlersRequest) -> RagDeleteCrawlersResponse:
         response: RagDeleteCrawlersResponse = await self.stub.RagDeleteCrawlers(request, metadata=self.metadata)
+        return response
+
+    async def rag_get_crawler_run_logs(self, request: RagGetCrawlerRunLogsRequest) -> RagGetCrawlerRunLogsResponse:
+        response: RagGetCrawlerRunLogsResponse = await self.stub.RagGetCrawlerRunLogs(request, metadata=self.metadata)
         return response
