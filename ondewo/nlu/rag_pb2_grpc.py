@@ -177,6 +177,11 @@ class RagsStub(object):
                 request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagDeleteCrawlersRequest.SerializeToString,
                 response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagDeleteCrawlersResponse.FromString,
                 _registered_method=True)
+        self.RagGetCrawlerRunLogs = channel.unary_unary(
+                '/ondewo.nlu.Rags/RagGetCrawlerRunLogs',
+                request_serializer=ondewo_dot_nlu_dot_rag__pb2.RagGetCrawlerRunLogsRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagGetCrawlerRunLogsResponse.FromString,
+                _registered_method=True)
 
 
 class RagsServicer(object):
@@ -435,6 +440,13 @@ class RagsServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def RagGetCrawlerRunLogs(self, request, context):
+        """Get crawler run logs.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_RagsServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -577,6 +589,11 @@ def add_RagsServicer_to_server(servicer, server):
                     servicer.RagDeleteCrawlers,
                     request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagDeleteCrawlersRequest.FromString,
                     response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagDeleteCrawlersResponse.SerializeToString,
+            ),
+            'RagGetCrawlerRunLogs': grpc.unary_unary_rpc_method_handler(
+                    servicer.RagGetCrawlerRunLogs,
+                    request_deserializer=ondewo_dot_nlu_dot_rag__pb2.RagGetCrawlerRunLogsRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_rag__pb2.RagGetCrawlerRunLogsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -1337,6 +1354,33 @@ class Rags(object):
             '/ondewo.nlu.Rags/RagDeleteCrawlers',
             ondewo_dot_nlu_dot_rag__pb2.RagDeleteCrawlersRequest.SerializeToString,
             ondewo_dot_nlu_dot_rag__pb2.RagDeleteCrawlersResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def RagGetCrawlerRunLogs(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.Rags/RagGetCrawlerRunLogs',
+            ondewo_dot_nlu_dot_rag__pb2.RagGetCrawlerRunLogsRequest.SerializeToString,
+            ondewo_dot_nlu_dot_rag__pb2.RagGetCrawlerRunLogsResponse.FromString,
             options,
             channel_credentials,
             insecure,

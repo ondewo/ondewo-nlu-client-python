@@ -13,6 +13,8 @@
 # limitations under the License.
 from typing import AsyncIterator
 
+from ondewo.nlu.core.async_services_interface import AsyncServicesInterface
+from ondewo.nlu.operations_pb2 import Operation
 from ondewo.nlu.rag_pb2 import (
     RagAddCrawlerResultsToDatasetsRequest,
     RagCrawler,
@@ -39,6 +41,8 @@ from ondewo.nlu.rag_pb2 import (
     RagGetCrawlerResultRequest,
     RagGetCrawlerResultsRequest,
     RagGetCrawlerResultsResponse,
+    RagGetCrawlerRunLogsRequest,
+    RagGetCrawlerRunLogsResponse,
     RagGetCrawlerRunRequest,
     RagListCrawlerRunsRequest,
     RagListCrawlerRunsResponse,
@@ -59,8 +63,6 @@ from ondewo.nlu.rag_pb2 import (
     RagUploadDocumentRequest,
 )
 from ondewo.nlu.rag_pb2_grpc import RagsStub
-from ondewo.nlu.core.async_services_interface import AsyncServicesInterface
-from ondewo.nlu.operations_pb2 import Operation
 
 
 class Rags(AsyncServicesInterface):
@@ -191,4 +193,8 @@ class Rags(AsyncServicesInterface):
 
     async def rag_delete_crawlers(self, request: RagDeleteCrawlersRequest) -> RagDeleteCrawlersResponse:
         response: RagDeleteCrawlersResponse = await self.stub.RagDeleteCrawlers(request, metadata=self.metadata)
+        return response
+
+    async def rag_get_crawler_run_logs(self, request: RagGetCrawlerRunLogsRequest) -> RagGetCrawlerRunLogsResponse:
+        response: RagGetCrawlerRunLogsResponse = await self.stub.RagGetCrawlerRunLogs(request, metadata=self.metadata)
         return response

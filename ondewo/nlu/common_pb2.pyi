@@ -23,6 +23,7 @@ import google.protobuf.field_mask_pb2
 import google.protobuf.internal.containers
 import google.protobuf.internal.enum_type_wrapper
 import google.protobuf.message
+import google.protobuf.struct_pb2
 import google.protobuf.timestamp_pb2
 import sys
 import typing
@@ -253,6 +254,50 @@ NOTIFICATION_ORIGIN_ONDEWO_VTSI: NotificationOrigin.ValueType  # 8
 NOTIFICATION_ORIGIN_ONDEWO_VTSI_RABBITMQ: NotificationOrigin.ValueType  # 9
 """ondewo-vtsi-rabbitmq service"""
 global___NotificationOrigin = NotificationOrigin
+
+class _LogSeverity:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _LogSeverityEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_LogSeverity.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    LOG_SEVERITY_UNSPECIFIED: _LogSeverity.ValueType  # 0
+    """Unspecified log level."""
+    LOG_SEVERITY_TRACE: _LogSeverity.ValueType  # 1
+    """Trace level - lowest level, most detailed."""
+    LOG_SEVERITY_DEBUG: _LogSeverity.ValueType  # 2
+    """Debug level - detailed information for troubleshooting."""
+    LOG_SEVERITY_INFO: _LogSeverity.ValueType  # 3
+    """Info level - general operational messages."""
+    LOG_SEVERITY_SUCCESS: _LogSeverity.ValueType  # 4
+    """Success level - successful completion of an operation."""
+    LOG_SEVERITY_WARNING: _LogSeverity.ValueType  # 5
+    """Warning level - potential issues that don't stop execution."""
+    LOG_SEVERITY_ERROR: _LogSeverity.ValueType  # 6
+    """Error level - serious issues that might affect results."""
+    LOG_SEVERITY_CRITICAL: _LogSeverity.ValueType  # 7
+    """Critical level - critical failures that stop the process."""
+
+class LogSeverity(_LogSeverity, metaclass=_LogSeverityEnumTypeWrapper):
+    """Log levels for various system operations based on Loguru log levels."""
+
+LOG_SEVERITY_UNSPECIFIED: LogSeverity.ValueType  # 0
+"""Unspecified log level."""
+LOG_SEVERITY_TRACE: LogSeverity.ValueType  # 1
+"""Trace level - lowest level, most detailed."""
+LOG_SEVERITY_DEBUG: LogSeverity.ValueType  # 2
+"""Debug level - detailed information for troubleshooting."""
+LOG_SEVERITY_INFO: LogSeverity.ValueType  # 3
+"""Info level - general operational messages."""
+LOG_SEVERITY_SUCCESS: LogSeverity.ValueType  # 4
+"""Success level - successful completion of an operation."""
+LOG_SEVERITY_WARNING: LogSeverity.ValueType  # 5
+"""Warning level - potential issues that don't stop execution."""
+LOG_SEVERITY_ERROR: LogSeverity.ValueType  # 6
+"""Error level - serious issues that might affect results."""
+LOG_SEVERITY_CRITICAL: LogSeverity.ValueType  # 7
+"""Critical level - critical failures that stop the process."""
+global___LogSeverity = LogSeverity
 
 @typing.final
 class StatResponse(google.protobuf.message.Message):
@@ -720,3 +765,68 @@ class KeyValuePair(google.protobuf.message.Message):
     def WhichOneof(self, oneof_group: typing.Literal["value", b"value"]) -> typing.Literal["int_value", "float_value", "double_value", "string_value", "created_at"] | None: ...
 
 global___KeyValuePair = KeyValuePair
+
+@typing.final
+class LogEntry(google.protobuf.message.Message):
+    """A generic log entry structure."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    NAME_FIELD_NUMBER: builtins.int
+    LOG_ENTRY_SEQUENCE_INDEX_FIELD_NUMBER: builtins.int
+    DISPLAY_NAME_FIELD_NUMBER: builtins.int
+    LOG_ENTRY_TIMESTAMP_FIELD_NUMBER: builtins.int
+    LOG_ENTRY_RECEIVE_TIMESTAMP_FIELD_NUMBER: builtins.int
+    LOG_ENTRY_SEVERITY_FIELD_NUMBER: builtins.int
+    LOG_ENTRY_PHASE_FIELD_NUMBER: builtins.int
+    LOG_ENTRY_OPERATION_NAME_FIELD_NUMBER: builtins.int
+    LOG_ENTRY_DETAILS_FIELD_NUMBER: builtins.int
+    LOG_ENTRY_CONTEXT_FIELD_NUMBER: builtins.int
+    name: builtins.str
+    """Resource name of the log entry.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/logs/&lt;log_uuid&gt;</code></pre>
+    """
+    log_entry_sequence_index: builtins.int
+    """Sequence index within the run."""
+    display_name: builtins.str
+    """Name of the log."""
+    log_entry_severity: global___LogSeverity.ValueType
+    """Severity of the log."""
+    log_entry_phase: builtins.str
+    """Execution phase (e.g. "discovery", "extraction")."""
+    log_entry_operation_name: builtins.str
+    """Name of the operation."""
+    @property
+    def log_entry_timestamp(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Timestamp of the log."""
+
+    @property
+    def log_entry_receive_timestamp(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Output only. Timestamp when the log was received."""
+
+    @property
+    def log_entry_details(self) -> google.protobuf.struct_pb2.Struct:
+        """Raw details in Struct format."""
+
+    @property
+    def log_entry_context(self) -> google.protobuf.struct_pb2.Struct:
+        """Domain-specific metadata in Struct format."""
+
+    def __init__(
+        self,
+        *,
+        name: builtins.str = ...,
+        log_entry_sequence_index: builtins.int = ...,
+        display_name: builtins.str = ...,
+        log_entry_timestamp: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        log_entry_receive_timestamp: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        log_entry_severity: global___LogSeverity.ValueType = ...,
+        log_entry_phase: builtins.str = ...,
+        log_entry_operation_name: builtins.str = ...,
+        log_entry_details: google.protobuf.struct_pb2.Struct | None = ...,
+        log_entry_context: google.protobuf.struct_pb2.Struct | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["log_entry_context", b"log_entry_context", "log_entry_details", b"log_entry_details", "log_entry_receive_timestamp", b"log_entry_receive_timestamp", "log_entry_timestamp", b"log_entry_timestamp"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["display_name", b"display_name", "log_entry_context", b"log_entry_context", "log_entry_details", b"log_entry_details", "log_entry_operation_name", b"log_entry_operation_name", "log_entry_phase", b"log_entry_phase", "log_entry_receive_timestamp", b"log_entry_receive_timestamp", "log_entry_sequence_index", b"log_entry_sequence_index", "log_entry_severity", b"log_entry_severity", "log_entry_timestamp", b"log_entry_timestamp", "name", b"name"]) -> None: ...
+
+global___LogEntry = LogEntry
