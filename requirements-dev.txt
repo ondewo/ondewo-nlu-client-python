@@ -8,3 +8,4 @@ pytest
 tqdm
 types-protobuf
 types-tqdm
+typing_extensions
