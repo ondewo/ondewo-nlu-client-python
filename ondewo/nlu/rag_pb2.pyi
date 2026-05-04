@@ -901,6 +901,7 @@ class RagUpdateDatasetRequest(google.protobuf.message.Message):
     CHUNK_METHOD_FIELD_NUMBER: builtins.int
     PARSER_CONFIG_FIELD_NUMBER: builtins.int
     PAGERANK_FIELD_NUMBER: builtins.int
+    EMBEDDING_CCAI_SERVICE_NAME_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The agent to update the dataset for.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
@@ -919,6 +920,8 @@ class RagUpdateDatasetRequest(google.protobuf.message.Message):
     """Optional. New chunk method."""
     pagerank: builtins.int
     """Optional. Minimum 0. Maximum 100. PageRank value."""
+    embedding_ccai_service_name: builtins.str
+    """Optional. CCAI service to use for embedding the documents in the dataset."""
     @property
     def parser_config(self) -> global___RagParserConfig:
         """Optional. New parser config (deep merged with existing)."""
@@ -935,9 +938,10 @@ class RagUpdateDatasetRequest(google.protobuf.message.Message):
         chunk_method: global___RagChunkMethod.ValueType = ...,
         parser_config: global___RagParserConfig | None = ...,
         pagerank: builtins.int | None = ...,
+        embedding_ccai_service_name: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["_avatar", b"_avatar", "_description", b"_description", "_pagerank", b"_pagerank", "avatar", b"avatar", "description", b"description", "pagerank", b"pagerank", "parser_config", b"parser_config"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_avatar", b"_avatar", "_description", b"_description", "_pagerank", b"_pagerank", "avatar", b"avatar", "chunk_method", b"chunk_method", "dataset_id", b"dataset_id", "description", b"description", "language_code", b"language_code", "name", b"name", "pagerank", b"pagerank", "parent", b"parent", "parser_config", b"parser_config"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["_avatar", b"_avatar", "_description", b"_description", "_pagerank", b"_pagerank", "avatar", b"avatar", "chunk_method", b"chunk_method", "dataset_id", b"dataset_id", "description", b"description", "embedding_ccai_service_name", b"embedding_ccai_service_name", "language_code", b"language_code", "name", b"name", "pagerank", b"pagerank", "parent", b"parent", "parser_config", b"parser_config"]) -> None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_avatar", b"_avatar"]) -> typing.Literal["avatar"] | None: ...
     @typing.overload
