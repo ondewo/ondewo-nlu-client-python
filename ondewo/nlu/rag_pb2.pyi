@@ -534,6 +534,7 @@ class RagCreateDatasetRequest(google.protobuf.message.Message):
     AVATAR_FIELD_NUMBER: builtins.int
     CHUNK_METHOD_FIELD_NUMBER: builtins.int
     PARSER_CONFIG_FIELD_NUMBER: builtins.int
+    EMBEDDING_CCAI_SERVICE_NAME_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The agent to create the dataset for.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
@@ -554,6 +555,8 @@ class RagCreateDatasetRequest(google.protobuf.message.Message):
     """Optional. Base64-encoded avatar image in the format <code>"data:image/[png|jpeg];base64,&lt;base64_string&gt;"</code>. Maximum 65,535 characters."""
     chunk_method: global___RagChunkMethod.ValueType
     """Optional. Default chunking method for documents in this dataset."""
+    embedding_ccai_service_name: builtins.str
+    """Optional if <code>dataset_default_embedding_ccai_service_name</code> is set in the ONDEWO config, otherwise mandatory. CCAI service to use for embedding the documents in the dataset."""
     @property
     def parser_config(self) -> global___RagParserConfig:
         """Optional. Configuration settings for the dataset parser. The used fields vary depending on the selected <code>chunk_method</code>."""
@@ -568,9 +571,10 @@ class RagCreateDatasetRequest(google.protobuf.message.Message):
         avatar: builtins.str = ...,
         chunk_method: global___RagChunkMethod.ValueType = ...,
         parser_config: global___RagParserConfig | None = ...,
+        embedding_ccai_service_name: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["parser_config", b"parser_config"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["avatar", b"avatar", "chunk_method", b"chunk_method", "description", b"description", "language_code", b"language_code", "name", b"name", "parent", b"parent", "parser_config", b"parser_config"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["avatar", b"avatar", "chunk_method", b"chunk_method", "description", b"description", "embedding_ccai_service_name", b"embedding_ccai_service_name", "language_code", b"language_code", "name", b"name", "parent", b"parent", "parser_config", b"parser_config"]) -> None: ...
 
 global___RagCreateDatasetRequest = RagCreateDatasetRequest
 
@@ -1623,6 +1627,7 @@ class RagRetrievalRequest(google.protobuf.message.Message):
     TOP_K_FIELD_NUMBER: builtins.int
     HIGHLIGHT_FIELD_NUMBER: builtins.int
     KEYWORD_FIELD_NUMBER: builtins.int
+    RERANK_CCAI_SERVICE_NAME_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The agent to retrieve chunks for.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
@@ -1665,6 +1670,8 @@ class RagRetrievalRequest(google.protobuf.message.Message):
     """Optional. Whether to highlight matched content in the returned chunks."""
     keyword: builtins.bool
     """Optional. Extract additional keywords from the query to improve retrieval."""
+    rerank_ccai_service_name: builtins.str
+    """Optional. Rerank model used to refine the initial retrieval scores. If not provided, the default model is used (if one is set). If empty, the results are not reranked."""
     @property
     def dataset_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Required. Dataset IDs to search."""
@@ -1700,13 +1707,16 @@ class RagRetrievalRequest(google.protobuf.message.Message):
         top_k: builtins.int = ...,
         highlight: builtins.bool | None = ...,
         keyword: builtins.bool | None = ...,
+        rerank_ccai_service_name: builtins.str | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_highlight", b"_highlight", "_keyword", b"_keyword", "_similarity_threshold", b"_similarity_threshold", "_use_kg", b"_use_kg", "_vector_similarity_weight", b"_vector_similarity_weight", "highlight", b"highlight", "keyword", b"keyword", "metadata_condition", b"metadata_condition", "similarity_threshold", b"similarity_threshold", "use_kg", b"use_kg", "vector_similarity_weight", b"vector_similarity_weight"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_highlight", b"_highlight", "_keyword", b"_keyword", "_similarity_threshold", b"_similarity_threshold", "_use_kg", b"_use_kg", "_vector_similarity_weight", b"_vector_similarity_weight", "cross_languages", b"cross_languages", "dataset_ids", b"dataset_ids", "document_ids", b"document_ids", "highlight", b"highlight", "keyword", b"keyword", "language_code", b"language_code", "metadata_condition", b"metadata_condition", "page_token", b"page_token", "parent", b"parent", "question", b"question", "similarity_threshold", b"similarity_threshold", "top_k", b"top_k", "use_kg", b"use_kg", "vector_similarity_weight", b"vector_similarity_weight"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_highlight", b"_highlight", "_keyword", b"_keyword", "_rerank_ccai_service_name", b"_rerank_ccai_service_name", "_similarity_threshold", b"_similarity_threshold", "_use_kg", b"_use_kg", "_vector_similarity_weight", b"_vector_similarity_weight", "highlight", b"highlight", "keyword", b"keyword", "metadata_condition", b"metadata_condition", "rerank_ccai_service_name", b"rerank_ccai_service_name", "similarity_threshold", b"similarity_threshold", "use_kg", b"use_kg", "vector_similarity_weight", b"vector_similarity_weight"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_highlight", b"_highlight", "_keyword", b"_keyword", "_rerank_ccai_service_name", b"_rerank_ccai_service_name", "_similarity_threshold", b"_similarity_threshold", "_use_kg", b"_use_kg", "_vector_similarity_weight", b"_vector_similarity_weight", "cross_languages", b"cross_languages", "dataset_ids", b"dataset_ids", "document_ids", b"document_ids", "highlight", b"highlight", "keyword", b"keyword", "language_code", b"language_code", "metadata_condition", b"metadata_condition", "page_token", b"page_token", "parent", b"parent", "question", b"question", "rerank_ccai_service_name", b"rerank_ccai_service_name", "similarity_threshold", b"similarity_threshold", "top_k", b"top_k", "use_kg", b"use_kg", "vector_similarity_weight", b"vector_similarity_weight"]) -> None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_highlight", b"_highlight"]) -> typing.Literal["highlight"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_keyword", b"_keyword"]) -> typing.Literal["keyword"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_rerank_ccai_service_name", b"_rerank_ccai_service_name"]) -> typing.Literal["rerank_ccai_service_name"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_similarity_threshold", b"_similarity_threshold"]) -> typing.Literal["similarity_threshold"] | None: ...
     @typing.overload
