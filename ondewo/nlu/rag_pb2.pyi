@@ -1868,6 +1868,7 @@ class RagChunk(google.protobuf.message.Message):
     CREATE_TIME_FIELD_NUMBER: builtins.int
     DOCUMENT_KEYWORD_FIELD_NUMBER: builtins.int
     SIMILARITY_FIELD_NUMBER: builtins.int
+    DOCUMENT_NAME_FIELD_NUMBER: builtins.int
     id: builtins.str
     """Chunk ID (computed as xxhash of content combined with document_id)."""
     dataset_id: builtins.str
@@ -1882,6 +1883,8 @@ class RagChunk(google.protobuf.message.Message):
     """Document name used as a keyword for retrieval."""
     similarity: builtins.float
     """Similarity score between <code>0.0</code> and <code>1.0</code> (only populated in retrieval responses)."""
+    document_name: builtins.str
+    """Parent document file name."""
     @property
     def important_keywords(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Important keywords extracted from or manually assigned to this chunk."""
@@ -1914,9 +1917,10 @@ class RagChunk(google.protobuf.message.Message):
         create_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         document_keyword: builtins.str = ...,
         similarity: builtins.float | None = ...,
+        document_name: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["_similarity", b"_similarity", "create_time", b"create_time", "similarity", b"similarity"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_similarity", b"_similarity", "content", b"content", "create_time", b"create_time", "dataset_id", b"dataset_id", "document_id", b"document_id", "document_keyword", b"document_keyword", "id", b"id", "image_id", b"image_id", "important_keywords", b"important_keywords", "positions", b"positions", "questions", b"questions", "similarity", b"similarity"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["_similarity", b"_similarity", "content", b"content", "create_time", b"create_time", "dataset_id", b"dataset_id", "document_id", b"document_id", "document_keyword", b"document_keyword", "document_name", b"document_name", "id", b"id", "image_id", b"image_id", "important_keywords", b"important_keywords", "positions", b"positions", "questions", b"questions", "similarity", b"similarity"]) -> None: ...
     def WhichOneof(self, oneof_group: typing.Literal["_similarity", b"_similarity"]) -> typing.Literal["similarity"] | None: ...
 
 global___RagChunk = RagChunk
