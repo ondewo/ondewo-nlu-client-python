@@ -16,7 +16,7 @@ export
 
 # MUST BE THE SAME AS API in Mayor and Minor Version Number
 # example: API 2.9.0 --> Client 2.9.X
-ONDEWO_NLU_VERSION = 6.7.0
+ONDEWO_NLU_VERSION = 6.8.0
 
 ONDEWO_NLU_API_GIT_BRANCH=feature/OND211-2380-allow-changing-the-models-that-rag-chat-and-rag-retrieval-uses
 ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags/5.9.0
