@@ -786,6 +786,7 @@ class RagDataset(google.protobuf.message.Message):
     PARSING_STATUS_FIELD_NUMBER: builtins.int
     CREATE_TIME_FIELD_NUMBER: builtins.int
     UPDATE_TIME_FIELD_NUMBER: builtins.int
+    EMBEDDING_MODEL_CCAI_SERVICE_NAME_FIELD_NUMBER: builtins.int
     id: builtins.str
     """Dataset UUID."""
     avatar: builtins.str
@@ -804,6 +805,8 @@ class RagDataset(google.protobuf.message.Message):
     """Default chunking method for documents in this dataset."""
     pagerank: builtins.int
     """Pagerank."""
+    embedding_model_ccai_service_name: builtins.str
+    """CCAI service name of the embedding model used by this dataset."""
     @property
     def parser_config(self) -> global___RagParserConfig:
         """Document parser configuration (auto-generated based on chunk_method)."""
@@ -836,9 +839,10 @@ class RagDataset(google.protobuf.message.Message):
         parsing_status: global___RagDatasetParsingStatus | None = ...,
         create_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         update_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        embedding_model_ccai_service_name: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["_chunk_count", b"_chunk_count", "_document_count", b"_document_count", "_pagerank", b"_pagerank", "_token_num", b"_token_num", "chunk_count", b"chunk_count", "create_time", b"create_time", "document_count", b"document_count", "pagerank", b"pagerank", "parser_config", b"parser_config", "parsing_status", b"parsing_status", "token_num", b"token_num", "update_time", b"update_time"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_chunk_count", b"_chunk_count", "_document_count", b"_document_count", "_pagerank", b"_pagerank", "_token_num", b"_token_num", "avatar", b"avatar", "chunk_count", b"chunk_count", "chunk_method", b"chunk_method", "create_time", b"create_time", "description", b"description", "document_count", b"document_count", "id", b"id", "name", b"name", "pagerank", b"pagerank", "parser_config", b"parser_config", "parsing_status", b"parsing_status", "token_num", b"token_num", "update_time", b"update_time"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["_chunk_count", b"_chunk_count", "_document_count", b"_document_count", "_pagerank", b"_pagerank", "_token_num", b"_token_num", "avatar", b"avatar", "chunk_count", b"chunk_count", "chunk_method", b"chunk_method", "create_time", b"create_time", "description", b"description", "document_count", b"document_count", "embedding_model_ccai_service_name", b"embedding_model_ccai_service_name", "id", b"id", "name", b"name", "pagerank", b"pagerank", "parser_config", b"parser_config", "parsing_status", b"parsing_status", "token_num", b"token_num", "update_time", b"update_time"]) -> None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_chunk_count", b"_chunk_count"]) -> typing.Literal["chunk_count"] | None: ...
     @typing.overload
