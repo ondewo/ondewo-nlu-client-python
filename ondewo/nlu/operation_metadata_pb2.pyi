@@ -110,6 +110,8 @@ class OperationMetadata(google.protobuf.message.Message):
         """add a rag crawler result to a dataset"""
         REMOVE_RAG_CRAWLER_RESULT_FROM_DATASET: OperationMetadata._OperationType.ValueType  # 12
         """remove a rag crawler result from a dataset"""
+        CHANGE_DATASET_EMBEDDING_MODEL: OperationMetadata._OperationType.ValueType  # 13
+        """change the embedding model of dataset that already contains parsed documents"""
 
     class OperationType(_OperationType, metaclass=_OperationTypeEnumTypeWrapper):
         """Type of operation.
@@ -142,6 +144,8 @@ class OperationMetadata(google.protobuf.message.Message):
     """add a rag crawler result to a dataset"""
     REMOVE_RAG_CRAWLER_RESULT_FROM_DATASET: OperationMetadata.OperationType.ValueType  # 12
     """remove a rag crawler result from a dataset"""
+    CHANGE_DATASET_EMBEDDING_MODEL: OperationMetadata.OperationType.ValueType  # 13
+    """change the embedding model of dataset that already contains parsed documents"""
 
     STATUS_FIELD_NUMBER: builtins.int
     PARENT_OPERATION_NAME_FIELD_NUMBER: builtins.int
