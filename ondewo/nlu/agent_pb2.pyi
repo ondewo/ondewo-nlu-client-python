@@ -232,10 +232,6 @@ class _SessionsReportTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrap
     """Thinking-token / duration aggregates across sessions in scope (where the
     provider surfaces extended thinking).
     """
-    SESSION_LLM_COST: _SessionsReportType.ValueType  # 21
-    """Aggregate LLM cost (USD) across sessions in scope, computed via the
-    configured price table.
-    """
     SESSION_LLM_FINISH_REASONS: _SessionsReportType.ValueType  # 22
     """Finish-reason distribution across sessions in scope (<code>stop</code>,
     <code>length</code>, <code>tool_calls</code>, <code>content_filter</code>,
@@ -318,10 +314,6 @@ SESSION_LLM_TOOL_CALLS: SessionsReportType.ValueType  # 19
 SESSION_LLM_THINKING: SessionsReportType.ValueType  # 20
 """Thinking-token / duration aggregates across sessions in scope (where the
 provider surfaces extended thinking).
-"""
-SESSION_LLM_COST: SessionsReportType.ValueType  # 21
-"""Aggregate LLM cost (USD) across sessions in scope, computed via the
-configured price table.
 """
 SESSION_LLM_FINISH_REASONS: SessionsReportType.ValueType  # 22
 """Finish-reason distribution across sessions in scope (<code>stop</code>,
@@ -1395,7 +1387,7 @@ class GetSessionsStatisticsResponse(google.protobuf.message.Message):
     @property
     def llm_telemetry_report(self) -> ondewo.nlu.session_pb2.LlmTelemetryReport:
         """Optional aggregate LLM telemetry summarizing the report (tokens, tool
-        calls, thinking, costs) across all sessions matched by the request.
+        calls, thinking) across all sessions matched by the request.
         Populated only for LLM-typed report types (SESSION_LLM_*).
         """
 

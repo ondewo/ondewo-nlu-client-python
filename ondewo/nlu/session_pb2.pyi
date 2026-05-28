@@ -805,7 +805,6 @@ class LlmTelemetry(google.protobuf.message.Message):
     TURN_INDEX_FIELD_NUMBER: builtins.int
     REFLECTION_ITERATIONS_FIELD_NUMBER: builtins.int
     TERMINATION_REASON_FIELD_NUMBER: builtins.int
-    COST_USD_FIELD_NUMBER: builtins.int
     EVALUATOR_RUNS_JOIN_KEY_FIELD_NUMBER: builtins.int
     LLM_FEEDBACKS_FIELD_NUMBER: builtins.int
     provider: builtins.str
@@ -861,8 +860,6 @@ class LlmTelemetry(google.protobuf.message.Message):
     turn_index: builtins.int
     reflection_iterations: builtins.int
     termination_reason: builtins.str
-    cost_usd: builtins.float
-    """Computed cost in USD (TokenUsage * price-table lookup)."""
     evaluator_runs_join_key: builtins.str
     """Join key linking this LLM call to an evaluator run (see llm_evaluation.proto)."""
     @property
@@ -955,12 +952,11 @@ class LlmTelemetry(google.protobuf.message.Message):
         turn_index: builtins.int = ...,
         reflection_iterations: builtins.int = ...,
         termination_reason: builtins.str = ...,
-        cost_usd: builtins.float = ...,
         evaluator_runs_join_key: builtins.str = ...,
         llm_feedbacks: collections.abc.Iterable[ondewo.nlu.llm_evaluation_pb2.LlmFeedback] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["end_time", b"end_time", "inputs", b"inputs", "metadata", b"metadata", "outputs", b"outputs", "start_time", b"start_time", "thinking_metadata", b"thinking_metadata", "token_usage", b"token_usage"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["agent_name", b"agent_name", "agent_role", b"agent_role", "cache_creation_input_tokens", b"cache_creation_input_tokens", "cached", b"cached", "cached_input_tokens", b"cached_input_tokens", "component_name", b"component_name", "cost_usd", b"cost_usd", "duration_seconds", b"duration_seconds", "end_time", b"end_time", "error_class", b"error_class", "error_message", b"error_message", "evaluator_runs_join_key", b"evaluator_runs_join_key", "fallback_depth", b"fallback_depth", "finish_reasons", b"finish_reasons", "first_token_latency_seconds", b"first_token_latency_seconds", "inputs", b"inputs", "langsmith_run_url", b"langsmith_run_url", "llm_feedbacks", b"llm_feedbacks", "max_tokens", b"max_tokens", "metadata", b"metadata", "model_name", b"model_name", "n_generations", b"n_generations", "outputs", b"outputs", "parent_run_id", b"parent_run_id", "provider", b"provider", "recipient_agent", b"recipient_agent", "reflection_iterations", b"reflection_iterations", "retry_count", b"retry_count", "run_id", b"run_id", "run_type", b"run_type", "sender_agent", b"sender_agent", "start_time", b"start_time", "streaming_chunk_count", b"streaming_chunk_count", "system_fingerprint", b"system_fingerprint", "tags", b"tags", "team_id", b"team_id", "team_name", b"team_name", "temperature", b"temperature", "termination_reason", b"termination_reason", "thinking_metadata", b"thinking_metadata", "token_usage", b"token_usage", "tool_call_count", b"tool_call_count", "tool_call_metadatas", b"tool_call_metadatas", "top_p", b"top_p", "traceback", b"traceback", "turn_index", b"turn_index"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["agent_name", b"agent_name", "agent_role", b"agent_role", "cache_creation_input_tokens", b"cache_creation_input_tokens", "cached", b"cached", "cached_input_tokens", b"cached_input_tokens", "component_name", b"component_name", "duration_seconds", b"duration_seconds", "end_time", b"end_time", "error_class", b"error_class", "error_message", b"error_message", "evaluator_runs_join_key", b"evaluator_runs_join_key", "fallback_depth", b"fallback_depth", "finish_reasons", b"finish_reasons", "first_token_latency_seconds", b"first_token_latency_seconds", "inputs", b"inputs", "langsmith_run_url", b"langsmith_run_url", "llm_feedbacks", b"llm_feedbacks", "max_tokens", b"max_tokens", "metadata", b"metadata", "model_name", b"model_name", "n_generations", b"n_generations", "outputs", b"outputs", "parent_run_id", b"parent_run_id", "provider", b"provider", "recipient_agent", b"recipient_agent", "reflection_iterations", b"reflection_iterations", "retry_count", b"retry_count", "run_id", b"run_id", "run_type", b"run_type", "sender_agent", b"sender_agent", "start_time", b"start_time", "streaming_chunk_count", b"streaming_chunk_count", "system_fingerprint", b"system_fingerprint", "tags", b"tags", "team_id", b"team_id", "team_name", b"team_name", "temperature", b"temperature", "termination_reason", b"termination_reason", "thinking_metadata", b"thinking_metadata", "token_usage", b"token_usage", "tool_call_count", b"tool_call_count", "tool_call_metadatas", b"tool_call_metadatas", "top_p", b"top_p", "traceback", b"traceback", "turn_index", b"turn_index"]) -> None: ...
 
 global___LlmTelemetry = LlmTelemetry
 
