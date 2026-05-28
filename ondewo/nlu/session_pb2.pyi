@@ -45,6 +45,7 @@ import ondewo.nlu.common_pb2
 import ondewo.nlu.context_pb2
 import ondewo.nlu.entity_type_pb2
 import ondewo.nlu.intent_pb2
+import ondewo.nlu.llm_evaluation_pb2
 import sys
 import typing
 
@@ -320,6 +321,7 @@ class DetectIntentResponse(google.protobuf.message.Message):
     RESPONSE_ID_FIELD_NUMBER: builtins.int
     QUERY_RESULT_FIELD_NUMBER: builtins.int
     WEBHOOK_STATUS_FIELD_NUMBER: builtins.int
+    LLM_TELEMETRY_FIELD_NUMBER: builtins.int
     response_id: builtins.str
     """The unique identifier of the response. It can be used to
     locate a response in the training example set or for reporting issues.
@@ -334,15 +336,22 @@ class DetectIntentResponse(google.protobuf.message.Message):
         is never populated in webhook requests.
         """
 
+    @property
+    def llm_telemetry(self) -> global___LlmTelemetryReport:
+        """Aggregated LLM telemetry — duplicated convenience copy of
+        <code>query_result.llm_telemetry</code> for unary clients.
+        """
+
     def __init__(
         self,
         *,
         response_id: builtins.str = ...,
         query_result: global___QueryResult | None = ...,
         webhook_status: google.rpc.status_pb2.Status | None = ...,
+        llm_telemetry: global___LlmTelemetryReport | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["query_result", b"query_result", "webhook_status", b"webhook_status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["query_result", b"query_result", "response_id", b"response_id", "webhook_status", b"webhook_status"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["llm_telemetry", b"llm_telemetry", "query_result", b"query_result", "webhook_status", b"webhook_status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["llm_telemetry", b"llm_telemetry", "query_result", b"query_result", "response_id", b"response_id", "webhook_status", b"webhook_status"]) -> None: ...
 
 global___DetectIntentResponse = DetectIntentResponse
 
@@ -618,6 +627,562 @@ class QueryInput(google.protobuf.message.Message):
 global___QueryInput = QueryInput
 
 @typing.final
+class TokenUsage(google.protobuf.message.Message):
+    """Token usage counters for a single LLM call (or aggregate)."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TOTAL_TOKENS_FIELD_NUMBER: builtins.int
+    INPUT_TOKENS_FIELD_NUMBER: builtins.int
+    OUTPUT_TOKENS_FIELD_NUMBER: builtins.int
+    total_tokens: builtins.int
+    """Sum of input and output tokens for this call (or aggregate across calls)."""
+    input_tokens: builtins.int
+    """Number of prompt / input tokens consumed."""
+    output_tokens: builtins.int
+    """Number of completion / output tokens produced."""
+    def __init__(
+        self,
+        *,
+        total_tokens: builtins.int = ...,
+        input_tokens: builtins.int = ...,
+        output_tokens: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["input_tokens", b"input_tokens", "output_tokens", b"output_tokens", "total_tokens", b"total_tokens"]) -> None: ...
+
+global___TokenUsage = TokenUsage
+
+@typing.final
+class ToolCallMetadata(google.protobuf.message.Message):
+    """Metadata for one tool call executed by the LLM."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TOOL_CALL_ID_FIELD_NUMBER: builtins.int
+    TOOL_NAME_FIELD_NUMBER: builtins.int
+    START_TIME_FIELD_NUMBER: builtins.int
+    END_TIME_FIELD_NUMBER: builtins.int
+    DURATION_SECONDS_FIELD_NUMBER: builtins.int
+    TOKENS_FIELD_NUMBER: builtins.int
+    ARGUMENTS_FIELD_NUMBER: builtins.int
+    RESULT_FIELD_NUMBER: builtins.int
+    ERROR_MESSAGE_FIELD_NUMBER: builtins.int
+    tool_call_id: builtins.str
+    """Stable id assigned by the upstream framework (autogen / langchain)."""
+    tool_name: builtins.str
+    """Name of the tool / function invoked."""
+    duration_seconds: builtins.float
+    """Convenience duration (end_time - start_time)."""
+    error_message: builtins.str
+    """Populated only when the tool call failed; empty string on success."""
+    @property
+    def start_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Wall-clock start time of the tool call."""
+
+    @property
+    def end_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Wall-clock end time of the tool call."""
+
+    @property
+    def tokens(self) -> global___TokenUsage:
+        """Token attribution for this tool call when available."""
+
+    @property
+    def arguments(self) -> google.protobuf.struct_pb2.Struct:
+        """Tool arguments as a structured payload. May be omitted on incremental events."""
+
+    @property
+    def result(self) -> google.protobuf.struct_pb2.Struct:
+        """Tool result as a structured payload. May be omitted on incremental events."""
+
+    def __init__(
+        self,
+        *,
+        tool_call_id: builtins.str = ...,
+        tool_name: builtins.str = ...,
+        start_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        end_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        duration_seconds: builtins.float = ...,
+        tokens: global___TokenUsage | None = ...,
+        arguments: google.protobuf.struct_pb2.Struct | None = ...,
+        result: google.protobuf.struct_pb2.Struct | None = ...,
+        error_message: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["arguments", b"arguments", "end_time", b"end_time", "result", b"result", "start_time", b"start_time", "tokens", b"tokens"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["arguments", b"arguments", "duration_seconds", b"duration_seconds", "end_time", b"end_time", "error_message", b"error_message", "result", b"result", "start_time", b"start_time", "tokens", b"tokens", "tool_call_id", b"tool_call_id", "tool_name", b"tool_name"]) -> None: ...
+
+global___ToolCallMetadata = ToolCallMetadata
+
+@typing.final
+class ThinkingMetadata(google.protobuf.message.Message):
+    """Thinking / reasoning block emitted by the model (e.g. Anthropic extended thinking,
+    OpenAI o-series reasoning).
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TOKENS_FIELD_NUMBER: builtins.int
+    START_TIME_FIELD_NUMBER: builtins.int
+    END_TIME_FIELD_NUMBER: builtins.int
+    DURATION_SECONDS_FIELD_NUMBER: builtins.int
+    THINKING_TEXT_FIELD_NUMBER: builtins.int
+    duration_seconds: builtins.float
+    """Convenience duration (end_time - start_time)."""
+    thinking_text: builtins.str
+    """Raw thinking text. Subject to redaction depending on telemetry policy."""
+    @property
+    def tokens(self) -> global___TokenUsage:
+        """Token attribution for the thinking block when surfaced by the provider."""
+
+    @property
+    def start_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Wall-clock start of the thinking block."""
+
+    @property
+    def end_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Wall-clock end of the thinking block."""
+
+    def __init__(
+        self,
+        *,
+        tokens: global___TokenUsage | None = ...,
+        start_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        end_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        duration_seconds: builtins.float = ...,
+        thinking_text: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["end_time", b"end_time", "start_time", b"start_time", "tokens", b"tokens"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["duration_seconds", b"duration_seconds", "end_time", b"end_time", "start_time", b"start_time", "thinking_text", b"thinking_text", "tokens", b"tokens"]) -> None: ...
+
+global___ThinkingMetadata = ThinkingMetadata
+
+@typing.final
+class LlmTelemetry(google.protobuf.message.Message):
+    """Telemetry for a single LLM invocation inside one DetectIntent turn."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PROVIDER_FIELD_NUMBER: builtins.int
+    MODEL_NAME_FIELD_NUMBER: builtins.int
+    AGENT_NAME_FIELD_NUMBER: builtins.int
+    TOKENS_FIELD_NUMBER: builtins.int
+    TOOL_CALLS_FIELD_NUMBER: builtins.int
+    TOOL_CALL_COUNT_FIELD_NUMBER: builtins.int
+    THINKING_FIELD_NUMBER: builtins.int
+    START_TIME_FIELD_NUMBER: builtins.int
+    END_TIME_FIELD_NUMBER: builtins.int
+    DURATION_SECONDS_FIELD_NUMBER: builtins.int
+    RUN_ID_FIELD_NUMBER: builtins.int
+    PARENT_RUN_ID_FIELD_NUMBER: builtins.int
+    RUN_TYPE_FIELD_NUMBER: builtins.int
+    COMPONENT_NAME_FIELD_NUMBER: builtins.int
+    TAGS_FIELD_NUMBER: builtins.int
+    METADATA_FIELD_NUMBER: builtins.int
+    INPUTS_FIELD_NUMBER: builtins.int
+    OUTPUTS_FIELD_NUMBER: builtins.int
+    ERROR_CLASS_FIELD_NUMBER: builtins.int
+    ERROR_MESSAGE_FIELD_NUMBER: builtins.int
+    TRACEBACK_FIELD_NUMBER: builtins.int
+    STREAMING_CHUNK_COUNT_FIELD_NUMBER: builtins.int
+    FIRST_TOKEN_LATENCY_SECONDS_FIELD_NUMBER: builtins.int
+    SYSTEM_FINGERPRINT_FIELD_NUMBER: builtins.int
+    CACHED_FIELD_NUMBER: builtins.int
+    RETRY_COUNT_FIELD_NUMBER: builtins.int
+    FALLBACK_DEPTH_FIELD_NUMBER: builtins.int
+    TEMPERATURE_FIELD_NUMBER: builtins.int
+    TOP_P_FIELD_NUMBER: builtins.int
+    MAX_TOKENS_FIELD_NUMBER: builtins.int
+    N_GENERATIONS_FIELD_NUMBER: builtins.int
+    FINISH_REASONS_FIELD_NUMBER: builtins.int
+    CACHED_INPUT_TOKENS_FIELD_NUMBER: builtins.int
+    CACHE_CREATION_INPUT_TOKENS_FIELD_NUMBER: builtins.int
+    LANGSMITH_RUN_URL_FIELD_NUMBER: builtins.int
+    TEAM_NAME_FIELD_NUMBER: builtins.int
+    TEAM_ID_FIELD_NUMBER: builtins.int
+    AGENT_ROLE_FIELD_NUMBER: builtins.int
+    SENDER_AGENT_FIELD_NUMBER: builtins.int
+    RECIPIENT_AGENT_FIELD_NUMBER: builtins.int
+    TURN_INDEX_FIELD_NUMBER: builtins.int
+    REFLECTION_ITERATIONS_FIELD_NUMBER: builtins.int
+    TERMINATION_REASON_FIELD_NUMBER: builtins.int
+    COST_USD_FIELD_NUMBER: builtins.int
+    EVALUATOR_RUNS_JOIN_KEY_FIELD_NUMBER: builtins.int
+    INLINE_FEEDBACKS_FIELD_NUMBER: builtins.int
+    provider: builtins.str
+    """Provider tag: "autogen" | "langchain" | "openai" | "anthropic" | ..."""
+    model_name: builtins.str
+    """Concrete model identifier (e.g. "claude-3-5-sonnet-20241022")."""
+    agent_name: builtins.str
+    """intent_agent executor / agent name."""
+    tool_call_count: builtins.int
+    """Denormalized len(tool_calls)."""
+    duration_seconds: builtins.float
+    """Convenience duration (end_time - start_time)."""
+    run_id: builtins.str
+    """LangChain / LangSmith run-tree identifiers."""
+    parent_run_id: builtins.str
+    run_type: builtins.str
+    """LangSmith run taxonomy: chain | llm | tool | retriever | agent | parser | prompt."""
+    component_name: builtins.str
+    """Serialized component name from LangChain callbacks (e.g. "ChatOpenAI")."""
+    error_class: builtins.str
+    """Failure surface: class, message, stack trace."""
+    error_message: builtins.str
+    traceback: builtins.str
+    streaming_chunk_count: builtins.int
+    """Streaming chunk count observed during the call."""
+    first_token_latency_seconds: builtins.float
+    """Time-to-first-token (start_time -> first chunk)."""
+    system_fingerprint: builtins.str
+    """OpenAI system_fingerprint when available."""
+    cached: builtins.bool
+    """Whether the result was served from a client-side cache."""
+    retry_count: builtins.int
+    """Retry count for the underlying provider call."""
+    fallback_depth: builtins.int
+    """Index inside a with_fallbacks([...]) chain when the call succeeded."""
+    temperature: builtins.float
+    """Sampling / generation params (from request kwargs)."""
+    top_p: builtins.float
+    max_tokens: builtins.int
+    n_generations: builtins.int
+    cached_input_tokens: builtins.int
+    """Anthropic / Bedrock cache token counters (separate from prompt-cache TokenUsage)."""
+    cache_creation_input_tokens: builtins.int
+    langsmith_run_url: builtins.str
+    """External tracing handle."""
+    team_name: builtins.str
+    """Autogen team metadata."""
+    team_id: builtins.str
+    agent_role: builtins.str
+    """Autogen agent role tag (user_proxy | assistant | tool_executor | reflection)."""
+    sender_agent: builtins.str
+    recipient_agent: builtins.str
+    turn_index: builtins.int
+    reflection_iterations: builtins.int
+    termination_reason: builtins.str
+    cost_usd: builtins.float
+    """Computed cost in USD (TokenUsage * price-table lookup)."""
+    evaluator_runs_join_key: builtins.str
+    """Join key linking this LLM call to an evaluator run (see llm_evaluation.proto)."""
+    @property
+    def tokens(self) -> global___TokenUsage:
+        """Totals for this call."""
+
+    @property
+    def tool_calls(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___ToolCallMetadata]:
+        """Tool calls observed during this LLM invocation."""
+
+    @property
+    def thinking(self) -> global___ThinkingMetadata:
+        """Thinking block when surfaced by the model."""
+
+    @property
+    def start_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Wall-clock start of the LLM call."""
+
+    @property
+    def end_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Wall-clock end of the LLM call."""
+
+    @property
+    def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Tags propagated via RunnableConfig."""
+
+    @property
+    def metadata(self) -> google.protobuf.struct_pb2.Struct:
+        """Free-form metadata propagated via RunnableConfig."""
+
+    @property
+    def inputs(self) -> google.protobuf.struct_pb2.Struct:
+        """Redaction-aware snapshot of inputs at the run boundary."""
+
+    @property
+    def outputs(self) -> google.protobuf.struct_pb2.Struct:
+        """Redaction-aware snapshot of outputs at the run boundary."""
+
+    @property
+    def finish_reasons(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    @property
+    def inline_feedbacks(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.llm_evaluation_pb2.LlmFeedback]:
+        """Immediate feedback recorded inside the turn (e.g. self-grading by a reflection agent)."""
+
+    def __init__(
+        self,
+        *,
+        provider: builtins.str = ...,
+        model_name: builtins.str = ...,
+        agent_name: builtins.str = ...,
+        tokens: global___TokenUsage | None = ...,
+        tool_calls: collections.abc.Iterable[global___ToolCallMetadata] | None = ...,
+        tool_call_count: builtins.int = ...,
+        thinking: global___ThinkingMetadata | None = ...,
+        start_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        end_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        duration_seconds: builtins.float = ...,
+        run_id: builtins.str = ...,
+        parent_run_id: builtins.str = ...,
+        run_type: builtins.str = ...,
+        component_name: builtins.str = ...,
+        tags: collections.abc.Iterable[builtins.str] | None = ...,
+        metadata: google.protobuf.struct_pb2.Struct | None = ...,
+        inputs: google.protobuf.struct_pb2.Struct | None = ...,
+        outputs: google.protobuf.struct_pb2.Struct | None = ...,
+        error_class: builtins.str = ...,
+        error_message: builtins.str = ...,
+        traceback: builtins.str = ...,
+        streaming_chunk_count: builtins.int = ...,
+        first_token_latency_seconds: builtins.float = ...,
+        system_fingerprint: builtins.str = ...,
+        cached: builtins.bool = ...,
+        retry_count: builtins.int = ...,
+        fallback_depth: builtins.int = ...,
+        temperature: builtins.float = ...,
+        top_p: builtins.float = ...,
+        max_tokens: builtins.int = ...,
+        n_generations: builtins.int = ...,
+        finish_reasons: collections.abc.Iterable[builtins.str] | None = ...,
+        cached_input_tokens: builtins.int = ...,
+        cache_creation_input_tokens: builtins.int = ...,
+        langsmith_run_url: builtins.str = ...,
+        team_name: builtins.str = ...,
+        team_id: builtins.str = ...,
+        agent_role: builtins.str = ...,
+        sender_agent: builtins.str = ...,
+        recipient_agent: builtins.str = ...,
+        turn_index: builtins.int = ...,
+        reflection_iterations: builtins.int = ...,
+        termination_reason: builtins.str = ...,
+        cost_usd: builtins.float = ...,
+        evaluator_runs_join_key: builtins.str = ...,
+        inline_feedbacks: collections.abc.Iterable[ondewo.nlu.llm_evaluation_pb2.LlmFeedback] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["end_time", b"end_time", "inputs", b"inputs", "metadata", b"metadata", "outputs", b"outputs", "start_time", b"start_time", "thinking", b"thinking", "tokens", b"tokens"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["agent_name", b"agent_name", "agent_role", b"agent_role", "cache_creation_input_tokens", b"cache_creation_input_tokens", "cached", b"cached", "cached_input_tokens", b"cached_input_tokens", "component_name", b"component_name", "cost_usd", b"cost_usd", "duration_seconds", b"duration_seconds", "end_time", b"end_time", "error_class", b"error_class", "error_message", b"error_message", "evaluator_runs_join_key", b"evaluator_runs_join_key", "fallback_depth", b"fallback_depth", "finish_reasons", b"finish_reasons", "first_token_latency_seconds", b"first_token_latency_seconds", "inline_feedbacks", b"inline_feedbacks", "inputs", b"inputs", "langsmith_run_url", b"langsmith_run_url", "max_tokens", b"max_tokens", "metadata", b"metadata", "model_name", b"model_name", "n_generations", b"n_generations", "outputs", b"outputs", "parent_run_id", b"parent_run_id", "provider", b"provider", "recipient_agent", b"recipient_agent", "reflection_iterations", b"reflection_iterations", "retry_count", b"retry_count", "run_id", b"run_id", "run_type", b"run_type", "sender_agent", b"sender_agent", "start_time", b"start_time", "streaming_chunk_count", b"streaming_chunk_count", "system_fingerprint", b"system_fingerprint", "tags", b"tags", "team_id", b"team_id", "team_name", b"team_name", "temperature", b"temperature", "termination_reason", b"termination_reason", "thinking", b"thinking", "tokens", b"tokens", "tool_call_count", b"tool_call_count", "tool_calls", b"tool_calls", "top_p", b"top_p", "traceback", b"traceback", "turn_index", b"turn_index"]) -> None: ...
+
+global___LlmTelemetry = LlmTelemetry
+
+@typing.final
+class LlmTelemetryReport(google.protobuf.message.Message):
+    """Aggregated telemetry across all LLM calls in one DetectIntent turn."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TOKENS_TOTAL_FIELD_NUMBER: builtins.int
+    TOOL_CALL_COUNT_TOTAL_FIELD_NUMBER: builtins.int
+    LLM_CALL_COUNT_FIELD_NUMBER: builtins.int
+    LLM_CALLS_FIELD_NUMBER: builtins.int
+    DURATION_SECONDS_TOTAL_FIELD_NUMBER: builtins.int
+    tool_call_count_total: builtins.int
+    """Sum of LlmTelemetry.tool_call_count across llm_calls."""
+    llm_call_count: builtins.int
+    """Denormalized len(llm_calls)."""
+    duration_seconds_total: builtins.float
+    """Sum of LlmTelemetry.duration_seconds across llm_calls."""
+    @property
+    def tokens_total(self) -> global___TokenUsage:
+        """Summed TokenUsage across llm_calls."""
+
+    @property
+    def llm_calls(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmTelemetry]:
+        """Per-LLM-invocation breakdown."""
+
+    def __init__(
+        self,
+        *,
+        tokens_total: global___TokenUsage | None = ...,
+        tool_call_count_total: builtins.int = ...,
+        llm_call_count: builtins.int = ...,
+        llm_calls: collections.abc.Iterable[global___LlmTelemetry] | None = ...,
+        duration_seconds_total: builtins.float = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["tokens_total", b"tokens_total"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["duration_seconds_total", b"duration_seconds_total", "llm_call_count", b"llm_call_count", "llm_calls", b"llm_calls", "tokens_total", b"tokens_total", "tool_call_count_total", b"tool_call_count_total"]) -> None: ...
+
+global___LlmTelemetryReport = LlmTelemetryReport
+
+@typing.final
+class LlmCallStartedEvent(google.protobuf.message.Message):
+    """Emitted on a streaming DetectIntent when an LLM invocation starts."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    LLM_CALL_ID_FIELD_NUMBER: builtins.int
+    PROVIDER_FIELD_NUMBER: builtins.int
+    MODEL_NAME_FIELD_NUMBER: builtins.int
+    AGENT_NAME_FIELD_NUMBER: builtins.int
+    START_TIME_FIELD_NUMBER: builtins.int
+    llm_call_id: builtins.str
+    provider: builtins.str
+    model_name: builtins.str
+    agent_name: builtins.str
+    @property
+    def start_time(self) -> google.protobuf.timestamp_pb2.Timestamp: ...
+    def __init__(
+        self,
+        *,
+        llm_call_id: builtins.str = ...,
+        provider: builtins.str = ...,
+        model_name: builtins.str = ...,
+        agent_name: builtins.str = ...,
+        start_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["start_time", b"start_time"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["agent_name", b"agent_name", "llm_call_id", b"llm_call_id", "model_name", b"model_name", "provider", b"provider", "start_time", b"start_time"]) -> None: ...
+
+global___LlmCallStartedEvent = LlmCallStartedEvent
+
+@typing.final
+class LlmCallFinishedEvent(google.protobuf.message.Message):
+    """Emitted on a streaming DetectIntent when an LLM invocation finishes."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    LLM_CALL_ID_FIELD_NUMBER: builtins.int
+    END_TIME_FIELD_NUMBER: builtins.int
+    DURATION_SECONDS_FIELD_NUMBER: builtins.int
+    TOKENS_FIELD_NUMBER: builtins.int
+    llm_call_id: builtins.str
+    duration_seconds: builtins.float
+    @property
+    def end_time(self) -> google.protobuf.timestamp_pb2.Timestamp: ...
+    @property
+    def tokens(self) -> global___TokenUsage: ...
+    def __init__(
+        self,
+        *,
+        llm_call_id: builtins.str = ...,
+        end_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        duration_seconds: builtins.float = ...,
+        tokens: global___TokenUsage | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["end_time", b"end_time", "tokens", b"tokens"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["duration_seconds", b"duration_seconds", "end_time", b"end_time", "llm_call_id", b"llm_call_id", "tokens", b"tokens"]) -> None: ...
+
+global___LlmCallFinishedEvent = LlmCallFinishedEvent
+
+@typing.final
+class ToolCallStartedEvent(google.protobuf.message.Message):
+    """Emitted on a streaming DetectIntent when a tool call starts."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TOOL_CALL_ID_FIELD_NUMBER: builtins.int
+    TOOL_NAME_FIELD_NUMBER: builtins.int
+    ARGUMENTS_FIELD_NUMBER: builtins.int
+    START_TIME_FIELD_NUMBER: builtins.int
+    LLM_CALL_ID_FIELD_NUMBER: builtins.int
+    tool_call_id: builtins.str
+    tool_name: builtins.str
+    llm_call_id: builtins.str
+    """Groups events under an LlmTelemetry entry."""
+    @property
+    def arguments(self) -> google.protobuf.struct_pb2.Struct: ...
+    @property
+    def start_time(self) -> google.protobuf.timestamp_pb2.Timestamp: ...
+    def __init__(
+        self,
+        *,
+        tool_call_id: builtins.str = ...,
+        tool_name: builtins.str = ...,
+        arguments: google.protobuf.struct_pb2.Struct | None = ...,
+        start_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        llm_call_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["arguments", b"arguments", "start_time", b"start_time"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["arguments", b"arguments", "llm_call_id", b"llm_call_id", "start_time", b"start_time", "tool_call_id", b"tool_call_id", "tool_name", b"tool_name"]) -> None: ...
+
+global___ToolCallStartedEvent = ToolCallStartedEvent
+
+@typing.final
+class ToolCallFinishedEvent(google.protobuf.message.Message):
+    """Emitted on a streaming DetectIntent when a tool call finishes."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TOOL_CALL_ID_FIELD_NUMBER: builtins.int
+    END_TIME_FIELD_NUMBER: builtins.int
+    DURATION_SECONDS_FIELD_NUMBER: builtins.int
+    TOKENS_FIELD_NUMBER: builtins.int
+    RESULT_FIELD_NUMBER: builtins.int
+    ERROR_MESSAGE_FIELD_NUMBER: builtins.int
+    LLM_CALL_ID_FIELD_NUMBER: builtins.int
+    tool_call_id: builtins.str
+    duration_seconds: builtins.float
+    error_message: builtins.str
+    llm_call_id: builtins.str
+    @property
+    def end_time(self) -> google.protobuf.timestamp_pb2.Timestamp: ...
+    @property
+    def tokens(self) -> global___TokenUsage: ...
+    @property
+    def result(self) -> google.protobuf.struct_pb2.Struct: ...
+    def __init__(
+        self,
+        *,
+        tool_call_id: builtins.str = ...,
+        end_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        duration_seconds: builtins.float = ...,
+        tokens: global___TokenUsage | None = ...,
+        result: google.protobuf.struct_pb2.Struct | None = ...,
+        error_message: builtins.str = ...,
+        llm_call_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["end_time", b"end_time", "result", b"result", "tokens", b"tokens"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["duration_seconds", b"duration_seconds", "end_time", b"end_time", "error_message", b"error_message", "llm_call_id", b"llm_call_id", "result", b"result", "tokens", b"tokens", "tool_call_id", b"tool_call_id"]) -> None: ...
+
+global___ToolCallFinishedEvent = ToolCallFinishedEvent
+
+@typing.final
+class ThinkingDeltaEvent(google.protobuf.message.Message):
+    """Emitted on a streaming DetectIntent for each thinking-delta chunk."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    LLM_CALL_ID_FIELD_NUMBER: builtins.int
+    TEXT_DELTA_FIELD_NUMBER: builtins.int
+    TIMESTAMP_FIELD_NUMBER: builtins.int
+    llm_call_id: builtins.str
+    text_delta: builtins.str
+    @property
+    def timestamp(self) -> google.protobuf.timestamp_pb2.Timestamp: ...
+    def __init__(
+        self,
+        *,
+        llm_call_id: builtins.str = ...,
+        text_delta: builtins.str = ...,
+        timestamp: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["timestamp", b"timestamp"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["llm_call_id", b"llm_call_id", "text_delta", b"text_delta", "timestamp", b"timestamp"]) -> None: ...
+
+global___ThinkingDeltaEvent = ThinkingDeltaEvent
+
+@typing.final
+class TokenUsageUpdateEvent(google.protobuf.message.Message):
+    """Emitted on a streaming DetectIntent when running token counts update."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    LLM_CALL_ID_FIELD_NUMBER: builtins.int
+    TOKENS_FIELD_NUMBER: builtins.int
+    llm_call_id: builtins.str
+    @property
+    def tokens(self) -> global___TokenUsage:
+        """Running totals for that llm_call."""
+
+    def __init__(
+        self,
+        *,
+        llm_call_id: builtins.str = ...,
+        tokens: global___TokenUsage | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["tokens", b"tokens"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["llm_call_id", b"llm_call_id", "tokens", b"tokens"]) -> None: ...
+
+global___TokenUsageUpdateEvent = TokenUsageUpdateEvent
+
+@typing.final
 class QueryResult(google.protobuf.message.Message):
     """Represents the result of conversational query or event processing."""
 
@@ -639,6 +1204,7 @@ class QueryResult(google.protobuf.message.Message):
     DIAGNOSTIC_INFO_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     FILE_RESOURCES_FIELD_NUMBER: builtins.int
+    LLM_TELEMETRY_FIELD_NUMBER: builtins.int
     query_text: builtins.str
     """The original conversational query text:
     <ul>
@@ -730,6 +1296,10 @@ class QueryResult(google.protobuf.message.Message):
     def file_resources(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FileResource]:
         """Generated or attached files, e.g., llm generates a picture or file attachment"""
 
+    @property
+    def llm_telemetry(self) -> global___LlmTelemetryReport:
+        """Aggregated LLM telemetry (tokens, tool calls, thinking) for this turn."""
+
     def __init__(
         self,
         *,
@@ -749,9 +1319,10 @@ class QueryResult(google.protobuf.message.Message):
         diagnostic_info: google.protobuf.struct_pb2.Struct | None = ...,
         language_code: builtins.str = ...,
         file_resources: collections.abc.Iterable[global___FileResource] | None = ...,
+        llm_telemetry: global___LlmTelemetryReport | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["diagnostic_info", b"diagnostic_info", "intent", b"intent", "parameters", b"parameters", "webhook_payload", b"webhook_payload"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["action", b"action", "all_required_params_present", b"all_required_params_present", "diagnostic_info", b"diagnostic_info", "file_resources", b"file_resources", "fulfillment_messages", b"fulfillment_messages", "fulfillment_text", b"fulfillment_text", "intent", b"intent", "intent_detection_confidence", b"intent_detection_confidence", "language_code", b"language_code", "output_contexts", b"output_contexts", "parameters", b"parameters", "query_text", b"query_text", "query_text_original", b"query_text_original", "speech_recognition_confidence", b"speech_recognition_confidence", "webhook_payload", b"webhook_payload", "webhook_source", b"webhook_source"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["diagnostic_info", b"diagnostic_info", "intent", b"intent", "llm_telemetry", b"llm_telemetry", "parameters", b"parameters", "webhook_payload", b"webhook_payload"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["action", b"action", "all_required_params_present", b"all_required_params_present", "diagnostic_info", b"diagnostic_info", "file_resources", b"file_resources", "fulfillment_messages", b"fulfillment_messages", "fulfillment_text", b"fulfillment_text", "intent", b"intent", "intent_detection_confidence", b"intent_detection_confidence", "language_code", b"language_code", "llm_telemetry", b"llm_telemetry", "output_contexts", b"output_contexts", "parameters", b"parameters", "query_text", b"query_text", "query_text_original", b"query_text_original", "speech_recognition_confidence", b"speech_recognition_confidence", "webhook_payload", b"webhook_payload", "webhook_source", b"webhook_source"]) -> None: ...
 
 global___QueryResult = QueryResult
 
@@ -835,6 +1406,12 @@ class StreamingDetectIntentResponse(google.protobuf.message.Message):
     RECOGNITION_RESULT_FIELD_NUMBER: builtins.int
     QUERY_RESULT_FIELD_NUMBER: builtins.int
     WEBHOOK_STATUS_FIELD_NUMBER: builtins.int
+    LLM_CALL_STARTED_FIELD_NUMBER: builtins.int
+    LLM_CALL_FINISHED_FIELD_NUMBER: builtins.int
+    TOOL_CALL_STARTED_FIELD_NUMBER: builtins.int
+    TOOL_CALL_FINISHED_FIELD_NUMBER: builtins.int
+    THINKING_DELTA_FIELD_NUMBER: builtins.int
+    TOKEN_USAGE_UPDATE_FIELD_NUMBER: builtins.int
     response_id: builtins.str
     """The unique identifier of the response. It can be used to
     locate a response in the training example set or for reporting issues.
@@ -851,6 +1428,18 @@ class StreamingDetectIntentResponse(google.protobuf.message.Message):
     def webhook_status(self) -> google.rpc.status_pb2.Status:
         """Specifies the status of the webhook request."""
 
+    @property
+    def llm_call_started(self) -> global___LlmCallStartedEvent: ...
+    @property
+    def llm_call_finished(self) -> global___LlmCallFinishedEvent: ...
+    @property
+    def tool_call_started(self) -> global___ToolCallStartedEvent: ...
+    @property
+    def tool_call_finished(self) -> global___ToolCallFinishedEvent: ...
+    @property
+    def thinking_delta(self) -> global___ThinkingDeltaEvent: ...
+    @property
+    def token_usage_update(self) -> global___TokenUsageUpdateEvent: ...
     def __init__(
         self,
         *,
@@ -858,9 +1447,16 @@ class StreamingDetectIntentResponse(google.protobuf.message.Message):
         recognition_result: global___StreamingRecognitionResult | None = ...,
         query_result: global___QueryResult | None = ...,
         webhook_status: google.rpc.status_pb2.Status | None = ...,
+        llm_call_started: global___LlmCallStartedEvent | None = ...,
+        llm_call_finished: global___LlmCallFinishedEvent | None = ...,
+        tool_call_started: global___ToolCallStartedEvent | None = ...,
+        tool_call_finished: global___ToolCallFinishedEvent | None = ...,
+        thinking_delta: global___ThinkingDeltaEvent | None = ...,
+        token_usage_update: global___TokenUsageUpdateEvent | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["query_result", b"query_result", "recognition_result", b"recognition_result", "webhook_status", b"webhook_status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["query_result", b"query_result", "recognition_result", b"recognition_result", "response_id", b"response_id", "webhook_status", b"webhook_status"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["llm_call_finished", b"llm_call_finished", "llm_call_started", b"llm_call_started", "query_result", b"query_result", "recognition_result", b"recognition_result", "telemetry_event", b"telemetry_event", "thinking_delta", b"thinking_delta", "token_usage_update", b"token_usage_update", "tool_call_finished", b"tool_call_finished", "tool_call_started", b"tool_call_started", "webhook_status", b"webhook_status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["llm_call_finished", b"llm_call_finished", "llm_call_started", b"llm_call_started", "query_result", b"query_result", "recognition_result", b"recognition_result", "response_id", b"response_id", "telemetry_event", b"telemetry_event", "thinking_delta", b"thinking_delta", "token_usage_update", b"token_usage_update", "tool_call_finished", b"tool_call_finished", "tool_call_started", b"tool_call_started", "webhook_status", b"webhook_status"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["telemetry_event", b"telemetry_event"]) -> typing.Literal["llm_call_started", "llm_call_finished", "tool_call_started", "tool_call_finished", "thinking_delta", "token_usage_update"] | None: ...
 
 global___StreamingDetectIntentResponse = StreamingDetectIntentResponse
 
@@ -1180,6 +1776,7 @@ class SessionStep(google.protobuf.message.Message):
     CREATED_BY_FIELD_NUMBER: builtins.int
     MODIFIED_BY_FIELD_NUMBER: builtins.int
     AUDIO_FILE_RESOURCES_FIELD_NUMBER: builtins.int
+    LLM_TELEMETRY_FIELD_NUMBER: builtins.int
     name: builtins.str
     """The unique identifier for the given review
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;</code></pre>
@@ -1216,6 +1813,12 @@ class SessionStep(google.protobuf.message.Message):
     def audio_file_resources(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AudioFileResource]:
         """audio file resources associated with the session step"""
 
+    @property
+    def llm_telemetry(self) -> global___LlmTelemetryReport:
+        """Aggregated LLM telemetry for this step (one entry per LLM invocation,
+        plus turn-level totals).
+        """
+
     def __init__(
         self,
         *,
@@ -1229,9 +1832,10 @@ class SessionStep(google.protobuf.message.Message):
         created_by: builtins.str = ...,
         modified_by: builtins.str = ...,
         audio_file_resources: collections.abc.Iterable[global___AudioFileResource] | None = ...,
+        llm_telemetry: global___LlmTelemetryReport | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["created_at", b"created_at", "detect_intent_request", b"detect_intent_request", "detect_intent_response", b"detect_intent_response", "modified_at", b"modified_at", "timestamp", b"timestamp"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["audio_file_resources", b"audio_file_resources", "contexts", b"contexts", "created_at", b"created_at", "created_by", b"created_by", "detect_intent_request", b"detect_intent_request", "detect_intent_response", b"detect_intent_response", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "timestamp", b"timestamp"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["created_at", b"created_at", "detect_intent_request", b"detect_intent_request", "detect_intent_response", b"detect_intent_response", "llm_telemetry", b"llm_telemetry", "modified_at", b"modified_at", "timestamp", b"timestamp"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["audio_file_resources", b"audio_file_resources", "contexts", b"contexts", "created_at", b"created_at", "created_by", b"created_by", "detect_intent_request", b"detect_intent_request", "detect_intent_response", b"detect_intent_response", "llm_telemetry", b"llm_telemetry", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "timestamp", b"timestamp"]) -> None: ...
 
 global___SessionStep = SessionStep
 
