@@ -126,6 +126,7 @@ class LlmEvaluationDataset(google.protobuf.message.Message):
     MODIFIED_AT_FIELD_NUMBER: builtins.int
     MODIFIED_BY_FIELD_NUMBER: builtins.int
     PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     dataset_id: builtins.str
     """Stable UUID assigned at creation time."""
     name: builtins.str
@@ -139,6 +140,12 @@ class LlmEvaluationDataset(google.protobuf.message.Message):
     parent: builtins.str
     """Project owning the dataset.
     Format: <code>projects/&lt;project_uuid&gt;</code>.
+    """
+    language_code: builtins.str
+    """BCP-47 language code (e.g. <code>"en"</code>, <code>"de"</code>, <code>"en-US"</code>)
+    identifying which language the dataset was authored for. Datasets are
+    scoped per (project, language_code) — the same dataset name may exist
+    independently per language.
     """
     @property
     def llm_evaluation_examples(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmEvaluationExample]:
@@ -171,9 +178,10 @@ class LlmEvaluationDataset(google.protobuf.message.Message):
         modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         modified_by: builtins.str = ...,
         parent: builtins.str = ...,
+        language_code: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["created_at", b"created_at", "created_by", b"created_by", "dataset_id", b"dataset_id", "description", b"description", "llm_evaluation_examples", b"llm_evaluation_examples", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "parent", b"parent", "tags", b"tags"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["created_at", b"created_at", "created_by", b"created_by", "dataset_id", b"dataset_id", "description", b"description", "language_code", b"language_code", "llm_evaluation_examples", b"llm_evaluation_examples", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "parent", b"parent", "tags", b"tags"]) -> None: ...
 
 global___LlmEvaluationDataset = LlmEvaluationDataset
 
@@ -190,12 +198,20 @@ class LlmEvaluationExample(google.protobuf.message.Message):
     DATASET_ID_FIELD_NUMBER: builtins.int
     CREATED_AT_FIELD_NUMBER: builtins.int
     CREATED_BY_FIELD_NUMBER: builtins.int
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     example_id: builtins.str
     """Stable UUID assigned at creation time."""
     dataset_id: builtins.str
     """Foreign key to the owning dataset."""
     created_by: builtins.str
     """User id of the example creator."""
+    parent: builtins.str
+    """Project owning the example (denormalized from parent dataset for cheap
+    per-project filtering). Format: <code>projects/&lt;project_uuid&gt;</code>.
+    """
+    language_code: builtins.str
+    """BCP-47 language code (denormalized from parent dataset for cheap filtering)."""
     @property
     def inputs(self) -> google.protobuf.struct_pb2.Struct:
         """Structured inputs payload — agent inputs, prompt vars, retrieval context, ..."""
@@ -222,9 +238,11 @@ class LlmEvaluationExample(google.protobuf.message.Message):
         dataset_id: builtins.str = ...,
         created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         created_by: builtins.str = ...,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["created_at", b"created_at", "expected_outputs", b"expected_outputs", "inputs", b"inputs", "metadata", b"metadata"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["created_at", b"created_at", "created_by", b"created_by", "dataset_id", b"dataset_id", "example_id", b"example_id", "expected_outputs", b"expected_outputs", "inputs", b"inputs", "metadata", b"metadata"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["created_at", b"created_at", "created_by", b"created_by", "dataset_id", b"dataset_id", "example_id", b"example_id", "expected_outputs", b"expected_outputs", "inputs", b"inputs", "language_code", b"language_code", "metadata", b"metadata", "parent", b"parent"]) -> None: ...
 
 global___LlmEvaluationExample = LlmEvaluationExample
 
@@ -252,6 +270,7 @@ class LlmEvaluationExperiment(google.protobuf.message.Message):
     PARENT_FIELD_NUMBER: builtins.int
     STATUS_FIELD_NUMBER: builtins.int
     CREATED_BY_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     experiment_id: builtins.str
     """Stable UUID assigned at creation time."""
     dataset_id: builtins.str
@@ -284,6 +303,11 @@ class LlmEvaluationExperiment(google.protobuf.message.Message):
     """
     created_by: builtins.str
     """User id of the experiment creator."""
+    language_code: builtins.str
+    """BCP-47 language code (denormalized from parent dataset). Experiments are
+    scoped per (project, language_code); experiment name uniqueness is
+    enforced per (project, language_code) tuple.
+    """
     @property
     def config(self) -> google.protobuf.struct_pb2.Struct:
         """Arbitrary configuration captured at run time."""
@@ -321,9 +345,10 @@ class LlmEvaluationExperiment(google.protobuf.message.Message):
         parent: builtins.str = ...,
         status: global___ExperimentStatus.ValueType = ...,
         created_by: builtins.str = ...,
+        language_code: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["config", b"config", "finished_at", b"finished_at", "started_at", b"started_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["baseline_experiment_id", b"baseline_experiment_id", "config", b"config", "created_by", b"created_by", "dataset_id", b"dataset_id", "duration_seconds", b"duration_seconds", "experiment_id", b"experiment_id", "finished_at", b"finished_at", "git_sha", b"git_sha", "llm_evaluator_runs", b"llm_evaluator_runs", "model_name", b"model_name", "n_examples", b"n_examples", "n_failed", b"n_failed", "n_passed", b"n_passed", "name", b"name", "parent", b"parent", "prompt_version", b"prompt_version", "started_at", b"started_at", "status", b"status"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["baseline_experiment_id", b"baseline_experiment_id", "config", b"config", "created_by", b"created_by", "dataset_id", b"dataset_id", "duration_seconds", b"duration_seconds", "experiment_id", b"experiment_id", "finished_at", b"finished_at", "git_sha", b"git_sha", "language_code", b"language_code", "llm_evaluator_runs", b"llm_evaluator_runs", "model_name", b"model_name", "n_examples", b"n_examples", "n_failed", b"n_failed", "n_passed", b"n_passed", "name", b"name", "parent", b"parent", "prompt_version", b"prompt_version", "started_at", b"started_at", "status", b"status"]) -> None: ...
 
 global___LlmEvaluationExperiment = LlmEvaluationExperiment
 
@@ -543,14 +568,19 @@ class CreateLlmEvaluationDatasetRequest(google.protobuf.message.Message):
     DESCRIPTION_FIELD_NUMBER: builtins.int
     LLM_EVALUATION_EXAMPLES_FIELD_NUMBER: builtins.int
     TAGS_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Project owning the dataset.
     Format: <code>projects/&lt;project_uuid&gt;</code>.
     """
     name: builtins.str
-    """Human-readable dataset name (unique within the project)."""
+    """Human-readable dataset name (unique within the (project, language_code) tuple)."""
     description: builtins.str
     """Free-form description."""
+    language_code: builtins.str
+    """BCP-47 language code the dataset is authored for. Required — the same
+    dataset name may coexist across different languages.
+    """
     @property
     def llm_evaluation_examples(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmEvaluationExample]:
         """Optional initial set of examples."""
@@ -567,8 +597,9 @@ class CreateLlmEvaluationDatasetRequest(google.protobuf.message.Message):
         description: builtins.str = ...,
         llm_evaluation_examples: collections.abc.Iterable[global___LlmEvaluationExample] | None = ...,
         tags: collections.abc.Iterable[builtins.str] | None = ...,
+        language_code: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["description", b"description", "llm_evaluation_examples", b"llm_evaluation_examples", "name", b"name", "parent", b"parent", "tags", b"tags"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["description", b"description", "language_code", b"language_code", "llm_evaluation_examples", b"llm_evaluation_examples", "name", b"name", "parent", b"parent", "tags", b"tags"]) -> None: ...
 
 global___CreateLlmEvaluationDatasetRequest = CreateLlmEvaluationDatasetRequest
 
@@ -610,6 +641,7 @@ class ListLlmEvaluationDatasetsRequest(google.protobuf.message.Message):
     FIELD_MASK_FIELD_NUMBER: builtins.int
     NAME_FILTER_FIELD_NUMBER: builtins.int
     TAGS_FILTER_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Project owning the datasets.
     Format: <code>projects/&lt;project_uuid&gt;</code>.
@@ -618,6 +650,10 @@ class ListLlmEvaluationDatasetsRequest(google.protobuf.message.Message):
     """Optional pagination token (e.g. <code>"current_index-0--page_size-20"</code>)."""
     name_filter: builtins.str
     """Optional name substring filter."""
+    language_code: builtins.str
+    """Optional BCP-47 language-code filter. When set, only datasets authored
+    for the given language are returned.
+    """
     @property
     def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields will be filled with data."""
@@ -634,9 +670,10 @@ class ListLlmEvaluationDatasetsRequest(google.protobuf.message.Message):
         field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
         name_filter: builtins.str = ...,
         tags_filter: collections.abc.Iterable[builtins.str] | None = ...,
+        language_code: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "name_filter", b"name_filter", "page_token", b"page_token", "parent", b"parent", "tags_filter", b"tags_filter"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "language_code", b"language_code", "name_filter", b"name_filter", "page_token", b"page_token", "parent", b"parent", "tags_filter", b"tags_filter"]) -> None: ...
 
 global___ListLlmEvaluationDatasetsRequest = ListLlmEvaluationDatasetsRequest
 
@@ -938,6 +975,7 @@ class RunLlmEvaluationExperimentRequest(google.protobuf.message.Message):
     CONFIG_FIELD_NUMBER: builtins.int
     EVALUATOR_NAMES_FIELD_NUMBER: builtins.int
     BASELINE_EXPERIMENT_ID_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Project owning the experiment.
     Format: <code>projects/&lt;project_uuid&gt;</code>.
@@ -954,6 +992,10 @@ class RunLlmEvaluationExperimentRequest(google.protobuf.message.Message):
     """Concrete model identifier under test."""
     baseline_experiment_id: builtins.str
     """Optional baseline experiment id for regression detection."""
+    language_code: builtins.str
+    """BCP-47 language code the experiment runs against. Required — selects
+    which language-scoped dataset is loaded.
+    """
     @property
     def config(self) -> google.protobuf.struct_pb2.Struct:
         """Arbitrary run-time configuration."""
@@ -974,9 +1016,10 @@ class RunLlmEvaluationExperimentRequest(google.protobuf.message.Message):
         config: google.protobuf.struct_pb2.Struct | None = ...,
         evaluator_names: collections.abc.Iterable[builtins.str] | None = ...,
         baseline_experiment_id: builtins.str = ...,
+        language_code: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["config", b"config"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["baseline_experiment_id", b"baseline_experiment_id", "config", b"config", "dataset_id", b"dataset_id", "evaluator_names", b"evaluator_names", "git_sha", b"git_sha", "model_name", b"model_name", "name", b"name", "parent", b"parent", "prompt_version", b"prompt_version"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["baseline_experiment_id", b"baseline_experiment_id", "config", b"config", "dataset_id", b"dataset_id", "evaluator_names", b"evaluator_names", "git_sha", b"git_sha", "language_code", b"language_code", "model_name", b"model_name", "name", b"name", "parent", b"parent", "prompt_version", b"prompt_version"]) -> None: ...
 
 global___RunLlmEvaluationExperimentRequest = RunLlmEvaluationExperimentRequest
 
@@ -1017,6 +1060,7 @@ class ListLlmEvaluationExperimentsRequest(google.protobuf.message.Message):
     FIELD_MASK_FIELD_NUMBER: builtins.int
     STATUS_FILTER_FIELD_NUMBER: builtins.int
     NAME_FILTER_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Project owning the experiments.
     Format: <code>projects/&lt;project_uuid&gt;</code>.
@@ -1029,6 +1073,10 @@ class ListLlmEvaluationExperimentsRequest(google.protobuf.message.Message):
     """Optional. Restrict to a specific status (RUNNING, SUCCEEDED, ...)."""
     name_filter: builtins.str
     """Optional. Substring filter on experiment name."""
+    language_code: builtins.str
+    """Optional BCP-47 language-code filter. When set, only experiments
+    authored for the given language are returned.
+    """
     @property
     def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields will be filled with data."""
@@ -1042,9 +1090,10 @@ class ListLlmEvaluationExperimentsRequest(google.protobuf.message.Message):
         field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
         status_filter: global___ExperimentStatus.ValueType = ...,
         name_filter: builtins.str = ...,
+        language_code: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["dataset_id", b"dataset_id", "field_mask", b"field_mask", "name_filter", b"name_filter", "page_token", b"page_token", "parent", b"parent", "status_filter", b"status_filter"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["dataset_id", b"dataset_id", "field_mask", b"field_mask", "language_code", b"language_code", "name_filter", b"name_filter", "page_token", b"page_token", "parent", b"parent", "status_filter", b"status_filter"]) -> None: ...
 
 global___ListLlmEvaluationExperimentsRequest = ListLlmEvaluationExperimentsRequest
 
