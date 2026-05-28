@@ -16,7 +16,7 @@ export
 
 # MUST BE THE SAME AS API in Mayor and Minor Version Number
 # example: API 2.9.0 --> Client 2.9.X
-ONDEWO_NLU_VERSION = 6.11.3.dev0+ond211.2396
+ONDEWO_NLU_VERSION = 6.11.4.dev0+ond211.2396
 
 ONDEWO_NLU_API_GIT_BRANCH=local/feature/OND211-2396-add-thinking-tool-call-and-tokens
 ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags/5.9.0
