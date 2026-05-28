@@ -63,20 +63,23 @@ class _TranscriptionType:
 class _TranscriptionTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_TranscriptionType.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     TRANSCRIPTION_TYPE_UNSPECIFIED: _TranscriptionType.ValueType  # 0
-    """unspecified"""
+    """Sentinel value when the source of the transcription was not specified."""
     TRANSCRIPTION_TYPE_S2T: _TranscriptionType.ValueType  # 1
-    """Automatic transcription by a speech to text system"""
+    """Automatic transcription produced by a speech-to-text system."""
     TRANSCRIPTION_TYPE_HUMAN: _TranscriptionType.ValueType  # 2
-    """Manual human transcription"""
+    """Manual transcription produced by a human annotator."""
 
-class TranscriptionType(_TranscriptionType, metaclass=_TranscriptionTypeEnumTypeWrapper): ...
+class TranscriptionType(_TranscriptionType, metaclass=_TranscriptionTypeEnumTypeWrapper):
+    """Identifies whether a transcription was produced by an automatic
+    speech-to-text system or by a human annotator.
+    """
 
 TRANSCRIPTION_TYPE_UNSPECIFIED: TranscriptionType.ValueType  # 0
-"""unspecified"""
+"""Sentinel value when the source of the transcription was not specified."""
 TRANSCRIPTION_TYPE_S2T: TranscriptionType.ValueType  # 1
-"""Automatic transcription by a speech to text system"""
+"""Automatic transcription produced by a speech-to-text system."""
 TRANSCRIPTION_TYPE_HUMAN: TranscriptionType.ValueType  # 2
-"""Manual human transcription"""
+"""Manual transcription produced by a human annotator."""
 global___TranscriptionType = TranscriptionType
 
 class _AudioEncoding:
@@ -818,16 +821,21 @@ class LlmTelemetry(google.protobuf.message.Message):
     duration_seconds: builtins.float
     """Convenience duration (end_time - start_time)."""
     run_id: builtins.str
-    """LangChain / LangSmith run-tree identifiers."""
+    """LangChain / LangSmith run identifier for this LLM call (UUID)."""
     parent_run_id: builtins.str
+    """LangChain / LangSmith identifier of the parent run that spawned this call,
+    forming the LangSmith run tree.
+    """
     run_type: builtins.str
     """LangSmith run taxonomy: chain | llm | tool | retriever | agent | parser | prompt."""
     component_name: builtins.str
     """Serialized component name from LangChain callbacks (e.g. "ChatOpenAI")."""
     error_class: builtins.str
-    """Failure surface: class, message, stack trace."""
+    """Exception class name when the LLM call failed; empty on success."""
     error_message: builtins.str
+    """Exception message text when the LLM call failed; empty on success."""
     traceback: builtins.str
+    """Formatted stack trace when the LLM call failed; empty on success."""
     streaming_chunk_count: builtins.int
     """Streaming chunk count observed during the call."""
     first_token_latency_seconds: builtins.float
@@ -841,25 +849,39 @@ class LlmTelemetry(google.protobuf.message.Message):
     fallback_depth: builtins.int
     """Index inside a with_fallbacks([...]) chain when the call succeeded."""
     temperature: builtins.float
-    """Sampling / generation params (from request kwargs)."""
+    """Sampling temperature requested for the LLM call (request kwargs)."""
     top_p: builtins.float
+    """Top-p (nucleus sampling) parameter requested for the LLM call."""
     max_tokens: builtins.int
+    """Maximum number of tokens the model was allowed to produce."""
     n_generations: builtins.int
+    """Number of generations the model was asked to return (<code>n</code> in OpenAI API)."""
     cached_input_tokens: builtins.int
-    """Anthropic / Bedrock cache token counters (separate from prompt-cache TokenUsage)."""
+    """Number of input tokens served from the provider-side prompt cache
+    (Anthropic <code>cache_read_input_tokens</code>).
+    """
     cache_creation_input_tokens: builtins.int
+    """Number of input tokens written to the provider-side prompt cache
+    (Anthropic <code>cache_creation_input_tokens</code>).
+    """
     langsmith_run_url: builtins.str
-    """External tracing handle."""
+    """LangSmith run URL for direct click-through when LangSmith tracing is active."""
     team_name: builtins.str
-    """Autogen team metadata."""
+    """Autogen team display name owning the call."""
     team_id: builtins.str
+    """Autogen team identifier (UUID)."""
     agent_role: builtins.str
     """Autogen agent role tag (user_proxy | assistant | tool_executor | reflection)."""
     sender_agent: builtins.str
+    """Name of the autogen agent that produced the message."""
     recipient_agent: builtins.str
+    """Name of the autogen agent that received the message."""
     turn_index: builtins.int
+    """Zero-based position of this LLM call inside the autogen <code>run_stream()</code> sequence."""
     reflection_iterations: builtins.int
+    """Number of reflection loops executed in <code>robust_assistant_agent</code> for this call."""
     termination_reason: builtins.str
+    """Autogen <code>TaskResult.stop_reason</code> string when surfaced."""
     evaluator_runs_join_key: builtins.str
     """Join key linking this LLM call to an evaluator run (see llm_evaluation.proto)."""
     @property
@@ -899,7 +921,9 @@ class LlmTelemetry(google.protobuf.message.Message):
         """Redaction-aware snapshot of outputs at the run boundary."""
 
     @property
-    def finish_reasons(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    def finish_reasons(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """One finish reason per generation (e.g. <code>stop</code>, <code>length</code>, <code>tool_calls</code>, <code>content_filter</code>)."""
+
     @property
     def llm_feedbacks(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.llm_evaluation_pb2.LlmFeedback]:
         """Immediate inline feedback recorded inside the turn (e.g. self-grading by a
@@ -1793,7 +1817,7 @@ global___Session = Session
 
 @typing.final
 class SessionStep(google.protobuf.message.Message):
-    """SessionStep is a single user interaction as part of a session"""
+    """SessionStep is a single user interaction as part of a session."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1809,7 +1833,7 @@ class SessionStep(google.protobuf.message.Message):
     AUDIO_FILE_RESOURCES_FIELD_NUMBER: builtins.int
     LLM_TELEMETRY_REPORT_FIELD_NUMBER: builtins.int
     name: builtins.str
-    """The unique identifier for the given review
+    """The unique identifier of the session step.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;</code></pre>
     """
     created_by: builtins.str
@@ -1958,7 +1982,7 @@ global___DeleteSessionStepRequest = DeleteSessionStepRequest
 
 @typing.final
 class CreateSessionStepRequest(google.protobuf.message.Message):
-    """CreateSessionStepRequest stores a session step into the session"""
+    """Request to append a new SessionStep to an existing session."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1966,16 +1990,18 @@ class CreateSessionStepRequest(google.protobuf.message.Message):
     SESSION_STEP_FIELD_NUMBER: builtins.int
     FIELD_MASK_FIELD_NUMBER: builtins.int
     session_id: builtins.str
-    """The unique identifier for the given review
-    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;</code></pre>.
+    """The unique identifier of the parent session.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>.
     """
     @property
     def session_step(self) -> global___SessionStep:
-        """The session step to be added"""
+        """The session step to be added."""
 
     @property
     def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
-        """field mask specifying what the request should return, e.g. only name, created_at etc."""
+        """Field mask specifying which fields the returned SessionStep should carry
+        (e.g. only <code>name</code>, <code>created_at</code>).
+        """
 
     def __init__(
         self,
@@ -2707,7 +2733,11 @@ global___DeleteSessionRequest = DeleteSessionRequest
 
 @typing.final
 class CreateSessionReviewRequest(google.protobuf.message.Message):
-    """*** SESSION-REVIEW RELATED MESSAGES *** //"""
+    """*** SESSION-REVIEW RELATED MESSAGES *** //
+
+    Request to persist a session review for a given session.
+    As a side effect, training data in ondewo-cai may also be updated.
+    """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -4194,6 +4224,8 @@ global___DocumentFileResource = DocumentFileResource
 
 @typing.final
 class ImageFileResource(google.protobuf.message.Message):
+    """Represents an image file resource (e.g., JPEG, PNG, GIF) attached to a session."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     NAME_FIELD_NUMBER: builtins.int
@@ -4204,13 +4236,13 @@ class ImageFileResource(google.protobuf.message.Message):
     CREATED_BY_FIELD_NUMBER: builtins.int
     MODIFIED_BY_FIELD_NUMBER: builtins.int
     name: builtins.str
-    """The unique identifier of the session for which the latest review should be returned
+    """The unique identifier of the image file resource.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/images/&lt;image_uuid&gt;</code></pre>
     """
     display_name: builtins.str
     """File name of the image, e.g., MyPicture.jpg, or a user assigned display name"""
     bytes: builtins.bytes
-    """Bytes of the audio file"""
+    """Raw bytes of the image file."""
     created_by: builtins.str
     """User id in form of a valid UUID."""
     modified_by: builtins.str
@@ -4241,6 +4273,8 @@ global___ImageFileResource = ImageFileResource
 
 @typing.final
 class AudioFileResource(google.protobuf.message.Message):
+    """Represents an audio file resource attached to a session (input recording or generated TTS output)."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     NAME_FIELD_NUMBER: builtins.int
@@ -4256,7 +4290,7 @@ class AudioFileResource(google.protobuf.message.Message):
     MODIFIED_BY_FIELD_NUMBER: builtins.int
     DISPLAY_NAME_FIELD_NUMBER: builtins.int
     name: builtins.str
-    """The unique identifier of the session for which the latest review should be returned
+    """The unique identifier of the audio file resource.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
     """
     bytes: builtins.bytes
@@ -4274,7 +4308,7 @@ class AudioFileResource(google.protobuf.message.Message):
     modified_by: builtins.str
     """User id in form of a valid UUID."""
     display_name: builtins.str
-    """Bytes of the audio file"""
+    """Display name of the audio file, e.g., MyRecording.wav, or a user-assigned label."""
     @property
     def transcriptions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___S2tTranscription]:
         """transcriptions of the user input sorted by score.
