@@ -232,14 +232,14 @@ class _SessionsReportTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrap
     """Thinking-token / duration aggregates across sessions in scope (where the
     provider surfaces extended thinking).
     """
-    SESSION_LLM_FINISH_REASONS: _SessionsReportType.ValueType  # 22
+    SESSION_LLM_FINISH_REASONS: _SessionsReportType.ValueType  # 21
     """Finish-reason distribution across sessions in scope (<code>stop</code>,
     <code>length</code>, <code>tool_calls</code>, <code>content_filter</code>,
     <code>error</code>, ...).
     """
-    SESSION_LLM_LATENCY: _SessionsReportType.ValueType  # 23
+    SESSION_LLM_LATENCY: _SessionsReportType.ValueType  # 22
     """LLM call latency aggregates (p50 / p95 / p99, time-to-first-token)."""
-    SESSION_LLM_RAG_METRICS: _SessionsReportType.ValueType  # 24
+    SESSION_LLM_RAG_METRICS: _SessionsReportType.ValueType  # 23
     """RAG-specific metrics (retrieval hit-rate, context precision, citation
     overlap) aggregated across sessions in scope.
     """
@@ -315,14 +315,14 @@ SESSION_LLM_THINKING: SessionsReportType.ValueType  # 20
 """Thinking-token / duration aggregates across sessions in scope (where the
 provider surfaces extended thinking).
 """
-SESSION_LLM_FINISH_REASONS: SessionsReportType.ValueType  # 22
+SESSION_LLM_FINISH_REASONS: SessionsReportType.ValueType  # 21
 """Finish-reason distribution across sessions in scope (<code>stop</code>,
 <code>length</code>, <code>tool_calls</code>, <code>content_filter</code>,
 <code>error</code>, ...).
 """
-SESSION_LLM_LATENCY: SessionsReportType.ValueType  # 23
+SESSION_LLM_LATENCY: SessionsReportType.ValueType  # 22
 """LLM call latency aggregates (p50 / p95 / p99, time-to-first-token)."""
-SESSION_LLM_RAG_METRICS: SessionsReportType.ValueType  # 24
+SESSION_LLM_RAG_METRICS: SessionsReportType.ValueType  # 23
 """RAG-specific metrics (retrieval hit-rate, context precision, citation
 overlap) aggregated across sessions in scope.
 """
