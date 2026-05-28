@@ -39,6 +39,7 @@ from ondewo.nlu.services.async_ccai_projects import CcaiProjects
 from ondewo.nlu.services.async_contexts import Contexts
 from ondewo.nlu.services.async_entity_types import EntityTypes
 from ondewo.nlu.services.async_intents import Intents
+from ondewo.nlu.services.async_llm_evaluations import LlmEvaluations
 from ondewo.nlu.services.async_operations import Operations
 from ondewo.nlu.services.async_project_roles import ProjectRoles
 from ondewo.nlu.services.async_project_statistics import ProjectStatistics
@@ -91,6 +92,7 @@ class AsyncClient(AsyncBaseClient):
             contexts=Contexts(**kwargs),
             entity_types=EntityTypes(**kwargs),
             intents=Intents(**kwargs),
+            llm_evaluations=LlmEvaluations(**kwargs),
             operations=Operations(**kwargs),
             project_roles=ProjectRoles(**kwargs),
             project_statistics=ProjectStatistics(**kwargs),

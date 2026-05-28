@@ -221,6 +221,32 @@ class _SessionsReportTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrap
     """report least x tags. Supports SessionFilter to filter"""
     TOTAL_STATISTICS: _SessionsReportType.ValueType  # 17
     """report total numbers of e.g. sessions, session steps, etc."""
+    SESSION_LLM_TOKEN_USAGE: _SessionsReportType.ValueType  # 18
+    """Aggregate LLM token usage (input / output / cache) across sessions in scope.
+    Supports SessionFilter to filter and the request's <code>llm_*_filter</code> fields
+    to restrict to specific models / providers / agents.
+    """
+    SESSION_LLM_TOOL_CALLS: _SessionsReportType.ValueType  # 19
+    """Tool-call breakdown across sessions in scope (counts, durations, error rate)."""
+    SESSION_LLM_THINKING: _SessionsReportType.ValueType  # 20
+    """Thinking-token / duration aggregates across sessions in scope (where the
+    provider surfaces extended thinking).
+    """
+    SESSION_LLM_COST: _SessionsReportType.ValueType  # 21
+    """Aggregate LLM cost (USD) across sessions in scope, computed via the
+    configured price table.
+    """
+    SESSION_LLM_FINISH_REASONS: _SessionsReportType.ValueType  # 22
+    """Finish-reason distribution across sessions in scope (<code>stop</code>,
+    <code>length</code>, <code>tool_calls</code>, <code>content_filter</code>,
+    <code>error</code>, ...).
+    """
+    SESSION_LLM_LATENCY: _SessionsReportType.ValueType  # 23
+    """LLM call latency aggregates (p50 / p95 / p99, time-to-first-token)."""
+    SESSION_LLM_RAG_METRICS: _SessionsReportType.ValueType  # 24
+    """RAG-specific metrics (retrieval hit-rate, context precision, citation
+    overlap) aggregated across sessions in scope.
+    """
 
 class SessionsReportType(_SessionsReportType, metaclass=_SessionsReportTypeEnumTypeWrapper):
     """Type of reports about the domain of the agent"""
@@ -282,6 +308,32 @@ SESSION_LEAST_X_TAGS: SessionsReportType.ValueType  # 16
 """report least x tags. Supports SessionFilter to filter"""
 TOTAL_STATISTICS: SessionsReportType.ValueType  # 17
 """report total numbers of e.g. sessions, session steps, etc."""
+SESSION_LLM_TOKEN_USAGE: SessionsReportType.ValueType  # 18
+"""Aggregate LLM token usage (input / output / cache) across sessions in scope.
+Supports SessionFilter to filter and the request's <code>llm_*_filter</code> fields
+to restrict to specific models / providers / agents.
+"""
+SESSION_LLM_TOOL_CALLS: SessionsReportType.ValueType  # 19
+"""Tool-call breakdown across sessions in scope (counts, durations, error rate)."""
+SESSION_LLM_THINKING: SessionsReportType.ValueType  # 20
+"""Thinking-token / duration aggregates across sessions in scope (where the
+provider surfaces extended thinking).
+"""
+SESSION_LLM_COST: SessionsReportType.ValueType  # 21
+"""Aggregate LLM cost (USD) across sessions in scope, computed via the
+configured price table.
+"""
+SESSION_LLM_FINISH_REASONS: SessionsReportType.ValueType  # 22
+"""Finish-reason distribution across sessions in scope (<code>stop</code>,
+<code>length</code>, <code>tool_calls</code>, <code>content_filter</code>,
+<code>error</code>, ...).
+"""
+SESSION_LLM_LATENCY: SessionsReportType.ValueType  # 23
+"""LLM call latency aggregates (p50 / p95 / p99, time-to-first-token)."""
+SESSION_LLM_RAG_METRICS: SessionsReportType.ValueType  # 24
+"""RAG-specific metrics (retrieval hit-rate, context precision, citation
+overlap) aggregated across sessions in scope.
+"""
 global___SessionsReportType = SessionsReportType
 
 class _ReportFormat:
@@ -1130,6 +1182,11 @@ class GetAgentStatisticsRequest(google.protobuf.message.Message):
     FORMAT_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     TYPE_FIELD_NUMBER: builtins.int
+    LLM_MODEL_FILTER_FIELD_NUMBER: builtins.int
+    LLM_PROVIDER_FILTER_FIELD_NUMBER: builtins.int
+    LLM_AGENT_NAME_FILTER_FIELD_NUMBER: builtins.int
+    LLM_GROUP_BYS_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The project to get statistics from.
     Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
@@ -1142,6 +1199,34 @@ class GetAgentStatisticsRequest(google.protobuf.message.Message):
     """
     type: global___ReportType.ValueType
     """Type of reports about the domain of the agent"""
+    @property
+    def llm_model_filter(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Restrict LLM aggregations to specific models (e.g.
+        <code>"claude-3-5-sonnet-20241022"</code>). Empty list = all models.
+        """
+
+    @property
+    def llm_provider_filter(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Restrict LLM aggregations to specific providers
+        (e.g. <code>"anthropic"</code>, <code>"openai"</code>). Empty list = all providers.
+        """
+
+    @property
+    def llm_agent_name_filter(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Restrict LLM aggregations to specific intent-agent names."""
+
+    @property
+    def llm_group_bys(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Group LLM aggregations by named dimensions (e.g.
+        <code>["model_name", "provider"]</code>). Empty list = no grouping.
+        """
+
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields will be filled with data on the
+        response (e.g. paths=["llm_telemetry_report"]).
+        """
+
     def __init__(
         self,
         *,
@@ -1149,8 +1234,14 @@ class GetAgentStatisticsRequest(google.protobuf.message.Message):
         format: global___ReportFormat.ValueType = ...,
         language_code: builtins.str = ...,
         type: global___ReportType.ValueType = ...,
+        llm_model_filter: collections.abc.Iterable[builtins.str] | None = ...,
+        llm_provider_filter: collections.abc.Iterable[builtins.str] | None = ...,
+        llm_agent_name_filter: collections.abc.Iterable[builtins.str] | None = ...,
+        llm_group_bys: collections.abc.Iterable[builtins.str] | None = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["format", b"format", "language_code", b"language_code", "parent", b"parent", "type", b"type"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "format", b"format", "language_code", b"language_code", "llm_agent_name_filter", b"llm_agent_name_filter", "llm_group_bys", b"llm_group_bys", "llm_model_filter", b"llm_model_filter", "llm_provider_filter", b"llm_provider_filter", "parent", b"parent", "type", b"type"]) -> None: ...
 
 global___GetAgentStatisticsRequest = GetAgentStatisticsRequest
 
@@ -1163,20 +1254,30 @@ class GetAgentStatisticsResponse(google.protobuf.message.Message):
     REPORTS_FIELD_NUMBER: builtins.int
     FORMAT_FIELD_NUMBER: builtins.int
     TYPE_FIELD_NUMBER: builtins.int
+    LLM_TELEMETRY_REPORT_FIELD_NUMBER: builtins.int
     reports: builtins.bytes
     """Statistic info."""
     format: global___ReportFormat.ValueType
     """File formats for reports"""
     type: global___ReportType.ValueType
     """Type of reports about the domain of the agent"""
+    @property
+    def llm_telemetry_report(self) -> ondewo.nlu.session_pb2.LlmTelemetryReport:
+        """Optional aggregate LLM telemetry across all sessions / steps in scope
+        (subject to the LLM filters in the request). Populated only when the
+        request field_mask includes <code>llm_telemetry_report</code>.
+        """
+
     def __init__(
         self,
         *,
         reports: builtins.bytes = ...,
         format: global___ReportFormat.ValueType = ...,
         type: global___ReportType.ValueType = ...,
+        llm_telemetry_report: ondewo.nlu.session_pb2.LlmTelemetryReport | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["format", b"format", "reports", b"reports", "type", b"type"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["llm_telemetry_report", b"llm_telemetry_report"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["format", b"format", "llm_telemetry_report", b"llm_telemetry_report", "reports", b"reports", "type", b"type"]) -> None: ...
 
 global___GetAgentStatisticsResponse = GetAgentStatisticsResponse
 
@@ -1196,6 +1297,10 @@ class GetSessionsStatisticsRequest(google.protobuf.message.Message):
     ORDER_BYS_FIELD_NUMBER: builtins.int
     FIELD_MASK_FIELD_NUMBER: builtins.int
     SQL_QUERY_FIELD_NUMBER: builtins.int
+    LLM_MODEL_FILTER_FIELD_NUMBER: builtins.int
+    LLM_PROVIDER_FILTER_FIELD_NUMBER: builtins.int
+    LLM_AGENT_NAME_FILTER_FIELD_NUMBER: builtins.int
+    LLM_TOOL_NAME_FILTER_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The project to get statistics from.
     Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
@@ -1232,6 +1337,22 @@ class GetSessionsStatisticsRequest(google.protobuf.message.Message):
         <br>
         """
 
+    @property
+    def llm_model_filter(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Restrict LLM-typed reports to specific models. Empty = all models."""
+
+    @property
+    def llm_provider_filter(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Restrict LLM-typed reports to specific providers. Empty = all providers."""
+
+    @property
+    def llm_agent_name_filter(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Restrict LLM-typed reports to specific intent-agent names. Empty = all."""
+
+    @property
+    def llm_tool_name_filter(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Restrict LLM-typed reports to specific tool names. Empty = all."""
+
     def __init__(
         self,
         *,
@@ -1245,9 +1366,13 @@ class GetSessionsStatisticsRequest(google.protobuf.message.Message):
         order_bys: collections.abc.Iterable[builtins.str] | None = ...,
         field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
         sql_query: builtins.str = ...,
+        llm_model_filter: collections.abc.Iterable[builtins.str] | None = ...,
+        llm_provider_filter: collections.abc.Iterable[builtins.str] | None = ...,
+        llm_agent_name_filter: collections.abc.Iterable[builtins.str] | None = ...,
+        llm_tool_name_filter: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["context_filters", b"context_filters", "field_mask", b"field_mask", "format", b"format", "group_bys", b"group_bys", "limit", b"limit", "order_bys", b"order_bys", "parent", b"parent", "session_filter", b"session_filter", "sql_query", b"sql_query", "type", b"type"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["context_filters", b"context_filters", "field_mask", b"field_mask", "format", b"format", "group_bys", b"group_bys", "limit", b"limit", "llm_agent_name_filter", b"llm_agent_name_filter", "llm_model_filter", b"llm_model_filter", "llm_provider_filter", b"llm_provider_filter", "llm_tool_name_filter", b"llm_tool_name_filter", "order_bys", b"order_bys", "parent", b"parent", "session_filter", b"session_filter", "sql_query", b"sql_query", "type", b"type"]) -> None: ...
 
 global___GetSessionsStatisticsRequest = GetSessionsStatisticsRequest
 
@@ -1260,20 +1385,30 @@ class GetSessionsStatisticsResponse(google.protobuf.message.Message):
     REPORTS_FIELD_NUMBER: builtins.int
     FORMAT_FIELD_NUMBER: builtins.int
     TYPE_FIELD_NUMBER: builtins.int
+    LLM_TELEMETRY_REPORT_FIELD_NUMBER: builtins.int
     reports: builtins.bytes
     """Statistic info."""
     format: global___ReportFormat.ValueType
     """File formats for reports"""
     type: global___SessionsReportType.ValueType
     """Type of reports about the domain of the agent"""
+    @property
+    def llm_telemetry_report(self) -> ondewo.nlu.session_pb2.LlmTelemetryReport:
+        """Optional aggregate LLM telemetry summarizing the report (tokens, tool
+        calls, thinking, costs) across all sessions matched by the request.
+        Populated only for LLM-typed report types (SESSION_LLM_*).
+        """
+
     def __init__(
         self,
         *,
         reports: builtins.bytes = ...,
         format: global___ReportFormat.ValueType = ...,
         type: global___SessionsReportType.ValueType = ...,
+        llm_telemetry_report: ondewo.nlu.session_pb2.LlmTelemetryReport | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["format", b"format", "reports", b"reports", "type", b"type"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["llm_telemetry_report", b"llm_telemetry_report"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["format", b"format", "llm_telemetry_report", b"llm_telemetry_report", "reports", b"reports", "type", b"type"]) -> None: ...
 
 global___GetSessionsStatisticsResponse = GetSessionsStatisticsResponse
 
