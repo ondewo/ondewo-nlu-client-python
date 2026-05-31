@@ -139,7 +139,7 @@ class LlmEvaluationDataset(google.protobuf.message.Message):
     """User id of the last modifier."""
     parent: builtins.str
     """Project owning the dataset.
-    Format: <code>projects/&lt;project_uuid&gt;</code>.
+    Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     """
     language_code: builtins.str
     """BCP-47 language code (e.g. <code>"en"</code>, <code>"de"</code>, <code>"en-US"</code>)
@@ -208,7 +208,7 @@ class LlmEvaluationExample(google.protobuf.message.Message):
     """User id of the example creator."""
     parent: builtins.str
     """Project owning the example (denormalized from parent dataset for cheap
-    per-project filtering). Format: <code>projects/&lt;project_uuid&gt;</code>.
+    per-project filtering). Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     """
     language_code: builtins.str
     """BCP-47 language code (denormalized from parent dataset for cheap filtering)."""
@@ -271,6 +271,7 @@ class LlmEvaluationExperiment(google.protobuf.message.Message):
     STATUS_FIELD_NUMBER: builtins.int
     CREATED_BY_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    CCAI_SERVICE_NAMES_FIELD_NUMBER: builtins.int
     experiment_id: builtins.str
     """Stable UUID assigned at creation time."""
     dataset_id: builtins.str
@@ -295,7 +296,7 @@ class LlmEvaluationExperiment(google.protobuf.message.Message):
     """Optional pointer to a baseline experiment for regression detection."""
     parent: builtins.str
     """Project owning the experiment.
-    Format: <code>projects/&lt;project_uuid&gt;</code>.
+    Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     """
     status: global___ExperimentStatus.ValueType
     """Current lifecycle status of the experiment (pending / running / succeeded /
@@ -324,6 +325,12 @@ class LlmEvaluationExperiment(google.protobuf.message.Message):
     def finished_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Wall-clock end of the experiment run."""
 
+    @property
+    def ccai_service_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """CcaiService name(s) whose LLM connection details defined the model(s) evaluated in this run
+        (echoed from RunLlmEvaluationExperimentRequest for audit / reproducibility).
+        """
+
     def __init__(
         self,
         *,
@@ -346,9 +353,10 @@ class LlmEvaluationExperiment(google.protobuf.message.Message):
         status: global___ExperimentStatus.ValueType = ...,
         created_by: builtins.str = ...,
         language_code: builtins.str = ...,
+        ccai_service_names: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["config", b"config", "finished_at", b"finished_at", "started_at", b"started_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["baseline_experiment_id", b"baseline_experiment_id", "config", b"config", "created_by", b"created_by", "dataset_id", b"dataset_id", "duration_seconds", b"duration_seconds", "experiment_id", b"experiment_id", "finished_at", b"finished_at", "git_sha", b"git_sha", "language_code", b"language_code", "llm_evaluator_runs", b"llm_evaluator_runs", "model_name", b"model_name", "n_examples", b"n_examples", "n_failed", b"n_failed", "n_passed", b"n_passed", "name", b"name", "parent", b"parent", "prompt_version", b"prompt_version", "started_at", b"started_at", "status", b"status"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["baseline_experiment_id", b"baseline_experiment_id", "ccai_service_names", b"ccai_service_names", "config", b"config", "created_by", b"created_by", "dataset_id", b"dataset_id", "duration_seconds", b"duration_seconds", "experiment_id", b"experiment_id", "finished_at", b"finished_at", "git_sha", b"git_sha", "language_code", b"language_code", "llm_evaluator_runs", b"llm_evaluator_runs", "model_name", b"model_name", "n_examples", b"n_examples", "n_failed", b"n_failed", "n_passed", b"n_passed", "name", b"name", "parent", b"parent", "prompt_version", b"prompt_version", "started_at", b"started_at", "status", b"status"]) -> None: ...
 
 global___LlmEvaluationExperiment = LlmEvaluationExperiment
 
@@ -434,7 +442,10 @@ class LlmFeedback(google.protobuf.message.Message):
     "exact_match", "embedding_distance", "bleu", "rouge", "regression", ...
     """
     score: builtins.float
-    """Numeric score (0.0-1.0 by convention). Empty when the feedback is purely categorical."""
+    """Numeric score (0.0-1.0 by convention). Defaults to 0.0 (proto3 has no field
+    presence on this scalar, so an unset score and a genuine 0.0 are indistinguishable);
+    for purely categorical feedback, rely on categorical_value rather than this field.
+    """
     categorical_value: builtins.str
     """Categorical value when applicable ("pass" | "fail" | "yes" | "no" | tier)."""
     comment: builtins.str
@@ -571,7 +582,7 @@ class CreateLlmEvaluationDatasetRequest(google.protobuf.message.Message):
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Project owning the dataset.
-    Format: <code>projects/&lt;project_uuid&gt;</code>.
+    Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     """
     name: builtins.str
     """Human-readable dataset name (unique within the (project, language_code) tuple)."""
@@ -617,7 +628,7 @@ class GetLlmEvaluationDatasetRequest(google.protobuf.message.Message):
     """Dataset to fetch."""
     parent: builtins.str
     """Project owning the dataset.
-    Format: <code>projects/&lt;project_uuid&gt;</code>.
+    Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     """
     language_code: builtins.str
     """BCP-47 language-code scope (required)."""
@@ -654,7 +665,7 @@ class ListLlmEvaluationDatasetsRequest(google.protobuf.message.Message):
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Project owning the datasets.
-    Format: <code>projects/&lt;project_uuid&gt;</code>.
+    Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     """
     page_token: builtins.str
     """Optional pagination token (e.g. <code>"current_index-0--page_size-20"</code>)."""
@@ -724,7 +735,7 @@ class UpdateLlmEvaluationDatasetRequest(google.protobuf.message.Message):
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Project owning the dataset.
-    Format: <code>projects/&lt;project_uuid&gt;</code>.
+    Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     """
     language_code: builtins.str
     """BCP-47 language-code scope (required)."""
@@ -769,7 +780,7 @@ class DeleteLlmEvaluationDatasetRequest(google.protobuf.message.Message):
     """Dataset to delete."""
     parent: builtins.str
     """Project owning the dataset.
-    Format: <code>projects/&lt;project_uuid&gt;</code>.
+    Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     """
     language_code: builtins.str
     """BCP-47 language-code scope (required)."""
@@ -801,7 +812,7 @@ class AddLlmEvaluationExampleRequest(google.protobuf.message.Message):
     """Dataset to extend."""
     parent: builtins.str
     """Project owning the dataset.
-    Format: <code>projects/&lt;project_uuid&gt;</code>.
+    Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     """
     language_code: builtins.str
     """BCP-47 language-code scope (required, must match the dataset's)."""
@@ -836,7 +847,7 @@ class AddLlmEvaluationExamplesRequest(google.protobuf.message.Message):
     """Dataset to extend."""
     parent: builtins.str
     """Project owning the dataset.
-    Format: <code>projects/&lt;project_uuid&gt;</code>.
+    Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     """
     language_code: builtins.str
     """BCP-47 language-code scope (required, must match the dataset's)."""
@@ -890,7 +901,7 @@ class GetLlmEvaluationExampleRequest(google.protobuf.message.Message):
     """Example to fetch."""
     parent: builtins.str
     """Project owning the example.
-    Format: <code>projects/&lt;project_uuid&gt;</code>.
+    Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     """
     language_code: builtins.str
     """BCP-47 language-code scope (required)."""
@@ -928,7 +939,7 @@ class ListLlmEvaluationExamplesRequest(google.protobuf.message.Message):
     """Optional pagination token (e.g. <code>"current_index-0--page_size-20"</code>)."""
     parent: builtins.str
     """Project owning the dataset.
-    Format: <code>projects/&lt;project_uuid&gt;</code>.
+    Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     """
     language_code: builtins.str
     """BCP-47 language-code scope (required)."""
@@ -987,7 +998,7 @@ class UpdateLlmEvaluationExampleRequest(google.protobuf.message.Message):
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Project owning the example.
-    Format: <code>projects/&lt;project_uuid&gt;</code>.
+    Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     """
     language_code: builtins.str
     """BCP-47 language-code scope (required)."""
@@ -1032,7 +1043,7 @@ class DeleteLlmEvaluationExampleRequest(google.protobuf.message.Message):
     """Example to delete."""
     parent: builtins.str
     """Project owning the example.
-    Format: <code>projects/&lt;project_uuid&gt;</code>.
+    Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     """
     language_code: builtins.str
     """BCP-47 language-code scope (required)."""
@@ -1066,9 +1077,10 @@ class RunLlmEvaluationExperimentRequest(google.protobuf.message.Message):
     EVALUATOR_NAMES_FIELD_NUMBER: builtins.int
     BASELINE_EXPERIMENT_ID_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    CCAI_SERVICE_NAMES_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Project owning the experiment.
-    Format: <code>projects/&lt;project_uuid&gt;</code>.
+    Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     """
     dataset_id: builtins.str
     """Dataset to evaluate against."""
@@ -1094,6 +1106,15 @@ class RunLlmEvaluationExperimentRequest(google.protobuf.message.Message):
     def evaluator_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Logical names of evaluators to run (resolved server-side to evaluator implementations)."""
 
+    @property
+    def ccai_service_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Logical names of the CcaiService(s) that carry the LLM connection details (host/port/model/
+        auth) of the model(s) under evaluation, resolved server-side — mirroring the
+        IntentRagflowClassifier / IntentAgent <code>ccai_service_names</code> pattern. Each named
+        service defines one LLM to evaluate; supplying several evaluates and compares multiple LLMs
+        in a single run. Takes precedence over the free-form <code>model_name</code> label.
+        """
+
     def __init__(
         self,
         *,
@@ -1107,9 +1128,10 @@ class RunLlmEvaluationExperimentRequest(google.protobuf.message.Message):
         evaluator_names: collections.abc.Iterable[builtins.str] | None = ...,
         baseline_experiment_id: builtins.str = ...,
         language_code: builtins.str = ...,
+        ccai_service_names: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["config", b"config"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["baseline_experiment_id", b"baseline_experiment_id", "config", b"config", "dataset_id", b"dataset_id", "evaluator_names", b"evaluator_names", "git_sha", b"git_sha", "language_code", b"language_code", "model_name", b"model_name", "name", b"name", "parent", b"parent", "prompt_version", b"prompt_version"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["baseline_experiment_id", b"baseline_experiment_id", "ccai_service_names", b"ccai_service_names", "config", b"config", "dataset_id", b"dataset_id", "evaluator_names", b"evaluator_names", "git_sha", b"git_sha", "language_code", b"language_code", "model_name", b"model_name", "name", b"name", "parent", b"parent", "prompt_version", b"prompt_version"]) -> None: ...
 
 global___RunLlmEvaluationExperimentRequest = RunLlmEvaluationExperimentRequest
 
@@ -1127,7 +1149,7 @@ class GetLlmEvaluationExperimentRequest(google.protobuf.message.Message):
     """Experiment to fetch."""
     parent: builtins.str
     """Project owning the experiment.
-    Format: <code>projects/&lt;project_uuid&gt;</code>.
+    Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     """
     language_code: builtins.str
     """BCP-47 language-code scope (required)."""
@@ -1163,7 +1185,7 @@ class ListLlmEvaluationExperimentsRequest(google.protobuf.message.Message):
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Project owning the experiments.
-    Format: <code>projects/&lt;project_uuid&gt;</code>.
+    Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     """
     dataset_id: builtins.str
     """Optional. Restrict to experiments tied to a specific dataset."""
@@ -1234,7 +1256,7 @@ class UpdateLlmEvaluationExperimentRequest(google.protobuf.message.Message):
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Project owning the experiment.
-    Format: <code>projects/&lt;project_uuid&gt;</code>.
+    Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     """
     language_code: builtins.str
     """BCP-47 language-code scope (required)."""
@@ -1281,7 +1303,7 @@ class DeleteLlmEvaluationExperimentRequest(google.protobuf.message.Message):
     """Experiment to delete."""
     parent: builtins.str
     """Project owning the experiment.
-    Format: <code>projects/&lt;project_uuid&gt;</code>.
+    Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     """
     language_code: builtins.str
     """BCP-47 language-code scope (required)."""
@@ -1309,7 +1331,7 @@ class CancelLlmEvaluationExperimentRequest(google.protobuf.message.Message):
     """Experiment to cancel."""
     parent: builtins.str
     """Project owning the experiment.
-    Format: <code>projects/&lt;project_uuid&gt;</code>.
+    Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     """
     language_code: builtins.str
     """BCP-47 language-code scope (required)."""
@@ -1338,7 +1360,7 @@ class CompareLlmEvaluationExperimentsRequest(google.protobuf.message.Message):
     """Optional baseline used for delta computation."""
     parent: builtins.str
     """Project owning the experiments.
-    Format: <code>projects/&lt;project_uuid&gt;</code>.
+    Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     """
     language_code: builtins.str
     """BCP-47 language-code scope (required, all experiments must share the same)."""
@@ -1380,7 +1402,7 @@ class SubmitLlmFeedbackRequest(google.protobuf.message.Message):
     """
     parent: builtins.str
     """Project owning the experiment.
-    Format: <code>projects/&lt;project_uuid&gt;</code>.
+    Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     """
     language_code: builtins.str
     """BCP-47 language-code scope (required)."""
@@ -1428,7 +1450,7 @@ class ListLlmFeedbackRequest(google.protobuf.message.Message):
     """Optional. Pagination token."""
     parent: builtins.str
     """Project owning the feedback records.
-    Format: <code>projects/&lt;project_uuid&gt;</code>.
+    Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     """
     language_code: builtins.str
     """BCP-47 language-code scope (required)."""
@@ -1490,7 +1512,7 @@ class DeleteLlmFeedbackRequest(google.protobuf.message.Message):
     """Feedback record to delete."""
     parent: builtins.str
     """Project owning the feedback.
-    Format: <code>projects/&lt;project_uuid&gt;</code>.
+    Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
     """
     language_code: builtins.str
     """BCP-47 language-code scope (required)."""
