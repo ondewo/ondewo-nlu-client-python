@@ -33,7 +33,7 @@ from ondewo.nlu.llm_evaluation_pb2 import (
     DeleteLlmEvaluationDatasetRequest,
     DeleteLlmEvaluationExampleRequest,
     DeleteLlmEvaluationExperimentRequest,
-    DeleteLlmEvaluationLlmFeedbackRequest,
+    DeleteLlmEvaluationFeedbackRequest,
     GetLlmEvaluationDatasetRequest,
     GetLlmEvaluationExampleRequest,
     GetLlmEvaluationExperimentRequest,
@@ -43,21 +43,22 @@ from ondewo.nlu.llm_evaluation_pb2 import (
     ListLlmEvaluationExamplesResponse,
     ListLlmEvaluationExperimentsRequest,
     ListLlmEvaluationExperimentsResponse,
-    ListLlmEvaluationLlmFeedbackRequest,
-    ListLlmEvaluationLlmFeedbackResponse,
+    ListLlmEvaluationFeedbackRequest,
+    ListLlmEvaluationFeedbackResponse,
     LlmEvaluationComparison,
     LlmEvaluationDataset,
     LlmEvaluationExample,
     LlmEvaluationExperiment,
-    LlmEvaluationLlmFeedback,
+    LlmEvaluationFeedback,
     RunLlmEvaluationExperimentRequest,
-    SubmitLlmEvaluationLlmFeedbackRequest,
+    SubmitLlmEvaluationFeedbackRequest,
     UpdateLlmEvaluationDatasetRequest,
     UpdateLlmEvaluationExampleRequest,
     UpdateLlmEvaluationExperimentRequest,
 )
 from ondewo.nlu.llm_evaluation_pb2_grpc import LlmEvaluationsStub
 from ondewo.nlu.core.services_interface import ServicesInterface
+from ondewo.nlu.operations_pb2 import Operation
 
 
 class LlmEvaluations(ServicesInterface):
@@ -124,12 +125,8 @@ class LlmEvaluations(ServicesInterface):
         response: Empty = self.stub.LlmEvaluationDeleteExample(request, metadata=self.metadata)
         return response
 
-    def llm_evaluation_evaluator_run_experiment(
-        self,
-        request: RunLlmEvaluationExperimentRequest,
-    ) -> LlmEvaluationExperiment:
-        response: LlmEvaluationExperiment = \
-            self.stub.LlmEvaluationEvaluatorRunExperiment(request, metadata=self.metadata)
+    def llm_evaluation_run_experiment(self, request: RunLlmEvaluationExperimentRequest) -> Operation:
+        response: Operation = self.stub.LlmEvaluationRunExperiment(request, metadata=self.metadata)
         return response
 
     def llm_evaluation_get_experiment(self, request: GetLlmEvaluationExperimentRequest) -> LlmEvaluationExperiment:
@@ -169,21 +166,18 @@ class LlmEvaluations(ServicesInterface):
         response: LlmEvaluationComparison = self.stub.LlmEvaluationCompareExperiments(request, metadata=self.metadata)
         return response
 
-    def llm_evaluation_submit_feedback(
-        self,
-        request: SubmitLlmEvaluationLlmFeedbackRequest,
-    ) -> LlmEvaluationLlmFeedback:
-        response: LlmEvaluationLlmFeedback = self.stub.LlmEvaluationSubmitFeedback(request, metadata=self.metadata)
+    def llm_evaluation_submit_feedback(self, request: SubmitLlmEvaluationFeedbackRequest) -> LlmEvaluationFeedback:
+        response: LlmEvaluationFeedback = self.stub.LlmEvaluationSubmitFeedback(request, metadata=self.metadata)
         return response
 
     def llm_evaluation_list_feedback(
         self,
-        request: ListLlmEvaluationLlmFeedbackRequest,
-    ) -> ListLlmEvaluationLlmFeedbackResponse:
-        response: ListLlmEvaluationLlmFeedbackResponse = \
+        request: ListLlmEvaluationFeedbackRequest,
+    ) -> ListLlmEvaluationFeedbackResponse:
+        response: ListLlmEvaluationFeedbackResponse = \
             self.stub.LlmEvaluationListFeedback(request, metadata=self.metadata)
         return response
 
-    def llm_evaluation_delete_feedback(self, request: DeleteLlmEvaluationLlmFeedbackRequest) -> Empty:
+    def llm_evaluation_delete_feedback(self, request: DeleteLlmEvaluationFeedbackRequest) -> Empty:
         response: Empty = self.stub.LlmEvaluationDeleteFeedback(request, metadata=self.metadata)
         return response

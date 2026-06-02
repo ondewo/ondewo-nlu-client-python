@@ -5,6 +5,7 @@ import warnings
 
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 from ondewo.nlu import llm_evaluation_pb2 as ondewo_dot_nlu_dot_llm__evaluation__pb2
+from ondewo.nlu import operations_pb2 as ondewo_dot_nlu_dot_operations__pb2
 
 GRPC_GENERATED_VERSION = '1.67.1'
 GRPC_VERSION = grpc.__version__
@@ -93,10 +94,10 @@ class LlmEvaluationsStub(object):
                 request_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.DeleteLlmEvaluationExampleRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 _registered_method=True)
-        self.LlmEvaluationEvaluatorRunExperiment = channel.unary_unary(
-                '/ondewo.nlu.LlmEvaluations/LlmEvaluationEvaluatorRunExperiment',
+        self.LlmEvaluationRunExperiment = channel.unary_unary(
+                '/ondewo.nlu.LlmEvaluations/LlmEvaluationRunExperiment',
                 request_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.RunLlmEvaluationExperimentRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.LlmEvaluationExperiment.FromString,
+                response_deserializer=ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
                 _registered_method=True)
         self.LlmEvaluationGetExperiment = channel.unary_unary(
                 '/ondewo.nlu.LlmEvaluations/LlmEvaluationGetExperiment',
@@ -130,17 +131,17 @@ class LlmEvaluationsStub(object):
                 _registered_method=True)
         self.LlmEvaluationSubmitFeedback = channel.unary_unary(
                 '/ondewo.nlu.LlmEvaluations/LlmEvaluationSubmitFeedback',
-                request_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.SubmitLlmEvaluationLlmFeedbackRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.LlmEvaluationLlmFeedback.FromString,
+                request_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.SubmitLlmEvaluationFeedbackRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.LlmEvaluationFeedback.FromString,
                 _registered_method=True)
         self.LlmEvaluationListFeedback = channel.unary_unary(
                 '/ondewo.nlu.LlmEvaluations/LlmEvaluationListFeedback',
-                request_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.ListLlmEvaluationLlmFeedbackRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.ListLlmEvaluationLlmFeedbackResponse.FromString,
+                request_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.ListLlmEvaluationFeedbackRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.ListLlmEvaluationFeedbackResponse.FromString,
                 _registered_method=True)
         self.LlmEvaluationDeleteFeedback = channel.unary_unary(
                 '/ondewo.nlu.LlmEvaluations/LlmEvaluationDeleteFeedback',
-                request_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.DeleteLlmEvaluationLlmFeedbackRequest.SerializeToString,
+                request_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.DeleteLlmEvaluationFeedbackRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 _registered_method=True)
 
@@ -161,7 +162,7 @@ class LlmEvaluationsServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def LlmEvaluationGetDataset(self, request, context):
-        """Get an evaluation dataset by id.
+        """Get an evaluation dataset by resource name.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -207,14 +208,14 @@ class LlmEvaluationsServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def LlmEvaluationGetExample(self, request, context):
-        """Get a single evaluation example by id.
+        """Get a single evaluation example by resource name.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def LlmEvaluationListExamples(self, request, context):
-        """List examples in a dataset, optionally paginated.
+        """List examples in a dataset, optionally filtered + paginated.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -234,36 +235,37 @@ class LlmEvaluationsServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def LlmEvaluationEvaluatorRunExperiment(self, request, context):
+    def LlmEvaluationRunExperiment(self, request, context):
         """endregion examples
 
         region experiments
 
-        Run a fresh experiment over a dataset. Long-running: returns the completed
-        experiment record once all evaluators have produced feedback.
+        Run a fresh experiment over a dataset. Long-running operation: the returned
+        Operation resolves to the completed LlmEvaluationExperiment once all
+        evaluators have produced feedback.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def LlmEvaluationGetExperiment(self, request, context):
-        """Retrieve a previously-run experiment by id.
+        """Retrieve a previously-run experiment by resource name.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def LlmEvaluationListExperiments(self, request, context):
-        """List experiments in a project / dataset, optionally paginated.
+        """List experiments in a project, optionally filtered + paginated.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def LlmEvaluationUpdateExperiment(self, request, context):
-        """Update metadata of an experiment (e.g. baseline pointer, name, tags).
-        Evaluator runs and feedback are immutable; use SubmitFeedback / DeleteFeedback
-        for downstream annotations.
+        """Update metadata of an experiment (e.g. baseline pointer, display_name).
+        Evaluator runs and feedback are immutable; use LlmEvaluationSubmitFeedback /
+        LlmEvaluationDeleteFeedback for downstream annotations.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -302,7 +304,7 @@ class LlmEvaluationsServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def LlmEvaluationListFeedback(self, request, context):
-        """List feedback records, optionally filtered by experiment / example / criterion.
+        """List feedback records, optionally filtered + paginated.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -373,10 +375,10 @@ def add_LlmEvaluationsServicer_to_server(servicer, server):
                     request_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.DeleteLlmEvaluationExampleRequest.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
-            'LlmEvaluationEvaluatorRunExperiment': grpc.unary_unary_rpc_method_handler(
-                    servicer.LlmEvaluationEvaluatorRunExperiment,
+            'LlmEvaluationRunExperiment': grpc.unary_unary_rpc_method_handler(
+                    servicer.LlmEvaluationRunExperiment,
                     request_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.RunLlmEvaluationExperimentRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.LlmEvaluationExperiment.SerializeToString,
+                    response_serializer=ondewo_dot_nlu_dot_operations__pb2.Operation.SerializeToString,
             ),
             'LlmEvaluationGetExperiment': grpc.unary_unary_rpc_method_handler(
                     servicer.LlmEvaluationGetExperiment,
@@ -410,17 +412,17 @@ def add_LlmEvaluationsServicer_to_server(servicer, server):
             ),
             'LlmEvaluationSubmitFeedback': grpc.unary_unary_rpc_method_handler(
                     servicer.LlmEvaluationSubmitFeedback,
-                    request_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.SubmitLlmEvaluationLlmFeedbackRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.LlmEvaluationLlmFeedback.SerializeToString,
+                    request_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.SubmitLlmEvaluationFeedbackRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.LlmEvaluationFeedback.SerializeToString,
             ),
             'LlmEvaluationListFeedback': grpc.unary_unary_rpc_method_handler(
                     servicer.LlmEvaluationListFeedback,
-                    request_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.ListLlmEvaluationLlmFeedbackRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.ListLlmEvaluationLlmFeedbackResponse.SerializeToString,
+                    request_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.ListLlmEvaluationFeedbackRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.ListLlmEvaluationFeedbackResponse.SerializeToString,
             ),
             'LlmEvaluationDeleteFeedback': grpc.unary_unary_rpc_method_handler(
                     servicer.LlmEvaluationDeleteFeedback,
-                    request_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.DeleteLlmEvaluationLlmFeedbackRequest.FromString,
+                    request_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.DeleteLlmEvaluationFeedbackRequest.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
     }
@@ -735,7 +737,7 @@ class LlmEvaluations(object):
             _registered_method=True)
 
     @staticmethod
-    def LlmEvaluationEvaluatorRunExperiment(request,
+    def LlmEvaluationRunExperiment(request,
             target,
             options=(),
             channel_credentials=None,
@@ -748,9 +750,9 @@ class LlmEvaluations(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/ondewo.nlu.LlmEvaluations/LlmEvaluationEvaluatorRunExperiment',
+            '/ondewo.nlu.LlmEvaluations/LlmEvaluationRunExperiment',
             ondewo_dot_nlu_dot_llm__evaluation__pb2.RunLlmEvaluationExperimentRequest.SerializeToString,
-            ondewo_dot_nlu_dot_llm__evaluation__pb2.LlmEvaluationExperiment.FromString,
+            ondewo_dot_nlu_dot_operations__pb2.Operation.FromString,
             options,
             channel_credentials,
             insecure,
@@ -938,8 +940,8 @@ class LlmEvaluations(object):
             request,
             target,
             '/ondewo.nlu.LlmEvaluations/LlmEvaluationSubmitFeedback',
-            ondewo_dot_nlu_dot_llm__evaluation__pb2.SubmitLlmEvaluationLlmFeedbackRequest.SerializeToString,
-            ondewo_dot_nlu_dot_llm__evaluation__pb2.LlmEvaluationLlmFeedback.FromString,
+            ondewo_dot_nlu_dot_llm__evaluation__pb2.SubmitLlmEvaluationFeedbackRequest.SerializeToString,
+            ondewo_dot_nlu_dot_llm__evaluation__pb2.LlmEvaluationFeedback.FromString,
             options,
             channel_credentials,
             insecure,
@@ -965,8 +967,8 @@ class LlmEvaluations(object):
             request,
             target,
             '/ondewo.nlu.LlmEvaluations/LlmEvaluationListFeedback',
-            ondewo_dot_nlu_dot_llm__evaluation__pb2.ListLlmEvaluationLlmFeedbackRequest.SerializeToString,
-            ondewo_dot_nlu_dot_llm__evaluation__pb2.ListLlmEvaluationLlmFeedbackResponse.FromString,
+            ondewo_dot_nlu_dot_llm__evaluation__pb2.ListLlmEvaluationFeedbackRequest.SerializeToString,
+            ondewo_dot_nlu_dot_llm__evaluation__pb2.ListLlmEvaluationFeedbackResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -992,7 +994,7 @@ class LlmEvaluations(object):
             request,
             target,
             '/ondewo.nlu.LlmEvaluations/LlmEvaluationDeleteFeedback',
-            ondewo_dot_nlu_dot_llm__evaluation__pb2.DeleteLlmEvaluationLlmFeedbackRequest.SerializeToString,
+            ondewo_dot_nlu_dot_llm__evaluation__pb2.DeleteLlmEvaluationFeedbackRequest.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options,
             channel_credentials,
