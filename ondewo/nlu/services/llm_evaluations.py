@@ -33,7 +33,7 @@ from ondewo.nlu.llm_evaluation_pb2 import (
     DeleteLlmEvaluationDatasetRequest,
     DeleteLlmEvaluationExampleRequest,
     DeleteLlmEvaluationExperimentRequest,
-    DeleteLlmFeedbackRequest,
+    DeleteLlmEvaluationLlmFeedbackRequest,
     GetLlmEvaluationDatasetRequest,
     GetLlmEvaluationExampleRequest,
     GetLlmEvaluationExperimentRequest,
@@ -43,15 +43,15 @@ from ondewo.nlu.llm_evaluation_pb2 import (
     ListLlmEvaluationExamplesResponse,
     ListLlmEvaluationExperimentsRequest,
     ListLlmEvaluationExperimentsResponse,
-    ListLlmFeedbackRequest,
-    ListLlmFeedbackResponse,
+    ListLlmEvaluationLlmFeedbackRequest,
+    ListLlmEvaluationLlmFeedbackResponse,
     LlmEvaluationComparison,
     LlmEvaluationDataset,
     LlmEvaluationExample,
     LlmEvaluationExperiment,
-    LlmFeedback,
+    LlmEvaluationLlmFeedback,
     RunLlmEvaluationExperimentRequest,
-    SubmitLlmFeedbackRequest,
+    SubmitLlmEvaluationLlmFeedbackRequest,
     UpdateLlmEvaluationDatasetRequest,
     UpdateLlmEvaluationExampleRequest,
     UpdateLlmEvaluationExperimentRequest,
@@ -72,86 +72,118 @@ class LlmEvaluations(ServicesInterface):
         stub: LlmEvaluationsStub = LlmEvaluationsStub(channel=self.grpc_channel)
         return stub
 
-    def create_dataset(self, request: CreateLlmEvaluationDatasetRequest) -> LlmEvaluationDataset:
-        response: LlmEvaluationDataset = self.stub.CreateDataset(request, metadata=self.metadata)
+    def llm_evaluation_create_dataset(self, request: CreateLlmEvaluationDatasetRequest) -> LlmEvaluationDataset:
+        response: LlmEvaluationDataset = self.stub.LlmEvaluationCreateDataset(request, metadata=self.metadata)
         return response
 
-    def get_dataset(self, request: GetLlmEvaluationDatasetRequest) -> LlmEvaluationDataset:
-        response: LlmEvaluationDataset = self.stub.GetDataset(request, metadata=self.metadata)
+    def llm_evaluation_get_dataset(self, request: GetLlmEvaluationDatasetRequest) -> LlmEvaluationDataset:
+        response: LlmEvaluationDataset = self.stub.LlmEvaluationGetDataset(request, metadata=self.metadata)
         return response
 
-    def list_datasets(self, request: ListLlmEvaluationDatasetsRequest) -> ListLlmEvaluationDatasetsResponse:
-        response: ListLlmEvaluationDatasetsResponse = self.stub.ListDatasets(request, metadata=self.metadata)
+    def llm_evaluation_list_datasets(
+        self,
+        request: ListLlmEvaluationDatasetsRequest,
+    ) -> ListLlmEvaluationDatasetsResponse:
+        response: ListLlmEvaluationDatasetsResponse = \
+            self.stub.LlmEvaluationListDatasets(request, metadata=self.metadata)
         return response
 
-    def update_dataset(self, request: UpdateLlmEvaluationDatasetRequest) -> LlmEvaluationDataset:
-        response: LlmEvaluationDataset = self.stub.UpdateDataset(request, metadata=self.metadata)
+    def llm_evaluation_update_dataset(self, request: UpdateLlmEvaluationDatasetRequest) -> LlmEvaluationDataset:
+        response: LlmEvaluationDataset = self.stub.LlmEvaluationUpdateDataset(request, metadata=self.metadata)
         return response
 
-    def delete_dataset(self, request: DeleteLlmEvaluationDatasetRequest) -> Empty:
-        response: Empty = self.stub.DeleteDataset(request, metadata=self.metadata)
+    def llm_evaluation_delete_dataset(self, request: DeleteLlmEvaluationDatasetRequest) -> Empty:
+        response: Empty = self.stub.LlmEvaluationDeleteDataset(request, metadata=self.metadata)
         return response
 
-    def add_example(self, request: AddLlmEvaluationExampleRequest) -> LlmEvaluationExample:
-        response: LlmEvaluationExample = self.stub.AddExample(request, metadata=self.metadata)
+    def llm_evaluation_add_example(self, request: AddLlmEvaluationExampleRequest) -> LlmEvaluationExample:
+        response: LlmEvaluationExample = self.stub.LlmEvaluationAddExample(request, metadata=self.metadata)
         return response
 
-    def add_examples(self, request: AddLlmEvaluationExamplesRequest) -> AddLlmEvaluationExamplesResponse:
-        response: AddLlmEvaluationExamplesResponse = self.stub.AddExamples(request, metadata=self.metadata)
+    def llm_evaluation_add_examples(self, request: AddLlmEvaluationExamplesRequest) -> AddLlmEvaluationExamplesResponse:
+        response: AddLlmEvaluationExamplesResponse = self.stub.LlmEvaluationAddExamples(request, metadata=self.metadata)
         return response
 
-    def get_example(self, request: GetLlmEvaluationExampleRequest) -> LlmEvaluationExample:
-        response: LlmEvaluationExample = self.stub.GetExample(request, metadata=self.metadata)
+    def llm_evaluation_get_example(self, request: GetLlmEvaluationExampleRequest) -> LlmEvaluationExample:
+        response: LlmEvaluationExample = self.stub.LlmEvaluationGetExample(request, metadata=self.metadata)
         return response
 
-    def list_examples(self, request: ListLlmEvaluationExamplesRequest) -> ListLlmEvaluationExamplesResponse:
-        response: ListLlmEvaluationExamplesResponse = self.stub.ListExamples(request, metadata=self.metadata)
+    def llm_evaluation_list_examples(
+        self,
+        request: ListLlmEvaluationExamplesRequest,
+    ) -> ListLlmEvaluationExamplesResponse:
+        response: ListLlmEvaluationExamplesResponse = \
+            self.stub.LlmEvaluationListExamples(request, metadata=self.metadata)
         return response
 
-    def update_example(self, request: UpdateLlmEvaluationExampleRequest) -> LlmEvaluationExample:
-        response: LlmEvaluationExample = self.stub.UpdateExample(request, metadata=self.metadata)
+    def llm_evaluation_update_example(self, request: UpdateLlmEvaluationExampleRequest) -> LlmEvaluationExample:
+        response: LlmEvaluationExample = self.stub.LlmEvaluationUpdateExample(request, metadata=self.metadata)
         return response
 
-    def delete_example(self, request: DeleteLlmEvaluationExampleRequest) -> Empty:
-        response: Empty = self.stub.DeleteExample(request, metadata=self.metadata)
+    def llm_evaluation_delete_example(self, request: DeleteLlmEvaluationExampleRequest) -> Empty:
+        response: Empty = self.stub.LlmEvaluationDeleteExample(request, metadata=self.metadata)
         return response
 
-    def run_experiment(self, request: RunLlmEvaluationExperimentRequest) -> LlmEvaluationExperiment:
-        response: LlmEvaluationExperiment = self.stub.RunExperiment(request, metadata=self.metadata)
+    def llm_evaluation_evaluator_run_experiment(
+        self,
+        request: RunLlmEvaluationExperimentRequest,
+    ) -> LlmEvaluationExperiment:
+        response: LlmEvaluationExperiment = \
+            self.stub.LlmEvaluationEvaluatorRunExperiment(request, metadata=self.metadata)
         return response
 
-    def get_experiment(self, request: GetLlmEvaluationExperimentRequest) -> LlmEvaluationExperiment:
-        response: LlmEvaluationExperiment = self.stub.GetExperiment(request, metadata=self.metadata)
+    def llm_evaluation_get_experiment(self, request: GetLlmEvaluationExperimentRequest) -> LlmEvaluationExperiment:
+        response: LlmEvaluationExperiment = self.stub.LlmEvaluationGetExperiment(request, metadata=self.metadata)
         return response
 
-    def list_experiments(self, request: ListLlmEvaluationExperimentsRequest) -> ListLlmEvaluationExperimentsResponse:
-        response: ListLlmEvaluationExperimentsResponse = self.stub.ListExperiments(request, metadata=self.metadata)
+    def llm_evaluation_list_experiments(
+        self,
+        request: ListLlmEvaluationExperimentsRequest,
+    ) -> ListLlmEvaluationExperimentsResponse:
+        response: ListLlmEvaluationExperimentsResponse = \
+            self.stub.LlmEvaluationListExperiments(request, metadata=self.metadata)
         return response
 
-    def update_experiment(self, request: UpdateLlmEvaluationExperimentRequest) -> LlmEvaluationExperiment:
-        response: LlmEvaluationExperiment = self.stub.UpdateExperiment(request, metadata=self.metadata)
+    def llm_evaluation_update_experiment(
+        self,
+        request: UpdateLlmEvaluationExperimentRequest,
+    ) -> LlmEvaluationExperiment:
+        response: LlmEvaluationExperiment = self.stub.LlmEvaluationUpdateExperiment(request, metadata=self.metadata)
         return response
 
-    def delete_experiment(self, request: DeleteLlmEvaluationExperimentRequest) -> Empty:
-        response: Empty = self.stub.DeleteExperiment(request, metadata=self.metadata)
+    def llm_evaluation_delete_experiment(self, request: DeleteLlmEvaluationExperimentRequest) -> Empty:
+        response: Empty = self.stub.LlmEvaluationDeleteExperiment(request, metadata=self.metadata)
         return response
 
-    def cancel_experiment(self, request: CancelLlmEvaluationExperimentRequest) -> LlmEvaluationExperiment:
-        response: LlmEvaluationExperiment = self.stub.CancelExperiment(request, metadata=self.metadata)
+    def llm_evaluation_cancel_experiment(
+        self,
+        request: CancelLlmEvaluationExperimentRequest,
+    ) -> LlmEvaluationExperiment:
+        response: LlmEvaluationExperiment = self.stub.LlmEvaluationCancelExperiment(request, metadata=self.metadata)
         return response
 
-    def compare_experiments(self, request: CompareLlmEvaluationExperimentsRequest) -> LlmEvaluationComparison:
-        response: LlmEvaluationComparison = self.stub.CompareExperiments(request, metadata=self.metadata)
+    def llm_evaluation_compare_experiments(
+        self,
+        request: CompareLlmEvaluationExperimentsRequest,
+    ) -> LlmEvaluationComparison:
+        response: LlmEvaluationComparison = self.stub.LlmEvaluationCompareExperiments(request, metadata=self.metadata)
         return response
 
-    def submit_feedback(self, request: SubmitLlmFeedbackRequest) -> LlmFeedback:
-        response: LlmFeedback = self.stub.SubmitFeedback(request, metadata=self.metadata)
+    def llm_evaluation_submit_feedback(
+        self,
+        request: SubmitLlmEvaluationLlmFeedbackRequest,
+    ) -> LlmEvaluationLlmFeedback:
+        response: LlmEvaluationLlmFeedback = self.stub.LlmEvaluationSubmitFeedback(request, metadata=self.metadata)
         return response
 
-    def list_feedback(self, request: ListLlmFeedbackRequest) -> ListLlmFeedbackResponse:
-        response: ListLlmFeedbackResponse = self.stub.ListFeedback(request, metadata=self.metadata)
+    def llm_evaluation_list_feedback(
+        self,
+        request: ListLlmEvaluationLlmFeedbackRequest,
+    ) -> ListLlmEvaluationLlmFeedbackResponse:
+        response: ListLlmEvaluationLlmFeedbackResponse = \
+            self.stub.LlmEvaluationListFeedback(request, metadata=self.metadata)
         return response
 
-    def delete_feedback(self, request: DeleteLlmFeedbackRequest) -> Empty:
-        response: Empty = self.stub.DeleteFeedback(request, metadata=self.metadata)
+    def llm_evaluation_delete_feedback(self, request: DeleteLlmEvaluationLlmFeedbackRequest) -> Empty:
+        response: Empty = self.stub.LlmEvaluationDeleteFeedback(request, metadata=self.metadata)
         return response

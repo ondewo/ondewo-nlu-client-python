@@ -33,7 +33,7 @@ from ondewo.nlu.llm_evaluation_pb2 import (
     DeleteLlmEvaluationDatasetRequest,
     DeleteLlmEvaluationExampleRequest,
     DeleteLlmEvaluationExperimentRequest,
-    DeleteLlmFeedbackRequest,
+    DeleteLlmEvaluationLlmFeedbackRequest,
     GetLlmEvaluationDatasetRequest,
     GetLlmEvaluationExampleRequest,
     GetLlmEvaluationExperimentRequest,
@@ -43,15 +43,15 @@ from ondewo.nlu.llm_evaluation_pb2 import (
     ListLlmEvaluationExamplesResponse,
     ListLlmEvaluationExperimentsRequest,
     ListLlmEvaluationExperimentsResponse,
-    ListLlmFeedbackRequest,
-    ListLlmFeedbackResponse,
+    ListLlmEvaluationLlmFeedbackRequest,
+    ListLlmEvaluationLlmFeedbackResponse,
     LlmEvaluationComparison,
     LlmEvaluationDataset,
     LlmEvaluationExample,
     LlmEvaluationExperiment,
-    LlmFeedback,
+    LlmEvaluationLlmFeedback,
     RunLlmEvaluationExperimentRequest,
-    SubmitLlmFeedbackRequest,
+    SubmitLlmEvaluationLlmFeedbackRequest,
     UpdateLlmEvaluationDatasetRequest,
     UpdateLlmEvaluationExampleRequest,
     UpdateLlmEvaluationExperimentRequest,
@@ -72,90 +72,137 @@ class LlmEvaluations(AsyncServicesInterface):
         stub: LlmEvaluationsStub = LlmEvaluationsStub(channel=self.grpc_channel)
         return stub
 
-    async def create_dataset(self, request: CreateLlmEvaluationDatasetRequest) -> LlmEvaluationDataset:
-        response: LlmEvaluationDataset = await self.stub.CreateDataset(request, metadata=self.metadata)
+    async def llm_evaluation_create_dataset(self, request: CreateLlmEvaluationDatasetRequest) -> LlmEvaluationDataset:
+        response: LlmEvaluationDataset = await self.stub.LlmEvaluationCreateDataset(request, metadata=self.metadata)
         return response
 
-    async def get_dataset(self, request: GetLlmEvaluationDatasetRequest) -> LlmEvaluationDataset:
-        response: LlmEvaluationDataset = await self.stub.GetDataset(request, metadata=self.metadata)
+    async def llm_evaluation_get_dataset(self, request: GetLlmEvaluationDatasetRequest) -> LlmEvaluationDataset:
+        response: LlmEvaluationDataset = await self.stub.LlmEvaluationGetDataset(request, metadata=self.metadata)
         return response
 
-    async def list_datasets(self, request: ListLlmEvaluationDatasetsRequest) -> ListLlmEvaluationDatasetsResponse:
-        response: ListLlmEvaluationDatasetsResponse = await self.stub.ListDatasets(request, metadata=self.metadata)
-        return response
-
-    async def update_dataset(self, request: UpdateLlmEvaluationDatasetRequest) -> LlmEvaluationDataset:
-        response: LlmEvaluationDataset = await self.stub.UpdateDataset(request, metadata=self.metadata)
-        return response
-
-    async def delete_dataset(self, request: DeleteLlmEvaluationDatasetRequest) -> Empty:
-        response: Empty = await self.stub.DeleteDataset(request, metadata=self.metadata)
-        return response
-
-    async def add_example(self, request: AddLlmEvaluationExampleRequest) -> LlmEvaluationExample:
-        response: LlmEvaluationExample = await self.stub.AddExample(request, metadata=self.metadata)
-        return response
-
-    async def add_examples(self, request: AddLlmEvaluationExamplesRequest) -> AddLlmEvaluationExamplesResponse:
-        response: AddLlmEvaluationExamplesResponse = await self.stub.AddExamples(request, metadata=self.metadata)
-        return response
-
-    async def get_example(self, request: GetLlmEvaluationExampleRequest) -> LlmEvaluationExample:
-        response: LlmEvaluationExample = await self.stub.GetExample(request, metadata=self.metadata)
-        return response
-
-    async def list_examples(self, request: ListLlmEvaluationExamplesRequest) -> ListLlmEvaluationExamplesResponse:
-        response: ListLlmEvaluationExamplesResponse = await self.stub.ListExamples(request, metadata=self.metadata)
-        return response
-
-    async def update_example(self, request: UpdateLlmEvaluationExampleRequest) -> LlmEvaluationExample:
-        response: LlmEvaluationExample = await self.stub.UpdateExample(request, metadata=self.metadata)
-        return response
-
-    async def delete_example(self, request: DeleteLlmEvaluationExampleRequest) -> Empty:
-        response: Empty = await self.stub.DeleteExample(request, metadata=self.metadata)
-        return response
-
-    async def run_experiment(self, request: RunLlmEvaluationExperimentRequest) -> LlmEvaluationExperiment:
-        response: LlmEvaluationExperiment = await self.stub.RunExperiment(request, metadata=self.metadata)
-        return response
-
-    async def get_experiment(self, request: GetLlmEvaluationExperimentRequest) -> LlmEvaluationExperiment:
-        response: LlmEvaluationExperiment = await self.stub.GetExperiment(request, metadata=self.metadata)
-        return response
-
-    async def list_experiments(
-        self, request: ListLlmEvaluationExperimentsRequest
-    ) -> ListLlmEvaluationExperimentsResponse:
-        response: ListLlmEvaluationExperimentsResponse = await self.stub.ListExperiments(
+    async def llm_evaluation_list_datasets(
+        self,
+        request: ListLlmEvaluationDatasetsRequest,
+    ) -> ListLlmEvaluationDatasetsResponse:
+        response: ListLlmEvaluationDatasetsResponse = await self.stub.LlmEvaluationListDatasets(
             request, metadata=self.metadata
         )
         return response
 
-    async def update_experiment(self, request: UpdateLlmEvaluationExperimentRequest) -> LlmEvaluationExperiment:
-        response: LlmEvaluationExperiment = await self.stub.UpdateExperiment(request, metadata=self.metadata)
+    async def llm_evaluation_update_dataset(self, request: UpdateLlmEvaluationDatasetRequest) -> LlmEvaluationDataset:
+        response: LlmEvaluationDataset = await self.stub.LlmEvaluationUpdateDataset(request, metadata=self.metadata)
         return response
 
-    async def delete_experiment(self, request: DeleteLlmEvaluationExperimentRequest) -> Empty:
-        response: Empty = await self.stub.DeleteExperiment(request, metadata=self.metadata)
+    async def llm_evaluation_delete_dataset(self, request: DeleteLlmEvaluationDatasetRequest) -> Empty:
+        response: Empty = await self.stub.LlmEvaluationDeleteDataset(request, metadata=self.metadata)
         return response
 
-    async def cancel_experiment(self, request: CancelLlmEvaluationExperimentRequest) -> LlmEvaluationExperiment:
-        response: LlmEvaluationExperiment = await self.stub.CancelExperiment(request, metadata=self.metadata)
+    async def llm_evaluation_add_example(self, request: AddLlmEvaluationExampleRequest) -> LlmEvaluationExample:
+        response: LlmEvaluationExample = await self.stub.LlmEvaluationAddExample(request, metadata=self.metadata)
         return response
 
-    async def compare_experiments(self, request: CompareLlmEvaluationExperimentsRequest) -> LlmEvaluationComparison:
-        response: LlmEvaluationComparison = await self.stub.CompareExperiments(request, metadata=self.metadata)
+    async def llm_evaluation_add_examples(
+        self, request: AddLlmEvaluationExamplesRequest
+    ) -> AddLlmEvaluationExamplesResponse:
+        response: AddLlmEvaluationExamplesResponse = await self.stub.LlmEvaluationAddExamples(
+            request, metadata=self.metadata
+        )
         return response
 
-    async def submit_feedback(self, request: SubmitLlmFeedbackRequest) -> LlmFeedback:
-        response: LlmFeedback = await self.stub.SubmitFeedback(request, metadata=self.metadata)
+    async def llm_evaluation_get_example(self, request: GetLlmEvaluationExampleRequest) -> LlmEvaluationExample:
+        response: LlmEvaluationExample = await self.stub.LlmEvaluationGetExample(request, metadata=self.metadata)
         return response
 
-    async def list_feedback(self, request: ListLlmFeedbackRequest) -> ListLlmFeedbackResponse:
-        response: ListLlmFeedbackResponse = await self.stub.ListFeedback(request, metadata=self.metadata)
+    async def llm_evaluation_list_examples(
+        self,
+        request: ListLlmEvaluationExamplesRequest,
+    ) -> ListLlmEvaluationExamplesResponse:
+        response: ListLlmEvaluationExamplesResponse = await self.stub.LlmEvaluationListExamples(
+            request, metadata=self.metadata
+        )
         return response
 
-    async def delete_feedback(self, request: DeleteLlmFeedbackRequest) -> Empty:
-        response: Empty = await self.stub.DeleteFeedback(request, metadata=self.metadata)
+    async def llm_evaluation_update_example(self, request: UpdateLlmEvaluationExampleRequest) -> LlmEvaluationExample:
+        response: LlmEvaluationExample = await self.stub.LlmEvaluationUpdateExample(request, metadata=self.metadata)
+        return response
+
+    async def llm_evaluation_delete_example(self, request: DeleteLlmEvaluationExampleRequest) -> Empty:
+        response: Empty = await self.stub.LlmEvaluationDeleteExample(request, metadata=self.metadata)
+        return response
+
+    async def llm_evaluation_evaluator_run_experiment(
+        self,
+        request: RunLlmEvaluationExperimentRequest,
+    ) -> LlmEvaluationExperiment:
+        response: LlmEvaluationExperiment = await self.stub.LlmEvaluationEvaluatorRunExperiment(
+            request, metadata=self.metadata
+        )
+        return response
+
+    async def llm_evaluation_get_experiment(
+        self, request: GetLlmEvaluationExperimentRequest
+    ) -> LlmEvaluationExperiment:
+        response: LlmEvaluationExperiment = await self.stub.LlmEvaluationGetExperiment(request, metadata=self.metadata)
+        return response
+
+    async def llm_evaluation_list_experiments(
+        self,
+        request: ListLlmEvaluationExperimentsRequest,
+    ) -> ListLlmEvaluationExperimentsResponse:
+        response: ListLlmEvaluationExperimentsResponse = await self.stub.LlmEvaluationListExperiments(
+            request, metadata=self.metadata
+        )
+        return response
+
+    async def llm_evaluation_update_experiment(
+        self,
+        request: UpdateLlmEvaluationExperimentRequest,
+    ) -> LlmEvaluationExperiment:
+        response: LlmEvaluationExperiment = await self.stub.LlmEvaluationUpdateExperiment(
+            request, metadata=self.metadata
+        )
+        return response
+
+    async def llm_evaluation_delete_experiment(self, request: DeleteLlmEvaluationExperimentRequest) -> Empty:
+        response: Empty = await self.stub.LlmEvaluationDeleteExperiment(request, metadata=self.metadata)
+        return response
+
+    async def llm_evaluation_cancel_experiment(
+        self,
+        request: CancelLlmEvaluationExperimentRequest,
+    ) -> LlmEvaluationExperiment:
+        response: LlmEvaluationExperiment = await self.stub.LlmEvaluationCancelExperiment(
+            request, metadata=self.metadata
+        )
+        return response
+
+    async def llm_evaluation_compare_experiments(
+        self,
+        request: CompareLlmEvaluationExperimentsRequest,
+    ) -> LlmEvaluationComparison:
+        response: LlmEvaluationComparison = await self.stub.LlmEvaluationCompareExperiments(
+            request, metadata=self.metadata
+        )
+        return response
+
+    async def llm_evaluation_submit_feedback(
+        self,
+        request: SubmitLlmEvaluationLlmFeedbackRequest,
+    ) -> LlmEvaluationLlmFeedback:
+        response: LlmEvaluationLlmFeedback = await self.stub.LlmEvaluationSubmitFeedback(
+            request, metadata=self.metadata
+        )
+        return response
+
+    async def llm_evaluation_list_feedback(
+        self,
+        request: ListLlmEvaluationLlmFeedbackRequest,
+    ) -> ListLlmEvaluationLlmFeedbackResponse:
+        response: ListLlmEvaluationLlmFeedbackResponse = await self.stub.LlmEvaluationListFeedback(
+            request, metadata=self.metadata
+        )
+        return response
+
+    async def llm_evaluation_delete_feedback(self, request: DeleteLlmEvaluationLlmFeedbackRequest) -> Empty:
+        response: Empty = await self.stub.LlmEvaluationDeleteFeedback(request, metadata=self.metadata)
         return response

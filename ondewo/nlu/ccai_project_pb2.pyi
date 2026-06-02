@@ -482,6 +482,10 @@ class _CcaiServiceProviderEnumTypeWrapper(google.protobuf.internal.enum_type_wra
     """PostgreSQL as the CCAI service provider, enabling integration with PostgreSQL databases
     <a href="https://www.postgresql.org/">PostgreSQL</a>
     """
+    CCAI_SERVICE_PROVIDER_MICROSOFT_AGENT_FRAMEWORK: _CcaiServiceProvider.ValueType  # 34
+    """Microsoft Agent Framework as the CCAI service provider
+    <a href="https://github.com/microsoft/agent-framework">Microsoft Agent Framework</a>
+    """
 
 class CcaiServiceProvider(_CcaiServiceProvider, metaclass=_CcaiServiceProviderEnumTypeWrapper): ...
 
@@ -619,6 +623,10 @@ CCAI_SERVICE_PROVIDER_GROK: CcaiServiceProvider.ValueType  # 32
 CCAI_SERVICE_PROVIDER_POSTGRES: CcaiServiceProvider.ValueType  # 33
 """PostgreSQL as the CCAI service provider, enabling integration with PostgreSQL databases
 <a href="https://www.postgresql.org/">PostgreSQL</a>
+"""
+CCAI_SERVICE_PROVIDER_MICROSOFT_AGENT_FRAMEWORK: CcaiServiceProvider.ValueType  # 34
+"""Microsoft Agent Framework as the CCAI service provider
+<a href="https://github.com/microsoft/agent-framework">Microsoft Agent Framework</a>
 """
 global___CcaiServiceProvider = CcaiServiceProvider
 
