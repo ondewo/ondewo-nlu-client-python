@@ -630,7 +630,7 @@ class QueryInput(google.protobuf.message.Message):
 global___QueryInput = QueryInput
 
 @typing.final
-class TokenUsage(google.protobuf.message.Message):
+class LlmTokenUsage(google.protobuf.message.Message):
     """Token usage counters for a single LLM call (or aggregate)."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -653,10 +653,10 @@ class TokenUsage(google.protobuf.message.Message):
     ) -> None: ...
     def ClearField(self, field_name: typing.Literal["input_tokens", b"input_tokens", "output_tokens", b"output_tokens", "total_tokens", b"total_tokens"]) -> None: ...
 
-global___TokenUsage = TokenUsage
+global___LlmTokenUsage = LlmTokenUsage
 
 @typing.final
-class ToolCallMetadata(google.protobuf.message.Message):
+class LlmToolCallMetadata(google.protobuf.message.Message):
     """Metadata for one tool call executed by the LLM."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -666,7 +666,7 @@ class ToolCallMetadata(google.protobuf.message.Message):
     START_TIME_FIELD_NUMBER: builtins.int
     END_TIME_FIELD_NUMBER: builtins.int
     DURATION_SECONDS_FIELD_NUMBER: builtins.int
-    TOKEN_USAGE_FIELD_NUMBER: builtins.int
+    LLM_TOKEN_USAGE_FIELD_NUMBER: builtins.int
     ARGUMENTS_FIELD_NUMBER: builtins.int
     RESULT_FIELD_NUMBER: builtins.int
     ERROR_MESSAGE_FIELD_NUMBER: builtins.int
@@ -687,7 +687,7 @@ class ToolCallMetadata(google.protobuf.message.Message):
         """Wall-clock end time of the tool call."""
 
     @property
-    def token_usage(self) -> global___TokenUsage:
+    def llm_token_usage(self) -> global___LlmTokenUsage:
         """Token attribution for this tool call when available."""
 
     @property
@@ -706,25 +706,25 @@ class ToolCallMetadata(google.protobuf.message.Message):
         start_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         end_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         duration_seconds: builtins.float = ...,
-        token_usage: global___TokenUsage | None = ...,
+        llm_token_usage: global___LlmTokenUsage | None = ...,
         arguments: google.protobuf.struct_pb2.Struct | None = ...,
         result: google.protobuf.struct_pb2.Struct | None = ...,
         error_message: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["arguments", b"arguments", "end_time", b"end_time", "result", b"result", "start_time", b"start_time", "token_usage", b"token_usage"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["arguments", b"arguments", "duration_seconds", b"duration_seconds", "end_time", b"end_time", "error_message", b"error_message", "result", b"result", "start_time", b"start_time", "token_usage", b"token_usage", "tool_call_id", b"tool_call_id", "tool_name", b"tool_name"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["arguments", b"arguments", "end_time", b"end_time", "llm_token_usage", b"llm_token_usage", "result", b"result", "start_time", b"start_time"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["arguments", b"arguments", "duration_seconds", b"duration_seconds", "end_time", b"end_time", "error_message", b"error_message", "llm_token_usage", b"llm_token_usage", "result", b"result", "start_time", b"start_time", "tool_call_id", b"tool_call_id", "tool_name", b"tool_name"]) -> None: ...
 
-global___ToolCallMetadata = ToolCallMetadata
+global___LlmToolCallMetadata = LlmToolCallMetadata
 
 @typing.final
-class ThinkingMetadata(google.protobuf.message.Message):
+class LlmThinkingMetadata(google.protobuf.message.Message):
     """Thinking / reasoning block emitted by the model (e.g. Anthropic extended thinking,
     OpenAI o-series reasoning).
     """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    TOKEN_USAGE_FIELD_NUMBER: builtins.int
+    LLM_TOKEN_USAGE_FIELD_NUMBER: builtins.int
     START_TIME_FIELD_NUMBER: builtins.int
     END_TIME_FIELD_NUMBER: builtins.int
     DURATION_SECONDS_FIELD_NUMBER: builtins.int
@@ -734,7 +734,7 @@ class ThinkingMetadata(google.protobuf.message.Message):
     thinking_text: builtins.str
     """Raw thinking text. Subject to redaction depending on telemetry policy."""
     @property
-    def token_usage(self) -> global___TokenUsage:
+    def llm_token_usage(self) -> global___LlmTokenUsage:
         """Token attribution for the thinking block when surfaced by the provider."""
 
     @property
@@ -748,16 +748,16 @@ class ThinkingMetadata(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        token_usage: global___TokenUsage | None = ...,
+        llm_token_usage: global___LlmTokenUsage | None = ...,
         start_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         end_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         duration_seconds: builtins.float = ...,
         thinking_text: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["end_time", b"end_time", "start_time", b"start_time", "token_usage", b"token_usage"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["duration_seconds", b"duration_seconds", "end_time", b"end_time", "start_time", b"start_time", "thinking_text", b"thinking_text", "token_usage", b"token_usage"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["end_time", b"end_time", "llm_token_usage", b"llm_token_usage", "start_time", b"start_time"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["duration_seconds", b"duration_seconds", "end_time", b"end_time", "llm_token_usage", b"llm_token_usage", "start_time", b"start_time", "thinking_text", b"thinking_text"]) -> None: ...
 
-global___ThinkingMetadata = ThinkingMetadata
+global___LlmThinkingMetadata = LlmThinkingMetadata
 
 @typing.final
 class LlmTelemetry(google.protobuf.message.Message):
@@ -768,10 +768,10 @@ class LlmTelemetry(google.protobuf.message.Message):
     PROVIDER_FIELD_NUMBER: builtins.int
     MODEL_NAME_FIELD_NUMBER: builtins.int
     AGENT_NAME_FIELD_NUMBER: builtins.int
-    TOKEN_USAGE_FIELD_NUMBER: builtins.int
-    TOOL_CALL_METADATAS_FIELD_NUMBER: builtins.int
+    LLM_TOKEN_USAGE_FIELD_NUMBER: builtins.int
+    LLM_TOOL_CALL_METADATAS_FIELD_NUMBER: builtins.int
     TOOL_CALL_COUNT_FIELD_NUMBER: builtins.int
-    THINKING_METADATA_FIELD_NUMBER: builtins.int
+    LLM_THINKING_METADATA_FIELD_NUMBER: builtins.int
     START_TIME_FIELD_NUMBER: builtins.int
     END_TIME_FIELD_NUMBER: builtins.int
     DURATION_SECONDS_FIELD_NUMBER: builtins.int
@@ -809,7 +809,7 @@ class LlmTelemetry(google.protobuf.message.Message):
     REFLECTION_ITERATIONS_FIELD_NUMBER: builtins.int
     TERMINATION_REASON_FIELD_NUMBER: builtins.int
     EVALUATOR_RUNS_JOIN_KEY_FIELD_NUMBER: builtins.int
-    LLM_FEEDBACKS_FIELD_NUMBER: builtins.int
+    LLM_EVALUATION_FEEDBACKS_FIELD_NUMBER: builtins.int
     provider: builtins.str
     """Provider tag: "autogen" | "langchain" | "openai" | "anthropic" | ..."""
     model_name: builtins.str
@@ -817,7 +817,7 @@ class LlmTelemetry(google.protobuf.message.Message):
     agent_name: builtins.str
     """intent_agent executor / agent name."""
     tool_call_count: builtins.int
-    """Denormalized len(tool_call_metadatas)."""
+    """Denormalized len(llm_tool_call_metadatas)."""
     duration_seconds: builtins.float
     """Convenience duration (end_time - start_time)."""
     run_id: builtins.str
@@ -885,15 +885,15 @@ class LlmTelemetry(google.protobuf.message.Message):
     evaluator_runs_join_key: builtins.str
     """Join key linking this LLM call to an evaluator run (see llm_evaluation.proto)."""
     @property
-    def token_usage(self) -> global___TokenUsage:
+    def llm_token_usage(self) -> global___LlmTokenUsage:
         """Totals for this call."""
 
     @property
-    def tool_call_metadatas(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___ToolCallMetadata]:
+    def llm_tool_call_metadatas(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmToolCallMetadata]:
         """Tool calls observed during this LLM invocation."""
 
     @property
-    def thinking_metadata(self) -> global___ThinkingMetadata:
+    def llm_thinking_metadata(self) -> global___LlmThinkingMetadata:
         """Thinking block when surfaced by the model."""
 
     @property
@@ -925,9 +925,9 @@ class LlmTelemetry(google.protobuf.message.Message):
         """One finish reason per generation (e.g. <code>stop</code>, <code>length</code>, <code>tool_calls</code>, <code>content_filter</code>)."""
 
     @property
-    def llm_feedbacks(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.llm_evaluation_pb2.LlmEvaluationLlmFeedback]:
+    def llm_evaluation_feedbacks(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.llm_evaluation_pb2.LlmEvaluationFeedback]:
         """Immediate inline feedback recorded inside the turn (e.g. self-grading by a
-        reflection agent). Each entry is a single LlmEvaluationLlmFeedback record.
+        reflection agent). Each entry is a single LlmEvaluationFeedback record.
         """
 
     def __init__(
@@ -936,10 +936,10 @@ class LlmTelemetry(google.protobuf.message.Message):
         provider: builtins.str = ...,
         model_name: builtins.str = ...,
         agent_name: builtins.str = ...,
-        token_usage: global___TokenUsage | None = ...,
-        tool_call_metadatas: collections.abc.Iterable[global___ToolCallMetadata] | None = ...,
+        llm_token_usage: global___LlmTokenUsage | None = ...,
+        llm_tool_call_metadatas: collections.abc.Iterable[global___LlmToolCallMetadata] | None = ...,
         tool_call_count: builtins.int = ...,
-        thinking_metadata: global___ThinkingMetadata | None = ...,
+        llm_thinking_metadata: global___LlmThinkingMetadata | None = ...,
         start_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         end_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         duration_seconds: builtins.float = ...,
@@ -977,10 +977,10 @@ class LlmTelemetry(google.protobuf.message.Message):
         reflection_iterations: builtins.int = ...,
         termination_reason: builtins.str = ...,
         evaluator_runs_join_key: builtins.str = ...,
-        llm_feedbacks: collections.abc.Iterable[ondewo.nlu.llm_evaluation_pb2.LlmEvaluationLlmFeedback] | None = ...,
+        llm_evaluation_feedbacks: collections.abc.Iterable[ondewo.nlu.llm_evaluation_pb2.LlmEvaluationFeedback] | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["end_time", b"end_time", "inputs", b"inputs", "metadata", b"metadata", "outputs", b"outputs", "start_time", b"start_time", "thinking_metadata", b"thinking_metadata", "token_usage", b"token_usage"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["agent_name", b"agent_name", "agent_role", b"agent_role", "cache_creation_input_tokens", b"cache_creation_input_tokens", "cached", b"cached", "cached_input_tokens", b"cached_input_tokens", "component_name", b"component_name", "duration_seconds", b"duration_seconds", "end_time", b"end_time", "error_class", b"error_class", "error_message", b"error_message", "evaluator_runs_join_key", b"evaluator_runs_join_key", "fallback_depth", b"fallback_depth", "finish_reasons", b"finish_reasons", "first_token_latency_seconds", b"first_token_latency_seconds", "inputs", b"inputs", "langsmith_run_url", b"langsmith_run_url", "llm_feedbacks", b"llm_feedbacks", "max_tokens", b"max_tokens", "metadata", b"metadata", "model_name", b"model_name", "n_generations", b"n_generations", "outputs", b"outputs", "parent_run_id", b"parent_run_id", "provider", b"provider", "recipient_agent", b"recipient_agent", "reflection_iterations", b"reflection_iterations", "retry_count", b"retry_count", "run_id", b"run_id", "run_type", b"run_type", "sender_agent", b"sender_agent", "start_time", b"start_time", "streaming_chunk_count", b"streaming_chunk_count", "system_fingerprint", b"system_fingerprint", "tags", b"tags", "team_id", b"team_id", "team_name", b"team_name", "temperature", b"temperature", "termination_reason", b"termination_reason", "thinking_metadata", b"thinking_metadata", "token_usage", b"token_usage", "tool_call_count", b"tool_call_count", "tool_call_metadatas", b"tool_call_metadatas", "top_p", b"top_p", "traceback", b"traceback", "turn_index", b"turn_index"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["end_time", b"end_time", "inputs", b"inputs", "llm_thinking_metadata", b"llm_thinking_metadata", "llm_token_usage", b"llm_token_usage", "metadata", b"metadata", "outputs", b"outputs", "start_time", b"start_time"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["agent_name", b"agent_name", "agent_role", b"agent_role", "cache_creation_input_tokens", b"cache_creation_input_tokens", "cached", b"cached", "cached_input_tokens", b"cached_input_tokens", "component_name", b"component_name", "duration_seconds", b"duration_seconds", "end_time", b"end_time", "error_class", b"error_class", "error_message", b"error_message", "evaluator_runs_join_key", b"evaluator_runs_join_key", "fallback_depth", b"fallback_depth", "finish_reasons", b"finish_reasons", "first_token_latency_seconds", b"first_token_latency_seconds", "inputs", b"inputs", "langsmith_run_url", b"langsmith_run_url", "llm_evaluation_feedbacks", b"llm_evaluation_feedbacks", "llm_thinking_metadata", b"llm_thinking_metadata", "llm_token_usage", b"llm_token_usage", "llm_tool_call_metadatas", b"llm_tool_call_metadatas", "max_tokens", b"max_tokens", "metadata", b"metadata", "model_name", b"model_name", "n_generations", b"n_generations", "outputs", b"outputs", "parent_run_id", b"parent_run_id", "provider", b"provider", "recipient_agent", b"recipient_agent", "reflection_iterations", b"reflection_iterations", "retry_count", b"retry_count", "run_id", b"run_id", "run_type", b"run_type", "sender_agent", b"sender_agent", "start_time", b"start_time", "streaming_chunk_count", b"streaming_chunk_count", "system_fingerprint", b"system_fingerprint", "tags", b"tags", "team_id", b"team_id", "team_name", b"team_name", "temperature", b"temperature", "termination_reason", b"termination_reason", "tool_call_count", b"tool_call_count", "top_p", b"top_p", "traceback", b"traceback", "turn_index", b"turn_index"]) -> None: ...
 
 global___LlmTelemetry = LlmTelemetry
 
@@ -990,7 +990,7 @@ class LlmTelemetryReport(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    TOKEN_USAGE_TOTAL_FIELD_NUMBER: builtins.int
+    LLM_TOKEN_USAGE_FIELD_NUMBER: builtins.int
     TOOL_CALL_COUNT_TOTAL_FIELD_NUMBER: builtins.int
     LLM_CALL_COUNT_FIELD_NUMBER: builtins.int
     LLM_TELEMETRIES_FIELD_NUMBER: builtins.int
@@ -1002,8 +1002,8 @@ class LlmTelemetryReport(google.protobuf.message.Message):
     duration_seconds_total: builtins.float
     """Sum of LlmTelemetry.duration_seconds across llm_telemetries."""
     @property
-    def token_usage_total(self) -> global___TokenUsage:
-        """Summed TokenUsage across llm_telemetries."""
+    def llm_token_usage(self) -> global___LlmTokenUsage:
+        """Summed LlmTokenUsage across llm_telemetries."""
 
     @property
     def llm_telemetries(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmTelemetry]:
@@ -1012,14 +1012,14 @@ class LlmTelemetryReport(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        token_usage_total: global___TokenUsage | None = ...,
+        llm_token_usage: global___LlmTokenUsage | None = ...,
         tool_call_count_total: builtins.int = ...,
         llm_call_count: builtins.int = ...,
         llm_telemetries: collections.abc.Iterable[global___LlmTelemetry] | None = ...,
         duration_seconds_total: builtins.float = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["token_usage_total", b"token_usage_total"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["duration_seconds_total", b"duration_seconds_total", "llm_call_count", b"llm_call_count", "llm_telemetries", b"llm_telemetries", "token_usage_total", b"token_usage_total", "tool_call_count_total", b"tool_call_count_total"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["llm_token_usage", b"llm_token_usage"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["duration_seconds_total", b"duration_seconds_total", "llm_call_count", b"llm_call_count", "llm_telemetries", b"llm_telemetries", "llm_token_usage", b"llm_token_usage", "tool_call_count_total", b"tool_call_count_total"]) -> None: ...
 
 global___LlmTelemetryReport = LlmTelemetryReport
 
@@ -1069,7 +1069,7 @@ class LlmCallFinishedEvent(google.protobuf.message.Message):
     LLM_CALL_ID_FIELD_NUMBER: builtins.int
     END_TIME_FIELD_NUMBER: builtins.int
     DURATION_SECONDS_FIELD_NUMBER: builtins.int
-    TOKEN_USAGE_FIELD_NUMBER: builtins.int
+    LLM_TOKEN_USAGE_FIELD_NUMBER: builtins.int
     llm_call_id: builtins.str
     """Collector-assigned id grouping events for this LLM call."""
     duration_seconds: builtins.float
@@ -1079,7 +1079,7 @@ class LlmCallFinishedEvent(google.protobuf.message.Message):
         """Wall-clock end time of the LLM call."""
 
     @property
-    def token_usage(self) -> global___TokenUsage:
+    def llm_token_usage(self) -> global___LlmTokenUsage:
         """Final token totals for this LLM call."""
 
     def __init__(
@@ -1088,15 +1088,15 @@ class LlmCallFinishedEvent(google.protobuf.message.Message):
         llm_call_id: builtins.str = ...,
         end_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         duration_seconds: builtins.float = ...,
-        token_usage: global___TokenUsage | None = ...,
+        llm_token_usage: global___LlmTokenUsage | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["end_time", b"end_time", "token_usage", b"token_usage"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["duration_seconds", b"duration_seconds", "end_time", b"end_time", "llm_call_id", b"llm_call_id", "token_usage", b"token_usage"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["end_time", b"end_time", "llm_token_usage", b"llm_token_usage"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["duration_seconds", b"duration_seconds", "end_time", b"end_time", "llm_call_id", b"llm_call_id", "llm_token_usage", b"llm_token_usage"]) -> None: ...
 
 global___LlmCallFinishedEvent = LlmCallFinishedEvent
 
 @typing.final
-class ToolCallStartedEvent(google.protobuf.message.Message):
+class LlmToolCallStartedEvent(google.protobuf.message.Message):
     """Emitted on a streaming DetectIntent when a tool call starts."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -1132,10 +1132,10 @@ class ToolCallStartedEvent(google.protobuf.message.Message):
     def HasField(self, field_name: typing.Literal["arguments", b"arguments", "start_time", b"start_time"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing.Literal["arguments", b"arguments", "llm_call_id", b"llm_call_id", "start_time", b"start_time", "tool_call_id", b"tool_call_id", "tool_name", b"tool_name"]) -> None: ...
 
-global___ToolCallStartedEvent = ToolCallStartedEvent
+global___LlmToolCallStartedEvent = LlmToolCallStartedEvent
 
 @typing.final
-class ToolCallFinishedEvent(google.protobuf.message.Message):
+class LlmToolCallFinishedEvent(google.protobuf.message.Message):
     """Emitted on a streaming DetectIntent when a tool call finishes."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -1143,12 +1143,12 @@ class ToolCallFinishedEvent(google.protobuf.message.Message):
     TOOL_CALL_ID_FIELD_NUMBER: builtins.int
     END_TIME_FIELD_NUMBER: builtins.int
     DURATION_SECONDS_FIELD_NUMBER: builtins.int
-    TOKEN_USAGE_FIELD_NUMBER: builtins.int
+    LLM_TOKEN_USAGE_FIELD_NUMBER: builtins.int
     RESULT_FIELD_NUMBER: builtins.int
     ERROR_MESSAGE_FIELD_NUMBER: builtins.int
     LLM_CALL_ID_FIELD_NUMBER: builtins.int
     tool_call_id: builtins.str
-    """Stable id matching the matching ToolCallStartedEvent."""
+    """Stable id matching the matching LlmToolCallStartedEvent."""
     duration_seconds: builtins.float
     """Convenience duration (end_time - start_time)."""
     error_message: builtins.str
@@ -1160,7 +1160,7 @@ class ToolCallFinishedEvent(google.protobuf.message.Message):
         """Wall-clock end time of the tool call."""
 
     @property
-    def token_usage(self) -> global___TokenUsage:
+    def llm_token_usage(self) -> global___LlmTokenUsage:
         """Token attribution for this tool call when available."""
 
     @property
@@ -1173,18 +1173,18 @@ class ToolCallFinishedEvent(google.protobuf.message.Message):
         tool_call_id: builtins.str = ...,
         end_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         duration_seconds: builtins.float = ...,
-        token_usage: global___TokenUsage | None = ...,
+        llm_token_usage: global___LlmTokenUsage | None = ...,
         result: google.protobuf.struct_pb2.Struct | None = ...,
         error_message: builtins.str = ...,
         llm_call_id: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["end_time", b"end_time", "result", b"result", "token_usage", b"token_usage"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["duration_seconds", b"duration_seconds", "end_time", b"end_time", "error_message", b"error_message", "llm_call_id", b"llm_call_id", "result", b"result", "token_usage", b"token_usage", "tool_call_id", b"tool_call_id"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["end_time", b"end_time", "llm_token_usage", b"llm_token_usage", "result", b"result"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["duration_seconds", b"duration_seconds", "end_time", b"end_time", "error_message", b"error_message", "llm_call_id", b"llm_call_id", "llm_token_usage", b"llm_token_usage", "result", b"result", "tool_call_id", b"tool_call_id"]) -> None: ...
 
-global___ToolCallFinishedEvent = ToolCallFinishedEvent
+global___LlmToolCallFinishedEvent = LlmToolCallFinishedEvent
 
 @typing.final
-class ThinkingDeltaEvent(google.protobuf.message.Message):
+class LlmThinkingDeltaEvent(google.protobuf.message.Message):
     """Emitted on a streaming DetectIntent for each thinking-delta chunk."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -1210,32 +1210,32 @@ class ThinkingDeltaEvent(google.protobuf.message.Message):
     def HasField(self, field_name: typing.Literal["timestamp", b"timestamp"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing.Literal["llm_call_id", b"llm_call_id", "text_delta", b"text_delta", "timestamp", b"timestamp"]) -> None: ...
 
-global___ThinkingDeltaEvent = ThinkingDeltaEvent
+global___LlmThinkingDeltaEvent = LlmThinkingDeltaEvent
 
 @typing.final
-class TokenUsageUpdateEvent(google.protobuf.message.Message):
+class LlmTokenUsageUpdateEvent(google.protobuf.message.Message):
     """Emitted on a streaming DetectIntent when running token counts update."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     LLM_CALL_ID_FIELD_NUMBER: builtins.int
-    TOKEN_USAGE_FIELD_NUMBER: builtins.int
+    LLM_TOKEN_USAGE_FIELD_NUMBER: builtins.int
     llm_call_id: builtins.str
     """Groups events under an LlmTelemetry entry."""
     @property
-    def token_usage(self) -> global___TokenUsage:
+    def llm_token_usage(self) -> global___LlmTokenUsage:
         """Running totals for that llm_call."""
 
     def __init__(
         self,
         *,
         llm_call_id: builtins.str = ...,
-        token_usage: global___TokenUsage | None = ...,
+        llm_token_usage: global___LlmTokenUsage | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["token_usage", b"token_usage"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["llm_call_id", b"llm_call_id", "token_usage", b"token_usage"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["llm_token_usage", b"llm_token_usage"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["llm_call_id", b"llm_call_id", "llm_token_usage", b"llm_token_usage"]) -> None: ...
 
-global___TokenUsageUpdateEvent = TokenUsageUpdateEvent
+global___LlmTokenUsageUpdateEvent = LlmTokenUsageUpdateEvent
 
 @typing.final
 class QueryResult(google.protobuf.message.Message):
@@ -1463,10 +1463,10 @@ class StreamingDetectIntentResponse(google.protobuf.message.Message):
     WEBHOOK_STATUS_FIELD_NUMBER: builtins.int
     LLM_CALL_STARTED_FIELD_NUMBER: builtins.int
     LLM_CALL_FINISHED_FIELD_NUMBER: builtins.int
-    TOOL_CALL_STARTED_FIELD_NUMBER: builtins.int
-    TOOL_CALL_FINISHED_FIELD_NUMBER: builtins.int
-    THINKING_DELTA_FIELD_NUMBER: builtins.int
-    TOKEN_USAGE_UPDATE_FIELD_NUMBER: builtins.int
+    LLM_TOOL_CALL_STARTED_FIELD_NUMBER: builtins.int
+    LLM_TOOL_CALL_FINISHED_FIELD_NUMBER: builtins.int
+    LLM_THINKING_DELTA_FIELD_NUMBER: builtins.int
+    LLM_TOKEN_USAGE_UPDATE_FIELD_NUMBER: builtins.int
     response_id: builtins.str
     """The unique identifier of the response. It can be used to
     locate a response in the training example set or for reporting issues.
@@ -1488,13 +1488,13 @@ class StreamingDetectIntentResponse(google.protobuf.message.Message):
     @property
     def llm_call_finished(self) -> global___LlmCallFinishedEvent: ...
     @property
-    def tool_call_started(self) -> global___ToolCallStartedEvent: ...
+    def llm_tool_call_started(self) -> global___LlmToolCallStartedEvent: ...
     @property
-    def tool_call_finished(self) -> global___ToolCallFinishedEvent: ...
+    def llm_tool_call_finished(self) -> global___LlmToolCallFinishedEvent: ...
     @property
-    def thinking_delta(self) -> global___ThinkingDeltaEvent: ...
+    def llm_thinking_delta(self) -> global___LlmThinkingDeltaEvent: ...
     @property
-    def token_usage_update(self) -> global___TokenUsageUpdateEvent: ...
+    def llm_token_usage_update(self) -> global___LlmTokenUsageUpdateEvent: ...
     def __init__(
         self,
         *,
@@ -1504,14 +1504,14 @@ class StreamingDetectIntentResponse(google.protobuf.message.Message):
         webhook_status: google.rpc.status_pb2.Status | None = ...,
         llm_call_started: global___LlmCallStartedEvent | None = ...,
         llm_call_finished: global___LlmCallFinishedEvent | None = ...,
-        tool_call_started: global___ToolCallStartedEvent | None = ...,
-        tool_call_finished: global___ToolCallFinishedEvent | None = ...,
-        thinking_delta: global___ThinkingDeltaEvent | None = ...,
-        token_usage_update: global___TokenUsageUpdateEvent | None = ...,
+        llm_tool_call_started: global___LlmToolCallStartedEvent | None = ...,
+        llm_tool_call_finished: global___LlmToolCallFinishedEvent | None = ...,
+        llm_thinking_delta: global___LlmThinkingDeltaEvent | None = ...,
+        llm_token_usage_update: global___LlmTokenUsageUpdateEvent | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["llm_call_finished", b"llm_call_finished", "llm_call_started", b"llm_call_started", "query_result", b"query_result", "recognition_result", b"recognition_result", "telemetry_event", b"telemetry_event", "thinking_delta", b"thinking_delta", "token_usage_update", b"token_usage_update", "tool_call_finished", b"tool_call_finished", "tool_call_started", b"tool_call_started", "webhook_status", b"webhook_status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["llm_call_finished", b"llm_call_finished", "llm_call_started", b"llm_call_started", "query_result", b"query_result", "recognition_result", b"recognition_result", "response_id", b"response_id", "telemetry_event", b"telemetry_event", "thinking_delta", b"thinking_delta", "token_usage_update", b"token_usage_update", "tool_call_finished", b"tool_call_finished", "tool_call_started", b"tool_call_started", "webhook_status", b"webhook_status"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["telemetry_event", b"telemetry_event"]) -> typing.Literal["llm_call_started", "llm_call_finished", "tool_call_started", "tool_call_finished", "thinking_delta", "token_usage_update"] | None: ...
+    def HasField(self, field_name: typing.Literal["llm_call_finished", b"llm_call_finished", "llm_call_started", b"llm_call_started", "llm_thinking_delta", b"llm_thinking_delta", "llm_token_usage_update", b"llm_token_usage_update", "llm_tool_call_finished", b"llm_tool_call_finished", "llm_tool_call_started", b"llm_tool_call_started", "query_result", b"query_result", "recognition_result", b"recognition_result", "telemetry_event", b"telemetry_event", "webhook_status", b"webhook_status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["llm_call_finished", b"llm_call_finished", "llm_call_started", b"llm_call_started", "llm_thinking_delta", b"llm_thinking_delta", "llm_token_usage_update", b"llm_token_usage_update", "llm_tool_call_finished", b"llm_tool_call_finished", "llm_tool_call_started", b"llm_tool_call_started", "query_result", b"query_result", "recognition_result", b"recognition_result", "response_id", b"response_id", "telemetry_event", b"telemetry_event", "webhook_status", b"webhook_status"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["telemetry_event", b"telemetry_event"]) -> typing.Literal["llm_call_started", "llm_call_finished", "llm_tool_call_started", "llm_tool_call_finished", "llm_thinking_delta", "llm_token_usage_update"] | None: ...
 
 global___StreamingDetectIntentResponse = StreamingDetectIntentResponse
 
