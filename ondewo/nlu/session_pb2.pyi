@@ -1143,8 +1143,468 @@ class LlmTelemetry(google.protobuf.message.Message):
 global___LlmTelemetry = LlmTelemetry
 
 @typing.final
+class LlmLatencyStats(google.protobuf.message.Message):
+    """Latency aggregate (seconds) across the LLM calls in scope."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    CALL_COUNT_FIELD_NUMBER: builtins.int
+    MEAN_DURATION_SECONDS_FIELD_NUMBER: builtins.int
+    P50_DURATION_SECONDS_FIELD_NUMBER: builtins.int
+    P95_DURATION_SECONDS_FIELD_NUMBER: builtins.int
+    P99_DURATION_SECONDS_FIELD_NUMBER: builtins.int
+    MAX_DURATION_SECONDS_FIELD_NUMBER: builtins.int
+    MEAN_FIRST_TOKEN_LATENCY_SECONDS_FIELD_NUMBER: builtins.int
+    P95_FIRST_TOKEN_LATENCY_SECONDS_FIELD_NUMBER: builtins.int
+    call_count: builtins.int
+    """Number of LLM calls included in these latency stats."""
+    mean_duration_seconds: builtins.float
+    """Mean end-to-end call duration in seconds."""
+    p50_duration_seconds: builtins.float
+    """50th percentile end-to-end call duration in seconds."""
+    p95_duration_seconds: builtins.float
+    """95th percentile end-to-end call duration in seconds."""
+    p99_duration_seconds: builtins.float
+    """99th percentile end-to-end call duration in seconds."""
+    max_duration_seconds: builtins.float
+    """Maximum observed end-to-end call duration in seconds."""
+    mean_first_token_latency_seconds: builtins.float
+    """Mean time-to-first-token in seconds (streaming calls only)."""
+    p95_first_token_latency_seconds: builtins.float
+    """95th percentile time-to-first-token in seconds."""
+    def __init__(
+        self,
+        *,
+        call_count: builtins.int = ...,
+        mean_duration_seconds: builtins.float = ...,
+        p50_duration_seconds: builtins.float = ...,
+        p95_duration_seconds: builtins.float = ...,
+        p99_duration_seconds: builtins.float = ...,
+        max_duration_seconds: builtins.float = ...,
+        mean_first_token_latency_seconds: builtins.float = ...,
+        p95_first_token_latency_seconds: builtins.float = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["call_count", b"call_count", "max_duration_seconds", b"max_duration_seconds", "mean_duration_seconds", b"mean_duration_seconds", "mean_first_token_latency_seconds", b"mean_first_token_latency_seconds", "p50_duration_seconds", b"p50_duration_seconds", "p95_duration_seconds", b"p95_duration_seconds", "p95_first_token_latency_seconds", b"p95_first_token_latency_seconds", "p99_duration_seconds", b"p99_duration_seconds"]) -> None: ...
+
+global___LlmLatencyStats = LlmLatencyStats
+
+@typing.final
+class LlmCacheStats(google.protobuf.message.Message):
+    """Prompt-cache efficiency aggregate across the LLM calls in scope."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    CACHED_INPUT_TOKENS_FIELD_NUMBER: builtins.int
+    CACHE_CREATION_INPUT_TOKENS_FIELD_NUMBER: builtins.int
+    UNCACHED_INPUT_TOKENS_FIELD_NUMBER: builtins.int
+    CACHE_HIT_RATE_FIELD_NUMBER: builtins.int
+    TOKEN_SAVINGS_FIELD_NUMBER: builtins.int
+    cached_input_tokens: builtins.int
+    """Tokens served from prompt cache (cached_input_tokens summed)."""
+    cache_creation_input_tokens: builtins.int
+    """Tokens written to prompt cache (cache_creation_input_tokens summed)."""
+    uncached_input_tokens: builtins.int
+    """Non-cached input tokens."""
+    cache_hit_rate: builtins.float
+    """cached_input_tokens / (cached_input_tokens + uncached_input_tokens)."""
+    token_savings: builtins.int
+    """Input tokens avoided by cache reuse."""
+    def __init__(
+        self,
+        *,
+        cached_input_tokens: builtins.int = ...,
+        cache_creation_input_tokens: builtins.int = ...,
+        uncached_input_tokens: builtins.int = ...,
+        cache_hit_rate: builtins.float = ...,
+        token_savings: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["cache_creation_input_tokens", b"cache_creation_input_tokens", "cache_hit_rate", b"cache_hit_rate", "cached_input_tokens", b"cached_input_tokens", "token_savings", b"token_savings", "uncached_input_tokens", b"uncached_input_tokens"]) -> None: ...
+
+global___LlmCacheStats = LlmCacheStats
+
+@typing.final
+class LlmModelUsage(google.protobuf.message.Message):
+    """Per-model usage rollup across the scope."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    MODEL_NAME_FIELD_NUMBER: builtins.int
+    PROVIDER_FIELD_NUMBER: builtins.int
+    CALL_COUNT_FIELD_NUMBER: builtins.int
+    LLM_TOKEN_USAGE_FIELD_NUMBER: builtins.int
+    TOOL_CALL_COUNT_FIELD_NUMBER: builtins.int
+    ERROR_COUNT_FIELD_NUMBER: builtins.int
+    DURATION_SECONDS_TOTAL_FIELD_NUMBER: builtins.int
+    CACHE_STATS_FIELD_NUMBER: builtins.int
+    CCAI_SERVICE_NAME_FIELD_NUMBER: builtins.int
+    CCAI_SERVICE_PROVIDER_FIELD_NUMBER: builtins.int
+    BASE_URL_FIELD_NUMBER: builtins.int
+    THINKING_TOKENS_TOTAL_FIELD_NUMBER: builtins.int
+    THINKING_DURATION_SECONDS_TOTAL_FIELD_NUMBER: builtins.int
+    TOOL_CALL_TOKENS_TOTAL_FIELD_NUMBER: builtins.int
+    TOOL_CALL_DURATION_SECONDS_TOTAL_FIELD_NUMBER: builtins.int
+    model_name: builtins.str
+    """Concrete model identifier (e.g. "claude-3-5-sonnet-20241022")."""
+    provider: builtins.str
+    """Provider tag owning the model (e.g. "anthropic")."""
+    call_count: builtins.int
+    """Number of LLM calls to this model in scope."""
+    tool_call_count: builtins.int
+    """Tool-call count attributed to this model."""
+    error_count: builtins.int
+    """Error count attributed to this model."""
+    duration_seconds_total: builtins.float
+    """Summed call duration in seconds for this model."""
+    ccai_service_name: builtins.str
+    """Resource name of the CCAI service that issued the calls."""
+    ccai_service_provider: ondewo.nlu.ccai_project_pb2.CcaiServiceProvider.ValueType
+    """Provider of the CCAI service."""
+    base_url: builtins.str
+    """Base URL used for the calls (proxy / compatible provider)."""
+    thinking_tokens_total: builtins.int
+    """Summed thinking-block tokens for this model."""
+    thinking_duration_seconds_total: builtins.float
+    """Summed thinking-block duration in seconds for this model."""
+    tool_call_tokens_total: builtins.int
+    """Summed tool-call tokens for this model."""
+    tool_call_duration_seconds_total: builtins.float
+    """Summed tool-call duration in seconds for this model."""
+    @property
+    def llm_token_usage(self) -> global___LlmTokenUsage:
+        """Summed token usage (input / output / total) for this model."""
+
+    @property
+    def cache_stats(self) -> global___LlmCacheStats:
+        """Optional cache stats for this model."""
+
+    def __init__(
+        self,
+        *,
+        model_name: builtins.str = ...,
+        provider: builtins.str = ...,
+        call_count: builtins.int = ...,
+        llm_token_usage: global___LlmTokenUsage | None = ...,
+        tool_call_count: builtins.int = ...,
+        error_count: builtins.int = ...,
+        duration_seconds_total: builtins.float = ...,
+        cache_stats: global___LlmCacheStats | None = ...,
+        ccai_service_name: builtins.str = ...,
+        ccai_service_provider: ondewo.nlu.ccai_project_pb2.CcaiServiceProvider.ValueType = ...,
+        base_url: builtins.str = ...,
+        thinking_tokens_total: builtins.int = ...,
+        thinking_duration_seconds_total: builtins.float = ...,
+        tool_call_tokens_total: builtins.int = ...,
+        tool_call_duration_seconds_total: builtins.float = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["cache_stats", b"cache_stats", "llm_token_usage", b"llm_token_usage"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["base_url", b"base_url", "cache_stats", b"cache_stats", "call_count", b"call_count", "ccai_service_name", b"ccai_service_name", "ccai_service_provider", b"ccai_service_provider", "duration_seconds_total", b"duration_seconds_total", "error_count", b"error_count", "llm_token_usage", b"llm_token_usage", "model_name", b"model_name", "provider", b"provider", "thinking_duration_seconds_total", b"thinking_duration_seconds_total", "thinking_tokens_total", b"thinking_tokens_total", "tool_call_count", b"tool_call_count", "tool_call_duration_seconds_total", b"tool_call_duration_seconds_total", "tool_call_tokens_total", b"tool_call_tokens_total"]) -> None: ...
+
+global___LlmModelUsage = LlmModelUsage
+
+@typing.final
+class LlmProviderUsage(google.protobuf.message.Message):
+    """Per-provider usage rollup across the scope."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PROVIDER_FIELD_NUMBER: builtins.int
+    CALL_COUNT_FIELD_NUMBER: builtins.int
+    LLM_TOKEN_USAGE_FIELD_NUMBER: builtins.int
+    ERROR_COUNT_FIELD_NUMBER: builtins.int
+    DURATION_SECONDS_TOTAL_FIELD_NUMBER: builtins.int
+    MODEL_NAMES_FIELD_NUMBER: builtins.int
+    provider: builtins.str
+    """Provider tag (e.g. "anthropic", "openai", "ollama")."""
+    call_count: builtins.int
+    """Number of LLM calls to this provider in scope."""
+    error_count: builtins.int
+    """Error count attributed to this provider."""
+    duration_seconds_total: builtins.float
+    """Summed call duration in seconds for this provider."""
+    @property
+    def llm_token_usage(self) -> global___LlmTokenUsage:
+        """Summed token usage for this provider."""
+
+    @property
+    def model_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Distinct model names seen under this provider."""
+
+    def __init__(
+        self,
+        *,
+        provider: builtins.str = ...,
+        call_count: builtins.int = ...,
+        llm_token_usage: global___LlmTokenUsage | None = ...,
+        error_count: builtins.int = ...,
+        duration_seconds_total: builtins.float = ...,
+        model_names: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["llm_token_usage", b"llm_token_usage"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["call_count", b"call_count", "duration_seconds_total", b"duration_seconds_total", "error_count", b"error_count", "llm_token_usage", b"llm_token_usage", "model_names", b"model_names", "provider", b"provider"]) -> None: ...
+
+global___LlmProviderUsage = LlmProviderUsage
+
+@typing.final
+class LlmCcaiServiceUsage(google.protobuf.message.Message):
+    """Per-CCAI-service usage rollup across the scope."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    CCAI_SERVICE_PROVIDER_FIELD_NUMBER: builtins.int
+    CCAI_SERVICE_NAME_FIELD_NUMBER: builtins.int
+    CALL_COUNT_FIELD_NUMBER: builtins.int
+    LLM_TOKEN_USAGE_FIELD_NUMBER: builtins.int
+    BASE_URL_FIELD_NUMBER: builtins.int
+    MODEL_NAMES_FIELD_NUMBER: builtins.int
+    ccai_service_provider: ondewo.nlu.ccai_project_pb2.CcaiServiceProvider.ValueType
+    """CCAI service provider enum value."""
+    ccai_service_name: builtins.str
+    """Resource name of the CCAI service."""
+    call_count: builtins.int
+    """Number of LLM calls attributed to this CCAI service in scope."""
+    base_url: builtins.str
+    """Base URL used by this CCAI service."""
+    @property
+    def llm_token_usage(self) -> global___LlmTokenUsage:
+        """Summed token usage for this CCAI service."""
+
+    @property
+    def model_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Distinct model names seen under this CCAI service."""
+
+    def __init__(
+        self,
+        *,
+        ccai_service_provider: ondewo.nlu.ccai_project_pb2.CcaiServiceProvider.ValueType = ...,
+        ccai_service_name: builtins.str = ...,
+        call_count: builtins.int = ...,
+        llm_token_usage: global___LlmTokenUsage | None = ...,
+        base_url: builtins.str = ...,
+        model_names: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["llm_token_usage", b"llm_token_usage"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["base_url", b"base_url", "call_count", b"call_count", "ccai_service_name", b"ccai_service_name", "ccai_service_provider", b"ccai_service_provider", "llm_token_usage", b"llm_token_usage", "model_names", b"model_names"]) -> None: ...
+
+global___LlmCcaiServiceUsage = LlmCcaiServiceUsage
+
+@typing.final
+class LlmAgentUsage(google.protobuf.message.Message):
+    """Per-intent-agent usage rollup across the scope."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    AGENT_NAME_FIELD_NUMBER: builtins.int
+    AGENT_ROLE_FIELD_NUMBER: builtins.int
+    TEAM_NAME_FIELD_NUMBER: builtins.int
+    CALL_COUNT_FIELD_NUMBER: builtins.int
+    LLM_TOKEN_USAGE_FIELD_NUMBER: builtins.int
+    TOOL_CALL_COUNT_FIELD_NUMBER: builtins.int
+    agent_name: builtins.str
+    """intent_agent executor / agent name owning the calls."""
+    agent_role: builtins.str
+    """Optional agent role."""
+    team_name: builtins.str
+    """Optional team name."""
+    call_count: builtins.int
+    """Number of LLM calls attributed to this agent in scope."""
+    tool_call_count: builtins.int
+    """Tool-call count attributed to this agent."""
+    @property
+    def llm_token_usage(self) -> global___LlmTokenUsage:
+        """Summed token usage for this agent."""
+
+    def __init__(
+        self,
+        *,
+        agent_name: builtins.str = ...,
+        agent_role: builtins.str = ...,
+        team_name: builtins.str = ...,
+        call_count: builtins.int = ...,
+        llm_token_usage: global___LlmTokenUsage | None = ...,
+        tool_call_count: builtins.int = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["llm_token_usage", b"llm_token_usage"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["agent_name", b"agent_name", "agent_role", b"agent_role", "call_count", b"call_count", "llm_token_usage", b"llm_token_usage", "team_name", b"team_name", "tool_call_count", b"tool_call_count"]) -> None: ...
+
+global___LlmAgentUsage = LlmAgentUsage
+
+@typing.final
+class LlmToolUsage(google.protobuf.message.Message):
+    """One tool's invocation aggregate across the scope."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TOOL_NAME_FIELD_NUMBER: builtins.int
+    CALL_COUNT_FIELD_NUMBER: builtins.int
+    ERROR_COUNT_FIELD_NUMBER: builtins.int
+    ERROR_RATE_FIELD_NUMBER: builtins.int
+    DURATION_SECONDS_TOTAL_FIELD_NUMBER: builtins.int
+    MEAN_DURATION_SECONDS_FIELD_NUMBER: builtins.int
+    LLM_TOKEN_USAGE_FIELD_NUMBER: builtins.int
+    tool_name: builtins.str
+    """Name of the tool / function."""
+    call_count: builtins.int
+    """Number of times the tool was invoked in scope."""
+    error_count: builtins.int
+    """Number of failed invocations."""
+    error_rate: builtins.float
+    """error_count / call_count."""
+    duration_seconds_total: builtins.float
+    """Summed tool-call duration in seconds."""
+    mean_duration_seconds: builtins.float
+    """Mean tool-call duration in seconds."""
+    @property
+    def llm_token_usage(self) -> global___LlmTokenUsage:
+        """Summed tool-call token usage (input / output / total)."""
+
+    def __init__(
+        self,
+        *,
+        tool_name: builtins.str = ...,
+        call_count: builtins.int = ...,
+        error_count: builtins.int = ...,
+        error_rate: builtins.float = ...,
+        duration_seconds_total: builtins.float = ...,
+        mean_duration_seconds: builtins.float = ...,
+        llm_token_usage: global___LlmTokenUsage | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["llm_token_usage", b"llm_token_usage"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["call_count", b"call_count", "duration_seconds_total", b"duration_seconds_total", "error_count", b"error_count", "error_rate", b"error_rate", "llm_token_usage", b"llm_token_usage", "mean_duration_seconds", b"mean_duration_seconds", "tool_name", b"tool_name"]) -> None: ...
+
+global___LlmToolUsage = LlmToolUsage
+
+@typing.final
+class LlmErrorStat(google.protobuf.message.Message):
+    """One error class aggregate."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ERROR_CLASS_FIELD_NUMBER: builtins.int
+    COUNT_FIELD_NUMBER: builtins.int
+    RATE_FIELD_NUMBER: builtins.int
+    SAMPLE_MESSAGE_FIELD_NUMBER: builtins.int
+    error_class: builtins.str
+    """Error class / type (LlmTelemetry.error_class)."""
+    count: builtins.int
+    """Number of occurrences in scope."""
+    rate: builtins.float
+    """count / total LLM calls in scope."""
+    sample_message: builtins.str
+    """A representative error_message sample (may be truncated / redacted)."""
+    def __init__(
+        self,
+        *,
+        error_class: builtins.str = ...,
+        count: builtins.int = ...,
+        rate: builtins.float = ...,
+        sample_message: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["count", b"count", "error_class", b"error_class", "rate", b"rate", "sample_message", b"sample_message"]) -> None: ...
+
+global___LlmErrorStat = LlmErrorStat
+
+@typing.final
+class LlmErrorStats(google.protobuf.message.Message):
+    """Error breakdown aggregate across the scope."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TOTAL_ERROR_COUNT_FIELD_NUMBER: builtins.int
+    OVERALL_ERROR_RATE_FIELD_NUMBER: builtins.int
+    ERRORS_BY_CLASS_FIELD_NUMBER: builtins.int
+    RETRY_COUNT_TOTAL_FIELD_NUMBER: builtins.int
+    MAX_FALLBACK_DEPTH_FIELD_NUMBER: builtins.int
+    total_error_count: builtins.int
+    """Total failed LLM calls in scope."""
+    overall_error_rate: builtins.float
+    """total_error_count / total LLM calls in scope."""
+    retry_count_total: builtins.int
+    """Total retries observed (LlmTelemetry.retry_count summed)."""
+    max_fallback_depth: builtins.int
+    """Max fallback depth observed (LlmTelemetry.fallback_depth max)."""
+    @property
+    def errors_by_class(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmErrorStat]:
+        """Per-error-class breakdown, descending by count."""
+
+    def __init__(
+        self,
+        *,
+        total_error_count: builtins.int = ...,
+        overall_error_rate: builtins.float = ...,
+        errors_by_class: collections.abc.Iterable[global___LlmErrorStat] | None = ...,
+        retry_count_total: builtins.int = ...,
+        max_fallback_depth: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["errors_by_class", b"errors_by_class", "max_fallback_depth", b"max_fallback_depth", "overall_error_rate", b"overall_error_rate", "retry_count_total", b"retry_count_total", "total_error_count", b"total_error_count"]) -> None: ...
+
+global___LlmErrorStats = LlmErrorStats
+
+@typing.final
+class LlmFinishReasonStat(google.protobuf.message.Message):
+    """One finish-reason aggregate."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    FINISH_REASON_FIELD_NUMBER: builtins.int
+    COUNT_FIELD_NUMBER: builtins.int
+    RATE_FIELD_NUMBER: builtins.int
+    finish_reason: builtins.str
+    """Finish reason ("stop" | "length" | "tool_calls" | "content_filter" | "error" | ...)."""
+    count: builtins.int
+    """Number of occurrences in scope."""
+    rate: builtins.float
+    """count / total LLM calls in scope."""
+    def __init__(
+        self,
+        *,
+        finish_reason: builtins.str = ...,
+        count: builtins.int = ...,
+        rate: builtins.float = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["count", b"count", "finish_reason", b"finish_reason", "rate", b"rate"]) -> None: ...
+
+global___LlmFinishReasonStat = LlmFinishReasonStat
+
+@typing.final
+class LlmReasoningEffortStat(google.protobuf.message.Message):
+    """One reasoning-effort aggregate."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    REASONING_EFFORT_FIELD_NUMBER: builtins.int
+    COUNT_FIELD_NUMBER: builtins.int
+    RATE_FIELD_NUMBER: builtins.int
+    LLM_TOKEN_USAGE_FIELD_NUMBER: builtins.int
+    reasoning_effort: global___ReasoningEffort.ValueType
+    """Reasoning effort enum value."""
+    count: builtins.int
+    """Number of LLM calls at this effort level in scope."""
+    rate: builtins.float
+    """count / total LLM calls in scope."""
+    @property
+    def llm_token_usage(self) -> global___LlmTokenUsage:
+        """Summed token usage at this effort level."""
+
+    def __init__(
+        self,
+        *,
+        reasoning_effort: global___ReasoningEffort.ValueType = ...,
+        count: builtins.int = ...,
+        rate: builtins.float = ...,
+        llm_token_usage: global___LlmTokenUsage | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["llm_token_usage", b"llm_token_usage"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["count", b"count", "llm_token_usage", b"llm_token_usage", "rate", b"rate", "reasoning_effort", b"reasoning_effort"]) -> None: ...
+
+global___LlmReasoningEffortStat = LlmReasoningEffortStat
+
+@typing.final
 class LlmTelemetryReport(google.protobuf.message.Message):
-    """Aggregated telemetry across all LLM calls in one DetectIntent turn."""
+    """Aggregated telemetry across all LLM calls in one DetectIntent turn, or across
+    a session / agent-domain scope when used as a statistics report payload. The
+    breakdown fields (6+) are populated only for the matching report type; a
+    *_LLM_TOTAL_STATISTICS report populates all of them.
+    """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1153,12 +1613,34 @@ class LlmTelemetryReport(google.protobuf.message.Message):
     LLM_CALL_COUNT_FIELD_NUMBER: builtins.int
     LLM_TELEMETRIES_FIELD_NUMBER: builtins.int
     DURATION_SECONDS_TOTAL_FIELD_NUMBER: builtins.int
+    MODELS_USED_FIELD_NUMBER: builtins.int
+    PROVIDERS_USED_FIELD_NUMBER: builtins.int
+    CCAI_SERVICES_USED_FIELD_NUMBER: builtins.int
+    AGENTS_USED_FIELD_NUMBER: builtins.int
+    TOOLS_USED_FIELD_NUMBER: builtins.int
+    LATENCY_STATS_FIELD_NUMBER: builtins.int
+    CACHE_STATS_FIELD_NUMBER: builtins.int
+    ERROR_STATS_FIELD_NUMBER: builtins.int
+    FINISH_REASON_DISTRIBUTION_FIELD_NUMBER: builtins.int
+    REASONING_EFFORT_DISTRIBUTION_FIELD_NUMBER: builtins.int
+    THINKING_TOKENS_TOTAL_FIELD_NUMBER: builtins.int
+    THINKING_DURATION_SECONDS_TOTAL_FIELD_NUMBER: builtins.int
+    TOOL_CALL_TOKENS_TOTAL_FIELD_NUMBER: builtins.int
+    TOOL_CALL_DURATION_SECONDS_TOTAL_FIELD_NUMBER: builtins.int
     tool_call_count_total: builtins.int
     """Sum of LlmTelemetry.tool_call_count across llm_telemetries."""
     llm_call_count: builtins.int
     """Denormalized len(llm_telemetries)."""
     duration_seconds_total: builtins.float
     """Sum of LlmTelemetry.duration_in_s across llm_telemetries."""
+    thinking_tokens_total: builtins.int
+    """Scope-wide summed thinking-block tokens."""
+    thinking_duration_seconds_total: builtins.float
+    """Scope-wide summed thinking-block duration in seconds."""
+    tool_call_tokens_total: builtins.int
+    """Scope-wide summed tool-call tokens."""
+    tool_call_duration_seconds_total: builtins.float
+    """Scope-wide summed tool-call duration in seconds."""
     @property
     def llm_token_usage(self) -> global___LlmTokenUsage:
         """Summed LlmTokenUsage across llm_telemetries."""
@@ -1166,6 +1648,46 @@ class LlmTelemetryReport(google.protobuf.message.Message):
     @property
     def llm_telemetries(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmTelemetry]:
         """Per-LLM-invocation breakdown."""
+
+    @property
+    def models_used(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmModelUsage]:
+        """Per-model usage rollup. Populated for *_LLM_MODELS_USED and *_LLM_TOTAL_STATISTICS."""
+
+    @property
+    def providers_used(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmProviderUsage]:
+        """Per-provider usage rollup. Populated for *_LLM_PROVIDERS_USED and *_LLM_TOTAL_STATISTICS."""
+
+    @property
+    def ccai_services_used(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmCcaiServiceUsage]:
+        """Per-CCAI-service usage rollup. Populated for *_LLM_CCAI_SERVICES_USED and *_LLM_TOTAL_STATISTICS."""
+
+    @property
+    def agents_used(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmAgentUsage]:
+        """Per-intent-agent usage rollup. Populated for *_LLM_AGENTS_USED and *_LLM_TOTAL_STATISTICS."""
+
+    @property
+    def tools_used(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmToolUsage]:
+        """Tool-usage rollup. Populated for *_LLM_TOP_X_TOOLS / *_LLM_LEAST_X_TOOLS and *_LLM_TOTAL_STATISTICS."""
+
+    @property
+    def latency_stats(self) -> global___LlmLatencyStats:
+        """Latency aggregate. Populated for *_LLM_LATENCY and *_LLM_TOTAL_STATISTICS."""
+
+    @property
+    def cache_stats(self) -> global___LlmCacheStats:
+        """Cache efficiency aggregate. Populated for *_LLM_CACHE_EFFICIENCY and *_LLM_TOTAL_STATISTICS."""
+
+    @property
+    def error_stats(self) -> global___LlmErrorStats:
+        """Error aggregate. Populated for *_LLM_ERRORS and *_LLM_TOTAL_STATISTICS."""
+
+    @property
+    def finish_reason_distribution(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmFinishReasonStat]:
+        """Finish-reason distribution. Populated for *_LLM_FINISH_REASONS and *_LLM_TOTAL_STATISTICS."""
+
+    @property
+    def reasoning_effort_distribution(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmReasoningEffortStat]:
+        """Reasoning-effort distribution. Populated for *_LLM_REASONING_EFFORT and *_LLM_TOTAL_STATISTICS."""
 
     def __init__(
         self,
@@ -1175,9 +1697,23 @@ class LlmTelemetryReport(google.protobuf.message.Message):
         llm_call_count: builtins.int = ...,
         llm_telemetries: collections.abc.Iterable[global___LlmTelemetry] | None = ...,
         duration_seconds_total: builtins.float = ...,
+        models_used: collections.abc.Iterable[global___LlmModelUsage] | None = ...,
+        providers_used: collections.abc.Iterable[global___LlmProviderUsage] | None = ...,
+        ccai_services_used: collections.abc.Iterable[global___LlmCcaiServiceUsage] | None = ...,
+        agents_used: collections.abc.Iterable[global___LlmAgentUsage] | None = ...,
+        tools_used: collections.abc.Iterable[global___LlmToolUsage] | None = ...,
+        latency_stats: global___LlmLatencyStats | None = ...,
+        cache_stats: global___LlmCacheStats | None = ...,
+        error_stats: global___LlmErrorStats | None = ...,
+        finish_reason_distribution: collections.abc.Iterable[global___LlmFinishReasonStat] | None = ...,
+        reasoning_effort_distribution: collections.abc.Iterable[global___LlmReasoningEffortStat] | None = ...,
+        thinking_tokens_total: builtins.int = ...,
+        thinking_duration_seconds_total: builtins.float = ...,
+        tool_call_tokens_total: builtins.int = ...,
+        tool_call_duration_seconds_total: builtins.float = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["llm_token_usage", b"llm_token_usage"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["duration_seconds_total", b"duration_seconds_total", "llm_call_count", b"llm_call_count", "llm_telemetries", b"llm_telemetries", "llm_token_usage", b"llm_token_usage", "tool_call_count_total", b"tool_call_count_total"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["cache_stats", b"cache_stats", "error_stats", b"error_stats", "latency_stats", b"latency_stats", "llm_token_usage", b"llm_token_usage"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["agents_used", b"agents_used", "cache_stats", b"cache_stats", "ccai_services_used", b"ccai_services_used", "duration_seconds_total", b"duration_seconds_total", "error_stats", b"error_stats", "finish_reason_distribution", b"finish_reason_distribution", "latency_stats", b"latency_stats", "llm_call_count", b"llm_call_count", "llm_telemetries", b"llm_telemetries", "llm_token_usage", b"llm_token_usage", "models_used", b"models_used", "providers_used", b"providers_used", "reasoning_effort_distribution", b"reasoning_effort_distribution", "thinking_duration_seconds_total", b"thinking_duration_seconds_total", "thinking_tokens_total", b"thinking_tokens_total", "tool_call_count_total", b"tool_call_count_total", "tool_call_duration_seconds_total", b"tool_call_duration_seconds_total", "tool_call_tokens_total", b"tool_call_tokens_total", "tools_used", b"tools_used"]) -> None: ...
 
 global___LlmTelemetryReport = LlmTelemetryReport
 
