@@ -41,6 +41,7 @@ import google.protobuf.struct_pb2
 import google.protobuf.timestamp_pb2
 import google.rpc.status_pb2
 import google.type.latlng_pb2
+import ondewo.nlu.ccai_project_pb2
 import ondewo.nlu.common_pb2
 import ondewo.nlu.context_pb2
 import ondewo.nlu.entity_type_pb2
@@ -81,6 +82,40 @@ TRANSCRIPTION_TYPE_S2T: TranscriptionType.ValueType  # 1
 TRANSCRIPTION_TYPE_HUMAN: TranscriptionType.ValueType  # 2
 """Manual transcription produced by a human annotator."""
 global___TranscriptionType = TranscriptionType
+
+class _ReasoningEffort:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _ReasoningEffortEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_ReasoningEffort.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    REASONING_EFFORT_UNSPECIFIED: _ReasoningEffort.ValueType  # 0
+    """Unspecified reasoning effort."""
+    REASONING_EFFORT_MINIMAL: _ReasoningEffort.ValueType  # 1
+    """Minimal reasoning effort."""
+    REASONING_EFFORT_LOW: _ReasoningEffort.ValueType  # 2
+    """Low reasoning effort."""
+    REASONING_EFFORT_MEDIUM: _ReasoningEffort.ValueType  # 3
+    """Medium reasoning effort."""
+    REASONING_EFFORT_HIGH: _ReasoningEffort.ValueType  # 4
+    """High reasoning effort."""
+
+class ReasoningEffort(_ReasoningEffort, metaclass=_ReasoningEffortEnumTypeWrapper):
+    """Effort level for reasoning models (e.g. o1, o3). Controls the trade-off
+    between speed and quality.
+    """
+
+REASONING_EFFORT_UNSPECIFIED: ReasoningEffort.ValueType  # 0
+"""Unspecified reasoning effort."""
+REASONING_EFFORT_MINIMAL: ReasoningEffort.ValueType  # 1
+"""Minimal reasoning effort."""
+REASONING_EFFORT_LOW: ReasoningEffort.ValueType  # 2
+"""Low reasoning effort."""
+REASONING_EFFORT_MEDIUM: ReasoningEffort.ValueType  # 3
+"""Medium reasoning effort."""
+REASONING_EFFORT_HIGH: ReasoningEffort.ValueType  # 4
+"""High reasoning effort."""
+global___ReasoningEffort = ReasoningEffort
 
 class _AudioEncoding:
     ValueType = typing.NewType("ValueType", builtins.int)
@@ -665,7 +700,7 @@ class LlmToolCallMetadata(google.protobuf.message.Message):
     TOOL_NAME_FIELD_NUMBER: builtins.int
     START_TIME_FIELD_NUMBER: builtins.int
     END_TIME_FIELD_NUMBER: builtins.int
-    DURATION_SECONDS_FIELD_NUMBER: builtins.int
+    DURATION_IN_S_FIELD_NUMBER: builtins.int
     LLM_TOKEN_USAGE_FIELD_NUMBER: builtins.int
     ARGUMENTS_FIELD_NUMBER: builtins.int
     RESULT_FIELD_NUMBER: builtins.int
@@ -674,7 +709,7 @@ class LlmToolCallMetadata(google.protobuf.message.Message):
     """Stable id assigned by the upstream framework (autogen / langchain)."""
     tool_name: builtins.str
     """Name of the tool / function invoked."""
-    duration_seconds: builtins.float
+    duration_in_s: builtins.float
     """Convenience duration (end_time - start_time)."""
     error_message: builtins.str
     """Populated only when the tool call failed; empty string on success."""
@@ -705,14 +740,14 @@ class LlmToolCallMetadata(google.protobuf.message.Message):
         tool_name: builtins.str = ...,
         start_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         end_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        duration_seconds: builtins.float = ...,
+        duration_in_s: builtins.float = ...,
         llm_token_usage: global___LlmTokenUsage | None = ...,
         arguments: google.protobuf.struct_pb2.Struct | None = ...,
         result: google.protobuf.struct_pb2.Struct | None = ...,
         error_message: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["arguments", b"arguments", "end_time", b"end_time", "llm_token_usage", b"llm_token_usage", "result", b"result", "start_time", b"start_time"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["arguments", b"arguments", "duration_seconds", b"duration_seconds", "end_time", b"end_time", "error_message", b"error_message", "llm_token_usage", b"llm_token_usage", "result", b"result", "start_time", b"start_time", "tool_call_id", b"tool_call_id", "tool_name", b"tool_name"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["arguments", b"arguments", "duration_in_s", b"duration_in_s", "end_time", b"end_time", "error_message", b"error_message", "llm_token_usage", b"llm_token_usage", "result", b"result", "start_time", b"start_time", "tool_call_id", b"tool_call_id", "tool_name", b"tool_name"]) -> None: ...
 
 global___LlmToolCallMetadata = LlmToolCallMetadata
 
@@ -727,9 +762,9 @@ class LlmThinkingMetadata(google.protobuf.message.Message):
     LLM_TOKEN_USAGE_FIELD_NUMBER: builtins.int
     START_TIME_FIELD_NUMBER: builtins.int
     END_TIME_FIELD_NUMBER: builtins.int
-    DURATION_SECONDS_FIELD_NUMBER: builtins.int
+    DURATION_IN_S_FIELD_NUMBER: builtins.int
     THINKING_TEXT_FIELD_NUMBER: builtins.int
-    duration_seconds: builtins.float
+    duration_in_s: builtins.float
     """Convenience duration (end_time - start_time)."""
     thinking_text: builtins.str
     """Raw thinking text. Subject to redaction depending on telemetry policy."""
@@ -751,11 +786,11 @@ class LlmThinkingMetadata(google.protobuf.message.Message):
         llm_token_usage: global___LlmTokenUsage | None = ...,
         start_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         end_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        duration_seconds: builtins.float = ...,
+        duration_in_s: builtins.float = ...,
         thinking_text: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["end_time", b"end_time", "llm_token_usage", b"llm_token_usage", "start_time", b"start_time"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["duration_seconds", b"duration_seconds", "end_time", b"end_time", "llm_token_usage", b"llm_token_usage", "start_time", b"start_time", "thinking_text", b"thinking_text"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["duration_in_s", b"duration_in_s", "end_time", b"end_time", "llm_token_usage", b"llm_token_usage", "start_time", b"start_time", "thinking_text", b"thinking_text"]) -> None: ...
 
 global___LlmThinkingMetadata = LlmThinkingMetadata
 
@@ -774,7 +809,7 @@ class LlmTelemetry(google.protobuf.message.Message):
     LLM_THINKING_METADATA_FIELD_NUMBER: builtins.int
     START_TIME_FIELD_NUMBER: builtins.int
     END_TIME_FIELD_NUMBER: builtins.int
-    DURATION_SECONDS_FIELD_NUMBER: builtins.int
+    DURATION_IN_S_FIELD_NUMBER: builtins.int
     RUN_ID_FIELD_NUMBER: builtins.int
     PARENT_RUN_ID_FIELD_NUMBER: builtins.int
     RUN_TYPE_FIELD_NUMBER: builtins.int
@@ -810,15 +845,30 @@ class LlmTelemetry(google.protobuf.message.Message):
     TERMINATION_REASON_FIELD_NUMBER: builtins.int
     EVALUATOR_RUNS_JOIN_KEY_FIELD_NUMBER: builtins.int
     LLM_EVALUATION_FEEDBACKS_FIELD_NUMBER: builtins.int
+    CCAI_SERVICE_NAME_FIELD_NUMBER: builtins.int
+    BASE_URL_FIELD_NUMBER: builtins.int
+    DEFAULT_HEADERS_FIELD_NUMBER: builtins.int
+    DEFAULT_QUERY_FIELD_NUMBER: builtins.int
+    FREQUENCY_PENALTY_FIELD_NUMBER: builtins.int
+    OPENAI_METADATA_FIELD_NUMBER: builtins.int
+    PRESENCE_PENALTY_FIELD_NUMBER: builtins.int
+    REASONING_EFFORT_FIELD_NUMBER: builtins.int
+    USER_FIELD_NUMBER: builtins.int
+    TIMEOUT_FIELD_NUMBER: builtins.int
+    STRICT_RESPONSE_VALIDATION_FIELD_NUMBER: builtins.int
+    EXTRA_HEADERS_FIELD_NUMBER: builtins.int
+    EXTRA_QUERY_FIELD_NUMBER: builtins.int
+    EXTRA_BODY_FIELD_NUMBER: builtins.int
+    CCAI_SERVICE_PROVIDER_FIELD_NUMBER: builtins.int
     provider: builtins.str
     """Provider tag: "autogen" | "langchain" | "openai" | "anthropic" | ..."""
     model_name: builtins.str
-    """Concrete model identifier (e.g. "claude-3-5-sonnet-20241022")."""
+    """Concrete model identifier (e.g. "Qwen/Qwen3.6-27b-fp8")."""
     agent_name: builtins.str
     """intent_agent executor / agent name."""
     tool_call_count: builtins.int
     """Denormalized len(llm_tool_call_metadatas)."""
-    duration_seconds: builtins.float
+    duration_in_s: builtins.float
     """Convenience duration (end_time - start_time)."""
     run_id: builtins.str
     """LangChain / LangSmith run identifier for this LLM call (UUID)."""
@@ -884,6 +934,40 @@ class LlmTelemetry(google.protobuf.message.Message):
     """Autogen <code>TaskResult.stop_reason</code> string when surfaced."""
     evaluator_runs_join_key: builtins.str
     """Join key linking this LLM call to an evaluator run (see llm_evaluation.proto)."""
+    ccai_service_name: builtins.str
+    """Resource name of the CCAI service that issued this LLM call."""
+    base_url: builtins.str
+    """The base URL for the OpenAI API. Overrides the default endpoint, useful
+    for proxies or compatible third-party providers.
+    """
+    frequency_penalty: builtins.float
+    """Optional. A number between -2.0 and 2.0. Positive values penalize new
+    tokens based on their existing frequency in the text so far, decreasing the
+    likelihood of the model repeating the same line verbatim.
+    """
+    presence_penalty: builtins.float
+    """Optional. A number between -2.0 and 2.0. Positive values penalize new
+    tokens based on whether they have already appeared in the text, increasing
+    the likelihood of the model discussing new topics.
+    """
+    reasoning_effort: global___ReasoningEffort.ValueType
+    """Optional. Constrains the effort level for reasoning models (e.g. o1, o3).
+    Controls the trade-off between speed and quality.
+    """
+    user: builtins.str
+    """Optional. A unique identifier representing the end-user, which helps OpenAI
+    monitor and detect abuse.
+    """
+    timeout: builtins.float
+    """Optional. The timeout in seconds for requests to the OpenAI API. Applies to
+    the entire request lifecycle including connection, sending, and receiving.
+    """
+    strict_response_validation: builtins.bool
+    """Optional. If true, enables strict validation of response payloads returned
+    by the OpenAI API.
+    """
+    ccai_service_provider: ondewo.nlu.ccai_project_pb2.CcaiServiceProvider.ValueType
+    """Provider of the ccai service"""
     @property
     def llm_token_usage(self) -> global___LlmTokenUsage:
         """Totals for this call."""
@@ -930,6 +1014,41 @@ class LlmTelemetry(google.protobuf.message.Message):
         reflection agent). Each entry is a single LlmEvaluationFeedback record.
         """
 
+    @property
+    def default_headers(self) -> google.protobuf.struct_pb2.Struct:
+        """Optional. Default HTTP headers to include with every request to the OpenAI API."""
+
+    @property
+    def default_query(self) -> google.protobuf.struct_pb2.Struct:
+        """Optional. Default query parameters to append to every request URL sent to
+        the OpenAI API. Values can be of any type (string, number, boolean, list),
+        hence the use of Struct.
+        """
+
+    @property
+    def openai_metadata(self) -> google.protobuf.struct_pb2.Struct:
+        """Optional. Developer-defined tags and values used for filtering completions
+        in the OpenAI dashboard.
+        """
+
+    @property
+    def extra_headers(self) -> google.protobuf.struct_pb2.Struct:
+        """Optional. Additional HTTP headers to send with the request. These are
+        merged with and override default_headers for this specific request only.
+        """
+
+    @property
+    def extra_query(self) -> google.protobuf.struct_pb2.Struct:
+        """Optional. Additional query parameters to send with the request. These are
+        merged with and override default_query for this specific request only.
+        """
+
+    @property
+    def extra_body(self) -> google.protobuf.struct_pb2.Struct:
+        """Optional. Additional JSON properties to include in the request body. Useful
+        for accessing new or undocumented API parameters.
+        """
+
     def __init__(
         self,
         *,
@@ -942,7 +1061,7 @@ class LlmTelemetry(google.protobuf.message.Message):
         llm_thinking_metadata: global___LlmThinkingMetadata | None = ...,
         start_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         end_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        duration_seconds: builtins.float = ...,
+        duration_in_s: builtins.float = ...,
         run_id: builtins.str = ...,
         parent_run_id: builtins.str = ...,
         run_type: builtins.str = ...,
@@ -978,9 +1097,48 @@ class LlmTelemetry(google.protobuf.message.Message):
         termination_reason: builtins.str = ...,
         evaluator_runs_join_key: builtins.str = ...,
         llm_evaluation_feedbacks: collections.abc.Iterable[ondewo.nlu.llm_evaluation_pb2.LlmEvaluationFeedback] | None = ...,
+        ccai_service_name: builtins.str = ...,
+        base_url: builtins.str = ...,
+        default_headers: google.protobuf.struct_pb2.Struct | None = ...,
+        default_query: google.protobuf.struct_pb2.Struct | None = ...,
+        frequency_penalty: builtins.float | None = ...,
+        openai_metadata: google.protobuf.struct_pb2.Struct | None = ...,
+        presence_penalty: builtins.float | None = ...,
+        reasoning_effort: global___ReasoningEffort.ValueType | None = ...,
+        user: builtins.str | None = ...,
+        timeout: builtins.float | None = ...,
+        strict_response_validation: builtins.bool | None = ...,
+        extra_headers: google.protobuf.struct_pb2.Struct | None = ...,
+        extra_query: google.protobuf.struct_pb2.Struct | None = ...,
+        extra_body: google.protobuf.struct_pb2.Struct | None = ...,
+        ccai_service_provider: ondewo.nlu.ccai_project_pb2.CcaiServiceProvider.ValueType = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["end_time", b"end_time", "inputs", b"inputs", "llm_thinking_metadata", b"llm_thinking_metadata", "llm_token_usage", b"llm_token_usage", "metadata", b"metadata", "outputs", b"outputs", "start_time", b"start_time"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["agent_name", b"agent_name", "agent_role", b"agent_role", "cache_creation_input_tokens", b"cache_creation_input_tokens", "cached", b"cached", "cached_input_tokens", b"cached_input_tokens", "component_name", b"component_name", "duration_seconds", b"duration_seconds", "end_time", b"end_time", "error_class", b"error_class", "error_message", b"error_message", "evaluator_runs_join_key", b"evaluator_runs_join_key", "fallback_depth", b"fallback_depth", "finish_reasons", b"finish_reasons", "first_token_latency_seconds", b"first_token_latency_seconds", "inputs", b"inputs", "langsmith_run_url", b"langsmith_run_url", "llm_evaluation_feedbacks", b"llm_evaluation_feedbacks", "llm_thinking_metadata", b"llm_thinking_metadata", "llm_token_usage", b"llm_token_usage", "llm_tool_call_metadatas", b"llm_tool_call_metadatas", "max_tokens", b"max_tokens", "metadata", b"metadata", "model_name", b"model_name", "n_generations", b"n_generations", "outputs", b"outputs", "parent_run_id", b"parent_run_id", "provider", b"provider", "recipient_agent", b"recipient_agent", "reflection_iterations", b"reflection_iterations", "retry_count", b"retry_count", "run_id", b"run_id", "run_type", b"run_type", "sender_agent", b"sender_agent", "start_time", b"start_time", "streaming_chunk_count", b"streaming_chunk_count", "system_fingerprint", b"system_fingerprint", "tags", b"tags", "team_id", b"team_id", "team_name", b"team_name", "temperature", b"temperature", "termination_reason", b"termination_reason", "tool_call_count", b"tool_call_count", "top_p", b"top_p", "traceback", b"traceback", "turn_index", b"turn_index"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_default_headers", b"_default_headers", "_default_query", b"_default_query", "_extra_body", b"_extra_body", "_extra_headers", b"_extra_headers", "_extra_query", b"_extra_query", "_frequency_penalty", b"_frequency_penalty", "_openai_metadata", b"_openai_metadata", "_presence_penalty", b"_presence_penalty", "_reasoning_effort", b"_reasoning_effort", "_strict_response_validation", b"_strict_response_validation", "_timeout", b"_timeout", "_user", b"_user", "default_headers", b"default_headers", "default_query", b"default_query", "end_time", b"end_time", "extra_body", b"extra_body", "extra_headers", b"extra_headers", "extra_query", b"extra_query", "frequency_penalty", b"frequency_penalty", "inputs", b"inputs", "llm_thinking_metadata", b"llm_thinking_metadata", "llm_token_usage", b"llm_token_usage", "metadata", b"metadata", "openai_metadata", b"openai_metadata", "outputs", b"outputs", "presence_penalty", b"presence_penalty", "reasoning_effort", b"reasoning_effort", "start_time", b"start_time", "strict_response_validation", b"strict_response_validation", "timeout", b"timeout", "user", b"user"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_default_headers", b"_default_headers", "_default_query", b"_default_query", "_extra_body", b"_extra_body", "_extra_headers", b"_extra_headers", "_extra_query", b"_extra_query", "_frequency_penalty", b"_frequency_penalty", "_openai_metadata", b"_openai_metadata", "_presence_penalty", b"_presence_penalty", "_reasoning_effort", b"_reasoning_effort", "_strict_response_validation", b"_strict_response_validation", "_timeout", b"_timeout", "_user", b"_user", "agent_name", b"agent_name", "agent_role", b"agent_role", "base_url", b"base_url", "cache_creation_input_tokens", b"cache_creation_input_tokens", "cached", b"cached", "cached_input_tokens", b"cached_input_tokens", "ccai_service_name", b"ccai_service_name", "ccai_service_provider", b"ccai_service_provider", "component_name", b"component_name", "default_headers", b"default_headers", "default_query", b"default_query", "duration_in_s", b"duration_in_s", "end_time", b"end_time", "error_class", b"error_class", "error_message", b"error_message", "evaluator_runs_join_key", b"evaluator_runs_join_key", "extra_body", b"extra_body", "extra_headers", b"extra_headers", "extra_query", b"extra_query", "fallback_depth", b"fallback_depth", "finish_reasons", b"finish_reasons", "first_token_latency_seconds", b"first_token_latency_seconds", "frequency_penalty", b"frequency_penalty", "inputs", b"inputs", "langsmith_run_url", b"langsmith_run_url", "llm_evaluation_feedbacks", b"llm_evaluation_feedbacks", "llm_thinking_metadata", b"llm_thinking_metadata", "llm_token_usage", b"llm_token_usage", "llm_tool_call_metadatas", b"llm_tool_call_metadatas", "max_tokens", b"max_tokens", "metadata", b"metadata", "model_name", b"model_name", "n_generations", b"n_generations", "openai_metadata", b"openai_metadata", "outputs", b"outputs", "parent_run_id", b"parent_run_id", "presence_penalty", b"presence_penalty", "provider", b"provider", "reasoning_effort", b"reasoning_effort", "recipient_agent", b"recipient_agent", "reflection_iterations", b"reflection_iterations", "retry_count", b"retry_count", "run_id", b"run_id", "run_type", b"run_type", "sender_agent", b"sender_agent", "start_time", b"start_time", "streaming_chunk_count", b"streaming_chunk_count", "strict_response_validation", b"strict_response_validation", "system_fingerprint", b"system_fingerprint", "tags", b"tags", "team_id", b"team_id", "team_name", b"team_name", "temperature", b"temperature", "termination_reason", b"termination_reason", "timeout", b"timeout", "tool_call_count", b"tool_call_count", "top_p", b"top_p", "traceback", b"traceback", "turn_index", b"turn_index", "user", b"user"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_default_headers", b"_default_headers"]) -> typing.Literal["default_headers"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_default_query", b"_default_query"]) -> typing.Literal["default_query"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_extra_body", b"_extra_body"]) -> typing.Literal["extra_body"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_extra_headers", b"_extra_headers"]) -> typing.Literal["extra_headers"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_extra_query", b"_extra_query"]) -> typing.Literal["extra_query"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_frequency_penalty", b"_frequency_penalty"]) -> typing.Literal["frequency_penalty"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_openai_metadata", b"_openai_metadata"]) -> typing.Literal["openai_metadata"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_presence_penalty", b"_presence_penalty"]) -> typing.Literal["presence_penalty"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_reasoning_effort", b"_reasoning_effort"]) -> typing.Literal["reasoning_effort"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_strict_response_validation", b"_strict_response_validation"]) -> typing.Literal["strict_response_validation"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_timeout", b"_timeout"]) -> typing.Literal["timeout"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_user", b"_user"]) -> typing.Literal["user"] | None: ...
 
 global___LlmTelemetry = LlmTelemetry
 
@@ -1000,7 +1158,7 @@ class LlmTelemetryReport(google.protobuf.message.Message):
     llm_call_count: builtins.int
     """Denormalized len(llm_telemetries)."""
     duration_seconds_total: builtins.float
-    """Sum of LlmTelemetry.duration_seconds across llm_telemetries."""
+    """Sum of LlmTelemetry.duration_in_s across llm_telemetries."""
     @property
     def llm_token_usage(self) -> global___LlmTokenUsage:
         """Summed LlmTokenUsage across llm_telemetries."""
@@ -1068,11 +1226,11 @@ class LlmCallFinishedEvent(google.protobuf.message.Message):
 
     LLM_CALL_ID_FIELD_NUMBER: builtins.int
     END_TIME_FIELD_NUMBER: builtins.int
-    DURATION_SECONDS_FIELD_NUMBER: builtins.int
+    DURATION_IN_S_FIELD_NUMBER: builtins.int
     LLM_TOKEN_USAGE_FIELD_NUMBER: builtins.int
     llm_call_id: builtins.str
     """Collector-assigned id grouping events for this LLM call."""
-    duration_seconds: builtins.float
+    duration_in_s: builtins.float
     """Convenience duration (end_time - start_time)."""
     @property
     def end_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
@@ -1087,11 +1245,11 @@ class LlmCallFinishedEvent(google.protobuf.message.Message):
         *,
         llm_call_id: builtins.str = ...,
         end_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        duration_seconds: builtins.float = ...,
+        duration_in_s: builtins.float = ...,
         llm_token_usage: global___LlmTokenUsage | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["end_time", b"end_time", "llm_token_usage", b"llm_token_usage"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["duration_seconds", b"duration_seconds", "end_time", b"end_time", "llm_call_id", b"llm_call_id", "llm_token_usage", b"llm_token_usage"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["duration_in_s", b"duration_in_s", "end_time", b"end_time", "llm_call_id", b"llm_call_id", "llm_token_usage", b"llm_token_usage"]) -> None: ...
 
 global___LlmCallFinishedEvent = LlmCallFinishedEvent
 
@@ -1142,14 +1300,14 @@ class LlmToolCallFinishedEvent(google.protobuf.message.Message):
 
     TOOL_CALL_ID_FIELD_NUMBER: builtins.int
     END_TIME_FIELD_NUMBER: builtins.int
-    DURATION_SECONDS_FIELD_NUMBER: builtins.int
+    DURATION_IN_S_FIELD_NUMBER: builtins.int
     LLM_TOKEN_USAGE_FIELD_NUMBER: builtins.int
     RESULT_FIELD_NUMBER: builtins.int
     ERROR_MESSAGE_FIELD_NUMBER: builtins.int
     LLM_CALL_ID_FIELD_NUMBER: builtins.int
     tool_call_id: builtins.str
     """Stable id matching the matching LlmToolCallStartedEvent."""
-    duration_seconds: builtins.float
+    duration_in_s: builtins.float
     """Convenience duration (end_time - start_time)."""
     error_message: builtins.str
     """Populated only when the tool call failed; empty string on success."""
@@ -1172,14 +1330,14 @@ class LlmToolCallFinishedEvent(google.protobuf.message.Message):
         *,
         tool_call_id: builtins.str = ...,
         end_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        duration_seconds: builtins.float = ...,
+        duration_in_s: builtins.float = ...,
         llm_token_usage: global___LlmTokenUsage | None = ...,
         result: google.protobuf.struct_pb2.Struct | None = ...,
         error_message: builtins.str = ...,
         llm_call_id: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["end_time", b"end_time", "llm_token_usage", b"llm_token_usage", "result", b"result"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["duration_seconds", b"duration_seconds", "end_time", b"end_time", "error_message", b"error_message", "llm_call_id", b"llm_call_id", "llm_token_usage", b"llm_token_usage", "result", b"result", "tool_call_id", b"tool_call_id"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["duration_in_s", b"duration_in_s", "end_time", b"end_time", "error_message", b"error_message", "llm_call_id", b"llm_call_id", "llm_token_usage", b"llm_token_usage", "result", b"result", "tool_call_id", b"tool_call_id"]) -> None: ...
 
 global___LlmToolCallFinishedEvent = LlmToolCallFinishedEvent
 

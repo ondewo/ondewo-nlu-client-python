@@ -287,7 +287,7 @@ class LlmEvaluationExperiment(google.protobuf.message.Message):
     LLM_EVALUATION_EVALUATOR_RUNS_FIELD_NUMBER: builtins.int
     STARTED_AT_FIELD_NUMBER: builtins.int
     FINISHED_AT_FIELD_NUMBER: builtins.int
-    DURATION_SECONDS_FIELD_NUMBER: builtins.int
+    DURATION_IN_S_FIELD_NUMBER: builtins.int
     N_EXAMPLES_FIELD_NUMBER: builtins.int
     N_PASSED_FIELD_NUMBER: builtins.int
     N_FAILED_FIELD_NUMBER: builtins.int
@@ -318,7 +318,7 @@ class LlmEvaluationExperiment(google.protobuf.message.Message):
     """Logical version identifier of the prompt under test."""
     model_name: builtins.str
     """Concrete model identifier exercised by the experiment."""
-    duration_seconds: builtins.float
+    duration_in_s: builtins.float
     """Convenience duration (finished_at - started_at)."""
     n_examples: builtins.int
     """Number of dataset examples consumed."""
@@ -391,7 +391,7 @@ class LlmEvaluationExperiment(google.protobuf.message.Message):
         llm_evaluation_evaluator_runs: collections.abc.Iterable[global___LlmEvaluationEvaluatorRun] | None = ...,
         started_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         finished_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        duration_seconds: builtins.float = ...,
+        duration_in_s: builtins.float = ...,
         n_examples: builtins.int = ...,
         n_passed: builtins.int = ...,
         n_failed: builtins.int = ...,
@@ -406,7 +406,7 @@ class LlmEvaluationExperiment(google.protobuf.message.Message):
         modified_by: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["config", b"config", "created_at", b"created_at", "finished_at", b"finished_at", "modified_at", b"modified_at", "started_at", b"started_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["ccai_service_names", b"ccai_service_names", "config", b"config", "created_at", b"created_at", "created_by", b"created_by", "description", b"description", "display_name", b"display_name", "duration_seconds", b"duration_seconds", "finished_at", b"finished_at", "git_sha", b"git_sha", "language_code", b"language_code", "llm_evaluation_baseline_experiment_name", b"llm_evaluation_baseline_experiment_name", "llm_evaluation_dataset_name", b"llm_evaluation_dataset_name", "llm_evaluation_evaluator_runs", b"llm_evaluation_evaluator_runs", "llm_evaluation_experiment_status", b"llm_evaluation_experiment_status", "model_name", b"model_name", "modified_at", b"modified_at", "modified_by", b"modified_by", "n_examples", b"n_examples", "n_failed", b"n_failed", "n_passed", b"n_passed", "name", b"name", "parent", b"parent", "prompt_version", b"prompt_version", "started_at", b"started_at"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["ccai_service_names", b"ccai_service_names", "config", b"config", "created_at", b"created_at", "created_by", b"created_by", "description", b"description", "display_name", b"display_name", "duration_in_s", b"duration_in_s", "finished_at", b"finished_at", "git_sha", b"git_sha", "language_code", b"language_code", "llm_evaluation_baseline_experiment_name", b"llm_evaluation_baseline_experiment_name", "llm_evaluation_dataset_name", b"llm_evaluation_dataset_name", "llm_evaluation_evaluator_runs", b"llm_evaluation_evaluator_runs", "llm_evaluation_experiment_status", b"llm_evaluation_experiment_status", "model_name", b"model_name", "modified_at", b"modified_at", "modified_by", b"modified_by", "n_examples", b"n_examples", "n_failed", b"n_failed", "n_passed", b"n_passed", "name", b"name", "parent", b"parent", "prompt_version", b"prompt_version", "started_at", b"started_at"]) -> None: ...
 
 global___LlmEvaluationExperiment = LlmEvaluationExperiment
 
