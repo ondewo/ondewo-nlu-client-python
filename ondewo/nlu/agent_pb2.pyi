@@ -45,6 +45,7 @@ import google.protobuf.internal.enum_type_wrapper
 import google.protobuf.message
 import google.protobuf.struct_pb2
 import google.protobuf.timestamp_pb2
+import ondewo.nlu.ccai_project_pb2
 import ondewo.nlu.common_pb2
 import ondewo.nlu.intent_pb2
 import ondewo.nlu.project_role_pb2
@@ -142,6 +143,46 @@ class _ReportTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     """report on collision of the entity synonyms"""
     INTENT_GENERAL: _ReportType.ValueType  # 4
     """report of statistics of the general (relevant to all supported languages) part of intent database"""
+    AGENT_LLM_TOKEN_USAGE: _ReportType.ValueType  # 5
+    """Aggregate LLM token usage (input / output / cache) over the agent domain."""
+    AGENT_LLM_MODELS_USED: _ReportType.ValueType  # 6
+    """Per-model usage rollup (calls, tokens, latency) over the agent domain."""
+    AGENT_LLM_PROVIDERS_USED: _ReportType.ValueType  # 7
+    """Per-provider usage rollup over the agent domain."""
+    AGENT_LLM_CCAI_SERVICES_USED: _ReportType.ValueType  # 8
+    """Per-CCAI-service usage rollup (keyed by CcaiServiceProvider) over the agent domain."""
+    AGENT_LLM_AGENTS_USED: _ReportType.ValueType  # 9
+    """Per-intent-agent usage rollup over the agent domain."""
+    AGENT_LLM_ERRORS: _ReportType.ValueType  # 10
+    """LLM error breakdown (counts and rate per error_class) over the agent domain."""
+    AGENT_LLM_CACHE_EFFICIENCY: _ReportType.ValueType  # 11
+    """Prompt-cache efficiency over the agent domain."""
+    AGENT_LLM_REASONING_EFFORT: _ReportType.ValueType  # 12
+    """Reasoning-effort distribution (keyed by ReasoningEffort) over the agent domain."""
+    AGENT_LLM_TOP_X_TOOLS: _ReportType.ValueType  # 13
+    """Top X most-invoked tools over the agent domain."""
+    AGENT_LLM_LEAST_X_TOOLS: _ReportType.ValueType  # 14
+    """Least X invoked tools over the agent domain."""
+    AGENT_LLM_LATENCY: _ReportType.ValueType  # 15
+    """LLM latency aggregates (p50 / p95 / p99, time-to-first-token) over the agent domain."""
+    AGENT_LLM_FINISH_REASONS: _ReportType.ValueType  # 16
+    """Finish-reason distribution over the agent domain."""
+    AGENT_LLM_TOTAL_STATISTICS: _ReportType.ValueType  # 17
+    """Single rolled-up LLM statistics summary (totals + all breakdowns) over the agent domain."""
+    AGENT_LLM_INPUT_TOKEN_USAGE: _ReportType.ValueType  # 18
+    """Aggregate LLM input / prompt token usage over the agent domain."""
+    AGENT_LLM_OUTPUT_TOKEN_USAGE: _ReportType.ValueType  # 19
+    """Aggregate LLM output / completion token usage over the agent domain."""
+    AGENT_LLM_THINKING_TOKEN_USAGE: _ReportType.ValueType  # 20
+    """Aggregate LLM thinking / reasoning token usage over the agent domain."""
+    AGENT_LLM_TOOL_CALL_TOKEN_USAGE: _ReportType.ValueType  # 21
+    """Aggregate LLM tool-call token usage over the agent domain."""
+    AGENT_LLM_TOP_X_MODELS: _ReportType.ValueType  # 22
+    """Top X most-used models (by calls / tokens) over the agent domain."""
+    AGENT_LLM_TOP_X_CCAI_SERVICE_PROVIDERS: _ReportType.ValueType  # 23
+    """Top X most-used CCAI service providers over the agent domain."""
+    AGENT_LLM_TOP_X_AGENT_NAMES: _ReportType.ValueType  # 24
+    """Top X most-used agent name of agentic AI team"""
 
 class ReportType(_ReportType, metaclass=_ReportTypeEnumTypeWrapper):
     """Type of reports about the domain of the agent"""
@@ -156,6 +197,46 @@ ENTITY_COLLISION: ReportType.ValueType  # 3
 """report on collision of the entity synonyms"""
 INTENT_GENERAL: ReportType.ValueType  # 4
 """report of statistics of the general (relevant to all supported languages) part of intent database"""
+AGENT_LLM_TOKEN_USAGE: ReportType.ValueType  # 5
+"""Aggregate LLM token usage (input / output / cache) over the agent domain."""
+AGENT_LLM_MODELS_USED: ReportType.ValueType  # 6
+"""Per-model usage rollup (calls, tokens, latency) over the agent domain."""
+AGENT_LLM_PROVIDERS_USED: ReportType.ValueType  # 7
+"""Per-provider usage rollup over the agent domain."""
+AGENT_LLM_CCAI_SERVICES_USED: ReportType.ValueType  # 8
+"""Per-CCAI-service usage rollup (keyed by CcaiServiceProvider) over the agent domain."""
+AGENT_LLM_AGENTS_USED: ReportType.ValueType  # 9
+"""Per-intent-agent usage rollup over the agent domain."""
+AGENT_LLM_ERRORS: ReportType.ValueType  # 10
+"""LLM error breakdown (counts and rate per error_class) over the agent domain."""
+AGENT_LLM_CACHE_EFFICIENCY: ReportType.ValueType  # 11
+"""Prompt-cache efficiency over the agent domain."""
+AGENT_LLM_REASONING_EFFORT: ReportType.ValueType  # 12
+"""Reasoning-effort distribution (keyed by ReasoningEffort) over the agent domain."""
+AGENT_LLM_TOP_X_TOOLS: ReportType.ValueType  # 13
+"""Top X most-invoked tools over the agent domain."""
+AGENT_LLM_LEAST_X_TOOLS: ReportType.ValueType  # 14
+"""Least X invoked tools over the agent domain."""
+AGENT_LLM_LATENCY: ReportType.ValueType  # 15
+"""LLM latency aggregates (p50 / p95 / p99, time-to-first-token) over the agent domain."""
+AGENT_LLM_FINISH_REASONS: ReportType.ValueType  # 16
+"""Finish-reason distribution over the agent domain."""
+AGENT_LLM_TOTAL_STATISTICS: ReportType.ValueType  # 17
+"""Single rolled-up LLM statistics summary (totals + all breakdowns) over the agent domain."""
+AGENT_LLM_INPUT_TOKEN_USAGE: ReportType.ValueType  # 18
+"""Aggregate LLM input / prompt token usage over the agent domain."""
+AGENT_LLM_OUTPUT_TOKEN_USAGE: ReportType.ValueType  # 19
+"""Aggregate LLM output / completion token usage over the agent domain."""
+AGENT_LLM_THINKING_TOKEN_USAGE: ReportType.ValueType  # 20
+"""Aggregate LLM thinking / reasoning token usage over the agent domain."""
+AGENT_LLM_TOOL_CALL_TOKEN_USAGE: ReportType.ValueType  # 21
+"""Aggregate LLM tool-call token usage over the agent domain."""
+AGENT_LLM_TOP_X_MODELS: ReportType.ValueType  # 22
+"""Top X most-used models (by calls / tokens) over the agent domain."""
+AGENT_LLM_TOP_X_CCAI_SERVICE_PROVIDERS: ReportType.ValueType  # 23
+"""Top X most-used CCAI service providers over the agent domain."""
+AGENT_LLM_TOP_X_AGENT_NAMES: ReportType.ValueType  # 24
+"""Top X most-used agent name of agentic AI team"""
 global___ReportType = ReportType
 
 class _SessionsReportType:
@@ -221,6 +302,62 @@ class _SessionsReportTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrap
     """report least x tags. Supports SessionFilter to filter"""
     TOTAL_STATISTICS: _SessionsReportType.ValueType  # 17
     """report total numbers of e.g. sessions, session steps, etc."""
+    SESSION_LLM_TOKEN_USAGE: _SessionsReportType.ValueType  # 18
+    """Aggregate LLM token usage (input / output / cache) across sessions in scope.
+    Supports SessionFilter to filter and the request's <code>llm_*_filter</code> fields
+    to restrict to specific models / providers / agents.
+    """
+    SESSION_LLM_TOOL_CALLS: _SessionsReportType.ValueType  # 19
+    """Tool-call breakdown across sessions in scope (counts, durations, error rate)."""
+    SESSION_LLM_THINKING: _SessionsReportType.ValueType  # 20
+    """Thinking-token / duration aggregates across sessions in scope (where the
+    provider surfaces extended thinking).
+    """
+    SESSION_LLM_FINISH_REASONS: _SessionsReportType.ValueType  # 21
+    """Finish-reason distribution across sessions in scope (<code>stop</code>,
+    <code>length</code>, <code>tool_calls</code>, <code>content_filter</code>,
+    <code>error</code>, ...).
+    """
+    SESSION_LLM_LATENCY: _SessionsReportType.ValueType  # 22
+    """LLM call latency aggregates (p50 / p95 / p99, time-to-first-token)."""
+    SESSION_LLM_RAG_METRICS: _SessionsReportType.ValueType  # 23
+    """RAG-specific metrics (retrieval hit-rate, context precision, citation
+    overlap) aggregated across sessions in scope.
+    """
+    SESSION_LLM_MODELS_USED: _SessionsReportType.ValueType  # 24
+    """Per-model usage rollup (calls, tokens, latency) across sessions in scope."""
+    SESSION_LLM_PROVIDERS_USED: _SessionsReportType.ValueType  # 25
+    """Per-provider usage rollup across sessions in scope."""
+    SESSION_LLM_CCAI_SERVICES_USED: _SessionsReportType.ValueType  # 26
+    """Per-CCAI-service usage rollup (keyed by CcaiServiceProvider) across sessions in scope."""
+    SESSION_LLM_AGENTS_USED: _SessionsReportType.ValueType  # 27
+    """Per-intent-agent usage rollup across sessions in scope."""
+    SESSION_LLM_ERRORS: _SessionsReportType.ValueType  # 28
+    """LLM error breakdown (counts and rate per error_class) across sessions in scope."""
+    SESSION_LLM_CACHE_EFFICIENCY: _SessionsReportType.ValueType  # 29
+    """Prompt-cache efficiency (cache read / creation tokens, hit-rate, savings)."""
+    SESSION_LLM_REASONING_EFFORT: _SessionsReportType.ValueType  # 30
+    """Reasoning-effort distribution (keyed by ReasoningEffort) across sessions in scope."""
+    SESSION_LLM_TOP_X_TOOLS: _SessionsReportType.ValueType  # 31
+    """Top X most-invoked tools (count, duration, error-rate) across sessions in scope."""
+    SESSION_LLM_LEAST_X_TOOLS: _SessionsReportType.ValueType  # 32
+    """Least X invoked tools across sessions in scope."""
+    SESSION_LLM_TOTAL_STATISTICS: _SessionsReportType.ValueType  # 33
+    """Single rolled-up LLM statistics summary (totals + all breakdowns) across sessions in scope."""
+    SESSION_LLM_INPUT_TOKEN_USAGE: _SessionsReportType.ValueType  # 34
+    """Aggregate LLM input / prompt token usage across sessions in scope."""
+    SESSION_LLM_OUTPUT_TOKEN_USAGE: _SessionsReportType.ValueType  # 35
+    """Aggregate LLM output / completion token usage across sessions in scope."""
+    SESSION_LLM_THINKING_TOKEN_USAGE: _SessionsReportType.ValueType  # 36
+    """Aggregate LLM thinking / reasoning token usage across sessions in scope."""
+    SESSION_LLM_TOOL_CALL_TOKEN_USAGE: _SessionsReportType.ValueType  # 37
+    """Aggregate LLM tool-call token usage across sessions in scope."""
+    SESSION_LLM_TOP_X_MODELS: _SessionsReportType.ValueType  # 38
+    """Top X most-used models (by calls / tokens) across sessions in scope."""
+    SESSION_LLM_TOP_X_CCAI_SERVICE_PROVIDERS: _SessionsReportType.ValueType  # 39
+    """Top X most-used CCAI service providers across sessions in scope."""
+    SESSION_LLM_TOP_X_AGENT_NAMES: _SessionsReportType.ValueType  # 40
+    """Top X most-used agent name of agentic AI team"""
 
 class SessionsReportType(_SessionsReportType, metaclass=_SessionsReportTypeEnumTypeWrapper):
     """Type of reports about the domain of the agent"""
@@ -282,6 +419,62 @@ SESSION_LEAST_X_TAGS: SessionsReportType.ValueType  # 16
 """report least x tags. Supports SessionFilter to filter"""
 TOTAL_STATISTICS: SessionsReportType.ValueType  # 17
 """report total numbers of e.g. sessions, session steps, etc."""
+SESSION_LLM_TOKEN_USAGE: SessionsReportType.ValueType  # 18
+"""Aggregate LLM token usage (input / output / cache) across sessions in scope.
+Supports SessionFilter to filter and the request's <code>llm_*_filter</code> fields
+to restrict to specific models / providers / agents.
+"""
+SESSION_LLM_TOOL_CALLS: SessionsReportType.ValueType  # 19
+"""Tool-call breakdown across sessions in scope (counts, durations, error rate)."""
+SESSION_LLM_THINKING: SessionsReportType.ValueType  # 20
+"""Thinking-token / duration aggregates across sessions in scope (where the
+provider surfaces extended thinking).
+"""
+SESSION_LLM_FINISH_REASONS: SessionsReportType.ValueType  # 21
+"""Finish-reason distribution across sessions in scope (<code>stop</code>,
+<code>length</code>, <code>tool_calls</code>, <code>content_filter</code>,
+<code>error</code>, ...).
+"""
+SESSION_LLM_LATENCY: SessionsReportType.ValueType  # 22
+"""LLM call latency aggregates (p50 / p95 / p99, time-to-first-token)."""
+SESSION_LLM_RAG_METRICS: SessionsReportType.ValueType  # 23
+"""RAG-specific metrics (retrieval hit-rate, context precision, citation
+overlap) aggregated across sessions in scope.
+"""
+SESSION_LLM_MODELS_USED: SessionsReportType.ValueType  # 24
+"""Per-model usage rollup (calls, tokens, latency) across sessions in scope."""
+SESSION_LLM_PROVIDERS_USED: SessionsReportType.ValueType  # 25
+"""Per-provider usage rollup across sessions in scope."""
+SESSION_LLM_CCAI_SERVICES_USED: SessionsReportType.ValueType  # 26
+"""Per-CCAI-service usage rollup (keyed by CcaiServiceProvider) across sessions in scope."""
+SESSION_LLM_AGENTS_USED: SessionsReportType.ValueType  # 27
+"""Per-intent-agent usage rollup across sessions in scope."""
+SESSION_LLM_ERRORS: SessionsReportType.ValueType  # 28
+"""LLM error breakdown (counts and rate per error_class) across sessions in scope."""
+SESSION_LLM_CACHE_EFFICIENCY: SessionsReportType.ValueType  # 29
+"""Prompt-cache efficiency (cache read / creation tokens, hit-rate, savings)."""
+SESSION_LLM_REASONING_EFFORT: SessionsReportType.ValueType  # 30
+"""Reasoning-effort distribution (keyed by ReasoningEffort) across sessions in scope."""
+SESSION_LLM_TOP_X_TOOLS: SessionsReportType.ValueType  # 31
+"""Top X most-invoked tools (count, duration, error-rate) across sessions in scope."""
+SESSION_LLM_LEAST_X_TOOLS: SessionsReportType.ValueType  # 32
+"""Least X invoked tools across sessions in scope."""
+SESSION_LLM_TOTAL_STATISTICS: SessionsReportType.ValueType  # 33
+"""Single rolled-up LLM statistics summary (totals + all breakdowns) across sessions in scope."""
+SESSION_LLM_INPUT_TOKEN_USAGE: SessionsReportType.ValueType  # 34
+"""Aggregate LLM input / prompt token usage across sessions in scope."""
+SESSION_LLM_OUTPUT_TOKEN_USAGE: SessionsReportType.ValueType  # 35
+"""Aggregate LLM output / completion token usage across sessions in scope."""
+SESSION_LLM_THINKING_TOKEN_USAGE: SessionsReportType.ValueType  # 36
+"""Aggregate LLM thinking / reasoning token usage across sessions in scope."""
+SESSION_LLM_TOOL_CALL_TOKEN_USAGE: SessionsReportType.ValueType  # 37
+"""Aggregate LLM tool-call token usage across sessions in scope."""
+SESSION_LLM_TOP_X_MODELS: SessionsReportType.ValueType  # 38
+"""Top X most-used models (by calls / tokens) across sessions in scope."""
+SESSION_LLM_TOP_X_CCAI_SERVICE_PROVIDERS: SessionsReportType.ValueType  # 39
+"""Top X most-used CCAI service providers across sessions in scope."""
+SESSION_LLM_TOP_X_AGENT_NAMES: SessionsReportType.ValueType  # 40
+"""Top X most-used agent name of agentic AI team"""
 global___SessionsReportType = SessionsReportType
 
 class _ReportFormat:
@@ -1130,6 +1323,12 @@ class GetAgentStatisticsRequest(google.protobuf.message.Message):
     FORMAT_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     TYPE_FIELD_NUMBER: builtins.int
+    LLM_MODEL_FILTER_FIELD_NUMBER: builtins.int
+    LLM_PROVIDER_FILTER_FIELD_NUMBER: builtins.int
+    LLM_AGENT_NAME_FILTER_FIELD_NUMBER: builtins.int
+    LLM_GROUP_BYS_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
+    LLM_CCAI_SERVICE_PROVIDER_FILTER_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The project to get statistics from.
     Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
@@ -1142,6 +1341,38 @@ class GetAgentStatisticsRequest(google.protobuf.message.Message):
     """
     type: global___ReportType.ValueType
     """Type of reports about the domain of the agent"""
+    @property
+    def llm_model_filter(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Restrict LLM aggregations to specific models (e.g.
+        <code>"claude-3-5-sonnet-20241022"</code>). Empty list = all models.
+        """
+
+    @property
+    def llm_provider_filter(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Restrict LLM aggregations to specific providers
+        (e.g. <code>"anthropic"</code>, <code>"openai"</code>). Empty list = all providers.
+        """
+
+    @property
+    def llm_agent_name_filter(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Restrict LLM aggregations to specific intent-agent names."""
+
+    @property
+    def llm_group_bys(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Group LLM aggregations by named dimensions (e.g.
+        <code>["model_name", "provider"]</code>). Empty list = no grouping.
+        """
+
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields will be filled with data on the
+        response (e.g. paths=["llm_telemetry_report"]).
+        """
+
+    @property
+    def llm_ccai_service_provider_filter(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[ondewo.nlu.ccai_project_pb2.CcaiServiceProvider.ValueType]:
+        """Optional. Restrict LLM aggregations to specific CCAI service providers. Empty = all."""
+
     def __init__(
         self,
         *,
@@ -1149,8 +1380,15 @@ class GetAgentStatisticsRequest(google.protobuf.message.Message):
         format: global___ReportFormat.ValueType = ...,
         language_code: builtins.str = ...,
         type: global___ReportType.ValueType = ...,
+        llm_model_filter: collections.abc.Iterable[builtins.str] | None = ...,
+        llm_provider_filter: collections.abc.Iterable[builtins.str] | None = ...,
+        llm_agent_name_filter: collections.abc.Iterable[builtins.str] | None = ...,
+        llm_group_bys: collections.abc.Iterable[builtins.str] | None = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        llm_ccai_service_provider_filter: collections.abc.Iterable[ondewo.nlu.ccai_project_pb2.CcaiServiceProvider.ValueType] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["format", b"format", "language_code", b"language_code", "parent", b"parent", "type", b"type"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "format", b"format", "language_code", b"language_code", "llm_agent_name_filter", b"llm_agent_name_filter", "llm_ccai_service_provider_filter", b"llm_ccai_service_provider_filter", "llm_group_bys", b"llm_group_bys", "llm_model_filter", b"llm_model_filter", "llm_provider_filter", b"llm_provider_filter", "parent", b"parent", "type", b"type"]) -> None: ...
 
 global___GetAgentStatisticsRequest = GetAgentStatisticsRequest
 
@@ -1163,20 +1401,30 @@ class GetAgentStatisticsResponse(google.protobuf.message.Message):
     REPORTS_FIELD_NUMBER: builtins.int
     FORMAT_FIELD_NUMBER: builtins.int
     TYPE_FIELD_NUMBER: builtins.int
+    LLM_TELEMETRY_REPORT_FIELD_NUMBER: builtins.int
     reports: builtins.bytes
     """Statistic info."""
     format: global___ReportFormat.ValueType
     """File formats for reports"""
     type: global___ReportType.ValueType
     """Type of reports about the domain of the agent"""
+    @property
+    def llm_telemetry_report(self) -> ondewo.nlu.session_pb2.LlmTelemetryReport:
+        """Optional aggregate LLM telemetry across all sessions / steps in scope
+        (subject to the LLM filters in the request). Populated only when the
+        request field_mask includes <code>llm_telemetry_report</code>.
+        """
+
     def __init__(
         self,
         *,
         reports: builtins.bytes = ...,
         format: global___ReportFormat.ValueType = ...,
         type: global___ReportType.ValueType = ...,
+        llm_telemetry_report: ondewo.nlu.session_pb2.LlmTelemetryReport | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["format", b"format", "reports", b"reports", "type", b"type"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["llm_telemetry_report", b"llm_telemetry_report"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["format", b"format", "llm_telemetry_report", b"llm_telemetry_report", "reports", b"reports", "type", b"type"]) -> None: ...
 
 global___GetAgentStatisticsResponse = GetAgentStatisticsResponse
 
@@ -1196,6 +1444,11 @@ class GetSessionsStatisticsRequest(google.protobuf.message.Message):
     ORDER_BYS_FIELD_NUMBER: builtins.int
     FIELD_MASK_FIELD_NUMBER: builtins.int
     SQL_QUERY_FIELD_NUMBER: builtins.int
+    LLM_MODEL_FILTER_FIELD_NUMBER: builtins.int
+    LLM_PROVIDER_FILTER_FIELD_NUMBER: builtins.int
+    LLM_AGENT_NAME_FILTER_FIELD_NUMBER: builtins.int
+    LLM_TOOL_NAME_FILTER_FIELD_NUMBER: builtins.int
+    LLM_CCAI_SERVICE_PROVIDER_FILTER_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The project to get statistics from.
     Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
@@ -1232,6 +1485,26 @@ class GetSessionsStatisticsRequest(google.protobuf.message.Message):
         <br>
         """
 
+    @property
+    def llm_model_filter(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Restrict LLM-typed reports to specific models. Empty = all models."""
+
+    @property
+    def llm_provider_filter(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Restrict LLM-typed reports to specific providers. Empty = all providers."""
+
+    @property
+    def llm_agent_name_filter(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Restrict LLM-typed reports to specific intent-agent names. Empty = all."""
+
+    @property
+    def llm_tool_name_filter(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Restrict LLM-typed reports to specific tool names. Empty = all."""
+
+    @property
+    def llm_ccai_service_provider_filter(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[ondewo.nlu.ccai_project_pb2.CcaiServiceProvider.ValueType]:
+        """Optional. Restrict LLM-typed reports to specific CCAI service providers. Empty = all."""
+
     def __init__(
         self,
         *,
@@ -1245,9 +1518,14 @@ class GetSessionsStatisticsRequest(google.protobuf.message.Message):
         order_bys: collections.abc.Iterable[builtins.str] | None = ...,
         field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
         sql_query: builtins.str = ...,
+        llm_model_filter: collections.abc.Iterable[builtins.str] | None = ...,
+        llm_provider_filter: collections.abc.Iterable[builtins.str] | None = ...,
+        llm_agent_name_filter: collections.abc.Iterable[builtins.str] | None = ...,
+        llm_tool_name_filter: collections.abc.Iterable[builtins.str] | None = ...,
+        llm_ccai_service_provider_filter: collections.abc.Iterable[ondewo.nlu.ccai_project_pb2.CcaiServiceProvider.ValueType] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["context_filters", b"context_filters", "field_mask", b"field_mask", "format", b"format", "group_bys", b"group_bys", "limit", b"limit", "order_bys", b"order_bys", "parent", b"parent", "session_filter", b"session_filter", "sql_query", b"sql_query", "type", b"type"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["context_filters", b"context_filters", "field_mask", b"field_mask", "format", b"format", "group_bys", b"group_bys", "limit", b"limit", "llm_agent_name_filter", b"llm_agent_name_filter", "llm_ccai_service_provider_filter", b"llm_ccai_service_provider_filter", "llm_model_filter", b"llm_model_filter", "llm_provider_filter", b"llm_provider_filter", "llm_tool_name_filter", b"llm_tool_name_filter", "order_bys", b"order_bys", "parent", b"parent", "session_filter", b"session_filter", "sql_query", b"sql_query", "type", b"type"]) -> None: ...
 
 global___GetSessionsStatisticsRequest = GetSessionsStatisticsRequest
 
@@ -1260,20 +1538,30 @@ class GetSessionsStatisticsResponse(google.protobuf.message.Message):
     REPORTS_FIELD_NUMBER: builtins.int
     FORMAT_FIELD_NUMBER: builtins.int
     TYPE_FIELD_NUMBER: builtins.int
+    LLM_TELEMETRY_REPORT_FIELD_NUMBER: builtins.int
     reports: builtins.bytes
     """Statistic info."""
     format: global___ReportFormat.ValueType
     """File formats for reports"""
     type: global___SessionsReportType.ValueType
     """Type of reports about the domain of the agent"""
+    @property
+    def llm_telemetry_report(self) -> ondewo.nlu.session_pb2.LlmTelemetryReport:
+        """Optional aggregate LLM telemetry summarizing the report (tokens, tool
+        calls, thinking) across all sessions matched by the request.
+        Populated only for LLM-typed report types (SESSION_LLM_*).
+        """
+
     def __init__(
         self,
         *,
         reports: builtins.bytes = ...,
         format: global___ReportFormat.ValueType = ...,
         type: global___SessionsReportType.ValueType = ...,
+        llm_telemetry_report: ondewo.nlu.session_pb2.LlmTelemetryReport | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["format", b"format", "reports", b"reports", "type", b"type"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["llm_telemetry_report", b"llm_telemetry_report"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["format", b"format", "llm_telemetry_report", b"llm_telemetry_report", "reports", b"reports", "type", b"type"]) -> None: ...
 
 global___GetSessionsStatisticsResponse = GetSessionsStatisticsResponse
 

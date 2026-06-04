@@ -323,127 +323,148 @@ class SessionsServicer(object):
     def ListSessionLabels(self, request, context):
         """*** SESSION-LABEL RELATED ENDPOINTS *** //
 
+        Returns the list of labels attached to a single session.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ListSessionLabelsOfAllSessions(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Returns the distinct set of labels observed across all sessions of the agent, optionally narrowed by a SessionFilter.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ListLanguageCodesOfAllSessions(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Returns the distinct set of language codes observed across all sessions of the agent, optionally narrowed by a SessionFilter.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ListMatchedIntentsOfAllSessions(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Returns the distinct set of intents matched across all sessions of the agent, optionally narrowed by a SessionFilter.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ListMatchedEntityTypesOfAllSessions(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Returns the distinct set of entity types recognised across all sessions of the agent, optionally narrowed by a SessionFilter.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ListUserIdsOfAllSessions(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Returns the distinct set of <code>user_id</code> values observed across all sessions of the agent, optionally narrowed by a SessionFilter.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ListIdentifiedUserIdsOfAllSessions(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Returns the distinct set of <code>identified_user_id</code> values observed across all sessions of the agent, optionally narrowed by a SessionFilter.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ListTagsOfAllSessions(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Returns the distinct set of intent tags observed across all sessions of the agent, optionally narrowed by a SessionFilter.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ListInputContextsOfAllSessions(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Returns the distinct set of input contexts observed across all sessions of the agent, optionally narrowed by a SessionFilter.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ListOutputContextsOfAllSessions(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Returns the distinct set of output contexts observed across all sessions of the agent, optionally narrowed by a SessionFilter.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ListPlatformsOfAllSessions(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Returns the distinct set of <code>Intent.Message.Platform</code> values observed across all sessions of the agent, optionally narrowed by a SessionFilter.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ListAccountIdsOfAllSessions(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Returns the distinct set of <code>account_id</code> values observed across all sessions of the agent, optionally narrowed by a SessionFilter.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ListPropertyIdsOfAllSessions(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Returns the distinct set of <code>property_id</code> values observed across all sessions of the agent, optionally narrowed by a SessionFilter.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ListDatastreamIdsOfAllSessions(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Returns the distinct set of <code>datastream_id</code> values observed across all sessions of the agent, optionally narrowed by a SessionFilter.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ListOriginIdsOfAllSessions(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Returns the distinct set of <code>origin_id</code> values observed across all sessions of the agent, optionally narrowed by a SessionFilter.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def AddSessionLabels(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Attaches the supplied labels to a session and returns the updated session.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def DeleteSessionLabels(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Removes the supplied labels from a session and returns the updated session.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def AddSessionComment(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Appends a comment to a session and returns the persisted comment.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def DeleteSessionComments(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Removes the comments named in the request from a session and returns the updated session.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def UpdateSessionComments(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Updates an existing comment on a session and returns the updated session.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ListSessionComments(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Lists the comments attached to a session with pagination support.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
