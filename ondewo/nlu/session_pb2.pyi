@@ -117,6 +117,30 @@ REASONING_EFFORT_HIGH: ReasoningEffort.ValueType  # 4
 """High reasoning effort."""
 global___ReasoningEffort = ReasoningEffort
 
+class _LlmSafetyLocation:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _LlmSafetyLocationEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_LlmSafetyLocation.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    LLM_SAFETY_LOCATION_UNSPECIFIED: _LlmSafetyLocation.ValueType  # 0
+    """Default / unset."""
+    LLM_SAFETY_LOCATION_INPUT: _LlmSafetyLocation.ValueType  # 1
+    """The finding was matched in the model input (prompt / user turn)."""
+    LLM_SAFETY_LOCATION_OUTPUT: _LlmSafetyLocation.ValueType  # 2
+    """The finding was matched in the model output (completion)."""
+
+class LlmSafetyLocation(_LlmSafetyLocation, metaclass=_LlmSafetyLocationEnumTypeWrapper):
+    """Where a safety finding was located in the LLM call."""
+
+LLM_SAFETY_LOCATION_UNSPECIFIED: LlmSafetyLocation.ValueType  # 0
+"""Default / unset."""
+LLM_SAFETY_LOCATION_INPUT: LlmSafetyLocation.ValueType  # 1
+"""The finding was matched in the model input (prompt / user turn)."""
+LLM_SAFETY_LOCATION_OUTPUT: LlmSafetyLocation.ValueType  # 2
+"""The finding was matched in the model output (completion)."""
+global___LlmSafetyLocation = LlmSafetyLocation
+
 class _AudioEncoding:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
@@ -860,6 +884,8 @@ class LlmTelemetry(google.protobuf.message.Message):
     EXTRA_QUERY_FIELD_NUMBER: builtins.int
     EXTRA_BODY_FIELD_NUMBER: builtins.int
     CCAI_SERVICE_PROVIDER_FIELD_NUMBER: builtins.int
+    LLM_SAFETY_ASSESSMENT_FIELD_NUMBER: builtins.int
+    LLM_RETRIEVAL_METADATA_FIELD_NUMBER: builtins.int
     provider: builtins.str
     """Provider tag: "autogen" | "langchain" | "openai" | "anthropic" | ..."""
     model_name: builtins.str
@@ -1049,6 +1075,23 @@ class LlmTelemetry(google.protobuf.message.Message):
         for accessing new or undocumented API parameters.
         """
 
+    @property
+    def llm_safety_assessment(self) -> global___LlmSafetyAssessment:
+        """Native (regex / substring, no-LLM) safety assessment computed at telemetry
+        build time over the call's input / output text. Distinct from the offline
+        LLM-judge safety evaluators in <code>llm_evaluation.proto</code>: this is the
+        live MONITORING signal on real DetectIntent traffic. Unset when safety
+        scoring is disabled.
+        """
+
+    @property
+    def llm_retrieval_metadata(self) -> global___LlmRetrievalMetadata:
+        """Typed view of the retrieved RAG chunks for this LLM call. Populated
+        alongside the unstructured <code>outputs.retrieved_chunks</code> Struct
+        (field 18, kept for back-compat); both carry the same chunk list. Unset for
+        non-retrieval calls.
+        """
+
     def __init__(
         self,
         *,
@@ -1112,9 +1155,11 @@ class LlmTelemetry(google.protobuf.message.Message):
         extra_query: google.protobuf.struct_pb2.Struct | None = ...,
         extra_body: google.protobuf.struct_pb2.Struct | None = ...,
         ccai_service_provider: ondewo.nlu.ccai_project_pb2.CcaiServiceProvider.ValueType = ...,
+        llm_safety_assessment: global___LlmSafetyAssessment | None = ...,
+        llm_retrieval_metadata: global___LlmRetrievalMetadata | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_default_headers", b"_default_headers", "_default_query", b"_default_query", "_extra_body", b"_extra_body", "_extra_headers", b"_extra_headers", "_extra_query", b"_extra_query", "_frequency_penalty", b"_frequency_penalty", "_openai_metadata", b"_openai_metadata", "_presence_penalty", b"_presence_penalty", "_reasoning_effort", b"_reasoning_effort", "_strict_response_validation", b"_strict_response_validation", "_timeout", b"_timeout", "_user", b"_user", "default_headers", b"default_headers", "default_query", b"default_query", "end_time", b"end_time", "extra_body", b"extra_body", "extra_headers", b"extra_headers", "extra_query", b"extra_query", "frequency_penalty", b"frequency_penalty", "inputs", b"inputs", "llm_thinking_metadata", b"llm_thinking_metadata", "llm_token_usage", b"llm_token_usage", "metadata", b"metadata", "openai_metadata", b"openai_metadata", "outputs", b"outputs", "presence_penalty", b"presence_penalty", "reasoning_effort", b"reasoning_effort", "start_time", b"start_time", "strict_response_validation", b"strict_response_validation", "timeout", b"timeout", "user", b"user"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_default_headers", b"_default_headers", "_default_query", b"_default_query", "_extra_body", b"_extra_body", "_extra_headers", b"_extra_headers", "_extra_query", b"_extra_query", "_frequency_penalty", b"_frequency_penalty", "_openai_metadata", b"_openai_metadata", "_presence_penalty", b"_presence_penalty", "_reasoning_effort", b"_reasoning_effort", "_strict_response_validation", b"_strict_response_validation", "_timeout", b"_timeout", "_user", b"_user", "agent_name", b"agent_name", "agent_role", b"agent_role", "base_url", b"base_url", "cache_creation_input_tokens", b"cache_creation_input_tokens", "cached", b"cached", "cached_input_tokens", b"cached_input_tokens", "ccai_service_name", b"ccai_service_name", "ccai_service_provider", b"ccai_service_provider", "component_name", b"component_name", "default_headers", b"default_headers", "default_query", b"default_query", "duration_in_s", b"duration_in_s", "end_time", b"end_time", "error_class", b"error_class", "error_message", b"error_message", "evaluator_runs_join_key", b"evaluator_runs_join_key", "extra_body", b"extra_body", "extra_headers", b"extra_headers", "extra_query", b"extra_query", "fallback_depth", b"fallback_depth", "finish_reasons", b"finish_reasons", "first_token_latency_seconds", b"first_token_latency_seconds", "frequency_penalty", b"frequency_penalty", "inputs", b"inputs", "langsmith_run_url", b"langsmith_run_url", "llm_evaluation_feedbacks", b"llm_evaluation_feedbacks", "llm_thinking_metadata", b"llm_thinking_metadata", "llm_token_usage", b"llm_token_usage", "llm_tool_call_metadatas", b"llm_tool_call_metadatas", "max_tokens", b"max_tokens", "metadata", b"metadata", "model_name", b"model_name", "n_generations", b"n_generations", "openai_metadata", b"openai_metadata", "outputs", b"outputs", "parent_run_id", b"parent_run_id", "presence_penalty", b"presence_penalty", "provider", b"provider", "reasoning_effort", b"reasoning_effort", "recipient_agent", b"recipient_agent", "reflection_iterations", b"reflection_iterations", "retry_count", b"retry_count", "run_id", b"run_id", "run_type", b"run_type", "sender_agent", b"sender_agent", "start_time", b"start_time", "streaming_chunk_count", b"streaming_chunk_count", "strict_response_validation", b"strict_response_validation", "system_fingerprint", b"system_fingerprint", "tags", b"tags", "team_id", b"team_id", "team_name", b"team_name", "temperature", b"temperature", "termination_reason", b"termination_reason", "timeout", b"timeout", "tool_call_count", b"tool_call_count", "top_p", b"top_p", "traceback", b"traceback", "turn_index", b"turn_index", "user", b"user"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_default_headers", b"_default_headers", "_default_query", b"_default_query", "_extra_body", b"_extra_body", "_extra_headers", b"_extra_headers", "_extra_query", b"_extra_query", "_frequency_penalty", b"_frequency_penalty", "_openai_metadata", b"_openai_metadata", "_presence_penalty", b"_presence_penalty", "_reasoning_effort", b"_reasoning_effort", "_strict_response_validation", b"_strict_response_validation", "_timeout", b"_timeout", "_user", b"_user", "default_headers", b"default_headers", "default_query", b"default_query", "end_time", b"end_time", "extra_body", b"extra_body", "extra_headers", b"extra_headers", "extra_query", b"extra_query", "frequency_penalty", b"frequency_penalty", "inputs", b"inputs", "llm_retrieval_metadata", b"llm_retrieval_metadata", "llm_safety_assessment", b"llm_safety_assessment", "llm_thinking_metadata", b"llm_thinking_metadata", "llm_token_usage", b"llm_token_usage", "metadata", b"metadata", "openai_metadata", b"openai_metadata", "outputs", b"outputs", "presence_penalty", b"presence_penalty", "reasoning_effort", b"reasoning_effort", "start_time", b"start_time", "strict_response_validation", b"strict_response_validation", "timeout", b"timeout", "user", b"user"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_default_headers", b"_default_headers", "_default_query", b"_default_query", "_extra_body", b"_extra_body", "_extra_headers", b"_extra_headers", "_extra_query", b"_extra_query", "_frequency_penalty", b"_frequency_penalty", "_openai_metadata", b"_openai_metadata", "_presence_penalty", b"_presence_penalty", "_reasoning_effort", b"_reasoning_effort", "_strict_response_validation", b"_strict_response_validation", "_timeout", b"_timeout", "_user", b"_user", "agent_name", b"agent_name", "agent_role", b"agent_role", "base_url", b"base_url", "cache_creation_input_tokens", b"cache_creation_input_tokens", "cached", b"cached", "cached_input_tokens", b"cached_input_tokens", "ccai_service_name", b"ccai_service_name", "ccai_service_provider", b"ccai_service_provider", "component_name", b"component_name", "default_headers", b"default_headers", "default_query", b"default_query", "duration_in_s", b"duration_in_s", "end_time", b"end_time", "error_class", b"error_class", "error_message", b"error_message", "evaluator_runs_join_key", b"evaluator_runs_join_key", "extra_body", b"extra_body", "extra_headers", b"extra_headers", "extra_query", b"extra_query", "fallback_depth", b"fallback_depth", "finish_reasons", b"finish_reasons", "first_token_latency_seconds", b"first_token_latency_seconds", "frequency_penalty", b"frequency_penalty", "inputs", b"inputs", "langsmith_run_url", b"langsmith_run_url", "llm_evaluation_feedbacks", b"llm_evaluation_feedbacks", "llm_retrieval_metadata", b"llm_retrieval_metadata", "llm_safety_assessment", b"llm_safety_assessment", "llm_thinking_metadata", b"llm_thinking_metadata", "llm_token_usage", b"llm_token_usage", "llm_tool_call_metadatas", b"llm_tool_call_metadatas", "max_tokens", b"max_tokens", "metadata", b"metadata", "model_name", b"model_name", "n_generations", b"n_generations", "openai_metadata", b"openai_metadata", "outputs", b"outputs", "parent_run_id", b"parent_run_id", "presence_penalty", b"presence_penalty", "provider", b"provider", "reasoning_effort", b"reasoning_effort", "recipient_agent", b"recipient_agent", "reflection_iterations", b"reflection_iterations", "retry_count", b"retry_count", "run_id", b"run_id", "run_type", b"run_type", "sender_agent", b"sender_agent", "start_time", b"start_time", "streaming_chunk_count", b"streaming_chunk_count", "strict_response_validation", b"strict_response_validation", "system_fingerprint", b"system_fingerprint", "tags", b"tags", "team_id", b"team_id", "team_name", b"team_name", "temperature", b"temperature", "termination_reason", b"termination_reason", "timeout", b"timeout", "tool_call_count", b"tool_call_count", "top_p", b"top_p", "traceback", b"traceback", "turn_index", b"turn_index", "user", b"user"]) -> None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_default_headers", b"_default_headers"]) -> typing.Literal["default_headers"] | None: ...
     @typing.overload
@@ -1141,6 +1186,158 @@ class LlmTelemetry(google.protobuf.message.Message):
     def WhichOneof(self, oneof_group: typing.Literal["_user", b"_user"]) -> typing.Literal["user"] | None: ...
 
 global___LlmTelemetry = LlmTelemetry
+
+@typing.final
+class LlmSafetyFinding(google.protobuf.message.Message):
+    """One concrete safety finding inside an LlmSafetyAssessment."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    CATEGORY_FIELD_NUMBER: builtins.int
+    SEVERITY_FIELD_NUMBER: builtins.int
+    MATCHED_PATTERN_FIELD_NUMBER: builtins.int
+    LOCATION_FIELD_NUMBER: builtins.int
+    category: builtins.str
+    """Detector category that fired (e.g. <code>prompt_injection</code>,
+    <code>jailbreak</code>, <code>pii</code>, <code>info_leak</code>).
+    """
+    severity: builtins.str
+    """Severity tag ("low" | "medium" | "high" | "critical")."""
+    matched_pattern: builtins.str
+    """The pattern / detector rule that matched (may be a redacted excerpt)."""
+    location: global___LlmSafetyLocation.ValueType
+    """Whether the finding was located in the input or the output."""
+    def __init__(
+        self,
+        *,
+        category: builtins.str = ...,
+        severity: builtins.str = ...,
+        matched_pattern: builtins.str = ...,
+        location: global___LlmSafetyLocation.ValueType = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["category", b"category", "location", b"location", "matched_pattern", b"matched_pattern", "severity", b"severity"]) -> None: ...
+
+global___LlmSafetyFinding = LlmSafetyFinding
+
+@typing.final
+class LlmSafetyAssessment(google.protobuf.message.Message):
+    """Native safety assessment for one LLM call, computed at telemetry build time by
+    a dependency-free (regex / substring) assessor over the call's input / output
+    text. Additive, optional: absent when safety scoring is disabled. This is the
+    live MONITORING signal; the offline LLM-judge safety evaluators live in
+    <code>llm_evaluation.proto</code>.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    FLAGGED_CATEGORIES_FIELD_NUMBER: builtins.int
+    HAS_PII_FIELD_NUMBER: builtins.int
+    HAS_INJECTION_ATTEMPT_FIELD_NUMBER: builtins.int
+    HAS_JAILBREAK_ATTEMPT_FIELD_NUMBER: builtins.int
+    SAFETY_SCORE_FIELD_NUMBER: builtins.int
+    FINDINGS_FIELD_NUMBER: builtins.int
+    has_pii: builtins.bool
+    """True when any PII pattern (email / phone / IBAN / credit-card / national-id)
+    was detected in input or output.
+    """
+    has_injection_attempt: builtins.bool
+    """True when a prompt-injection pattern was detected in the input."""
+    has_jailbreak_attempt: builtins.bool
+    """True when a jailbreak / role-override pattern was detected in the input."""
+    safety_score: builtins.float
+    """Overall safety score in <code>[0.0, 1.0]</code> where <code>1.0</code> means
+    fully safe (no findings) and lower values indicate higher risk.
+    """
+    @property
+    def flagged_categories(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Detector categories that fired across input and output
+        (<code>prompt_injection</code> | <code>jailbreak</code> | <code>pii</code> |
+        <code>info_leak</code>). Empty when nothing was flagged.
+        """
+
+    @property
+    def findings(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmSafetyFinding]:
+        """Per-finding detail records (category / severity / matched pattern / location)."""
+
+    def __init__(
+        self,
+        *,
+        flagged_categories: collections.abc.Iterable[builtins.str] | None = ...,
+        has_pii: builtins.bool = ...,
+        has_injection_attempt: builtins.bool = ...,
+        has_jailbreak_attempt: builtins.bool = ...,
+        safety_score: builtins.float = ...,
+        findings: collections.abc.Iterable[global___LlmSafetyFinding] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["findings", b"findings", "flagged_categories", b"flagged_categories", "has_injection_attempt", b"has_injection_attempt", "has_jailbreak_attempt", b"has_jailbreak_attempt", "has_pii", b"has_pii", "safety_score", b"safety_score"]) -> None: ...
+
+global___LlmSafetyAssessment = LlmSafetyAssessment
+
+@typing.final
+class LlmRetrievedChunk(google.protobuf.message.Message):
+    """One retrieved RAG chunk surfaced during an LLM call. Mirrors the five-field
+    chunk already emitted into <code>outputs.retrieved_chunks</code> (Struct) plus
+    a typed <code>rank</code>.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    DOCUMENT_ID_FIELD_NUMBER: builtins.int
+    CHUNK_ID_FIELD_NUMBER: builtins.int
+    SCORE_FIELD_NUMBER: builtins.int
+    TEXT_FIELD_NUMBER: builtins.int
+    SOURCE_URI_FIELD_NUMBER: builtins.int
+    RANK_FIELD_NUMBER: builtins.int
+    document_id: builtins.str
+    """Source document identifier the chunk was retrieved from."""
+    chunk_id: builtins.str
+    """Chunk identifier within the source document."""
+    score: builtins.float
+    """Retrieval similarity / relevance score assigned by the retriever."""
+    text: builtins.str
+    """Chunk text (already truncated to the emit-time character cap, ~2000 chars)."""
+    source_uri: builtins.str
+    """Source URI (document URL or document name) for click-through."""
+    rank: builtins.int
+    """Zero-based position of this chunk in the retrieval result order
+    (RAGFlow reference order / LangChain document order).
+    """
+    def __init__(
+        self,
+        *,
+        document_id: builtins.str = ...,
+        chunk_id: builtins.str = ...,
+        score: builtins.float = ...,
+        text: builtins.str = ...,
+        source_uri: builtins.str = ...,
+        rank: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["chunk_id", b"chunk_id", "document_id", b"document_id", "rank", b"rank", "score", b"score", "source_uri", b"source_uri", "text", b"text"]) -> None: ...
+
+global___LlmRetrievedChunk = LlmRetrievedChunk
+
+@typing.final
+class LlmRetrievalMetadata(google.protobuf.message.Message):
+    """Typed view of the chunks retrieved for one LLM call. Populated alongside the
+    unstructured <code>outputs.retrieved_chunks</code> Struct (field 18 on
+    LlmTelemetry, kept for back-compat); both carry the same chunk list.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    CHUNKS_FIELD_NUMBER: builtins.int
+    @property
+    def chunks(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmRetrievedChunk]:
+        """The retrieved chunks in retrieval-result order."""
+
+    def __init__(
+        self,
+        *,
+        chunks: collections.abc.Iterable[global___LlmRetrievedChunk] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["chunks", b"chunks"]) -> None: ...
+
+global___LlmRetrievalMetadata = LlmRetrievalMetadata
 
 @typing.final
 class LlmLatencyStats(google.protobuf.message.Message):
@@ -1627,6 +1824,7 @@ class LlmTelemetryReport(google.protobuf.message.Message):
     THINKING_DURATION_SECONDS_TOTAL_FIELD_NUMBER: builtins.int
     TOOL_CALL_TOKENS_TOTAL_FIELD_NUMBER: builtins.int
     TOOL_CALL_DURATION_SECONDS_TOTAL_FIELD_NUMBER: builtins.int
+    SAFETY_STATS_FIELD_NUMBER: builtins.int
     tool_call_count_total: builtins.int
     """Sum of LlmTelemetry.tool_call_count across llm_telemetries."""
     llm_call_count: builtins.int
@@ -1689,6 +1887,12 @@ class LlmTelemetryReport(google.protobuf.message.Message):
     def reasoning_effort_distribution(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmReasoningEffortStat]:
         """Reasoning-effort distribution. Populated for *_LLM_REASONING_EFFORT and *_LLM_TOTAL_STATISTICS."""
 
+    @property
+    def safety_stats(self) -> global___LlmSafetyStats:
+        """Native safety aggregate (counts / rates / mean score). Populated for
+        *_LLM_SAFETY and *_LLM_TOTAL_STATISTICS reports.
+        """
+
     def __init__(
         self,
         *,
@@ -1711,11 +1915,76 @@ class LlmTelemetryReport(google.protobuf.message.Message):
         thinking_duration_seconds_total: builtins.float = ...,
         tool_call_tokens_total: builtins.int = ...,
         tool_call_duration_seconds_total: builtins.float = ...,
+        safety_stats: global___LlmSafetyStats | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["cache_stats", b"cache_stats", "error_stats", b"error_stats", "latency_stats", b"latency_stats", "llm_token_usage", b"llm_token_usage"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["agents_used", b"agents_used", "cache_stats", b"cache_stats", "ccai_services_used", b"ccai_services_used", "duration_seconds_total", b"duration_seconds_total", "error_stats", b"error_stats", "finish_reason_distribution", b"finish_reason_distribution", "latency_stats", b"latency_stats", "llm_call_count", b"llm_call_count", "llm_telemetries", b"llm_telemetries", "llm_token_usage", b"llm_token_usage", "models_used", b"models_used", "providers_used", b"providers_used", "reasoning_effort_distribution", b"reasoning_effort_distribution", "thinking_duration_seconds_total", b"thinking_duration_seconds_total", "thinking_tokens_total", b"thinking_tokens_total", "tool_call_count_total", b"tool_call_count_total", "tool_call_duration_seconds_total", b"tool_call_duration_seconds_total", "tool_call_tokens_total", b"tool_call_tokens_total", "tools_used", b"tools_used"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["cache_stats", b"cache_stats", "error_stats", b"error_stats", "latency_stats", b"latency_stats", "llm_token_usage", b"llm_token_usage", "safety_stats", b"safety_stats"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["agents_used", b"agents_used", "cache_stats", b"cache_stats", "ccai_services_used", b"ccai_services_used", "duration_seconds_total", b"duration_seconds_total", "error_stats", b"error_stats", "finish_reason_distribution", b"finish_reason_distribution", "latency_stats", b"latency_stats", "llm_call_count", b"llm_call_count", "llm_telemetries", b"llm_telemetries", "llm_token_usage", b"llm_token_usage", "models_used", b"models_used", "providers_used", b"providers_used", "reasoning_effort_distribution", b"reasoning_effort_distribution", "safety_stats", b"safety_stats", "thinking_duration_seconds_total", b"thinking_duration_seconds_total", "thinking_tokens_total", b"thinking_tokens_total", "tool_call_count_total", b"tool_call_count_total", "tool_call_duration_seconds_total", b"tool_call_duration_seconds_total", "tool_call_tokens_total", b"tool_call_tokens_total", "tools_used", b"tools_used"]) -> None: ...
 
 global___LlmTelemetryReport = LlmTelemetryReport
+
+@typing.final
+class LlmSafetyCategoryStat(google.protobuf.message.Message):
+    """Per-category native-safety aggregate across the LLM calls in scope."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    CATEGORY_FIELD_NUMBER: builtins.int
+    COUNT_FIELD_NUMBER: builtins.int
+    RATE_FIELD_NUMBER: builtins.int
+    category: builtins.str
+    """Detector category (<code>prompt_injection</code> | <code>jailbreak</code> |
+    <code>pii</code> | <code>info_leak</code>).
+    """
+    count: builtins.int
+    """Number of calls flagged for this category in scope."""
+    rate: builtins.float
+    """count / total_assessed."""
+    def __init__(
+        self,
+        *,
+        category: builtins.str = ...,
+        count: builtins.int = ...,
+        rate: builtins.float = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["category", b"category", "count", b"count", "rate", b"rate"]) -> None: ...
+
+global___LlmSafetyCategoryStat = LlmSafetyCategoryStat
+
+@typing.final
+class LlmSafetyStats(google.protobuf.message.Message):
+    """Native-safety breakdown aggregate across the LLM calls in scope. Computed from
+    the per-call LlmSafetyAssessment records.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TOTAL_ASSESSED_FIELD_NUMBER: builtins.int
+    FLAGGED_COUNT_FIELD_NUMBER: builtins.int
+    OVERALL_SAFETY_SCORE_FIELD_NUMBER: builtins.int
+    CATEGORY_STATS_FIELD_NUMBER: builtins.int
+    total_assessed: builtins.int
+    """Number of LLM calls that carried a safety assessment in scope."""
+    flagged_count: builtins.int
+    """Number of assessed calls with at least one flagged category."""
+    overall_safety_score: builtins.float
+    """Mean LlmSafetyAssessment.safety_score across assessed calls
+    (<code>1.0</code> = fully safe).
+    """
+    @property
+    def category_stats(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmSafetyCategoryStat]:
+        """Per-category counts and rates, descending by count."""
+
+    def __init__(
+        self,
+        *,
+        total_assessed: builtins.int = ...,
+        flagged_count: builtins.int = ...,
+        overall_safety_score: builtins.float = ...,
+        category_stats: collections.abc.Iterable[global___LlmSafetyCategoryStat] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["category_stats", b"category_stats", "flagged_count", b"flagged_count", "overall_safety_score", b"overall_safety_score", "total_assessed", b"total_assessed"]) -> None: ...
+
+global___LlmSafetyStats = LlmSafetyStats
 
 @typing.final
 class LlmCallStartedEvent(google.protobuf.message.Message):

@@ -29,6 +29,7 @@ from ondewo.nlu.llm_evaluation_pb2 import (
     AddLlmEvaluationExamplesResponse,
     CancelLlmEvaluationExperimentRequest,
     CompareLlmEvaluationExperimentsRequest,
+    CreateLlmEvaluationAbExperimentRequest,
     CreateLlmEvaluationDatasetRequest,
     CreateLlmEvaluationExamplesFromSessionRequest,
     CreateLlmEvaluationExamplesFromSessionResponse,
@@ -36,6 +37,7 @@ from ondewo.nlu.llm_evaluation_pb2 import (
     CreateLlmEvaluationReportRequest,
     CreateLlmEvaluationScheduleRequest,
     CreateLlmEvaluationScorecardRequest,
+    DeleteLlmEvaluationAbExperimentRequest,
     DeleteLlmEvaluationDatasetRequest,
     DeleteLlmEvaluationExampleRequest,
     DeleteLlmEvaluationExperimentRequest,
@@ -44,6 +46,9 @@ from ondewo.nlu.llm_evaluation_pb2 import (
     DeleteLlmEvaluationReportRequest,
     DeleteLlmEvaluationScheduleRequest,
     DeleteLlmEvaluationScorecardRequest,
+    GetLlmEvaluationAbExperimentRequest,
+    GetLlmEvaluationAbExperimentResultsRequest,
+    GetLlmEvaluationAbExperimentResultsResponse,
     GetLlmEvaluationDatasetRequest,
     GetLlmEvaluationExampleRequest,
     GetLlmEvaluationExperimentRequest,
@@ -53,6 +58,8 @@ from ondewo.nlu.llm_evaluation_pb2 import (
     GetLlmEvaluationReportRequest,
     GetLlmEvaluationScheduleRequest,
     GetLlmEvaluationScorecardRequest,
+    ListLlmEvaluationAbExperimentsRequest,
+    ListLlmEvaluationAbExperimentsResponse,
     ListLlmEvaluationDatasetsRequest,
     ListLlmEvaluationDatasetsResponse,
     ListLlmEvaluationEvaluatorsRequest,
@@ -73,6 +80,7 @@ from ondewo.nlu.llm_evaluation_pb2 import (
     ListLlmEvaluationSchedulesResponse,
     ListLlmEvaluationScorecardsRequest,
     ListLlmEvaluationScorecardsResponse,
+    LlmEvaluationAbExperiment,
     LlmEvaluationComparison,
     LlmEvaluationDataset,
     LlmEvaluationExample,
@@ -87,7 +95,10 @@ from ondewo.nlu.llm_evaluation_pb2 import (
     RunLlmEvaluationExperimentRequest,
     RunLlmEvaluationReleaseGateRequest,
     SimulateLlmEvaluationConversationsRequest,
+    StartLlmEvaluationAbExperimentRequest,
+    StopLlmEvaluationAbExperimentRequest,
     SubmitLlmEvaluationFeedbackRequest,
+    UpdateLlmEvaluationAbExperimentRequest,
     UpdateLlmEvaluationDatasetRequest,
     UpdateLlmEvaluationExampleRequest,
     UpdateLlmEvaluationExperimentRequest,
@@ -426,4 +437,71 @@ class LlmEvaluations(AsyncServicesInterface):
 
     async def llm_evaluation_delete_report(self, request: DeleteLlmEvaluationReportRequest) -> Empty:
         response: Empty = await self.stub.LlmEvaluationDeleteReport(request, metadata=self.metadata)
+        return response
+
+    async def llm_evaluation_create_ab_experiment(
+        self,
+        request: CreateLlmEvaluationAbExperimentRequest,
+    ) -> LlmEvaluationAbExperiment:
+        response: LlmEvaluationAbExperiment = await self.stub.LlmEvaluationCreateAbExperiment(
+            request, metadata=self.metadata
+        )
+        return response
+
+    async def llm_evaluation_get_ab_experiment(
+        self,
+        request: GetLlmEvaluationAbExperimentRequest,
+    ) -> LlmEvaluationAbExperiment:
+        response: LlmEvaluationAbExperiment = await self.stub.LlmEvaluationGetAbExperiment(
+            request, metadata=self.metadata
+        )
+        return response
+
+    async def llm_evaluation_list_ab_experiments(
+        self,
+        request: ListLlmEvaluationAbExperimentsRequest,
+    ) -> ListLlmEvaluationAbExperimentsResponse:
+        response: ListLlmEvaluationAbExperimentsResponse = await self.stub.LlmEvaluationListAbExperiments(
+            request, metadata=self.metadata
+        )
+        return response
+
+    async def llm_evaluation_update_ab_experiment(
+        self,
+        request: UpdateLlmEvaluationAbExperimentRequest,
+    ) -> LlmEvaluationAbExperiment:
+        response: LlmEvaluationAbExperiment = await self.stub.LlmEvaluationUpdateAbExperiment(
+            request, metadata=self.metadata
+        )
+        return response
+
+    async def llm_evaluation_delete_ab_experiment(self, request: DeleteLlmEvaluationAbExperimentRequest) -> Empty:
+        response: Empty = await self.stub.LlmEvaluationDeleteAbExperiment(request, metadata=self.metadata)
+        return response
+
+    async def llm_evaluation_start_ab_experiment(
+        self,
+        request: StartLlmEvaluationAbExperimentRequest,
+    ) -> LlmEvaluationAbExperiment:
+        response: LlmEvaluationAbExperiment = await self.stub.LlmEvaluationStartAbExperiment(
+            request, metadata=self.metadata
+        )
+        return response
+
+    async def llm_evaluation_stop_ab_experiment(
+        self,
+        request: StopLlmEvaluationAbExperimentRequest,
+    ) -> LlmEvaluationAbExperiment:
+        response: LlmEvaluationAbExperiment = await self.stub.LlmEvaluationStopAbExperiment(
+            request, metadata=self.metadata
+        )
+        return response
+
+    async def llm_evaluation_get_ab_experiment_results(
+        self,
+        request: GetLlmEvaluationAbExperimentResultsRequest,
+    ) -> GetLlmEvaluationAbExperimentResultsResponse:
+        response: GetLlmEvaluationAbExperimentResultsResponse = await self.stub.LlmEvaluationGetAbExperimentResults(
+            request, metadata=self.metadata
+        )
         return response

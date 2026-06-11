@@ -183,6 +183,10 @@ class _ReportTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     """Top X most-used CCAI service providers over the agent domain."""
     AGENT_LLM_TOP_X_AGENT_NAMES: _ReportType.ValueType  # 24
     """Top X most-used agent name of agentic AI team"""
+    AGENT_LLM_SAFETY: _ReportType.ValueType  # 25
+    """Native-safety breakdown (flagged counts / rates per category, mean safety
+    score) over the agent domain.
+    """
 
 class ReportType(_ReportType, metaclass=_ReportTypeEnumTypeWrapper):
     """Type of reports about the domain of the agent"""
@@ -237,6 +241,10 @@ AGENT_LLM_TOP_X_CCAI_SERVICE_PROVIDERS: ReportType.ValueType  # 23
 """Top X most-used CCAI service providers over the agent domain."""
 AGENT_LLM_TOP_X_AGENT_NAMES: ReportType.ValueType  # 24
 """Top X most-used agent name of agentic AI team"""
+AGENT_LLM_SAFETY: ReportType.ValueType  # 25
+"""Native-safety breakdown (flagged counts / rates per category, mean safety
+score) over the agent domain.
+"""
 global___ReportType = ReportType
 
 class _SessionsReportType:
@@ -358,6 +366,10 @@ class _SessionsReportTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrap
     """Top X most-used CCAI service providers across sessions in scope."""
     SESSION_LLM_TOP_X_AGENT_NAMES: _SessionsReportType.ValueType  # 40
     """Top X most-used agent name of agentic AI team"""
+    SESSION_LLM_SAFETY: _SessionsReportType.ValueType  # 41
+    """Native-safety breakdown (flagged counts / rates per category, mean safety
+    score) across sessions in scope.
+    """
 
 class SessionsReportType(_SessionsReportType, metaclass=_SessionsReportTypeEnumTypeWrapper):
     """Type of reports about the domain of the agent"""
@@ -475,6 +487,10 @@ SESSION_LLM_TOP_X_CCAI_SERVICE_PROVIDERS: SessionsReportType.ValueType  # 39
 """Top X most-used CCAI service providers across sessions in scope."""
 SESSION_LLM_TOP_X_AGENT_NAMES: SessionsReportType.ValueType  # 40
 """Top X most-used agent name of agentic AI team"""
+SESSION_LLM_SAFETY: SessionsReportType.ValueType  # 41
+"""Native-safety breakdown (flagged counts / rates per category, mean safety
+score) across sessions in scope.
+"""
 global___SessionsReportType = SessionsReportType
 
 class _ReportFormat:
