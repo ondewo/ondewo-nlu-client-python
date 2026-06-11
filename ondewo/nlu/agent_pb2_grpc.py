@@ -162,6 +162,11 @@ class AgentsStub(object):
                 request_serializer=ondewo_dot_nlu_dot_agent__pb2.GetSessionsStatisticsRequest.SerializeToString,
                 response_deserializer=ondewo_dot_nlu_dot_agent__pb2.GetSessionsStatisticsResponse.FromString,
                 _registered_method=True)
+        self.GetSessionsStatisticsTimeSeries = channel.unary_unary(
+                '/ondewo.nlu.Agents/GetSessionsStatisticsTimeSeries',
+                request_serializer=ondewo_dot_nlu_dot_agent__pb2.GetSessionsStatisticsTimeSeriesRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_agent__pb2.GetSessionsStatisticsTimeSeriesResponse.FromString,
+                _registered_method=True)
         self.SetAgentStatus = channel.unary_unary(
                 '/ondewo.nlu.Agents/SetAgentStatus',
                 request_serializer=ondewo_dot_nlu_dot_agent__pb2.SetAgentStatusRequest.SerializeToString,
@@ -630,6 +635,14 @@ class AgentsServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetSessionsStatisticsTimeSeries(self, request, context):
+        """Gets LLM telemetry statistics for sessions bucketed over time (time series).
+        Supports LLM-typed report types (SESSION_LLM_*) only.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def SetAgentStatus(self, request, context):
         """Sets status for the agent
         """
@@ -873,6 +886,11 @@ def add_AgentsServicer_to_server(servicer, server):
                     servicer.GetSessionsStatistics,
                     request_deserializer=ondewo_dot_nlu_dot_agent__pb2.GetSessionsStatisticsRequest.FromString,
                     response_serializer=ondewo_dot_nlu_dot_agent__pb2.GetSessionsStatisticsResponse.SerializeToString,
+            ),
+            'GetSessionsStatisticsTimeSeries': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetSessionsStatisticsTimeSeries,
+                    request_deserializer=ondewo_dot_nlu_dot_agent__pb2.GetSessionsStatisticsTimeSeriesRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_agent__pb2.GetSessionsStatisticsTimeSeriesResponse.SerializeToString,
             ),
             'SetAgentStatus': grpc.unary_unary_rpc_method_handler(
                     servicer.SetAgentStatus,
@@ -1597,6 +1615,33 @@ class Agents(object):
             '/ondewo.nlu.Agents/GetSessionsStatistics',
             ondewo_dot_nlu_dot_agent__pb2.GetSessionsStatisticsRequest.SerializeToString,
             ondewo_dot_nlu_dot_agent__pb2.GetSessionsStatisticsResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetSessionsStatisticsTimeSeries(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.Agents/GetSessionsStatisticsTimeSeries',
+            ondewo_dot_nlu_dot_agent__pb2.GetSessionsStatisticsTimeSeriesRequest.SerializeToString,
+            ondewo_dot_nlu_dot_agent__pb2.GetSessionsStatisticsTimeSeriesResponse.FromString,
             options,
             channel_credentials,
             insecure,

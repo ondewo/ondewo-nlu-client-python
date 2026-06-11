@@ -1566,6 +1566,146 @@ class GetSessionsStatisticsResponse(google.protobuf.message.Message):
 global___GetSessionsStatisticsResponse = GetSessionsStatisticsResponse
 
 @typing.final
+class GetSessionsStatisticsTimeSeriesRequest(google.protobuf.message.Message):
+    """Request for time-bucketed LLM telemetry statistics about sessions."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PARENT_FIELD_NUMBER: builtins.int
+    TYPE_FIELD_NUMBER: builtins.int
+    SESSION_FILTER_FIELD_NUMBER: builtins.int
+    BUCKET_WIDTH_SECONDS_FIELD_NUMBER: builtins.int
+    MAX_BUCKETS_FIELD_NUMBER: builtins.int
+    LLM_MODEL_FILTER_FIELD_NUMBER: builtins.int
+    LLM_PROVIDER_FILTER_FIELD_NUMBER: builtins.int
+    LLM_AGENT_NAME_FILTER_FIELD_NUMBER: builtins.int
+    LLM_TOOL_NAME_FILTER_FIELD_NUMBER: builtins.int
+    LLM_CCAI_SERVICE_PROVIDER_FILTER_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Required. The project to get statistics from.
+    Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
+    """
+    type: global___SessionsReportType.ValueType
+    """Type of report. Only LLM-typed report types (SESSION_LLM_*) are supported."""
+    bucket_width_seconds: builtins.int
+    """Optional. Width of one bucket in seconds. 0 = the server picks
+    (time range divided by <code>max_buckets</code>).
+    """
+    max_buckets: builtins.int
+    """Optional. Maximum number of buckets (default 50, server-side cap 200)."""
+    @property
+    def session_filter(self) -> ondewo.nlu.session_pb2.SessionFilter:
+        """Required. A filter narrowing the sessions; <code>earliest</code> /
+        <code>latest</code> define the time range that is bucketed.
+        """
+
+    @property
+    def llm_model_filter(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Restrict to specific models. Empty = all models."""
+
+    @property
+    def llm_provider_filter(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Restrict to specific providers. Empty = all providers."""
+
+    @property
+    def llm_agent_name_filter(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Restrict to specific intent-agent names. Empty = all."""
+
+    @property
+    def llm_tool_name_filter(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Restrict to specific tool names. Empty = all."""
+
+    @property
+    def llm_ccai_service_provider_filter(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[ondewo.nlu.ccai_project_pb2.CcaiServiceProvider.ValueType]:
+        """Optional. Restrict to specific CCAI service providers. Empty = all."""
+
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which data fields will be added to the
+        returned data (e.g. paths=["llm_telemetry_time_series_buckets.llm_telemetry_report.llm_token_usage"]).
+        """
+
+    def __init__(
+        self,
+        *,
+        parent: builtins.str = ...,
+        type: global___SessionsReportType.ValueType = ...,
+        session_filter: ondewo.nlu.session_pb2.SessionFilter | None = ...,
+        bucket_width_seconds: builtins.int = ...,
+        max_buckets: builtins.int = ...,
+        llm_model_filter: collections.abc.Iterable[builtins.str] | None = ...,
+        llm_provider_filter: collections.abc.Iterable[builtins.str] | None = ...,
+        llm_agent_name_filter: collections.abc.Iterable[builtins.str] | None = ...,
+        llm_tool_name_filter: collections.abc.Iterable[builtins.str] | None = ...,
+        llm_ccai_service_provider_filter: collections.abc.Iterable[ondewo.nlu.ccai_project_pb2.CcaiServiceProvider.ValueType] | None = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["bucket_width_seconds", b"bucket_width_seconds", "field_mask", b"field_mask", "llm_agent_name_filter", b"llm_agent_name_filter", "llm_ccai_service_provider_filter", b"llm_ccai_service_provider_filter", "llm_model_filter", b"llm_model_filter", "llm_provider_filter", b"llm_provider_filter", "llm_tool_name_filter", b"llm_tool_name_filter", "max_buckets", b"max_buckets", "parent", b"parent", "session_filter", b"session_filter", "type", b"type"]) -> None: ...
+
+global___GetSessionsStatisticsTimeSeriesRequest = GetSessionsStatisticsTimeSeriesRequest
+
+@typing.final
+class LlmTelemetryTimeSeriesBucket(google.protobuf.message.Message):
+    """One time bucket of aggregated LLM telemetry."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    BUCKET_START_FIELD_NUMBER: builtins.int
+    BUCKET_END_FIELD_NUMBER: builtins.int
+    LLM_TELEMETRY_REPORT_FIELD_NUMBER: builtins.int
+    @property
+    def bucket_start(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Inclusive start of the bucket."""
+
+    @property
+    def bucket_end(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Exclusive end of the bucket."""
+
+    @property
+    def llm_telemetry_report(self) -> ondewo.nlu.session_pb2.LlmTelemetryReport:
+        """Aggregated LLM telemetry of all matched sessions inside the bucket."""
+
+    def __init__(
+        self,
+        *,
+        bucket_start: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        bucket_end: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        llm_telemetry_report: ondewo.nlu.session_pb2.LlmTelemetryReport | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["bucket_end", b"bucket_end", "bucket_start", b"bucket_start", "llm_telemetry_report", b"llm_telemetry_report"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["bucket_end", b"bucket_end", "bucket_start", b"bucket_start", "llm_telemetry_report", b"llm_telemetry_report"]) -> None: ...
+
+global___LlmTelemetryTimeSeriesBucket = LlmTelemetryTimeSeriesBucket
+
+@typing.final
+class GetSessionsStatisticsTimeSeriesResponse(google.protobuf.message.Message):
+    """Response with time-bucketed LLM telemetry statistics."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    LLM_TELEMETRY_TIME_SERIES_BUCKETS_FIELD_NUMBER: builtins.int
+    BUCKET_WIDTH_SECONDS_FIELD_NUMBER: builtins.int
+    bucket_width_seconds: builtins.int
+    """Effective bucket width in seconds the server used."""
+    @property
+    def llm_telemetry_time_series_buckets(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmTelemetryTimeSeriesBucket]:
+        """Buckets in ascending time order. Buckets without any matching telemetry
+        carry an empty report (llm_call_count == 0).
+        """
+
+    def __init__(
+        self,
+        *,
+        llm_telemetry_time_series_buckets: collections.abc.Iterable[global___LlmTelemetryTimeSeriesBucket] | None = ...,
+        bucket_width_seconds: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["bucket_width_seconds", b"bucket_width_seconds", "llm_telemetry_time_series_buckets", b"llm_telemetry_time_series_buckets"]) -> None: ...
+
+global___GetSessionsStatisticsTimeSeriesResponse = GetSessionsStatisticsTimeSeriesResponse
+
+@typing.final
 class AddUserToProjectRequest(google.protobuf.message.Message):
     """Request to add user to project."""
 

@@ -30,31 +30,72 @@ from ondewo.nlu.llm_evaluation_pb2 import (
     CancelLlmEvaluationExperimentRequest,
     CompareLlmEvaluationExperimentsRequest,
     CreateLlmEvaluationDatasetRequest,
+    CreateLlmEvaluationExamplesFromSessionRequest,
+    CreateLlmEvaluationExamplesFromSessionResponse,
+    CreateLlmEvaluationReleaseGateRequest,
+    CreateLlmEvaluationReportRequest,
+    CreateLlmEvaluationScheduleRequest,
+    CreateLlmEvaluationScorecardRequest,
     DeleteLlmEvaluationDatasetRequest,
     DeleteLlmEvaluationExampleRequest,
     DeleteLlmEvaluationExperimentRequest,
     DeleteLlmEvaluationFeedbackRequest,
+    DeleteLlmEvaluationReleaseGateRequest,
+    DeleteLlmEvaluationReportRequest,
+    DeleteLlmEvaluationScheduleRequest,
+    DeleteLlmEvaluationScorecardRequest,
     GetLlmEvaluationDatasetRequest,
     GetLlmEvaluationExampleRequest,
     GetLlmEvaluationExperimentRequest,
+    GetLlmEvaluationProjectSettingsRequest,
+    GetLlmEvaluationReleaseGateRequest,
+    GetLlmEvaluationReleaseGateRunRequest,
+    GetLlmEvaluationReportRequest,
+    GetLlmEvaluationScheduleRequest,
+    GetLlmEvaluationScorecardRequest,
     ListLlmEvaluationDatasetsRequest,
     ListLlmEvaluationDatasetsResponse,
+    ListLlmEvaluationEvaluatorsRequest,
+    ListLlmEvaluationEvaluatorsResponse,
     ListLlmEvaluationExamplesRequest,
     ListLlmEvaluationExamplesResponse,
     ListLlmEvaluationExperimentsRequest,
     ListLlmEvaluationExperimentsResponse,
     ListLlmEvaluationFeedbackRequest,
     ListLlmEvaluationFeedbackResponse,
+    ListLlmEvaluationReleaseGateRunsRequest,
+    ListLlmEvaluationReleaseGateRunsResponse,
+    ListLlmEvaluationReleaseGatesRequest,
+    ListLlmEvaluationReleaseGatesResponse,
+    ListLlmEvaluationReportsRequest,
+    ListLlmEvaluationReportsResponse,
+    ListLlmEvaluationSchedulesRequest,
+    ListLlmEvaluationSchedulesResponse,
+    ListLlmEvaluationScorecardsRequest,
+    ListLlmEvaluationScorecardsResponse,
     LlmEvaluationComparison,
     LlmEvaluationDataset,
     LlmEvaluationExample,
     LlmEvaluationExperiment,
     LlmEvaluationFeedback,
+    LlmEvaluationProjectSettings,
+    LlmEvaluationReleaseGate,
+    LlmEvaluationReleaseGateRun,
+    LlmEvaluationReport,
+    LlmEvaluationSchedule,
+    LlmEvaluationScorecard,
     RunLlmEvaluationExperimentRequest,
+    RunLlmEvaluationReleaseGateRequest,
+    SimulateLlmEvaluationConversationsRequest,
     SubmitLlmEvaluationFeedbackRequest,
     UpdateLlmEvaluationDatasetRequest,
     UpdateLlmEvaluationExampleRequest,
     UpdateLlmEvaluationExperimentRequest,
+    UpdateLlmEvaluationFeedbackRequest,
+    UpdateLlmEvaluationProjectSettingsRequest,
+    UpdateLlmEvaluationReleaseGateRequest,
+    UpdateLlmEvaluationScheduleRequest,
+    UpdateLlmEvaluationScorecardRequest,
 )
 from ondewo.nlu.llm_evaluation_pb2_grpc import LlmEvaluationsStub
 from ondewo.nlu.core.async_services_interface import AsyncServicesInterface
@@ -198,4 +239,191 @@ class LlmEvaluations(AsyncServicesInterface):
 
     async def llm_evaluation_delete_feedback(self, request: DeleteLlmEvaluationFeedbackRequest) -> Empty:
         response: Empty = await self.stub.LlmEvaluationDeleteFeedback(request, metadata=self.metadata)
+        return response
+
+    async def llm_evaluation_update_feedback(
+        self, request: UpdateLlmEvaluationFeedbackRequest
+    ) -> LlmEvaluationFeedback:
+        response: LlmEvaluationFeedback = await self.stub.LlmEvaluationUpdateFeedback(request, metadata=self.metadata)
+        return response
+
+    async def llm_evaluation_create_release_gate(
+        self,
+        request: CreateLlmEvaluationReleaseGateRequest,
+    ) -> LlmEvaluationReleaseGate:
+        response: LlmEvaluationReleaseGate = await self.stub.LlmEvaluationCreateReleaseGate(
+            request, metadata=self.metadata
+        )
+        return response
+
+    async def llm_evaluation_get_release_gate(
+        self, request: GetLlmEvaluationReleaseGateRequest
+    ) -> LlmEvaluationReleaseGate:
+        response: LlmEvaluationReleaseGate = await self.stub.LlmEvaluationGetReleaseGate(
+            request, metadata=self.metadata
+        )
+        return response
+
+    async def llm_evaluation_list_release_gates(
+        self,
+        request: ListLlmEvaluationReleaseGatesRequest,
+    ) -> ListLlmEvaluationReleaseGatesResponse:
+        response: ListLlmEvaluationReleaseGatesResponse = await self.stub.LlmEvaluationListReleaseGates(
+            request, metadata=self.metadata
+        )
+        return response
+
+    async def llm_evaluation_update_release_gate(
+        self,
+        request: UpdateLlmEvaluationReleaseGateRequest,
+    ) -> LlmEvaluationReleaseGate:
+        response: LlmEvaluationReleaseGate = await self.stub.LlmEvaluationUpdateReleaseGate(
+            request, metadata=self.metadata
+        )
+        return response
+
+    async def llm_evaluation_delete_release_gate(self, request: DeleteLlmEvaluationReleaseGateRequest) -> Empty:
+        response: Empty = await self.stub.LlmEvaluationDeleteReleaseGate(request, metadata=self.metadata)
+        return response
+
+    async def llm_evaluation_run_release_gate(self, request: RunLlmEvaluationReleaseGateRequest) -> Operation:
+        response: Operation = await self.stub.LlmEvaluationRunReleaseGate(request, metadata=self.metadata)
+        return response
+
+    async def llm_evaluation_get_release_gate_run(
+        self,
+        request: GetLlmEvaluationReleaseGateRunRequest,
+    ) -> LlmEvaluationReleaseGateRun:
+        response: LlmEvaluationReleaseGateRun = await self.stub.LlmEvaluationGetReleaseGateRun(
+            request, metadata=self.metadata
+        )
+        return response
+
+    async def llm_evaluation_list_release_gate_runs(
+        self,
+        request: ListLlmEvaluationReleaseGateRunsRequest,
+    ) -> ListLlmEvaluationReleaseGateRunsResponse:
+        response: ListLlmEvaluationReleaseGateRunsResponse = await self.stub.LlmEvaluationListReleaseGateRuns(
+            request, metadata=self.metadata
+        )
+        return response
+
+    async def llm_evaluation_create_scorecard(
+        self, request: CreateLlmEvaluationScorecardRequest
+    ) -> LlmEvaluationScorecard:
+        response: LlmEvaluationScorecard = await self.stub.LlmEvaluationCreateScorecard(request, metadata=self.metadata)
+        return response
+
+    async def llm_evaluation_get_scorecard(self, request: GetLlmEvaluationScorecardRequest) -> LlmEvaluationScorecard:
+        response: LlmEvaluationScorecard = await self.stub.LlmEvaluationGetScorecard(request, metadata=self.metadata)
+        return response
+
+    async def llm_evaluation_list_scorecards(
+        self,
+        request: ListLlmEvaluationScorecardsRequest,
+    ) -> ListLlmEvaluationScorecardsResponse:
+        response: ListLlmEvaluationScorecardsResponse = await self.stub.LlmEvaluationListScorecards(
+            request, metadata=self.metadata
+        )
+        return response
+
+    async def llm_evaluation_update_scorecard(
+        self, request: UpdateLlmEvaluationScorecardRequest
+    ) -> LlmEvaluationScorecard:
+        response: LlmEvaluationScorecard = await self.stub.LlmEvaluationUpdateScorecard(request, metadata=self.metadata)
+        return response
+
+    async def llm_evaluation_delete_scorecard(self, request: DeleteLlmEvaluationScorecardRequest) -> Empty:
+        response: Empty = await self.stub.LlmEvaluationDeleteScorecard(request, metadata=self.metadata)
+        return response
+
+    async def llm_evaluation_get_project_settings(
+        self,
+        request: GetLlmEvaluationProjectSettingsRequest,
+    ) -> LlmEvaluationProjectSettings:
+        response: LlmEvaluationProjectSettings = await self.stub.LlmEvaluationGetProjectSettings(
+            request, metadata=self.metadata
+        )
+        return response
+
+    async def llm_evaluation_update_project_settings(
+        self,
+        request: UpdateLlmEvaluationProjectSettingsRequest,
+    ) -> LlmEvaluationProjectSettings:
+        response: LlmEvaluationProjectSettings = await self.stub.LlmEvaluationUpdateProjectSettings(
+            request, metadata=self.metadata
+        )
+        return response
+
+    async def llm_evaluation_list_evaluators(
+        self,
+        request: ListLlmEvaluationEvaluatorsRequest,
+    ) -> ListLlmEvaluationEvaluatorsResponse:
+        response: ListLlmEvaluationEvaluatorsResponse = await self.stub.LlmEvaluationListEvaluators(
+            request, metadata=self.metadata
+        )
+        return response
+
+    async def llm_evaluation_create_examples_from_session(
+        self,
+        request: CreateLlmEvaluationExamplesFromSessionRequest,
+    ) -> CreateLlmEvaluationExamplesFromSessionResponse:
+        response: CreateLlmEvaluationExamplesFromSessionResponse = (
+            await self.stub.LlmEvaluationCreateExamplesFromSession(request, metadata=self.metadata)
+        )
+        return response
+
+    async def llm_evaluation_simulate_conversations(
+        self, request: SimulateLlmEvaluationConversationsRequest
+    ) -> Operation:
+        response: Operation = await self.stub.LlmEvaluationSimulateConversations(request, metadata=self.metadata)
+        return response
+
+    async def llm_evaluation_create_schedule(
+        self, request: CreateLlmEvaluationScheduleRequest
+    ) -> LlmEvaluationSchedule:
+        response: LlmEvaluationSchedule = await self.stub.LlmEvaluationCreateSchedule(request, metadata=self.metadata)
+        return response
+
+    async def llm_evaluation_get_schedule(self, request: GetLlmEvaluationScheduleRequest) -> LlmEvaluationSchedule:
+        response: LlmEvaluationSchedule = await self.stub.LlmEvaluationGetSchedule(request, metadata=self.metadata)
+        return response
+
+    async def llm_evaluation_list_schedules(
+        self,
+        request: ListLlmEvaluationSchedulesRequest,
+    ) -> ListLlmEvaluationSchedulesResponse:
+        response: ListLlmEvaluationSchedulesResponse = await self.stub.LlmEvaluationListSchedules(
+            request, metadata=self.metadata
+        )
+        return response
+
+    async def llm_evaluation_update_schedule(
+        self, request: UpdateLlmEvaluationScheduleRequest
+    ) -> LlmEvaluationSchedule:
+        response: LlmEvaluationSchedule = await self.stub.LlmEvaluationUpdateSchedule(request, metadata=self.metadata)
+        return response
+
+    async def llm_evaluation_delete_schedule(self, request: DeleteLlmEvaluationScheduleRequest) -> Empty:
+        response: Empty = await self.stub.LlmEvaluationDeleteSchedule(request, metadata=self.metadata)
+        return response
+
+    async def llm_evaluation_create_report(self, request: CreateLlmEvaluationReportRequest) -> LlmEvaluationReport:
+        response: LlmEvaluationReport = await self.stub.LlmEvaluationCreateReport(request, metadata=self.metadata)
+        return response
+
+    async def llm_evaluation_get_report(self, request: GetLlmEvaluationReportRequest) -> LlmEvaluationReport:
+        response: LlmEvaluationReport = await self.stub.LlmEvaluationGetReport(request, metadata=self.metadata)
+        return response
+
+    async def llm_evaluation_list_reports(
+        self, request: ListLlmEvaluationReportsRequest
+    ) -> ListLlmEvaluationReportsResponse:
+        response: ListLlmEvaluationReportsResponse = await self.stub.LlmEvaluationListReports(
+            request, metadata=self.metadata
+        )
+        return response
+
+    async def llm_evaluation_delete_report(self, request: DeleteLlmEvaluationReportRequest) -> Empty:
+        response: Empty = await self.stub.LlmEvaluationDeleteReport(request, metadata=self.metadata)
         return response

@@ -54,6 +54,8 @@ from ondewo.nlu.agent_pb2 import (
     GetPlatformMappingRequest,
     GetSessionsStatisticsRequest,
     GetSessionsStatisticsResponse,
+    GetSessionsStatisticsTimeSeriesRequest,
+    GetSessionsStatisticsTimeSeriesResponse,
     ImportAgentRequest,
     ListAgentsOfUserResponse,
     ListAgentsRequest,
@@ -180,6 +182,14 @@ class Agents(ServicesInterface):
 
     def get_sessions_statistics(self, request: GetSessionsStatisticsRequest) -> GetSessionsStatisticsResponse:
         response: GetSessionsStatisticsResponse = self.stub.GetSessionsStatistics(request, metadata=self.metadata)
+        return response
+
+    def get_sessions_statistics_time_series(
+        self,
+        request: GetSessionsStatisticsTimeSeriesRequest,
+    ) -> GetSessionsStatisticsTimeSeriesResponse:
+        response: GetSessionsStatisticsTimeSeriesResponse = \
+            self.stub.GetSessionsStatisticsTimeSeries(request, metadata=self.metadata)
         return response
 
     def set_agent_status(self, request: SetAgentStatusRequest) -> Agent:
