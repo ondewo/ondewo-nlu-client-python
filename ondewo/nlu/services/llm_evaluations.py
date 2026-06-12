@@ -27,6 +27,7 @@ from ondewo.nlu.llm_evaluation_pb2 import (
     AddLlmEvaluationExampleRequest,
     AddLlmEvaluationExamplesRequest,
     AddLlmEvaluationExamplesResponse,
+    ApplyLlmEvaluationAbRolloutRequest,
     CancelLlmEvaluationExperimentRequest,
     CompareLlmEvaluationExperimentsRequest,
     CreateLlmEvaluationAbExperimentRequest,
@@ -51,6 +52,8 @@ from ondewo.nlu.llm_evaluation_pb2 import (
     GetLlmEvaluationAbExperimentRequest,
     GetLlmEvaluationAbExperimentResultsRequest,
     GetLlmEvaluationAbExperimentResultsResponse,
+    GetLlmEvaluationAbRolloutDecisionRequest,
+    GetLlmEvaluationAbRolloutRecommendationRequest,
     GetLlmEvaluationAnnotationQueueItemRequest,
     GetLlmEvaluationDatasetRequest,
     GetLlmEvaluationExampleRequest,
@@ -65,6 +68,8 @@ from ondewo.nlu.llm_evaluation_pb2 import (
     GetLlmEvaluationScorecardRequest,
     ListLlmEvaluationAbExperimentsRequest,
     ListLlmEvaluationAbExperimentsResponse,
+    ListLlmEvaluationAbRolloutDecisionsRequest,
+    ListLlmEvaluationAbRolloutDecisionsResponse,
     ListLlmEvaluationAnnotationQueueItemsRequest,
     ListLlmEvaluationAnnotationQueueItemsResponse,
     ListLlmEvaluationDatasetsRequest,
@@ -92,6 +97,8 @@ from ondewo.nlu.llm_evaluation_pb2 import (
     ListLlmEvaluationScorecardsRequest,
     ListLlmEvaluationScorecardsResponse,
     LlmEvaluationAbExperiment,
+    LlmEvaluationAbRolloutDecision,
+    LlmEvaluationAbRolloutRecommendation,
     LlmEvaluationAnnotationQueueItem,
     LlmEvaluationComparison,
     LlmEvaluationDataset,
@@ -459,6 +466,38 @@ class LlmEvaluations(ServicesInterface):
     ) -> GetLlmEvaluationAbExperimentResultsResponse:
         response: GetLlmEvaluationAbExperimentResultsResponse = \
             self.stub.LlmEvaluationGetAbExperimentResults(request, metadata=self.metadata)
+        return response
+
+    def llm_evaluation_get_ab_rollout_recommendation(
+        self,
+        request: GetLlmEvaluationAbRolloutRecommendationRequest,
+    ) -> LlmEvaluationAbRolloutRecommendation:
+        response: LlmEvaluationAbRolloutRecommendation = \
+            self.stub.LlmEvaluationGetAbRolloutRecommendation(request, metadata=self.metadata)
+        return response
+
+    def llm_evaluation_apply_ab_rollout(
+        self,
+        request: ApplyLlmEvaluationAbRolloutRequest,
+    ) -> LlmEvaluationAbRolloutDecision:
+        response: LlmEvaluationAbRolloutDecision = \
+            self.stub.LlmEvaluationApplyAbRollout(request, metadata=self.metadata)
+        return response
+
+    def llm_evaluation_get_ab_rollout_decision(
+        self,
+        request: GetLlmEvaluationAbRolloutDecisionRequest,
+    ) -> LlmEvaluationAbRolloutDecision:
+        response: LlmEvaluationAbRolloutDecision = \
+            self.stub.LlmEvaluationGetAbRolloutDecision(request, metadata=self.metadata)
+        return response
+
+    def llm_evaluation_list_ab_rollout_decisions(
+        self,
+        request: ListLlmEvaluationAbRolloutDecisionsRequest,
+    ) -> ListLlmEvaluationAbRolloutDecisionsResponse:
+        response: ListLlmEvaluationAbRolloutDecisionsResponse = \
+            self.stub.LlmEvaluationListAbRolloutDecisions(request, metadata=self.metadata)
         return response
 
     def llm_evaluation_create_online_config(

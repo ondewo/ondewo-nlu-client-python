@@ -382,6 +382,50 @@ LLM_EVALUATION_AB_EXPERIMENT_STATUS_ARCHIVED: LlmEvaluationAbExperimentStatus.Va
 """Archived; read-only, hidden from the default list."""
 global___LlmEvaluationAbExperimentStatus = LlmEvaluationAbExperimentStatus
 
+class _LlmEvaluationAbOptimizeMetric:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _LlmEvaluationAbOptimizeMetricEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_LlmEvaluationAbOptimizeMetric.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    LLM_EVALUATION_AB_OPTIMIZE_METRIC_UNSPECIFIED: _LlmEvaluationAbOptimizeMetric.ValueType  # 0
+    """Default / unset."""
+    LLM_EVALUATION_AB_OPTIMIZE_METRIC_PASS_RATE: _LlmEvaluationAbOptimizeMetric.ValueType  # 1
+    """Fraction of sessions that passed (1 - error_rate). Higher is better."""
+    LLM_EVALUATION_AB_OPTIMIZE_METRIC_ERROR_RATE: _LlmEvaluationAbOptimizeMetric.ValueType  # 2
+    """Fraction of sessions that errored. Lower is better."""
+    LLM_EVALUATION_AB_OPTIMIZE_METRIC_MEAN_LATENCY: _LlmEvaluationAbOptimizeMetric.ValueType  # 3
+    """Mean first-token / response latency in seconds. Lower is better."""
+    LLM_EVALUATION_AB_OPTIMIZE_METRIC_CRITERION_SCORE: _LlmEvaluationAbOptimizeMetric.ValueType  # 4
+    """Mean offline-criterion score in <code>[0.0, 1.0]</code>. Higher is better."""
+    LLM_EVALUATION_AB_OPTIMIZE_METRIC_SAFETY_SCORE: _LlmEvaluationAbOptimizeMetric.ValueType  # 5
+    """Mean native-safety score in <code>[0.0, 1.0]</code>. Higher is better."""
+
+class LlmEvaluationAbOptimizeMetric(_LlmEvaluationAbOptimizeMetric, metaclass=_LlmEvaluationAbOptimizeMetricEnumTypeWrapper):
+    """region a/b rollout domain messages
+
+    The metric an A/B rollout optimizes when comparing each variant against the
+    control. Each value maps to a quantity already produced by the per-variant
+    results rollup (see GetAbExperimentResults). Higher-is-better vs.
+    lower-is-better is implied by the metric (e.g. PASS_RATE / CRITERION_SCORE /
+    SAFETY_SCORE are higher-is-better; ERROR_RATE / MEAN_LATENCY are
+    lower-is-better) and applied server-side when picking the winner.
+    """
+
+LLM_EVALUATION_AB_OPTIMIZE_METRIC_UNSPECIFIED: LlmEvaluationAbOptimizeMetric.ValueType  # 0
+"""Default / unset."""
+LLM_EVALUATION_AB_OPTIMIZE_METRIC_PASS_RATE: LlmEvaluationAbOptimizeMetric.ValueType  # 1
+"""Fraction of sessions that passed (1 - error_rate). Higher is better."""
+LLM_EVALUATION_AB_OPTIMIZE_METRIC_ERROR_RATE: LlmEvaluationAbOptimizeMetric.ValueType  # 2
+"""Fraction of sessions that errored. Lower is better."""
+LLM_EVALUATION_AB_OPTIMIZE_METRIC_MEAN_LATENCY: LlmEvaluationAbOptimizeMetric.ValueType  # 3
+"""Mean first-token / response latency in seconds. Lower is better."""
+LLM_EVALUATION_AB_OPTIMIZE_METRIC_CRITERION_SCORE: LlmEvaluationAbOptimizeMetric.ValueType  # 4
+"""Mean offline-criterion score in <code>[0.0, 1.0]</code>. Higher is better."""
+LLM_EVALUATION_AB_OPTIMIZE_METRIC_SAFETY_SCORE: LlmEvaluationAbOptimizeMetric.ValueType  # 5
+"""Mean native-safety score in <code>[0.0, 1.0]</code>. Higher is better."""
+global___LlmEvaluationAbOptimizeMetric = LlmEvaluationAbOptimizeMetric
+
 class _LlmEvaluationAnnotationStatus:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
@@ -4713,9 +4757,78 @@ class LlmEvaluationAbTrafficConfig(google.protobuf.message.Message):
 global___LlmEvaluationAbTrafficConfig = LlmEvaluationAbTrafficConfig
 
 @typing.final
+class RagVariantConfig(google.protobuf.message.Message):
+    """RAGFlow variant override for an A/B experiment running on a RAG-classifier
+    project (<code>IntentRagflowClassifier</code>). Where an IntentAgent variant
+    overrides the LLM via <code>ccai_service_names</code>, a RAG variant overrides
+    the project's chat-assistant LLM CcaiService and the retrieval parameters used
+    when answering the assigned sessions. Override-or-inherit semantics apply per
+    field: an empty / zero value means "inherit the project's base
+    IntentRagflowClassifier config for this field".
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    CHAT_ASSISTANT_LLM_CCAI_SERVICE_NAME_FIELD_NUMBER: builtins.int
+    TOP_K_FIELD_NUMBER: builtins.int
+    SIMILARITY_THRESHOLD_FIELD_NUMBER: builtins.int
+    VECTOR_SIMILARITY_WEIGHT_FIELD_NUMBER: builtins.int
+    RERANK_MODEL_CCAI_SERVICE_NAME_FIELD_NUMBER: builtins.int
+    chat_assistant_llm_ccai_service_name: builtins.str
+    """CcaiService name whose LLM connection details back the chat-assistant LLM
+    for sessions assigned to this variant (overrides the project's
+    <code>chat_assistant_llm_ccai_service_name</code>). Empty = inherit.
+    Format: <code>projects/&lt;project_uuid&gt;/agent/ccaiServices/&lt;ccai_service_uuid&gt;</code>.
+    """
+    top_k: builtins.int
+    """Retrieval top_k: the maximum number of chunks retrieved per turn (overrides
+    the project's <code>retrieval_max_retrieval_chunks</code>). 0 = inherit.
+    """
+    similarity_threshold: builtins.float
+    """Retrieval similarity threshold in <code>[0.0, 1.0]</code>: chunks scoring
+    below it are dropped (overrides the project's
+    <code>chat_assistant_similarity_threshold</code>). 0.0 = inherit.
+    """
+    vector_similarity_weight: builtins.float
+    """Vector-vs-keyword similarity weight in <code>[0.0, 1.0]</code> (overrides
+    the project's <code>retrieval_vector_similarity_weight</code>, surfaced to
+    RAGFlow as the chat assistant's keywords-similarity weight). 0.0 = inherit.
+    """
+    rerank_model_ccai_service_name: builtins.str
+    """Optional. CcaiService name backing the rerank model for sessions assigned to
+    this variant (overrides the project's
+    <code>chat_assistant_rerank_ccai_service_name</code>). Empty = inherit (or
+    no reranking when the project itself configures none).
+    Format: <code>projects/&lt;project_uuid&gt;/agent/ccaiServices/&lt;ccai_service_uuid&gt;</code>.
+    """
+    def __init__(
+        self,
+        *,
+        chat_assistant_llm_ccai_service_name: builtins.str = ...,
+        top_k: builtins.int = ...,
+        similarity_threshold: builtins.float = ...,
+        vector_similarity_weight: builtins.float = ...,
+        rerank_model_ccai_service_name: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["chat_assistant_llm_ccai_service_name", b"chat_assistant_llm_ccai_service_name", "rerank_model_ccai_service_name", b"rerank_model_ccai_service_name", "similarity_threshold", b"similarity_threshold", "top_k", b"top_k", "vector_similarity_weight", b"vector_similarity_weight"]) -> None: ...
+
+global___RagVariantConfig = RagVariantConfig
+
+@typing.final
 class LlmEvaluationAbVariant(google.protobuf.message.Message):
-    """One routing variant of an A/B experiment. The variant overrides the LLM
-    connection (CcaiService(s) / model / prompt) for the sessions assigned to it.
+    """One routing variant of an A/B experiment. The variant overrides the model used
+    for the sessions assigned to it. A variant is one of two shapes depending on
+    the project's classifier:
+    <ul>
+      <li><b>IntentAgent projects</b> — the variant overrides the LLM connection
+          via <code>ccai_service_names</code> (+ optional <code>model_name</code> /
+          <code>prompt_version</code>).</li>
+      <li><b>RAG projects</b> (<code>IntentRagflowClassifier</code>) — the variant
+          overrides the chat-assistant LLM CcaiService and retrieval parameters via
+          <code>rag_variant_config</code>.</li>
+    </ul>
+    The two override shapes are mutually exclusive per variant; the server applies
+    whichever matches the project's classifier type.
     """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -4728,6 +4841,7 @@ class LlmEvaluationAbVariant(google.protobuf.message.Message):
     MODEL_NAME_FIELD_NUMBER: builtins.int
     PROMPT_VERSION_FIELD_NUMBER: builtins.int
     CONFIG_FIELD_NUMBER: builtins.int
+    RAG_VARIANT_CONFIG_FIELD_NUMBER: builtins.int
     variant_id: builtins.str
     """Required. Stable slug identifying the variant within its experiment
     (e.g. "control", "qwen3-fp8"). Lower-case, used as the assignment key.
@@ -4747,7 +4861,8 @@ class LlmEvaluationAbVariant(google.protobuf.message.Message):
     """Optional. Logical prompt version recorded for this variant."""
     @property
     def ccai_service_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """CcaiService name(s) defining this variant's LLM connection.
+        """CcaiService name(s) defining this variant's LLM connection (IntentAgent
+        projects). Mutually exclusive with <code>rag_variant_config</code>.
         Format: <code>projects/&lt;project_uuid&gt;/agent/ccaiServices/&lt;ccai_service_uuid&gt;</code>.
         """
 
@@ -4755,6 +4870,15 @@ class LlmEvaluationAbVariant(google.protobuf.message.Message):
     def config(self) -> google.protobuf.struct_pb2.Struct:
         """Optional. Free-form target descriptor (the serialized CcaiServiceList /
         routing override applied for sessions assigned to this variant).
+        """
+
+    @property
+    def rag_variant_config(self) -> global___RagVariantConfig:
+        """Optional. RAGFlow override for a RAG-classifier project: the chat-assistant
+        LLM CcaiService + retrieval parameters applied to sessions assigned to this
+        variant. Used instead of <code>ccai_service_names</code> when the project's
+        classifier is <code>IntentRagflowClassifier</code>; empty / zero fields
+        inside it inherit the project's base config.
         """
 
     def __init__(
@@ -4768,9 +4892,10 @@ class LlmEvaluationAbVariant(google.protobuf.message.Message):
         model_name: builtins.str = ...,
         prompt_version: builtins.str = ...,
         config: google.protobuf.struct_pb2.Struct | None = ...,
+        rag_variant_config: global___RagVariantConfig | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["config", b"config"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["ccai_service_names", b"ccai_service_names", "config", b"config", "display_name", b"display_name", "is_control", b"is_control", "model_name", b"model_name", "prompt_version", b"prompt_version", "traffic_weight", b"traffic_weight", "variant_id", b"variant_id"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["config", b"config", "rag_variant_config", b"rag_variant_config"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["ccai_service_names", b"ccai_service_names", "config", b"config", "display_name", b"display_name", "is_control", b"is_control", "model_name", b"model_name", "prompt_version", b"prompt_version", "rag_variant_config", b"rag_variant_config", "traffic_weight", b"traffic_weight", "variant_id", b"variant_id"]) -> None: ...
 
 global___LlmEvaluationAbVariant = LlmEvaluationAbVariant
 
@@ -4796,6 +4921,7 @@ class LlmEvaluationAbExperiment(google.protobuf.message.Message):
     MODIFIED_BY_FIELD_NUMBER: builtins.int
     PARENT_FIELD_NUMBER: builtins.int
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    LLM_EVALUATION_AB_ROLLOUT_DECISION_NAME_FIELD_NUMBER: builtins.int
     name: builtins.str
     """The unique resource name of the A/B experiment. Read-only; populated by the server.
     Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbExperiments/&lt;experiment_uuid&gt;</code>.
@@ -4816,6 +4942,13 @@ class LlmEvaluationAbExperiment(google.protobuf.message.Message):
     """
     language_code: builtins.str
     """BCP-47 language-code scope."""
+    llm_evaluation_ab_rollout_decision_name: builtins.str
+    """Optional. Resource name of the rollout decision that was applied to this
+    experiment (set once an operator explicitly applies a variant via
+    <code>LlmEvaluationApplyAbRollout</code>; empty while no rollout has been
+    applied). Lets a results view link straight to the applied audit record.
+    Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbRolloutDecisions/&lt;decision_uuid&gt;</code>.
+    """
     @property
     def variants(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmEvaluationAbVariant]:
         """The routing variants of this experiment."""
@@ -4857,9 +4990,10 @@ class LlmEvaluationAbExperiment(google.protobuf.message.Message):
         modified_by: builtins.str = ...,
         parent: builtins.str = ...,
         language_code: builtins.str = ...,
+        llm_evaluation_ab_rollout_decision_name: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at", "started_at", b"started_at", "stopped_at", b"stopped_at", "traffic_config", b"traffic_config"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["created_at", b"created_at", "created_by", b"created_by", "description", b"description", "display_name", b"display_name", "language_code", b"language_code", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "parent", b"parent", "started_at", b"started_at", "status", b"status", "stopped_at", b"stopped_at", "traffic_config", b"traffic_config", "variants", b"variants"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["created_at", b"created_at", "created_by", b"created_by", "description", b"description", "display_name", b"display_name", "language_code", b"language_code", "llm_evaluation_ab_rollout_decision_name", b"llm_evaluation_ab_rollout_decision_name", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "parent", b"parent", "started_at", b"started_at", "status", b"status", "stopped_at", b"stopped_at", "traffic_config", b"traffic_config", "variants", b"variants"]) -> None: ...
 
 global___LlmEvaluationAbExperiment = LlmEvaluationAbExperiment
 
@@ -5271,6 +5405,433 @@ class GetLlmEvaluationAbExperimentResultsResponse(google.protobuf.message.Messag
     def ClearField(self, field_name: typing.Literal["llm_evaluation_ab_experiment_name", b"llm_evaluation_ab_experiment_name", "variant_results", b"variant_results"]) -> None: ...
 
 global___GetLlmEvaluationAbExperimentResultsResponse = GetLlmEvaluationAbExperimentResultsResponse
+
+@typing.final
+class LlmEvaluationAbRolloutRecommendation(google.protobuf.message.Message):
+    """A computed, read-only rollout recommendation for an A/B experiment: which
+    variant currently wins against the control on the chosen optimize metric,
+    under the requested statistical guard-rails. Stateless — recomputed on demand
+    by <code>LlmEvaluationGetAbRolloutRecommendation</code> from the per-variant
+    results rollup; nothing is persisted and no traffic / config changes. The
+    operator decides whether to apply it via <code>LlmEvaluationApplyAbRollout</code>.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing.final
+    class SessionsPerVariantEntry(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        KEY_FIELD_NUMBER: builtins.int
+        VALUE_FIELD_NUMBER: builtins.int
+        key: builtins.str
+        value: builtins.int
+        def __init__(
+            self,
+            *,
+            key: builtins.str = ...,
+            value: builtins.int = ...,
+        ) -> None: ...
+        def ClearField(self, field_name: typing.Literal["key", b"key", "value", b"value"]) -> None: ...
+
+    OPTIMIZE_METRIC_FIELD_NUMBER: builtins.int
+    WINNER_VARIANT_ID_FIELD_NUMBER: builtins.int
+    CONTROL_VARIANT_ID_FIELD_NUMBER: builtins.int
+    P_VALUE_FIELD_NUMBER: builtins.int
+    EFFECT_SIZE_FIELD_NUMBER: builtins.int
+    IS_SIGNIFICANT_FIELD_NUMBER: builtins.int
+    SESSIONS_PER_VARIANT_FIELD_NUMBER: builtins.int
+    NEEDS_MORE_DATA_FIELD_NUMBER: builtins.int
+    REASON_FIELD_NUMBER: builtins.int
+    optimize_metric: global___LlmEvaluationAbOptimizeMetric.ValueType
+    """The metric the recommendation was computed against (echoed from the request)."""
+    winner_variant_id: builtins.str
+    """Variant slug that currently wins against the control on this metric, once
+    the guard-rails (significance, effect size, minimum sessions) are met.
+    Empty while <code>needs_more_data</code> is true or no variant beats the
+    control.
+    """
+    control_variant_id: builtins.str
+    """Variant slug of the control (baseline) arm the winner was compared against."""
+    p_value: builtins.float
+    """Two-sided p-value of the winner-vs-control test on the optimize metric."""
+    effect_size: builtins.float
+    """Observed effect size between winner and control (absolute risk difference
+    for rate metrics, standardized / raw mean difference for continuous metrics).
+    """
+    is_significant: builtins.bool
+    """Whether the result is statistically significant at the requested confidence
+    level AND clears the requested minimum effect size.
+    """
+    needs_more_data: builtins.bool
+    """True when at least one arm has not yet reached the requested minimum number
+    of sessions, so no winner can be called yet (collect more traffic).
+    """
+    reason: builtins.str
+    """Human-readable rationale for the recommendation (e.g. the winner and its
+    margin, or "needs N more sessions on variant X", or "no variant beats
+    control").
+    """
+    @property
+    def sessions_per_variant(self) -> google.protobuf.internal.containers.ScalarMap[builtins.str, builtins.int]:
+        """Number of sessions observed per variant in scope, keyed by variant slug.
+        Used to surface the guard-rail check against the requested minimum.
+        """
+
+    def __init__(
+        self,
+        *,
+        optimize_metric: global___LlmEvaluationAbOptimizeMetric.ValueType = ...,
+        winner_variant_id: builtins.str = ...,
+        control_variant_id: builtins.str = ...,
+        p_value: builtins.float = ...,
+        effect_size: builtins.float = ...,
+        is_significant: builtins.bool = ...,
+        sessions_per_variant: collections.abc.Mapping[builtins.str, builtins.int] | None = ...,
+        needs_more_data: builtins.bool = ...,
+        reason: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["control_variant_id", b"control_variant_id", "effect_size", b"effect_size", "is_significant", b"is_significant", "needs_more_data", b"needs_more_data", "optimize_metric", b"optimize_metric", "p_value", b"p_value", "reason", b"reason", "sessions_per_variant", b"sessions_per_variant", "winner_variant_id", b"winner_variant_id"]) -> None: ...
+
+global___LlmEvaluationAbRolloutRecommendation = LlmEvaluationAbRolloutRecommendation
+
+@typing.final
+class LlmEvaluationAbRolloutDecision(google.protobuf.message.Message):
+    """The persisted audit record of an A/B rollout that an operator explicitly
+    applied: it captures which variant's config was promoted to the project's
+    classifier default, on which metric, and the statistics at the moment of
+    application. Written + returned by <code>LlmEvaluationApplyAbRollout</code>;
+    read back via <code>LlmEvaluationGetAbRolloutDecision</code> /
+    <code>LlmEvaluationListAbRolloutDecisions</code>. There is no auto-rollout —
+    every decision row corresponds to an explicit operator action.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    NAME_FIELD_NUMBER: builtins.int
+    LLM_EVALUATION_AB_EXPERIMENT_NAME_FIELD_NUMBER: builtins.int
+    APPLIED_VARIANT_ID_FIELD_NUMBER: builtins.int
+    OPTIMIZE_METRIC_FIELD_NUMBER: builtins.int
+    P_VALUE_FIELD_NUMBER: builtins.int
+    EFFECT_SIZE_FIELD_NUMBER: builtins.int
+    APPLIED_AT_FIELD_NUMBER: builtins.int
+    APPLIED_BY_FIELD_NUMBER: builtins.int
+    CREATED_AT_FIELD_NUMBER: builtins.int
+    MODIFIED_AT_FIELD_NUMBER: builtins.int
+    CREATED_BY_FIELD_NUMBER: builtins.int
+    MODIFIED_BY_FIELD_NUMBER: builtins.int
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    name: builtins.str
+    """The unique resource name of the rollout decision. Read-only; populated by the server.
+    Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbRolloutDecisions/&lt;decision_uuid&gt;</code>.
+    """
+    llm_evaluation_ab_experiment_name: builtins.str
+    """Resource name of the A/B experiment this decision was applied to.
+    Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbExperiments/&lt;experiment_uuid&gt;</code>.
+    """
+    applied_variant_id: builtins.str
+    """Variant slug whose config was promoted to the project classifier default."""
+    optimize_metric: global___LlmEvaluationAbOptimizeMetric.ValueType
+    """The metric the rollout was decided on (recorded for the audit trail)."""
+    p_value: builtins.float
+    """Two-sided p-value of the applied-variant-vs-control test at application time."""
+    effect_size: builtins.float
+    """Observed effect size (applied variant vs. control) at application time."""
+    applied_by: builtins.str
+    """User id (in form of a valid UUID) of the operator who applied the rollout."""
+    created_by: builtins.str
+    """User id in form of a valid UUID."""
+    modified_by: builtins.str
+    """User id in form of a valid UUID."""
+    parent: builtins.str
+    """Project owning the decision.
+    Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    """
+    language_code: builtins.str
+    """BCP-47 language-code scope."""
+    @property
+    def applied_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Wall-clock time the rollout was applied. Read-only."""
+
+    @property
+    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Creation date and time. Read-only field."""
+
+    @property
+    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Modification date and time. Read-only field."""
+
+    def __init__(
+        self,
+        *,
+        name: builtins.str = ...,
+        llm_evaluation_ab_experiment_name: builtins.str = ...,
+        applied_variant_id: builtins.str = ...,
+        optimize_metric: global___LlmEvaluationAbOptimizeMetric.ValueType = ...,
+        p_value: builtins.float = ...,
+        effect_size: builtins.float = ...,
+        applied_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        applied_by: builtins.str = ...,
+        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        created_by: builtins.str = ...,
+        modified_by: builtins.str = ...,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["applied_at", b"applied_at", "created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["applied_at", b"applied_at", "applied_by", b"applied_by", "applied_variant_id", b"applied_variant_id", "created_at", b"created_at", "created_by", b"created_by", "effect_size", b"effect_size", "language_code", b"language_code", "llm_evaluation_ab_experiment_name", b"llm_evaluation_ab_experiment_name", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "optimize_metric", b"optimize_metric", "p_value", b"p_value", "parent", b"parent"]) -> None: ...
+
+global___LlmEvaluationAbRolloutDecision = LlmEvaluationAbRolloutDecision
+
+@typing.final
+class GetLlmEvaluationAbRolloutRecommendationRequest(google.protobuf.message.Message):
+    """region a/b rollout RPC messages
+
+    Request to compute a rollout recommendation for an A/B experiment. Read-only /
+    stateless — computes the winner-vs-control statistics on demand under the
+    supplied guard-rails and returns a LlmEvaluationAbRolloutRecommendation
+    without mutating anything.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    NAME_FIELD_NUMBER: builtins.int
+    OPTIMIZE_METRIC_FIELD_NUMBER: builtins.int
+    CONFIDENCE_LEVEL_FIELD_NUMBER: builtins.int
+    MIN_SESSIONS_PER_VARIANT_FIELD_NUMBER: builtins.int
+    MIN_EFFECT_SIZE_FIELD_NUMBER: builtins.int
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    name: builtins.str
+    """Resource name of the experiment to evaluate.
+    Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbExperiments/&lt;experiment_uuid&gt;</code>.
+    """
+    optimize_metric: global___LlmEvaluationAbOptimizeMetric.ValueType
+    """Required. The metric to optimize when picking the winner."""
+    confidence_level: builtins.float
+    """Optional. Confidence level for the significance test in <code>(0.0, 1.0)</code>
+    (e.g. <code>0.95</code> for 95%). Unset / 0 defaults to <code>0.95</code>.
+    """
+    min_sessions_per_variant: builtins.int
+    """Optional. Minimum number of sessions required per variant before a winner
+    may be called; below it the recommendation reports
+    <code>needs_more_data</code>. Unset / 0 applies the server default.
+    """
+    min_effect_size: builtins.float
+    """Optional. Minimum absolute effect size required to call a winner; guards
+    against statistically-significant-but-trivial differences. Unset / 0 applies
+    the server default.
+    """
+    parent: builtins.str
+    """Project owning the experiment.
+    Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    """
+    language_code: builtins.str
+    """BCP-47 language-code scope (required)."""
+    def __init__(
+        self,
+        *,
+        name: builtins.str = ...,
+        optimize_metric: global___LlmEvaluationAbOptimizeMetric.ValueType = ...,
+        confidence_level: builtins.float = ...,
+        min_sessions_per_variant: builtins.int = ...,
+        min_effect_size: builtins.float = ...,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["confidence_level", b"confidence_level", "language_code", b"language_code", "min_effect_size", b"min_effect_size", "min_sessions_per_variant", b"min_sessions_per_variant", "name", b"name", "optimize_metric", b"optimize_metric", "parent", b"parent"]) -> None: ...
+
+global___GetLlmEvaluationAbRolloutRecommendationRequest = GetLlmEvaluationAbRolloutRecommendationRequest
+
+@typing.final
+class ApplyLlmEvaluationAbRolloutRequest(google.protobuf.message.Message):
+    """Request to apply an A/B rollout: promotes the chosen variant's config to the
+    project's classifier default, stops the experiment and writes the audit
+    decision. Idempotent — re-applying the same already-applied experiment returns
+    the existing decision rather than promoting twice.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    NAME_FIELD_NUMBER: builtins.int
+    VARIANT_ID_FIELD_NUMBER: builtins.int
+    OPTIMIZE_METRIC_FIELD_NUMBER: builtins.int
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    name: builtins.str
+    """Resource name of the experiment to roll out.
+    Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbExperiments/&lt;experiment_uuid&gt;</code>.
+    """
+    variant_id: builtins.str
+    """Required. Variant slug whose config to promote to the project classifier
+    default. The operator's explicit choice; the server applies exactly this
+    variant.
+    """
+    optimize_metric: global___LlmEvaluationAbOptimizeMetric.ValueType
+    """The metric the decision was made on, recorded on the audit decision."""
+    parent: builtins.str
+    """Project owning the experiment.
+    Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    """
+    language_code: builtins.str
+    """BCP-47 language-code scope (required)."""
+    def __init__(
+        self,
+        *,
+        name: builtins.str = ...,
+        variant_id: builtins.str = ...,
+        optimize_metric: global___LlmEvaluationAbOptimizeMetric.ValueType = ...,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["language_code", b"language_code", "name", b"name", "optimize_metric", b"optimize_metric", "parent", b"parent", "variant_id", b"variant_id"]) -> None: ...
+
+global___ApplyLlmEvaluationAbRolloutRequest = ApplyLlmEvaluationAbRolloutRequest
+
+@typing.final
+class GetLlmEvaluationAbRolloutDecisionRequest(google.protobuf.message.Message):
+    """Request to get a single A/B rollout decision (the applied audit record) for an
+    experiment.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    NAME_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    name: builtins.str
+    """Resource name of the rollout decision to fetch.
+    Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbRolloutDecisions/&lt;decision_uuid&gt;</code>.
+    """
+    parent: builtins.str
+    """Project owning the decision.
+    Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    """
+    language_code: builtins.str
+    """BCP-47 language-code scope (required)."""
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields will be filled with data."""
+
+    def __init__(
+        self,
+        *,
+        name: builtins.str = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "language_code", b"language_code", "name", b"name", "parent", b"parent"]) -> None: ...
+
+global___GetLlmEvaluationAbRolloutDecisionRequest = GetLlmEvaluationAbRolloutDecisionRequest
+
+@typing.final
+class LlmEvaluationAbRolloutDecisionFilter(google.protobuf.message.Message):
+    """Filter conditions for ListAbRolloutDecisions. All fields are optional;
+    multiple fields set at the same time are combined via logical AND.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    LLM_EVALUATION_AB_EXPERIMENT_NAME_FIELD_NUMBER: builtins.int
+    APPLIED_BY_FIELD_NUMBER: builtins.int
+    llm_evaluation_ab_experiment_name: builtins.str
+    """Optional. Match only decisions applied to this A/B experiment (resource name).
+    Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAbExperiments/&lt;experiment_uuid&gt;</code>.
+    """
+    applied_by: builtins.str
+    """Optional. Match only decisions applied by this user id (UUID)."""
+    def __init__(
+        self,
+        *,
+        llm_evaluation_ab_experiment_name: builtins.str = ...,
+        applied_by: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["applied_by", b"applied_by", "llm_evaluation_ab_experiment_name", b"llm_evaluation_ab_experiment_name"]) -> None: ...
+
+global___LlmEvaluationAbRolloutDecisionFilter = LlmEvaluationAbRolloutDecisionFilter
+
+@typing.final
+class ListLlmEvaluationAbRolloutDecisionsRequest(google.protobuf.message.Message):
+    """Request to list A/B rollout decisions within a project, optionally narrowed by
+    filter (typically by experiment).
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PARENT_FIELD_NUMBER: builtins.int
+    PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    LLM_EVALUATION_AB_ROLLOUT_DECISION_FILTER_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Project owning the decisions.
+    Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    """
+    page_token: builtins.str
+    """Optional. Page token for pagination. Retrieves a large result set in
+    smaller, more manageable portions. The token encodes the current index
+    and the page size.
+
+    Valid page token strings:
+    <ul>
+      <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li>
+      <li><code>&quot;current_index-0--page_size-20&quot;</code> - First page, page size 20.</li>
+      <li><code>&quot;current_index-1--page_size-20&quot;</code> - Second page, page size 20.</li>
+    </ul>
+    Index starts at 0.
+    """
+    language_code: builtins.str
+    """BCP-47 language-code scope (required)."""
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields will be filled with data."""
+
+    @property
+    def llm_evaluation_ab_rollout_decision_filter(self) -> global___LlmEvaluationAbRolloutDecisionFilter:
+        """Optional. Filter conditions to narrow the returned decisions."""
+
+    def __init__(
+        self,
+        *,
+        parent: builtins.str = ...,
+        page_token: builtins.str = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        language_code: builtins.str = ...,
+        llm_evaluation_ab_rollout_decision_filter: global___LlmEvaluationAbRolloutDecisionFilter | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask", "llm_evaluation_ab_rollout_decision_filter", b"llm_evaluation_ab_rollout_decision_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "language_code", b"language_code", "llm_evaluation_ab_rollout_decision_filter", b"llm_evaluation_ab_rollout_decision_filter", "page_token", b"page_token", "parent", b"parent"]) -> None: ...
+
+global___ListLlmEvaluationAbRolloutDecisionsRequest = ListLlmEvaluationAbRolloutDecisionsRequest
+
+@typing.final
+class ListLlmEvaluationAbRolloutDecisionsResponse(google.protobuf.message.Message):
+    """Response for ListAbRolloutDecisions."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    LLM_EVALUATION_AB_ROLLOUT_DECISIONS_FIELD_NUMBER: builtins.int
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    next_page_token: builtins.str
+    """Pagination token for the next page (empty if this is the last page)."""
+    @property
+    def llm_evaluation_ab_rollout_decisions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmEvaluationAbRolloutDecision]:
+        """Rollout decisions matching the request."""
+
+    def __init__(
+        self,
+        *,
+        llm_evaluation_ab_rollout_decisions: collections.abc.Iterable[global___LlmEvaluationAbRolloutDecision] | None = ...,
+        next_page_token: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["llm_evaluation_ab_rollout_decisions", b"llm_evaluation_ab_rollout_decisions", "next_page_token", b"next_page_token"]) -> None: ...
+
+global___ListLlmEvaluationAbRolloutDecisionsResponse = ListLlmEvaluationAbRolloutDecisionsResponse
 
 @typing.final
 class LlmEvaluationOnlineSessionFilter(google.protobuf.message.Message):

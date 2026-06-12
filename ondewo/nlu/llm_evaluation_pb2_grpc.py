@@ -327,6 +327,26 @@ class LlmEvaluationsStub(object):
                 request_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.GetLlmEvaluationAbExperimentResultsRequest.SerializeToString,
                 response_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.GetLlmEvaluationAbExperimentResultsResponse.FromString,
                 _registered_method=True)
+        self.LlmEvaluationGetAbRolloutRecommendation = channel.unary_unary(
+                '/ondewo.nlu.LlmEvaluations/LlmEvaluationGetAbRolloutRecommendation',
+                request_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.GetLlmEvaluationAbRolloutRecommendationRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.LlmEvaluationAbRolloutRecommendation.FromString,
+                _registered_method=True)
+        self.LlmEvaluationApplyAbRollout = channel.unary_unary(
+                '/ondewo.nlu.LlmEvaluations/LlmEvaluationApplyAbRollout',
+                request_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.ApplyLlmEvaluationAbRolloutRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.LlmEvaluationAbRolloutDecision.FromString,
+                _registered_method=True)
+        self.LlmEvaluationGetAbRolloutDecision = channel.unary_unary(
+                '/ondewo.nlu.LlmEvaluations/LlmEvaluationGetAbRolloutDecision',
+                request_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.GetLlmEvaluationAbRolloutDecisionRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.LlmEvaluationAbRolloutDecision.FromString,
+                _registered_method=True)
+        self.LlmEvaluationListAbRolloutDecisions = channel.unary_unary(
+                '/ondewo.nlu.LlmEvaluations/LlmEvaluationListAbRolloutDecisions',
+                request_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.ListLlmEvaluationAbRolloutDecisionsRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.ListLlmEvaluationAbRolloutDecisionsResponse.FromString,
+                _registered_method=True)
         self.LlmEvaluationCreateOnlineConfig = channel.unary_unary(
                 '/ondewo.nlu.LlmEvaluations/LlmEvaluationCreateOnlineConfig',
                 request_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.CreateLlmEvaluationOnlineConfigRequest.SerializeToString,
@@ -864,8 +884,49 @@ class LlmEvaluationsServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def LlmEvaluationCreateOnlineConfig(self, request, context):
+    def LlmEvaluationGetAbRolloutRecommendation(self, request, context):
         """endregion a/b experiments
+
+        region a/b rollout
+
+        Compute a rollout recommendation for an A/B experiment: which variant wins
+        against the control on the chosen optimize metric under the supplied
+        statistical guard-rails (confidence level, minimum sessions per variant,
+        minimum effect size). Stateless / read-only — computed on demand from the
+        per-variant results; nothing is persisted and no traffic / config changes.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def LlmEvaluationApplyAbRollout(self, request, context):
+        """Apply a rollout for an A/B experiment: promotes the chosen variant's config
+        as the project's classifier default, stops the experiment, and writes +
+        returns the LlmEvaluationAbRolloutDecision audit record. The operator picks
+        the variant explicitly (there is no auto-rollout). Idempotent: re-applying
+        an already-rolled-out experiment returns the existing decision.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def LlmEvaluationGetAbRolloutDecision(self, request, context):
+        """Get the applied rollout decision (audit record) by resource name.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def LlmEvaluationListAbRolloutDecisions(self, request, context):
+        """List applied rollout decisions in the project, optionally filtered (e.g. by
+        experiment) + paginated.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def LlmEvaluationCreateOnlineConfig(self, request, context):
+        """endregion a/b rollout
 
         region online evaluation
 
@@ -1252,6 +1313,26 @@ def add_LlmEvaluationsServicer_to_server(servicer, server):
                     servicer.LlmEvaluationGetAbExperimentResults,
                     request_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.GetLlmEvaluationAbExperimentResultsRequest.FromString,
                     response_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.GetLlmEvaluationAbExperimentResultsResponse.SerializeToString,
+            ),
+            'LlmEvaluationGetAbRolloutRecommendation': grpc.unary_unary_rpc_method_handler(
+                    servicer.LlmEvaluationGetAbRolloutRecommendation,
+                    request_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.GetLlmEvaluationAbRolloutRecommendationRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.LlmEvaluationAbRolloutRecommendation.SerializeToString,
+            ),
+            'LlmEvaluationApplyAbRollout': grpc.unary_unary_rpc_method_handler(
+                    servicer.LlmEvaluationApplyAbRollout,
+                    request_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.ApplyLlmEvaluationAbRolloutRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.LlmEvaluationAbRolloutDecision.SerializeToString,
+            ),
+            'LlmEvaluationGetAbRolloutDecision': grpc.unary_unary_rpc_method_handler(
+                    servicer.LlmEvaluationGetAbRolloutDecision,
+                    request_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.GetLlmEvaluationAbRolloutDecisionRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.LlmEvaluationAbRolloutDecision.SerializeToString,
+            ),
+            'LlmEvaluationListAbRolloutDecisions': grpc.unary_unary_rpc_method_handler(
+                    servicer.LlmEvaluationListAbRolloutDecisions,
+                    request_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.ListLlmEvaluationAbRolloutDecisionsRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.ListLlmEvaluationAbRolloutDecisionsResponse.SerializeToString,
             ),
             'LlmEvaluationCreateOnlineConfig': grpc.unary_unary_rpc_method_handler(
                     servicer.LlmEvaluationCreateOnlineConfig,
@@ -2854,6 +2935,114 @@ class LlmEvaluations(object):
             '/ondewo.nlu.LlmEvaluations/LlmEvaluationGetAbExperimentResults',
             ondewo_dot_nlu_dot_llm__evaluation__pb2.GetLlmEvaluationAbExperimentResultsRequest.SerializeToString,
             ondewo_dot_nlu_dot_llm__evaluation__pb2.GetLlmEvaluationAbExperimentResultsResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def LlmEvaluationGetAbRolloutRecommendation(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.LlmEvaluations/LlmEvaluationGetAbRolloutRecommendation',
+            ondewo_dot_nlu_dot_llm__evaluation__pb2.GetLlmEvaluationAbRolloutRecommendationRequest.SerializeToString,
+            ondewo_dot_nlu_dot_llm__evaluation__pb2.LlmEvaluationAbRolloutRecommendation.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def LlmEvaluationApplyAbRollout(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.LlmEvaluations/LlmEvaluationApplyAbRollout',
+            ondewo_dot_nlu_dot_llm__evaluation__pb2.ApplyLlmEvaluationAbRolloutRequest.SerializeToString,
+            ondewo_dot_nlu_dot_llm__evaluation__pb2.LlmEvaluationAbRolloutDecision.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def LlmEvaluationGetAbRolloutDecision(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.LlmEvaluations/LlmEvaluationGetAbRolloutDecision',
+            ondewo_dot_nlu_dot_llm__evaluation__pb2.GetLlmEvaluationAbRolloutDecisionRequest.SerializeToString,
+            ondewo_dot_nlu_dot_llm__evaluation__pb2.LlmEvaluationAbRolloutDecision.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def LlmEvaluationListAbRolloutDecisions(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.LlmEvaluations/LlmEvaluationListAbRolloutDecisions',
+            ondewo_dot_nlu_dot_llm__evaluation__pb2.ListLlmEvaluationAbRolloutDecisionsRequest.SerializeToString,
+            ondewo_dot_nlu_dot_llm__evaluation__pb2.ListLlmEvaluationAbRolloutDecisionsResponse.FromString,
             options,
             channel_credentials,
             insecure,
