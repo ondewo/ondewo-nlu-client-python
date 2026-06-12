@@ -327,6 +327,61 @@ class LlmEvaluationsStub(object):
                 request_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.GetLlmEvaluationAbExperimentResultsRequest.SerializeToString,
                 response_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.GetLlmEvaluationAbExperimentResultsResponse.FromString,
                 _registered_method=True)
+        self.LlmEvaluationCreateOnlineConfig = channel.unary_unary(
+                '/ondewo.nlu.LlmEvaluations/LlmEvaluationCreateOnlineConfig',
+                request_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.CreateLlmEvaluationOnlineConfigRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.LlmEvaluationOnlineConfig.FromString,
+                _registered_method=True)
+        self.LlmEvaluationGetOnlineConfig = channel.unary_unary(
+                '/ondewo.nlu.LlmEvaluations/LlmEvaluationGetOnlineConfig',
+                request_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.GetLlmEvaluationOnlineConfigRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.LlmEvaluationOnlineConfig.FromString,
+                _registered_method=True)
+        self.LlmEvaluationListOnlineConfigs = channel.unary_unary(
+                '/ondewo.nlu.LlmEvaluations/LlmEvaluationListOnlineConfigs',
+                request_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.ListLlmEvaluationOnlineConfigsRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.ListLlmEvaluationOnlineConfigsResponse.FromString,
+                _registered_method=True)
+        self.LlmEvaluationUpdateOnlineConfig = channel.unary_unary(
+                '/ondewo.nlu.LlmEvaluations/LlmEvaluationUpdateOnlineConfig',
+                request_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.UpdateLlmEvaluationOnlineConfigRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.LlmEvaluationOnlineConfig.FromString,
+                _registered_method=True)
+        self.LlmEvaluationDeleteOnlineConfig = channel.unary_unary(
+                '/ondewo.nlu.LlmEvaluations/LlmEvaluationDeleteOnlineConfig',
+                request_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.DeleteLlmEvaluationOnlineConfigRequest.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                _registered_method=True)
+        self.LlmEvaluationGetOnlineResult = channel.unary_unary(
+                '/ondewo.nlu.LlmEvaluations/LlmEvaluationGetOnlineResult',
+                request_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.GetLlmEvaluationOnlineResultRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.LlmEvaluationOnlineResult.FromString,
+                _registered_method=True)
+        self.LlmEvaluationListOnlineResults = channel.unary_unary(
+                '/ondewo.nlu.LlmEvaluations/LlmEvaluationListOnlineResults',
+                request_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.ListLlmEvaluationOnlineResultsRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.ListLlmEvaluationOnlineResultsResponse.FromString,
+                _registered_method=True)
+        self.LlmEvaluationGetAnnotationQueueItem = channel.unary_unary(
+                '/ondewo.nlu.LlmEvaluations/LlmEvaluationGetAnnotationQueueItem',
+                request_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.GetLlmEvaluationAnnotationQueueItemRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.LlmEvaluationAnnotationQueueItem.FromString,
+                _registered_method=True)
+        self.LlmEvaluationListAnnotationQueueItems = channel.unary_unary(
+                '/ondewo.nlu.LlmEvaluations/LlmEvaluationListAnnotationQueueItems',
+                request_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.ListLlmEvaluationAnnotationQueueItemsRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.ListLlmEvaluationAnnotationQueueItemsResponse.FromString,
+                _registered_method=True)
+        self.LlmEvaluationUpdateAnnotationQueueItem = channel.unary_unary(
+                '/ondewo.nlu.LlmEvaluations/LlmEvaluationUpdateAnnotationQueueItem',
+                request_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.UpdateLlmEvaluationAnnotationQueueItemRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.LlmEvaluationAnnotationQueueItem.FromString,
+                _registered_method=True)
+        self.LlmEvaluationPromoteAnnotationQueueItem = channel.unary_unary(
+                '/ondewo.nlu.LlmEvaluations/LlmEvaluationPromoteAnnotationQueueItem',
+                request_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.PromoteLlmEvaluationAnnotationQueueItemRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.PromoteLlmEvaluationAnnotationQueueItemResponse.FromString,
+                _registered_method=True)
 
 
 class LlmEvaluationsServicer(object):
@@ -809,6 +864,107 @@ class LlmEvaluationsServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def LlmEvaluationCreateOnlineConfig(self, request, context):
+        """endregion a/b experiments
+
+        region online evaluation
+
+        Create a new online-evaluation config: a per-(project, language_code)
+        definition selecting a reference-free evaluator set + a sample rate. A
+        swarm-safe background worker samples already-persisted live session steps,
+        scores the recorded answer with these evaluators and enqueues failing steps
+        into the annotation queue.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def LlmEvaluationGetOnlineConfig(self, request, context):
+        """Get an online-evaluation config by resource name.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def LlmEvaluationListOnlineConfigs(self, request, context):
+        """List online-evaluation configs in the project, optionally filtered + paginated.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def LlmEvaluationUpdateOnlineConfig(self, request, context):
+        """Update an existing online-evaluation config (enabled flag, evaluator set,
+        sample rate, thresholds, session filter).
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def LlmEvaluationDeleteOnlineConfig(self, request, context):
+        """Delete an online-evaluation config. Already-produced online results and
+        annotation-queue items are kept.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def LlmEvaluationGetOnlineResult(self, request, context):
+        """endregion online evaluation
+
+        region online results
+
+        Get a single online-evaluation result (per scored session step) by resource name.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def LlmEvaluationListOnlineResults(self, request, context):
+        """List online-evaluation results, optionally filtered by config / pass-state + paginated.
+        Read-only: result rows are produced by the online-evaluation worker (no Create RPC).
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def LlmEvaluationGetAnnotationQueueItem(self, request, context):
+        """endregion online results
+
+        region annotation queue
+
+        Get a single annotation-queue item by resource name.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def LlmEvaluationListAnnotationQueueItems(self, request, context):
+        """List annotation-queue items, optionally filtered by status / assignee + paginated.
+        Items are enqueued by the online-evaluation worker (no Create RPC).
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def LlmEvaluationUpdateAnnotationQueueItem(self, request, context):
+        """Update an annotation-queue item (status / assignee / reason transitions:
+        PENDING -> REVIEWED / DISMISSED).
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def LlmEvaluationPromoteAnnotationQueueItem(self, request, context):
+        """Promote an annotation-queue item into a regression dataset. Thin server-side
+        composition: delegates to LlmEvaluationCreateExamplesFromSession with the
+        item's session (+ selected steps), flips the item status to PROMOTED and
+        stamps the promoted dataset name. Returns the created example(s).
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_LlmEvaluationsServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -1096,6 +1252,61 @@ def add_LlmEvaluationsServicer_to_server(servicer, server):
                     servicer.LlmEvaluationGetAbExperimentResults,
                     request_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.GetLlmEvaluationAbExperimentResultsRequest.FromString,
                     response_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.GetLlmEvaluationAbExperimentResultsResponse.SerializeToString,
+            ),
+            'LlmEvaluationCreateOnlineConfig': grpc.unary_unary_rpc_method_handler(
+                    servicer.LlmEvaluationCreateOnlineConfig,
+                    request_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.CreateLlmEvaluationOnlineConfigRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.LlmEvaluationOnlineConfig.SerializeToString,
+            ),
+            'LlmEvaluationGetOnlineConfig': grpc.unary_unary_rpc_method_handler(
+                    servicer.LlmEvaluationGetOnlineConfig,
+                    request_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.GetLlmEvaluationOnlineConfigRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.LlmEvaluationOnlineConfig.SerializeToString,
+            ),
+            'LlmEvaluationListOnlineConfigs': grpc.unary_unary_rpc_method_handler(
+                    servicer.LlmEvaluationListOnlineConfigs,
+                    request_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.ListLlmEvaluationOnlineConfigsRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.ListLlmEvaluationOnlineConfigsResponse.SerializeToString,
+            ),
+            'LlmEvaluationUpdateOnlineConfig': grpc.unary_unary_rpc_method_handler(
+                    servicer.LlmEvaluationUpdateOnlineConfig,
+                    request_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.UpdateLlmEvaluationOnlineConfigRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.LlmEvaluationOnlineConfig.SerializeToString,
+            ),
+            'LlmEvaluationDeleteOnlineConfig': grpc.unary_unary_rpc_method_handler(
+                    servicer.LlmEvaluationDeleteOnlineConfig,
+                    request_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.DeleteLlmEvaluationOnlineConfigRequest.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'LlmEvaluationGetOnlineResult': grpc.unary_unary_rpc_method_handler(
+                    servicer.LlmEvaluationGetOnlineResult,
+                    request_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.GetLlmEvaluationOnlineResultRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.LlmEvaluationOnlineResult.SerializeToString,
+            ),
+            'LlmEvaluationListOnlineResults': grpc.unary_unary_rpc_method_handler(
+                    servicer.LlmEvaluationListOnlineResults,
+                    request_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.ListLlmEvaluationOnlineResultsRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.ListLlmEvaluationOnlineResultsResponse.SerializeToString,
+            ),
+            'LlmEvaluationGetAnnotationQueueItem': grpc.unary_unary_rpc_method_handler(
+                    servicer.LlmEvaluationGetAnnotationQueueItem,
+                    request_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.GetLlmEvaluationAnnotationQueueItemRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.LlmEvaluationAnnotationQueueItem.SerializeToString,
+            ),
+            'LlmEvaluationListAnnotationQueueItems': grpc.unary_unary_rpc_method_handler(
+                    servicer.LlmEvaluationListAnnotationQueueItems,
+                    request_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.ListLlmEvaluationAnnotationQueueItemsRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.ListLlmEvaluationAnnotationQueueItemsResponse.SerializeToString,
+            ),
+            'LlmEvaluationUpdateAnnotationQueueItem': grpc.unary_unary_rpc_method_handler(
+                    servicer.LlmEvaluationUpdateAnnotationQueueItem,
+                    request_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.UpdateLlmEvaluationAnnotationQueueItemRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.LlmEvaluationAnnotationQueueItem.SerializeToString,
+            ),
+            'LlmEvaluationPromoteAnnotationQueueItem': grpc.unary_unary_rpc_method_handler(
+                    servicer.LlmEvaluationPromoteAnnotationQueueItem,
+                    request_deserializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.PromoteLlmEvaluationAnnotationQueueItemRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_llm__evaluation__pb2.PromoteLlmEvaluationAnnotationQueueItemResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -2643,6 +2854,303 @@ class LlmEvaluations(object):
             '/ondewo.nlu.LlmEvaluations/LlmEvaluationGetAbExperimentResults',
             ondewo_dot_nlu_dot_llm__evaluation__pb2.GetLlmEvaluationAbExperimentResultsRequest.SerializeToString,
             ondewo_dot_nlu_dot_llm__evaluation__pb2.GetLlmEvaluationAbExperimentResultsResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def LlmEvaluationCreateOnlineConfig(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.LlmEvaluations/LlmEvaluationCreateOnlineConfig',
+            ondewo_dot_nlu_dot_llm__evaluation__pb2.CreateLlmEvaluationOnlineConfigRequest.SerializeToString,
+            ondewo_dot_nlu_dot_llm__evaluation__pb2.LlmEvaluationOnlineConfig.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def LlmEvaluationGetOnlineConfig(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.LlmEvaluations/LlmEvaluationGetOnlineConfig',
+            ondewo_dot_nlu_dot_llm__evaluation__pb2.GetLlmEvaluationOnlineConfigRequest.SerializeToString,
+            ondewo_dot_nlu_dot_llm__evaluation__pb2.LlmEvaluationOnlineConfig.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def LlmEvaluationListOnlineConfigs(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.LlmEvaluations/LlmEvaluationListOnlineConfigs',
+            ondewo_dot_nlu_dot_llm__evaluation__pb2.ListLlmEvaluationOnlineConfigsRequest.SerializeToString,
+            ondewo_dot_nlu_dot_llm__evaluation__pb2.ListLlmEvaluationOnlineConfigsResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def LlmEvaluationUpdateOnlineConfig(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.LlmEvaluations/LlmEvaluationUpdateOnlineConfig',
+            ondewo_dot_nlu_dot_llm__evaluation__pb2.UpdateLlmEvaluationOnlineConfigRequest.SerializeToString,
+            ondewo_dot_nlu_dot_llm__evaluation__pb2.LlmEvaluationOnlineConfig.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def LlmEvaluationDeleteOnlineConfig(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.LlmEvaluations/LlmEvaluationDeleteOnlineConfig',
+            ondewo_dot_nlu_dot_llm__evaluation__pb2.DeleteLlmEvaluationOnlineConfigRequest.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def LlmEvaluationGetOnlineResult(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.LlmEvaluations/LlmEvaluationGetOnlineResult',
+            ondewo_dot_nlu_dot_llm__evaluation__pb2.GetLlmEvaluationOnlineResultRequest.SerializeToString,
+            ondewo_dot_nlu_dot_llm__evaluation__pb2.LlmEvaluationOnlineResult.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def LlmEvaluationListOnlineResults(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.LlmEvaluations/LlmEvaluationListOnlineResults',
+            ondewo_dot_nlu_dot_llm__evaluation__pb2.ListLlmEvaluationOnlineResultsRequest.SerializeToString,
+            ondewo_dot_nlu_dot_llm__evaluation__pb2.ListLlmEvaluationOnlineResultsResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def LlmEvaluationGetAnnotationQueueItem(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.LlmEvaluations/LlmEvaluationGetAnnotationQueueItem',
+            ondewo_dot_nlu_dot_llm__evaluation__pb2.GetLlmEvaluationAnnotationQueueItemRequest.SerializeToString,
+            ondewo_dot_nlu_dot_llm__evaluation__pb2.LlmEvaluationAnnotationQueueItem.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def LlmEvaluationListAnnotationQueueItems(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.LlmEvaluations/LlmEvaluationListAnnotationQueueItems',
+            ondewo_dot_nlu_dot_llm__evaluation__pb2.ListLlmEvaluationAnnotationQueueItemsRequest.SerializeToString,
+            ondewo_dot_nlu_dot_llm__evaluation__pb2.ListLlmEvaluationAnnotationQueueItemsResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def LlmEvaluationUpdateAnnotationQueueItem(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.LlmEvaluations/LlmEvaluationUpdateAnnotationQueueItem',
+            ondewo_dot_nlu_dot_llm__evaluation__pb2.UpdateLlmEvaluationAnnotationQueueItemRequest.SerializeToString,
+            ondewo_dot_nlu_dot_llm__evaluation__pb2.LlmEvaluationAnnotationQueueItem.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def LlmEvaluationPromoteAnnotationQueueItem(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.LlmEvaluations/LlmEvaluationPromoteAnnotationQueueItem',
+            ondewo_dot_nlu_dot_llm__evaluation__pb2.PromoteLlmEvaluationAnnotationQueueItemRequest.SerializeToString,
+            ondewo_dot_nlu_dot_llm__evaluation__pb2.PromoteLlmEvaluationAnnotationQueueItemResponse.FromString,
             options,
             channel_credentials,
             insecure,

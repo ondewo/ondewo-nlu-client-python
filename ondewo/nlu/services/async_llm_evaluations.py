@@ -33,6 +33,7 @@ from ondewo.nlu.llm_evaluation_pb2 import (
     CreateLlmEvaluationDatasetRequest,
     CreateLlmEvaluationExamplesFromSessionRequest,
     CreateLlmEvaluationExamplesFromSessionResponse,
+    CreateLlmEvaluationOnlineConfigRequest,
     CreateLlmEvaluationReleaseGateRequest,
     CreateLlmEvaluationReportRequest,
     CreateLlmEvaluationScheduleRequest,
@@ -42,6 +43,7 @@ from ondewo.nlu.llm_evaluation_pb2 import (
     DeleteLlmEvaluationExampleRequest,
     DeleteLlmEvaluationExperimentRequest,
     DeleteLlmEvaluationFeedbackRequest,
+    DeleteLlmEvaluationOnlineConfigRequest,
     DeleteLlmEvaluationReleaseGateRequest,
     DeleteLlmEvaluationReportRequest,
     DeleteLlmEvaluationScheduleRequest,
@@ -49,9 +51,12 @@ from ondewo.nlu.llm_evaluation_pb2 import (
     GetLlmEvaluationAbExperimentRequest,
     GetLlmEvaluationAbExperimentResultsRequest,
     GetLlmEvaluationAbExperimentResultsResponse,
+    GetLlmEvaluationAnnotationQueueItemRequest,
     GetLlmEvaluationDatasetRequest,
     GetLlmEvaluationExampleRequest,
     GetLlmEvaluationExperimentRequest,
+    GetLlmEvaluationOnlineConfigRequest,
+    GetLlmEvaluationOnlineResultRequest,
     GetLlmEvaluationProjectSettingsRequest,
     GetLlmEvaluationReleaseGateRequest,
     GetLlmEvaluationReleaseGateRunRequest,
@@ -60,6 +65,8 @@ from ondewo.nlu.llm_evaluation_pb2 import (
     GetLlmEvaluationScorecardRequest,
     ListLlmEvaluationAbExperimentsRequest,
     ListLlmEvaluationAbExperimentsResponse,
+    ListLlmEvaluationAnnotationQueueItemsRequest,
+    ListLlmEvaluationAnnotationQueueItemsResponse,
     ListLlmEvaluationDatasetsRequest,
     ListLlmEvaluationDatasetsResponse,
     ListLlmEvaluationEvaluatorsRequest,
@@ -70,6 +77,10 @@ from ondewo.nlu.llm_evaluation_pb2 import (
     ListLlmEvaluationExperimentsResponse,
     ListLlmEvaluationFeedbackRequest,
     ListLlmEvaluationFeedbackResponse,
+    ListLlmEvaluationOnlineConfigsRequest,
+    ListLlmEvaluationOnlineConfigsResponse,
+    ListLlmEvaluationOnlineResultsRequest,
+    ListLlmEvaluationOnlineResultsResponse,
     ListLlmEvaluationReleaseGateRunsRequest,
     ListLlmEvaluationReleaseGateRunsResponse,
     ListLlmEvaluationReleaseGatesRequest,
@@ -81,17 +92,22 @@ from ondewo.nlu.llm_evaluation_pb2 import (
     ListLlmEvaluationScorecardsRequest,
     ListLlmEvaluationScorecardsResponse,
     LlmEvaluationAbExperiment,
+    LlmEvaluationAnnotationQueueItem,
     LlmEvaluationComparison,
     LlmEvaluationDataset,
     LlmEvaluationExample,
     LlmEvaluationExperiment,
     LlmEvaluationFeedback,
+    LlmEvaluationOnlineConfig,
+    LlmEvaluationOnlineResult,
     LlmEvaluationProjectSettings,
     LlmEvaluationReleaseGate,
     LlmEvaluationReleaseGateRun,
     LlmEvaluationReport,
     LlmEvaluationSchedule,
     LlmEvaluationScorecard,
+    PromoteLlmEvaluationAnnotationQueueItemRequest,
+    PromoteLlmEvaluationAnnotationQueueItemResponse,
     RunLlmEvaluationExperimentRequest,
     RunLlmEvaluationReleaseGateRequest,
     SimulateLlmEvaluationConversationsRequest,
@@ -99,10 +115,12 @@ from ondewo.nlu.llm_evaluation_pb2 import (
     StopLlmEvaluationAbExperimentRequest,
     SubmitLlmEvaluationFeedbackRequest,
     UpdateLlmEvaluationAbExperimentRequest,
+    UpdateLlmEvaluationAnnotationQueueItemRequest,
     UpdateLlmEvaluationDatasetRequest,
     UpdateLlmEvaluationExampleRequest,
     UpdateLlmEvaluationExperimentRequest,
     UpdateLlmEvaluationFeedbackRequest,
+    UpdateLlmEvaluationOnlineConfigRequest,
     UpdateLlmEvaluationProjectSettingsRequest,
     UpdateLlmEvaluationReleaseGateRequest,
     UpdateLlmEvaluationScheduleRequest,
@@ -503,5 +521,99 @@ class LlmEvaluations(AsyncServicesInterface):
     ) -> GetLlmEvaluationAbExperimentResultsResponse:
         response: GetLlmEvaluationAbExperimentResultsResponse = await self.stub.LlmEvaluationGetAbExperimentResults(
             request, metadata=self.metadata
+        )
+        return response
+
+    async def llm_evaluation_create_online_config(
+        self,
+        request: CreateLlmEvaluationOnlineConfigRequest,
+    ) -> LlmEvaluationOnlineConfig:
+        response: LlmEvaluationOnlineConfig = await self.stub.LlmEvaluationCreateOnlineConfig(
+            request, metadata=self.metadata
+        )
+        return response
+
+    async def llm_evaluation_get_online_config(
+        self,
+        request: GetLlmEvaluationOnlineConfigRequest,
+    ) -> LlmEvaluationOnlineConfig:
+        response: LlmEvaluationOnlineConfig = await self.stub.LlmEvaluationGetOnlineConfig(
+            request, metadata=self.metadata
+        )
+        return response
+
+    async def llm_evaluation_list_online_configs(
+        self,
+        request: ListLlmEvaluationOnlineConfigsRequest,
+    ) -> ListLlmEvaluationOnlineConfigsResponse:
+        response: ListLlmEvaluationOnlineConfigsResponse = await self.stub.LlmEvaluationListOnlineConfigs(
+            request, metadata=self.metadata
+        )
+        return response
+
+    async def llm_evaluation_update_online_config(
+        self,
+        request: UpdateLlmEvaluationOnlineConfigRequest,
+    ) -> LlmEvaluationOnlineConfig:
+        response: LlmEvaluationOnlineConfig = await self.stub.LlmEvaluationUpdateOnlineConfig(
+            request, metadata=self.metadata
+        )
+        return response
+
+    async def llm_evaluation_delete_online_config(self, request: DeleteLlmEvaluationOnlineConfigRequest) -> Empty:
+        response: Empty = await self.stub.LlmEvaluationDeleteOnlineConfig(request, metadata=self.metadata)
+        return response
+
+    async def llm_evaluation_get_online_result(
+        self,
+        request: GetLlmEvaluationOnlineResultRequest,
+    ) -> LlmEvaluationOnlineResult:
+        response: LlmEvaluationOnlineResult = await self.stub.LlmEvaluationGetOnlineResult(
+            request, metadata=self.metadata
+        )
+        return response
+
+    async def llm_evaluation_list_online_results(
+        self,
+        request: ListLlmEvaluationOnlineResultsRequest,
+    ) -> ListLlmEvaluationOnlineResultsResponse:
+        response: ListLlmEvaluationOnlineResultsResponse = await self.stub.LlmEvaluationListOnlineResults(
+            request, metadata=self.metadata
+        )
+        return response
+
+    async def llm_evaluation_get_annotation_queue_item(
+        self,
+        request: GetLlmEvaluationAnnotationQueueItemRequest,
+    ) -> LlmEvaluationAnnotationQueueItem:
+        response: LlmEvaluationAnnotationQueueItem = await self.stub.LlmEvaluationGetAnnotationQueueItem(
+            request, metadata=self.metadata
+        )
+        return response
+
+    async def llm_evaluation_list_annotation_queue_items(
+        self,
+        request: ListLlmEvaluationAnnotationQueueItemsRequest,
+    ) -> ListLlmEvaluationAnnotationQueueItemsResponse:
+        response: ListLlmEvaluationAnnotationQueueItemsResponse = await self.stub.LlmEvaluationListAnnotationQueueItems(
+            request, metadata=self.metadata
+        )
+        return response
+
+    async def llm_evaluation_update_annotation_queue_item(
+        self,
+        request: UpdateLlmEvaluationAnnotationQueueItemRequest,
+    ) -> LlmEvaluationAnnotationQueueItem:
+        response: LlmEvaluationAnnotationQueueItem = await self.stub.LlmEvaluationUpdateAnnotationQueueItem(
+            request, metadata=self.metadata
+        )
+        return response
+
+    async def llm_evaluation_promote_annotation_queue_item(
+        self,
+        request: PromoteLlmEvaluationAnnotationQueueItemRequest,
+    ) -> PromoteLlmEvaluationAnnotationQueueItemResponse:
+        response: PromoteLlmEvaluationAnnotationQueueItemResponse = (
+            await self.stub.LlmEvaluationPromoteAnnotationQueueItem(request, metadata=self.metadata)
         )
         return response

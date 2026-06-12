@@ -382,6 +382,41 @@ LLM_EVALUATION_AB_EXPERIMENT_STATUS_ARCHIVED: LlmEvaluationAbExperimentStatus.Va
 """Archived; read-only, hidden from the default list."""
 global___LlmEvaluationAbExperimentStatus = LlmEvaluationAbExperimentStatus
 
+class _LlmEvaluationAnnotationStatus:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _LlmEvaluationAnnotationStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_LlmEvaluationAnnotationStatus.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    LLM_EVALUATION_ANNOTATION_STATUS_UNSPECIFIED: _LlmEvaluationAnnotationStatus.ValueType  # 0
+    """Default / unset."""
+    LLM_EVALUATION_ANNOTATION_STATUS_PENDING: _LlmEvaluationAnnotationStatus.ValueType  # 1
+    """Enqueued, awaiting human review."""
+    LLM_EVALUATION_ANNOTATION_STATUS_REVIEWED: _LlmEvaluationAnnotationStatus.ValueType  # 2
+    """Reviewed by a human (verdict / reason recorded), not yet promoted or dismissed."""
+    LLM_EVALUATION_ANNOTATION_STATUS_PROMOTED: _LlmEvaluationAnnotationStatus.ValueType  # 3
+    """Promoted into a regression dataset (promoted_dataset_name stamped)."""
+    LLM_EVALUATION_ANNOTATION_STATUS_DISMISSED: _LlmEvaluationAnnotationStatus.ValueType  # 4
+    """Dismissed (not a genuine failure; will not be promoted)."""
+
+class LlmEvaluationAnnotationStatus(_LlmEvaluationAnnotationStatus, metaclass=_LlmEvaluationAnnotationStatusEnumTypeWrapper):
+    """region annotation queue domain messages
+
+    Lifecycle status of an annotation-queue item.
+    """
+
+LLM_EVALUATION_ANNOTATION_STATUS_UNSPECIFIED: LlmEvaluationAnnotationStatus.ValueType  # 0
+"""Default / unset."""
+LLM_EVALUATION_ANNOTATION_STATUS_PENDING: LlmEvaluationAnnotationStatus.ValueType  # 1
+"""Enqueued, awaiting human review."""
+LLM_EVALUATION_ANNOTATION_STATUS_REVIEWED: LlmEvaluationAnnotationStatus.ValueType  # 2
+"""Reviewed by a human (verdict / reason recorded), not yet promoted or dismissed."""
+LLM_EVALUATION_ANNOTATION_STATUS_PROMOTED: LlmEvaluationAnnotationStatus.ValueType  # 3
+"""Promoted into a regression dataset (promoted_dataset_name stamped)."""
+LLM_EVALUATION_ANNOTATION_STATUS_DISMISSED: LlmEvaluationAnnotationStatus.ValueType  # 4
+"""Dismissed (not a genuine failure; will not be promoted)."""
+global___LlmEvaluationAnnotationStatus = LlmEvaluationAnnotationStatus
+
 @typing.final
 class LlmEvaluationDataset(google.protobuf.message.Message):
     """region domain messages
@@ -5236,3 +5271,1012 @@ class GetLlmEvaluationAbExperimentResultsResponse(google.protobuf.message.Messag
     def ClearField(self, field_name: typing.Literal["llm_evaluation_ab_experiment_name", b"llm_evaluation_ab_experiment_name", "variant_results", b"variant_results"]) -> None: ...
 
 global___GetLlmEvaluationAbExperimentResultsResponse = GetLlmEvaluationAbExperimentResultsResponse
+
+@typing.final
+class LlmEvaluationOnlineSessionFilter(google.protobuf.message.Message):
+    """region online evaluation domain messages
+
+    Optional filter narrowing which already-persisted live session steps an
+    online-evaluation config samples. All fields are optional; multiple fields set
+    at the same time are combined via logical AND.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    LABELS_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODES_FIELD_NUMBER: builtins.int
+    PLATFORMS_FIELD_NUMBER: builtins.int
+    REQUIRE_TELEMETRY_FIELD_NUMBER: builtins.int
+    require_telemetry: builtins.bool
+    """Optional. When true, only sample steps that have recorded LLM telemetry
+    (a <code>session_step_llm_telemetry</code> row), so reference-free judges
+    requiring the trace can run.
+    """
+    @property
+    def labels(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Match only session steps whose session carries every one of these
+        labels (e.g. <code>"AI_FLAGGED"</code>).
+        """
+
+    @property
+    def language_codes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Restrict sampling to these BCP-47 language codes. Empty = the
+        owning config's language_code only.
+        """
+
+    @property
+    def platforms(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Restrict sampling to these integration platforms."""
+
+    def __init__(
+        self,
+        *,
+        labels: collections.abc.Iterable[builtins.str] | None = ...,
+        language_codes: collections.abc.Iterable[builtins.str] | None = ...,
+        platforms: collections.abc.Iterable[builtins.str] | None = ...,
+        require_telemetry: builtins.bool = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["labels", b"labels", "language_codes", b"language_codes", "platforms", b"platforms", "require_telemetry", b"require_telemetry"]) -> None: ...
+
+global___LlmEvaluationOnlineSessionFilter = LlmEvaluationOnlineSessionFilter
+
+@typing.final
+class LlmEvaluationOnlineConfig(google.protobuf.message.Message):
+    """An online-evaluation config: a per-(project, language_code) definition that a
+    swarm-safe background worker uses to sample already-persisted live session
+    steps, score the recorded answer with a reference-free evaluator set, and
+    enqueue failing steps into the annotation queue. Mirrors the LlmEvaluationSchedule
+    scoping / audit / enabled-flag shape.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    NAME_FIELD_NUMBER: builtins.int
+    DISPLAY_NAME_FIELD_NUMBER: builtins.int
+    DESCRIPTION_FIELD_NUMBER: builtins.int
+    EVALUATOR_NAMES_FIELD_NUMBER: builtins.int
+    SAMPLE_RATE_FIELD_NUMBER: builtins.int
+    ENABLED_FIELD_NUMBER: builtins.int
+    TARGET_DATASET_NAME_FIELD_NUMBER: builtins.int
+    FAIL_THRESHOLD_FIELD_NUMBER: builtins.int
+    SETTLE_SECONDS_FIELD_NUMBER: builtins.int
+    REQUIRE_TELEMETRY_FIELD_NUMBER: builtins.int
+    LLM_EVALUATION_ONLINE_SESSION_FILTER_FIELD_NUMBER: builtins.int
+    LAST_EVALUATED_AT_FIELD_NUMBER: builtins.int
+    N_SESSIONS_EVALUATED_FIELD_NUMBER: builtins.int
+    CREATED_AT_FIELD_NUMBER: builtins.int
+    CREATED_BY_FIELD_NUMBER: builtins.int
+    MODIFIED_AT_FIELD_NUMBER: builtins.int
+    MODIFIED_BY_FIELD_NUMBER: builtins.int
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    name: builtins.str
+    """The unique resource name of the online config. Read-only; populated by the server.
+    Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationOnlineConfigs/&lt;config_uuid&gt;</code>.
+    """
+    display_name: builtins.str
+    """Required. Human-readable display name (unique within the (project, language_code) tuple)."""
+    description: builtins.str
+    """Free-form description."""
+    sample_rate: builtins.float
+    """Fraction of candidate steps to score, in the range 0.0-1.0. Applied
+    deterministically per step.
+    """
+    enabled: builtins.bool
+    """Whether the worker samples for this config. Disabled configs keep their configuration."""
+    target_dataset_name: builtins.str
+    """Optional. Default promotion target dataset for steps enqueued by this config.
+    Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;</code>.
+    """
+    fail_threshold: builtins.float
+    """Score cutoff (0.0-1.0). Scored steps whose aggregate score is below this
+    threshold are enqueued into the annotation queue. Defaults to 0.5.
+    """
+    settle_seconds: builtins.int
+    """Settle window in seconds: the worker only considers steps older than this,
+    so per-step telemetry has landed before scoring. Defaults to 30.
+    """
+    require_telemetry: builtins.bool
+    """When true, only steps with recorded LLM telemetry are sampled (shorthand for
+    the session-filter flag of the same name).
+    """
+    n_sessions_evaluated: builtins.int
+    """Running count of session steps this config has scored. Read-only; set by the worker."""
+    created_by: builtins.str
+    """User id in form of a valid UUID."""
+    modified_by: builtins.str
+    """User id in form of a valid UUID."""
+    parent: builtins.str
+    """Project owning the config.
+    Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    """
+    language_code: builtins.str
+    """BCP-47 language-code scope."""
+    @property
+    def evaluator_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Reference-free evaluator names the worker runs on each sampled step (e.g.
+        <code>"answer_relevancy"</code>, <code>"faithfulness"</code>, <code>"toxicity"</code>).
+        AIM restricts the picker to reference-free evaluators via LlmEvaluationListEvaluators.
+        """
+
+    @property
+    def llm_evaluation_online_session_filter(self) -> global___LlmEvaluationOnlineSessionFilter:
+        """Optional. Filter narrowing which session steps are sampled."""
+
+    @property
+    def last_evaluated_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Wall-clock time of the worker's most recent evaluation pass for this config.
+        Read-only; set by the worker.
+        """
+
+    @property
+    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Creation date and time. Read-only field."""
+
+    @property
+    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Modification date and time. Read-only field."""
+
+    def __init__(
+        self,
+        *,
+        name: builtins.str = ...,
+        display_name: builtins.str = ...,
+        description: builtins.str = ...,
+        evaluator_names: collections.abc.Iterable[builtins.str] | None = ...,
+        sample_rate: builtins.float = ...,
+        enabled: builtins.bool = ...,
+        target_dataset_name: builtins.str = ...,
+        fail_threshold: builtins.float = ...,
+        settle_seconds: builtins.int = ...,
+        require_telemetry: builtins.bool = ...,
+        llm_evaluation_online_session_filter: global___LlmEvaluationOnlineSessionFilter | None = ...,
+        last_evaluated_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        n_sessions_evaluated: builtins.int = ...,
+        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        created_by: builtins.str = ...,
+        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        modified_by: builtins.str = ...,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["created_at", b"created_at", "last_evaluated_at", b"last_evaluated_at", "llm_evaluation_online_session_filter", b"llm_evaluation_online_session_filter", "modified_at", b"modified_at"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["created_at", b"created_at", "created_by", b"created_by", "description", b"description", "display_name", b"display_name", "enabled", b"enabled", "evaluator_names", b"evaluator_names", "fail_threshold", b"fail_threshold", "language_code", b"language_code", "last_evaluated_at", b"last_evaluated_at", "llm_evaluation_online_session_filter", b"llm_evaluation_online_session_filter", "modified_at", b"modified_at", "modified_by", b"modified_by", "n_sessions_evaluated", b"n_sessions_evaluated", "name", b"name", "parent", b"parent", "require_telemetry", b"require_telemetry", "sample_rate", b"sample_rate", "settle_seconds", b"settle_seconds", "target_dataset_name", b"target_dataset_name"]) -> None: ...
+
+global___LlmEvaluationOnlineConfig = LlmEvaluationOnlineConfig
+
+@typing.final
+class CreateLlmEvaluationOnlineConfigRequest(google.protobuf.message.Message):
+    """Request to create a new online-evaluation config."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    LLM_EVALUATION_ONLINE_CONFIG_FIELD_NUMBER: builtins.int
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Project owning the config.
+    Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    """
+    language_code: builtins.str
+    """BCP-47 language-code scope (required)."""
+    @property
+    def llm_evaluation_online_config(self) -> global___LlmEvaluationOnlineConfig:
+        """Config payload (name / audit / last-evaluated fields are server-populated)."""
+
+    def __init__(
+        self,
+        *,
+        llm_evaluation_online_config: global___LlmEvaluationOnlineConfig | None = ...,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["llm_evaluation_online_config", b"llm_evaluation_online_config"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["language_code", b"language_code", "llm_evaluation_online_config", b"llm_evaluation_online_config", "parent", b"parent"]) -> None: ...
+
+global___CreateLlmEvaluationOnlineConfigRequest = CreateLlmEvaluationOnlineConfigRequest
+
+@typing.final
+class GetLlmEvaluationOnlineConfigRequest(google.protobuf.message.Message):
+    """Request to get a single online-evaluation config."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    NAME_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    name: builtins.str
+    """Resource name of the config to fetch.
+    Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationOnlineConfigs/&lt;config_uuid&gt;</code>.
+    """
+    parent: builtins.str
+    """Project owning the config.
+    Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    """
+    language_code: builtins.str
+    """BCP-47 language-code scope (required)."""
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields will be filled with data."""
+
+    def __init__(
+        self,
+        *,
+        name: builtins.str = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "language_code", b"language_code", "name", b"name", "parent", b"parent"]) -> None: ...
+
+global___GetLlmEvaluationOnlineConfigRequest = GetLlmEvaluationOnlineConfigRequest
+
+@typing.final
+class LlmEvaluationOnlineConfigFilter(google.protobuf.message.Message):
+    """Filter conditions for ListOnlineConfigs. All fields are optional; multiple
+    fields set at the same time are combined via logical AND.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    DISPLAY_NAME_FIELD_NUMBER: builtins.int
+    ENABLED_ONLY_FIELD_NUMBER: builtins.int
+    display_name: builtins.str
+    """Optional. Match only configs whose display name contains this substring
+    (case-insensitive).
+    """
+    enabled_only: builtins.bool
+    """Optional. When true, match only enabled configs."""
+    def __init__(
+        self,
+        *,
+        display_name: builtins.str = ...,
+        enabled_only: builtins.bool = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["display_name", b"display_name", "enabled_only", b"enabled_only"]) -> None: ...
+
+global___LlmEvaluationOnlineConfigFilter = LlmEvaluationOnlineConfigFilter
+
+@typing.final
+class ListLlmEvaluationOnlineConfigsRequest(google.protobuf.message.Message):
+    """Request to list online-evaluation configs within a project."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PARENT_FIELD_NUMBER: builtins.int
+    PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    LLM_EVALUATION_ONLINE_CONFIG_FILTER_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Project owning the configs.
+    Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    """
+    page_token: builtins.str
+    """Optional. Page token for pagination. Retrieves a large result set in
+    smaller, more manageable portions. The token encodes the current index
+    and the page size.
+
+    Valid page token strings:
+    <ul>
+      <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li>
+      <li><code>&quot;current_index-0--page_size-20&quot;</code> - First page, page size 20.</li>
+      <li><code>&quot;current_index-1--page_size-20&quot;</code> - Second page, page size 20.</li>
+    </ul>
+    Index starts at 0.
+    """
+    language_code: builtins.str
+    """BCP-47 language-code scope (required)."""
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields will be filled with data."""
+
+    @property
+    def llm_evaluation_online_config_filter(self) -> global___LlmEvaluationOnlineConfigFilter:
+        """Optional. Filter conditions to narrow the returned configs."""
+
+    def __init__(
+        self,
+        *,
+        parent: builtins.str = ...,
+        page_token: builtins.str = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        language_code: builtins.str = ...,
+        llm_evaluation_online_config_filter: global___LlmEvaluationOnlineConfigFilter | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask", "llm_evaluation_online_config_filter", b"llm_evaluation_online_config_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "language_code", b"language_code", "llm_evaluation_online_config_filter", b"llm_evaluation_online_config_filter", "page_token", b"page_token", "parent", b"parent"]) -> None: ...
+
+global___ListLlmEvaluationOnlineConfigsRequest = ListLlmEvaluationOnlineConfigsRequest
+
+@typing.final
+class ListLlmEvaluationOnlineConfigsResponse(google.protobuf.message.Message):
+    """Response for ListOnlineConfigs."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    LLM_EVALUATION_ONLINE_CONFIGS_FIELD_NUMBER: builtins.int
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    next_page_token: builtins.str
+    """Pagination token for the next page (empty if this is the last page)."""
+    @property
+    def llm_evaluation_online_configs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmEvaluationOnlineConfig]:
+        """Configs matching the request."""
+
+    def __init__(
+        self,
+        *,
+        llm_evaluation_online_configs: collections.abc.Iterable[global___LlmEvaluationOnlineConfig] | None = ...,
+        next_page_token: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["llm_evaluation_online_configs", b"llm_evaluation_online_configs", "next_page_token", b"next_page_token"]) -> None: ...
+
+global___ListLlmEvaluationOnlineConfigsResponse = ListLlmEvaluationOnlineConfigsResponse
+
+@typing.final
+class UpdateLlmEvaluationOnlineConfigRequest(google.protobuf.message.Message):
+    """Request to update an existing online-evaluation config."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    LLM_EVALUATION_ONLINE_CONFIG_FIELD_NUMBER: builtins.int
+    UPDATE_MASK_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Project owning the config.
+    Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    """
+    language_code: builtins.str
+    """BCP-47 language-code scope (required)."""
+    @property
+    def llm_evaluation_online_config(self) -> global___LlmEvaluationOnlineConfig:
+        """Config payload (only fields covered by <code>update_mask</code> are applied)."""
+
+    @property
+    def update_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Mask of fields to update on the config record."""
+
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields will be filled with data on the
+        returned config.
+        """
+
+    def __init__(
+        self,
+        *,
+        llm_evaluation_online_config: global___LlmEvaluationOnlineConfig | None = ...,
+        update_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask", "llm_evaluation_online_config", b"llm_evaluation_online_config", "update_mask", b"update_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "language_code", b"language_code", "llm_evaluation_online_config", b"llm_evaluation_online_config", "parent", b"parent", "update_mask", b"update_mask"]) -> None: ...
+
+global___UpdateLlmEvaluationOnlineConfigRequest = UpdateLlmEvaluationOnlineConfigRequest
+
+@typing.final
+class DeleteLlmEvaluationOnlineConfigRequest(google.protobuf.message.Message):
+    """Request to delete an online-evaluation config."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    NAME_FIELD_NUMBER: builtins.int
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    name: builtins.str
+    """Resource name of the config to delete.
+    Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationOnlineConfigs/&lt;config_uuid&gt;</code>.
+    """
+    parent: builtins.str
+    """Project owning the config.
+    Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    """
+    language_code: builtins.str
+    """BCP-47 language-code scope (required)."""
+    def __init__(
+        self,
+        *,
+        name: builtins.str = ...,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["language_code", b"language_code", "name", b"name", "parent", b"parent"]) -> None: ...
+
+global___DeleteLlmEvaluationOnlineConfigRequest = DeleteLlmEvaluationOnlineConfigRequest
+
+@typing.final
+class LlmEvaluationOnlineResult(google.protobuf.message.Message):
+    """region online result domain messages
+
+    A self-contained online-evaluation result: one row per scored session step.
+    Per-criterion feedbacks are stored as an embedded repeated LlmEvaluationFeedback
+    list (exactly like LlmEvaluationTurnResult.feedbacks — NOT persisted into the
+    experiment-scoped llm_feedback table). Produced by the online-evaluation worker;
+    read-only over the API.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    NAME_FIELD_NUMBER: builtins.int
+    LLM_EVALUATION_ONLINE_CONFIG_NAME_FIELD_NUMBER: builtins.int
+    SESSION_NAME_FIELD_NUMBER: builtins.int
+    SESSION_STEP_NAME_FIELD_NUMBER: builtins.int
+    LLM_EVALUATION_FEEDBACKS_FIELD_NUMBER: builtins.int
+    PASSED_FIELD_NUMBER: builtins.int
+    AGGREGATE_SCORE_FIELD_NUMBER: builtins.int
+    EVALUATED_AT_FIELD_NUMBER: builtins.int
+    CREATED_AT_FIELD_NUMBER: builtins.int
+    CREATED_BY_FIELD_NUMBER: builtins.int
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    name: builtins.str
+    """The unique resource name of the result. Read-only; populated by the server.
+    Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationOnlineResults/&lt;result_uuid&gt;</code>.
+    """
+    llm_evaluation_online_config_name: builtins.str
+    """Resource name of the online config that produced this result.
+    Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationOnlineConfigs/&lt;config_uuid&gt;</code>.
+    """
+    session_name: builtins.str
+    """Resource name of the scored session.
+    Format: <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code>.
+    """
+    session_step_name: builtins.str
+    """Resource name of the scored session step.
+    Format: <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionSteps/&lt;step_uuid&gt;</code>.
+    """
+    passed: builtins.bool
+    """Whether the step passed every criterion (aggregate_score >= the config's
+    fail_threshold and no criterion failed).
+    """
+    aggregate_score: builtins.float
+    """Aggregate roll-up score across the criteria (0.0-1.0)."""
+    created_by: builtins.str
+    """User id in form of a valid UUID (the worker / system identity)."""
+    parent: builtins.str
+    """Project owning the result.
+    Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    """
+    language_code: builtins.str
+    """BCP-47 language-code scope."""
+    @property
+    def llm_evaluation_feedbacks(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmEvaluationFeedback]:
+        """Per-criterion feedback records, one per configured evaluator (embedded list;
+        the same LlmEvaluationFeedback message reused as the per-criterion result
+        element).
+        """
+
+    @property
+    def evaluated_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Wall-clock time the worker scored this step. Read-only."""
+
+    @property
+    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Creation date and time. Read-only field."""
+
+    def __init__(
+        self,
+        *,
+        name: builtins.str = ...,
+        llm_evaluation_online_config_name: builtins.str = ...,
+        session_name: builtins.str = ...,
+        session_step_name: builtins.str = ...,
+        llm_evaluation_feedbacks: collections.abc.Iterable[global___LlmEvaluationFeedback] | None = ...,
+        passed: builtins.bool = ...,
+        aggregate_score: builtins.float = ...,
+        evaluated_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        created_by: builtins.str = ...,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["created_at", b"created_at", "evaluated_at", b"evaluated_at"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["aggregate_score", b"aggregate_score", "created_at", b"created_at", "created_by", b"created_by", "evaluated_at", b"evaluated_at", "language_code", b"language_code", "llm_evaluation_feedbacks", b"llm_evaluation_feedbacks", "llm_evaluation_online_config_name", b"llm_evaluation_online_config_name", "name", b"name", "parent", b"parent", "passed", b"passed", "session_name", b"session_name", "session_step_name", b"session_step_name"]) -> None: ...
+
+global___LlmEvaluationOnlineResult = LlmEvaluationOnlineResult
+
+@typing.final
+class GetLlmEvaluationOnlineResultRequest(google.protobuf.message.Message):
+    """Request to get a single online-evaluation result."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    NAME_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    name: builtins.str
+    """Resource name of the result to fetch.
+    Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationOnlineResults/&lt;result_uuid&gt;</code>.
+    """
+    parent: builtins.str
+    """Project owning the result.
+    Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    """
+    language_code: builtins.str
+    """BCP-47 language-code scope (required)."""
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields will be filled with data."""
+
+    def __init__(
+        self,
+        *,
+        name: builtins.str = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "language_code", b"language_code", "name", b"name", "parent", b"parent"]) -> None: ...
+
+global___GetLlmEvaluationOnlineResultRequest = GetLlmEvaluationOnlineResultRequest
+
+@typing.final
+class LlmEvaluationOnlineResultFilter(google.protobuf.message.Message):
+    """Filter conditions for ListOnlineResults. All fields are optional; multiple
+    fields set at the same time are combined via logical AND.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    LLM_EVALUATION_ONLINE_CONFIG_NAME_FIELD_NUMBER: builtins.int
+    PASSED_FIELD_NUMBER: builtins.int
+    FILTER_BY_PASSED_FIELD_NUMBER: builtins.int
+    llm_evaluation_online_config_name: builtins.str
+    """Optional. Match only results produced by this online config.
+    Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationOnlineConfigs/&lt;config_uuid&gt;</code>.
+    """
+    passed: builtins.bool
+    """Optional. Match only results with this pass-state."""
+    filter_by_passed: builtins.bool
+    """Optional. When true, the <code>passed</code> field is applied as a filter;
+    when false the <code>passed</code> field is ignored (so unset means "any").
+    """
+    def __init__(
+        self,
+        *,
+        llm_evaluation_online_config_name: builtins.str = ...,
+        passed: builtins.bool = ...,
+        filter_by_passed: builtins.bool = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["filter_by_passed", b"filter_by_passed", "llm_evaluation_online_config_name", b"llm_evaluation_online_config_name", "passed", b"passed"]) -> None: ...
+
+global___LlmEvaluationOnlineResultFilter = LlmEvaluationOnlineResultFilter
+
+@typing.final
+class ListLlmEvaluationOnlineResultsRequest(google.protobuf.message.Message):
+    """Request to list online-evaluation results within a project."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PARENT_FIELD_NUMBER: builtins.int
+    PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    LLM_EVALUATION_ONLINE_RESULT_FILTER_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Project owning the results.
+    Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    """
+    page_token: builtins.str
+    """Optional. Page token for pagination. Retrieves a large result set in
+    smaller, more manageable portions. The token encodes the current index
+    and the page size.
+
+    Valid page token strings:
+    <ul>
+      <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li>
+      <li><code>&quot;current_index-0--page_size-20&quot;</code> - First page, page size 20.</li>
+      <li><code>&quot;current_index-1--page_size-20&quot;</code> - Second page, page size 20.</li>
+    </ul>
+    Index starts at 0.
+    """
+    language_code: builtins.str
+    """BCP-47 language-code scope (required)."""
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields will be filled with data."""
+
+    @property
+    def llm_evaluation_online_result_filter(self) -> global___LlmEvaluationOnlineResultFilter:
+        """Optional. Filter conditions to narrow the returned results."""
+
+    def __init__(
+        self,
+        *,
+        parent: builtins.str = ...,
+        page_token: builtins.str = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        language_code: builtins.str = ...,
+        llm_evaluation_online_result_filter: global___LlmEvaluationOnlineResultFilter | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask", "llm_evaluation_online_result_filter", b"llm_evaluation_online_result_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "language_code", b"language_code", "llm_evaluation_online_result_filter", b"llm_evaluation_online_result_filter", "page_token", b"page_token", "parent", b"parent"]) -> None: ...
+
+global___ListLlmEvaluationOnlineResultsRequest = ListLlmEvaluationOnlineResultsRequest
+
+@typing.final
+class ListLlmEvaluationOnlineResultsResponse(google.protobuf.message.Message):
+    """Response for ListOnlineResults."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    LLM_EVALUATION_ONLINE_RESULTS_FIELD_NUMBER: builtins.int
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    next_page_token: builtins.str
+    """Pagination token for the next page (empty if this is the last page)."""
+    @property
+    def llm_evaluation_online_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmEvaluationOnlineResult]:
+        """Results matching the request."""
+
+    def __init__(
+        self,
+        *,
+        llm_evaluation_online_results: collections.abc.Iterable[global___LlmEvaluationOnlineResult] | None = ...,
+        next_page_token: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["llm_evaluation_online_results", b"llm_evaluation_online_results", "next_page_token", b"next_page_token"]) -> None: ...
+
+global___ListLlmEvaluationOnlineResultsResponse = ListLlmEvaluationOnlineResultsResponse
+
+@typing.final
+class LlmEvaluationAnnotationQueueItem(google.protobuf.message.Message):
+    """A human-review annotation-queue item: one per failing session step enqueued by
+    the online-evaluation worker. The reviewer annotates (status / reason) and may
+    promote the offending session into a regression dataset.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    NAME_FIELD_NUMBER: builtins.int
+    SESSION_NAME_FIELD_NUMBER: builtins.int
+    SESSION_STEP_NAME_FIELD_NUMBER: builtins.int
+    LLM_EVALUATION_ONLINE_RESULT_NAME_FIELD_NUMBER: builtins.int
+    STATUS_FIELD_NUMBER: builtins.int
+    ASSIGNED_TO_FIELD_NUMBER: builtins.int
+    REASON_FIELD_NUMBER: builtins.int
+    LLM_EVALUATION_DATASET_NAME_FIELD_NUMBER: builtins.int
+    CREATED_AT_FIELD_NUMBER: builtins.int
+    CREATED_BY_FIELD_NUMBER: builtins.int
+    MODIFIED_AT_FIELD_NUMBER: builtins.int
+    MODIFIED_BY_FIELD_NUMBER: builtins.int
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    name: builtins.str
+    """The unique resource name of the queue item. Read-only; populated by the server.
+    Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAnnotationQueueItems/&lt;item_uuid&gt;</code>.
+    """
+    session_name: builtins.str
+    """Resource name of the offending session.
+    Format: <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code>.
+    """
+    session_step_name: builtins.str
+    """Resource name of the offending session step.
+    Format: <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionSteps/&lt;step_uuid&gt;</code>.
+    """
+    llm_evaluation_online_result_name: builtins.str
+    """Resource name of the online result that triggered the enqueue.
+    Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationOnlineResults/&lt;result_uuid&gt;</code>.
+    """
+    status: global___LlmEvaluationAnnotationStatus.ValueType
+    """Current lifecycle status."""
+    assigned_to: builtins.str
+    """Optional. User id (UUID) the item is assigned to for review."""
+    reason: builtins.str
+    """Human-readable reason / rationale (e.g. <code>"faithfulness=0.2 &lt; 0.5"</code>)."""
+    llm_evaluation_dataset_name: builtins.str
+    """Resource name of the dataset the item was promoted into. Set when the item
+    reaches PROMOTED status.
+    Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;</code>.
+    """
+    created_by: builtins.str
+    """User id in form of a valid UUID."""
+    modified_by: builtins.str
+    """User id in form of a valid UUID."""
+    parent: builtins.str
+    """Project owning the item.
+    Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    """
+    language_code: builtins.str
+    """BCP-47 language-code scope."""
+    @property
+    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Creation date and time. Read-only field."""
+
+    @property
+    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Modification date and time. Read-only field."""
+
+    def __init__(
+        self,
+        *,
+        name: builtins.str = ...,
+        session_name: builtins.str = ...,
+        session_step_name: builtins.str = ...,
+        llm_evaluation_online_result_name: builtins.str = ...,
+        status: global___LlmEvaluationAnnotationStatus.ValueType = ...,
+        assigned_to: builtins.str = ...,
+        reason: builtins.str = ...,
+        llm_evaluation_dataset_name: builtins.str = ...,
+        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        created_by: builtins.str = ...,
+        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        modified_by: builtins.str = ...,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["assigned_to", b"assigned_to", "created_at", b"created_at", "created_by", b"created_by", "language_code", b"language_code", "llm_evaluation_dataset_name", b"llm_evaluation_dataset_name", "llm_evaluation_online_result_name", b"llm_evaluation_online_result_name", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "parent", b"parent", "reason", b"reason", "session_name", b"session_name", "session_step_name", b"session_step_name", "status", b"status"]) -> None: ...
+
+global___LlmEvaluationAnnotationQueueItem = LlmEvaluationAnnotationQueueItem
+
+@typing.final
+class GetLlmEvaluationAnnotationQueueItemRequest(google.protobuf.message.Message):
+    """Request to get a single annotation-queue item."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    NAME_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    name: builtins.str
+    """Resource name of the item to fetch.
+    Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAnnotationQueueItems/&lt;item_uuid&gt;</code>.
+    """
+    parent: builtins.str
+    """Project owning the item.
+    Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    """
+    language_code: builtins.str
+    """BCP-47 language-code scope (required)."""
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields will be filled with data."""
+
+    def __init__(
+        self,
+        *,
+        name: builtins.str = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "language_code", b"language_code", "name", b"name", "parent", b"parent"]) -> None: ...
+
+global___GetLlmEvaluationAnnotationQueueItemRequest = GetLlmEvaluationAnnotationQueueItemRequest
+
+@typing.final
+class LlmEvaluationAnnotationQueueItemFilter(google.protobuf.message.Message):
+    """Filter conditions for ListAnnotationQueueItems. All fields are optional;
+    multiple fields set at the same time are combined via logical AND.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    ASSIGNED_TO_FIELD_NUMBER: builtins.int
+    status: global___LlmEvaluationAnnotationStatus.ValueType
+    """Optional. Match only items with this status."""
+    assigned_to: builtins.str
+    """Optional. Match only items assigned to this user id (UUID)."""
+    def __init__(
+        self,
+        *,
+        status: global___LlmEvaluationAnnotationStatus.ValueType = ...,
+        assigned_to: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["assigned_to", b"assigned_to", "status", b"status"]) -> None: ...
+
+global___LlmEvaluationAnnotationQueueItemFilter = LlmEvaluationAnnotationQueueItemFilter
+
+@typing.final
+class ListLlmEvaluationAnnotationQueueItemsRequest(google.protobuf.message.Message):
+    """Request to list annotation-queue items within a project."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PARENT_FIELD_NUMBER: builtins.int
+    PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    LLM_EVALUATION_ANNOTATION_QUEUE_ITEM_FILTER_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Project owning the items.
+    Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    """
+    page_token: builtins.str
+    """Optional. Page token for pagination. Retrieves a large result set in
+    smaller, more manageable portions. The token encodes the current index
+    and the page size.
+
+    Valid page token strings:
+    <ul>
+      <li><code>&quot;&quot;</code> (empty string) - Retrieves the first page.</li>
+      <li><code>&quot;current_index-0--page_size-20&quot;</code> - First page, page size 20.</li>
+      <li><code>&quot;current_index-1--page_size-20&quot;</code> - Second page, page size 20.</li>
+    </ul>
+    Index starts at 0.
+    """
+    language_code: builtins.str
+    """BCP-47 language-code scope (required)."""
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields will be filled with data."""
+
+    @property
+    def llm_evaluation_annotation_queue_item_filter(self) -> global___LlmEvaluationAnnotationQueueItemFilter:
+        """Optional. Filter conditions to narrow the returned items."""
+
+    def __init__(
+        self,
+        *,
+        parent: builtins.str = ...,
+        page_token: builtins.str = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        language_code: builtins.str = ...,
+        llm_evaluation_annotation_queue_item_filter: global___LlmEvaluationAnnotationQueueItemFilter | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask", "llm_evaluation_annotation_queue_item_filter", b"llm_evaluation_annotation_queue_item_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "language_code", b"language_code", "llm_evaluation_annotation_queue_item_filter", b"llm_evaluation_annotation_queue_item_filter", "page_token", b"page_token", "parent", b"parent"]) -> None: ...
+
+global___ListLlmEvaluationAnnotationQueueItemsRequest = ListLlmEvaluationAnnotationQueueItemsRequest
+
+@typing.final
+class ListLlmEvaluationAnnotationQueueItemsResponse(google.protobuf.message.Message):
+    """Response for ListAnnotationQueueItems."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    LLM_EVALUATION_ANNOTATION_QUEUE_ITEMS_FIELD_NUMBER: builtins.int
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    next_page_token: builtins.str
+    """Pagination token for the next page (empty if this is the last page)."""
+    @property
+    def llm_evaluation_annotation_queue_items(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmEvaluationAnnotationQueueItem]:
+        """Items matching the request."""
+
+    def __init__(
+        self,
+        *,
+        llm_evaluation_annotation_queue_items: collections.abc.Iterable[global___LlmEvaluationAnnotationQueueItem] | None = ...,
+        next_page_token: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["llm_evaluation_annotation_queue_items", b"llm_evaluation_annotation_queue_items", "next_page_token", b"next_page_token"]) -> None: ...
+
+global___ListLlmEvaluationAnnotationQueueItemsResponse = ListLlmEvaluationAnnotationQueueItemsResponse
+
+@typing.final
+class UpdateLlmEvaluationAnnotationQueueItemRequest(google.protobuf.message.Message):
+    """Request to update an annotation-queue item (status / assignee / reason transitions)."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    LLM_EVALUATION_ANNOTATION_QUEUE_ITEM_FIELD_NUMBER: builtins.int
+    UPDATE_MASK_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Project owning the item.
+    Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    """
+    language_code: builtins.str
+    """BCP-47 language-code scope (required)."""
+    @property
+    def llm_evaluation_annotation_queue_item(self) -> global___LlmEvaluationAnnotationQueueItem:
+        """Item payload (only fields covered by <code>update_mask</code> are applied)."""
+
+    @property
+    def update_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Mask of fields to update on the item record."""
+
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields will be filled with data on the
+        returned item.
+        """
+
+    def __init__(
+        self,
+        *,
+        llm_evaluation_annotation_queue_item: global___LlmEvaluationAnnotationQueueItem | None = ...,
+        update_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask", "llm_evaluation_annotation_queue_item", b"llm_evaluation_annotation_queue_item", "update_mask", b"update_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "language_code", b"language_code", "llm_evaluation_annotation_queue_item", b"llm_evaluation_annotation_queue_item", "parent", b"parent", "update_mask", b"update_mask"]) -> None: ...
+
+global___UpdateLlmEvaluationAnnotationQueueItemRequest = UpdateLlmEvaluationAnnotationQueueItemRequest
+
+@typing.final
+class PromoteLlmEvaluationAnnotationQueueItemRequest(google.protobuf.message.Message):
+    """Request to promote an annotation-queue item into a regression dataset. Thin
+    server-side composition over LlmEvaluationCreateExamplesFromSession; the item
+    status is flipped to PROMOTED and the dataset name stamped on success.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    NAME_FIELD_NUMBER: builtins.int
+    TARGET_DATASET_NAME_FIELD_NUMBER: builtins.int
+    LLM_EVALUATION_EXAMPLE_EXTRACTION_MODE_FIELD_NUMBER: builtins.int
+    INCLUDE_TOOL_CALLS_FIELD_NUMBER: builtins.int
+    INCLUDE_RETRIEVAL_CONTEXT_FIELD_NUMBER: builtins.int
+    PARENT_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    name: builtins.str
+    """Resource name of the item to promote.
+    Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationAnnotationQueueItems/&lt;item_uuid&gt;</code>.
+    """
+    target_dataset_name: builtins.str
+    """Resource name of the dataset receiving the created example(s).
+    Format: <code>projects/&lt;project_uuid&gt;/agent/llmEvaluationDatasets/&lt;dataset_uuid&gt;</code>.
+    """
+    llm_evaluation_example_extraction_mode: global___LlmEvaluationExampleExtractionMode.ValueType
+    """How the item's session steps are turned into examples (reused mode enum)."""
+    include_tool_calls: builtins.bool
+    """When true, tool calls recorded in the session's telemetry are captured as
+    expected tool calls on the created examples.
+    """
+    include_retrieval_context: builtins.bool
+    """When true, retrieved chunks recorded by retriever spans are captured as
+    frozen retrieval context on the created examples.
+    """
+    parent: builtins.str
+    """Project owning the item and the dataset.
+    Format: <code>projects/&lt;project_uuid&gt;/agent</code>.
+    """
+    language_code: builtins.str
+    """BCP-47 language-code scope (required)."""
+    def __init__(
+        self,
+        *,
+        name: builtins.str = ...,
+        target_dataset_name: builtins.str = ...,
+        llm_evaluation_example_extraction_mode: global___LlmEvaluationExampleExtractionMode.ValueType = ...,
+        include_tool_calls: builtins.bool = ...,
+        include_retrieval_context: builtins.bool = ...,
+        parent: builtins.str = ...,
+        language_code: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["include_retrieval_context", b"include_retrieval_context", "include_tool_calls", b"include_tool_calls", "language_code", b"language_code", "llm_evaluation_example_extraction_mode", b"llm_evaluation_example_extraction_mode", "name", b"name", "parent", b"parent", "target_dataset_name", b"target_dataset_name"]) -> None: ...
+
+global___PromoteLlmEvaluationAnnotationQueueItemRequest = PromoteLlmEvaluationAnnotationQueueItemRequest
+
+@typing.final
+class PromoteLlmEvaluationAnnotationQueueItemResponse(google.protobuf.message.Message):
+    """Response for PromoteAnnotationQueueItem."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    LLM_EVALUATION_EXAMPLES_FIELD_NUMBER: builtins.int
+    LLM_EVALUATION_ANNOTATION_QUEUE_ITEM_FIELD_NUMBER: builtins.int
+    @property
+    def llm_evaluation_examples(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmEvaluationExample]:
+        """Example record(s) created in the target dataset."""
+
+    @property
+    def llm_evaluation_annotation_queue_item(self) -> global___LlmEvaluationAnnotationQueueItem:
+        """The promoted queue item (status flipped to PROMOTED, dataset name stamped)."""
+
+    def __init__(
+        self,
+        *,
+        llm_evaluation_examples: collections.abc.Iterable[global___LlmEvaluationExample] | None = ...,
+        llm_evaluation_annotation_queue_item: global___LlmEvaluationAnnotationQueueItem | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["llm_evaluation_annotation_queue_item", b"llm_evaluation_annotation_queue_item"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["llm_evaluation_annotation_queue_item", b"llm_evaluation_annotation_queue_item", "llm_evaluation_examples", b"llm_evaluation_examples"]) -> None: ...
+
+global___PromoteLlmEvaluationAnnotationQueueItemResponse = PromoteLlmEvaluationAnnotationQueueItemResponse
