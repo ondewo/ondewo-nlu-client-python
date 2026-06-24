@@ -566,6 +566,7 @@ def main(proto_dir: Path, output_dir: Path) -> None:
     generated_services.sort(key=lambda t: t[0])
 
     container_path = output_dir.parent / 'core' / 'services_container.py'
+    container_path.parent.mkdir(parents=True, exist_ok=True)
     container_path.write_text(_build_services_container_content(generated_services))
     print(f'  generated {container_path}')
 
