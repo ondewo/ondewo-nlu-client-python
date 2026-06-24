@@ -24,11 +24,11 @@ jobs:
 
       # The repo is ~95% generated protobuf/gRPC stubs; coverage is gated on the HAND-WRITTEN surface
       # (the Keycloak/D18 auth helper + client config) — the production-critical code this SDK owns.
-      - name: Unit tests + >=90% coverage gate on hand-written code
+      - name: Unit tests + 100% coverage gate on hand-written code
         run: |
           pytest tests/unit -q \
             --cov=ondewo.nlu.utils.keycloak \
             --cov=ondewo.nlu.client_config \
             --cov-report=term-missing \
             --cov-report=xml \
-            --cov-fail-under=90
+            --cov-fail-under=100

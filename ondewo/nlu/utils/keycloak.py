@@ -71,7 +71,7 @@ class TokenEndpoint(Protocol):
         timeout: float,
     ) -> 'TokenResponse':
         """Send an ``application/x-www-form-urlencoded`` POST and return the response."""
-        ...
+        ...  # pragma: no cover - abstract Protocol method, never executed
 
 
 class TokenResponse(Protocol):
@@ -81,12 +81,12 @@ class TokenResponse(Protocol):
 
     def json(self) -> Dict[str, Any]:
         """Return the parsed JSON body."""
-        ...
+        ...  # pragma: no cover - abstract Protocol method, never executed
 
     @property
     def text(self) -> str:
         """Return the raw response body (used for error messages)."""
-        ...
+        ...  # pragma: no cover - abstract Protocol property, never executed
 
 
 class _RequestsTransport:

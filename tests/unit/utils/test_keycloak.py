@@ -28,6 +28,8 @@ import pytest
 from ondewo.nlu.client_config import ClientConfig
 from ondewo.nlu.utils import keycloak as keycloak_module
 from ondewo.nlu.utils.keycloak import (
+    _HTTP_TIMEOUT_S,
+    _RequestsTransport,
     KeycloakAuthenticationError,
     KeycloakTokenProvider,
     get_keycloak_token_provider,
@@ -290,3 +292,101 @@ class TestSharedProviderRegistry:
         assert first is second
         # Login happened exactly once despite two factory calls.
         assert len(post_calls) == 1
+
+    def test_factory_forwards_token_expiration_in_s(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        # The factory must thread `token_expiration_in_s` from the config into the provider so
+        # the auto-refresh bound is honoured; otherwise a refresh would run past the deadline.
+        clock: Dict[str, float] = {'now': 1000.0}
+        monkeypatch.setattr(keycloak_module.time, 'monotonic', lambda: clock['now'])
+
+        token_expiration_in_s: int = 600
+
+        def fake_post(url: str, data: Dict[str, str], timeout: float) -> FakeResponse:
+            return FakeResponse(200, _token_body('acc-1', 'off-1', 300))
+
+        monkeypatch.setattr(keycloak_module.requests, 'post', fake_post)
+
+        config = ClientConfig(
+            host='localhost',
+            port='50055',
+            user_name=USERNAME,
+            password=PASSWORD,
+            keycloak_url=KEYCLOAK_URL,
+            realm=REALM,
+            client_id=CLIENT_ID,
+            token_expiration_in_s=token_expiration_in_s,
+        )
+        provider = get_keycloak_token_provider(config)
+
+        assert provider.token_expiration_in_s == token_expiration_in_s
+
+
+class TestDefaultRequestsTransport:
+    def test_provider_uses_requests_transport_by_default(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        # When no transport is injected the provider must fall back to the real requests-backed
+        # transport (the production path); patch requests.post so no network is touched.
+        post_calls: List[Dict[str, str]] = []
+
+        def fake_post(url: str, data: Dict[str, str], timeout: float) -> FakeResponse:
+            post_calls.append({'url': url, **data})
+            return FakeResponse(200, _token_body('acc-1', 'off-1', 300))
+
+        monkeypatch.setattr(keycloak_module.requests, 'post', fake_post)
+
+        provider = KeycloakTokenProvider(
+            keycloak_url=KEYCLOAK_URL,
+            realm=REALM,
+            client_id=CLIENT_ID,
+            username=USERNAME,
+            password=PASSWORD,
+        )
+
+        assert isinstance(provider._transport, _RequestsTransport)
+        assert provider.access_token == 'acc-1'
+        assert len(post_calls) == 1
+        assert post_calls[0]['url'] == EXPECTED_TOKEN_ENDPOINT
+
+    def test_requests_transport_forwards_url_data_and_timeout(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        # _RequestsTransport.post must pass through url/data verbatim and the module HTTP timeout.
+        captured: Dict[str, Any] = {}
+
+        def fake_post(url: str, data: Dict[str, str], timeout: float) -> FakeResponse:
+            captured['url'] = url
+            captured['data'] = data
+            captured['timeout'] = timeout
+            return FakeResponse(200, _token_body('acc-1', 'off-1', 300))
+
+        monkeypatch.setattr(keycloak_module.requests, 'post', fake_post)
+
+        transport = _RequestsTransport()
+        form_data: Dict[str, str] = {'grant_type': 'password'}
+        response = transport.post(EXPECTED_TOKEN_ENDPOINT, data=form_data, timeout=_HTTP_TIMEOUT_S)
+
+        assert response.status_code == 200
+        assert captured['url'] == EXPECTED_TOKEN_ENDPOINT
+        assert captured['data'] == form_data
+        assert captured['timeout'] == _HTTP_TIMEOUT_S
+
+
+class TestStoreTokensExpiry:
+    def test_missing_expires_in_defaults_to_zero_and_forces_refresh(
+        self,
+        monkeypatch: pytest.MonkeyPatch,
+    ) -> None:
+        # A token response without `expires_in` is treated as already at expiry (0s), so the very
+        # next metadata read must refresh rather than serve a token with an unknown lifetime.
+        clock: Dict[str, float] = {'now': 1000.0}
+        monkeypatch.setattr(keycloak_module.time, 'monotonic', lambda: clock['now'])
+
+        transport = FakeTransport([
+            FakeResponse(200, {'access_token': 'acc-1', 'refresh_token': 'off-1'}),
+            FakeResponse(200, _token_body('acc-2', 'off-2', 300)),
+        ])
+        provider = _build_provider(transport)
+
+        # Clock has not advanced, but expires_at == login time (expires_in defaulted to 0), so the
+        # leeway check fires immediately and the next read refreshes.
+        _, value = provider.authorization_metadata()
+
+        assert value == 'Bearer acc-2'
+        assert len(transport.calls) == 2
