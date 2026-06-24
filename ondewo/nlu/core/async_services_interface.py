@@ -23,6 +23,10 @@ from typing import (
 from ondewo.utils.async_base_services_interface import AsyncBaseServicesInterface
 
 from ondewo.nlu.client_config import ClientConfig
+from ondewo.nlu.utils.keycloak import (
+    KeycloakTokenProvider,
+    get_keycloak_token_provider,
+)
 
 
 class AsyncServicesInterface(AsyncBaseServicesInterface, ABC):
@@ -38,7 +42,35 @@ class AsyncServicesInterface(AsyncBaseServicesInterface, ABC):
             use_secure_channel=use_secure_channel,
             options=options,
         )
-        self.metadata: List[Tuple[str, str]] = [
+        # When Keycloak headless auth (D18) is configured, every call carries a freshly
+        # auto-refreshed `Authorization: Bearer` token; the provider is shared per config so
+        # the offline-token ROPC login happens once for all services on the client.
+        self._keycloak_provider: Optional[KeycloakTokenProvider] = (
+            get_keycloak_token_provider(config) if config.use_keycloak else None
+        )
+        # Legacy dual-mode metadata: the `cai-token` from the `Login` RPC plus the optional
+        # legacy `Authorization: Basic` http_token.
+        self._legacy_metadata: List[Tuple[str, str]] = [
             ('cai-token', nlu_token if nlu_token else 'null'),
             ('authorization', config.http_token),
         ]
+
+    @property
+    def metadata(self) -> List[Tuple[str, str]]:
+        """
+        The gRPC metadata attached to every outgoing call.
+
+        With Keycloak auth this rebuilds (and auto-refreshes) the `Authorization: Bearer`
+        token on each access; otherwise it returns the legacy `cai-token` metadata.
+
+        Returns:
+            List[Tuple[str, str]]: The metadata tuples for the next gRPC call.
+        """
+        if self._keycloak_provider is not None:
+            return self._keycloak_provider.bearer_metadata()
+        return self._legacy_metadata
+
+    @metadata.setter
+    def metadata(self, value: List[Tuple[str, str]]) -> None:
+        """Allow the base class / callers to override the legacy metadata list."""
+        self._legacy_metadata = value

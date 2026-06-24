@@ -34,14 +34,22 @@ async def login(
     """
     Asynchronously log in using the user and password in the client config and return the auth token, i.e. "cai-token".
 
+    With Keycloak headless auth (D18) configured on the config, the legacy `Login` RPC is
+    skipped entirely — authentication happens via the Keycloak offline-token flow and the
+    access token is attached as `Authorization: Bearer` by the services interface. An empty
+    string is returned in that case.
+
     Args:
         config (ClientConfig): Configuration for the client.
         use_secure_channel (bool): Whether to use a secure gRPC channel.
         options (Optional[Set[Tuple[str, Any]]]): Additional options for the gRPC channel.
 
     Returns:
-        str: The auth token, i.e. "cai-token".
+        str: The auth token, i.e. "cai-token" (empty string for the Keycloak path).
     """
+    if config.use_keycloak:
+        return ''
+
     request = LoginRequest(user_email=config.user_name, password=config.password)
 
     user_service = ondewo.nlu.services.async_users.Users(

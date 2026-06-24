@@ -7,5 +7,6 @@ protobuf
 pytest
 tqdm
 types-protobuf
+types-requests
 types-tqdm
 typing_extensions

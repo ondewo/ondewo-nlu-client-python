@@ -9,4 +9,5 @@ polling
 protobuf
 python-dateutil
 regex
+requests
 setuptools

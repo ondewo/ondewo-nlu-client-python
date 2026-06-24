@@ -34,6 +34,11 @@ def login(
     """
     Log in using the user and password in the client config and returns the auth token, i.e. "cai-token".
 
+    With Keycloak headless auth (D18) configured on the config, the legacy `Login` RPC is
+    skipped entirely — authentication happens via the Keycloak offline-token flow and the
+    access token is attached as `Authorization: Bearer` by the services interface. An empty
+    string is returned in that case.
+
     Args:
         config (BaseClientConfig):
             Configuration for the client.
@@ -43,8 +48,11 @@ def login(
             Additional options for the gRPC channel.
 
     Returns
-        str: returns the auth token, i.e. "cai-token"
+        str: returns the auth token, i.e. "cai-token" (empty string for the Keycloak path)
     """
+    if config.use_keycloak:
+        return ''
+
     request: LoginRequest = LoginRequest(
         user_email=config.user_name,
         password=config.password,

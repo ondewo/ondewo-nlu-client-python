@@ -3680,3 +3680,209 @@ class ReindexAgentRequest(google.protobuf.message.Message):
     def ClearField(self, field_name: typing.Literal["branch_name", b"branch_name", "index_types", b"index_types", "parent", b"parent"]) -> None: ...
 
 global___ReindexAgentRequest = ReindexAgentRequest
+
+@typing.final
+class CreateProjectTechnicalUserRequest(google.protobuf.message.Message):
+    """Project-scoped technical-user messages (D14)
+
+    Request to create a project-scoped technical user (PROJECT_EXECUTOR, 2FA-exempt).
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PARENT_FIELD_NUMBER: builtins.int
+    NAME_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Required. The project (agent) that the technical user is scoped to.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
+    name: builtins.str
+    """Optional. A human-readable name used to derive the technical user's
+    Keycloak username/email (e.g. ondewo-nlu-cai-tech-&lt;project&gt;-&lt;name&gt;).
+    If empty, the server generates one.
+    """
+    def __init__(
+        self,
+        *,
+        parent: builtins.str = ...,
+        name: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["name", b"name", "parent", b"parent"]) -> None: ...
+
+global___CreateProjectTechnicalUserRequest = CreateProjectTechnicalUserRequest
+
+@typing.final
+class CreateProjectTechnicalUserResponse(google.protobuf.message.Message):
+    """Response with the freshly minted technical user's credentials.
+    The password is returned ONCE and cannot be retrieved later.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_ID_FIELD_NUMBER: builtins.int
+    USERNAME_FIELD_NUMBER: builtins.int
+    PASSWORD_FIELD_NUMBER: builtins.int
+    user_id: builtins.str
+    """The technical user's id (Keycloak sub / UUID)."""
+    username: builtins.str
+    """The technical user's login username / email."""
+    password: builtins.str
+    """The generated password. Shown ONCE; not retrievable afterwards."""
+    def __init__(
+        self,
+        *,
+        user_id: builtins.str = ...,
+        username: builtins.str = ...,
+        password: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["password", b"password", "user_id", b"user_id", "username", b"username"]) -> None: ...
+
+global___CreateProjectTechnicalUserResponse = CreateProjectTechnicalUserResponse
+
+@typing.final
+class ListProjectTechnicalUsersRequest(google.protobuf.message.Message):
+    """Request to list the project-scoped technical users of a project (agent)."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PARENT_FIELD_NUMBER: builtins.int
+    PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Required. The project (agent) whose technical users are listed.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
+    page_token: builtins.str
+    """Optional. The next_page_token value returned from a previous list request.
+    The page token to support pagination.
+    """
+    def __init__(
+        self,
+        *,
+        parent: builtins.str = ...,
+        page_token: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["page_token", b"page_token", "parent", b"parent"]) -> None: ...
+
+global___ListProjectTechnicalUsersRequest = ListProjectTechnicalUsersRequest
+
+@typing.final
+class ProjectTechnicalUser(google.protobuf.message.Message):
+    """A single project-scoped technical user entry."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_ID_FIELD_NUMBER: builtins.int
+    USERNAME_FIELD_NUMBER: builtins.int
+    user_id: builtins.str
+    """The technical user's id (Keycloak sub / UUID)."""
+    username: builtins.str
+    """The technical user's login username / email."""
+    def __init__(
+        self,
+        *,
+        user_id: builtins.str = ...,
+        username: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["user_id", b"user_id", "username", b"username"]) -> None: ...
+
+global___ProjectTechnicalUser = ProjectTechnicalUser
+
+@typing.final
+class ListProjectTechnicalUsersResponse(google.protobuf.message.Message):
+    """Response listing the project-scoped technical users of a project (agent)."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TECHNICAL_USERS_FIELD_NUMBER: builtins.int
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    next_page_token: builtins.str
+    """The next_page_token is used to retrieve the next page of a returned result."""
+    @property
+    def technical_users(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___ProjectTechnicalUser]:
+        """The technical users scoped to the project."""
+
+    def __init__(
+        self,
+        *,
+        technical_users: collections.abc.Iterable[global___ProjectTechnicalUser] | None = ...,
+        next_page_token: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["next_page_token", b"next_page_token", "technical_users", b"technical_users"]) -> None: ...
+
+global___ListProjectTechnicalUsersResponse = ListProjectTechnicalUsersResponse
+
+@typing.final
+class DeleteProjectTechnicalUserRequest(google.protobuf.message.Message):
+    """Request to delete a project-scoped technical user."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PARENT_FIELD_NUMBER: builtins.int
+    USER_ID_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Required. The project (agent) that the technical user is scoped to.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
+    user_id: builtins.str
+    """Required. The id of the technical user to delete."""
+    def __init__(
+        self,
+        *,
+        parent: builtins.str = ...,
+        user_id: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["parent", b"parent", "user_id", b"user_id"]) -> None: ...
+
+global___DeleteProjectTechnicalUserRequest = DeleteProjectTechnicalUserRequest
+
+@typing.final
+class RotateProjectTechnicalUserPasswordRequest(google.protobuf.message.Message):
+    """Request to rotate the password of a project-scoped technical user."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PARENT_FIELD_NUMBER: builtins.int
+    USER_ID_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """Required. The project (agent) that the technical user is scoped to.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
+    user_id: builtins.str
+    """Required. The id of the technical user whose password is rotated."""
+    def __init__(
+        self,
+        *,
+        parent: builtins.str = ...,
+        user_id: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["parent", b"parent", "user_id", b"user_id"]) -> None: ...
+
+global___RotateProjectTechnicalUserPasswordRequest = RotateProjectTechnicalUserPasswordRequest
+
+@typing.final
+class RotateProjectTechnicalUserPasswordResponse(google.protobuf.message.Message):
+    """Response with the rotated password.
+    The password is returned ONCE and cannot be retrieved later.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_ID_FIELD_NUMBER: builtins.int
+    USERNAME_FIELD_NUMBER: builtins.int
+    PASSWORD_FIELD_NUMBER: builtins.int
+    user_id: builtins.str
+    """The technical user's id (Keycloak sub / UUID)."""
+    username: builtins.str
+    """The technical user's login username / email."""
+    password: builtins.str
+    """The new generated password. Shown ONCE; not retrievable afterwards."""
+    def __init__(
+        self,
+        *,
+        user_id: builtins.str = ...,
+        username: builtins.str = ...,
+        password: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["password", b"password", "user_id", b"user_id", "username", b"username"]) -> None: ...
+
+global___RotateProjectTechnicalUserPasswordResponse = RotateProjectTechnicalUserPasswordResponse
