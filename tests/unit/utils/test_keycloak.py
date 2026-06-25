@@ -15,11 +15,16 @@
 
 No network is touched: a fake HTTP transport captures the token-endpoint requests and
 returns queued fake responses, and the module clock is monkeypatched to drive expiry.
+The proactive background-refresh thread is driven deterministically via an injected clock
+and a controllable stop event — no real sleeps, so the suite stays fast and non-flaky.
 """
+import gc
+import threading
 from typing import (
     Any,
     Dict,
     List,
+    Optional,
     Tuple,
 )
 
@@ -28,7 +33,10 @@ import pytest
 from ondewo.nlu.client_config import ClientConfig
 from ondewo.nlu.utils import keycloak as keycloak_module
 from ondewo.nlu.utils.keycloak import (
+    _EXPIRY_LEEWAY_S,
     _HTTP_TIMEOUT_S,
+    _MIN_REFRESH_DELAY_S,
+    _refresh_loop,
     _RequestsTransport,
     KeycloakAuthenticationError,
     KeycloakTokenProvider,
@@ -149,6 +157,10 @@ def _build_provider(
 ) -> KeycloakTokenProvider:
     """Construct a `KeycloakTokenProvider` wired to the fake transport and shared test fixtures.
 
+    The proactive background-refresh thread is disabled (`start_background_refresh=False`) so
+    the lazy read-path assertions on exact `transport.calls` counts stay deterministic; the
+    background loop is covered explicitly in `TestBackgroundRefresh` by driving `_refresh_loop`.
+
     Args:
         transport (FakeTransport):
             The fake token endpoint backing the provider.
@@ -167,6 +179,7 @@ def _build_provider(
         password=PASSWORD,
         token_expiration_in_s=token_expiration_in_s,
         transport=transport,
+        start_background_refresh=False,
     )
 
 
@@ -601,3 +614,479 @@ class TestStoreTokensExpiry:
 
         assert value == 'Bearer acc-2'
         assert len(transport.calls) == 2
+
+
+class ScriptedEvent:
+    """A `threading.Event` stand-in that drives `_refresh_loop` deterministically.
+
+    `wait(timeout)` records each requested delay and replays a queued list of return values
+    (`True` = stop fired during the sleep, `False` = the sleep timed out → trigger a refresh).
+    Once the script is exhausted it returns `True`, terminating the loop so a test never spins
+    or sleeps for real. A `clock` and optional per-step advances let `wait` move the injected
+    monotonic clock forward exactly as a real timed wait would.
+    """
+
+    def __init__(
+        self,
+        wait_returns: List[bool],
+        clock: Dict[str, float],
+        advance_by: Optional[List[float]] = None,
+    ) -> None:
+        """Queue the scripted `wait` results and bind the controllable clock.
+
+        Args:
+            wait_returns (List[bool]):
+                Successive return values for `wait()`: `True` simulates `stop()` firing during
+                the sleep, `False` simulates a timeout that should drive a refresh.
+            clock (Dict[str, float]):
+                The shared mutable clock (`{'now': <seconds>}`) the injected `time_fn` reads.
+            advance_by (Optional[List[float]]):
+                Optional per-`wait` clock advances (seconds); when shorter than the requested
+                delay this models a `stop()` that interrupts the sleep early. Defaults to
+                advancing by exactly the requested delay each call.
+        """
+        self._wait_returns: List[bool] = list(wait_returns)
+        self._clock: Dict[str, float] = clock
+        self._advance_by: Optional[List[float]] = list(advance_by) if advance_by is not None else None
+        self._set: bool = False
+        self.wait_delays: List[float] = []
+
+    def is_set(self) -> bool:
+        """Return whether the event has been set (mirrors `threading.Event.is_set`).
+
+        Returns:
+            bool:
+                `True` once `set()` has been called.
+        """
+        return self._set
+
+    def set(self) -> None:
+        """Mark the event as set (mirrors `threading.Event.set`)."""
+        self._set = True
+
+    def wait(self, timeout: Optional[float] = None) -> bool:
+        """Record the requested delay, advance the clock, and replay the next scripted result.
+
+        Args:
+            timeout (Optional[float]):
+                The delay the loop asked to sleep for; recorded in `wait_delays`.
+
+        Returns:
+            bool:
+                The next queued return value (`True` = stopped, `False` = timed out); `True`
+                once the script is exhausted so the loop terminates.
+        """
+        self.wait_delays.append(float(timeout if timeout is not None else 0.0))
+        if self._advance_by is not None and self._advance_by:
+            self._clock['now'] += self._advance_by.pop(0)
+        elif timeout is not None:
+            self._clock['now'] += timeout
+        if not self._wait_returns:
+            self._set = True
+            return True
+        result: bool = self._wait_returns.pop(0)
+        if result:
+            self._set = True
+        return result
+
+
+def _weak(obj: KeycloakTokenProvider) -> 'Any':
+    """Return a weak reference to a provider (a thin, typed wrapper around `weakref.ref`).
+
+    Args:
+        obj (KeycloakTokenProvider):
+            The provider to weakly reference.
+
+    Returns:
+        Any:
+            A weak reference whose deref yields the provider while it is alive, else `None`.
+    """
+    import weakref
+
+    return weakref.ref(obj)
+
+
+def _build_background_provider(
+    transport: FakeTransport,
+    clock: Dict[str, float],
+    stop_event: ScriptedEvent,
+    token_expiration_in_s: int | None = None,
+) -> KeycloakTokenProvider:
+    """Construct a provider wired to an injected clock + scripted event, background thread off.
+
+    The background thread is not started here; tests call `_refresh_loop` directly with the
+    scripted event so the loop body runs deterministically without a real thread or sleeps.
+
+    Args:
+        transport (FakeTransport):
+            The fake token endpoint backing the provider.
+        clock (Dict[str, float]):
+            The shared mutable monotonic clock (`{'now': <seconds>}`).
+        stop_event (ScriptedEvent):
+            The scripted event driving `wait()`/`is_set()` in the loop.
+        token_expiration_in_s (int | None):
+            Optional upper bound on auto-refresh; `None` keeps refreshing unbounded.
+
+    Returns:
+        KeycloakTokenProvider:
+            A logged-in provider with `start_background_refresh=False`.
+    """
+    return KeycloakTokenProvider(
+        keycloak_url=KEYCLOAK_URL,
+        realm=REALM,
+        client_id=CLIENT_ID,
+        username=USERNAME,
+        password=PASSWORD,
+        token_expiration_in_s=token_expiration_in_s,
+        transport=transport,
+        time_fn=lambda: clock['now'],
+        stop_event=stop_event,  # type: ignore[arg-type]  # ScriptedEvent is a structural Event stand-in
+        start_background_refresh=False,
+    )
+
+
+class TestBackgroundRefresh:
+    """The proactive background-refresh loop (`_refresh_loop` + its scheduling/teardown)."""
+
+    def test_refreshes_before_expiry_and_reschedules(self) -> None:
+        """The loop wakes leeway-before-expiry, refreshes, and reschedules from the new expiry."""
+        clock: Dict[str, float] = {'now': 1000.0}
+        transport: FakeTransport = FakeTransport([
+            FakeResponse(200, _token_body('acc-1', 'off-1', 300)),
+            FakeResponse(200, _token_body('acc-2', 'off-2', 300)),
+            FakeResponse(200, _token_body('acc-3', 'off-3', 300)),
+        ])
+        # Each wait advances the clock by exactly the requested delay (the default), landing the
+        # clock at expiry-minus-leeway so the post-wait refresh guard fires. Two timeouts → two
+        # refreshes; the third wait exhausts the script and stops the loop.
+        event: ScriptedEvent = ScriptedEvent(wait_returns=[False, False], clock=clock)
+        provider: KeycloakTokenProvider = _build_background_provider(transport, clock, event)
+
+        _refresh_loop(_weak(provider), event, lambda: clock['now'])  # type: ignore[arg-type]
+
+        # Login + two background refreshes.
+        assert len(transport.calls) == 3
+        assert transport.calls[1]['grant_type'] == 'refresh_token'
+        assert transport.calls[1]['refresh_token'] == 'off-1'
+        assert transport.calls[2]['refresh_token'] == 'off-2'
+        assert provider.access_token == 'acc-3'
+        # Each scheduled delay is (expires_in - leeway) = 300 - 30 = 270s, computed from the
+        # then-current expiry — proving the loop reschedules off the *new* expiry each time.
+        expected_delay: float = 300.0 - _EXPIRY_LEEWAY_S
+        assert event.wait_delays[0] == expected_delay
+        assert event.wait_delays[1] == expected_delay
+
+    def test_min_delay_clamp_prevents_hot_loop(self) -> None:
+        """A token whose lifetime is below the leeway clamps the wait to the minimum delay."""
+        clock: Dict[str, float] = {'now': 1000.0}
+        # expires_in=5 → desired delay 5 - 30 = -25 → must clamp to _MIN_REFRESH_DELAY_S.
+        transport: FakeTransport = FakeTransport([
+            FakeResponse(200, _token_body('acc-1', 'off-1', 5)),
+            FakeResponse(200, _token_body('acc-2', 'off-2', 300)),
+        ])
+        event: ScriptedEvent = ScriptedEvent(wait_returns=[False], clock=clock, advance_by=[0.0, 0.0])
+        provider: KeycloakTokenProvider = _build_background_provider(transport, clock, event)
+
+        _refresh_loop(_weak(provider), event, lambda: clock['now'])  # type: ignore[arg-type]
+
+        assert event.wait_delays[0] == _MIN_REFRESH_DELAY_S
+        assert provider.access_token == 'acc-2'
+
+    def test_stop_during_wait_halts_the_loop_without_refresh(self) -> None:
+        """When `wait()` returns True (stop fired mid-sleep) the loop exits with no refresh."""
+        clock: Dict[str, float] = {'now': 1000.0}
+        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body('acc-1', 'off-1', 300))])
+        # First wait reports stop() fired during the sleep → loop returns immediately.
+        event: ScriptedEvent = ScriptedEvent(wait_returns=[True], clock=clock, advance_by=[0.0])
+        provider: KeycloakTokenProvider = _build_background_provider(transport, clock, event)
+
+        _refresh_loop(_weak(provider), event, lambda: clock['now'])  # type: ignore[arg-type]
+
+        # Only the login call happened; no refresh after the stop.
+        assert len(transport.calls) == 1
+        assert event.wait_delays == [300.0 - _EXPIRY_LEEWAY_S]
+
+    def test_already_set_event_exits_before_first_wait(self) -> None:
+        """A pre-set stop event makes the loop exit at the top, before computing any delay."""
+        clock: Dict[str, float] = {'now': 1000.0}
+        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body('acc-1', 'off-1', 300))])
+        event: ScriptedEvent = ScriptedEvent(wait_returns=[], clock=clock)
+        provider: KeycloakTokenProvider = _build_background_provider(transport, clock, event)
+        event.set()
+
+        _refresh_loop(_weak(provider), event, lambda: clock['now'])  # type: ignore[arg-type]
+
+        assert event.wait_delays == []
+        assert len(transport.calls) == 1
+
+    def test_bounded_deadline_stops_loop_at_top(self) -> None:
+        """Once the login deadline has elapsed the loop sets the event and exits (no refresh)."""
+        clock: Dict[str, float] = {'now': 1000.0}
+        token_expiration_in_s: int = 100
+        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body('acc-1', 'off-1', 300))])
+        event: ScriptedEvent = ScriptedEvent(wait_returns=[], clock=clock)
+        provider: KeycloakTokenProvider = _build_background_provider(
+            transport, clock, event, token_expiration_in_s=token_expiration_in_s,
+        )
+        # Jump the clock past the login deadline (login was at 1000, deadline = 1100).
+        clock['now'] = 1000.0 + token_expiration_in_s + 1.0
+
+        _refresh_loop(_weak(provider), event, lambda: clock['now'])  # type: ignore[arg-type]
+
+        # Deadline elapsed at the top of the loop → no wait, no refresh, and the event is set.
+        assert event.wait_delays == []
+        assert len(transport.calls) == 1
+        assert event.is_set()
+
+    def test_deadline_clamps_remaining_time_below_expiry_delay(self) -> None:
+        """When the deadline is nearer than the expiry-leeway delay, the wait clamps to it."""
+        clock: Dict[str, float] = {'now': 1000.0}
+        # Deadline at +50s is nearer than the expiry-leeway delay (300 - 30 = 270), so the
+        # remaining-to-deadline (50s) must clamp the wait; the post-wait refresh then sees the
+        # clock at the deadline and the loop stops via _refresh_if_within_window.
+        token_expiration_in_s: int = 50
+        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body('acc-1', 'off-1', 300))])
+        event: ScriptedEvent = ScriptedEvent(wait_returns=[False], clock=clock, advance_by=[50.0])
+        provider: KeycloakTokenProvider = _build_background_provider(
+            transport, clock, event, token_expiration_in_s=token_expiration_in_s,
+        )
+
+        _refresh_loop(_weak(provider), event, lambda: clock['now'])  # type: ignore[arg-type]
+
+        assert event.wait_delays[0] == float(token_expiration_in_s)
+        # The wait advanced the clock by 50s → now == deadline → the post-wait refresh is skipped.
+        assert len(transport.calls) == 1
+
+    def test_weakref_collected_provider_exits_loop(self) -> None:
+        """A loop whose provider was already collected exits at the top without a refresh."""
+        clock: Dict[str, float] = {'now': 1000.0}
+        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body('acc-1', 'off-1', 300))])
+        provider: KeycloakTokenProvider = _build_background_provider(transport, clock, ScriptedEvent([], clock))
+        ref: 'Any' = _weak(provider)
+
+        del provider
+        gc.collect()
+
+        # Drive the loop with a *separate*, un-set event: collecting the provider runs its
+        # `__del__` → `stop()`, which sets the provider's own internal stop event, but the loop
+        # here is handed a fresh event so its `while not stop_event.is_set()` still enters once,
+        # exercising the top-of-loop deref-to-None exit (the weakref-GC teardown path).
+        loop_event: ScriptedEvent = ScriptedEvent(wait_returns=[False], clock=clock)
+        _refresh_loop(ref, loop_event, lambda: clock['now'])  # type: ignore[arg-type]
+
+        # The provider was collected before the loop ran, so its first top-of-loop deref is
+        # already None → exits immediately with only the login call recorded.
+        assert ref() is None
+        assert len(transport.calls) == 1
+        assert loop_event.wait_delays == []
+
+    def test_post_wait_weakref_collected_provider_exits(self) -> None:
+        """If the provider is collected during the wait, the post-wait deref exits the loop.
+
+        Drives the branch where the *top-of-loop* deref succeeds (provider still alive), the
+        loop arms a wait, and the provider is collected *during* that wait so the second deref
+        returns None.
+        """
+        clock: Dict[str, float] = {'now': 1000.0}
+        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body('acc-1', 'off-1', 300))])
+        holder: Dict[str, Optional[KeycloakTokenProvider]] = {
+            'provider': _build_background_provider(transport, clock, ScriptedEvent([], clock)),
+        }
+        ref: 'Any' = _weak(holder['provider'])
+
+        class CollectingEvent(ScriptedEvent):
+            """A scripted event whose single `wait` collects the provider before returning."""
+
+            def wait(self, timeout: Optional[float] = None) -> bool:
+                """Drop the provider strong-ref, force a GC, then report a timeout once.
+
+                Args:
+                    timeout (Optional[float]):
+                        The requested delay (recorded for assertion).
+
+                Returns:
+                    bool:
+                        `False` exactly once (a timeout) so the loop proceeds to the
+                        now-None post-wait deref.
+                """
+                self.wait_delays.append(float(timeout if timeout is not None else 0.0))
+                holder['provider'] = None
+                gc.collect()
+                return False
+
+        event: CollectingEvent = CollectingEvent(wait_returns=[], clock=clock)
+
+        _refresh_loop(ref, event, lambda: clock['now'])  # type: ignore[arg-type]
+
+        assert ref() is None
+        # Top-of-loop deref armed exactly one wait; the post-wait deref found None and exited.
+        assert len(event.wait_delays) == 1
+        assert len(transport.calls) == 1
+
+    def test_start_background_refresh_spawns_daemon_thread(self) -> None:
+        """`start_background_refresh=True` spawns a named daemon thread that `stop()` joins."""
+        clock: Dict[str, float] = {'now': 1000.0}
+        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body('acc-1', 'off-1', 300))])
+        # A real Event + a frozen clock keep the first computed delay large (270s), so the thread
+        # parks in wait() until stop() releases it — no refresh fires, no real sleep elapses.
+        provider: KeycloakTokenProvider = KeycloakTokenProvider(
+            keycloak_url=KEYCLOAK_URL,
+            realm=REALM,
+            client_id=CLIENT_ID,
+            username=USERNAME,
+            password=PASSWORD,
+            transport=transport,
+            time_fn=lambda: clock['now'],
+            start_background_refresh=True,
+        )
+        thread: Optional[threading.Thread] = provider._refresh_thread
+        assert thread is not None
+        assert thread.daemon is True
+        assert thread.name == f'keycloak-token-refresh-{CLIENT_ID}'
+        assert thread.is_alive()
+
+        provider.stop()
+
+        # stop() set the event (interrupting the wait) and joined the thread.
+        assert not thread.is_alive()
+        # Only the login call happened: the thread parked in wait() and never refreshed.
+        assert len(transport.calls) == 1
+
+    def test_stop_is_idempotent(self) -> None:
+        """Calling `stop()` twice is safe and leaves the thread joined."""
+        clock: Dict[str, float] = {'now': 1000.0}
+        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body('acc-1', 'off-1', 300))])
+        provider: KeycloakTokenProvider = KeycloakTokenProvider(
+            keycloak_url=KEYCLOAK_URL,
+            realm=REALM,
+            client_id=CLIENT_ID,
+            username=USERNAME,
+            password=PASSWORD,
+            transport=transport,
+            time_fn=lambda: clock['now'],
+            start_background_refresh=True,
+        )
+
+        provider.stop()
+        provider.stop()  # second call must be a no-op, not an error
+
+        assert provider._refresh_thread is not None
+        assert not provider._refresh_thread.is_alive()
+
+    def test_close_alias_stops_thread(self) -> None:
+        """The `close` alias performs the same teardown as `stop`."""
+        clock: Dict[str, float] = {'now': 1000.0}
+        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body('acc-1', 'off-1', 300))])
+        provider: KeycloakTokenProvider = KeycloakTokenProvider(
+            keycloak_url=KEYCLOAK_URL,
+            realm=REALM,
+            client_id=CLIENT_ID,
+            username=USERNAME,
+            password=PASSWORD,
+            transport=transport,
+            time_fn=lambda: clock['now'],
+            start_background_refresh=True,
+        )
+        thread: Optional[threading.Thread] = provider._refresh_thread
+        assert thread is not None
+
+        provider.close()
+
+        assert not thread.is_alive()
+
+    def test_context_manager_stops_thread_on_exit(self) -> None:
+        """Using the provider as a context manager stops its background thread on block exit."""
+        clock: Dict[str, float] = {'now': 1000.0}
+        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body('acc-1', 'off-1', 300))])
+        with KeycloakTokenProvider(
+            keycloak_url=KEYCLOAK_URL,
+            realm=REALM,
+            client_id=CLIENT_ID,
+            username=USERNAME,
+            password=PASSWORD,
+            transport=transport,
+            time_fn=lambda: clock['now'],
+            start_background_refresh=True,
+        ) as provider:
+            thread: Optional[threading.Thread] = provider._refresh_thread
+            assert thread is not None
+            assert thread.is_alive()
+            assert provider.access_token == 'acc-1'
+
+        assert thread is not None
+        assert not thread.is_alive()
+
+    def test_del_stops_thread(self) -> None:
+        """Garbage-collecting the provider triggers `__del__`, which stops the background thread."""
+        clock: Dict[str, float] = {'now': 1000.0}
+        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body('acc-1', 'off-1', 300))])
+        provider: KeycloakTokenProvider = KeycloakTokenProvider(
+            keycloak_url=KEYCLOAK_URL,
+            realm=REALM,
+            client_id=CLIENT_ID,
+            username=USERNAME,
+            password=PASSWORD,
+            transport=transport,
+            time_fn=lambda: clock['now'],
+            start_background_refresh=True,
+        )
+        thread: Optional[threading.Thread] = provider._refresh_thread
+        assert thread is not None
+        assert thread.is_alive()
+
+        del provider
+        gc.collect()
+        # __del__ set the stop event; the daemon thread (holding only a weakref) then exits.
+        thread.join(timeout=5.0)
+        assert not thread.is_alive()
+
+    def test_stop_from_within_refresh_thread_skips_self_join(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        """`stop()` invoked as the refresh thread must skip the self-join (would deadlock).
+
+        Drives the `thread is threading.current_thread()` guard by patching `current_thread` to
+        return the provider's refresh thread, so `stop()` sees itself and must not call `join`.
+
+        Args:
+            monkeypatch (pytest.MonkeyPatch):
+                Fixture used to patch `threading.current_thread` for the guard.
+        """
+        clock: Dict[str, float] = {'now': 1000.0}
+        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body('acc-1', 'off-1', 300))])
+        provider: KeycloakTokenProvider = KeycloakTokenProvider(
+            keycloak_url=KEYCLOAK_URL,
+            realm=REALM,
+            client_id=CLIENT_ID,
+            username=USERNAME,
+            password=PASSWORD,
+            transport=transport,
+            time_fn=lambda: clock['now'],
+            start_background_refresh=True,
+        )
+        refresh_thread: Optional[threading.Thread] = provider._refresh_thread
+        assert refresh_thread is not None
+
+        joined: List[bool] = []
+        original_join = refresh_thread.join
+
+        def _tracking_join(timeout: Optional[float] = None) -> None:
+            """Record a join attempt, then delegate to the real `Thread.join`.
+
+            Args:
+                timeout (Optional[float]):
+                    The join timeout forwarded to the real `Thread.join`.
+            """
+            joined.append(True)
+            original_join(timeout=timeout)
+
+        refresh_thread.join = _tracking_join  # type: ignore[method-assign]
+
+        monkeypatch.setattr(keycloak_module.threading, 'current_thread', lambda: refresh_thread)
+        provider.stop()
+        # The self-join guard skipped join() entirely.
+        assert joined == []
+
+        # Restore real current_thread so a normal external stop joins and tears the thread down.
+        monkeypatch.undo()
+        provider.stop()
+        assert joined == [True]
+        assert not refresh_thread.is_alive()

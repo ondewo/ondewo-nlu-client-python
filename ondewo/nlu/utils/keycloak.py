@@ -22,7 +22,10 @@ keycloak migration plan (D18) for the *public* SDK client `ondewo-nlu-cai-sdk-pu
    the public Keycloak client returns a short-lived ``access_token`` and a long-lived
    *offline* ``refresh_token``.
 2. The provider auto-refreshes the access token (``grant_type=refresh_token``) before
-   it expires and attaches it as the standard ``Authorization: Bearer`` metadata.
+   it expires and attaches it as the standard ``Authorization: Bearer`` metadata. The
+   refresh happens *proactively* in a background daemon thread (mirroring the nodejs /
+   js / ts / angular SDKs) that wakes :data:`_EXPIRY_LEEWAY_S` before expiry, and a
+   *lazy* read-time check on :meth:`authorization_metadata` remains as a cheap fallback.
 3. The auto-refresh loop stops once ``token_expiration_in_s`` has elapsed since login
    (omit it to keep refreshing until the offline session itself expires).
 
@@ -31,8 +34,10 @@ browser flow (D14). The client is public, so no ``client_secret`` is sent.
 """
 import threading
 import time
+import weakref
 from typing import (
     Any,
+    Callable,
     Dict,
     List,
     Optional,
@@ -52,8 +57,16 @@ _TOKEN_ENDPOINT_TEMPLATE: str = '{keycloak_url}/realms/{realm}/protocol/openid-c
 # in-flight call never travels with a token that lapses mid-request.
 _EXPIRY_LEEWAY_S: float = 30.0
 
+# Lower bound (in seconds) for the scheduled background-refresh delay so a tiny/zero
+# ``expires_in`` cannot spin the refresh thread into a hot loop.
+_MIN_REFRESH_DELAY_S: float = 1.0
+
 # HTTP timeout for the (single, fast) token-endpoint calls.
 _HTTP_TIMEOUT_S: float = 30.0
+
+# Timeout (seconds) for joining the background refresh thread on stop()/__del__ so a
+# refresh stuck in an HTTP call cannot block teardown indefinitely.
+_THREAD_JOIN_TIMEOUT_S: float = 5.0
 
 
 class TokenEndpoint(Protocol):
@@ -101,17 +114,88 @@ class KeycloakAuthenticationError(Exception):
     """Raised when the Keycloak token endpoint rejects a login or refresh request."""
 
 
+def _refresh_loop(
+    provider_ref: 'weakref.ref[KeycloakTokenProvider]',
+    stop_event: threading.Event,
+    time_fn: Callable[[], float],
+) -> None:
+    """
+    Background daemon-thread target that proactively refreshes the access token.
+
+    The loop derefs the (weak) provider reference on every wake and exits as soon as it
+    resolves to ``None`` — the provider has been garbage-collected (it is held only weakly
+    by :data:`_PROVIDER_REGISTRY`), so a strong ``self`` reference here would pin it forever
+    and leak the thread. On each iteration it computes the delay until
+    :data:`_EXPIRY_LEEWAY_S` before the current access token's expiry, clamps it to
+    :data:`_MIN_REFRESH_DELAY_S`, then waits that long on ``stop_event`` (so :meth:`stop`
+    interrupts the sleep immediately). When the wait times out it refreshes the access token
+    under the provider lock. The loop stops once :meth:`stop` is called or the
+    ``token_expiration_in_s`` login deadline has elapsed.
+
+    Args:
+        provider_ref (weakref.ref[KeycloakTokenProvider]):
+            Weak reference to the owning provider; the loop exits when it derefs to ``None``.
+        stop_event (threading.Event):
+            Event signalled by :meth:`stop`; also used as the interruptible sleep primitive.
+        time_fn (Callable[[], float]):
+            Monotonic clock (injectable for deterministic tests).
+    """
+    while not stop_event.is_set():
+        provider: Optional['KeycloakTokenProvider'] = provider_ref()
+        if provider is None:
+            # The provider has been collected; never resurrect it — just exit the thread.
+            return
+
+        now: float = time_fn()
+        deadline: Optional[float] = provider._login_deadline
+        if deadline is not None and now >= deadline:
+            # The bounded auto-refresh window has closed: stop renewing and let the token lapse.
+            stop_event.set()
+            return
+
+        delay: float = provider._access_token_expires_at - _EXPIRY_LEEWAY_S - now
+        if delay < _MIN_REFRESH_DELAY_S:
+            delay = _MIN_REFRESH_DELAY_S
+        if deadline is not None:
+            remaining: float = deadline - now
+            if remaining < delay:
+                delay = remaining
+
+        # Drop the strong reference before sleeping so a long wait cannot pin the provider.
+        provider = None
+
+        # Wait returns True if stop() fired, False on timeout — only a timeout triggers a refresh.
+        if stop_event.wait(delay):
+            return
+
+        provider = provider_ref()
+        if provider is None:
+            return
+        with provider._lock:
+            provider._refresh_if_within_window(now=time_fn())
+        provider = None
+
+
 class KeycloakTokenProvider:
     """
     Acquire and auto-refresh a Keycloak access token for the headless SDK (D18).
 
     The provider performs a one-time ROPC login with ``scope=offline_access`` against a
-    public Keycloak client and then refreshes the access token on demand from the offline
-    refresh token. Reading :meth:`authorization_metadata` (or :meth:`bearer_metadata`) lazily
-    refreshes the token whenever it is within :data:`_EXPIRY_LEEWAY_S` of expiry, so every
-    outgoing gRPC call carries a fresh ``Authorization: Bearer`` value without a background
-    thread. Once ``token_expiration_in_s`` has elapsed since login the refresh stops and the
-    access token is allowed to lapse (re-login required).
+    public Keycloak client and then refreshes the access token from the offline refresh
+    token. Refresh happens two ways, both within the ``token_expiration_in_s`` window:
+
+    * **Proactively**, in a background daemon thread that wakes :data:`_EXPIRY_LEEWAY_S`
+      before the access token's expiry, refreshes, and reschedules from the new expiry
+      (mirroring the nodejs / js / ts / angular SDKs).
+    * **Lazily**, as a cheap fallback: reading :meth:`authorization_metadata` (or
+      :meth:`bearer_metadata`) refreshes the token whenever it is within
+      :data:`_EXPIRY_LEEWAY_S` of expiry.
+
+    Both paths are serialised by an internal lock, so every outgoing gRPC call carries a
+    fresh ``Authorization: Bearer`` value. Once ``token_expiration_in_s`` has elapsed since
+    login the refresh stops, the background thread exits, and the access token is allowed to
+    lapse (re-login required). Call :meth:`stop` (or use the provider as a context manager)
+    for deterministic teardown of the background thread.
 
     Attributes:
         keycloak_url (str):
@@ -138,9 +222,12 @@ class KeycloakTokenProvider:
         password: str,
         token_expiration_in_s: Optional[int] = None,
         transport: Optional[TokenEndpoint] = None,
+        time_fn: Optional[Callable[[], float]] = None,
+        stop_event: Optional[threading.Event] = None,
+        start_background_refresh: bool = True,
     ) -> None:
         """
-        Initialize the provider and acquire the offline token immediately.
+        Initialize the provider, acquire the offline token, and arm the background refresh.
 
         Args:
             keycloak_url (str):
@@ -159,6 +246,17 @@ class KeycloakTokenProvider:
             transport (Optional[TokenEndpoint]):
                 HTTP transport for the token endpoint. Defaults to :mod:`requests`. Unit
                 tests inject a fake transport so no network is required.
+            time_fn (Optional[Callable[[], float]]):
+                Monotonic clock used for all expiry bookkeeping and the background-refresh
+                schedule. Defaults to :func:`time.monotonic`; tests inject a controllable
+                fake so the background thread is deterministic.
+            stop_event (Optional[threading.Event]):
+                Event the background thread waits on (interruptible sleep) and that
+                :meth:`stop` signals. Defaults to a fresh :class:`threading.Event`; tests
+                inject a controllable one to drive the loop without real sleeps.
+            start_background_refresh (bool):
+                Whether to spawn the background refresh thread after login. Defaults to
+                ``True``; tests set it to ``False`` to drive the loop body directly.
 
         Raises:
             KeycloakAuthenticationError:
@@ -171,6 +269,7 @@ class KeycloakTokenProvider:
         self.password: str = password
         self.token_expiration_in_s: Optional[int] = token_expiration_in_s
         self._transport: TokenEndpoint = transport if transport is not None else _RequestsTransport()
+        self._time_fn: Callable[[], float] = time_fn if time_fn is not None else time.monotonic
 
         self._token_endpoint: str = _TOKEN_ENDPOINT_TEMPLATE.format(
             keycloak_url=self.keycloak_url,
@@ -182,11 +281,48 @@ class KeycloakTokenProvider:
         self._access_token_expires_at: float = 0.0
         self._login_deadline: Optional[float] = None
 
+        # Serialises the lazy read-path refresh against the background-thread refresh.
+        self._lock: threading.RLock = threading.RLock()
+        # Signalled by stop(); also the interruptible sleep primitive for the refresh thread.
+        self._stop_event: threading.Event = stop_event if stop_event is not None else threading.Event()
+        self._refresh_thread: Optional[threading.Thread] = None
+
         self._login()
+
+        if start_background_refresh:
+            self._start_background_refresh()
+
+    def __enter__(self) -> 'KeycloakTokenProvider':
+        """
+        Enter the runtime context, returning the provider itself.
+
+        Returns:
+            KeycloakTokenProvider:
+                This provider, with its background refresh thread running.
+        """
+        return self
+
+    def __exit__(self, exc_type: Any, exc_value: Any, traceback: Any) -> None:
+        """
+        Exit the runtime context and stop the background refresh thread.
+
+        Args:
+            exc_type (Any):
+                The exception type if the ``with`` block raised, else ``None``.
+            exc_value (Any):
+                The exception instance if the ``with`` block raised, else ``None``.
+            traceback (Any):
+                The traceback if the ``with`` block raised, else ``None``.
+        """
+        self.stop()
+
+    def __del__(self) -> None:
+        """Stop the background refresh thread when the provider is garbage-collected."""
+        self.stop()
 
     @property
     def access_token(self) -> str:
-        """The most recently issued access token (refreshed lazily on metadata reads)."""
+        """The most recently issued access token (refreshed lazily and in the background)."""
         return self._access_token
 
     def authorization_metadata(self) -> Tuple[str, str]:
@@ -199,8 +335,9 @@ class KeycloakTokenProvider:
                 for at least :data:`_EXPIRY_LEEWAY_S` more seconds (when within the
                 ``token_expiration_in_s`` window).
         """
-        self._ensure_fresh_access_token()
-        return ('authorization', f'Bearer {self._access_token}')
+        with self._lock:
+            self._refresh_if_within_window(now=self._time_fn())
+            return ('authorization', f'Bearer {self._access_token}')
 
     def bearer_metadata(self) -> List[Tuple[str, str]]:
         """
@@ -213,15 +350,56 @@ class KeycloakTokenProvider:
         """
         return [self.authorization_metadata()]
 
-    def _ensure_fresh_access_token(self) -> None:
+    def stop(self) -> None:
+        """
+        Stop the background refresh loop and join its thread. Idempotent and safe from any state.
+
+        Signals the stop event (interrupting any in-flight :meth:`threading.Event.wait`) and
+        joins the background thread with a bounded timeout so teardown — including the
+        :meth:`__del__` path — never blocks indefinitely on a stuck refresh.
+        """
+        self._stop_event.set()
+        thread: Optional[threading.Thread] = self._refresh_thread
+        # Never join from within the refresh thread itself (would deadlock); only an external
+        # caller joins. A daemon thread that outlives this join is reaped at interpreter exit.
+        if thread is not None and thread is not threading.current_thread():
+            thread.join(timeout=_THREAD_JOIN_TIMEOUT_S)
+
+    # An alias so callers used to ``close()`` get the same deterministic teardown.
+    close = stop
+
+    def _start_background_refresh(self) -> None:
+        """
+        Spawn the daemon thread that proactively refreshes the access token before expiry.
+
+        The thread target receives only a :class:`weakref.ref` to this provider (never a bound
+        method or strong ``self``), so the provider — held weakly by :data:`_PROVIDER_REGISTRY`
+        — can still be garbage-collected; the loop exits on the next wake when the weakref
+        resolves to ``None``.
+        """
+        provider_ref: 'weakref.ref[KeycloakTokenProvider]' = weakref.ref(self)
+        thread: threading.Thread = threading.Thread(
+            target=_refresh_loop,
+            args=(provider_ref, self._stop_event, self._time_fn),
+            name=f'keycloak-token-refresh-{self.client_id}',
+            daemon=True,
+        )
+        self._refresh_thread = thread
+        thread.start()
+
+    def _refresh_if_within_window(self, now: float) -> None:
         """
         Refresh the access token if it is near expiry and refresh is still permitted.
 
-        Does nothing once ``token_expiration_in_s`` has elapsed since login (the access
-        token is then allowed to lapse). Within the window, refreshes via the offline
-        refresh token whenever the current access token is within the leeway of its ``exp``.
+        Shared by the lazy read path and the background thread; callers hold :attr:`_lock`.
+        Does nothing once ``token_expiration_in_s`` has elapsed since login (the access token
+        is then allowed to lapse). Within the window, refreshes via the offline refresh token
+        whenever the current access token is within the leeway of its ``exp``.
+
+        Args:
+            now (float):
+                The current monotonic time, sampled by the caller from :attr:`_time_fn`.
         """
-        now: float = time.monotonic()
         if self._login_deadline is not None and now >= self._login_deadline:
             # The auto-refresh window has closed: stop renewing and let the token lapse.
             return
@@ -248,7 +426,7 @@ class KeycloakTokenProvider:
         payload: Dict[str, Any] = self._post_token_request(data=data, action='login')
         self._store_tokens(payload=payload)
         if self.token_expiration_in_s is not None:
-            self._login_deadline = time.monotonic() + self.token_expiration_in_s
+            self._login_deadline = self._time_fn() + self.token_expiration_in_s
 
     def _refresh(self) -> None:
         """
@@ -321,7 +499,7 @@ class KeycloakTokenProvider:
             self._refresh_token = refresh_token
 
         expires_in: int = int(payload.get('expires_in', 0))
-        self._access_token_expires_at = time.monotonic() + expires_in
+        self._access_token_expires_at = self._time_fn() + expires_in
 
 
 # One shared provider per ClientConfig so the ROPC offline-token login happens once for all
