@@ -50,9 +50,9 @@ async def login(
     if config.use_keycloak:
         return ''
 
-    request = LoginRequest(user_email=config.user_name, password=config.password)
+    request: LoginRequest = LoginRequest(user_email=config.user_name, password=config.password)
 
-    user_service = ondewo.nlu.services.async_users.Users(
+    user_service: ondewo.nlu.services.async_users.Users = ondewo.nlu.services.async_users.Users(
         config=config,
         nlu_token='',
         use_secure_channel=use_secure_channel,

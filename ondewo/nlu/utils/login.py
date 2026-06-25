@@ -40,15 +40,16 @@ def login(
     string is returned in that case.
 
     Args:
-        config (BaseClientConfig):
+        config (ClientConfig):
             Configuration for the client.
         use_secure_channel (bool):
             Whether to use a secure gRPC channel.
         options (Optional[Set[Tuple[str, Any]]]):
             Additional options for the gRPC channel.
 
-    Returns
-        str: returns the auth token, i.e. "cai-token" (empty string for the Keycloak path)
+    Returns:
+        str:
+            The auth token, i.e. "cai-token" (empty string for the Keycloak path).
     """
     if config.use_keycloak:
         return ''

@@ -96,7 +96,7 @@ class ClientConfig(BaseClientConfig):
         if not self.password:
             raise ValueError(f'The field `password` is mandatory in {self.__class__.__name__}.')
 
-        keycloak_fields = (self.keycloak_url, self.realm, self.client_id)
+        keycloak_fields: tuple[str, str, str] = (self.keycloak_url, self.realm, self.client_id)
         if any(keycloak_fields) and not all(keycloak_fields):
             raise ValueError(
                 'The Keycloak fields `keycloak_url`, `realm`, and `client_id` must be provided '
