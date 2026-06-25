@@ -3773,17 +3773,28 @@ class ProjectTechnicalUser(google.protobuf.message.Message):
 
     USER_ID_FIELD_NUMBER: builtins.int
     USERNAME_FIELD_NUMBER: builtins.int
+    CREATED_AT_FIELD_NUMBER: builtins.int
+    CREATED_BY_FIELD_NUMBER: builtins.int
     user_id: builtins.str
     """The technical user's id (Keycloak sub / UUID)."""
     username: builtins.str
     """The technical user's login username / email."""
+    created_by: builtins.str
+    """The id of the user that created this technical user."""
+    @property
+    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """The time the technical user was created (Keycloak createdTimestamp)."""
+
     def __init__(
         self,
         *,
         user_id: builtins.str = ...,
         username: builtins.str = ...,
+        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        created_by: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["user_id", b"user_id", "username", b"username"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["created_at", b"created_at"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["created_at", b"created_at", "created_by", b"created_by", "user_id", b"user_id", "username", b"username"]) -> None: ...
 
 global___ProjectTechnicalUser = ProjectTechnicalUser
 
