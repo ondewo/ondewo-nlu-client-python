@@ -2201,6 +2201,56 @@ class LlmTokenUsageUpdateEvent(google.protobuf.message.Message):
 global___LlmTokenUsageUpdateEvent = LlmTokenUsageUpdateEvent
 
 @typing.final
+class ReferencedChunk(google.protobuf.message.Message):
+    """Chunk information for a document chunk referenced in a RAG based <code>StreamingDetectIntentResponse</code>"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    REFERENCE_INDEX_FIELD_NUMBER: builtins.int
+    DATASET_ID_FIELD_NUMBER: builtins.int
+    DOCUMENT_ID_FIELD_NUMBER: builtins.int
+    CHUNK_ID_FIELD_NUMBER: builtins.int
+    DOCUMENT_NAME_FIELD_NUMBER: builtins.int
+    CONTENT_FIELD_NUMBER: builtins.int
+    SIMILARITY_FIELD_NUMBER: builtins.int
+    DOCUMENT_URL_FIELD_NUMBER: builtins.int
+    DEEP_LINK_URL_FIELD_NUMBER: builtins.int
+    reference_index: builtins.int
+    """Index by which this chunk is referenced in the response text. For index <code>N</code> the reference in the response text has format <code>[ID:N]</code>"""
+    dataset_id: builtins.str
+    """ID of the dataset the chunk belongs to."""
+    document_id: builtins.str
+    """ID of the document the chunk belongs to."""
+    chunk_id: builtins.str
+    """ID of the chunk."""
+    document_name: builtins.str
+    """Name of the document the chunk belongs to."""
+    content: builtins.str
+    """Text of the chunk."""
+    similarity: builtins.float
+    """Similarity score of this chunk for response it is retruned with."""
+    document_url: builtins.str
+    """For crawled documents the URL of the source document. For any other document it is left empty."""
+    deep_link_url: builtins.str
+    """For crawled documents link to the source document that directly jumps to the chunk's location on the page using a text fragment anchor (a bit fragile and might not always work). For any other document it is left empty."""
+    def __init__(
+        self,
+        *,
+        reference_index: builtins.int = ...,
+        dataset_id: builtins.str = ...,
+        document_id: builtins.str = ...,
+        chunk_id: builtins.str = ...,
+        document_name: builtins.str = ...,
+        content: builtins.str = ...,
+        similarity: builtins.float = ...,
+        document_url: builtins.str = ...,
+        deep_link_url: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["chunk_id", b"chunk_id", "content", b"content", "dataset_id", b"dataset_id", "deep_link_url", b"deep_link_url", "document_id", b"document_id", "document_name", b"document_name", "document_url", b"document_url", "reference_index", b"reference_index", "similarity", b"similarity"]) -> None: ...
+
+global___ReferencedChunk = ReferencedChunk
+
+@typing.final
 class QueryResult(google.protobuf.message.Message):
     """Represents the result of conversational query or event processing."""
 
@@ -2223,6 +2273,7 @@ class QueryResult(google.protobuf.message.Message):
     LANGUAGE_CODE_FIELD_NUMBER: builtins.int
     FILE_RESOURCES_FIELD_NUMBER: builtins.int
     LLM_TELEMETRY_REPORT_FIELD_NUMBER: builtins.int
+    REFERENCED_CHUNKS_FIELD_NUMBER: builtins.int
     query_text: builtins.str
     """The original conversational query text:
     <ul>
@@ -2318,6 +2369,10 @@ class QueryResult(google.protobuf.message.Message):
     def llm_telemetry_report(self) -> global___LlmTelemetryReport:
         """Aggregated LLM telemetry (tokens, tool calls, thinking) for this turn."""
 
+    @property
+    def referenced_chunks(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___ReferencedChunk]:
+        """Source chunks the answer cited via in-text <code>[ID:N]</code> markers, documents. Empty when the turn was not answered from a RAG dataset."""
+
     def __init__(
         self,
         *,
@@ -2338,9 +2393,10 @@ class QueryResult(google.protobuf.message.Message):
         language_code: builtins.str = ...,
         file_resources: collections.abc.Iterable[global___FileResource] | None = ...,
         llm_telemetry_report: global___LlmTelemetryReport | None = ...,
+        referenced_chunks: collections.abc.Iterable[global___ReferencedChunk] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["diagnostic_info", b"diagnostic_info", "intent", b"intent", "llm_telemetry_report", b"llm_telemetry_report", "parameters", b"parameters", "webhook_payload", b"webhook_payload"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["action", b"action", "all_required_params_present", b"all_required_params_present", "diagnostic_info", b"diagnostic_info", "file_resources", b"file_resources", "fulfillment_messages", b"fulfillment_messages", "fulfillment_text", b"fulfillment_text", "intent", b"intent", "intent_detection_confidence", b"intent_detection_confidence", "language_code", b"language_code", "llm_telemetry_report", b"llm_telemetry_report", "output_contexts", b"output_contexts", "parameters", b"parameters", "query_text", b"query_text", "query_text_original", b"query_text_original", "speech_recognition_confidence", b"speech_recognition_confidence", "webhook_payload", b"webhook_payload", "webhook_source", b"webhook_source"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["action", b"action", "all_required_params_present", b"all_required_params_present", "diagnostic_info", b"diagnostic_info", "file_resources", b"file_resources", "fulfillment_messages", b"fulfillment_messages", "fulfillment_text", b"fulfillment_text", "intent", b"intent", "intent_detection_confidence", b"intent_detection_confidence", "language_code", b"language_code", "llm_telemetry_report", b"llm_telemetry_report", "output_contexts", b"output_contexts", "parameters", b"parameters", "query_text", b"query_text", "query_text_original", b"query_text_original", "referenced_chunks", b"referenced_chunks", "speech_recognition_confidence", b"speech_recognition_confidence", "webhook_payload", b"webhook_payload", "webhook_source", b"webhook_source"]) -> None: ...
 
 global___QueryResult = QueryResult
 
