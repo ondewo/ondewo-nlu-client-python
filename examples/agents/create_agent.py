@@ -46,7 +46,9 @@ if __name__ == "__main__":
     config: ClientConfig = ClientConfig(
         host='localhost',
         port='1234',
-        http_token='<http/root token>',
+        keycloak_url='https://<host>/auth',
+        realm='ondewo-ccai-platform',
+        client_id='ondewo-nlu-cai-sdk-public',
         user_name='<e-mail of user>',
         password='<password of user>',
     )

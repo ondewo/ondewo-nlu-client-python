@@ -206,7 +206,9 @@ if __name__ == '__main__':
     config: ClientConfig = ClientConfig(
         host='localhost',
         port='1234',
-        http_token='aimp',
+        keycloak_url='https://<host>/auth',
+        realm='ondewo-ccai-platform',
+        client_id='ondewo-nlu-cai-sdk-public',
         user_name='admin@ondewo.com',
         password='asdf'
     )
@@ -220,7 +222,9 @@ if __name__ == '__main__':
             port=config_['port'],
             user_name=config_['user_name'],
             password=config_['password'],
-            http_token=config_['http_token'],
+            keycloak_url=config_['keycloak_url'],
+            realm=config_['realm'],
+            client_id=config_.get('client_id', 'ondewo-nlu-cai-sdk-public'),
             grpc_cert=config_.get('grpc_cert', ''),
         )
     # endregion

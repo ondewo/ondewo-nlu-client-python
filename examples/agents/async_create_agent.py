@@ -71,7 +71,9 @@ async def main() -> None:
     config: ClientConfig = ClientConfig(
         host='localhost',
         port='50055',
-        http_token='aimp',
+        keycloak_url='https://<host>/auth',
+        realm='ondewo-ccai-platform',
+        client_id='ondewo-nlu-cai-sdk-public',
         user_name='admin@ondewo.com',
         password='asdf'
     )
