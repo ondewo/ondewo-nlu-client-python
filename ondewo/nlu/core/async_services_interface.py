@@ -52,7 +52,7 @@ class AsyncServicesInterface(AsyncBaseServicesInterface, ABC):
         # legacy `Authorization: Basic` http_token.
         self._legacy_metadata: List[Tuple[str, str]] = [
             ('cai-token', nlu_token if nlu_token else 'null'),
-            ('authorization', config.http_token),
+            ('Authorization', config.http_token),
         ]
 
     @property
