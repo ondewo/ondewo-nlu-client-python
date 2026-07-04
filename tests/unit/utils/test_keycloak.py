@@ -205,13 +205,13 @@ class TestLogin:
         assert 'client_secret' not in login_call
 
     def test_authorization_metadata_is_bearer(self) -> None:
-        """`authorization_metadata()` returns the `('Authorization', 'Bearer <token>')` tuple."""
+        """`authorization_metadata()` returns the `('authorization', 'Bearer <token>')` tuple."""
         transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body('acc-1', 'off-1', 300))])
 
         provider: KeycloakTokenProvider = _build_provider(transport)
 
         key, value = provider.authorization_metadata()
-        assert key == 'Authorization'
+        assert key == 'authorization'
         assert value == 'Bearer acc-1'
 
     def test_bearer_metadata_shape(self) -> None:
@@ -221,7 +221,7 @@ class TestLogin:
         provider: KeycloakTokenProvider = _build_provider(transport)
 
         metadata: List[Tuple[str, str]] = provider.bearer_metadata()
-        assert metadata == [('Authorization', 'Bearer acc-1')]
+        assert metadata == [('authorization', 'Bearer acc-1')]
 
     def test_login_failure_raises(self) -> None:
         """A non-2xx login response raises `KeycloakAuthenticationError`."""

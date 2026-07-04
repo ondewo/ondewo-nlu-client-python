@@ -135,7 +135,7 @@ from ondewo.nlu.rag_pb2_grpc import RagsStub
 
 channel = grpc.secure_channel("host:port", grpc.ssl_channel_credentials())
 stub = RagsStub(channel)
-metadata = [("Authorization", "Bearer <token>")]
+metadata = [("authorization", "Bearer <token>")]
 for chunk in stub.RagAsk(RagAskRequest(query="hello"), metadata=metadata):
     print(chunk)
 ```
