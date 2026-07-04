@@ -178,7 +178,9 @@ The `/examples` folder provides a possible implementation of this library. To ru
 - port `// Port of the Server - e.g. 6600`
 - user_name `// Username - same as you would use in AIM`
 - password `// Password of the user`
-- http_token `// Token to allow access through`
+- keycloak_url `// Base URL of the Keycloak server, e.g. https://<host>/auth`
+- realm `// Keycloak realm, e.g. ondewo-ccai-platform`
+- client_id `// Public Keycloak SDK client id, e.g. ondewo-nlu-cai-sdk-public`
 - grpc_cert `// gRPC Certificate of the server`
 
 ## Automatic Release Process

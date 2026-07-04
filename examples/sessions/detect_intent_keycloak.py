@@ -14,11 +14,10 @@
 """
 Minimal detect-intent example using the current Keycloak bearer auth (D18).
 
-The legacy `Login` RPC / `cai-token` / `Authorization: Basic http_token` path has been
-removed from the platform. Authentication now uses the headless Keycloak offline-token
-flow: configure `keycloak_url`, `realm`, and `client_id` (the public SDK client, no
-secret) together with the technical-user `user_name` / `password`. The `Client` then
-attaches a freshly auto-refreshed `Authorization: Bearer <token>` to every gRPC call.
+Authentication uses the headless Keycloak offline-token flow: configure `keycloak_url`,
+`realm`, and `client_id` (the public SDK client, no secret) together with the
+technical-user `user_name` / `password`. The `Client` then attaches a freshly
+auto-refreshed `Authorization: Bearer <token>` to every gRPC call.
 
 The request-building and response-formatting logic is factored into small functions so it
 can be unit-tested with the gRPC client mocked (see
@@ -111,7 +110,7 @@ def format_response(response: DetectIntentResponse) -> str:
 
 
 if __name__ == '__main__':
-    # Current auth (D18): Keycloak headless offline-token flow — no http_token / cai-token.
+    # Auth (D18): Keycloak headless offline-token flow — bearer token attached automatically.
     config: ClientConfig = ClientConfig(
         host='localhost',
         port='50055',

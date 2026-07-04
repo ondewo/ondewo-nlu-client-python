@@ -4,7 +4,8 @@ This module provides a python client for convenient interaction between a user a
 
 Quick Introduction
 ------------------
-1. Instantiate a client: This logs the user in with the login-information provided via the client config.
+1. Instantiate a client: authentication uses the Keycloak headless offline-token flow — the
+   client attaches a freshly auto-refreshed `Authorization: Bearer` token to every gRPC call.
     ```python
     from ondewo.nlu.client import Client
     from ondewo.nlu.client_config import ClientConfig
@@ -12,17 +13,16 @@ Quick Introduction
     config = ClientConfig(
         host='my_host',
         port='my_port',
-        http_token='my_http_token', # the token required for getting past nginx
         grpc_cert=b'my_certificate', # the certificate required for setting up a secure grpc channel
-        user_name='user@ondewo.com', # the user name for ONDEWO NLU services
+        user_name='user@ondewo.com', # the technical-user name for ONDEWO NLU services
         password='1234', # the password for ONDEWO NLU services
+        keycloak_url='https://my_host/auth', # base URL of the Keycloak server
+        realm='ondewo-ccai-platform', # Keycloak realm
+        client_id='ondewo-nlu-cai-sdk-public', # public Keycloak SDK client (no secret)
     )
 
     client = Client(config=config)
     ```
-   Note: Since a login is necessary, any intermediate service rerouting requests to an ONDEWO NLU server
-    must at least make the Login endpoint available to the client.
-
    Note: By default, a secure grpc-channel is established.
     If the backend allows, you can use an insecure channel by
     instantiating a client using `client = Client(config=config, use_secure_channel=False)`.
@@ -54,10 +54,12 @@ To log in a new user or connect to a different server, create a new client confi
 new_config = ClientConfig(
     host='my_new_host',
     port='my_new_port',
-    http_token='my_new_http_token', # the token required for getting past nginx
     grpc_cert=b'my_new_certificate', # the certificate required for setting up a secure grpc channel
-    user_name='new_user@ondewo.com', # the user name for ONDEWO NLU services
+    user_name='new_user@ondewo.com', # the technical-user name for ONDEWO NLU services
     password='new_password', # the password for ONDEWO NLU services
+    keycloak_url='https://my_new_host/auth', # base URL of the Keycloak server
+    realm='ondewo-ccai-platform', # Keycloak realm
+    client_id='ondewo-nlu-cai-sdk-public', # public Keycloak SDK client (no secret)
 )
 
 new_client = Client(config=new_config)

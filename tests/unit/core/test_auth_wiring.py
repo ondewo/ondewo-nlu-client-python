@@ -11,17 +11,17 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Hermetic unit tests for the client's auth wiring.
+"""Hermetic unit tests for the client's bearer-only auth wiring.
 
 These cover the two seams that decide *how* a call authenticates, independent of the
 Keycloak token helper itself (covered by `test_keycloak.py`):
 
-* `login()` / async `login()` short-circuit — the Keycloak (D18) path must skip the legacy
-  `Login` RPC entirely and return an empty `cai-token`.
+* `login()` / async `login()` are neutralized no-ops — authentication is Keycloak bearer
+  only, so they never call the legacy `Login` RPC and always return an empty string.
 * `ServicesInterface.metadata` / `AsyncServicesInterface.metadata` selection — the Keycloak
   path must attach the **lowercase** `authorization` bearer tuple (grpc-python rejects a
-  capital metadata key client-side), and the legacy path must attach the `cai-token` list
-  whose `authorization` key is likewise lowercase.
+  capital metadata key client-side), and the non-Keycloak path must attach an empty list so
+  the call travels unauthenticated (no legacy `cai-token` metadata).
 
 No network is touched: the Keycloak token provider is replaced with a fake, and the gRPC
 channels created at construction are insecure and are never used to issue a call.
@@ -46,22 +46,19 @@ HOST: str = 'localhost'
 PORT: str = '50055'
 USERNAME: str = 'tech-user@example.com'
 PASSWORD: str = 's3cr3t'
-HTTP_TOKEN: str = 'Basic bGVnYWN5'
-NLU_TOKEN: str = 'cai-token-xyz'
 KEYCLOAK_URL: str = 'https://kc.example.com/auth'
 REALM: str = 'ondewo-ccai-platform'
 CLIENT_ID: str = 'ondewo-nlu-cai-sdk-public'
 BEARER_METADATA: List[Tuple[str, str]] = [('authorization', 'Bearer acc-1')]
 
 
-def _legacy_config() -> ClientConfig:
-    """Build a config for the legacy `Login`-RPC auth path (no Keycloak fields set)."""
+def _non_keycloak_config() -> ClientConfig:
+    """Build a config with no Keycloak fields set (calls travel unauthenticated)."""
     return ClientConfig(
         host=HOST,
         port=PORT,
         user_name=USERNAME,
         password=PASSWORD,
-        http_token=HTTP_TOKEN,
     )
 
 
@@ -106,27 +103,35 @@ class _AsyncService(AsyncServicesInterface):
 
 async def _async_metadata(config: ClientConfig) -> List[Tuple[str, str]]:
     """Build an `_AsyncService` (needs a running loop for its `grpc.aio` channel) and read its metadata."""
-    service: _AsyncService = _AsyncService(config=config, nlu_token=NLU_TOKEN, use_secure_channel=False)
+    service: _AsyncService = _AsyncService(config=config, nlu_token='', use_secure_channel=False)
     try:
         return service.metadata
     finally:
         await service.grpc_channel.close()
 
 
-class TestLoginShortCircuit:
-    """`login()` skips the legacy `Login` RPC and returns an empty token under Keycloak."""
+class TestLoginIsNeutralizedNoOp:
+    """`login()` never calls the legacy `Login` RPC and always returns an empty string."""
 
-    def test_sync_login_returns_empty_and_skips_rpc_for_keycloak(self) -> None:
-        """The synchronous `login()` returns `''` without constructing the `Users` service."""
+    def test_sync_login_returns_empty_for_keycloak(self) -> None:
+        """The synchronous `login()` returns `''` for a Keycloak config without an RPC."""
         assert login(_keycloak_config(), use_secure_channel=False) == ''
 
-    def test_async_login_returns_empty_and_skips_rpc_for_keycloak(self) -> None:
-        """The asynchronous `login()` returns `''` without constructing the `Users` service."""
+    def test_sync_login_returns_empty_without_keycloak(self) -> None:
+        """The synchronous `login()` returns `''` for a non-Keycloak config without an RPC."""
+        assert login(_non_keycloak_config(), use_secure_channel=False) == ''
+
+    def test_async_login_returns_empty_for_keycloak(self) -> None:
+        """The asynchronous `login()` returns `''` for a Keycloak config without an RPC."""
         assert asyncio.run(async_login(_keycloak_config(), use_secure_channel=False)) == ''
+
+    def test_async_login_returns_empty_without_keycloak(self) -> None:
+        """The asynchronous `login()` returns `''` for a non-Keycloak config without an RPC."""
+        assert asyncio.run(async_login(_non_keycloak_config(), use_secure_channel=False)) == ''
 
 
 class TestMetadataSelection:
-    """`metadata` picks the lowercase bearer tuple under Keycloak, the `cai-token` list otherwise."""
+    """`metadata` picks the lowercase bearer tuple under Keycloak, an empty list otherwise."""
 
     def test_sync_metadata_is_lowercase_bearer_tuple_for_keycloak(
         self,
@@ -143,11 +148,11 @@ class TestMetadataSelection:
         assert service.metadata == BEARER_METADATA
         assert service.metadata[0][0] == 'authorization'
 
-    def test_sync_metadata_is_legacy_cai_token_list_without_keycloak(self) -> None:
-        """Without Keycloak the sync interface attaches the `cai-token` + lowercase `authorization` list."""
-        service: _SyncService = _SyncService(config=_legacy_config(), nlu_token=NLU_TOKEN, use_secure_channel=False)
+    def test_sync_metadata_is_empty_without_keycloak(self) -> None:
+        """Without Keycloak the sync interface attaches no metadata (unauthenticated call)."""
+        service: _SyncService = _SyncService(config=_non_keycloak_config(), nlu_token='', use_secure_channel=False)
 
-        assert service.metadata == [('cai-token', NLU_TOKEN), ('authorization', HTTP_TOKEN)]
+        assert service.metadata == []
 
     def test_async_metadata_is_lowercase_bearer_tuple_for_keycloak(
         self,
@@ -166,8 +171,8 @@ class TestMetadataSelection:
         assert metadata == BEARER_METADATA
         assert metadata[0][0] == 'authorization'
 
-    def test_async_metadata_is_legacy_cai_token_list_without_keycloak(self) -> None:
-        """Without Keycloak the async interface attaches the `cai-token` + lowercase `authorization` list."""
-        metadata: List[Tuple[str, str]] = asyncio.run(_async_metadata(_legacy_config()))
+    def test_async_metadata_is_empty_without_keycloak(self) -> None:
+        """Without Keycloak the async interface attaches no metadata (unauthenticated call)."""
+        metadata: List[Tuple[str, str]] = asyncio.run(_async_metadata(_non_keycloak_config()))
 
-        assert metadata == [('cai-token', NLU_TOKEN), ('authorization', HTTP_TOKEN)]
+        assert metadata == []

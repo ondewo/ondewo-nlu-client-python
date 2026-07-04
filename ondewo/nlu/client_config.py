@@ -25,21 +25,19 @@ class ClientConfig(BaseClientConfig):
     Configuration for the ONDEWO Python client.
 
     This class extends `BaseClientConfig` with the authentication details required for
-    connecting to ONDEWO NLU services. Two authentication paths are supported:
+    connecting to ONDEWO NLU services. Authentication is **Keycloak bearer only**:
 
     * **Keycloak headless offline-token auth (D18)** — set `keycloak_url`, `realm`,
       `client_id`, `user_name`, and `password` (and optionally `token_expiration_in_s`).
       The client performs an ROPC login with `scope=offline_access` against the *public*
       Keycloak SDK client (no `client_secret`), then auto-refreshes the short-lived access
-      token and attaches it as `Authorization: Bearer`.
-    * **Legacy `Login` RPC auth** — set `user_name` and `password` (and optionally the
-      legacy `http_token`). The client calls the `Login` RPC and attaches the returned
-      `cai-token`. Kept for backward compatibility (dual-mode).
+      token and attaches it as `Authorization: Bearer` on every gRPC call.
+
+    When the Keycloak fields are omitted the client sends no auth metadata at all, so the
+    connection travels unauthenticated (e.g. against a plaintext server or an Envoy ingress
+    that injects the bearer token).
 
     Attributes:
-        http_token (str):
-            Legacy token for bypassing nginx or other proxies (`Authorization: Basic`).
-            Optional — kept only for backward compatibility with the legacy login path.
         user_name (str):
             The user name for authenticating with ONDEWO NLU services.
             Example: 'testuser@ondewo.com'.
@@ -57,7 +55,6 @@ class ClientConfig(BaseClientConfig):
             Bounds how long the auto-refresh loop runs (seconds since login). `None`
             keeps refreshing until the offline session itself expires.
     """
-    http_token: str = ''
     user_name: str = ''
     password: str = ''
     keycloak_url: str = ''
@@ -79,9 +76,8 @@ class ClientConfig(BaseClientConfig):
         """
         Post-initialization hook to validate the configured authentication path.
 
-        `http_token` is no longer mandatory (D5 — clients no longer send
-        `Authorization: Basic`; Envoy validates the Bearer JWT). The check requires
-        `user_name` and `password` for both paths, and additionally requires the full
+        Envoy validates the Bearer JWT, so no separate proxy credential is required. The
+        check requires `user_name` and `password`, and additionally requires the full
         Keycloak triple (`keycloak_url`, `realm`, `client_id`) to be all-or-nothing.
 
         Raises:

@@ -19,11 +19,6 @@ from typing import (
 )
 
 from ondewo.nlu.client_config import ClientConfig
-from ondewo.nlu.services.users import Users
-from ondewo.nlu.user_pb2 import (
-    LoginRequest,
-    LoginResponse,
-)
 
 
 def login(
@@ -32,12 +27,11 @@ def login(
     options: Optional[Set[Tuple[str, Any]]] = None,
 ) -> str:
     """
-    Log in using the user and password in the client config and returns the auth token, i.e. "cai-token".
+    No-op login retained for backward compatibility with the generated client.
 
-    With Keycloak headless auth (D18) configured on the config, the legacy `Login` RPC is
-    skipped entirely — authentication happens via the Keycloak offline-token flow and the
-    access token is attached as `Authorization: Bearer` by the services interface. An empty
-    string is returned in that case.
+    Authentication is Keycloak bearer only: the access token is attached as
+    `Authorization: Bearer` by the services interface. The legacy `Login` RPC is never
+    called, so this always returns an empty string.
 
     Args:
         config (ClientConfig):
@@ -49,25 +43,6 @@ def login(
 
     Returns:
         str:
-            The auth token, i.e. "cai-token" (empty string for the Keycloak path).
+            Always an empty string (no legacy token is issued).
     """
-    if config.use_keycloak:
-        return ''
-
-    request: LoginRequest = LoginRequest(
-        user_email=config.user_name,
-        password=config.password,
-    )
-
-    user_service: Users = Users(
-        config=config,
-        nlu_token='',
-        use_secure_channel=use_secure_channel,
-        options=options,
-    )
-    response: LoginResponse = user_service.login(request)
-    # retrieve the "cai-token"
-    nlu_token: str = response.auth_token
-    user_service.grpc_channel.close()
-
-    return nlu_token
+    return ''

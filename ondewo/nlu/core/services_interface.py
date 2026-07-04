@@ -38,18 +38,15 @@ class ServicesInterface(BaseServicesInterface, ABC):
         options: Optional[Set[Tuple[str, Any]]] = None,
     ) -> None:
         super(ServicesInterface, self).__init__(config=config, use_secure_channel=use_secure_channel, options=options)
+        # `nlu_token` is accepted for backward compatibility with the generated service
+        # signatures but is no longer used: authentication is Keycloak bearer only.
+        del nlu_token
         # When Keycloak headless auth (D18) is configured, every call carries a freshly
         # auto-refreshed `Authorization: Bearer` token; the provider is shared per config so
         # the offline-token ROPC login happens once for all services on the client.
         self._keycloak_provider: Optional[KeycloakTokenProvider] = (
             get_keycloak_token_provider(config) if config.use_keycloak else None
         )
-        # Legacy dual-mode metadata: the `cai-token` from the `Login` RPC plus the optional
-        # legacy `Authorization: Basic` http_token.
-        self._legacy_metadata: List[Tuple[str, str]] = [
-            ('cai-token', nlu_token if nlu_token else 'null'),
-            ('authorization', config.http_token),
-        ]
 
     @property
     def metadata(self) -> List[Tuple[str, str]]:
@@ -57,16 +54,14 @@ class ServicesInterface(BaseServicesInterface, ABC):
         The gRPC metadata attached to every outgoing call.
 
         With Keycloak auth this rebuilds (and auto-refreshes) the `Authorization: Bearer`
-        token on each access; otherwise it returns the legacy `cai-token` metadata.
+        token on each access; otherwise it returns an empty list so the call travels
+        unauthenticated (e.g. against a plaintext server or an Envoy ingress that injects
+        the bearer token).
 
         Returns:
-            List[Tuple[str, str]]: The metadata tuples for the next gRPC call.
+            List[Tuple[str, str]]: The metadata tuples for the next gRPC call, or `[]` when
+            Keycloak auth is not configured.
         """
         if self._keycloak_provider is not None:
             return self._keycloak_provider.bearer_metadata()
-        return self._legacy_metadata
-
-    @metadata.setter
-    def metadata(self, value: List[Tuple[str, str]]) -> None:
-        """Allow the base class / callers to override the legacy metadata list."""
-        self._legacy_metadata = value
+        return []

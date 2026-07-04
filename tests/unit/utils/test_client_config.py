@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Unit tests for `ClientConfig` validation across the dual-mode auth paths (D5/D18)."""
+"""Unit tests for `ClientConfig` validation on the bearer-only auth model (D18)."""
 import pytest
 
 from ondewo.nlu.client_config import ClientConfig
@@ -25,29 +25,20 @@ REALM: str = 'ondewo-ccai-platform'
 CLIENT_ID: str = 'ondewo-nlu-cai-sdk-public'
 
 
-class TestLegacyPath:
-    """Validation of the legacy (non-Keycloak) `Login` RPC auth path (D5)."""
+class TestNonKeycloakPath:
+    """Validation of a config with no Keycloak fields (calls travel unauthenticated)."""
 
-    def test_legacy_config_without_http_token_is_valid(self) -> None:
-        """A legacy config with only user_name/password (no http_token) is valid and not Keycloak."""
-        # http_token is no longer mandatory (D5).
+    def test_config_without_keycloak_is_valid_and_not_keycloak(self) -> None:
+        """A config with only user_name/password is valid and reports `use_keycloak is False`."""
         config: ClientConfig = ClientConfig(host=HOST, port=PORT, user_name=USERNAME, password=PASSWORD)
 
-        assert config.http_token == ''
         assert config.use_keycloak is False
 
-    def test_legacy_config_with_http_token_still_valid(self) -> None:
-        """Supplying the legacy http_token is still accepted and keeps the non-Keycloak path."""
-        config: ClientConfig = ClientConfig(
-            host=HOST,
-            port=PORT,
-            http_token='Basic abc',
-            user_name=USERNAME,
-            password=PASSWORD,
-        )
+    def test_no_http_token_field_present(self) -> None:
+        """The bearer-only config exposes no legacy `http_token` attribute."""
+        config: ClientConfig = ClientConfig(host=HOST, port=PORT, user_name=USERNAME, password=PASSWORD)
 
-        assert config.http_token == 'Basic abc'
-        assert config.use_keycloak is False
+        assert not hasattr(config, 'http_token')
 
     def test_missing_user_name_raises(self) -> None:
         """An empty user_name fails `__post_init__` validation with `ValueError`."""
