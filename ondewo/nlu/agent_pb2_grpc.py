@@ -299,7 +299,7 @@ class AgentsServicer(object):
         Examples:
 
         <pre>
-        grpcurl -plaintext -H 'cai-token: aimp' -d '{
+        grpcurl -plaintext -H 'Authorization: Bearer <jwt>' -d '{
         "agent": {
         "display_name": "My Pizza Bot",
         "default_language_code": "en",
@@ -333,7 +333,7 @@ class AgentsServicer(object):
         Examples:
 
         <pre>
-        grpcurl -plaintext -H 'cai-token: aimp' -d '{
+        grpcurl -plaintext -H 'Authorization: Bearer <jwt>' -d '{
         "agent": {
         "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent",
         "display_name": "Pizza Bot 2",
@@ -372,7 +372,7 @@ class AgentsServicer(object):
         Examples:
 
         <pre>
-        grpcurl -plaintext -H 'cai-token: aimp' -d '{
+        grpcurl -plaintext -H 'Authorization: Bearer <jwt>' -d '{
         "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent"
         }' localhost:50055 ondewo.nlu.Agents.GetAgent
         </pre>
@@ -401,7 +401,7 @@ class AgentsServicer(object):
         Examples:
 
         <pre>
-        grpcurl -plaintext -H 'cai-token: aimp' -d '{
+        grpcurl -plaintext -H 'Authorization: Bearer <jwt>' -d '{
         "parent": "projects/76aaf4f3-a1f6-4fda-b4b3-351c64e65bc4/agent"
         }' localhost:50055 ondewo.nlu.Agents.DeleteAgent
         </pre>
@@ -417,7 +417,7 @@ class AgentsServicer(object):
         Examples:
 
         <pre>
-        grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.DeleteAllAgents
+        grpcurl -plaintext -H 'Authorization: Bearer <jwt>' localhost:50055 ondewo.nlu.Agents.DeleteAllAgents
         </pre>
         <samp>{}</samp>
         """
@@ -431,7 +431,7 @@ class AgentsServicer(object):
         Examples:
 
         <pre>
-        grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.ListAgents
+        grpcurl -plaintext -H 'Authorization: Bearer <jwt>' localhost:50055 ondewo.nlu.Agents.ListAgents
         </pre>
         <samp>{
         "agents_with_owners": [
@@ -463,7 +463,7 @@ class AgentsServicer(object):
         Examples:
 
         <pre>
-        grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.ListAgentsOfUser
+        grpcurl -plaintext -H 'Authorization: Bearer <jwt>' localhost:50055 ondewo.nlu.Agents.ListAgentsOfUser
         </pre>
         <samp>{
         "agents_of_user_with_owners": [
@@ -501,7 +501,7 @@ class AgentsServicer(object):
         Examples:
 
         <pre>
-        grpcurl -plaintext -H 'cai-token: aimp' localhost:50055 ondewo.nlu.Agents.ListAllAgents
+        grpcurl -plaintext -H 'Authorization: Bearer <jwt>' localhost:50055 ondewo.nlu.Agents.ListAllAgents
         </pre>
         <samp>{
         "agents_with_owners": [
