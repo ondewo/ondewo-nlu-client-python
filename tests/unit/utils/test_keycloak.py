@@ -409,7 +409,7 @@ class TestSharedProviderRegistry:
         # Drive the default transport (requests) through a fake so no network is hit.
         post_calls: List[Dict[str, str]] = []
 
-        def fake_post(url: str, data: Dict[str, str], timeout: float) -> FakeResponse:
+        def fake_post(url: str, data: Dict[str, str], timeout: float, verify: bool = True) -> FakeResponse:
             """Record the POST and return a canned successful login response.
 
             Args:
@@ -459,7 +459,7 @@ class TestSharedProviderRegistry:
 
         token_expiration_in_s: int = 600
 
-        def fake_post(url: str, data: Dict[str, str], timeout: float) -> FakeResponse:
+        def fake_post(url: str, data: Dict[str, str], timeout: float, verify: bool = True) -> FakeResponse:
             """Return a canned successful login response.
 
             Args:
@@ -507,7 +507,7 @@ class TestDefaultRequestsTransport:
         # transport (the production path); patch requests.post so no network is touched.
         post_calls: List[Dict[str, str]] = []
 
-        def fake_post(url: str, data: Dict[str, str], timeout: float) -> FakeResponse:
+        def fake_post(url: str, data: Dict[str, str], timeout: float, verify: bool = True) -> FakeResponse:
             """Record the POST and return a canned successful login response.
 
             Args:
@@ -550,7 +550,7 @@ class TestDefaultRequestsTransport:
         # _RequestsTransport.post must pass through url/data verbatim and the module HTTP timeout.
         captured: Dict[str, Any] = {}
 
-        def fake_post(url: str, data: Dict[str, str], timeout: float) -> FakeResponse:
+        def fake_post(url: str, data: Dict[str, str], timeout: float, verify: bool = True) -> FakeResponse:
             """Capture the forwarded arguments and return a canned response.
 
             Args:
@@ -582,6 +582,293 @@ class TestDefaultRequestsTransport:
         assert captured['url'] == EXPECTED_TOKEN_ENDPOINT
         assert captured['data'] == form_data
         assert captured['timeout'] == _HTTP_TIMEOUT_S
+
+
+class TestVerifySsl:
+    """The `keycloak_verify_ssl` flag flowing config → factory → provider → default transport."""
+
+    def test_requests_transport_defaults_to_verify_true(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        """`_RequestsTransport()` forwards `verify=True` to `requests.post` by default (secure).
+
+        Args:
+            monkeypatch (pytest.MonkeyPatch):
+                Fixture used to patch `requests.post` and capture the `verify` kwarg.
+        """
+        captured: Dict[str, Any] = {}
+
+        def fake_post(url: str, data: Dict[str, str], timeout: float, verify: bool = True) -> FakeResponse:
+            """Capture the `verify` kwarg and return a canned response.
+
+            Args:
+                url (str):
+                    The token-endpoint URL (unused).
+                data (Dict[str, str]):
+                    The form-encoded request parameters (unused).
+                timeout (float):
+                    The request timeout (unused).
+                verify (bool):
+                    The TLS-verification flag, captured for assertion.
+
+            Returns:
+                FakeResponse:
+                    A 200 response carrying access/refresh tokens.
+            """
+            captured['verify'] = verify
+            return FakeResponse(200, _token_body('acc-1', 'off-1', 300))
+
+        monkeypatch.setattr(keycloak_module.requests, 'post', fake_post)
+
+        transport: _RequestsTransport = _RequestsTransport()
+        transport.post(EXPECTED_TOKEN_ENDPOINT, data={'grant_type': 'password'}, timeout=_HTTP_TIMEOUT_S)
+
+        assert captured['verify'] is True
+
+    def test_requests_transport_verify_false_forwards_false(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        """`_RequestsTransport(verify_ssl=False)` forwards `verify=False` and suppresses the warning.
+
+        Args:
+            monkeypatch (pytest.MonkeyPatch):
+                Fixture used to patch `requests.post` and `urllib3.disable_warnings`.
+        """
+        captured: Dict[str, Any] = {}
+
+        def fake_post(url: str, data: Dict[str, str], timeout: float, verify: bool = True) -> FakeResponse:
+            """Capture the `verify` kwarg and return a canned response.
+
+            Args:
+                url (str):
+                    The token-endpoint URL (unused).
+                data (Dict[str, str]):
+                    The form-encoded request parameters (unused).
+                timeout (float):
+                    The request timeout (unused).
+                verify (bool):
+                    The TLS-verification flag, captured for assertion.
+
+            Returns:
+                FakeResponse:
+                    A 200 response carrying access/refresh tokens.
+            """
+            captured['verify'] = verify
+            return FakeResponse(200, _token_body('acc-1', 'off-1', 300))
+
+        monkeypatch.setattr(keycloak_module.requests, 'post', fake_post)
+
+        disable_warnings_calls: List[Any] = []
+        monkeypatch.setattr(
+            keycloak_module.urllib3,
+            'disable_warnings',
+            lambda category=None: disable_warnings_calls.append(category),
+        )
+
+        transport: _RequestsTransport = _RequestsTransport(verify_ssl=False)
+        transport.post(EXPECTED_TOKEN_ENDPOINT, data={'grant_type': 'password'}, timeout=_HTTP_TIMEOUT_S)
+
+        assert captured['verify'] is False
+        # The InsecureRequestWarning must be suppressed exactly once when verification is disabled.
+        assert disable_warnings_calls == [keycloak_module.urllib3.exceptions.InsecureRequestWarning]
+
+    def test_provider_default_transport_verifies_ssl(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        """A provider with no `verify_ssl` argument uses a default transport that verifies TLS.
+
+        Args:
+            monkeypatch (pytest.MonkeyPatch):
+                Fixture used to patch `requests.post` and capture the `verify` kwarg.
+        """
+        captured: Dict[str, Any] = {}
+
+        def fake_post(url: str, data: Dict[str, str], timeout: float, verify: bool = True) -> FakeResponse:
+            """Capture the `verify` kwarg of the login POST and return a canned response.
+
+            Args:
+                url (str):
+                    The token-endpoint URL (unused).
+                data (Dict[str, str]):
+                    The form-encoded request parameters (unused).
+                timeout (float):
+                    The request timeout (unused).
+                verify (bool):
+                    The TLS-verification flag, captured for assertion.
+
+            Returns:
+                FakeResponse:
+                    A 200 response carrying access/refresh tokens.
+            """
+            captured['verify'] = verify
+            return FakeResponse(200, _token_body('acc-1', 'off-1', 300))
+
+        monkeypatch.setattr(keycloak_module.requests, 'post', fake_post)
+
+        provider: KeycloakTokenProvider = KeycloakTokenProvider(
+            keycloak_url=KEYCLOAK_URL,
+            realm=REALM,
+            client_id=CLIENT_ID,
+            username=USERNAME,
+            password=PASSWORD,
+            start_background_refresh=False,
+        )
+
+        assert isinstance(provider._transport, _RequestsTransport)
+        assert captured['verify'] is True
+
+    def test_provider_verify_ssl_false_disables_verification(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        """`KeycloakTokenProvider(verify_ssl=False)` posts the login with `verify=False`.
+
+        Args:
+            monkeypatch (pytest.MonkeyPatch):
+                Fixture used to patch `requests.post` / `urllib3.disable_warnings`.
+        """
+        captured: Dict[str, Any] = {}
+
+        def fake_post(url: str, data: Dict[str, str], timeout: float, verify: bool = True) -> FakeResponse:
+            """Capture the `verify` kwarg of the login POST and return a canned response.
+
+            Args:
+                url (str):
+                    The token-endpoint URL (unused).
+                data (Dict[str, str]):
+                    The form-encoded request parameters (unused).
+                timeout (float):
+                    The request timeout (unused).
+                verify (bool):
+                    The TLS-verification flag, captured for assertion.
+
+            Returns:
+                FakeResponse:
+                    A 200 response carrying access/refresh tokens.
+            """
+            captured['verify'] = verify
+            return FakeResponse(200, _token_body('acc-1', 'off-1', 300))
+
+        monkeypatch.setattr(keycloak_module.requests, 'post', fake_post)
+        monkeypatch.setattr(keycloak_module.urllib3, 'disable_warnings', lambda category=None: None)
+
+        provider: KeycloakTokenProvider = KeycloakTokenProvider(
+            keycloak_url=KEYCLOAK_URL,
+            realm=REALM,
+            client_id=CLIENT_ID,
+            username=USERNAME,
+            password=PASSWORD,
+            verify_ssl=False,
+            start_background_refresh=False,
+        )
+
+        assert isinstance(provider._transport, _RequestsTransport)
+        assert captured['verify'] is False
+
+    def test_factory_threads_keycloak_verify_ssl_default_true(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        """A config that omits `keycloak_verify_ssl` yields a login POST with `verify=True`.
+
+        Args:
+            monkeypatch (pytest.MonkeyPatch):
+                Fixture used to patch `requests.post` and capture the `verify` kwarg.
+        """
+        captured: Dict[str, Any] = {}
+
+        def fake_post(url: str, data: Dict[str, str], timeout: float, verify: bool = True) -> FakeResponse:
+            """Capture the `verify` kwarg of the login POST and return a canned response.
+
+            Args:
+                url (str):
+                    The token-endpoint URL (unused).
+                data (Dict[str, str]):
+                    The form-encoded request parameters (unused).
+                timeout (float):
+                    The request timeout (unused).
+                verify (bool):
+                    The TLS-verification flag, captured for assertion.
+
+            Returns:
+                FakeResponse:
+                    A 200 response carrying access/refresh tokens.
+            """
+            captured['verify'] = verify
+            return FakeResponse(200, _token_body('acc-1', 'off-1', 300))
+
+        monkeypatch.setattr(keycloak_module.requests, 'post', fake_post)
+
+        config: ClientConfig = ClientConfig(
+            host='localhost',
+            port='50055',
+            user_name=USERNAME,
+            password=PASSWORD,
+            keycloak_url=KEYCLOAK_URL,
+            realm=REALM,
+            client_id=CLIENT_ID,
+        )
+        assert config.keycloak_verify_ssl is True
+        provider: KeycloakTokenProvider = get_keycloak_token_provider(config)
+        provider.stop()
+
+        assert captured['verify'] is True
+
+    def test_factory_threads_keycloak_verify_ssl_false(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        """`ClientConfig(keycloak_verify_ssl=False)` flows all the way to `verify=False`.
+
+        Args:
+            monkeypatch (pytest.MonkeyPatch):
+                Fixture used to patch `requests.post` / `urllib3.disable_warnings`.
+        """
+        captured: Dict[str, Any] = {}
+
+        def fake_post(url: str, data: Dict[str, str], timeout: float, verify: bool = True) -> FakeResponse:
+            """Capture the `verify` kwarg of the login POST and return a canned response.
+
+            Args:
+                url (str):
+                    The token-endpoint URL (unused).
+                data (Dict[str, str]):
+                    The form-encoded request parameters (unused).
+                timeout (float):
+                    The request timeout (unused).
+                verify (bool):
+                    The TLS-verification flag, captured for assertion.
+
+            Returns:
+                FakeResponse:
+                    A 200 response carrying access/refresh tokens.
+            """
+            captured['verify'] = verify
+            return FakeResponse(200, _token_body('acc-1', 'off-1', 300))
+
+        monkeypatch.setattr(keycloak_module.requests, 'post', fake_post)
+        monkeypatch.setattr(keycloak_module.urllib3, 'disable_warnings', lambda category=None: None)
+
+        config: ClientConfig = ClientConfig(
+            host='localhost',
+            port='50055',
+            user_name=USERNAME,
+            password=PASSWORD,
+            keycloak_url=KEYCLOAK_URL,
+            realm=REALM,
+            client_id=CLIENT_ID,
+            keycloak_verify_ssl=False,
+        )
+        assert config.keycloak_verify_ssl is False
+        provider: KeycloakTokenProvider = get_keycloak_token_provider(config)
+        provider.stop()
+
+        assert captured['verify'] is False
+
+    def test_injected_transport_ignores_verify_ssl(self) -> None:
+        """An injected transport is used verbatim; `verify_ssl=False` never touches it."""
+        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body('acc-1', 'off-1', 300))])
+
+        provider: KeycloakTokenProvider = KeycloakTokenProvider(
+            keycloak_url=KEYCLOAK_URL,
+            realm=REALM,
+            client_id=CLIENT_ID,
+            username=USERNAME,
+            password=PASSWORD,
+            verify_ssl=False,
+            transport=transport,
+            start_background_refresh=False,
+        )
+
+        # The flag only affects the default requests transport — the injected fake is untouched.
+        assert provider._transport is transport
+        assert provider.access_token == 'acc-1'
+        assert len(transport.calls) == 1
 
 
 class TestStoreTokensExpiry:

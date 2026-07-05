@@ -47,6 +47,7 @@ from typing import (
 from weakref import WeakValueDictionary
 
 import requests
+import urllib3
 
 from ondewo.nlu.client_config import ClientConfig
 
@@ -105,9 +106,23 @@ class TokenResponse(Protocol):
 class _RequestsTransport:
     """Default :class:`TokenEndpoint` backed by :func:`requests.post`."""
 
+    def __init__(self, verify_ssl: bool = True) -> None:
+        """Store the TLS-verification flag for the token-endpoint POST.
+
+        Args:
+            verify_ssl (bool):
+                Whether :func:`requests.post` verifies the server's TLS certificate.
+                Defaults to ``True`` (secure). When ``False``, urllib3's
+                ``InsecureRequestWarning`` is suppressed so the disabled-verification
+                path does not emit a warning on every call.
+        """
+        self._verify_ssl: bool = verify_ssl
+        if not verify_ssl:
+            urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
     def post(self, url: str, data: Dict[str, str], timeout: float) -> requests.Response:
         """Send a form-encoded POST to the Keycloak token endpoint."""
-        return requests.post(url, data=data, timeout=timeout)
+        return requests.post(url, data=data, timeout=timeout, verify=self._verify_ssl)
 
 
 class KeycloakAuthenticationError(Exception):
@@ -221,6 +236,7 @@ class KeycloakTokenProvider:
         username: str,
         password: str,
         token_expiration_in_s: Optional[int] = None,
+        verify_ssl: bool = True,
         transport: Optional[TokenEndpoint] = None,
         time_fn: Optional[Callable[[], float]] = None,
         stop_event: Optional[threading.Event] = None,
@@ -243,6 +259,11 @@ class KeycloakTokenProvider:
             token_expiration_in_s (Optional[int]):
                 Bounds how long the auto-refresh runs (seconds since login). ``None`` =
                 until the offline session expires.
+            verify_ssl (bool):
+                Whether the *default* :class:`_RequestsTransport` verifies the Keycloak
+                server's TLS certificate. Defaults to ``True`` (secure). Ignored when a
+                custom ``transport`` is injected (the flag only touches the default
+                transport).
             transport (Optional[TokenEndpoint]):
                 HTTP transport for the token endpoint. Defaults to :mod:`requests`. Unit
                 tests inject a fake transport so no network is required.
@@ -268,7 +289,10 @@ class KeycloakTokenProvider:
         self.username: str = username
         self.password: str = password
         self.token_expiration_in_s: Optional[int] = token_expiration_in_s
-        self._transport: TokenEndpoint = transport if transport is not None else _RequestsTransport()
+        self.verify_ssl: bool = verify_ssl
+        self._transport: TokenEndpoint = (
+            transport if transport is not None else _RequestsTransport(verify_ssl=verify_ssl)
+        )
         self._time_fn: Callable[[], float] = time_fn if time_fn is not None else time.monotonic
 
         self._token_endpoint: str = _TOKEN_ENDPOINT_TEMPLATE.format(
@@ -536,6 +560,7 @@ def get_keycloak_token_provider(config: ClientConfig) -> KeycloakTokenProvider:
                 username=config.user_name,
                 password=config.password,
                 token_expiration_in_s=config.token_expiration_in_s,
+                verify_ssl=config.keycloak_verify_ssl,
             )
             _PROVIDER_REGISTRY[key] = provider
         return provider
