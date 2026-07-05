@@ -14,6 +14,7 @@
 import asyncio
 import json
 import os.path
+import time
 from collections import defaultdict
 from typing import (
     Dict,
@@ -22,8 +23,7 @@ from typing import (
 )
 
 import tqdm as tqdm
-from ondewo.logging.decorators import Timer
-from ondewo.logging.logger import logger_console as log
+from loguru import logger as log
 
 from ondewo.nlu.client import Client
 from ondewo.nlu.client_config import ClientConfig
@@ -43,13 +43,13 @@ from ondewo.nlu.intent_pb2 import (
 )
 
 
-@Timer(logger=log.debug, log_arguments=True, message='Retrieving all entities. Elapsed time: {}')
 def get_all_entities(
     parent: str,
     language_code: str,
     client: Client
 ) -> Dict[str, Dict[str, Set[str]]]:
-    log.debug('START: Creating Entity Map...')
+    start_time: float = time.perf_counter()
+    log.info(f'START: get_all_entities: parent={parent}, language_code={language_code}')
     _map: Dict[str, Dict[str, Set[str]]] = defaultdict(lambda: defaultdict(set))
 
     response: ListEntityTypesResponse = client.services.entity_types.list_entity_types(
@@ -65,11 +65,11 @@ def get_all_entities(
         for ev in et.entities:
             _map[et.name][ev.name] |= {s for s in ev.synonyms}  # Merge sets together in place
 
-    log.debug('DONE: Creating Entity Map.')
+    elapsed: float = time.perf_counter() - start_time
+    log.info(f'DONE: get_all_entities. Elapsed time: {elapsed:.5f}')
     return _map
 
 
-@Timer(logger=log.debug, log_arguments=True, message='Checking all annotations. Elapsed time: {}')
 async def check_all_annotations(
     parent: str,
     language_code: str,
@@ -77,6 +77,10 @@ async def check_all_annotations(
     client: Client,
     dry_run: bool = False
 ) -> None:
+    start_time: float = time.perf_counter()
+    log.info(
+        f'START: check_all_annotations: parent={parent}, language_code={language_code}, dry_run={dry_run}'
+    )
     log.debug("START: Retrieving the intent list...")
     intents_response: ListIntentsResponse = client.services.intents.list_intents(
         ListIntentsRequest(
@@ -172,17 +176,23 @@ async def check_all_annotations(
         else:
             log.info(f'No training phrases need to be cleaned. Checked {nr_of_intents} intents.')
 
+    elapsed: float = time.perf_counter() - start_time
+    log.info(f'DONE: check_all_annotations. Elapsed time: {elapsed:.5f}')
 
-@Timer(logger=log.debug, log_arguments=False, message='batch_update_training_phrase. Elapsed time: {}')
+
 async def batch_update_training_phrase(
     client: Client,
     phrases_to_update: List[Intent.TrainingPhrase]
 ) -> None:
+    start_time: float = time.perf_counter()
+    log.info(f'START: batch_update_training_phrase: nr_of_phrases={len(phrases_to_update)}')
     client.services.intents.batch_update_training_phrases(
         BatchUpdateTrainingPhrasesRequest(
             training_phrases=phrases_to_update
         )
     )
+    elapsed: float = time.perf_counter() - start_time
+    log.info(f'DONE: batch_update_training_phrase. Elapsed time: {elapsed:.5f}')
 
 
 if __name__ == '__main__':

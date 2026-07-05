@@ -1,9 +1,8 @@
 import asyncio
 import time
-import timeit
 from typing import Optional
 
-from ondewo.logging.logger import logger_console as log
+from loguru import logger as log
 
 from ondewo.nlu.agent_pb2 import (
     Agent,
@@ -144,7 +143,7 @@ async def main() -> None:
         )
     )
     log.debug(f'START: {export_operation.name}. Exporting agent {created_agent.parent}.')
-    start_time: float = timeit.default_timer()
+    start_time: float = time.perf_counter()
 
     # Polling for the operation result asynchronously
     try:
@@ -155,7 +154,7 @@ async def main() -> None:
 
     log.debug(
         f'DONE: {export_operation.name}. Exported agent {created_agent.parent} '
-        f'in {timeit.default_timer() - start_time:.4f} sec.'
+        f'in {time.perf_counter() - start_time:.5f} sec.'
     )
 
     # Retrieve the final operation status

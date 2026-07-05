@@ -34,7 +34,7 @@ admin credentials below. Fill in the placeholders, then run::
 """
 import uuid
 
-from ondewo.logging.logger import logger_console as log
+from loguru import logger as log
 
 from ondewo.nlu.agent_pb2 import (
     CreateProjectTechnicalUserRequest,

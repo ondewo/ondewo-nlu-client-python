@@ -3,8 +3,8 @@ google-api-core
 grpcio
 grpcio-reflection
 grpcio-tools
+loguru
 ondewo-client-utils>=3.1.0
-ondewo-logging
 polling
 protobuf
 python-dateutil
