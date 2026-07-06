@@ -4,7 +4,7 @@ grpcio
 grpcio-reflection
 grpcio-tools
 loguru
-ondewo-client-utils>=3.1.0
+ondewo-client-utils>=3.2.0
 polling
 protobuf
 python-dateutil
