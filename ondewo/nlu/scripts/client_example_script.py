@@ -38,14 +38,16 @@ from ondewo.nlu.session_pb2 import (
 # TODO: this is deprecated
 if __name__ == '__main__':
     # 1. define the client configuration...
-    # put your host, port, user_name, password, grpc_cert and http_token into the config_file json
-    # format as follows:
+    # put your host, port, user_name, password, grpc_cert and the Keycloak fields
+    # (keycloak_url, realm, client_id) into the config_file json format as follows:
     # {
     #     "host": "<host_ip>",
     #     "port": "<host_port>",
     #     "user_name": "<user_email>",
     #     "password": "<user_password>",
-    #     "http_token": "<http_token>",
+    #     "keycloak_url": "https://<host>/auth",
+    #     "realm": "ondewo-ccai-platform",
+    #     "client_id": "ondewo-nlu-cai-sdk-public",
     #     "grpc_cert": "-----BEGIN CERTIFICATE-----\n<certificate_string>\n-----END CERTIFICATE-----\n",
     #     "project_parent": "projects/<project_id>/agent",
     #     "session_uuid": "<some_uuid>"
@@ -59,7 +61,6 @@ if __name__ == '__main__':
     port: str = config_["port"]
     user_name: str = config_["user_name"]
     password: str = config_["password"]
-    http_token: str = config_["http_token"]
     grpc_cert: bytes = str(config_.get("grpc_cert", '')).encode()
 
     config = ClientConfig(
@@ -67,7 +68,9 @@ if __name__ == '__main__':
         port=port,
         user_name=user_name,
         password=password,
-        http_token=http_token,
+        keycloak_url=config_["keycloak_url"],
+        realm=config_["realm"],
+        client_id=config_["client_id"],
         grpc_cert=grpc_cert,  # type: ignore
     )
 

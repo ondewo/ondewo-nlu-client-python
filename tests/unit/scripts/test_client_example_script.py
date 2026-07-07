@@ -16,7 +16,7 @@ import importlib.util
 from pathlib import Path
 
 
-_SCRIPT_PATH = Path(__file__).parents[4] / 'ondewo' / 'nlu' / 'scripts' / 'client_example_script.py'
+_SCRIPT_PATH = Path(__file__).parents[3] / 'ondewo' / 'nlu' / 'scripts' / 'client_example_script.py'
 
 
 class TestClientExampleScript:

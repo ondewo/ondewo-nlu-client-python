@@ -28,7 +28,10 @@ from ondewo.nlu.agent_pb2 import (
     Agent,
     BuildCacheRequest,
     CreateAgentRequest,
+    CreateProjectTechnicalUserRequest,
+    CreateProjectTechnicalUserResponse,
     DeleteAgentRequest,
+    DeleteProjectTechnicalUserRequest,
     DeleteResourcesRequest,
     ExportAgentRequest,
     ExportBenchmarkAgentRequest,
@@ -62,6 +65,8 @@ from ondewo.nlu.agent_pb2 import (
     ListAgentsResponse,
     ListProjectPermissionsRequest,
     ListProjectPermissionsResponse,
+    ListProjectTechnicalUsersRequest,
+    ListProjectTechnicalUsersResponse,
     ListUsersInProjectRequest,
     ListUsersInProjectResponse,
     MigrateAgentRequest,
@@ -70,6 +75,8 @@ from ondewo.nlu.agent_pb2 import (
     ReindexAgentRequest,
     RemoveUserFromProjectRequest,
     RestoreAgentRequest,
+    RotateProjectTechnicalUserPasswordRequest,
+    RotateProjectTechnicalUserPasswordResponse,
     SetAgentStatusRequest,
     SetResourcesRequest,
     TrainAgentRequest,
@@ -288,4 +295,32 @@ class Agents(ServicesInterface):
 
     def reindex_agent(self, request: ReindexAgentRequest) -> Operation:
         response: Operation = self.stub.ReindexAgent(request, metadata=self.metadata)
+        return response
+
+    def create_project_technical_user(
+        self,
+        request: CreateProjectTechnicalUserRequest,
+    ) -> CreateProjectTechnicalUserResponse:
+        response: CreateProjectTechnicalUserResponse = \
+            self.stub.CreateProjectTechnicalUser(request, metadata=self.metadata)
+        return response
+
+    def list_project_technical_users(
+        self,
+        request: ListProjectTechnicalUsersRequest,
+    ) -> ListProjectTechnicalUsersResponse:
+        response: ListProjectTechnicalUsersResponse = \
+            self.stub.ListProjectTechnicalUsers(request, metadata=self.metadata)
+        return response
+
+    def delete_project_technical_user(self, request: DeleteProjectTechnicalUserRequest) -> Empty:
+        response: Empty = self.stub.DeleteProjectTechnicalUser(request, metadata=self.metadata)
+        return response
+
+    def rotate_project_technical_user_password(
+        self,
+        request: RotateProjectTechnicalUserPasswordRequest,
+    ) -> RotateProjectTechnicalUserPasswordResponse:
+        response: RotateProjectTechnicalUserPasswordResponse = \
+            self.stub.RotateProjectTechnicalUserPassword(request, metadata=self.metadata)
         return response

@@ -28,7 +28,10 @@ from ondewo.nlu.agent_pb2 import (
     Agent,
     BuildCacheRequest,
     CreateAgentRequest,
+    CreateProjectTechnicalUserRequest,
+    CreateProjectTechnicalUserResponse,
     DeleteAgentRequest,
+    DeleteProjectTechnicalUserRequest,
     DeleteResourcesRequest,
     ExportAgentRequest,
     ExportBenchmarkAgentRequest,
@@ -62,6 +65,8 @@ from ondewo.nlu.agent_pb2 import (
     ListAgentsResponse,
     ListProjectPermissionsRequest,
     ListProjectPermissionsResponse,
+    ListProjectTechnicalUsersRequest,
+    ListProjectTechnicalUsersResponse,
     ListUsersInProjectRequest,
     ListUsersInProjectResponse,
     MigrateAgentRequest,
@@ -70,6 +75,8 @@ from ondewo.nlu.agent_pb2 import (
     ReindexAgentRequest,
     RemoveUserFromProjectRequest,
     RestoreAgentRequest,
+    RotateProjectTechnicalUserPasswordRequest,
+    RotateProjectTechnicalUserPasswordResponse,
     SetAgentStatusRequest,
     SetResourcesRequest,
     TrainAgentRequest,
@@ -307,4 +314,35 @@ class Agents(AsyncServicesInterface):
 
     async def reindex_agent(self, request: ReindexAgentRequest) -> Operation:
         response: Operation = await self.stub.ReindexAgent(request, metadata=self.metadata)
+        return response
+
+    async def create_project_technical_user(
+        self,
+        request: CreateProjectTechnicalUserRequest,
+    ) -> CreateProjectTechnicalUserResponse:
+        response: CreateProjectTechnicalUserResponse = await self.stub.CreateProjectTechnicalUser(
+            request, metadata=self.metadata
+        )
+        return response
+
+    async def list_project_technical_users(
+        self,
+        request: ListProjectTechnicalUsersRequest,
+    ) -> ListProjectTechnicalUsersResponse:
+        response: ListProjectTechnicalUsersResponse = await self.stub.ListProjectTechnicalUsers(
+            request, metadata=self.metadata
+        )
+        return response
+
+    async def delete_project_technical_user(self, request: DeleteProjectTechnicalUserRequest) -> Empty:
+        response: Empty = await self.stub.DeleteProjectTechnicalUser(request, metadata=self.metadata)
+        return response
+
+    async def rotate_project_technical_user_password(
+        self,
+        request: RotateProjectTechnicalUserPasswordRequest,
+    ) -> RotateProjectTechnicalUserPasswordResponse:
+        response: RotateProjectTechnicalUserPasswordResponse = await self.stub.RotateProjectTechnicalUserPassword(
+            request, metadata=self.metadata
+        )
         return response

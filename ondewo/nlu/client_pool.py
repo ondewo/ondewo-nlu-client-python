@@ -18,7 +18,7 @@ from queue import (
     Queue,
 )
 
-from ondewo.logging.logger import logger
+from loguru import logger
 from ondewo.utils.base_client_config import BaseClientConfig
 
 from ondewo.nlu.client import Client

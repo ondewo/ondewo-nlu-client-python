@@ -23,6 +23,10 @@ from typing import (
 from ondewo.utils.async_base_services_interface import AsyncBaseServicesInterface
 
 from ondewo.nlu.client_config import ClientConfig
+from ondewo.nlu.utils.keycloak import (
+    KeycloakTokenProvider,
+    get_keycloak_token_provider,
+)
 
 
 class AsyncServicesInterface(AsyncBaseServicesInterface, ABC):
@@ -38,7 +42,30 @@ class AsyncServicesInterface(AsyncBaseServicesInterface, ABC):
             use_secure_channel=use_secure_channel,
             options=options,
         )
-        self.metadata: List[Tuple[str, str]] = [
-            ('cai-token', nlu_token if nlu_token else 'null'),
-            ('authorization', config.http_token),
-        ]
+        # `nlu_token` is accepted for backward compatibility with the generated service
+        # signatures but is no longer used: authentication is Keycloak bearer only.
+        del nlu_token
+        # When Keycloak headless auth (D18) is configured, every call carries a freshly
+        # auto-refreshed `Authorization: Bearer` token; the provider is shared per config so
+        # the offline-token ROPC login happens once for all services on the client.
+        self._keycloak_provider: Optional[KeycloakTokenProvider] = (
+            get_keycloak_token_provider(config) if config.use_keycloak else None
+        )
+
+    @property
+    def metadata(self) -> List[Tuple[str, str]]:
+        """
+        The gRPC metadata attached to every outgoing call.
+
+        With Keycloak auth this rebuilds (and auto-refreshes) the `Authorization: Bearer`
+        token on each access; otherwise it returns an empty list so the call travels
+        unauthenticated (e.g. against a plaintext server or an Envoy ingress that injects
+        the bearer token).
+
+        Returns:
+            List[Tuple[str, str]]: The metadata tuples for the next gRPC call, or `[]` when
+            Keycloak auth is not configured.
+        """
+        if self._keycloak_provider is not None:
+            return self._keycloak_provider.bearer_metadata()
+        return []
