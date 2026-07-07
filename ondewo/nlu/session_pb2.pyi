@@ -2503,17 +2503,29 @@ class StreamingDetectIntentResponse(google.protobuf.message.Message):
         """Specifies the status of the webhook request."""
 
     @property
-    def llm_call_started(self) -> global___LlmCallStartedEvent: ...
+    def llm_call_started(self) -> global___LlmCallStartedEvent:
+        """Emitted when an LLM call has started."""
+
     @property
-    def llm_call_finished(self) -> global___LlmCallFinishedEvent: ...
+    def llm_call_finished(self) -> global___LlmCallFinishedEvent:
+        """Emitted when an LLM call has finished."""
+
     @property
-    def llm_tool_call_started(self) -> global___LlmToolCallStartedEvent: ...
+    def llm_tool_call_started(self) -> global___LlmToolCallStartedEvent:
+        """Emitted when an LLM tool call has started."""
+
     @property
-    def llm_tool_call_finished(self) -> global___LlmToolCallFinishedEvent: ...
+    def llm_tool_call_finished(self) -> global___LlmToolCallFinishedEvent:
+        """Emitted when an LLM tool call has finished."""
+
     @property
-    def llm_thinking_delta(self) -> global___LlmThinkingDeltaEvent: ...
+    def llm_thinking_delta(self) -> global___LlmThinkingDeltaEvent:
+        """Emitted for an incremental LLM thinking (reasoning) update."""
+
     @property
-    def llm_token_usage_update(self) -> global___LlmTokenUsageUpdateEvent: ...
+    def llm_token_usage_update(self) -> global___LlmTokenUsageUpdateEvent:
+        """Emitted when the running LLM token-usage totals are updated."""
+
     def __init__(
         self,
         *,

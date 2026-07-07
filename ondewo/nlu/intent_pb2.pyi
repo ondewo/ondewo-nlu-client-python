@@ -2046,7 +2046,9 @@ class IntentSorting(google.protobuf.message.Message):
     SORTING_FIELD_FIELD_NUMBER: builtins.int
     SORTING_MODE_FIELD_NUMBER: builtins.int
     sorting_field: global___IntentSorting.IntentSortingField.ValueType
+    """The field to sort the intents by"""
     sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType
+    """The sorting mode: ascending or descending"""
     def __init__(
         self,
         *,
@@ -2172,8 +2174,11 @@ class TrainingPhraseStatus(google.protobuf.message.Message):
     TRAINING_PHRASE_FIELD_NUMBER: builtins.int
     ERROR_MESSAGE_FIELD_NUMBER: builtins.int
     error_message: builtins.str
+    """The error message when processing this training phrase failed"""
     @property
-    def training_phrase(self) -> global___Intent.TrainingPhrase: ...
+    def training_phrase(self) -> global___Intent.TrainingPhrase:
+        """The successfully processed training phrase"""
+
     def __init__(
         self,
         *,
@@ -2241,7 +2246,9 @@ class BatchCreateTrainingPhrasesRequest(google.protobuf.message.Message):
 
     TRAINING_PHRASE_REQUESTS_FIELD_NUMBER: builtins.int
     @property
-    def training_phrase_requests(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___BatchCreateTrainingPhrasesRequest.CreateTrainingPhraseRequest]: ...
+    def training_phrase_requests(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___BatchCreateTrainingPhrasesRequest.CreateTrainingPhraseRequest]:
+        """The list of training phrases to create"""
+
     def __init__(
         self,
         *,
@@ -2310,8 +2317,11 @@ class BatchDeleteTrainingPhrasesResponse(google.protobuf.message.Message):
         SUCCESSFULLY_DELETED_FIELD_NUMBER: builtins.int
         ERROR_MESSAGE_FIELD_NUMBER: builtins.int
         error_message: builtins.str
+        """The error message when deleting this training phrase failed"""
         @property
-        def successfully_deleted(self) -> google.protobuf.empty_pb2.Empty: ...
+        def successfully_deleted(self) -> google.protobuf.empty_pb2.Empty:
+            """Set when the training phrase was successfully deleted"""
+
         def __init__(
             self,
             *,
@@ -2325,8 +2335,11 @@ class BatchDeleteTrainingPhrasesResponse(google.protobuf.message.Message):
     DELETE_STATUSES_FIELD_NUMBER: builtins.int
     HAS_ERRORS_FIELD_NUMBER: builtins.int
     has_errors: builtins.bool
+    """Indicates if some of the training phrase deletions have errors"""
     @property
-    def delete_statuses(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___BatchDeleteTrainingPhrasesResponse.DeleteTrainingPhraseStatus]: ...
+    def delete_statuses(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___BatchDeleteTrainingPhrasesResponse.DeleteTrainingPhraseStatus]:
+        """The deletion status for each requested training phrase"""
+
     def __init__(
         self,
         *,
@@ -2441,8 +2454,11 @@ class BatchResponseMessagesStatusResponse(google.protobuf.message.Message):
         RESPONSE_MESSAGE_FIELD_NUMBER: builtins.int
         ERROR_MESSAGE_FIELD_NUMBER: builtins.int
         error_message: builtins.str
+        """The error message when processing this response message failed"""
         @property
-        def response_message(self) -> global___Intent.Message: ...
+        def response_message(self) -> global___Intent.Message:
+            """The successfully processed response message"""
+
         def __init__(
             self,
             *,
@@ -2458,7 +2474,9 @@ class BatchResponseMessagesStatusResponse(google.protobuf.message.Message):
     has_errors: builtins.bool
     """indicates if statuses of some of the response messages have errors"""
     @property
-    def response_message_statuses(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___BatchResponseMessagesStatusResponse.ResponseMessageStatus]: ...
+    def response_message_statuses(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___BatchResponseMessagesStatusResponse.ResponseMessageStatus]:
+        """The status for each response message in the batch"""
+
     def __init__(
         self,
         *,
@@ -2500,7 +2518,9 @@ class BatchCreateResponseMessagesRequest(google.protobuf.message.Message):
 
     RESPONSE_MESSAGE_REQUESTS_FIELD_NUMBER: builtins.int
     @property
-    def response_message_requests(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___BatchCreateResponseMessagesRequest.CreateResponseMessageRequest]: ...
+    def response_message_requests(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___BatchCreateResponseMessagesRequest.CreateResponseMessageRequest]:
+        """The list of response messages to create"""
+
     def __init__(
         self,
         *,
@@ -2589,8 +2609,11 @@ class BatchDeleteResponseMessagesResponse(google.protobuf.message.Message):
         SUCCESSFULLY_DELETED_FIELD_NUMBER: builtins.int
         ERROR_MESSAGE_FIELD_NUMBER: builtins.int
         error_message: builtins.str
+        """The error message when deleting this response message failed"""
         @property
-        def successfully_deleted(self) -> google.protobuf.empty_pb2.Empty: ...
+        def successfully_deleted(self) -> google.protobuf.empty_pb2.Empty:
+            """Set when the response message was successfully deleted"""
+
         def __init__(
             self,
             *,
@@ -2604,8 +2627,11 @@ class BatchDeleteResponseMessagesResponse(google.protobuf.message.Message):
     DELETE_STATUSES_FIELD_NUMBER: builtins.int
     HAS_ERRORS_FIELD_NUMBER: builtins.int
     has_errors: builtins.bool
+    """Indicates if some of the response message deletions have errors"""
     @property
-    def delete_statuses(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___BatchDeleteResponseMessagesResponse.DeleteResponseMessageStatus]: ...
+    def delete_statuses(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___BatchDeleteResponseMessagesResponse.DeleteResponseMessageStatus]:
+        """The deletion status for each requested response message"""
+
     def __init__(
         self,
         *,
@@ -2720,8 +2746,11 @@ class BatchParametersStatusResponse(google.protobuf.message.Message):
         PARAMETER_FIELD_NUMBER: builtins.int
         ERROR_MESSAGE_FIELD_NUMBER: builtins.int
         error_message: builtins.str
+        """The error message when processing this parameter failed"""
         @property
-        def parameter(self) -> global___Intent.Parameter: ...
+        def parameter(self) -> global___Intent.Parameter:
+            """The successfully processed parameter"""
+
         def __init__(
             self,
             *,
@@ -2737,7 +2766,9 @@ class BatchParametersStatusResponse(google.protobuf.message.Message):
     has_errors: builtins.bool
     """indicates if statuses of some of the parameters have errors"""
     @property
-    def parameter_statuses(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___BatchParametersStatusResponse.ParameterStatus]: ...
+    def parameter_statuses(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___BatchParametersStatusResponse.ParameterStatus]:
+        """The status for each parameter in the batch"""
+
     def __init__(
         self,
         *,
@@ -2870,8 +2901,11 @@ class BatchDeleteParametersResponse(google.protobuf.message.Message):
         SUCCESSFULLY_DELETED_FIELD_NUMBER: builtins.int
         ERROR_MESSAGE_FIELD_NUMBER: builtins.int
         error_message: builtins.str
+        """The error message when deleting this parameter failed"""
         @property
-        def successfully_deleted(self) -> google.protobuf.empty_pb2.Empty: ...
+        def successfully_deleted(self) -> google.protobuf.empty_pb2.Empty:
+            """Set when the parameter was successfully deleted"""
+
         def __init__(
             self,
             *,
@@ -2885,8 +2919,11 @@ class BatchDeleteParametersResponse(google.protobuf.message.Message):
     DELETE_STATUSES_FIELD_NUMBER: builtins.int
     HAS_ERRORS_FIELD_NUMBER: builtins.int
     has_errors: builtins.bool
+    """Indicates if some of the parameter deletions have errors"""
     @property
-    def delete_statuses(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___BatchDeleteParametersResponse.DeleteParameterStatus]: ...
+    def delete_statuses(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___BatchDeleteParametersResponse.DeleteParameterStatus]:
+        """The deletion status for each requested parameter"""
+
     def __init__(
         self,
         *,

@@ -806,7 +806,9 @@ class EntityTypeSorting(google.protobuf.message.Message):
     SORTING_FIELD_FIELD_NUMBER: builtins.int
     SORTING_MODE_FIELD_NUMBER: builtins.int
     sorting_field: global___EntityTypeSorting.EntityTypeSortingField.ValueType
+    """The field to sort the entity types by"""
     sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType
+    """The sorting mode: ascending or descending"""
     def __init__(
         self,
         *,
@@ -1046,8 +1048,11 @@ class DeleteEntityStatus(google.protobuf.message.Message):
     SUCCESSFULLY_DELETED_FIELD_NUMBER: builtins.int
     ERROR_MESSAGE_FIELD_NUMBER: builtins.int
     error_message: builtins.str
+    """The error message when deleting the entity failed"""
     @property
-    def successfully_deleted(self) -> google.protobuf.empty_pb2.Empty: ...
+    def successfully_deleted(self) -> google.protobuf.empty_pb2.Empty:
+        """Set when the entity was successfully deleted"""
+
     def __init__(
         self,
         *,
@@ -1227,7 +1232,9 @@ class EntityValueSorting(google.protobuf.message.Message):
     SORTING_FIELD_FIELD_NUMBER: builtins.int
     SORTING_MODE_FIELD_NUMBER: builtins.int
     sorting_field: global___EntityValueSorting.EntityValueSortingField.ValueType
+    """The field to sort the entity values by"""
     sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType
+    """The sorting mode: ascending or descending"""
     def __init__(
         self,
         *,

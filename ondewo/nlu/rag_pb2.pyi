@@ -2492,13 +2492,21 @@ class RagCrawlerFilters(google.protobuf.message.Message):
         """Optional. Domain block-list."""
 
     @property
-    def allowed_regex(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    def allowed_regex(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Path allow-list by regular expression."""
+
     @property
-    def disallowed_regex(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    def disallowed_regex(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Path block-list by regular expression."""
+
     @property
-    def allowed_paths(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    def allowed_paths(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Explicit path allow-list."""
+
     @property
-    def disallowed_paths(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    def disallowed_paths(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Explicit path block-list."""
+
     def __init__(
         self,
         *,

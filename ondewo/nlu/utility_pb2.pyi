@@ -126,7 +126,9 @@ class ValidateEmbeddedRegexRequest(google.protobuf.message.Message):
 
     ENTITY_TYPE_FIELD_NUMBER: builtins.int
     @property
-    def entity_type(self) -> ondewo.nlu.entity_type_pb2.EntityType.Entity: ...
+    def entity_type(self) -> ondewo.nlu.entity_type_pb2.EntityType.Entity:
+        """The entity (with embedded regex) to validate"""
+
     def __init__(
         self,
         *,
