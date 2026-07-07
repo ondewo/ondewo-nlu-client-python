@@ -27,7 +27,7 @@ PYPI_PASSWORD?=ENTER_HERE_YOUR_PYPI_PASSWORD
 GITHUB_GH_TOKEN?=ENTER_YOUR_TOKEN_HERE
 
 CURRENT_RELEASE_NOTES=`cat RELEASE.md \
-	| sed -n '/Release ONDEWO NLU Python Client ${ONDEWO_NLU_VERSION}/,/\*\*/p'`
+	| perl -ne 'print if /Release ONDEWO NLU Python Client ${ONDEWO_NLU_VERSION}/../\*\*/'`
 
 GH_REPO="https://github.com/ondewo/ondewo-nlu-client-python"
 DEVOPS_ACCOUNT_GIT="ondewo-devops-accounts"
@@ -106,8 +106,8 @@ check_build: ## Checks if all built proto-code is there
 #		Build
 
 update_setup: ## Update Version in setup.py
-	@sed -i "s/version='[0-9]*.[0-9]*.[0-9]*'/version='${ONDEWO_NLU_VERSION}'/g" setup.py
-	@sed -i "s/version=\"[0-9]*.[0-9]*.[0-9]*\"/version='${ONDEWO_NLU_VERSION}'/g" setup.py
+	@perl -i -pe "s/version='[0-9]*.[0-9]*.[0-9]*'/version='${ONDEWO_NLU_VERSION}'/g" setup.py
+	@perl -i -pe "s/version=\"[0-9]*.[0-9]*.[0-9]*\"/version='${ONDEWO_NLU_VERSION}'/g" setup.py
 
 build: clear_package_data init_submodules checkout_defined_submodule_versions build_compiler generate_ondewo_protos generate_services update_setup ## Build source code
 
@@ -159,31 +159,20 @@ create_async_services: ## Create async services for all synchronous services
 	        cp "$$file" "$$dir/async_$$filename"; \
 	    done; \
 	    for file in "$$dir"/async_*.py; do \
-	        sed -i -E \
-	            -e '/def stub/b' -e 's/^([[:space:]]*)def /\1async def /g' \
-	            -e 's/self\.stub/await self.stub/g' \
-	            -e 's/ServicesInterface/AsyncServicesInterface/g' \
-	            -e 's/services_interface/async_services_interface/g' \
+	        perl -i -pe 'unless(/def stub/){ s/^([[:space:]]*)def /$$1async def /g; s/self\.stub/await self.stub/g; s/ServicesInterface/AsyncServicesInterface/g; s/services_interface/async_services_interface/g; }' \
 	            "$$file"; \
-	        sed -i -E \
-	            -e 's/\bIterator\b/AsyncIterator/g' \
-	            -e 's/(response: AsyncIterator\[[^]]+\] = )await (self\.stub)/\1\2/g' \
+	        perl -i -pe \
+	            's/\bIterator\b/AsyncIterator/g; s/(response: AsyncIterator\[[^]]+\] = )await (self\.stub)/$$1$$2/g' \
 	            "$$file"; \
 	    done; \
 	done
 	cp ondewo/nlu/client.py ondewo/nlu/async_client.py
-	sed -i -E \
-	    -e 's/from ondewo\.nlu\.services\.([a-z_]+) import/from ondewo.nlu.services.async_\1 import/g' \
-	    -e 's/from ondewo\.utils\.base_client import BaseClient/from ondewo.utils.async_base_client import AsyncBaseClient/g' \
-	    -e 's/from ondewo\.nlu\.core\.services_container import ServicesContainer/from ondewo.nlu.core.async_services_container import AsyncServicesContainer/g' \
-	    -e 's/\bServicesContainer\b/AsyncServicesContainer/g' \
-	    -e 's/\bBaseClient\b/AsyncBaseClient/g' \
-	    -e 's/class Client\b/class AsyncClient/g' \
+	perl -i -pe \
+	    's/from ondewo\.nlu\.services\.([a-z_]+) import/from ondewo.nlu.services.async_$$1 import/g; s/from ondewo\.utils\.base_client import BaseClient/from ondewo.utils.async_base_client import AsyncBaseClient/g; s/from ondewo\.nlu\.core\.services_container import ServicesContainer/from ondewo.nlu.core.async_services_container import AsyncServicesContainer/g; s/\bServicesContainer\b/AsyncServicesContainer/g; s/\bBaseClient\b/AsyncBaseClient/g; s/class Client\b/class AsyncClient/g' \
 	    ondewo/nlu/async_client.py
 	cp ondewo/nlu/core/services_container.py ondewo/nlu/core/async_services_container.py
-	sed -i -E \
-	    -e 's/from ondewo\.nlu\.services\.([a-z_]+) import/from ondewo.nlu.services.async_\1 import/g' \
-	    -e 's/class ServicesContainer\b/class AsyncServicesContainer/g' \
+	perl -i -pe \
+	    's/from ondewo\.nlu\.services\.([a-z_]+) import/from ondewo.nlu.services.async_$$1 import/g; s/class ServicesContainer\b/class AsyncServicesContainer/g' \
 	    ondewo/nlu/core/async_services_container.py
 	-make precommit_hooks_run_all_files
 
