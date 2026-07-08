@@ -43,7 +43,7 @@ class TestClientExampleScript:
         source = _SCRIPT_PATH.read_text()
         lines = source.splitlines()
         guarded_start = next(
-            (i for i, l in enumerate(lines) if l.strip().startswith("if __name__")),
+            (i for i, line in enumerate(lines) if line.strip().startswith("if __name__")),
             None,
         )
         assert guarded_start is not None, "No 'if __name__ == \"__main__\":' block found"

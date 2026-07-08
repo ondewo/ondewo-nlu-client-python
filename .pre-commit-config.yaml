@@ -5,7 +5,7 @@
 # - pre-commit hooks are run on staged files just before a commit or a push                 #
 # - to run a given hook on any file at any time, run the following on the command line:     #
 #    pre-commit run <HOOK_ID> --files <FILE1> <FILE2> ..., e.g.,                            #
-#    pre-commit run autopep8 --files mal_formatted_file.py                                  #
+#    pre-commit run ruff --files mal_formatted_file.py                                       #
 #############################################################################################
 exclude: '^$'
 # "exclude: '^$'" specifies the global file exclude pattern; '^$' excludes
@@ -20,7 +20,7 @@ repos:
     hooks:
       - id: mypy  # Run mypy type checker; note: runs with flag --missing-imports
         exclude: ondewo
-        args: [ --config-file=mypy.ini ]
+        args: [ --config-file=pyproject.toml ]
         # Use language: system to run Mypy git repo's existing virtual environment
         # instead of mypy's own virtual environment. Necessary to find types-.* packages
         # Replace language: python in your hook definition with language: system.
@@ -36,26 +36,14 @@ repos:
         verbose: true
         types: [ python ]
 
-  - repo: https://github.com/psf/black
-    rev: 26.5.1
+  # Ruff replaces flake8 (lint) AND black + autopep8 (format). Config lives in pyproject.toml
+  # ([tool.ruff]); generated *_pb2* stubs are excluded there via extend-exclude.
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.15.20
     hooks:
-      - id: black  # Perform line breaks and indentation auto-formatting
-        args: [ --line-length=120 ]
-        exclude: |
-          (?x) (
-            ^.*_pb2.*  # Exclude files with _pb2 in their name
-          )
-        files: 'ondewo/.*/services/async_.*\.py'  # Match files with async_ prefix in any service folder under ondewo/
-
-  - repo: https://github.com/hhatto/autopep8
-    rev: v2.3.2
-    hooks:
-      - id: autopep8  # Perform pep8 auto-formatting
-        args: [ --max-line-length=120, --in-place, --aggressive, --recursive, --experimental ]
-        exclude: |
-          (?x) (
-          ^.*_pb2*
-          )
+      - id: ruff  # Lint (replaces flake8)
+        args: [ --fix ]
+      - id: ruff-format  # Format (replaces black + autopep8)
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
@@ -79,11 +67,6 @@ repos:
         args: [ --pytest-test-first ]
       - id: requirements-txt-fixer  # Sorts the requirement.txt files' content
         files: 'requirements/requirements.*\.txt$'
-
-  - repo: https://github.com/pycqa/flake8
-    rev: 7.3.0
-    hooks:
-      - id: flake8
 
   - repo: https://github.com/milin/giticket
     rev: '1.92'

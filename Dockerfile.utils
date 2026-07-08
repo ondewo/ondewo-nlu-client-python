@@ -17,7 +17,7 @@ RUN apt-get update -qq  \
   && apt-get purge -y --auto-remove \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN pip install --upgrade pip && pip install twine setuptools wheel
+RUN pip install --upgrade pip && pip install twine setuptools wheel build
 
 RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg \
     && sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg \
