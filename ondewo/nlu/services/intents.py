@@ -130,29 +130,33 @@ class Intents(ServicesInterface):
         self,
         request: BatchCreateTrainingPhrasesRequest,
     ) -> BatchTrainingPhrasesStatusResponse:
-        response: BatchTrainingPhrasesStatusResponse = \
-            self.stub.BatchCreateTrainingPhrases(request, metadata=self.metadata)
+        response: BatchTrainingPhrasesStatusResponse = self.stub.BatchCreateTrainingPhrases(
+            request, metadata=self.metadata
+        )
         return response
 
     def batch_get_training_phrases(self, request: BatchGetTrainingPhrasesRequest) -> BatchTrainingPhrasesStatusResponse:
-        response: BatchTrainingPhrasesStatusResponse = \
-            self.stub.BatchGetTrainingPhrases(request, metadata=self.metadata)
+        response: BatchTrainingPhrasesStatusResponse = self.stub.BatchGetTrainingPhrases(
+            request, metadata=self.metadata
+        )
         return response
 
     def batch_update_training_phrases(
         self,
         request: BatchUpdateTrainingPhrasesRequest,
     ) -> BatchTrainingPhrasesStatusResponse:
-        response: BatchTrainingPhrasesStatusResponse = \
-            self.stub.BatchUpdateTrainingPhrases(request, metadata=self.metadata)
+        response: BatchTrainingPhrasesStatusResponse = self.stub.BatchUpdateTrainingPhrases(
+            request, metadata=self.metadata
+        )
         return response
 
     def batch_delete_training_phrases(
         self,
         request: BatchDeleteTrainingPhrasesRequest,
     ) -> BatchDeleteTrainingPhrasesResponse:
-        response: BatchDeleteTrainingPhrasesResponse = \
-            self.stub.BatchDeleteTrainingPhrases(request, metadata=self.metadata)
+        response: BatchDeleteTrainingPhrasesResponse = self.stub.BatchDeleteTrainingPhrases(
+            request, metadata=self.metadata
+        )
         return response
 
     def list_training_phrases(self, request: ListTrainingPhrasesRequest) -> ListTrainingPhrasesResponse:
@@ -163,32 +167,36 @@ class Intents(ServicesInterface):
         self,
         request: BatchCreateResponseMessagesRequest,
     ) -> BatchResponseMessagesStatusResponse:
-        response: BatchResponseMessagesStatusResponse = \
-            self.stub.BatchCreateResponseMessages(request, metadata=self.metadata)
+        response: BatchResponseMessagesStatusResponse = self.stub.BatchCreateResponseMessages(
+            request, metadata=self.metadata
+        )
         return response
 
     def batch_get_response_messages(
         self,
         request: BatchGetResponseMessagesRequest,
     ) -> BatchResponseMessagesStatusResponse:
-        response: BatchResponseMessagesStatusResponse = \
-            self.stub.BatchGetResponseMessages(request, metadata=self.metadata)
+        response: BatchResponseMessagesStatusResponse = self.stub.BatchGetResponseMessages(
+            request, metadata=self.metadata
+        )
         return response
 
     def batch_update_response_messages(
         self,
         request: BatchUpdateResponseMessagesRequest,
     ) -> BatchResponseMessagesStatusResponse:
-        response: BatchResponseMessagesStatusResponse = \
-            self.stub.BatchUpdateResponseMessages(request, metadata=self.metadata)
+        response: BatchResponseMessagesStatusResponse = self.stub.BatchUpdateResponseMessages(
+            request, metadata=self.metadata
+        )
         return response
 
     def batch_delete_response_messages(
         self,
         request: BatchDeleteResponseMessagesRequest,
     ) -> BatchDeleteResponseMessagesResponse:
-        response: BatchDeleteResponseMessagesResponse = \
-            self.stub.BatchDeleteResponseMessages(request, metadata=self.metadata)
+        response: BatchDeleteResponseMessagesResponse = self.stub.BatchDeleteResponseMessages(
+            request, metadata=self.metadata
+        )
         return response
 
     def list_response_messages(self, request: ListResponseMessagesRequest) -> ListResponseMessagesResponse:
@@ -219,6 +227,7 @@ class Intents(ServicesInterface):
         self,
         request: ListTrainingPhrasesofIntentsWithEnrichmentRequest,
     ) -> ListTrainingPhrasesofIntentsWithEnrichmentResponse:
-        response: ListTrainingPhrasesofIntentsWithEnrichmentResponse = \
+        response: ListTrainingPhrasesofIntentsWithEnrichmentResponse = (
             self.stub.ListTrainingPhrasesofIntentsWithEnrichment(request, metadata=self.metadata)
+        )
         return response

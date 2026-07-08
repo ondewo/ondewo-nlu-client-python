@@ -12,10 +12,13 @@ RUN apt-get update -qq && \
   apt-get clean && apt-get purge -y --auto-remove \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
+
 WORKDIR /home/ondewo/
 
-COPY requirements.txt requirements.txt
-RUN pip install -r requirements.txt
-
+# Install the client library (runtime dependencies resolved from pyproject.toml
+# by the setuptools backend) into the system environment.
+COPY pyproject.toml README.md ./
 COPY ondewo ondewo
 COPY examples examples
+RUN uv pip install --system .

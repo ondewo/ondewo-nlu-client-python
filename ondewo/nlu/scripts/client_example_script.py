@@ -36,7 +36,7 @@ from ondewo.nlu.session_pb2 import (
 )
 
 # TODO: this is deprecated
-if __name__ == '__main__':
+if __name__ == "__main__":
     # 1. define the client configuration...
     # put your host, port, user_name, password, grpc_cert and the Keycloak fields
     # (keycloak_url, realm, client_id) into the config_file json format as follows:
@@ -61,7 +61,7 @@ if __name__ == '__main__':
     port: str = config_["port"]
     user_name: str = config_["user_name"]
     password: str = config_["password"]
-    grpc_cert: bytes = str(config_.get("grpc_cert", '')).encode()
+    grpc_cert: bytes = str(config_.get("grpc_cert", "")).encode()
 
     config = ClientConfig(
         host=host,
@@ -80,12 +80,12 @@ if __name__ == '__main__':
     # 3. play...
     project_parent: str = config_["project_parent"]
     session_uuid: str = config_["session_uuid"]
-    session_id: str = f'{project_parent}/sessions/{session_uuid}'
+    session_id: str = f"{project_parent}/sessions/{session_uuid}"
 
     # detect an intent
     request: Any = DetectIntentRequest()
-    request.query_input.text.text = 'Hi'
-    request.query_input.text.language_code = 'en'
+    request.query_input.text.text = "Hi"
+    request.query_input.text.language_code = "en"
     request.session = session_id
     response: Any = client.services.sessions.detect_intent(request)
     print(response.query_result.fulfillment_messages[0].text)
@@ -93,14 +93,14 @@ if __name__ == '__main__':
     # list all intents
     request = ListIntentsRequest()
     request.parent = project_parent
-    request.language_code = 'en'
+    request.language_code = "en"
     response = client.services.intents.list_intents(request)
     print(response)
 
     # set a context
     request = CreateContextRequest()
     request.parent = project_parent
-    request.context.name = f'{session_id}/contexts/{uuid4()}'
+    request.context.name = f"{session_id}/contexts/{uuid4()}"
     request.context.lifespan_count = 2
     response = client.services.contexts.create_context(request)
     print(response)
@@ -128,29 +128,29 @@ if __name__ == '__main__':
     shared_request_data = SharedRequestData(
         project_parent=project_parent,
         session_uuid=session_uuid,
-        language_code='en',
+        language_code="en",
     )
 
     # try intent detection
     # fill request with data from shared_request_data to avoid needing to fill all fields explicitly
     request = DetectIntentRequest()
     request = shared_request_data.fill_missing_fields(request)
-    request.query_input.text.text = 'Hi'
+    request.query_input.text.text = "Hi"
     response = client.services.sessions.detect_intent(request)
     print(response.query_result.fulfillment_messages[0].text)
 
     # again for a different language
-    shared_request_data.language_code = 'de'
+    shared_request_data.language_code = "de"
     request = DetectIntentRequest()
     request = shared_request_data.fill_missing_fields(request)
-    request.query_input.text.text = 'Hallo'
+    request.query_input.text.text = "Hallo"
     response = client.services.sessions.detect_intent(shared_request_data.fill_missing_fields(request))
     print(response.query_result.fulfillment_messages[0].text)
 
     # set a context
     request = CreateContextRequest()
     request = shared_request_data.fill_missing_fields(request)
-    request.context.name = f'{shared_request_data.session_id}/contexts/{uuid4()}'
+    request.context.name = f"{shared_request_data.session_id}/contexts/{uuid4()}"
     request.context.lifespan_count = 2
     response = client.services.contexts.create_context(request)
     print(response)

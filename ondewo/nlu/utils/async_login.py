@@ -41,4 +41,4 @@ async def login(
     Returns:
         str: Always an empty string (no legacy token is issued).
     """
-    return ''
+    return ""

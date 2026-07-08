@@ -22,24 +22,24 @@ from ondewo.nlu.entity_type_pb2 import (
     UpdateEntityTypeRequest,
 )
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # CONFIGURING THE CLIENT
     config: ClientConfig = ClientConfig(
-        host='localhost',
-        port='1234',
-        keycloak_url='https://<host>/auth',
-        realm='ondewo-ccai-platform',
-        client_id='ondewo-nlu-cai-sdk-public',
-        user_name='<e-mail of user>',
-        password='<password of user>'
+        host="localhost",
+        port="1234",
+        keycloak_url="https://<host>/auth",
+        realm="ondewo-ccai-platform",
+        client_id="ondewo-nlu-cai-sdk-public",
+        user_name="<e-mail of user>",
+        password="<password of user>",
     )
 
     client: Client = Client(config=config, use_secure_channel=False)
 
     # CONFIGURING THE AGENT
     project_uuid: str = "02534e0c-0c4e-4977-9aee-332cbb7fafea"
-    parent: str = f'projects/{project_uuid}/agent'  # projects/<project_id>/agent
-    language_code: str = 'de'  # acronym of the language of choice, i.e "en"
+    parent: str = f"projects/{project_uuid}/agent"  # projects/<project_id>/agent
+    language_code: str = "de"  # acronym of the language of choice, i.e "en"
     entity_type_uuid: str = "ff77e8a2-f414-4f57-aca7-53229c1bf679"
     entity_type_name: str = f"{parent}/entityTypes/{entity_type_uuid}"
 
@@ -68,14 +68,8 @@ if __name__ == '__main__':
 
     # Step 2: create the list of new entity values with
     new_entities: List[EntityType.Entity] = [
-        EntityType.Entity(
-            value='my new entity value number',
-            synonyms=['my new synonym 1', 'my new synonym 2']
-        ),
-        EntityType.Entity(
-            value='my new entity value letter',
-            synonyms=['my new synonym a', 'my new synonym b']
-        )
+        EntityType.Entity(value="my new entity value number", synonyms=["my new synonym 1", "my new synonym 2"]),
+        EntityType.Entity(value="my new entity value letter", synonyms=["my new synonym a", "my new synonym b"]),
     ]
 
     # Step 3: add the new entities to our entity type

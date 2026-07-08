@@ -195,8 +195,9 @@ class Agents(ServicesInterface):
         self,
         request: GetSessionsStatisticsTimeSeriesRequest,
     ) -> GetSessionsStatisticsTimeSeriesResponse:
-        response: GetSessionsStatisticsTimeSeriesResponse = \
-            self.stub.GetSessionsStatisticsTimeSeries(request, metadata=self.metadata)
+        response: GetSessionsStatisticsTimeSeriesResponse = self.stub.GetSessionsStatisticsTimeSeries(
+            request, metadata=self.metadata
+        )
         return response
 
     def set_agent_status(self, request: SetAgentStatusRequest) -> Agent:
@@ -228,8 +229,9 @@ class Agents(ServicesInterface):
         return response
 
     def get_full_text_search_entity_type(self, request: FullTextSearchRequest) -> FullTextSearchResponseEntityType:
-        response: FullTextSearchResponseEntityType = \
-            self.stub.GetFullTextSearchEntityType(request, metadata=self.metadata)
+        response: FullTextSearchResponseEntityType = self.stub.GetFullTextSearchEntityType(
+            request, metadata=self.metadata
+        )
         return response
 
     def get_full_text_search_entity(self, request: FullTextSearchRequest) -> FullTextSearchResponseEntity:
@@ -240,8 +242,9 @@ class Agents(ServicesInterface):
         self,
         request: FullTextSearchRequest,
     ) -> FullTextSearchResponseEntitySynonym:
-        response: FullTextSearchResponseEntitySynonym = \
-            self.stub.GetFullTextSearchEntitySynonym(request, metadata=self.metadata)
+        response: FullTextSearchResponseEntitySynonym = self.stub.GetFullTextSearchEntitySynonym(
+            request, metadata=self.metadata
+        )
         return response
 
     def get_full_text_search_intent(self, request: FullTextSearchRequest) -> FullTextSearchResponseIntent:
@@ -252,45 +255,51 @@ class Agents(ServicesInterface):
         self,
         request: FullTextSearchRequest,
     ) -> FullTextSearchResponseIntentContextIn:
-        response: FullTextSearchResponseIntentContextIn = \
-            self.stub.GetFullTextSearchIntentContextIn(request, metadata=self.metadata)
+        response: FullTextSearchResponseIntentContextIn = self.stub.GetFullTextSearchIntentContextIn(
+            request, metadata=self.metadata
+        )
         return response
 
     def get_full_text_search_intent_context_out(
         self,
         request: FullTextSearchRequest,
     ) -> FullTextSearchResponseIntentContextOut:
-        response: FullTextSearchResponseIntentContextOut = \
-            self.stub.GetFullTextSearchIntentContextOut(request, metadata=self.metadata)
+        response: FullTextSearchResponseIntentContextOut = self.stub.GetFullTextSearchIntentContextOut(
+            request, metadata=self.metadata
+        )
         return response
 
     def get_full_text_search_intent_usersays(
         self,
         request: FullTextSearchRequest,
     ) -> FullTextSearchResponseIntentUsersays:
-        response: FullTextSearchResponseIntentUsersays = \
-            self.stub.GetFullTextSearchIntentUsersays(request, metadata=self.metadata)
+        response: FullTextSearchResponseIntentUsersays = self.stub.GetFullTextSearchIntentUsersays(
+            request, metadata=self.metadata
+        )
         return response
 
     def get_full_text_search_intent_tags(self, request: FullTextSearchRequest) -> FullTextSearchResponseIntentTags:
-        response: FullTextSearchResponseIntentTags = \
-            self.stub.GetFullTextSearchIntentTags(request, metadata=self.metadata)
+        response: FullTextSearchResponseIntentTags = self.stub.GetFullTextSearchIntentTags(
+            request, metadata=self.metadata
+        )
         return response
 
     def get_full_text_search_intent_response(
         self,
         request: FullTextSearchRequest,
     ) -> FullTextSearchResponseIntentResponse:
-        response: FullTextSearchResponseIntentResponse = \
-            self.stub.GetFullTextSearchIntentResponse(request, metadata=self.metadata)
+        response: FullTextSearchResponseIntentResponse = self.stub.GetFullTextSearchIntentResponse(
+            request, metadata=self.metadata
+        )
         return response
 
     def get_full_text_search_intent_parameters(
         self,
         request: FullTextSearchRequest,
     ) -> FullTextSearchResponseIntentParameters:
-        response: FullTextSearchResponseIntentParameters = \
-            self.stub.GetFullTextSearchIntentParameters(request, metadata=self.metadata)
+        response: FullTextSearchResponseIntentParameters = self.stub.GetFullTextSearchIntentParameters(
+            request, metadata=self.metadata
+        )
         return response
 
     def reindex_agent(self, request: ReindexAgentRequest) -> Operation:
@@ -301,16 +310,18 @@ class Agents(ServicesInterface):
         self,
         request: CreateProjectTechnicalUserRequest,
     ) -> CreateProjectTechnicalUserResponse:
-        response: CreateProjectTechnicalUserResponse = \
-            self.stub.CreateProjectTechnicalUser(request, metadata=self.metadata)
+        response: CreateProjectTechnicalUserResponse = self.stub.CreateProjectTechnicalUser(
+            request, metadata=self.metadata
+        )
         return response
 
     def list_project_technical_users(
         self,
         request: ListProjectTechnicalUsersRequest,
     ) -> ListProjectTechnicalUsersResponse:
-        response: ListProjectTechnicalUsersResponse = \
-            self.stub.ListProjectTechnicalUsers(request, metadata=self.metadata)
+        response: ListProjectTechnicalUsersResponse = self.stub.ListProjectTechnicalUsers(
+            request, metadata=self.metadata
+        )
         return response
 
     def delete_project_technical_user(self, request: DeleteProjectTechnicalUserRequest) -> Empty:
@@ -321,6 +332,7 @@ class Agents(ServicesInterface):
         self,
         request: RotateProjectTechnicalUserPasswordRequest,
     ) -> RotateProjectTechnicalUserPasswordResponse:
-        response: RotateProjectTechnicalUserPasswordResponse = \
-            self.stub.RotateProjectTechnicalUserPassword(request, metadata=self.metadata)
+        response: RotateProjectTechnicalUserPasswordResponse = self.stub.RotateProjectTechnicalUserPassword(
+            request, metadata=self.metadata
+        )
         return response

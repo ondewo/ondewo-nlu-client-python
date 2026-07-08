@@ -43,13 +43,9 @@ from ondewo.nlu.intent_pb2 import (
 )
 
 
-def get_all_entities(
-    parent: str,
-    language_code: str,
-    client: Client
-) -> Dict[str, Dict[str, Set[str]]]:
+def get_all_entities(parent: str, language_code: str, client: Client) -> Dict[str, Dict[str, Set[str]]]:
     start_time: float = time.perf_counter()
-    log.info(f'START: get_all_entities: parent={parent}, language_code={language_code}')
+    log.info(f"START: get_all_entities: parent={parent}, language_code={language_code}")
     _map: Dict[str, Dict[str, Set[str]]] = defaultdict(lambda: defaultdict(set))
 
     response: ListEntityTypesResponse = client.services.entity_types.list_entity_types(
@@ -57,54 +53,48 @@ def get_all_entities(
             parent=parent,
             language_code=language_code,
             entity_type_view=EntityTypeView.ENTITY_TYPE_VIEW_FULL,
-            page_token='page_size-100000'
+            page_token="page_size-100000",
         )
     )
 
-    for et in tqdm.tqdm(iterable=response.entity_types, desc='Loading entity map...'):
+    for et in tqdm.tqdm(iterable=response.entity_types, desc="Loading entity map..."):
         for ev in et.entities:
             _map[et.name][ev.name] |= {s for s in ev.synonyms}  # Merge sets together in place
 
     elapsed: float = time.perf_counter() - start_time
-    log.info(f'DONE: get_all_entities. Elapsed time: {elapsed:.5f}')
+    log.info(f"DONE: get_all_entities. Elapsed time: {elapsed:.5f}")
     return _map
 
 
 async def check_all_annotations(
-    parent: str,
-    language_code: str,
-    entity_map: Dict,
-    client: Client,
-    dry_run: bool = False
+    parent: str, language_code: str, entity_map: Dict, client: Client, dry_run: bool = False
 ) -> None:
     start_time: float = time.perf_counter()
-    log.info(
-        f'START: check_all_annotations: parent={parent}, language_code={language_code}, dry_run={dry_run}'
-    )
+    log.info(f"START: check_all_annotations: parent={parent}, language_code={language_code}, dry_run={dry_run}")
     log.debug("START: Retrieving the intent list...")
     intents_response: ListIntentsResponse = client.services.intents.list_intents(
         ListIntentsRequest(
             parent=parent,
             language_code=language_code,
             intent_view=IntentView.INTENT_VIEW_MINIMUM,
-            page_token='page_size-10000000'
+            page_token="page_size-10000000",
         )
     )
     nr_of_intents: int = len(intents_response.intents)
-    log.debug(f'DONE: Retrieving the intent list of {nr_of_intents} intents')
+    log.debug(f"DONE: Retrieving the intent list of {nr_of_intents} intents")
 
     phrases_to_update: List[Intent.TrainingPhrase] = []
-    for intent in tqdm.tqdm(iterable=intents_response.intents, desc='Cleaning Training Phrases...'):
+    for intent in tqdm.tqdm(iterable=intents_response.intents, desc="Cleaning Training Phrases..."):
         list_training_phrase_response: ListTrainingPhrasesResponse = client.services.intents.list_training_phrases(
             ListTrainingPhrasesRequest(
                 intent_name=intent.name,  # intent_name='<Intent ID>',
                 language_code=language_code,
-                page_token='page_size-10000000'  # get all training phrases of the intent
+                page_token="page_size-10000000",  # get all training phrases of the intent
             )
         )
         phrases_to_update_in_intent: List[Intent.TrainingPhrase] = []
         nr_of_training_phrass_in_intent: int = len(list_training_phrase_response.training_phrases)
-        log.debug(f'START: Cleaning {nr_of_training_phrass_in_intent} training phrases in intent {intent.display_name}')
+        log.debug(f"START: Cleaning {nr_of_training_phrass_in_intent} training phrases in intent {intent.display_name}")
 
         for phrase in list_training_phrase_response.training_phrases:
             annotations: List[Intent.TrainingPhrase.Entity] = []
@@ -114,16 +104,16 @@ async def check_all_annotations(
                 continue
 
             for annotation in phrase.entities:
-                t: str = phrase.text[annotation.start:annotation.end]
+                t: str = phrase.text[annotation.start : annotation.end]
 
                 if (
-                    not annotation.entity_type_display_name.startswith('sys.') and
-                    t not in entity_map[annotation.entity_type_name][annotation.entity_value_name]
+                    not annotation.entity_type_display_name.startswith("sys.")
+                    and t not in entity_map[annotation.entity_type_name][annotation.entity_value_name]
                 ):
                     log.debug(
                         f'Annotation! "{t}" '
-                        f'on intent [{intent.display_name}] '
-                        f'has no synonym on the entity type: [{annotation.entity_type_display_name}]'
+                        f"on intent [{intent.display_name}] "
+                        f"has no synonym on the entity type: [{annotation.entity_type_display_name}]"
                     )
 
                     if dry_run:
@@ -143,59 +133,50 @@ async def check_all_annotations(
         nr_of_cleaned_training_phrases_of_intent: int = len(phrases_to_update_in_intent)
         if nr_of_cleaned_training_phrases_of_intent > 0:
             log.debug(
-                f'DONE: Cleaned {nr_of_cleaned_training_phrases_of_intent} of {nr_of_training_phrass_in_intent} '
-                f'training phrases in intent {intent.display_name}.'
+                f"DONE: Cleaned {nr_of_cleaned_training_phrases_of_intent} of {nr_of_training_phrass_in_intent} "
+                f"training phrases in intent {intent.display_name}."
             )
             phrases_to_update.extend(phrases_to_update_in_intent)
         else:
             log.debug(
-                f'DONE: No cleaning was necessary for {nr_of_training_phrass_in_intent} '
-                f'training phrases in intent {intent.display_name}.'
+                f"DONE: No cleaning was necessary for {nr_of_training_phrass_in_intent} "
+                f"training phrases in intent {intent.display_name}."
             )
 
     if not dry_run:
         nr_of_training_phrases_to_update = len(phrases_to_update)
         if nr_of_training_phrases_to_update > 0:
             log.info(
-                f'START: Updating {nr_of_training_phrases_to_update} training phrases in '
-                f'{nr_of_intents} intents...'
+                f"START: Updating {nr_of_training_phrases_to_update} training phrases in {nr_of_intents} intents..."
             )
 
             chunk_size: int = 100
             training_phrase_chunks: List[List[Intent.TrainingPhrase]] = [
-                phrases_to_update[x:x + chunk_size] for x in range(0, nr_of_training_phrases_to_update, chunk_size)
+                phrases_to_update[x : x + chunk_size] for x in range(0, nr_of_training_phrases_to_update, chunk_size)
             ]
-            log.debug(f'Split training phrases into {training_phrase_chunks} chunks of chunk size {chunk_size}')
+            log.debug(f"Split training phrases into {training_phrase_chunks} chunks of chunk size {chunk_size}")
             tasks = [batch_update_training_phrase(client, chunk) for chunk in training_phrase_chunks]
             await asyncio.wait(tasks)
 
-            log.info(
-                f'DONE: Updating {nr_of_training_phrases_to_update} training phrases in '
-                f'{nr_of_intents} intents.'
-            )
+            log.info(f"DONE: Updating {nr_of_training_phrases_to_update} training phrases in {nr_of_intents} intents.")
         else:
-            log.info(f'No training phrases need to be cleaned. Checked {nr_of_intents} intents.')
+            log.info(f"No training phrases need to be cleaned. Checked {nr_of_intents} intents.")
 
     elapsed: float = time.perf_counter() - start_time
-    log.info(f'DONE: check_all_annotations. Elapsed time: {elapsed:.5f}')
+    log.info(f"DONE: check_all_annotations. Elapsed time: {elapsed:.5f}")
 
 
-async def batch_update_training_phrase(
-    client: Client,
-    phrases_to_update: List[Intent.TrainingPhrase]
-) -> None:
+async def batch_update_training_phrase(client: Client, phrases_to_update: List[Intent.TrainingPhrase]) -> None:
     start_time: float = time.perf_counter()
-    log.info(f'START: batch_update_training_phrase: nr_of_phrases={len(phrases_to_update)}')
+    log.info(f"START: batch_update_training_phrase: nr_of_phrases={len(phrases_to_update)}")
     client.services.intents.batch_update_training_phrases(
-        BatchUpdateTrainingPhrasesRequest(
-            training_phrases=phrases_to_update
-        )
+        BatchUpdateTrainingPhrasesRequest(training_phrases=phrases_to_update)
     )
     elapsed: float = time.perf_counter() - start_time
-    log.info(f'DONE: batch_update_training_phrase. Elapsed time: {elapsed:.5f}')
+    log.info(f"DONE: batch_update_training_phrase. Elapsed time: {elapsed:.5f}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     log.info(
         """
             ------------------------------------------------------------------------
@@ -207,20 +188,20 @@ if __name__ == '__main__':
     ################################################################################
     # Update here your configuration for the project and the nlu client            #
     ################################################################################
-    project_id: str = '652c101f-fe0a-4956-8fd2-1a80b21c4348'  # project_id: str = '<Your project ID>'
-    language_code: str = 'de'
-    config_file: str = 'examples/local_client.json'  # config file for the ClientConfig
+    project_id: str = "652c101f-fe0a-4956-8fd2-1a80b21c4348"  # project_id: str = '<Your project ID>'
+    language_code: str = "de"
+    config_file: str = "examples/local_client.json"  # config file for the ClientConfig
 
     # region Client configuration
     # default client settings
     config: ClientConfig = ClientConfig(
-        host='localhost',
-        port='1234',
-        keycloak_url='https://<host>/auth',
-        realm='ondewo-ccai-platform',
-        client_id='ondewo-nlu-cai-sdk-public',
-        user_name='admin@ondewo.com',
-        password='asdf'
+        host="localhost",
+        port="1234",
+        keycloak_url="https://<host>/auth",
+        realm="ondewo-ccai-platform",
+        client_id="ondewo-nlu-cai-sdk-public",
+        user_name="admin@ondewo.com",
+        password="asdf",
     )
 
     # in configuration file exists overwrite the standard client configuration
@@ -228,21 +209,21 @@ if __name__ == '__main__':
         with open(config_file) as f:
             config_ = json.load(f)
         config = ClientConfig(
-            host=config_['host'],
-            port=config_['port'],
-            user_name=config_['user_name'],
-            password=config_['password'],
-            keycloak_url=config_['keycloak_url'],
-            realm=config_['realm'],
-            client_id=config_.get('client_id', 'ondewo-nlu-cai-sdk-public'),
-            grpc_cert=config_.get('grpc_cert', ''),
+            host=config_["host"],
+            port=config_["port"],
+            user_name=config_["user_name"],
+            password=config_["password"],
+            keycloak_url=config_["keycloak_url"],
+            realm=config_["realm"],
+            client_id=config_.get("client_id", "ondewo-nlu-cai-sdk-public"),
+            grpc_cert=config_.get("grpc_cert", ""),
         )
     # endregion
 
-    log.info('Starting clean up process ... ')
-    parent: str = f'projects/{project_id}/agent'
+    log.info("Starting clean up process ... ")
+    parent: str = f"projects/{project_id}/agent"
     client: Client = Client(config=config, use_secure_channel=False)
-    log.debug('Client created!')
+    log.debug("Client created!")
     map_: Dict[str, Dict[str, Set[str]]] = get_all_entities(
         parent=parent,
         language_code=language_code,
@@ -259,4 +240,4 @@ if __name__ == '__main__':
             dry_run=False,
         )
     )
-    log.info('Clean up process complete!!')
+    log.info("Clean up process complete!!")

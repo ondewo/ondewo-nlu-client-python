@@ -27,30 +27,26 @@ from ondewo.nlu.operations_pb2 import (
     Operation,
 )
 
-if __name__ == '__main__':
-    parent: str = 'projects/some_agent_id/agent'
-    config_file: str = 'envs/example.json'
+if __name__ == "__main__":
+    parent: str = "projects/some_agent_id/agent"
+    config_file: str = "envs/example.json"
 
     with open(config_file) as f:
         config_ = json.load(f)
 
     config = ClientConfig(
-        host=config_['host'],
-        port=config_['port'],
-        user_name=config_['user_name'],
-        password=config_['password'],
-        keycloak_url=config_['keycloak_url'],
-        realm=config_['realm'],
-        client_id=config_.get('client_id', 'ondewo-nlu-cai-sdk-public'),
-        grpc_cert=config_.get('grpc_cert', '').encode().decode().replace('\\n', '\n'),  # type: ignore
+        host=config_["host"],
+        port=config_["port"],
+        user_name=config_["user_name"],
+        password=config_["password"],
+        keycloak_url=config_["keycloak_url"],
+        realm=config_["realm"],
+        client_id=config_.get("client_id", "ondewo-nlu-cai-sdk-public"),
+        grpc_cert=config_.get("grpc_cert", "").encode().decode().replace("\\n", "\n"),  # type: ignore
     )
 
     client: Client = Client(config=config, use_secure_channel=True)
-    export_operation: Operation = client.services.agents.export_agent(
-        ExportAgentRequest(
-            parent=parent
-        )
-    )
+    export_operation: Operation = client.services.agents.export_agent(ExportAgentRequest(parent=parent))
 
     polling.poll(
         target=client.services.operations.get_operation,
@@ -70,5 +66,5 @@ if __name__ == '__main__':
     else:
         assert False
 
-    with open('my_backup.zip', mode='wb') as zf:
+    with open("my_backup.zip", mode="wb") as zf:
         zf.write(export_response.agent_content)

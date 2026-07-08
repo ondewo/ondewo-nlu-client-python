@@ -30,7 +30,7 @@ class ClientPool:
         config: BaseClientConfig,
         use_secure_channel: bool = True,
         pool_size: int = 10,
-        max_size_ratio: float = 1.5
+        max_size_ratio: float = 1.5,
     ) -> None:
         """
         Initialise a ClientPool to handle all your requests.
@@ -68,17 +68,17 @@ class ClientPool:
             return self.pool.get(block=True, timeout=2)
         except Empty:
             logger.warning(
-                'The ClientPool is empty, cannot retrieve more clients from it.\n'
-                'Opening new client to fulfill request...'
+                "The ClientPool is empty, cannot retrieve more clients from it.\n"
+                "Opening new client to fulfill request..."
             )
 
             if self.n_clients_created_limit <= self.n_clients_created:
                 raise Full(
                     f'A concerning number of "Clients" have been created.'
                     f'Remember to "release" (or "disconnect) the clients after using them.\n'
-                    f'If there are too many requests, consider increasing the pool size.\n'
-                    f'\t - # clients created: {self.n_clients_created}\n'
-                    f'\t - Current max pool size: {self.max_size}.'
+                    f"If there are too many requests, consider increasing the pool size.\n"
+                    f"\t - # clients created: {self.n_clients_created}\n"
+                    f"\t - Current max pool size: {self.max_size}."
                 )
 
             self.n_clients_created += 1
@@ -89,8 +89,7 @@ class ClientPool:
             self.pool.put(c)
         except Full:
             logger.warning(
-                'The ClientPool is full, putting more clients into it is not possible.\n'
-                'Closing client connection...'
+                "The ClientPool is full, putting more clients into it is not possible.\nClosing client connection..."
             )
             c.disconnect()
 

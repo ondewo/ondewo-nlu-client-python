@@ -44,6 +44,7 @@ dev = [
     "ruff",
     "mypy",
     "mypy-protobuf",
+    "pre-commit",
     "protobuf",
     "pytest",
     "pytest-cov",

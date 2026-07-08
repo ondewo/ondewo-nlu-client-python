@@ -44,34 +44,32 @@ IMAGE_UTILS_NAME=ondewo-nlu-client-utils-python:${ONDEWO_NLU_VERSION}
 #       ONDEWO Standard Make Targets
 ########################################################
 
-setup_developer_environment_locally: install_precommit_hooks install_dependencies_locally
+setup_developer_environment_locally: install_uv install_dependencies_locally install_precommit_hooks ## Ready a fresh laptop: install uv, sync runtime+dev deps into .venv, install pre-commit hooks
 
-install_precommit_hooks: ## Installs pre-commit hooks and sets them up for the ondewo-csi-client repo
-	-pip install pre-commit
-	-conda -y install pre-commit
-	pre-commit install
-	pre-commit install --hook-type commit-msg
+install_uv: ## Install the uv package manager if it is not already available
+	@command -v uv >/dev/null 2>&1 || curl -LsSf https://astral.sh/uv/install.sh | sh
+
+install_precommit_hooks: ## Installs pre-commit hooks and sets them up for the ondewo-nlu-client-python repo
+	uv run pre-commit install
+	uv run pre-commit install --hook-type commit-msg
 
 precommit_hooks_run_all_files: ## Runs all pre-commit hooks on all files and not just the changed ones
-	pre-commit run --all-file
+	uv run pre-commit run --all-files
 
-install_dependencies_locally: ## Install dependencies locally
-	pip install -r requirements-dev.txt
-	pip install -r requirements.txt
+install_dependencies_locally: ## Install runtime + dev dependencies locally into the uv-managed .venv
+	uv sync --extra dev
 
-flake8: ## Runs flake8
-	flake8 --config .flake8 .
+ruff: ## Lint with ruff (replaces flake8)
+	uv run ruff check .
+
+ruff_fix: ## Lint with ruff and auto-fix fixable issues
+	uv run ruff check --fix .
+
+ruff_format: ## Format the codebase with ruff (replaces black + autopep8)
+	uv run ruff format .
 
 mypy: ## Run mypy static code checking
-	@echo "---------------------------------------------"
-	@echo "START: Run mypy in pre-commit hook ..."
-	pre-commit run mypy --all-files
-	@echo "DONE: Run mypy in pre-commit hook."
-	@echo "---------------------------------------------"
-	@echo "START: Run mypy directly ..."
-	mypy --config-file=mypy.ini .
-	@echo "DONE: Run mypy directly"
-	@echo "---------------------------------------------"
+	uv run mypy ondewo/ tests/
 
 help: ## Print usage info about help targets
 	# (first comment after target starting with double hashes ##)
@@ -124,7 +122,7 @@ build_compiler:  ## Build proto compiler docker image
 	make -C ondewo-proto-compiler/python build
 
 generate_services: ## Generate service wrapper files from proto definitions
-	python3 ondewo/nlu/scripts/generate_services.py \
+	uv run python ondewo/nlu/scripts/generate_services.py \
 		${ONDEWO_NLU_API_DIR}/ondewo/nlu \
 		ondewo/nlu/services
 	-make precommit_hooks_run_all_files
@@ -138,15 +136,6 @@ generate_ondewo_protos:  ## Generate python code from proto files
 		TARGET_DIR='ondewo' \
 		OUTPUT_DIR=${OUTPUT_DIR}
 	-make precommit_hooks_run_all_files
-
-setup_conda_env: ## Checks for CONDA Environment
-	@echo "\n START SETTING UP CONDA ENV \n"
-	@conda env list | grep -q ondewo-nlu-client-python || ( echo "\n CONDA ENV FOR REPO DOESNT EXIST \n" \
-	&& make create_conda_env)
-
-create_conda_env: ##Creates CONDA Environment
-	conda create -y --name ondewo-nlu-client-python python=3.9
-	/bin/bash -c 'source `conda info --base`/bin/activate ondewo-nlu-client-python; make setup_developer_environment_locally && echo "\n PRECOMMIT INSTALLED \n"'
 
 create_async_services: ## Create async services for all synchronous services
 	@find ondewo -type d -name "services" ! -path "*/.*/*" | while read -r dir; do \
@@ -181,7 +170,7 @@ create_async_services: ## Create async services for all synchronous services
 release: ## Automate the entire release process
 	@echo "Start Release"
 	make build
-	/bin/bash -c 'source `conda info --base`/bin/activate ondewo-nlu-client-python; make precommit_hooks_run_all_files || echo "PRECOMMIT FOUND SOMETHING"'
+	-make precommit_hooks_run_all_files
 	git status
 	make check_build
 	git add ondewo
@@ -217,7 +206,7 @@ build_gh_release: ## Generate Github Release with CLI
 #		Submodules
 
 install: init_submodules ## Installs all packages
-	pip install -e .
+	uv sync --extra dev
 
 init_submodules:  ## Initialize submodules
 	@echo "START initializing submodules ..."
@@ -236,7 +225,7 @@ checkout_defined_submodule_versions:  ## Update submodule versions
 #		PYPI
 
 build_package: ## Builds PYPI Package
-	python -m build --no-isolation
+	uv build
 	chmod a+rw dist -R
 
 upload_package: ## Uploads PYPI Package
@@ -299,13 +288,13 @@ clone_devops_accounts: ## Clones devops-accounts repo
 
 run_release_with_devops: ## Gets Credentials from devops-repo and run release command with them
 	$(eval info:= $(shell cat ${DEVOPS_ACCOUNT_DIR}/account_github.env | grep GITHUB_GH & cat ${DEVOPS_ACCOUNT_DIR}/account_pypi.env | grep PYPI_USERNAME & cat ${DEVOPS_ACCOUNT_DIR}/account_pypi.env | grep PYPI_PASSWORD))
-	@(echo ${CONDA_PREFIX} | grep -q nlu-client-python || make setup_conda_env $(info)) && make release $(info)
+	make release $(info)
 
 
 spc: ## Checks if the Release Branch, Tag and Pypi version already exist
 	$(eval filtered_branches:= $(shell git branch --all | grep "release/${ONDEWO_NLU_VERSION}"))
 	$(eval filtered_tags:= $(shell git tag --list | grep "${ONDEWO_NLU_VERSION}"))
-	$(eval setuppy_version:= $(shell cat setup.py | grep "version"))
+	$(eval pyproject_version:= $(shell grep '^version = ' pyproject.toml))
 	@if test "$(filtered_branches)" != ""; then echo "-- Test 1: Branch exists!!" & exit 1; else echo "-- Test 1: Branch is fine";fi
 	@if test "$(filtered_tags)" != ""; then echo "-- Test 2: Tag exists!!" & exit 1; else echo "-- Test 2: Tag is fine";fi
-	#	@if test "$(setuppy_version)" != "version='${ONDEWO_NLU_VERSION}',"; then echo "-- Test 3: Setup.py not updated!!" & exit 1; else echo "-- Test 3: Setup.py is fine";fi
+	#	@if test "$(pyproject_version)" != "version = \"${ONDEWO_NLU_VERSION}\""; then echo "-- Test 3: pyproject.toml not updated!!" & exit 1; else echo "-- Test 3: pyproject.toml is fine";fi

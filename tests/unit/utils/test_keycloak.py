@@ -18,6 +18,7 @@ returns queued fake responses, and the module clock is monkeypatched to drive ex
 The proactive background-refresh thread is driven deterministically via an injected clock
 and a controllable stop event — no real sleeps, so the suite stays fast and non-flaky.
 """
+
 import gc
 import threading
 from typing import (
@@ -45,14 +46,12 @@ from ondewo.nlu.utils.keycloak import (
 
 # Bound exactly once so a refactor that changes only an input or only an expectation cannot
 # silently make a test tautological.
-KEYCLOAK_URL: str = 'https://kc.example.com/auth'
-REALM: str = 'ondewo-ccai-platform'
-CLIENT_ID: str = 'ondewo-nlu-cai-sdk-public'
-USERNAME: str = 'tech-user@example.com'
-PASSWORD: str = 's3cr3t'
-EXPECTED_TOKEN_ENDPOINT: str = (
-    'https://kc.example.com/auth/realms/ondewo-ccai-platform/protocol/openid-connect/token'
-)
+KEYCLOAK_URL: str = "https://kc.example.com/auth"
+REALM: str = "ondewo-ccai-platform"
+CLIENT_ID: str = "ondewo-nlu-cai-sdk-public"
+USERNAME: str = "tech-user@example.com"
+PASSWORD: str = "s3cr3t"
+EXPECTED_TOKEN_ENDPOINT: str = "https://kc.example.com/auth/realms/ondewo-ccai-platform/protocol/openid-connect/token"
 
 
 class FakeResponse:
@@ -122,9 +121,9 @@ class FakeTransport:
             AssertionError:
                 If more POSTs are made than responses were queued.
         """
-        self.calls.append({'url': url, **data})
+        self.calls.append({"url": url, **data})
         if not self._responses:
-            raise AssertionError('FakeTransport received more POSTs than queued responses')
+            raise AssertionError("FakeTransport received more POSTs than queued responses")
         return self._responses.pop(0)
 
 
@@ -144,10 +143,10 @@ def _token_body(access_token: str, refresh_token: str, expires_in: int) -> Dict[
             A token response body with access/refresh tokens, lifetime, and `token_type`.
     """
     return {
-        'access_token': access_token,
-        'refresh_token': refresh_token,
-        'expires_in': expires_in,
-        'token_type': 'Bearer',
+        "access_token": access_token,
+        "refresh_token": refresh_token,
+        "expires_in": expires_in,
+        "token_type": "Bearer",
     }
 
 
@@ -188,51 +187,51 @@ class TestLogin:
 
     def test_ropc_login_sends_offline_access_scope_and_no_secret(self) -> None:
         """Login posts grant_type=password with offline_access scope and no client_secret (Q1)."""
-        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body('acc-1', 'off-1', 300))])
+        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body("acc-1", "off-1", 300))])
 
         provider: KeycloakTokenProvider = _build_provider(transport)
 
-        assert provider.access_token == 'acc-1'
+        assert provider.access_token == "acc-1"
         assert len(transport.calls) == 1
         login_call: Dict[str, str] = transport.calls[0]
-        assert login_call['url'] == EXPECTED_TOKEN_ENDPOINT
-        assert login_call['grant_type'] == 'password'
-        assert login_call['client_id'] == CLIENT_ID
-        assert login_call['username'] == USERNAME
-        assert login_call['password'] == PASSWORD
-        assert login_call['scope'] == 'offline_access'
+        assert login_call["url"] == EXPECTED_TOKEN_ENDPOINT
+        assert login_call["grant_type"] == "password"
+        assert login_call["client_id"] == CLIENT_ID
+        assert login_call["username"] == USERNAME
+        assert login_call["password"] == PASSWORD
+        assert login_call["scope"] == "offline_access"
         # Q1: public client — never send a client_secret.
-        assert 'client_secret' not in login_call
+        assert "client_secret" not in login_call
 
     def test_authorization_metadata_is_bearer(self) -> None:
         """`authorization_metadata()` returns the `('authorization', 'Bearer <token>')` tuple."""
-        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body('acc-1', 'off-1', 300))])
+        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body("acc-1", "off-1", 300))])
 
         provider: KeycloakTokenProvider = _build_provider(transport)
 
         key, value = provider.authorization_metadata()
-        assert key == 'authorization'
-        assert value == 'Bearer acc-1'
+        assert key == "authorization"
+        assert value == "Bearer acc-1"
 
     def test_bearer_metadata_shape(self) -> None:
         """`bearer_metadata()` wraps the authorization tuple in a single-element list."""
-        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body('acc-1', 'off-1', 300))])
+        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body("acc-1", "off-1", 300))])
 
         provider: KeycloakTokenProvider = _build_provider(transport)
 
         metadata: List[Tuple[str, str]] = provider.bearer_metadata()
-        assert metadata == [('authorization', 'Bearer acc-1')]
+        assert metadata == [("authorization", "Bearer acc-1")]
 
     def test_login_failure_raises(self) -> None:
         """A non-2xx login response raises `KeycloakAuthenticationError`."""
-        transport: FakeTransport = FakeTransport([FakeResponse(401, {'error': 'invalid_grant'})])
+        transport: FakeTransport = FakeTransport([FakeResponse(401, {"error": "invalid_grant"})])
 
         with pytest.raises(KeycloakAuthenticationError):
             _build_provider(transport)
 
     def test_missing_access_token_raises(self) -> None:
         """A 2xx response that omits `access_token` raises `KeycloakAuthenticationError`."""
-        transport: FakeTransport = FakeTransport([FakeResponse(200, {'refresh_token': 'off-1', 'expires_in': 300})])
+        transport: FakeTransport = FakeTransport([FakeResponse(200, {"refresh_token": "off-1", "expires_in": 300})])
 
         with pytest.raises(KeycloakAuthenticationError):
             _build_provider(transport)
@@ -248,26 +247,28 @@ class TestRefresh:
             monkeypatch (pytest.MonkeyPatch):
                 Fixture used to replace the module clock with a controllable fake.
         """
-        clock: Dict[str, float] = {'now': 1000.0}
-        monkeypatch.setattr(keycloak_module.time, 'monotonic', lambda: clock['now'])
+        clock: Dict[str, float] = {"now": 1000.0}
+        monkeypatch.setattr(keycloak_module.time, "monotonic", lambda: clock["now"])
 
-        transport: FakeTransport = FakeTransport([
-            FakeResponse(200, _token_body('acc-1', 'off-1', 300)),
-            FakeResponse(200, _token_body('acc-2', 'off-2', 300)),
-        ])
+        transport: FakeTransport = FakeTransport(
+            [
+                FakeResponse(200, _token_body("acc-1", "off-1", 300)),
+                FakeResponse(200, _token_body("acc-2", "off-2", 300)),
+            ]
+        )
         provider: KeycloakTokenProvider = _build_provider(transport)
 
         # Advance the clock past the access-token lifetime so the next read refreshes.
-        clock['now'] = 1000.0 + 300.0
+        clock["now"] = 1000.0 + 300.0
         _, value = provider.authorization_metadata()
 
-        assert value == 'Bearer acc-2'
+        assert value == "Bearer acc-2"
         assert len(transport.calls) == 2
         refresh_call: Dict[str, str] = transport.calls[1]
-        assert refresh_call['grant_type'] == 'refresh_token'
-        assert refresh_call['client_id'] == CLIENT_ID
-        assert refresh_call['refresh_token'] == 'off-1'
-        assert 'client_secret' not in refresh_call
+        assert refresh_call["grant_type"] == "refresh_token"
+        assert refresh_call["client_id"] == CLIENT_ID
+        assert refresh_call["refresh_token"] == "off-1"
+        assert "client_secret" not in refresh_call
 
     def test_no_refresh_while_token_still_valid(self, monkeypatch: pytest.MonkeyPatch) -> None:
         """Repeated reads inside the validity window do not trigger any extra HTTP call.
@@ -276,14 +277,14 @@ class TestRefresh:
             monkeypatch (pytest.MonkeyPatch):
                 Fixture used to replace the module clock with a controllable fake.
         """
-        clock: Dict[str, float] = {'now': 1000.0}
-        monkeypatch.setattr(keycloak_module.time, 'monotonic', lambda: clock['now'])
+        clock: Dict[str, float] = {"now": 1000.0}
+        monkeypatch.setattr(keycloak_module.time, "monotonic", lambda: clock["now"])
 
-        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body('acc-1', 'off-1', 300))])
+        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body("acc-1", "off-1", 300))])
         provider: KeycloakTokenProvider = _build_provider(transport)
 
         # Read several times well inside the validity window: still exactly one HTTP call.
-        clock['now'] = 1000.0 + 100.0
+        clock["now"] = 1000.0 + 100.0
         provider.authorization_metadata()
         provider.authorization_metadata()
 
@@ -299,23 +300,25 @@ class TestRefresh:
             monkeypatch (pytest.MonkeyPatch):
                 Fixture used to replace the module clock with a controllable fake.
         """
-        clock: Dict[str, float] = {'now': 1000.0}
-        monkeypatch.setattr(keycloak_module.time, 'monotonic', lambda: clock['now'])
+        clock: Dict[str, float] = {"now": 1000.0}
+        monkeypatch.setattr(keycloak_module.time, "monotonic", lambda: clock["now"])
 
-        transport: FakeTransport = FakeTransport([
-            FakeResponse(200, _token_body('acc-1', 'off-1', 300)),
-            # A refresh response that omits refresh_token — provider keeps the old one.
-            FakeResponse(200, {'access_token': 'acc-2', 'expires_in': 300}),
-            FakeResponse(200, _token_body('acc-3', 'off-3', 300)),
-        ])
+        transport: FakeTransport = FakeTransport(
+            [
+                FakeResponse(200, _token_body("acc-1", "off-1", 300)),
+                # A refresh response that omits refresh_token — provider keeps the old one.
+                FakeResponse(200, {"access_token": "acc-2", "expires_in": 300}),
+                FakeResponse(200, _token_body("acc-3", "off-3", 300)),
+            ]
+        )
         provider: KeycloakTokenProvider = _build_provider(transport)
 
-        clock['now'] = 1000.0 + 300.0
+        clock["now"] = 1000.0 + 300.0
         provider.authorization_metadata()  # refresh #1 → acc-2, no new offline token
-        clock['now'] = 1000.0 + 600.0
+        clock["now"] = 1000.0 + 600.0
         provider.authorization_metadata()  # refresh #2 → must still use off-1
 
-        assert transport.calls[2]['refresh_token'] == 'off-1'
+        assert transport.calls[2]["refresh_token"] == "off-1"
 
 
 class TestTokenExpirationBound:
@@ -328,26 +331,28 @@ class TestTokenExpirationBound:
             monkeypatch (pytest.MonkeyPatch):
                 Fixture used to replace the module clock with a controllable fake.
         """
-        clock: Dict[str, float] = {'now': 1000.0}
-        monkeypatch.setattr(keycloak_module.time, 'monotonic', lambda: clock['now'])
+        clock: Dict[str, float] = {"now": 1000.0}
+        monkeypatch.setattr(keycloak_module.time, "monotonic", lambda: clock["now"])
 
         token_expiration_in_s: int = 600
-        transport: FakeTransport = FakeTransport([
-            FakeResponse(200, _token_body('acc-1', 'off-1', 300)),
-            FakeResponse(200, _token_body('acc-2', 'off-2', 300)),
-        ])
+        transport: FakeTransport = FakeTransport(
+            [
+                FakeResponse(200, _token_body("acc-1", "off-1", 300)),
+                FakeResponse(200, _token_body("acc-2", "off-2", 300)),
+            ]
+        )
         provider: KeycloakTokenProvider = _build_provider(transport, token_expiration_in_s=token_expiration_in_s)
 
         # First refresh (at +300s) is still within the 600s window → happens.
-        clock['now'] = 1000.0 + 300.0
+        clock["now"] = 1000.0 + 300.0
         _, value_in_window = provider.authorization_metadata()
-        assert value_in_window == 'Bearer acc-2'
+        assert value_in_window == "Bearer acc-2"
         assert len(transport.calls) == 2
 
         # Past the 600s bound: refresh must stop; the stale token is returned, no HTTP call.
-        clock['now'] = 1000.0 + token_expiration_in_s + 1.0
+        clock["now"] = 1000.0 + token_expiration_in_s + 1.0
         _, value_after_bound = provider.authorization_metadata()
-        assert value_after_bound == 'Bearer acc-2'
+        assert value_after_bound == "Bearer acc-2"
         assert len(transport.calls) == 2
 
     def test_unbounded_keeps_refreshing(self, monkeypatch: pytest.MonkeyPatch) -> None:
@@ -357,22 +362,24 @@ class TestTokenExpirationBound:
             monkeypatch (pytest.MonkeyPatch):
                 Fixture used to replace the module clock with a controllable fake.
         """
-        clock: Dict[str, float] = {'now': 1000.0}
-        monkeypatch.setattr(keycloak_module.time, 'monotonic', lambda: clock['now'])
+        clock: Dict[str, float] = {"now": 1000.0}
+        monkeypatch.setattr(keycloak_module.time, "monotonic", lambda: clock["now"])
 
-        transport: FakeTransport = FakeTransport([
-            FakeResponse(200, _token_body('acc-1', 'off-1', 300)),
-            FakeResponse(200, _token_body('acc-2', 'off-2', 300)),
-            FakeResponse(200, _token_body('acc-3', 'off-3', 300)),
-        ])
+        transport: FakeTransport = FakeTransport(
+            [
+                FakeResponse(200, _token_body("acc-1", "off-1", 300)),
+                FakeResponse(200, _token_body("acc-2", "off-2", 300)),
+                FakeResponse(200, _token_body("acc-3", "off-3", 300)),
+            ]
+        )
         provider: KeycloakTokenProvider = _build_provider(transport, token_expiration_in_s=None)
 
-        clock['now'] = 1000.0 + 300.0
+        clock["now"] = 1000.0 + 300.0
         provider.authorization_metadata()
-        clock['now'] = 1000.0 + 600.0
+        clock["now"] = 1000.0 + 600.0
         _, value = provider.authorization_metadata()
 
-        assert value == 'Bearer acc-3'
+        assert value == "Bearer acc-3"
         assert len(transport.calls) == 3
 
     def test_refresh_failure_after_login_raises(self, monkeypatch: pytest.MonkeyPatch) -> None:
@@ -382,16 +389,18 @@ class TestTokenExpirationBound:
             monkeypatch (pytest.MonkeyPatch):
                 Fixture used to replace the module clock with a controllable fake.
         """
-        clock: Dict[str, float] = {'now': 1000.0}
-        monkeypatch.setattr(keycloak_module.time, 'monotonic', lambda: clock['now'])
+        clock: Dict[str, float] = {"now": 1000.0}
+        monkeypatch.setattr(keycloak_module.time, "monotonic", lambda: clock["now"])
 
-        transport: FakeTransport = FakeTransport([
-            FakeResponse(200, _token_body('acc-1', 'off-1', 300)),
-            FakeResponse(400, {'error': 'invalid_grant'}),
-        ])
+        transport: FakeTransport = FakeTransport(
+            [
+                FakeResponse(200, _token_body("acc-1", "off-1", 300)),
+                FakeResponse(400, {"error": "invalid_grant"}),
+            ]
+        )
         provider: KeycloakTokenProvider = _build_provider(transport)
 
-        clock['now'] = 1000.0 + 300.0
+        clock["now"] = 1000.0 + 300.0
         with pytest.raises(KeycloakAuthenticationError):
             provider.authorization_metadata()
 
@@ -424,14 +433,14 @@ class TestSharedProviderRegistry:
                 FakeResponse:
                     A 200 response carrying access/refresh tokens.
             """
-            post_calls.append({'url': url, **data})
-            return FakeResponse(200, _token_body('acc-1', 'off-1', 300))
+            post_calls.append({"url": url, **data})
+            return FakeResponse(200, _token_body("acc-1", "off-1", 300))
 
-        monkeypatch.setattr(keycloak_module.requests, 'post', fake_post)
+        monkeypatch.setattr(keycloak_module.requests, "post", fake_post)
 
         config: ClientConfig = ClientConfig(
-            host='localhost',
-            port='50055',
+            host="localhost",
+            port="50055",
             user_name=USERNAME,
             password=PASSWORD,
             keycloak_url=KEYCLOAK_URL,
@@ -454,8 +463,8 @@ class TestSharedProviderRegistry:
         """
         # The factory must thread `token_expiration_in_s` from the config into the provider so
         # the auto-refresh bound is honoured; otherwise a refresh would run past the deadline.
-        clock: Dict[str, float] = {'now': 1000.0}
-        monkeypatch.setattr(keycloak_module.time, 'monotonic', lambda: clock['now'])
+        clock: Dict[str, float] = {"now": 1000.0}
+        monkeypatch.setattr(keycloak_module.time, "monotonic", lambda: clock["now"])
 
         token_expiration_in_s: int = 600
 
@@ -474,13 +483,13 @@ class TestSharedProviderRegistry:
                 FakeResponse:
                     A 200 response carrying access/refresh tokens.
             """
-            return FakeResponse(200, _token_body('acc-1', 'off-1', 300))
+            return FakeResponse(200, _token_body("acc-1", "off-1", 300))
 
-        monkeypatch.setattr(keycloak_module.requests, 'post', fake_post)
+        monkeypatch.setattr(keycloak_module.requests, "post", fake_post)
 
         config: ClientConfig = ClientConfig(
-            host='localhost',
-            port='50055',
+            host="localhost",
+            port="50055",
             user_name=USERNAME,
             password=PASSWORD,
             keycloak_url=KEYCLOAK_URL,
@@ -522,10 +531,10 @@ class TestDefaultRequestsTransport:
                 FakeResponse:
                     A 200 response carrying access/refresh tokens.
             """
-            post_calls.append({'url': url, **data})
-            return FakeResponse(200, _token_body('acc-1', 'off-1', 300))
+            post_calls.append({"url": url, **data})
+            return FakeResponse(200, _token_body("acc-1", "off-1", 300))
 
-        monkeypatch.setattr(keycloak_module.requests, 'post', fake_post)
+        monkeypatch.setattr(keycloak_module.requests, "post", fake_post)
 
         provider: KeycloakTokenProvider = KeycloakTokenProvider(
             keycloak_url=KEYCLOAK_URL,
@@ -536,9 +545,9 @@ class TestDefaultRequestsTransport:
         )
 
         assert isinstance(provider._transport, _RequestsTransport)
-        assert provider.access_token == 'acc-1'
+        assert provider.access_token == "acc-1"
         assert len(post_calls) == 1
-        assert post_calls[0]['url'] == EXPECTED_TOKEN_ENDPOINT
+        assert post_calls[0]["url"] == EXPECTED_TOKEN_ENDPOINT
 
     def test_requests_transport_forwards_url_data_and_timeout(self, monkeypatch: pytest.MonkeyPatch) -> None:
         """`_RequestsTransport.post` forwards url/data verbatim and the module HTTP timeout.
@@ -565,23 +574,23 @@ class TestDefaultRequestsTransport:
                 FakeResponse:
                     A 200 response carrying access/refresh tokens.
             """
-            captured['url'] = url
-            captured['data'] = data
-            captured['timeout'] = timeout
-            return FakeResponse(200, _token_body('acc-1', 'off-1', 300))
+            captured["url"] = url
+            captured["data"] = data
+            captured["timeout"] = timeout
+            return FakeResponse(200, _token_body("acc-1", "off-1", 300))
 
-        monkeypatch.setattr(keycloak_module.requests, 'post', fake_post)
+        monkeypatch.setattr(keycloak_module.requests, "post", fake_post)
 
         transport: _RequestsTransport = _RequestsTransport()
-        form_data: Dict[str, str] = {'grant_type': 'password'}
+        form_data: Dict[str, str] = {"grant_type": "password"}
         # `_RequestsTransport.post` is statically typed to return `requests.Response`; let mypy
         # infer that declared type rather than the fake the patched `requests.post` actually yields.
         response = transport.post(EXPECTED_TOKEN_ENDPOINT, data=form_data, timeout=_HTTP_TIMEOUT_S)
 
         assert response.status_code == 200
-        assert captured['url'] == EXPECTED_TOKEN_ENDPOINT
-        assert captured['data'] == form_data
-        assert captured['timeout'] == _HTTP_TIMEOUT_S
+        assert captured["url"] == EXPECTED_TOKEN_ENDPOINT
+        assert captured["data"] == form_data
+        assert captured["timeout"] == _HTTP_TIMEOUT_S
 
 
 class TestVerifySsl:
@@ -613,15 +622,15 @@ class TestVerifySsl:
                 FakeResponse:
                     A 200 response carrying access/refresh tokens.
             """
-            captured['verify'] = verify
-            return FakeResponse(200, _token_body('acc-1', 'off-1', 300))
+            captured["verify"] = verify
+            return FakeResponse(200, _token_body("acc-1", "off-1", 300))
 
-        monkeypatch.setattr(keycloak_module.requests, 'post', fake_post)
+        monkeypatch.setattr(keycloak_module.requests, "post", fake_post)
 
         transport: _RequestsTransport = _RequestsTransport()
-        transport.post(EXPECTED_TOKEN_ENDPOINT, data={'grant_type': 'password'}, timeout=_HTTP_TIMEOUT_S)
+        transport.post(EXPECTED_TOKEN_ENDPOINT, data={"grant_type": "password"}, timeout=_HTTP_TIMEOUT_S)
 
-        assert captured['verify'] is True
+        assert captured["verify"] is True
 
     def test_requests_transport_verify_false_forwards_false(self, monkeypatch: pytest.MonkeyPatch) -> None:
         """`_RequestsTransport(verify_ssl=False)` forwards `verify=False` and suppresses the warning.
@@ -649,22 +658,22 @@ class TestVerifySsl:
                 FakeResponse:
                     A 200 response carrying access/refresh tokens.
             """
-            captured['verify'] = verify
-            return FakeResponse(200, _token_body('acc-1', 'off-1', 300))
+            captured["verify"] = verify
+            return FakeResponse(200, _token_body("acc-1", "off-1", 300))
 
-        monkeypatch.setattr(keycloak_module.requests, 'post', fake_post)
+        monkeypatch.setattr(keycloak_module.requests, "post", fake_post)
 
         disable_warnings_calls: List[Any] = []
         monkeypatch.setattr(
             keycloak_module.urllib3,
-            'disable_warnings',
+            "disable_warnings",
             lambda category=None: disable_warnings_calls.append(category),
         )
 
         transport: _RequestsTransport = _RequestsTransport(verify_ssl=False)
-        transport.post(EXPECTED_TOKEN_ENDPOINT, data={'grant_type': 'password'}, timeout=_HTTP_TIMEOUT_S)
+        transport.post(EXPECTED_TOKEN_ENDPOINT, data={"grant_type": "password"}, timeout=_HTTP_TIMEOUT_S)
 
-        assert captured['verify'] is False
+        assert captured["verify"] is False
         # The InsecureRequestWarning must be suppressed exactly once when verification is disabled.
         assert disable_warnings_calls == [keycloak_module.urllib3.exceptions.InsecureRequestWarning]
 
@@ -694,10 +703,10 @@ class TestVerifySsl:
                 FakeResponse:
                     A 200 response carrying access/refresh tokens.
             """
-            captured['verify'] = verify
-            return FakeResponse(200, _token_body('acc-1', 'off-1', 300))
+            captured["verify"] = verify
+            return FakeResponse(200, _token_body("acc-1", "off-1", 300))
 
-        monkeypatch.setattr(keycloak_module.requests, 'post', fake_post)
+        monkeypatch.setattr(keycloak_module.requests, "post", fake_post)
 
         provider: KeycloakTokenProvider = KeycloakTokenProvider(
             keycloak_url=KEYCLOAK_URL,
@@ -709,7 +718,7 @@ class TestVerifySsl:
         )
 
         assert isinstance(provider._transport, _RequestsTransport)
-        assert captured['verify'] is True
+        assert captured["verify"] is True
 
     def test_provider_verify_ssl_false_disables_verification(self, monkeypatch: pytest.MonkeyPatch) -> None:
         """`KeycloakTokenProvider(verify_ssl=False)` posts the login with `verify=False`.
@@ -737,11 +746,11 @@ class TestVerifySsl:
                 FakeResponse:
                     A 200 response carrying access/refresh tokens.
             """
-            captured['verify'] = verify
-            return FakeResponse(200, _token_body('acc-1', 'off-1', 300))
+            captured["verify"] = verify
+            return FakeResponse(200, _token_body("acc-1", "off-1", 300))
 
-        monkeypatch.setattr(keycloak_module.requests, 'post', fake_post)
-        monkeypatch.setattr(keycloak_module.urllib3, 'disable_warnings', lambda category=None: None)
+        monkeypatch.setattr(keycloak_module.requests, "post", fake_post)
+        monkeypatch.setattr(keycloak_module.urllib3, "disable_warnings", lambda category=None: None)
 
         provider: KeycloakTokenProvider = KeycloakTokenProvider(
             keycloak_url=KEYCLOAK_URL,
@@ -754,7 +763,7 @@ class TestVerifySsl:
         )
 
         assert isinstance(provider._transport, _RequestsTransport)
-        assert captured['verify'] is False
+        assert captured["verify"] is False
 
     def test_factory_threads_keycloak_verify_ssl_default_true(self, monkeypatch: pytest.MonkeyPatch) -> None:
         """A config that omits `keycloak_verify_ssl` yields a login POST with `verify=True`.
@@ -782,14 +791,14 @@ class TestVerifySsl:
                 FakeResponse:
                     A 200 response carrying access/refresh tokens.
             """
-            captured['verify'] = verify
-            return FakeResponse(200, _token_body('acc-1', 'off-1', 300))
+            captured["verify"] = verify
+            return FakeResponse(200, _token_body("acc-1", "off-1", 300))
 
-        monkeypatch.setattr(keycloak_module.requests, 'post', fake_post)
+        monkeypatch.setattr(keycloak_module.requests, "post", fake_post)
 
         config: ClientConfig = ClientConfig(
-            host='localhost',
-            port='50055',
+            host="localhost",
+            port="50055",
             user_name=USERNAME,
             password=PASSWORD,
             keycloak_url=KEYCLOAK_URL,
@@ -800,7 +809,7 @@ class TestVerifySsl:
         provider: KeycloakTokenProvider = get_keycloak_token_provider(config)
         provider.stop()
 
-        assert captured['verify'] is True
+        assert captured["verify"] is True
 
     def test_factory_threads_keycloak_verify_ssl_false(self, monkeypatch: pytest.MonkeyPatch) -> None:
         """`ClientConfig(keycloak_verify_ssl=False)` flows all the way to `verify=False`.
@@ -828,15 +837,15 @@ class TestVerifySsl:
                 FakeResponse:
                     A 200 response carrying access/refresh tokens.
             """
-            captured['verify'] = verify
-            return FakeResponse(200, _token_body('acc-1', 'off-1', 300))
+            captured["verify"] = verify
+            return FakeResponse(200, _token_body("acc-1", "off-1", 300))
 
-        monkeypatch.setattr(keycloak_module.requests, 'post', fake_post)
-        monkeypatch.setattr(keycloak_module.urllib3, 'disable_warnings', lambda category=None: None)
+        monkeypatch.setattr(keycloak_module.requests, "post", fake_post)
+        monkeypatch.setattr(keycloak_module.urllib3, "disable_warnings", lambda category=None: None)
 
         config: ClientConfig = ClientConfig(
-            host='localhost',
-            port='50055',
+            host="localhost",
+            port="50055",
             user_name=USERNAME,
             password=PASSWORD,
             keycloak_url=KEYCLOAK_URL,
@@ -848,11 +857,11 @@ class TestVerifySsl:
         provider: KeycloakTokenProvider = get_keycloak_token_provider(config)
         provider.stop()
 
-        assert captured['verify'] is False
+        assert captured["verify"] is False
 
     def test_injected_transport_ignores_verify_ssl(self) -> None:
         """An injected transport is used verbatim; `verify_ssl=False` never touches it."""
-        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body('acc-1', 'off-1', 300))])
+        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body("acc-1", "off-1", 300))])
 
         provider: KeycloakTokenProvider = KeycloakTokenProvider(
             keycloak_url=KEYCLOAK_URL,
@@ -867,7 +876,7 @@ class TestVerifySsl:
 
         # The flag only affects the default requests transport — the injected fake is untouched.
         assert provider._transport is transport
-        assert provider.access_token == 'acc-1'
+        assert provider.access_token == "acc-1"
         assert len(transport.calls) == 1
 
 
@@ -886,20 +895,22 @@ class TestStoreTokensExpiry:
         """
         # A token response without `expires_in` is treated as already at expiry (0s), so the very
         # next metadata read must refresh rather than serve a token with an unknown lifetime.
-        clock: Dict[str, float] = {'now': 1000.0}
-        monkeypatch.setattr(keycloak_module.time, 'monotonic', lambda: clock['now'])
+        clock: Dict[str, float] = {"now": 1000.0}
+        monkeypatch.setattr(keycloak_module.time, "monotonic", lambda: clock["now"])
 
-        transport: FakeTransport = FakeTransport([
-            FakeResponse(200, {'access_token': 'acc-1', 'refresh_token': 'off-1'}),
-            FakeResponse(200, _token_body('acc-2', 'off-2', 300)),
-        ])
+        transport: FakeTransport = FakeTransport(
+            [
+                FakeResponse(200, {"access_token": "acc-1", "refresh_token": "off-1"}),
+                FakeResponse(200, _token_body("acc-2", "off-2", 300)),
+            ]
+        )
         provider: KeycloakTokenProvider = _build_provider(transport)
 
         # Clock has not advanced, but expires_at == login time (expires_in defaulted to 0), so the
         # leeway check fires immediately and the next read refreshes.
         _, value = provider.authorization_metadata()
 
-        assert value == 'Bearer acc-2'
+        assert value == "Bearer acc-2"
         assert len(transport.calls) == 2
 
 
@@ -965,9 +976,9 @@ class ScriptedEvent:
         """
         self.wait_delays.append(float(timeout if timeout is not None else 0.0))
         if self._advance_by is not None and self._advance_by:
-            self._clock['now'] += self._advance_by.pop(0)
+            self._clock["now"] += self._advance_by.pop(0)
         elif timeout is not None:
-            self._clock['now'] += timeout
+            self._clock["now"] += timeout
         if not self._wait_returns:
             self._set = True
             return True
@@ -977,7 +988,7 @@ class ScriptedEvent:
         return result
 
 
-def _weak(obj: KeycloakTokenProvider) -> 'Any':
+def _weak(obj: KeycloakTokenProvider) -> "Any":
     """Return a weak reference to a provider (a thin, typed wrapper around `weakref.ref`).
 
     Args:
@@ -1026,7 +1037,7 @@ def _build_background_provider(
         password=PASSWORD,
         token_expiration_in_s=token_expiration_in_s,
         transport=transport,
-        time_fn=lambda: clock['now'],
+        time_fn=lambda: clock["now"],
         stop_event=stop_event,  # type: ignore[arg-type]  # ScriptedEvent is a structural Event stand-in
         start_background_refresh=False,
     )
@@ -1037,26 +1048,28 @@ class TestBackgroundRefresh:
 
     def test_refreshes_before_expiry_and_reschedules(self) -> None:
         """The loop wakes leeway-before-expiry, refreshes, and reschedules from the new expiry."""
-        clock: Dict[str, float] = {'now': 1000.0}
-        transport: FakeTransport = FakeTransport([
-            FakeResponse(200, _token_body('acc-1', 'off-1', 300)),
-            FakeResponse(200, _token_body('acc-2', 'off-2', 300)),
-            FakeResponse(200, _token_body('acc-3', 'off-3', 300)),
-        ])
+        clock: Dict[str, float] = {"now": 1000.0}
+        transport: FakeTransport = FakeTransport(
+            [
+                FakeResponse(200, _token_body("acc-1", "off-1", 300)),
+                FakeResponse(200, _token_body("acc-2", "off-2", 300)),
+                FakeResponse(200, _token_body("acc-3", "off-3", 300)),
+            ]
+        )
         # Each wait advances the clock by exactly the requested delay (the default), landing the
         # clock at expiry-minus-leeway so the post-wait refresh guard fires. Two timeouts → two
         # refreshes; the third wait exhausts the script and stops the loop.
         event: ScriptedEvent = ScriptedEvent(wait_returns=[False, False], clock=clock)
         provider: KeycloakTokenProvider = _build_background_provider(transport, clock, event)
 
-        _refresh_loop(_weak(provider), event, lambda: clock['now'])  # type: ignore[arg-type]
+        _refresh_loop(_weak(provider), event, lambda: clock["now"])  # type: ignore[arg-type]
 
         # Login + two background refreshes.
         assert len(transport.calls) == 3
-        assert transport.calls[1]['grant_type'] == 'refresh_token'
-        assert transport.calls[1]['refresh_token'] == 'off-1'
-        assert transport.calls[2]['refresh_token'] == 'off-2'
-        assert provider.access_token == 'acc-3'
+        assert transport.calls[1]["grant_type"] == "refresh_token"
+        assert transport.calls[1]["refresh_token"] == "off-1"
+        assert transport.calls[2]["refresh_token"] == "off-2"
+        assert provider.access_token == "acc-3"
         # Each scheduled delay is (expires_in - leeway) = 300 - 30 = 270s, computed from the
         # then-current expiry — proving the loop reschedules off the *new* expiry each time.
         expected_delay: float = 300.0 - _EXPIRY_LEEWAY_S
@@ -1065,29 +1078,31 @@ class TestBackgroundRefresh:
 
     def test_min_delay_clamp_prevents_hot_loop(self) -> None:
         """A token whose lifetime is below the leeway clamps the wait to the minimum delay."""
-        clock: Dict[str, float] = {'now': 1000.0}
+        clock: Dict[str, float] = {"now": 1000.0}
         # expires_in=5 → desired delay 5 - 30 = -25 → must clamp to _MIN_REFRESH_DELAY_S.
-        transport: FakeTransport = FakeTransport([
-            FakeResponse(200, _token_body('acc-1', 'off-1', 5)),
-            FakeResponse(200, _token_body('acc-2', 'off-2', 300)),
-        ])
+        transport: FakeTransport = FakeTransport(
+            [
+                FakeResponse(200, _token_body("acc-1", "off-1", 5)),
+                FakeResponse(200, _token_body("acc-2", "off-2", 300)),
+            ]
+        )
         event: ScriptedEvent = ScriptedEvent(wait_returns=[False], clock=clock, advance_by=[0.0, 0.0])
         provider: KeycloakTokenProvider = _build_background_provider(transport, clock, event)
 
-        _refresh_loop(_weak(provider), event, lambda: clock['now'])  # type: ignore[arg-type]
+        _refresh_loop(_weak(provider), event, lambda: clock["now"])  # type: ignore[arg-type]
 
         assert event.wait_delays[0] == _MIN_REFRESH_DELAY_S
-        assert provider.access_token == 'acc-2'
+        assert provider.access_token == "acc-2"
 
     def test_stop_during_wait_halts_the_loop_without_refresh(self) -> None:
         """When `wait()` returns True (stop fired mid-sleep) the loop exits with no refresh."""
-        clock: Dict[str, float] = {'now': 1000.0}
-        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body('acc-1', 'off-1', 300))])
+        clock: Dict[str, float] = {"now": 1000.0}
+        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body("acc-1", "off-1", 300))])
         # First wait reports stop() fired during the sleep → loop returns immediately.
         event: ScriptedEvent = ScriptedEvent(wait_returns=[True], clock=clock, advance_by=[0.0])
         provider: KeycloakTokenProvider = _build_background_provider(transport, clock, event)
 
-        _refresh_loop(_weak(provider), event, lambda: clock['now'])  # type: ignore[arg-type]
+        _refresh_loop(_weak(provider), event, lambda: clock["now"])  # type: ignore[arg-type]
 
         # Only the login call happened; no refresh after the stop.
         assert len(transport.calls) == 1
@@ -1095,30 +1110,33 @@ class TestBackgroundRefresh:
 
     def test_already_set_event_exits_before_first_wait(self) -> None:
         """A pre-set stop event makes the loop exit at the top, before computing any delay."""
-        clock: Dict[str, float] = {'now': 1000.0}
-        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body('acc-1', 'off-1', 300))])
+        clock: Dict[str, float] = {"now": 1000.0}
+        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body("acc-1", "off-1", 300))])
         event: ScriptedEvent = ScriptedEvent(wait_returns=[], clock=clock)
         provider: KeycloakTokenProvider = _build_background_provider(transport, clock, event)
         event.set()
 
-        _refresh_loop(_weak(provider), event, lambda: clock['now'])  # type: ignore[arg-type]
+        _refresh_loop(_weak(provider), event, lambda: clock["now"])  # type: ignore[arg-type]
 
         assert event.wait_delays == []
         assert len(transport.calls) == 1
 
     def test_bounded_deadline_stops_loop_at_top(self) -> None:
         """Once the login deadline has elapsed the loop sets the event and exits (no refresh)."""
-        clock: Dict[str, float] = {'now': 1000.0}
+        clock: Dict[str, float] = {"now": 1000.0}
         token_expiration_in_s: int = 100
-        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body('acc-1', 'off-1', 300))])
+        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body("acc-1", "off-1", 300))])
         event: ScriptedEvent = ScriptedEvent(wait_returns=[], clock=clock)
         provider: KeycloakTokenProvider = _build_background_provider(
-            transport, clock, event, token_expiration_in_s=token_expiration_in_s,
+            transport,
+            clock,
+            event,
+            token_expiration_in_s=token_expiration_in_s,
         )
         # Jump the clock past the login deadline (login was at 1000, deadline = 1100).
-        clock['now'] = 1000.0 + token_expiration_in_s + 1.0
+        clock["now"] = 1000.0 + token_expiration_in_s + 1.0
 
-        _refresh_loop(_weak(provider), event, lambda: clock['now'])  # type: ignore[arg-type]
+        _refresh_loop(_weak(provider), event, lambda: clock["now"])  # type: ignore[arg-type]
 
         # Deadline elapsed at the top of the loop → no wait, no refresh, and the event is set.
         assert event.wait_delays == []
@@ -1127,18 +1145,21 @@ class TestBackgroundRefresh:
 
     def test_deadline_clamps_remaining_time_below_expiry_delay(self) -> None:
         """When the deadline is nearer than the expiry-leeway delay, the wait clamps to it."""
-        clock: Dict[str, float] = {'now': 1000.0}
+        clock: Dict[str, float] = {"now": 1000.0}
         # Deadline at +50s is nearer than the expiry-leeway delay (300 - 30 = 270), so the
         # remaining-to-deadline (50s) must clamp the wait; the post-wait refresh then sees the
         # clock at the deadline and the loop stops via _refresh_if_within_window.
         token_expiration_in_s: int = 50
-        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body('acc-1', 'off-1', 300))])
+        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body("acc-1", "off-1", 300))])
         event: ScriptedEvent = ScriptedEvent(wait_returns=[False], clock=clock, advance_by=[50.0])
         provider: KeycloakTokenProvider = _build_background_provider(
-            transport, clock, event, token_expiration_in_s=token_expiration_in_s,
+            transport,
+            clock,
+            event,
+            token_expiration_in_s=token_expiration_in_s,
         )
 
-        _refresh_loop(_weak(provider), event, lambda: clock['now'])  # type: ignore[arg-type]
+        _refresh_loop(_weak(provider), event, lambda: clock["now"])  # type: ignore[arg-type]
 
         assert event.wait_delays[0] == float(token_expiration_in_s)
         # The wait advanced the clock by 50s → now == deadline → the post-wait refresh is skipped.
@@ -1146,10 +1167,10 @@ class TestBackgroundRefresh:
 
     def test_weakref_collected_provider_exits_loop(self) -> None:
         """A loop whose provider was already collected exits at the top without a refresh."""
-        clock: Dict[str, float] = {'now': 1000.0}
-        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body('acc-1', 'off-1', 300))])
+        clock: Dict[str, float] = {"now": 1000.0}
+        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body("acc-1", "off-1", 300))])
         provider: KeycloakTokenProvider = _build_background_provider(transport, clock, ScriptedEvent([], clock))
-        ref: 'Any' = _weak(provider)
+        ref: "Any" = _weak(provider)
 
         del provider
         gc.collect()
@@ -1159,7 +1180,7 @@ class TestBackgroundRefresh:
         # here is handed a fresh event so its `while not stop_event.is_set()` still enters once,
         # exercising the top-of-loop deref-to-None exit (the weakref-GC teardown path).
         loop_event: ScriptedEvent = ScriptedEvent(wait_returns=[False], clock=clock)
-        _refresh_loop(ref, loop_event, lambda: clock['now'])  # type: ignore[arg-type]
+        _refresh_loop(ref, loop_event, lambda: clock["now"])  # type: ignore[arg-type]
 
         # The provider was collected before the loop ran, so its first top-of-loop deref is
         # already None → exits immediately with only the login call recorded.
@@ -1174,12 +1195,12 @@ class TestBackgroundRefresh:
         loop arms a wait, and the provider is collected *during* that wait so the second deref
         returns None.
         """
-        clock: Dict[str, float] = {'now': 1000.0}
-        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body('acc-1', 'off-1', 300))])
+        clock: Dict[str, float] = {"now": 1000.0}
+        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body("acc-1", "off-1", 300))])
         holder: Dict[str, Optional[KeycloakTokenProvider]] = {
-            'provider': _build_background_provider(transport, clock, ScriptedEvent([], clock)),
+            "provider": _build_background_provider(transport, clock, ScriptedEvent([], clock)),
         }
-        ref: 'Any' = _weak(holder['provider'])  # type: ignore[arg-type]
+        ref: "Any" = _weak(holder["provider"])  # type: ignore[arg-type]
 
         class CollectingEvent(ScriptedEvent):
             """A scripted event whose single `wait` collects the provider before returning."""
@@ -1197,13 +1218,13 @@ class TestBackgroundRefresh:
                         now-None post-wait deref.
                 """
                 self.wait_delays.append(float(timeout if timeout is not None else 0.0))
-                holder['provider'] = None
+                holder["provider"] = None
                 gc.collect()
                 return False
 
         event: CollectingEvent = CollectingEvent(wait_returns=[], clock=clock)
 
-        _refresh_loop(ref, event, lambda: clock['now'])  # type: ignore[arg-type]
+        _refresh_loop(ref, event, lambda: clock["now"])  # type: ignore[arg-type]
 
         assert ref() is None
         # Top-of-loop deref armed exactly one wait; the post-wait deref found None and exited.
@@ -1212,8 +1233,8 @@ class TestBackgroundRefresh:
 
     def test_start_background_refresh_spawns_daemon_thread(self) -> None:
         """`start_background_refresh=True` spawns a named daemon thread that `stop()` joins."""
-        clock: Dict[str, float] = {'now': 1000.0}
-        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body('acc-1', 'off-1', 300))])
+        clock: Dict[str, float] = {"now": 1000.0}
+        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body("acc-1", "off-1", 300))])
         # A real Event + a frozen clock keep the first computed delay large (270s), so the thread
         # parks in wait() until stop() releases it — no refresh fires, no real sleep elapses.
         provider: KeycloakTokenProvider = KeycloakTokenProvider(
@@ -1223,13 +1244,13 @@ class TestBackgroundRefresh:
             username=USERNAME,
             password=PASSWORD,
             transport=transport,
-            time_fn=lambda: clock['now'],
+            time_fn=lambda: clock["now"],
             start_background_refresh=True,
         )
         thread: Optional[threading.Thread] = provider._refresh_thread
         assert thread is not None
         assert thread.daemon is True
-        assert thread.name == f'keycloak-token-refresh-{CLIENT_ID}'
+        assert thread.name == f"keycloak-token-refresh-{CLIENT_ID}"
         assert thread.is_alive()
 
         provider.stop()
@@ -1241,8 +1262,8 @@ class TestBackgroundRefresh:
 
     def test_stop_is_idempotent(self) -> None:
         """Calling `stop()` twice is safe and leaves the thread joined."""
-        clock: Dict[str, float] = {'now': 1000.0}
-        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body('acc-1', 'off-1', 300))])
+        clock: Dict[str, float] = {"now": 1000.0}
+        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body("acc-1", "off-1", 300))])
         provider: KeycloakTokenProvider = KeycloakTokenProvider(
             keycloak_url=KEYCLOAK_URL,
             realm=REALM,
@@ -1250,7 +1271,7 @@ class TestBackgroundRefresh:
             username=USERNAME,
             password=PASSWORD,
             transport=transport,
-            time_fn=lambda: clock['now'],
+            time_fn=lambda: clock["now"],
             start_background_refresh=True,
         )
 
@@ -1262,8 +1283,8 @@ class TestBackgroundRefresh:
 
     def test_close_alias_stops_thread(self) -> None:
         """The `close` alias performs the same teardown as `stop`."""
-        clock: Dict[str, float] = {'now': 1000.0}
-        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body('acc-1', 'off-1', 300))])
+        clock: Dict[str, float] = {"now": 1000.0}
+        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body("acc-1", "off-1", 300))])
         provider: KeycloakTokenProvider = KeycloakTokenProvider(
             keycloak_url=KEYCLOAK_URL,
             realm=REALM,
@@ -1271,7 +1292,7 @@ class TestBackgroundRefresh:
             username=USERNAME,
             password=PASSWORD,
             transport=transport,
-            time_fn=lambda: clock['now'],
+            time_fn=lambda: clock["now"],
             start_background_refresh=True,
         )
         thread: Optional[threading.Thread] = provider._refresh_thread
@@ -1283,8 +1304,8 @@ class TestBackgroundRefresh:
 
     def test_context_manager_stops_thread_on_exit(self) -> None:
         """Using the provider as a context manager stops its background thread on block exit."""
-        clock: Dict[str, float] = {'now': 1000.0}
-        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body('acc-1', 'off-1', 300))])
+        clock: Dict[str, float] = {"now": 1000.0}
+        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body("acc-1", "off-1", 300))])
         with KeycloakTokenProvider(
             keycloak_url=KEYCLOAK_URL,
             realm=REALM,
@@ -1292,21 +1313,21 @@ class TestBackgroundRefresh:
             username=USERNAME,
             password=PASSWORD,
             transport=transport,
-            time_fn=lambda: clock['now'],
+            time_fn=lambda: clock["now"],
             start_background_refresh=True,
         ) as provider:
             thread: Optional[threading.Thread] = provider._refresh_thread
             assert thread is not None
             assert thread.is_alive()
-            assert provider.access_token == 'acc-1'
+            assert provider.access_token == "acc-1"
 
         assert thread is not None
         assert not thread.is_alive()
 
     def test_del_stops_thread(self) -> None:
         """Garbage-collecting the provider triggers `__del__`, which stops the background thread."""
-        clock: Dict[str, float] = {'now': 1000.0}
-        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body('acc-1', 'off-1', 300))])
+        clock: Dict[str, float] = {"now": 1000.0}
+        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body("acc-1", "off-1", 300))])
         provider: KeycloakTokenProvider = KeycloakTokenProvider(
             keycloak_url=KEYCLOAK_URL,
             realm=REALM,
@@ -1314,7 +1335,7 @@ class TestBackgroundRefresh:
             username=USERNAME,
             password=PASSWORD,
             transport=transport,
-            time_fn=lambda: clock['now'],
+            time_fn=lambda: clock["now"],
             start_background_refresh=True,
         )
         thread: Optional[threading.Thread] = provider._refresh_thread
@@ -1337,8 +1358,8 @@ class TestBackgroundRefresh:
             monkeypatch (pytest.MonkeyPatch):
                 Fixture used to patch `threading.current_thread` for the guard.
         """
-        clock: Dict[str, float] = {'now': 1000.0}
-        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body('acc-1', 'off-1', 300))])
+        clock: Dict[str, float] = {"now": 1000.0}
+        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body("acc-1", "off-1", 300))])
         provider: KeycloakTokenProvider = KeycloakTokenProvider(
             keycloak_url=KEYCLOAK_URL,
             realm=REALM,
@@ -1346,7 +1367,7 @@ class TestBackgroundRefresh:
             username=USERNAME,
             password=PASSWORD,
             transport=transport,
-            time_fn=lambda: clock['now'],
+            time_fn=lambda: clock["now"],
             start_background_refresh=True,
         )
         refresh_thread: Optional[threading.Thread] = provider._refresh_thread
@@ -1367,7 +1388,7 @@ class TestBackgroundRefresh:
 
         refresh_thread.join = _tracking_join  # type: ignore[method-assign]
 
-        monkeypatch.setattr(keycloak_module.threading, 'current_thread', lambda: refresh_thread)
+        monkeypatch.setattr(keycloak_module.threading, "current_thread", lambda: refresh_thread)
         provider.stop()
         # The self-join guard skipped join() entirely.
         assert joined == []

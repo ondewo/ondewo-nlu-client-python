@@ -21,22 +21,13 @@ from ondewo.qa.qa_pb2 import (
     GetAnswerResponse,
 )
 
-if __name__ == '__main__':
-    config: ClientConfig = ClientConfig(
-        host='localhost',
-        port='1234'
-    )
-    client: QAClient = QAClient(
-        config=config,
-        use_secure_channel=False
-    )
+if __name__ == "__main__":
+    config: ClientConfig = ClientConfig(host="localhost", port="1234")
+    client: QAClient = QAClient(config=config, use_secure_channel=False)
 
     answer: GetAnswerResponse = client.services.qa.get_answer(
         GetAnswerRequest(
-            text=TextInput(text='<Your Q&A query>'),
-            max_num_answers=3,
-            threshold_reader=0,
-            threshold_retriever=0
+            text=TextInput(text="<Your Q&A query>"), max_num_answers=3, threshold_reader=0, threshold_retriever=0
         )
     )
 

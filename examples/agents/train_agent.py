@@ -23,25 +23,21 @@ from ondewo.nlu.operations_pb2 import (
     Operation,
 )
 
-if __name__ == '__main__':
-    parent: str = '<PUT_YOUR_AGENT_PARENT_HERE>'
+if __name__ == "__main__":
+    parent: str = "<PUT_YOUR_AGENT_PARENT_HERE>"
     config: ClientConfig = ClientConfig(
-        host='localhost',
-        port='1234',
-        keycloak_url='https://<host>/auth',
-        realm='ondewo-ccai-platform',
-        client_id='ondewo-nlu-cai-sdk-public',
-        user_name='<e-mail of user>',
-        password='<password of user>'
+        host="localhost",
+        port="1234",
+        keycloak_url="https://<host>/auth",
+        realm="ondewo-ccai-platform",
+        client_id="ondewo-nlu-cai-sdk-public",
+        user_name="<e-mail of user>",
+        password="<password of user>",
     )
 
     client: Client = Client(config=config, use_secure_channel=True)
 
-    train_operation: Operation = client.services.agents.train_agent(
-        TrainAgentRequest(
-            parent=parent
-        )
-    )
+    train_operation: Operation = client.services.agents.train_agent(TrainAgentRequest(parent=parent))
 
     polling.poll(
         target=client.services.operations.get_operation,

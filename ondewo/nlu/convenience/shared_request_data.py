@@ -75,6 +75,7 @@ class SharedRequestData(object):
         session_review_uuid: Optional[str] = None ... the UUID identifying an NLU session review
 
     """
+
     project_parent: Optional[str] = None
     language_code: Optional[str] = None
     intent_uuid: Optional[str] = None
@@ -90,19 +91,19 @@ class SharedRequestData(object):
     def session_id(self) -> Optional[str]:
         if not self.project_parent or not self.session_uuid:
             return None
-        return f'{self.project_parent}/sessions/{self.session_uuid}'
+        return f"{self.project_parent}/sessions/{self.session_uuid}"
 
     @property
     def session_review_id(self) -> Optional[str]:
         if not self.project_parent or not self.session_uuid:
             return None
-        return f'{self.project_parent}/sessions/{self.session_uuid}/reviews/{self.session_review_uuid}'
+        return f"{self.project_parent}/sessions/{self.session_uuid}/reviews/{self.session_review_uuid}"
 
     @property
     def intent_id(self) -> Optional[str]:
         if not self.project_parent or not self.intent_uuid:
             return None
-        return f'{self.project_parent}/intents/{self.intent_uuid}'
+        return f"{self.project_parent}/intents/{self.intent_uuid}"
 
     def fill_missing_fields(self, request: T) -> T:
         """
@@ -130,14 +131,13 @@ class SharedRequestData(object):
         if request_type not in self._request_field__to__field__per__request_type:
             raise NotImplementedError(f'mapping not defined for request type "{request_type}".')
 
-        request_field__to__field: Dict[str, str] = \
-            self._request_field__to__field__per__request_type[request_type]
+        request_field__to__field: Dict[str, str] = self._request_field__to__field__per__request_type[request_type]
         for request_field_name, field_name in request_field__to__field.items():
             value_from_request: Any = get_attr_recursive(obj=request_to_return, attr=request_field_name)
             if not value_from_request:
                 value_from_self: Any = get_attr_recursive(obj=self, attr=field_name)
                 if not value_from_self:
-                    raise ValueError(f'Could not get {field_name} for {self}.')
+                    raise ValueError(f"Could not get {field_name} for {self}.")
 
                 set_attr_recursive(obj=request_to_return, attr=request_field_name, value=value_from_self)
         return request_to_return
@@ -162,69 +162,53 @@ class SharedRequestData(object):
 
         """
         return {
-            DetectIntentRequest: {
-                'session': 'session_id',
-                'query_input.text.language_code': 'language_code'
-            },
+            DetectIntentRequest: {"session": "session_id", "query_input.text.language_code": "language_code"},
             ListSessionsRequest: {
-                'parent': 'project_parent',
+                "parent": "project_parent",
             },
-            GetSessionRequest: {
-                'session_id': 'session_id'
-            },
-            ListSessionReviewsRequest: {
-                'session_id': 'session_id'
-            },
-            GetSessionReviewRequest: {
-                'session_review_id': 'session_review_id'
-            },
-            GetLatestSessionReviewRequest: {
-                'session_id': 'session_id'
-            },
-            CreateSessionReviewRequest: {
-                'session_id': 'session_id'
-            },
+            GetSessionRequest: {"session_id": "session_id"},
+            ListSessionReviewsRequest: {"session_id": "session_id"},
+            GetSessionReviewRequest: {"session_review_id": "session_review_id"},
+            GetLatestSessionReviewRequest: {"session_id": "session_id"},
+            CreateSessionReviewRequest: {"session_id": "session_id"},
             CreateContextRequest: {
-                'parent': 'session_id',
+                "parent": "session_id",
             },
             ListContextsRequest: {
-                'parent': 'session_id',
+                "parent": "session_id",
             },
-            GetContextRequest: {
-            },
-            UpdateContextRequest: {
-            },
-            DeleteContextRequest: {
-            },
+            GetContextRequest: {},
+            UpdateContextRequest: {},
+            DeleteContextRequest: {},
             DeleteAllContextsRequest: {
-                'parent': 'project_parent',
+                "parent": "project_parent",
             },
             LoginRequest: {},
             GetIntentRequest: {
-                'name': 'intent_id',
-                'language_code': 'language_code',
+                "name": "intent_id",
+                "language_code": "language_code",
             },
             ListIntentsRequest: {
-                'parent': 'project_parent',
-                'language_code': 'language_code',
+                "parent": "project_parent",
+                "language_code": "language_code",
             },
             CreateIntentRequest: {
-                'parent': 'project_parent',
-                'language_code': 'language_code',
-                'intent.name': 'intent_id',
+                "parent": "project_parent",
+                "language_code": "language_code",
+                "intent.name": "intent_id",
             },
             UpdateIntentRequest: {
-                'language_code': 'language_code',
-                'intent.name': 'intent_id',
+                "language_code": "language_code",
+                "intent.name": "intent_id",
             },
             DeleteIntentRequest: {
-                'name': 'intent_id',
+                "name": "intent_id",
             },
             BatchUpdateIntentsRequest: {
-                'parent': 'project_parent',
-                'language_code': 'language_code',
+                "parent": "project_parent",
+                "language_code": "language_code",
             },
             BatchDeleteIntentsRequest: {
-                'parent': 'project_parent',
+                "parent": "project_parent",
             },
         }

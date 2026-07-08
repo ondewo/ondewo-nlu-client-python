@@ -27,13 +27,13 @@ if __name__ == "__main__":
     parent: str = "<PUT_YOUR_AGENT_PARENT_HERE>"
     zip_path: str = "<the path of your zip file>"
     config: ClientConfig = ClientConfig(
-        host='localhost',
-        port='1234',
-        keycloak_url='https://<host>/auth',
-        realm='ondewo-ccai-platform',
-        client_id='ondewo-nlu-cai-sdk-public',
-        user_name='<e-mail of user>',
-        password='<password of user>',
+        host="localhost",
+        port="1234",
+        keycloak_url="https://<host>/auth",
+        realm="ondewo-ccai-platform",
+        client_id="ondewo-nlu-cai-sdk-public",
+        user_name="<e-mail of user>",
+        password="<password of user>",
     )
     client: Client = Client(config=config, use_secure_channel=False)
 

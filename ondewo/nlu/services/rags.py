@@ -199,8 +199,9 @@ class Rags(ServicesInterface):
         self,
         request: RagGetCrawlerAttachedDatasetsRequest,
     ) -> RagGetCrawlerAttachedDatasetsResponse:
-        response: RagGetCrawlerAttachedDatasetsResponse = \
-            self.stub.RagGetCrawlerAttachedDatasets(request, metadata=self.metadata)
+        response: RagGetCrawlerAttachedDatasetsResponse = self.stub.RagGetCrawlerAttachedDatasets(
+            request, metadata=self.metadata
+        )
         return response
 
     def rag_delete_crawlers(self, request: RagDeleteCrawlersRequest) -> RagDeleteCrawlersResponse:

@@ -16,20 +16,20 @@ import importlib.util
 from pathlib import Path
 
 
-_SCRIPT_PATH = Path(__file__).parents[3] / 'ondewo' / 'nlu' / 'scripts' / 'client_example_script.py'
+_SCRIPT_PATH = Path(__file__).parents[3] / "ondewo" / "nlu" / "scripts" / "client_example_script.py"
 
 
 class TestClientExampleScript:
     def test_script_file_exists(self) -> None:
-        assert _SCRIPT_PATH.exists(), f'Script not found at {_SCRIPT_PATH}'
+        assert _SCRIPT_PATH.exists(), f"Script not found at {_SCRIPT_PATH}"
 
     def test_script_is_valid_python(self) -> None:
         source = _SCRIPT_PATH.read_text()
         # Raises SyntaxError if the file cannot be compiled
-        compile(source, str(_SCRIPT_PATH), 'exec')
+        compile(source, str(_SCRIPT_PATH), "exec")
 
     def test_module_can_be_imported(self) -> None:
-        spec = importlib.util.spec_from_file_location('client_example_script', _SCRIPT_PATH)
+        spec = importlib.util.spec_from_file_location("client_example_script", _SCRIPT_PATH)
         assert spec is not None
         module = importlib.util.module_from_spec(spec)
         # Loading executes module-level code but not the if __name__ == '__main__' block,
@@ -49,7 +49,8 @@ class TestClientExampleScript:
         assert guarded_start is not None, "No 'if __name__ == \"__main__\":' block found"
         # No top-level statements that perform I/O should appear before the guard.
         top_level_io = [
-            line.strip() for line in lines[:guarded_start]
-            if line.strip().startswith(('open(', 'Client(', 'client.services'))
+            line.strip()
+            for line in lines[:guarded_start]
+            if line.strip().startswith(("open(", "Client(", "client.services"))
         ]
-        assert top_level_io == [], f'Unguarded I/O statements found: {top_level_io}'
+        assert top_level_io == [], f"Unguarded I/O statements found: {top_level_io}"

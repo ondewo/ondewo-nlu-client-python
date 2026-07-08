@@ -76,14 +76,14 @@ class Client(BaseClient):
                 Additional options for the gRPC channel.
         """
         if not isinstance(config, ClientConfig):
-            raise ValueError('The provided config must be of type `ondewo.nlu.client_config.ClientConfig`')
+            raise ValueError("The provided config must be of type `ondewo.nlu.client_config.ClientConfig`")
 
         nlu_token: str = login(config=config, use_secure_channel=use_secure_channel, options=options)
         kwargs: Dict[str, Any] = {
-            'config': config,
-            'nlu_token': nlu_token,
-            'use_secure_channel': use_secure_channel,
-            'options': options,
+            "config": config,
+            "nlu_token": nlu_token,
+            "use_secure_channel": use_secure_channel,
+            "options": options,
         }
         self.services: ServicesContainer = ServicesContainer(
             agents=Agents(**kwargs),

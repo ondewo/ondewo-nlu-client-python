@@ -23,21 +23,21 @@ from ondewo.nlu.intent_pb2 import (
     ListIntentsRequest,
 )
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # CONFIGURING THE CLIENT
     config: ClientConfig = ClientConfig(
-        host='localhost',
-        port='1234',
-        keycloak_url='https://<host>/auth',
-        realm='ondewo-ccai-platform',
-        client_id='ondewo-nlu-cai-sdk-public',
-        user_name='<e-mail of user>',
-        password='<password of user>'
+        host="localhost",
+        port="1234",
+        keycloak_url="https://<host>/auth",
+        realm="ondewo-ccai-platform",
+        client_id="ondewo-nlu-cai-sdk-public",
+        user_name="<e-mail of user>",
+        password="<password of user>",
     )
     client: Client = Client(config=config, use_secure_channel=False)
 
     # CONFIGURING THE AGENT
-    parent: str = '<PUT_YOUR_AGENT_PARENT_HERE>'
+    parent: str = "<PUT_YOUR_AGENT_PARENT_HERE>"
     language_code: str = '<acronym of he language of choice, i.e "en">'
 
     # LOAD ALL INTENTS
@@ -48,7 +48,7 @@ if __name__ == '__main__':
                 language_code=language_code,
                 intent_view=IntentView.INTENT_VIEW_SHALLOW,
                 filter_by_category=IntentCategory.DATE_ACTIVE_INTENTS,
-                page_token='page_size-10000',
+                page_token="page_size-10000",
             )
         ).intents
     )

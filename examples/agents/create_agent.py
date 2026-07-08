@@ -44,13 +44,13 @@ from ondewo.nlu.operations_pb2 import (
 
 if __name__ == "__main__":
     config: ClientConfig = ClientConfig(
-        host='localhost',
-        port='1234',
-        keycloak_url='https://<host>/auth',
-        realm='ondewo-ccai-platform',
-        client_id='ondewo-nlu-cai-sdk-public',
-        user_name='<e-mail of user>',
-        password='<password of user>',
+        host="localhost",
+        port="1234",
+        keycloak_url="https://<host>/auth",
+        realm="ondewo-ccai-platform",
+        client_id="ondewo-nlu-cai-sdk-public",
+        user_name="<e-mail of user>",
+        password="<password of user>",
     )
 
     # https://github.com/grpc/grpc-proto/blob/master/grpc/service_config/service_config.proto
@@ -92,14 +92,14 @@ if __name__ == "__main__":
         ("grpc.max_send_message_length", 1024 * 1024),
         ("grpc.max_receive_message_length", 1024 * 1024),
         # Example of setting KeepAlive options through generic channel_args
-        ("grpc.keepalive_time_ms", 2 ** 31 - 1),
+        ("grpc.keepalive_time_ms", 2**31 - 1),
         ("grpc.keepalive_timeout_ms", 20000),
         ("grpc.keepalive_permit_without_calls", False),
         ("grpc.http2.max_pings_without_data", 2),
         # Example arg requested for the feature
         ("grpc.dns_enable_srv_queries", 1),
         ("grpc.enable_retries", 1),
-        ("grpc.service_config", service_config_json)
+        ("grpc.service_config", service_config_json),
     }
 
     client: Client = Client(config=config, use_secure_channel=False, options=options)
@@ -136,15 +136,9 @@ if __name__ == "__main__":
         )
     )
 
-    print(
-        client.services.intents.list_intents(
-            ListIntentsRequest(parent=created_agent.parent, language_code="en")
-        )
-    )
+    print(client.services.intents.list_intents(ListIntentsRequest(parent=created_agent.parent, language_code="en")))
 
-    export_operation: Operation = client.services.agents.export_agent(
-        ExportAgentRequest(parent=created_agent.parent)
-    )
+    export_operation: Operation = client.services.agents.export_agent(ExportAgentRequest(parent=created_agent.parent))
 
     polling.poll(
         target=client.services.operations.get_operation,

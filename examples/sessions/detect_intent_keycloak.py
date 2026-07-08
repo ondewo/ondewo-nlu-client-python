@@ -23,6 +23,7 @@ The request-building and response-formatting logic is factored into small functi
 can be unit-tested with the gRPC client mocked (see
 `tests/unit/examples/test_detect_intent_keycloak.py`) — no live server required.
 """
+
 from ondewo.nlu.client import Client
 from ondewo.nlu.client_config import ClientConfig
 from ondewo.nlu.session_pb2 import (
@@ -36,7 +37,7 @@ from ondewo.nlu.session_pb2 import (
 def build_detect_intent_request(
     session: str,
     text: str,
-    language_code: str = 'en',
+    language_code: str = "en",
 ) -> DetectIntentRequest:
     """
     Build a `DetectIntentRequest` for a single text turn in a session.
@@ -66,7 +67,7 @@ def detect_intent(
     client: Client,
     session: str,
     text: str,
-    language_code: str = 'en',
+    language_code: str = "en",
 ) -> DetectIntentResponse:
     """
     Send a single text turn to the NLU server and return the response.
@@ -106,28 +107,28 @@ def format_response(response: DetectIntentResponse) -> str:
             A one-line summary with the recognised query text and detected intent.
     """
     query_result = response.query_result
-    return f'query_text={query_result.query_text!r} intent={query_result.intent.display_name!r}'
+    return f"query_text={query_result.query_text!r} intent={query_result.intent.display_name!r}"
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # Auth (D18): Keycloak headless offline-token flow — bearer token attached automatically.
     config: ClientConfig = ClientConfig(
-        host='localhost',
-        port='50055',
-        user_name='<technical-user-email>',
-        password='<technical-user-password>',
-        keycloak_url='https://<host>/auth',
-        realm='ondewo-ccai-platform',
-        client_id='ondewo-nlu-cai-sdk-public',
+        host="localhost",
+        port="50055",
+        user_name="<technical-user-email>",
+        password="<technical-user-password>",
+        keycloak_url="https://<host>/auth",
+        realm="ondewo-ccai-platform",
+        client_id="ondewo-nlu-cai-sdk-public",
     )
     client: Client = Client(config=config, use_secure_channel=True)
 
-    parent: str = 'projects/<project-uuid>/agent'
-    session_id: str = f'{parent}/sessions/<session-uuid>'
+    parent: str = "projects/<project-uuid>/agent"
+    session_id: str = f"{parent}/sessions/<session-uuid>"
 
     response: DetectIntentResponse = detect_intent(
         client=client,
         session=session_id,
-        text='Hello',
+        text="Hello",
     )
     print(format_response(response))

@@ -23,22 +23,22 @@ from ondewo.nlu.operations_pb2 import (
     Operation,
 )
 
-if __name__ == '__main__':
-    parent: str = '<PUT_YOUR_AGENT_PARENT_HERE>'
-    zip_path: str = '<the path of your zip file>'
+if __name__ == "__main__":
+    parent: str = "<PUT_YOUR_AGENT_PARENT_HERE>"
+    zip_path: str = "<the path of your zip file>"
     config: ClientConfig = ClientConfig(
-        host='localhost',
-        port='1234',
-        keycloak_url='https://<host>/auth',
-        realm='ondewo-ccai-platform',
-        client_id='ondewo-nlu-cai-sdk-public',
-        user_name='<e-mail of user>',
-        password='<password of user>'
+        host="localhost",
+        port="1234",
+        keycloak_url="https://<host>/auth",
+        realm="ondewo-ccai-platform",
+        client_id="ondewo-nlu-cai-sdk-public",
+        user_name="<e-mail of user>",
+        password="<password of user>",
     )
 
     client: Client = Client(config=config, use_secure_channel=False)
 
-    with open(zip_path, 'rb') as file:
+    with open(zip_path, "rb") as file:
         byte_object = file.read()
 
     restore_operation: Operation = client.services.agents.restore_agent(
@@ -53,7 +53,6 @@ if __name__ == '__main__':
         timeout=600,  # wait 10 minutes until training is finished
     )
 
-    op: Optional[Operation] = \
-        client.services.operations.get_operation(GetOperationRequest(name=restore_operation.name))
+    op: Optional[Operation] = client.services.operations.get_operation(GetOperationRequest(name=restore_operation.name))
     assert op
     assert op.done

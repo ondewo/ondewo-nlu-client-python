@@ -50,7 +50,7 @@ class Client(BaseClient):
                 Additional options for the gRPC channel.
         """
         if not isinstance(config, ClientConfig):
-            raise ValueError('The provided config must be of type `ondewo.qa.client_config.ClientConfig`')
+            raise ValueError("The provided config must be of type `ondewo.qa.client_config.ClientConfig`")
 
         self.services: ServicesContainer = ServicesContainer(
             qa=QA(config=config, use_secure_channel=use_secure_channel, options=options),

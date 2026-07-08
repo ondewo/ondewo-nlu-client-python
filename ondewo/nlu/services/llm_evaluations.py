@@ -162,8 +162,9 @@ class LlmEvaluations(ServicesInterface):
         self,
         request: ListLlmEvaluationDatasetsRequest,
     ) -> ListLlmEvaluationDatasetsResponse:
-        response: ListLlmEvaluationDatasetsResponse = \
-            self.stub.LlmEvaluationListDatasets(request, metadata=self.metadata)
+        response: ListLlmEvaluationDatasetsResponse = self.stub.LlmEvaluationListDatasets(
+            request, metadata=self.metadata
+        )
         return response
 
     def llm_evaluation_update_dataset(self, request: UpdateLlmEvaluationDatasetRequest) -> LlmEvaluationDataset:
@@ -190,8 +191,9 @@ class LlmEvaluations(ServicesInterface):
         self,
         request: ListLlmEvaluationExamplesRequest,
     ) -> ListLlmEvaluationExamplesResponse:
-        response: ListLlmEvaluationExamplesResponse = \
-            self.stub.LlmEvaluationListExamples(request, metadata=self.metadata)
+        response: ListLlmEvaluationExamplesResponse = self.stub.LlmEvaluationListExamples(
+            request, metadata=self.metadata
+        )
         return response
 
     def llm_evaluation_update_example(self, request: UpdateLlmEvaluationExampleRequest) -> LlmEvaluationExample:
@@ -214,8 +216,9 @@ class LlmEvaluations(ServicesInterface):
         self,
         request: ListLlmEvaluationExperimentsRequest,
     ) -> ListLlmEvaluationExperimentsResponse:
-        response: ListLlmEvaluationExperimentsResponse = \
-            self.stub.LlmEvaluationListExperiments(request, metadata=self.metadata)
+        response: ListLlmEvaluationExperimentsResponse = self.stub.LlmEvaluationListExperiments(
+            request, metadata=self.metadata
+        )
         return response
 
     def llm_evaluation_update_experiment(
@@ -251,8 +254,9 @@ class LlmEvaluations(ServicesInterface):
         self,
         request: ListLlmEvaluationFeedbackRequest,
     ) -> ListLlmEvaluationFeedbackResponse:
-        response: ListLlmEvaluationFeedbackResponse = \
-            self.stub.LlmEvaluationListFeedback(request, metadata=self.metadata)
+        response: ListLlmEvaluationFeedbackResponse = self.stub.LlmEvaluationListFeedback(
+            request, metadata=self.metadata
+        )
         return response
 
     def llm_evaluation_delete_feedback(self, request: DeleteLlmEvaluationFeedbackRequest) -> Empty:
@@ -278,8 +282,9 @@ class LlmEvaluations(ServicesInterface):
         self,
         request: ListLlmEvaluationReleaseGatesRequest,
     ) -> ListLlmEvaluationReleaseGatesResponse:
-        response: ListLlmEvaluationReleaseGatesResponse = \
-            self.stub.LlmEvaluationListReleaseGates(request, metadata=self.metadata)
+        response: ListLlmEvaluationReleaseGatesResponse = self.stub.LlmEvaluationListReleaseGates(
+            request, metadata=self.metadata
+        )
         return response
 
     def llm_evaluation_update_release_gate(
@@ -301,16 +306,18 @@ class LlmEvaluations(ServicesInterface):
         self,
         request: GetLlmEvaluationReleaseGateRunRequest,
     ) -> LlmEvaluationReleaseGateRun:
-        response: LlmEvaluationReleaseGateRun = \
-            self.stub.LlmEvaluationGetReleaseGateRun(request, metadata=self.metadata)
+        response: LlmEvaluationReleaseGateRun = self.stub.LlmEvaluationGetReleaseGateRun(
+            request, metadata=self.metadata
+        )
         return response
 
     def llm_evaluation_list_release_gate_runs(
         self,
         request: ListLlmEvaluationReleaseGateRunsRequest,
     ) -> ListLlmEvaluationReleaseGateRunsResponse:
-        response: ListLlmEvaluationReleaseGateRunsResponse = \
-            self.stub.LlmEvaluationListReleaseGateRuns(request, metadata=self.metadata)
+        response: ListLlmEvaluationReleaseGateRunsResponse = self.stub.LlmEvaluationListReleaseGateRuns(
+            request, metadata=self.metadata
+        )
         return response
 
     def llm_evaluation_create_scorecard(self, request: CreateLlmEvaluationScorecardRequest) -> LlmEvaluationScorecard:
@@ -325,8 +332,9 @@ class LlmEvaluations(ServicesInterface):
         self,
         request: ListLlmEvaluationScorecardsRequest,
     ) -> ListLlmEvaluationScorecardsResponse:
-        response: ListLlmEvaluationScorecardsResponse = \
-            self.stub.LlmEvaluationListScorecards(request, metadata=self.metadata)
+        response: ListLlmEvaluationScorecardsResponse = self.stub.LlmEvaluationListScorecards(
+            request, metadata=self.metadata
+        )
         return response
 
     def llm_evaluation_update_scorecard(self, request: UpdateLlmEvaluationScorecardRequest) -> LlmEvaluationScorecard:
@@ -341,32 +349,36 @@ class LlmEvaluations(ServicesInterface):
         self,
         request: GetLlmEvaluationProjectSettingsRequest,
     ) -> LlmEvaluationProjectSettings:
-        response: LlmEvaluationProjectSettings = \
-            self.stub.LlmEvaluationGetProjectSettings(request, metadata=self.metadata)
+        response: LlmEvaluationProjectSettings = self.stub.LlmEvaluationGetProjectSettings(
+            request, metadata=self.metadata
+        )
         return response
 
     def llm_evaluation_update_project_settings(
         self,
         request: UpdateLlmEvaluationProjectSettingsRequest,
     ) -> LlmEvaluationProjectSettings:
-        response: LlmEvaluationProjectSettings = \
-            self.stub.LlmEvaluationUpdateProjectSettings(request, metadata=self.metadata)
+        response: LlmEvaluationProjectSettings = self.stub.LlmEvaluationUpdateProjectSettings(
+            request, metadata=self.metadata
+        )
         return response
 
     def llm_evaluation_list_evaluators(
         self,
         request: ListLlmEvaluationEvaluatorsRequest,
     ) -> ListLlmEvaluationEvaluatorsResponse:
-        response: ListLlmEvaluationEvaluatorsResponse = \
-            self.stub.LlmEvaluationListEvaluators(request, metadata=self.metadata)
+        response: ListLlmEvaluationEvaluatorsResponse = self.stub.LlmEvaluationListEvaluators(
+            request, metadata=self.metadata
+        )
         return response
 
     def llm_evaluation_create_examples_from_session(
         self,
         request: CreateLlmEvaluationExamplesFromSessionRequest,
     ) -> CreateLlmEvaluationExamplesFromSessionResponse:
-        response: CreateLlmEvaluationExamplesFromSessionResponse = \
-            self.stub.LlmEvaluationCreateExamplesFromSession(request, metadata=self.metadata)
+        response: CreateLlmEvaluationExamplesFromSessionResponse = self.stub.LlmEvaluationCreateExamplesFromSession(
+            request, metadata=self.metadata
+        )
         return response
 
     def llm_evaluation_simulate_conversations(self, request: SimulateLlmEvaluationConversationsRequest) -> Operation:
@@ -385,8 +397,9 @@ class LlmEvaluations(ServicesInterface):
         self,
         request: ListLlmEvaluationSchedulesRequest,
     ) -> ListLlmEvaluationSchedulesResponse:
-        response: ListLlmEvaluationSchedulesResponse = \
-            self.stub.LlmEvaluationListSchedules(request, metadata=self.metadata)
+        response: ListLlmEvaluationSchedulesResponse = self.stub.LlmEvaluationListSchedules(
+            request, metadata=self.metadata
+        )
         return response
 
     def llm_evaluation_update_schedule(self, request: UpdateLlmEvaluationScheduleRequest) -> LlmEvaluationSchedule:
@@ -431,8 +444,9 @@ class LlmEvaluations(ServicesInterface):
         self,
         request: ListLlmEvaluationAbExperimentsRequest,
     ) -> ListLlmEvaluationAbExperimentsResponse:
-        response: ListLlmEvaluationAbExperimentsResponse = \
-            self.stub.LlmEvaluationListAbExperiments(request, metadata=self.metadata)
+        response: ListLlmEvaluationAbExperimentsResponse = self.stub.LlmEvaluationListAbExperiments(
+            request, metadata=self.metadata
+        )
         return response
 
     def llm_evaluation_update_ab_experiment(
@@ -464,40 +478,45 @@ class LlmEvaluations(ServicesInterface):
         self,
         request: GetLlmEvaluationAbExperimentResultsRequest,
     ) -> GetLlmEvaluationAbExperimentResultsResponse:
-        response: GetLlmEvaluationAbExperimentResultsResponse = \
-            self.stub.LlmEvaluationGetAbExperimentResults(request, metadata=self.metadata)
+        response: GetLlmEvaluationAbExperimentResultsResponse = self.stub.LlmEvaluationGetAbExperimentResults(
+            request, metadata=self.metadata
+        )
         return response
 
     def llm_evaluation_get_ab_rollout_recommendation(
         self,
         request: GetLlmEvaluationAbRolloutRecommendationRequest,
     ) -> LlmEvaluationAbRolloutRecommendation:
-        response: LlmEvaluationAbRolloutRecommendation = \
-            self.stub.LlmEvaluationGetAbRolloutRecommendation(request, metadata=self.metadata)
+        response: LlmEvaluationAbRolloutRecommendation = self.stub.LlmEvaluationGetAbRolloutRecommendation(
+            request, metadata=self.metadata
+        )
         return response
 
     def llm_evaluation_apply_ab_rollout(
         self,
         request: ApplyLlmEvaluationAbRolloutRequest,
     ) -> LlmEvaluationAbRolloutDecision:
-        response: LlmEvaluationAbRolloutDecision = \
-            self.stub.LlmEvaluationApplyAbRollout(request, metadata=self.metadata)
+        response: LlmEvaluationAbRolloutDecision = self.stub.LlmEvaluationApplyAbRollout(
+            request, metadata=self.metadata
+        )
         return response
 
     def llm_evaluation_get_ab_rollout_decision(
         self,
         request: GetLlmEvaluationAbRolloutDecisionRequest,
     ) -> LlmEvaluationAbRolloutDecision:
-        response: LlmEvaluationAbRolloutDecision = \
-            self.stub.LlmEvaluationGetAbRolloutDecision(request, metadata=self.metadata)
+        response: LlmEvaluationAbRolloutDecision = self.stub.LlmEvaluationGetAbRolloutDecision(
+            request, metadata=self.metadata
+        )
         return response
 
     def llm_evaluation_list_ab_rollout_decisions(
         self,
         request: ListLlmEvaluationAbRolloutDecisionsRequest,
     ) -> ListLlmEvaluationAbRolloutDecisionsResponse:
-        response: ListLlmEvaluationAbRolloutDecisionsResponse = \
-            self.stub.LlmEvaluationListAbRolloutDecisions(request, metadata=self.metadata)
+        response: ListLlmEvaluationAbRolloutDecisionsResponse = self.stub.LlmEvaluationListAbRolloutDecisions(
+            request, metadata=self.metadata
+        )
         return response
 
     def llm_evaluation_create_online_config(
@@ -518,8 +537,9 @@ class LlmEvaluations(ServicesInterface):
         self,
         request: ListLlmEvaluationOnlineConfigsRequest,
     ) -> ListLlmEvaluationOnlineConfigsResponse:
-        response: ListLlmEvaluationOnlineConfigsResponse = \
-            self.stub.LlmEvaluationListOnlineConfigs(request, metadata=self.metadata)
+        response: ListLlmEvaluationOnlineConfigsResponse = self.stub.LlmEvaluationListOnlineConfigs(
+            request, metadata=self.metadata
+        )
         return response
 
     def llm_evaluation_update_online_config(
@@ -544,38 +564,43 @@ class LlmEvaluations(ServicesInterface):
         self,
         request: ListLlmEvaluationOnlineResultsRequest,
     ) -> ListLlmEvaluationOnlineResultsResponse:
-        response: ListLlmEvaluationOnlineResultsResponse = \
-            self.stub.LlmEvaluationListOnlineResults(request, metadata=self.metadata)
+        response: ListLlmEvaluationOnlineResultsResponse = self.stub.LlmEvaluationListOnlineResults(
+            request, metadata=self.metadata
+        )
         return response
 
     def llm_evaluation_get_annotation_queue_item(
         self,
         request: GetLlmEvaluationAnnotationQueueItemRequest,
     ) -> LlmEvaluationAnnotationQueueItem:
-        response: LlmEvaluationAnnotationQueueItem = \
-            self.stub.LlmEvaluationGetAnnotationQueueItem(request, metadata=self.metadata)
+        response: LlmEvaluationAnnotationQueueItem = self.stub.LlmEvaluationGetAnnotationQueueItem(
+            request, metadata=self.metadata
+        )
         return response
 
     def llm_evaluation_list_annotation_queue_items(
         self,
         request: ListLlmEvaluationAnnotationQueueItemsRequest,
     ) -> ListLlmEvaluationAnnotationQueueItemsResponse:
-        response: ListLlmEvaluationAnnotationQueueItemsResponse = \
-            self.stub.LlmEvaluationListAnnotationQueueItems(request, metadata=self.metadata)
+        response: ListLlmEvaluationAnnotationQueueItemsResponse = self.stub.LlmEvaluationListAnnotationQueueItems(
+            request, metadata=self.metadata
+        )
         return response
 
     def llm_evaluation_update_annotation_queue_item(
         self,
         request: UpdateLlmEvaluationAnnotationQueueItemRequest,
     ) -> LlmEvaluationAnnotationQueueItem:
-        response: LlmEvaluationAnnotationQueueItem = \
-            self.stub.LlmEvaluationUpdateAnnotationQueueItem(request, metadata=self.metadata)
+        response: LlmEvaluationAnnotationQueueItem = self.stub.LlmEvaluationUpdateAnnotationQueueItem(
+            request, metadata=self.metadata
+        )
         return response
 
     def llm_evaluation_promote_annotation_queue_item(
         self,
         request: PromoteLlmEvaluationAnnotationQueueItemRequest,
     ) -> PromoteLlmEvaluationAnnotationQueueItemResponse:
-        response: PromoteLlmEvaluationAnnotationQueueItemResponse = \
-            self.stub.LlmEvaluationPromoteAnnotationQueueItem(request, metadata=self.metadata)
+        response: PromoteLlmEvaluationAnnotationQueueItemResponse = self.stub.LlmEvaluationPromoteAnnotationQueueItem(
+            request, metadata=self.metadata
+        )
         return response

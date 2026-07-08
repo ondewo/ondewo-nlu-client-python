@@ -17,7 +17,11 @@ RUN apt-get update -qq  \
   && apt-get purge -y --auto-remove \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN pip install --upgrade pip && pip install twine setuptools wheel build
+# uv builds the wheel/sdist (setuptools backend, resolved from pyproject.toml + uv.lock);
+# twine uploads to PyPI.
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
+
+RUN pip install --upgrade pip && pip install twine
 
 RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg \
     && sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg \
@@ -29,8 +33,6 @@ WORKDIR /home/ondewo/
 
 COPY Makefile .
 
-COPY .flake8 .
-
 COPY .pre-commit-config.yaml .
 
 COPY CONTRIBUTING.md .
@@ -39,15 +41,11 @@ COPY LICENSE .
 
 COPY MANIFEST.in .
 
-COPY mypy.ini .
-
 COPY examples .
 
-COPY requirements.txt .
+COPY pyproject.toml .
 
-COPY setup.py  .
-
-COPY setup.cfg .
+COPY uv.lock .
 
 COPY README.md .
 

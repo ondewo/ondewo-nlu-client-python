@@ -119,8 +119,9 @@ class Sessions(ServicesInterface):
         self,
         request: Iterator[StreamingDetectIntentRequest],
     ) -> Iterator[StreamingDetectIntentResponse]:
-        response: Iterator[StreamingDetectIntentResponse] = \
-            self.stub.StreamingDetectIntent(request, metadata=self.metadata)
+        response: Iterator[StreamingDetectIntentResponse] = self.stub.StreamingDetectIntent(
+            request, metadata=self.metadata
+        )
         return response
 
     def list_sessions(self, request: ListSessionsRequest) -> ListSessionsResponse:
@@ -177,16 +178,18 @@ class Sessions(ServicesInterface):
         self,
         request: ListMatchedIntentsOfAllSessionsRequest,
     ) -> ListMatchedIntentsResponse:
-        response: ListMatchedIntentsResponse = \
-            self.stub.ListMatchedIntentsOfAllSessions(request, metadata=self.metadata)
+        response: ListMatchedIntentsResponse = self.stub.ListMatchedIntentsOfAllSessions(
+            request, metadata=self.metadata
+        )
         return response
 
     def list_matched_entity_types_of_all_sessions(
         self,
         request: ListMatchedEntityTypesOfAllSessionsRequest,
     ) -> ListMatchedEntityTypesResponse:
-        response: ListMatchedEntityTypesResponse = \
-            self.stub.ListMatchedEntityTypesOfAllSessions(request, metadata=self.metadata)
+        response: ListMatchedEntityTypesResponse = self.stub.ListMatchedEntityTypesOfAllSessions(
+            request, metadata=self.metadata
+        )
         return response
 
     def list_user_ids_of_all_sessions(self, request: ListUserIdsOfAllSessionsRequest) -> ListUserIdsResponse:
@@ -197,8 +200,9 @@ class Sessions(ServicesInterface):
         self,
         request: ListIdentifiedUserIdsOfAllSessionsRequest,
     ) -> ListIdentifiedUserIdsResponse:
-        response: ListIdentifiedUserIdsResponse = \
-            self.stub.ListIdentifiedUserIdsOfAllSessions(request, metadata=self.metadata)
+        response: ListIdentifiedUserIdsResponse = self.stub.ListIdentifiedUserIdsOfAllSessions(
+            request, metadata=self.metadata
+        )
         return response
 
     def list_tags_of_all_sessions(self, request: ListTagsOfAllSessionsRequest) -> ListTagsResponse:
@@ -216,8 +220,9 @@ class Sessions(ServicesInterface):
         self,
         request: ListOutputContextsOfAllSessionsRequest,
     ) -> ListOutputContextsResponse:
-        response: ListOutputContextsResponse = \
-            self.stub.ListOutputContextsOfAllSessions(request, metadata=self.metadata)
+        response: ListOutputContextsResponse = self.stub.ListOutputContextsOfAllSessions(
+            request, metadata=self.metadata
+        )
         return response
 
     def list_platforms_of_all_sessions(self, request: ListPlatformsOfAllSessionsRequest) -> ListPlatformsResponse:

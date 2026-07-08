@@ -45,4 +45,4 @@ def login(
         str:
             Always an empty string (no legacy token is issued).
     """
-    return ''
+    return ""

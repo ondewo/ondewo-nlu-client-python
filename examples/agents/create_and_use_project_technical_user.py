@@ -32,6 +32,7 @@ admin credentials below. Fill in the placeholders, then run::
 
     python examples/agents/create_and_use_project_technical_user.py
 """
+
 import uuid
 
 from loguru import logger as log
@@ -59,22 +60,22 @@ from ondewo.nlu.session_pb2 import (
 )
 
 # --- Connection + Keycloak configuration (fill these in) -------------------------------------
-HOST: str = 'localhost'
-PORT: str = '50055'
+HOST: str = "localhost"
+PORT: str = "50055"
 USE_SECURE_CHANNEL: bool = False
 
-KEYCLOAK_URL: str = 'https://<host>/auth'  # base URL, the part before /realms/<realm>
-KEYCLOAK_REALM: str = 'ondewo-ccai-platform'
-KEYCLOAK_CLIENT_ID: str = 'ondewo-nlu-cai-sdk-public'  # the public SDK client (no secret)
+KEYCLOAK_URL: str = "https://<host>/auth"  # base URL, the part before /realms/<realm>
+KEYCLOAK_REALM: str = "ondewo-ccai-platform"
+KEYCLOAK_CLIENT_ID: str = "ondewo-nlu-cai-sdk-public"  # the public SDK client (no secret)
 
 # An administrator / project-developer identity that may create technical users on the project
 # (must hold PROJECT_DEVELOPER or PROJECT_ADMIN on it).
-ADMIN_USER_NAME: str = 'admin@ondewo.com'
-ADMIN_PASSWORD: str = '<admin-password>'
+ADMIN_USER_NAME: str = "admin@ondewo.com"
+ADMIN_PASSWORD: str = "<admin-password>"
 
 # The project (agent) that the technical user is scoped to.
-PROJECT_UUID: str = '<project-uuid>'
-LANGUAGE_CODE: str = 'en-US'
+PROJECT_UUID: str = "<project-uuid>"
+LANGUAGE_CODE: str = "en-US"
 
 
 def build_keycloak_client(user_name: str, password: str) -> Client:
@@ -104,17 +105,17 @@ def build_keycloak_client(user_name: str, password: str) -> Client:
 
 
 def main() -> None:
-    parent: str = f'projects/{PROJECT_UUID}/agent'
+    parent: str = f"projects/{PROJECT_UUID}/agent"
 
     # 1) Authenticate as the admin / project-developer.
     admin_client: Client = build_keycloak_client(ADMIN_USER_NAME, ADMIN_PASSWORD)
 
     # 2) Create a project-scoped technical user. The password is returned ONCE.
     created: CreateProjectTechnicalUserResponse = admin_client.services.agents.create_project_technical_user(
-        CreateProjectTechnicalUserRequest(parent=parent, name='sip-runtime'),
+        CreateProjectTechnicalUserRequest(parent=parent, name="sip-runtime"),
     )
     log.info(f"Created technical user: user_id={created.user_id} username={created.username}")
-    log.warning('Store this password NOW — it is shown once and cannot be retrieved later.')
+    log.warning("Store this password NOW — it is shown once and cannot be retrieved later.")
     technical_user_id: str = created.user_id
     technical_user_name: str = created.username
     technical_user_password: str = created.password  # persist securely (secret store / env var)
@@ -135,11 +136,11 @@ def main() -> None:
 
     #    a) detect_intent — the canonical runtime call (what sip/csi/vtsi use the technical user
     #       for). The high-level wrapper attaches the bearer automatically.
-    session: str = f'{parent}/sessions/{uuid.uuid4()}'
+    session: str = f"{parent}/sessions/{uuid.uuid4()}"
     detect_response: DetectIntentResponse = technical_user_client.services.sessions.detect_intent(
         DetectIntentRequest(
             session=session,
-            query_input=QueryInput(text=TextInput(text='hello', language_code=LANGUAGE_CODE)),
+            query_input=QueryInput(text=TextInput(text="hello", language_code=LANGUAGE_CODE)),
         ),
     )
     for message in detect_response.query_result.fulfillment_messages:
@@ -169,5 +170,5 @@ def main() -> None:
     log.info(f"Deleted technical user {technical_user_id}.")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

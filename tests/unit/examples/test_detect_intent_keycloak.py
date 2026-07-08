@@ -20,6 +20,7 @@ block never runs, so no `Client` is constructed and no Keycloak / gRPC network c
 made. The gRPC client is replaced with a `MagicMock`, so the tests assert exactly the
 request the example builds and that it returns the server response unchanged.
 """
+
 import importlib.util
 from pathlib import Path
 from types import ModuleType
@@ -27,15 +28,15 @@ from unittest.mock import MagicMock
 
 from ondewo.nlu.session_pb2 import DetectIntentResponse
 
-_EXAMPLE_PATH: Path = Path(__file__).parents[3] / 'examples' / 'sessions' / 'detect_intent_keycloak.py'
+_EXAMPLE_PATH: Path = Path(__file__).parents[3] / "examples" / "sessions" / "detect_intent_keycloak.py"
 
 # Bound once so a refactor that changes only an input or only an expectation cannot
 # silently make an assertion tautological.
-SESSION: str = 'projects/11111111-1111-1111-1111-111111111111/agent/sessions/abc'
-TEXT: str = 'Hello there'
-LANGUAGE_CODE: str = 'de'
-QUERY_TEXT: str = 'Hello there'
-INTENT_NAME: str = 'i.greeting'
+SESSION: str = "projects/11111111-1111-1111-1111-111111111111/agent/sessions/abc"
+TEXT: str = "Hello there"
+LANGUAGE_CODE: str = "de"
+QUERY_TEXT: str = "Hello there"
+INTENT_NAME: str = "i.greeting"
 
 
 def _load_example() -> ModuleType:
@@ -46,7 +47,7 @@ def _load_example() -> ModuleType:
         ModuleType:
             The imported `detect_intent_keycloak` example module.
     """
-    spec = importlib.util.spec_from_file_location('detect_intent_keycloak', _EXAMPLE_PATH)
+    spec = importlib.util.spec_from_file_location("detect_intent_keycloak", _EXAMPLE_PATH)
     assert spec is not None and spec.loader is not None
     module: ModuleType = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
@@ -58,7 +59,7 @@ class TestDetectIntentKeycloakExample:
 
     def test_example_file_exists(self) -> None:
         """The example the tests drive is present at the expected path."""
-        assert _EXAMPLE_PATH.exists(), f'Example not found at {_EXAMPLE_PATH}'
+        assert _EXAMPLE_PATH.exists(), f"Example not found at {_EXAMPLE_PATH}"
 
     def test_build_request_sets_session_text_and_language(self) -> None:
         """`build_detect_intent_request` maps its args onto the proto request fields."""
@@ -93,7 +94,7 @@ class TestDetectIntentKeycloakExample:
         )
 
         client.services.sessions.detect_intent.assert_called_once()
-        sent_request = client.services.sessions.detect_intent.call_args.kwargs['request']
+        sent_request = client.services.sessions.detect_intent.call_args.kwargs["request"]
         assert sent_request.session == SESSION
         assert sent_request.query_input.text.text == TEXT
         assert sent_request.query_input.text.language_code == LANGUAGE_CODE
@@ -110,4 +111,4 @@ class TestDetectIntentKeycloakExample:
 
         summary: str = module.format_response(response)
 
-        assert summary == f'query_text={QUERY_TEXT!r} intent={INTENT_NAME!r}'
+        assert summary == f"query_text={QUERY_TEXT!r} intent={INTENT_NAME!r}"

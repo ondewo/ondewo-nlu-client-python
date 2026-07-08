@@ -68,13 +68,13 @@ async def poll_async(
 
 async def main() -> None:
     config: ClientConfig = ClientConfig(
-        host='localhost',
-        port='50055',
-        keycloak_url='https://<host>/auth',
-        realm='ondewo-ccai-platform',
-        client_id='ondewo-nlu-cai-sdk-public',
-        user_name='admin@ondewo.com',
-        password='asdf'
+        host="localhost",
+        port="50055",
+        keycloak_url="https://<host>/auth",
+        realm="ondewo-ccai-platform",
+        client_id="ondewo-nlu-cai-sdk-public",
+        user_name="admin@ondewo.com",
+        password="asdf",
     )
     # Use the async version of the client
     client: AsyncClient = AsyncClient(config=config, use_secure_channel=False)
@@ -83,12 +83,12 @@ async def main() -> None:
     created_agent: Agent = await client.services.agents.create_agent(
         CreateAgentRequest(
             agent=Agent(
-                display_name='my python agent',
-                default_language_code='en-US',
-                supported_language_codes=['en-US'],
-                time_zone='Europe/Vienna',
-                nlu_platform='ONDEWO',
-                description='This is an agent created through the python client'
+                display_name="my python agent",
+                default_language_code="en-US",
+                supported_language_codes=["en-US"],
+                time_zone="Europe/Vienna",
+                nlu_platform="ONDEWO",
+                description="This is an agent created through the python client",
             )
         )
     )
@@ -103,9 +103,9 @@ async def main() -> None:
     created_intent: Intent = await client.services.intents.create_intent(
         CreateIntentRequest(
             parent=created_agent.parent,
-            language_code='en-US',
+            language_code="en-US",
             intent=Intent(
-                display_name='i.pepper.dance',
+                display_name="i.pepper.dance",
                 webhook_state=Intent.WEBHOOK_STATE_UNSPECIFIED,
                 priority=250000,
                 is_fallback=False,
@@ -113,36 +113,33 @@ async def main() -> None:
                 messages=[
                     Intent.Message(
                         text=Intent.Message.Text(
-                            text=['Hast du nicht die Fotos vom letzten Wochenende gesehen? Pass mal auf.  '
-                                  '$onStartBehavior=ht_entertainment/dance', ]
+                            text=[
+                                "Hast du nicht die Fotos vom letzten Wochenende gesehen? Pass mal auf.  "
+                                "$onStartBehavior=ht_entertainment/dance",
+                            ]
                         )
                     )
                 ],
                 training_phrases=[
-                    Intent.TrainingPhrase(
-                        text='Pepper kannst du tanzen?',
-                        type=Intent.TrainingPhrase.EXAMPLE
-                    )
+                    Intent.TrainingPhrase(text="Pepper kannst du tanzen?", type=Intent.TrainingPhrase.EXAMPLE)
                 ],
                 status=Intent.IntentStatus.ACTIVE,
-            )
+            ),
         )
     )
 
     intent: Intent = await client.services.intents.get_intent(GetIntentRequest(name=created_intent.name))
     intent_list: ListIntentsResponse = await client.services.intents.list_intents(
-        ListIntentsRequest(parent=created_agent.parent, language_code='en-US')
+        ListIntentsRequest(parent=created_agent.parent, language_code="en-US")
     )
     log.debug(f"Intent created: {intent}")
     log.debug(f"List of intents: {intent_list}")
 
     # Exporting the agent
     export_operation: Operation = await client.services.agents.export_agent(
-        ExportAgentRequest(
-            parent=created_agent.parent
-        )
+        ExportAgentRequest(parent=created_agent.parent)
     )
-    log.debug(f'START: {export_operation.name}. Exporting agent {created_agent.parent}.')
+    log.debug(f"START: {export_operation.name}. Exporting agent {created_agent.parent}.")
     start_time: float = time.perf_counter()
 
     # Polling for the operation result asynchronously
@@ -153,8 +150,8 @@ async def main() -> None:
         return
 
     log.debug(
-        f'DONE: {export_operation.name}. Exported agent {created_agent.parent} '
-        f'in {time.perf_counter() - start_time:.5f} sec.'
+        f"DONE: {export_operation.name}. Exported agent {created_agent.parent} "
+        f"in {time.perf_counter() - start_time:.5f} sec."
     )
 
     # Retrieve the final operation status
@@ -166,10 +163,10 @@ async def main() -> None:
     export_operation_update.response.Unpack(export_response)
     assert export_response.agent_content
 
-    with open('my_backup.zip', mode='wb') as zf:
+    with open("my_backup.zip", mode="wb") as zf:
         zf.write(export_response.agent_content)
 
 
 # Run the main async function
-if __name__ == '__main__':
+if __name__ == "__main__":
     asyncio.run(main())

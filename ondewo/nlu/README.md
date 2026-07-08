@@ -1,11 +1,14 @@
 Ondewo Python Client
 ====================
+
 This module provides a python client for convenient interaction between a user and his/her ONDEWO NLU server.
 
 Quick Introduction
 ------------------
+
 1. Instantiate a client: authentication uses the Keycloak headless offline-token flow — the
    client attaches a freshly auto-refreshed `Authorization: Bearer` token to every gRPC call.
+
     ```python
     from ondewo.nlu.client import Client
     from ondewo.nlu.client_config import ClientConfig
@@ -23,6 +26,7 @@ Quick Introduction
 
     client = Client(config=config)
     ```
+
    Note: By default, a secure grpc-channel is established.
     If the backend allows, you can use an insecure channel by
     instantiating a client using `client = Client(config=config, use_secure_channel=False)`.
@@ -32,6 +36,7 @@ Quick Introduction
     E.g., `client.services.sessions` for sessions-related functionality or `client.services.contexts` for contexts-related functionality.
 
 1. Interact with one of the endpoints exposed by the services, e.g., the DetectIntent endpoint.
+
     ```python
     from google.cloud.dialogflow.v2.session_pb2 import DetectIntentRequest, DetectIntentResponse
 
@@ -47,6 +52,7 @@ Quick Introduction
 
 Client configuration
 --------------------
+
 The client configuration controls which NLU server we are interacting with and the user used for this interaction.
 To log in a new user or connect to a different server, create a new client config and instantiate a new client.
 
@@ -67,6 +73,7 @@ new_client = Client(config=new_config)
 
 Conventions
 -----------
+
 The client uses the names of the grpc services and endpoints but in snake_case to conform to Python style conventions.
 
 Example:
@@ -80,18 +87,20 @@ The signatures of the endpoint methods are exactly the same as the signatures of
 Example:
 
 - grpc Service
+
 ```python
 class Sessions(...):
     def DetectIntent(self, request: DetectIntentRequest) -> DetectIntentResponse:
 ```
 
 - corresponding client method
+
 ```python
 client.services.sessions.detect_intent # type: Callable[[DetectIntentRequest], DetectIntentResponse]
 ```
 
 Convenience methods for development
-===================================
+-----------------------------------
 
 Working with incomplete requests: SharedRequestData.fill_missing_fields()
 -------------------------------------------------------------------------
@@ -103,8 +112,8 @@ To simplify life, we provide a **helper dataclass SharedRequestData** which can
 
 - _provides a method fill_missing_fields to fill unset fields on a request_ using this information
 
-
 Example:
+
 ```python
 from ondewo.nlu.convenience import SharedRequestData
 from google.cloud.dialogflow.v2.session_pb2 import DetectIntentRequest, DetectIntentResponse
@@ -121,6 +130,7 @@ request = shared_request_data.fill_missing_fields(request)  # fill missing field
 response: DetectIntentResponse = client.services.sessions.detect_intent(request)
 print(response.query_result.intent.display_name)
 ```
+
 Note that we did not need to explicitly set all fields on this request:
 request.session and request.query_input.text.language_code, for example, were filled from shared_request_data.
 

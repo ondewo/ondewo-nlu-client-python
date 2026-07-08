@@ -12,17 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """Unit tests for `ClientConfig` validation on the bearer-only auth model (D18)."""
+
 import pytest
 
 from ondewo.nlu.client_config import ClientConfig
 
-HOST: str = 'localhost'
-PORT: str = '50055'
-USERNAME: str = 'tech-user@example.com'
-PASSWORD: str = 's3cr3t'
-KEYCLOAK_URL: str = 'https://kc.example.com/auth'
-REALM: str = 'ondewo-ccai-platform'
-CLIENT_ID: str = 'ondewo-nlu-cai-sdk-public'
+HOST: str = "localhost"
+PORT: str = "50055"
+USERNAME: str = "tech-user@example.com"
+PASSWORD: str = "s3cr3t"
+KEYCLOAK_URL: str = "https://kc.example.com/auth"
+REALM: str = "ondewo-ccai-platform"
+CLIENT_ID: str = "ondewo-nlu-cai-sdk-public"
 
 
 class TestNonKeycloakPath:
@@ -38,7 +39,7 @@ class TestNonKeycloakPath:
         """The bearer-only config exposes no legacy `http_token` attribute."""
         config: ClientConfig = ClientConfig(host=HOST, port=PORT, user_name=USERNAME, password=PASSWORD)
 
-        assert not hasattr(config, 'http_token')
+        assert not hasattr(config, "http_token")
 
     def test_missing_user_name_raises(self) -> None:
         """An empty user_name fails `__post_init__` validation with `ValueError`."""
@@ -111,4 +112,4 @@ class TestKeycloakPath:
             client_id=CLIENT_ID,
         )
 
-        assert not hasattr(config, 'client_secret')
+        assert not hasattr(config, "client_secret")

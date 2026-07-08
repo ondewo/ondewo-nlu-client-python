@@ -21,6 +21,7 @@ allows to use AIM as an editor for intents or intent templates.
 3) using save_intents_to_jsons.py:
  save all intents of a given agent to json-files in an output folder
 """
+
 from pathlib import Path
 from typing import List
 
@@ -34,21 +35,21 @@ from ondewo.nlu.intent_pb2 import (
     ListIntentsRequest,
 )
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # CONFIGURING THE CLIENT
     config: ClientConfig = ClientConfig(
-        host='localhost',
-        port='1234',
-        keycloak_url='https://<host>/auth',
-        realm='ondewo-ccai-platform',
-        client_id='ondewo-nlu-cai-sdk-public',
-        user_name='<e-mail of user>',
-        password='<password of user>'
+        host="localhost",
+        port="1234",
+        keycloak_url="https://<host>/auth",
+        realm="ondewo-ccai-platform",
+        client_id="ondewo-nlu-cai-sdk-public",
+        user_name="<e-mail of user>",
+        password="<password of user>",
     )
     client: Client = Client(config=config, use_secure_channel=False)
 
     # CONFIGURING THE AGENT
-    parent: str = '<PUT_YOUR_AGENT_PARENT_HERE>'
+    parent: str = "<PUT_YOUR_AGENT_PARENT_HERE>"
     language_code: str = '<acronym of he language of choice, i.e "en">'
 
     # LOAD ALL INTENTS
@@ -58,13 +59,13 @@ if __name__ == '__main__':
                 parent=parent,
                 language_code=language_code,
                 intent_view=IntentView.INTENT_VIEW_FULL,
-                page_token='page_size-10000',
+                page_token="page_size-10000",
             )
         ).intents
     )
 
     # EXPORT ALL INTENTS AS JSON FILES
-    export_dir: Path = Path('<destination folder>') / language_code
+    export_dir: Path = Path("<destination folder>") / language_code
     for intent in intents:
         if intent.display_name in [
             "Default Exit Intent",
@@ -76,7 +77,7 @@ if __name__ == '__main__':
         intent.ClearField("training_phrase_count")
         for training_phrase in intent.training_phrases:
             training_phrase.ClearField("name")
-        export_path: Path = export_dir / f'{intent.display_name}.json'
+        export_path: Path = export_dir / f"{intent.display_name}.json"
         intent_json: str = MessageToJson(intent)
-        with export_path.open('w') as f:
+        with export_path.open("w") as f:
             f.write(intent_json)

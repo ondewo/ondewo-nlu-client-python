@@ -81,8 +81,9 @@ class AiServices(ServicesInterface):
         self,
         request: GetAlternativeTrainingPhrasesRequest,
     ) -> GetAlternativeTrainingPhrasesResponse:
-        response: GetAlternativeTrainingPhrasesResponse = \
-            self.stub.GetAlternativeTrainingPhrases(request, metadata=self.metadata)
+        response: GetAlternativeTrainingPhrasesResponse = self.stub.GetAlternativeTrainingPhrases(
+            request, metadata=self.metadata
+        )
         return response
 
     def get_synonyms(self, request: GetSynonymsRequest) -> GetSynonymsResponse:
@@ -102,8 +103,9 @@ class AiServices(ServicesInterface):
         return response
 
     def streaming_llm_generate(self, request: LlmGenerateRequest) -> Iterator[StreamingLlmGenerateResponse]:
-        response: Iterator[StreamingLlmGenerateResponse] = \
-            self.stub.StreamingLlmGenerate(request, metadata=self.metadata)
+        response: Iterator[StreamingLlmGenerateResponse] = self.stub.StreamingLlmGenerate(
+            request, metadata=self.metadata
+        )
         return response
 
     def list_llm_models(self, request: ListLlmModelsRequest) -> ListLlmModelsResponse:

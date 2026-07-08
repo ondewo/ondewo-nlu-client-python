@@ -26,6 +26,7 @@ Keycloak token helper itself (covered by `test_keycloak.py`):
 No network is touched: the Keycloak token provider is replaced with a fake, and the gRPC
 channels created at construction are insecure and are never used to issue a call.
 """
+
 import asyncio
 from typing import (
     List,
@@ -42,14 +43,14 @@ from ondewo.nlu.utils.login import login
 
 # Bound once so a refactor that changes only an input or only an expectation cannot silently
 # make an assertion tautological.
-HOST: str = 'localhost'
-PORT: str = '50055'
-USERNAME: str = 'tech-user@example.com'
-PASSWORD: str = 's3cr3t'
-KEYCLOAK_URL: str = 'https://kc.example.com/auth'
-REALM: str = 'ondewo-ccai-platform'
-CLIENT_ID: str = 'ondewo-nlu-cai-sdk-public'
-BEARER_METADATA: List[Tuple[str, str]] = [('authorization', 'Bearer acc-1')]
+HOST: str = "localhost"
+PORT: str = "50055"
+USERNAME: str = "tech-user@example.com"
+PASSWORD: str = "s3cr3t"
+KEYCLOAK_URL: str = "https://kc.example.com/auth"
+REALM: str = "ondewo-ccai-platform"
+CLIENT_ID: str = "ondewo-nlu-cai-sdk-public"
+BEARER_METADATA: List[Tuple[str, str]] = [("authorization", "Bearer acc-1")]
 
 
 def _non_keycloak_config() -> ClientConfig:
@@ -103,7 +104,7 @@ class _AsyncService(AsyncServicesInterface):
 
 async def _async_metadata(config: ClientConfig) -> List[Tuple[str, str]]:
     """Build an `_AsyncService` (needs a running loop for its `grpc.aio` channel) and read its metadata."""
-    service: _AsyncService = _AsyncService(config=config, nlu_token='', use_secure_channel=False)
+    service: _AsyncService = _AsyncService(config=config, nlu_token="", use_secure_channel=False)
     try:
         return service.metadata
     finally:
@@ -115,19 +116,19 @@ class TestLoginIsNeutralizedNoOp:
 
     def test_sync_login_returns_empty_for_keycloak(self) -> None:
         """The synchronous `login()` returns `''` for a Keycloak config without an RPC."""
-        assert login(_keycloak_config(), use_secure_channel=False) == ''
+        assert login(_keycloak_config(), use_secure_channel=False) == ""
 
     def test_sync_login_returns_empty_without_keycloak(self) -> None:
         """The synchronous `login()` returns `''` for a non-Keycloak config without an RPC."""
-        assert login(_non_keycloak_config(), use_secure_channel=False) == ''
+        assert login(_non_keycloak_config(), use_secure_channel=False) == ""
 
     def test_async_login_returns_empty_for_keycloak(self) -> None:
         """The asynchronous `login()` returns `''` for a Keycloak config without an RPC."""
-        assert asyncio.run(async_login(_keycloak_config(), use_secure_channel=False)) == ''
+        assert asyncio.run(async_login(_keycloak_config(), use_secure_channel=False)) == ""
 
     def test_async_login_returns_empty_without_keycloak(self) -> None:
         """The asynchronous `login()` returns `''` for a non-Keycloak config without an RPC."""
-        assert asyncio.run(async_login(_non_keycloak_config(), use_secure_channel=False)) == ''
+        assert asyncio.run(async_login(_non_keycloak_config(), use_secure_channel=False)) == ""
 
 
 class TestMetadataSelection:
@@ -139,18 +140,18 @@ class TestMetadataSelection:
     ) -> None:
         """With Keycloak configured the sync interface attaches the fake provider's bearer tuple."""
         monkeypatch.setattr(
-            'ondewo.nlu.core.services_interface.get_keycloak_token_provider',
+            "ondewo.nlu.core.services_interface.get_keycloak_token_provider",
             lambda config: _FakeKeycloakProvider(),
         )
 
-        service: _SyncService = _SyncService(config=_keycloak_config(), nlu_token='', use_secure_channel=False)
+        service: _SyncService = _SyncService(config=_keycloak_config(), nlu_token="", use_secure_channel=False)
 
         assert service.metadata == BEARER_METADATA
-        assert service.metadata[0][0] == 'authorization'
+        assert service.metadata[0][0] == "authorization"
 
     def test_sync_metadata_is_empty_without_keycloak(self) -> None:
         """Without Keycloak the sync interface attaches no metadata (unauthenticated call)."""
-        service: _SyncService = _SyncService(config=_non_keycloak_config(), nlu_token='', use_secure_channel=False)
+        service: _SyncService = _SyncService(config=_non_keycloak_config(), nlu_token="", use_secure_channel=False)
 
         assert service.metadata == []
 
@@ -160,7 +161,7 @@ class TestMetadataSelection:
     ) -> None:
         """With Keycloak configured the async interface attaches the fake provider's bearer tuple."""
         monkeypatch.setattr(
-            'ondewo.nlu.core.async_services_interface.get_keycloak_token_provider',
+            "ondewo.nlu.core.async_services_interface.get_keycloak_token_provider",
             lambda config: _FakeKeycloakProvider(),
         )
 
@@ -169,7 +170,7 @@ class TestMetadataSelection:
         metadata: List[Tuple[str, str]] = asyncio.run(_async_metadata(_keycloak_config()))
 
         assert metadata == BEARER_METADATA
-        assert metadata[0][0] == 'authorization'
+        assert metadata[0][0] == "authorization"
 
     def test_async_metadata_is_empty_without_keycloak(self) -> None:
         """Without Keycloak the async interface attaches no metadata (unauthenticated call)."""

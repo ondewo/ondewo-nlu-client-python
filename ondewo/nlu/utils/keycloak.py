@@ -32,6 +32,7 @@ keycloak migration plan (D18) for the *public* SDK client `ondewo-nlu-cai-sdk-pu
 No 2FA is involved: the account is a 2FA-exempt technical user and ROPC bypasses the
 browser flow (D14). The client is public, so no ``client_secret`` is sent.
 """
+
 import threading
 import time
 import weakref
@@ -52,7 +53,7 @@ import urllib3
 from ondewo.nlu.client_config import ClientConfig
 
 # Standard OIDC token endpoint path under a Keycloak realm.
-_TOKEN_ENDPOINT_TEMPLATE: str = '{keycloak_url}/realms/{realm}/protocol/openid-connect/token'
+_TOKEN_ENDPOINT_TEMPLATE: str = "{keycloak_url}/realms/{realm}/protocol/openid-connect/token"
 
 # Refresh the access token this many seconds *before* it actually expires so that an
 # in-flight call never travels with a token that lapses mid-request.
@@ -83,7 +84,7 @@ class TokenEndpoint(Protocol):
         url: str,
         data: Dict[str, str],
         timeout: float,
-    ) -> 'TokenResponse':
+    ) -> "TokenResponse":
         """Send an ``application/x-www-form-urlencoded`` POST and return the response."""
         ...  # pragma: no cover - abstract Protocol method, never executed
 
@@ -130,7 +131,7 @@ class KeycloakAuthenticationError(Exception):
 
 
 def _refresh_loop(
-    provider_ref: 'weakref.ref[KeycloakTokenProvider]',
+    provider_ref: "weakref.ref[KeycloakTokenProvider]",
     stop_event: threading.Event,
     time_fn: Callable[[], float],
 ) -> None:
@@ -156,7 +157,7 @@ def _refresh_loop(
             Monotonic clock (injectable for deterministic tests).
     """
     while not stop_event.is_set():
-        provider: Optional['KeycloakTokenProvider'] = provider_ref()
+        provider: Optional["KeycloakTokenProvider"] = provider_ref()
         if provider is None:
             # The provider has been collected; never resurrect it — just exit the thread.
             return
@@ -283,7 +284,7 @@ class KeycloakTokenProvider:
             KeycloakAuthenticationError:
                 If the initial ROPC login is rejected by Keycloak.
         """
-        self.keycloak_url: str = keycloak_url.rstrip('/')
+        self.keycloak_url: str = keycloak_url.rstrip("/")
         self.realm: str = realm
         self.client_id: str = client_id
         self.username: str = username
@@ -300,8 +301,8 @@ class KeycloakTokenProvider:
             realm=self.realm,
         )
 
-        self._access_token: str = ''
-        self._refresh_token: str = ''
+        self._access_token: str = ""
+        self._refresh_token: str = ""
         self._access_token_expires_at: float = 0.0
         self._login_deadline: Optional[float] = None
 
@@ -316,7 +317,7 @@ class KeycloakTokenProvider:
         if start_background_refresh:
             self._start_background_refresh()
 
-    def __enter__(self) -> 'KeycloakTokenProvider':
+    def __enter__(self) -> "KeycloakTokenProvider":
         """
         Enter the runtime context, returning the provider itself.
 
@@ -361,7 +362,7 @@ class KeycloakTokenProvider:
         """
         with self._lock:
             self._refresh_if_within_window(now=self._time_fn())
-            return ('authorization', f'Bearer {self._access_token}')
+            return ("authorization", f"Bearer {self._access_token}")
 
     def bearer_metadata(self) -> List[Tuple[str, str]]:
         """
@@ -401,11 +402,11 @@ class KeycloakTokenProvider:
         — can still be garbage-collected; the loop exits on the next wake when the weakref
         resolves to ``None``.
         """
-        provider_ref: 'weakref.ref[KeycloakTokenProvider]' = weakref.ref(self)
+        provider_ref: "weakref.ref[KeycloakTokenProvider]" = weakref.ref(self)
         thread: threading.Thread = threading.Thread(
             target=_refresh_loop,
             args=(provider_ref, self._stop_event, self._time_fn),
-            name=f'keycloak-token-refresh-{self.client_id}',
+            name=f"keycloak-token-refresh-{self.client_id}",
             daemon=True,
         )
         self._refresh_thread = thread
@@ -441,13 +442,13 @@ class KeycloakTokenProvider:
                 If Keycloak rejects the credentials.
         """
         data: Dict[str, str] = {
-            'grant_type': 'password',
-            'client_id': self.client_id,
-            'username': self.username,
-            'password': self.password,
-            'scope': 'offline_access',
+            "grant_type": "password",
+            "client_id": self.client_id,
+            "username": self.username,
+            "password": self.password,
+            "scope": "offline_access",
         }
-        payload: Dict[str, Any] = self._post_token_request(data=data, action='login')
+        payload: Dict[str, Any] = self._post_token_request(data=data, action="login")
         self._store_tokens(payload=payload)
         if self.token_expiration_in_s is not None:
             self._login_deadline = self._time_fn() + self.token_expiration_in_s
@@ -461,11 +462,11 @@ class KeycloakTokenProvider:
                 If Keycloak rejects the refresh token.
         """
         data: Dict[str, str] = {
-            'grant_type': 'refresh_token',
-            'client_id': self.client_id,
-            'refresh_token': self._refresh_token,
+            "grant_type": "refresh_token",
+            "client_id": self.client_id,
+            "refresh_token": self._refresh_token,
         }
-        payload: Dict[str, Any] = self._post_token_request(data=data, action='refresh')
+        payload: Dict[str, Any] = self._post_token_request(data=data, action="refresh")
         self._store_tokens(payload=payload)
 
     def _post_token_request(self, data: Dict[str, str], action: str) -> Dict[str, Any]:
@@ -493,7 +494,7 @@ class KeycloakTokenProvider:
         )
         if response.status_code < 200 or response.status_code >= 300:
             raise KeycloakAuthenticationError(
-                f'Keycloak token {action} failed with status {response.status_code}: {response.text}'
+                f"Keycloak token {action} failed with status {response.status_code}: {response.text}"
             )
         body: Dict[str, Any] = response.json()
         return body
@@ -510,26 +511,24 @@ class KeycloakTokenProvider:
             KeycloakAuthenticationError:
                 If the response carries no ``access_token``.
         """
-        access_token: str = payload.get('access_token', '')
+        access_token: str = payload.get("access_token", "")
         if not access_token:
-            raise KeycloakAuthenticationError(
-                f'Keycloak token response did not contain an access_token: {payload!r}'
-            )
+            raise KeycloakAuthenticationError(f"Keycloak token response did not contain an access_token: {payload!r}")
         self._access_token = access_token
         # Keycloak always re-issues the refresh token; keep the previous one if absent so a
         # response that omits it (e.g. a same-token refresh) does not blank out the offline token.
-        refresh_token: str = payload.get('refresh_token', '')
+        refresh_token: str = payload.get("refresh_token", "")
         if refresh_token:
             self._refresh_token = refresh_token
 
-        expires_in: int = int(payload.get('expires_in', 0))
+        expires_in: int = int(payload.get("expires_in", 0))
         self._access_token_expires_at = self._time_fn() + expires_in
 
 
 # One shared provider per ClientConfig so the ROPC offline-token login happens once for all
 # of a client's service stubs (they all read the same auto-refreshed access token). The weak
 # reference lets the provider be collected once the config is gone.
-_PROVIDER_REGISTRY: 'WeakValueDictionary[int, KeycloakTokenProvider]' = WeakValueDictionary()
+_PROVIDER_REGISTRY: "WeakValueDictionary[int, KeycloakTokenProvider]" = WeakValueDictionary()
 _PROVIDER_REGISTRY_LOCK: threading.Lock = threading.Lock()
 
 
