@@ -209,7 +209,7 @@ create_release_tag: ## Create Release Tag and push it to origin
 	git push origin ${ONDEWO_NLU_VERSION}
 
 login_to_gh: ## Login to Github CLI with Access Token
-	echo $(GITHUB_GH_TOKEN) | gh auth login -p ssh --with-token
+	@echo $(GITHUB_GH_TOKEN) | gh auth login -p ssh --with-token
 
 build_gh_release: ## Generate Github Release with CLI
 	gh release create --repo $(GH_REPO) "$(ONDEWO_NLU_VERSION)" -n "$(CURRENT_RELEASE_NOTES)" -t "Release ${ONDEWO_NLU_VERSION}"
@@ -241,7 +241,7 @@ build_package: ## Builds PYPI Package
 	chmod a+rw dist -R
 
 upload_package: ## Uploads PYPI Package
-	twine upload --verbose -r pypi dist/* -u${PYPI_USERNAME} -p${PYPI_PASSWORD}
+	@twine upload --verbose -r pypi dist/* -u${PYPI_USERNAME} -p${PYPI_PASSWORD}
 
 clear_package_data: ## Clears PYPI Package
 	echo "Waiting 5s so directory for removal is not busy anymore"
@@ -253,7 +253,7 @@ build_utils_docker_image:  ## Build utils docker image
 
 push_to_pypi_via_docker_image:  ## Push source code to pypi via docker
 	[ -d $(OUTPUT_DIR) ] || mkdir -p $(OUTPUT_DIR)
-	docker run --rm \
+	@docker run --rm \
 		-v ${shell pwd}/dist:/home/ondewo/dist \
 		-e PYPI_USERNAME=${PYPI_USERNAME} \
 		-e PYPI_PASSWORD=${PYPI_PASSWORD} \
@@ -270,7 +270,7 @@ show_pypi: build_package ## Shows PYPI Package with Dockerimage
 
 show_pypi_via_docker_image: build_utils_docker_image ## Push source code to pypi via docker
 	[ -d $(OUTPUT_DIR) ] || mkdir -p $(OUTPUT_DIR)
-	docker run --rm \
+	@docker run --rm \
 		-v ${shell pwd}/dist:/home/ondewo/dist \
 		-e PYPI_USERNAME=${PYPI_USERNAME} \
 		-e PYPI_PASSWORD=${PYPI_PASSWORD} \
@@ -284,7 +284,7 @@ push_to_gh: login_to_gh build_gh_release ## Logs into GitHub CLI and Releases
 	@echo 'Released to Github'
 
 release_to_github_via_docker_image:  ## Release to Github via docker
-	docker run --rm \
+	@docker run --rm \
 		-e GITHUB_GH_TOKEN=${GITHUB_GH_TOKEN} \
 		${IMAGE_UTILS_NAME} make push_to_gh
 
