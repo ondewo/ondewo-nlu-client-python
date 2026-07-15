@@ -95,7 +95,7 @@ class SharedRequestData(object):
 
     @property
     def session_review_id(self) -> Optional[str]:
-        if not self.project_parent or not self.session_uuid:
+        if not self.project_parent or not self.session_uuid or not self.session_review_uuid:
             return None
         return f"{self.project_parent}/sessions/{self.session_uuid}/reviews/{self.session_review_uuid}"
 
