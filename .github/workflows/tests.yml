@@ -28,13 +28,26 @@ jobs:
       - name: Mypy type check
         run: uv run --frozen mypy ondewo
 
-      # The repo is ~95% generated protobuf/gRPC stubs; coverage is gated on the HAND-WRITTEN surface
-      # (the Keycloak/D18 auth helper + client config) — the production-critical code this SDK owns.
+      # The repo is ~95% generated protobuf/gRPC stubs; coverage is still gated at 100% on the
+      # HAND-WRITTEN surface this SDK owns — but the way that surface is SELECTED changed.
+      #
+      # This gate used to name each module as `--cov=ondewo.nlu.utils.keycloak` etc. That dotted
+      # form FAILS OPEN: pytest-cov only measures dotted modules the suite actually imports, so a
+      # module with zero tests is dropped from the report entirely instead of scoring 0% — the gate
+      # then prints "Required test coverage of 100% reached" and exits 0 while whole files are
+      # untested. (Proved: adding --cov=ondewo.nlu.async_client --cov=ondewo.nlu.client_pool to the
+      # old gate still passed, though neither had a single test.) It also silently under-measured
+      # every module nobody remembered to add to the list.
+      #
+      # Instead, `[tool.coverage.run] source = ["ondewo"]` in pyproject.toml is FILESYSTEM-SCANNED:
+      # every .py under ondewo/ is measured whether or not a test imports it, so a new untested file
+      # reports 0% and FAILS the gate. What is genuinely not worth testing (generated stubs and thin
+      # stub-delegation wrappers) is justified explicitly in that file's `omit` list. The bare --cov
+      # below just switches coverage on and defers to that config.
       - name: Unit tests + 100% coverage gate on hand-written code
         run: |
           uv run --frozen pytest tests/unit -q \
-            --cov=ondewo.nlu.utils.keycloak \
-            --cov=ondewo.nlu.client_config \
+            --cov \
             --cov-report=term-missing \
             --cov-report=xml \
             --cov-fail-under=100
