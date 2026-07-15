@@ -480,7 +480,6 @@ def _build_client_content(services: List[Tuple[str, str]]) -> str:
     for field_name, class_name in services:
         lines.append(f"from ondewo.nlu.services.{field_name} import {class_name}")
     lines += [
-        "from ondewo.nlu.utils.login import login",
         "",
         "",
         "class Client(BaseClient):",
@@ -496,8 +495,7 @@ def _build_client_content(services: List[Tuple[str, str]]) -> str:
         "    ) -> None:",
         '        """',
         "",
-        "        Initialize the service clients and lLogin with the current config"
-        " and set up the services in self.services",
+        "        Initialize the service clients with the current config and set up the services in self.services",
         "",
         "        Args:",
         "            config (BaseClientConfig):",
@@ -510,10 +508,8 @@ def _build_client_content(services: List[Tuple[str, str]]) -> str:
         "        if not isinstance(config, ClientConfig):",
         "            raise ValueError('The provided config must be of type `ondewo.nlu.client_config.ClientConfig`')",
         "",
-        "        nlu_token: str = login(config=config, use_secure_channel=use_secure_channel, options=options)",
         "        kwargs: Dict[str, Any] = {",
         "            'config': config,",
-        "            'nlu_token': nlu_token,",
         "            'use_secure_channel': use_secure_channel,",
         "            'options': options,",
         "        }",
@@ -576,7 +572,7 @@ def main(proto_dir: Path, output_dir: Path) -> None:
     print(f"  generated {client_path}")
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover - argv parsing for the Makefile entry point; main() is tested directly
     _proto_dir = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("ondewo-nlu-api/ondewo/nlu")
     _output_dir = Path(sys.argv[2]) if len(sys.argv) > 2 else Path("ondewo/nlu/services")
     main(_proto_dir, _output_dir)

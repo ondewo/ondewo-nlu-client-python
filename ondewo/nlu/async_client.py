@@ -49,7 +49,6 @@ from ondewo.nlu.services.async_sessions import Sessions
 from ondewo.nlu.services.async_users import Users
 from ondewo.nlu.services.async_utilities import Utilities
 from ondewo.nlu.services.async_webhooks import Webhook
-from ondewo.nlu.utils.login import login
 
 
 class AsyncClient(AsyncBaseClient):
@@ -78,10 +77,8 @@ class AsyncClient(AsyncBaseClient):
         if not isinstance(config, ClientConfig):
             raise ValueError("The provided config must be of type `ondewo.nlu.client_config.ClientConfig`")
 
-        nlu_token: str = login(config=config, use_secure_channel=use_secure_channel, options=options)
         kwargs: Dict[str, Any] = {
             "config": config,
-            "nlu_token": nlu_token,
             "use_secure_channel": use_secure_channel,
             "options": options,
         }

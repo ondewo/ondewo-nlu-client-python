@@ -33,7 +33,6 @@ class AsyncServicesInterface(AsyncBaseServicesInterface, ABC):
     def __init__(
         self,
         config: ClientConfig,
-        nlu_token: str,
         use_secure_channel: bool,
         options: Optional[Set[Tuple[str, Any]]] = None,
     ) -> None:
@@ -42,9 +41,6 @@ class AsyncServicesInterface(AsyncBaseServicesInterface, ABC):
             use_secure_channel=use_secure_channel,
             options=options,
         )
-        # `nlu_token` is accepted for backward compatibility with the generated service
-        # signatures but is no longer used: authentication is Keycloak bearer only.
-        del nlu_token
         # When Keycloak headless auth (D18) is configured, every call carries a freshly
         # auto-refreshed `Authorization: Bearer` token; the provider is shared per config so
         # the offline-token ROPC login happens once for all services on the client.
