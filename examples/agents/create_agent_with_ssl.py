@@ -104,6 +104,16 @@ def build_tls_client() -> Client:
 
 
 if __name__ == "__main__":
+    # This example is TLS-only: unlike the others it does not honour ONDEWO_NLU_CAI_SECURE, because a
+    # plaintext run would demonstrate nothing. Pointed at a plaintext port it dies with
+    # "Tls handshake failed (TSI_PROTOCOL_FAILURE)", which is correct but says nothing about the cause,
+    # so say it here instead.
+    print(
+        f"Connecting over TLS to {env('ONDEWO_NLU_CAI_HOST')}:{env('ONDEWO_NLU_CAI_PORT')}. That port must be "
+        "serving TLS (ONDEWO_NLU_CAI_GRPC_SERVER_USE_INSECURE_CHANNEL=False on the server); against a "
+        "plaintext port this fails with 'Tls handshake failed', which means the port, not the certificate.",
+        file=sys.stderr,
+    )
     client: Client = build_tls_client()
 
     # A unique display name keeps the example re-runnable: the server rejects a duplicate.
