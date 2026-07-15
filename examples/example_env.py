@@ -39,6 +39,7 @@ override any value without editing it.
 import base64
 import binascii
 import os
+import sys
 from pathlib import Path
 from typing import (
     Dict,
@@ -262,11 +263,45 @@ def use_secure_channel() -> bool:
     """
     Whether the gRPC channel should be TLS-secured.
 
+    TLS needs BOTH halves: ``ONDEWO_NLU_CAI_SECURE`` asking for it, and a CA certificate in
+    ``ONDEWO_NLU_CAI_GRPC_CERT_BASE64`` to verify the server with. The SDK does not fall back to the
+    system trust store — a secure channel with no ``grpc_cert`` raises
+    ``ValueError: No grpc certificate found on config`` — so asking for TLS without a certificate
+    cannot produce a working client. When the certificate is absent the examples therefore fall back
+    to a plaintext channel and say so loudly, rather than dying on a config error.
+
+    ⚠️ The fallback is a convenience for the examples, NOT a pattern to copy into production: it
+    turns a missing certificate into an unencrypted connection. Real deployments should treat a
+    missing CA as a hard failure.
+
     Returns:
         bool:
-            ``ONDEWO_NLU_CAI_SECURE`` as a boolean; ``False`` by default (plaintext local server).
+            True only when TLS was requested AND a CA certificate is available.
     """
-    return env_bool("ONDEWO_NLU_CAI_SECURE", default=False)
+    if not env_bool("ONDEWO_NLU_CAI_SECURE", default=False):
+        return False
+    if grpc_cert_is_available():
+        return True
+    print(
+        "WARNING: ONDEWO_NLU_CAI_SECURE is true but ONDEWO_NLU_CAI_GRPC_CERT_BASE64 is empty, so there "
+        "is no CA to verify the server with — falling back to an INSECURE channel. Set it with "
+        "`make show_ssl_certificate_env_vars` in the ondewo-cai repo.",
+        file=sys.stderr,
+    )
+    return False
+
+
+def grpc_cert_is_available() -> bool:
+    """
+    Whether a CA certificate is configured for the gRPC channel.
+
+    Returns:
+        bool:
+            True when ``ONDEWO_NLU_CAI_GRPC_CERT_BASE64`` holds a non-empty value.
+    """
+    if not _loaded:
+        load_environment()
+    return bool(os.environ.get("ONDEWO_NLU_CAI_GRPC_CERT_BASE64", "").strip())
 
 
 # The server owns these fields and stamps them itself. It returns them on every read, but *rejects*

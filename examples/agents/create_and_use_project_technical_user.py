@@ -64,17 +64,12 @@ from ondewo.nlu.session_pb2 import (
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from example_env import (  # noqa: E402
     env,
-    get_client_config,
+    get_grpc_cert,
+    use_secure_channel,
 )
 
-# --- Connection + Keycloak configuration (fill these in) -------------------------------------
-HOST: str = "localhost"
-PORT: str = "50055"
-USE_SECURE_CHANNEL: bool = False
-
-KEYCLOAK_URL: str = "https://<host>/auth"  # base URL, the part before /realms/<realm>
-KEYCLOAK_REALM: str = env("ONDEWO_KEYCLOAK_REALM")
-KEYCLOAK_CLIENT_ID: str = env("ONDEWO_KEYCLOAK_SDK_PUBLIC_CLIENT_ID")  # the public SDK client (no secret)
+# Connection + Keycloak settings all come from examples/environment.env via build_keycloak_client();
+# whether the channel is TLS follows ONDEWO_NLU_CAI_SECURE + ONDEWO_NLU_CAI_GRPC_CERT_BASE64.
 
 # An administrator / project-developer identity that may create technical users on the project
 # (must hold PROJECT_DEVELOPER or PROJECT_ADMIN on it). This is the identity configured in
@@ -101,8 +96,20 @@ def build_keycloak_client(user_name: str, password: str) -> Client:
             A client that attaches an auto-refreshed ``Authorization: Bearer`` token to every
             call. Constructing it triggers the one-time offline-token login.
     """
-    config: ClientConfig = get_client_config()
-    return Client(config=config, use_secure_channel=USE_SECURE_CHANNEL)
+    # The connection settings come from environment.env, but the IDENTITY comes from the arguments:
+    # the whole point below is to act as the technical user rather than as the admin. Reusing
+    # get_client_config() wholesale would silently re-authenticate as the admin every time.
+    config: ClientConfig = ClientConfig(
+        host=env("ONDEWO_NLU_CAI_HOST"),
+        port=env("ONDEWO_NLU_CAI_PORT"),
+        grpc_cert=get_grpc_cert(),
+        keycloak_url=env("ONDEWO_KEYCLOAK_URL"),
+        realm=env("ONDEWO_KEYCLOAK_REALM"),
+        client_id=env("ONDEWO_KEYCLOAK_SDK_PUBLIC_CLIENT_ID"),
+        user_name=user_name,
+        password=password,
+    )
+    return Client(config=config, use_secure_channel=use_secure_channel())
 
 
 def main() -> None:
