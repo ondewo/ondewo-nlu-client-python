@@ -78,19 +78,6 @@ EXPECTED_INTENT_ID: str = "projects/my-project/agent/intents/intent-1"
 # already present on a request is never overwritten by the shared data.
 PRESET_SESSION_ID: str = "projects/other-project/agent/sessions/preset-session"
 
-# CreateContextRequest, ListContextsRequest and DeleteAllContextsRequest are mapped on a
-# request field named "parent", but context.proto calls that field "session_id" on all three
-# (CreateContextRequest -> ['session_id', 'context'], ListContextsRequest -> ['session_id',
-# 'page_token'], DeleteAllContextsRequest -> ['session_id']). `get_attr_recursive` passes no
-# default to getattr, so `fill_missing_fields` dies with `AttributeError: parent` instead of
-# filling the field — the convenience layer is simply unusable for context requests. These
-# stay strict-xfail so the suite records the defect and turns red the moment it is fixed,
-# prompting whoever fixes it to drop the marker.
-_STALE_PARENT_REASON: str = (
-    'mapping table uses the stale request field "parent"; context.proto renamed it to '
-    '"session_id", so fill_missing_fields raises AttributeError'
-)
-
 
 def _full() -> SharedRequestData:
     """Return a `SharedRequestData` with every field populated."""
@@ -271,6 +258,26 @@ class TestFillMissingFields:
         assert filled.language_code == LANGUAGE_CODE
         assert filled.intent.name == EXPECTED_INTENT_ID
 
+    @pytest.mark.parametrize(
+        "request_type",
+        [CreateContextRequest, ListContextsRequest, DeleteAllContextsRequest],
+    )
+    def test_session_scoped_context_request_is_filled_with_the_full_session_name(
+        self,
+        request_type: Type[Message],
+    ) -> None:
+        """Regression test: context requests take a session name, not a project parent.
+
+        context.proto documents `session_id` on all three as
+        "Format: projects/<project_uuid>/agent/sessions/<session_uuid>". Asserting the exact
+        value — not merely that the field is non-empty — is what distinguishes the correct
+        `session_id` mapping from a `project_parent` one, which would silently send
+        "projects/my-project/agent" where the server expects a session.
+        """
+        filled: Message = _full().fill_missing_fields(request=request_type())
+
+        assert _get_nested(filled, "session_id") == EXPECTED_SESSION_ID
+
     def test_request_type_with_an_empty_mapping_is_returned_as_an_equal_copy(self) -> None:
         request: LoginRequest = LoginRequest(user_email="someone@example.com")
 
@@ -328,12 +335,12 @@ class TestRequestFieldMapping:
             GetSessionReviewRequest,
             GetLatestSessionReviewRequest,
             CreateSessionReviewRequest,
-            pytest.param(CreateContextRequest, marks=pytest.mark.xfail(strict=True, reason=_STALE_PARENT_REASON)),
-            pytest.param(ListContextsRequest, marks=pytest.mark.xfail(strict=True, reason=_STALE_PARENT_REASON)),
+            CreateContextRequest,
+            ListContextsRequest,
             GetContextRequest,
             UpdateContextRequest,
             DeleteContextRequest,
-            pytest.param(DeleteAllContextsRequest, marks=pytest.mark.xfail(strict=True, reason=_STALE_PARENT_REASON)),
+            DeleteAllContextsRequest,
             LoginRequest,
             GetIntentRequest,
             ListIntentsRequest,

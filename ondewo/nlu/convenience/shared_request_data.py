@@ -172,16 +172,16 @@ class SharedRequestData(object):
             GetLatestSessionReviewRequest: {"session_id": "session_id"},
             CreateSessionReviewRequest: {"session_id": "session_id"},
             CreateContextRequest: {
-                "parent": "session_id",
+                "session_id": "session_id",
             },
             ListContextsRequest: {
-                "parent": "session_id",
+                "session_id": "session_id",
             },
             GetContextRequest: {},
             UpdateContextRequest: {},
             DeleteContextRequest: {},
             DeleteAllContextsRequest: {
-                "parent": "project_parent",
+                "session_id": "session_id",
             },
             LoginRequest: {},
             GetIntentRequest: {
