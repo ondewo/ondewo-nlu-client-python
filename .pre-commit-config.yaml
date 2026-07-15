@@ -80,6 +80,19 @@ repos:
     hooks:
       - id: uv-lock
 
+  # Enforce Conventional Commits on the commit message.
+  # ORDER MATTERS: this must run BEFORE giticket. commit-msg hooks run in the order listed, and giticket
+  # rewrites the subject to "[OND211-1234] <subject>" — which is no longer a valid Conventional Commit. With
+  # giticket first, every commit from a ticket-named branch was rejected by this hook (i.e. one hook failing on
+  # the other hook's own output), and the only escapes were --no-verify or renaming the branch. Validating the
+  # human-written subject first and letting giticket decorate it afterwards is also what ondewo-cai does.
+  - repo: https://github.com/compilerla/conventional-pre-commit
+    rev: v4.4.0
+    hooks:
+      - id: conventional-pre-commit
+        stages: [ commit-msg ]
+
+  # Runs AFTER conventional-pre-commit (see the note above) so it decorates an already-validated subject.
   - repo: https://github.com/milin/giticket
     rev: '1.92'
     hooks:
@@ -87,10 +100,3 @@ repos:
         args: [ '--regex=(?:(?:feature|bugfix|support|hotfix)/)?(OND[0-9]{3}-[0-9]{1,5})[_-][\w-]+',
                 '--format=[{ticket}] {commit_msg}',
                 '--mode=regex_match' ]
-
-  # Enforce Conventional Commits on the commit message.
-  - repo: https://github.com/compilerla/conventional-pre-commit
-    rev: v4.4.0
-    hooks:
-      - id: conventional-pre-commit
-        stages: [ commit-msg ]
