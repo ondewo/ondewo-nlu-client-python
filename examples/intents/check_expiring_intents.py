@@ -11,6 +11,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import sys
+from pathlib import Path
 import datetime
 from typing import List
 
@@ -23,22 +25,21 @@ from ondewo.nlu.intent_pb2 import (
     ListIntentsRequest,
 )
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from example_env import (  # noqa: E402
+    env,
+    get_client_config,
+    use_secure_channel,
+)
+
 if __name__ == "__main__":
     # CONFIGURING THE CLIENT
-    config: ClientConfig = ClientConfig(
-        host="localhost",
-        port="1234",
-        keycloak_url="https://<host>/auth",
-        realm="ondewo-ccai-platform",
-        client_id="ondewo-nlu-cai-sdk-public",
-        user_name="<e-mail of user>",
-        password="<password of user>",
-    )
-    client: Client = Client(config=config, use_secure_channel=False)
+    config: ClientConfig = get_client_config()
+    client: Client = Client(config=config, use_secure_channel=use_secure_channel())
 
     # CONFIGURING THE AGENT
-    parent: str = "<PUT_YOUR_AGENT_PARENT_HERE>"
-    language_code: str = '<acronym of he language of choice, i.e "en">'
+    parent: str = env("ONDEWO_NLU_CAI_AGENT_PARENT")
+    language_code: str = env("ONDEWO_NLU_CAI_LANGUAGE_CODE")
 
     # LOAD ALL INTENTS
     intents: List[Intent] = list(

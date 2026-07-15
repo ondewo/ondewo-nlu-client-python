@@ -148,3 +148,11 @@ cython_debug/
 
 # Vim swap files
 *.swp
+
+# Examples config: holds credentials for a real deployment. The committed template is
+# examples/environment.env.template — never commit the filled-in file (this repo is public).
+examples/environment.env
+
+# Output of examples/agents/get_agent_statistics.py, which hardcodes this path — so it appears in
+# the working tree of anyone who runs that example.
+results/

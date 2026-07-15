@@ -11,6 +11,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import sys
+from pathlib import Path
 import json
 from typing import (
     Any,
@@ -42,16 +44,28 @@ from ondewo.nlu.operations_pb2 import (
     Operation,
 )
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from example_env import (  # noqa: E402
+    env,
+    get_client_config,
+    use_secure_channel,
+)
+
 if __name__ == "__main__":
-    config: ClientConfig = ClientConfig(
-        host="localhost",
-        port="1234",
-        keycloak_url="https://<host>/auth",
-        realm="ondewo-ccai-platform",
-        client_id="ondewo-nlu-cai-sdk-public",
-        user_name="<e-mail of user>",
-        password="<password of user>",
-    )
+    # The client authenticates directly against Keycloak — no ondewo-aim involved. On construction the SDK
+    # performs a one-time ROPC grant (grant_type=password, scope=offline_access) against the *public*
+    # `ondewo-nlu-cai-sdk-public` client (so there is no client_secret), then auto-refreshes the short-lived
+    # access token in a background thread and sends `Authorization: Bearer` on every call.
+    #
+    # IMPORTANT — `user_name` must be a 2FA-EXEMPT identity.
+    # ROPC is non-interactive and cannot perform a TOTP step, so a normal human user (for whom the realm
+    # enforces 2FA) is rejected by Keycloak with:
+    #     400 {"error":"invalid_grant","error_description":"Account is not fully set up"}
+    # Use a *project technical user* instead: an admin/developer calls `CreateProjectTechnicalUser`, which
+    # returns a `username` (NOT an e-mail) plus a one-time password, and is exempt from 2FA. Pass that
+    # username here. A human e-mail only works on deployments where 2FA is relaxed (e.g. local dev), so
+    # scripts written against one will pass locally and fail in production.
+    config: ClientConfig = get_client_config()
 
     # https://github.com/grpc/grpc-proto/blob/master/grpc/service_config/service_config.proto
     service_config_json: str = json.dumps(
@@ -63,7 +77,8 @@ if __name__ == "__main__":
                         # {}
                         # List single  rpc method call
                         {"service": "ondewo.nlu.Users", "method": "CreateUser"},
-                        {"service": "ondewo.nlu.Users", "method": "Login"},
+                        # NOTE: no entry for `ondewo.nlu.Users/Login` — authentication is Keycloak-bearer
+                        # only and the client never calls that RPC, so a retry policy for it would never fire.
                     ],
                     "retryPolicy": {
                         "maxAttempts": 10,
@@ -102,14 +117,14 @@ if __name__ == "__main__":
         ("grpc.service_config", service_config_json),
     }
 
-    client: Client = Client(config=config, use_secure_channel=False, options=options)
+    client: Client = Client(config=config, use_secure_channel=use_secure_channel(), options=options)
 
     created_agent: Agent = client.services.agents.create_agent(
         request=CreateAgentRequest(
             agent=Agent(
                 display_name="my python agent",
-                default_language_code="en",
-                supported_language_codes=["en"],
+                default_language_code=env("ONDEWO_NLU_CAI_LANGUAGE_CODE"),
+                supported_language_codes=[env("ONDEWO_NLU_CAI_LANGUAGE_CODE")],
                 time_zone="Europe/Vienna",
                 nlu_platform="ONDEWO",
                 description="This is an agent created through the python client",
@@ -123,7 +138,7 @@ if __name__ == "__main__":
     created_intent: Intent = client.services.intents.create_intent(
         CreateIntentRequest(
             parent=created_agent.parent,
-            language_code="en",
+            language_code=env("ONDEWO_NLU_CAI_LANGUAGE_CODE"),
             intent=Intent(
                 display_name="i.my_python_intent",
                 training_phrases=[
@@ -136,7 +151,11 @@ if __name__ == "__main__":
         )
     )
 
-    print(client.services.intents.list_intents(ListIntentsRequest(parent=created_agent.parent, language_code="en")))
+    print(
+        client.services.intents.list_intents(
+            ListIntentsRequest(parent=created_agent.parent, language_code=env("ONDEWO_NLU_CAI_LANGUAGE_CODE"))
+        )
+    )
 
     export_operation: Operation = client.services.agents.export_agent(ExportAgentRequest(parent=created_agent.parent))
 
@@ -156,5 +175,5 @@ if __name__ == "__main__":
         export_operation_update.response.Unpack(export_response)
     assert export_response.agent_content
 
-    with open("my_backup.zip", mode="wb") as zf:
+    with open(env("ONDEWO_NLU_CAI_AGENT_ZIP_PATH"), mode="wb") as zf:
         zf.write(export_response.agent_content)

@@ -11,6 +11,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import sys
+from pathlib import Path
 from typing import List
 
 from ondewo.nlu.client import Client
@@ -22,25 +24,25 @@ from ondewo.nlu.entity_type_pb2 import (
     UpdateEntityTypeRequest,
 )
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from example_env import (  # noqa: E402
+    clear_server_owned_fields,
+    env,
+    get_client_config,
+    use_secure_channel,
+)
+
 if __name__ == "__main__":
     # CONFIGURING THE CLIENT
-    config: ClientConfig = ClientConfig(
-        host="localhost",
-        port="1234",
-        keycloak_url="https://<host>/auth",
-        realm="ondewo-ccai-platform",
-        client_id="ondewo-nlu-cai-sdk-public",
-        user_name="<e-mail of user>",
-        password="<password of user>",
-    )
+    config: ClientConfig = get_client_config()
 
-    client: Client = Client(config=config, use_secure_channel=False)
+    client: Client = Client(config=config, use_secure_channel=use_secure_channel())
 
     # CONFIGURING THE AGENT
-    project_uuid: str = "02534e0c-0c4e-4977-9aee-332cbb7fafea"
-    parent: str = f"projects/{project_uuid}/agent"  # projects/<project_id>/agent
-    language_code: str = "de"  # acronym of the language of choice, i.e "en"
-    entity_type_uuid: str = "ff77e8a2-f414-4f57-aca7-53229c1bf679"
+    project_uuid: str = env("ONDEWO_NLU_CAI_PROJECT_ID")
+    parent: str = env("ONDEWO_NLU_CAI_AGENT_PARENT")
+    language_code: str = env("ONDEWO_NLU_CAI_LANGUAGE_CODE")  # acronym of the language of choice, i.e "en"
+    entity_type_uuid: str = env("ONDEWO_NLU_CAI_ENTITY_TYPE_ID")
     entity_type_name: str = f"{parent}/entityTypes/{entity_type_uuid}"
 
     # retrieve the entity type including all values and synonyms, hence we need to set ENTITY_TYPE_VIEW_FULL
@@ -66,10 +68,25 @@ if __name__ == "__main__":
     entity_type.ClearField("entity_count")
     entity_type.ClearField("synonym_count")
 
+    # The entity type we just read carries the fields the server stamped on it (created_at,
+    # modified_by, ...). The server returns them but refuses to accept them back in an update, so
+    # they have to be stripped before this can be sent. The resource name is kept — the update
+    # needs it to know which entity type it is changing.
+    clear_server_owned_fields(message=entity_type)
+
     # Step 2: create the list of new entity values with
+    # NOTE: `display_name` is mandatory alongside `value` — the server rejects an entity without it.
     new_entities: List[EntityType.Entity] = [
-        EntityType.Entity(value="my new entity value number", synonyms=["my new synonym 1", "my new synonym 2"]),
-        EntityType.Entity(value="my new entity value letter", synonyms=["my new synonym a", "my new synonym b"]),
+        EntityType.Entity(
+            value="my new entity value number",
+            display_name="my new entity value number",
+            synonyms=["my new synonym 1", "my new synonym 2"],
+        ),
+        EntityType.Entity(
+            value="my new entity value letter",
+            display_name="my new entity value letter",
+            synonyms=["my new synonym a", "my new synonym b"],
+        ),
     ]
 
     # Step 3: add the new entities to our entity type

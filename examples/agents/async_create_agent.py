@@ -1,3 +1,5 @@
+import sys
+from pathlib import Path
 import asyncio
 import time
 from typing import Optional
@@ -25,6 +27,13 @@ from ondewo.nlu.intent_pb2 import (
 from ondewo.nlu.operations_pb2 import (
     GetOperationRequest,
     Operation,
+)
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from example_env import (  # noqa: E402
+    env,
+    get_client_config,
+    use_secure_channel,
 )
 
 
@@ -67,24 +76,16 @@ async def poll_async(
 
 
 async def main() -> None:
-    config: ClientConfig = ClientConfig(
-        host="localhost",
-        port="50055",
-        keycloak_url="https://<host>/auth",
-        realm="ondewo-ccai-platform",
-        client_id="ondewo-nlu-cai-sdk-public",
-        user_name="admin@ondewo.com",
-        password="asdf",
-    )
+    config: ClientConfig = get_client_config()
     # Use the async version of the client
-    client: AsyncClient = AsyncClient(config=config, use_secure_channel=False)
+    client: AsyncClient = AsyncClient(config=config, use_secure_channel=use_secure_channel())
 
     # Creating the agent
     created_agent: Agent = await client.services.agents.create_agent(
         CreateAgentRequest(
             agent=Agent(
                 display_name="my python agent",
-                default_language_code="en-US",
+                default_language_code=env("ONDEWO_NLU_CAI_LANGUAGE_CODE"),
                 supported_language_codes=["en-US"],
                 time_zone="Europe/Vienna",
                 nlu_platform="ONDEWO",
@@ -103,7 +104,7 @@ async def main() -> None:
     created_intent: Intent = await client.services.intents.create_intent(
         CreateIntentRequest(
             parent=created_agent.parent,
-            language_code="en-US",
+            language_code=env("ONDEWO_NLU_CAI_LANGUAGE_CODE"),
             intent=Intent(
                 display_name="i.pepper.dance",
                 webhook_state=Intent.WEBHOOK_STATE_UNSPECIFIED,
@@ -130,7 +131,7 @@ async def main() -> None:
 
     intent: Intent = await client.services.intents.get_intent(GetIntentRequest(name=created_intent.name))
     intent_list: ListIntentsResponse = await client.services.intents.list_intents(
-        ListIntentsRequest(parent=created_agent.parent, language_code="en-US")
+        ListIntentsRequest(parent=created_agent.parent, language_code=env("ONDEWO_NLU_CAI_LANGUAGE_CODE"))
     )
     log.debug(f"Intent created: {intent}")
     log.debug(f"List of intents: {intent_list}")
@@ -163,7 +164,7 @@ async def main() -> None:
     export_operation_update.response.Unpack(export_response)
     assert export_response.agent_content
 
-    with open("my_backup.zip", mode="wb") as zf:
+    with open(env("ONDEWO_NLU_CAI_AGENT_ZIP_PATH"), mode="wb") as zf:
         zf.write(export_response.agent_content)
 
 

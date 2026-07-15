@@ -12,7 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 import io
-import json
+import sys
+from pathlib import Path
 from zipfile import ZipFile
 
 from ondewo.nlu import (
@@ -22,7 +23,13 @@ from ondewo.nlu import (
     project_statistics_pb2,
 )
 from ondewo.nlu.client import Client
-from ondewo.nlu.client_config import ClientConfig
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from example_env import (  # noqa: E402
+    env,
+    get_client_config,
+    use_secure_channel,
+)
 
 
 def get_agent_stats(client: Client, parent: str, language_code: str) -> None:
@@ -67,26 +74,11 @@ def get_responses_per_intent(client: Client, parent: str, language_code: str) ->
 
 
 if __name__ == "__main__":
-    project_id: str = "<Your project ID>"
-    parent: str = f"projects/{project_id}/agent"
-    language_code: str = "de"
-    config_file: str = "local_client.json"
+    # All settings come from examples/environment.env — see examples/example_env.py.
+    parent: str = env("ONDEWO_NLU_CAI_AGENT_PARENT")
+    language_code: str = env("ONDEWO_NLU_CAI_LANGUAGE_CODE")
 
-    with open(config_file) as f:
-        config_ = json.load(f)
-
-    config = ClientConfig(
-        host=config_["host"],
-        port=config_["port"],
-        user_name=config_["user_name"],
-        password=config_["password"],
-        keycloak_url=config_["keycloak_url"],
-        realm=config_["realm"],
-        client_id=config_.get("client_id", "ondewo-nlu-cai-sdk-public"),
-        grpc_cert=config_.get("grpc_cert", ""),
-    )
-
-    client: Client = Client(config=config, use_secure_channel=False)
+    client: Client = Client(config=get_client_config(), use_secure_channel=use_secure_channel())
     print("Client created!")
 
     get_agent_stats(client=client, parent=parent, language_code=language_code)

@@ -11,6 +11,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import sys
+from pathlib import Path
 import uuid
 from typing import (
     Dict,
@@ -29,10 +31,17 @@ from ondewo.nlu.session_pb2 import (
     TextInput,
 )
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from example_env import (  # noqa: E402
+    env,
+    get_client_config,
+    use_secure_channel,
+)
+
 
 def make_context() -> context_pb2.Context:
     # Enter intent name .. Example would be i.order.pizza
-    intent_name: str = "<intent_name>"
+    intent_name: str = env("ONDEWO_NLU_CAI_INTENT_NAME")
     context_parameter: context_pb2.Context.Parameter = context_pb2.Context.Parameter(
         display_name="intent_name", value=intent_name
     )
@@ -55,20 +64,12 @@ def create_session_nlu(project_id: str) -> str:
 
 if __name__ == "__main__":
     # Pass in your project id and a session will be created for the nlu client
-    project_id: str = "<project id>"
+    project_id: str = env("ONDEWO_NLU_CAI_PROJECT_ID")
     session: str = create_session_nlu(project_id)
 
     # Client configuration
-    config: ClientConfig = ClientConfig(
-        host="localhost",
-        port="1234",
-        keycloak_url="https://<host>/auth",
-        realm="ondewo-ccai-platform",
-        client_id="ondewo-nlu-cai-sdk-public",
-        user_name="<e-mail of user>",
-        password="<password of user>",
-    )
-    nlu_client: NluClient = NluClient(config=config, use_secure_channel=False)
+    config: ClientConfig = get_client_config()
+    nlu_client: NluClient = NluClient(config=config, use_secure_channel=use_secure_channel())
     # You have to go to the function and set the context you want
     context: Optional[List[context_pb2.Context]] = [make_context()]
     print(f"The context here is: {context}")
@@ -80,8 +81,8 @@ if __name__ == "__main__":
         session=session,
         query_input=QueryInput(
             text=TextInput(
-                text="<enter your text here>",
-                language_code="de",
+                text=env("ONDEWO_NLU_CAI_TEXT"),
+                language_code=env("ONDEWO_NLU_CAI_LANGUAGE_CODE"),
             )
         ),
         query_params=QueryParameters(contexts=context),

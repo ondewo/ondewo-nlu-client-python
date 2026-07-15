@@ -12,6 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import sys
+from pathlib import Path
+
+import grpc
+
 from ondewo.nlu.client import Client as NluClient
 from ondewo.nlu.client_config import ClientConfig
 from ondewo.nlu.session_pb2 import (
@@ -23,35 +28,39 @@ from ondewo.nlu.session_pb2 import (
     TextInput,
 )
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from example_env import (  # noqa: E402
+    env,
+    get_client_config,
+    use_secure_channel,
+)
+
 if __name__ == "__main__":
     # Pass in your project id and a session will be created for the nlu client
-    project_id: str = "<project id>"
+    project_id: str = env("ONDEWO_NLU_CAI_PROJECT_ID")
     project_parent: str = f"projects/{project_id}/agent"
-    session_id = "<session_id>"
+    session_id = env("ONDEWO_NLU_CAI_SESSION_ID")
     session_path: str = f"{project_parent}/sessions/{session_id}"
 
     # Client configuration
-    config: ClientConfig = ClientConfig(
-        host="localhost",
-        port="1234",
-        keycloak_url="https://<host>/auth",
-        realm="ondewo-ccai-platform",
-        client_id="ondewo-nlu-cai-sdk-public",
-        user_name="<e-mail of user>",
-        password="<password of user>",
-    )
-    nlu_client: NluClient = NluClient(config=config, use_secure_channel=False)
+    config: ClientConfig = get_client_config()
+    nlu_client: NluClient = NluClient(config=config, use_secure_channel=use_secure_channel())
 
-    # DELETE a session
-    nlu_client.services.sessions.delete_session(DeleteSessionRequest(session_id=session_path))
+    # DELETE the session first, so the interaction below starts from a clean slate. On a first run the
+    # session does not exist yet and the server answers NOT_FOUND — that is expected, not an error.
+    try:
+        nlu_client.services.sessions.delete_session(DeleteSessionRequest(session_id=session_path))
+    except grpc.RpcError as rpc_error:
+        if rpc_error.code() is not grpc.StatusCode.NOT_FOUND:
+            raise
 
     # Nlu request and response
     nlu_request: DetectIntentRequest = DetectIntentRequest(
         session=session_path,
         query_input=QueryInput(
             text=TextInput(
-                text="<enter your text here>",
-                language_code="de",
+                text=env("ONDEWO_NLU_CAI_TEXT"),
+                language_code=env("ONDEWO_NLU_CAI_LANGUAGE_CODE"),
             )
         ),
         query_params=QueryParameters(),
