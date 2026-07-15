@@ -36,6 +36,8 @@ Real environment variables always win over the file, so a CI job or a shell ``ex
 override any value without editing it.
 """
 
+import base64
+import binascii
 import os
 from pathlib import Path
 from typing import (
@@ -165,19 +167,95 @@ def get_client_config() -> ClientConfig:
     ``400 invalid_grant: "Account is not fully set up"``. Use a project technical user's
     *username* (see ``examples/agents/create_and_use_project_technical_user.py``).
 
+    When ``ONDEWO_NLU_CAI_SECURE`` is true the config also carries ``grpc_cert``, taken from
+    ``ONDEWO_NLU_CAI_GRPC_CERT_BASE64``. The SDK requires it for a TLS channel: it does NOT fall back
+    to the system trust store, it raises ``ValueError: No grpc certificate found``.
+
     Returns:
         ClientConfig:
             The configuration for :class:`ondewo.nlu.client.Client`.
+
+    Raises:
+        KeyError:
+            If a TLS channel is requested but ``ONDEWO_NLU_CAI_GRPC_CERT_BASE64`` is not set.
+        ValueError:
+            If that value is not valid base64 of a PEM certificate.
     """
     return ClientConfig(
         host=env("ONDEWO_NLU_CAI_HOST"),
         port=env("ONDEWO_NLU_CAI_PORT"),
+        grpc_cert=get_grpc_cert(),
         keycloak_url=env("ONDEWO_KEYCLOAK_URL"),
         realm=env("ONDEWO_KEYCLOAK_REALM"),
         client_id=env("ONDEWO_KEYCLOAK_SDK_PUBLIC_CLIENT_ID"),
         user_name=env("ONDEWO_NLU_CAI_USER_NAME"),
         password=env("ONDEWO_NLU_CAI_PASSWORD"),
     )
+
+
+def get_grpc_cert_from_env() -> str:
+    """
+    Read the CA certificate straight out of the environment, with no file involved.
+
+    ``ONDEWO_NLU_CAI_GRPC_CERT_BASE64`` holds the base64 of the CA PEM. It is base64 rather than the
+    raw PEM because a PEM is multi-line and an env file is line-based, so the raw text cannot survive
+    a ``KEY=VALUE`` round trip. Encoding it keeps the whole certificate in a single value that a
+    container runtime, a CI secret or a k8s Secret can inject directly — the deployment shape where
+    there is no file to point at. ondewo-cai uses the same ``*_BASE64`` convention for the PEM in
+    ``ONDEWO_NLU_CAI_RAGFLOW_PUBLIC_KEY_BASE64``.
+
+    Produce the value with:
+        base64 -w0 < ondewo-cai/certs/ca-cert.pem
+
+    Returns:
+        str:
+            The CA PEM contents, ready to hand to ``ClientConfig.grpc_cert``.
+
+    Raises:
+        KeyError:
+            If ``ONDEWO_NLU_CAI_GRPC_CERT_BASE64`` is not set.
+        ValueError:
+            If the value is not valid base64, or does not decode to a PEM certificate — caught here
+            rather than surfacing later as an opaque TLS handshake failure.
+    """
+    raw: str = env("ONDEWO_NLU_CAI_GRPC_CERT_BASE64")
+    try:
+        pem: str = base64.b64decode(raw, validate=True).decode("utf-8")
+    except (binascii.Error, UnicodeDecodeError) as error:
+        raise ValueError(
+            "ONDEWO_NLU_CAI_GRPC_CERT_BASE64 is not valid base64 of a PEM certificate. Regenerate it "
+            "with: base64 -w0 < <path-to>/ondewo-cai/certs/ca-cert.pem",
+        ) from error
+    if "BEGIN CERTIFICATE" not in pem:
+        raise ValueError(
+            "ONDEWO_NLU_CAI_GRPC_CERT_BASE64 decodes to something that is not a PEM certificate "
+            f"(it starts with {pem[:32]!r}). It must be the base64 of the CA certificate that SIGNED "
+            "the server's certificate, i.e. ondewo-cai/certs/ca-cert.pem — not the server cert, and "
+            "not a private key.",
+        )
+    return pem
+
+
+def get_grpc_cert() -> Optional[str]:
+    """
+    Return the CA certificate that signs the server's gRPC certificate, when TLS is in use.
+
+    The certificate always comes from the environment — there is deliberately no file-path option.
+    See :func:`get_grpc_cert_from_env` for why it is base64.
+
+    Returns:
+        Optional[str]:
+            The CA PEM contents, or ``None`` when running against a plaintext server.
+
+    Raises:
+        KeyError:
+            If TLS is requested but ``ONDEWO_NLU_CAI_GRPC_CERT_BASE64`` is not set.
+        ValueError:
+            If the value is not valid base64 of a PEM certificate.
+    """
+    if not use_secure_channel():
+        return None
+    return get_grpc_cert_from_env()
 
 
 def use_secure_channel() -> bool:
