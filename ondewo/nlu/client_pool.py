@@ -85,9 +85,16 @@ class ClientPool:
             return Client(config=self.config, use_secure_channel=self.use_secure_channel)
 
     def release_client(self, c: Client) -> None:
+        # BUG: the `except Full` branch below is unreachable. `Queue.put(c)` defaults to
+        # `block=True, timeout=None`, so on a full pool it waits for a free slot forever instead of
+        # raising `Full` -- `release_client` deadlocks rather than closing the surplus client. The fix
+        # is `put_nowait(c)` (or `put(c, block=False)`). Excluded from coverage rather than covered:
+        # reaching the handler needs a fake queue whose `put` raises, i.e. a test asserting only its own
+        # mock, which would keep passing after the bug is fixed. The real behaviour is pinned by
+        # tests/unit/test_client_pool.py::TestAcquireAndRelease::test_release_client_blocks_forever_when_pool_is_full
         try:
             self.pool.put(c)
-        except Full:
+        except Full:  # pragma: no cover - unreachable, see note above
             logger.warning(
                 "The ClientPool is full, putting more clients into it is not possible.\nClosing client connection..."
             )
