@@ -23,9 +23,11 @@ seconds per assertion. `_collapse_get_timeout` keeps the real, really-empty queu
 forces its timeout to 0 — the `Empty` still comes from the real queue observing that it is
 really empty. This mirrors the injected clock in `tests/unit/utils/test_keycloak.py`.
 
-Two real defects were found while writing these tests and are documented at their tests:
-see `test_release_client_blocks_forever_when_pool_is_full` (a `# pragma: no cover` in the
-source) and `test_pool_smaller_than_max_size_ratio_one_would_deadlock_on_init`.
+Three defects that earlier revisions of these tests only documented are now fixed and pinned
+to the *correct* behaviour: `test_release_client_on_a_full_pool_disconnects_the_surplus_client`
+(was a deadlocking blocking `put`), `test_a_max_size_ratio_below_one_is_rejected_...` (was a
+deadlocking `__init__`) and `test_the_creation_counter_is_only_mutated_under_the_creation_lock`
+(was an unguarded check-then-act on `n_clients_created`).
 """
 
 import threading
@@ -34,10 +36,13 @@ from queue import (
     Full,
     Queue,
 )
+from types import TracebackType
 from typing import (
     List,
     Optional,
     Set,
+    Tuple,
+    Type,
 )
 
 import pytest
@@ -90,6 +95,39 @@ def _collapse_get_timeout(pool: ClientPool) -> None:
 
     # `setattr` on the instance shadows the bound method; the class is untouched.
     setattr(real_queue, "get", _get_without_waiting)
+
+
+class _CounterWatchingLock:
+    """Wraps the pool's **real** lock and snapshots `n_clients_created` around every critical section.
+
+    This is the seam that makes the lost-update guard deterministically testable. Reproducing the
+    actual race would mean betting on a GIL switch landing inside a two-bytecode window — flaky by
+    construction, and only ever provable with a sleep. So instead of racing, this asserts the
+    invariant that makes racing safe: the counter is read and written *only* while the lock is held.
+    A snapshot log of `enter`/`exit` values exposes any mutation performed outside a critical
+    section as a jump between one section's exit value and the next one's entry value.
+
+    Nothing is faked: the real `threading.Lock` still does the locking, it is only observed.
+    """
+
+    def __init__(self, pool: ClientPool, inner: threading.Lock) -> None:
+        self._pool: ClientPool = pool
+        self._inner: threading.Lock = inner
+        self.snapshots: List[Tuple[str, int]] = []
+
+    def __enter__(self) -> "_CounterWatchingLock":
+        self._inner.acquire()
+        self.snapshots.append(("enter", self._pool.n_clients_created))
+        return self
+
+    def __exit__(
+        self,
+        exc_type: Optional[Type[BaseException]],
+        exc_value: Optional[BaseException],
+        traceback: Optional[TracebackType],
+    ) -> None:
+        self.snapshots.append(("exit", self._pool.n_clients_created))
+        self._inner.release()
 
 
 class TestInitialisation:
@@ -251,17 +289,19 @@ class TestAcquireAndRelease:
 
         assert pool.n_clients_created == pool_size + 1, "returning a client does not decrement the counter"
 
-    def test_release_client_blocks_forever_when_pool_is_full(self, config: ClientConfig) -> None:
-        """BUG: `release_client` deadlocks on a full pool instead of disconnecting the surplus client.
+    def test_release_client_on_a_full_pool_disconnects_the_surplus_client(self, config: ClientConfig) -> None:
+        """A full pool must close the surplus client, not wait for a slot that may never free up.
 
-        `release_client` wraps `self.pool.put(c)` in `except Full`, but `Queue.put` defaults to
-        `block=True, timeout=None` — so it waits for a free slot forever and `Full` is never
-        raised. The handler (warn + `c.disconnect()`) is therefore dead code, marked
-        `# pragma: no cover` in the source. The fix is `put_nowait`; this test pins the current,
-        wrong behaviour so that fixing it fails here and forces the pragma to be removed.
+        The pool here is *genuinely* full — `max_size_ratio=1.0` makes `max_size == pool_size == 1`
+        and the pool starts pre-filled — so the `Full` comes from the real queue refusing a real
+        `put_nowait`, not from a double scripted to raise it.
+
+        The release runs on a worker thread purely to bound the failure: if `put` ever goes back to
+        blocking, this fails on the `wait` instead of hanging the whole suite.
         """
         pool: ClientPool = _build_pool(config, pool_size=1, max_size_ratio=1.0)
         assert pool.max_size == 1 and pool.pool.qsize() == 1, "pool must start full for this to be the full-pool path"
+        pooled: Client = list(pool.pool.queue)[0]
         surplus: Client = Client(config=config, use_secure_channel=False)
 
         returned: threading.Event = threading.Event()
@@ -272,31 +312,88 @@ class TestAcquireAndRelease:
 
         worker: threading.Thread = threading.Thread(target=_release, daemon=True)
         worker.start()
-        # A generous bound: `put` either returns/raises at once, or it is blocked forever.
-        assert not returned.wait(timeout=0.5), "release_client returned — the Full handler is reachable after all"
-        assert surplus.services is not None, "the surplus client was never disconnected; it leaks"
 
-        # Unblock the parked thread so it cannot outlive the test.
-        pool.pool.get()
-        assert returned.wait(timeout=2), "freeing a slot must let the parked release_client complete"
+        assert returned.wait(timeout=5), "release_client must not wait for a slot; it must refuse the surplus at once"
+        assert surplus.services is None, "the surplus client must be disconnected, not leaked"
+        assert pool.pool.qsize() == 1, "a full pool must not grow past max_size"
+        assert list(pool.pool.queue)[0] is pooled, "the surplus client must not displace the pooled one"
+        assert pooled.services is not None, "closing the surplus must not touch the client already pooled"
 
-    def test_pool_smaller_than_max_size_ratio_one_would_deadlock_on_init(self, config: ClientConfig) -> None:
-        """BUG (documented, not exercised): `max_size_ratio < 1` hangs `ClientPool.__init__`.
+    @pytest.mark.parametrize(
+        ("pool_size", "max_size_ratio", "expected_max_size"),
+        [
+            # The plain case: floor(10 * 0.5) == 5 slots for 10 clients.
+            (10, 0.5, 5),
+            # Rounding alone is enough to break it: floor(1 * 0.9) == 0 slots for 1 client.
+            (1, 0.9, 0),
+        ],
+    )
+    def test_a_max_size_ratio_below_one_is_rejected_instead_of_deadlocking_init(
+        self,
+        config: ClientConfig,
+        pool_size: int,
+        max_size_ratio: float,
+        expected_max_size: int,
+    ) -> None:
+        """`max_size < pool_size` is refused up front rather than parking `__init__` forever.
 
         `max_size = floor(pool_size * ratio)` can fall below `pool_size`, and `_initialize_pool`
-        then does `pool_size` blocking `put`s into a shorter queue — the surplus put parks
-        forever. Asserting the arithmetic is enough to pin the precondition; actually calling the
-        constructor would hang the suite, so the constructor is deliberately not called here.
+        then does `pool_size` blocking `put`s into a shorter queue — the surplus put used to park
+        forever, hanging the caller's process with no diagnostic. It is now a fast `ValueError`
+        that names every value involved.
         """
-        pool_size: int = 10
-        ratio: float = 0.5
+        with pytest.raises(ValueError) as exc_info:
+            _build_pool(config, pool_size=pool_size, max_size_ratio=max_size_ratio)
 
-        max_size: int = int(pool_size * ratio)
+        message: str = str(exc_info.value)
+        assert str(pool_size) in message, "the error must name the pool_size it could not fit"
+        assert str(max_size_ratio) in message, "the error must name the offending ratio"
+        assert str(expected_max_size) in message, "the error must name the max_size it computed"
 
-        assert max_size < pool_size, "init would block putting client #{} into a queue of {}".format(
-            max_size + 1,
-            max_size,
-        )
+    def test_a_max_size_ratio_of_exactly_one_is_accepted(self, config: ClientConfig) -> None:
+        """The boundary of the validation above: `max_size == pool_size` fits exactly, so it is legal."""
+        pool_size: int = 3
+
+        pool: ClientPool = _build_pool(config, pool_size=pool_size, max_size_ratio=1.0)
+
+        assert pool.max_size == pool_size
+        assert pool.pool.qsize() == pool_size, "a pool with zero headroom must still pre-fill completely"
+
+    def test_the_creation_counter_is_only_mutated_under_the_creation_lock(self, config: ClientConfig) -> None:
+        """The limit check and the increment it guards must be one atomic step.
+
+        `Queue` is thread-safe but `n_clients_created` is not: an unguarded
+        `if limit <= n: raise` / `n += 1` lets two concurrent overflow acquires read the same value,
+        both pass the check and both create a client — the counter lost-updates and the runaway-
+        creation limit is exceeded. See `_CounterWatchingLock` for why this asserts the invariant
+        rather than trying to lose a coin-flip race on purpose.
+        """
+        pool_size: int = 2
+        overflows: int = 3
+        pool: ClientPool = _build_pool(config, pool_size=pool_size)
+        assert pool.n_clients_created_limit >= pool_size + overflows, "every overflow below must be allowed through"
+        for _ in range(pool_size):
+            pool.acquire_client()
+        _collapse_get_timeout(pool)
+
+        watcher: _CounterWatchingLock = _CounterWatchingLock(pool=pool, inner=pool._creation_lock)
+        # `setattr` dodges the declared `threading.Lock` type; the real lock lives on inside `watcher`.
+        setattr(pool, "_creation_lock", watcher)
+
+        for _ in range(overflows):
+            pool.acquire_client()
+
+        assert pool.n_clients_created == pool_size + overflows
+        # Every increment sits strictly between an `enter` and its `exit`, and each `enter` resumes at
+        # exactly the previous `exit` value — so the counter never moved with the lock released.
+        assert watcher.snapshots == [
+            ("enter", pool_size),
+            ("exit", pool_size + 1),
+            ("enter", pool_size + 1),
+            ("exit", pool_size + 2),
+            ("enter", pool_size + 2),
+            ("exit", pool_size + 3),
+        ], "n_clients_created must be read and written only inside the critical section"
 
 
 class TestClose:
