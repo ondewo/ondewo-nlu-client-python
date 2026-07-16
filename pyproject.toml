@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ondewo-nlu-client"
-version = "6.14.1"
+version = "7.0.0"
 description = "ONDEWO Natural Language Understanding (NLU) Client library for Python"
 readme = "README.md"
 requires-python = ">=3.9"
@@ -26,16 +26,11 @@ dependencies = [
     "dataclasses-json",
     "google-api-core",
     "grpcio",
-    "grpcio-reflection",
-    "grpcio-tools",
     "loguru",
     "ondewo-client-utils>=3.2.0",
     "polling",
     "protobuf",
-    "python-dateutil",
-    "regex",
     "requests",
-    "setuptools",
 ]
 
 [project.optional-dependencies]
@@ -214,17 +209,18 @@ ignore_errors = true
 ignore_missing_imports = true
 
 # Third-party packages without (complete) type stubs.
+#
+# `faker.*`, `polling.*` and `tqdm.*` are imported only from `examples/`, so a narrower run
+# (`mypy ondewo tests`) reports them as unused sections under `warn_unused_configs`. They are
+# live — verify against the union scope `mypy ondewo tests examples` before removing any entry.
 [[tool.mypy.overrides]]
 module = [
     "loguru.*",
     "ondewo.utils.*",
     "faker.*",
-    "google.longrunning.*",
     "google.protobuf.*",
     "grpc.*",
     "polling.*",
-    "regex.*",
-    "setuptools.*",
     "tqdm.*",
 ]
 ignore_missing_imports = true

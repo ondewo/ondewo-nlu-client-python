@@ -38,14 +38,37 @@ When editing existing code:
 - Don't "improve" adjacent code, comments, or formatting.
 - Don't refactor things that aren't broken.
 - Match existing style, even if you'd do it differently.
-- If you notice unrelated dead code, mention it — don't delete it.
+- If you notice unrelated dead code, mention it and delete it — but **prove it is dead first**.
 
 When your changes create orphans:
 
 - Remove imports/variables/functions that _your_ changes made unused.
-- Don't remove pre-existing dead code unless asked.
 
 The test: every changed line should trace directly to the user's request.
+
+### Proving code is dead
+
+"No importer" is not proof. A symbol can be reached without ever appearing in an `import`
+statement, and each such consumer needs its own check before you delete anything:
+
+- **Packaging metadata is consumed by installers, not by imports.** `[project].dependencies` in
+  `pyproject.toml` exists so that `pip install ondewo-nlu-client` pulls the package into a _user's_
+  environment. Grepping this repo for `import x` says nothing about whether a downstream consumer
+  needs it — and dropping a genuinely required entry produces an `ImportError` that only surfaces
+  after release, in someone else's venv. Read what actually imports the symbol **in the shipped
+  package** (`ondewo/`), and remember that a dependency can legitimately be needed at build time
+  (`[build-system].requires`) or only by `examples/` / the dev extra.
+- **Strings, not identifiers.** Reflection (`getattr`, `importlib`), entry points, Makefile targets,
+  `git add` paths, and Docker build steps reference files and symbols by name as text.
+- **Generated code.** `ondewo/nlu/services/*.py` is emitted by `generate_services.py`, not written by
+  hand. Deleting from the output without touching the generator means the next `make generate_services`
+  puts it straight back.
+- **Config that lints itself.** mypy's `warn_unused_configs` reports an override section as unused
+  only for the scope it was run over: `faker.*`, `polling.*` and `tqdm.*` look dead under
+  `mypy ondewo tests` and are live under `mypy ondewo tests examples`. Run the union scope.
+
+If you cannot prove a thing is unreferenced, leave it and say so. Deleting live code is far worse
+than leaving dead code.
 
 ### Goal-driven execution
 
