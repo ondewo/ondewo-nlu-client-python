@@ -119,7 +119,7 @@ class Sessions(AsyncServicesInterface):
         self,
         request: AsyncIterator[StreamingDetectIntentRequest],
     ) -> AsyncIterator[StreamingDetectIntentResponse]:
-        response: AsyncIterator[StreamingDetectIntentResponse] = await self.stub.StreamingDetectIntent(
+        response: AsyncIterator[StreamingDetectIntentResponse] = self.stub.StreamingDetectIntent(
             request, metadata=self.metadata
         )
         return response

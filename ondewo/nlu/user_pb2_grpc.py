@@ -102,11 +102,6 @@ class UsersStub(object):
                 request_serializer=ondewo_dot_nlu_dot_user__pb2.ListServerPermissionsRequest.SerializeToString,
                 response_deserializer=ondewo_dot_nlu_dot_user__pb2.ListServerPermissionsResponse.FromString,
                 _registered_method=True)
-        self.Login = channel.unary_unary(
-                '/ondewo.nlu.Users/Login',
-                request_serializer=ondewo_dot_nlu_dot_user__pb2.LoginRequest.SerializeToString,
-                response_deserializer=ondewo_dot_nlu_dot_user__pb2.LoginResponse.FromString,
-                _registered_method=True)
         self.CheckLogin = channel.unary_unary(
                 '/ondewo.nlu.Users/CheckLogin',
                 request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
@@ -244,13 +239,6 @@ class UsersServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def Login(self, request, context):
-        """Requests login.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
     def CheckLogin(self, request, context):
         """Checks login.
         """
@@ -374,11 +362,6 @@ def add_UsersServicer_to_server(servicer, server):
                     servicer.ListServerPermissions,
                     request_deserializer=ondewo_dot_nlu_dot_user__pb2.ListServerPermissionsRequest.FromString,
                     response_serializer=ondewo_dot_nlu_dot_user__pb2.ListServerPermissionsResponse.SerializeToString,
-            ),
-            'Login': grpc.unary_unary_rpc_method_handler(
-                    servicer.Login,
-                    request_deserializer=ondewo_dot_nlu_dot_user__pb2.LoginRequest.FromString,
-                    response_serializer=ondewo_dot_nlu_dot_user__pb2.LoginResponse.SerializeToString,
             ),
             'CheckLogin': grpc.unary_unary_rpc_method_handler(
                     servicer.CheckLogin,
@@ -773,33 +756,6 @@ class Users(object):
             '/ondewo.nlu.Users/ListServerPermissions',
             ondewo_dot_nlu_dot_user__pb2.ListServerPermissionsRequest.SerializeToString,
             ondewo_dot_nlu_dot_user__pb2.ListServerPermissionsResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def Login(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/ondewo.nlu.Users/Login',
-            ondewo_dot_nlu_dot_user__pb2.LoginRequest.SerializeToString,
-            ondewo_dot_nlu_dot_user__pb2.LoginResponse.FromString,
             options,
             channel_credentials,
             insecure,

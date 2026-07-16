@@ -2,6 +2,17 @@
 
 *****************
 
+## Release ONDEWO NLU Python Client 7.0.0
+
+### Breaking Changes
+
+* Tracking API Version [7.0.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/7.0.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+* [[OND211-2418]](https://ondewo.atlassian.net/browse/OND211-2418) The `Login` RPC is removed from the API, and with it `Users.login()`, the async `Users.login()`, and the `LoginRequest` / `LoginResponse` messages. Authentication is Keycloak-only. The client already mints and refreshes a Keycloak access token by itself — construct it with `keycloak_url`, `realm`, `client_id`, `user_name` and `password` in the `ClientConfig` and every call carries `Authorization: Bearer <token>`. The identity must be exempt from 2FA (create one with `CreateProjectTechnicalUser` and pass its `username`), because the token comes from a non-interactive password grant.
+* [[OND211-2418]](https://ondewo.atlassian.net/browse/OND211-2418) `SharedRequestData` no longer maps `LoginRequest`; `fill_missing_fields` raises `NotImplementedError` for it, as it does for any unmapped request type.
+* `Users.check_login()` is **not** affected and remains the way to probe whether a token is still valid.
+
+*****************
+
 ## Release ONDEWO NLU Python Client 6.14.1
 
 ### Improvements

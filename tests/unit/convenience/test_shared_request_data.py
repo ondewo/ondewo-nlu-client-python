@@ -60,7 +60,6 @@ from ondewo.nlu.session_pb2 import (
     ListSessionReviewsRequest,
     ListSessionsRequest,
 )
-from ondewo.nlu.user_pb2 import LoginRequest
 
 # --- Inputs: bound exactly once ---------------------------------------------------------
 PROJECT_PARENT: str = "projects/my-project/agent"
@@ -279,9 +278,9 @@ class TestFillMissingFields:
         assert _get_nested(filled, "session_id") == EXPECTED_SESSION_ID
 
     def test_request_type_with_an_empty_mapping_is_returned_as_an_equal_copy(self) -> None:
-        request: LoginRequest = LoginRequest(user_email="someone@example.com")
+        request: GetContextRequest = GetContextRequest(name="projects/p/agent/sessions/s/contexts/c")
 
-        filled: LoginRequest = _full().fill_missing_fields(request=request)
+        filled: GetContextRequest = _full().fill_missing_fields(request=request)
 
         assert filled is not request
         assert filled == request
@@ -341,7 +340,6 @@ class TestRequestFieldMapping:
             UpdateContextRequest,
             DeleteContextRequest,
             DeleteAllContextsRequest,
-            LoginRequest,
             GetIntentRequest,
             ListIntentsRequest,
             CreateIntentRequest,

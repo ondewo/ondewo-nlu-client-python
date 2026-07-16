@@ -55,7 +55,6 @@ from ondewo.nlu.session_pb2 import (
     ListSessionReviewsRequest,
     ListSessionsRequest,
 )
-from ondewo.nlu.user_pb2 import LoginRequest
 
 T = TypeVar("T", bound=Message)
 
@@ -183,7 +182,6 @@ class SharedRequestData(object):
             DeleteAllContextsRequest: {
                 "session_id": "session_id",
             },
-            LoginRequest: {},
             GetIntentRequest: {
                 "name": "intent_id",
                 "language_code": "language_code",

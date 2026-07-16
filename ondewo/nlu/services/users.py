@@ -41,8 +41,6 @@ from ondewo.nlu.user_pb2 import (
     ListUserInfosResponse,
     ListUsersRequest,
     ListUsersResponse,
-    LoginRequest,
-    LoginResponse,
     ServerRole,
     SetUserPreferencesRequest,
     SetUserPreferencesResponse,
@@ -123,10 +121,6 @@ class Users(ServicesInterface):
 
     def list_server_permissions(self, request: ListServerPermissionsRequest) -> ListServerPermissionsResponse:
         response: ListServerPermissionsResponse = self.stub.ListServerPermissions(request, metadata=self.metadata)
-        return response
-
-    def login(self, request: LoginRequest) -> LoginResponse:
-        response: LoginResponse = self.stub.Login(request, metadata=self.metadata)
         return response
 
     def check_login(self) -> Empty:

@@ -712,61 +712,6 @@ class ListServerPermissionsResponse(google.protobuf.message.Message):
 global___ListServerPermissionsResponse = ListServerPermissionsResponse
 
 @typing.final
-class LoginRequest(google.protobuf.message.Message):
-    """Authentication messages"""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    USER_EMAIL_FIELD_NUMBER: builtins.int
-    PASSWORD_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    user_email: builtins.str
-    """user email"""
-    password: builtins.str
-    """user password"""
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
-        """Optional. The mask to control which fields gets returned."""
-
-    def __init__(
-        self,
-        *,
-        user_email: builtins.str = ...,
-        password: builtins.str = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "password", b"password", "user_email", b"user_email"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
-
-global___LoginRequest = LoginRequest
-
-@typing.final
-class LoginResponse(google.protobuf.message.Message):
-    """This message is a response of logging"""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    USER_FIELD_NUMBER: builtins.int
-    AUTH_TOKEN_FIELD_NUMBER: builtins.int
-    auth_token: builtins.str
-    """authentication token after successful login of the user to access NLU services"""
-    @property
-    def user(self) -> global___User:
-        """user object - user_id must be there"""
-
-    def __init__(
-        self,
-        *,
-        user: global___User | None = ...,
-        auth_token: builtins.str = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing.Literal["user", b"user"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["auth_token", b"auth_token", "user", b"user"]) -> None: ...
-
-global___LoginResponse = LoginResponse
-
-@typing.final
 class GetUserPreferencesRequest(google.protobuf.message.Message):
     """Request to get user preferences."""
 
