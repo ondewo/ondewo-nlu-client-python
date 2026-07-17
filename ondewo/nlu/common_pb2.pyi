@@ -354,7 +354,10 @@ class Comment(google.protobuf.message.Message):
     modified_by: builtins.str
     """User id in form of a valid UUID."""
     is_resolved: builtins.bool
-    """Whether the comment has been resolved. Defaults to false."""
+    """Whether the comment has been resolved. Defaults to false.
+    Declared `optional` so field presence is tracked: on UpdateSessionComments an unset value leaves
+    the stored resolved status unchanged, so editing a comment's text never clobbers its resolved flag.
+    """
     @property
     def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Creation date and time. Read-only field."""
@@ -375,10 +378,11 @@ class Comment(google.protobuf.message.Message):
         modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         created_by: builtins.str = ...,
         modified_by: builtins.str = ...,
-        is_resolved: builtins.bool = ...,
+        is_resolved: builtins.bool | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["comment_about_name", b"comment_about_name", "created_at", b"created_at", "created_by", b"created_by", "is_resolved", b"is_resolved", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "parent_comment_name", b"parent_comment_name", "text", b"text", "user_id", b"user_id"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_is_resolved", b"_is_resolved", "created_at", b"created_at", "is_resolved", b"is_resolved", "modified_at", b"modified_at"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_is_resolved", b"_is_resolved", "comment_about_name", b"comment_about_name", "created_at", b"created_at", "created_by", b"created_by", "is_resolved", b"is_resolved", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "parent_comment_name", b"parent_comment_name", "text", b"text", "user_id", b"user_id"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_is_resolved", b"_is_resolved"]) -> typing.Literal["is_resolved"] | None: ...
 
 global___Comment = Comment
 
