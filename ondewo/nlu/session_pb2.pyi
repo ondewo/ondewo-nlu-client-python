@@ -4910,8 +4910,9 @@ class ListSessionCommentsRequest(google.protobuf.message.Message):
     SESSION_ID_FIELD_NUMBER: builtins.int
     PAGE_TOKEN_FIELD_NUMBER: builtins.int
     FIELD_MASK_FIELD_NUMBER: builtins.int
+    IS_RESOLVED_FIELD_NUMBER: builtins.int
     session_id: builtins.str
-    """The unique identifier for the session for which reviews should be listed
+    """The unique identifier for the session for which comments should be listed
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
     """
     page_token: builtins.str
@@ -4945,6 +4946,10 @@ class ListSessionCommentsRequest(google.protobuf.message.Message):
       <li><code>&quot;current_index-1--page_size--20&quot;</code></li>
     </ul>
     """
+    is_resolved: builtins.bool
+    """Optional. Filter comments by their resolved status.
+    If unset, comments with any resolved status are returned.
+    """
     @property
     def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields gets returned."""
@@ -4955,12 +4960,63 @@ class ListSessionCommentsRequest(google.protobuf.message.Message):
         session_id: builtins.str = ...,
         page_token: builtins.str = ...,
         field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        is_resolved: builtins.bool | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "page_token", b"page_token", "session_id", b"session_id"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "_is_resolved", b"_is_resolved", "field_mask", b"field_mask", "is_resolved", b"is_resolved"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "_is_resolved", b"_is_resolved", "field_mask", b"field_mask", "is_resolved", b"is_resolved", "page_token", b"page_token", "session_id", b"session_id"]) -> None: ...
+    @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_is_resolved", b"_is_resolved"]) -> typing.Literal["is_resolved"] | None: ...
 
 global___ListSessionCommentsRequest = ListSessionCommentsRequest
+
+@typing.final
+class ListSessionCommentsOfAllSessionsRequest(google.protobuf.message.Message):
+    """This message is a request to list comments of all sessions of an agent"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PARENT_FIELD_NUMBER: builtins.int
+    SESSION_FILTER_FIELD_NUMBER: builtins.int
+    PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
+    IS_RESOLVED_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """The parent for which the comments of all sessions should be listed
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
+    page_token: builtins.str
+    """Optional. The page token to support pagination."""
+    is_resolved: builtins.bool
+    """Optional. Filter comments by their resolved status.
+    If unset, comments with any resolved status are returned.
+    """
+    @property
+    def session_filter(self) -> global___SessionFilter:
+        """Optional. A filter to narrow the response down to sessions of interest."""
+
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields gets returned."""
+
+    def __init__(
+        self,
+        *,
+        parent: builtins.str = ...,
+        session_filter: global___SessionFilter | None = ...,
+        page_token: builtins.str = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        is_resolved: builtins.bool | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "_is_resolved", b"_is_resolved", "field_mask", b"field_mask", "is_resolved", b"is_resolved", "session_filter", b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "_is_resolved", b"_is_resolved", "field_mask", b"field_mask", "is_resolved", b"is_resolved", "page_token", b"page_token", "parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_is_resolved", b"_is_resolved"]) -> typing.Literal["is_resolved"] | None: ...
+
+global___ListSessionCommentsOfAllSessionsRequest = ListSessionCommentsOfAllSessionsRequest
 
 @typing.final
 class ListSessionCommentsResponse(google.protobuf.message.Message):

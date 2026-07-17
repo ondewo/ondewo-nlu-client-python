@@ -73,6 +73,7 @@ from ondewo.nlu.session_pb2 import (
     ListPlatformsResponse,
     ListPropertyIdsOfAllSessionsRequest,
     ListPropertyIdsResponse,
+    ListSessionCommentsOfAllSessionsRequest,
     ListSessionCommentsRequest,
     ListSessionCommentsResponse,
     ListSessionLabelsOfAllSessionsRequest,
@@ -273,6 +274,15 @@ class Sessions(ServicesInterface):
 
     def list_session_comments(self, request: ListSessionCommentsRequest) -> ListSessionCommentsResponse:
         response: ListSessionCommentsResponse = self.stub.ListSessionComments(request, metadata=self.metadata)
+        return response
+
+    def list_session_comments_of_all_sessions(
+        self,
+        request: ListSessionCommentsOfAllSessionsRequest,
+    ) -> ListSessionCommentsResponse:
+        response: ListSessionCommentsResponse = self.stub.ListSessionCommentsOfAllSessions(
+            request, metadata=self.metadata
+        )
         return response
 
     def list_session_reviews(self, request: ListSessionReviewsRequest) -> ListSessionReviewsResponse:

@@ -192,6 +192,11 @@ class SessionsStub(object):
                 request_serializer=ondewo_dot_nlu_dot_session__pb2.ListSessionCommentsRequest.SerializeToString,
                 response_deserializer=ondewo_dot_nlu_dot_session__pb2.ListSessionCommentsResponse.FromString,
                 _registered_method=True)
+        self.ListSessionCommentsOfAllSessions = channel.unary_unary(
+                '/ondewo.nlu.Sessions/ListSessionCommentsOfAllSessions',
+                request_serializer=ondewo_dot_nlu_dot_session__pb2.ListSessionCommentsOfAllSessionsRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_session__pb2.ListSessionCommentsResponse.FromString,
+                _registered_method=True)
         self.ListSessionReviews = channel.unary_unary(
                 '/ondewo.nlu.Sessions/ListSessionReviews',
                 request_serializer=ondewo_dot_nlu_dot_session__pb2.ListSessionReviewsRequest.SerializeToString,
@@ -463,7 +468,15 @@ class SessionsServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def ListSessionComments(self, request, context):
-        """Lists the comments attached to a session with pagination support.
+        """Lists the comments attached to a session with pagination support, optionally narrowed by resolved status.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListSessionCommentsOfAllSessions(self, request, context):
+        """Lists the comments attached to all sessions of the agent with pagination support,
+        optionally narrowed by a SessionFilter and by resolved status.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -704,6 +717,11 @@ def add_SessionsServicer_to_server(servicer, server):
             'ListSessionComments': grpc.unary_unary_rpc_method_handler(
                     servicer.ListSessionComments,
                     request_deserializer=ondewo_dot_nlu_dot_session__pb2.ListSessionCommentsRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_session__pb2.ListSessionCommentsResponse.SerializeToString,
+            ),
+            'ListSessionCommentsOfAllSessions': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListSessionCommentsOfAllSessions,
+                    request_deserializer=ondewo_dot_nlu_dot_session__pb2.ListSessionCommentsOfAllSessionsRequest.FromString,
                     response_serializer=ondewo_dot_nlu_dot_session__pb2.ListSessionCommentsResponse.SerializeToString,
             ),
             'ListSessionReviews': grpc.unary_unary_rpc_method_handler(
@@ -1589,6 +1607,33 @@ class Sessions(object):
             target,
             '/ondewo.nlu.Sessions/ListSessionComments',
             ondewo_dot_nlu_dot_session__pb2.ListSessionCommentsRequest.SerializeToString,
+            ondewo_dot_nlu_dot_session__pb2.ListSessionCommentsResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def ListSessionCommentsOfAllSessions(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.Sessions/ListSessionCommentsOfAllSessions',
+            ondewo_dot_nlu_dot_session__pb2.ListSessionCommentsOfAllSessionsRequest.SerializeToString,
             ondewo_dot_nlu_dot_session__pb2.ListSessionCommentsResponse.FromString,
             options,
             channel_credentials,

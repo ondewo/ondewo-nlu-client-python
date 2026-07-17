@@ -332,6 +332,7 @@ class Comment(google.protobuf.message.Message):
     MODIFIED_AT_FIELD_NUMBER: builtins.int
     CREATED_BY_FIELD_NUMBER: builtins.int
     MODIFIED_BY_FIELD_NUMBER: builtins.int
+    IS_RESOLVED_FIELD_NUMBER: builtins.int
     name: builtins.str
     """resource name of the comment"""
     text: builtins.str
@@ -352,6 +353,8 @@ class Comment(google.protobuf.message.Message):
     """User id in form of a valid UUID."""
     modified_by: builtins.str
     """User id in form of a valid UUID."""
+    is_resolved: builtins.bool
+    """Whether the comment has been resolved. Defaults to false."""
     @property
     def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Creation date and time. Read-only field."""
@@ -372,9 +375,10 @@ class Comment(google.protobuf.message.Message):
         modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         created_by: builtins.str = ...,
         modified_by: builtins.str = ...,
+        is_resolved: builtins.bool = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["comment_about_name", b"comment_about_name", "created_at", b"created_at", "created_by", b"created_by", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "parent_comment_name", b"parent_comment_name", "text", b"text", "user_id", b"user_id"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["comment_about_name", b"comment_about_name", "created_at", b"created_at", "created_by", b"created_by", "is_resolved", b"is_resolved", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "parent_comment_name", b"parent_comment_name", "text", b"text", "user_id", b"user_id"]) -> None: ...
 
 global___Comment = Comment
 
