@@ -395,6 +395,30 @@ RAG_CRAWLER_AUTHENTICATION_EXECUTION_TYPE_CLIENT_SIDE: RagCrawlerAuthenticationE
 """Authentication execution type is client side."""
 global___RagCrawlerAuthenticationExecutionType = RagCrawlerAuthenticationExecutionType
 
+class _RagCrawlerPruningThresholdType:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _RagCrawlerPruningThresholdTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_RagCrawlerPruningThresholdType.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    RAG_CRAWLER_PRUNING_THRESHOLD_TYPE_UNSPECIFIED: _RagCrawlerPruningThresholdType.ValueType  # 0
+    """Unspecified (treated as FIXED)."""
+    RAG_CRAWLER_PRUNING_THRESHOLD_TYPE_FIXED: _RagCrawlerPruningThresholdType.ValueType  # 1
+    """Fixed cutoff: nodes scoring below <code>threshold</code> are removed."""
+    RAG_CRAWLER_PRUNING_THRESHOLD_TYPE_DYNAMIC: _RagCrawlerPruningThresholdType.ValueType  # 2
+    """Dynamic: the threshold is adjusted per-document by the pruning heuristic."""
+
+class RagCrawlerPruningThresholdType(_RagCrawlerPruningThresholdType, metaclass=_RagCrawlerPruningThresholdTypeEnumTypeWrapper):
+    """Interpretation of the density-pruning threshold."""
+
+RAG_CRAWLER_PRUNING_THRESHOLD_TYPE_UNSPECIFIED: RagCrawlerPruningThresholdType.ValueType  # 0
+"""Unspecified (treated as FIXED)."""
+RAG_CRAWLER_PRUNING_THRESHOLD_TYPE_FIXED: RagCrawlerPruningThresholdType.ValueType  # 1
+"""Fixed cutoff: nodes scoring below <code>threshold</code> are removed."""
+RAG_CRAWLER_PRUNING_THRESHOLD_TYPE_DYNAMIC: RagCrawlerPruningThresholdType.ValueType  # 2
+"""Dynamic: the threshold is adjusted per-document by the pruning heuristic."""
+global___RagCrawlerPruningThresholdType = RagCrawlerPruningThresholdType
+
 class _RagCrawlerMetaDataExtractorType:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
@@ -2800,6 +2824,7 @@ class RagCrawlerConfig(google.protobuf.message.Message):
     CONCURRENCY_CONFIG_FIELD_NUMBER: builtins.int
     DEEP_CRAWLER_CONFIG_FIELD_NUMBER: builtins.int
     OUTPUT_CONFIG_FIELD_NUMBER: builtins.int
+    STATUS_FILTER_FIELD_NUMBER: builtins.int
     @property
     def concurrency_config(self) -> global___RagCrawlerConcurrencyConfig:
         """Optional. Concurrency and pacing controls for crawler requests."""
@@ -2812,21 +2837,28 @@ class RagCrawlerConfig(google.protobuf.message.Message):
     def output_config(self) -> global___RagCrawlerResultsConfig:
         """Optional. Structured output configuration (format + metadata policy)."""
 
+    @property
+    def status_filter(self) -> global___RagCrawlerStatusFilter:
+        """Optional. HTTP status filtering: which fetched pages become result documents."""
+
     def __init__(
         self,
         *,
         concurrency_config: global___RagCrawlerConcurrencyConfig | None = ...,
         deep_crawler_config: global___RagCrawlerDeepCrawlerConfig | None = ...,
         output_config: global___RagCrawlerResultsConfig | None = ...,
+        status_filter: global___RagCrawlerStatusFilter | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_concurrency_config", b"_concurrency_config", "_deep_crawler_config", b"_deep_crawler_config", "_output_config", b"_output_config", "concurrency_config", b"concurrency_config", "deep_crawler_config", b"deep_crawler_config", "output_config", b"output_config"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_concurrency_config", b"_concurrency_config", "_deep_crawler_config", b"_deep_crawler_config", "_output_config", b"_output_config", "concurrency_config", b"concurrency_config", "deep_crawler_config", b"deep_crawler_config", "output_config", b"output_config"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_concurrency_config", b"_concurrency_config", "_deep_crawler_config", b"_deep_crawler_config", "_output_config", b"_output_config", "_status_filter", b"_status_filter", "concurrency_config", b"concurrency_config", "deep_crawler_config", b"deep_crawler_config", "output_config", b"output_config", "status_filter", b"status_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_concurrency_config", b"_concurrency_config", "_deep_crawler_config", b"_deep_crawler_config", "_output_config", b"_output_config", "_status_filter", b"_status_filter", "concurrency_config", b"concurrency_config", "deep_crawler_config", b"deep_crawler_config", "output_config", b"output_config", "status_filter", b"status_filter"]) -> None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_concurrency_config", b"_concurrency_config"]) -> typing.Literal["concurrency_config"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_deep_crawler_config", b"_deep_crawler_config"]) -> typing.Literal["deep_crawler_config"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_output_config", b"_output_config"]) -> typing.Literal["output_config"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_status_filter", b"_status_filter"]) -> typing.Literal["status_filter"] | None: ...
 
 global___RagCrawlerConfig = RagCrawlerConfig
 
@@ -2841,6 +2873,7 @@ class RagCrawlerDeepCrawlerConfig(google.protobuf.message.Message):
     MAX_DEPTH_FIELD_NUMBER: builtins.int
     MAX_PAGES_FIELD_NUMBER: builtins.int
     DEEP_CRAWLER_FILTERS_FIELD_NUMBER: builtins.int
+    NORMALIZE_URL_CASE_FIELD_NUMBER: builtins.int
     is_active: builtins.bool
     """Optional. Enable deep crawler behavior (link following beyond seeds).
     Default <code>false</code>. If <code>false</code>, <code>config</code> is ignored.
@@ -2856,6 +2889,8 @@ class RagCrawlerDeepCrawlerConfig(google.protobuf.message.Message):
     """
     max_pages: builtins.int
     """Optional. Hard cap on total processed pages for this run."""
+    normalize_url_case: builtins.bool
+    """Optional. Normalize URL case (lowercase the path) during link discovery/deduplication."""
     @property
     def deep_crawler_filters(self) -> global___RagCrawlerFilters:
         """Optional. URL and domain restrictions."""
@@ -2868,9 +2903,10 @@ class RagCrawlerDeepCrawlerConfig(google.protobuf.message.Message):
         max_depth: builtins.int | None = ...,
         max_pages: builtins.int | None = ...,
         deep_crawler_filters: global___RagCrawlerFilters | None = ...,
+        normalize_url_case: builtins.bool | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_crawl_strategy", b"_crawl_strategy", "_deep_crawler_filters", b"_deep_crawler_filters", "_is_active", b"_is_active", "_max_depth", b"_max_depth", "_max_pages", b"_max_pages", "crawl_strategy", b"crawl_strategy", "deep_crawler_filters", b"deep_crawler_filters", "is_active", b"is_active", "max_depth", b"max_depth", "max_pages", b"max_pages"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_crawl_strategy", b"_crawl_strategy", "_deep_crawler_filters", b"_deep_crawler_filters", "_is_active", b"_is_active", "_max_depth", b"_max_depth", "_max_pages", b"_max_pages", "crawl_strategy", b"crawl_strategy", "deep_crawler_filters", b"deep_crawler_filters", "is_active", b"is_active", "max_depth", b"max_depth", "max_pages", b"max_pages"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_crawl_strategy", b"_crawl_strategy", "_deep_crawler_filters", b"_deep_crawler_filters", "_is_active", b"_is_active", "_max_depth", b"_max_depth", "_max_pages", b"_max_pages", "_normalize_url_case", b"_normalize_url_case", "crawl_strategy", b"crawl_strategy", "deep_crawler_filters", b"deep_crawler_filters", "is_active", b"is_active", "max_depth", b"max_depth", "max_pages", b"max_pages", "normalize_url_case", b"normalize_url_case"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_crawl_strategy", b"_crawl_strategy", "_deep_crawler_filters", b"_deep_crawler_filters", "_is_active", b"_is_active", "_max_depth", b"_max_depth", "_max_pages", b"_max_pages", "_normalize_url_case", b"_normalize_url_case", "crawl_strategy", b"crawl_strategy", "deep_crawler_filters", b"deep_crawler_filters", "is_active", b"is_active", "max_depth", b"max_depth", "max_pages", b"max_pages", "normalize_url_case", b"normalize_url_case"]) -> None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_crawl_strategy", b"_crawl_strategy"]) -> typing.Literal["crawl_strategy"] | None: ...
     @typing.overload
@@ -2881,6 +2917,8 @@ class RagCrawlerDeepCrawlerConfig(google.protobuf.message.Message):
     def WhichOneof(self, oneof_group: typing.Literal["_max_depth", b"_max_depth"]) -> typing.Literal["max_depth"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_max_pages", b"_max_pages"]) -> typing.Literal["max_pages"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_normalize_url_case", b"_normalize_url_case"]) -> typing.Literal["normalize_url_case"] | None: ...
 
 global___RagCrawlerDeepCrawlerConfig = RagCrawlerDeepCrawlerConfig
 
@@ -2896,6 +2934,8 @@ class RagCrawlerResultsConfig(google.protobuf.message.Message):
 
     INJECT_FRONTMATTER_FIELD_NUMBER: builtins.int
     META_DATA_EXTRACTORS_FIELD_NUMBER: builtins.int
+    CONTENT_SCOPE_FIELD_NUMBER: builtins.int
+    DENSITY_PRUNING_FIELD_NUMBER: builtins.int
     inject_frontmatter: builtins.bool
     """Optional. Inject YAML frontmatter into markdown output.
     If the content is HTML based, it will automatically be converted to markdown.
@@ -2906,17 +2946,107 @@ class RagCrawlerResultsConfig(google.protobuf.message.Message):
     def meta_data_extractors(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagCrawlerMetaDataExtractor]:
         """Optional. Metadata extractors."""
 
+    @property
+    def content_scope(self) -> global___RagCrawlerContentScope:
+        """Optional. CSS-selector based content scoping for markdown extraction."""
+
+    @property
+    def density_pruning(self) -> global___RagCrawlerDensityPruning:
+        """Optional. Density-based content pruning (Crawl4AI PruningContentFilter).
+        If not set the <code>RagCrawlerDensityPruning</code> defaults are used.
+        """
+
     def __init__(
         self,
         *,
         inject_frontmatter: builtins.bool | None = ...,
         meta_data_extractors: collections.abc.Iterable[global___RagCrawlerMetaDataExtractor] | None = ...,
+        content_scope: global___RagCrawlerContentScope | None = ...,
+        density_pruning: global___RagCrawlerDensityPruning | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_inject_frontmatter", b"_inject_frontmatter", "inject_frontmatter", b"inject_frontmatter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_inject_frontmatter", b"_inject_frontmatter", "inject_frontmatter", b"inject_frontmatter", "meta_data_extractors", b"meta_data_extractors"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_content_scope", b"_content_scope", "_density_pruning", b"_density_pruning", "_inject_frontmatter", b"_inject_frontmatter", "content_scope", b"content_scope", "density_pruning", b"density_pruning", "inject_frontmatter", b"inject_frontmatter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_content_scope", b"_content_scope", "_density_pruning", b"_density_pruning", "_inject_frontmatter", b"_inject_frontmatter", "content_scope", b"content_scope", "density_pruning", b"density_pruning", "inject_frontmatter", b"inject_frontmatter", "meta_data_extractors", b"meta_data_extractors"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_content_scope", b"_content_scope"]) -> typing.Literal["content_scope"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_density_pruning", b"_density_pruning"]) -> typing.Literal["density_pruning"] | None: ...
+    @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_inject_frontmatter", b"_inject_frontmatter"]) -> typing.Literal["inject_frontmatter"] | None: ...
 
 global___RagCrawlerResultsConfig = RagCrawlerResultsConfig
+
+@typing.final
+class RagCrawlerContentScope(google.protobuf.message.Message):
+    """CSS-selector based content scoping for markdown extraction.
+
+    When set, Markdown is generated only from the elements matched by <code>include_selectors</code> (if any), after removing elements matched by <code>exclude_selectors</code>.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    INCLUDE_SELECTORS_FIELD_NUMBER: builtins.int
+    EXCLUDE_SELECTORS_FIELD_NUMBER: builtins.int
+    @property
+    def include_selectors(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. CSS selectors to scope extraction to (keep only matching subtrees).
+        Empty means the whole page is used.
+        """
+
+    @property
+    def exclude_selectors(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. CSS selectors whose matching elements are removed before extraction (e.g. navigation, footer, sidebars, internal-only blocks)."""
+
+    def __init__(
+        self,
+        *,
+        include_selectors: collections.abc.Iterable[builtins.str] | None = ...,
+        exclude_selectors: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["exclude_selectors", b"exclude_selectors", "include_selectors", b"include_selectors"]) -> None: ...
+
+global___RagCrawlerContentScope = RagCrawlerContentScope
+
+@typing.final
+class RagCrawlerDensityPruning(google.protobuf.message.Message):
+    """Density-based content pruning (Crawl4AI PruningContentFilter).
+
+    Removes low-text-density and very short nodes by a composite density score.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    IS_ACTIVE_FIELD_NUMBER: builtins.int
+    THRESHOLD_FIELD_NUMBER: builtins.int
+    THRESHOLD_TYPE_FIELD_NUMBER: builtins.int
+    MIN_WORD_THRESHOLD_FIELD_NUMBER: builtins.int
+    is_active: builtins.bool
+    """Optional. Enable density pruning. Default <code>true</code>."""
+    threshold: builtins.float
+    """Optional. Density score threshold. Default <code>0.5</code>."""
+    threshold_type: global___RagCrawlerPruningThresholdType.ValueType
+    """Optional. Threshold interpretation. Default <code>RAG_CRAWLER_PRUNING_THRESHOLD_TYPE_FIXED</code>."""
+    min_word_threshold: builtins.int
+    """Optional. Nodes with fewer than this many words are removed. Default <code>10</code>."""
+    def __init__(
+        self,
+        *,
+        is_active: builtins.bool | None = ...,
+        threshold: builtins.float | None = ...,
+        threshold_type: global___RagCrawlerPruningThresholdType.ValueType | None = ...,
+        min_word_threshold: builtins.int | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_is_active", b"_is_active", "_min_word_threshold", b"_min_word_threshold", "_threshold", b"_threshold", "_threshold_type", b"_threshold_type", "is_active", b"is_active", "min_word_threshold", b"min_word_threshold", "threshold", b"threshold", "threshold_type", b"threshold_type"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_is_active", b"_is_active", "_min_word_threshold", b"_min_word_threshold", "_threshold", b"_threshold", "_threshold_type", b"_threshold_type", "is_active", b"is_active", "min_word_threshold", b"min_word_threshold", "threshold", b"threshold", "threshold_type", b"threshold_type"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_is_active", b"_is_active"]) -> typing.Literal["is_active"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_min_word_threshold", b"_min_word_threshold"]) -> typing.Literal["min_word_threshold"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_threshold", b"_threshold"]) -> typing.Literal["threshold"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_threshold_type", b"_threshold_type"]) -> typing.Literal["threshold_type"] | None: ...
+
+global___RagCrawlerDensityPruning = RagCrawlerDensityPruning
 
 @typing.final
 class RagCrawlerMetaDataExtractor(google.protobuf.message.Message):
@@ -2977,6 +3107,35 @@ class RagCrawlerRetryConfig(google.protobuf.message.Message):
     def WhichOneof(self, oneof_group: typing.Literal["_retry_max_attempts", b"_retry_max_attempts"]) -> typing.Literal["retry_max_attempts"] | None: ...
 
 global___RagCrawlerRetryConfig = RagCrawlerRetryConfig
+
+@typing.final
+class RagCrawlerStatusFilter(google.protobuf.message.Message):
+    """HTTP status filtering for crawled pages.
+
+    When active, a fetched page becomes a result document only if its HTTP status is accepted.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    IS_ACTIVE_FIELD_NUMBER: builtins.int
+    ACCEPTED_STATUS_CODES_FIELD_NUMBER: builtins.int
+    is_active: builtins.bool
+    """Optional. Enable HTTP status filtering. Default <code>false</code>."""
+    @property
+    def accepted_status_codes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
+        """Optional. Accepted HTTP status codes. If empty while active, only the 2xx range (<code>200</code>-<code>299</code>) is accepted. Add specific codes here to accept extras."""
+
+    def __init__(
+        self,
+        *,
+        is_active: builtins.bool | None = ...,
+        accepted_status_codes: collections.abc.Iterable[builtins.int] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_is_active", b"_is_active", "is_active", b"is_active"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_is_active", b"_is_active", "accepted_status_codes", b"accepted_status_codes", "is_active", b"is_active"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_is_active", b"_is_active"]) -> typing.Literal["is_active"] | None: ...
+
+global___RagCrawlerStatusFilter = RagCrawlerStatusFilter
 
 @typing.final
 class RagCrawlerContentResult(google.protobuf.message.Message):
