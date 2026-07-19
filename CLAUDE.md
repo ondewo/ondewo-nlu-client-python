@@ -172,6 +172,22 @@ Raises:
 - Prefer region comments for grouping methods in files that already use them.
 - End edited Markdown and YAML files with a trailing newline.
 
+## Regenerating stubs after an API change
+
+Point the `ondewo-nlu-api` submodule at the api commit
+(`git -C ondewo-nlu-api fetch origin <branch> && git -C ondewo-nlu-api checkout <api-sha>`), then run
+**both** generators — they are different:
+
+- `make generate_ondewo_protos` — the `*_pb2.py` / `*_pb2.pyi` / `*_pb2_grpc.py` family.
+- `make generate_services` — the hand-generator that produces `ondewo/nlu/services/*.py` (+
+  `create_async_services` derives `async_*.py` / `client.py`). **A new RPC needs THIS too**, or the
+  service client has no method for it. A server-streaming RPC generates a method returning
+  `Iterator[<ResponseMessage>]` (async: `AsyncIterator[…]`) in `services/<service>.py`. Do **not** run the
+  full `make build` (it resets the submodule off your commit). Verified 2026-07-19 (OND211-2418): the
+  container-logs RPCs needed both generators; running only `generate_ondewo_protos` leaves
+  `services/operations.py` without the new methods. Commit the `_pb2*` + `services/*` changes together with
+  the submodule pointer; push and hand the client SHA to cai's `pyproject.toml` pin.
+
 ## Release gotchas (hard-won this session)
 
 These bit us during the 6.14.0 release. Keep them in mind when releasing.
@@ -208,3 +224,14 @@ The repo is now fully on **uv** (not just pyproject.toml):
 - **`[tool.mypy] python_version` must be `3.12`** wherever numpy 2.x is on the mypy path — its PEP-695 `type X = …` stubs fail to parse on < 3.12.
 - The release `git commit` uses **`--no-verify`** so pre-commit hooks never gate an automated release.
 - **Validated by a real PyPI publish** — `ondewo-t2s-client 6.5.0` was built with `uv build` and uploaded via twine end-to-end; the uv release pipeline works.
+
+## Jenkins — never trigger a multibranch scan or branch indexing
+
+**NEVER trigger a Jenkins multibranch scan or branch indexing.** Do not call a multibranch/folder job's
+`build`, `scan`, or reindex endpoints, click "Scan Repository Now" / "Build Now" on a folder, run
+`p4 scan`, or use any API/CLI that reindexes branches or scans the repository. A scan/reindex runs across
+**every** branch, consumes CI resources, and can kick off unintended builds and deploys.
+
+If a branch is not building — it was not discovered, or its job is marked `buildable: false` / orphaned —
+**report it and stop**. Let the user or a Jenkins admin adjust branch-discovery/config or rename the branch
+to the convention. Never force a build by scanning or reindexing.
