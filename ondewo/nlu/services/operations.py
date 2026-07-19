@@ -21,15 +21,23 @@
 #       ondewo-nlu-api/ondewo/nlu ondewo/nlu/services
 # ---------------------------------------------------------------------------
 
+from typing import Iterator
+
 from google.protobuf.empty_pb2 import Empty
 
 from ondewo.nlu.operations_pb2 import (
     CancelOperationRequest,
     DeleteOperationRequest,
     GetOperationRequest,
+    GetRemoteOperationContainerLogsRequest,
+    GetRemoteOperationContainerLogsResponse,
+    GetRemoteOperationContainerStatusRequest,
     ListOperationsRequest,
     ListOperationsResponse,
     Operation,
+    RemoteOperationContainerLogLine,
+    RemoteOperationContainerStatus,
+    StreamRemoteOperationContainerLogsRequest,
 )
 from ondewo.nlu.operations_pb2_grpc import OperationsStub
 from ondewo.nlu.core.services_interface import ServicesInterface
@@ -61,4 +69,31 @@ class Operations(ServicesInterface):
 
     def cancel_operation(self, request: CancelOperationRequest) -> Empty:
         response: Empty = self.stub.CancelOperation(request, metadata=self.metadata)
+        return response
+
+    def stream_remote_operation_container_logs(
+        self,
+        request: StreamRemoteOperationContainerLogsRequest,
+    ) -> Iterator[RemoteOperationContainerLogLine]:
+        response: Iterator[RemoteOperationContainerLogLine] = self.stub.StreamRemoteOperationContainerLogs(
+            request, metadata=self.metadata
+        )
+        return response
+
+    def get_remote_operation_container_logs(
+        self,
+        request: GetRemoteOperationContainerLogsRequest,
+    ) -> GetRemoteOperationContainerLogsResponse:
+        response: GetRemoteOperationContainerLogsResponse = self.stub.GetRemoteOperationContainerLogs(
+            request, metadata=self.metadata
+        )
+        return response
+
+    def get_remote_operation_container_status(
+        self,
+        request: GetRemoteOperationContainerStatusRequest,
+    ) -> RemoteOperationContainerStatus:
+        response: RemoteOperationContainerStatus = self.stub.GetRemoteOperationContainerStatus(
+            request, metadata=self.metadata
+        )
         return response
