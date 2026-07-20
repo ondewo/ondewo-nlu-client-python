@@ -229,6 +229,8 @@ class _NotificationOriginEnumTypeWrapper(google.protobuf.internal.enum_type_wrap
     """ondewo-vtsi service"""
     NOTIFICATION_ORIGIN_ONDEWO_VTSI_RABBITMQ: _NotificationOrigin.ValueType  # 9
     """ondewo-vtsi-rabbitmq service"""
+    NOTIFICATION_ORIGIN_ONDEWO_SURVEY: _NotificationOrigin.ValueType  # 10
+    """ondewo-survey service"""
 
 class NotificationOrigin(_NotificationOrigin, metaclass=_NotificationOriginEnumTypeWrapper):
     """Enumerates the possible origins for a notification."""
@@ -253,6 +255,8 @@ NOTIFICATION_ORIGIN_ONDEWO_VTSI: NotificationOrigin.ValueType  # 8
 """ondewo-vtsi service"""
 NOTIFICATION_ORIGIN_ONDEWO_VTSI_RABBITMQ: NotificationOrigin.ValueType  # 9
 """ondewo-vtsi-rabbitmq service"""
+NOTIFICATION_ORIGIN_ONDEWO_SURVEY: NotificationOrigin.ValueType  # 10
+"""ondewo-survey service"""
 global___NotificationOrigin = NotificationOrigin
 
 class _LogSeverity:
@@ -410,6 +414,7 @@ class Notification(google.protobuf.message.Message):
     MODIFIED_AT_FIELD_NUMBER: builtins.int
     CREATED_BY_FIELD_NUMBER: builtins.int
     MODIFIED_BY_FIELD_NUMBER: builtins.int
+    LINK_FIELD_NUMBER: builtins.int
     name: builtins.str
     """resource name of the notification"""
     user_name: builtins.str
@@ -444,6 +449,10 @@ class Notification(google.protobuf.message.Message):
     """User id in form of a valid UUID."""
     modified_by: builtins.str
     """User id in form of a valid UUID."""
+    link: builtins.str
+    """Optional deep-link / route target the notification navigates to when clicked, e.g. a relative AIM route to
+    the referenced intent or entity. Empty when the notification is not clickable.
+    """
     @property
     def notification_flagged_timestamp(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """When the user marked the notification as read"""
@@ -481,9 +490,10 @@ class Notification(google.protobuf.message.Message):
         modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         created_by: builtins.str = ...,
         modified_by: builtins.str = ...,
+        link: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at", "notification_flagged_timestamp", b"notification_flagged_timestamp", "notification_read_timestamp", b"notification_read_timestamp"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["created_at", b"created_at", "created_by", b"created_by", "description_long", b"description_long", "description_short", b"description_short", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "notification_flagged_status", b"notification_flagged_status", "notification_flagged_timestamp", b"notification_flagged_timestamp", "notification_origin", b"notification_origin", "notification_read_status", b"notification_read_status", "notification_read_timestamp", b"notification_read_timestamp", "notification_type", b"notification_type", "notification_visibility", b"notification_visibility", "origin_language", b"origin_language", "origin_name", b"origin_name", "title", b"title", "user_name", b"user_name"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["created_at", b"created_at", "created_by", b"created_by", "description_long", b"description_long", "description_short", b"description_short", "link", b"link", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "notification_flagged_status", b"notification_flagged_status", "notification_flagged_timestamp", b"notification_flagged_timestamp", "notification_origin", b"notification_origin", "notification_read_status", b"notification_read_status", "notification_read_timestamp", b"notification_read_timestamp", "notification_type", b"notification_type", "notification_visibility", b"notification_visibility", "origin_language", b"origin_language", "origin_name", b"origin_name", "title", b"title", "user_name", b"user_name"]) -> None: ...
 
 global___Notification = Notification
 
@@ -550,6 +560,7 @@ class NotificationFilter(google.protobuf.message.Message):
     LATEST_FIELD_NUMBER: builtins.int
     USER_NAMES_FIELD_NUMBER: builtins.int
     ORIGIN_NAMES_FIELD_NUMBER: builtins.int
+    NOTIFICATION_TYPES_FIELD_NUMBER: builtins.int
     @property
     def language_codes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Language codes of the projects for which notifications are filtered."""
@@ -586,6 +597,10 @@ class NotificationFilter(google.protobuf.message.Message):
     def origin_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Resource names of the origin of the notification to filter notifications."""
 
+    @property
+    def notification_types(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[global___NotificationType.ValueType]:
+        """Types of the notifications to filter."""
+
     def __init__(
         self,
         *,
@@ -598,9 +613,10 @@ class NotificationFilter(google.protobuf.message.Message):
         latest: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         user_names: collections.abc.Iterable[builtins.str] | None = ...,
         origin_names: collections.abc.Iterable[builtins.str] | None = ...,
+        notification_types: collections.abc.Iterable[global___NotificationType.ValueType] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["earliest", b"earliest", "latest", b"latest"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["earliest", b"earliest", "language_codes", b"language_codes", "latest", b"latest", "notification_flagged_status", b"notification_flagged_status", "notification_origins", b"notification_origins", "notification_read_status", b"notification_read_status", "notification_visibilities", b"notification_visibilities", "origin_names", b"origin_names", "user_names", b"user_names"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["earliest", b"earliest", "language_codes", b"language_codes", "latest", b"latest", "notification_flagged_status", b"notification_flagged_status", "notification_origins", b"notification_origins", "notification_read_status", b"notification_read_status", "notification_types", b"notification_types", "notification_visibilities", b"notification_visibilities", "origin_names", b"origin_names", "user_names", b"user_names"]) -> None: ...
 
 global___NotificationFilter = NotificationFilter
 
