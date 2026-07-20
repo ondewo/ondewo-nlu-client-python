@@ -269,6 +269,65 @@ ENDS_WITH: ComparisonOperator.ValueType  # 6
 """ends with operator for string comparison only"""
 global___ComparisonOperator = ComparisonOperator
 
+class _FeedbackRating:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _FeedbackRatingEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_FeedbackRating.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    FEEDBACK_RATING_UNSPECIFIED: _FeedbackRating.ValueType  # 0
+    """No rating provided (e.g. a comment-only feedback)."""
+    FEEDBACK_RATING_THUMBS_UP: _FeedbackRating.ValueType  # 1
+    """Positive feedback (thumbs up)."""
+    FEEDBACK_RATING_THUMBS_DOWN: _FeedbackRating.ValueType  # 2
+    """Negative feedback (thumbs down)."""
+
+class FeedbackRating(_FeedbackRating, metaclass=_FeedbackRatingEnumTypeWrapper):
+    """*** SESSION-FEEDBACK RELATED MESSAGES *** //
+
+    The thumbs rating a user gives as feedback.
+    """
+
+FEEDBACK_RATING_UNSPECIFIED: FeedbackRating.ValueType  # 0
+"""No rating provided (e.g. a comment-only feedback)."""
+FEEDBACK_RATING_THUMBS_UP: FeedbackRating.ValueType  # 1
+"""Positive feedback (thumbs up)."""
+FEEDBACK_RATING_THUMBS_DOWN: FeedbackRating.ValueType  # 2
+"""Negative feedback (thumbs down)."""
+global___FeedbackRating = FeedbackRating
+
+class _FeedbackAuthorType:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _FeedbackAuthorTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_FeedbackAuthorType.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    FEEDBACK_AUTHOR_TYPE_UNSPECIFIED: _FeedbackAuthorType.ValueType  # 0
+    """Unknown author type."""
+    FEEDBACK_AUTHOR_TYPE_HUMAN_REVIEWER: _FeedbackAuthorType.ValueType  # 1
+    """A logged-in human reviewer / test user (an authenticated Keycloak identity; annotator_user_id is set)."""
+    FEEDBACK_AUTHOR_TYPE_TECHNICAL_USER: _FeedbackAuthorType.ValueType  # 2
+    """A technical / service user."""
+    FEEDBACK_AUTHOR_TYPE_END_USER_ANONYMOUS: _FeedbackAuthorType.ValueType  # 3
+    """An anonymous production end-user of the webchat / webphone channel (no authenticated identity;
+    identified only by the session and channel origin).
+    """
+
+class FeedbackAuthorType(_FeedbackAuthorType, metaclass=_FeedbackAuthorTypeEnumTypeWrapper):
+    """Who left a piece of feedback — distinguishes trusted reviewers from anonymous production end-users."""
+
+FEEDBACK_AUTHOR_TYPE_UNSPECIFIED: FeedbackAuthorType.ValueType  # 0
+"""Unknown author type."""
+FEEDBACK_AUTHOR_TYPE_HUMAN_REVIEWER: FeedbackAuthorType.ValueType  # 1
+"""A logged-in human reviewer / test user (an authenticated Keycloak identity; annotator_user_id is set)."""
+FEEDBACK_AUTHOR_TYPE_TECHNICAL_USER: FeedbackAuthorType.ValueType  # 2
+"""A technical / service user."""
+FEEDBACK_AUTHOR_TYPE_END_USER_ANONYMOUS: FeedbackAuthorType.ValueType  # 3
+"""An anonymous production end-user of the webchat / webphone channel (no authenticated identity;
+identified only by the session and channel origin).
+"""
+global___FeedbackAuthorType = FeedbackAuthorType
+
 class _ResourceView:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
@@ -5072,6 +5131,580 @@ class ListSessionCommentsResponse(google.protobuf.message.Message):
     def ClearField(self, field_name: typing.Literal["comment", b"comment", "page_token", b"page_token"]) -> None: ...
 
 global___ListSessionCommentsResponse = ListSessionCommentsResponse
+
+@typing.final
+class SessionFeedback(google.protobuf.message.Message):
+    """A single piece of user feedback about a whole session or a single session step (turn).
+
+    The rating is intentionally extensible: <code>rating</code> carries the thumbs signal surfaced in the UI
+    today, while <code>score</code> and <code>categorical_value</code> allow richer scales (star / NPS / CSAT)
+    to be added later without a schema change. The feedback is pinned to the exact forensic context it is
+    about (<code>session_id</code>, <code>session_step_id</code>, <code>response_id</code>,
+    <code>session_step_llm_telemetry_id</code>) so the full conversation state up to the feedback can be
+    reconstructed from the already-persisted session step.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    NAME_FIELD_NUMBER: builtins.int
+    SESSION_ID_FIELD_NUMBER: builtins.int
+    SESSION_STEP_ID_FIELD_NUMBER: builtins.int
+    RESPONSE_ID_FIELD_NUMBER: builtins.int
+    SESSION_STEP_LLM_TELEMETRY_ID_FIELD_NUMBER: builtins.int
+    RATING_FIELD_NUMBER: builtins.int
+    CATEGORICAL_VALUE_FIELD_NUMBER: builtins.int
+    SCORE_FIELD_NUMBER: builtins.int
+    COMMENT_FIELD_NUMBER: builtins.int
+    CRITERION_FIELD_NUMBER: builtins.int
+    AUTHOR_TYPE_FIELD_NUMBER: builtins.int
+    ANNOTATOR_USER_ID_FIELD_NUMBER: builtins.int
+    ORIGIN_ID_FIELD_NUMBER: builtins.int
+    IDENTIFIED_USER_ID_FIELD_NUMBER: builtins.int
+    RAW_FIELD_NUMBER: builtins.int
+    CREATED_AT_FIELD_NUMBER: builtins.int
+    MODIFIED_AT_FIELD_NUMBER: builtins.int
+    CREATED_BY_FIELD_NUMBER: builtins.int
+    MODIFIED_BY_FIELD_NUMBER: builtins.int
+    name: builtins.str
+    """The resource name of the feedback.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/feedback/&lt;feedback_uuid&gt;</code></pre>
+    """
+    session_id: builtins.str
+    """The session this feedback belongs to.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
+    """
+    session_step_id: builtins.str
+    """The session step (turn) this feedback targets. Empty for session-level feedback."""
+    response_id: builtins.str
+    """Optional. The specific detect-intent response this feedback pins."""
+    session_step_llm_telemetry_id: builtins.str
+    """Optional. The specific LLM-telemetry sub-event (llm call / tool call) this feedback pins."""
+    rating: global___FeedbackRating.ValueType
+    """The thumbs rating."""
+    categorical_value: builtins.str
+    """Optional. An extensible categorical value (e.g. star bucket, NPS/CSAT bucket)."""
+    score: builtins.float
+    """Optional. A numeric score in [0, 1] for future continuous scales."""
+    comment: builtins.str
+    """Optional. Free-text comment."""
+    criterion: builtins.str
+    """Optional. A dimension the feedback is about (e.g. "helpfulness", "accuracy")."""
+    author_type: global___FeedbackAuthorType.ValueType
+    """Who left the feedback."""
+    annotator_user_id: builtins.str
+    """The authenticated author's user id (Keycloak sub); empty for anonymous end-users."""
+    origin_id: builtins.str
+    """Optional. The channel origin id (webchat / webphone) identifying an anonymous end-user."""
+    identified_user_id: builtins.str
+    """Optional. The identified end-user id, when the channel provides one."""
+    created_by: builtins.str
+    """Who created the feedback."""
+    modified_by: builtins.str
+    """Who last modified the feedback."""
+    @property
+    def raw(self) -> google.protobuf.struct_pb2.Struct:
+        """Optional. An extensibility escape hatch for channel-specific metadata."""
+
+    @property
+    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """When the feedback was created."""
+
+    @property
+    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """When the feedback was last modified."""
+
+    def __init__(
+        self,
+        *,
+        name: builtins.str = ...,
+        session_id: builtins.str = ...,
+        session_step_id: builtins.str = ...,
+        response_id: builtins.str = ...,
+        session_step_llm_telemetry_id: builtins.str = ...,
+        rating: global___FeedbackRating.ValueType = ...,
+        categorical_value: builtins.str = ...,
+        score: builtins.float = ...,
+        comment: builtins.str = ...,
+        criterion: builtins.str = ...,
+        author_type: global___FeedbackAuthorType.ValueType = ...,
+        annotator_user_id: builtins.str = ...,
+        origin_id: builtins.str = ...,
+        identified_user_id: builtins.str = ...,
+        raw: google.protobuf.struct_pb2.Struct | None = ...,
+        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        created_by: builtins.str = ...,
+        modified_by: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at", "raw", b"raw"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["annotator_user_id", b"annotator_user_id", "author_type", b"author_type", "categorical_value", b"categorical_value", "comment", b"comment", "created_at", b"created_at", "created_by", b"created_by", "criterion", b"criterion", "identified_user_id", b"identified_user_id", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "origin_id", b"origin_id", "rating", b"rating", "raw", b"raw", "response_id", b"response_id", "score", b"score", "session_id", b"session_id", "session_step_id", b"session_step_id", "session_step_llm_telemetry_id", b"session_step_llm_telemetry_id"]) -> None: ...
+
+global___SessionFeedback = SessionFeedback
+
+@typing.final
+class AddSessionFeedbackRequest(google.protobuf.message.Message):
+    """Request to record feedback about a whole session."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    SESSION_ID_FIELD_NUMBER: builtins.int
+    FEEDBACK_FIELD_NUMBER: builtins.int
+    session_id: builtins.str
+    """The id of the session."""
+    @property
+    def feedback(self) -> global___SessionFeedback:
+        """The feedback to record. session_step_id is left empty for session-level feedback."""
+
+    def __init__(
+        self,
+        *,
+        session_id: builtins.str = ...,
+        feedback: global___SessionFeedback | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["feedback", b"feedback"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["feedback", b"feedback", "session_id", b"session_id"]) -> None: ...
+
+global___AddSessionFeedbackRequest = AddSessionFeedbackRequest
+
+@typing.final
+class AddSessionStepFeedbackRequest(google.protobuf.message.Message):
+    """Request to record feedback about a single session step (turn)."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    SESSION_ID_FIELD_NUMBER: builtins.int
+    SESSION_STEP_ID_FIELD_NUMBER: builtins.int
+    FEEDBACK_FIELD_NUMBER: builtins.int
+    session_id: builtins.str
+    """The id of the session."""
+    session_step_id: builtins.str
+    """The id of the session step (turn) the feedback is about."""
+    @property
+    def feedback(self) -> global___SessionFeedback:
+        """The feedback to record."""
+
+    def __init__(
+        self,
+        *,
+        session_id: builtins.str = ...,
+        session_step_id: builtins.str = ...,
+        feedback: global___SessionFeedback | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["feedback", b"feedback"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["feedback", b"feedback", "session_id", b"session_id", "session_step_id", b"session_step_id"]) -> None: ...
+
+global___AddSessionStepFeedbackRequest = AddSessionStepFeedbackRequest
+
+@typing.final
+class GetSessionFeedbackRequest(google.protobuf.message.Message):
+    """Request to fetch a single feedback by resource name."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    NAME_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
+    name: builtins.str
+    """The resource name of the feedback."""
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields get returned."""
+
+    def __init__(
+        self,
+        *,
+        name: builtins.str = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "name", b"name"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
+
+global___GetSessionFeedbackRequest = GetSessionFeedbackRequest
+
+@typing.final
+class UpdateSessionFeedbackRequest(google.protobuf.message.Message):
+    """Request to update (revise) an existing feedback."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    FEEDBACK_FIELD_NUMBER: builtins.int
+    UPDATE_MASK_FIELD_NUMBER: builtins.int
+    @property
+    def feedback(self) -> global___SessionFeedback:
+        """The feedback to update; feedback.name identifies the record."""
+
+    @property
+    def update_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The fields of the feedback to update."""
+
+    def __init__(
+        self,
+        *,
+        feedback: global___SessionFeedback | None = ...,
+        update_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["feedback", b"feedback", "update_mask", b"update_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["feedback", b"feedback", "update_mask", b"update_mask"]) -> None: ...
+
+global___UpdateSessionFeedbackRequest = UpdateSessionFeedbackRequest
+
+@typing.final
+class DeleteSessionFeedbackRequest(google.protobuf.message.Message):
+    """Request to delete (withdraw) a feedback."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    NAME_FIELD_NUMBER: builtins.int
+    name: builtins.str
+    """The resource name of the feedback to delete."""
+    def __init__(
+        self,
+        *,
+        name: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["name", b"name"]) -> None: ...
+
+global___DeleteSessionFeedbackRequest = DeleteSessionFeedbackRequest
+
+@typing.final
+class ListSessionFeedbackRequest(google.protobuf.message.Message):
+    """Request to list all feedback attached to a session."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    SESSION_ID_FIELD_NUMBER: builtins.int
+    PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
+    session_id: builtins.str
+    """The id of the session."""
+    page_token: builtins.str
+    """Optional. The page token to support pagination."""
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields get returned."""
+
+    def __init__(
+        self,
+        *,
+        session_id: builtins.str = ...,
+        page_token: builtins.str = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "page_token", b"page_token", "session_id", b"session_id"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
+
+global___ListSessionFeedbackRequest = ListSessionFeedbackRequest
+
+@typing.final
+class ListSessionFeedbackOfAllSessionsRequest(google.protobuf.message.Message):
+    """Request to list feedback across all sessions of an agent."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PARENT_FIELD_NUMBER: builtins.int
+    SESSION_FILTER_FIELD_NUMBER: builtins.int
+    PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """The parent for which the feedback of all sessions should be listed.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
+    page_token: builtins.str
+    """Optional. The page token to support pagination."""
+    @property
+    def session_filter(self) -> global___SessionFilter:
+        """Optional. A filter to narrow the response down to sessions of interest."""
+
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields get returned."""
+
+    def __init__(
+        self,
+        *,
+        parent: builtins.str = ...,
+        session_filter: global___SessionFilter | None = ...,
+        page_token: builtins.str = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "page_token", b"page_token", "parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
+
+global___ListSessionFeedbackOfAllSessionsRequest = ListSessionFeedbackOfAllSessionsRequest
+
+@typing.final
+class ListSessionFeedbackResponse(google.protobuf.message.Message):
+    """A page of feedback."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    FEEDBACK_FIELD_NUMBER: builtins.int
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    next_page_token: builtins.str
+    """The page token for the next page (empty when there are no more pages)."""
+    @property
+    def feedback(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___SessionFeedback]:
+        """The feedback of the requested scope."""
+
+    def __init__(
+        self,
+        *,
+        feedback: collections.abc.Iterable[global___SessionFeedback] | None = ...,
+        next_page_token: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["feedback", b"feedback", "next_page_token", b"next_page_token"]) -> None: ...
+
+global___ListSessionFeedbackResponse = ListSessionFeedbackResponse
+
+@typing.final
+class FeedbackBreakdownBucket(google.protobuf.message.Message):
+    """A key + up/down counts breakdown bucket (by language / intent / author type / ...)."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    KEY_FIELD_NUMBER: builtins.int
+    THUMBS_UP_COUNT_FIELD_NUMBER: builtins.int
+    THUMBS_DOWN_COUNT_FIELD_NUMBER: builtins.int
+    TOTAL_FIELD_NUMBER: builtins.int
+    key: builtins.str
+    """The bucket key (e.g. a language code, an intent display name, an author type)."""
+    thumbs_up_count: builtins.int
+    """Number of thumbs-up feedback in this bucket."""
+    thumbs_down_count: builtins.int
+    """Number of thumbs-down feedback in this bucket."""
+    total: builtins.int
+    """Total feedback in this bucket (including unrated comment-only feedback)."""
+    def __init__(
+        self,
+        *,
+        key: builtins.str = ...,
+        thumbs_up_count: builtins.int = ...,
+        thumbs_down_count: builtins.int = ...,
+        total: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["key", b"key", "thumbs_down_count", b"thumbs_down_count", "thumbs_up_count", b"thumbs_up_count", "total", b"total"]) -> None: ...
+
+global___FeedbackBreakdownBucket = FeedbackBreakdownBucket
+
+@typing.final
+class FeedbackStatistics(google.protobuf.message.Message):
+    """Aggregated feedback statistics for an agent."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TOTAL_FEEDBACK_FIELD_NUMBER: builtins.int
+    THUMBS_UP_COUNT_FIELD_NUMBER: builtins.int
+    THUMBS_DOWN_COUNT_FIELD_NUMBER: builtins.int
+    SESSION_LEVEL_COUNT_FIELD_NUMBER: builtins.int
+    SESSION_STEP_LEVEL_COUNT_FIELD_NUMBER: builtins.int
+    COMMENT_COUNT_FIELD_NUMBER: builtins.int
+    SESSION_REVIEW_COUNT_FIELD_NUMBER: builtins.int
+    SESSION_COMMENT_COUNT_FIELD_NUMBER: builtins.int
+    BY_LANGUAGE_FIELD_NUMBER: builtins.int
+    BY_INTENT_FIELD_NUMBER: builtins.int
+    BY_AUTHOR_TYPE_FIELD_NUMBER: builtins.int
+    total_feedback: builtins.int
+    """Total feedback records."""
+    thumbs_up_count: builtins.int
+    """Number of thumbs-up feedback."""
+    thumbs_down_count: builtins.int
+    """Number of thumbs-down feedback."""
+    session_level_count: builtins.int
+    """Number of session-level feedback."""
+    session_step_level_count: builtins.int
+    """Number of session-step-level feedback."""
+    comment_count: builtins.int
+    """Number of feedback that carry a free-text comment."""
+    session_review_count: builtins.int
+    """Roll-up of existing session reviews (additional quality signal)."""
+    session_comment_count: builtins.int
+    """Roll-up of existing session comments (additional quality signal)."""
+    @property
+    def by_language(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FeedbackBreakdownBucket]:
+        """Up/down breakdown by language code."""
+
+    @property
+    def by_intent(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FeedbackBreakdownBucket]:
+        """Up/down breakdown by matched intent."""
+
+    @property
+    def by_author_type(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FeedbackBreakdownBucket]:
+        """Up/down breakdown by author type."""
+
+    def __init__(
+        self,
+        *,
+        total_feedback: builtins.int = ...,
+        thumbs_up_count: builtins.int = ...,
+        thumbs_down_count: builtins.int = ...,
+        session_level_count: builtins.int = ...,
+        session_step_level_count: builtins.int = ...,
+        comment_count: builtins.int = ...,
+        session_review_count: builtins.int = ...,
+        session_comment_count: builtins.int = ...,
+        by_language: collections.abc.Iterable[global___FeedbackBreakdownBucket] | None = ...,
+        by_intent: collections.abc.Iterable[global___FeedbackBreakdownBucket] | None = ...,
+        by_author_type: collections.abc.Iterable[global___FeedbackBreakdownBucket] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["by_author_type", b"by_author_type", "by_intent", b"by_intent", "by_language", b"by_language", "comment_count", b"comment_count", "session_comment_count", b"session_comment_count", "session_level_count", b"session_level_count", "session_review_count", b"session_review_count", "session_step_level_count", b"session_step_level_count", "thumbs_down_count", b"thumbs_down_count", "thumbs_up_count", b"thumbs_up_count", "total_feedback", b"total_feedback"]) -> None: ...
+
+global___FeedbackStatistics = FeedbackStatistics
+
+@typing.final
+class GetFeedbackStatisticsRequest(google.protobuf.message.Message):
+    """Request for aggregated feedback statistics."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PARENT_FIELD_NUMBER: builtins.int
+    SESSION_FILTER_FIELD_NUMBER: builtins.int
+    INCLUDE_REVIEW_AND_COMMENT_ROLLUP_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """The agent parent.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
+    include_review_and_comment_rollup: builtins.bool
+    """Optional. When true, roll up existing session reviews and comments as additional signals."""
+    @property
+    def session_filter(self) -> global___SessionFilter:
+        """Optional. A filter to narrow the sessions considered."""
+
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields of the statistics get returned."""
+
+    def __init__(
+        self,
+        *,
+        parent: builtins.str = ...,
+        session_filter: global___SessionFilter | None = ...,
+        include_review_and_comment_rollup: builtins.bool = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "include_review_and_comment_rollup", b"include_review_and_comment_rollup", "parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
+
+global___GetFeedbackStatisticsRequest = GetFeedbackStatisticsRequest
+
+@typing.final
+class GetFeedbackStatisticsResponse(google.protobuf.message.Message):
+    """Response carrying aggregated feedback statistics."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATISTICS_FIELD_NUMBER: builtins.int
+    @property
+    def statistics(self) -> global___FeedbackStatistics:
+        """The aggregated statistics."""
+
+    def __init__(
+        self,
+        *,
+        statistics: global___FeedbackStatistics | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["statistics", b"statistics"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["statistics", b"statistics"]) -> None: ...
+
+global___GetFeedbackStatisticsResponse = GetFeedbackStatisticsResponse
+
+@typing.final
+class FeedbackTimeSeriesBucket(google.protobuf.message.Message):
+    """One time bucket of feedback counts."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    BUCKET_START_FIELD_NUMBER: builtins.int
+    THUMBS_UP_COUNT_FIELD_NUMBER: builtins.int
+    THUMBS_DOWN_COUNT_FIELD_NUMBER: builtins.int
+    TOTAL_FIELD_NUMBER: builtins.int
+    thumbs_up_count: builtins.int
+    """Number of thumbs-up feedback in this bucket."""
+    thumbs_down_count: builtins.int
+    """Number of thumbs-down feedback in this bucket."""
+    total: builtins.int
+    """Total feedback in this bucket."""
+    @property
+    def bucket_start(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """The (inclusive) start of the time bucket."""
+
+    def __init__(
+        self,
+        *,
+        bucket_start: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        thumbs_up_count: builtins.int = ...,
+        thumbs_down_count: builtins.int = ...,
+        total: builtins.int = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["bucket_start", b"bucket_start"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["bucket_start", b"bucket_start", "thumbs_down_count", b"thumbs_down_count", "thumbs_up_count", b"thumbs_up_count", "total", b"total"]) -> None: ...
+
+global___FeedbackTimeSeriesBucket = FeedbackTimeSeriesBucket
+
+@typing.final
+class GetFeedbackStatisticsTimeSeriesRequest(google.protobuf.message.Message):
+    """Request for feedback statistics bucketed over time."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PARENT_FIELD_NUMBER: builtins.int
+    SESSION_FILTER_FIELD_NUMBER: builtins.int
+    BUCKET_WIDTH_SECONDS_FIELD_NUMBER: builtins.int
+    MAX_BUCKETS_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
+    parent: builtins.str
+    """The agent parent.
+    Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
+    """
+    bucket_width_seconds: builtins.int
+    """The width of each time bucket in seconds."""
+    max_buckets: builtins.int
+    """The maximum number of buckets to return."""
+    @property
+    def session_filter(self) -> global___SessionFilter:
+        """Optional. A filter to narrow the sessions considered."""
+
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. The mask to control which fields get returned."""
+
+    def __init__(
+        self,
+        *,
+        parent: builtins.str = ...,
+        session_filter: global___SessionFilter | None = ...,
+        bucket_width_seconds: builtins.int = ...,
+        max_buckets: builtins.int = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "bucket_width_seconds", b"bucket_width_seconds", "field_mask", b"field_mask", "max_buckets", b"max_buckets", "parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
+
+global___GetFeedbackStatisticsTimeSeriesRequest = GetFeedbackStatisticsTimeSeriesRequest
+
+@typing.final
+class GetFeedbackStatisticsTimeSeriesResponse(google.protobuf.message.Message):
+    """Response carrying feedback counts bucketed over time."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    BUCKETS_FIELD_NUMBER: builtins.int
+    @property
+    def buckets(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FeedbackTimeSeriesBucket]:
+        """The time buckets, oldest first."""
+
+    def __init__(
+        self,
+        *,
+        buckets: collections.abc.Iterable[global___FeedbackTimeSeriesBucket] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["buckets", b"buckets"]) -> None: ...
+
+global___GetFeedbackStatisticsTimeSeriesResponse = GetFeedbackStatisticsTimeSeriesResponse
 
 @typing.final
 class ListSessionReviewsRequest(google.protobuf.message.Message):

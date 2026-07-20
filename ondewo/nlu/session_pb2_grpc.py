@@ -197,6 +197,51 @@ class SessionsStub(object):
                 request_serializer=ondewo_dot_nlu_dot_session__pb2.ListSessionCommentsOfAllSessionsRequest.SerializeToString,
                 response_deserializer=ondewo_dot_nlu_dot_session__pb2.ListSessionCommentsResponse.FromString,
                 _registered_method=True)
+        self.AddSessionFeedback = channel.unary_unary(
+                '/ondewo.nlu.Sessions/AddSessionFeedback',
+                request_serializer=ondewo_dot_nlu_dot_session__pb2.AddSessionFeedbackRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_session__pb2.SessionFeedback.FromString,
+                _registered_method=True)
+        self.AddSessionStepFeedback = channel.unary_unary(
+                '/ondewo.nlu.Sessions/AddSessionStepFeedback',
+                request_serializer=ondewo_dot_nlu_dot_session__pb2.AddSessionStepFeedbackRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_session__pb2.SessionFeedback.FromString,
+                _registered_method=True)
+        self.GetSessionFeedback = channel.unary_unary(
+                '/ondewo.nlu.Sessions/GetSessionFeedback',
+                request_serializer=ondewo_dot_nlu_dot_session__pb2.GetSessionFeedbackRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_session__pb2.SessionFeedback.FromString,
+                _registered_method=True)
+        self.UpdateSessionFeedback = channel.unary_unary(
+                '/ondewo.nlu.Sessions/UpdateSessionFeedback',
+                request_serializer=ondewo_dot_nlu_dot_session__pb2.UpdateSessionFeedbackRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_session__pb2.SessionFeedback.FromString,
+                _registered_method=True)
+        self.DeleteSessionFeedback = channel.unary_unary(
+                '/ondewo.nlu.Sessions/DeleteSessionFeedback',
+                request_serializer=ondewo_dot_nlu_dot_session__pb2.DeleteSessionFeedbackRequest.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                _registered_method=True)
+        self.ListSessionFeedback = channel.unary_unary(
+                '/ondewo.nlu.Sessions/ListSessionFeedback',
+                request_serializer=ondewo_dot_nlu_dot_session__pb2.ListSessionFeedbackRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_session__pb2.ListSessionFeedbackResponse.FromString,
+                _registered_method=True)
+        self.ListSessionFeedbackOfAllSessions = channel.unary_unary(
+                '/ondewo.nlu.Sessions/ListSessionFeedbackOfAllSessions',
+                request_serializer=ondewo_dot_nlu_dot_session__pb2.ListSessionFeedbackOfAllSessionsRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_session__pb2.ListSessionFeedbackResponse.FromString,
+                _registered_method=True)
+        self.GetFeedbackStatistics = channel.unary_unary(
+                '/ondewo.nlu.Sessions/GetFeedbackStatistics',
+                request_serializer=ondewo_dot_nlu_dot_session__pb2.GetFeedbackStatisticsRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_session__pb2.GetFeedbackStatisticsResponse.FromString,
+                _registered_method=True)
+        self.GetFeedbackStatisticsTimeSeries = channel.unary_unary(
+                '/ondewo.nlu.Sessions/GetFeedbackStatisticsTimeSeries',
+                request_serializer=ondewo_dot_nlu_dot_session__pb2.GetFeedbackStatisticsTimeSeriesRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_session__pb2.GetFeedbackStatisticsTimeSeriesResponse.FromString,
+                _registered_method=True)
         self.ListSessionReviews = channel.unary_unary(
                 '/ondewo.nlu.Sessions/ListSessionReviews',
                 request_serializer=ondewo_dot_nlu_dot_session__pb2.ListSessionReviewsRequest.SerializeToString,
@@ -482,6 +527,75 @@ class SessionsServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def AddSessionFeedback(self, request, context):
+        """*** SESSION-FEEDBACK RELATED ENDPOINTS *** //
+
+        Records user feedback (thumbs up/down + optional comment + optional score/categorical value) about a
+        whole session and returns the persisted feedback. Works for authenticated reviewers/test users and,
+        where enabled, anonymous production end-users (webchat/webphone).
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def AddSessionStepFeedback(self, request, context):
+        """Records user feedback about a single session step (turn), pinned to the exact response, and returns
+        the persisted feedback.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetSessionFeedback(self, request, context):
+        """Returns a single session/step feedback by its resource name.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def UpdateSessionFeedback(self, request, context):
+        """Updates an existing feedback (a user revising their thumbs / comment) and returns it.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteSessionFeedback(self, request, context):
+        """Deletes a feedback (a user withdrawing their feedback).
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListSessionFeedback(self, request, context):
+        """Lists all feedback (session-level and step-level) attached to a session with pagination support.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListSessionFeedbackOfAllSessions(self, request, context):
+        """Lists feedback across all sessions of the agent, optionally narrowed by a SessionFilter.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetFeedbackStatistics(self, request, context):
+        """Returns aggregated feedback statistics for an agent (thumbs up/down counts + breakdowns), optionally
+        rolling up existing session reviews and comments as additional quality signals.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetFeedbackStatisticsTimeSeries(self, request, context):
+        """Returns feedback statistics bucketed over time for trend charts.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def ListSessionReviews(self, request, context):
         """*** SESSION-REVIEW RELATED ENDPOINTS *** //
 
@@ -723,6 +837,51 @@ def add_SessionsServicer_to_server(servicer, server):
                     servicer.ListSessionCommentsOfAllSessions,
                     request_deserializer=ondewo_dot_nlu_dot_session__pb2.ListSessionCommentsOfAllSessionsRequest.FromString,
                     response_serializer=ondewo_dot_nlu_dot_session__pb2.ListSessionCommentsResponse.SerializeToString,
+            ),
+            'AddSessionFeedback': grpc.unary_unary_rpc_method_handler(
+                    servicer.AddSessionFeedback,
+                    request_deserializer=ondewo_dot_nlu_dot_session__pb2.AddSessionFeedbackRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_session__pb2.SessionFeedback.SerializeToString,
+            ),
+            'AddSessionStepFeedback': grpc.unary_unary_rpc_method_handler(
+                    servicer.AddSessionStepFeedback,
+                    request_deserializer=ondewo_dot_nlu_dot_session__pb2.AddSessionStepFeedbackRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_session__pb2.SessionFeedback.SerializeToString,
+            ),
+            'GetSessionFeedback': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetSessionFeedback,
+                    request_deserializer=ondewo_dot_nlu_dot_session__pb2.GetSessionFeedbackRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_session__pb2.SessionFeedback.SerializeToString,
+            ),
+            'UpdateSessionFeedback': grpc.unary_unary_rpc_method_handler(
+                    servicer.UpdateSessionFeedback,
+                    request_deserializer=ondewo_dot_nlu_dot_session__pb2.UpdateSessionFeedbackRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_session__pb2.SessionFeedback.SerializeToString,
+            ),
+            'DeleteSessionFeedback': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteSessionFeedback,
+                    request_deserializer=ondewo_dot_nlu_dot_session__pb2.DeleteSessionFeedbackRequest.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'ListSessionFeedback': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListSessionFeedback,
+                    request_deserializer=ondewo_dot_nlu_dot_session__pb2.ListSessionFeedbackRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_session__pb2.ListSessionFeedbackResponse.SerializeToString,
+            ),
+            'ListSessionFeedbackOfAllSessions': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListSessionFeedbackOfAllSessions,
+                    request_deserializer=ondewo_dot_nlu_dot_session__pb2.ListSessionFeedbackOfAllSessionsRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_session__pb2.ListSessionFeedbackResponse.SerializeToString,
+            ),
+            'GetFeedbackStatistics': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetFeedbackStatistics,
+                    request_deserializer=ondewo_dot_nlu_dot_session__pb2.GetFeedbackStatisticsRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_session__pb2.GetFeedbackStatisticsResponse.SerializeToString,
+            ),
+            'GetFeedbackStatisticsTimeSeries': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetFeedbackStatisticsTimeSeries,
+                    request_deserializer=ondewo_dot_nlu_dot_session__pb2.GetFeedbackStatisticsTimeSeriesRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_session__pb2.GetFeedbackStatisticsTimeSeriesResponse.SerializeToString,
             ),
             'ListSessionReviews': grpc.unary_unary_rpc_method_handler(
                     servicer.ListSessionReviews,
@@ -1635,6 +1794,249 @@ class Sessions(object):
             '/ondewo.nlu.Sessions/ListSessionCommentsOfAllSessions',
             ondewo_dot_nlu_dot_session__pb2.ListSessionCommentsOfAllSessionsRequest.SerializeToString,
             ondewo_dot_nlu_dot_session__pb2.ListSessionCommentsResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def AddSessionFeedback(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.Sessions/AddSessionFeedback',
+            ondewo_dot_nlu_dot_session__pb2.AddSessionFeedbackRequest.SerializeToString,
+            ondewo_dot_nlu_dot_session__pb2.SessionFeedback.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def AddSessionStepFeedback(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.Sessions/AddSessionStepFeedback',
+            ondewo_dot_nlu_dot_session__pb2.AddSessionStepFeedbackRequest.SerializeToString,
+            ondewo_dot_nlu_dot_session__pb2.SessionFeedback.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetSessionFeedback(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.Sessions/GetSessionFeedback',
+            ondewo_dot_nlu_dot_session__pb2.GetSessionFeedbackRequest.SerializeToString,
+            ondewo_dot_nlu_dot_session__pb2.SessionFeedback.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def UpdateSessionFeedback(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.Sessions/UpdateSessionFeedback',
+            ondewo_dot_nlu_dot_session__pb2.UpdateSessionFeedbackRequest.SerializeToString,
+            ondewo_dot_nlu_dot_session__pb2.SessionFeedback.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def DeleteSessionFeedback(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.Sessions/DeleteSessionFeedback',
+            ondewo_dot_nlu_dot_session__pb2.DeleteSessionFeedbackRequest.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def ListSessionFeedback(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.Sessions/ListSessionFeedback',
+            ondewo_dot_nlu_dot_session__pb2.ListSessionFeedbackRequest.SerializeToString,
+            ondewo_dot_nlu_dot_session__pb2.ListSessionFeedbackResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def ListSessionFeedbackOfAllSessions(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.Sessions/ListSessionFeedbackOfAllSessions',
+            ondewo_dot_nlu_dot_session__pb2.ListSessionFeedbackOfAllSessionsRequest.SerializeToString,
+            ondewo_dot_nlu_dot_session__pb2.ListSessionFeedbackResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetFeedbackStatistics(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.Sessions/GetFeedbackStatistics',
+            ondewo_dot_nlu_dot_session__pb2.GetFeedbackStatisticsRequest.SerializeToString,
+            ondewo_dot_nlu_dot_session__pb2.GetFeedbackStatisticsResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetFeedbackStatisticsTimeSeries(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.Sessions/GetFeedbackStatisticsTimeSeries',
+            ondewo_dot_nlu_dot_session__pb2.GetFeedbackStatisticsTimeSeriesRequest.SerializeToString,
+            ondewo_dot_nlu_dot_session__pb2.GetFeedbackStatisticsTimeSeriesResponse.FromString,
             options,
             channel_credentials,
             insecure,

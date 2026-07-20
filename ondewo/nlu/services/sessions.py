@@ -29,7 +29,9 @@ from ondewo.nlu.session_pb2 import (
     AddAudioFilesRequest,
     AddAudioFilesResponse,
     AddSessionCommentRequest,
+    AddSessionFeedbackRequest,
     AddSessionLabelsRequest,
+    AddSessionStepFeedbackRequest,
     AudioFileResource,
     CreateSessionRequest,
     CreateSessionReviewRequest,
@@ -37,6 +39,7 @@ from ondewo.nlu.session_pb2 import (
     DeleteAudioFilesRequest,
     DeleteAudioFilesResponse,
     DeleteSessionCommentsRequest,
+    DeleteSessionFeedbackRequest,
     DeleteSessionLabelsRequest,
     DeleteSessionRequest,
     DeleteSessionStepRequest,
@@ -45,7 +48,12 @@ from ondewo.nlu.session_pb2 import (
     GetAudioFileOfSessionRequest,
     GetAudioFilesRequest,
     GetAudioFilesResponse,
+    GetFeedbackStatisticsRequest,
+    GetFeedbackStatisticsResponse,
+    GetFeedbackStatisticsTimeSeriesRequest,
+    GetFeedbackStatisticsTimeSeriesResponse,
     GetLatestSessionReviewRequest,
+    GetSessionFeedbackRequest,
     GetSessionRequest,
     GetSessionReviewRequest,
     GetSessionStepRequest,
@@ -76,6 +84,9 @@ from ondewo.nlu.session_pb2 import (
     ListSessionCommentsOfAllSessionsRequest,
     ListSessionCommentsRequest,
     ListSessionCommentsResponse,
+    ListSessionFeedbackOfAllSessionsRequest,
+    ListSessionFeedbackRequest,
+    ListSessionFeedbackResponse,
     ListSessionLabelsOfAllSessionsRequest,
     ListSessionLabelsRequest,
     ListSessionLabelsResponse,
@@ -88,11 +99,13 @@ from ondewo.nlu.session_pb2 import (
     ListUserIdsOfAllSessionsRequest,
     ListUserIdsResponse,
     Session,
+    SessionFeedback,
     SessionReview,
     SessionStep,
     StreamingDetectIntentRequest,
     StreamingDetectIntentResponse,
     UpdateSessionCommentsRequest,
+    UpdateSessionFeedbackRequest,
     UpdateSessionStepRequest,
 )
 from ondewo.nlu.session_pb2_grpc import SessionsStub
@@ -281,6 +294,52 @@ class Sessions(ServicesInterface):
         request: ListSessionCommentsOfAllSessionsRequest,
     ) -> ListSessionCommentsResponse:
         response: ListSessionCommentsResponse = self.stub.ListSessionCommentsOfAllSessions(
+            request, metadata=self.metadata
+        )
+        return response
+
+    def add_session_feedback(self, request: AddSessionFeedbackRequest) -> SessionFeedback:
+        response: SessionFeedback = self.stub.AddSessionFeedback(request, metadata=self.metadata)
+        return response
+
+    def add_session_step_feedback(self, request: AddSessionStepFeedbackRequest) -> SessionFeedback:
+        response: SessionFeedback = self.stub.AddSessionStepFeedback(request, metadata=self.metadata)
+        return response
+
+    def get_session_feedback(self, request: GetSessionFeedbackRequest) -> SessionFeedback:
+        response: SessionFeedback = self.stub.GetSessionFeedback(request, metadata=self.metadata)
+        return response
+
+    def update_session_feedback(self, request: UpdateSessionFeedbackRequest) -> SessionFeedback:
+        response: SessionFeedback = self.stub.UpdateSessionFeedback(request, metadata=self.metadata)
+        return response
+
+    def delete_session_feedback(self, request: DeleteSessionFeedbackRequest) -> Empty:
+        response: Empty = self.stub.DeleteSessionFeedback(request, metadata=self.metadata)
+        return response
+
+    def list_session_feedback(self, request: ListSessionFeedbackRequest) -> ListSessionFeedbackResponse:
+        response: ListSessionFeedbackResponse = self.stub.ListSessionFeedback(request, metadata=self.metadata)
+        return response
+
+    def list_session_feedback_of_all_sessions(
+        self,
+        request: ListSessionFeedbackOfAllSessionsRequest,
+    ) -> ListSessionFeedbackResponse:
+        response: ListSessionFeedbackResponse = self.stub.ListSessionFeedbackOfAllSessions(
+            request, metadata=self.metadata
+        )
+        return response
+
+    def get_feedback_statistics(self, request: GetFeedbackStatisticsRequest) -> GetFeedbackStatisticsResponse:
+        response: GetFeedbackStatisticsResponse = self.stub.GetFeedbackStatistics(request, metadata=self.metadata)
+        return response
+
+    def get_feedback_statistics_time_series(
+        self,
+        request: GetFeedbackStatisticsTimeSeriesRequest,
+    ) -> GetFeedbackStatisticsTimeSeriesResponse:
+        response: GetFeedbackStatisticsTimeSeriesResponse = self.stub.GetFeedbackStatisticsTimeSeries(
             request, metadata=self.metadata
         )
         return response
