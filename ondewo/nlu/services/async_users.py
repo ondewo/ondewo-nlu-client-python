@@ -52,10 +52,16 @@ from ondewo.nlu.user_pb2 import (
 from ondewo.nlu.user_pb2_grpc import UsersStub
 from ondewo.nlu.core.async_services_interface import AsyncServicesInterface
 from ondewo.nlu.common_pb2 import (
+    AddNotificationsRequest,
+    AddNotificationsResponse,
+    DeleteNotificationsRequest,
+    GetNotificationRequest,
     ListNotificationsRequest,
     ListNotificationsResponse,
+    Notification,
     SetNotificationsFlaggedStatusRequest,
     SetNotificationsReadStatusRequest,
+    UpdateNotificationRequest,
 )
 
 
@@ -146,6 +152,22 @@ class Users(AsyncServicesInterface):
         response: ListNotificationsResponse = await self.stub.SetNotificationsReadStatus(
             request, metadata=self.metadata
         )
+        return response
+
+    async def add_notifications(self, request: AddNotificationsRequest) -> AddNotificationsResponse:
+        response: AddNotificationsResponse = await self.stub.AddNotifications(request, metadata=self.metadata)
+        return response
+
+    async def get_notification(self, request: GetNotificationRequest) -> Notification:
+        response: Notification = await self.stub.GetNotification(request, metadata=self.metadata)
+        return response
+
+    async def update_notification(self, request: UpdateNotificationRequest) -> Notification:
+        response: Notification = await self.stub.UpdateNotification(request, metadata=self.metadata)
+        return response
+
+    async def delete_notifications(self, request: DeleteNotificationsRequest) -> Empty:
+        response: Empty = await self.stub.DeleteNotifications(request, metadata=self.metadata)
         return response
 
     async def get_user_preferences(self, request: GetUserPreferencesRequest) -> GetUserPreferencesResponse:

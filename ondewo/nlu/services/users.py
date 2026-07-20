@@ -52,10 +52,16 @@ from ondewo.nlu.user_pb2 import (
 from ondewo.nlu.user_pb2_grpc import UsersStub
 from ondewo.nlu.core.services_interface import ServicesInterface
 from ondewo.nlu.common_pb2 import (
+    AddNotificationsRequest,
+    AddNotificationsResponse,
+    DeleteNotificationsRequest,
+    GetNotificationRequest,
     ListNotificationsRequest,
     ListNotificationsResponse,
+    Notification,
     SetNotificationsFlaggedStatusRequest,
     SetNotificationsReadStatusRequest,
+    UpdateNotificationRequest,
 )
 
 
@@ -140,6 +146,22 @@ class Users(ServicesInterface):
 
     def set_notifications_read_status(self, request: SetNotificationsReadStatusRequest) -> ListNotificationsResponse:
         response: ListNotificationsResponse = self.stub.SetNotificationsReadStatus(request, metadata=self.metadata)
+        return response
+
+    def add_notifications(self, request: AddNotificationsRequest) -> AddNotificationsResponse:
+        response: AddNotificationsResponse = self.stub.AddNotifications(request, metadata=self.metadata)
+        return response
+
+    def get_notification(self, request: GetNotificationRequest) -> Notification:
+        response: Notification = self.stub.GetNotification(request, metadata=self.metadata)
+        return response
+
+    def update_notification(self, request: UpdateNotificationRequest) -> Notification:
+        response: Notification = self.stub.UpdateNotification(request, metadata=self.metadata)
+        return response
+
+    def delete_notifications(self, request: DeleteNotificationsRequest) -> Empty:
+        response: Empty = self.stub.DeleteNotifications(request, metadata=self.metadata)
         return response
 
     def get_user_preferences(self, request: GetUserPreferencesRequest) -> GetUserPreferencesResponse:

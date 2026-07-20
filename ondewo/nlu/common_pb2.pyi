@@ -494,16 +494,24 @@ class AddNotificationsRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     NOTIFICATIONS_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     @property
     def notifications(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Notification]:
         """List of notifications to be added."""
+
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. Mask to control which fields of the returned notifications are filled with data."""
 
     def __init__(
         self,
         *,
         notifications: collections.abc.Iterable[global___Notification] | None = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["notifications", b"notifications"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "notifications", b"notifications"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___AddNotificationsRequest = AddNotificationsRequest
 
@@ -688,6 +696,7 @@ class SetNotificationsFlaggedStatusRequest(google.protobuf.message.Message):
 
     NOTIFICATION_NAMES_FIELD_NUMBER: builtins.int
     FLAGGED_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     @property
     def notification_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Names of notifications to set the flagged status for."""
@@ -696,13 +705,20 @@ class SetNotificationsFlaggedStatusRequest(google.protobuf.message.Message):
     def flagged(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.bool]:
         """Flagged status to set for the specified notifications."""
 
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. Mask to control which fields of the returned notifications are filled with data."""
+
     def __init__(
         self,
         *,
         notification_names: collections.abc.Iterable[builtins.str] | None = ...,
         flagged: collections.abc.Iterable[builtins.bool] | None = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["flagged", b"flagged", "notification_names", b"notification_names"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "flagged", b"flagged", "notification_names", b"notification_names"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___SetNotificationsFlaggedStatusRequest = SetNotificationsFlaggedStatusRequest
 
@@ -714,6 +730,7 @@ class SetNotificationsReadStatusRequest(google.protobuf.message.Message):
 
     NOTIFICATION_NAMES_FIELD_NUMBER: builtins.int
     FLAGGED_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
     @property
     def notification_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Names of notifications to set the read status for."""
@@ -722,15 +739,102 @@ class SetNotificationsReadStatusRequest(google.protobuf.message.Message):
     def flagged(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.bool]:
         """Read status to set for the specified notifications."""
 
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. Mask to control which fields of the returned notifications are filled with data."""
+
     def __init__(
         self,
         *,
         notification_names: collections.abc.Iterable[builtins.str] | None = ...,
         flagged: collections.abc.Iterable[builtins.bool] | None = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["flagged", b"flagged", "notification_names", b"notification_names"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "flagged", b"flagged", "notification_names", b"notification_names"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___SetNotificationsReadStatusRequest = SetNotificationsReadStatusRequest
+
+@typing.final
+class GetNotificationRequest(google.protobuf.message.Message):
+    """Message for retrieving a single notification by its resource name."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    NAME_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
+    name: builtins.str
+    """Resource name of the notification to retrieve."""
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. Mask to control which fields of the notification are returned."""
+
+    def __init__(
+        self,
+        *,
+        name: builtins.str = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "name", b"name"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
+
+global___GetNotificationRequest = GetNotificationRequest
+
+@typing.final
+class UpdateNotificationRequest(google.protobuf.message.Message):
+    """Message for updating a single notification."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    NOTIFICATION_FIELD_NUMBER: builtins.int
+    UPDATE_MASK_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
+    @property
+    def notification(self) -> global___Notification:
+        """The notification to update, identified by its resource name."""
+
+    @property
+    def update_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Mask controlling which fields of the notification are updated."""
+
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. Mask to control which fields of the returned notification are filled with data."""
+
+    def __init__(
+        self,
+        *,
+        notification: global___Notification | None = ...,
+        update_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "notification", b"notification", "update_mask", b"update_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "notification", b"notification", "update_mask", b"update_mask"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
+
+global___UpdateNotificationRequest = UpdateNotificationRequest
+
+@typing.final
+class DeleteNotificationsRequest(google.protobuf.message.Message):
+    """Message for deleting one or more notifications by their resource names."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    NOTIFICATION_NAMES_FIELD_NUMBER: builtins.int
+    @property
+    def notification_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Resource names of the notifications to delete."""
+
+    def __init__(
+        self,
+        *,
+        notification_names: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["notification_names", b"notification_names"]) -> None: ...
+
+global___DeleteNotificationsRequest = DeleteNotificationsRequest
 
 @typing.final
 class KeyValuePair(google.protobuf.message.Message):
