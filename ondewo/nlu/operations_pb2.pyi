@@ -417,6 +417,8 @@ class GetRemoteOperationContainerLogsRequest(google.protobuf.message.Message):
     MAX_LINES_FIELD_NUMBER: builtins.int
     REGEX_FIELD_NUMBER: builtins.int
     CONTAINER_ID_FIELD_NUMBER: builtins.int
+    BEFORE_SEQ_FIELD_NUMBER: builtins.int
+    AFTER_SEQ_FIELD_NUMBER: builtins.int
     name: builtins.str
     """The name of the operation resource whose container logs should be returned."""
     min_log_level: ondewo.nlu.common_pb2.LogSeverity.ValueType
@@ -436,6 +438,15 @@ class GetRemoteOperationContainerLogsRequest(google.protobuf.message.Message):
     container id. Empty (the default) queries the operation&apos;s currently-registered container,
     preserving the legacy single-container behavior. When the container has finished and been removed,
     its persisted logs are served from the server-side log archive.
+    """
+    before_seq: builtins.int
+    """Optional cursor for infinite-scroll-UP paging: return the newest lines with
+    <a href="index.html#ondewo.nlu.RemoteOperationContainerLogLine">seq</a> &lt; <code>before_seq</code>
+    (older window). <code>0</code> (the default) disables backward paging.
+    """
+    after_seq: builtins.int
+    """Optional cursor for infinite-scroll-DOWN paging: return lines with <code>seq</code> &gt;
+    <code>after_seq</code> (newer window). <code>0</code> (the default) disables forward paging.
     """
     @property
     def start_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
@@ -459,9 +470,11 @@ class GetRemoteOperationContainerLogsRequest(google.protobuf.message.Message):
         max_lines: builtins.int = ...,
         regex: builtins.str = ...,
         container_id: builtins.str = ...,
+        before_seq: builtins.int = ...,
+        after_seq: builtins.int = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["end_time", b"end_time", "start_time", b"start_time"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["container_id", b"container_id", "end_time", b"end_time", "max_lines", b"max_lines", "min_log_level", b"min_log_level", "name", b"name", "regex", b"regex", "start_time", b"start_time"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["after_seq", b"after_seq", "before_seq", b"before_seq", "container_id", b"container_id", "end_time", b"end_time", "max_lines", b"max_lines", "min_log_level", b"min_log_level", "name", b"name", "regex", b"regex", "start_time", b"start_time"]) -> None: ...
 
 global___GetRemoteOperationContainerLogsRequest = GetRemoteOperationContainerLogsRequest
 
@@ -473,8 +486,21 @@ class GetRemoteOperationContainerLogsResponse(google.protobuf.message.Message):
 
     LOG_LINES_FIELD_NUMBER: builtins.int
     TRUNCATED_FIELD_NUMBER: builtins.int
+    MIN_AVAILABLE_SEQ_FIELD_NUMBER: builtins.int
+    MAX_AVAILABLE_SEQ_FIELD_NUMBER: builtins.int
+    HAS_MORE_OLDER_FIELD_NUMBER: builtins.int
     truncated: builtins.bool
     """True when older matching lines were dropped because <code>max_lines</code> was reached."""
+    min_available_seq: builtins.int
+    """The smallest <code>seq</code> currently available for this container (its oldest captured line).
+    A client paging up has reached the beginning when the returned lines start at this value.
+    """
+    max_available_seq: builtins.int
+    """The largest <code>seq</code> currently available for this container (its newest captured line)."""
+    has_more_older: builtins.bool
+    """True when older lines than the returned window still exist (i.e. the window&apos;s first
+    <code>seq</code> &gt; <code>min_available_seq</code>) — the client may keep scrolling up.
+    """
     @property
     def log_lines(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RemoteOperationContainerLogLine]:
         """The matching log lines, oldest first. Secrets are redacted server-side."""
@@ -484,8 +510,11 @@ class GetRemoteOperationContainerLogsResponse(google.protobuf.message.Message):
         *,
         log_lines: collections.abc.Iterable[global___RemoteOperationContainerLogLine] | None = ...,
         truncated: builtins.bool = ...,
+        min_available_seq: builtins.int = ...,
+        max_available_seq: builtins.int = ...,
+        has_more_older: builtins.bool = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["log_lines", b"log_lines", "truncated", b"truncated"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["has_more_older", b"has_more_older", "log_lines", b"log_lines", "max_available_seq", b"max_available_seq", "min_available_seq", b"min_available_seq", "truncated", b"truncated"]) -> None: ...
 
 global___GetRemoteOperationContainerLogsResponse = GetRemoteOperationContainerLogsResponse
 
@@ -500,6 +529,7 @@ class RemoteOperationContainerLogLine(google.protobuf.message.Message):
     MESSAGE_FIELD_NUMBER: builtins.int
     CONTAINER_ID_FIELD_NUMBER: builtins.int
     CONTAINER_NAME_FIELD_NUMBER: builtins.int
+    SEQ_FIELD_NUMBER: builtins.int
     level: ondewo.nlu.common_pb2.LogSeverity.ValueType
     """The loguru severity parsed from the line, or <code>LOG_SEVERITY_UNSPECIFIED</code> if the line
     carried no recognizable level (e.g. a continuation / traceback line).
@@ -512,6 +542,11 @@ class RemoteOperationContainerLogLine(google.protobuf.message.Message):
     """
     container_name: builtins.str
     """The docker container name this line was produced by. Empty when unavailable."""
+    seq: builtins.int
+    """The monotonically-increasing sequence number of this line within its container&apos;s captured log
+    (assigned by the server-side capture). Used as the cursor for infinite-scroll paging. <code>0</code>
+    when the line was produced by a legacy path that did not assign a sequence.
+    """
     @property
     def timestamp(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """The timestamp parsed from the loguru line prefix, if present."""
@@ -524,9 +559,10 @@ class RemoteOperationContainerLogLine(google.protobuf.message.Message):
         message: builtins.str = ...,
         container_id: builtins.str = ...,
         container_name: builtins.str = ...,
+        seq: builtins.int = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["timestamp", b"timestamp"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["container_id", b"container_id", "container_name", b"container_name", "level", b"level", "message", b"message", "timestamp", b"timestamp"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["container_id", b"container_id", "container_name", b"container_name", "level", b"level", "message", b"message", "seq", b"seq", "timestamp", b"timestamp"]) -> None: ...
 
 global___RemoteOperationContainerLogLine = RemoteOperationContainerLogLine
 
@@ -561,6 +597,22 @@ class RemoteOperationContainerStatus(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
+    @typing.final
+    class EnvironmentVariablesEntry(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        KEY_FIELD_NUMBER: builtins.int
+        VALUE_FIELD_NUMBER: builtins.int
+        key: builtins.str
+        value: builtins.str
+        def __init__(
+            self,
+            *,
+            key: builtins.str = ...,
+            value: builtins.str = ...,
+        ) -> None: ...
+        def ClearField(self, field_name: typing.Literal["key", b"key", "value", b"value"]) -> None: ...
+
     NAME_FIELD_NUMBER: builtins.int
     LIFECYCLE_STATE_FIELD_NUMBER: builtins.int
     HOST_NAME_FIELD_NUMBER: builtins.int
@@ -572,6 +624,14 @@ class RemoteOperationContainerStatus(google.protobuf.message.Message):
     STARTED_AT_FIELD_NUMBER: builtins.int
     FINISHED_AT_FIELD_NUMBER: builtins.int
     OBSERVED_AT_FIELD_NUMBER: builtins.int
+    ENVIRONMENT_VARIABLES_FIELD_NUMBER: builtins.int
+    COMMAND_FIELD_NUMBER: builtins.int
+    MEMORY_LIMIT_BYTES_FIELD_NUMBER: builtins.int
+    NANO_CPUS_FIELD_NUMBER: builtins.int
+    CPUSET_CPUS_FIELD_NUMBER: builtins.int
+    CPU_QUOTA_FIELD_NUMBER: builtins.int
+    CPU_PERIOD_FIELD_NUMBER: builtins.int
+    IMAGE_FIELD_NUMBER: builtins.int
     name: builtins.str
     """The name of the operation resource this status describes."""
     lifecycle_state: global___RemoteOperationContainerLifecycleState.ValueType
@@ -592,6 +652,24 @@ class RemoteOperationContainerStatus(google.protobuf.message.Message):
     """The Docker healthcheck status (<code>healthy</code> / <code>unhealthy</code> / <code>starting</code>),
     empty when the container declares no healthcheck.
     """
+    memory_limit_bytes: builtins.int
+    """The container&apos;s hard memory limit in bytes (docker <code>HostConfig.Memory</code>).
+    <code>0</code> means unlimited.
+    """
+    nano_cpus: builtins.int
+    """The container&apos;s CPU limit in billionths of a CPU (docker <code>HostConfig.NanoCpus</code>);
+    cores = <code>nano_cpus</code> / 1e9. <code>0</code> means unset (see <code>cpu_quota</code>).
+    """
+    cpuset_cpus: builtins.str
+    """The CPUs the container is pinned to (docker <code>HostConfig.CpusetCpus</code>), empty when unset."""
+    cpu_quota: builtins.int
+    """The CFS CPU quota (docker <code>HostConfig.CpuQuota</code>), the older cpu-limit form; cores =
+    <code>cpu_quota</code> / <code>cpu_period</code> when both are &gt; 0.
+    """
+    cpu_period: builtins.int
+    """The CFS CPU period (docker <code>HostConfig.CpuPeriod</code>)."""
+    image: builtins.str
+    """The docker image reference the container was started from (docker <code>Config.Image</code>)."""
     @property
     def started_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """When the container started, if known."""
@@ -603,6 +681,17 @@ class RemoteOperationContainerStatus(google.protobuf.message.Message):
     @property
     def observed_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """When this status was observed by the server."""
+
+    @property
+    def environment_variables(self) -> google.protobuf.internal.containers.ScalarMap[builtins.str, builtins.str]:
+        """The container&apos;s environment variables (docker <code>Config.Env</code>), as a name→value map.
+        Secret values (passwords, tokens, private keys, certificates) are redacted server-side; plain
+        non-secret values such as numeric limits remain visible.
+        """
+
+    @property
+    def command(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """The container&apos;s command/args (docker <code>Config.Cmd</code>)."""
 
     def __init__(
         self,
@@ -618,9 +707,17 @@ class RemoteOperationContainerStatus(google.protobuf.message.Message):
         started_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         finished_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         observed_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        environment_variables: collections.abc.Mapping[builtins.str, builtins.str] | None = ...,
+        command: collections.abc.Iterable[builtins.str] | None = ...,
+        memory_limit_bytes: builtins.int = ...,
+        nano_cpus: builtins.int = ...,
+        cpuset_cpus: builtins.str = ...,
+        cpu_quota: builtins.int = ...,
+        cpu_period: builtins.int = ...,
+        image: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["finished_at", b"finished_at", "observed_at", b"observed_at", "started_at", b"started_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["container_id", b"container_id", "container_name", b"container_name", "exit_code", b"exit_code", "finished_at", b"finished_at", "health_status", b"health_status", "host_name", b"host_name", "lifecycle_state", b"lifecycle_state", "name", b"name", "observed_at", b"observed_at", "oom_killed", b"oom_killed", "started_at", b"started_at"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["command", b"command", "container_id", b"container_id", "container_name", b"container_name", "cpu_period", b"cpu_period", "cpu_quota", b"cpu_quota", "cpuset_cpus", b"cpuset_cpus", "environment_variables", b"environment_variables", "exit_code", b"exit_code", "finished_at", b"finished_at", "health_status", b"health_status", "host_name", b"host_name", "image", b"image", "lifecycle_state", b"lifecycle_state", "memory_limit_bytes", b"memory_limit_bytes", "name", b"name", "nano_cpus", b"nano_cpus", "observed_at", b"observed_at", "oom_killed", b"oom_killed", "started_at", b"started_at"]) -> None: ...
 
 global___RemoteOperationContainerStatus = RemoteOperationContainerStatus
 
@@ -634,6 +731,22 @@ class RemoteOperationContainer(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
+    @typing.final
+    class EnvironmentVariablesEntry(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        KEY_FIELD_NUMBER: builtins.int
+        VALUE_FIELD_NUMBER: builtins.int
+        key: builtins.str
+        value: builtins.str
+        def __init__(
+            self,
+            *,
+            key: builtins.str = ...,
+            value: builtins.str = ...,
+        ) -> None: ...
+        def ClearField(self, field_name: typing.Literal["key", b"key", "value", b"value"]) -> None: ...
+
     CONTAINER_ID_FIELD_NUMBER: builtins.int
     CONTAINER_NAME_FIELD_NUMBER: builtins.int
     HOST_NAME_FIELD_NUMBER: builtins.int
@@ -646,6 +759,13 @@ class RemoteOperationContainer(google.protobuf.message.Message):
     STARTED_AT_FIELD_NUMBER: builtins.int
     FINISHED_AT_FIELD_NUMBER: builtins.int
     LOGS_AVAILABLE_FIELD_NUMBER: builtins.int
+    ENVIRONMENT_VARIABLES_FIELD_NUMBER: builtins.int
+    COMMAND_FIELD_NUMBER: builtins.int
+    MEMORY_LIMIT_BYTES_FIELD_NUMBER: builtins.int
+    NANO_CPUS_FIELD_NUMBER: builtins.int
+    CPUSET_CPUS_FIELD_NUMBER: builtins.int
+    CPU_QUOTA_FIELD_NUMBER: builtins.int
+    CPU_PERIOD_FIELD_NUMBER: builtins.int
     container_id: builtins.str
     """The docker container id (64-hex). Empty until captured at launch."""
     container_name: builtins.str
@@ -672,6 +792,22 @@ class RemoteOperationContainer(google.protobuf.message.Message):
     """True when logs for this container can still be fetched — either the container is live, or its logs
     were persisted to the server-side archive after it finished.
     """
+    memory_limit_bytes: builtins.int
+    """The container&apos;s hard memory limit in bytes (docker <code>HostConfig.Memory</code>).
+    <code>0</code> means unlimited.
+    """
+    nano_cpus: builtins.int
+    """The container&apos;s CPU limit in billionths of a CPU (docker <code>HostConfig.NanoCpus</code>);
+    cores = <code>nano_cpus</code> / 1e9. <code>0</code> means unset (see <code>cpu_quota</code>).
+    """
+    cpuset_cpus: builtins.str
+    """The CPUs the container is pinned to (docker <code>HostConfig.CpusetCpus</code>), empty when unset."""
+    cpu_quota: builtins.int
+    """The CFS CPU quota (docker <code>HostConfig.CpuQuota</code>); cores =
+    <code>cpu_quota</code> / <code>cpu_period</code> when both are &gt; 0.
+    """
+    cpu_period: builtins.int
+    """The CFS CPU period (docker <code>HostConfig.CpuPeriod</code>)."""
     @property
     def started_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """When the container started, if known."""
@@ -679,6 +815,18 @@ class RemoteOperationContainer(google.protobuf.message.Message):
     @property
     def finished_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """When the container finished, if it has exited."""
+
+    @property
+    def environment_variables(self) -> google.protobuf.internal.containers.ScalarMap[builtins.str, builtins.str]:
+        """The container&apos;s environment variables (docker <code>Config.Env</code>), as a name→value map.
+        Secret values (passwords, tokens, private keys, certificates) are redacted server-side; plain
+        non-secret values such as numeric limits remain visible. Persisted at launch so it is available
+        even after the container is removed.
+        """
+
+    @property
+    def command(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """The container&apos;s command/args (docker <code>Config.Cmd</code>)."""
 
     def __init__(
         self,
@@ -695,9 +843,16 @@ class RemoteOperationContainer(google.protobuf.message.Message):
         started_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         finished_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         logs_available: builtins.bool = ...,
+        environment_variables: collections.abc.Mapping[builtins.str, builtins.str] | None = ...,
+        command: collections.abc.Iterable[builtins.str] | None = ...,
+        memory_limit_bytes: builtins.int = ...,
+        nano_cpus: builtins.int = ...,
+        cpuset_cpus: builtins.str = ...,
+        cpu_quota: builtins.int = ...,
+        cpu_period: builtins.int = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["finished_at", b"finished_at", "started_at", b"started_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["container_id", b"container_id", "container_name", b"container_name", "exit_code", b"exit_code", "finished_at", b"finished_at", "host_name", b"host_name", "image", b"image", "lifecycle_state", b"lifecycle_state", "logs_available", b"logs_available", "oom_killed", b"oom_killed", "operation_name", b"operation_name", "phase", b"phase", "started_at", b"started_at"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["command", b"command", "container_id", b"container_id", "container_name", b"container_name", "cpu_period", b"cpu_period", "cpu_quota", b"cpu_quota", "cpuset_cpus", b"cpuset_cpus", "environment_variables", b"environment_variables", "exit_code", b"exit_code", "finished_at", b"finished_at", "host_name", b"host_name", "image", b"image", "lifecycle_state", b"lifecycle_state", "logs_available", b"logs_available", "memory_limit_bytes", b"memory_limit_bytes", "nano_cpus", b"nano_cpus", "oom_killed", b"oom_killed", "operation_name", b"operation_name", "phase", b"phase", "started_at", b"started_at"]) -> None: ...
 
 global___RemoteOperationContainer = RemoteOperationContainer
 
