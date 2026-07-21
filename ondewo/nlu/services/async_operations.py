@@ -34,6 +34,8 @@ from ondewo.nlu.operations_pb2 import (
     GetRemoteOperationContainerStatusRequest,
     ListOperationsRequest,
     ListOperationsResponse,
+    ListRemoteOperationContainersRequest,
+    ListRemoteOperationContainersResponse,
     Operation,
     RemoteOperationContainerLogLine,
     RemoteOperationContainerStatus,
@@ -94,6 +96,15 @@ class Operations(AsyncServicesInterface):
         request: GetRemoteOperationContainerStatusRequest,
     ) -> RemoteOperationContainerStatus:
         response: RemoteOperationContainerStatus = await self.stub.GetRemoteOperationContainerStatus(
+            request, metadata=self.metadata
+        )
+        return response
+
+    async def list_remote_operation_containers(
+        self,
+        request: ListRemoteOperationContainersRequest,
+    ) -> ListRemoteOperationContainersResponse:
+        response: ListRemoteOperationContainersResponse = await self.stub.ListRemoteOperationContainers(
             request, metadata=self.metadata
         )
         return response

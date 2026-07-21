@@ -73,6 +73,11 @@ class OperationsStub(object):
                 request_serializer=ondewo_dot_nlu_dot_operations__pb2.GetRemoteOperationContainerStatusRequest.SerializeToString,
                 response_deserializer=ondewo_dot_nlu_dot_operations__pb2.RemoteOperationContainerStatus.FromString,
                 _registered_method=True)
+        self.ListRemoteOperationContainers = channel.unary_unary(
+                '/ondewo.nlu.Operations/ListRemoteOperationContainers',
+                request_serializer=ondewo_dot_nlu_dot_operations__pb2.ListRemoteOperationContainersRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_operations__pb2.ListRemoteOperationContainersResponse.FromString,
+                _registered_method=True)
 
 
 class OperationsServicer(object):
@@ -155,6 +160,17 @@ class OperationsServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ListRemoteOperationContainers(self, request, context):
+        """Lists every docker container that a remote operation started (a single operation may run several
+        containers sequentially, e.g. hardware-check, GPU pre-allocation, build-cache and one training
+        container per algorithm). When <code>include_sub_operations</code> is set, the containers of the
+        operation&apos;s sub-operations are included as well. Each entry carries the container id + name,
+        its host, lifecycle state and whether logs are still available (live or persisted).
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_OperationsServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -192,6 +208,11 @@ def add_OperationsServicer_to_server(servicer, server):
                     servicer.GetRemoteOperationContainerStatus,
                     request_deserializer=ondewo_dot_nlu_dot_operations__pb2.GetRemoteOperationContainerStatusRequest.FromString,
                     response_serializer=ondewo_dot_nlu_dot_operations__pb2.RemoteOperationContainerStatus.SerializeToString,
+            ),
+            'ListRemoteOperationContainers': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListRemoteOperationContainers,
+                    request_deserializer=ondewo_dot_nlu_dot_operations__pb2.ListRemoteOperationContainersRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_operations__pb2.ListRemoteOperationContainersResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -386,6 +407,33 @@ class Operations(object):
             '/ondewo.nlu.Operations/GetRemoteOperationContainerStatus',
             ondewo_dot_nlu_dot_operations__pb2.GetRemoteOperationContainerStatusRequest.SerializeToString,
             ondewo_dot_nlu_dot_operations__pb2.RemoteOperationContainerStatus.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def ListRemoteOperationContainers(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.Operations/ListRemoteOperationContainers',
+            ondewo_dot_nlu_dot_operations__pb2.ListRemoteOperationContainersRequest.SerializeToString,
+            ondewo_dot_nlu_dot_operations__pb2.ListRemoteOperationContainersResponse.FromString,
             options,
             channel_credentials,
             insecure,
