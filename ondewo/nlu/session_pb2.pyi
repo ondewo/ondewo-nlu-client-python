@@ -328,6 +328,68 @@ identified only by the session and channel origin).
 """
 global___FeedbackAuthorType = FeedbackAuthorType
 
+class _FeedbackScope:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _FeedbackScopeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_FeedbackScope.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    FEEDBACK_SCOPE_UNSPECIFIED: _FeedbackScope.ValueType  # 0
+    """Both session-level and step-level feedback."""
+    FEEDBACK_SCOPE_SESSION_LEVEL: _FeedbackScope.ValueType  # 1
+    """Only session-level feedback (session_step_id empty)."""
+    FEEDBACK_SCOPE_STEP_LEVEL: _FeedbackScope.ValueType  # 2
+    """Only session-step-level feedback (session_step_id set)."""
+
+class FeedbackScope(_FeedbackScope, metaclass=_FeedbackScopeEnumTypeWrapper):
+    """The scope a feedback filter targets: session-level, step-level, or both."""
+
+FEEDBACK_SCOPE_UNSPECIFIED: FeedbackScope.ValueType  # 0
+"""Both session-level and step-level feedback."""
+FEEDBACK_SCOPE_SESSION_LEVEL: FeedbackScope.ValueType  # 1
+"""Only session-level feedback (session_step_id empty)."""
+FEEDBACK_SCOPE_STEP_LEVEL: FeedbackScope.ValueType  # 2
+"""Only session-step-level feedback (session_step_id set)."""
+global___FeedbackScope = FeedbackScope
+
+class _FeedbackTimeGranularity:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _FeedbackTimeGranularityEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_FeedbackTimeGranularity.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    FEEDBACK_TIME_GRANULARITY_UNSPECIFIED: _FeedbackTimeGranularity.ValueType  # 0
+    """Unspecified — use the request's fixed-width bucket_width_seconds instead."""
+    FEEDBACK_TIME_GRANULARITY_HOUR: _FeedbackTimeGranularity.ValueType  # 1
+    """Hourly calendar buckets."""
+    FEEDBACK_TIME_GRANULARITY_DAY: _FeedbackTimeGranularity.ValueType  # 2
+    """Daily calendar buckets."""
+    FEEDBACK_TIME_GRANULARITY_WEEK: _FeedbackTimeGranularity.ValueType  # 3
+    """Weekly calendar buckets (ISO weeks, Monday start)."""
+    FEEDBACK_TIME_GRANULARITY_MONTH: _FeedbackTimeGranularity.ValueType  # 4
+    """Monthly calendar buckets."""
+    FEEDBACK_TIME_GRANULARITY_YEAR: _FeedbackTimeGranularity.ValueType  # 5
+    """Yearly calendar buckets."""
+
+class FeedbackTimeGranularity(_FeedbackTimeGranularity, metaclass=_FeedbackTimeGranularityEnumTypeWrapper):
+    """The calendar granularity of a feedback time series. When set (non-unspecified) it overrides the
+    fixed-width bucket_width_seconds on the request.
+    """
+
+FEEDBACK_TIME_GRANULARITY_UNSPECIFIED: FeedbackTimeGranularity.ValueType  # 0
+"""Unspecified — use the request's fixed-width bucket_width_seconds instead."""
+FEEDBACK_TIME_GRANULARITY_HOUR: FeedbackTimeGranularity.ValueType  # 1
+"""Hourly calendar buckets."""
+FEEDBACK_TIME_GRANULARITY_DAY: FeedbackTimeGranularity.ValueType  # 2
+"""Daily calendar buckets."""
+FEEDBACK_TIME_GRANULARITY_WEEK: FeedbackTimeGranularity.ValueType  # 3
+"""Weekly calendar buckets (ISO weeks, Monday start)."""
+FEEDBACK_TIME_GRANULARITY_MONTH: FeedbackTimeGranularity.ValueType  # 4
+"""Monthly calendar buckets."""
+FEEDBACK_TIME_GRANULARITY_YEAR: FeedbackTimeGranularity.ValueType  # 5
+"""Yearly calendar buckets."""
+global___FeedbackTimeGranularity = FeedbackTimeGranularity
+
 class _ResourceView:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
@@ -5406,12 +5468,16 @@ class ListSessionFeedbackOfAllSessionsRequest(google.protobuf.message.Message):
     SESSION_FILTER_FIELD_NUMBER: builtins.int
     PAGE_TOKEN_FIELD_NUMBER: builtins.int
     FIELD_MASK_FIELD_NUMBER: builtins.int
+    FEEDBACK_FILTER_FIELD_NUMBER: builtins.int
+    ORDER_BY_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """The parent for which the feedback of all sessions should be listed.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
     page_token: builtins.str
     """Optional. The page token to support pagination."""
+    order_by: builtins.str
+    """Optional. Sort order, e.g. "created_at desc" (default), "created_at asc", "rating desc"."""
     @property
     def session_filter(self) -> global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
@@ -5420,6 +5486,10 @@ class ListSessionFeedbackOfAllSessionsRequest(google.protobuf.message.Message):
     def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields get returned."""
 
+    @property
+    def feedback_filter(self) -> global___FeedbackFilter:
+        """Optional. A feedback-native filter (rating / author / comment / score / criterion / date window)."""
+
     def __init__(
         self,
         *,
@@ -5427,9 +5497,11 @@ class ListSessionFeedbackOfAllSessionsRequest(google.protobuf.message.Message):
         session_filter: global___SessionFilter | None = ...,
         page_token: builtins.str = ...,
         field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        feedback_filter: global___FeedbackFilter | None = ...,
+        order_by: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "page_token", b"page_token", "parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "feedback_filter", b"feedback_filter", "field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "feedback_filter", b"feedback_filter", "field_mask", b"field_mask", "order_by", b"order_by", "page_token", b"page_token", "parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
     def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___ListSessionFeedbackOfAllSessionsRequest = ListSessionFeedbackOfAllSessionsRequest
@@ -5442,8 +5514,11 @@ class ListSessionFeedbackResponse(google.protobuf.message.Message):
 
     FEEDBACK_FIELD_NUMBER: builtins.int
     NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
+    TOTAL_COUNT_FIELD_NUMBER: builtins.int
     next_page_token: builtins.str
     """The page token for the next page (empty when there are no more pages)."""
+    total_count: builtins.int
+    """Total number of feedback matching the filter across all pages."""
     @property
     def feedback(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___SessionFeedback]:
         """The feedback of the requested scope."""
@@ -5453,15 +5528,102 @@ class ListSessionFeedbackResponse(google.protobuf.message.Message):
         *,
         feedback: collections.abc.Iterable[global___SessionFeedback] | None = ...,
         next_page_token: builtins.str = ...,
+        total_count: builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["feedback", b"feedback", "next_page_token", b"next_page_token"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["feedback", b"feedback", "next_page_token", b"next_page_token", "total_count", b"total_count"]) -> None: ...
 
 global___ListSessionFeedbackResponse = ListSessionFeedbackResponse
 
 @typing.final
-class FeedbackBreakdownBucket(google.protobuf.message.Message):
-    """A key + up/down counts breakdown bucket (by language / intent / author type / ...)."""
+class FeedbackFilter(google.protobuf.message.Message):
+    """A key + up/down counts breakdown bucket (by language / intent / author type / ...).
+    A feedback-native filter for feedback list + analytics requests, complementing SessionFilter (which
+    filters the parent sessions). All set fields are AND-combined; repeated fields are OR-within-field.
+    """
 
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    RATINGS_FIELD_NUMBER: builtins.int
+    AUTHOR_TYPES_FIELD_NUMBER: builtins.int
+    HAS_COMMENT_FIELD_NUMBER: builtins.int
+    EARLIEST_FIELD_NUMBER: builtins.int
+    LATEST_FIELD_NUMBER: builtins.int
+    CRITERIA_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODES_FIELD_NUMBER: builtins.int
+    ANNOTATOR_USER_IDS_FIELD_NUMBER: builtins.int
+    ORIGIN_IDS_FIELD_NUMBER: builtins.int
+    SCORE_MIN_FIELD_NUMBER: builtins.int
+    SCORE_MAX_FIELD_NUMBER: builtins.int
+    SCOPE_FIELD_NUMBER: builtins.int
+    has_comment: builtins.bool
+    """When set, keep only feedback that has (true) or lacks (false) a free-text comment."""
+    score_min: builtins.float
+    """When set, keep only feedback with a numeric score at or above this value."""
+    score_max: builtins.float
+    """When set, keep only feedback with a numeric score at or below this value."""
+    scope: global___FeedbackScope.ValueType
+    """Restrict to session-level or step-level feedback (unspecified means both)."""
+    @property
+    def ratings(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[global___FeedbackRating.ValueType]:
+        """Keep only feedback with one of these ratings (thumbs up / down / unspecified)."""
+
+    @property
+    def author_types(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[global___FeedbackAuthorType.ValueType]:
+        """Keep only feedback left by one of these author types."""
+
+    @property
+    def earliest(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Keep only feedback created at or after this time (feedback created_at, not session time)."""
+
+    @property
+    def latest(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Keep only feedback created at or before this time."""
+
+    @property
+    def criteria(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Keep only feedback whose criterion is one of these."""
+
+    @property
+    def language_codes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Keep only feedback whose language code is one of these."""
+
+    @property
+    def annotator_user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Keep only feedback whose authenticated annotator is one of these user ids."""
+
+    @property
+    def origin_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Keep only feedback whose channel origin id is one of these."""
+
+    def __init__(
+        self,
+        *,
+        ratings: collections.abc.Iterable[global___FeedbackRating.ValueType] | None = ...,
+        author_types: collections.abc.Iterable[global___FeedbackAuthorType.ValueType] | None = ...,
+        has_comment: builtins.bool | None = ...,
+        earliest: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        latest: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        criteria: collections.abc.Iterable[builtins.str] | None = ...,
+        language_codes: collections.abc.Iterable[builtins.str] | None = ...,
+        annotator_user_ids: collections.abc.Iterable[builtins.str] | None = ...,
+        origin_ids: collections.abc.Iterable[builtins.str] | None = ...,
+        score_min: builtins.float | None = ...,
+        score_max: builtins.float | None = ...,
+        scope: global___FeedbackScope.ValueType = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_has_comment", b"_has_comment", "_score_max", b"_score_max", "_score_min", b"_score_min", "earliest", b"earliest", "has_comment", b"has_comment", "latest", b"latest", "score_max", b"score_max", "score_min", b"score_min"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_has_comment", b"_has_comment", "_score_max", b"_score_max", "_score_min", b"_score_min", "annotator_user_ids", b"annotator_user_ids", "author_types", b"author_types", "criteria", b"criteria", "earliest", b"earliest", "has_comment", b"has_comment", "language_codes", b"language_codes", "latest", b"latest", "origin_ids", b"origin_ids", "ratings", b"ratings", "scope", b"scope", "score_max", b"score_max", "score_min", b"score_min"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_has_comment", b"_has_comment"]) -> typing.Literal["has_comment"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_score_max", b"_score_max"]) -> typing.Literal["score_max"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_score_min", b"_score_min"]) -> typing.Literal["score_min"] | None: ...
+
+global___FeedbackFilter = FeedbackFilter
+
+@typing.final
+class FeedbackBreakdownBucket(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     KEY_FIELD_NUMBER: builtins.int
@@ -5505,6 +5667,11 @@ class FeedbackStatistics(google.protobuf.message.Message):
     BY_LANGUAGE_FIELD_NUMBER: builtins.int
     BY_INTENT_FIELD_NUMBER: builtins.int
     BY_AUTHOR_TYPE_FIELD_NUMBER: builtins.int
+    UNSPECIFIED_RATING_COUNT_FIELD_NUMBER: builtins.int
+    SCORED_COUNT_FIELD_NUMBER: builtins.int
+    AVERAGE_SCORE_FIELD_NUMBER: builtins.int
+    BY_ORIGIN_FIELD_NUMBER: builtins.int
+    BY_CRITERION_FIELD_NUMBER: builtins.int
     total_feedback: builtins.int
     """Total feedback records."""
     thumbs_up_count: builtins.int
@@ -5521,6 +5688,12 @@ class FeedbackStatistics(google.protobuf.message.Message):
     """Roll-up of existing session reviews (additional quality signal)."""
     session_comment_count: builtins.int
     """Roll-up of existing session comments (additional quality signal)."""
+    unspecified_rating_count: builtins.int
+    """Number of feedback with no rating (comment-only / unspecified rating)."""
+    scored_count: builtins.int
+    """Number of feedback that carry a numeric score."""
+    average_score: builtins.float
+    """Mean of the numeric scores across scored feedback (0 when none)."""
     @property
     def by_language(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FeedbackBreakdownBucket]:
         """Up/down breakdown by language code."""
@@ -5532,6 +5705,14 @@ class FeedbackStatistics(google.protobuf.message.Message):
     @property
     def by_author_type(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FeedbackBreakdownBucket]:
         """Up/down breakdown by author type."""
+
+    @property
+    def by_origin(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FeedbackBreakdownBucket]:
+        """Up/down breakdown by channel origin id."""
+
+    @property
+    def by_criterion(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FeedbackBreakdownBucket]:
+        """Up/down breakdown by criterion."""
 
     def __init__(
         self,
@@ -5547,8 +5728,13 @@ class FeedbackStatistics(google.protobuf.message.Message):
         by_language: collections.abc.Iterable[global___FeedbackBreakdownBucket] | None = ...,
         by_intent: collections.abc.Iterable[global___FeedbackBreakdownBucket] | None = ...,
         by_author_type: collections.abc.Iterable[global___FeedbackBreakdownBucket] | None = ...,
+        unspecified_rating_count: builtins.int = ...,
+        scored_count: builtins.int = ...,
+        average_score: builtins.float = ...,
+        by_origin: collections.abc.Iterable[global___FeedbackBreakdownBucket] | None = ...,
+        by_criterion: collections.abc.Iterable[global___FeedbackBreakdownBucket] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["by_author_type", b"by_author_type", "by_intent", b"by_intent", "by_language", b"by_language", "comment_count", b"comment_count", "session_comment_count", b"session_comment_count", "session_level_count", b"session_level_count", "session_review_count", b"session_review_count", "session_step_level_count", b"session_step_level_count", "thumbs_down_count", b"thumbs_down_count", "thumbs_up_count", b"thumbs_up_count", "total_feedback", b"total_feedback"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["average_score", b"average_score", "by_author_type", b"by_author_type", "by_criterion", b"by_criterion", "by_intent", b"by_intent", "by_language", b"by_language", "by_origin", b"by_origin", "comment_count", b"comment_count", "scored_count", b"scored_count", "session_comment_count", b"session_comment_count", "session_level_count", b"session_level_count", "session_review_count", b"session_review_count", "session_step_level_count", b"session_step_level_count", "thumbs_down_count", b"thumbs_down_count", "thumbs_up_count", b"thumbs_up_count", "total_feedback", b"total_feedback", "unspecified_rating_count", b"unspecified_rating_count"]) -> None: ...
 
 global___FeedbackStatistics = FeedbackStatistics
 
@@ -5562,6 +5748,7 @@ class GetFeedbackStatisticsRequest(google.protobuf.message.Message):
     SESSION_FILTER_FIELD_NUMBER: builtins.int
     INCLUDE_REVIEW_AND_COMMENT_ROLLUP_FIELD_NUMBER: builtins.int
     FIELD_MASK_FIELD_NUMBER: builtins.int
+    FEEDBACK_FILTER_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """The agent parent.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
@@ -5576,6 +5763,10 @@ class GetFeedbackStatisticsRequest(google.protobuf.message.Message):
     def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields of the statistics get returned."""
 
+    @property
+    def feedback_filter(self) -> global___FeedbackFilter:
+        """Optional. A feedback-native filter (rating / author / comment / score / criterion / date window)."""
+
     def __init__(
         self,
         *,
@@ -5583,9 +5774,10 @@ class GetFeedbackStatisticsRequest(google.protobuf.message.Message):
         session_filter: global___SessionFilter | None = ...,
         include_review_and_comment_rollup: builtins.bool = ...,
         field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        feedback_filter: global___FeedbackFilter | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "include_review_and_comment_rollup", b"include_review_and_comment_rollup", "parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "feedback_filter", b"feedback_filter", "field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "feedback_filter", b"feedback_filter", "field_mask", b"field_mask", "include_review_and_comment_rollup", b"include_review_and_comment_rollup", "parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
     def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___GetFeedbackStatisticsRequest = GetFeedbackStatisticsRequest
@@ -5621,6 +5813,7 @@ class FeedbackTimeSeriesBucket(google.protobuf.message.Message):
     THUMBS_UP_COUNT_FIELD_NUMBER: builtins.int
     THUMBS_DOWN_COUNT_FIELD_NUMBER: builtins.int
     TOTAL_FIELD_NUMBER: builtins.int
+    BUCKET_END_FIELD_NUMBER: builtins.int
     thumbs_up_count: builtins.int
     """Number of thumbs-up feedback in this bucket."""
     thumbs_down_count: builtins.int
@@ -5631,6 +5824,10 @@ class FeedbackTimeSeriesBucket(google.protobuf.message.Message):
     def bucket_start(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """The (inclusive) start of the time bucket."""
 
+    @property
+    def bucket_end(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """The (exclusive) end of the time bucket."""
+
     def __init__(
         self,
         *,
@@ -5638,9 +5835,10 @@ class FeedbackTimeSeriesBucket(google.protobuf.message.Message):
         thumbs_up_count: builtins.int = ...,
         thumbs_down_count: builtins.int = ...,
         total: builtins.int = ...,
+        bucket_end: google.protobuf.timestamp_pb2.Timestamp | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["bucket_start", b"bucket_start"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["bucket_start", b"bucket_start", "thumbs_down_count", b"thumbs_down_count", "thumbs_up_count", b"thumbs_up_count", "total", b"total"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["bucket_end", b"bucket_end", "bucket_start", b"bucket_start"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["bucket_end", b"bucket_end", "bucket_start", b"bucket_start", "thumbs_down_count", b"thumbs_down_count", "thumbs_up_count", b"thumbs_up_count", "total", b"total"]) -> None: ...
 
 global___FeedbackTimeSeriesBucket = FeedbackTimeSeriesBucket
 
@@ -5655,6 +5853,11 @@ class GetFeedbackStatisticsTimeSeriesRequest(google.protobuf.message.Message):
     BUCKET_WIDTH_SECONDS_FIELD_NUMBER: builtins.int
     MAX_BUCKETS_FIELD_NUMBER: builtins.int
     FIELD_MASK_FIELD_NUMBER: builtins.int
+    FEEDBACK_FILTER_FIELD_NUMBER: builtins.int
+    GRANULARITY_FIELD_NUMBER: builtins.int
+    TIME_ZONE_FIELD_NUMBER: builtins.int
+    START_FIELD_NUMBER: builtins.int
+    END_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """The agent parent.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
@@ -5663,6 +5866,10 @@ class GetFeedbackStatisticsTimeSeriesRequest(google.protobuf.message.Message):
     """The width of each time bucket in seconds."""
     max_buckets: builtins.int
     """The maximum number of buckets to return."""
+    granularity: global___FeedbackTimeGranularity.ValueType
+    """Optional. Calendar granularity; when set (non-unspecified) it overrides bucket_width_seconds."""
+    time_zone: builtins.str
+    """Optional. IANA timezone for calendar bucketing (e.g. "Europe/Vienna"); defaults to UTC."""
     @property
     def session_filter(self) -> global___SessionFilter:
         """Optional. A filter to narrow the sessions considered."""
@@ -5670,6 +5877,18 @@ class GetFeedbackStatisticsTimeSeriesRequest(google.protobuf.message.Message):
     @property
     def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields get returned."""
+
+    @property
+    def feedback_filter(self) -> global___FeedbackFilter:
+        """Optional. A feedback-native filter."""
+
+    @property
+    def start(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Optional. Inclusive start of the series window; when set, empty leading buckets are zero-filled."""
+
+    @property
+    def end(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Optional. Exclusive end of the series window; defaults to now."""
 
     def __init__(
         self,
@@ -5679,9 +5898,14 @@ class GetFeedbackStatisticsTimeSeriesRequest(google.protobuf.message.Message):
         bucket_width_seconds: builtins.int = ...,
         max_buckets: builtins.int = ...,
         field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        feedback_filter: global___FeedbackFilter | None = ...,
+        granularity: global___FeedbackTimeGranularity.ValueType = ...,
+        time_zone: builtins.str = ...,
+        start: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        end: google.protobuf.timestamp_pb2.Timestamp | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "bucket_width_seconds", b"bucket_width_seconds", "field_mask", b"field_mask", "max_buckets", b"max_buckets", "parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "end", b"end", "feedback_filter", b"feedback_filter", "field_mask", b"field_mask", "session_filter", b"session_filter", "start", b"start"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "bucket_width_seconds", b"bucket_width_seconds", "end", b"end", "feedback_filter", b"feedback_filter", "field_mask", b"field_mask", "granularity", b"granularity", "max_buckets", b"max_buckets", "parent", b"parent", "session_filter", b"session_filter", "start", b"start", "time_zone", b"time_zone"]) -> None: ...
     def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
 
 global___GetFeedbackStatisticsTimeSeriesRequest = GetFeedbackStatisticsTimeSeriesRequest
