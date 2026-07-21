@@ -142,6 +142,11 @@ class UsersStub(object):
                 request_serializer=ondewo_dot_nlu_dot_common__pb2.DeleteNotificationsRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 _registered_method=True)
+        self.StreamNotifications = channel.unary_stream(
+                '/ondewo.nlu.Users/StreamNotifications',
+                request_serializer=ondewo_dot_nlu_dot_common__pb2.StreamNotificationsRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_common__pb2.Notification.FromString,
+                _registered_method=True)
         self.GetUserPreferences = channel.unary_unary(
                 '/ondewo.nlu.Users/GetUserPreferences',
                 request_serializer=ondewo_dot_nlu_dot_user__pb2.GetUserPreferencesRequest.SerializeToString,
@@ -315,6 +320,17 @@ class UsersServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def StreamNotifications(self, request, context):
+        """Streams notifications for the authenticated caller in real time: each newly-added notification that
+        matches the request filter is pushed to the client as it is created (backed server-side by a
+        Postgres LISTEN/NOTIFY channel). The stream stays open until the client disconnects. When
+        <code>include_existing</code> is set the currently-stored matching notifications are replayed first
+        (newest last) before switching to the live tail.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def GetUserPreferences(self, request, context):
         """Retrieves user preferences based on the provided request.
         """
@@ -450,6 +466,11 @@ def add_UsersServicer_to_server(servicer, server):
                     servicer.DeleteNotifications,
                     request_deserializer=ondewo_dot_nlu_dot_common__pb2.DeleteNotificationsRequest.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'StreamNotifications': grpc.unary_stream_rpc_method_handler(
+                    servicer.StreamNotifications,
+                    request_deserializer=ondewo_dot_nlu_dot_common__pb2.StreamNotificationsRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_common__pb2.Notification.SerializeToString,
             ),
             'GetUserPreferences': grpc.unary_unary_rpc_method_handler(
                     servicer.GetUserPreferences,
@@ -1040,6 +1061,33 @@ class Users(object):
             '/ondewo.nlu.Users/DeleteNotifications',
             ondewo_dot_nlu_dot_common__pb2.DeleteNotificationsRequest.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def StreamNotifications(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_stream(
+            request,
+            target,
+            '/ondewo.nlu.Users/StreamNotifications',
+            ondewo_dot_nlu_dot_common__pb2.StreamNotificationsRequest.SerializeToString,
+            ondewo_dot_nlu_dot_common__pb2.Notification.FromString,
             options,
             channel_credentials,
             insecure,

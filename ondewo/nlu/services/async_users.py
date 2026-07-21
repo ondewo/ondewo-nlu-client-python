@@ -21,6 +21,8 @@
 #       ondewo-nlu-api/ondewo/nlu ondewo/nlu/services
 # ---------------------------------------------------------------------------
 
+from typing import AsyncIterator
+
 from google.protobuf.empty_pb2 import Empty
 
 from ondewo.nlu.user_pb2 import (
@@ -61,6 +63,7 @@ from ondewo.nlu.common_pb2 import (
     Notification,
     SetNotificationsFlaggedStatusRequest,
     SetNotificationsReadStatusRequest,
+    StreamNotificationsRequest,
     UpdateNotificationRequest,
 )
 
@@ -168,6 +171,10 @@ class Users(AsyncServicesInterface):
 
     async def delete_notifications(self, request: DeleteNotificationsRequest) -> Empty:
         response: Empty = await self.stub.DeleteNotifications(request, metadata=self.metadata)
+        return response
+
+    async def stream_notifications(self, request: StreamNotificationsRequest) -> AsyncIterator[Notification]:
+        response: AsyncIterator[Notification] = self.stub.StreamNotifications(request, metadata=self.metadata)
         return response
 
     async def get_user_preferences(self, request: GetUserPreferencesRequest) -> GetUserPreferencesResponse:

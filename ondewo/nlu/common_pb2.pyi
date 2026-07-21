@@ -853,6 +853,39 @@ class DeleteNotificationsRequest(google.protobuf.message.Message):
 global___DeleteNotificationsRequest = DeleteNotificationsRequest
 
 @typing.final
+class StreamNotificationsRequest(google.protobuf.message.Message):
+    """Message for streaming notifications in real time via
+    <a href="index.html#ondewo.nlu.Users.StreamNotifications">Users.StreamNotifications</a>.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    NOTIFICATION_FILTER_FIELD_NUMBER: builtins.int
+    INCLUDE_EXISTING_FIELD_NUMBER: builtins.int
+    include_existing: builtins.bool
+    """When true, the currently-stored matching notifications are replayed first (oldest first) before the
+    stream switches to pushing only newly-created notifications. When false (the default) only
+    notifications created after the stream opened are pushed.
+    """
+    @property
+    def notification_filter(self) -> global___NotificationFilter:
+        """Optional filter to narrow the stream down to specific notifications (same semantics as
+        <a href="index.html#ondewo.nlu.NotificationFilter">NotificationFilter</a> used by ListNotifications).
+        The caller is always additionally scoped to their own notifications server-side.
+        """
+
+    def __init__(
+        self,
+        *,
+        notification_filter: global___NotificationFilter | None = ...,
+        include_existing: builtins.bool = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["notification_filter", b"notification_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["include_existing", b"include_existing", "notification_filter", b"notification_filter"]) -> None: ...
+
+global___StreamNotificationsRequest = StreamNotificationsRequest
+
+@typing.final
 class KeyValuePair(google.protobuf.message.Message):
     """Key-Value pair message, where the value can be one of various types (int, float, double, string, etc.)."""
 
