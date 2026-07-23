@@ -2936,6 +2936,7 @@ class RagCrawlerResultsConfig(google.protobuf.message.Message):
     META_DATA_EXTRACTORS_FIELD_NUMBER: builtins.int
     CONTENT_SCOPE_FIELD_NUMBER: builtins.int
     DENSITY_PRUNING_FIELD_NUMBER: builtins.int
+    DISCOVERY_ONLY_URL_REGEX_FIELD_NUMBER: builtins.int
     inject_frontmatter: builtins.bool
     """Optional. Inject YAML frontmatter into markdown output.
     If the content is HTML based, it will automatically be converted to markdown.
@@ -2956,6 +2957,10 @@ class RagCrawlerResultsConfig(google.protobuf.message.Message):
         If not set the <code>RagCrawlerDensityPruning</code> defaults are used.
         """
 
+    @property
+    def discovery_only_url_regex(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Regular expressions matched against a crawled page's URL. A page whose URL matches any of these is still fetched and its links are followed for discovery, but it is NOT converted into a document"""
+
     def __init__(
         self,
         *,
@@ -2963,9 +2968,10 @@ class RagCrawlerResultsConfig(google.protobuf.message.Message):
         meta_data_extractors: collections.abc.Iterable[global___RagCrawlerMetaDataExtractor] | None = ...,
         content_scope: global___RagCrawlerContentScope | None = ...,
         density_pruning: global___RagCrawlerDensityPruning | None = ...,
+        discovery_only_url_regex: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["_content_scope", b"_content_scope", "_density_pruning", b"_density_pruning", "_inject_frontmatter", b"_inject_frontmatter", "content_scope", b"content_scope", "density_pruning", b"density_pruning", "inject_frontmatter", b"inject_frontmatter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_content_scope", b"_content_scope", "_density_pruning", b"_density_pruning", "_inject_frontmatter", b"_inject_frontmatter", "content_scope", b"content_scope", "density_pruning", b"density_pruning", "inject_frontmatter", b"inject_frontmatter", "meta_data_extractors", b"meta_data_extractors"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["_content_scope", b"_content_scope", "_density_pruning", b"_density_pruning", "_inject_frontmatter", b"_inject_frontmatter", "content_scope", b"content_scope", "density_pruning", b"density_pruning", "discovery_only_url_regex", b"discovery_only_url_regex", "inject_frontmatter", b"inject_frontmatter", "meta_data_extractors", b"meta_data_extractors"]) -> None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_content_scope", b"_content_scope"]) -> typing.Literal["content_scope"] | None: ...
     @typing.overload
