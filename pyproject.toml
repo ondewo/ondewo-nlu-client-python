@@ -23,10 +23,12 @@ classifiers = [
     "Topic :: Software Development :: Libraries",
 ]
 dependencies = [
-    "dataclasses-json",
     "google-api-core",
     "grpcio",
     "loguru",
+    # >=3.3.0 is what finally drops the dataclasses-json -> marshmallow chain (BaseClientConfig implements
+    # to_dict/from_dict/to_json/from_json itself). 3.2.0 still supplies those helpers via @dataclass_json, so
+    # this package works on both -- raise the floor to >=3.3.0 once client-utils 3.3.0 is on PyPI.
     "ondewo-client-utils>=3.2.0",
     "polling",
     "protobuf",

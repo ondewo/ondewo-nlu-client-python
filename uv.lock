@@ -1642,7 +1642,6 @@ name = "ondewo-nlu-client"
 version = "7.0.0"
 source = { editable = "." }
 dependencies = [
-    { name = "dataclasses-json" },
     { name = "google-api-core", version = "2.30.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.10'" },
     { name = "google-api-core", version = "2.31.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10'" },
     { name = "grpcio", version = "1.80.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.10'" },
@@ -1683,7 +1682,6 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "dataclasses-json" },
     { name = "faker", marker = "extra == 'dev'" },
     { name = "google-api-core" },
     { name = "grpcio" },
