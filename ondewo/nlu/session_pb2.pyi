@@ -5246,7 +5246,16 @@ class SessionFeedback(google.protobuf.message.Message):
     categorical_value: builtins.str
     """Optional. An extensible categorical value (e.g. star bucket, NPS/CSAT bucket)."""
     score: builtins.float
-    """Optional. A numeric score in [0, 1] for future continuous scales."""
+    """Optional. A numeric score in [0, 1] for future continuous scales.
+
+    Explicit presence (<code>optional</code>): a score of <code>0.0</code> is a MEANINGFUL rating — the
+    worst point of a 0-10 NPS or 0-5 CSAT scale — and without presence it is indistinguishable from
+    "no score given". The server persists an absent score as SQL NULL and excludes it from
+    <code>average_score</code> / <code>scored_count</code> and from the <code>score_min</code> /
+    <code>score_max</code> range filters, so conflating the two silently dropped exactly the worst
+    ratings and biased the reported average upward. Use <code>HasField("score")</code> to distinguish.
+    Matches <code>FeedbackFilter.score_min</code> / <code>score_max</code>, which are already optional.
+    """
     comment: builtins.str
     """Optional. Free-text comment."""
     criterion: builtins.str
@@ -5285,7 +5294,7 @@ class SessionFeedback(google.protobuf.message.Message):
         session_step_llm_telemetry_id: builtins.str = ...,
         rating: global___FeedbackRating.ValueType = ...,
         categorical_value: builtins.str = ...,
-        score: builtins.float = ...,
+        score: builtins.float | None = ...,
         comment: builtins.str = ...,
         criterion: builtins.str = ...,
         author_type: global___FeedbackAuthorType.ValueType = ...,
@@ -5298,8 +5307,9 @@ class SessionFeedback(google.protobuf.message.Message):
         created_by: builtins.str = ...,
         modified_by: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at", "raw", b"raw"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["annotator_user_id", b"annotator_user_id", "author_type", b"author_type", "categorical_value", b"categorical_value", "comment", b"comment", "created_at", b"created_at", "created_by", b"created_by", "criterion", b"criterion", "identified_user_id", b"identified_user_id", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "origin_id", b"origin_id", "rating", b"rating", "raw", b"raw", "response_id", b"response_id", "score", b"score", "session_id", b"session_id", "session_step_id", b"session_step_id", "session_step_llm_telemetry_id", b"session_step_llm_telemetry_id"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_score", b"_score", "created_at", b"created_at", "modified_at", b"modified_at", "raw", b"raw", "score", b"score"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_score", b"_score", "annotator_user_id", b"annotator_user_id", "author_type", b"author_type", "categorical_value", b"categorical_value", "comment", b"comment", "created_at", b"created_at", "created_by", b"created_by", "criterion", b"criterion", "identified_user_id", b"identified_user_id", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "origin_id", b"origin_id", "rating", b"rating", "raw", b"raw", "response_id", b"response_id", "score", b"score", "session_id", b"session_id", "session_step_id", b"session_step_id", "session_step_llm_telemetry_id", b"session_step_llm_telemetry_id"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_score", b"_score"]) -> typing.Literal["score"] | None: ...
 
 global___SessionFeedback = SessionFeedback
 
