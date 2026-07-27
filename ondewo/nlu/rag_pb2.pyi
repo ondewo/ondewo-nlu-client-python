@@ -3095,20 +3095,34 @@ class RagCrawlerRetryConfig(google.protobuf.message.Message):
 
     PAGE_LOAD_TIMEOUT_SECONDS_FIELD_NUMBER: builtins.int
     RETRY_MAX_ATTEMPTS_FIELD_NUMBER: builtins.int
+    RETRY_BACKOFF_SECONDS_FIELD_NUMBER: builtins.int
+    MAX_STALL_SECONDS_FIELD_NUMBER: builtins.int
     page_load_timeout_seconds: builtins.int
     """Optional. Page load/render timeout in seconds."""
     retry_max_attempts: builtins.int
     """Optional. Maximum retry attempts per page source."""
+    retry_backoff_seconds: builtins.float
+    """Optional. Base for the per-URL retry linear backoff, in seconds (default: 2)."""
+    max_stall_seconds: builtins.int
+    """Optional. Abort the crawl run when no page has been fetched successfully for this many seconds (default: 600).
+    <code>0</code> disables the bound.
+    """
     def __init__(
         self,
         *,
         page_load_timeout_seconds: builtins.int | None = ...,
         retry_max_attempts: builtins.int | None = ...,
+        retry_backoff_seconds: builtins.float | None = ...,
+        max_stall_seconds: builtins.int | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_page_load_timeout_seconds", b"_page_load_timeout_seconds", "_retry_max_attempts", b"_retry_max_attempts", "page_load_timeout_seconds", b"page_load_timeout_seconds", "retry_max_attempts", b"retry_max_attempts"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_page_load_timeout_seconds", b"_page_load_timeout_seconds", "_retry_max_attempts", b"_retry_max_attempts", "page_load_timeout_seconds", b"page_load_timeout_seconds", "retry_max_attempts", b"retry_max_attempts"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_max_stall_seconds", b"_max_stall_seconds", "_page_load_timeout_seconds", b"_page_load_timeout_seconds", "_retry_backoff_seconds", b"_retry_backoff_seconds", "_retry_max_attempts", b"_retry_max_attempts", "max_stall_seconds", b"max_stall_seconds", "page_load_timeout_seconds", b"page_load_timeout_seconds", "retry_backoff_seconds", b"retry_backoff_seconds", "retry_max_attempts", b"retry_max_attempts"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_max_stall_seconds", b"_max_stall_seconds", "_page_load_timeout_seconds", b"_page_load_timeout_seconds", "_retry_backoff_seconds", b"_retry_backoff_seconds", "_retry_max_attempts", b"_retry_max_attempts", "max_stall_seconds", b"max_stall_seconds", "page_load_timeout_seconds", b"page_load_timeout_seconds", "retry_backoff_seconds", b"retry_backoff_seconds", "retry_max_attempts", b"retry_max_attempts"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_max_stall_seconds", b"_max_stall_seconds"]) -> typing.Literal["max_stall_seconds"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_page_load_timeout_seconds", b"_page_load_timeout_seconds"]) -> typing.Literal["page_load_timeout_seconds"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_retry_backoff_seconds", b"_retry_backoff_seconds"]) -> typing.Literal["retry_backoff_seconds"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_retry_max_attempts", b"_retry_max_attempts"]) -> typing.Literal["retry_max_attempts"] | None: ...
 
