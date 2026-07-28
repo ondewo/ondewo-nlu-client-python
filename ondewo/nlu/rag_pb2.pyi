@@ -2502,11 +2502,11 @@ class RagCrawlerFilters(google.protobuf.message.Message):
     ALLOWED_PATHS_FIELD_NUMBER: builtins.int
     DISALLOWED_PATHS_FIELD_NUMBER: builtins.int
     allow_internal_links: builtins.bool
-    """Optional. Include internal links."""
+    """Deprecated. Has never had any effect."""
     allow_external_links: builtins.bool
-    """Optional. Include external links."""
+    """Optional. Include external links, that is links outside the crawled site's registrable domain."""
     allow_social_media_links: builtins.bool
-    """Optional. Include social media links."""
+    """Deprecated. Has never had any effect."""
     @property
     def allowed_domains(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Optional. Domain allow-list (host-level gating)."""
