@@ -1007,6 +1007,7 @@ class LlmTelemetry(google.protobuf.message.Message):
     CCAI_SERVICE_PROVIDER_FIELD_NUMBER: builtins.int
     LLM_SAFETY_ASSESSMENT_FIELD_NUMBER: builtins.int
     LLM_RETRIEVAL_METADATA_FIELD_NUMBER: builtins.int
+    LLM_CALL_ID_FIELD_NUMBER: builtins.int
     provider: builtins.str
     """Provider tag: "autogen" | "langchain" | "openai" | "anthropic" | ..."""
     model_name: builtins.str
@@ -1115,6 +1116,13 @@ class LlmTelemetry(google.protobuf.message.Message):
     """
     ccai_service_provider: ondewo.nlu.ccai_project_pb2.CcaiServiceProvider.ValueType
     """Provider of the ccai service"""
+    llm_call_id: builtins.str
+    """Id of THIS LLM call. Same identifier the streaming telemetry events carry as
+    <code>llm_call_id</code> (<code>LlmLlmCallStartedEvent</code>,
+    <code>LlmToolCallStartedEvent</code>, ...), so an aggregate or a persisted row can be
+    correlated back to the live event stream. Distinct from <code>run_id</code> (field 11),
+    which is the UPSTREAM framework's id (autogen / langchain).
+    """
     @property
     def llm_token_usage(self) -> global___LlmTokenUsage:
         """Totals for this call."""
@@ -1278,9 +1286,10 @@ class LlmTelemetry(google.protobuf.message.Message):
         ccai_service_provider: ondewo.nlu.ccai_project_pb2.CcaiServiceProvider.ValueType = ...,
         llm_safety_assessment: global___LlmSafetyAssessment | None = ...,
         llm_retrieval_metadata: global___LlmRetrievalMetadata | None = ...,
+        llm_call_id: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["_frequency_penalty", b"_frequency_penalty", "_presence_penalty", b"_presence_penalty", "_reasoning_effort", b"_reasoning_effort", "_strict_response_validation", b"_strict_response_validation", "_timeout", b"_timeout", "_user", b"_user", "default_headers", b"default_headers", "default_query", b"default_query", "end_time", b"end_time", "extra_body", b"extra_body", "extra_headers", b"extra_headers", "extra_query", b"extra_query", "frequency_penalty", b"frequency_penalty", "inputs", b"inputs", "llm_retrieval_metadata", b"llm_retrieval_metadata", "llm_safety_assessment", b"llm_safety_assessment", "llm_thinking_metadata", b"llm_thinking_metadata", "llm_token_usage", b"llm_token_usage", "metadata", b"metadata", "openai_metadata", b"openai_metadata", "outputs", b"outputs", "presence_penalty", b"presence_penalty", "reasoning_effort", b"reasoning_effort", "start_time", b"start_time", "strict_response_validation", b"strict_response_validation", "timeout", b"timeout", "user", b"user"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_frequency_penalty", b"_frequency_penalty", "_presence_penalty", b"_presence_penalty", "_reasoning_effort", b"_reasoning_effort", "_strict_response_validation", b"_strict_response_validation", "_timeout", b"_timeout", "_user", b"_user", "agent_name", b"agent_name", "agent_role", b"agent_role", "base_url", b"base_url", "cache_creation_input_tokens", b"cache_creation_input_tokens", "cached", b"cached", "cached_input_tokens", b"cached_input_tokens", "ccai_service_name", b"ccai_service_name", "ccai_service_provider", b"ccai_service_provider", "component_name", b"component_name", "default_headers", b"default_headers", "default_query", b"default_query", "duration_in_s", b"duration_in_s", "end_time", b"end_time", "error_class", b"error_class", "error_message", b"error_message", "evaluator_runs_join_key", b"evaluator_runs_join_key", "extra_body", b"extra_body", "extra_headers", b"extra_headers", "extra_query", b"extra_query", "fallback_depth", b"fallback_depth", "finish_reasons", b"finish_reasons", "first_token_latency_seconds", b"first_token_latency_seconds", "frequency_penalty", b"frequency_penalty", "inputs", b"inputs", "langsmith_run_url", b"langsmith_run_url", "llm_evaluation_feedbacks", b"llm_evaluation_feedbacks", "llm_retrieval_metadata", b"llm_retrieval_metadata", "llm_safety_assessment", b"llm_safety_assessment", "llm_thinking_metadata", b"llm_thinking_metadata", "llm_token_usage", b"llm_token_usage", "llm_tool_call_metadatas", b"llm_tool_call_metadatas", "max_tokens", b"max_tokens", "metadata", b"metadata", "model_name", b"model_name", "n_generations", b"n_generations", "openai_metadata", b"openai_metadata", "outputs", b"outputs", "parent_run_id", b"parent_run_id", "presence_penalty", b"presence_penalty", "provider", b"provider", "reasoning_effort", b"reasoning_effort", "recipient_agent", b"recipient_agent", "reflection_iterations", b"reflection_iterations", "retry_count", b"retry_count", "run_id", b"run_id", "run_type", b"run_type", "sender_agent", b"sender_agent", "start_time", b"start_time", "streaming_chunk_count", b"streaming_chunk_count", "strict_response_validation", b"strict_response_validation", "system_fingerprint", b"system_fingerprint", "tags", b"tags", "team_id", b"team_id", "team_name", b"team_name", "temperature", b"temperature", "termination_reason", b"termination_reason", "timeout", b"timeout", "tool_call_count", b"tool_call_count", "top_p", b"top_p", "traceback", b"traceback", "turn_index", b"turn_index", "user", b"user"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["_frequency_penalty", b"_frequency_penalty", "_presence_penalty", b"_presence_penalty", "_reasoning_effort", b"_reasoning_effort", "_strict_response_validation", b"_strict_response_validation", "_timeout", b"_timeout", "_user", b"_user", "agent_name", b"agent_name", "agent_role", b"agent_role", "base_url", b"base_url", "cache_creation_input_tokens", b"cache_creation_input_tokens", "cached", b"cached", "cached_input_tokens", b"cached_input_tokens", "ccai_service_name", b"ccai_service_name", "ccai_service_provider", b"ccai_service_provider", "component_name", b"component_name", "default_headers", b"default_headers", "default_query", b"default_query", "duration_in_s", b"duration_in_s", "end_time", b"end_time", "error_class", b"error_class", "error_message", b"error_message", "evaluator_runs_join_key", b"evaluator_runs_join_key", "extra_body", b"extra_body", "extra_headers", b"extra_headers", "extra_query", b"extra_query", "fallback_depth", b"fallback_depth", "finish_reasons", b"finish_reasons", "first_token_latency_seconds", b"first_token_latency_seconds", "frequency_penalty", b"frequency_penalty", "inputs", b"inputs", "langsmith_run_url", b"langsmith_run_url", "llm_call_id", b"llm_call_id", "llm_evaluation_feedbacks", b"llm_evaluation_feedbacks", "llm_retrieval_metadata", b"llm_retrieval_metadata", "llm_safety_assessment", b"llm_safety_assessment", "llm_thinking_metadata", b"llm_thinking_metadata", "llm_token_usage", b"llm_token_usage", "llm_tool_call_metadatas", b"llm_tool_call_metadatas", "max_tokens", b"max_tokens", "metadata", b"metadata", "model_name", b"model_name", "n_generations", b"n_generations", "openai_metadata", b"openai_metadata", "outputs", b"outputs", "parent_run_id", b"parent_run_id", "presence_penalty", b"presence_penalty", "provider", b"provider", "reasoning_effort", b"reasoning_effort", "recipient_agent", b"recipient_agent", "reflection_iterations", b"reflection_iterations", "retry_count", b"retry_count", "run_id", b"run_id", "run_type", b"run_type", "sender_agent", b"sender_agent", "start_time", b"start_time", "streaming_chunk_count", b"streaming_chunk_count", "strict_response_validation", b"strict_response_validation", "system_fingerprint", b"system_fingerprint", "tags", b"tags", "team_id", b"team_id", "team_name", b"team_name", "temperature", b"temperature", "termination_reason", b"termination_reason", "timeout", b"timeout", "tool_call_count", b"tool_call_count", "top_p", b"top_p", "traceback", b"traceback", "turn_index", b"turn_index", "user", b"user"]) -> None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_frequency_penalty", b"_frequency_penalty"]) -> typing.Literal["frequency_penalty"] | None: ...
     @typing.overload
@@ -1747,6 +1756,9 @@ class LlmToolUsage(google.protobuf.message.Message):
     DURATION_SECONDS_TOTAL_FIELD_NUMBER: builtins.int
     MEAN_DURATION_SECONDS_FIELD_NUMBER: builtins.int
     LLM_TOKEN_USAGE_FIELD_NUMBER: builtins.int
+    ARGUMENTS_FIELD_NUMBER: builtins.int
+    LLM_CALL_ID_FIELD_NUMBER: builtins.int
+    TOOL_CALL_ID_FIELD_NUMBER: builtins.int
     tool_name: builtins.str
     """Name of the tool / function."""
     call_count: builtins.int
@@ -1759,9 +1771,28 @@ class LlmToolUsage(google.protobuf.message.Message):
     """Summed tool-call duration in seconds."""
     mean_duration_seconds: builtins.float
     """Mean tool-call duration in seconds."""
+    llm_call_id: builtins.str
+    """Groups the representative invocation under its <code>LlmTelemetry</code> entry."""
+    tool_call_id: builtins.str
+    """Stable id of the representative invocation, assigned by the upstream framework
+    (autogen / langchain).
+    """
     @property
     def llm_token_usage(self) -> global___LlmTokenUsage:
         """Summed tool-call token usage (input / output / total)."""
+
+    @property
+    def arguments(self) -> google.protobuf.struct_pb2.Struct:
+        """The three fields below describe ONE REPRESENTATIVE invocation of this tool -- the most
+        recent one in scope -- not the whole aggregate. The message covers <code>call_count</code>
+        invocations, each with its own arguments and ids, so a single value can only ever be a
+        sample. Same intent as <code>LlmErrorStat.sample_message</code>. They are typed exactly as
+        on <code>LlmToolCallStartedEvent</code>, so a caller can correlate an aggregate row back to
+        the live event stream.
+
+        Arguments the representative invocation was called with, as a structured payload
+        (Struct kept as-is; not a custom Message). Unset when the source metadata carried none.
+        """
 
     def __init__(
         self,
@@ -1773,9 +1804,12 @@ class LlmToolUsage(google.protobuf.message.Message):
         duration_seconds_total: builtins.float = ...,
         mean_duration_seconds: builtins.float = ...,
         llm_token_usage: global___LlmTokenUsage | None = ...,
+        arguments: google.protobuf.struct_pb2.Struct | None = ...,
+        llm_call_id: builtins.str = ...,
+        tool_call_id: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["llm_token_usage", b"llm_token_usage"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["call_count", b"call_count", "duration_seconds_total", b"duration_seconds_total", "error_count", b"error_count", "error_rate", b"error_rate", "llm_token_usage", b"llm_token_usage", "mean_duration_seconds", b"mean_duration_seconds", "tool_name", b"tool_name"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["arguments", b"arguments", "llm_token_usage", b"llm_token_usage"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["arguments", b"arguments", "call_count", b"call_count", "duration_seconds_total", b"duration_seconds_total", "error_count", b"error_count", "error_rate", b"error_rate", "llm_call_id", b"llm_call_id", "llm_token_usage", b"llm_token_usage", "mean_duration_seconds", b"mean_duration_seconds", "tool_call_id", b"tool_call_id", "tool_name", b"tool_name"]) -> None: ...
 
 global___LlmToolUsage = LlmToolUsage
 
