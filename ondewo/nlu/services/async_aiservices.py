@@ -107,7 +107,7 @@ class AiServices(AsyncServicesInterface):
         return response
 
     async def streaming_llm_generate(self, request: LlmGenerateRequest) -> AsyncIterator[StreamingLlmGenerateResponse]:
-        response: AsyncIterator[StreamingLlmGenerateResponse] = await self.stub.StreamingLlmGenerate(
+        response: AsyncIterator[StreamingLlmGenerateResponse] = self.stub.StreamingLlmGenerate(
             request, metadata=self.metadata
         )
         return response

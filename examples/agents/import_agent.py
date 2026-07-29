@@ -11,6 +11,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import sys
+from pathlib import Path
 from typing import Optional
 
 import polling
@@ -23,19 +25,18 @@ from ondewo.nlu.operations_pb2 import (
     Operation,
 )
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from example_env import (  # noqa: E402
+    env,
+    get_client_config,
+    use_secure_channel,
+)
+
 if __name__ == "__main__":
-    parent: str = "<PUT_YOUR_AGENT_PARENT_HERE>"
-    zip_path: str = "<the path of your zip file>"
-    config: ClientConfig = ClientConfig(
-        host="localhost",
-        port="1234",
-        keycloak_url="https://<host>/auth",
-        realm="ondewo-ccai-platform",
-        client_id="ondewo-nlu-cai-sdk-public",
-        user_name="<e-mail of user>",
-        password="<password of user>",
-    )
-    client: Client = Client(config=config, use_secure_channel=False)
+    parent: str = env("ONDEWO_NLU_CAI_AGENT_PARENT")
+    zip_path: str = env("ONDEWO_NLU_CAI_AGENT_ZIP_PATH")
+    config: ClientConfig = get_client_config()
+    client: Client = Client(config=config, use_secure_channel=use_secure_channel())
 
     with open(zip_path, "rb") as file:
         byte_object = file.read()

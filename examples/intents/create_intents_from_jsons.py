@@ -22,6 +22,7 @@ allows to use AIM as an editor for intents or intent templates.
  save all intents of a given agent to json-files in an output folder
 """
 
+import sys
 from pathlib import Path
 
 from google.protobuf.json_format import Parse
@@ -33,29 +34,33 @@ from ondewo.nlu.intent_pb2 import (
     Intent,
 )
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from example_env import (  # noqa: E402
+    clear_server_owned_fields,
+    env,
+    get_client_config,
+    use_secure_channel,
+)
+
 if __name__ == "__main__":
     # CONFIGURING THE CLIENT
-    config: ClientConfig = ClientConfig(
-        host="localhost",
-        port="1234",
-        keycloak_url="https://<host>/auth",
-        realm="ondewo-ccai-platform",
-        client_id="ondewo-nlu-cai-sdk-public",
-        user_name="<e-mail of user>",
-        password="<password of user>",
-    )
-    client: Client = Client(config=config, use_secure_channel=False)
+    config: ClientConfig = get_client_config()
+    client: Client = Client(config=config, use_secure_channel=use_secure_channel())
 
     # CONFIGURING THE AGENT
-    parent: str = "<PUT_YOUR_AGENT_PARENT_HERE>"
-    language_code: str = '<acronym of he language of choice, i.e "en">'
+    parent: str = env("ONDEWO_NLU_CAI_AGENT_PARENT")
+    language_code: str = env("ONDEWO_NLU_CAI_LANGUAGE_CODE")
 
     # CREATE INTENTS BASED ON JSON-FILES
-    import_dir: Path = Path("<lookup folder>") / language_code
+    import_dir: Path = Path(env("ONDEWO_NLU_CAI_INTENTS_DIR")) / language_code
     for json_file in import_dir.glob("*.json"):
         with json_file.open("r") as f:
             intent_json: str = f.read()
         intent: Intent = Parse(text=intent_json, message=Intent())
+        # A json written by save_intents_to_json.py is a resource read back from a server, so it
+        # still carries the ids and provenance that server assigned. Both have to go before the
+        # intent can be created here, so that this server assigns its own.
+        clear_server_owned_fields(message=intent, clear_resource_names=True)
         client.services.intents.create_intent(
             CreateIntentRequest(
                 parent=parent,

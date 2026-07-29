@@ -21,6 +21,8 @@
 #       ondewo-nlu-api/ondewo/nlu ondewo/nlu/services
 # ---------------------------------------------------------------------------
 
+from typing import Iterator
+
 from google.protobuf.empty_pb2 import Empty
 
 from ondewo.nlu.user_pb2 import (
@@ -41,8 +43,6 @@ from ondewo.nlu.user_pb2 import (
     ListUserInfosResponse,
     ListUsersRequest,
     ListUsersResponse,
-    LoginRequest,
-    LoginResponse,
     ServerRole,
     SetUserPreferencesRequest,
     SetUserPreferencesResponse,
@@ -54,10 +54,17 @@ from ondewo.nlu.user_pb2 import (
 from ondewo.nlu.user_pb2_grpc import UsersStub
 from ondewo.nlu.core.services_interface import ServicesInterface
 from ondewo.nlu.common_pb2 import (
+    AddNotificationsRequest,
+    AddNotificationsResponse,
+    DeleteNotificationsRequest,
+    GetNotificationRequest,
     ListNotificationsRequest,
     ListNotificationsResponse,
+    Notification,
     SetNotificationsFlaggedStatusRequest,
     SetNotificationsReadStatusRequest,
+    StreamNotificationsRequest,
+    UpdateNotificationRequest,
 )
 
 
@@ -125,10 +132,6 @@ class Users(ServicesInterface):
         response: ListServerPermissionsResponse = self.stub.ListServerPermissions(request, metadata=self.metadata)
         return response
 
-    def login(self, request: LoginRequest) -> LoginResponse:
-        response: LoginResponse = self.stub.Login(request, metadata=self.metadata)
-        return response
-
     def check_login(self) -> Empty:
         response: Empty = self.stub.CheckLogin(Empty(), metadata=self.metadata)
         return response
@@ -146,6 +149,26 @@ class Users(ServicesInterface):
 
     def set_notifications_read_status(self, request: SetNotificationsReadStatusRequest) -> ListNotificationsResponse:
         response: ListNotificationsResponse = self.stub.SetNotificationsReadStatus(request, metadata=self.metadata)
+        return response
+
+    def add_notifications(self, request: AddNotificationsRequest) -> AddNotificationsResponse:
+        response: AddNotificationsResponse = self.stub.AddNotifications(request, metadata=self.metadata)
+        return response
+
+    def get_notification(self, request: GetNotificationRequest) -> Notification:
+        response: Notification = self.stub.GetNotification(request, metadata=self.metadata)
+        return response
+
+    def update_notification(self, request: UpdateNotificationRequest) -> Notification:
+        response: Notification = self.stub.UpdateNotification(request, metadata=self.metadata)
+        return response
+
+    def delete_notifications(self, request: DeleteNotificationsRequest) -> Empty:
+        response: Empty = self.stub.DeleteNotifications(request, metadata=self.metadata)
+        return response
+
+    def stream_notifications(self, request: StreamNotificationsRequest) -> Iterator[Notification]:
+        response: Iterator[Notification] = self.stub.StreamNotifications(request, metadata=self.metadata)
         return response
 
     def get_user_preferences(self, request: GetUserPreferencesRequest) -> GetUserPreferencesResponse:

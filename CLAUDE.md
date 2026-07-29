@@ -38,14 +38,37 @@ When editing existing code:
 - Don't "improve" adjacent code, comments, or formatting.
 - Don't refactor things that aren't broken.
 - Match existing style, even if you'd do it differently.
-- If you notice unrelated dead code, mention it — don't delete it.
+- If you notice unrelated dead code, mention it and delete it — but **prove it is dead first**.
 
 When your changes create orphans:
 
 - Remove imports/variables/functions that _your_ changes made unused.
-- Don't remove pre-existing dead code unless asked.
 
 The test: every changed line should trace directly to the user's request.
+
+### Proving code is dead
+
+"No importer" is not proof. A symbol can be reached without ever appearing in an `import`
+statement, and each such consumer needs its own check before you delete anything:
+
+- **Packaging metadata is consumed by installers, not by imports.** `[project].dependencies` in
+  `pyproject.toml` exists so that `pip install ondewo-nlu-client` pulls the package into a _user's_
+  environment. Grepping this repo for `import x` says nothing about whether a downstream consumer
+  needs it — and dropping a genuinely required entry produces an `ImportError` that only surfaces
+  after release, in someone else's venv. Read what actually imports the symbol **in the shipped
+  package** (`ondewo/`), and remember that a dependency can legitimately be needed at build time
+  (`[build-system].requires`) or only by `examples/` / the dev extra.
+- **Strings, not identifiers.** Reflection (`getattr`, `importlib`), entry points, Makefile targets,
+  `git add` paths, and Docker build steps reference files and symbols by name as text.
+- **Generated code.** `ondewo/nlu/services/*.py` is emitted by `generate_services.py`, not written by
+  hand. Deleting from the output without touching the generator means the next `make generate_services`
+  puts it straight back.
+- **Config that lints itself.** mypy's `warn_unused_configs` reports an override section as unused
+  only for the scope it was run over: `faker.*`, `polling.*` and `tqdm.*` look dead under
+  `mypy ondewo tests` and are live under `mypy ondewo tests examples`. Run the union scope.
+
+If you cannot prove a thing is unreferenced, leave it and say so. Deleting live code is far worse
+than leaving dead code.
 
 ### Goal-driven execution
 
@@ -149,6 +172,22 @@ Raises:
 - Prefer region comments for grouping methods in files that already use them.
 - End edited Markdown and YAML files with a trailing newline.
 
+## Regenerating stubs after an API change
+
+Point the `ondewo-nlu-api` submodule at the api commit
+(`git -C ondewo-nlu-api fetch origin <branch> && git -C ondewo-nlu-api checkout <api-sha>`), then run
+**both** generators — they are different:
+
+- `make generate_ondewo_protos` — the `*_pb2.py` / `*_pb2.pyi` / `*_pb2_grpc.py` family.
+- `make generate_services` — the hand-generator that produces `ondewo/nlu/services/*.py` (+
+  `create_async_services` derives `async_*.py` / `client.py`). **A new RPC needs THIS too**, or the
+  service client has no method for it. A server-streaming RPC generates a method returning
+  `Iterator[<ResponseMessage>]` (async: `AsyncIterator[…]`) in `services/<service>.py`. Do **not** run the
+  full `make build` (it resets the submodule off your commit). Verified 2026-07-19 (OND211-2418): the
+  container-logs RPCs needed both generators; running only `generate_ondewo_protos` leaves
+  `services/operations.py` without the new methods. Commit the `_pb2*` + `services/*` changes together with
+  the submodule pointer; push and hand the client SHA to cai's `pyproject.toml` pin.
+
 ## Release gotchas (hard-won this session)
 
 These bit us during the 6.14.0 release. Keep them in mind when releasing.
@@ -185,3 +224,14 @@ The repo is now fully on **uv** (not just pyproject.toml):
 - **`[tool.mypy] python_version` must be `3.12`** wherever numpy 2.x is on the mypy path — its PEP-695 `type X = …` stubs fail to parse on < 3.12.
 - The release `git commit` uses **`--no-verify`** so pre-commit hooks never gate an automated release.
 - **Validated by a real PyPI publish** — `ondewo-t2s-client 6.5.0` was built with `uv build` and uploaded via twine end-to-end; the uv release pipeline works.
+
+## Jenkins — never trigger a multibranch scan or branch indexing
+
+**NEVER trigger a Jenkins multibranch scan or branch indexing.** Do not call a multibranch/folder job's
+`build`, `scan`, or reindex endpoints, click "Scan Repository Now" / "Build Now" on a folder, run
+`p4 scan`, or use any API/CLI that reindexes branches or scans the repository. A scan/reindex runs across
+**every** branch, consumes CI resources, and can kick off unintended builds and deploys.
+
+If a branch is not building — it was not discovered, or its job is marked `buildable: false` / orphaned —
+**report it and stop**. Let the user or a Jenkins admin adjust branch-discovery/config or rename the branch
+to the convention. Never force a build by scanning or reindexing.

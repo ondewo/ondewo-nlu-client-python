@@ -11,6 +11,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import sys
+from pathlib import Path
 from typing import Optional
 
 import polling
@@ -23,19 +25,18 @@ from ondewo.nlu.operations_pb2 import (
     Operation,
 )
 
-if __name__ == "__main__":
-    parent: str = "<PUT_YOUR_AGENT_PARENT_HERE>"
-    config: ClientConfig = ClientConfig(
-        host="localhost",
-        port="1234",
-        keycloak_url="https://<host>/auth",
-        realm="ondewo-ccai-platform",
-        client_id="ondewo-nlu-cai-sdk-public",
-        user_name="<e-mail of user>",
-        password="<password of user>",
-    )
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from example_env import (  # noqa: E402
+    env,
+    get_client_config,
+    use_secure_channel,
+)
 
-    client: Client = Client(config=config, use_secure_channel=True)
+if __name__ == "__main__":
+    parent: str = env("ONDEWO_NLU_CAI_AGENT_PARENT")
+    config: ClientConfig = get_client_config()
+
+    client: Client = Client(config=config, use_secure_channel=use_secure_channel())
 
     train_operation: Operation = client.services.agents.train_agent(TrainAgentRequest(parent=parent))
 
@@ -52,3 +53,14 @@ if __name__ == "__main__":
     )
     if training_operation_update is not None:
         assert training_operation_update.done
+        # `done` only means the operation finished — it is also set when training FAILED, and the
+        # error is reported in `error` rather than raised. Without this check a failed training
+        # looks exactly like a successful one, and the agent silently stays unable to predict:
+        # every later detect_intent then fails with a confusing FAILED_PRECONDITION instead.
+        if training_operation_update.HasField("error"):
+            raise RuntimeError(
+                "Training the agent failed. The agent is NOT trained and cannot detect intents. "
+                f"code={training_operation_update.error.code} "
+                f"message={training_operation_update.error.message!r}"
+            )
+        print(f"Agent {parent} trained successfully.")

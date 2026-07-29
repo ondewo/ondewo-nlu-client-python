@@ -31,7 +31,8 @@ limitations under the License.
 
 File-level comment for <code>ondewo/nlu/rag.proto</code>.
 This file contains a single service <a href="#ondewo.nlu.Rags">Rags</a>. The Rags service provides RAG (Retrieval-Augmented Generation) and web crawler functionality.
-All message fields that are marked as <code>optional</code> are not actually optional but marked as such to enable presence tracking so that it is possible to distinguish between null and default value fields. Without the <code>optional</code> keyword it would for instance not be possible to distinguish between an integer <code>0</code> and <code>null</code>.
+Fields marked as <code>optional</code> carry explicit presence, so that an explicitly set default value (<code>0</code>, <code>false</code>, <code>""</code>) can be distinguished from a field that was never set. Without the <code>optional</code> keyword it would for instance not be possible to distinguish between an integer <code>0</code> and <code>null</code>.
+The marker is applied where that distinction is actually consumed — the partial-update inputs (an unset field leaves the stored value untouched, an explicit default clears it) and the retrieval overrides that are forwarded to RAGFlow (an explicit <code>0.0</code> or <code>false</code> must override the server-side default rather than fall back to it). Fields that carry no such distinction are deliberately left without the keyword, and for message-typed fields it is omitted because proto3 gives them explicit presence anyway.
 """
 
 import builtins
@@ -395,6 +396,30 @@ RAG_CRAWLER_AUTHENTICATION_EXECUTION_TYPE_CLIENT_SIDE: RagCrawlerAuthenticationE
 """Authentication execution type is client side."""
 global___RagCrawlerAuthenticationExecutionType = RagCrawlerAuthenticationExecutionType
 
+class _RagCrawlerPruningThresholdType:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _RagCrawlerPruningThresholdTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_RagCrawlerPruningThresholdType.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    RAG_CRAWLER_PRUNING_THRESHOLD_TYPE_UNSPECIFIED: _RagCrawlerPruningThresholdType.ValueType  # 0
+    """Unspecified (treated as FIXED)."""
+    RAG_CRAWLER_PRUNING_THRESHOLD_TYPE_FIXED: _RagCrawlerPruningThresholdType.ValueType  # 1
+    """Fixed cutoff: nodes scoring below <code>threshold</code> are removed."""
+    RAG_CRAWLER_PRUNING_THRESHOLD_TYPE_DYNAMIC: _RagCrawlerPruningThresholdType.ValueType  # 2
+    """Dynamic: the threshold is adjusted per-document by the pruning heuristic."""
+
+class RagCrawlerPruningThresholdType(_RagCrawlerPruningThresholdType, metaclass=_RagCrawlerPruningThresholdTypeEnumTypeWrapper):
+    """Interpretation of the density-pruning threshold."""
+
+RAG_CRAWLER_PRUNING_THRESHOLD_TYPE_UNSPECIFIED: RagCrawlerPruningThresholdType.ValueType  # 0
+"""Unspecified (treated as FIXED)."""
+RAG_CRAWLER_PRUNING_THRESHOLD_TYPE_FIXED: RagCrawlerPruningThresholdType.ValueType  # 1
+"""Fixed cutoff: nodes scoring below <code>threshold</code> are removed."""
+RAG_CRAWLER_PRUNING_THRESHOLD_TYPE_DYNAMIC: RagCrawlerPruningThresholdType.ValueType  # 2
+"""Dynamic: the threshold is adjusted per-document by the pruning heuristic."""
+global___RagCrawlerPruningThresholdType = RagCrawlerPruningThresholdType
+
 class _RagCrawlerMetaDataExtractorType:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
@@ -750,16 +775,14 @@ class RagGraphRagConfig(google.protobuf.message.Message):
         *,
         use_graphrag: builtins.bool | None = ...,
         entity_types: collections.abc.Iterable[builtins.str] | None = ...,
-        method: global___RagGraphRagMethod.ValueType | None = ...,
+        method: global___RagGraphRagMethod.ValueType = ...,
         community: builtins.bool | None = ...,
         resolution: builtins.bool | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_community", b"_community", "_method", b"_method", "_resolution", b"_resolution", "_use_graphrag", b"_use_graphrag", "community", b"community", "method", b"method", "resolution", b"resolution", "use_graphrag", b"use_graphrag"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_community", b"_community", "_method", b"_method", "_resolution", b"_resolution", "_use_graphrag", b"_use_graphrag", "community", b"community", "entity_types", b"entity_types", "method", b"method", "resolution", b"resolution", "use_graphrag", b"use_graphrag"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_community", b"_community", "_resolution", b"_resolution", "_use_graphrag", b"_use_graphrag", "community", b"community", "resolution", b"resolution", "use_graphrag", b"use_graphrag"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_community", b"_community", "_resolution", b"_resolution", "_use_graphrag", b"_use_graphrag", "community", b"community", "entity_types", b"entity_types", "method", b"method", "resolution", b"resolution", "use_graphrag", b"use_graphrag"]) -> None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_community", b"_community"]) -> typing.Literal["community"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_method", b"_method"]) -> typing.Literal["method"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_resolution", b"_resolution"]) -> typing.Literal["resolution"] | None: ...
     @typing.overload
@@ -956,18 +979,14 @@ class RagUpdateDatasetRequest(google.protobuf.message.Message):
         field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
         embedding_model_ccai_service_name: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_avatar", b"_avatar", "_description", b"_description", "_field_mask", b"_field_mask", "_pagerank", b"_pagerank", "_update_mask", b"_update_mask", "avatar", b"avatar", "description", b"description", "field_mask", b"field_mask", "pagerank", b"pagerank", "parser_config", b"parser_config", "update_mask", b"update_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_avatar", b"_avatar", "_description", b"_description", "_field_mask", b"_field_mask", "_pagerank", b"_pagerank", "_update_mask", b"_update_mask", "avatar", b"avatar", "chunk_method", b"chunk_method", "dataset_id", b"dataset_id", "description", b"description", "embedding_model_ccai_service_name", b"embedding_model_ccai_service_name", "field_mask", b"field_mask", "language_code", b"language_code", "name", b"name", "pagerank", b"pagerank", "parent", b"parent", "parser_config", b"parser_config", "update_mask", b"update_mask"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_avatar", b"_avatar", "_description", b"_description", "_pagerank", b"_pagerank", "avatar", b"avatar", "description", b"description", "field_mask", b"field_mask", "pagerank", b"pagerank", "parser_config", b"parser_config", "update_mask", b"update_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_avatar", b"_avatar", "_description", b"_description", "_pagerank", b"_pagerank", "avatar", b"avatar", "chunk_method", b"chunk_method", "dataset_id", b"dataset_id", "description", b"description", "embedding_model_ccai_service_name", b"embedding_model_ccai_service_name", "field_mask", b"field_mask", "language_code", b"language_code", "name", b"name", "pagerank", b"pagerank", "parent", b"parent", "parser_config", b"parser_config", "update_mask", b"update_mask"]) -> None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_avatar", b"_avatar"]) -> typing.Literal["avatar"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_description", b"_description"]) -> typing.Literal["description"] | None: ...
     @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
-    @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_pagerank", b"_pagerank"]) -> typing.Literal["pagerank"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_update_mask", b"_update_mask"]) -> typing.Literal["update_mask"] | None: ...
 
 global___RagUpdateDatasetRequest = RagUpdateDatasetRequest
 
@@ -1084,17 +1103,12 @@ class RagListDatasetsRequest(google.protobuf.message.Message):
         name: builtins.str = ...,
         orderby: builtins.str = ...,
         desc: builtins.bool | None = ...,
-        sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType | None = ...,
+        sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType = ...,
         field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_desc", b"_desc", "_field_mask", b"_field_mask", "_sorting_mode", b"_sorting_mode", "desc", b"desc", "field_mask", b"field_mask", "sorting_mode", b"sorting_mode"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_desc", b"_desc", "_field_mask", b"_field_mask", "_sorting_mode", b"_sorting_mode", "desc", b"desc", "field_mask", b"field_mask", "id", b"id", "language_code", b"language_code", "name", b"name", "orderby", b"orderby", "page_token", b"page_token", "parent", b"parent", "sorting_mode", b"sorting_mode"]) -> None: ...
-    @typing.overload
+    def HasField(self, field_name: typing.Literal["_desc", b"_desc", "desc", b"desc", "field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_desc", b"_desc", "desc", b"desc", "field_mask", b"field_mask", "id", b"id", "language_code", b"language_code", "name", b"name", "orderby", b"orderby", "page_token", b"page_token", "parent", b"parent", "sorting_mode", b"sorting_mode"]) -> None: ...
     def WhichOneof(self, oneof_group: typing.Literal["_desc", b"_desc"]) -> typing.Literal["desc"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_sorting_mode", b"_sorting_mode"]) -> typing.Literal["sorting_mode"] | None: ...
 
 global___RagListDatasetsRequest = RagListDatasetsRequest
 
@@ -1345,14 +1359,9 @@ class RagUpdateDocumentRequest(google.protobuf.message.Message):
         update_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
         field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_enabled", b"_enabled", "_field_mask", b"_field_mask", "_update_mask", b"_update_mask", "enabled", b"enabled", "field_mask", b"field_mask", "meta_fields", b"meta_fields", "parser_config", b"parser_config", "update_mask", b"update_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_enabled", b"_enabled", "_field_mask", b"_field_mask", "_update_mask", b"_update_mask", "chunk_method", b"chunk_method", "dataset_id", b"dataset_id", "document_id", b"document_id", "enabled", b"enabled", "field_mask", b"field_mask", "language_code", b"language_code", "meta_fields", b"meta_fields", "name", b"name", "parent", b"parent", "parser_config", b"parser_config", "update_mask", b"update_mask"]) -> None: ...
-    @typing.overload
+    def HasField(self, field_name: typing.Literal["_enabled", b"_enabled", "enabled", b"enabled", "field_mask", b"field_mask", "meta_fields", b"meta_fields", "parser_config", b"parser_config", "update_mask", b"update_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_enabled", b"_enabled", "chunk_method", b"chunk_method", "dataset_id", b"dataset_id", "document_id", b"document_id", "enabled", b"enabled", "field_mask", b"field_mask", "language_code", b"language_code", "meta_fields", b"meta_fields", "name", b"name", "parent", b"parent", "parser_config", b"parser_config", "update_mask", b"update_mask"]) -> None: ...
     def WhichOneof(self, oneof_group: typing.Literal["_enabled", b"_enabled"]) -> typing.Literal["enabled"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_update_mask", b"_update_mask"]) -> typing.Literal["update_mask"] | None: ...
 
 global___RagUpdateDocumentRequest = RagUpdateDocumentRequest
 
@@ -1518,17 +1527,12 @@ class RagListDocumentsRequest(google.protobuf.message.Message):
         create_time_from: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         create_time_to: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         metadata_condition: global___RagMetadataConditions | None = ...,
-        sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType | None = ...,
+        sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType = ...,
         field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_desc", b"_desc", "_field_mask", b"_field_mask", "_sorting_mode", b"_sorting_mode", "create_time_from", b"create_time_from", "create_time_to", b"create_time_to", "desc", b"desc", "field_mask", b"field_mask", "metadata_condition", b"metadata_condition", "sorting_mode", b"sorting_mode"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_desc", b"_desc", "_field_mask", b"_field_mask", "_sorting_mode", b"_sorting_mode", "create_time_from", b"create_time_from", "create_time_to", b"create_time_to", "dataset_id", b"dataset_id", "desc", b"desc", "field_mask", b"field_mask", "id", b"id", "keywords", b"keywords", "language_code", b"language_code", "metadata_condition", b"metadata_condition", "name", b"name", "orderby", b"orderby", "page_token", b"page_token", "parent", b"parent", "run_status", b"run_status", "sorting_mode", b"sorting_mode", "suffix", b"suffix"]) -> None: ...
-    @typing.overload
+    def HasField(self, field_name: typing.Literal["_desc", b"_desc", "create_time_from", b"create_time_from", "create_time_to", b"create_time_to", "desc", b"desc", "field_mask", b"field_mask", "metadata_condition", b"metadata_condition"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_desc", b"_desc", "create_time_from", b"create_time_from", "create_time_to", b"create_time_to", "dataset_id", b"dataset_id", "desc", b"desc", "field_mask", b"field_mask", "id", b"id", "keywords", b"keywords", "language_code", b"language_code", "metadata_condition", b"metadata_condition", "name", b"name", "orderby", b"orderby", "page_token", b"page_token", "parent", b"parent", "run_status", b"run_status", "sorting_mode", b"sorting_mode", "suffix", b"suffix"]) -> None: ...
     def WhichOneof(self, oneof_group: typing.Literal["_desc", b"_desc"]) -> typing.Literal["desc"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_sorting_mode", b"_sorting_mode"]) -> typing.Literal["sorting_mode"] | None: ...
 
 global___RagListDocumentsRequest = RagListDocumentsRequest
 
@@ -1800,10 +1804,8 @@ class RagRetrievalRequest(google.protobuf.message.Message):
         field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
         rerank_model_ccai_service_name: builtins.str | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "_highlight", b"_highlight", "_keyword", b"_keyword", "_rerank_model_ccai_service_name", b"_rerank_model_ccai_service_name", "_similarity_threshold", b"_similarity_threshold", "_use_kg", b"_use_kg", "_vector_similarity_weight", b"_vector_similarity_weight", "field_mask", b"field_mask", "highlight", b"highlight", "keyword", b"keyword", "metadata_condition", b"metadata_condition", "rerank_model_ccai_service_name", b"rerank_model_ccai_service_name", "similarity_threshold", b"similarity_threshold", "use_kg", b"use_kg", "vector_similarity_weight", b"vector_similarity_weight"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "_highlight", b"_highlight", "_keyword", b"_keyword", "_rerank_model_ccai_service_name", b"_rerank_model_ccai_service_name", "_similarity_threshold", b"_similarity_threshold", "_use_kg", b"_use_kg", "_vector_similarity_weight", b"_vector_similarity_weight", "cross_languages", b"cross_languages", "dataset_ids", b"dataset_ids", "document_ids", b"document_ids", "field_mask", b"field_mask", "highlight", b"highlight", "keyword", b"keyword", "language_code", b"language_code", "metadata_condition", b"metadata_condition", "page_token", b"page_token", "parent", b"parent", "question", b"question", "rerank_model_ccai_service_name", b"rerank_model_ccai_service_name", "similarity_threshold", b"similarity_threshold", "top_k", b"top_k", "use_kg", b"use_kg", "vector_similarity_weight", b"vector_similarity_weight"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
+    def HasField(self, field_name: typing.Literal["_highlight", b"_highlight", "_keyword", b"_keyword", "_rerank_model_ccai_service_name", b"_rerank_model_ccai_service_name", "_similarity_threshold", b"_similarity_threshold", "_use_kg", b"_use_kg", "_vector_similarity_weight", b"_vector_similarity_weight", "field_mask", b"field_mask", "highlight", b"highlight", "keyword", b"keyword", "metadata_condition", b"metadata_condition", "rerank_model_ccai_service_name", b"rerank_model_ccai_service_name", "similarity_threshold", b"similarity_threshold", "use_kg", b"use_kg", "vector_similarity_weight", b"vector_similarity_weight"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_highlight", b"_highlight", "_keyword", b"_keyword", "_rerank_model_ccai_service_name", b"_rerank_model_ccai_service_name", "_similarity_threshold", b"_similarity_threshold", "_use_kg", b"_use_kg", "_vector_similarity_weight", b"_vector_similarity_weight", "cross_languages", b"cross_languages", "dataset_ids", b"dataset_ids", "document_ids", b"document_ids", "field_mask", b"field_mask", "highlight", b"highlight", "keyword", b"keyword", "language_code", b"language_code", "metadata_condition", b"metadata_condition", "page_token", b"page_token", "parent", b"parent", "question", b"question", "rerank_model_ccai_service_name", b"rerank_model_ccai_service_name", "similarity_threshold", b"similarity_threshold", "top_k", b"top_k", "use_kg", b"use_kg", "vector_similarity_weight", b"vector_similarity_weight"]) -> None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_highlight", b"_highlight"]) -> typing.Literal["highlight"] | None: ...
     @typing.overload
@@ -1991,9 +1993,8 @@ class RagCreateCrawlerRequest(google.protobuf.message.Message):
         crawler: global___RagCrawler | None = ...,
         field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "crawler", b"crawler", "field_mask", b"field_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "crawler", b"crawler", "field_mask", b"field_mask", "language_code", b"language_code", "parent", b"parent"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
+    def HasField(self, field_name: typing.Literal["crawler", b"crawler", "field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["crawler", b"crawler", "field_mask", b"field_mask", "language_code", b"language_code", "parent", b"parent"]) -> None: ...
 
 global___RagCreateCrawlerRequest = RagCreateCrawlerRequest
 
@@ -2164,26 +2165,15 @@ class RagListCrawlersRequest(google.protobuf.message.Message):
         *,
         parent: builtins.str = ...,
         language_code: builtins.str = ...,
-        page_token: builtins.str | None = ...,
-        dataset_name: builtins.str | None = ...,
-        crawler_name: builtins.str | None = ...,
-        orderby: builtins.str | None = ...,
+        page_token: builtins.str = ...,
+        dataset_name: builtins.str = ...,
+        crawler_name: builtins.str = ...,
+        orderby: builtins.str = ...,
         sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType | None = ...,
         field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_crawler_name", b"_crawler_name", "_dataset_name", b"_dataset_name", "_field_mask", b"_field_mask", "_orderby", b"_orderby", "_page_token", b"_page_token", "_sorting_mode", b"_sorting_mode", "crawler_name", b"crawler_name", "dataset_name", b"dataset_name", "field_mask", b"field_mask", "orderby", b"orderby", "page_token", b"page_token", "sorting_mode", b"sorting_mode"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_crawler_name", b"_crawler_name", "_dataset_name", b"_dataset_name", "_field_mask", b"_field_mask", "_orderby", b"_orderby", "_page_token", b"_page_token", "_sorting_mode", b"_sorting_mode", "crawler_name", b"crawler_name", "dataset_name", b"dataset_name", "field_mask", b"field_mask", "language_code", b"language_code", "orderby", b"orderby", "page_token", b"page_token", "parent", b"parent", "sorting_mode", b"sorting_mode"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_crawler_name", b"_crawler_name"]) -> typing.Literal["crawler_name"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_dataset_name", b"_dataset_name"]) -> typing.Literal["dataset_name"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_orderby", b"_orderby"]) -> typing.Literal["orderby"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_page_token", b"_page_token"]) -> typing.Literal["page_token"] | None: ...
-    @typing.overload
+    def HasField(self, field_name: typing.Literal["_sorting_mode", b"_sorting_mode", "field_mask", b"field_mask", "sorting_mode", b"sorting_mode"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_sorting_mode", b"_sorting_mode", "crawler_name", b"crawler_name", "dataset_name", b"dataset_name", "field_mask", b"field_mask", "language_code", b"language_code", "orderby", b"orderby", "page_token", b"page_token", "parent", b"parent", "sorting_mode", b"sorting_mode"]) -> None: ...
     def WhichOneof(self, oneof_group: typing.Literal["_sorting_mode", b"_sorting_mode"]) -> typing.Literal["sorting_mode"] | None: ...
 
 global___RagListCrawlersRequest = RagListCrawlersRequest
@@ -2244,9 +2234,8 @@ class RagGetCrawlerRequest(google.protobuf.message.Message):
         language_code: builtins.str = ...,
         field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "language_code", b"language_code", "name", b"name", "parent", b"parent"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
+    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "language_code", b"language_code", "name", b"name", "parent", b"parent"]) -> None: ...
 
 global___RagGetCrawlerRequest = RagGetCrawlerRequest
 
@@ -2293,12 +2282,8 @@ class RagUpdateCrawlerRequest(google.protobuf.message.Message):
         update_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
         field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "_update_mask", b"_update_mask", "crawler", b"crawler", "field_mask", b"field_mask", "update_mask", b"update_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "_update_mask", b"_update_mask", "crawler", b"crawler", "field_mask", b"field_mask", "language_code", b"language_code", "parent", b"parent", "update_mask", b"update_mask"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_update_mask", b"_update_mask"]) -> typing.Literal["update_mask"] | None: ...
+    def HasField(self, field_name: typing.Literal["crawler", b"crawler", "field_mask", b"field_mask", "update_mask", b"update_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["crawler", b"crawler", "field_mask", b"field_mask", "language_code", b"language_code", "parent", b"parent", "update_mask", b"update_mask"]) -> None: ...
 
 global___RagUpdateCrawlerRequest = RagUpdateCrawlerRequest
 
@@ -2391,7 +2376,7 @@ class RagCrawler(google.protobuf.message.Message):
         self,
         *,
         name: builtins.str = ...,
-        display_name: builtins.str | None = ...,
+        display_name: builtins.str = ...,
         created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         created_by: builtins.str = ...,
@@ -2403,22 +2388,8 @@ class RagCrawler(google.protobuf.message.Message):
         crawler_config: global___RagCrawlerConfig | None = ...,
         retry_config: global___RagCrawlerRetryConfig | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_crawler_auth", b"_crawler_auth", "_crawler_browser_config", b"_crawler_browser_config", "_crawler_config", b"_crawler_config", "_crawler_seed_url_filters", b"_crawler_seed_url_filters", "_crawler_sources", b"_crawler_sources", "_display_name", b"_display_name", "_retry_config", b"_retry_config", "crawler_auth", b"crawler_auth", "crawler_browser_config", b"crawler_browser_config", "crawler_config", b"crawler_config", "crawler_seed_url_filters", b"crawler_seed_url_filters", "crawler_sources", b"crawler_sources", "created_at", b"created_at", "display_name", b"display_name", "modified_at", b"modified_at", "retry_config", b"retry_config"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_crawler_auth", b"_crawler_auth", "_crawler_browser_config", b"_crawler_browser_config", "_crawler_config", b"_crawler_config", "_crawler_seed_url_filters", b"_crawler_seed_url_filters", "_crawler_sources", b"_crawler_sources", "_display_name", b"_display_name", "_retry_config", b"_retry_config", "crawler_auth", b"crawler_auth", "crawler_browser_config", b"crawler_browser_config", "crawler_config", b"crawler_config", "crawler_seed_url_filters", b"crawler_seed_url_filters", "crawler_sources", b"crawler_sources", "created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "retry_config", b"retry_config"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_crawler_auth", b"_crawler_auth"]) -> typing.Literal["crawler_auth"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_crawler_browser_config", b"_crawler_browser_config"]) -> typing.Literal["crawler_browser_config"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_crawler_config", b"_crawler_config"]) -> typing.Literal["crawler_config"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_crawler_seed_url_filters", b"_crawler_seed_url_filters"]) -> typing.Literal["crawler_seed_url_filters"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_crawler_sources", b"_crawler_sources"]) -> typing.Literal["crawler_sources"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_display_name", b"_display_name"]) -> typing.Literal["display_name"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_retry_config", b"_retry_config"]) -> typing.Literal["retry_config"] | None: ...
+    def HasField(self, field_name: typing.Literal["crawler_auth", b"crawler_auth", "crawler_browser_config", b"crawler_browser_config", "crawler_config", b"crawler_config", "crawler_seed_url_filters", b"crawler_seed_url_filters", "crawler_sources", b"crawler_sources", "created_at", b"created_at", "modified_at", b"modified_at", "retry_config", b"retry_config"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["crawler_auth", b"crawler_auth", "crawler_browser_config", b"crawler_browser_config", "crawler_config", b"crawler_config", "crawler_seed_url_filters", b"crawler_seed_url_filters", "crawler_sources", b"crawler_sources", "created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "retry_config", b"retry_config"]) -> None: ...
 
 global___RagCrawler = RagCrawler
 
@@ -2512,22 +2483,15 @@ class RagCrawlerFilters(google.protobuf.message.Message):
         *,
         allowed_domains: collections.abc.Iterable[builtins.str] | None = ...,
         disallowed_domains: collections.abc.Iterable[builtins.str] | None = ...,
-        allow_internal_links: builtins.bool | None = ...,
-        allow_external_links: builtins.bool | None = ...,
-        allow_social_media_links: builtins.bool | None = ...,
+        allow_internal_links: builtins.bool = ...,
+        allow_external_links: builtins.bool = ...,
+        allow_social_media_links: builtins.bool = ...,
         allowed_regex: collections.abc.Iterable[builtins.str] | None = ...,
         disallowed_regex: collections.abc.Iterable[builtins.str] | None = ...,
         allowed_paths: collections.abc.Iterable[builtins.str] | None = ...,
         disallowed_paths: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_allow_external_links", b"_allow_external_links", "_allow_internal_links", b"_allow_internal_links", "_allow_social_media_links", b"_allow_social_media_links", "allow_external_links", b"allow_external_links", "allow_internal_links", b"allow_internal_links", "allow_social_media_links", b"allow_social_media_links"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_allow_external_links", b"_allow_external_links", "_allow_internal_links", b"_allow_internal_links", "_allow_social_media_links", b"_allow_social_media_links", "allow_external_links", b"allow_external_links", "allow_internal_links", b"allow_internal_links", "allow_social_media_links", b"allow_social_media_links", "allowed_domains", b"allowed_domains", "allowed_paths", b"allowed_paths", "allowed_regex", b"allowed_regex", "disallowed_domains", b"disallowed_domains", "disallowed_paths", b"disallowed_paths", "disallowed_regex", b"disallowed_regex"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_allow_external_links", b"_allow_external_links"]) -> typing.Literal["allow_external_links"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_allow_internal_links", b"_allow_internal_links"]) -> typing.Literal["allow_internal_links"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_allow_social_media_links", b"_allow_social_media_links"]) -> typing.Literal["allow_social_media_links"] | None: ...
+    def ClearField(self, field_name: typing.Literal["allow_external_links", b"allow_external_links", "allow_internal_links", b"allow_internal_links", "allow_social_media_links", b"allow_social_media_links", "allowed_domains", b"allowed_domains", "allowed_paths", b"allowed_paths", "allowed_regex", b"allowed_regex", "disallowed_domains", b"disallowed_domains", "disallowed_paths", b"disallowed_paths", "disallowed_regex", b"disallowed_regex"]) -> None: ...
 
 global___RagCrawlerFilters = RagCrawlerFilters
 
@@ -2593,12 +2557,8 @@ class RagCrawlerAuth(google.protobuf.message.Message):
         http_auth: global___RagCrawlerHttpAuth | None = ...,
         html_auth: global___RagCrawlerHtmlAuth | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_html_auth", b"_html_auth", "_http_auth", b"_http_auth", "html_auth", b"html_auth", "http_auth", b"http_auth"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_html_auth", b"_html_auth", "_http_auth", b"_http_auth", "html_auth", b"html_auth", "http_auth", b"http_auth"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_html_auth", b"_html_auth"]) -> typing.Literal["html_auth"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_http_auth", b"_http_auth"]) -> typing.Literal["http_auth"] | None: ...
+    def HasField(self, field_name: typing.Literal["html_auth", b"html_auth", "http_auth", b"http_auth"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["html_auth", b"html_auth", "http_auth", b"http_auth"]) -> None: ...
 
 global___RagCrawlerAuth = RagCrawlerAuth
 
@@ -2639,33 +2599,16 @@ class RagCrawlerHtmlAuth(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        html_auth_base_url: builtins.str | None = ...,
-        html_auth_username_selector_type: global___RagCrawlerSelectorType.ValueType | None = ...,
-        html_auth_username_selector: builtins.str | None = ...,
-        html_auth_username: builtins.str | None = ...,
-        html_auth_password_selector_type: global___RagCrawlerSelectorType.ValueType | None = ...,
-        html_auth_password_selector: builtins.str | None = ...,
-        html_auth_password: builtins.str | None = ...,
-        authentication_execution_type: global___RagCrawlerAuthenticationExecutionType.ValueType | None = ...,
+        html_auth_base_url: builtins.str = ...,
+        html_auth_username_selector_type: global___RagCrawlerSelectorType.ValueType = ...,
+        html_auth_username_selector: builtins.str = ...,
+        html_auth_username: builtins.str = ...,
+        html_auth_password_selector_type: global___RagCrawlerSelectorType.ValueType = ...,
+        html_auth_password_selector: builtins.str = ...,
+        html_auth_password: builtins.str = ...,
+        authentication_execution_type: global___RagCrawlerAuthenticationExecutionType.ValueType = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_authentication_execution_type", b"_authentication_execution_type", "_html_auth_base_url", b"_html_auth_base_url", "_html_auth_password", b"_html_auth_password", "_html_auth_password_selector", b"_html_auth_password_selector", "_html_auth_password_selector_type", b"_html_auth_password_selector_type", "_html_auth_username", b"_html_auth_username", "_html_auth_username_selector", b"_html_auth_username_selector", "_html_auth_username_selector_type", b"_html_auth_username_selector_type", "authentication_execution_type", b"authentication_execution_type", "html_auth_base_url", b"html_auth_base_url", "html_auth_password", b"html_auth_password", "html_auth_password_selector", b"html_auth_password_selector", "html_auth_password_selector_type", b"html_auth_password_selector_type", "html_auth_username", b"html_auth_username", "html_auth_username_selector", b"html_auth_username_selector", "html_auth_username_selector_type", b"html_auth_username_selector_type"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_authentication_execution_type", b"_authentication_execution_type", "_html_auth_base_url", b"_html_auth_base_url", "_html_auth_password", b"_html_auth_password", "_html_auth_password_selector", b"_html_auth_password_selector", "_html_auth_password_selector_type", b"_html_auth_password_selector_type", "_html_auth_username", b"_html_auth_username", "_html_auth_username_selector", b"_html_auth_username_selector", "_html_auth_username_selector_type", b"_html_auth_username_selector_type", "authentication_execution_type", b"authentication_execution_type", "html_auth_base_url", b"html_auth_base_url", "html_auth_password", b"html_auth_password", "html_auth_password_selector", b"html_auth_password_selector", "html_auth_password_selector_type", b"html_auth_password_selector_type", "html_auth_username", b"html_auth_username", "html_auth_username_selector", b"html_auth_username_selector", "html_auth_username_selector_type", b"html_auth_username_selector_type"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_authentication_execution_type", b"_authentication_execution_type"]) -> typing.Literal["authentication_execution_type"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_html_auth_base_url", b"_html_auth_base_url"]) -> typing.Literal["html_auth_base_url"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_html_auth_password", b"_html_auth_password"]) -> typing.Literal["html_auth_password"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_html_auth_password_selector", b"_html_auth_password_selector"]) -> typing.Literal["html_auth_password_selector"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_html_auth_password_selector_type", b"_html_auth_password_selector_type"]) -> typing.Literal["html_auth_password_selector_type"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_html_auth_username", b"_html_auth_username"]) -> typing.Literal["html_auth_username"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_html_auth_username_selector", b"_html_auth_username_selector"]) -> typing.Literal["html_auth_username_selector"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_html_auth_username_selector_type", b"_html_auth_username_selector_type"]) -> typing.Literal["html_auth_username_selector_type"] | None: ...
+    def ClearField(self, field_name: typing.Literal["authentication_execution_type", b"authentication_execution_type", "html_auth_base_url", b"html_auth_base_url", "html_auth_password", b"html_auth_password", "html_auth_password_selector", b"html_auth_password_selector", "html_auth_password_selector_type", b"html_auth_password_selector_type", "html_auth_username", b"html_auth_username", "html_auth_username_selector", b"html_auth_username_selector", "html_auth_username_selector_type", b"html_auth_username_selector_type"]) -> None: ...
 
 global___RagCrawlerHtmlAuth = RagCrawlerHtmlAuth
 
@@ -2750,11 +2693,9 @@ class RagCrawlerCookie(google.protobuf.message.Message):
         *,
         cookie_name: builtins.str = ...,
         cookie_value: builtins.str = ...,
-        cookie_domain: builtins.str | None = ...,
+        cookie_domain: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_cookie_domain", b"_cookie_domain", "cookie_domain", b"cookie_domain"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_cookie_domain", b"_cookie_domain", "cookie_domain", b"cookie_domain", "cookie_name", b"cookie_name", "cookie_value", b"cookie_value"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["_cookie_domain", b"_cookie_domain"]) -> typing.Literal["cookie_domain"] | None: ...
+    def ClearField(self, field_name: typing.Literal["cookie_domain", b"cookie_domain", "cookie_name", b"cookie_name", "cookie_value", b"cookie_value"]) -> None: ...
 
 global___RagCrawlerCookie = RagCrawlerCookie
 
@@ -2775,15 +2716,10 @@ class RagCrawlerConcurrencyConfig(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        max_concurrent_requests: builtins.int | None = ...,
-        slow_crawl: builtins.bool | None = ...,
+        max_concurrent_requests: builtins.int = ...,
+        slow_crawl: builtins.bool = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_max_concurrent_requests", b"_max_concurrent_requests", "_slow_crawl", b"_slow_crawl", "max_concurrent_requests", b"max_concurrent_requests", "slow_crawl", b"slow_crawl"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_max_concurrent_requests", b"_max_concurrent_requests", "_slow_crawl", b"_slow_crawl", "max_concurrent_requests", b"max_concurrent_requests", "slow_crawl", b"slow_crawl"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_max_concurrent_requests", b"_max_concurrent_requests"]) -> typing.Literal["max_concurrent_requests"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_slow_crawl", b"_slow_crawl"]) -> typing.Literal["slow_crawl"] | None: ...
+    def ClearField(self, field_name: typing.Literal["max_concurrent_requests", b"max_concurrent_requests", "slow_crawl", b"slow_crawl"]) -> None: ...
 
 global___RagCrawlerConcurrencyConfig = RagCrawlerConcurrencyConfig
 
@@ -2800,6 +2736,7 @@ class RagCrawlerConfig(google.protobuf.message.Message):
     CONCURRENCY_CONFIG_FIELD_NUMBER: builtins.int
     DEEP_CRAWLER_CONFIG_FIELD_NUMBER: builtins.int
     OUTPUT_CONFIG_FIELD_NUMBER: builtins.int
+    STATUS_FILTER_FIELD_NUMBER: builtins.int
     @property
     def concurrency_config(self) -> global___RagCrawlerConcurrencyConfig:
         """Optional. Concurrency and pacing controls for crawler requests."""
@@ -2812,21 +2749,20 @@ class RagCrawlerConfig(google.protobuf.message.Message):
     def output_config(self) -> global___RagCrawlerResultsConfig:
         """Optional. Structured output configuration (format + metadata policy)."""
 
+    @property
+    def status_filter(self) -> global___RagCrawlerStatusFilter:
+        """Optional. HTTP status filtering: which fetched pages become result documents."""
+
     def __init__(
         self,
         *,
         concurrency_config: global___RagCrawlerConcurrencyConfig | None = ...,
         deep_crawler_config: global___RagCrawlerDeepCrawlerConfig | None = ...,
         output_config: global___RagCrawlerResultsConfig | None = ...,
+        status_filter: global___RagCrawlerStatusFilter | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_concurrency_config", b"_concurrency_config", "_deep_crawler_config", b"_deep_crawler_config", "_output_config", b"_output_config", "concurrency_config", b"concurrency_config", "deep_crawler_config", b"deep_crawler_config", "output_config", b"output_config"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_concurrency_config", b"_concurrency_config", "_deep_crawler_config", b"_deep_crawler_config", "_output_config", b"_output_config", "concurrency_config", b"concurrency_config", "deep_crawler_config", b"deep_crawler_config", "output_config", b"output_config"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_concurrency_config", b"_concurrency_config"]) -> typing.Literal["concurrency_config"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_deep_crawler_config", b"_deep_crawler_config"]) -> typing.Literal["deep_crawler_config"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_output_config", b"_output_config"]) -> typing.Literal["output_config"] | None: ...
+    def HasField(self, field_name: typing.Literal["concurrency_config", b"concurrency_config", "deep_crawler_config", b"deep_crawler_config", "output_config", b"output_config", "status_filter", b"status_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["concurrency_config", b"concurrency_config", "deep_crawler_config", b"deep_crawler_config", "output_config", b"output_config", "status_filter", b"status_filter"]) -> None: ...
 
 global___RagCrawlerConfig = RagCrawlerConfig
 
@@ -2841,6 +2777,7 @@ class RagCrawlerDeepCrawlerConfig(google.protobuf.message.Message):
     MAX_DEPTH_FIELD_NUMBER: builtins.int
     MAX_PAGES_FIELD_NUMBER: builtins.int
     DEEP_CRAWLER_FILTERS_FIELD_NUMBER: builtins.int
+    NORMALIZE_URL_CASE_FIELD_NUMBER: builtins.int
     is_active: builtins.bool
     """Optional. Enable deep crawler behavior (link following beyond seeds).
     Default <code>false</code>. If <code>false</code>, <code>config</code> is ignored.
@@ -2856,6 +2793,8 @@ class RagCrawlerDeepCrawlerConfig(google.protobuf.message.Message):
     """
     max_pages: builtins.int
     """Optional. Hard cap on total processed pages for this run."""
+    normalize_url_case: builtins.bool
+    """Optional. Normalize URL case (lowercase the path) during link discovery/deduplication."""
     @property
     def deep_crawler_filters(self) -> global___RagCrawlerFilters:
         """Optional. URL and domain restrictions."""
@@ -2863,24 +2802,19 @@ class RagCrawlerDeepCrawlerConfig(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        is_active: builtins.bool | None = ...,
-        crawl_strategy: global___RagCrawlerCrawlStrategy.ValueType | None = ...,
+        is_active: builtins.bool = ...,
+        crawl_strategy: global___RagCrawlerCrawlStrategy.ValueType = ...,
         max_depth: builtins.int | None = ...,
-        max_pages: builtins.int | None = ...,
+        max_pages: builtins.int = ...,
         deep_crawler_filters: global___RagCrawlerFilters | None = ...,
+        normalize_url_case: builtins.bool | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_crawl_strategy", b"_crawl_strategy", "_deep_crawler_filters", b"_deep_crawler_filters", "_is_active", b"_is_active", "_max_depth", b"_max_depth", "_max_pages", b"_max_pages", "crawl_strategy", b"crawl_strategy", "deep_crawler_filters", b"deep_crawler_filters", "is_active", b"is_active", "max_depth", b"max_depth", "max_pages", b"max_pages"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_crawl_strategy", b"_crawl_strategy", "_deep_crawler_filters", b"_deep_crawler_filters", "_is_active", b"_is_active", "_max_depth", b"_max_depth", "_max_pages", b"_max_pages", "crawl_strategy", b"crawl_strategy", "deep_crawler_filters", b"deep_crawler_filters", "is_active", b"is_active", "max_depth", b"max_depth", "max_pages", b"max_pages"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_crawl_strategy", b"_crawl_strategy"]) -> typing.Literal["crawl_strategy"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_deep_crawler_filters", b"_deep_crawler_filters"]) -> typing.Literal["deep_crawler_filters"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_is_active", b"_is_active"]) -> typing.Literal["is_active"] | None: ...
+    def HasField(self, field_name: typing.Literal["_max_depth", b"_max_depth", "_normalize_url_case", b"_normalize_url_case", "deep_crawler_filters", b"deep_crawler_filters", "max_depth", b"max_depth", "normalize_url_case", b"normalize_url_case"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_max_depth", b"_max_depth", "_normalize_url_case", b"_normalize_url_case", "crawl_strategy", b"crawl_strategy", "deep_crawler_filters", b"deep_crawler_filters", "is_active", b"is_active", "max_depth", b"max_depth", "max_pages", b"max_pages", "normalize_url_case", b"normalize_url_case"]) -> None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_max_depth", b"_max_depth"]) -> typing.Literal["max_depth"] | None: ...
     @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_max_pages", b"_max_pages"]) -> typing.Literal["max_pages"] | None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_normalize_url_case", b"_normalize_url_case"]) -> typing.Literal["normalize_url_case"] | None: ...
 
 global___RagCrawlerDeepCrawlerConfig = RagCrawlerDeepCrawlerConfig
 
@@ -2896,6 +2830,8 @@ class RagCrawlerResultsConfig(google.protobuf.message.Message):
 
     INJECT_FRONTMATTER_FIELD_NUMBER: builtins.int
     META_DATA_EXTRACTORS_FIELD_NUMBER: builtins.int
+    CONTENT_SCOPE_FIELD_NUMBER: builtins.int
+    DENSITY_PRUNING_FIELD_NUMBER: builtins.int
     inject_frontmatter: builtins.bool
     """Optional. Inject YAML frontmatter into markdown output.
     If the content is HTML based, it will automatically be converted to markdown.
@@ -2906,17 +2842,102 @@ class RagCrawlerResultsConfig(google.protobuf.message.Message):
     def meta_data_extractors(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagCrawlerMetaDataExtractor]:
         """Optional. Metadata extractors."""
 
+    @property
+    def content_scope(self) -> global___RagCrawlerContentScope:
+        """Optional. CSS-selector based content scoping for markdown extraction."""
+
+    @property
+    def density_pruning(self) -> global___RagCrawlerDensityPruning:
+        """Optional. Density-based content pruning (Crawl4AI PruningContentFilter).
+        If not set the <code>RagCrawlerDensityPruning</code> defaults are used.
+        """
+
     def __init__(
         self,
         *,
         inject_frontmatter: builtins.bool | None = ...,
         meta_data_extractors: collections.abc.Iterable[global___RagCrawlerMetaDataExtractor] | None = ...,
+        content_scope: global___RagCrawlerContentScope | None = ...,
+        density_pruning: global___RagCrawlerDensityPruning | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_inject_frontmatter", b"_inject_frontmatter", "inject_frontmatter", b"inject_frontmatter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_inject_frontmatter", b"_inject_frontmatter", "inject_frontmatter", b"inject_frontmatter", "meta_data_extractors", b"meta_data_extractors"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_inject_frontmatter", b"_inject_frontmatter", "content_scope", b"content_scope", "density_pruning", b"density_pruning", "inject_frontmatter", b"inject_frontmatter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_inject_frontmatter", b"_inject_frontmatter", "content_scope", b"content_scope", "density_pruning", b"density_pruning", "inject_frontmatter", b"inject_frontmatter", "meta_data_extractors", b"meta_data_extractors"]) -> None: ...
     def WhichOneof(self, oneof_group: typing.Literal["_inject_frontmatter", b"_inject_frontmatter"]) -> typing.Literal["inject_frontmatter"] | None: ...
 
 global___RagCrawlerResultsConfig = RagCrawlerResultsConfig
+
+@typing.final
+class RagCrawlerContentScope(google.protobuf.message.Message):
+    """CSS-selector based content scoping for markdown extraction.
+
+    When set, Markdown is generated only from the elements matched by <code>include_selectors</code> (if any), after removing elements matched by <code>exclude_selectors</code>.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    INCLUDE_SELECTORS_FIELD_NUMBER: builtins.int
+    EXCLUDE_SELECTORS_FIELD_NUMBER: builtins.int
+    @property
+    def include_selectors(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. CSS selectors to scope extraction to (keep only matching subtrees).
+        Empty means the whole page is used.
+        """
+
+    @property
+    def exclude_selectors(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. CSS selectors whose matching elements are removed before extraction (e.g. navigation, footer, sidebars, internal-only blocks)."""
+
+    def __init__(
+        self,
+        *,
+        include_selectors: collections.abc.Iterable[builtins.str] | None = ...,
+        exclude_selectors: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["exclude_selectors", b"exclude_selectors", "include_selectors", b"include_selectors"]) -> None: ...
+
+global___RagCrawlerContentScope = RagCrawlerContentScope
+
+@typing.final
+class RagCrawlerDensityPruning(google.protobuf.message.Message):
+    """Density-based content pruning (Crawl4AI PruningContentFilter).
+
+    Removes low-text-density and very short nodes by a composite density score.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    IS_ACTIVE_FIELD_NUMBER: builtins.int
+    THRESHOLD_FIELD_NUMBER: builtins.int
+    THRESHOLD_TYPE_FIELD_NUMBER: builtins.int
+    MIN_WORD_THRESHOLD_FIELD_NUMBER: builtins.int
+    is_active: builtins.bool
+    """Optional. Enable density pruning. Default <code>true</code>."""
+    threshold: builtins.float
+    """Optional. Density score threshold. Default <code>0.5</code>."""
+    threshold_type: global___RagCrawlerPruningThresholdType.ValueType
+    """Optional. Threshold interpretation. Default <code>RAG_CRAWLER_PRUNING_THRESHOLD_TYPE_FIXED</code>."""
+    min_word_threshold: builtins.int
+    """Optional. Nodes with fewer than this many words are removed. Default <code>10</code>."""
+    def __init__(
+        self,
+        *,
+        is_active: builtins.bool | None = ...,
+        threshold: builtins.float | None = ...,
+        threshold_type: global___RagCrawlerPruningThresholdType.ValueType | None = ...,
+        min_word_threshold: builtins.int | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_is_active", b"_is_active", "_min_word_threshold", b"_min_word_threshold", "_threshold", b"_threshold", "_threshold_type", b"_threshold_type", "is_active", b"is_active", "min_word_threshold", b"min_word_threshold", "threshold", b"threshold", "threshold_type", b"threshold_type"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_is_active", b"_is_active", "_min_word_threshold", b"_min_word_threshold", "_threshold", b"_threshold", "_threshold_type", b"_threshold_type", "is_active", b"is_active", "min_word_threshold", b"min_word_threshold", "threshold", b"threshold", "threshold_type", b"threshold_type"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_is_active", b"_is_active"]) -> typing.Literal["is_active"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_min_word_threshold", b"_min_word_threshold"]) -> typing.Literal["min_word_threshold"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_threshold", b"_threshold"]) -> typing.Literal["threshold"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_threshold_type", b"_threshold_type"]) -> typing.Literal["threshold_type"] | None: ...
+
+global___RagCrawlerDensityPruning = RagCrawlerDensityPruning
 
 @typing.final
 class RagCrawlerMetaDataExtractor(google.protobuf.message.Message):
@@ -2936,18 +2957,11 @@ class RagCrawlerMetaDataExtractor(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        type: global___RagCrawlerMetaDataExtractorType.ValueType | None = ...,
-        value: builtins.str | None = ...,
-        key: builtins.str | None = ...,
+        type: global___RagCrawlerMetaDataExtractorType.ValueType = ...,
+        value: builtins.str = ...,
+        key: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_key", b"_key", "_type", b"_type", "_value", b"_value", "key", b"key", "type", b"type", "value", b"value"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_key", b"_key", "_type", b"_type", "_value", b"_value", "key", b"key", "type", b"type", "value", b"value"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_key", b"_key"]) -> typing.Literal["key"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_type", b"_type"]) -> typing.Literal["type"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_value", b"_value"]) -> typing.Literal["value"] | None: ...
+    def ClearField(self, field_name: typing.Literal["key", b"key", "type", b"type", "value", b"value"]) -> None: ...
 
 global___RagCrawlerMetaDataExtractor = RagCrawlerMetaDataExtractor
 
@@ -2979,6 +2993,35 @@ class RagCrawlerRetryConfig(google.protobuf.message.Message):
 global___RagCrawlerRetryConfig = RagCrawlerRetryConfig
 
 @typing.final
+class RagCrawlerStatusFilter(google.protobuf.message.Message):
+    """HTTP status filtering for crawled pages.
+
+    When active, a fetched page becomes a result document only if its HTTP status is accepted.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    IS_ACTIVE_FIELD_NUMBER: builtins.int
+    ACCEPTED_STATUS_CODES_FIELD_NUMBER: builtins.int
+    is_active: builtins.bool
+    """Optional. Enable HTTP status filtering. Default <code>false</code>."""
+    @property
+    def accepted_status_codes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
+        """Optional. Accepted HTTP status codes. If empty while active, only the 2xx range (<code>200</code>-<code>299</code>) is accepted. Add specific codes here to accept extras."""
+
+    def __init__(
+        self,
+        *,
+        is_active: builtins.bool | None = ...,
+        accepted_status_codes: collections.abc.Iterable[builtins.int] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_is_active", b"_is_active", "is_active", b"is_active"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_is_active", b"_is_active", "accepted_status_codes", b"accepted_status_codes", "is_active", b"is_active"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_is_active", b"_is_active"]) -> typing.Literal["is_active"] | None: ...
+
+global___RagCrawlerStatusFilter = RagCrawlerStatusFilter
+
+@typing.final
 class RagCrawlerContentResult(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -2998,12 +3041,9 @@ class RagCrawlerContentResult(google.protobuf.message.Message):
         metadata: google.protobuf.struct_pb2.Struct | None = ...,
         markdown: builtins.str | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_markdown", b"_markdown", "_metadata", b"_metadata", "markdown", b"markdown", "metadata", b"metadata"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_markdown", b"_markdown", "_metadata", b"_metadata", "markdown", b"markdown", "metadata", b"metadata"]) -> None: ...
-    @typing.overload
+    def HasField(self, field_name: typing.Literal["_markdown", b"_markdown", "markdown", b"markdown", "metadata", b"metadata"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_markdown", b"_markdown", "markdown", b"markdown", "metadata", b"metadata"]) -> None: ...
     def WhichOneof(self, oneof_group: typing.Literal["_markdown", b"_markdown"]) -> typing.Literal["markdown"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_metadata", b"_metadata"]) -> typing.Literal["metadata"] | None: ...
 
 global___RagCrawlerContentResult = RagCrawlerContentResult
 
@@ -3031,12 +3071,10 @@ class RagCrawlerExecutionInfo(google.protobuf.message.Message):
         success: builtins.bool | None = ...,
         error_message: builtins.str | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_error_message", b"_error_message", "_ssl_certificate", b"_ssl_certificate", "_success", b"_success", "error_message", b"error_message", "ssl_certificate", b"ssl_certificate", "success", b"success"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_error_message", b"_error_message", "_ssl_certificate", b"_ssl_certificate", "_success", b"_success", "error_message", b"error_message", "ssl_certificate", b"ssl_certificate", "success", b"success"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_error_message", b"_error_message", "_success", b"_success", "error_message", b"error_message", "ssl_certificate", b"ssl_certificate", "success", b"success"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_error_message", b"_error_message", "_success", b"_success", "error_message", b"error_message", "ssl_certificate", b"ssl_certificate", "success", b"success"]) -> None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_error_message", b"_error_message"]) -> typing.Literal["error_message"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_ssl_certificate", b"_ssl_certificate"]) -> typing.Literal["ssl_certificate"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_success", b"_success"]) -> typing.Literal["success"] | None: ...
 
@@ -3103,12 +3141,8 @@ class RagCrawlerResult(google.protobuf.message.Message):
         content_result: global___RagCrawlerContentResult | None = ...,
         page_last_updated_date: google.protobuf.timestamp_pb2.Timestamp | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_content_result", b"_content_result", "_page_last_updated_date", b"_page_last_updated_date", "content_result", b"content_result", "file_resource", b"file_resource", "last_crawled_date", b"last_crawled_date", "page_last_updated_date", b"page_last_updated_date"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_content_result", b"_content_result", "_page_last_updated_date", b"_page_last_updated_date", "content_result", b"content_result", "crawler_name", b"crawler_name", "file_resource", b"file_resource", "last_crawled_date", b"last_crawled_date", "name", b"name", "operation_name", b"operation_name", "page_last_updated_date", b"page_last_updated_date", "source_url", b"source_url"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_content_result", b"_content_result"]) -> typing.Literal["content_result"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_page_last_updated_date", b"_page_last_updated_date"]) -> typing.Literal["page_last_updated_date"] | None: ...
+    def HasField(self, field_name: typing.Literal["content_result", b"content_result", "file_resource", b"file_resource", "last_crawled_date", b"last_crawled_date", "page_last_updated_date", b"page_last_updated_date"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["content_result", b"content_result", "crawler_name", b"crawler_name", "file_resource", b"file_resource", "last_crawled_date", b"last_crawled_date", "name", b"name", "operation_name", b"operation_name", "page_last_updated_date", b"page_last_updated_date", "source_url", b"source_url"]) -> None: ...
 
 global___RagCrawlerResult = RagCrawlerResult
 
@@ -3230,24 +3264,15 @@ class RagListCrawlerRunsRequest(google.protobuf.message.Message):
         *,
         parent: builtins.str = ...,
         language_code: builtins.str = ...,
-        crawler_name: builtins.str | None = ...,
-        page_token: builtins.str | None = ...,
-        status: ondewo.nlu.operation_metadata_pb2.OperationMetadata.Status.ValueType | None = ...,
-        orderby: builtins.str | None = ...,
+        crawler_name: builtins.str = ...,
+        page_token: builtins.str = ...,
+        status: ondewo.nlu.operation_metadata_pb2.OperationMetadata.Status.ValueType = ...,
+        orderby: builtins.str = ...,
         sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_crawler_name", b"_crawler_name", "_orderby", b"_orderby", "_page_token", b"_page_token", "_sorting_mode", b"_sorting_mode", "_status", b"_status", "crawler_name", b"crawler_name", "orderby", b"orderby", "page_token", b"page_token", "sorting_mode", b"sorting_mode", "status", b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_crawler_name", b"_crawler_name", "_orderby", b"_orderby", "_page_token", b"_page_token", "_sorting_mode", b"_sorting_mode", "_status", b"_status", "crawler_name", b"crawler_name", "language_code", b"language_code", "orderby", b"orderby", "page_token", b"page_token", "parent", b"parent", "sorting_mode", b"sorting_mode", "status", b"status"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_crawler_name", b"_crawler_name"]) -> typing.Literal["crawler_name"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_orderby", b"_orderby"]) -> typing.Literal["orderby"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_page_token", b"_page_token"]) -> typing.Literal["page_token"] | None: ...
-    @typing.overload
+    def HasField(self, field_name: typing.Literal["_sorting_mode", b"_sorting_mode", "sorting_mode", b"sorting_mode"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_sorting_mode", b"_sorting_mode", "crawler_name", b"crawler_name", "language_code", b"language_code", "orderby", b"orderby", "page_token", b"page_token", "parent", b"parent", "sorting_mode", b"sorting_mode", "status", b"status"]) -> None: ...
     def WhichOneof(self, oneof_group: typing.Literal["_sorting_mode", b"_sorting_mode"]) -> typing.Literal["sorting_mode"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_status", b"_status"]) -> typing.Literal["status"] | None: ...
 
 global___RagListCrawlerRunsRequest = RagListCrawlerRunsRequest
 
@@ -3470,24 +3495,15 @@ class RagGetCrawlerResultsRequest(google.protobuf.message.Message):
         parent: builtins.str = ...,
         language_code: builtins.str = ...,
         operation_name: builtins.str = ...,
-        page_token: builtins.str | None = ...,
-        url_query: builtins.str | None = ...,
+        page_token: builtins.str = ...,
+        url_query: builtins.str = ...,
         field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
-        orderby: builtins.str | None = ...,
+        orderby: builtins.str = ...,
         sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "_orderby", b"_orderby", "_page_token", b"_page_token", "_sorting_mode", b"_sorting_mode", "_url_query", b"_url_query", "field_mask", b"field_mask", "orderby", b"orderby", "page_token", b"page_token", "sorting_mode", b"sorting_mode", "url_query", b"url_query"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "_orderby", b"_orderby", "_page_token", b"_page_token", "_sorting_mode", b"_sorting_mode", "_url_query", b"_url_query", "field_mask", b"field_mask", "language_code", b"language_code", "operation_name", b"operation_name", "orderby", b"orderby", "page_token", b"page_token", "parent", b"parent", "sorting_mode", b"sorting_mode", "url_query", b"url_query"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_orderby", b"_orderby"]) -> typing.Literal["orderby"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_page_token", b"_page_token"]) -> typing.Literal["page_token"] | None: ...
-    @typing.overload
+    def HasField(self, field_name: typing.Literal["_sorting_mode", b"_sorting_mode", "field_mask", b"field_mask", "sorting_mode", b"sorting_mode"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_sorting_mode", b"_sorting_mode", "field_mask", b"field_mask", "language_code", b"language_code", "operation_name", b"operation_name", "orderby", b"orderby", "page_token", b"page_token", "parent", b"parent", "sorting_mode", b"sorting_mode", "url_query", b"url_query"]) -> None: ...
     def WhichOneof(self, oneof_group: typing.Literal["_sorting_mode", b"_sorting_mode"]) -> typing.Literal["sorting_mode"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_url_query", b"_url_query"]) -> typing.Literal["url_query"] | None: ...
 
 global___RagGetCrawlerResultsRequest = RagGetCrawlerResultsRequest
 
@@ -3557,9 +3573,8 @@ class RagGetCrawlerResultRequest(google.protobuf.message.Message):
         url: builtins.str = ...,
         field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "field_mask", b"field_mask", "language_code", b"language_code", "operation_name", b"operation_name", "parent", b"parent", "url", b"url"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
+    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "language_code", b"language_code", "operation_name", b"operation_name", "parent", b"parent", "url", b"url"]) -> None: ...
 
 global___RagGetCrawlerResultRequest = RagGetCrawlerResultRequest
 
@@ -3725,23 +3740,14 @@ class RagGetCrawlerAttachedDatasetsRequest(google.protobuf.message.Message):
         parent: builtins.str = ...,
         language_code: builtins.str = ...,
         crawler_name: builtins.str = ...,
-        page_size: builtins.int | None = ...,
-        page_token: builtins.str | None = ...,
+        page_size: builtins.int = ...,
+        page_token: builtins.str = ...,
         field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
-        orderby: builtins.str | None = ...,
+        orderby: builtins.str = ...,
         sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "_orderby", b"_orderby", "_page_size", b"_page_size", "_page_token", b"_page_token", "_sorting_mode", b"_sorting_mode", "field_mask", b"field_mask", "orderby", b"orderby", "page_size", b"page_size", "page_token", b"page_token", "sorting_mode", b"sorting_mode"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_field_mask", b"_field_mask", "_orderby", b"_orderby", "_page_size", b"_page_size", "_page_token", b"_page_token", "_sorting_mode", b"_sorting_mode", "crawler_name", b"crawler_name", "field_mask", b"field_mask", "language_code", b"language_code", "orderby", b"orderby", "page_size", b"page_size", "page_token", b"page_token", "parent", b"parent", "sorting_mode", b"sorting_mode"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_orderby", b"_orderby"]) -> typing.Literal["orderby"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_page_size", b"_page_size"]) -> typing.Literal["page_size"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_page_token", b"_page_token"]) -> typing.Literal["page_token"] | None: ...
-    @typing.overload
+    def HasField(self, field_name: typing.Literal["_sorting_mode", b"_sorting_mode", "field_mask", b"field_mask", "sorting_mode", b"sorting_mode"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_sorting_mode", b"_sorting_mode", "crawler_name", b"crawler_name", "field_mask", b"field_mask", "language_code", b"language_code", "orderby", b"orderby", "page_size", b"page_size", "page_token", b"page_token", "parent", b"parent", "sorting_mode", b"sorting_mode"]) -> None: ...
     def WhichOneof(self, oneof_group: typing.Literal["_sorting_mode", b"_sorting_mode"]) -> typing.Literal["sorting_mode"] | None: ...
 
 global___RagGetCrawlerAttachedDatasetsRequest = RagGetCrawlerAttachedDatasetsRequest
@@ -3841,40 +3847,21 @@ class RagGetCrawlerRunLogsRequest(google.protobuf.message.Message):
         parent: builtins.str = ...,
         language_code: builtins.str = ...,
         operation_name: builtins.str = ...,
-        page_token: builtins.str | None = ...,
-        page_size: builtins.int | None = ...,
+        page_token: builtins.str = ...,
+        page_size: builtins.int = ...,
         level_filters: collections.abc.Iterable[ondewo.nlu.common_pb2.LogSeverity.ValueType] | None = ...,
-        phase_filter: builtins.str | None = ...,
-        search_query: builtins.str | None = ...,
+        phase_filter: builtins.str = ...,
+        search_query: builtins.str = ...,
         start_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         end_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        source_url_filter: builtins.str | None = ...,
-        orderby: builtins.str | None = ...,
+        source_url_filter: builtins.str = ...,
+        orderby: builtins.str = ...,
         sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType | None = ...,
         field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_end_time", b"_end_time", "_field_mask", b"_field_mask", "_orderby", b"_orderby", "_page_size", b"_page_size", "_page_token", b"_page_token", "_phase_filter", b"_phase_filter", "_search_query", b"_search_query", "_sorting_mode", b"_sorting_mode", "_source_url_filter", b"_source_url_filter", "_start_time", b"_start_time", "end_time", b"end_time", "field_mask", b"field_mask", "orderby", b"orderby", "page_size", b"page_size", "page_token", b"page_token", "phase_filter", b"phase_filter", "search_query", b"search_query", "sorting_mode", b"sorting_mode", "source_url_filter", b"source_url_filter", "start_time", b"start_time"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_end_time", b"_end_time", "_field_mask", b"_field_mask", "_orderby", b"_orderby", "_page_size", b"_page_size", "_page_token", b"_page_token", "_phase_filter", b"_phase_filter", "_search_query", b"_search_query", "_sorting_mode", b"_sorting_mode", "_source_url_filter", b"_source_url_filter", "_start_time", b"_start_time", "end_time", b"end_time", "field_mask", b"field_mask", "language_code", b"language_code", "level_filters", b"level_filters", "operation_name", b"operation_name", "orderby", b"orderby", "page_size", b"page_size", "page_token", b"page_token", "parent", b"parent", "phase_filter", b"phase_filter", "search_query", b"search_query", "sorting_mode", b"sorting_mode", "source_url_filter", b"source_url_filter", "start_time", b"start_time"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_end_time", b"_end_time"]) -> typing.Literal["end_time"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_field_mask", b"_field_mask"]) -> typing.Literal["field_mask"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_orderby", b"_orderby"]) -> typing.Literal["orderby"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_page_size", b"_page_size"]) -> typing.Literal["page_size"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_page_token", b"_page_token"]) -> typing.Literal["page_token"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_phase_filter", b"_phase_filter"]) -> typing.Literal["phase_filter"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_search_query", b"_search_query"]) -> typing.Literal["search_query"] | None: ...
-    @typing.overload
+    def HasField(self, field_name: typing.Literal["_sorting_mode", b"_sorting_mode", "end_time", b"end_time", "field_mask", b"field_mask", "sorting_mode", b"sorting_mode", "start_time", b"start_time"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_sorting_mode", b"_sorting_mode", "end_time", b"end_time", "field_mask", b"field_mask", "language_code", b"language_code", "level_filters", b"level_filters", "operation_name", b"operation_name", "orderby", b"orderby", "page_size", b"page_size", "page_token", b"page_token", "parent", b"parent", "phase_filter", b"phase_filter", "search_query", b"search_query", "sorting_mode", b"sorting_mode", "source_url_filter", b"source_url_filter", "start_time", b"start_time"]) -> None: ...
     def WhichOneof(self, oneof_group: typing.Literal["_sorting_mode", b"_sorting_mode"]) -> typing.Literal["sorting_mode"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_source_url_filter", b"_source_url_filter"]) -> typing.Literal["source_url_filter"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_start_time", b"_start_time"]) -> typing.Literal["start_time"] | None: ...
 
 global___RagGetCrawlerRunLogsRequest = RagGetCrawlerRunLogsRequest
 

@@ -11,26 +11,27 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import sys
+from pathlib import Path
 from ondewo.nlu import intent_pb2
 from ondewo.nlu.client import Client
 from ondewo.nlu.client_config import ClientConfig
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from example_env import (  # noqa: E402
+    env,
+    get_client_config,
+    use_secure_channel,
+)
+
 if __name__ == "__main__":
     # CONFIGURING THE CLIENT
-    config: ClientConfig = ClientConfig(
-        host="localhost",
-        port="1234",
-        keycloak_url="https://<host>/auth",
-        realm="ondewo-ccai-platform",
-        client_id="ondewo-nlu-cai-sdk-public",
-        user_name="<e-mail of user>",
-        password="<password of user>",
-    )
-    client: Client = Client(config=config, use_secure_channel=False)
+    config: ClientConfig = get_client_config()
+    client: Client = Client(config=config, use_secure_channel=use_secure_channel())
 
     # CONFIGURING THE AGENT
-    parent: str = "<PUT_YOUR_AGENT_PARENT_HERE>"
-    language_code: str = '<acronym of he language of choice, i.e "en">'
+    parent: str = env("ONDEWO_NLU_CAI_AGENT_PARENT")
+    language_code: str = env("ONDEWO_NLU_CAI_LANGUAGE_CODE")
 
     r = intent_pb2.CreateIntentRequest(
         intent=intent_pb2.Intent(
@@ -77,9 +78,13 @@ if __name__ == "__main__":
             ],
         ),
         parent=parent,
-        language_code="en",
+        language_code=env("ONDEWO_NLU_CAI_LANGUAGE_CODE"),
     )
 
     response = client.services.intents.create_intent(r)
     print(response)
-    print(client.services.intents.get_intent(intent_pb2.GetIntentRequest(name=response.name, language_code="en")))
+    print(
+        client.services.intents.get_intent(
+            intent_pb2.GetIntentRequest(name=response.name, language_code=env("ONDEWO_NLU_CAI_LANGUAGE_CODE"))
+        )
+    )

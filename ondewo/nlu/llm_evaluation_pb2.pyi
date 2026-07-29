@@ -983,7 +983,7 @@ class LlmEvaluationFeedback(google.protobuf.message.Message):
         name: builtins.str = ...,
         display_name: builtins.str = ...,
         criterion: builtins.str = ...,
-        score: builtins.float = ...,
+        score: builtins.float | None = ...,
         categorical_value: builtins.str = ...,
         comment: builtins.str = ...,
         annotator_user_id: builtins.str = ...,
@@ -996,8 +996,9 @@ class LlmEvaluationFeedback(google.protobuf.message.Message):
         created_by: builtins.str = ...,
         modified_by: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at", "raw", b"raw"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["annotator_user_id", b"annotator_user_id", "categorical_value", b"categorical_value", "comment", b"comment", "created_at", b"created_at", "created_by", b"created_by", "criterion", b"criterion", "display_name", b"display_name", "llm_evaluation_evaluator_run_name", b"llm_evaluation_evaluator_run_name", "llm_evaluation_example_name", b"llm_evaluation_example_name", "llm_evaluation_experiment_name", b"llm_evaluation_experiment_name", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "raw", b"raw", "score", b"score"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_score", b"_score", "created_at", b"created_at", "modified_at", b"modified_at", "raw", b"raw", "score", b"score"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_score", b"_score", "annotator_user_id", b"annotator_user_id", "categorical_value", b"categorical_value", "comment", b"comment", "created_at", b"created_at", "created_by", b"created_by", "criterion", b"criterion", "display_name", b"display_name", "llm_evaluation_evaluator_run_name", b"llm_evaluation_evaluator_run_name", "llm_evaluation_example_name", b"llm_evaluation_example_name", "llm_evaluation_experiment_name", b"llm_evaluation_experiment_name", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "raw", b"raw", "score", b"score"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_score", b"_score"]) -> typing.Literal["score"] | None: ...
 
 global___LlmEvaluationFeedback = LlmEvaluationFeedback
 
@@ -2447,11 +2448,13 @@ class LlmEvaluationReleaseGateThresholds(google.protobuf.message.Message):
         self,
         *,
         min_pass_rate: builtins.float = ...,
-        max_regression_per_criterion: builtins.float = ...,
+        max_regression_per_criterion: builtins.float | None = ...,
         max_p95_latency_seconds: builtins.float = ...,
         acceptance_must_pass: builtins.bool = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["acceptance_must_pass", b"acceptance_must_pass", "max_p95_latency_seconds", b"max_p95_latency_seconds", "max_regression_per_criterion", b"max_regression_per_criterion", "min_pass_rate", b"min_pass_rate"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_max_regression_per_criterion", b"_max_regression_per_criterion", "max_regression_per_criterion", b"max_regression_per_criterion"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_max_regression_per_criterion", b"_max_regression_per_criterion", "acceptance_must_pass", b"acceptance_must_pass", "max_p95_latency_seconds", b"max_p95_latency_seconds", "max_regression_per_criterion", b"max_regression_per_criterion", "min_pass_rate", b"min_pass_rate"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_max_regression_per_criterion", b"_max_regression_per_criterion"]) -> typing.Literal["max_regression_per_criterion"] | None: ...
 
 global___LlmEvaluationReleaseGateThresholds = LlmEvaluationReleaseGateThresholds
 
@@ -2488,10 +2491,15 @@ class LlmEvaluationReleaseGateSafetyConfig(google.protobuf.message.Message):
         enabled: builtins.bool = ...,
         adversarial_dataset_name: builtins.str = ...,
         evaluator_names: collections.abc.Iterable[builtins.str] | None = ...,
-        max_toxicity: builtins.float = ...,
-        max_bias: builtins.float = ...,
+        max_toxicity: builtins.float | None = ...,
+        max_bias: builtins.float | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["adversarial_dataset_name", b"adversarial_dataset_name", "enabled", b"enabled", "evaluator_names", b"evaluator_names", "max_bias", b"max_bias", "max_toxicity", b"max_toxicity"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_max_bias", b"_max_bias", "_max_toxicity", b"_max_toxicity", "max_bias", b"max_bias", "max_toxicity", b"max_toxicity"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_max_bias", b"_max_bias", "_max_toxicity", b"_max_toxicity", "adversarial_dataset_name", b"adversarial_dataset_name", "enabled", b"enabled", "evaluator_names", b"evaluator_names", "max_bias", b"max_bias", "max_toxicity", b"max_toxicity"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_max_bias", b"_max_bias"]) -> typing.Literal["max_bias"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_max_toxicity", b"_max_toxicity"]) -> typing.Literal["max_toxicity"] | None: ...
 
 global___LlmEvaluationReleaseGateSafetyConfig = LlmEvaluationReleaseGateSafetyConfig
 
@@ -5988,7 +5996,7 @@ class LlmEvaluationOnlineConfig(google.protobuf.message.Message):
         sample_rate: builtins.float = ...,
         enabled: builtins.bool = ...,
         target_dataset_name: builtins.str = ...,
-        fail_threshold: builtins.float = ...,
+        fail_threshold: builtins.float | None = ...,
         settle_seconds: builtins.int = ...,
         require_telemetry: builtins.bool = ...,
         llm_evaluation_online_session_filter: global___LlmEvaluationOnlineSessionFilter | None = ...,
@@ -6001,8 +6009,9 @@ class LlmEvaluationOnlineConfig(google.protobuf.message.Message):
         parent: builtins.str = ...,
         language_code: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["created_at", b"created_at", "last_evaluated_at", b"last_evaluated_at", "llm_evaluation_online_session_filter", b"llm_evaluation_online_session_filter", "modified_at", b"modified_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["created_at", b"created_at", "created_by", b"created_by", "description", b"description", "display_name", b"display_name", "enabled", b"enabled", "evaluator_names", b"evaluator_names", "fail_threshold", b"fail_threshold", "language_code", b"language_code", "last_evaluated_at", b"last_evaluated_at", "llm_evaluation_online_session_filter", b"llm_evaluation_online_session_filter", "modified_at", b"modified_at", "modified_by", b"modified_by", "n_sessions_evaluated", b"n_sessions_evaluated", "name", b"name", "parent", b"parent", "require_telemetry", b"require_telemetry", "sample_rate", b"sample_rate", "settle_seconds", b"settle_seconds", "target_dataset_name", b"target_dataset_name"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_fail_threshold", b"_fail_threshold", "created_at", b"created_at", "fail_threshold", b"fail_threshold", "last_evaluated_at", b"last_evaluated_at", "llm_evaluation_online_session_filter", b"llm_evaluation_online_session_filter", "modified_at", b"modified_at"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_fail_threshold", b"_fail_threshold", "created_at", b"created_at", "created_by", b"created_by", "description", b"description", "display_name", b"display_name", "enabled", b"enabled", "evaluator_names", b"evaluator_names", "fail_threshold", b"fail_threshold", "language_code", b"language_code", "last_evaluated_at", b"last_evaluated_at", "llm_evaluation_online_session_filter", b"llm_evaluation_online_session_filter", "modified_at", b"modified_at", "modified_by", b"modified_by", "n_sessions_evaluated", b"n_sessions_evaluated", "name", b"name", "parent", b"parent", "require_telemetry", b"require_telemetry", "sample_rate", b"sample_rate", "settle_seconds", b"settle_seconds", "target_dataset_name", b"target_dataset_name"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_fail_threshold", b"_fail_threshold"]) -> typing.Literal["fail_threshold"] | None: ...
 
 global___LlmEvaluationOnlineConfig = LlmEvaluationOnlineConfig
 

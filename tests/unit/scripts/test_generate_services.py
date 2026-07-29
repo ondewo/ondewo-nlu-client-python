@@ -19,7 +19,9 @@ import pytest
 from ondewo.nlu.scripts.generate_services import (
     RpcMethod,
     ServiceDef,
+    _MAX_LINE_LENGTH,
     _build_file_content,
+    _emit_method,
     camel_to_snake,
     main,
     parse_proto_file,
@@ -503,6 +505,157 @@ class TestBuildFileContent:
         content = _build_file_content(svc, self._RAG_TYPES)
         assert "from typing import Iterator" not in content
 
+    def test_multiple_types_from_same_external_module_are_grouped(self) -> None:
+        """Two names from one external module are emitted as a parenthesised block.
+
+        Mirrors the shipped ``users.py``, whose ``user``-stemmed service pulls
+        several notification types out of ``common_pb2`` in a single block.
+        """
+        svc = self._make_svc(
+            [
+                RpcMethod(
+                    "ListNotifications",
+                    "ondewo.nlu.ListNotificationsRequest",
+                    "ondewo.nlu.ListNotificationsResponse",
+                    False,
+                    False,
+                ),
+            ],
+            proto_stem="user",
+            name="Users",
+        )
+        content = _build_file_content(
+            svc,
+            {"ListNotificationsRequest": "common", "ListNotificationsResponse": "common"},
+        )
+        assert (
+            "from ondewo.nlu.common_pb2 import (\n    ListNotificationsRequest,\n    ListNotificationsResponse,\n)"
+        ) in content
+        # The single-name form must not also be emitted for that module.
+        assert "from ondewo.nlu.common_pb2 import ListNotificationsRequest\n" not in content
+
+    def test_single_type_from_external_module_stays_on_one_line(self) -> None:
+        svc = self._make_svc(
+            [
+                RpcMethod("RagStart", "RagStartRequest", "ondewo.nlu.Operation", False, False),
+            ]
+        )
+        content = _build_file_content(svc, self._RAG_TYPES)
+        assert "from ondewo.nlu.operations_pb2 import Operation\n" in content
+        assert "from ondewo.nlu.operations_pb2 import (" not in content
+
+    def test_empty_request_method_takes_no_parameters(self) -> None:
+        """An Empty-request RPC hides the protobuf artifact: no param, ``Empty()`` supplied internally.
+
+        Mirrors the shipped ``Agents.delete_all_agents`` wrapper.
+        """
+        svc = self._make_svc(
+            [
+                RpcMethod("DeleteAllAgents", "google.protobuf.Empty", "google.protobuf.Empty", False, False),
+            ],
+            proto_stem="agent",
+            name="Agents",
+        )
+        content = _build_file_content(svc, self._RAG_TYPES)
+        assert "    def delete_all_agents(self) -> Empty:" in content
+        assert "        response: Empty = self.stub.DeleteAllAgents(Empty(), metadata=self.metadata)" in content
+        assert "from google.protobuf.empty_pb2 import Empty" in content
+
+    def test_empty_request_with_client_streaming_keeps_request_parameter(self) -> None:
+        """The Empty-request shortcut is suppressed for client-streaming RPCs, which must keep their stream."""
+        svc = self._make_svc(
+            [
+                RpcMethod("RagUpload", "google.protobuf.Empty", "RagDocument", True, False),
+            ]
+        )
+        content = _build_file_content(svc, self._RAG_TYPES)
+        assert "def rag_upload(self, request: Iterator[Empty]) -> RagDocument:" in content
+        assert "self.stub.RagUpload(request, metadata=self.metadata)" in content
+
+
+# ---------------------------------------------------------------------------
+# _emit_method (line wrapping)
+# ---------------------------------------------------------------------------
+
+
+class TestEmitMethod:
+    """Wrapping branches that only trigger once a rendered line would exceed the line-length budget.
+
+    The short-line paths are covered through ``_build_file_content`` above; these
+    tests drive ``_emit_method`` directly so the name lengths can be controlled
+    precisely enough to isolate each branch.
+    """
+
+    def test_long_signature_is_wrapped_over_multiple_lines(self) -> None:
+        rpc_name = "GetAlternativeTrainingPhrasesForLargeIntentCollections"
+        request_type = f"{rpc_name}Request"
+        response_type = f"{rpc_name}Response"
+
+        out = _emit_method(
+            RpcMethod(rpc_name, request_type, response_type, False, False),
+            request_type,
+            response_type,
+        )
+
+        assert "    def get_alternative_training_phrases_for_large_intent_collections(" in out
+        assert "        self," in out
+        assert f"        request: {request_type}," in out
+        assert f"    ) -> {response_type}:" in out
+        assert all(len(line) <= _MAX_LINE_LENGTH for line in out)
+
+    def test_long_signature_with_empty_request_omits_request_parameter(self) -> None:
+        rpc_name = "ExportAllAgentsWithTrainingPhrasesAndEntities"
+        response_type = f"{rpc_name}Response"
+
+        out = _emit_method(
+            RpcMethod(rpc_name, "google.protobuf.Empty", response_type, False, False),
+            "Empty",
+            response_type,
+        )
+
+        assert "    def export_all_agents_with_training_phrases_and_entities(" in out
+        assert "        self," in out
+        assert f"    ) -> {response_type}:" in out
+        # The wrapped Empty-request form must not declare a request parameter.
+        assert not any(line.strip().startswith("request:") for line in out)
+        assert all(len(line) <= _MAX_LINE_LENGTH for line in out)
+
+    def test_long_body_with_empty_request_uses_backslash_continuation(self) -> None:
+        """A signature that fits but a body that does not: only the body is split.
+
+        ``ListAllProjectPermissions`` renders an 80-char signature and a 122-char
+        body, isolating the body-wrapping branch from the signature-wrapping one.
+        """
+        rpc_name = "ListAllProjectPermissions"
+        response_type = f"{rpc_name}Response"
+
+        out = _emit_method(
+            RpcMethod(rpc_name, "google.protobuf.Empty", response_type, False, False),
+            "Empty",
+            response_type,
+        )
+
+        assert f"    def list_all_project_permissions(self) -> {response_type}:" in out
+        assert f"        response: {response_type} = \\" in out
+        assert f"            self.stub.{rpc_name}(Empty(), metadata=self.metadata)" in out
+        assert "        return response" in out
+        assert all(len(line) <= _MAX_LINE_LENGTH for line in out)
+
+    def test_long_body_with_request_uses_backslash_continuation(self) -> None:
+        rpc_name = "BatchCreateTrainingPhrasesForLargeIntents"
+        request_type = f"{rpc_name}Request"
+        response_type = f"{rpc_name}Response"
+
+        out = _emit_method(
+            RpcMethod(rpc_name, request_type, response_type, False, False),
+            request_type,
+            response_type,
+        )
+
+        assert f"        response: {response_type} = \\" in out
+        assert f"            self.stub.{rpc_name}(request, metadata=self.metadata)" in out
+        assert all(len(line) <= _MAX_LINE_LENGTH for line in out)
+
 
 # ---------------------------------------------------------------------------
 # main (integration)
@@ -620,6 +773,52 @@ class TestMain:
         captured = capsys.readouterr()
         assert "WARNING" in captured.err
         assert "rags.py" in captured.err
+
+    def test_message_defined_in_two_protos_warns_and_last_wins(
+        self,
+        tmp_path: Path,
+        capsys: pytest.CaptureFixture,
+    ) -> None:
+        """A message name claimed by two protos warns, and the alphabetically later proto wins the registry.
+
+        The winner is observable in the generated file: because ``server_statistics.proto``
+        overrides ``common.proto``, ``StatResponse`` resolves as local to the
+        ``server_statistics`` stem rather than as an import from ``common_pb2``.
+        """
+        duplicated_message = "StatResponse"
+        proto_dir = tmp_path / "protos"
+        proto_dir.mkdir()
+        output_dir = tmp_path / "services"
+        self._write_proto(
+            proto_dir,
+            "common.proto",
+            f"""
+            syntax = "proto3";
+            message {duplicated_message} {{ int32 value = 1; }}
+        """,
+        )
+        self._write_proto(
+            proto_dir,
+            "server_statistics.proto",
+            f"""
+            syntax = "proto3";
+            message {duplicated_message} {{ int32 value = 1; }}
+            service ServerStatistics {{
+                rpc GetUserCount (google.protobuf.Empty) returns ({duplicated_message});
+            }}
+        """,
+        )
+
+        main(proto_dir, output_dir)
+
+        captured = capsys.readouterr()
+        assert f'WARNING: message "{duplicated_message}" defined in both common.proto and server_statistics.proto' in (
+            captured.err
+        )
+        assert "using server_statistics.proto" in captured.err
+        content = (output_dir / "server_statistics.py").read_text()
+        assert f"from ondewo.nlu.server_statistics_pb2 import (\n    {duplicated_message},\n)" in content
+        assert f"from ondewo.nlu.common_pb2 import {duplicated_message}" not in content
 
     def test_utility_pluralised_to_utilities(self, tmp_path: Path) -> None:
         proto_dir = tmp_path / "protos"

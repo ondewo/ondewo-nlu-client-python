@@ -11,7 +11,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-import json
+import sys
+from pathlib import Path
 from typing import Optional
 
 import polling
@@ -21,31 +22,23 @@ from ondewo.nlu.agent_pb2 import (
     ExportAgentResponse,
 )
 from ondewo.nlu.client import Client
-from ondewo.nlu.client_config import ClientConfig
-from ondewo.nlu.operations_pb2 import (
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from example_env import (  # noqa: E402
+    env,
+    get_client_config,
+    use_secure_channel,
+)
+from ondewo.nlu.operations_pb2 import (  # noqa: E402
     GetOperationRequest,
     Operation,
 )
 
 if __name__ == "__main__":
-    parent: str = "projects/some_agent_id/agent"
-    config_file: str = "envs/example.json"
+    # All settings come from examples/environment.env — see examples/example_env.py.
+    parent: str = env("ONDEWO_NLU_CAI_AGENT_PARENT")
 
-    with open(config_file) as f:
-        config_ = json.load(f)
-
-    config = ClientConfig(
-        host=config_["host"],
-        port=config_["port"],
-        user_name=config_["user_name"],
-        password=config_["password"],
-        keycloak_url=config_["keycloak_url"],
-        realm=config_["realm"],
-        client_id=config_.get("client_id", "ondewo-nlu-cai-sdk-public"),
-        grpc_cert=config_.get("grpc_cert", "").encode().decode().replace("\\n", "\n"),  # type: ignore
-    )
-
-    client: Client = Client(config=config, use_secure_channel=True)
+    client: Client = Client(config=get_client_config(), use_secure_channel=use_secure_channel())
     export_operation: Operation = client.services.agents.export_agent(ExportAgentRequest(parent=parent))
 
     polling.poll(
@@ -66,5 +59,5 @@ if __name__ == "__main__":
     else:
         assert False
 
-    with open("my_backup.zip", mode="wb") as zf:
+    with open(env("ONDEWO_NLU_CAI_AGENT_ZIP_PATH"), mode="wb") as zf:
         zf.write(export_response.agent_content)

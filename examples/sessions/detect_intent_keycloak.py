@@ -24,6 +24,8 @@ can be unit-tested with the gRPC client mocked (see
 `tests/unit/examples/test_detect_intent_keycloak.py`) — no live server required.
 """
 
+import sys
+from pathlib import Path
 from ondewo.nlu.client import Client
 from ondewo.nlu.client_config import ClientConfig
 from ondewo.nlu.session_pb2 import (
@@ -33,11 +35,18 @@ from ondewo.nlu.session_pb2 import (
     TextInput,
 )
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from example_env import (  # noqa: E402
+    env,
+    get_client_config,
+    use_secure_channel,
+)
+
 
 def build_detect_intent_request(
     session: str,
     text: str,
-    language_code: str = "en",
+    language_code: str = "en-US",
 ) -> DetectIntentRequest:
     """
     Build a `DetectIntentRequest` for a single text turn in a session.
@@ -49,7 +58,8 @@ def build_detect_intent_request(
         text (str):
             The user utterance to send to the NLU server.
         language_code (str):
-            The language of the utterance, e.g. `en`.
+            The language of the utterance, e.g. `en-US`. Must be a full code from the
+            `LanguageCode` enum — a bare `en` is rejected.
 
     Returns:
         DetectIntentRequest:
@@ -67,7 +77,7 @@ def detect_intent(
     client: Client,
     session: str,
     text: str,
-    language_code: str = "en",
+    language_code: str = "en-US",
 ) -> DetectIntentResponse:
     """
     Send a single text turn to the NLU server and return the response.
@@ -112,23 +122,19 @@ def format_response(response: DetectIntentResponse) -> str:
 
 if __name__ == "__main__":
     # Auth (D18): Keycloak headless offline-token flow — bearer token attached automatically.
-    config: ClientConfig = ClientConfig(
-        host="localhost",
-        port="50055",
-        user_name="<technical-user-email>",
-        password="<technical-user-password>",
-        keycloak_url="https://<host>/auth",
-        realm="ondewo-ccai-platform",
-        client_id="ondewo-nlu-cai-sdk-public",
-    )
-    client: Client = Client(config=config, use_secure_channel=True)
+    # NOTE: a technical user logs in with its *username* (as returned by
+    # `CreateProjectTechnicalUser`), never with the synthetic `tech-<hash>@…` e-mail the server
+    # derives for it. That e-mail exists only to satisfy Keycloak's unique-email requirement.
+    config: ClientConfig = get_client_config()
+    client: Client = Client(config=config, use_secure_channel=use_secure_channel())
 
-    parent: str = "projects/<project-uuid>/agent"
-    session_id: str = f"{parent}/sessions/<session-uuid>"
+    parent: str = env("ONDEWO_NLU_CAI_AGENT_PARENT")
+    session_id: str = f"{parent}/sessions/{env('ONDEWO_NLU_CAI_SESSION_ID')}"
 
     response: DetectIntentResponse = detect_intent(
         client=client,
         session=session_id,
-        text="Hello",
+        text=env("ONDEWO_NLU_CAI_TEXT"),
+        language_code=env("ONDEWO_NLU_CAI_LANGUAGE_CODE"),
     )
     print(format_response(response))

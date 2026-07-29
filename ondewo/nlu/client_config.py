@@ -14,11 +14,9 @@
 from dataclasses import dataclass
 from typing import Optional
 
-from dataclasses_json import dataclass_json
 from ondewo.utils.base_client_config import BaseClientConfig
 
 
-@dataclass_json
 @dataclass(frozen=True)
 class ClientConfig(BaseClientConfig):
     """

@@ -21,6 +21,8 @@
 #       ondewo-nlu-api/ondewo/nlu ondewo/nlu/services
 # ---------------------------------------------------------------------------
 
+from typing import AsyncIterator
+
 from google.protobuf.empty_pb2 import Empty
 
 from ondewo.nlu.user_pb2 import (
@@ -41,8 +43,6 @@ from ondewo.nlu.user_pb2 import (
     ListUserInfosResponse,
     ListUsersRequest,
     ListUsersResponse,
-    LoginRequest,
-    LoginResponse,
     ServerRole,
     SetUserPreferencesRequest,
     SetUserPreferencesResponse,
@@ -54,10 +54,17 @@ from ondewo.nlu.user_pb2 import (
 from ondewo.nlu.user_pb2_grpc import UsersStub
 from ondewo.nlu.core.async_services_interface import AsyncServicesInterface
 from ondewo.nlu.common_pb2 import (
+    AddNotificationsRequest,
+    AddNotificationsResponse,
+    DeleteNotificationsRequest,
+    GetNotificationRequest,
     ListNotificationsRequest,
     ListNotificationsResponse,
+    Notification,
     SetNotificationsFlaggedStatusRequest,
     SetNotificationsReadStatusRequest,
+    StreamNotificationsRequest,
+    UpdateNotificationRequest,
 )
 
 
@@ -125,10 +132,6 @@ class Users(AsyncServicesInterface):
         response: ListServerPermissionsResponse = await self.stub.ListServerPermissions(request, metadata=self.metadata)
         return response
 
-    async def login(self, request: LoginRequest) -> LoginResponse:
-        response: LoginResponse = await self.stub.Login(request, metadata=self.metadata)
-        return response
-
     async def check_login(self) -> Empty:
         response: Empty = await self.stub.CheckLogin(Empty(), metadata=self.metadata)
         return response
@@ -152,6 +155,26 @@ class Users(AsyncServicesInterface):
         response: ListNotificationsResponse = await self.stub.SetNotificationsReadStatus(
             request, metadata=self.metadata
         )
+        return response
+
+    async def add_notifications(self, request: AddNotificationsRequest) -> AddNotificationsResponse:
+        response: AddNotificationsResponse = await self.stub.AddNotifications(request, metadata=self.metadata)
+        return response
+
+    async def get_notification(self, request: GetNotificationRequest) -> Notification:
+        response: Notification = await self.stub.GetNotification(request, metadata=self.metadata)
+        return response
+
+    async def update_notification(self, request: UpdateNotificationRequest) -> Notification:
+        response: Notification = await self.stub.UpdateNotification(request, metadata=self.metadata)
+        return response
+
+    async def delete_notifications(self, request: DeleteNotificationsRequest) -> Empty:
+        response: Empty = await self.stub.DeleteNotifications(request, metadata=self.metadata)
+        return response
+
+    async def stream_notifications(self, request: StreamNotificationsRequest) -> AsyncIterator[Notification]:
+        response: AsyncIterator[Notification] = self.stub.StreamNotifications(request, metadata=self.metadata)
         return response
 
     async def get_user_preferences(self, request: GetUserPreferencesRequest) -> GetUserPreferencesResponse:

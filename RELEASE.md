@@ -2,6 +2,39 @@
 
 *****************
 
+## Release ONDEWO NLU Python Client 7.0.0
+
+### Breaking Changes
+
+* Tracking API Version [7.0.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/7.0.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+* [[OND211-2418]](https://ondewo.atlassian.net/browse/OND211-2418) The `Login` RPC is removed from the API, and with it `Users.login()`, the async `Users.login()`, and the `LoginRequest` / `LoginResponse` messages. Authentication is Keycloak-only. The client already mints and refreshes a Keycloak access token by itself — construct it with `keycloak_url`, `realm`, `client_id`, `user_name` and `password` in the `ClientConfig` and every call carries `Authorization: Bearer <token>`. The identity must be exempt from 2FA (create one with `CreateProjectTechnicalUser` and pass its `username`), because the token comes from a non-interactive password grant.
+* [[OND211-2418]](https://ondewo.atlassian.net/browse/OND211-2418) `SharedRequestData` no longer maps `LoginRequest`; `fill_missing_fields` raises `NotImplementedError` for it, as it does for any unmapped request type.
+* `Users.check_login()` is **not** affected and remains the way to probe whether a token is still valid.
+
+*****************
+
+## Release ONDEWO NLU Python Client 6.14.1
+
+### Improvements
+
+* Tracking API Version [6.14.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/6.14.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+* Examples: every example now reads its settings from a single `examples/environment.env` (loaded by `examples/example_env.py`) instead of a config file that was never present in the repo. Real environment variables override it, so CI and containers need no edit.
+* Examples: new `examples/agents/create_agent_with_ssl.py` showing a TLS gRPC channel whose CA certificate is taken from `ONDEWO_NLU_CAI_GRPC_CERT_BASE64` rather than read from a file — the shape a container, CI secret or Kubernetes Secret actually injects.
+* Examples: `ONDEWO_NLU_CAI_SECURE` selects a secure or insecure channel. TLS requires both the flag and a CA certificate; without the certificate the examples fall back to an insecure channel and say so, because a secure channel with no `grpc_cert` cannot be constructed.
+
+### Bug fixes
+
+* `ondewo.qa.services.async_qa` raised `ModuleNotFoundError` on import — `ondewo.qa.core.async_services_interface` never existed. The module has been unimportable since it was added and shipped that way. Added the missing interface; also removed the mypy override that was silencing the error.
+* `SharedRequestData.session_review_id` returned `projects/<p>/agent/sessions/<s>/reviews/None` instead of `None`: it guarded on `session_uuid` but interpolated `session_review_uuid`. The truthy result passed `fill_missing_fields`' emptiness check and would reach the server as a real resource name.
+* `SharedRequestData` sent Context requests to a `parent` field that `context.proto` renamed to `session_id`, so `CreateContextRequest`, `ListContextsRequest` and `DeleteAllContextsRequest` raised `AttributeError`. `DeleteAllContextsRequest` additionally mapped to the project name where the proto has always documented a session name.
+* `ClientPool.release_client` waited forever instead of closing a surplus client when the pool was full (blocking `put`), and `ClientPool.__init__` deadlocked outright for a `max_size_ratio` below 1. The client-creation counter was also mutated without a lock, so concurrent overflow acquires could exceed `n_clients_created_limit`.
+
+### Breaking Changes
+
+* `ondewo.nlu.utils.login` and `ondewo.nlu.utils.async_login` are removed, along with the `nlu_token` argument of `ServicesInterface` / `AsyncServicesInterface`. Both were inert: `login()` returned an empty string and the token it produced was never sent. Authentication is Keycloak bearer only — pass `keycloak_url`, `realm`, `client_id`, `user_name` and `password` to `ClientConfig` and the SDK mints and refreshes the token itself.
+
+*****************
+
 ## Release ONDEWO NLU Python Client 6.14.0
 
 ### Improvements
@@ -13,70 +46,80 @@
 ## Release ONDEWO NLU Python Client 6.13.0
 
 ### Improvements
- * Tracking API Version [6.13.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/6.13.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+
+* Tracking API Version [6.13.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/6.13.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 
 *****************
 
 ## Release ONDEWO NLU Python Client 6.12.0
 
 ### Improvements
- * Tracking API Version [6.12.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/6.12.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+
+* Tracking API Version [6.12.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/6.12.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 
 *****************
 
 ## Release ONDEWO NLU Python Client 6.11.0
 
 ### Improvements
- * Tracking API Version [6.11.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/6.11.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+
+* Tracking API Version [6.11.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/6.11.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 
 *****************
 
 ## Release ONDEWO NLU Python Client 6.10.0
 
 ### Improvements
- * Tracking API Version [6.10.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/6.10.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+
+* Tracking API Version [6.10.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/6.10.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 
 *****************
 
 ## Release ONDEWO NLU Python Client 6.9.0
 
 ### Improvements
- * Tracking API Version [6.9.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/6.9.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+
+* Tracking API Version [6.9.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/6.9.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 
 *****************
 
 ## Release ONDEWO NLU Python Client 6.8.0
 
 ### Improvements
- * Tracking API Version [6.8.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/6.8.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+
+* Tracking API Version [6.8.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/6.8.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 
 *****************
 
 ## Release ONDEWO NLU Python Client 6.7.0
 
 ### Improvements
- * Tracking API Version [6.7.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/6.7.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+
+* Tracking API Version [6.7.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/6.7.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 
 *****************
 
 ## Release ONDEWO NLU Python Client 6.6.0
 
 ### Improvements
- * Tracking API Version [6.6.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/6.6.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+
+* Tracking API Version [6.6.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/6.6.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 
 *****************
 
 ## Release ONDEWO NLU Python Client 6.5.0
 
 ### Improvements
- * Tracking API Version [6.5.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/6.5.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+
+* Tracking API Version [6.5.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/6.5.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 
 *****************
 
 ## Release ONDEWO NLU Python Client 6.4.0
 
 ### Improvements
- * Tracking API Version [6.4.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/6.4.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+
+* Tracking API Version [6.4.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/6.4.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 
 *****************
 

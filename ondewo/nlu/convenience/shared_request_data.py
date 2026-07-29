@@ -55,7 +55,6 @@ from ondewo.nlu.session_pb2 import (
     ListSessionReviewsRequest,
     ListSessionsRequest,
 )
-from ondewo.nlu.user_pb2 import LoginRequest
 
 T = TypeVar("T", bound=Message)
 
@@ -95,7 +94,7 @@ class SharedRequestData(object):
 
     @property
     def session_review_id(self) -> Optional[str]:
-        if not self.project_parent or not self.session_uuid:
+        if not self.project_parent or not self.session_uuid or not self.session_review_uuid:
             return None
         return f"{self.project_parent}/sessions/{self.session_uuid}/reviews/{self.session_review_uuid}"
 
@@ -172,18 +171,17 @@ class SharedRequestData(object):
             GetLatestSessionReviewRequest: {"session_id": "session_id"},
             CreateSessionReviewRequest: {"session_id": "session_id"},
             CreateContextRequest: {
-                "parent": "session_id",
+                "session_id": "session_id",
             },
             ListContextsRequest: {
-                "parent": "session_id",
+                "session_id": "session_id",
             },
             GetContextRequest: {},
             UpdateContextRequest: {},
             DeleteContextRequest: {},
             DeleteAllContextsRequest: {
-                "parent": "project_parent",
+                "session_id": "session_id",
             },
-            LoginRequest: {},
             GetIntentRequest: {
                 "name": "intent_id",
                 "language_code": "language_code",

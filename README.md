@@ -52,11 +52,14 @@ make setup_developer_environment_locally
 │   │   │   ├── __init__.py
 │   │   │   └── shared_request_data.py
 │   │   ├── core
+│   │   │   ├── async_services_container.py
+│   │   │   ├── async_services_interface.py
 │   │   │   ├── __init__.py
 │   │   │   ├── services_container.py
 │   │   │   └── services_interface.py
 │   │   ├── scripts
 │   │   │   ├── client_example_script.py
+│   │   │   ├── generate_services.py
 │   │   │   └── __init__.py
 │   │   ├── services
 │   │   │   ├── agents.py
@@ -68,7 +71,7 @@ make setup_developer_environment_locally
 │   │   │   ├── ...
 │   │   ├── utils
 │   │   │   ├── __init__.py
-│   │   │   └── login.py
+│   │   │   └── keycloak.py
 │   │   ├── agent_pb2_grpc.py
 │   │   ├── agent_pb2.py
 │   │   ├── agent_pb2.pyi
@@ -76,6 +79,13 @@ make setup_developer_environment_locally
 │   │   ├── aiservices_pb2.py
 │   │   ├── aiservices_pb2.pyi
 │   │   ├── ...
+│   │   ├── async_client.py
+│   │   ├── client_config.py
+│   │   ├── client_pool.py
+│   │   ├── client.py
+│   │   ├── __init__.py
+│   │   ├── py.typed
+│   │   └── README.md
 │   ├── qa
 │   │   ├── core
 │   │   │   ├── __init__.py
@@ -94,19 +104,19 @@ make setup_developer_environment_locally
 │   └── __init__.py
 ├── ondewo-nlu-api                         <----- @ https://github.com/ondewo/ondewo-nlu-api
 ├── ondewo-proto-compiler                  <----- @ https://github.com/ondewo/ondewo-proto-compiler
+├── tests
+│   └── unit                               <----- Hermetic tests, no network
+├── CLAUDE.md
 ├── CONTRIBUTING.md
 ├── Dockerfile
 ├── Dockerfile.utils
 ├── LICENSE
 ├── Makefile
 ├── MANIFEST.in
-├── mypy.ini
+├── pyproject.toml                         <----- Packaging, ruff, mypy and coverage config
 ├── README.md
 ├── RELEASE.md
-├── requirements-dev.txt
-├── requirements.txt
-├── setup.cfg
-└── setup.py
+└── uv.lock
 ```
 
 ## Build
@@ -176,12 +186,27 @@ The `/examples` folder provides a possible implementation of this library. To ru
 
 - host `// The hostname of the Server - e.g. 127.0.0.1`
 - port `// Port of the Server - e.g. 6600`
-- user_name `// Username - same as you would use in AIM`
+- user_name `// Username of a 2FA-exempt identity - see the note below`
 - password `// Password of the user`
 - keycloak_url `// Base URL of the Keycloak server, e.g. https://<host>/auth`
 - realm `// Keycloak realm, e.g. ondewo-ccai-platform`
 - client_id `// Public Keycloak SDK client id, e.g. ondewo-nlu-cai-sdk-public`
 - grpc_cert `// gRPC Certificate of the server`
+
+> **`user_name` cannot be your own AIM login.** The client authenticates headlessly through the
+> Keycloak Resource-Owner-Password-Credentials (ROPC) grant, which has no way to carry out an
+> interactive second factor. Under the 2FA-for-all-users policy a human account is therefore
+> rejected by Keycloak before the client ever reaches the server:
+>
+> ```text
+> 400 {"error":"invalid_grant","error_description":"Account is not fully set up"}
+> ```
+>
+> Use a **2FA-exempt** identity instead — either a **project technical user** (created via
+> `CreateProjectTechnicalUser`, which returns a `username` plus a one-time password; pass that
+> `username` verbatim, it is not an e-mail address), or the **root admin**. See
+> [`examples/agents/create_and_use_project_technical_user.py`](examples/agents/create_and_use_project_technical_user.py)
+> for the full flow.
 
 ## Automatic Release Process
 
