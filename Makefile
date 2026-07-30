@@ -58,7 +58,11 @@ install_precommit_hooks: ## Installs pre-commit hooks and sets them up for the o
 	uv run pre-commit install --hook-type commit-msg
 
 precommit_hooks_run_all_files: ## Runs all pre-commit hooks on all files and not just the changed ones
-	uv run pre-commit run --all-files
+# --extra dev is required: the mypy hook is `language: system` (deliberately, so it can see the types-*
+# packages), so pre-commit resolves `mypy` from PATH. A bare `uv run` syncs only the default dependency
+# group, leaving .venv without mypy, and the hook dies with "Executable `mypy` not found" — which fails
+# `generate_services` and aborts the release.
+	uv run --extra dev pre-commit run --all-files
 
 install_dependencies_locally: ## Install runtime + dev dependencies locally into the uv-managed .venv
 	uv sync --extra dev
