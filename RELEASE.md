@@ -2,6 +2,15 @@
 
 *****************
 
+## Release ONDEWO NLU Python Client 7.0.1
+
+### Bug fixes
+
+* Tracking API Version [7.0.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/7.0.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+* [[OND211-2418]](https://ondewo.atlassian.net/browse/OND211-2418) A keycloak-authenticated client printed an `Exception ignored while calling deallocator ... PythonFinalizationError: can't join thread at interpreter shutdown` traceback on stderr whenever it was garbage-collected at interpreter exit on Python 3.13+. `KeycloakTokenProvider.__del__` calls `stop()`, which joined the background token-refresh thread unconditionally, and CPython >= 3.13 refuses that join once finalization has begun. Every short-lived process using keycloak auth ended with the traceback, and in a `pytest` run it appeared per test, where it can mask real errors. `stop()` now skips the join once `sys.is_finalizing()` is true and swallows a `RuntimeError` from the join to cover the race between the guard and the call (`PythonFinalizationError` subclasses `RuntimeError`, so the handling also works on older interpreters). The refresh thread is a daemon and is reaped by the interpreter anyway, so nothing is leaked. Behaviour on the explicit `stop()` / `close()` / `__exit__` path is unchanged: it still joins the refresh thread deterministically with the same bounded timeout, the self-join guard is untouched, and `stop()` stays idempotent.
+
+*****************
+
 ## Release ONDEWO NLU Python Client 7.0.0
 
 ### Breaking Changes
