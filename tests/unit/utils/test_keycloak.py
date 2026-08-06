@@ -20,7 +20,11 @@ and a controllable stop event — no real sleeps, so the suite stays fast and no
 """
 
 import gc
+import os
+import subprocess
+import sys
 import threading
+from pathlib import Path
 from typing import (
     Any,
     Dict,
@@ -1398,3 +1402,181 @@ class TestBackgroundRefresh:
         provider.stop()
         assert joined == [True]
         assert not refresh_thread.is_alive()
+
+
+# Child-process program for `test_process_exit_emits_no_finalization_traceback` below. It builds a
+# provider whose background thread is running, keeps it in a module global, and never stops it — so
+# `__del__` (and therefore `stop()`) runs during interpreter finalization, the one state in which
+# CPython >= 3.13 refuses `Thread.join`. A fake transport keeps the probe off the network.
+_SHUTDOWN_PROBE_SCRIPT: str = '''
+from typing import Any, Dict
+
+from ondewo.nlu.utils.keycloak import KeycloakTokenProvider
+
+
+class ProbeResponse:
+    """Canned 200 token response (same shape as the in-process FakeResponse)."""
+
+    status_code: int = 200
+
+    def json(self) -> Dict[str, Any]:
+        return {"access_token": "acc-1", "refresh_token": "off-1", "expires_in": 300}
+
+    @property
+    def text(self) -> str:
+        return ""
+
+
+class ProbeTransport:
+    """Fake token endpoint so the probe never performs I/O."""
+
+    def post(self, url: str, data: Dict[str, str], timeout: float) -> ProbeResponse:
+        return ProbeResponse()
+
+
+# Module-global on purpose: the provider must still be alive when finalization starts.
+PROVIDER = KeycloakTokenProvider(
+    keycloak_url="https://kc.example.com/auth",
+    realm="ondewo-ccai-platform",
+    client_id="ondewo-nlu-cai-sdk-public",
+    username="tech-user@example.com",
+    password="s3cr3t",
+    transport=ProbeTransport(),
+)
+print("PROBE-OK", PROVIDER.access_token)
+'''
+
+
+class TestInterpreterShutdownTeardown:
+    """`stop()` must stay silent when it runs during interpreter finalization (`__del__` path)."""
+
+    def test_stop_swallows_runtime_error_from_join(self) -> None:
+        """A `RuntimeError` out of `Thread.join` is swallowed; the stop event is still set.
+
+        CPython >= 3.13 raises `PythonFinalizationError` — a `RuntimeError` subclass — from
+        `Thread.join` at interpreter shutdown. `stop()` must absorb it, because on the `__del__`
+        path the exception cannot propagate anywhere and is merely printed.
+        """
+        clock: Dict[str, float] = {"now": 1000.0}
+        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body("acc-1", "off-1", 300))])
+        provider: KeycloakTokenProvider = KeycloakTokenProvider(
+            keycloak_url=KEYCLOAK_URL,
+            realm=REALM,
+            client_id=CLIENT_ID,
+            username=USERNAME,
+            password=PASSWORD,
+            transport=transport,
+            time_fn=lambda: clock["now"],
+            start_background_refresh=True,
+        )
+        thread: Optional[threading.Thread] = provider._refresh_thread
+        assert thread is not None
+        original_join = thread.join
+        attempts: List[bool] = []
+
+        def _raising_join(timeout: Optional[float] = None) -> None:
+            """Stand in for a join refused by a finalizing interpreter.
+
+            Args:
+                timeout (Optional[float]):
+                    The join timeout `stop()` passes; unused, the call always raises.
+
+            Raises:
+                RuntimeError:
+                    Always — mirroring `PythonFinalizationError` from `Thread.join`.
+            """
+            attempts.append(True)
+            raise RuntimeError("cannot join thread at interpreter shutdown")
+
+        thread.join = _raising_join  # type: ignore[method-assign]
+
+        provider.stop()  # must not raise
+
+        assert attempts == [True]
+        assert provider._stop_event.is_set()
+
+        # Restore the real join so the daemon thread is actually reaped before the test ends.
+        thread.join = original_join  # type: ignore[method-assign]
+        provider.stop()
+        assert not thread.is_alive()
+
+    def test_stop_skips_join_once_finalization_started(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        """With `sys.is_finalizing()` true, `stop()` sets the event and skips the join entirely.
+
+        Args:
+            monkeypatch (pytest.MonkeyPatch):
+                Fixture used to patch `sys.is_finalizing` for the guard.
+        """
+        clock: Dict[str, float] = {"now": 1000.0}
+        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body("acc-1", "off-1", 300))])
+        provider: KeycloakTokenProvider = KeycloakTokenProvider(
+            keycloak_url=KEYCLOAK_URL,
+            realm=REALM,
+            client_id=CLIENT_ID,
+            username=USERNAME,
+            password=PASSWORD,
+            transport=transport,
+            time_fn=lambda: clock["now"],
+            start_background_refresh=True,
+        )
+        thread: Optional[threading.Thread] = provider._refresh_thread
+        assert thread is not None
+
+        joined: List[bool] = []
+        original_join = thread.join
+
+        def _tracking_join(timeout: Optional[float] = None) -> None:
+            """Record a join attempt, then delegate to the real `Thread.join`.
+
+            Args:
+                timeout (Optional[float]):
+                    The join timeout forwarded to the real `Thread.join`.
+            """
+            joined.append(True)
+            original_join(timeout=timeout)
+
+        thread.join = _tracking_join  # type: ignore[method-assign]
+
+        monkeypatch.setattr(keycloak_module.sys, "is_finalizing", lambda: True)
+        provider.stop()
+        assert joined == []
+        assert provider._stop_event.is_set()
+
+        # Restore the real is_finalizing so a normal stop joins and tears the thread down.
+        monkeypatch.undo()
+        provider.stop()
+        assert joined == [True]
+        assert not thread.is_alive()
+
+    def test_process_exit_emits_no_finalization_traceback(self, tmp_path: Path) -> None:
+        """A short-lived process that builds a provider and exits must print nothing on stderr.
+
+        True interpreter finalization cannot be staged in-process, so the probe runs as a child:
+        it constructs a provider, never calls `stop()`, and lets shutdown invoke `__del__`. Before
+        the fix this printed `Exception ignored while calling deallocator ...
+        PythonFinalizationError` on CPython >= 3.13. The child's exit status is 0 either way (the
+        interpreter only *prints* exceptions raised in a deallocator), so stderr is the assertion.
+
+        Args:
+            tmp_path (Path):
+                Fixture directory the probe script is written to and executed from.
+        """
+        script: Path = tmp_path / "keycloak_shutdown_probe.py"
+        script.write_text(_SHUTDOWN_PROBE_SCRIPT, encoding="utf-8")
+        # Hand the child the parent's import path so it loads the very `ondewo` package under test.
+        env: Dict[str, str] = dict(os.environ)
+        env["PYTHONPATH"] = os.pathsep.join(entry for entry in sys.path if entry)
+
+        result: "subprocess.CompletedProcess[str]" = subprocess.run(
+            [sys.executable, str(script)],
+            cwd=str(tmp_path),
+            env=env,
+            capture_output=True,
+            text=True,
+            timeout=60,
+        )
+
+        assert result.returncode == 0, result.stderr
+        assert "PROBE-OK acc-1" in result.stdout
+        assert "PythonFinalizationError" not in result.stderr
+        assert "Exception ignored" not in result.stderr

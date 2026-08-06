@@ -33,6 +33,7 @@ No 2FA is involved: the account is a 2FA-exempt technical user and ROPC bypasses
 browser flow (D14). The client is public, so no ``client_secret`` is sent.
 """
 
+import sys
 import threading
 import time
 import weakref
@@ -382,13 +383,26 @@ class KeycloakTokenProvider:
         Signals the stop event (interrupting any in-flight :meth:`threading.Event.wait`) and
         joins the background thread with a bounded timeout so teardown — including the
         :meth:`__del__` path — never blocks indefinitely on a stuck refresh.
+
+        Once interpreter finalization has begun the join is skipped: CPython >= 3.13 refuses it
+        outright (:exc:`PythonFinalizationError`, a :exc:`RuntimeError` subclass), which on the
+        :meth:`__del__` path surfaced as an "Exception ignored while calling deallocator"
+        traceback on every process exit. The refresh thread is a daemon and is reaped by the
+        interpreter regardless, so skipping the join costs nothing at shutdown.
         """
         self._stop_event.set()
         thread: Optional[threading.Thread] = self._refresh_thread
         # Never join from within the refresh thread itself (would deadlock); only an external
-        # caller joins. A daemon thread that outlives this join is reaped at interpreter exit.
-        if thread is not None and thread is not threading.current_thread():
-            thread.join(timeout=_THREAD_JOIN_TIMEOUT_S)
+        # caller joins. A daemon thread that outlives this join is reaped at interpreter exit,
+        # which is also why the join is skipped entirely once finalization is under way.
+        if thread is not None and thread is not threading.current_thread() and not sys.is_finalizing():
+            try:
+                thread.join(timeout=_THREAD_JOIN_TIMEOUT_S)
+            except RuntimeError:
+                # Finalization can start between the guard above and the join. Catching
+                # RuntimeError (the portable base of 3.13+'s PythonFinalizationError) keeps
+                # that race from escaping into __del__, where it would only be printed.
+                pass
 
     # An alias so callers used to ``close()`` get the same deterministic teardown.
     close = stop
