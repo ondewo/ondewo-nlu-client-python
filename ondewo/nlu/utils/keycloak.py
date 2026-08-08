@@ -33,6 +33,7 @@ No 2FA is involved: the account is a 2FA-exempt technical user and ROPC bypasses
 browser flow (D14). The client is public, so no ``client_secret`` is sent.
 """
 
+import hashlib
 import sys
 import threading
 import time
@@ -539,20 +540,58 @@ class KeycloakTokenProvider:
         self._access_token_expires_at = self._time_fn() + expires_in
 
 
-# One shared provider per ClientConfig so the ROPC offline-token login happens once for all
-# of a client's service stubs (they all read the same auto-refreshed access token). The weak
-# reference lets the provider be collected once the config is gone.
-_PROVIDER_REGISTRY: "WeakValueDictionary[int, KeycloakTokenProvider]" = WeakValueDictionary()
+# One shared provider per set of Keycloak credentials so the ROPC offline-token login happens
+# once for all of a client's service stubs (they all read the same auto-refreshed access token).
+# The weak reference lets the provider be collected once the last stub holding it is gone.
+#
+# The key MUST be derived from the credentials, never from `id(config)`. `BaseServicesInterface`
+# keeps only the grpc channel, so the `ClientConfig` in the usual `Client(config=ClientConfig(...))`
+# call is unreachable the moment the client is built; CPython then reuses its address for the next
+# `ClientConfig`, and a registry keyed by that stale int handed the new client the PREVIOUS user's
+# still-alive provider. The second client then silently authenticated as the first user — including
+# with credentials that do not exist at all.
+_PROVIDER_REGISTRY: "WeakValueDictionary[str, KeycloakTokenProvider]" = WeakValueDictionary()
 _PROVIDER_REGISTRY_LOCK: threading.Lock = threading.Lock()
+
+
+def _provider_registry_key(config: ClientConfig) -> str:
+    """
+    Derive the registry key identifying the Keycloak identity a config authenticates as.
+
+    Every field the provider is constructed from takes part, so two configs share a provider
+    exactly when a shared provider would behave identically for both. The fields are hashed
+    rather than stored verbatim because one of them is the password: a plain tuple key would put
+    the secret in a module-level dict and in the locals of this frame, where any traceback
+    renderer that shows locals would print it.
+
+    Args:
+        config (ClientConfig):
+            A config with the Keycloak headless-auth fields set (`config.use_keycloak`).
+
+    Returns:
+        str:
+            A hex digest identifying the credential set.
+    """
+    fields: List[str] = [
+        config.keycloak_url,
+        config.realm,
+        config.client_id,
+        config.user_name,
+        config.password,
+        "" if config.token_expiration_in_s is None else str(config.token_expiration_in_s),
+        str(config.keycloak_verify_ssl),
+    ]
+    # "\0" cannot occur in any of the fields, so the join is unambiguous.
+    return hashlib.sha256("\0".join(fields).encode("utf-8")).hexdigest()
 
 
 def get_keycloak_token_provider(config: ClientConfig) -> KeycloakTokenProvider:
     """
     Return the shared :class:`KeycloakTokenProvider` for a client config, creating it once.
 
-    All service stubs built from the same `ClientConfig` share a single provider, so the
-    one-time ROPC offline-token login runs once and every stub reads the same auto-refreshed
-    access token.
+    All service stubs built from the same credentials share a single provider, so the one-time
+    ROPC offline-token login runs once and every stub reads the same auto-refreshed access token.
+    Configs carrying *different* credentials never share a provider.
 
     Args:
         config (ClientConfig):
@@ -560,9 +599,9 @@ def get_keycloak_token_provider(config: ClientConfig) -> KeycloakTokenProvider:
 
     Returns:
         KeycloakTokenProvider:
-            The provider bound to this config (created on first call).
+            The provider bound to this config's credentials (created on first call).
     """
-    key: int = id(config)
+    key: str = _provider_registry_key(config)
     with _PROVIDER_REGISTRY_LOCK:
         provider: Optional[KeycloakTokenProvider] = _PROVIDER_REGISTRY.get(key)
         if provider is None:

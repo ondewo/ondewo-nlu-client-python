@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ondewo-nlu-client"
-version = "7.0.1"
+version = "7.0.2"
 description = "ONDEWO Natural Language Understanding (NLU) Client library for Python"
 readme = "README.md"
 requires-python = ">=3.9"
