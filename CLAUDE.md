@@ -235,3 +235,63 @@ The repo is now fully on **uv** (not just pyproject.toml):
 If a branch is not building — it was not discovered, or its job is marked `buildable: false` / orphaned —
 **report it and stop**. Let the user or a Jenkins admin adjust branch-discovery/config or rename the branch
 to the convention. Never force a build by scanning or reindexing.
+
+## `ClientConfig` must not print its secrets
+
+`@dataclass` generates a `__repr__` that prints **every** field, so `log.debug(f"…{config}")` — or any
+traceback carrying locals — wrote the ROPC `password` and the PEM `grpc_cert` to the log in clear text.
+Downstream consumers really do log config objects: a repository-wide sweep in ondewo-vtsi found this class
+among the leakers, alongside thirteen of its own dataclasses. All five ONDEWO Python clients had the same
+defect and all five now carry the same fix.
+
+`ondewo/nlu/client_config.py` names the secrets once and renders around them:
+
+```python
+SECRET_FIELD_NAMES: ClassVar[FrozenSet[str]] = frozenset({"password", "grpc_cert"})
+```
+
+Four properties are load-bearing:
+
+- **An empty secret renders as `''`, never as `***REDACTED***`.** The marker reads as "this is set and
+  sensitive", which is actively misleading when the real fault is that nobody set it — usually the very
+  thing being debugged. The `__repr__` therefore redacts only a _truthy_ value.
+- **A new secret field must join `SECRET_FIELD_NAMES` in the same commit.** That frozenset is the entire
+  policy; nothing infers sensitivity from a field name.
+- **Redaction covers `repr()` / `str()` only.** Measured on the real class: `to_json()`, `to_dict()` and
+  `dataclasses.asdict()` still return the plaintext password. `to_json()` exists here even though
+  `ef8c751` dropped this class's own `@dataclass_json` — `BaseClientConfig` still carries it. That is
+  deliberate, because serialization has to round-trip through `from_json`; so never log a serialized
+  config, and do not "fix" it by redacting there.
+- **The guard is behavioural.** `tests/unit/test_client_config_redacts_secrets.py` builds a `ClientConfig`
+  with distinctive planted values and reads its `repr`. It does not grep for `__repr__`, because a grep
+  passes just as well for a `__repr__` that prints the secret anyway. It also asserts each secret is really
+  **on the object** (`config.password == PASSWORD`) before asserting it is absent from the repr — reading
+  only the repr would pass vacuously against unfixed code. The certificate is compared against
+  `GRPC_CERT.encode()`, since `BaseClientConfig.__post_init__` encodes it to `bytes`; comparing to the
+  `str` would fail while the redaction it guards worked perfectly.
+
+Run it with `uv run pytest tests/unit/test_client_config_redacts_secrets.py -q` — 5 tests.
+
+**`ondewo/qa/client_config.py` is NOT covered.** It is an empty `BaseClientConfig` subclass with no
+`__repr__` of its own, so it still prints the inherited certificate verbatim — measured:
+`ClientConfig(host='h', port='1', grpc_cert=b'PLANTED-CERT-abc')`. It has no password field, so the PEM is
+the whole exposure — but that is a live one, not a hypothetical. Give it the same `SECRET_FIELD_NAMES` +
+`__repr__`, and certainly before it ever grows a credential field.
+
+**The fix is unreleased.** `git tag --contains HEAD` is empty here (newest tag `7.0.2`), and ondewo-vtsi
+pins `ondewo-nlu-client==7.0.2` by exact version, so the redaction cannot reach it until this package cuts
+a release.
+
+## The commit-msg hook order is already correct here — keep it
+
+`.pre-commit-config.yaml` lists `conventional-pre-commit` **before** `giticket`, fixed on this branch by
+`517dd96` (2026-07-15) — a month ahead of the same fix in the sip, csi and vtsi clients, which were still
+wrong until 2026-08-14 and are the reason this is worth writing down. pre-commit runs hooks in
+file order, and `giticket` rewrites the subject to `[OND211-2418] <subject>`, which is not a valid
+Conventional Commit. With `giticket` first the validator is handed the prefix the other hook just added and
+rejects it, so **no conforming commit message exists at all** — one hook failing on the other hook's output.
+The only escapes were `--no-verify` (which also skips ruff, ruff-format, mypy and uv-lock) or renaming the
+branch away from its ticket.
+
+Both hooks carry a comment saying so. If either block is ever moved, move them as a pair: validator first,
+decorator second.
