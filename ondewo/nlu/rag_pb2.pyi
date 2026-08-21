@@ -2517,19 +2517,19 @@ class RagCrawlerFilters(google.protobuf.message.Message):
 
     @property
     def allowed_regex(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Optional. Path allow-list by regular expression."""
+        """Optional. URL allow-list by regular expression."""
 
     @property
     def disallowed_regex(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Optional. Path block-list by regular expression."""
+        """Optional. URL block-list by regular expression."""
 
     @property
     def allowed_paths(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Optional. Explicit path allow-list."""
+        """Deprecated. Use <code>allowed_regex</code>, which can express everything this field could."""
 
     @property
     def disallowed_paths(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Optional. Explicit path block-list."""
+        """Deprecated. Use <code>disallowed_regex</code>."""
 
     def __init__(
         self,
@@ -2879,16 +2879,11 @@ class RagCrawlerDeepCrawlerConfig(google.protobuf.message.Message):
     Default <code>false</code>. If <code>false</code>, <code>config</code> is ignored.
     """
     crawl_strategy: global___RagCrawlerCrawlStrategy.ValueType
-    """Optional. Crawl traversal strategy.
-    BFS is often best for broad site coverage; DFS for deep section traversal.
-    Default <code>RAG_CRAWLER_CRAWL_STRATEGY_BFS</code>.
-    """
+    """Optional. Crawl traversal strategy. Default <code>RAG_CRAWLER_CRAWL_STRATEGY_BEST_FIRST</code>."""
     max_depth: builtins.int
-    """Optional. Maximum link depth from seed URLs.
-    <code>0</code> usually means only seed pages.
-    """
+    """Optional. Maximum link depth from seed URLs, counted from the nearest seed. <code>0</code> means unlimited depth."""
     max_pages: builtins.int
-    """Optional. Hard cap on total processed pages for this run."""
+    """Optional. Hard cap on pages fetched successfully in this run; <code>0</code> means unlimited."""
     normalize_url_case: builtins.bool
     """Optional. Normalize URL case (lowercase the path) during link discovery/deduplication."""
     @property
@@ -2938,11 +2933,7 @@ class RagCrawlerResultsConfig(google.protobuf.message.Message):
     DENSITY_PRUNING_FIELD_NUMBER: builtins.int
     DISCOVERY_ONLY_URL_REGEX_FIELD_NUMBER: builtins.int
     inject_frontmatter: builtins.bool
-    """Optional. Inject YAML frontmatter into markdown output.
-    If the content is HTML based, it will automatically be converted to markdown.
-    Optionally, you can inject YAML frontmatter into the markdown output.
-    Default <code>true</code>.
-    """
+    """Optional. Prepend the page's extracted metadata to the markdown as a YAML frontmatter block."""
     @property
     def meta_data_extractors(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagCrawlerMetaDataExtractor]:
         """Optional. Metadata extractors."""
