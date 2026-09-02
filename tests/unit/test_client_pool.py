@@ -218,18 +218,39 @@ class TestAcquireAndRelease:
         assert pool.pool.qsize() == 0
 
     def test_acquire_on_exhausted_pool_creates_an_extra_client(self, config: ClientConfig) -> None:
-        """Below the creation limit an exhausted pool overflows: a brand-new client is built."""
+        """Below the creation limit an exhausted pool overflows: a brand-new client is built.
+
+        The acquired clients are KEPT REFERENCED, and the comparison is `is` against live objects
+        rather than a set of `id()` values captured earlier. That is not style, it is the same trap
+        this SDK shipped as a real defect in `get_keycloak_token_provider`, which keyed its provider
+        registry on `id(config)`: CPython's `id()` is the object's ADDRESS, and an address is only
+        unique among objects that are simultaneously ALIVE.
+
+        The previous version snapshotted `{id(c) for c in pool.pool.queue}`, then acquired every
+        pooled client while discarding the return values -- so those clients became garbage, their
+        addresses were freed, and the freshly built overflow client could legitimately land on one
+        of them. The assertion then failed with "an exhausted pool must build a new client, not
+        reissue a busy one" about a pool that had done exactly the right thing. Measured: 1 spurious
+        failure in roughly 7 full-suite runs, with the test passing in isolation every time.
+        """
         pool_size: int = 2
         pool: ClientPool = _build_pool(config, pool_size=pool_size)
-        pooled: Set[int] = {id(c) for c in pool.pool.queue}
+        # Strong references, held for the whole test: this is what keeps the addresses from being
+        # recycled underneath the comparison below.
+        pooled_clients: List[Client] = list(pool.pool.queue)
 
-        for _ in range(pool_size):
-            pool.acquire_client()
+        acquired: List[Client] = [pool.acquire_client() for _ in range(pool_size)]
         _collapse_get_timeout(pool)
 
         overflow: Client = pool.acquire_client()
 
-        assert id(overflow) not in pooled, "an exhausted pool must build a new client, not reissue a busy one"
+        assert all(overflow is not client for client in pooled_clients), (
+            "an exhausted pool must build a new client, not reissue a busy one"
+        )
+        assert all(overflow is not client for client in acquired), (
+            "the overflow client must not be one of the clients already handed out"
+        )
+        assert len(acquired) == pool_size
         assert overflow.services is not None
         assert pool.n_clients_created == pool_size + 1
         assert pool.pool.qsize() == 0, "the overflow client is not pooled until it is released"
