@@ -30,6 +30,12 @@ class ClientConfig(BaseClientConfig):
       The client performs an ROPC login with `scope=offline_access` against the *public*
       Keycloak SDK client (no `client_secret`), then auto-refreshes the short-lived access
       token and attaches it as `Authorization: Bearer` on every gRPC call.
+    * **Handed-off offline token** — set `refresh_token` instead of `password`. The client
+      then never sends a password grant at all: it exchanges the handed-off offline token
+      for an access token and auto-refreshes exactly as above. This exists because Keycloak's
+      brute-force detection counts failed *logins*, so N processes booting at once with the
+      same technical user are a burst the realm penalises, while N concurrent refresh grants
+      are not.
 
     When the Keycloak fields are omitted the client sends no auth metadata at all, so the
     connection travels unauthenticated (e.g. against a plaintext server or an Envoy ingress
@@ -56,6 +62,14 @@ class ClientConfig(BaseClientConfig):
             Whether to verify the Keycloak server's TLS certificate on the token-endpoint
             call. Defaults to `True` (secure). Set `False` only for a self-signed/local
             Envoy at `https://localhost:12001/auth`.
+        refresh_token (str):
+            A Keycloak *offline* refresh token handed to this client instead of a password.
+            When set, the client skips the ROPC password grant entirely and bootstraps from
+            this token. At least one of `password` and `refresh_token` must be provided; when
+            BOTH are set the refresh token wins and no password grant is ever sent. There is
+            deliberately no fallback to the password if the offline token is rejected -- a
+            silent fallback would reintroduce exactly the login burst this field exists to
+            avoid, at the least predictable moment.
     """
 
     user_name: str = ""
@@ -65,10 +79,18 @@ class ClientConfig(BaseClientConfig):
     client_id: str = ""
     token_expiration_in_s: Optional[int] = None
     keycloak_verify_ssl: bool = True
+    # APPENDED LAST, deliberately. The dataclass is frozen and `host`/`port` are positional, so an
+    # external caller may be passing fields positionally; inserting mid-list would silently rebind
+    # their arguments. No test in this repository could see that, because every construction site
+    # here uses keyword arguments.
+    refresh_token: str = ""
 
-    #: Fields whose value must never be rendered. ``grpc_cert`` is PEM material and ``password`` is
-    #: the ROPC login secret; both are printed verbatim by the ``__repr__`` ``@dataclass`` generates.
-    SECRET_FIELD_NAMES: ClassVar[FrozenSet[str]] = frozenset({"password", "grpc_cert"})
+    #: Fields whose value must never be rendered. ``grpc_cert`` is PEM material, ``password`` is the
+    #: ROPC login secret and ``refresh_token`` is a long-lived offline bearer credential; all three
+    #: are printed verbatim by the ``__repr__`` ``@dataclass`` generates. Matching here is by EXACT
+    #: field name -- unlike ondewo-vtsi's substring-matching ``SECRET_NAME_TOKENS`` -- so a new
+    #: secret field is rendered in full until it is named on this line.
+    SECRET_FIELD_NAMES: ClassVar[FrozenSet[str]] = frozenset({"password", "grpc_cert", "refresh_token"})
 
     def __repr__(self) -> str:
         """
@@ -111,20 +133,29 @@ class ClientConfig(BaseClientConfig):
         Post-initialization hook to validate the configured authentication path.
 
         Envoy validates the Bearer JWT, so no separate proxy credential is required. The
-        check requires `user_name` and `password`, and additionally requires the full
-        Keycloak triple (`keycloak_url`, `realm`, `client_id`) to be all-or-nothing.
+        check requires `user_name` and AT LEAST ONE credential -- `password` (ROPC login) or
+        `refresh_token` (a handed-off offline token) -- and additionally requires the full
+        Keycloak triple (`keycloak_url`, `realm`, `client_id`) to be all-or-nothing. Supplying
+        both credentials is allowed and is the normal shape mid-migration; the refresh token is
+        the one that gets used.
+
+        The credential check is WIDENED rather than removed. Dropping it would let a
+        credential-less config construct successfully and fail later at the token endpoint,
+        which turns a constructor precondition into a runtime failure far from its cause.
 
         Raises:
             ValueError:
-                If `user_name` or `password` is empty, or if the Keycloak fields are only
-                partially provided.
+                If `user_name` is empty, if NEITHER `password` nor `refresh_token` is set, or
+                if the Keycloak fields are only partially provided.
         """
         super(ClientConfig, self).__post_init__()
 
         if not self.user_name:
             raise ValueError(f"The field `user_name` is mandatory in {self.__class__.__name__}.")
-        if not self.password:
-            raise ValueError(f"The field `password` is mandatory in {self.__class__.__name__}.")
+        if not self.password and not self.refresh_token:
+            raise ValueError(
+                f"Either the field `password` or the field `refresh_token` is mandatory in {self.__class__.__name__}."
+            )
 
         keycloak_fields: tuple[str, str, str] = (self.keycloak_url, self.realm, self.client_id)
         if any(keycloak_fields) and not all(keycloak_fields):
