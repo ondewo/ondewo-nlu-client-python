@@ -225,6 +225,65 @@ The repo is now fully on **uv** (not just pyproject.toml):
 - The release `git commit` uses **`--no-verify`** so pre-commit hooks never gate an automated release.
 - **Validated by a real PyPI publish** — `ondewo-t2s-client 6.5.0` was built with `uv build` and uploaded via twine end-to-end; the uv release pipeline works.
 
+## GitHub Actions (`tests`) is a REQUIRED gate — reproduce it with `--frozen`
+
+`.github/workflows/tests.yml` (job `unit-tests`, `runs-on: ubuntu-latest`) fires on **every** push to
+**every** branch (`branches: ["**"]`) and on every pull request. It is not advisory: it is the only
+automated check this repository has, so a red run is a broken branch. Its five steps are checkout,
+`astral-sh/setup-uv@v6`, then these four, which are the whole gate:
+
+```bash
+uv python install 3.12
+uv sync --extra dev --frozen
+uv run --frozen ruff check .
+uv run --frozen mypy ondewo
+uv run --frozen pytest tests/unit -q --cov --cov-report=term-missing --cov-report=xml --cov-fail-under=100
+```
+
+Copy those verbatim — **including `--frozen`** — rather than reaching for the `make` targets. There is no
+`gh` CLI on these machines; read the real verdict for the commit you are on straight from the API:
+
+```bash
+SHA=$(git rev-parse HEAD)
+curl -s "https://api.github.com/repos/ondewo/ondewo-nlu-client-python/actions/runs?head_sha=$SHA"
+```
+
+and check `.workflow_runs[].status` / `.conclusion`. `total_count: 0` means **nobody has ever built this
+commit**, which is not the same as a pass — an unpushed local commit always reads that way.
+
+Four things measured while running the gate by hand (2026-09-02, at `f9343e4` — all four steps green,
+309 tests, 100.00% coverage):
+
+- **The coverage gate is filesystem-scanned via `[tool.coverage.run] source = ["ondewo"]`, and the bare
+  `--cov` in the workflow exists only to switch coverage on and defer to it. Never "clarify" it into
+  dotted `--cov=ondewo.nlu.…` arguments.** The dotted form FAILS OPEN, and worse than the pyproject
+  comment claims: dropping a throwaway `ondewo/nlu/utils/_tmp_probe_uncovered.py` with two untested
+  functions into the tree made the workflow's bare `--cov` report it at `0%` and fail the gate
+  (`99.16%`, exit 1) — while the dotted form **naming that very module on the command line** printed
+  `CoverageWarning: Module … was never imported (module-not-imported)`, omitted it from the table, and
+  exited **0** with "Required test coverage of 100% reached". Naming a module explicitly is not enough;
+  pytest-cov measures a dotted module only if the suite imports it. A file that genuinely should not be
+  tested belongs in the `omit` list in `pyproject.toml` with a written reason, never left to vanish.
+- **`--frozen` on `uv sync` does NOT validate `uv.lock` against `pyproject.toml` — it trusts the lock as
+  the source of truth.** Adding a dependency to `[project].dependencies` without re-running `uv lock`
+  left `uv sync --extra dev --frozen` exiting **0** while the package was simply never installed; the
+  failure then surfaces far downstream as a `ModuleNotFoundError` from ruff, mypy or pytest, naming a
+  module the author believes they declared. `uv lock --check` is the command that actually catches it
+  (`error: The lockfile at uv.lock needs to be updated`, exit 1) — run it after any `pyproject.toml` edit.
+- **`make ruff` / `make mypy` run `uv run` WITHOUT `--frozen`, which silently re-resolves and REWRITES
+  `uv.lock` as a side effect.** Measured: with a dependency added to `pyproject.toml`, `uv run ruff
+  check .` changed `uv.lock`'s md5 and installed the new package, then reported `All checks passed!`. So
+  a green `make ruff` is not evidence the gate is green — it repaired the divergence in your working tree
+  instead of reporting it, and CI's `--frozen` run will use whatever lock you actually committed. After
+  touching `pyproject.toml`, `git status` before committing: the rewritten `uv.lock` must go in the same
+  commit.
+- **The gate type-checks `ondewo` only, which is NARROWER than `make mypy` (`ondewo/ tests/`).** Both pass
+  today, and so does the union scope `uv run mypy ondewo tests examples` (146 files). The narrow scope is
+  why the gate prints `note: unused section(s): module = ['faker.*', 'polling.*', 'tqdm.*']` — those three
+  overrides are live only for `examples/`, as the comment in `pyproject.toml` says. It is a **note**, not
+  an error; mypy still exits 0 and the step passes. Do not "fix" it by deleting those override sections —
+  verify against the union scope first (see _Proving code is dead_).
+
 ## Jenkins — never trigger a multibranch scan or branch indexing
 
 **NEVER trigger a Jenkins multibranch scan or branch indexing.** Do not call a multibranch/folder job's
