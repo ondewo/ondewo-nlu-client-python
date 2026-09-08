@@ -19,7 +19,7 @@ repos:
   # Markdown linting. MD013 (line-length) and MD033 (inline HTML) are disabled in
   # .markdownlint-cli2.yaml because the docs embed <p>/<code> and long lines.
   - repo: https://github.com/DavidAnson/markdownlint-cli2
-    rev: v0.23.0
+    rev: v0.23.2
     hooks:
       - id: markdownlint-cli2
 
