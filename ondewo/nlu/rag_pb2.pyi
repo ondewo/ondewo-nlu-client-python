@@ -1718,6 +1718,9 @@ class RagRetrievalRequest(google.protobuf.message.Message):
     KEYWORD_FIELD_NUMBER: builtins.int
     FIELD_MASK_FIELD_NUMBER: builtins.int
     RERANK_MODEL_CCAI_SERVICE_NAME_FIELD_NUMBER: builtins.int
+    RERANK_CANDIDATES_FIELD_NUMBER: builtins.int
+    DEDUP_THRESHOLD_FIELD_NUMBER: builtins.int
+    DEDUP_BEFORE_RERANK_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The agent to retrieve chunks for.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
@@ -1762,6 +1765,12 @@ class RagRetrievalRequest(google.protobuf.message.Message):
     """Optional. Extract additional keywords from the query to improve retrieval."""
     rerank_model_ccai_service_name: builtins.str
     """Optional. Rerank model used to refine the initial retrieval scores. If not provided, the default model is used (if one is set). If empty, the results are not reranked."""
+    rerank_candidates: builtins.int
+    """Optional. Minimum 0. Number of retrieved chunks the rerank model scores (default: <code>64</code>). Only takes effect when a rerank model is used."""
+    dedup_threshold: builtins.float
+    """Optional. Drop a retrieved chunk whose word-shingle similarity to a better-ranked chunk reaches this threshold, between <code>0.0</code> and <code>1.0</code> (default: <code>0.0</code>)."""
+    dedup_before_rerank: builtins.bool
+    """Optional. Suppress near-duplicates before reranking instead of after (default: <code>false</code>)."""
     @property
     def dataset_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Required. Dataset IDs to search."""
@@ -1803,9 +1812,16 @@ class RagRetrievalRequest(google.protobuf.message.Message):
         keyword: builtins.bool | None = ...,
         field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
         rerank_model_ccai_service_name: builtins.str | None = ...,
+        rerank_candidates: builtins.int = ...,
+        dedup_threshold: builtins.float | None = ...,
+        dedup_before_rerank: builtins.bool | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_highlight", b"_highlight", "_keyword", b"_keyword", "_rerank_model_ccai_service_name", b"_rerank_model_ccai_service_name", "_similarity_threshold", b"_similarity_threshold", "_use_kg", b"_use_kg", "_vector_similarity_weight", b"_vector_similarity_weight", "field_mask", b"field_mask", "highlight", b"highlight", "keyword", b"keyword", "metadata_condition", b"metadata_condition", "rerank_model_ccai_service_name", b"rerank_model_ccai_service_name", "similarity_threshold", b"similarity_threshold", "use_kg", b"use_kg", "vector_similarity_weight", b"vector_similarity_weight"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_highlight", b"_highlight", "_keyword", b"_keyword", "_rerank_model_ccai_service_name", b"_rerank_model_ccai_service_name", "_similarity_threshold", b"_similarity_threshold", "_use_kg", b"_use_kg", "_vector_similarity_weight", b"_vector_similarity_weight", "cross_languages", b"cross_languages", "dataset_ids", b"dataset_ids", "document_ids", b"document_ids", "field_mask", b"field_mask", "highlight", b"highlight", "keyword", b"keyword", "language_code", b"language_code", "metadata_condition", b"metadata_condition", "page_token", b"page_token", "parent", b"parent", "question", b"question", "rerank_model_ccai_service_name", b"rerank_model_ccai_service_name", "similarity_threshold", b"similarity_threshold", "top_k", b"top_k", "use_kg", b"use_kg", "vector_similarity_weight", b"vector_similarity_weight"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_dedup_before_rerank", b"_dedup_before_rerank", "_dedup_threshold", b"_dedup_threshold", "_highlight", b"_highlight", "_keyword", b"_keyword", "_rerank_model_ccai_service_name", b"_rerank_model_ccai_service_name", "_similarity_threshold", b"_similarity_threshold", "_use_kg", b"_use_kg", "_vector_similarity_weight", b"_vector_similarity_weight", "dedup_before_rerank", b"dedup_before_rerank", "dedup_threshold", b"dedup_threshold", "field_mask", b"field_mask", "highlight", b"highlight", "keyword", b"keyword", "metadata_condition", b"metadata_condition", "rerank_model_ccai_service_name", b"rerank_model_ccai_service_name", "similarity_threshold", b"similarity_threshold", "use_kg", b"use_kg", "vector_similarity_weight", b"vector_similarity_weight"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_dedup_before_rerank", b"_dedup_before_rerank", "_dedup_threshold", b"_dedup_threshold", "_highlight", b"_highlight", "_keyword", b"_keyword", "_rerank_model_ccai_service_name", b"_rerank_model_ccai_service_name", "_similarity_threshold", b"_similarity_threshold", "_use_kg", b"_use_kg", "_vector_similarity_weight", b"_vector_similarity_weight", "cross_languages", b"cross_languages", "dataset_ids", b"dataset_ids", "dedup_before_rerank", b"dedup_before_rerank", "dedup_threshold", b"dedup_threshold", "document_ids", b"document_ids", "field_mask", b"field_mask", "highlight", b"highlight", "keyword", b"keyword", "language_code", b"language_code", "metadata_condition", b"metadata_condition", "page_token", b"page_token", "parent", b"parent", "question", b"question", "rerank_candidates", b"rerank_candidates", "rerank_model_ccai_service_name", b"rerank_model_ccai_service_name", "similarity_threshold", b"similarity_threshold", "top_k", b"top_k", "use_kg", b"use_kg", "vector_similarity_weight", b"vector_similarity_weight"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_dedup_before_rerank", b"_dedup_before_rerank"]) -> typing.Literal["dedup_before_rerank"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_dedup_threshold", b"_dedup_threshold"]) -> typing.Literal["dedup_threshold"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_highlight", b"_highlight"]) -> typing.Literal["highlight"] | None: ...
     @typing.overload
