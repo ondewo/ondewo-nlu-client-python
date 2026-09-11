@@ -1718,6 +1718,9 @@ class RagRetrievalRequest(google.protobuf.message.Message):
     KEYWORD_FIELD_NUMBER: builtins.int
     FIELD_MASK_FIELD_NUMBER: builtins.int
     RERANK_MODEL_CCAI_SERVICE_NAME_FIELD_NUMBER: builtins.int
+    RERANK_CANDIDATES_FIELD_NUMBER: builtins.int
+    DEDUP_THRESHOLD_FIELD_NUMBER: builtins.int
+    DEDUP_BEFORE_RERANK_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The agent to retrieve chunks for.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
@@ -1762,6 +1765,12 @@ class RagRetrievalRequest(google.protobuf.message.Message):
     """Optional. Extract additional keywords from the query to improve retrieval."""
     rerank_model_ccai_service_name: builtins.str
     """Optional. Rerank model used to refine the initial retrieval scores. If not provided, the default model is used (if one is set). If empty, the results are not reranked."""
+    rerank_candidates: builtins.int
+    """Optional. Minimum 0. Number of retrieved chunks the rerank model scores (default: <code>64</code>). Only takes effect when a rerank model is used."""
+    dedup_threshold: builtins.float
+    """Optional. Drop a retrieved chunk whose word-shingle similarity to a better-ranked chunk reaches this threshold, between <code>0.0</code> and <code>1.0</code> (default: <code>0.0</code>)."""
+    dedup_before_rerank: builtins.bool
+    """Optional. Suppress near-duplicates before reranking instead of after (default: <code>false</code>)."""
     @property
     def dataset_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Required. Dataset IDs to search."""
@@ -1803,9 +1812,16 @@ class RagRetrievalRequest(google.protobuf.message.Message):
         keyword: builtins.bool | None = ...,
         field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
         rerank_model_ccai_service_name: builtins.str | None = ...,
+        rerank_candidates: builtins.int = ...,
+        dedup_threshold: builtins.float | None = ...,
+        dedup_before_rerank: builtins.bool | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_highlight", b"_highlight", "_keyword", b"_keyword", "_rerank_model_ccai_service_name", b"_rerank_model_ccai_service_name", "_similarity_threshold", b"_similarity_threshold", "_use_kg", b"_use_kg", "_vector_similarity_weight", b"_vector_similarity_weight", "field_mask", b"field_mask", "highlight", b"highlight", "keyword", b"keyword", "metadata_condition", b"metadata_condition", "rerank_model_ccai_service_name", b"rerank_model_ccai_service_name", "similarity_threshold", b"similarity_threshold", "use_kg", b"use_kg", "vector_similarity_weight", b"vector_similarity_weight"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_highlight", b"_highlight", "_keyword", b"_keyword", "_rerank_model_ccai_service_name", b"_rerank_model_ccai_service_name", "_similarity_threshold", b"_similarity_threshold", "_use_kg", b"_use_kg", "_vector_similarity_weight", b"_vector_similarity_weight", "cross_languages", b"cross_languages", "dataset_ids", b"dataset_ids", "document_ids", b"document_ids", "field_mask", b"field_mask", "highlight", b"highlight", "keyword", b"keyword", "language_code", b"language_code", "metadata_condition", b"metadata_condition", "page_token", b"page_token", "parent", b"parent", "question", b"question", "rerank_model_ccai_service_name", b"rerank_model_ccai_service_name", "similarity_threshold", b"similarity_threshold", "top_k", b"top_k", "use_kg", b"use_kg", "vector_similarity_weight", b"vector_similarity_weight"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_dedup_before_rerank", b"_dedup_before_rerank", "_dedup_threshold", b"_dedup_threshold", "_highlight", b"_highlight", "_keyword", b"_keyword", "_rerank_model_ccai_service_name", b"_rerank_model_ccai_service_name", "_similarity_threshold", b"_similarity_threshold", "_use_kg", b"_use_kg", "_vector_similarity_weight", b"_vector_similarity_weight", "dedup_before_rerank", b"dedup_before_rerank", "dedup_threshold", b"dedup_threshold", "field_mask", b"field_mask", "highlight", b"highlight", "keyword", b"keyword", "metadata_condition", b"metadata_condition", "rerank_model_ccai_service_name", b"rerank_model_ccai_service_name", "similarity_threshold", b"similarity_threshold", "use_kg", b"use_kg", "vector_similarity_weight", b"vector_similarity_weight"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_dedup_before_rerank", b"_dedup_before_rerank", "_dedup_threshold", b"_dedup_threshold", "_highlight", b"_highlight", "_keyword", b"_keyword", "_rerank_model_ccai_service_name", b"_rerank_model_ccai_service_name", "_similarity_threshold", b"_similarity_threshold", "_use_kg", b"_use_kg", "_vector_similarity_weight", b"_vector_similarity_weight", "cross_languages", b"cross_languages", "dataset_ids", b"dataset_ids", "dedup_before_rerank", b"dedup_before_rerank", "dedup_threshold", b"dedup_threshold", "document_ids", b"document_ids", "field_mask", b"field_mask", "highlight", b"highlight", "keyword", b"keyword", "language_code", b"language_code", "metadata_condition", b"metadata_condition", "page_token", b"page_token", "parent", b"parent", "question", b"question", "rerank_candidates", b"rerank_candidates", "rerank_model_ccai_service_name", b"rerank_model_ccai_service_name", "similarity_threshold", b"similarity_threshold", "top_k", b"top_k", "use_kg", b"use_kg", "vector_similarity_weight", b"vector_similarity_weight"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_dedup_before_rerank", b"_dedup_before_rerank"]) -> typing.Literal["dedup_before_rerank"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_dedup_threshold", b"_dedup_threshold"]) -> typing.Literal["dedup_threshold"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_highlight", b"_highlight"]) -> typing.Literal["highlight"] | None: ...
     @typing.overload
@@ -2449,11 +2465,11 @@ class RagCrawlerFilters(google.protobuf.message.Message):
     ALLOWED_PATHS_FIELD_NUMBER: builtins.int
     DISALLOWED_PATHS_FIELD_NUMBER: builtins.int
     allow_internal_links: builtins.bool
-    """Optional. Include internal links."""
+    """Deprecated. Has never had any effect."""
     allow_external_links: builtins.bool
-    """Optional. Include external links."""
+    """Optional. Include external links, that is links outside the crawled site's registrable domain."""
     allow_social_media_links: builtins.bool
-    """Optional. Include social media links."""
+    """Deprecated. Has never had any effect."""
     @property
     def allowed_domains(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Optional. Domain allow-list (host-level gating)."""
@@ -2464,19 +2480,19 @@ class RagCrawlerFilters(google.protobuf.message.Message):
 
     @property
     def allowed_regex(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Optional. Path allow-list by regular expression."""
+        """Optional. URL allow-list by regular expression."""
 
     @property
     def disallowed_regex(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Optional. Path block-list by regular expression."""
+        """Optional. URL block-list by regular expression."""
 
     @property
     def allowed_paths(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Optional. Explicit path allow-list."""
+        """Deprecated. Use <code>allowed_regex</code>, which can express everything this field could."""
 
     @property
     def disallowed_paths(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Optional. Explicit path block-list."""
+        """Deprecated. Use <code>disallowed_regex</code>."""
 
     def __init__(
         self,
@@ -2737,6 +2753,7 @@ class RagCrawlerConfig(google.protobuf.message.Message):
     DEEP_CRAWLER_CONFIG_FIELD_NUMBER: builtins.int
     OUTPUT_CONFIG_FIELD_NUMBER: builtins.int
     STATUS_FILTER_FIELD_NUMBER: builtins.int
+    INCREMENTAL_CONFIG_FIELD_NUMBER: builtins.int
     @property
     def concurrency_config(self) -> global___RagCrawlerConcurrencyConfig:
         """Optional. Concurrency and pacing controls for crawler requests."""
@@ -2753,6 +2770,10 @@ class RagCrawlerConfig(google.protobuf.message.Message):
     def status_filter(self) -> global___RagCrawlerStatusFilter:
         """Optional. HTTP status filtering: which fetched pages become result documents."""
 
+    @property
+    def incremental_config(self) -> global___RagCrawlerIncrementalConfig:
+        """Optional. Incremental crawling: reuse unchanged pages from the previous run instead of re-fetching them."""
+
     def __init__(
         self,
         *,
@@ -2760,9 +2781,10 @@ class RagCrawlerConfig(google.protobuf.message.Message):
         deep_crawler_config: global___RagCrawlerDeepCrawlerConfig | None = ...,
         output_config: global___RagCrawlerResultsConfig | None = ...,
         status_filter: global___RagCrawlerStatusFilter | None = ...,
+        incremental_config: global___RagCrawlerIncrementalConfig | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["concurrency_config", b"concurrency_config", "deep_crawler_config", b"deep_crawler_config", "output_config", b"output_config", "status_filter", b"status_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["concurrency_config", b"concurrency_config", "deep_crawler_config", b"deep_crawler_config", "output_config", b"output_config", "status_filter", b"status_filter"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["concurrency_config", b"concurrency_config", "deep_crawler_config", b"deep_crawler_config", "incremental_config", b"incremental_config", "output_config", b"output_config", "status_filter", b"status_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["concurrency_config", b"concurrency_config", "deep_crawler_config", b"deep_crawler_config", "incremental_config", b"incremental_config", "output_config", b"output_config", "status_filter", b"status_filter"]) -> None: ...
 
 global___RagCrawlerConfig = RagCrawlerConfig
 
@@ -2783,16 +2805,11 @@ class RagCrawlerDeepCrawlerConfig(google.protobuf.message.Message):
     Default <code>false</code>. If <code>false</code>, <code>config</code> is ignored.
     """
     crawl_strategy: global___RagCrawlerCrawlStrategy.ValueType
-    """Optional. Crawl traversal strategy.
-    BFS is often best for broad site coverage; DFS for deep section traversal.
-    Default <code>RAG_CRAWLER_CRAWL_STRATEGY_BFS</code>.
-    """
+    """Optional. Crawl traversal strategy. Default <code>RAG_CRAWLER_CRAWL_STRATEGY_BEST_FIRST</code>."""
     max_depth: builtins.int
-    """Optional. Maximum link depth from seed URLs.
-    <code>0</code> usually means only seed pages.
-    """
+    """Optional. Maximum link depth from seed URLs, counted from the nearest seed. <code>0</code> means unlimited depth."""
     max_pages: builtins.int
-    """Optional. Hard cap on total processed pages for this run."""
+    """Optional. Hard cap on pages fetched successfully in this run; <code>0</code> means unlimited."""
     normalize_url_case: builtins.bool
     """Optional. Normalize URL case (lowercase the path) during link discovery/deduplication."""
     @property
@@ -2832,12 +2849,9 @@ class RagCrawlerResultsConfig(google.protobuf.message.Message):
     META_DATA_EXTRACTORS_FIELD_NUMBER: builtins.int
     CONTENT_SCOPE_FIELD_NUMBER: builtins.int
     DENSITY_PRUNING_FIELD_NUMBER: builtins.int
+    DISCOVERY_ONLY_URL_REGEX_FIELD_NUMBER: builtins.int
     inject_frontmatter: builtins.bool
-    """Optional. Inject YAML frontmatter into markdown output.
-    If the content is HTML based, it will automatically be converted to markdown.
-    Optionally, you can inject YAML frontmatter into the markdown output.
-    Default <code>true</code>.
-    """
+    """Optional. Prepend the page's extracted metadata to the markdown as a YAML frontmatter block."""
     @property
     def meta_data_extractors(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RagCrawlerMetaDataExtractor]:
         """Optional. Metadata extractors."""
@@ -2852,6 +2866,10 @@ class RagCrawlerResultsConfig(google.protobuf.message.Message):
         If not set the <code>RagCrawlerDensityPruning</code> defaults are used.
         """
 
+    @property
+    def discovery_only_url_regex(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Regular expressions matched against a crawled page's URL. A page whose URL matches any of these is still fetched and its links are followed for discovery, but it is NOT converted into a document"""
+
     def __init__(
         self,
         *,
@@ -2859,9 +2877,10 @@ class RagCrawlerResultsConfig(google.protobuf.message.Message):
         meta_data_extractors: collections.abc.Iterable[global___RagCrawlerMetaDataExtractor] | None = ...,
         content_scope: global___RagCrawlerContentScope | None = ...,
         density_pruning: global___RagCrawlerDensityPruning | None = ...,
+        discovery_only_url_regex: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["_inject_frontmatter", b"_inject_frontmatter", "content_scope", b"content_scope", "density_pruning", b"density_pruning", "inject_frontmatter", b"inject_frontmatter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_inject_frontmatter", b"_inject_frontmatter", "content_scope", b"content_scope", "density_pruning", b"density_pruning", "inject_frontmatter", b"inject_frontmatter", "meta_data_extractors", b"meta_data_extractors"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["_inject_frontmatter", b"_inject_frontmatter", "content_scope", b"content_scope", "density_pruning", b"density_pruning", "discovery_only_url_regex", b"discovery_only_url_regex", "inject_frontmatter", b"inject_frontmatter", "meta_data_extractors", b"meta_data_extractors"]) -> None: ...
     def WhichOneof(self, oneof_group: typing.Literal["_inject_frontmatter", b"_inject_frontmatter"]) -> typing.Literal["inject_frontmatter"] | None: ...
 
 global___RagCrawlerResultsConfig = RagCrawlerResultsConfig
@@ -2973,20 +2992,34 @@ class RagCrawlerRetryConfig(google.protobuf.message.Message):
 
     PAGE_LOAD_TIMEOUT_SECONDS_FIELD_NUMBER: builtins.int
     RETRY_MAX_ATTEMPTS_FIELD_NUMBER: builtins.int
+    RETRY_BACKOFF_SECONDS_FIELD_NUMBER: builtins.int
+    MAX_STALL_SECONDS_FIELD_NUMBER: builtins.int
     page_load_timeout_seconds: builtins.int
     """Optional. Page load/render timeout in seconds."""
     retry_max_attempts: builtins.int
     """Optional. Maximum retry attempts per page source."""
+    retry_backoff_seconds: builtins.float
+    """Optional. Base for the per-URL retry linear backoff, in seconds (default: 2)."""
+    max_stall_seconds: builtins.int
+    """Optional. Abort the crawl run when no page has been fetched successfully for this many seconds (default: 600).
+    <code>0</code> disables the bound.
+    """
     def __init__(
         self,
         *,
         page_load_timeout_seconds: builtins.int | None = ...,
         retry_max_attempts: builtins.int | None = ...,
+        retry_backoff_seconds: builtins.float | None = ...,
+        max_stall_seconds: builtins.int | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_page_load_timeout_seconds", b"_page_load_timeout_seconds", "_retry_max_attempts", b"_retry_max_attempts", "page_load_timeout_seconds", b"page_load_timeout_seconds", "retry_max_attempts", b"retry_max_attempts"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_page_load_timeout_seconds", b"_page_load_timeout_seconds", "_retry_max_attempts", b"_retry_max_attempts", "page_load_timeout_seconds", b"page_load_timeout_seconds", "retry_max_attempts", b"retry_max_attempts"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_max_stall_seconds", b"_max_stall_seconds", "_page_load_timeout_seconds", b"_page_load_timeout_seconds", "_retry_backoff_seconds", b"_retry_backoff_seconds", "_retry_max_attempts", b"_retry_max_attempts", "max_stall_seconds", b"max_stall_seconds", "page_load_timeout_seconds", b"page_load_timeout_seconds", "retry_backoff_seconds", b"retry_backoff_seconds", "retry_max_attempts", b"retry_max_attempts"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_max_stall_seconds", b"_max_stall_seconds", "_page_load_timeout_seconds", b"_page_load_timeout_seconds", "_retry_backoff_seconds", b"_retry_backoff_seconds", "_retry_max_attempts", b"_retry_max_attempts", "max_stall_seconds", b"max_stall_seconds", "page_load_timeout_seconds", b"page_load_timeout_seconds", "retry_backoff_seconds", b"retry_backoff_seconds", "retry_max_attempts", b"retry_max_attempts"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_max_stall_seconds", b"_max_stall_seconds"]) -> typing.Literal["max_stall_seconds"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_page_load_timeout_seconds", b"_page_load_timeout_seconds"]) -> typing.Literal["page_load_timeout_seconds"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_retry_backoff_seconds", b"_retry_backoff_seconds"]) -> typing.Literal["retry_backoff_seconds"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_retry_max_attempts", b"_retry_max_attempts"]) -> typing.Literal["retry_max_attempts"] | None: ...
 
@@ -3020,6 +3053,36 @@ class RagCrawlerStatusFilter(google.protobuf.message.Message):
     def WhichOneof(self, oneof_group: typing.Literal["_is_active", b"_is_active"]) -> typing.Literal["is_active"] | None: ...
 
 global___RagCrawlerStatusFilter = RagCrawlerStatusFilter
+
+@typing.final
+class RagCrawlerIncrementalConfig(google.protobuf.message.Message):
+    """Incremental crawling: skip re-fetching pages a sitemap reports as unchanged.
+
+    A page is reused from the most recent completed run of the same crawler when its sitemap/ <code>&lt;lastmod&gt;</code> is not newer than the <code>page_last_updated_date</code> of the copy that run holds. A reused page is part of the new run exactly like a freshly fetched one; only <code>RagCrawlerResult.last_crawled_date</code> still reports when its content was actually fetched.
+
+    A page is always fetched when any of the following holds: its sitemap entry carries no <code>&lt;lastmod&gt;</code>; the most recent completed run did not contain it; there is no completed previous
+    run; the crawler configuration changed since that run; or <code>max_age_days</code> has elapsed.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    IS_ACTIVE_FIELD_NUMBER: builtins.int
+    MAX_AGE_DAYS_FIELD_NUMBER: builtins.int
+    is_active: builtins.bool
+    """Optional. Enable incremental crawling. Default <code>false</code>."""
+    max_age_days: builtins.int
+    """Optional. Force a re-fetch of any page whose content was fetched more than this many days ago, regardless of what <code>&lt;lastmod&gt;</code> reports. Unset means never force a re-fetch."""
+    def __init__(
+        self,
+        *,
+        is_active: builtins.bool = ...,
+        max_age_days: builtins.int | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_max_age_days", b"_max_age_days", "max_age_days", b"max_age_days"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_max_age_days", b"_max_age_days", "is_active", b"is_active", "max_age_days", b"max_age_days"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_max_age_days", b"_max_age_days"]) -> typing.Literal["max_age_days"] | None: ...
+
+global___RagCrawlerIncrementalConfig = RagCrawlerIncrementalConfig
 
 @typing.final
 class RagCrawlerContentResult(google.protobuf.message.Message):
@@ -3105,7 +3168,7 @@ class RagCrawlerResult(google.protobuf.message.Message):
     crawler_name: builtins.str
     """Resource name of the source crawler profile."""
     operation_name: builtins.str
-    """Resource name of the crawler run that produced this result."""
+    """Resource name of the crawler run this result was requested under."""
     source_url: builtins.str
     """URL this content came from."""
     @property
