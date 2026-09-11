@@ -2753,6 +2753,7 @@ class RagCrawlerConfig(google.protobuf.message.Message):
     DEEP_CRAWLER_CONFIG_FIELD_NUMBER: builtins.int
     OUTPUT_CONFIG_FIELD_NUMBER: builtins.int
     STATUS_FILTER_FIELD_NUMBER: builtins.int
+    INCREMENTAL_CONFIG_FIELD_NUMBER: builtins.int
     @property
     def concurrency_config(self) -> global___RagCrawlerConcurrencyConfig:
         """Optional. Concurrency and pacing controls for crawler requests."""
@@ -2769,6 +2770,10 @@ class RagCrawlerConfig(google.protobuf.message.Message):
     def status_filter(self) -> global___RagCrawlerStatusFilter:
         """Optional. HTTP status filtering: which fetched pages become result documents."""
 
+    @property
+    def incremental_config(self) -> global___RagCrawlerIncrementalConfig:
+        """Optional. Incremental crawling: reuse unchanged pages from the previous run instead of re-fetching them."""
+
     def __init__(
         self,
         *,
@@ -2776,9 +2781,10 @@ class RagCrawlerConfig(google.protobuf.message.Message):
         deep_crawler_config: global___RagCrawlerDeepCrawlerConfig | None = ...,
         output_config: global___RagCrawlerResultsConfig | None = ...,
         status_filter: global___RagCrawlerStatusFilter | None = ...,
+        incremental_config: global___RagCrawlerIncrementalConfig | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["concurrency_config", b"concurrency_config", "deep_crawler_config", b"deep_crawler_config", "output_config", b"output_config", "status_filter", b"status_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["concurrency_config", b"concurrency_config", "deep_crawler_config", b"deep_crawler_config", "output_config", b"output_config", "status_filter", b"status_filter"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["concurrency_config", b"concurrency_config", "deep_crawler_config", b"deep_crawler_config", "incremental_config", b"incremental_config", "output_config", b"output_config", "status_filter", b"status_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["concurrency_config", b"concurrency_config", "deep_crawler_config", b"deep_crawler_config", "incremental_config", b"incremental_config", "output_config", b"output_config", "status_filter", b"status_filter"]) -> None: ...
 
 global___RagCrawlerConfig = RagCrawlerConfig
 
@@ -3049,6 +3055,36 @@ class RagCrawlerStatusFilter(google.protobuf.message.Message):
 global___RagCrawlerStatusFilter = RagCrawlerStatusFilter
 
 @typing.final
+class RagCrawlerIncrementalConfig(google.protobuf.message.Message):
+    """Incremental crawling: skip re-fetching pages a sitemap reports as unchanged.
+
+    A page is reused from the most recent completed run of the same crawler when its sitemap/ <code>&lt;lastmod&gt;</code> is not newer than the <code>page_last_updated_date</code> of the copy that run holds. A reused page is part of the new run exactly like a freshly fetched one; only <code>RagCrawlerResult.last_crawled_date</code> still reports when its content was actually fetched.
+
+    A page is always fetched when any of the following holds: its sitemap entry carries no <code>&lt;lastmod&gt;</code>; the most recent completed run did not contain it; there is no completed previous
+    run; the crawler configuration changed since that run; or <code>max_age_days</code> has elapsed.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    IS_ACTIVE_FIELD_NUMBER: builtins.int
+    MAX_AGE_DAYS_FIELD_NUMBER: builtins.int
+    is_active: builtins.bool
+    """Optional. Enable incremental crawling. Default <code>false</code>."""
+    max_age_days: builtins.int
+    """Optional. Force a re-fetch of any page whose content was fetched more than this many days ago, regardless of what <code>&lt;lastmod&gt;</code> reports. Unset means never force a re-fetch."""
+    def __init__(
+        self,
+        *,
+        is_active: builtins.bool = ...,
+        max_age_days: builtins.int | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_max_age_days", b"_max_age_days", "max_age_days", b"max_age_days"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_max_age_days", b"_max_age_days", "is_active", b"is_active", "max_age_days", b"max_age_days"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_max_age_days", b"_max_age_days"]) -> typing.Literal["max_age_days"] | None: ...
+
+global___RagCrawlerIncrementalConfig = RagCrawlerIncrementalConfig
+
+@typing.final
 class RagCrawlerContentResult(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -3132,7 +3168,7 @@ class RagCrawlerResult(google.protobuf.message.Message):
     crawler_name: builtins.str
     """Resource name of the source crawler profile."""
     operation_name: builtins.str
-    """Resource name of the crawler run that produced this result."""
+    """Resource name of the crawler run this result was requested under."""
     source_url: builtins.str
     """URL this content came from."""
     @property
