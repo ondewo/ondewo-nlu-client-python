@@ -35,6 +35,7 @@ from typing import (
 )
 
 import pytest
+from loguru import logger
 
 from ondewo.nlu.client_config import ClientConfig
 from ondewo.nlu.utils import keycloak as keycloak_module
@@ -2091,3 +2092,119 @@ class TestInterpreterShutdownTeardown:
         assert "PROBE-OK acc-1" in result.stdout
         assert "PythonFinalizationError" not in result.stderr
         assert "Exception ignored" not in result.stderr
+
+
+class TestARefreshFailureDoesNotKillTheBackgroundLoop:
+    """
+    A failed refresh must not end proactive refresh for the process's lifetime.
+
+    `_refresh_loop` is the thread target. Before the guard, any exception out of the refresh
+    escaped it and killed the daemon thread permanently -- `_start_background_refresh` runs once
+    from `__init__` and nothing re-arms it -- so a single transient answer from the token
+    endpoint disabled background refresh for good, with the only symptom a traceback on stderr.
+
+    Observed in production as the dead-offline-session case: Keycloak answered
+    `400 invalid_grant: Offline user session not found` and neither `_refresh`,
+    `_refresh_if_within_window` nor the loop caught it.
+    """
+
+    def test_a_failed_refresh_is_retried_on_the_next_tick(self) -> None:
+        """The canonical failure: one refresh is refused, the next succeeds, the loop survives."""
+        clock: Dict[str, float] = {"now": 1000.0}
+        transport: FakeTransport = FakeTransport(
+            [
+                FakeResponse(200, _token_body("acc-1", "off-1", 300)),
+                # The dead offline session, exactly as Keycloak answers it.
+                FakeResponse(
+                    400,
+                    {"error": "invalid_grant", "error_description": "Offline user session not found"},
+                ),
+                FakeResponse(200, _token_body("acc-3", "off-3", 300)),
+            ]
+        )
+        event: ScriptedEvent = ScriptedEvent(wait_returns=[False, False], clock=clock)
+        provider: KeycloakTokenProvider = _build_background_provider(transport, clock, event)
+
+        _refresh_loop(_weak(provider), event, lambda: clock["now"])  # type: ignore[arg-type]
+
+        # Login + the refused refresh + the successful one. A loop that died on the refusal would
+        # never have made the third call.
+        assert len(transport.calls) == 3, (
+            f"the loop stopped after a failed refresh; it made {len(transport.calls)} token "
+            f"call(s) instead of 3, so background refresh was dead for the process's lifetime"
+        )
+        assert transport.calls[2]["grant_type"] == "refresh_token"
+        assert provider.access_token == "acc-3", "the provider did not recover on the next tick"
+
+    def test_a_persistently_failing_refresh_keeps_the_loop_alive(self) -> None:
+        """A dead offline session does not self-heal, but it must not be terminal for the thread."""
+        clock: Dict[str, float] = {"now": 1000.0}
+        transport: FakeTransport = FakeTransport(
+            [
+                FakeResponse(200, _token_body("acc-1", "off-1", 300)),
+                FakeResponse(400, {"error": "invalid_grant", "error_description": "Offline user session not found"}),
+                FakeResponse(400, {"error": "invalid_grant", "error_description": "Offline user session not found"}),
+            ]
+        )
+        event: ScriptedEvent = ScriptedEvent(wait_returns=[False, False], clock=clock)
+        provider: KeycloakTokenProvider = _build_background_provider(transport, clock, event)
+
+        _refresh_loop(_weak(provider), event, lambda: clock["now"])  # type: ignore[arg-type]
+
+        assert len(transport.calls) == 3, "the loop stopped after the first refusal"
+        # The provider is NOT silently repaired: the access token is still the one login issued,
+        # so the lazy read path keeps raising and a caller still learns the session is gone.
+        assert provider.access_token == "acc-1"
+
+    def test_the_failure_is_logged_rather_than_swallowed(self) -> None:
+        """Catching without saying so would trade a dead thread for a silent one."""
+        clock: Dict[str, float] = {"now": 1000.0}
+        transport: FakeTransport = FakeTransport(
+            [
+                FakeResponse(200, _token_body("acc-1", "off-1", 300)),
+                FakeResponse(400, {"error": "invalid_grant", "error_description": "Offline user session not found"}),
+            ]
+        )
+        event: ScriptedEvent = ScriptedEvent(wait_returns=[False], clock=clock)
+        provider: KeycloakTokenProvider = _build_background_provider(transport, clock, event)
+
+        captured: List[str] = []
+        sink_id: int = logger.add(lambda record: captured.append(str(record)), level="TRACE")
+        try:
+            _refresh_loop(_weak(provider), event, lambda: clock["now"])  # type: ignore[arg-type]
+        finally:
+            logger.remove(sink_id)
+
+        assert captured, "the refresh failure was swallowed with no log line at all"
+        assert any("background refresh failed" in record for record in captured), (
+            f"nothing named the failure; captured: {captured[:2]}"
+        )
+
+    def test_no_password_grant_is_sent_as_a_fallback(self) -> None:
+        """
+        The 7.0.5 release note makes this a decision, not an omission.
+
+        A silent re-login on a refused refresh would reintroduce, at the least predictable moment
+        (a realm restart invalidating every offline session at once), exactly the login burst the
+        handed-off token exists to avoid.
+        """
+        clock: Dict[str, float] = {"now": 1000.0}
+        transport: FakeTransport = FakeTransport(
+            [
+                FakeResponse(200, _token_body("acc-1", "off-1", 300)),
+                FakeResponse(400, {"error": "invalid_grant", "error_description": "Offline user session not found"}),
+                FakeResponse(400, {"error": "invalid_grant", "error_description": "Offline user session not found"}),
+            ]
+        )
+        event: ScriptedEvent = ScriptedEvent(wait_returns=[False, False], clock=clock)
+        provider: KeycloakTokenProvider = _build_background_provider(transport, clock, event)
+
+        _refresh_loop(_weak(provider), event, lambda: clock["now"])  # type: ignore[arg-type]
+
+        password_grants: List[Dict[str, Any]] = [
+            call for call in transport.calls[1:] if call.get("grant_type") == "password"
+        ]
+        assert not password_grants, (
+            f"the loop fell back to a password grant {len(password_grants)} time(s); that is the "
+            f"login burst the offline-token hand-off exists to prevent"
+        )

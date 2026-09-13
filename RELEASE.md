@@ -2,6 +2,16 @@
 
 *****************
 
+## Release ONDEWO NLU Python Client 7.1.1
+
+### Bug fixes
+
+* Tracking API Version [7.1.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/7.1.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+* [[OND211-2418]](https://ondewo.atlassian.net/browse/OND211-2418) **A single failed token refresh disabled background refresh for the rest of the process's life.** `_refresh_loop` is the background thread's target and its body was unguarded, so any exception out of the refresh escaped the target and killed the daemon thread — permanently, because `_start_background_refresh` runs once from `__init__` and nothing re-arms it. One transient answer from the token endpoint (a 502 from a proxy, a DNS blip, a restarting Keycloak) was therefore enough to end proactive refresh for good, and the only symptom was a traceback on stderr from the dying thread. Observed in production as the dead-offline-session case, where Keycloak answers `400 invalid_grant: Offline user session not found`: neither `_refresh`, `_refresh_if_within_window` nor the loop caught it. The loop now logs the failure and retries on the next tick, so a transient failure self-heals the moment the endpoint recovers.
+* **This does not, and deliberately must not, repair a genuinely dead offline session.** A refused refresh keeps being refused, the provider keeps the access token it last held, and the lazy read path in `authorization_metadata()` keeps raising — so a caller still learns the session is gone and can build a new provider. There is **no fallback to a password grant**, for the reason given in the 7.0.5 note below: a silent re-login would reintroduce the login burst the handed-off token exists to avoid, at the least predictable moment, since a realm restart invalidates every offline session at once and every provider would re-login together.
+
+*****************
+
 ## Release ONDEWO NLU Python Client 7.1.0
 
 ### Improvements

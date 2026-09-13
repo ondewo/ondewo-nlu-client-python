@@ -49,6 +49,8 @@ from typing import (
     Protocol,
     Tuple,
 )
+
+from loguru import logger
 from weakref import WeakValueDictionary
 
 import requests
@@ -191,8 +193,35 @@ def _refresh_loop(
         provider = provider_ref()
         if provider is None:
             return
-        with provider._lock:
-            provider._refresh_if_within_window(now=time_fn())
+        try:
+            with provider._lock:
+                provider._refresh_if_within_window(now=time_fn())
+        except Exception as exception:
+            # A FAILED REFRESH MUST NOT END PROACTIVE REFRESH FOR THE PROCESS'S LIFETIME.
+            # This function is the thread target, so before this guard any exception out of the
+            # refresh escaped it and killed the daemon thread -- permanently, because
+            # ``_start_background_refresh`` runs once from ``__init__`` and nothing re-arms it.
+            # A single transient answer from the token endpoint (a 502 from a proxy, a DNS blip,
+            # a restarting Keycloak) was therefore enough to disable background refresh for good,
+            # with the only symptom a traceback on stderr from the dying thread.
+            #
+            # Observed in production as the dead-offline-session case: Keycloak answered
+            # ``400 invalid_grant: Offline user session not found``, ``_post_token_request``
+            # raised, and neither ``_refresh``, ``_refresh_if_within_window`` nor this loop
+            # caught it.
+            #
+            # Retrying on the next tick is the whole remedy for a transient failure. It is
+            # deliberately NOT a remedy for a dead offline session: that keeps failing, and the
+            # lazy read path in ``authorization_metadata`` keeps raising, so a caller still finds
+            # out and can build a new provider. What changes is that the failure stays VISIBLE
+            # and self-heals the moment the endpoint recovers, instead of being silently
+            # terminal. There is deliberately no fallback to a password grant here -- see the
+            # 7.0.5 release note: a silent re-login would reintroduce, at the least predictable
+            # moment, exactly the login burst the handed-off token exists to avoid.
+            logger.warning(
+                f"Keycloak background refresh failed and will be retried on the next tick "
+                f"({type(exception).__name__}: {exception})"
+            )
         provider = None
 
 
