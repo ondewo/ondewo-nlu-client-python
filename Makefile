@@ -184,6 +184,10 @@ release: ## Automate the entire release process
 	git add Makefile
 	git add RELEASE.md
 	git add pyproject.toml uv.lock
+# tests/ is NOT packaged, but leaving it out of the release commit means a regression test
+# written alongside a fix never reaches the repository: 7.1.2 shipped its backoff fix with
+# the guarding tests left dirty in the working tree, so master's CI never ran them.
+	git add tests
 	git add ${ONDEWO_PROTO_COMPILER_DIR}
 	git add ${ONDEWO_NLU_API_DIR}
 	git status

@@ -40,11 +40,15 @@ from loguru import logger
 from ondewo.nlu.client_config import ClientConfig
 from ondewo.nlu.utils import keycloak as keycloak_module
 from ondewo.nlu.utils.keycloak import (
+    _backoff_delay_s,
     _EXPIRY_LEEWAY_S,
     _HTTP_TIMEOUT_S,
+    _MAX_REFRESH_RETRY_EXPONENT,
     _MIN_REFRESH_DELAY_S,
     _provider_registry_key,
     _refresh_loop,
+    _REFRESH_RETRY_BASE_DELAY_S,
+    _REFRESH_RETRY_MAX_DELAY_S,
     _RequestsTransport,
     KeycloakAuthenticationError,
     KeycloakTokenProvider,
@@ -2208,3 +2212,133 @@ class TestARefreshFailureDoesNotKillTheBackgroundLoop:
             f"the loop fell back to a password grant {len(password_grants)} time(s); that is the "
             f"login burst the offline-token hand-off exists to prevent"
         )
+
+
+class TestAFailedRefreshBacksOffInsteadOfPollingEverySecond:
+    """
+    A retry cadence is part of the fix, not a detail of it.
+
+    Re-arming the loop (`TestARefreshFailureDoesNotKillTheBackgroundLoop`) repaired the dead-thread
+    half of the defect and introduced a second one: a failed refresh leaves
+    `_access_token_expires_at` unchanged and therefore in the past, so the ordinary delay
+    computation clamps to `_MIN_REFRESH_DELAY_S` (1 s). A Keycloak outage then became a 1 Hz poll
+    per client -- and ondewo runs one client per call container, so the clients that fail together
+    retry together. That is the same thundering-herd shape as the login burst the offline-token
+    hand-off exists to remove, which is why the retry is both backed off AND jittered.
+    """
+
+    def test_a_failed_refresh_waits_the_backoff_base_rather_than_the_one_second_floor(self) -> None:
+        """The first retry waits `_REFRESH_RETRY_BASE_DELAY_S`, not `_MIN_REFRESH_DELAY_S`."""
+        clock: Dict[str, float] = {"now": 1000.0}
+        transport: FakeTransport = FakeTransport(
+            [
+                FakeResponse(200, _token_body("acc-1", "off-1", 300)),
+                FakeResponse(503, {"error": "temporarily_unavailable"}),
+                FakeResponse(200, _token_body("acc-2", "off-2", 300)),
+            ]
+        )
+        event: ScriptedEvent = ScriptedEvent(wait_returns=[False, False], clock=clock)
+        provider: KeycloakTokenProvider = _build_background_provider(transport, clock, event)
+
+        # A jitter source pinned to 0.0 puts every retry at the base of its window, so the delay
+        # is exact rather than drawn.
+        _refresh_loop(_weak(provider), event, lambda: clock["now"], lambda: 0.0)  # type: ignore[arg-type]
+
+        # wait_delays[0] is the healthy schedule: expires_in 300 - leeway 30 = 270 s.
+        assert event.wait_delays[0] == 300.0 - _EXPIRY_LEEWAY_S
+        # wait_delays[1] is the retry after the refusal. Before the backoff it was
+        # _MIN_REFRESH_DELAY_S, i.e. one token request per second for the whole outage.
+        assert event.wait_delays[1] == _REFRESH_RETRY_BASE_DELAY_S, (
+            f"the retry waited {event.wait_delays[1]}s; a value of {_MIN_REFRESH_DELAY_S}s means the "
+            f"failure path fell back to the scheduling floor and polls the token endpoint at 1 Hz"
+        )
+        assert provider.access_token == "acc-2", "the provider did not recover after the backoff"
+
+    def test_consecutive_failures_grow_the_delay_and_stop_at_the_ceiling(self) -> None:
+        """The ladder doubles from the base and is capped, so a long outage cannot push it to hours."""
+        clock: Dict[str, float] = {"now": 1000.0}
+        responses: List[FakeResponse] = [FakeResponse(200, _token_body("acc-1", "off-1", 300))]
+        responses.extend(FakeResponse(503, {"error": "temporarily_unavailable"}) for _ in range(8))
+        transport: FakeTransport = FakeTransport(responses)
+        event: ScriptedEvent = ScriptedEvent(wait_returns=[False] * 8, clock=clock)
+        provider: KeycloakTokenProvider = _build_background_provider(transport, clock, event)
+
+        # A jitter source pinned to 1.0 puts every retry at the TOP of its window, i.e. exactly the
+        # ceiling for that failure count -- which is what makes the ladder observable at all.
+        _refresh_loop(_weak(provider), event, lambda: clock["now"], lambda: 1.0)  # type: ignore[arg-type]
+
+        assert event.wait_delays[1:] == [5.0, 10.0, 20.0, 40.0, 80.0, 160.0, 300.0, 300.0]
+        assert event.wait_delays[-1] == _REFRESH_RETRY_MAX_DELAY_S
+        assert provider.access_token == "acc-1", "a failing refresh must not clobber the live token"
+
+    def test_the_delay_is_drawn_from_inside_the_window_rather_than_pinned_to_an_edge(self) -> None:
+        """Full jitter: the wait is uniform over `[base, ceiling]`, which is what desynchronises N clients."""
+        clock: Dict[str, float] = {"now": 1000.0}
+        transport: FakeTransport = FakeTransport(
+            [
+                FakeResponse(200, _token_body("acc-1", "off-1", 300)),
+                FakeResponse(503, {"error": "temporarily_unavailable"}),
+                FakeResponse(503, {"error": "temporarily_unavailable"}),
+            ]
+        )
+        event: ScriptedEvent = ScriptedEvent(wait_returns=[False, False], clock=clock)
+        provider: KeycloakTokenProvider = _build_background_provider(transport, clock, event)
+
+        _refresh_loop(_weak(provider), event, lambda: clock["now"], lambda: 0.5)  # type: ignore[arg-type]
+
+        # Failure 1: window [5, 5] -> 5 s whatever the fraction. Failure 2: window [5, 10] at 0.5
+        # -> 7.5 s, which is neither edge, so the value can only come from the draw.
+        assert event.wait_delays[1] == 5.0
+        assert event.wait_delays[2] == 7.5
+
+    def test_a_successful_refresh_resets_the_ladder(self) -> None:
+        """Otherwise one bad afternoon would leave a healthy client retrying at the ceiling."""
+        clock: Dict[str, float] = {"now": 1000.0}
+        transport: FakeTransport = FakeTransport(
+            [
+                FakeResponse(200, _token_body("acc-1", "off-1", 300)),
+                FakeResponse(503, {"error": "temporarily_unavailable"}),
+                FakeResponse(503, {"error": "temporarily_unavailable"}),
+                FakeResponse(200, _token_body("acc-2", "off-2", 300)),
+                FakeResponse(503, {"error": "temporarily_unavailable"}),
+            ]
+        )
+        event: ScriptedEvent = ScriptedEvent(wait_returns=[False] * 4, clock=clock)
+        provider: KeycloakTokenProvider = _build_background_provider(transport, clock, event)
+
+        _refresh_loop(_weak(provider), event, lambda: clock["now"], lambda: 1.0)  # type: ignore[arg-type]
+
+        # 270 (healthy) -> 5 (failure 1) -> 10 (failure 2) -> healthy again after the success ->
+        # 5 again after the next failure, because the counter was cleared rather than carried.
+        assert event.wait_delays[1] == 5.0
+        assert event.wait_delays[2] == 10.0
+        assert event.wait_delays[4] == 5.0, (
+            f"the ladder was not reset by the successful refresh: the next failure waited "
+            f"{event.wait_delays[4]}s instead of {_REFRESH_RETRY_BASE_DELAY_S}s"
+        )
+
+    def test_the_helper_never_returns_below_the_base_or_above_the_ceiling(self) -> None:
+        """The window is closed on both sides for every failure count and every fraction."""
+        for failures in range(1, _MAX_REFRESH_RETRY_EXPONENT + 5):
+            for fraction in (0.0, 0.25, 0.5, 0.75, 0.999):
+                delay: float = _backoff_delay_s(failures, lambda: fraction)
+                assert _REFRESH_RETRY_BASE_DELAY_S <= delay <= _REFRESH_RETRY_MAX_DELAY_S
+
+    def test_the_default_jitter_source_is_used_when_none_is_injected(self) -> None:
+        """The production path must not depend on a test injecting a random source."""
+        clock: Dict[str, float] = {"now": 1000.0}
+        transport: FakeTransport = FakeTransport(
+            [
+                FakeResponse(200, _token_body("acc-1", "off-1", 300)),
+                FakeResponse(503, {"error": "temporarily_unavailable"}),
+                FakeResponse(503, {"error": "temporarily_unavailable"}),
+            ]
+        )
+        event: ScriptedEvent = ScriptedEvent(wait_returns=[False, False], clock=clock)
+        provider: KeycloakTokenProvider = _build_background_provider(transport, clock, event)
+
+        _refresh_loop(_weak(provider), event, lambda: clock["now"])  # type: ignore[arg-type]
+
+        # Not an exact value -- random.random() supplied the fraction -- but it must sit inside the
+        # window rather than at the 1 s scheduling floor.
+        assert _REFRESH_RETRY_BASE_DELAY_S <= event.wait_delays[1] <= 5.0
