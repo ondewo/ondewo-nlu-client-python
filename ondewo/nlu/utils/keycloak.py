@@ -20,7 +20,9 @@ keycloak migration plan (D18) for the *public* SDK client `ondewo-nlu-cai-sdk-pu
 
 1. A one-time ROPC login (``grant_type=password`` + ``scope=offline_access``) against
    the public Keycloak client returns a short-lived ``access_token`` and a long-lived
-   *offline* ``refresh_token``.
+   *offline* ``refresh_token``. A caller that already holds such an offline token can hand
+   it to the provider instead (``refresh_token=``), which skips step 1 entirely: the
+   provider starts at step 2 and no password grant is ever sent.
 2. The provider auto-refreshes the access token (``grant_type=refresh_token``) before
    it expires and attaches it as the standard ``Authorization: Bearer`` metadata. The
    refresh happens *proactively* in a background daemon thread (mirroring the nodejs /
@@ -225,7 +227,9 @@ class KeycloakTokenProvider:
         username (str):
             Technical-user email/username for the ROPC grant.
         password (str):
-            Technical-user password for the ROPC grant.
+            Technical-user password for the ROPC grant. Unused when the provider was handed an
+            offline ``refresh_token``: that path never sends a password grant, whether or not a
+            password was also supplied.
         token_expiration_in_s (Optional[int]):
             Upper bound (in seconds since login) on how long auto-refresh runs. ``None``
             keeps refreshing until the offline session itself expires.
@@ -244,6 +248,7 @@ class KeycloakTokenProvider:
         time_fn: Optional[Callable[[], float]] = None,
         stop_event: Optional[threading.Event] = None,
         start_background_refresh: bool = True,
+        refresh_token: str = "",
     ) -> None:
         """
         Initialize the provider, acquire the offline token, and arm the background refresh.
@@ -281,10 +286,18 @@ class KeycloakTokenProvider:
             start_background_refresh (bool):
                 Whether to spawn the background refresh thread after login. Defaults to
                 ``True``; tests set it to ``False`` to drive the loop body directly.
+            refresh_token (str):
+                A Keycloak *offline* refresh token handed to this provider instead of a
+                password. When non-empty the provider bootstraps with a
+                ``grant_type=refresh_token`` exchange and **never sends a password grant**.
+                Appended LAST on purpose: the parameter list is part of this class's public
+                surface, and inserting mid-list would rebind an external positional caller's
+                arguments without any test here noticing.
 
         Raises:
             KeycloakAuthenticationError:
-                If the initial ROPC login is rejected by Keycloak.
+                If the initial ROPC login -- or, on the handed-off-token path, the initial
+                refresh -- is rejected by Keycloak.
         """
         self.keycloak_url: str = keycloak_url.rstrip("/")
         self.realm: str = realm
@@ -304,7 +317,7 @@ class KeycloakTokenProvider:
         )
 
         self._access_token: str = ""
-        self._refresh_token: str = ""
+        self._refresh_token: str = refresh_token
         self._access_token_expires_at: float = 0.0
         self._login_deadline: Optional[float] = None
 
@@ -314,7 +327,15 @@ class KeycloakTokenProvider:
         self._stop_event: threading.Event = stop_event if stop_event is not None else threading.Event()
         self._refresh_thread: Optional[threading.Thread] = None
 
-        self._login()
+        if refresh_token:
+            # Handed-off offline token: bootstrap with a refresh grant. Keycloak's brute-force
+            # detection counts failed *logins*, so N processes refreshing the same offline token in
+            # the same millisecond is not the burst the realm penalises, while N password grants is
+            # (measured: 3/10 password grants accepted at 0 ms spacing, 10/10 refresh grants).
+            self._refresh()
+        else:
+            self._login()
+        self._arm_auto_refresh_deadline()
 
         if start_background_refresh:
             self._start_background_refresh()
@@ -465,6 +486,16 @@ class KeycloakTokenProvider:
         }
         payload: Dict[str, Any] = self._post_token_request(data=data, action="login")
         self._store_tokens(payload=payload)
+
+    def _arm_auto_refresh_deadline(self) -> None:
+        """
+        Start the ``token_expiration_in_s`` window that bounds the auto-refresh loop.
+
+        Called from ``__init__`` after the initial token acquisition, whichever credential
+        produced it. Arming it here rather than inside :meth:`_login` is what makes the bound
+        mean the same thing on the handed-off-token path: a provider built from an offline
+        token would otherwise refresh for ever while its config asked for a bounded window.
+        """
         if self.token_expiration_in_s is not None:
             self._login_deadline = self._time_fn() + self.token_expiration_in_s
 
@@ -528,7 +559,16 @@ class KeycloakTokenProvider:
         """
         access_token: str = payload.get("access_token", "")
         if not access_token:
-            raise KeycloakAuthenticationError(f"Keycloak token response did not contain an access_token: {payload!r}")
+            # Report the field NAMES, never the values. A Keycloak token response is made almost
+            # entirely of credentials -- an offline ``refresh_token`` mints access tokens for the
+            # life of the offline session -- and rendering the body here wrote them into whatever
+            # log, traceback or archived CI report this exception reached. The names are what makes
+            # the failure diagnosable ("the body came back without an access_token, carrying
+            # refresh_token and expires_in"); the values add nothing to that and cannot be unsent.
+            raise KeycloakAuthenticationError(
+                "Keycloak token response did not contain an access_token; the response carried "
+                f"the fields {sorted(payload)} (values withheld: a token response is credential material)"
+            )
         self._access_token = access_token
         # Keycloak always re-issues the refresh token; keep the previous one if absent so a
         # response that omits it (e.g. a same-token refresh) does not blank out the offline token.
@@ -560,9 +600,15 @@ def _provider_registry_key(config: ClientConfig) -> str:
 
     Every field the provider is constructed from takes part, so two configs share a provider
     exactly when a shared provider would behave identically for both. The fields are hashed
-    rather than stored verbatim because one of them is the password: a plain tuple key would put
-    the secret in a module-level dict and in the locals of this frame, where any traceback
-    renderer that shows locals would print it.
+    rather than stored verbatim because two of them are secrets -- the password and the offline
+    refresh token: a plain tuple key would put them in a module-level dict and in the locals of
+    this frame, where any traceback renderer that shows locals would print them.
+
+    ``refresh_token`` is not optional here even though it looks like an afterthought. A config
+    authenticating with a handed-off offline token carries an EMPTY password, so the field that
+    otherwise discriminates two credentials degenerates to ``""`` for every one of them, and two
+    tenants' configs would collapse onto one provider -- one project's processes silently
+    authenticating as another's.
 
     Args:
         config (ClientConfig):
@@ -580,6 +626,7 @@ def _provider_registry_key(config: ClientConfig) -> str:
         config.password,
         "" if config.token_expiration_in_s is None else str(config.token_expiration_in_s),
         str(config.keycloak_verify_ssl),
+        config.refresh_token,
     ]
     # "\0" cannot occur in any of the fields, so the join is unambiguous.
     return hashlib.sha256("\0".join(fields).encode("utf-8")).hexdigest()
@@ -613,6 +660,7 @@ def get_keycloak_token_provider(config: ClientConfig) -> KeycloakTokenProvider:
                 password=config.password,
                 token_expiration_in_s=config.token_expiration_in_s,
                 verify_ssl=config.keycloak_verify_ssl,
+                refresh_token=config.refresh_token,
             )
             _PROVIDER_REGISTRY[key] = provider
         return provider

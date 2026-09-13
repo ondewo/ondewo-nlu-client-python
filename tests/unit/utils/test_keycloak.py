@@ -58,6 +58,9 @@ CLIENT_ID: str = "ondewo-nlu-cai-sdk-public"
 USERNAME: str = "tech-user@example.com"
 PASSWORD: str = "s3cr3t"
 EXPECTED_TOKEN_ENDPOINT: str = "https://kc.example.com/auth/realms/ondewo-ccai-platform/protocol/openid-connect/token"
+# A fabricated stand-in for a Keycloak offline refresh token; distinctive so a match in a request
+# body or a repr cannot be a coincidence of some other field.
+HANDED_OFF_REFRESH_TOKEN: str = "PLANTED-offline-refresh-token-4f19ac"
 
 
 class FakeResponse:
@@ -185,6 +188,42 @@ def _build_provider(
         token_expiration_in_s=token_expiration_in_s,
         transport=transport,
         start_background_refresh=False,
+    )
+
+
+def _build_token_provider(
+    transport: FakeTransport,
+    token_expiration_in_s: Optional[int] = None,
+    refresh_token: str = HANDED_OFF_REFRESH_TOKEN,
+) -> KeycloakTokenProvider:
+    """Construct a provider bootstrapped from a HANDED-OFF offline token, with no password at all.
+
+    The password is deliberately passed as `""`: the point of this path is that a process which
+    holds an offline token needs no password, so a helper that quietly supplies one would let the
+    provider fall back to the login path and still look green.
+
+    Args:
+        transport (FakeTransport):
+            The fake token endpoint backing the provider.
+        token_expiration_in_s (Optional[int]):
+            Optional upper bound on auto-refresh; `None` keeps refreshing unbounded.
+        refresh_token (str):
+            The offline token handed to the provider.
+
+    Returns:
+        KeycloakTokenProvider:
+            A provider that has already performed its bootstrap refresh via `transport`.
+    """
+    return KeycloakTokenProvider(
+        keycloak_url=KEYCLOAK_URL,
+        realm=REALM,
+        client_id=CLIENT_ID,
+        username=USERNAME,
+        password="",
+        token_expiration_in_s=token_expiration_in_s,
+        transport=transport,
+        start_background_refresh=False,
+        refresh_token=refresh_token,
     )
 
 
@@ -325,6 +364,185 @@ class TestRefresh:
         provider.authorization_metadata()  # refresh #2 → must still use off-1
 
         assert transport.calls[2]["refresh_token"] == "off-1"
+
+
+class TestHandedOffRefreshToken:
+    """Bootstrapping from an offline token handed in by the caller, with no password grant.
+
+    Keycloak's brute-force detection counts failed *logins*, so N processes booting at once as the
+    same technical user are a burst the realm penalises, while N concurrent refresh grants are not.
+    The whole value of this path therefore rests on ONE negative property -- that no
+    `grant_type=password` request is ever sent -- so that is asserted explicitly rather than
+    inferred from the request count.
+    """
+
+    def test_bootstrap_sends_a_refresh_grant_and_never_a_password_grant(self) -> None:
+        """A provider given an offline token exchanges it directly; no password grant is sent."""
+        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body("acc-1", "off-1", 300))])
+
+        provider: KeycloakTokenProvider = _build_token_provider(transport)
+
+        assert provider.access_token == "acc-1"
+        assert len(transport.calls) == 1
+        bootstrap_call: Dict[str, str] = transport.calls[0]
+        assert bootstrap_call["url"] == EXPECTED_TOKEN_ENDPOINT
+        assert bootstrap_call["grant_type"] == "refresh_token"
+        assert bootstrap_call["refresh_token"] == HANDED_OFF_REFRESH_TOKEN
+        assert bootstrap_call["client_id"] == CLIENT_ID
+        # The negative half, over EVERY request the provider made -- not just the first.
+        assert [call["grant_type"] for call in transport.calls] == ["refresh_token"]
+        assert all("password" not in call for call in transport.calls)
+        assert all("username" not in call for call in transport.calls)
+        # Q1: public client — never send a client_secret, on this path either.
+        assert "client_secret" not in bootstrap_call
+
+    def test_a_later_refresh_still_uses_the_handed_off_token_when_none_is_reissued(
+        self,
+        monkeypatch: pytest.MonkeyPatch,
+    ) -> None:
+        """Past expiry the provider refreshes again, and still never falls back to a password grant.
+
+        Args:
+            monkeypatch (pytest.MonkeyPatch):
+                Fixture used to replace the module clock with a controllable fake.
+        """
+        clock: Dict[str, float] = {"now": 1000.0}
+        monkeypatch.setattr(keycloak_module.time, "monotonic", lambda: clock["now"])
+
+        transport: FakeTransport = FakeTransport(
+            [
+                # The bootstrap response omits refresh_token, so the handed-off one must survive.
+                FakeResponse(200, {"access_token": "acc-1", "expires_in": 300}),
+                FakeResponse(200, _token_body("acc-2", "off-2", 300)),
+            ]
+        )
+        provider: KeycloakTokenProvider = _build_token_provider(transport)
+
+        clock["now"] = 1000.0 + 300.0
+        provider.authorization_metadata()
+
+        assert provider.access_token == "acc-2"
+        assert transport.calls[1]["refresh_token"] == HANDED_OFF_REFRESH_TOKEN
+        assert [call["grant_type"] for call in transport.calls] == ["refresh_token", "refresh_token"]
+
+    def test_a_rejected_handed_off_token_raises(self) -> None:
+        """A non-2xx bootstrap refresh raises, exactly as a rejected login does."""
+        transport: FakeTransport = FakeTransport([FakeResponse(400, {"error": "invalid_grant"})])
+
+        with pytest.raises(KeycloakAuthenticationError):
+            _build_token_provider(transport)
+
+    def test_the_expiration_bound_is_armed_on_this_path_too(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        """`token_expiration_in_s` bounds auto-refresh whichever credential bootstrapped it.
+
+        The deadline used to be armed inside `_login`, which the handed-off-token path never calls.
+        Left there, a token-bootstrapped provider would refresh for ever while its config asked for
+        a bounded window — a silent difference between the two paths, in the unsafe direction.
+
+        Args:
+            monkeypatch (pytest.MonkeyPatch):
+                Fixture used to replace the module clock with a controllable fake.
+        """
+        clock: Dict[str, float] = {"now": 1000.0}
+        monkeypatch.setattr(keycloak_module.time, "monotonic", lambda: clock["now"])
+
+        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body("acc-1", "off-1", 300))])
+        provider: KeycloakTokenProvider = _build_token_provider(transport, token_expiration_in_s=600)
+
+        # Past the access-token expiry AND past the 600 s window: the loop must have stopped, so no
+        # second request is made and the stale token is served.
+        clock["now"] = 1000.0 + 900.0
+        provider.authorization_metadata()
+
+        assert len(transport.calls) == 1
+        assert provider.access_token == "acc-1"
+
+    def test_the_offline_token_is_preferred_when_a_password_is_also_supplied(self) -> None:
+        """With BOTH credentials on the config, the offline token wins and no password is sent.
+
+        A caller migrating to handed-off tokens will plausibly leave the password populated -- it
+        is the same config object, and `__post_init__` accepts both. If the provider preferred the
+        password there, the migration would silently do nothing: every process would still send a
+        password grant, the login burst this feature exists to remove would still happen, and every
+        other assertion in this class -- which builds providers with `password=""` -- would stay
+        green. The precedence is therefore pinned on a provider that HAS both.
+        """
+        transport: FakeTransport = FakeTransport([FakeResponse(200, _token_body("acc-1", "off-1", 300))])
+
+        provider: KeycloakTokenProvider = KeycloakTokenProvider(
+            keycloak_url=KEYCLOAK_URL,
+            realm=REALM,
+            client_id=CLIENT_ID,
+            username=USERNAME,
+            password=PASSWORD,
+            transport=transport,
+            start_background_refresh=False,
+            refresh_token=HANDED_OFF_REFRESH_TOKEN,
+        )
+
+        # The password really is on the provider, so the assertion below cannot pass vacuously
+        # against a provider that simply never received one.
+        assert provider.password == PASSWORD
+        assert [call["grant_type"] for call in transport.calls] == ["refresh_token"]
+        assert all("password" not in call for call in transport.calls)
+        assert PASSWORD not in repr(transport.calls)
+
+
+class TestTokenResponseValuesAreNeverEchoed:
+    """A malformed token response must not put the credentials it carries into an error message.
+
+    `_store_tokens` raises when a 2xx body carries no `access_token`. A Keycloak token response is
+    made almost entirely of credentials, so rendering the body into the exception writes them
+    wherever that exception lands -- a log line, a traceback, an archived CI report. The same
+    commit that added `refresh_token` to `ClientConfig.SECRET_FIELD_NAMES` -- because an offline
+    token mints access tokens for the life of the offline session, with no password policy in the
+    way -- must not leave the one path in this module that prints a refresh token verbatim.
+
+    The message must still say what came back, or the reason for the failure is unreportable; the
+    FIELD NAMES carry that, and the values carry none of it.
+    """
+
+    #: No overlap with any Keycloak field name, so "value absent, key present" is unambiguous.
+    PLANTED_SECRET: str = "PLANTED-SECRET-VALUE-9c41de"
+
+    def test_a_response_without_an_access_token_does_not_echo_the_offline_token(self) -> None:
+        """The refresh token in a malformed 2xx body stays out of the raised message."""
+        transport: FakeTransport = FakeTransport(
+            [FakeResponse(200, {"refresh_token": self.PLANTED_SECRET, "expires_in": 300})]
+        )
+
+        with pytest.raises(KeycloakAuthenticationError) as excinfo:
+            _build_token_provider(transport)
+
+        assert self.PLANTED_SECRET not in str(excinfo.value)
+
+    def test_the_error_still_names_the_fields_that_did_come_back(self) -> None:
+        """Redaction keeps the message diagnosable: the field NAMES are still reported."""
+        transport: FakeTransport = FakeTransport(
+            [FakeResponse(200, {"refresh_token": self.PLANTED_SECRET, "expires_in": 300})]
+        )
+
+        with pytest.raises(KeycloakAuthenticationError) as excinfo:
+            _build_token_provider(transport)
+
+        message: str = str(excinfo.value)
+        assert "refresh_token" in message
+        assert "expires_in" in message
+
+    def test_the_password_path_is_covered_by_the_same_redaction(self) -> None:
+        """The login path shares `_store_tokens`, so it must not echo values either.
+
+        Keycloak issues the offline token in response to the ROPC login, so the very first
+        response a password-authenticating client receives already carries one.
+        """
+        transport: FakeTransport = FakeTransport(
+            [FakeResponse(200, {"refresh_token": self.PLANTED_SECRET, "expires_in": 300})]
+        )
+
+        with pytest.raises(KeycloakAuthenticationError) as excinfo:
+            _build_provider(transport)
+
+        assert self.PLANTED_SECRET not in str(excinfo.value)
 
 
 class TestTokenExpirationBound:
@@ -638,6 +856,7 @@ class TestSharedProviderRegistry:
             ("password", "other-secret"),
             ("token_expiration_in_s", 600),
             ("keycloak_verify_ssl", False),
+            ("refresh_token", "other-offline-token"),
         ],
     )
     def test_registry_key_changes_with_every_credential_field(
@@ -669,6 +888,133 @@ class TestSharedProviderRegistry:
         changed: ClientConfig = dataclasses.replace(baseline, **{field_name: changed_value})
 
         assert _provider_registry_key(baseline) != _provider_registry_key(changed)
+
+    def test_configs_differing_only_by_offline_token_never_share_a_provider(
+        self,
+        monkeypatch: pytest.MonkeyPatch,
+    ) -> None:
+        """Two token-only configs must resolve to two providers, each using its OWN token.
+
+        This is the case the credential keying does not cover by itself. A config authenticating
+        with a handed-off offline token carries an EMPTY password, so the field that discriminates
+        two password credentials degenerates to `""` for every token config: without the token in
+        the key, two tenants collapse onto one provider and the second silently authenticates as
+        the first.
+
+        Both configs are kept referenced so the weak registry cannot collect one and mask the
+        collapse, and the assertion is on the token each provider actually SENT, not merely on
+        object identity.
+
+        Args:
+            monkeypatch (pytest.MonkeyPatch):
+                Fixture used to patch `requests.post` so the default transport hits no network.
+        """
+        refreshed_with: List[str] = []
+
+        def fake_post(url: str, data: Dict[str, str], timeout: float, verify: bool = True) -> FakeResponse:
+            """Record the offline token each bootstrap used and return a canned response.
+
+            Args:
+                url (str):
+                    The token-endpoint URL (unused).
+                data (Dict[str, str]):
+                    The form-encoded request parameters.
+                timeout (float):
+                    The request timeout (unused).
+                verify (bool):
+                    Whether TLS verification is on (unused).
+
+            Returns:
+                FakeResponse:
+                    A 200 response carrying access/refresh tokens.
+            """
+            assert data["grant_type"] == "refresh_token"
+            refreshed_with.append(data["refresh_token"])
+            return FakeResponse(200, _token_body("acc-1", "off-1", 300))
+
+        monkeypatch.setattr(keycloak_module.requests, "post", fake_post)
+
+        other_refresh_token: str = "PLANTED-offline-refresh-token-OTHER-8ae201"
+
+        def build_config(refresh_token: str) -> ClientConfig:
+            """Build a token-only config carrying the given offline token.
+
+            Args:
+                refresh_token (str):
+                    The offline token the config authenticates with.
+
+            Returns:
+                ClientConfig:
+                    A password-less config for the shared test identity.
+            """
+            return ClientConfig(
+                host="localhost",
+                port="50055",
+                user_name=USERNAME,
+                keycloak_url=KEYCLOAK_URL,
+                realm=REALM,
+                client_id=CLIENT_ID,
+                refresh_token=refresh_token,
+            )
+
+        first_config: ClientConfig = build_config(HANDED_OFF_REFRESH_TOKEN)
+        second_config: ClientConfig = build_config(other_refresh_token)
+
+        first: KeycloakTokenProvider = get_keycloak_token_provider(first_config)
+        second: KeycloakTokenProvider = get_keycloak_token_provider(second_config)
+
+        assert first is not second
+        # Each config bootstrapped with its OWN token; neither rode on the other's provider.
+        assert refreshed_with == [HANDED_OFF_REFRESH_TOKEN, other_refresh_token]
+
+    def test_factory_forwards_the_offline_token_to_the_provider(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        """The factory threads `config.refresh_token` through, so no password grant leaves it.
+
+        A factory that dropped the field would build a provider with an empty token and fall
+        straight back to the login path — the exact burst this feature removes — while every
+        assertion about the provider class itself stayed green.
+
+        Args:
+            monkeypatch (pytest.MonkeyPatch):
+                Fixture used to patch `requests.post` so the default transport hits no network.
+        """
+        grant_types: List[str] = []
+
+        def fake_post(url: str, data: Dict[str, str], timeout: float, verify: bool = True) -> FakeResponse:
+            """Record the grant type used and return a canned response.
+
+            Args:
+                url (str):
+                    The token-endpoint URL (unused).
+                data (Dict[str, str]):
+                    The form-encoded request parameters.
+                timeout (float):
+                    The request timeout (unused).
+                verify (bool):
+                    Whether TLS verification is on (unused).
+
+            Returns:
+                FakeResponse:
+                    A 200 response carrying access/refresh tokens.
+            """
+            grant_types.append(data["grant_type"])
+            return FakeResponse(200, _token_body("acc-1", "off-1", 300))
+
+        monkeypatch.setattr(keycloak_module.requests, "post", fake_post)
+
+        config: ClientConfig = ClientConfig(
+            host="localhost",
+            port="50055",
+            user_name=USERNAME,
+            keycloak_url=KEYCLOAK_URL,
+            realm=REALM,
+            client_id=CLIENT_ID,
+            refresh_token=HANDED_OFF_REFRESH_TOKEN,
+        )
+        provider: KeycloakTokenProvider = get_keycloak_token_provider(config)
+
+        assert provider.access_token == "acc-1"
+        assert grant_types == ["refresh_token"]
 
 
 class TestDefaultRequestsTransport:

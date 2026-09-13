@@ -31,6 +31,7 @@ from ondewo.nlu.client_config import ClientConfig
 #: Distinctive, so a match cannot be a coincidence of a field name or a host.
 PASSWORD: str = "PLANTED-password-6b21fa"
 GRPC_CERT: str = "PLANTED-BEGIN-CERTIFICATE-91cd3e"
+REFRESH_TOKEN: str = "PLANTED-offline-refresh-token-4f19ac"
 HOST: str = "planted-host.invalid"
 USER: str = "planted-user@invalid"
 
@@ -42,6 +43,7 @@ def _config(**overrides: Any) -> ClientConfig:
         "grpc_cert": GRPC_CERT,
         "user_name": USER,
         "password": PASSWORD,
+        "refresh_token": REFRESH_TOKEN,
     }
     kwargs.update(overrides)
     return ClientConfig(**kwargs)
@@ -63,6 +65,23 @@ class TestClientConfigReprRedactsSecrets:
         # redaction it guards was working perfectly -- a red test that says nothing about the code.
         assert config.grpc_cert == GRPC_CERT.encode()
         assert GRPC_CERT not in repr(config)
+
+    def test_the_offline_refresh_token_is_not_printed(self) -> None:
+        # A handed-off Keycloak offline token is a long-lived bearer credential: anyone holding it
+        # mints access tokens for the life of the offline session, with no password policy and no
+        # realm login in the way. SECRET_FIELD_NAMES matches by EXACT field name -- unlike
+        # ondewo-vtsi's substring-matching SECRET_NAME_TOKENS, which already covers "token" -- so
+        # checking the downstream list and inferring this one leaves the token printed in full.
+        config: ClientConfig = _config()
+        # Read the ATTRIBUTE to prove the secret is really on the object; using repr for this would
+        # make the test unfalsifiable, since repr is the thing under test.
+        assert config.refresh_token == REFRESH_TOKEN
+        assert REFRESH_TOKEN not in repr(config)
+
+    def test_an_unset_offline_refresh_token_is_not_reported_as_present(self) -> None:
+        # The common case is a password config, which carries no token at all. Rendering that as
+        # ***REDACTED*** would read as "a token is set", hiding the very state being debugged.
+        assert "refresh_token=''" in repr(_config(refresh_token=""))
 
     def test_str_is_redacted_too(self) -> None:
         # `str()` falls back to `__repr__` unless `__str__` is defined; assert it explicitly so a

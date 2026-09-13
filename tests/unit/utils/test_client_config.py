@@ -13,6 +13,9 @@
 # limitations under the License.
 """Unit tests for `ClientConfig` validation on the bearer-only auth model (D18)."""
 
+import dataclasses
+from typing import List
+
 import pytest
 
 from ondewo.nlu.client_config import ClientConfig
@@ -24,6 +27,8 @@ PASSWORD: str = "s3cr3t"
 KEYCLOAK_URL: str = "https://kc.example.com/auth"
 REALM: str = "ondewo-ccai-platform"
 CLIENT_ID: str = "ondewo-nlu-cai-sdk-public"
+# A fabricated stand-in for a Keycloak offline refresh token.
+REFRESH_TOKEN: str = "PLANTED-offline-refresh-token-4f19ac"
 
 
 class TestNonKeycloakPath:
@@ -47,7 +52,7 @@ class TestNonKeycloakPath:
             ClientConfig(host=HOST, port=PORT, password=PASSWORD)
 
     def test_missing_password_raises(self) -> None:
-        """An empty password fails `__post_init__` validation with `ValueError`."""
+        """Neither a password nor a refresh token fails `__post_init__` validation."""
         with pytest.raises(ValueError):
             ClientConfig(host=HOST, port=PORT, user_name=USERNAME)
 
@@ -97,6 +102,55 @@ class TestKeycloakPath:
                 user_name=USERNAME,
                 password=PASSWORD,
                 keycloak_url=KEYCLOAK_URL,
+            )
+
+    def test_token_only_config_is_valid_and_still_uses_keycloak(self) -> None:
+        """A config carrying an offline token and NO password is valid and Keycloak-enabled.
+
+        `use_keycloak` is computed from the Keycloak triple alone, so it is unaffected by which
+        credential was supplied — but a silent `False` here would not fail anything, it would skip
+        authentication entirely, so it is asserted rather than reasoned about.
+        """
+        config: ClientConfig = ClientConfig(
+            host=HOST,
+            port=PORT,
+            user_name=USERNAME,
+            keycloak_url=KEYCLOAK_URL,
+            realm=REALM,
+            client_id=CLIENT_ID,
+            refresh_token=REFRESH_TOKEN,
+        )
+
+        assert config.password == ""
+        assert config.refresh_token == REFRESH_TOKEN
+        assert config.use_keycloak is True
+
+    def test_refresh_token_is_the_last_field(self) -> None:
+        """`refresh_token` must stay the LAST field of the dataclass.
+
+        `ClientConfig` is frozen and `host`/`port` are positional, so an external caller may be
+        constructing it positionally. Inserting the new field mid-list would silently rebind such a
+        caller's arguments, and no construction site in this repository — all keyword-based — could
+        see it. This guard is that missing signal.
+        """
+        field_names: List[str] = [field.name for field in dataclasses.fields(ClientConfig)]
+
+        assert field_names[-1] == "refresh_token"
+
+    def test_a_config_with_neither_credential_raises(self) -> None:
+        """A config with no password AND no refresh token still fails at construction.
+
+        The credential check is widened, never deleted: without it a credential-less config would
+        construct happily and fail later at the token endpoint, far from its cause.
+        """
+        with pytest.raises(ValueError):
+            ClientConfig(
+                host=HOST,
+                port=PORT,
+                user_name=USERNAME,
+                keycloak_url=KEYCLOAK_URL,
+                realm=REALM,
+                client_id=CLIENT_ID,
             )
 
     def test_no_client_secret_field_present(self) -> None:
