@@ -36,6 +36,7 @@ browser flow (D14). The client is public, so no ``client_secret`` is sent.
 """
 
 import hashlib
+import random
 import sys
 import threading
 import time
@@ -68,6 +69,19 @@ _EXPIRY_LEEWAY_S: float = 30.0
 # Lower bound (in seconds) for the scheduled background-refresh delay so a tiny/zero
 # ``expires_in`` cannot spin the refresh thread into a hot loop.
 _MIN_REFRESH_DELAY_S: float = 1.0
+
+# First retry delay (seconds) after a FAILED background refresh. Deliberately far above
+# ``_MIN_REFRESH_DELAY_S``: a failed refresh leaves ``_access_token_expires_at`` in the past, so the
+# ordinary delay computation clamps to the 1 s floor and a Keycloak outage becomes a 1 Hz poll per
+# client. ondewo runs one client per call container, so a floor that is harmless for a single
+# process is an amplifier against a realm they all share (see the login-burst note in 7.0.5).
+_REFRESH_RETRY_BASE_DELAY_S: float = 5.0
+
+# Ceiling (seconds) for the failure backoff: a persistent outage is retried at most this often.
+_REFRESH_RETRY_MAX_DELAY_S: float = 300.0
+
+# Exponent cap so ``2 ** n`` cannot grow without bound; 5 * 2^6 = 320 already exceeds the ceiling.
+_MAX_REFRESH_RETRY_EXPONENT: int = 6
 
 # HTTP timeout for the (single, fast) token-endpoint calls.
 _HTTP_TIMEOUT_S: float = 30.0
@@ -136,10 +150,36 @@ class KeycloakAuthenticationError(Exception):
     """Raised when the Keycloak token endpoint rejects a login or refresh request."""
 
 
+def _backoff_delay_s(consecutive_failures: int, random_fn: Callable[[], float]) -> float:
+    """
+    Compute the wait before the next attempt after ``consecutive_failures`` failed refreshes.
+
+    The ceiling grows ``_REFRESH_RETRY_BASE_DELAY_S * 2 ** (failures - 1)`` up to
+    :data:`_REFRESH_RETRY_MAX_DELAY_S`, and the returned delay is drawn uniformly from
+    ``[base, ceiling]``. The jitter is the load-bearing half: N containers whose refreshes fail in
+    the same instant would otherwise retry in lockstep for as long as the outage lasts, which is
+    the same thundering-herd shape as the login burst the offline-token hand-off exists to remove.
+
+    Args:
+        consecutive_failures (int):
+            Number of consecutive failed refreshes; must be >= 1.
+        random_fn (Callable[[], float]):
+            Source of a ``[0.0, 1.0)`` fraction (injectable so tests get an exact delay).
+
+    Returns:
+        float:
+            Seconds to wait before the next refresh attempt.
+    """
+    exponent: int = min(consecutive_failures - 1, _MAX_REFRESH_RETRY_EXPONENT)
+    ceiling_s: float = min(_REFRESH_RETRY_BASE_DELAY_S * float(2**exponent), _REFRESH_RETRY_MAX_DELAY_S)
+    return _REFRESH_RETRY_BASE_DELAY_S + random_fn() * (ceiling_s - _REFRESH_RETRY_BASE_DELAY_S)
+
+
 def _refresh_loop(
     provider_ref: "weakref.ref[KeycloakTokenProvider]",
     stop_event: threading.Event,
     time_fn: Callable[[], float],
+    random_fn: Optional[Callable[[], float]] = None,
 ) -> None:
     """
     Background daemon-thread target that proactively refreshes the access token.
@@ -161,7 +201,14 @@ def _refresh_loop(
             Event signalled by :meth:`stop`; also used as the interruptible sleep primitive.
         time_fn (Callable[[], float]):
             Monotonic clock (injectable for deterministic tests).
+        random_fn (Optional[Callable[[], float]]):
+            Source of a ``[0.0, 1.0)`` fraction for the failure-backoff jitter; defaults to
+            :func:`random.random`. Injected by tests so a retry delay is exact.
     """
+    jitter_fn: Callable[[], float] = random_fn if random_fn is not None else random.random
+    # Consecutive failed refreshes. Zero on the healthy path, so the ordinary
+    # expiry-driven schedule below is completely unaffected by this counter.
+    consecutive_failures: int = 0
     while not stop_event.is_set():
         provider: Optional["KeycloakTokenProvider"] = provider_ref()
         if provider is None:
@@ -178,6 +225,11 @@ def _refresh_loop(
         delay: float = provider._access_token_expires_at - _EXPIRY_LEEWAY_S - now
         if delay < _MIN_REFRESH_DELAY_S:
             delay = _MIN_REFRESH_DELAY_S
+        if consecutive_failures > 0:
+            # A failed refresh leaves ``_access_token_expires_at`` unchanged and therefore in the
+            # past, so the computation above has already clamped to the 1 s floor. Retrying there
+            # would poll the token endpoint once a second for the whole outage; back off instead.
+            delay = _backoff_delay_s(consecutive_failures, jitter_fn)
         if deadline is not None:
             remaining: float = deadline - now
             if remaining < delay:
@@ -196,6 +248,7 @@ def _refresh_loop(
         try:
             with provider._lock:
                 provider._refresh_if_within_window(now=time_fn())
+            consecutive_failures = 0
         except Exception as exception:
             # A FAILED REFRESH MUST NOT END PROACTIVE REFRESH FOR THE PROCESS'S LIFETIME.
             # This function is the thread target, so before this guard any exception out of the
@@ -218,8 +271,10 @@ def _refresh_loop(
             # terminal. There is deliberately no fallback to a password grant here -- see the
             # 7.0.5 release note: a silent re-login would reintroduce, at the least predictable
             # moment, exactly the login burst the handed-off token exists to avoid.
+            consecutive_failures += 1
             logger.warning(
-                f"Keycloak background refresh failed and will be retried on the next tick "
+                f"Keycloak background refresh failed (attempt {consecutive_failures}) and will be "
+                f"retried after a jittered backoff "
                 f"({type(exception).__name__}: {exception})"
             )
         provider = None
@@ -275,6 +330,7 @@ class KeycloakTokenProvider:
         verify_ssl: bool = True,
         transport: Optional[TokenEndpoint] = None,
         time_fn: Optional[Callable[[], float]] = None,
+        random_fn: Optional[Callable[[], float]] = None,
         stop_event: Optional[threading.Event] = None,
         start_background_refresh: bool = True,
         refresh_token: str = "",
@@ -308,6 +364,10 @@ class KeycloakTokenProvider:
                 Monotonic clock used for all expiry bookkeeping and the background-refresh
                 schedule. Defaults to :func:`time.monotonic`; tests inject a controllable
                 fake so the background thread is deterministic.
+            random_fn (Optional[Callable[[], float]]):
+                Source of a ``[0.0, 1.0)`` fraction used to jitter the backoff after a FAILED
+                background refresh. Defaults to :func:`random.random`; consulted only on the
+                failure path, so the healthy schedule is unaffected by it.
             stop_event (Optional[threading.Event]):
                 Event the background thread waits on (interruptible sleep) and that
                 :meth:`stop` signals. Defaults to a fresh :class:`threading.Event`; tests
@@ -339,6 +399,9 @@ class KeycloakTokenProvider:
             transport if transport is not None else _RequestsTransport(verify_ssl=verify_ssl)
         )
         self._time_fn: Callable[[], float] = time_fn if time_fn is not None else time.monotonic
+        # Jitter source for the background-refresh failure backoff; injectable so a test can make
+        # the retry delay exact. Only ever consulted on the failure path.
+        self._random_fn: Callable[[], float] = random_fn if random_fn is not None else random.random
 
         self._token_endpoint: str = _TOKEN_ENDPOINT_TEMPLATE.format(
             keycloak_url=self.keycloak_url,
@@ -470,7 +533,7 @@ class KeycloakTokenProvider:
         provider_ref: "weakref.ref[KeycloakTokenProvider]" = weakref.ref(self)
         thread: threading.Thread = threading.Thread(
             target=_refresh_loop,
-            args=(provider_ref, self._stop_event, self._time_fn),
+            args=(provider_ref, self._stop_event, self._time_fn, self._random_fn),
             name=f"keycloak-token-refresh-{self.client_id}",
             daemon=True,
         )
