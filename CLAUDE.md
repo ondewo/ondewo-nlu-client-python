@@ -354,3 +354,108 @@ branch away from its ticket.
 
 Both hooks carry a comment saying so. If either block is ever moved, move them as a pair: validator first,
 decorator second.
+
+## Releasing: preflight and the traps that have actually bitten
+
+Written after a release program across every ONDEWO client in one session. Each item below
+cost real time or a broken artefact; every statement is derived from THIS repo's Makefile.
+
+### Before you touch the version, check the released tag is in `master`
+
+Releases here are cut from a `release/<version>` branch and are **not always merged back**, so
+`master` can be missing work that is already published — and because a later version number
+sorts above the unmerged one, a consumer upgrading silently loses it. The ondewo-nlu-client-python
+7.1.0 release was exactly this: it shipped from a `master` that had never seen 7.0.5's
+offline-token hand-off, so PyPI's newest release was a regression against its predecessor.
+
+```bash
+latest=$(git tag --sort=-v:refname | head -1)
+git merge-base --is-ancestor "$latest" master && echo "in master" || echo "NOT in master -- merge first"
+```
+
+A fast-forward (`git merge --ff-only <tag>`) is the common case. A true merge needs care: resolve
+metadata toward `master` and keep BOTH release-note sections, newest first — a reader upgrading
+from the older line still needs the older entry.
+
+### `git add` on a dirty submodule stages the WRONG commit
+
+This repo has submodules (`ondewo-nlu-api`, `ondewo-proto-compiler`). If a submodule's working
+tree is dirty, `git add <submodule>` stages **its current HEAD**, not the pointer you resolved
+during a merge — silently regressing it to an older commit. `git checkout master -- <submodule>`
+fixes the index but the next `git add` re-breaks it. Move the working tree instead:
+
+```bash
+want=$(git ls-tree master <submodule> | awk '{print $3}')
+git -C <submodule> checkout -q "$want" && git add <submodule>
+```
+
+### The release notes are sliced by an EXACTLY-CASED heading
+
+`CURRENT_RELEASE_NOTES` slices `RELEASE.md` with a perl range. In THIS repo the opening
+pattern is, verbatim:
+
+```text
+Release ONDEWO NLU Python Client ${ONDEWO_NLU_VERSION}
+```
+
+So the heading of a new entry must read exactly `## Release ONDEWO NLU Python Client <version>`. **This wording is
+not consistent across the ONDEWO repos** — some say `... <Name> Client`, some `... Client
+<Name>` with the words reversed, the API repos say `... API` with no `Client` at all, and the
+casing varies (`Js`, `Nodejs`, `Typescript`, `Survey`). Do not carry a heading over from a
+sibling repo. Copy the PREVIOUS entry in this file and change only the version, or read the
+pattern above out of the Makefile.
+
+A heading that does not match yields an **empty slice**, and the GitHub release is then
+created with empty notes or fails outright. Verify before releasing:
+
+```bash
+grep -c '^## Release ONDEWO NLU Python Client ' RELEASE.md     # must be >= 1 for your new version
+```
+
+### Publish order decides how a partial failure is recovered
+
+`make release` in this repo runs:
+
+1. `create_release_branch`
+2. `create_release_tag`
+3. `release_to_github_via_docker`
+4. `push_to_pypi_via_docker`
+5. `push_to_pypi`
+
+The **PyPI publish happens LAST**. So a failure before it means nothing shipped, but the
+branch, tag and GitHub release may already exist — and `spc` will then refuse a re-run. Recover
+by running only the remaining step, not the whole target.
+
+### Verify against the registry, with the REAL package name
+
+This package publishes as **`ondewo-nlu-client`**, which is not always the repository name — the JS client
+publishes as `@ondewo/ondewo-nlu-client-js` (doubled `ondewo`), so a lookup by repo name returns
+a 404 that reads like a failed release. Check the name in the manifest first, then:
+
+```bash
+curl -s https://pypi.org/pypi/ondewo-nlu-client/json | python3 -c "import sys,json;print(json.load(sys.stdin)['info']['version'])"
+```
+
+### The `mypy` pre-commit hook is `language: system`
+
+It runs whatever `mypy` is on `PATH`, so a `git commit` outside the project venv fails with
+`Executable mypy not found` even though `uv run mypy` passes. Commit with the venv on `PATH`
+rather than reaching for `--no-verify`:
+
+```bash
+PATH="$PWD/.venv/bin:$PATH" git commit -m "..."
+```
+
+### The release prints credentials — read the log BEFORE you scrub it
+
+`make ondewo_release` clones `ondewo-devops-accounts` and passes the registry and GitHub tokens on
+the make command line, so they are echoed into the console and into any transcript capturing it.
+This is a known and accepted property of the shared release path: do **not** re-plumb the recipe.
+Redirect the run to a file, read it through a filter, and shred the file afterwards — and read it
+**before** shredding, or a genuine failure is lost with the secrets:
+
+```bash
+umask 077; make ondewo_release > /tmp/rel.log 2>&1; echo "RC=$?"
+grep -avE 'TOKEN|PASSWORD|USERNAME|_authToken' /tmp/rel.log | tail -20   # read FIRST
+shred -u /tmp/rel.log; rm -rf ondewo-devops-accounts                     # then scrub
+```
