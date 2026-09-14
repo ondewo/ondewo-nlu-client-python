@@ -112,6 +112,8 @@ class OperationMetadata(google.protobuf.message.Message):
         """remove a rag crawler result from a dataset"""
         CHANGE_DATASET_EMBEDDING_MODEL: OperationMetadata._OperationType.ValueType  # 13
         """change the embedding model of dataset that already contains parsed documents"""
+        REPARSE_DATASET: OperationMetadata._OperationType.ValueType  # 14
+        """re-parse of all documents in a dataset"""
 
     class OperationType(_OperationType, metaclass=_OperationTypeEnumTypeWrapper):
         """Type of operation.
@@ -146,6 +148,8 @@ class OperationMetadata(google.protobuf.message.Message):
     """remove a rag crawler result from a dataset"""
     CHANGE_DATASET_EMBEDDING_MODEL: OperationMetadata.OperationType.ValueType  # 13
     """change the embedding model of dataset that already contains parsed documents"""
+    REPARSE_DATASET: OperationMetadata.OperationType.ValueType  # 14
+    """re-parse of all documents in a dataset"""
 
     STATUS_FIELD_NUMBER: builtins.int
     PARENT_OPERATION_NAME_FIELD_NUMBER: builtins.int

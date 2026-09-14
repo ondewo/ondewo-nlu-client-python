@@ -2,6 +2,14 @@
 
 *****************
 
+## Release ONDEWO NLU Python Client 7.2.0
+
+### Improvements
+
+* Tracking API Version [7.2.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/7.2.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+
+*****************
+
 ## Release ONDEWO NLU Python Client 7.1.2
 
 ### Bug fixes
