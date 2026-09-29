@@ -2754,13 +2754,16 @@ class RagCrawlerConfig(google.protobuf.message.Message):
     OUTPUT_CONFIG_FIELD_NUMBER: builtins.int
     STATUS_FILTER_FIELD_NUMBER: builtins.int
     INCREMENTAL_CONFIG_FIELD_NUMBER: builtins.int
+    MAX_PAGES_FIELD_NUMBER: builtins.int
+    max_pages: builtins.int
+    """Optional. Hard cap on pages fetched successfully in this run; <code>0</code> means unlimited."""
     @property
     def concurrency_config(self) -> global___RagCrawlerConcurrencyConfig:
         """Optional. Concurrency and pacing controls for crawler requests."""
 
     @property
     def deep_crawler_config(self) -> global___RagCrawlerDeepCrawlerConfig:
-        """Optional. Deep crawler behavior (enable + depth/pages/scoring/filter chain)."""
+        """Optional. Deep crawler behavior (enable + depth/scoring/filter chain)."""
 
     @property
     def output_config(self) -> global___RagCrawlerResultsConfig:
@@ -2782,9 +2785,11 @@ class RagCrawlerConfig(google.protobuf.message.Message):
         output_config: global___RagCrawlerResultsConfig | None = ...,
         status_filter: global___RagCrawlerStatusFilter | None = ...,
         incremental_config: global___RagCrawlerIncrementalConfig | None = ...,
+        max_pages: builtins.int | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["concurrency_config", b"concurrency_config", "deep_crawler_config", b"deep_crawler_config", "incremental_config", b"incremental_config", "output_config", b"output_config", "status_filter", b"status_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["concurrency_config", b"concurrency_config", "deep_crawler_config", b"deep_crawler_config", "incremental_config", b"incremental_config", "output_config", b"output_config", "status_filter", b"status_filter"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_max_pages", b"_max_pages", "concurrency_config", b"concurrency_config", "deep_crawler_config", b"deep_crawler_config", "incremental_config", b"incremental_config", "max_pages", b"max_pages", "output_config", b"output_config", "status_filter", b"status_filter"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_max_pages", b"_max_pages", "concurrency_config", b"concurrency_config", "deep_crawler_config", b"deep_crawler_config", "incremental_config", b"incremental_config", "max_pages", b"max_pages", "output_config", b"output_config", "status_filter", b"status_filter"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_max_pages", b"_max_pages"]) -> typing.Literal["max_pages"] | None: ...
 
 global___RagCrawlerConfig = RagCrawlerConfig
 
@@ -2809,7 +2814,7 @@ class RagCrawlerDeepCrawlerConfig(google.protobuf.message.Message):
     max_depth: builtins.int
     """Optional. Maximum link depth from seed URLs, counted from the nearest seed. <code>0</code> means unlimited depth."""
     max_pages: builtins.int
-    """Optional. Hard cap on pages fetched successfully in this run; <code>0</code> means unlimited."""
+    """Deprecated. Use <code>RagCrawlerConfig.max_pages</code> instead"""
     normalize_url_case: builtins.bool
     """Optional. Normalize URL case (lowercase the path) during link discovery/deduplication."""
     @property
