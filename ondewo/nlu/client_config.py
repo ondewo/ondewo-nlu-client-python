@@ -86,11 +86,15 @@ class ClientConfig(BaseClientConfig):
     refresh_token: str = ""
 
     #: Fields whose value must never be rendered. ``grpc_cert`` is PEM material, ``password`` is the
-    #: ROPC login secret and ``refresh_token`` is a long-lived offline bearer credential; all three
-    #: are printed verbatim by the ``__repr__`` ``@dataclass`` generates. Matching here is by EXACT
-    #: field name -- unlike ondewo-vtsi's substring-matching ``SECRET_NAME_TOKENS`` -- so a new
-    #: secret field is rendered in full until it is named on this line.
-    SECRET_FIELD_NAMES: ClassVar[FrozenSet[str]] = frozenset({"password", "grpc_cert", "refresh_token"})
+    #: ROPC login secret, ``refresh_token`` is a long-lived offline bearer credential and
+    #: ``grpc_client_key`` is the mutual-TLS private key; all four are printed verbatim by the
+    #: ``__repr__`` ``@dataclass`` generates. Matching here is by EXACT field name -- unlike
+    #: ondewo-vtsi's substring-matching ``SECRET_NAME_TOKENS`` -- so a new secret field is rendered in
+    #: full until it is named on this line, unless it is declared with ``repr=False``: ``__repr__``
+    #: redacts every such field too, so a secret ``BaseClientConfig`` adds and hides stays hidden here.
+    SECRET_FIELD_NAMES: ClassVar[FrozenSet[str]] = frozenset(
+        {"password", "grpc_cert", "refresh_token", "grpc_client_key"}
+    )
 
     def __repr__(self) -> str:
         """
@@ -100,6 +104,11 @@ class ClientConfig(BaseClientConfig):
         ``log.debug(f"...{config}")`` -- or a bare traceback carrying locals -- writes the ROPC
         password and the gRPC certificate to its logs in clear text. Downstream services do exactly
         that: a repository-wide sweep in ondewo-vtsi found this class among its leaking dataclasses.
+
+        A field is redacted when it is named in ``SECRET_FIELD_NAMES`` OR declared with ``repr=False``.
+        The second condition matters because this override replaces the generated ``__repr__``, which
+        is what honours ``repr=False``: ``BaseClientConfig.grpc_client_key`` (the mutual-TLS private
+        key) is declared that way, and iterating ``fields()`` without checking it printed the key.
 
         An EMPTY secret still renders as ``''`` rather than as ``***REDACTED***``. The distinction is
         deliberate: the marker reads as "this is set and sensitive", which is actively misleading
@@ -112,7 +121,7 @@ class ClientConfig(BaseClientConfig):
         rendered: List[str] = []
         for field in fields(self):
             value: Any = getattr(self, field.name, None)
-            if field.name in self.SECRET_FIELD_NAMES and value:
+            if (field.name in self.SECRET_FIELD_NAMES or not field.repr) and value:
                 rendered.append(f"{field.name}='***REDACTED***'")
             else:
                 rendered.append(f"{field.name}={value!r}")
