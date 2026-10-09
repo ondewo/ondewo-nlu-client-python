@@ -363,6 +363,14 @@
 
 *****************
 
+## Release ONDEWO NLU Python Client 3.5.1
+
+### Bug fixes
+
+* Fixed flake8 and mypy issues
+
+*****************
+
 ## Release ONDEWO NLU Python Client 3.5.0
 
 ### Improvements
@@ -661,9 +669,12 @@
 
 ### New Features
 
+* [[OND211-1774]](https://ondewo.atlassian.net/browse/OND211-1774) Implement endpoints to directly create/update/get/delete and list parameters.
+* [[OND211-1773]](https://ondewo.atlassian.net/browse/OND211-1773) Implement endpoints to directly create/update/get/delete and list responses (=intent messages).
 * [[OND211-354]](https://ondewo.atlassian.net/browse/OND211-354) Establish a clear hierarchy for the merging of entities within the generalized waterfall strategy.
    Include intent parameters to entity selection criteria.
 * [[OND211-1767]](https://ondewo.atlassian.net/browse/OND211-1767) Change the training phrase message to include a language_code field
+* [[OND211-1766]](https://ondewo.atlassian.net/browse/OND211-1766) Make training phrases endpoints work with batches.
 * [[OND211-1760]](https://ondewo.atlassian.net/browse/OND211-1760) Implement endpoint to directly list training phrases.
 * [[OND211-1744]](https://ondewo.atlassian.net/browse/OND211-1744) Add initiation protocol into train agent endpoint
 * [[OND211-1732]](https://ondewo.atlassian.net/browse/OND211-1732) Implement endpoints directly create/update/get/delete training phrases.
