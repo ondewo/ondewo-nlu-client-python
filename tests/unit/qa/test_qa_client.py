@@ -30,7 +30,11 @@ import importlib
 import re
 from types import ModuleType
 from typing import (
+    Any,
+    Dict,
+    List,
     Optional,
+    Set,
     Tuple,
 )
 
@@ -41,6 +45,7 @@ from ondewo.utils.base_client_config import BaseClientConfig
 from ondewo.qa.client import Client
 from ondewo.qa.client_config import ClientConfig
 from ondewo.qa.core.services_container import ServicesContainer
+from ondewo.qa.services.qa import QA
 
 # Bound once so a refactor that changes only an input or only an expectation cannot silently
 # make an assertion tautological.
@@ -147,6 +152,74 @@ class TestDisconnect:
 
         spy: _ChannelCloseSpy = _ChannelCloseSpy(container.qa.grpc_channel)
         container.qa.grpc_channel = spy
+
+        client.disconnect()
+
+        assert spy.close_calls == 1
+        assert client.services is None
+
+
+class TestSharedChannel:
+    """`Client(use_shared_channel=True)` builds the QA channel with `build_shared_channel`, like the NLU client."""
+
+    @pytest.fixture
+    def build_calls(self, monkeypatch: pytest.MonkeyPatch) -> List[Dict[str, Any]]:
+        """Record every `build_shared_channel` call; each returns a fresh real (lazy) channel."""
+        calls: List[Dict[str, Any]] = []
+
+        def fake_build(**kwargs: Any) -> grpc.Channel:
+            calls.append(kwargs)
+            return grpc.insecure_channel(f"{HOST}:{PORT}")
+
+        monkeypatch.setattr("ondewo.utils.base_services_interface.build_shared_channel", fake_build)
+        return calls
+
+    def test_default_does_not_build_a_shared_channel(self, build_calls: List[Dict[str, Any]]) -> None:
+        client: Client = Client(config=qa_config(), use_secure_channel=False)
+        try:
+            assert client.use_shared_channel is False
+            assert client.services is not None
+            assert isinstance(client.services.qa.grpc_channel, grpc.Channel)
+        finally:
+            client.disconnect()
+
+        assert build_calls == []
+
+    def test_opt_in_hands_the_shared_channel_to_the_qa_service(self, build_calls: List[Dict[str, Any]]) -> None:
+        options: Set[Tuple[str, Any]] = {("grpc.primary_user_agent", "shared-test")}
+        client: Client = Client(config=qa_config(), use_secure_channel=False, options=options, use_shared_channel=True)
+        try:
+            assert client.services is not None
+            assert len(build_calls) == 1
+            assert build_calls[0]["service_classes"] == (QA,)
+            assert build_calls[0]["options"] == options
+            assert build_calls[0]["use_secure_channel"] is False
+        finally:
+            client.disconnect()
+
+    def test_real_shared_channel_is_a_grpc_channel(self) -> None:
+        client: Client = Client(config=qa_config(), use_secure_channel=False, use_shared_channel=True)
+        try:
+            assert client.services is not None
+            assert isinstance(client.services.qa.grpc_channel, grpc.Channel)
+        finally:
+            client.disconnect()
+
+    def test_connect_after_disconnect_keeps_sharing(self, build_calls: List[Dict[str, Any]]) -> None:
+        client: Client = Client(config=qa_config(), use_secure_channel=False, use_shared_channel=True)
+        client.disconnect()
+
+        client.connect(config=qa_config(), use_secure_channel=False)
+        try:
+            assert len(build_calls) == 2
+        finally:
+            client.disconnect()
+
+    def test_disconnect_closes_the_shared_channel_once(self) -> None:
+        client: Client = Client(config=qa_config(), use_secure_channel=False, use_shared_channel=True)
+        assert client.services is not None
+        spy: _ChannelCloseSpy = _ChannelCloseSpy(client.services.qa.grpc_channel)
+        client.services.qa.grpc_channel = spy
 
         client.disconnect()
 

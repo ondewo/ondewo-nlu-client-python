@@ -38,6 +38,7 @@ from queue import (
 )
 from types import TracebackType
 from typing import (
+    Any,
     List,
     Optional,
     Set,
@@ -50,6 +51,7 @@ import pytest
 from ondewo.nlu.client import Client
 from ondewo.nlu.client_config import ClientConfig
 from ondewo.nlu.client_pool import ClientPool
+from tests.unit.core.test_client_wiring import EXPECTED_SERVICE_NAMES
 
 # Bound once so a refactor that changes only an input or only an expectation cannot silently
 # make an assertion tautological.
@@ -510,3 +512,45 @@ class TestAcquireEmptySeam:
         pool.acquire_client()
         with pytest.raises(Empty):
             Queue.get(pool.pool, block=True, timeout=0)
+
+
+def _channels(client: Client) -> List[Any]:
+    """The channel object of every declared service of one pooled client, in container order."""
+    return [getattr(client.services, name).grpc_channel for name in EXPECTED_SERVICE_NAMES]
+
+
+class TestSharedChannel:
+    """`use_shared_channel` reaches every client the pool builds, pre-filled and overflow alike."""
+
+    def test_default_pooled_clients_open_one_channel_per_service(self, config: ClientConfig) -> None:
+        pool: ClientPool = _build_pool(config, pool_size=2)
+        try:
+            assert pool.use_shared_channel is False
+            for client in list(pool.pool.queue):
+                assert client.use_shared_channel is False
+                assert len({id(channel) for channel in _channels(client)}) == len(EXPECTED_SERVICE_NAMES)
+        finally:
+            pool.close()
+
+    def test_opt_in_reaches_every_pooled_and_overflow_client(self, config: ClientConfig) -> None:
+        pool_size: int = 2
+        pool: ClientPool = ClientPool(
+            config=config, use_secure_channel=False, pool_size=pool_size, use_shared_channel=True
+        )
+        # Strong references for the whole test, so `id()` values cannot be recycled (see above).
+        clients: List[Client] = [pool.acquire_client() for _ in range(pool_size)]
+        _collapse_get_timeout(pool)
+        clients.append(pool.acquire_client())
+        try:
+            assert pool.n_clients_created == pool_size + 1, "the last client is an overflow client"
+            shared_channels: List[Any] = []
+            for client in clients:
+                assert client.use_shared_channel is True
+                channels: List[Any] = _channels(client)
+                assert all(channel is channels[0] for channel in channels)
+                shared_channels.append(channels[0])
+            # One channel PER CLIENT: the pool does not make its clients share a connection.
+            assert len({id(channel) for channel in shared_channels}) == len(clients)
+        finally:
+            for client in clients:
+                client.disconnect()
