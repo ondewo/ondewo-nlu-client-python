@@ -194,6 +194,15 @@ async_client = AsyncClient(config=config, use_secure_channel=True, use_shared_ch
 The default is unchanged. `connect()` after `disconnect()` keeps the choice made in the constructor. Requires Python
 >= 3.12 (ondewo-client-utils >= 4.0.0); on older interpreters `use_shared_channel=True` raises `ImportError`.
 
+`ClientPool(config, ..., use_shared_channel=True)` passes the flag to every client it builds (pre-filled and overflow),
+so each pooled client holds one channel for its services; the clients do not share a channel with each other. The
+`ondewo.qa` `Client` takes the same keyword for parity: it has a single service, so it opens one channel either way.
+
+```python
+pool = ClientPool(config=config, use_secure_channel=True, use_shared_channel=True)
+qa_client = QaClient(config=qa_config, use_secure_channel=True, use_shared_channel=True)  # ondewo.qa.client.Client
+```
+
 ---
 
 ## Examples

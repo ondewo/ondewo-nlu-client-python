@@ -32,6 +32,8 @@ class ClientPool:
         use_secure_channel: bool = True,
         pool_size: int = 10,
         max_size_ratio: float = 1.5,
+        *,
+        use_shared_channel: bool = False,
     ) -> None:
         """
         Initialise a ClientPool to handle all your requests.
@@ -41,6 +43,8 @@ class ClientPool:
             use_secure_channel: self-explanatory
             pool_size: self-explanatory
             max_size_ratio: this is: (maximum_pool_size / pool_size); the pool can grow to up to a limit
+            use_shared_channel: passed to every `Client` the pool creates, so each client opens ONE gRPC
+                channel for all its services instead of one per service (see `Client`). Defaults to `False`.
 
         Raises:
             ValueError:
@@ -50,6 +54,7 @@ class ClientPool:
         # Client configuration
         self.config: BaseClientConfig = config
         self.use_secure_channel: bool = use_secure_channel
+        self.use_shared_channel: bool = use_shared_channel
 
         # Queue control mechanism
         self.pool_size: int = pool_size
@@ -82,9 +87,16 @@ class ClientPool:
         self.pool: Queue[Client] = Queue(maxsize=self.max_size)
         self._initialize_pool()
 
+    def _create_client(self) -> Client:
+        return Client(
+            config=self.config,
+            use_secure_channel=self.use_secure_channel,
+            use_shared_channel=self.use_shared_channel,
+        )
+
     def _initialize_pool(self) -> None:
         for i in range(self.pool_size):
-            self.pool.put(Client(config=self.config, use_secure_channel=self.use_secure_channel))
+            self.pool.put(self._create_client())
             self.n_clients_created += 1
 
     def acquire_client(self) -> Client:
@@ -110,7 +122,7 @@ class ClientPool:
 
             # Built outside the critical section: constructing a `Client` opens gRPC channels and must
             # not serialise every other thread's limit check behind it.
-            return Client(config=self.config, use_secure_channel=self.use_secure_channel)
+            return self._create_client()
 
     def release_client(self, c: Client) -> None:
         # `put_nowait` (and not `put`, which defaults to `block=True, timeout=None`) is what makes the
