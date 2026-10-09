@@ -30,6 +30,7 @@ from typing import (
 )
 
 from ondewo.utils.base_client import BaseClient
+from ondewo.utils.base_client_config import BaseClientConfig
 
 from ondewo.nlu.client_config import ClientConfig
 from ondewo.nlu.core.services_container import ServicesContainer
@@ -58,7 +59,7 @@ class Client(BaseClient):
 
     def _initialize_services(
         self,
-        config: ClientConfig,
+        config: BaseClientConfig,
         use_secure_channel: bool,
         options: Optional[Set[Tuple[str, Any]]] = None,
     ) -> None:
