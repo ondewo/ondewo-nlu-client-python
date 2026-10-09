@@ -163,7 +163,7 @@ create_async_services: ## Create async services for all synchronous services
 	done
 	cp ondewo/nlu/client.py ondewo/nlu/async_client.py
 	perl -i -pe \
-	    's/from ondewo\.nlu\.services\.([a-z_]+) import/from ondewo.nlu.services.async_$$1 import/g; s/from ondewo\.utils\.base_client import BaseClient/from ondewo.utils.async_base_client import AsyncBaseClient/g; s/from ondewo\.nlu\.core\.services_container import ServicesContainer/from ondewo.nlu.core.async_services_container import AsyncServicesContainer/g; s/\bServicesContainer\b/AsyncServicesContainer/g; s/\bBaseClient\b/AsyncBaseClient/g; s/class Client\b/class AsyncClient/g' \
+	    's/from ondewo\.nlu\.services\.([a-z_]+) import/from ondewo.nlu.services.async_$$1 import/g; s/from ondewo\.utils\.base_client import BaseClient/from ondewo.utils.async_base_client import AsyncBaseClient/g; s/from ondewo\.nlu\.core\.services_container import ServicesContainer/from ondewo.nlu.core.async_services_container import AsyncServicesContainer/g; s/\bServicesContainer\b/AsyncServicesContainer/g; s/\bBaseClient\b/AsyncBaseClient/g; s/class Client\b/class AsyncClient/g; s/from ondewo\.utils\.base_services_interface import/from ondewo.utils.async_base_services_interface import/g' \
 	    ondewo/nlu/async_client.py
 	cp ondewo/nlu/core/services_container.py ondewo/nlu/core/async_services_container.py
 	perl -i -pe \

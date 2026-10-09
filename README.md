@@ -178,6 +178,22 @@ async def main() -> None:
 asyncio.run(main())
 ```
 
+### One shared gRPC channel (opt-in)
+
+By default every service (`agents`, `sessions`, …) opens its own gRPC channel, so a client pays one TCP connection and,
+over TLS, one handshake per service. `use_shared_channel=True` gives all services ONE channel built by
+`ondewo-client-utils`' `build_shared_channel` (measured there: 16 services, 44.1 ms per-service vs 6.5 ms shared, TLS
+on loopback). Each method keeps exactly the retry policy it has on its own channel, Keycloak bearer metadata is still
+attached per call, and `disconnect()` closes the shared channel once.
+
+```python
+client = Client(config=config, use_secure_channel=True, use_shared_channel=True)
+async_client = AsyncClient(config=config, use_secure_channel=True, use_shared_channel=True)  # inside the running loop
+```
+
+The default is unchanged. `connect()` after `disconnect()` keeps the choice made in the constructor. Requires Python
+>= 3.12 (ondewo-client-utils >= 4.0.0); on older interpreters `use_shared_channel=True` raises `ImportError`.
+
 ---
 
 ## Examples
