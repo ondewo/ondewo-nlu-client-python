@@ -26,10 +26,12 @@ dependencies = [
     "google-api-core",
     "grpcio",
     "loguru",
-    # >=3.3.0 is what finally drops the dataclasses-json -> marshmallow chain (BaseClientConfig implements
-    # to_dict/from_dict/to_json/from_json itself). 3.2.0 still supplies those helpers via @dataclass_json, so
-    # this package works on both -- raise the floor to >=3.3.0 once client-utils 3.3.0 is on PyPI.
-    "ondewo-client-utils>=3.2.0",
+    # Split by interpreter because ondewo-client-utils >=4.0.0 requires Python >=3.12 while this package still
+    # supports >=3.9. On 3.12+ the floor is 4.1.1, the release whose BaseClientConfig carries the mutual-TLS
+    # grpc_client_cert / grpc_client_key fields that ClientConfig.__repr__ redacts. Older interpreters stay on
+    # 3.2.0+, which has no client-key field, so there is nothing there to leak.
+    "ondewo-client-utils>=4.1.1; python_version >= '3.12'",
+    "ondewo-client-utils>=3.2.0; python_version < '3.12'",
     "polling",
     "protobuf",
     "requests",

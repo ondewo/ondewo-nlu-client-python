@@ -14,12 +14,14 @@
 from abc import ABC
 from typing import (
     Any,
+    Dict,
     List,
     Optional,
     Set,
     Tuple,
 )
 
+import grpc
 from ondewo.utils.async_base_services_interface import AsyncBaseServicesInterface
 
 from ondewo.nlu.client_config import ClientConfig
@@ -35,11 +37,17 @@ class AsyncServicesInterface(AsyncBaseServicesInterface, ABC):
         config: ClientConfig,
         use_secure_channel: bool,
         options: Optional[Set[Tuple[str, Any]]] = None,
+        *,
+        grpc_channel: Optional[grpc.aio.Channel] = None,
     ) -> None:
+        # `grpc_channel` (a shared channel, see `AsyncClient(use_shared_channel=True)`) is passed on only when
+        # given: ondewo-client-utils < 4.0.0, the version installed on Python < 3.12, has no such parameter.
+        channel_kwargs: Dict[str, Any] = {} if grpc_channel is None else {"grpc_channel": grpc_channel}
         super(AsyncServicesInterface, self).__init__(
             config=config,
             use_secure_channel=use_secure_channel,
             options=options,
+            **channel_kwargs,
         )
         # When Keycloak headless auth (D18) is configured, every call carries a freshly
         # auto-refreshed `Authorization: Bearer` token; the provider is shared per config so
