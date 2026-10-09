@@ -369,9 +369,12 @@ sorts above the unmerged one, a consumer upgrading silently loses it. The ondewo
 offline-token hand-off, so PyPI's newest release was a regression against its predecessor.
 
 ```bash
-latest=$(git tag --sort=-v:refname | head -1)
+latest=$(git tag --list '[0-9]*.[0-9]*.[0-9]*' --sort=-v:refname | head -1)   # version tags only
 git merge-base --is-ancestor "$latest" master && echo "in master" || echo "NOT in master -- merge first"
 ```
+
+The glob matters: an unfiltered `git tag --sort=-v:refname` sorts any non-version tag first (a stray tag
+named `list`, deleted in 2026, made it print `list`).
 
 A fast-forward (`git merge --ff-only <tag>`) is the common case. A true merge needs care: resolve
 metadata toward `master` and keep BOTH release-note sections, newest first — a reader upgrading
