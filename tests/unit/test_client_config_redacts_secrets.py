@@ -24,7 +24,8 @@ The assertions are behavioural (build the object, read its ``repr``) rather than
 because a grep for ``__repr__`` passes just as well for a ``__repr__`` that prints the secret anyway.
 """
 
-from typing import Any, Dict
+from dataclasses import dataclass, field
+from typing import Any, Dict, Type
 
 from ondewo.nlu.client_config import ClientConfig
 
@@ -32,11 +33,14 @@ from ondewo.nlu.client_config import ClientConfig
 PASSWORD: str = "PLANTED-password-6b21fa"
 GRPC_CERT: str = "PLANTED-BEGIN-CERTIFICATE-91cd3e"
 REFRESH_TOKEN: str = "PLANTED-offline-refresh-token-4f19ac"
+CLIENT_CERT: str = "PLANTED-BEGIN-CLIENT-CERTIFICATE-3a7c52"
+CLIENT_KEY: str = "PLANTED-BEGIN-PRIVATE-KEY-e04b9d"
+HIDDEN: str = "PLANTED-repr-false-value-58d2a1"
 HOST: str = "planted-host.invalid"
 USER: str = "planted-user@invalid"
 
 
-def _config(**overrides: Any) -> ClientConfig:
+def _config(config_class: Type[ClientConfig] = ClientConfig, **overrides: Any) -> ClientConfig:
     kwargs: Dict[str, Any] = {
         "host": HOST,
         "port": 50055,
@@ -46,7 +50,7 @@ def _config(**overrides: Any) -> ClientConfig:
         "refresh_token": REFRESH_TOKEN,
     }
     kwargs.update(overrides)
-    return ClientConfig(**kwargs)
+    return config_class(**kwargs)
 
 
 class TestClientConfigReprRedactsSecrets:
@@ -100,3 +104,30 @@ class TestClientConfigReprRedactsSecrets:
         # sensitive", which is actively misleading when the real fault is that nobody set it.
         rendered: str = repr(_config(grpc_cert=""))
         assert "grpc_cert=''" in rendered
+
+    def test_the_mutual_tls_private_key_is_not_printed(self) -> None:
+        # BaseClientConfig declares grpc_client_key with repr=False, but that flag only steers the
+        # __repr__ @dataclass generates -- which this class replaces. Before it was honoured here the
+        # private key was printed in full. __post_init__ refuses half a client identity, so set both.
+        config: ClientConfig = _config(grpc_client_cert=CLIENT_CERT, grpc_client_key=CLIENT_KEY)
+        # Read the ATTRIBUTE to prove the key is really on the object (encoded to bytes, like grpc_cert).
+        assert config.grpc_client_key == CLIENT_KEY.encode()
+        assert CLIENT_KEY not in repr(config)
+        assert CLIENT_KEY not in str(config)
+        assert "grpc_client_key='***REDACTED***'" in repr(config)
+
+    def test_an_unset_mutual_tls_private_key_is_not_reported_as_present(self) -> None:
+        # Plain TLS (no client identity) is the common case; it must not read as "a key is set".
+        assert "grpc_client_key=''" in repr(_config(grpc_client_cert="", grpc_client_key=""))
+
+    def test_any_field_declared_repr_false_is_redacted(self) -> None:
+        # The name list is exact-match, so a secret the base class adds later would otherwise be printed
+        # until someone names it there. Declaring it repr=False must be enough on its own.
+        @dataclass(frozen=True, repr=False)
+        class _ConfigWithHiddenField(ClientConfig):
+            planted_hidden: str = field(default="", repr=False)
+
+        config: ClientConfig = _config(config_class=_ConfigWithHiddenField, planted_hidden=HIDDEN)
+        assert getattr(config, "planted_hidden") == HIDDEN
+        assert HIDDEN not in repr(config)
+        assert "planted_hidden='***REDACTED***'" in repr(config)
