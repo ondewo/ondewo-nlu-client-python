@@ -39,6 +39,8 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
+    # The TLS / mutual-TLS tests mint their PKI at test time (tests/unit/test_mutual_tls_end_to_end.py).
+    "cryptography",
     "Faker",
     "ruff",
     "mypy",
