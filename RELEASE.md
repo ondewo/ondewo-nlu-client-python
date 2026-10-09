@@ -2,6 +2,21 @@
 
 *****************
 
+## Release ONDEWO NLU Python Client 7.3.1
+
+### Bug fixes
+
+* Tracking API Version [7.3.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/7.3.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+* [[OND211-2443]](https://ondewo.atlassian.net/browse/OND211-2443) **`ClientConfig.__repr__` printed the mutual-TLS private key in clear text.** ondewo-client-utils 4.1.0 added `grpc_client_cert` / `grpc_client_key` and declared the key `repr=False`, but the hand-written `__repr__` only redacted the names in `SECRET_FIELD_NAMES`. It now redacts `grpc_client_key` and every field declared `repr=False`, so a secret the base class hides later stays hidden here too.
+
+### Improvements
+
+* [[OND211-2443]](https://ondewo.atlassian.net/browse/OND211-2443) Opt-in `use_shared_channel=True` on `Client` and `AsyncClient`: all 16 services share one gRPC channel (one connection, one TLS handshake) built by ondewo-client-utils' `build_shared_channel`, with the union of the per-service retry policies. Measured setup over TLS: 44 ms per-service vs 6.5 ms shared. The default (one channel per service) is unchanged.
+* Dependency floor `ondewo-client-utils>=4.1.1` on Python >= 3.12 (`>=3.2.0` below 3.12, where the shared channel and the client-key fields are not available).
+* `_initialize_services` is now typed against `BaseClientConfig` (ondewo-client-utils 4.1.1 ships `py.typed`); the `isinstance` guard is unchanged.
+
+*****************
+
 ## Release ONDEWO NLU Python Client 7.3.0
 
 ### Improvements
