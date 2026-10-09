@@ -2,6 +2,18 @@
 
 *****************
 
+## Release ONDEWO NLU Python Client 7.3.2
+
+### Improvements
+
+* Tracking API Version [7.3.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/7.3.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+* [[OND211-2443]](https://ondewo.atlassian.net/browse/OND211-2443) Opt-in `use_shared_channel=True` on `ClientPool`: the flag is passed to every `Client` the pool builds (pre-filled and overflow), so each pooled client opens one gRPC channel for all its services. The default is unchanged.
+* [[OND211-2443]](https://ondewo.atlassian.net/browse/OND211-2443) The QA `Client` (`ondewo.qa.client.Client`) takes the same keyword-only `use_shared_channel` flag as the NLU `Client` and builds its channel with ondewo-client-utils' `build_shared_channel`. The default is unchanged.
+* Generated code is built with ondewo-proto-compiler 5.15.3; the generated modules are byte-identical to 7.3.1.
+* RELEASE.md: added the missing 3.5.1 section and the 2.0.0 items that only the GitHub release listed; `tests/unit/test_release_notes.py` now checks every section is sliceable by the Makefile.
+
+*****************
+
 ## Release ONDEWO NLU Python Client 7.3.1
 
 ### Bug fixes
