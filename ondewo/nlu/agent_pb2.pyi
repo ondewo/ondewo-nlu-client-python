@@ -1344,6 +1344,7 @@ class GetAgentStatisticsRequest(google.protobuf.message.Message):
     LLM_GROUP_BYS_FIELD_NUMBER: builtins.int
     FIELD_MASK_FIELD_NUMBER: builtins.int
     LLM_CCAI_SERVICE_PROVIDER_FILTER_FIELD_NUMBER: builtins.int
+    LLM_BASE_URL_FILTER_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The project to get statistics from.
     Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
@@ -1388,6 +1389,13 @@ class GetAgentStatisticsRequest(google.protobuf.message.Message):
     def llm_ccai_service_provider_filter(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[ondewo.nlu.ccai_project_pb2.CcaiServiceProvider.ValueType]:
         """Optional. Restrict LLM aggregations to specific CCAI service providers. Empty = all."""
 
+    @property
+    def llm_base_url_filter(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Restrict LLM-typed reports to calls made through specific base URLs (the
+        <code>LlmTelemetry.base_url</code> values, as reported in <code>LlmTelemetryReport.base_urls_used</code>).
+        An empty string selects calls whose model configuration states no base URL. Empty list = all.
+        """
+
     def __init__(
         self,
         *,
@@ -1401,9 +1409,10 @@ class GetAgentStatisticsRequest(google.protobuf.message.Message):
         llm_group_bys: collections.abc.Iterable[builtins.str] | None = ...,
         field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
         llm_ccai_service_provider_filter: collections.abc.Iterable[ondewo.nlu.ccai_project_pb2.CcaiServiceProvider.ValueType] | None = ...,
+        llm_base_url_filter: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "format", b"format", "language_code", b"language_code", "llm_agent_name_filter", b"llm_agent_name_filter", "llm_ccai_service_provider_filter", b"llm_ccai_service_provider_filter", "llm_group_bys", b"llm_group_bys", "llm_model_filter", b"llm_model_filter", "llm_provider_filter", b"llm_provider_filter", "parent", b"parent", "type", b"type"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "format", b"format", "language_code", b"language_code", "llm_agent_name_filter", b"llm_agent_name_filter", "llm_base_url_filter", b"llm_base_url_filter", "llm_ccai_service_provider_filter", b"llm_ccai_service_provider_filter", "llm_group_bys", b"llm_group_bys", "llm_model_filter", b"llm_model_filter", "llm_provider_filter", b"llm_provider_filter", "parent", b"parent", "type", b"type"]) -> None: ...
 
 global___GetAgentStatisticsRequest = GetAgentStatisticsRequest
 
@@ -1464,6 +1473,7 @@ class GetSessionsStatisticsRequest(google.protobuf.message.Message):
     LLM_AGENT_NAME_FILTER_FIELD_NUMBER: builtins.int
     LLM_TOOL_NAME_FILTER_FIELD_NUMBER: builtins.int
     LLM_CCAI_SERVICE_PROVIDER_FILTER_FIELD_NUMBER: builtins.int
+    LLM_BASE_URL_FILTER_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The project to get statistics from.
     Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
@@ -1520,6 +1530,13 @@ class GetSessionsStatisticsRequest(google.protobuf.message.Message):
     def llm_ccai_service_provider_filter(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[ondewo.nlu.ccai_project_pb2.CcaiServiceProvider.ValueType]:
         """Optional. Restrict LLM-typed reports to specific CCAI service providers. Empty = all."""
 
+    @property
+    def llm_base_url_filter(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Restrict LLM-typed reports to calls made through specific base URLs (the
+        <code>LlmTelemetry.base_url</code> values, as reported in <code>LlmTelemetryReport.base_urls_used</code>).
+        An empty string selects calls whose model configuration states no base URL. Empty list = all.
+        """
+
     def __init__(
         self,
         *,
@@ -1538,9 +1555,10 @@ class GetSessionsStatisticsRequest(google.protobuf.message.Message):
         llm_agent_name_filter: collections.abc.Iterable[builtins.str] | None = ...,
         llm_tool_name_filter: collections.abc.Iterable[builtins.str] | None = ...,
         llm_ccai_service_provider_filter: collections.abc.Iterable[ondewo.nlu.ccai_project_pb2.CcaiServiceProvider.ValueType] | None = ...,
+        llm_base_url_filter: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["context_filters", b"context_filters", "field_mask", b"field_mask", "format", b"format", "group_bys", b"group_bys", "limit", b"limit", "llm_agent_name_filter", b"llm_agent_name_filter", "llm_ccai_service_provider_filter", b"llm_ccai_service_provider_filter", "llm_model_filter", b"llm_model_filter", "llm_provider_filter", b"llm_provider_filter", "llm_tool_name_filter", b"llm_tool_name_filter", "order_bys", b"order_bys", "parent", b"parent", "session_filter", b"session_filter", "sql_query", b"sql_query", "type", b"type"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["context_filters", b"context_filters", "field_mask", b"field_mask", "format", b"format", "group_bys", b"group_bys", "limit", b"limit", "llm_agent_name_filter", b"llm_agent_name_filter", "llm_base_url_filter", b"llm_base_url_filter", "llm_ccai_service_provider_filter", b"llm_ccai_service_provider_filter", "llm_model_filter", b"llm_model_filter", "llm_provider_filter", b"llm_provider_filter", "llm_tool_name_filter", b"llm_tool_name_filter", "order_bys", b"order_bys", "parent", b"parent", "session_filter", b"session_filter", "sql_query", b"sql_query", "type", b"type"]) -> None: ...
 
 global___GetSessionsStatisticsRequest = GetSessionsStatisticsRequest
 
@@ -1597,6 +1615,7 @@ class GetSessionsStatisticsTimeSeriesRequest(google.protobuf.message.Message):
     LLM_TOOL_NAME_FILTER_FIELD_NUMBER: builtins.int
     LLM_CCAI_SERVICE_PROVIDER_FILTER_FIELD_NUMBER: builtins.int
     FIELD_MASK_FIELD_NUMBER: builtins.int
+    LLM_BASE_URL_FILTER_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The project to get statistics from.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
@@ -1641,6 +1660,13 @@ class GetSessionsStatisticsTimeSeriesRequest(google.protobuf.message.Message):
         returned data (e.g. paths=["llm_telemetry_time_series_buckets.llm_telemetry_report.llm_token_usage"]).
         """
 
+    @property
+    def llm_base_url_filter(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Optional. Restrict LLM-typed reports to calls made through specific base URLs (the
+        <code>LlmTelemetry.base_url</code> values, as reported in <code>LlmTelemetryReport.base_urls_used</code>).
+        An empty string selects calls whose model configuration states no base URL. Empty list = all.
+        """
+
     def __init__(
         self,
         *,
@@ -1655,9 +1681,10 @@ class GetSessionsStatisticsTimeSeriesRequest(google.protobuf.message.Message):
         llm_tool_name_filter: collections.abc.Iterable[builtins.str] | None = ...,
         llm_ccai_service_provider_filter: collections.abc.Iterable[ondewo.nlu.ccai_project_pb2.CcaiServiceProvider.ValueType] | None = ...,
         field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        llm_base_url_filter: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["bucket_width_seconds", b"bucket_width_seconds", "field_mask", b"field_mask", "llm_agent_name_filter", b"llm_agent_name_filter", "llm_ccai_service_provider_filter", b"llm_ccai_service_provider_filter", "llm_model_filter", b"llm_model_filter", "llm_provider_filter", b"llm_provider_filter", "llm_tool_name_filter", b"llm_tool_name_filter", "max_buckets", b"max_buckets", "parent", b"parent", "session_filter", b"session_filter", "type", b"type"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["bucket_width_seconds", b"bucket_width_seconds", "field_mask", b"field_mask", "llm_agent_name_filter", b"llm_agent_name_filter", "llm_base_url_filter", b"llm_base_url_filter", "llm_ccai_service_provider_filter", b"llm_ccai_service_provider_filter", "llm_model_filter", b"llm_model_filter", "llm_provider_filter", b"llm_provider_filter", "llm_tool_name_filter", b"llm_tool_name_filter", "max_buckets", b"max_buckets", "parent", b"parent", "session_filter", b"session_filter", "type", b"type"]) -> None: ...
 
 global___GetSessionsStatisticsTimeSeriesRequest = GetSessionsStatisticsTimeSeriesRequest
 

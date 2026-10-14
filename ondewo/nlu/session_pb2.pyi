@@ -1703,6 +1703,46 @@ class LlmCcaiServiceUsage(google.protobuf.message.Message):
 global___LlmCcaiServiceUsage = LlmCcaiServiceUsage
 
 @typing.final
+class LlmBaseUrlUsage(google.protobuf.message.Message):
+    """Per-base-URL usage rollup across the scope. One entry per distinct
+    <code>LlmTelemetry.base_url</code>; calls whose model configuration states no base URL are
+    grouped under an empty <code>base_url</code>.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    BASE_URL_FIELD_NUMBER: builtins.int
+    CALL_COUNT_FIELD_NUMBER: builtins.int
+    LLM_TOKEN_USAGE_FIELD_NUMBER: builtins.int
+    MODEL_NAMES_FIELD_NUMBER: builtins.int
+    base_url: builtins.str
+    """Base URL the calls went through (proxy / OpenAI-compatible endpoint), with embedded
+    credentials redacted. Empty = the model configuration states no base URL.
+    """
+    call_count: builtins.int
+    """Number of LLM calls made through this base URL in scope."""
+    @property
+    def llm_token_usage(self) -> global___LlmTokenUsage:
+        """Summed token usage for the calls made through this base URL."""
+
+    @property
+    def model_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Distinct model names called through this base URL."""
+
+    def __init__(
+        self,
+        *,
+        base_url: builtins.str = ...,
+        call_count: builtins.int = ...,
+        llm_token_usage: global___LlmTokenUsage | None = ...,
+        model_names: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["llm_token_usage", b"llm_token_usage"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["base_url", b"base_url", "call_count", b"call_count", "llm_token_usage", b"llm_token_usage", "model_names", b"model_names"]) -> None: ...
+
+global___LlmBaseUrlUsage = LlmBaseUrlUsage
+
+@typing.final
 class LlmAgentUsage(google.protobuf.message.Message):
     """Per-intent-agent usage rollup across the scope."""
 
@@ -1968,6 +2008,7 @@ class LlmTelemetryReport(google.protobuf.message.Message):
     TOOL_CALL_TOKENS_TOTAL_FIELD_NUMBER: builtins.int
     TOOL_CALL_DURATION_SECONDS_TOTAL_FIELD_NUMBER: builtins.int
     SAFETY_STATS_FIELD_NUMBER: builtins.int
+    BASE_URLS_USED_FIELD_NUMBER: builtins.int
     tool_call_count_total: builtins.int
     """Sum of LlmTelemetry.tool_call_count across llm_telemetries."""
     llm_call_count: builtins.int
@@ -2036,6 +2077,13 @@ class LlmTelemetryReport(google.protobuf.message.Message):
         *_LLM_SAFETY and *_LLM_TOTAL_STATISTICS reports.
         """
 
+    @property
+    def base_urls_used(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmBaseUrlUsage]:
+        """Per-base-URL usage rollup. Populated for *_LLM_TOTAL_STATISTICS. Unlike
+        <code>LlmModelUsage.base_url</code>, which carries one base URL per model, this lists every
+        distinct base URL in scope.
+        """
+
     def __init__(
         self,
         *,
@@ -2059,9 +2107,10 @@ class LlmTelemetryReport(google.protobuf.message.Message):
         tool_call_tokens_total: builtins.int = ...,
         tool_call_duration_seconds_total: builtins.float = ...,
         safety_stats: global___LlmSafetyStats | None = ...,
+        base_urls_used: collections.abc.Iterable[global___LlmBaseUrlUsage] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["cache_stats", b"cache_stats", "error_stats", b"error_stats", "latency_stats", b"latency_stats", "llm_token_usage", b"llm_token_usage", "safety_stats", b"safety_stats"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["agents_used", b"agents_used", "cache_stats", b"cache_stats", "ccai_services_used", b"ccai_services_used", "duration_seconds_total", b"duration_seconds_total", "error_stats", b"error_stats", "finish_reason_distribution", b"finish_reason_distribution", "latency_stats", b"latency_stats", "llm_call_count", b"llm_call_count", "llm_telemetries", b"llm_telemetries", "llm_token_usage", b"llm_token_usage", "models_used", b"models_used", "providers_used", b"providers_used", "reasoning_effort_distribution", b"reasoning_effort_distribution", "safety_stats", b"safety_stats", "thinking_duration_seconds_total", b"thinking_duration_seconds_total", "thinking_tokens_total", b"thinking_tokens_total", "tool_call_count_total", b"tool_call_count_total", "tool_call_duration_seconds_total", b"tool_call_duration_seconds_total", "tool_call_tokens_total", b"tool_call_tokens_total", "tools_used", b"tools_used"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["agents_used", b"agents_used", "base_urls_used", b"base_urls_used", "cache_stats", b"cache_stats", "ccai_services_used", b"ccai_services_used", "duration_seconds_total", b"duration_seconds_total", "error_stats", b"error_stats", "finish_reason_distribution", b"finish_reason_distribution", "latency_stats", b"latency_stats", "llm_call_count", b"llm_call_count", "llm_telemetries", b"llm_telemetries", "llm_token_usage", b"llm_token_usage", "models_used", b"models_used", "providers_used", b"providers_used", "reasoning_effort_distribution", b"reasoning_effort_distribution", "safety_stats", b"safety_stats", "thinking_duration_seconds_total", b"thinking_duration_seconds_total", "thinking_tokens_total", b"thinking_tokens_total", "tool_call_count_total", b"tool_call_count_total", "tool_call_duration_seconds_total", b"tool_call_duration_seconds_total", "tool_call_tokens_total", b"tool_call_tokens_total", "tools_used", b"tools_used"]) -> None: ...
 
 global___LlmTelemetryReport = LlmTelemetryReport
 
