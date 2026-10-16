@@ -141,6 +141,34 @@ LLM_SAFETY_LOCATION_OUTPUT: LlmSafetyLocation.ValueType  # 2
 """The finding was matched in the model output (completion)."""
 global___LlmSafetyLocation = LlmSafetyLocation
 
+class _LlmAgentNodePhase:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _LlmAgentNodePhaseEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_LlmAgentNodePhase.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    LLM_AGENT_NODE_PHASE_UNSPECIFIED: _LlmAgentNodePhase.ValueType  # 0
+    """Not set."""
+    LLM_AGENT_NODE_PHASE_STARTED: _LlmAgentNodePhase.ValueType  # 1
+    """The node started running."""
+    LLM_AGENT_NODE_PHASE_COMPLETED: _LlmAgentNodePhase.ValueType  # 2
+    """The node finished without an error."""
+    LLM_AGENT_NODE_PHASE_FAILED: _LlmAgentNodePhase.ValueType  # 3
+    """The node raised an error."""
+
+class LlmAgentNodePhase(_LlmAgentNodePhase, metaclass=_LlmAgentNodePhaseEnumTypeWrapper):
+    """Lifecycle phase of an AI Team graph node, reported by <code>LlmAgentNodeEvent</code>."""
+
+LLM_AGENT_NODE_PHASE_UNSPECIFIED: LlmAgentNodePhase.ValueType  # 0
+"""Not set."""
+LLM_AGENT_NODE_PHASE_STARTED: LlmAgentNodePhase.ValueType  # 1
+"""The node started running."""
+LLM_AGENT_NODE_PHASE_COMPLETED: LlmAgentNodePhase.ValueType  # 2
+"""The node finished without an error."""
+LLM_AGENT_NODE_PHASE_FAILED: LlmAgentNodePhase.ValueType  # 3
+"""The node raised an error."""
+global___LlmAgentNodePhase = LlmAgentNodePhase
+
 class _AudioEncoding:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
@@ -1703,6 +1731,46 @@ class LlmCcaiServiceUsage(google.protobuf.message.Message):
 global___LlmCcaiServiceUsage = LlmCcaiServiceUsage
 
 @typing.final
+class LlmBaseUrlUsage(google.protobuf.message.Message):
+    """Per-base-URL usage rollup across the scope. One entry per distinct
+    <code>LlmTelemetry.base_url</code>; calls whose model configuration states no base URL are
+    grouped under an empty <code>base_url</code>.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    BASE_URL_FIELD_NUMBER: builtins.int
+    CALL_COUNT_FIELD_NUMBER: builtins.int
+    LLM_TOKEN_USAGE_FIELD_NUMBER: builtins.int
+    MODEL_NAMES_FIELD_NUMBER: builtins.int
+    base_url: builtins.str
+    """Base URL the calls went through (proxy / OpenAI-compatible endpoint), with embedded
+    credentials redacted. Empty = the model configuration states no base URL.
+    """
+    call_count: builtins.int
+    """Number of LLM calls made through this base URL in scope."""
+    @property
+    def llm_token_usage(self) -> global___LlmTokenUsage:
+        """Summed token usage for the calls made through this base URL."""
+
+    @property
+    def model_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Distinct model names called through this base URL."""
+
+    def __init__(
+        self,
+        *,
+        base_url: builtins.str = ...,
+        call_count: builtins.int = ...,
+        llm_token_usage: global___LlmTokenUsage | None = ...,
+        model_names: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["llm_token_usage", b"llm_token_usage"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["base_url", b"base_url", "call_count", b"call_count", "llm_token_usage", b"llm_token_usage", "model_names", b"model_names"]) -> None: ...
+
+global___LlmBaseUrlUsage = LlmBaseUrlUsage
+
+@typing.final
 class LlmAgentUsage(google.protobuf.message.Message):
     """Per-intent-agent usage rollup across the scope."""
 
@@ -1968,6 +2036,7 @@ class LlmTelemetryReport(google.protobuf.message.Message):
     TOOL_CALL_TOKENS_TOTAL_FIELD_NUMBER: builtins.int
     TOOL_CALL_DURATION_SECONDS_TOTAL_FIELD_NUMBER: builtins.int
     SAFETY_STATS_FIELD_NUMBER: builtins.int
+    BASE_URLS_USED_FIELD_NUMBER: builtins.int
     tool_call_count_total: builtins.int
     """Sum of LlmTelemetry.tool_call_count across llm_telemetries."""
     llm_call_count: builtins.int
@@ -2036,6 +2105,13 @@ class LlmTelemetryReport(google.protobuf.message.Message):
         *_LLM_SAFETY and *_LLM_TOTAL_STATISTICS reports.
         """
 
+    @property
+    def base_urls_used(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmBaseUrlUsage]:
+        """Per-base-URL usage rollup. Populated for *_LLM_TOTAL_STATISTICS. Unlike
+        <code>LlmModelUsage.base_url</code>, which carries one base URL per model, this lists every
+        distinct base URL in scope.
+        """
+
     def __init__(
         self,
         *,
@@ -2059,9 +2135,10 @@ class LlmTelemetryReport(google.protobuf.message.Message):
         tool_call_tokens_total: builtins.int = ...,
         tool_call_duration_seconds_total: builtins.float = ...,
         safety_stats: global___LlmSafetyStats | None = ...,
+        base_urls_used: collections.abc.Iterable[global___LlmBaseUrlUsage] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["cache_stats", b"cache_stats", "error_stats", b"error_stats", "latency_stats", b"latency_stats", "llm_token_usage", b"llm_token_usage", "safety_stats", b"safety_stats"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["agents_used", b"agents_used", "cache_stats", b"cache_stats", "ccai_services_used", b"ccai_services_used", "duration_seconds_total", b"duration_seconds_total", "error_stats", b"error_stats", "finish_reason_distribution", b"finish_reason_distribution", "latency_stats", b"latency_stats", "llm_call_count", b"llm_call_count", "llm_telemetries", b"llm_telemetries", "llm_token_usage", b"llm_token_usage", "models_used", b"models_used", "providers_used", b"providers_used", "reasoning_effort_distribution", b"reasoning_effort_distribution", "safety_stats", b"safety_stats", "thinking_duration_seconds_total", b"thinking_duration_seconds_total", "thinking_tokens_total", b"thinking_tokens_total", "tool_call_count_total", b"tool_call_count_total", "tool_call_duration_seconds_total", b"tool_call_duration_seconds_total", "tool_call_tokens_total", b"tool_call_tokens_total", "tools_used", b"tools_used"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["agents_used", b"agents_used", "base_urls_used", b"base_urls_used", "cache_stats", b"cache_stats", "ccai_services_used", b"ccai_services_used", "duration_seconds_total", b"duration_seconds_total", "error_stats", b"error_stats", "finish_reason_distribution", b"finish_reason_distribution", "latency_stats", b"latency_stats", "llm_call_count", b"llm_call_count", "llm_telemetries", b"llm_telemetries", "llm_token_usage", b"llm_token_usage", "models_used", b"models_used", "providers_used", b"providers_used", "reasoning_effort_distribution", b"reasoning_effort_distribution", "safety_stats", b"safety_stats", "thinking_duration_seconds_total", b"thinking_duration_seconds_total", "thinking_tokens_total", b"thinking_tokens_total", "tool_call_count_total", b"tool_call_count_total", "tool_call_duration_seconds_total", b"tool_call_duration_seconds_total", "tool_call_tokens_total", b"tool_call_tokens_total", "tools_used", b"tools_used"]) -> None: ...
 
 global___LlmTelemetryReport = LlmTelemetryReport
 
@@ -2342,6 +2419,66 @@ class LlmTokenUsageUpdateEvent(google.protobuf.message.Message):
     def ClearField(self, field_name: typing.Literal["llm_call_id", b"llm_call_id", "llm_token_usage", b"llm_token_usage"]) -> None: ...
 
 global___LlmTokenUsageUpdateEvent = LlmTokenUsageUpdateEvent
+
+@typing.final
+class LlmAgentNodeEvent(google.protobuf.message.Message):
+    """Emitted on a streaming DetectIntent when a node of an AI Team graph starts, completes or fails.
+    A node inside a nested graph (a subgraph, or a member agent of a supervisor or swarm) is reported too,
+    with its full <code>llm_agent_node_event_node_path</code>.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    LLM_AGENT_NODE_EVENT_NODE_RUN_ID_FIELD_NUMBER: builtins.int
+    LLM_AGENT_NODE_EVENT_PARENT_NODE_RUN_ID_FIELD_NUMBER: builtins.int
+    LLM_AGENT_NODE_EVENT_NODE_DISPLAY_NAME_FIELD_NUMBER: builtins.int
+    LLM_AGENT_NODE_EVENT_NODE_PATH_FIELD_NUMBER: builtins.int
+    LLM_AGENT_NODE_PHASE_FIELD_NUMBER: builtins.int
+    TIMESTAMP_FIELD_NUMBER: builtins.int
+    LLM_AGENT_NODE_EVENT_DURATION_IN_S_FIELD_NUMBER: builtins.int
+    LLM_AGENT_NODE_EVENT_ERROR_MESSAGE_FIELD_NUMBER: builtins.int
+    llm_agent_node_event_node_run_id: builtins.str
+    """Id of this run of the node. The <code>LLM_AGENT_NODE_PHASE_STARTED</code> event and the
+    <code>LLM_AGENT_NODE_PHASE_COMPLETED</code> or <code>LLM_AGENT_NODE_PHASE_FAILED</code> event of one run share it.
+    """
+    llm_agent_node_event_parent_node_run_id: builtins.str
+    """<code>llm_agent_node_event_node_run_id</code> of the node run this one is nested in; empty for a node of the outermost graph."""
+    llm_agent_node_event_node_display_name: builtins.str
+    """Name of the node, e.g. <code>researcher</code>."""
+    llm_agent_node_phase: global___LlmAgentNodePhase.ValueType
+    """Lifecycle phase this event reports."""
+    llm_agent_node_event_duration_in_s: builtins.float
+    """Duration of the node run in seconds; set only on <code>LLM_AGENT_NODE_PHASE_COMPLETED</code> and
+    <code>LLM_AGENT_NODE_PHASE_FAILED</code>.
+    """
+    llm_agent_node_event_error_message: builtins.str
+    """Populated only on <code>LLM_AGENT_NODE_PHASE_FAILED</code>; empty string otherwise."""
+    @property
+    def llm_agent_node_event_node_path(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Names of the nodes from the outermost graph down to this one, e.g.
+        <code>["supervisor", "researcher", "model"]</code>. The last element equals <code>llm_agent_node_event_node_display_name</code>.
+        """
+
+    @property
+    def timestamp(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Wall-clock time of the event."""
+
+    def __init__(
+        self,
+        *,
+        llm_agent_node_event_node_run_id: builtins.str = ...,
+        llm_agent_node_event_parent_node_run_id: builtins.str = ...,
+        llm_agent_node_event_node_display_name: builtins.str = ...,
+        llm_agent_node_event_node_path: collections.abc.Iterable[builtins.str] | None = ...,
+        llm_agent_node_phase: global___LlmAgentNodePhase.ValueType = ...,
+        timestamp: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        llm_agent_node_event_duration_in_s: builtins.float = ...,
+        llm_agent_node_event_error_message: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["timestamp", b"timestamp"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["llm_agent_node_event_duration_in_s", b"llm_agent_node_event_duration_in_s", "llm_agent_node_event_error_message", b"llm_agent_node_event_error_message", "llm_agent_node_event_node_display_name", b"llm_agent_node_event_node_display_name", "llm_agent_node_event_node_path", b"llm_agent_node_event_node_path", "llm_agent_node_event_node_run_id", b"llm_agent_node_event_node_run_id", "llm_agent_node_event_parent_node_run_id", b"llm_agent_node_event_parent_node_run_id", "llm_agent_node_phase", b"llm_agent_node_phase", "timestamp", b"timestamp"]) -> None: ...
+
+global___LlmAgentNodeEvent = LlmAgentNodeEvent
 
 @typing.final
 class ReferencedChunk(google.protobuf.message.Message):
@@ -2629,6 +2766,7 @@ class StreamingDetectIntentResponse(google.protobuf.message.Message):
     LLM_TOOL_CALL_FINISHED_FIELD_NUMBER: builtins.int
     LLM_THINKING_DELTA_FIELD_NUMBER: builtins.int
     LLM_TOKEN_USAGE_UPDATE_FIELD_NUMBER: builtins.int
+    LLM_AGENT_NODE_EVENT_FIELD_NUMBER: builtins.int
     response_id: builtins.str
     """The unique identifier of the response. It can be used to
     locate a response in the training example set or for reporting issues.
@@ -2669,6 +2807,10 @@ class StreamingDetectIntentResponse(google.protobuf.message.Message):
     def llm_token_usage_update(self) -> global___LlmTokenUsageUpdateEvent:
         """Emitted when the running LLM token-usage totals are updated."""
 
+    @property
+    def llm_agent_node_event(self) -> global___LlmAgentNodeEvent:
+        """Emitted when a node of an AI Team graph starts, completes or fails."""
+
     def __init__(
         self,
         *,
@@ -2682,10 +2824,11 @@ class StreamingDetectIntentResponse(google.protobuf.message.Message):
         llm_tool_call_finished: global___LlmToolCallFinishedEvent | None = ...,
         llm_thinking_delta: global___LlmThinkingDeltaEvent | None = ...,
         llm_token_usage_update: global___LlmTokenUsageUpdateEvent | None = ...,
+        llm_agent_node_event: global___LlmAgentNodeEvent | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["llm_call_finished", b"llm_call_finished", "llm_call_started", b"llm_call_started", "llm_thinking_delta", b"llm_thinking_delta", "llm_token_usage_update", b"llm_token_usage_update", "llm_tool_call_finished", b"llm_tool_call_finished", "llm_tool_call_started", b"llm_tool_call_started", "query_result", b"query_result", "recognition_result", b"recognition_result", "telemetry_event", b"telemetry_event", "webhook_status", b"webhook_status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["llm_call_finished", b"llm_call_finished", "llm_call_started", b"llm_call_started", "llm_thinking_delta", b"llm_thinking_delta", "llm_token_usage_update", b"llm_token_usage_update", "llm_tool_call_finished", b"llm_tool_call_finished", "llm_tool_call_started", b"llm_tool_call_started", "query_result", b"query_result", "recognition_result", b"recognition_result", "response_id", b"response_id", "telemetry_event", b"telemetry_event", "webhook_status", b"webhook_status"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["telemetry_event", b"telemetry_event"]) -> typing.Literal["llm_call_started", "llm_call_finished", "llm_tool_call_started", "llm_tool_call_finished", "llm_thinking_delta", "llm_token_usage_update"] | None: ...
+    def HasField(self, field_name: typing.Literal["llm_agent_node_event", b"llm_agent_node_event", "llm_call_finished", b"llm_call_finished", "llm_call_started", b"llm_call_started", "llm_thinking_delta", b"llm_thinking_delta", "llm_token_usage_update", b"llm_token_usage_update", "llm_tool_call_finished", b"llm_tool_call_finished", "llm_tool_call_started", b"llm_tool_call_started", "query_result", b"query_result", "recognition_result", b"recognition_result", "telemetry_event", b"telemetry_event", "webhook_status", b"webhook_status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["llm_agent_node_event", b"llm_agent_node_event", "llm_call_finished", b"llm_call_finished", "llm_call_started", b"llm_call_started", "llm_thinking_delta", b"llm_thinking_delta", "llm_token_usage_update", b"llm_token_usage_update", "llm_tool_call_finished", b"llm_tool_call_finished", "llm_tool_call_started", b"llm_tool_call_started", "query_result", b"query_result", "recognition_result", b"recognition_result", "response_id", b"response_id", "telemetry_event", b"telemetry_event", "webhook_status", b"webhook_status"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["telemetry_event", b"telemetry_event"]) -> typing.Literal["llm_call_started", "llm_call_finished", "llm_tool_call_started", "llm_tool_call_finished", "llm_thinking_delta", "llm_token_usage_update", "llm_agent_node_event"] | None: ...
 
 global___StreamingDetectIntentResponse = StreamingDetectIntentResponse
 
