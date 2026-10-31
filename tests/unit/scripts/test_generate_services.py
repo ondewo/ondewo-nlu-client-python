@@ -16,6 +16,7 @@ from pathlib import Path
 
 import pytest
 
+from ondewo.nlu.scripts import generate_services
 from ondewo.nlu.scripts.generate_services import (
     RpcMethod,
     ServiceDef,
@@ -837,3 +838,102 @@ class TestMain:
         main(proto_dir, output_dir)
         assert (output_dir / "utilities.py").exists()
         assert not (output_dir / "utilitys.py").exists()
+
+
+# ---------------------------------------------------------------------------
+# Opt-in timeout argument (_RPCS_WITH_TIMEOUT)
+# ---------------------------------------------------------------------------
+
+
+class TestTimeoutArgument:
+    """RPCs in ``_RPCS_WITH_TIMEOUT`` take ``timeout: Optional[float] = None`` and pass it to the stub."""
+
+    _SESSION_TYPES = {
+        "InterruptTurnRequest": "session",
+        "InterruptTurnResponse": "session",
+        "StreamingDetectIntentRequest": "session",
+        "StreamingDetectIntentResponse": "session",
+        "DetectIntentRequest": "session",
+        "DetectIntentResponse": "session",
+    }
+
+    @staticmethod
+    def _interrupt_turn() -> RpcMethod:
+        return RpcMethod("InterruptTurn", "InterruptTurnRequest", "InterruptTurnResponse", False, False)
+
+    def test_interrupt_turn_is_listed(self) -> None:
+        assert "InterruptTurn" in generate_services._RPCS_WITH_TIMEOUT
+
+    def test_short_signature_and_body_carry_the_timeout(self) -> None:
+        out = _emit_method(self._interrupt_turn(), "InterruptTurnRequest", "InterruptTurnResponse")
+        assert (
+            "    def interrupt_turn(self, request: InterruptTurnRequest, timeout: Optional[float] = None)"
+            " -> InterruptTurnResponse:"
+        ) in out
+        assert (
+            "        response: InterruptTurnResponse = "
+            "self.stub.InterruptTurn(request, metadata=self.metadata, timeout=timeout)"
+        ) in out
+        assert all(len(line) <= _MAX_LINE_LENGTH for line in out)
+
+    def test_an_unlisted_rpc_takes_no_timeout(self) -> None:
+        out = _emit_method(
+            RpcMethod("DetectIntent", "DetectIntentRequest", "DetectIntentResponse", False, False),
+            "DetectIntentRequest",
+            "DetectIntentResponse",
+        )
+        assert not any("timeout" in line for line in out)
+
+    def test_long_signature_wraps_the_timeout_onto_its_own_line(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        rpc_name = "InterruptTurnOfVeryLongNamedSessionForWrapping"
+        monkeypatch.setattr(generate_services, "_RPCS_WITH_TIMEOUT", frozenset({rpc_name}))
+        request_type = f"{rpc_name}Request"
+        response_type = f"{rpc_name}Response"
+
+        out = _emit_method(RpcMethod(rpc_name, request_type, response_type, False, False), request_type, response_type)
+
+        assert "    def interrupt_turn_of_very_long_named_session_for_wrapping(" in out
+        assert "        self," in out
+        assert f"        request: {request_type}," in out
+        assert "        timeout: Optional[float] = None," in out
+        assert f"    ) -> {response_type}:" in out
+        assert f"        response: {response_type} = \\" in out
+        assert f"            self.stub.{rpc_name}(request, metadata=self.metadata, timeout=timeout)" in out
+        assert all(len(line) <= _MAX_LINE_LENGTH for line in out)
+
+    def test_empty_request_rpc_takes_only_the_timeout(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        monkeypatch.setattr(generate_services, "_RPCS_WITH_TIMEOUT", frozenset({"Ping"}))
+
+        out = _emit_method(RpcMethod("Ping", "google.protobuf.Empty", "Pong", False, False), "Empty", "Pong")
+
+        assert "    def ping(self, timeout: Optional[float] = None) -> Pong:" in out
+        assert "        response: Pong = self.stub.Ping(Empty(), metadata=self.metadata, timeout=timeout)" in out
+
+    def test_optional_import_alone(self) -> None:
+        svc = ServiceDef(name="Sessions", rpcs=[self._interrupt_turn()], proto_stem="session")
+        content = _build_file_content(svc, self._SESSION_TYPES)
+        assert "from typing import Optional\n" in content
+        assert "Iterator" not in content
+
+    def test_iterator_and_optional_are_imported_together(self) -> None:
+        svc = ServiceDef(
+            name="Sessions",
+            rpcs=[
+                RpcMethod(
+                    "StreamingDetectIntent", "StreamingDetectIntentRequest", "StreamingDetectIntentResponse", True, True
+                ),
+                self._interrupt_turn(),
+            ],
+            proto_stem="session",
+        )
+        content = _build_file_content(svc, self._SESSION_TYPES)
+        assert "from typing import (\n    Iterator,\n    Optional,\n)\n" in content
+
+    def test_no_typing_import_without_streaming_or_timeout(self) -> None:
+        svc = ServiceDef(
+            name="Sessions",
+            rpcs=[RpcMethod("DetectIntent", "DetectIntentRequest", "DetectIntentResponse", False, False)],
+            proto_stem="session",
+        )
+        content = _build_file_content(svc, self._SESSION_TYPES)
+        assert "from typing import" not in content

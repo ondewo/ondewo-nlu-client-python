@@ -21,7 +21,10 @@
 #       ondewo-nlu-api/ondewo/nlu ondewo/nlu/services
 # ---------------------------------------------------------------------------
 
-from typing import Iterator
+from typing import (
+    Iterator,
+    Optional,
+)
 
 from google.protobuf.empty_pb2 import Empty
 
@@ -57,6 +60,8 @@ from ondewo.nlu.session_pb2 import (
     GetSessionRequest,
     GetSessionReviewRequest,
     GetSessionStepRequest,
+    InterruptTurnRequest,
+    InterruptTurnResponse,
     ListAccountIdsOfAllSessionsRequest,
     ListAccountIdsResponse,
     ListAudioFilesRequest,
@@ -136,6 +141,10 @@ class Sessions(ServicesInterface):
         response: Iterator[StreamingDetectIntentResponse] = self.stub.StreamingDetectIntent(
             request, metadata=self.metadata
         )
+        return response
+
+    def interrupt_turn(self, request: InterruptTurnRequest, timeout: Optional[float] = None) -> InterruptTurnResponse:
+        response: InterruptTurnResponse = self.stub.InterruptTurn(request, metadata=self.metadata, timeout=timeout)
         return response
 
     def list_sessions(self, request: ListSessionsRequest) -> ListSessionsResponse:

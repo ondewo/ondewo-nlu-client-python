@@ -47,6 +47,11 @@ class SessionsStub(object):
                 request_serializer=ondewo_dot_nlu_dot_session__pb2.StreamingDetectIntentRequest.SerializeToString,
                 response_deserializer=ondewo_dot_nlu_dot_session__pb2.StreamingDetectIntentResponse.FromString,
                 _registered_method=True)
+        self.InterruptTurn = channel.unary_unary(
+                '/ondewo.nlu.Sessions/InterruptTurn',
+                request_serializer=ondewo_dot_nlu_dot_session__pb2.InterruptTurnRequest.SerializeToString,
+                response_deserializer=ondewo_dot_nlu_dot_session__pb2.InterruptTurnResponse.FromString,
+                _registered_method=True)
         self.ListSessions = channel.unary_unary(
                 '/ondewo.nlu.Sessions/ListSessions',
                 request_serializer=ondewo_dot_nlu_dot_session__pb2.ListSessionsRequest.SerializeToString,
@@ -307,6 +312,18 @@ class SessionsServicer(object):
         """Processes a natural language query in audio format in a streaming fashion
         and returns structured, actionable data as a result. This method is only
         available via the gRPC API (not REST).
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def InterruptTurn(self, request, context):
+        """Interrupts a turn of the session outside a <code>StreamingDetectIntent</code> stream: cancels it, reports what
+        the user actually heard of its answer, or discards the session step of a preemptive draft. Meant for clients
+        without a call-length stream (e.g. a stop button) and for a heard report that arrives after the stream closed.
+        A voice client with an open stream sends the same <code>TurnControl</code> on that stream instead
+        (<code>StreamingDetectIntentRequest.turn_control</code>). Requires the permission to interrupt a turn of the
+        session's project.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -688,6 +705,11 @@ def add_SessionsServicer_to_server(servicer, server):
                     request_deserializer=ondewo_dot_nlu_dot_session__pb2.StreamingDetectIntentRequest.FromString,
                     response_serializer=ondewo_dot_nlu_dot_session__pb2.StreamingDetectIntentResponse.SerializeToString,
             ),
+            'InterruptTurn': grpc.unary_unary_rpc_method_handler(
+                    servicer.InterruptTurn,
+                    request_deserializer=ondewo_dot_nlu_dot_session__pb2.InterruptTurnRequest.FromString,
+                    response_serializer=ondewo_dot_nlu_dot_session__pb2.InterruptTurnResponse.SerializeToString,
+            ),
             'ListSessions': grpc.unary_unary_rpc_method_handler(
                     servicer.ListSessions,
                     request_deserializer=ondewo_dot_nlu_dot_session__pb2.ListSessionsRequest.FromString,
@@ -984,6 +1006,33 @@ class Sessions(object):
             '/ondewo.nlu.Sessions/StreamingDetectIntent',
             ondewo_dot_nlu_dot_session__pb2.StreamingDetectIntentRequest.SerializeToString,
             ondewo_dot_nlu_dot_session__pb2.StreamingDetectIntentResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def InterruptTurn(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/ondewo.nlu.Sessions/InterruptTurn',
+            ondewo_dot_nlu_dot_session__pb2.InterruptTurnRequest.SerializeToString,
+            ondewo_dot_nlu_dot_session__pb2.InterruptTurnResponse.FromString,
             options,
             channel_credentials,
             insecure,
