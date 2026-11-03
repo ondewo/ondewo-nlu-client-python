@@ -374,6 +374,8 @@ class StreamRemoteOperationContainerLogsRequest(google.protobuf.message.Message)
     MIN_LOG_LEVEL_FIELD_NUMBER: builtins.int
     TAIL_LINES_FIELD_NUMBER: builtins.int
     CONTAINER_ID_FIELD_NUMBER: builtins.int
+    REGEX_FIELD_NUMBER: builtins.int
+    RESUME_TOKEN_FIELD_NUMBER: builtins.int
     name: builtins.str
     """The name of the operation resource whose container logs should be streamed."""
     min_log_level: ondewo.nlu.common_pb2.LogSeverity.ValueType
@@ -390,6 +392,17 @@ class StreamRemoteOperationContainerLogsRequest(google.protobuf.message.Message)
     Empty (the default) streams the operation&apos;s currently-registered container, preserving the
     legacy single-container behavior.
     """
+    regex: builtins.str
+    """Optional. Only stream lines whose message matches this regular expression (Python <code>re</code> syntax,
+    at most 512 characters). Empty (the default) disables regex filtering. An invalid, oversized or
+    catastrophically backtracking pattern is rejected with <code>INVALID_ARGUMENT</code>.
+    """
+    resume_token: builtins.str
+    """Optional. Resume exactly where a previous stream or <code>GetRemoteOperationContainerLogs</code> page
+    stopped: the <code>next_resume_token</code> of that response, echoed back verbatim. When set, no
+    historical replay is applied and <code>tail_lines</code> is ignored. The token is interchangeable with
+    <code>Logs.StreamLogs</code> / <code>Logs.ListLogs</code> tokens.
+    """
     def __init__(
         self,
         *,
@@ -397,8 +410,10 @@ class StreamRemoteOperationContainerLogsRequest(google.protobuf.message.Message)
         min_log_level: ondewo.nlu.common_pb2.LogSeverity.ValueType = ...,
         tail_lines: builtins.int = ...,
         container_id: builtins.str = ...,
+        regex: builtins.str = ...,
+        resume_token: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["container_id", b"container_id", "min_log_level", b"min_log_level", "name", b"name", "tail_lines", b"tail_lines"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["container_id", b"container_id", "min_log_level", b"min_log_level", "name", b"name", "regex", b"regex", "resume_token", b"resume_token", "tail_lines", b"tail_lines"]) -> None: ...
 
 global___StreamRemoteOperationContainerLogsRequest = StreamRemoteOperationContainerLogsRequest
 
@@ -417,6 +432,8 @@ class GetRemoteOperationContainerLogsRequest(google.protobuf.message.Message):
     CONTAINER_ID_FIELD_NUMBER: builtins.int
     BEFORE_SEQ_FIELD_NUMBER: builtins.int
     AFTER_SEQ_FIELD_NUMBER: builtins.int
+    FIELD_MASK_FIELD_NUMBER: builtins.int
+    RESUME_TOKEN_FIELD_NUMBER: builtins.int
     name: builtins.str
     """The name of the operation resource whose container logs should be returned."""
     min_log_level: ondewo.nlu.common_pb2.LogSeverity.ValueType
@@ -446,6 +463,11 @@ class GetRemoteOperationContainerLogsRequest(google.protobuf.message.Message):
     """Optional cursor for infinite-scroll-DOWN paging: return lines with <code>seq</code> &gt;
     <code>after_seq</code> (newer window). <code>0</code> (the default) disables forward paging.
     """
+    resume_token: builtins.str
+    """Optional. An opaque cursor from a previous response&apos;s <code>next_resume_token</code>. Use it instead of
+    <code>after_seq</code> / <code>before_seq</code> when the operation ran several containers. Cannot be
+    combined with <code>before_seq</code> or <code>after_seq</code>.
+    """
     @property
     def start_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Only return lines whose timestamp is at or after this instant. Unset returns from the start of
@@ -456,6 +478,14 @@ class GetRemoteOperationContainerLogsRequest(google.protobuf.message.Message):
     def end_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Only return lines whose timestamp is at or before this instant. Unset returns up to the latest
         available log line.
+        """
+
+    @property
+    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+        """Optional. Partial response: the field paths to populate in every returned
+        <code>RemoteOperationContainerLogLine</code>, relative to that message (no <code>log_lines.</code>
+        prefix). <code>seq</code> and <code>log_stream</code> are always populated. Unset or empty returns every
+        field. An unknown path is rejected with <code>INVALID_ARGUMENT</code> naming it.
         """
 
     def __init__(
@@ -470,9 +500,11 @@ class GetRemoteOperationContainerLogsRequest(google.protobuf.message.Message):
         container_id: builtins.str = ...,
         before_seq: builtins.int = ...,
         after_seq: builtins.int = ...,
+        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        resume_token: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["end_time", b"end_time", "start_time", b"start_time"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["after_seq", b"after_seq", "before_seq", b"before_seq", "container_id", b"container_id", "end_time", b"end_time", "max_lines", b"max_lines", "min_log_level", b"min_log_level", "name", b"name", "regex", b"regex", "start_time", b"start_time"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["end_time", b"end_time", "field_mask", b"field_mask", "start_time", b"start_time"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["after_seq", b"after_seq", "before_seq", b"before_seq", "container_id", b"container_id", "end_time", b"end_time", "field_mask", b"field_mask", "max_lines", b"max_lines", "min_log_level", b"min_log_level", "name", b"name", "regex", b"regex", "resume_token", b"resume_token", "start_time", b"start_time"]) -> None: ...
 
 global___GetRemoteOperationContainerLogsRequest = GetRemoteOperationContainerLogsRequest
 
@@ -487,6 +519,8 @@ class GetRemoteOperationContainerLogsResponse(google.protobuf.message.Message):
     MIN_AVAILABLE_SEQ_FIELD_NUMBER: builtins.int
     MAX_AVAILABLE_SEQ_FIELD_NUMBER: builtins.int
     HAS_MORE_OLDER_FIELD_NUMBER: builtins.int
+    NEXT_RESUME_TOKEN_FIELD_NUMBER: builtins.int
+    HAS_MORE_NEWER_FIELD_NUMBER: builtins.int
     truncated: builtins.bool
     """True when older matching lines were dropped because <code>max_lines</code> was reached."""
     min_available_seq: builtins.int
@@ -499,6 +533,12 @@ class GetRemoteOperationContainerLogsResponse(google.protobuf.message.Message):
     """True when older lines than the returned window still exist (i.e. the window&apos;s first
     <code>seq</code> &gt; <code>min_available_seq</code>) — the client may keep scrolling up.
     """
+    next_resume_token: builtins.str
+    """Cursor to fetch the next window, or to start a <code>StreamRemoteOperationContainerLogs</code> (or a
+    <code>Logs.StreamLogs</code>) that continues exactly where this window ended.
+    """
+    has_more_newer: builtins.bool
+    """True when entries newer than this window exist."""
     @property
     def log_lines(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RemoteOperationContainerLogLine]:
         """The matching log lines, oldest first. Secrets are redacted server-side."""
@@ -511,8 +551,10 @@ class GetRemoteOperationContainerLogsResponse(google.protobuf.message.Message):
         min_available_seq: builtins.int = ...,
         max_available_seq: builtins.int = ...,
         has_more_older: builtins.bool = ...,
+        next_resume_token: builtins.str = ...,
+        has_more_newer: builtins.bool = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["has_more_older", b"has_more_older", "log_lines", b"log_lines", "max_available_seq", b"max_available_seq", "min_available_seq", b"min_available_seq", "truncated", b"truncated"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["has_more_newer", b"has_more_newer", "has_more_older", b"has_more_older", "log_lines", b"log_lines", "max_available_seq", b"max_available_seq", "min_available_seq", b"min_available_seq", "next_resume_token", b"next_resume_token", "truncated", b"truncated"]) -> None: ...
 
 global___GetRemoteOperationContainerLogsResponse = GetRemoteOperationContainerLogsResponse
 
@@ -528,6 +570,7 @@ class RemoteOperationContainerLogLine(google.protobuf.message.Message):
     CONTAINER_ID_FIELD_NUMBER: builtins.int
     CONTAINER_NAME_FIELD_NUMBER: builtins.int
     SEQ_FIELD_NUMBER: builtins.int
+    LOG_STREAM_FIELD_NUMBER: builtins.int
     level: ondewo.nlu.common_pb2.LogSeverity.ValueType
     """The loguru severity parsed from the line, or <code>LOG_SEVERITY_UNSPECIFIED</code> if the line
     carried no recognizable level (e.g. a continuation / traceback line).
@@ -541,9 +584,15 @@ class RemoteOperationContainerLogLine(google.protobuf.message.Message):
     container_name: builtins.str
     """The docker container name this line was produced by. Empty when unavailable."""
     seq: builtins.int
-    """The monotonically-increasing sequence number of this line within its container&apos;s captured log
-    (assigned by the server-side capture). Used as the cursor for infinite-scroll paging. <code>0</code>
-    when the line was produced by a legacy path that did not assign a sequence.
+    """Ordering cursor of this line, assigned by the database. Monotonically increasing WITHIN ONE CONTAINER but
+    NOT contiguous: values come from a sequence shared by every log stream and are removed by retention. Never
+    compute the next cursor as <code>seq + 1</code>; pass it back as <code>after_seq</code> /
+    <code>before_seq</code> (strictly greater / smaller) or use <code>resume_token</code>. <code>0</code> when
+    the line was produced by a legacy path that did not assign a sequence.
+    """
+    log_stream: builtins.str
+    """Resource name of the log stream this line belongs to (see
+    <a href="index.html#ondewo.nlu.CaiLogEntry">CaiLogEntry.log_stream</a>).
     """
     @property
     def timestamp(self) -> google.protobuf.timestamp_pb2.Timestamp:
@@ -558,9 +607,10 @@ class RemoteOperationContainerLogLine(google.protobuf.message.Message):
         container_id: builtins.str = ...,
         container_name: builtins.str = ...,
         seq: builtins.int = ...,
+        log_stream: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["timestamp", b"timestamp"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["container_id", b"container_id", "container_name", b"container_name", "level", b"level", "message", b"message", "seq", b"seq", "timestamp", b"timestamp"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["container_id", b"container_id", "container_name", b"container_name", "level", b"level", "log_stream", b"log_stream", "message", b"message", "seq", b"seq", "timestamp", b"timestamp"]) -> None: ...
 
 global___RemoteOperationContainerLogLine = RemoteOperationContainerLogLine
 

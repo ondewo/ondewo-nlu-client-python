@@ -41,6 +41,7 @@ from ondewo.nlu.services.async_contexts import Contexts
 from ondewo.nlu.services.async_entity_types import EntityTypes
 from ondewo.nlu.services.async_intents import Intents
 from ondewo.nlu.services.async_llm_evaluations import LlmEvaluations
+from ondewo.nlu.services.async_logs import Logs
 from ondewo.nlu.services.async_operations import Operations
 from ondewo.nlu.services.async_project_roles import ProjectRoles
 from ondewo.nlu.services.async_project_statistics import ProjectStatistics
@@ -124,6 +125,7 @@ class AsyncClient(AsyncBaseClient):
                     EntityTypes,
                     Intents,
                     LlmEvaluations,
+                    Logs,
                     Operations,
                     ProjectRoles,
                     ProjectStatistics,
@@ -144,6 +146,7 @@ class AsyncClient(AsyncBaseClient):
             entity_types=EntityTypes(**kwargs),
             intents=Intents(**kwargs),
             llm_evaluations=LlmEvaluations(**kwargs),
+            logs=Logs(**kwargs),
             operations=Operations(**kwargs),
             project_roles=ProjectRoles(**kwargs),
             project_statistics=ProjectStatistics(**kwargs),

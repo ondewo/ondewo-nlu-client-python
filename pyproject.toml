@@ -188,6 +188,8 @@ module = [
     "ondewo.nlu.intent_pb2_grpc",
     "ondewo.nlu.llm_evaluation_pb2",
     "ondewo.nlu.llm_evaluation_pb2_grpc",
+    "ondewo.nlu.logs_pb2",
+    "ondewo.nlu.logs_pb2_grpc",
     "ondewo.nlu.operation_metadata_pb2",
     "ondewo.nlu.operation_metadata_pb2_grpc",
     "ondewo.nlu.operations_pb2",

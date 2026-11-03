@@ -2997,10 +2997,15 @@ class StreamingDetectIntentResponse(google.protobuf.message.Message):
 
     @property
     def turn_control_ack(self) -> global___TurnControlAck:
-        """Set on the response that acknowledges a <code>CancelTurn</code> sent as
-        <code>StreamingDetectIntentRequest.turn_control</code>. It is sent after every other response of the cancelled
-        turn, so no response of that turn follows it. Only a <code>CancelTurn</code> is acknowledged on the stream; a
-        <code>HeardReport</code> or a <code>DiscardDraft</code> is not. Not part of <code>telemetry_event</code>.
+        """Set on the response that acknowledges a <code>CancelTurn</code> or a <code>DiscardDraft</code> sent as
+        <code>StreamingDetectIntentRequest.turn_control</code>; a <code>HeardReport</code> is not acknowledged on the
+        stream. A response that carries it carries no query result and is never an answer. The acknowledgement of a
+        <code>CancelTurn</code> is sent after every other response of the cancelled turn, so no response of that turn
+        follows it. The acknowledgement of a <code>DiscardDraft</code> is sent once the discard is decided, between
+        turns, with the draft's <code>response_id</code> and no <code>client_turn_id</code>:
+        <code>TURN_CONTROL_ACK_STATUS_DRAFT_DISCARDED</code> when the draft's session step was deleted,
+        <code>TURN_CONTROL_ACK_STATUS_UNKNOWN_TURN</code> when no step was deleted. Not part of
+        <code>telemetry_event</code>.
         """
 
     def __init__(
@@ -3049,7 +3054,9 @@ class TurnControl(google.protobuf.message.Message):
 
     @property
     def discard_draft(self) -> global___DiscardDraft:
-        """Discard the session step of a preemptive draft the client did not use."""
+        """Discard the session step of a preemptive draft the client did not use. Acknowledged with a
+        <code>TurnControlAck</code>.
+        """
 
     def __init__(
         self,

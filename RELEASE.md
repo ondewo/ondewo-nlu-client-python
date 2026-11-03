@@ -9,6 +9,7 @@
 * Tracking API Version [7.5.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/7.5.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
 * [[OND236-120]](https://ondewo.atlassian.net/browse/OND236-120) Turn control on `StreamingDetectIntent`: the generated `session_pb2` carries `TurnControl` (`cancel_turn`, `heard_report`, `discard_draft`), `CancelTurn`, `HeardReport`, `HeardMessage`, `DiscardDraft`, `TurnControlAck` and their enums, plus `StreamingDetectIntentRequest.turn_control` / `client_turn_id` and `StreamingDetectIntentResponse.turn_control_ack` / `client_turn_id`.
 * [[OND236-120]](https://ondewo.atlassian.net/browse/OND236-120) `Sessions.interrupt_turn(request, timeout=None)` (sync and async) calls the new `InterruptTurn` RPC. `timeout` is the call's gRPC deadline in seconds; `None` keeps the default of no deadline. `generate_services.py` adds such a `timeout` argument only to the RPCs it lists in `_RPCS_WITH_TIMEOUT`, so every other wrapper keeps its signature.
+* [[OND236-120]](https://ondewo.atlassian.net/browse/OND236-120) New `Logs` service wrapper (`client.services.logs`, sync and async) for the API's `Logs` service (`stream_logs`, `list_logs`, `get_log_stream`, `list_log_streams`, `export_logs`, `delete_logs`), and the regenerated `operations_pb2` with the new container-log fields.
 
 *****************
 

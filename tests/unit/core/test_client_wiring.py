@@ -69,6 +69,7 @@ EXPECTED_SERVICE_NAMES: Tuple[str, ...] = (
     "entity_types",
     "intents",
     "llm_evaluations",
+    "logs",
     "operations",
     "project_roles",
     "project_statistics",
