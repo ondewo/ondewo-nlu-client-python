@@ -2495,6 +2495,7 @@ class ReferencedChunk(google.protobuf.message.Message):
     SIMILARITY_FIELD_NUMBER: builtins.int
     DOCUMENT_URL_FIELD_NUMBER: builtins.int
     DEEP_LINK_URL_FIELD_NUMBER: builtins.int
+    DOCUMENT_TITLE_FIELD_NUMBER: builtins.int
     reference_index: builtins.int
     """Index by which this chunk is referenced in the response text. For index <code>N</code> the reference in the response text has format <code>[ID:N]</code>"""
     dataset_id: builtins.str
@@ -2513,6 +2514,8 @@ class ReferencedChunk(google.protobuf.message.Message):
     """For crawled documents the URL of the source document. For any other document it is left empty."""
     deep_link_url: builtins.str
     """For crawled documents link to the source document that directly jumps to the chunk's location on the page using a text fragment anchor (a bit fragile and might not always work). For any other document it is left empty."""
+    document_title: builtins.str
+    """Title of the document (optional)."""
     def __init__(
         self,
         *,
@@ -2525,8 +2528,9 @@ class ReferencedChunk(google.protobuf.message.Message):
         similarity: builtins.float = ...,
         document_url: builtins.str = ...,
         deep_link_url: builtins.str = ...,
+        document_title: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["chunk_id", b"chunk_id", "content", b"content", "dataset_id", b"dataset_id", "deep_link_url", b"deep_link_url", "document_id", b"document_id", "document_name", b"document_name", "document_url", b"document_url", "reference_index", b"reference_index", "similarity", b"similarity"]) -> None: ...
+    def ClearField(self, field_name: typing.Literal["chunk_id", b"chunk_id", "content", b"content", "dataset_id", b"dataset_id", "deep_link_url", b"deep_link_url", "document_id", b"document_id", "document_name", b"document_name", "document_title", b"document_title", "document_url", b"document_url", "reference_index", b"reference_index", "similarity", b"similarity"]) -> None: ...
 
 global___ReferencedChunk = ReferencedChunk
 
