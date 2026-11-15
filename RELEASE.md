@@ -2,6 +2,16 @@
 
 *****************
 
+## Release ONDEWO NLU Python Client 7.6.0
+
+### New Features
+
+* Tracking API Version [7.6.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/7.6.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+* [[OND236-120]](https://ondewo.atlassian.net/browse/OND236-120) Warm transfer intros: `Sessions.prepare_warm_transfer_intro(request, timeout=None)` and `Sessions.get_warm_transfer_intro_outcome(request, timeout=None)` (sync and async) call the new `PrepareWarmTransferIntro` and `GetWarmTransferIntroOutcome` RPCs. `timeout` is the call's gRPC deadline in seconds; `None` keeps the default of no deadline. The generated `session_pb2` carries `WarmTransferIntroConfig`, `PrepareWarmTransferIntroRequest` / `PrepareWarmTransferIntroResponse`, `GetWarmTransferIntroOutcomeRequest`, `WarmTransferIntroOutcome` and the enums `WarmTransferIntroTextSource`, `WarmTransferIntroDecision`, `WarmTransferIntroDecidedBy` and `WarmTransferIntroStage`. `WarmTransferIntroConfig.confirm_human_before_intro` and `decline_reason_question` are `optional`: test them with `HasField`.
+* [[OND236-120]](https://ondewo.atlassian.net/browse/OND236-120) The generated `agent_pb2` carries `Agent.warm_transfer_settings` (field 15) with `WarmTransferAgentSettings`, `WarmTransferAgentTexts` and `WarmTransferAgentLexicon`, the per-agent warm transfer defaults. `WarmTransferAgentSettings.enabled` and `WarmTransferAgentTexts.decline_reason_question` are `optional`.
+
+*****************
+
 ## Release ONDEWO NLU Python Client 7.5.0
 
 ### New Features
