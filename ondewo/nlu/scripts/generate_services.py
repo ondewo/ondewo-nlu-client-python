@@ -72,7 +72,11 @@ _MAX_LINE_LENGTH = 120
 # call's gRPC deadline in seconds (``None`` = no deadline, as for every other wrapper). Opt-in per RPC so the
 # signature of every other wrapper stays unchanged. ``InterruptTurn`` is called from latency-bounded paths
 # (e.g. a voice client reporting what the caller heard) that must never block on an unresponsive server.
-_RPCS_WITH_TIMEOUT: FrozenSet[str] = frozenset({"InterruptTurn"})
+# ``PrepareWarmTransferIntro`` and ``GetWarmTransferIntroOutcome`` are called by ondewo-vtsi inside a bounded
+# budget: Prepare before the transfer target rings, the outcome on its watcher's 1 s tick.
+_RPCS_WITH_TIMEOUT: FrozenSet[str] = frozenset(
+    {"InterruptTurn", "PrepareWarmTransferIntro", "GetWarmTransferIntroOutcome"}
+)
 
 
 @dataclass

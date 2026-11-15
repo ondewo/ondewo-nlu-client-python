@@ -570,6 +570,7 @@ class Agent(google.protobuf.message.Message):
     MODIFIED_AT_FIELD_NUMBER: builtins.int
     CREATED_BY_FIELD_NUMBER: builtins.int
     MODIFIED_BY_FIELD_NUMBER: builtins.int
+    WARM_TRANSFER_SETTINGS_FIELD_NUMBER: builtins.int
     parent: builtins.str
     """Required. The project of this agent.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
@@ -623,6 +624,12 @@ class Agent(google.protobuf.message.Message):
     def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Modification date and time. Read-only field."""
 
+    @property
+    def warm_transfer_settings(self) -> global___WarmTransferAgentSettings:
+        """Optional. The agent's settings of warm transfer intros (<code>Sessions.PrepareWarmTransferIntro</code>).
+        Unset = intros are enabled while the server's warm transfer feature is switched on, with the built-in texts.
+        """
+
     def __init__(
         self,
         *,
@@ -640,11 +647,162 @@ class Agent(google.protobuf.message.Message):
         modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         created_by: builtins.str = ...,
         modified_by: builtins.str = ...,
+        warm_transfer_settings: global___WarmTransferAgentSettings | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["configs", b"configs", "created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["configs", b"configs", "created_at", b"created_at", "created_by", b"created_by", "default_language_code", b"default_language_code", "description", b"description", "display_name", b"display_name", "modified_at", b"modified_at", "modified_by", b"modified_by", "nlu_platform", b"nlu_platform", "owner_id", b"owner_id", "parent", b"parent", "status", b"status", "supported_language_codes", b"supported_language_codes", "time_zone", b"time_zone"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["configs", b"configs", "created_at", b"created_at", "modified_at", b"modified_at", "warm_transfer_settings", b"warm_transfer_settings"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["configs", b"configs", "created_at", b"created_at", "created_by", b"created_by", "default_language_code", b"default_language_code", "description", b"description", "display_name", b"display_name", "modified_at", b"modified_at", "modified_by", b"modified_by", "nlu_platform", b"nlu_platform", "owner_id", b"owner_id", "parent", b"parent", "status", b"status", "supported_language_codes", b"supported_language_codes", "time_zone", b"time_zone", "warm_transfer_settings", b"warm_transfer_settings"]) -> None: ...
 
 global___Agent = Agent
+
+@typing.final
+class WarmTransferAgentSettings(google.protobuf.message.Message):
+    """The agent's settings of warm transfer intros. A text a <code>WarmTransferIntroConfig</code> leaves empty falls back
+    to the agent's text for the intro's language, then to the built-in default.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing.final
+    class DefaultTextsEntry(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        KEY_FIELD_NUMBER: builtins.int
+        VALUE_FIELD_NUMBER: builtins.int
+        key: builtins.str
+        @property
+        def value(self) -> global___WarmTransferAgentTexts: ...
+        def __init__(
+            self,
+            *,
+            key: builtins.str = ...,
+            value: global___WarmTransferAgentTexts | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["key", b"key", "value", b"value"]) -> None: ...
+
+    @typing.final
+    class ExtraLexiconEntry(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        KEY_FIELD_NUMBER: builtins.int
+        VALUE_FIELD_NUMBER: builtins.int
+        key: builtins.str
+        @property
+        def value(self) -> global___WarmTransferAgentLexicon: ...
+        def __init__(
+            self,
+            *,
+            key: builtins.str = ...,
+            value: global___WarmTransferAgentLexicon | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["key", b"key", "value", b"value"]) -> None: ...
+
+    ENABLED_FIELD_NUMBER: builtins.int
+    LLM_CCAI_SERVICE_NAME_FIELD_NUMBER: builtins.int
+    DEFAULT_TEXTS_FIELD_NUMBER: builtins.int
+    EXTRA_LEXICON_FIELD_NUMBER: builtins.int
+    enabled: builtins.bool
+    """Whether warm transfer intros are enabled for the agent. Unset = enabled while the server's warm transfer
+    feature is switched on. False = <code>PrepareWarmTransferIntro</code> answers <code>FAILED_PRECONDITION</code>
+    with <code>reason=warm-intro-disabled-for-agent</code>.
+    """
+    llm_ccai_service_name: builtins.str
+    """The <code>ONDEWO_NLU_LLM</code> CCAI service of the LLM intro when the request names none. Empty = the
+    project's first <code>ONDEWO_NLU_LLM</code> service.
+    """
+    @property
+    def default_texts(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, global___WarmTransferAgentTexts]:
+        """The default texts, keyed by language code (e.g. <code>de</code>)."""
+
+    @property
+    def extra_lexicon(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, global___WarmTransferAgentLexicon]:
+        """Additional words and phrases of the decision lexicon, keyed by language code (e.g. <code>de</code>)."""
+
+    def __init__(
+        self,
+        *,
+        enabled: builtins.bool | None = ...,
+        llm_ccai_service_name: builtins.str = ...,
+        default_texts: collections.abc.Mapping[builtins.str, global___WarmTransferAgentTexts] | None = ...,
+        extra_lexicon: collections.abc.Mapping[builtins.str, global___WarmTransferAgentLexicon] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_enabled", b"_enabled", "enabled", b"enabled"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_enabled", b"_enabled", "default_texts", b"default_texts", "enabled", b"enabled", "extra_lexicon", b"extra_lexicon", "llm_ccai_service_name", b"llm_ccai_service_name"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_enabled", b"_enabled"]) -> typing.Literal["enabled"] | None: ...
+
+global___WarmTransferAgentSettings = WarmTransferAgentSettings
+
+@typing.final
+class WarmTransferAgentTexts(google.protobuf.message.Message):
+    """The default texts of warm transfer intros in one language. An empty text = the built-in default. The fields and
+    placeholders are those of the same-named fields of <code>WarmTransferIntroConfig</code>.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    READY_QUESTION_FIELD_NUMBER: builtins.int
+    ACCEPT_QUESTION_FIELD_NUMBER: builtins.int
+    DECLINE_REASON_QUESTION_FIELD_NUMBER: builtins.int
+    CALLER_DECLINED_MESSAGE_FIELD_NUMBER: builtins.int
+    CALLER_UNREACHABLE_MESSAGE_FIELD_NUMBER: builtins.int
+    ready_question: builtins.str
+    """The first question to the target (placeholder <code>{project}</code>)."""
+    accept_question: builtins.str
+    """The question after the intro."""
+    decline_reason_question: builtins.str
+    """The question after a decline. Unset = the built-in default; set to "" = the reason is not asked for."""
+    caller_declined_message: builtins.str
+    """The message the caller hears after a decline (placeholders <code>{callee_name}</code>,
+    <code>{reason}</code>).
+    """
+    caller_unreachable_message: builtins.str
+    """The message the caller hears when the target could not be reached or gave no decision (placeholder
+    <code>{callee_name}</code>).
+    """
+    def __init__(
+        self,
+        *,
+        ready_question: builtins.str = ...,
+        accept_question: builtins.str = ...,
+        decline_reason_question: builtins.str | None = ...,
+        caller_declined_message: builtins.str = ...,
+        caller_unreachable_message: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_decline_reason_question", b"_decline_reason_question", "decline_reason_question", b"decline_reason_question"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_decline_reason_question", b"_decline_reason_question", "accept_question", b"accept_question", "caller_declined_message", b"caller_declined_message", "caller_unreachable_message", b"caller_unreachable_message", "decline_reason_question", b"decline_reason_question", "ready_question", b"ready_question"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_decline_reason_question", b"_decline_reason_question"]) -> typing.Literal["decline_reason_question"] | None: ...
+
+global___WarmTransferAgentTexts = WarmTransferAgentTexts
+
+@typing.final
+class WarmTransferAgentLexicon(google.protobuf.message.Message):
+    """Additional entries of the closed decision lexicon of warm transfer intros in one language, matched before an LLM
+    classifies an answer. At most 50 entries in <code>accept_phrases</code> and <code>decline_phrases</code>
+    together.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ACCEPT_PHRASES_FIELD_NUMBER: builtins.int
+    DECLINE_PHRASES_FIELD_NUMBER: builtins.int
+    @property
+    def accept_phrases(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Words and phrases that accept the call (and confirm the ready question), e.g. "übernehme"."""
+
+    @property
+    def decline_phrases(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Words and phrases that decline the call, e.g. "bin im Termin"."""
+
+    def __init__(
+        self,
+        *,
+        accept_phrases: collections.abc.Iterable[builtins.str] | None = ...,
+        decline_phrases: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["accept_phrases", b"accept_phrases", "decline_phrases", b"decline_phrases"]) -> None: ...
+
+global___WarmTransferAgentLexicon = WarmTransferAgentLexicon
 
 @typing.final
 class AgentWithOwner(google.protobuf.message.Message):

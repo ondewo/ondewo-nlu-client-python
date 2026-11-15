@@ -864,6 +864,10 @@ class TestTimeoutArgument:
     def test_interrupt_turn_is_listed(self) -> None:
         assert "InterruptTurn" in generate_services._RPCS_WITH_TIMEOUT
 
+    def test_the_warm_transfer_intro_rpcs_are_listed(self) -> None:
+        """ondewo-vtsi calls both inside a bounded budget (Prepare 6 s, the outcome on a 1 s tick)."""
+        assert {"PrepareWarmTransferIntro", "GetWarmTransferIntroOutcome"} <= generate_services._RPCS_WITH_TIMEOUT
+
     def test_short_signature_and_body_carry_the_timeout(self) -> None:
         out = _emit_method(self._interrupt_turn(), "InterruptTurnRequest", "InterruptTurnResponse")
         assert (

@@ -60,6 +60,7 @@ from ondewo.nlu.session_pb2 import (
     GetSessionRequest,
     GetSessionReviewRequest,
     GetSessionStepRequest,
+    GetWarmTransferIntroOutcomeRequest,
     InterruptTurnRequest,
     InterruptTurnResponse,
     ListAccountIdsOfAllSessionsRequest,
@@ -103,6 +104,8 @@ from ondewo.nlu.session_pb2 import (
     ListTagsResponse,
     ListUserIdsOfAllSessionsRequest,
     ListUserIdsResponse,
+    PrepareWarmTransferIntroRequest,
+    PrepareWarmTransferIntroResponse,
     Session,
     SessionFeedback,
     SessionReview,
@@ -112,6 +115,7 @@ from ondewo.nlu.session_pb2 import (
     UpdateSessionCommentsRequest,
     UpdateSessionFeedbackRequest,
     UpdateSessionStepRequest,
+    WarmTransferIntroOutcome,
 )
 from ondewo.nlu.session_pb2_grpc import SessionsStub
 from ondewo.nlu.core.services_interface import ServicesInterface
@@ -145,6 +149,26 @@ class Sessions(ServicesInterface):
 
     def interrupt_turn(self, request: InterruptTurnRequest, timeout: Optional[float] = None) -> InterruptTurnResponse:
         response: InterruptTurnResponse = self.stub.InterruptTurn(request, metadata=self.metadata, timeout=timeout)
+        return response
+
+    def prepare_warm_transfer_intro(
+        self,
+        request: PrepareWarmTransferIntroRequest,
+        timeout: Optional[float] = None,
+    ) -> PrepareWarmTransferIntroResponse:
+        response: PrepareWarmTransferIntroResponse = self.stub.PrepareWarmTransferIntro(
+            request, metadata=self.metadata, timeout=timeout
+        )
+        return response
+
+    def get_warm_transfer_intro_outcome(
+        self,
+        request: GetWarmTransferIntroOutcomeRequest,
+        timeout: Optional[float] = None,
+    ) -> WarmTransferIntroOutcome:
+        response: WarmTransferIntroOutcome = self.stub.GetWarmTransferIntroOutcome(
+            request, metadata=self.metadata, timeout=timeout
+        )
         return response
 
     def list_sessions(self, request: ListSessionsRequest) -> ListSessionsResponse:

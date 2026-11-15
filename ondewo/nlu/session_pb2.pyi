@@ -319,6 +319,138 @@ TURN_CONTROL_ACK_STATUS_DRAFT_DISCARDED: TurnControlAckStatus.ValueType  # 7
 """The draft's session step, whose request carried <code>QueryParameters.preemptive_draft</code>, was deleted."""
 global___TurnControlAckStatus = TurnControlAckStatus
 
+class _WarmTransferIntroTextSource:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _WarmTransferIntroTextSourceEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_WarmTransferIntroTextSource.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    WARM_TRANSFER_INTRO_TEXT_SOURCE_UNSPECIFIED: _WarmTransferIntroTextSource.ValueType  # 0
+    """Not set: <code>WARM_TRANSFER_INTRO_TEXT_SOURCE_LLM_SUMMARY</code> when the project has an LLM service, else
+    <code>WARM_TRANSFER_INTRO_TEXT_SOURCE_TEMPLATE</code>.
+    """
+    WARM_TRANSFER_INTRO_TEXT_SOURCE_TEMPLATE: _WarmTransferIntroTextSource.ValueType  # 1
+    """<code>WarmTransferIntroConfig.intro_prompt</code> is a text with the placeholders <code>{caller_name}</code>,
+    <code>{callee_name}</code>, <code>{topic}</code> and <code>{summary}</code>.
+    """
+    WARM_TRANSFER_INTRO_TEXT_SOURCE_LLM_SUMMARY: _WarmTransferIntroTextSource.ValueType  # 2
+    """An LLM summarises the source session for the target; <code>WarmTransferIntroConfig.intro_prompt</code> is its
+    instruction.
+    """
+
+class WarmTransferIntroTextSource(_WarmTransferIntroTextSource, metaclass=_WarmTransferIntroTextSourceEnumTypeWrapper):
+    """Where the intro text of a warm transfer comes from."""
+
+WARM_TRANSFER_INTRO_TEXT_SOURCE_UNSPECIFIED: WarmTransferIntroTextSource.ValueType  # 0
+"""Not set: <code>WARM_TRANSFER_INTRO_TEXT_SOURCE_LLM_SUMMARY</code> when the project has an LLM service, else
+<code>WARM_TRANSFER_INTRO_TEXT_SOURCE_TEMPLATE</code>.
+"""
+WARM_TRANSFER_INTRO_TEXT_SOURCE_TEMPLATE: WarmTransferIntroTextSource.ValueType  # 1
+"""<code>WarmTransferIntroConfig.intro_prompt</code> is a text with the placeholders <code>{caller_name}</code>,
+<code>{callee_name}</code>, <code>{topic}</code> and <code>{summary}</code>.
+"""
+WARM_TRANSFER_INTRO_TEXT_SOURCE_LLM_SUMMARY: WarmTransferIntroTextSource.ValueType  # 2
+"""An LLM summarises the source session for the target; <code>WarmTransferIntroConfig.intro_prompt</code> is its
+instruction.
+"""
+global___WarmTransferIntroTextSource = WarmTransferIntroTextSource
+
+class _WarmTransferIntroDecision:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _WarmTransferIntroDecisionEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_WarmTransferIntroDecision.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    WARM_TRANSFER_INTRO_DECISION_UNSPECIFIED: _WarmTransferIntroDecision.ValueType  # 0
+    """Not set."""
+    WARM_TRANSFER_INTRO_DECISION_PENDING: _WarmTransferIntroDecision.ValueType  # 1
+    """The intro is still running."""
+    WARM_TRANSFER_INTRO_DECISION_ACCEPTED: _WarmTransferIntroDecision.ValueType  # 2
+    """The target accepted the call."""
+    WARM_TRANSFER_INTRO_DECISION_DECLINED: _WarmTransferIntroDecision.ValueType  # 3
+    """The target declined the call."""
+    WARM_TRANSFER_INTRO_DECISION_NO_DECISION: _WarmTransferIntroDecision.ValueType  # 4
+    """The target gave no decision: no ready answer, an unclear answer twice, or a timeout."""
+
+class WarmTransferIntroDecision(_WarmTransferIntroDecision, metaclass=_WarmTransferIntroDecisionEnumTypeWrapper):
+    """The decision of the target of a warm transfer intro."""
+
+WARM_TRANSFER_INTRO_DECISION_UNSPECIFIED: WarmTransferIntroDecision.ValueType  # 0
+"""Not set."""
+WARM_TRANSFER_INTRO_DECISION_PENDING: WarmTransferIntroDecision.ValueType  # 1
+"""The intro is still running."""
+WARM_TRANSFER_INTRO_DECISION_ACCEPTED: WarmTransferIntroDecision.ValueType  # 2
+"""The target accepted the call."""
+WARM_TRANSFER_INTRO_DECISION_DECLINED: WarmTransferIntroDecision.ValueType  # 3
+"""The target declined the call."""
+WARM_TRANSFER_INTRO_DECISION_NO_DECISION: WarmTransferIntroDecision.ValueType  # 4
+"""The target gave no decision: no ready answer, an unclear answer twice, or a timeout."""
+global___WarmTransferIntroDecision = WarmTransferIntroDecision
+
+class _WarmTransferIntroDecidedBy:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _WarmTransferIntroDecidedByEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_WarmTransferIntroDecidedBy.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    WARM_TRANSFER_INTRO_DECIDED_BY_UNSPECIFIED: _WarmTransferIntroDecidedBy.ValueType  # 0
+    """Not set, or not decided yet."""
+    WARM_TRANSFER_INTRO_DECIDED_BY_DTMF: _WarmTransferIntroDecidedBy.ValueType  # 1
+    """By a DTMF key."""
+    WARM_TRANSFER_INTRO_DECIDED_BY_SPEECH: _WarmTransferIntroDecidedBy.ValueType  # 2
+    """By speech."""
+    WARM_TRANSFER_INTRO_DECIDED_BY_TIMEOUT: _WarmTransferIntroDecidedBy.ValueType  # 3
+    """By the decision timeout."""
+
+class WarmTransferIntroDecidedBy(_WarmTransferIntroDecidedBy, metaclass=_WarmTransferIntroDecidedByEnumTypeWrapper):
+    """How the target of a warm transfer intro gave the decision."""
+
+WARM_TRANSFER_INTRO_DECIDED_BY_UNSPECIFIED: WarmTransferIntroDecidedBy.ValueType  # 0
+"""Not set, or not decided yet."""
+WARM_TRANSFER_INTRO_DECIDED_BY_DTMF: WarmTransferIntroDecidedBy.ValueType  # 1
+"""By a DTMF key."""
+WARM_TRANSFER_INTRO_DECIDED_BY_SPEECH: WarmTransferIntroDecidedBy.ValueType  # 2
+"""By speech."""
+WARM_TRANSFER_INTRO_DECIDED_BY_TIMEOUT: WarmTransferIntroDecidedBy.ValueType  # 3
+"""By the decision timeout."""
+global___WarmTransferIntroDecidedBy = WarmTransferIntroDecidedBy
+
+class _WarmTransferIntroStage:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _WarmTransferIntroStageEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_WarmTransferIntroStage.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    WARM_TRANSFER_INTRO_STAGE_UNSPECIFIED: _WarmTransferIntroStage.ValueType  # 0
+    """Not set."""
+    WARM_TRANSFER_INTRO_STAGE_PREPARED: _WarmTransferIntroStage.ValueType  # 1
+    """Prepared; nothing spoken yet."""
+    WARM_TRANSFER_INTRO_STAGE_READY_ASKED: _WarmTransferIntroStage.ValueType  # 2
+    """<code>ready_question</code> spoken, waiting for a person to answer."""
+    WARM_TRANSFER_INTRO_STAGE_INTRO_SPOKEN: _WarmTransferIntroStage.ValueType  # 3
+    """The intro and <code>accept_question</code> spoken, waiting for the decision."""
+    WARM_TRANSFER_INTRO_STAGE_REASON_ASKED: _WarmTransferIntroStage.ValueType  # 4
+    """<code>decline_reason_question</code> spoken, waiting for the reason."""
+    WARM_TRANSFER_INTRO_STAGE_CLOSED: _WarmTransferIntroStage.ValueType  # 5
+    """The final answer, which ends the target's call, was generated."""
+
+class WarmTransferIntroStage(_WarmTransferIntroStage, metaclass=_WarmTransferIntroStageEnumTypeWrapper):
+    """The stage of a warm transfer intro session."""
+
+WARM_TRANSFER_INTRO_STAGE_UNSPECIFIED: WarmTransferIntroStage.ValueType  # 0
+"""Not set."""
+WARM_TRANSFER_INTRO_STAGE_PREPARED: WarmTransferIntroStage.ValueType  # 1
+"""Prepared; nothing spoken yet."""
+WARM_TRANSFER_INTRO_STAGE_READY_ASKED: WarmTransferIntroStage.ValueType  # 2
+"""<code>ready_question</code> spoken, waiting for a person to answer."""
+WARM_TRANSFER_INTRO_STAGE_INTRO_SPOKEN: WarmTransferIntroStage.ValueType  # 3
+"""The intro and <code>accept_question</code> spoken, waiting for the decision."""
+WARM_TRANSFER_INTRO_STAGE_REASON_ASKED: WarmTransferIntroStage.ValueType  # 4
+"""<code>decline_reason_question</code> spoken, waiting for the reason."""
+WARM_TRANSFER_INTRO_STAGE_CLOSED: WarmTransferIntroStage.ValueType  # 5
+"""The final answer, which ends the target's call, was generated."""
+global___WarmTransferIntroStage = WarmTransferIntroStage
+
 class _AudioEncoding:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
@@ -3333,6 +3465,244 @@ class InterruptTurnResponse(google.protobuf.message.Message):
     def ClearField(self, field_name: typing.Literal["turn_control_ack", b"turn_control_ack"]) -> None: ...
 
 global___InterruptTurnResponse = InterruptTurnResponse
+
+@typing.final
+class WarmTransferIntroConfig(google.protobuf.message.Message):
+    """The configuration of one warm transfer intro, as resolved by the caller of
+    <code>PrepareWarmTransferIntro</code>. A text left empty (or unset, for an <code>optional</code> field) falls back
+    to the agent's default text for the language (<code>Agent.warm_transfer_settings</code>), then to the built-in
+    default. Texts are spoken to the target, never to the caller, except <code>caller_declined_message</code> and
+    <code>caller_unreachable_message</code>.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    INTRO_PROMPT_FIELD_NUMBER: builtins.int
+    TEXT_SOURCE_FIELD_NUMBER: builtins.int
+    READY_QUESTION_FIELD_NUMBER: builtins.int
+    CONFIRM_HUMAN_BEFORE_INTRO_FIELD_NUMBER: builtins.int
+    ACCEPT_QUESTION_FIELD_NUMBER: builtins.int
+    DECLINE_REASON_QUESTION_FIELD_NUMBER: builtins.int
+    CALLER_DECLINED_MESSAGE_FIELD_NUMBER: builtins.int
+    CALLER_UNREACHABLE_MESSAGE_FIELD_NUMBER: builtins.int
+    ACCEPT_DTMF_FIELD_NUMBER: builtins.int
+    DECLINE_DTMF_FIELD_NUMBER: builtins.int
+    CALLEE_DISPLAY_NAME_FIELD_NUMBER: builtins.int
+    CALLEE_DESCRIPTION_FIELD_NUMBER: builtins.int
+    LLM_CCAI_SERVICE_NAME_FIELD_NUMBER: builtins.int
+    MAX_HISTORY_STEPS_FIELD_NUMBER: builtins.int
+    DECISION_TIMEOUT_S_FIELD_NUMBER: builtins.int
+    PROJECT_DISPLAY_NAME_FIELD_NUMBER: builtins.int
+    intro_prompt: builtins.str
+    """The LLM instruction (<code>WARM_TRANSFER_INTRO_TEXT_SOURCE_LLM_SUMMARY</code>) or the template text
+    (<code>WARM_TRANSFER_INTRO_TEXT_SOURCE_TEMPLATE</code>, placeholders <code>{caller_name}</code>,
+    <code>{callee_name}</code>, <code>{topic}</code>, <code>{summary}</code>) of the intro. At most 4000 characters.
+    """
+    text_source: global___WarmTransferIntroTextSource.ValueType
+    """Where the intro text comes from."""
+    ready_question: builtins.str
+    """The first question to the target, which must not reveal anything about the caller, e.g. "Hier ist der
+    digitale Assistent von {project}. Ich habe einen Anruf für Sie. Sind Sie am Apparat? Sagen Sie ja oder
+    drücken Sie 1." Placeholder <code>{project}</code>: <code>project_display_name</code>.
+    """
+    confirm_human_before_intro: builtins.bool
+    """Whether the intro is spoken only after the target answered <code>ready_question</code> (a guard against a
+    mailbox). Unset = true.
+    """
+    accept_question: builtins.str
+    """The question after the intro, e.g. "Möchten Sie das Gespräch übernehmen? Ja oder 1, nein oder 2." """
+    decline_reason_question: builtins.str
+    """The question after a decline, e.g. "Was darf ich dem Anrufer ausrichten?". Unset = the agent's or the
+    built-in default; set to "" = the reason is not asked for.
+    """
+    caller_declined_message: builtins.str
+    """The template of the message the caller hears after a decline. Placeholders <code>{callee_name}</code> and
+    <code>{reason}</code>; without a reason, the variant without the reason clause is used.
+    """
+    caller_unreachable_message: builtins.str
+    """The template of the message the caller hears when the target was busy, did not answer, gave no decision or
+    the intro could not run. Placeholder <code>{callee_name}</code>.
+    """
+    accept_dtmf: builtins.str
+    """The DTMF key that accepts: one of <code>0-9</code>, <code>*</code>, <code>#</code>. Empty = "1"."""
+    decline_dtmf: builtins.str
+    """The DTMF key that declines: one of <code>0-9</code>, <code>*</code>, <code>#</code>, different from
+    <code>accept_dtmf</code>. Empty = "2".
+    """
+    callee_display_name: builtins.str
+    """Who the target is, e.g. "Frau Berger, Buchhaltung": <code>{callee_name}</code>. At most 128 characters."""
+    callee_description: builtins.str
+    """The role and context of the target, given to the LLM intro. At most 512 characters."""
+    llm_ccai_service_name: builtins.str
+    """The <code>ONDEWO_NLU_LLM</code> CCAI service of the LLM intro. Empty = the agent's
+    <code>warm_transfer_settings.llm_ccai_service_name</code>, then the project's first
+    <code>ONDEWO_NLU_LLM</code> service.
+    """
+    max_history_steps: builtins.int
+    """How many of the latest steps of the source session the intro reads. 0 = 30."""
+    decision_timeout_s: builtins.int
+    """Seconds from a question to the decision, declared to the client as the expected input's timeout."""
+    project_display_name: builtins.str
+    """The project's display name: <code>{project}</code> in <code>ready_question</code>."""
+    def __init__(
+        self,
+        *,
+        intro_prompt: builtins.str = ...,
+        text_source: global___WarmTransferIntroTextSource.ValueType = ...,
+        ready_question: builtins.str = ...,
+        confirm_human_before_intro: builtins.bool | None = ...,
+        accept_question: builtins.str = ...,
+        decline_reason_question: builtins.str | None = ...,
+        caller_declined_message: builtins.str = ...,
+        caller_unreachable_message: builtins.str = ...,
+        accept_dtmf: builtins.str = ...,
+        decline_dtmf: builtins.str = ...,
+        callee_display_name: builtins.str = ...,
+        callee_description: builtins.str = ...,
+        llm_ccai_service_name: builtins.str = ...,
+        max_history_steps: builtins.int = ...,
+        decision_timeout_s: builtins.int = ...,
+        project_display_name: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["_confirm_human_before_intro", b"_confirm_human_before_intro", "_decline_reason_question", b"_decline_reason_question", "confirm_human_before_intro", b"confirm_human_before_intro", "decline_reason_question", b"decline_reason_question"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_confirm_human_before_intro", b"_confirm_human_before_intro", "_decline_reason_question", b"_decline_reason_question", "accept_dtmf", b"accept_dtmf", "accept_question", b"accept_question", "callee_description", b"callee_description", "callee_display_name", b"callee_display_name", "caller_declined_message", b"caller_declined_message", "caller_unreachable_message", b"caller_unreachable_message", "confirm_human_before_intro", b"confirm_human_before_intro", "decision_timeout_s", b"decision_timeout_s", "decline_dtmf", b"decline_dtmf", "decline_reason_question", b"decline_reason_question", "intro_prompt", b"intro_prompt", "llm_ccai_service_name", b"llm_ccai_service_name", "max_history_steps", b"max_history_steps", "project_display_name", b"project_display_name", "ready_question", b"ready_question", "text_source", b"text_source"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_confirm_human_before_intro", b"_confirm_human_before_intro"]) -> typing.Literal["confirm_human_before_intro"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_decline_reason_question", b"_decline_reason_question"]) -> typing.Literal["decline_reason_question"] | None: ...
+
+global___WarmTransferIntroConfig = WarmTransferIntroConfig
+
+@typing.final
+class PrepareWarmTransferIntroRequest(google.protobuf.message.Message):
+    """The request to prepare the intro session of a warm transfer."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    INTRO_SESSION_FIELD_NUMBER: builtins.int
+    SOURCE_SESSION_FIELD_NUMBER: builtins.int
+    CONFIG_FIELD_NUMBER: builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
+    TRANSFER_REQUEST_ID_FIELD_NUMBER: builtins.int
+    intro_session: builtins.str
+    """Required. The intro session, which must not exist yet. Format:
+    <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code>. An existing session that
+    was not prepared with the same <code>transfer_request_id</code> is refused with
+    <code>ALREADY_EXISTS</code>.
+    """
+    source_session: builtins.str
+    """Required. The caller's session the intro summarises. Format:
+    <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code>. A session of another project
+    than <code>intro_session</code> is refused with <code>INVALID_ARGUMENT</code>.
+    """
+    language_code: builtins.str
+    """The language of the intro session."""
+    transfer_request_id: builtins.str
+    """Required. The idempotency key of the transfer."""
+    @property
+    def config(self) -> global___WarmTransferIntroConfig:
+        """The configuration of the intro."""
+
+    def __init__(
+        self,
+        *,
+        intro_session: builtins.str = ...,
+        source_session: builtins.str = ...,
+        config: global___WarmTransferIntroConfig | None = ...,
+        language_code: builtins.str = ...,
+        transfer_request_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing.Literal["config", b"config"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["config", b"config", "intro_session", b"intro_session", "language_code", b"language_code", "source_session", b"source_session", "transfer_request_id", b"transfer_request_id"]) -> None: ...
+
+global___PrepareWarmTransferIntroRequest = PrepareWarmTransferIntroRequest
+
+@typing.final
+class PrepareWarmTransferIntroResponse(google.protobuf.message.Message):
+    """The response to a <code>PrepareWarmTransferIntroRequest</code>. Never carries the intro text."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TEXT_SOURCE_USED_FIELD_NUMBER: builtins.int
+    TEXT_FELL_BACK_FIELD_NUMBER: builtins.int
+    INTRO_TEXT_CHARS_FIELD_NUMBER: builtins.int
+    PROMPT_DIGEST_FIELD_NUMBER: builtins.int
+    text_source_used: global___WarmTransferIntroTextSource.ValueType
+    """The source the intro text was rendered from."""
+    text_fell_back: builtins.bool
+    """True when the LLM failed or exceeded its budget and the TEMPLATE was used instead."""
+    intro_text_chars: builtins.int
+    """The length of the intro text in characters."""
+    prompt_digest: builtins.str
+    """The SHA-256 (hex) of the resolved prompt, for audit."""
+    def __init__(
+        self,
+        *,
+        text_source_used: global___WarmTransferIntroTextSource.ValueType = ...,
+        text_fell_back: builtins.bool = ...,
+        intro_text_chars: builtins.int = ...,
+        prompt_digest: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["intro_text_chars", b"intro_text_chars", "prompt_digest", b"prompt_digest", "text_fell_back", b"text_fell_back", "text_source_used", b"text_source_used"]) -> None: ...
+
+global___PrepareWarmTransferIntroResponse = PrepareWarmTransferIntroResponse
+
+@typing.final
+class GetWarmTransferIntroOutcomeRequest(google.protobuf.message.Message):
+    """The request for the outcome of a warm transfer intro."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    INTRO_SESSION_FIELD_NUMBER: builtins.int
+    intro_session: builtins.str
+    """Required. The intro session. Format:
+    <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code>. A session that was not
+    prepared by <code>PrepareWarmTransferIntro</code> is answered with <code>NOT_FOUND</code>.
+    """
+    def __init__(
+        self,
+        *,
+        intro_session: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["intro_session", b"intro_session"]) -> None: ...
+
+global___GetWarmTransferIntroOutcomeRequest = GetWarmTransferIntroOutcomeRequest
+
+@typing.final
+class WarmTransferIntroOutcome(google.protobuf.message.Message):
+    """The outcome of a warm transfer intro. Holds no intro text and no reason text."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    DECISION_FIELD_NUMBER: builtins.int
+    DECIDED_BY_FIELD_NUMBER: builtins.int
+    DECLINE_REASON_PRESENT_FIELD_NUMBER: builtins.int
+    STAGE_FIELD_NUMBER: builtins.int
+    CAUSE_FIELD_NUMBER: builtins.int
+    decision: global___WarmTransferIntroDecision.ValueType
+    """The decision of the target."""
+    decided_by: global___WarmTransferIntroDecidedBy.ValueType
+    """How the decision was given."""
+    decline_reason_present: builtins.bool
+    """True when the target gave a reason after declining."""
+    stage: global___WarmTransferIntroStage.ValueType
+    """The stage of the intro session."""
+    cause: builtins.str
+    """A bounded token naming why there is no decision, e.g. <code>voicemail-suspected</code> (no ready answer) or
+    <code>unclear-twice</code>; empty otherwise.
+    """
+    def __init__(
+        self,
+        *,
+        decision: global___WarmTransferIntroDecision.ValueType = ...,
+        decided_by: global___WarmTransferIntroDecidedBy.ValueType = ...,
+        decline_reason_present: builtins.bool = ...,
+        stage: global___WarmTransferIntroStage.ValueType = ...,
+        cause: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing.Literal["cause", b"cause", "decided_by", b"decided_by", "decision", b"decision", "decline_reason_present", b"decline_reason_present", "stage", b"stage"]) -> None: ...
+
+global___WarmTransferIntroOutcome = WarmTransferIntroOutcome
 
 @typing.final
 class StreamingRecognitionResult(google.protobuf.message.Message):
