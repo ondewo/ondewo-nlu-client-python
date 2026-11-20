@@ -30,39 +30,39 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-import builtins
-import collections.abc
-import google.protobuf.descriptor
-import google.protobuf.field_mask_pb2
-import google.protobuf.internal.containers
-import google.protobuf.internal.enum_type_wrapper
-import google.protobuf.message
-import google.protobuf.struct_pb2
-import google.protobuf.timestamp_pb2
-import google.rpc.status_pb2
-import google.type.latlng_pb2
-import ondewo.nlu.ccai_project_pb2
-import ondewo.nlu.common_pb2
-import ondewo.nlu.context_pb2
-import ondewo.nlu.entity_type_pb2
-import ondewo.nlu.intent_pb2
-import ondewo.nlu.llm_evaluation_pb2
+from collections import abc as _abc
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import field_mask_pb2 as _field_mask_pb2
+from google.protobuf import message as _message
+from google.protobuf import struct_pb2 as _struct_pb2
+from google.protobuf import timestamp_pb2 as _timestamp_pb2
+from google.protobuf.internal import containers as _containers
+from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
+from google.rpc import status_pb2 as _status_pb2
+from google.type import latlng_pb2 as _latlng_pb2
+from ondewo.nlu import ccai_project_pb2 as _ccai_project_pb2
+from ondewo.nlu import common_pb2 as _common_pb2
+from ondewo.nlu import context_pb2 as _context_pb2
+from ondewo.nlu import entity_type_pb2 as _entity_type_pb2
+from ondewo.nlu import intent_pb2 as _intent_pb2
+from ondewo.nlu import llm_evaluation_pb2 as _llm_evaluation_pb2
+import builtins as _builtins
 import sys
-import typing
+import typing as _typing
 
-if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+if sys.version_info >= (3, 11):
+    from typing import TypeAlias as _TypeAlias, Never as _Never
 else:
-    import typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias, Never as _Never
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 class _TranscriptionType:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _TranscriptionTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_TranscriptionType.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _TranscriptionTypeEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_TranscriptionType.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     TRANSCRIPTION_TYPE_UNSPECIFIED: _TranscriptionType.ValueType  # 0
     """Sentinel value when the source of the transcription was not specified."""
     TRANSCRIPTION_TYPE_S2T: _TranscriptionType.ValueType  # 1
@@ -81,14 +81,14 @@ TRANSCRIPTION_TYPE_S2T: TranscriptionType.ValueType  # 1
 """Automatic transcription produced by a speech-to-text system."""
 TRANSCRIPTION_TYPE_HUMAN: TranscriptionType.ValueType  # 2
 """Manual transcription produced by a human annotator."""
-global___TranscriptionType = TranscriptionType
+Global___TranscriptionType: _TypeAlias = TranscriptionType  # noqa: Y015
 
 class _ReasoningEffort:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _ReasoningEffortEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_ReasoningEffort.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _ReasoningEffortEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_ReasoningEffort.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     REASONING_EFFORT_UNSPECIFIED: _ReasoningEffort.ValueType  # 0
     """Unspecified reasoning effort."""
     REASONING_EFFORT_MINIMAL: _ReasoningEffort.ValueType  # 1
@@ -115,14 +115,14 @@ REASONING_EFFORT_MEDIUM: ReasoningEffort.ValueType  # 3
 """Medium reasoning effort."""
 REASONING_EFFORT_HIGH: ReasoningEffort.ValueType  # 4
 """High reasoning effort."""
-global___ReasoningEffort = ReasoningEffort
+Global___ReasoningEffort: _TypeAlias = ReasoningEffort  # noqa: Y015
 
 class _LlmSafetyLocation:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _LlmSafetyLocationEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_LlmSafetyLocation.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _LlmSafetyLocationEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_LlmSafetyLocation.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     LLM_SAFETY_LOCATION_UNSPECIFIED: _LlmSafetyLocation.ValueType  # 0
     """Default / unset."""
     LLM_SAFETY_LOCATION_INPUT: _LlmSafetyLocation.ValueType  # 1
@@ -139,14 +139,14 @@ LLM_SAFETY_LOCATION_INPUT: LlmSafetyLocation.ValueType  # 1
 """The finding was matched in the model input (prompt / user turn)."""
 LLM_SAFETY_LOCATION_OUTPUT: LlmSafetyLocation.ValueType  # 2
 """The finding was matched in the model output (completion)."""
-global___LlmSafetyLocation = LlmSafetyLocation
+Global___LlmSafetyLocation: _TypeAlias = LlmSafetyLocation  # noqa: Y015
 
 class _LlmAgentNodePhase:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _LlmAgentNodePhaseEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_LlmAgentNodePhase.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _LlmAgentNodePhaseEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_LlmAgentNodePhase.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     LLM_AGENT_NODE_PHASE_UNSPECIFIED: _LlmAgentNodePhase.ValueType  # 0
     """Not set."""
     LLM_AGENT_NODE_PHASE_STARTED: _LlmAgentNodePhase.ValueType  # 1
@@ -167,14 +167,14 @@ LLM_AGENT_NODE_PHASE_COMPLETED: LlmAgentNodePhase.ValueType  # 2
 """The node finished without an error."""
 LLM_AGENT_NODE_PHASE_FAILED: LlmAgentNodePhase.ValueType  # 3
 """The node raised an error."""
-global___LlmAgentNodePhase = LlmAgentNodePhase
+Global___LlmAgentNodePhase: _TypeAlias = LlmAgentNodePhase  # noqa: Y015
 
 class _TurnInterruptionReason:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _TurnInterruptionReasonEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_TurnInterruptionReason.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _TurnInterruptionReasonEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_TurnInterruptionReason.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     TURN_INTERRUPTION_REASON_UNSPECIFIED: _TurnInterruptionReason.ValueType  # 0
     """Not set."""
     TURN_INTERRUPTION_REASON_BARGE_IN: _TurnInterruptionReason.ValueType  # 1
@@ -211,14 +211,14 @@ TURN_INTERRUPTION_REASON_OPERATOR_TAKEOVER: TurnInterruptionReason.ValueType  # 
 """A human operator took the call over."""
 TURN_INTERRUPTION_REASON_BOT_MUTED: TurnInterruptionReason.ValueType  # 7
 """A human operator muted the bot."""
-global___TurnInterruptionReason = TurnInterruptionReason
+Global___TurnInterruptionReason: _TypeAlias = TurnInterruptionReason  # noqa: Y015
 
 class _BackgroundWorkPolicy:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _BackgroundWorkPolicyEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_BackgroundWorkPolicy.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _BackgroundWorkPolicyEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_BackgroundWorkPolicy.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     BACKGROUND_WORK_POLICY_KEEP: _BackgroundWorkPolicy.ValueType  # 0
     """Keep it running; its result is delivered later as usual."""
     BACKGROUND_WORK_POLICY_CANCEL_PENDING: _BackgroundWorkPolicy.ValueType  # 1
@@ -231,14 +231,14 @@ BACKGROUND_WORK_POLICY_KEEP: BackgroundWorkPolicy.ValueType  # 0
 """Keep it running; its result is delivered later as usual."""
 BACKGROUND_WORK_POLICY_CANCEL_PENDING: BackgroundWorkPolicy.ValueType  # 1
 """Cancel work that is still pending, unless the user already heard it acknowledged."""
-global___BackgroundWorkPolicy = BackgroundWorkPolicy
+Global___BackgroundWorkPolicy: _TypeAlias = BackgroundWorkPolicy  # noqa: Y015
 
 class _HeardTextPrecision:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _HeardTextPrecisionEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_HeardTextPrecision.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _HeardTextPrecisionEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_HeardTextPrecision.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     HEARD_TEXT_PRECISION_UNSPECIFIED: _HeardTextPrecision.ValueType  # 0
     """Not set."""
     HEARD_TEXT_PRECISION_NONE_HEARD: _HeardTextPrecision.ValueType  # 1
@@ -267,14 +267,14 @@ measured by the player, and mapped proportionally onto the text.
 """
 HEARD_TEXT_PRECISION_PROPORTIONAL: HeardTextPrecision.ValueType  # 4
 """The played share of the audio was measured by the audio player and mapped proportionally onto the text."""
-global___HeardTextPrecision = HeardTextPrecision
+Global___HeardTextPrecision: _TypeAlias = HeardTextPrecision  # noqa: Y015
 
 class _TurnControlAckStatus:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _TurnControlAckStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_TurnControlAckStatus.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _TurnControlAckStatusEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_TurnControlAckStatus.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     TURN_CONTROL_ACK_STATUS_UNSPECIFIED: _TurnControlAckStatus.ValueType  # 0
     """Not set."""
     TURN_CONTROL_ACK_STATUS_CANCELLED: _TurnControlAckStatus.ValueType  # 1
@@ -317,14 +317,14 @@ TURN_CONTROL_ACK_STATUS_HEARD_STALE: TurnControlAckStatus.ValueType  # 6
 """The heard report was ignored because a report with the same or a higher revision was already applied."""
 TURN_CONTROL_ACK_STATUS_DRAFT_DISCARDED: TurnControlAckStatus.ValueType  # 7
 """The draft's session step, whose request carried <code>QueryParameters.preemptive_draft</code>, was deleted."""
-global___TurnControlAckStatus = TurnControlAckStatus
+Global___TurnControlAckStatus: _TypeAlias = TurnControlAckStatus  # noqa: Y015
 
 class _WarmTransferIntroTextSource:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _WarmTransferIntroTextSourceEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_WarmTransferIntroTextSource.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _WarmTransferIntroTextSourceEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_WarmTransferIntroTextSource.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     WARM_TRANSFER_INTRO_TEXT_SOURCE_UNSPECIFIED: _WarmTransferIntroTextSource.ValueType  # 0
     """Not set: <code>WARM_TRANSFER_INTRO_TEXT_SOURCE_LLM_SUMMARY</code> when the project has an LLM service, else
     <code>WARM_TRANSFER_INTRO_TEXT_SOURCE_TEMPLATE</code>.
@@ -353,14 +353,14 @@ WARM_TRANSFER_INTRO_TEXT_SOURCE_LLM_SUMMARY: WarmTransferIntroTextSource.ValueTy
 """An LLM summarises the source session for the target; <code>WarmTransferIntroConfig.intro_prompt</code> is its
 instruction.
 """
-global___WarmTransferIntroTextSource = WarmTransferIntroTextSource
+Global___WarmTransferIntroTextSource: _TypeAlias = WarmTransferIntroTextSource  # noqa: Y015
 
 class _WarmTransferIntroDecision:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _WarmTransferIntroDecisionEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_WarmTransferIntroDecision.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _WarmTransferIntroDecisionEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_WarmTransferIntroDecision.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     WARM_TRANSFER_INTRO_DECISION_UNSPECIFIED: _WarmTransferIntroDecision.ValueType  # 0
     """Not set."""
     WARM_TRANSFER_INTRO_DECISION_PENDING: _WarmTransferIntroDecision.ValueType  # 1
@@ -385,14 +385,14 @@ WARM_TRANSFER_INTRO_DECISION_DECLINED: WarmTransferIntroDecision.ValueType  # 3
 """The target declined the call."""
 WARM_TRANSFER_INTRO_DECISION_NO_DECISION: WarmTransferIntroDecision.ValueType  # 4
 """The target gave no decision: no ready answer, an unclear answer twice, or a timeout."""
-global___WarmTransferIntroDecision = WarmTransferIntroDecision
+Global___WarmTransferIntroDecision: _TypeAlias = WarmTransferIntroDecision  # noqa: Y015
 
 class _WarmTransferIntroDecidedBy:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _WarmTransferIntroDecidedByEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_WarmTransferIntroDecidedBy.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _WarmTransferIntroDecidedByEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_WarmTransferIntroDecidedBy.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     WARM_TRANSFER_INTRO_DECIDED_BY_UNSPECIFIED: _WarmTransferIntroDecidedBy.ValueType  # 0
     """Not set, or not decided yet."""
     WARM_TRANSFER_INTRO_DECIDED_BY_DTMF: _WarmTransferIntroDecidedBy.ValueType  # 1
@@ -413,14 +413,14 @@ WARM_TRANSFER_INTRO_DECIDED_BY_SPEECH: WarmTransferIntroDecidedBy.ValueType  # 2
 """By speech."""
 WARM_TRANSFER_INTRO_DECIDED_BY_TIMEOUT: WarmTransferIntroDecidedBy.ValueType  # 3
 """By the decision timeout."""
-global___WarmTransferIntroDecidedBy = WarmTransferIntroDecidedBy
+Global___WarmTransferIntroDecidedBy: _TypeAlias = WarmTransferIntroDecidedBy  # noqa: Y015
 
 class _WarmTransferIntroStage:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _WarmTransferIntroStageEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_WarmTransferIntroStage.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _WarmTransferIntroStageEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_WarmTransferIntroStage.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     WARM_TRANSFER_INTRO_STAGE_UNSPECIFIED: _WarmTransferIntroStage.ValueType  # 0
     """Not set."""
     WARM_TRANSFER_INTRO_STAGE_PREPARED: _WarmTransferIntroStage.ValueType  # 1
@@ -449,14 +449,14 @@ WARM_TRANSFER_INTRO_STAGE_REASON_ASKED: WarmTransferIntroStage.ValueType  # 4
 """<code>decline_reason_question</code> spoken, waiting for the reason."""
 WARM_TRANSFER_INTRO_STAGE_CLOSED: WarmTransferIntroStage.ValueType  # 5
 """The final answer, which ends the target's call, was generated."""
-global___WarmTransferIntroStage = WarmTransferIntroStage
+Global___WarmTransferIntroStage: _TypeAlias = WarmTransferIntroStage  # noqa: Y015
 
 class _AudioEncoding:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _AudioEncodingEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_AudioEncoding.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _AudioEncodingEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_AudioEncoding.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     AUDIO_ENCODING_UNSPECIFIED: _AudioEncoding.ValueType  # 0
     """Not specified."""
     AUDIO_ENCODING_LINEAR_16: _AudioEncoding.ValueType  # 1
@@ -537,14 +537,14 @@ bytes (octets) as specified in RFC 5574. In other words, each RTP header
 is replaced with a single byte containing the block length. Only Speex
 wideband is supported. <code>sample_rate_hertz</code> must be 16000.
 """
-global___AudioEncoding = AudioEncoding
+Global___AudioEncoding: _TypeAlias = AudioEncoding  # noqa: Y015
 
 class _ComparisonOperator:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _ComparisonOperatorEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_ComparisonOperator.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _ComparisonOperatorEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_ComparisonOperator.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     EQUAL: _ComparisonOperator.ValueType  # 0
     """equal operator"""
     GREATER: _ComparisonOperator.ValueType  # 1
@@ -577,14 +577,14 @@ STARTS_WITH: ComparisonOperator.ValueType  # 5
 """starts with operator for string comparison only"""
 ENDS_WITH: ComparisonOperator.ValueType  # 6
 """ends with operator for string comparison only"""
-global___ComparisonOperator = ComparisonOperator
+Global___ComparisonOperator: _TypeAlias = ComparisonOperator  # noqa: Y015
 
 class _FeedbackRating:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _FeedbackRatingEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_FeedbackRating.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _FeedbackRatingEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_FeedbackRating.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     FEEDBACK_RATING_UNSPECIFIED: _FeedbackRating.ValueType  # 0
     """No rating provided (e.g. a comment-only feedback)."""
     FEEDBACK_RATING_THUMBS_UP: _FeedbackRating.ValueType  # 1
@@ -604,14 +604,14 @@ FEEDBACK_RATING_THUMBS_UP: FeedbackRating.ValueType  # 1
 """Positive feedback (thumbs up)."""
 FEEDBACK_RATING_THUMBS_DOWN: FeedbackRating.ValueType  # 2
 """Negative feedback (thumbs down)."""
-global___FeedbackRating = FeedbackRating
+Global___FeedbackRating: _TypeAlias = FeedbackRating  # noqa: Y015
 
 class _FeedbackAuthorType:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _FeedbackAuthorTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_FeedbackAuthorType.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _FeedbackAuthorTypeEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_FeedbackAuthorType.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     FEEDBACK_AUTHOR_TYPE_UNSPECIFIED: _FeedbackAuthorType.ValueType  # 0
     """Unknown author type."""
     FEEDBACK_AUTHOR_TYPE_HUMAN_REVIEWER: _FeedbackAuthorType.ValueType  # 1
@@ -636,14 +636,14 @@ FEEDBACK_AUTHOR_TYPE_END_USER_ANONYMOUS: FeedbackAuthorType.ValueType  # 3
 """An anonymous production end-user of the webchat / webphone channel (no authenticated identity;
 identified only by the session and channel origin).
 """
-global___FeedbackAuthorType = FeedbackAuthorType
+Global___FeedbackAuthorType: _TypeAlias = FeedbackAuthorType  # noqa: Y015
 
 class _FeedbackScope:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _FeedbackScopeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_FeedbackScope.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _FeedbackScopeEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_FeedbackScope.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     FEEDBACK_SCOPE_UNSPECIFIED: _FeedbackScope.ValueType  # 0
     """Both session-level and step-level feedback."""
     FEEDBACK_SCOPE_SESSION_LEVEL: _FeedbackScope.ValueType  # 1
@@ -660,14 +660,14 @@ FEEDBACK_SCOPE_SESSION_LEVEL: FeedbackScope.ValueType  # 1
 """Only session-level feedback (session_step_id empty)."""
 FEEDBACK_SCOPE_STEP_LEVEL: FeedbackScope.ValueType  # 2
 """Only session-step-level feedback (session_step_id set)."""
-global___FeedbackScope = FeedbackScope
+Global___FeedbackScope: _TypeAlias = FeedbackScope  # noqa: Y015
 
 class _FeedbackTimeGranularity:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _FeedbackTimeGranularityEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_FeedbackTimeGranularity.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _FeedbackTimeGranularityEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_FeedbackTimeGranularity.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     FEEDBACK_TIME_GRANULARITY_UNSPECIFIED: _FeedbackTimeGranularity.ValueType  # 0
     """Unspecified — use the request's fixed-width bucket_width_seconds instead."""
     FEEDBACK_TIME_GRANULARITY_HOUR: _FeedbackTimeGranularity.ValueType  # 1
@@ -698,14 +698,14 @@ FEEDBACK_TIME_GRANULARITY_MONTH: FeedbackTimeGranularity.ValueType  # 4
 """Monthly calendar buckets."""
 FEEDBACK_TIME_GRANULARITY_YEAR: FeedbackTimeGranularity.ValueType  # 5
 """Yearly calendar buckets."""
-global___FeedbackTimeGranularity = FeedbackTimeGranularity
+Global___FeedbackTimeGranularity: _TypeAlias = FeedbackTimeGranularity  # noqa: Y015
 
 class _ResourceView:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _ResourceViewEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_ResourceView.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _ResourceViewEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_ResourceView.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     RESOURCE_VIEW_UNSPECIFIED: _ResourceView.ValueType  # 0
     """Resource view not specified"""
     RESOURCE_VIEW_FULL: _ResourceView.ValueType  # 1
@@ -726,14 +726,14 @@ RESOURCE_VIEW_PARTIAL: ResourceView.ValueType  # 2
 """Fields include metadata but no bytes"""
 RESOURCE_VIEW_MINIMUM: ResourceView.ValueType  # 3
 """Minimum view only without bytes and metadata"""
-global___ResourceView = ResourceView
+Global___ResourceView: _TypeAlias = ResourceView  # noqa: Y015
 
 class _AudioFileResourceType:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _AudioFileResourceTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_AudioFileResourceType.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _AudioFileResourceTypeEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_AudioFileResourceType.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     AUDIO_FILE_RESOURCE_TYPE_UNSPECIFIED: _AudioFileResourceType.ValueType  # 0
     """Unspecified audio file type"""
     AUDIO_FILE_RESOURCE_TYPE_T2S: _AudioFileResourceType.ValueType  # 1
@@ -754,36 +754,36 @@ AUDIO_FILE_RESOURCE_TYPE_S2T: AudioFileResourceType.ValueType  # 2
 """Audio file from speech to text"""
 AUDIO_FILE_RESOURCE_TYPE_S2T_AND_T2S: AudioFileResourceType.ValueType  # 3
 """Audio file from speech to text and text to speech"""
-global___AudioFileResourceType = AudioFileResourceType
+Global___AudioFileResourceType: _TypeAlias = AudioFileResourceType  # noqa: Y015
 
-@typing.final
-class DetectIntentRequest(google.protobuf.message.Message):
+@_typing.final
+class DetectIntentRequest(_message.Message):
     """The request to detect user&apos;s intent."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    SESSION_FIELD_NUMBER: builtins.int
-    QUERY_PARAMS_FIELD_NUMBER: builtins.int
-    QUERY_INPUT_FIELD_NUMBER: builtins.int
-    INPUT_AUDIO_FIELD_NUMBER: builtins.int
-    session: builtins.str
+    SESSION_FIELD_NUMBER: _builtins.int
+    QUERY_PARAMS_FIELD_NUMBER: _builtins.int
+    QUERY_INPUT_FIELD_NUMBER: _builtins.int
+    INPUT_AUDIO_FIELD_NUMBER: _builtins.int
+    session: _builtins.str
     """Required. The name of the session this query is sent to. Format:
     <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code>. It&apos;s up to the API
     caller to choose an appropriate session ID. It can be a random number or
     some type of user identifier (preferably hashed). The length of the session
     ID must not exceed 36 bytes.
     """
-    input_audio: builtins.bytes
+    input_audio: _builtins.bytes
     """Optional. The natural language speech audio to be processed. This field
     should be populated iff <code>query_input</code> is set to an input audio config.
     A single request can contain up to 1 minute of speech audio data.
     """
-    @property
-    def query_params(self) -> global___QueryParameters:
+    @_builtins.property
+    def query_params(self) -> Global___QueryParameters:
         """Optional. The parameters of this query."""
 
-    @property
-    def query_input(self) -> global___QueryInput:
+    @_builtins.property
+    def query_input(self) -> Global___QueryInput:
         """Required. The input specification. It can be set to:
         <ol>
           <li>an audio config which instructs the speech recognizer how to process the speech audio,</li>
@@ -795,42 +795,45 @@ class DetectIntentRequest(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        session: builtins.str = ...,
-        query_params: global___QueryParameters | None = ...,
-        query_input: global___QueryInput | None = ...,
-        input_audio: builtins.bytes = ...,
+        session: _builtins.str = ...,
+        query_params: Global___QueryParameters | None = ...,
+        query_input: Global___QueryInput | None = ...,
+        input_audio: _builtins.bytes = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["query_input", b"query_input", "query_params", b"query_params"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["input_audio", b"input_audio", "query_input", b"query_input", "query_params", b"query_params", "session", b"session"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["query_input", b"query_input", "query_params", b"query_params"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["input_audio", b"input_audio", "query_input", b"query_input", "query_params", b"query_params", "session", b"session"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___DetectIntentRequest = DetectIntentRequest
+Global___DetectIntentRequest: _TypeAlias = DetectIntentRequest  # noqa: Y015
 
-@typing.final
-class DetectIntentResponse(google.protobuf.message.Message):
+@_typing.final
+class DetectIntentResponse(_message.Message):
     """The message returned from the DetectIntent method."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    RESPONSE_ID_FIELD_NUMBER: builtins.int
-    QUERY_RESULT_FIELD_NUMBER: builtins.int
-    WEBHOOK_STATUS_FIELD_NUMBER: builtins.int
-    LLM_TELEMETRY_REPORT_FIELD_NUMBER: builtins.int
-    response_id: builtins.str
+    RESPONSE_ID_FIELD_NUMBER: _builtins.int
+    QUERY_RESULT_FIELD_NUMBER: _builtins.int
+    WEBHOOK_STATUS_FIELD_NUMBER: _builtins.int
+    LLM_TELEMETRY_REPORT_FIELD_NUMBER: _builtins.int
+    response_id: _builtins.str
     """The unique identifier of the response. It can be used to
     locate a response in the training example set or for reporting issues.
     """
-    @property
-    def query_result(self) -> global___QueryResult:
+    @_builtins.property
+    def query_result(self) -> Global___QueryResult:
         """The results of the conversational query or event processing."""
 
-    @property
-    def webhook_status(self) -> google.rpc.status_pb2.Status:
+    @_builtins.property
+    def webhook_status(self) -> _status_pb2.Status:
         """Specifies the status of the webhook request. <code>webhook_status</code>
         is never populated in webhook requests.
         """
 
-    @property
-    def llm_telemetry_report(self) -> global___LlmTelemetryReport:
+    @_builtins.property
+    def llm_telemetry_report(self) -> Global___LlmTelemetryReport:
         """Aggregated LLM telemetry — duplicated convenience copy of
         <code>query_result.llm_telemetry_report</code> for unary clients.
         """
@@ -838,57 +841,60 @@ class DetectIntentResponse(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        response_id: builtins.str = ...,
-        query_result: global___QueryResult | None = ...,
-        webhook_status: google.rpc.status_pb2.Status | None = ...,
-        llm_telemetry_report: global___LlmTelemetryReport | None = ...,
+        response_id: _builtins.str = ...,
+        query_result: Global___QueryResult | None = ...,
+        webhook_status: _status_pb2.Status | None = ...,
+        llm_telemetry_report: Global___LlmTelemetryReport | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["llm_telemetry_report", b"llm_telemetry_report", "query_result", b"query_result", "webhook_status", b"webhook_status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["llm_telemetry_report", b"llm_telemetry_report", "query_result", b"query_result", "response_id", b"response_id", "webhook_status", b"webhook_status"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["llm_telemetry_report", b"llm_telemetry_report", "query_result", b"query_result", "webhook_status", b"webhook_status"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["llm_telemetry_report", b"llm_telemetry_report", "query_result", b"query_result", "response_id", b"response_id", "webhook_status", b"webhook_status"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___DetectIntentResponse = DetectIntentResponse
+Global___DetectIntentResponse: _TypeAlias = DetectIntentResponse  # noqa: Y015
 
-@typing.final
-class QueryParameters(google.protobuf.message.Message):
+@_typing.final
+class QueryParameters(_message.Message):
     """Represents the parameters of the conversational query."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    TIME_ZONE_FIELD_NUMBER: builtins.int
-    GEO_LOCATION_FIELD_NUMBER: builtins.int
-    CONTEXTS_FIELD_NUMBER: builtins.int
-    RESET_CONTEXTS_FIELD_NUMBER: builtins.int
-    PAYLOAD_FIELD_NUMBER: builtins.int
-    LABELS_FIELD_NUMBER: builtins.int
-    PLATFORMS_FIELD_NUMBER: builtins.int
-    ACCOUNT_ID_FIELD_NUMBER: builtins.int
-    PROPERTY_ID_FIELD_NUMBER: builtins.int
-    DATASTREAM_ID_FIELD_NUMBER: builtins.int
-    ORIGIN_ID_FIELD_NUMBER: builtins.int
-    IDENTIFIED_USER_ID_FIELD_NUMBER: builtins.int
-    TRANSCRIPTIONS_FIELD_NUMBER: builtins.int
-    PREEMPTIVE_DRAFT_FIELD_NUMBER: builtins.int
-    time_zone: builtins.str
+    TIME_ZONE_FIELD_NUMBER: _builtins.int
+    GEO_LOCATION_FIELD_NUMBER: _builtins.int
+    CONTEXTS_FIELD_NUMBER: _builtins.int
+    RESET_CONTEXTS_FIELD_NUMBER: _builtins.int
+    PAYLOAD_FIELD_NUMBER: _builtins.int
+    LABELS_FIELD_NUMBER: _builtins.int
+    PLATFORMS_FIELD_NUMBER: _builtins.int
+    ACCOUNT_ID_FIELD_NUMBER: _builtins.int
+    PROPERTY_ID_FIELD_NUMBER: _builtins.int
+    DATASTREAM_ID_FIELD_NUMBER: _builtins.int
+    ORIGIN_ID_FIELD_NUMBER: _builtins.int
+    IDENTIFIED_USER_ID_FIELD_NUMBER: _builtins.int
+    TRANSCRIPTIONS_FIELD_NUMBER: _builtins.int
+    PREEMPTIVE_DRAFT_FIELD_NUMBER: _builtins.int
+    time_zone: _builtins.str
     """Optional. The time zone of this conversational query from the
     <a href="https://www.iana.org/time-zones">time zone database</a>, e.g.,
     America/New_York, Europe/Paris. If not provided, the time zone specified in
     agent settings is used.
     """
-    reset_contexts: builtins.bool
+    reset_contexts: _builtins.bool
     """Optional. Specifies whether to delete all contexts in the current session
     before the new ones are activated.
     """
-    account_id: builtins.str
+    account_id: _builtins.str
     """Id of the account, e.g. Company Ondewo"""
-    property_id: builtins.str
+    property_id: _builtins.str
     """Id of the property of the account, e.g. Domain ondewo.com
     This field can also be used for a customized tracking id or tag id
     """
-    datastream_id: builtins.str
+    datastream_id: _builtins.str
     """Id of the datastream of the property of the account, e.g. Subdomain sub1.ondewo.com or sub2.ondewo.com
     This field can also be used for a customized tracking id or tag id
     """
-    origin_id: builtins.str
+    origin_id: _builtins.str
     """Id of the the origin of the user request
 
     For a phone bot, this is the phone number +123456789 the user called (Note: This is not the user&apos;s phone number)
@@ -897,29 +903,29 @@ class QueryParameters(google.protobuf.message.Message):
     This field can also be used for a customized tracking id or tag id
     https://aim-develop.ondewo.com/
     """
-    identified_user_id: builtins.str
+    identified_user_id: _builtins.str
     """Id of the &quot;identified user&quot; e.g. for a chatbot the email address or for a phone bot the phone number of the user
     This field can also be used for a customized tracking id or tag id
     """
-    preemptive_draft: builtins.bool
+    preemptive_draft: _builtins.bool
     """Optional. Marks the request as a preemptive draft: a turn the client (e.g. ondewo-csi) starts speculatively,
     e.g. on a partial transcript, and may later discard with <code>TurnControl.discard_draft</code>. The server
     records the mark on the session step of this request. A <code>DiscardDraft</code> deletes only a session step
     of the same session whose request carried this mark. A server that does not know this field ignores it and
     keeps the step.
     """
-    @property
-    def geo_location(self) -> google.type.latlng_pb2.LatLng:
+    @_builtins.property
+    def geo_location(self) -> _latlng_pb2.LatLng:
         """Optional. The geo location of this conversational query."""
 
-    @property
-    def contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]:
+    @_builtins.property
+    def contexts(self) -> _containers.RepeatedCompositeFieldContainer[_context_pb2.Context]:
         """Optional. The collection of contexts to be activated before this query is
         executed.
         """
 
-    @property
-    def payload(self) -> google.protobuf.struct_pb2.Struct:
+    @_builtins.property
+    def payload(self) -> _struct_pb2.Struct:
         """Optional. This field can be used to pass custom data into the webhook
         associated with the agent.
 
@@ -972,117 +978,123 @@ class QueryParameters(google.protobuf.message.Message):
         </pre>
         """
 
-    @property
-    def labels(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def labels(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """labels associated to this request"""
 
-    @property
-    def platforms(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[ondewo.nlu.intent_pb2.Intent.Message.Platform.ValueType]:
+    @_builtins.property
+    def platforms(self) -> _containers.RepeatedScalarFieldContainer[_intent_pb2.Intent.Message.Platform.ValueType]:
         """Only messages for the specified Intent.Message.Platform platforms are sent to the user in the
         <code>DetectIntentResponse</code>
         """
 
-    @property
-    def transcriptions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___S2tTranscription]:
+    @_builtins.property
+    def transcriptions(self) -> _containers.RepeatedCompositeFieldContainer[Global___S2tTranscription]:
         """transcriptions of the user input sorted by score"""
 
     def __init__(
         self,
         *,
-        time_zone: builtins.str = ...,
-        geo_location: google.type.latlng_pb2.LatLng | None = ...,
-        contexts: collections.abc.Iterable[ondewo.nlu.context_pb2.Context] | None = ...,
-        reset_contexts: builtins.bool = ...,
-        payload: google.protobuf.struct_pb2.Struct | None = ...,
-        labels: collections.abc.Iterable[builtins.str] | None = ...,
-        platforms: collections.abc.Iterable[ondewo.nlu.intent_pb2.Intent.Message.Platform.ValueType] | None = ...,
-        account_id: builtins.str = ...,
-        property_id: builtins.str = ...,
-        datastream_id: builtins.str = ...,
-        origin_id: builtins.str = ...,
-        identified_user_id: builtins.str = ...,
-        transcriptions: collections.abc.Iterable[global___S2tTranscription] | None = ...,
-        preemptive_draft: builtins.bool = ...,
+        time_zone: _builtins.str = ...,
+        geo_location: _latlng_pb2.LatLng | None = ...,
+        contexts: _abc.Iterable[_context_pb2.Context] | None = ...,
+        reset_contexts: _builtins.bool = ...,
+        payload: _struct_pb2.Struct | None = ...,
+        labels: _abc.Iterable[_builtins.str] | None = ...,
+        platforms: _abc.Iterable[_intent_pb2.Intent.Message.Platform.ValueType] | None = ...,
+        account_id: _builtins.str = ...,
+        property_id: _builtins.str = ...,
+        datastream_id: _builtins.str = ...,
+        origin_id: _builtins.str = ...,
+        identified_user_id: _builtins.str = ...,
+        transcriptions: _abc.Iterable[Global___S2tTranscription] | None = ...,
+        preemptive_draft: _builtins.bool = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["geo_location", b"geo_location", "payload", b"payload"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["account_id", b"account_id", "contexts", b"contexts", "datastream_id", b"datastream_id", "geo_location", b"geo_location", "identified_user_id", b"identified_user_id", "labels", b"labels", "origin_id", b"origin_id", "payload", b"payload", "platforms", b"platforms", "preemptive_draft", b"preemptive_draft", "property_id", b"property_id", "reset_contexts", b"reset_contexts", "time_zone", b"time_zone", "transcriptions", b"transcriptions"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["geo_location", b"geo_location", "payload", b"payload"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["account_id", b"account_id", "contexts", b"contexts", "datastream_id", b"datastream_id", "geo_location", b"geo_location", "identified_user_id", b"identified_user_id", "labels", b"labels", "origin_id", b"origin_id", "payload", b"payload", "platforms", b"platforms", "preemptive_draft", b"preemptive_draft", "property_id", b"property_id", "reset_contexts", b"reset_contexts", "time_zone", b"time_zone", "transcriptions", b"transcriptions"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___QueryParameters = QueryParameters
+Global___QueryParameters: _TypeAlias = QueryParameters  # noqa: Y015
 
-@typing.final
-class S2tTranscription(google.protobuf.message.Message):
+@_typing.final
+class S2tTranscription(_message.Message):
     """Represents a speech-to-text transcription."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NAME_FIELD_NUMBER: builtins.int
-    TEXT_FIELD_NUMBER: builtins.int
-    SCORE_FIELD_NUMBER: builtins.int
-    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
-    AUDIO_RESOURCE_NAME_FIELD_NUMBER: builtins.int
-    PIPELINE_ID_FIELD_NUMBER: builtins.int
-    DURATION_IN_S_FIELD_NUMBER: builtins.int
-    TRANSCRIPTION_TYPE_FIELD_NUMBER: builtins.int
-    CREATED_AT_FIELD_NUMBER: builtins.int
-    MODIFIED_AT_FIELD_NUMBER: builtins.int
-    CREATED_BY_FIELD_NUMBER: builtins.int
-    MODIFIED_BY_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    TEXT_FIELD_NUMBER: _builtins.int
+    SCORE_FIELD_NUMBER: _builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: _builtins.int
+    AUDIO_RESOURCE_NAME_FIELD_NUMBER: _builtins.int
+    PIPELINE_ID_FIELD_NUMBER: _builtins.int
+    DURATION_IN_S_FIELD_NUMBER: _builtins.int
+    TRANSCRIPTION_TYPE_FIELD_NUMBER: _builtins.int
+    CREATED_AT_FIELD_NUMBER: _builtins.int
+    MODIFIED_AT_FIELD_NUMBER: _builtins.int
+    CREATED_BY_FIELD_NUMBER: _builtins.int
+    MODIFIED_BY_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """resource name of the transcription"""
-    text: builtins.str
+    text: _builtins.str
     """The transcribed text content."""
-    score: builtins.float
+    score: _builtins.float
     """Optional. A confidence score associated with the transcription.
     The score indicates the level of confidence in the accuracy of the transcription.
     It is a floating-point number, typically ranging from 0.0 (low confidence) to 1.0 (high confidence).
     """
-    language_code: builtins.str
+    language_code: _builtins.str
     """Optional. The detected language of the transcription.
     The language is represented by a string following language codes (e.g., "en" for English, "es" for Spanish).
     """
-    audio_resource_name: builtins.str
+    audio_resource_name: _builtins.str
     """the resource name of the audio file of the transcription"""
-    pipeline_id: builtins.str
+    pipeline_id: _builtins.str
     """Optional. pipeline used for transcription. A pipeline ID. Example: "pipeline_1" """
-    duration_in_s: builtins.float
+    duration_in_s: _builtins.float
     """Optional. Duration in seconds for transcription"""
-    transcription_type: global___TranscriptionType.ValueType
+    transcription_type: Global___TranscriptionType.ValueType
     """Whether a speech-to-text engine or a human has transcribed the audio"""
-    created_by: builtins.str
+    created_by: _builtins.str
     """User id in form of a valid UUID."""
-    modified_by: builtins.str
+    modified_by: _builtins.str
     """User id in form of a valid UUID."""
-    @property
-    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def created_at(self) -> _timestamp_pb2.Timestamp:
         """Creation date and time. Read-only field."""
 
-    @property
-    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def modified_at(self) -> _timestamp_pb2.Timestamp:
         """Modification date and time. Read-only field."""
 
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
-        text: builtins.str = ...,
-        score: builtins.float = ...,
-        language_code: builtins.str = ...,
-        audio_resource_name: builtins.str = ...,
-        pipeline_id: builtins.str = ...,
-        duration_in_s: builtins.float = ...,
-        transcription_type: global___TranscriptionType.ValueType = ...,
-        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        created_by: builtins.str = ...,
-        modified_by: builtins.str = ...,
+        name: _builtins.str = ...,
+        text: _builtins.str = ...,
+        score: _builtins.float = ...,
+        language_code: _builtins.str = ...,
+        audio_resource_name: _builtins.str = ...,
+        pipeline_id: _builtins.str = ...,
+        duration_in_s: _builtins.float = ...,
+        transcription_type: Global___TranscriptionType.ValueType = ...,
+        created_at: _timestamp_pb2.Timestamp | None = ...,
+        modified_at: _timestamp_pb2.Timestamp | None = ...,
+        created_by: _builtins.str = ...,
+        modified_by: _builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["audio_resource_name", b"audio_resource_name", "created_at", b"created_at", "created_by", b"created_by", "duration_in_s", b"duration_in_s", "language_code", b"language_code", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "pipeline_id", b"pipeline_id", "score", b"score", "text", b"text", "transcription_type", b"transcription_type"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["audio_resource_name", b"audio_resource_name", "created_at", b"created_at", "created_by", b"created_by", "duration_in_s", b"duration_in_s", "language_code", b"language_code", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "pipeline_id", b"pipeline_id", "score", b"score", "text", b"text", "transcription_type", b"transcription_type"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___S2tTranscription = S2tTranscription
+Global___S2tTranscription: _TypeAlias = S2tTranscription  # noqa: Y015
 
-@typing.final
-class QueryInput(google.protobuf.message.Message):
+@_typing.final
+class QueryInput(_message.Message):
     """Represents the query input. It can contain either:
 
     1.  An audio config which instructs the speech recognizer how to process the speech audio.
@@ -1092,439 +1104,457 @@ class QueryInput(google.protobuf.message.Message):
     3.  An event that specifies which intent to trigger.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    AUDIO_CONFIG_FIELD_NUMBER: builtins.int
-    TEXT_FIELD_NUMBER: builtins.int
-    EVENT_FIELD_NUMBER: builtins.int
-    FILE_RESOURCES_FIELD_NUMBER: builtins.int
-    @property
-    def audio_config(self) -> global___InputAudioConfig:
+    AUDIO_CONFIG_FIELD_NUMBER: _builtins.int
+    TEXT_FIELD_NUMBER: _builtins.int
+    EVENT_FIELD_NUMBER: _builtins.int
+    FILE_RESOURCES_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def audio_config(self) -> Global___InputAudioConfig:
         """Instructs the speech recognizer how to process the speech audio."""
 
-    @property
-    def text(self) -> global___TextInput:
+    @_builtins.property
+    def text(self) -> Global___TextInput:
         """The natural language text to be processed."""
 
-    @property
-    def event(self) -> global___EventInput:
+    @_builtins.property
+    def event(self) -> Global___EventInput:
         """The event to be processed."""
 
-    @property
-    def file_resources(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FileResource]:
+    @_builtins.property
+    def file_resources(self) -> _containers.RepeatedCompositeFieldContainer[Global___FileResource]:
         """Files as input for the detect intent request, e.g., image, document, audio, video etc."""
 
     def __init__(
         self,
         *,
-        audio_config: global___InputAudioConfig | None = ...,
-        text: global___TextInput | None = ...,
-        event: global___EventInput | None = ...,
-        file_resources: collections.abc.Iterable[global___FileResource] | None = ...,
+        audio_config: Global___InputAudioConfig | None = ...,
+        text: Global___TextInput | None = ...,
+        event: Global___EventInput | None = ...,
+        file_resources: _abc.Iterable[Global___FileResource] | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["audio_config", b"audio_config", "event", b"event", "input", b"input", "text", b"text"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["audio_config", b"audio_config", "event", b"event", "file_resources", b"file_resources", "input", b"input", "text", b"text"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["input", b"input"]) -> typing.Literal["audio_config", "text", "event"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["audio_config", b"audio_config", "event", b"event", "input", b"input", "text", b"text"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["audio_config", b"audio_config", "event", b"event", "file_resources", b"file_resources", "input", b"input", "text", b"text"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType_input: _TypeAlias = _typing.Literal["audio_config", "text", "event"]  # noqa: Y015
+    _WhichOneofArgType_input: _TypeAlias = _typing.Literal["input", b"input"]  # noqa: Y015
+    def WhichOneof(self, oneof_group: _WhichOneofArgType_input) -> _WhichOneofReturnType_input | None: ...
 
-global___QueryInput = QueryInput
+Global___QueryInput: _TypeAlias = QueryInput  # noqa: Y015
 
-@typing.final
-class LlmTokenUsage(google.protobuf.message.Message):
+@_typing.final
+class LlmTokenUsage(_message.Message):
     """Token usage counters for a single LLM call (or aggregate)."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    TOTAL_TOKENS_FIELD_NUMBER: builtins.int
-    INPUT_TOKENS_FIELD_NUMBER: builtins.int
-    OUTPUT_TOKENS_FIELD_NUMBER: builtins.int
-    total_tokens: builtins.int
+    TOTAL_TOKENS_FIELD_NUMBER: _builtins.int
+    INPUT_TOKENS_FIELD_NUMBER: _builtins.int
+    OUTPUT_TOKENS_FIELD_NUMBER: _builtins.int
+    total_tokens: _builtins.int
     """Sum of input and output tokens for this call (or aggregate across calls)."""
-    input_tokens: builtins.int
+    input_tokens: _builtins.int
     """Number of prompt / input tokens consumed."""
-    output_tokens: builtins.int
+    output_tokens: _builtins.int
     """Number of completion / output tokens produced."""
     def __init__(
         self,
         *,
-        total_tokens: builtins.int = ...,
-        input_tokens: builtins.int = ...,
-        output_tokens: builtins.int = ...,
+        total_tokens: _builtins.int = ...,
+        input_tokens: _builtins.int = ...,
+        output_tokens: _builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["input_tokens", b"input_tokens", "output_tokens", b"output_tokens", "total_tokens", b"total_tokens"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["input_tokens", b"input_tokens", "output_tokens", b"output_tokens", "total_tokens", b"total_tokens"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___LlmTokenUsage = LlmTokenUsage
+Global___LlmTokenUsage: _TypeAlias = LlmTokenUsage  # noqa: Y015
 
-@typing.final
-class LlmToolCallMetadata(google.protobuf.message.Message):
+@_typing.final
+class LlmToolCallMetadata(_message.Message):
     """Metadata for one tool call executed by the LLM."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    TOOL_CALL_ID_FIELD_NUMBER: builtins.int
-    TOOL_NAME_FIELD_NUMBER: builtins.int
-    START_TIME_FIELD_NUMBER: builtins.int
-    END_TIME_FIELD_NUMBER: builtins.int
-    DURATION_IN_S_FIELD_NUMBER: builtins.int
-    LLM_TOKEN_USAGE_FIELD_NUMBER: builtins.int
-    ARGUMENTS_FIELD_NUMBER: builtins.int
-    RESULT_FIELD_NUMBER: builtins.int
-    ERROR_MESSAGE_FIELD_NUMBER: builtins.int
-    tool_call_id: builtins.str
-    """Stable id assigned by the upstream framework (autogen / langchain)."""
-    tool_name: builtins.str
+    TOOL_CALL_ID_FIELD_NUMBER: _builtins.int
+    TOOL_NAME_FIELD_NUMBER: _builtins.int
+    START_TIME_FIELD_NUMBER: _builtins.int
+    END_TIME_FIELD_NUMBER: _builtins.int
+    DURATION_IN_S_FIELD_NUMBER: _builtins.int
+    LLM_TOKEN_USAGE_FIELD_NUMBER: _builtins.int
+    ARGUMENTS_FIELD_NUMBER: _builtins.int
+    RESULT_FIELD_NUMBER: _builtins.int
+    ERROR_MESSAGE_FIELD_NUMBER: _builtins.int
+    tool_call_id: _builtins.str
+    """Stable id assigned by the upstream framework (e.g. langchain)."""
+    tool_name: _builtins.str
     """Name of the tool / function invoked."""
-    duration_in_s: builtins.float
+    duration_in_s: _builtins.float
     """Convenience duration (end_time - start_time)."""
-    error_message: builtins.str
+    error_message: _builtins.str
     """Populated only when the tool call failed; empty string on success."""
-    @property
-    def start_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def start_time(self) -> _timestamp_pb2.Timestamp:
         """Wall-clock start time of the tool call."""
 
-    @property
-    def end_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def end_time(self) -> _timestamp_pb2.Timestamp:
         """Wall-clock end time of the tool call."""
 
-    @property
-    def llm_token_usage(self) -> global___LlmTokenUsage:
+    @_builtins.property
+    def llm_token_usage(self) -> Global___LlmTokenUsage:
         """Token attribution for this tool call when available."""
 
-    @property
-    def arguments(self) -> google.protobuf.struct_pb2.Struct:
+    @_builtins.property
+    def arguments(self) -> _struct_pb2.Struct:
         """Tool arguments as a structured payload. May be omitted on incremental events."""
 
-    @property
-    def result(self) -> google.protobuf.struct_pb2.Struct:
+    @_builtins.property
+    def result(self) -> _struct_pb2.Struct:
         """Tool result as a structured payload. May be omitted on incremental events."""
 
     def __init__(
         self,
         *,
-        tool_call_id: builtins.str = ...,
-        tool_name: builtins.str = ...,
-        start_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        end_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        duration_in_s: builtins.float = ...,
-        llm_token_usage: global___LlmTokenUsage | None = ...,
-        arguments: google.protobuf.struct_pb2.Struct | None = ...,
-        result: google.protobuf.struct_pb2.Struct | None = ...,
-        error_message: builtins.str = ...,
+        tool_call_id: _builtins.str = ...,
+        tool_name: _builtins.str = ...,
+        start_time: _timestamp_pb2.Timestamp | None = ...,
+        end_time: _timestamp_pb2.Timestamp | None = ...,
+        duration_in_s: _builtins.float = ...,
+        llm_token_usage: Global___LlmTokenUsage | None = ...,
+        arguments: _struct_pb2.Struct | None = ...,
+        result: _struct_pb2.Struct | None = ...,
+        error_message: _builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["arguments", b"arguments", "end_time", b"end_time", "llm_token_usage", b"llm_token_usage", "result", b"result", "start_time", b"start_time"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["arguments", b"arguments", "duration_in_s", b"duration_in_s", "end_time", b"end_time", "error_message", b"error_message", "llm_token_usage", b"llm_token_usage", "result", b"result", "start_time", b"start_time", "tool_call_id", b"tool_call_id", "tool_name", b"tool_name"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["arguments", b"arguments", "end_time", b"end_time", "llm_token_usage", b"llm_token_usage", "result", b"result", "start_time", b"start_time"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["arguments", b"arguments", "duration_in_s", b"duration_in_s", "end_time", b"end_time", "error_message", b"error_message", "llm_token_usage", b"llm_token_usage", "result", b"result", "start_time", b"start_time", "tool_call_id", b"tool_call_id", "tool_name", b"tool_name"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___LlmToolCallMetadata = LlmToolCallMetadata
+Global___LlmToolCallMetadata: _TypeAlias = LlmToolCallMetadata  # noqa: Y015
 
-@typing.final
-class LlmThinkingMetadata(google.protobuf.message.Message):
+@_typing.final
+class LlmThinkingMetadata(_message.Message):
     """Thinking / reasoning block emitted by the model (e.g. Anthropic extended thinking,
     OpenAI o-series reasoning).
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    LLM_TOKEN_USAGE_FIELD_NUMBER: builtins.int
-    START_TIME_FIELD_NUMBER: builtins.int
-    END_TIME_FIELD_NUMBER: builtins.int
-    DURATION_IN_S_FIELD_NUMBER: builtins.int
-    THINKING_TEXT_FIELD_NUMBER: builtins.int
-    duration_in_s: builtins.float
+    LLM_TOKEN_USAGE_FIELD_NUMBER: _builtins.int
+    START_TIME_FIELD_NUMBER: _builtins.int
+    END_TIME_FIELD_NUMBER: _builtins.int
+    DURATION_IN_S_FIELD_NUMBER: _builtins.int
+    THINKING_TEXT_FIELD_NUMBER: _builtins.int
+    duration_in_s: _builtins.float
     """Convenience duration (end_time - start_time)."""
-    thinking_text: builtins.str
+    thinking_text: _builtins.str
     """Raw thinking text. Subject to redaction depending on telemetry policy."""
-    @property
-    def llm_token_usage(self) -> global___LlmTokenUsage:
+    @_builtins.property
+    def llm_token_usage(self) -> Global___LlmTokenUsage:
         """Token attribution for the thinking block when surfaced by the provider."""
 
-    @property
-    def start_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def start_time(self) -> _timestamp_pb2.Timestamp:
         """Wall-clock start of the thinking block."""
 
-    @property
-    def end_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def end_time(self) -> _timestamp_pb2.Timestamp:
         """Wall-clock end of the thinking block."""
 
     def __init__(
         self,
         *,
-        llm_token_usage: global___LlmTokenUsage | None = ...,
-        start_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        end_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        duration_in_s: builtins.float = ...,
-        thinking_text: builtins.str = ...,
+        llm_token_usage: Global___LlmTokenUsage | None = ...,
+        start_time: _timestamp_pb2.Timestamp | None = ...,
+        end_time: _timestamp_pb2.Timestamp | None = ...,
+        duration_in_s: _builtins.float = ...,
+        thinking_text: _builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["end_time", b"end_time", "llm_token_usage", b"llm_token_usage", "start_time", b"start_time"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["duration_in_s", b"duration_in_s", "end_time", b"end_time", "llm_token_usage", b"llm_token_usage", "start_time", b"start_time", "thinking_text", b"thinking_text"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["end_time", b"end_time", "llm_token_usage", b"llm_token_usage", "start_time", b"start_time"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["duration_in_s", b"duration_in_s", "end_time", b"end_time", "llm_token_usage", b"llm_token_usage", "start_time", b"start_time", "thinking_text", b"thinking_text"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___LlmThinkingMetadata = LlmThinkingMetadata
+Global___LlmThinkingMetadata: _TypeAlias = LlmThinkingMetadata  # noqa: Y015
 
-@typing.final
-class LlmTelemetry(google.protobuf.message.Message):
+@_typing.final
+class LlmTelemetry(_message.Message):
     """Telemetry for a single LLM invocation inside one DetectIntent turn."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PROVIDER_FIELD_NUMBER: builtins.int
-    MODEL_NAME_FIELD_NUMBER: builtins.int
-    AGENT_NAME_FIELD_NUMBER: builtins.int
-    LLM_TOKEN_USAGE_FIELD_NUMBER: builtins.int
-    LLM_TOOL_CALL_METADATAS_FIELD_NUMBER: builtins.int
-    TOOL_CALL_COUNT_FIELD_NUMBER: builtins.int
-    LLM_THINKING_METADATA_FIELD_NUMBER: builtins.int
-    START_TIME_FIELD_NUMBER: builtins.int
-    END_TIME_FIELD_NUMBER: builtins.int
-    DURATION_IN_S_FIELD_NUMBER: builtins.int
-    RUN_ID_FIELD_NUMBER: builtins.int
-    PARENT_RUN_ID_FIELD_NUMBER: builtins.int
-    RUN_TYPE_FIELD_NUMBER: builtins.int
-    COMPONENT_NAME_FIELD_NUMBER: builtins.int
-    TAGS_FIELD_NUMBER: builtins.int
-    METADATA_FIELD_NUMBER: builtins.int
-    INPUTS_FIELD_NUMBER: builtins.int
-    OUTPUTS_FIELD_NUMBER: builtins.int
-    ERROR_CLASS_FIELD_NUMBER: builtins.int
-    ERROR_MESSAGE_FIELD_NUMBER: builtins.int
-    TRACEBACK_FIELD_NUMBER: builtins.int
-    STREAMING_CHUNK_COUNT_FIELD_NUMBER: builtins.int
-    FIRST_TOKEN_LATENCY_SECONDS_FIELD_NUMBER: builtins.int
-    SYSTEM_FINGERPRINT_FIELD_NUMBER: builtins.int
-    CACHED_FIELD_NUMBER: builtins.int
-    RETRY_COUNT_FIELD_NUMBER: builtins.int
-    FALLBACK_DEPTH_FIELD_NUMBER: builtins.int
-    TEMPERATURE_FIELD_NUMBER: builtins.int
-    TOP_P_FIELD_NUMBER: builtins.int
-    MAX_TOKENS_FIELD_NUMBER: builtins.int
-    N_GENERATIONS_FIELD_NUMBER: builtins.int
-    FINISH_REASONS_FIELD_NUMBER: builtins.int
-    CACHED_INPUT_TOKENS_FIELD_NUMBER: builtins.int
-    CACHE_CREATION_INPUT_TOKENS_FIELD_NUMBER: builtins.int
-    LANGSMITH_RUN_URL_FIELD_NUMBER: builtins.int
-    TEAM_NAME_FIELD_NUMBER: builtins.int
-    TEAM_ID_FIELD_NUMBER: builtins.int
-    AGENT_ROLE_FIELD_NUMBER: builtins.int
-    SENDER_AGENT_FIELD_NUMBER: builtins.int
-    RECIPIENT_AGENT_FIELD_NUMBER: builtins.int
-    TURN_INDEX_FIELD_NUMBER: builtins.int
-    REFLECTION_ITERATIONS_FIELD_NUMBER: builtins.int
-    TERMINATION_REASON_FIELD_NUMBER: builtins.int
-    EVALUATOR_RUNS_JOIN_KEY_FIELD_NUMBER: builtins.int
-    LLM_EVALUATION_FEEDBACKS_FIELD_NUMBER: builtins.int
-    CCAI_SERVICE_NAME_FIELD_NUMBER: builtins.int
-    BASE_URL_FIELD_NUMBER: builtins.int
-    DEFAULT_HEADERS_FIELD_NUMBER: builtins.int
-    DEFAULT_QUERY_FIELD_NUMBER: builtins.int
-    FREQUENCY_PENALTY_FIELD_NUMBER: builtins.int
-    OPENAI_METADATA_FIELD_NUMBER: builtins.int
-    PRESENCE_PENALTY_FIELD_NUMBER: builtins.int
-    REASONING_EFFORT_FIELD_NUMBER: builtins.int
-    USER_FIELD_NUMBER: builtins.int
-    TIMEOUT_FIELD_NUMBER: builtins.int
-    STRICT_RESPONSE_VALIDATION_FIELD_NUMBER: builtins.int
-    EXTRA_HEADERS_FIELD_NUMBER: builtins.int
-    EXTRA_QUERY_FIELD_NUMBER: builtins.int
-    EXTRA_BODY_FIELD_NUMBER: builtins.int
-    CCAI_SERVICE_PROVIDER_FIELD_NUMBER: builtins.int
-    LLM_SAFETY_ASSESSMENT_FIELD_NUMBER: builtins.int
-    LLM_RETRIEVAL_METADATA_FIELD_NUMBER: builtins.int
-    LLM_CALL_ID_FIELD_NUMBER: builtins.int
-    provider: builtins.str
-    """Provider tag: "autogen" | "langchain" | "openai" | "anthropic" | ..."""
-    model_name: builtins.str
+    PROVIDER_FIELD_NUMBER: _builtins.int
+    MODEL_NAME_FIELD_NUMBER: _builtins.int
+    AGENT_NAME_FIELD_NUMBER: _builtins.int
+    LLM_TOKEN_USAGE_FIELD_NUMBER: _builtins.int
+    LLM_TOOL_CALL_METADATAS_FIELD_NUMBER: _builtins.int
+    TOOL_CALL_COUNT_FIELD_NUMBER: _builtins.int
+    LLM_THINKING_METADATA_FIELD_NUMBER: _builtins.int
+    START_TIME_FIELD_NUMBER: _builtins.int
+    END_TIME_FIELD_NUMBER: _builtins.int
+    DURATION_IN_S_FIELD_NUMBER: _builtins.int
+    RUN_ID_FIELD_NUMBER: _builtins.int
+    PARENT_RUN_ID_FIELD_NUMBER: _builtins.int
+    RUN_TYPE_FIELD_NUMBER: _builtins.int
+    COMPONENT_NAME_FIELD_NUMBER: _builtins.int
+    TAGS_FIELD_NUMBER: _builtins.int
+    METADATA_FIELD_NUMBER: _builtins.int
+    INPUTS_FIELD_NUMBER: _builtins.int
+    OUTPUTS_FIELD_NUMBER: _builtins.int
+    ERROR_CLASS_FIELD_NUMBER: _builtins.int
+    ERROR_MESSAGE_FIELD_NUMBER: _builtins.int
+    TRACEBACK_FIELD_NUMBER: _builtins.int
+    STREAMING_CHUNK_COUNT_FIELD_NUMBER: _builtins.int
+    FIRST_TOKEN_LATENCY_SECONDS_FIELD_NUMBER: _builtins.int
+    SYSTEM_FINGERPRINT_FIELD_NUMBER: _builtins.int
+    CACHED_FIELD_NUMBER: _builtins.int
+    RETRY_COUNT_FIELD_NUMBER: _builtins.int
+    FALLBACK_DEPTH_FIELD_NUMBER: _builtins.int
+    TEMPERATURE_FIELD_NUMBER: _builtins.int
+    TOP_P_FIELD_NUMBER: _builtins.int
+    MAX_TOKENS_FIELD_NUMBER: _builtins.int
+    N_GENERATIONS_FIELD_NUMBER: _builtins.int
+    FINISH_REASONS_FIELD_NUMBER: _builtins.int
+    CACHED_INPUT_TOKENS_FIELD_NUMBER: _builtins.int
+    CACHE_CREATION_INPUT_TOKENS_FIELD_NUMBER: _builtins.int
+    LANGSMITH_RUN_URL_FIELD_NUMBER: _builtins.int
+    TEAM_NAME_FIELD_NUMBER: _builtins.int
+    TEAM_ID_FIELD_NUMBER: _builtins.int
+    AGENT_ROLE_FIELD_NUMBER: _builtins.int
+    SENDER_AGENT_FIELD_NUMBER: _builtins.int
+    RECIPIENT_AGENT_FIELD_NUMBER: _builtins.int
+    TURN_INDEX_FIELD_NUMBER: _builtins.int
+    REFLECTION_ITERATIONS_FIELD_NUMBER: _builtins.int
+    TERMINATION_REASON_FIELD_NUMBER: _builtins.int
+    EVALUATOR_RUNS_JOIN_KEY_FIELD_NUMBER: _builtins.int
+    LLM_EVALUATION_FEEDBACKS_FIELD_NUMBER: _builtins.int
+    CCAI_SERVICE_NAME_FIELD_NUMBER: _builtins.int
+    BASE_URL_FIELD_NUMBER: _builtins.int
+    DEFAULT_HEADERS_FIELD_NUMBER: _builtins.int
+    DEFAULT_QUERY_FIELD_NUMBER: _builtins.int
+    FREQUENCY_PENALTY_FIELD_NUMBER: _builtins.int
+    OPENAI_METADATA_FIELD_NUMBER: _builtins.int
+    PRESENCE_PENALTY_FIELD_NUMBER: _builtins.int
+    REASONING_EFFORT_FIELD_NUMBER: _builtins.int
+    USER_FIELD_NUMBER: _builtins.int
+    TIMEOUT_FIELD_NUMBER: _builtins.int
+    STRICT_RESPONSE_VALIDATION_FIELD_NUMBER: _builtins.int
+    EXTRA_HEADERS_FIELD_NUMBER: _builtins.int
+    EXTRA_QUERY_FIELD_NUMBER: _builtins.int
+    EXTRA_BODY_FIELD_NUMBER: _builtins.int
+    CCAI_SERVICE_PROVIDER_FIELD_NUMBER: _builtins.int
+    LLM_SAFETY_ASSESSMENT_FIELD_NUMBER: _builtins.int
+    LLM_RETRIEVAL_METADATA_FIELD_NUMBER: _builtins.int
+    LLM_CALL_ID_FIELD_NUMBER: _builtins.int
+    provider: _builtins.str
+    """Provider tag: "langchain" | "openai" | "anthropic" | ... ("autogen" only on telemetry recorded before AutoGen
+    was removed).
+    """
+    model_name: _builtins.str
     """Concrete model identifier (e.g. "Qwen/Qwen3.6-27b-fp8")."""
-    agent_name: builtins.str
+    agent_name: _builtins.str
     """intent_agent executor / agent name."""
-    tool_call_count: builtins.int
+    tool_call_count: _builtins.int
     """Denormalized len(llm_tool_call_metadatas)."""
-    duration_in_s: builtins.float
+    duration_in_s: _builtins.float
     """Convenience duration (end_time - start_time)."""
-    run_id: builtins.str
+    run_id: _builtins.str
     """LangChain / LangSmith run identifier for this LLM call (UUID)."""
-    parent_run_id: builtins.str
+    parent_run_id: _builtins.str
     """LangChain / LangSmith identifier of the parent run that spawned this call,
     forming the LangSmith run tree.
     """
-    run_type: builtins.str
+    run_type: _builtins.str
     """LangSmith run taxonomy: chain | llm | tool | retriever | agent | parser | prompt."""
-    component_name: builtins.str
+    component_name: _builtins.str
     """Serialized component name from LangChain callbacks (e.g. "ChatOpenAI")."""
-    error_class: builtins.str
+    error_class: _builtins.str
     """Exception class name when the LLM call failed; empty on success."""
-    error_message: builtins.str
+    error_message: _builtins.str
     """Exception message text when the LLM call failed; empty on success."""
-    traceback: builtins.str
+    traceback: _builtins.str
     """Formatted stack trace when the LLM call failed; empty on success."""
-    streaming_chunk_count: builtins.int
+    streaming_chunk_count: _builtins.int
     """Streaming chunk count observed during the call."""
-    first_token_latency_seconds: builtins.float
+    first_token_latency_seconds: _builtins.float
     """Time-to-first-token (start_time -> first chunk)."""
-    system_fingerprint: builtins.str
+    system_fingerprint: _builtins.str
     """OpenAI system_fingerprint when available."""
-    cached: builtins.bool
+    cached: _builtins.bool
     """Whether the result was served from a client-side cache."""
-    retry_count: builtins.int
+    retry_count: _builtins.int
     """Retry count for the underlying provider call."""
-    fallback_depth: builtins.int
+    fallback_depth: _builtins.int
     """Index inside a with_fallbacks([...]) chain when the call succeeded."""
-    temperature: builtins.float
+    temperature: _builtins.float
     """Sampling temperature requested for the LLM call (request kwargs)."""
-    top_p: builtins.float
+    top_p: _builtins.float
     """Top-p (nucleus sampling) parameter requested for the LLM call."""
-    max_tokens: builtins.int
+    max_tokens: _builtins.int
     """Maximum number of tokens the model was allowed to produce."""
-    n_generations: builtins.int
+    n_generations: _builtins.int
     """Number of generations the model was asked to return (<code>n</code> in OpenAI API)."""
-    cached_input_tokens: builtins.int
+    cached_input_tokens: _builtins.int
     """Number of input tokens served from the provider-side prompt cache
     (Anthropic <code>cache_read_input_tokens</code>).
     """
-    cache_creation_input_tokens: builtins.int
+    cache_creation_input_tokens: _builtins.int
     """Number of input tokens written to the provider-side prompt cache
     (Anthropic <code>cache_creation_input_tokens</code>).
     """
-    langsmith_run_url: builtins.str
+    langsmith_run_url: _builtins.str
     """LangSmith run URL for direct click-through when LangSmith tracing is active."""
-    team_name: builtins.str
-    """Autogen team display name owning the call."""
-    team_id: builtins.str
-    """Autogen team identifier (UUID)."""
-    agent_role: builtins.str
-    """Autogen agent role tag (user_proxy | assistant | tool_executor | reflection)."""
-    sender_agent: builtins.str
-    """Name of the autogen agent that produced the message."""
-    recipient_agent: builtins.str
-    """Name of the autogen agent that received the message."""
-    turn_index: builtins.int
-    """Zero-based position of this LLM call inside the autogen <code>run_stream()</code> sequence."""
-    reflection_iterations: builtins.int
-    """Number of reflection loops executed in <code>robust_assistant_agent</code> for this call."""
-    termination_reason: builtins.str
-    """Autogen <code>TaskResult.stop_reason</code> string when surfaced."""
-    evaluator_runs_join_key: builtins.str
+    team_name: _builtins.str
+    """Display name of the agent team owning the call; empty for a single agent."""
+    team_id: _builtins.str
+    """Identifier (UUID) of the agent team owning the call."""
+    agent_role: _builtins.str
+    """Role tag of the agent that made the call inside its team."""
+    sender_agent: _builtins.str
+    """Name of the agent that produced the message."""
+    recipient_agent: _builtins.str
+    """Name of the agent that received the message."""
+    turn_index: _builtins.int
+    """Zero-based position of this LLM call inside the agent run&apos;s sequence of LLM calls."""
+    reflection_iterations: _builtins.int
+    """Deprecated: number of reflection loops of the removed AutoGen <code>robust_assistant_agent</code> for this
+    call. No current agent runs reflection loops, so it is 0.
+    """
+    termination_reason: _builtins.str
+    """Stop reason of the agent team run when surfaced (formerly AutoGen <code>TaskResult.stop_reason</code>)."""
+    evaluator_runs_join_key: _builtins.str
     """Join key linking this LLM call to an evaluator run (see llm_evaluation.proto)."""
-    ccai_service_name: builtins.str
+    ccai_service_name: _builtins.str
     """Resource name of the CCAI service that issued this LLM call."""
-    base_url: builtins.str
+    base_url: _builtins.str
     """The base URL for the OpenAI API. Overrides the default endpoint, useful
     for proxies or compatible third-party providers.
     """
-    frequency_penalty: builtins.float
+    frequency_penalty: _builtins.float
     """Optional. A number between -2.0 and 2.0. Positive values penalize new
     tokens based on their existing frequency in the text so far, decreasing the
     likelihood of the model repeating the same line verbatim.
     """
-    presence_penalty: builtins.float
+    presence_penalty: _builtins.float
     """Optional. A number between -2.0 and 2.0. Positive values penalize new
     tokens based on whether they have already appeared in the text, increasing
     the likelihood of the model discussing new topics.
     """
-    reasoning_effort: global___ReasoningEffort.ValueType
+    reasoning_effort: Global___ReasoningEffort.ValueType
     """Optional. Constrains the effort level for reasoning models (e.g. o1, o3).
     Controls the trade-off between speed and quality.
     """
-    user: builtins.str
+    user: _builtins.str
     """Optional. A unique identifier representing the end-user, which helps OpenAI
     monitor and detect abuse.
     """
-    timeout: builtins.float
+    timeout: _builtins.float
     """Optional. The timeout in seconds for requests to the OpenAI API. Applies to
     the entire request lifecycle including connection, sending, and receiving.
     """
-    strict_response_validation: builtins.bool
+    strict_response_validation: _builtins.bool
     """Optional. If true, enables strict validation of response payloads returned
     by the OpenAI API.
     """
-    ccai_service_provider: ondewo.nlu.ccai_project_pb2.CcaiServiceProvider.ValueType
+    ccai_service_provider: _ccai_project_pb2.CcaiServiceProvider.ValueType
     """Provider of the ccai service"""
-    llm_call_id: builtins.str
+    llm_call_id: _builtins.str
     """Id of THIS LLM call. Same identifier the streaming telemetry events carry as
     <code>llm_call_id</code> (<code>LlmLlmCallStartedEvent</code>,
     <code>LlmToolCallStartedEvent</code>, ...), so an aggregate or a persisted row can be
     correlated back to the live event stream. Distinct from <code>run_id</code> (field 11),
-    which is the UPSTREAM framework's id (autogen / langchain).
+    which is the UPSTREAM framework's id (e.g. langchain).
     """
-    @property
-    def llm_token_usage(self) -> global___LlmTokenUsage:
+    @_builtins.property
+    def llm_token_usage(self) -> Global___LlmTokenUsage:
         """Totals for this call."""
 
-    @property
-    def llm_tool_call_metadatas(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmToolCallMetadata]:
+    @_builtins.property
+    def llm_tool_call_metadatas(self) -> _containers.RepeatedCompositeFieldContainer[Global___LlmToolCallMetadata]:
         """Tool calls observed during this LLM invocation."""
 
-    @property
-    def llm_thinking_metadata(self) -> global___LlmThinkingMetadata:
+    @_builtins.property
+    def llm_thinking_metadata(self) -> Global___LlmThinkingMetadata:
         """Thinking block when surfaced by the model."""
 
-    @property
-    def start_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def start_time(self) -> _timestamp_pb2.Timestamp:
         """Wall-clock start of the LLM call."""
 
-    @property
-    def end_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def end_time(self) -> _timestamp_pb2.Timestamp:
         """Wall-clock end of the LLM call."""
 
-    @property
-    def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def tags(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Tags propagated via RunnableConfig."""
 
-    @property
-    def metadata(self) -> google.protobuf.struct_pb2.Struct:
+    @_builtins.property
+    def metadata(self) -> _struct_pb2.Struct:
         """Free-form metadata propagated via RunnableConfig."""
 
-    @property
-    def inputs(self) -> google.protobuf.struct_pb2.Struct:
+    @_builtins.property
+    def inputs(self) -> _struct_pb2.Struct:
         """Redaction-aware snapshot of inputs at the run boundary."""
 
-    @property
-    def outputs(self) -> google.protobuf.struct_pb2.Struct:
+    @_builtins.property
+    def outputs(self) -> _struct_pb2.Struct:
         """Redaction-aware snapshot of outputs at the run boundary."""
 
-    @property
-    def finish_reasons(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def finish_reasons(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """One finish reason per generation (e.g. <code>stop</code>, <code>length</code>, <code>tool_calls</code>, <code>content_filter</code>)."""
 
-    @property
-    def llm_evaluation_feedbacks(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.llm_evaluation_pb2.LlmEvaluationFeedback]:
+    @_builtins.property
+    def llm_evaluation_feedbacks(self) -> _containers.RepeatedCompositeFieldContainer[_llm_evaluation_pb2.LlmEvaluationFeedback]:
         """Immediate inline feedback recorded inside the turn (e.g. self-grading by a
         reflection agent). Each entry is a single LlmEvaluationFeedback record.
         """
 
-    @property
-    def default_headers(self) -> google.protobuf.struct_pb2.Struct:
+    @_builtins.property
+    def default_headers(self) -> _struct_pb2.Struct:
         """Optional. Default HTTP headers to include with every request to the OpenAI API."""
 
-    @property
-    def default_query(self) -> google.protobuf.struct_pb2.Struct:
+    @_builtins.property
+    def default_query(self) -> _struct_pb2.Struct:
         """Optional. Default query parameters to append to every request URL sent to
         the OpenAI API. Values can be of any type (string, number, boolean, list),
         hence the use of Struct.
         """
 
-    @property
-    def openai_metadata(self) -> google.protobuf.struct_pb2.Struct:
+    @_builtins.property
+    def openai_metadata(self) -> _struct_pb2.Struct:
         """Optional. Developer-defined tags and values used for filtering completions
         in the OpenAI dashboard.
         """
 
-    @property
-    def extra_headers(self) -> google.protobuf.struct_pb2.Struct:
+    @_builtins.property
+    def extra_headers(self) -> _struct_pb2.Struct:
         """Optional. Additional HTTP headers to send with the request. These are
         merged with and override default_headers for this specific request only.
         """
 
-    @property
-    def extra_query(self) -> google.protobuf.struct_pb2.Struct:
+    @_builtins.property
+    def extra_query(self) -> _struct_pb2.Struct:
         """Optional. Additional query parameters to send with the request. These are
         merged with and override default_query for this specific request only.
         """
 
-    @property
-    def extra_body(self) -> google.protobuf.struct_pb2.Struct:
+    @_builtins.property
+    def extra_body(self) -> _struct_pb2.Struct:
         """Optional. Additional JSON properties to include in the request body. Useful
         for accessing new or undocumented API parameters.
         """
 
-    @property
-    def llm_safety_assessment(self) -> global___LlmSafetyAssessment:
+    @_builtins.property
+    def llm_safety_assessment(self) -> Global___LlmSafetyAssessment:
         """Native (regex / substring, no-LLM) safety assessment computed at telemetry
         build time over the call's input / output text. Distinct from the offline
         LLM-judge safety evaluators in <code>llm_evaluation.proto</code>: this is the
@@ -1532,8 +1562,8 @@ class LlmTelemetry(google.protobuf.message.Message):
         scoring is disabled.
         """
 
-    @property
-    def llm_retrieval_metadata(self) -> global___LlmRetrievalMetadata:
+    @_builtins.property
+    def llm_retrieval_metadata(self) -> Global___LlmRetrievalMetadata:
         """Typed view of the retrieved RAG chunks for this LLM call. Populated
         alongside the unstructured <code>outputs.retrieved_chunks</code> Struct
         (field 18, kept for back-compat); both carry the same chunk list. Unset for
@@ -1543,121 +1573,139 @@ class LlmTelemetry(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        provider: builtins.str = ...,
-        model_name: builtins.str = ...,
-        agent_name: builtins.str = ...,
-        llm_token_usage: global___LlmTokenUsage | None = ...,
-        llm_tool_call_metadatas: collections.abc.Iterable[global___LlmToolCallMetadata] | None = ...,
-        tool_call_count: builtins.int = ...,
-        llm_thinking_metadata: global___LlmThinkingMetadata | None = ...,
-        start_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        end_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        duration_in_s: builtins.float = ...,
-        run_id: builtins.str = ...,
-        parent_run_id: builtins.str = ...,
-        run_type: builtins.str = ...,
-        component_name: builtins.str = ...,
-        tags: collections.abc.Iterable[builtins.str] | None = ...,
-        metadata: google.protobuf.struct_pb2.Struct | None = ...,
-        inputs: google.protobuf.struct_pb2.Struct | None = ...,
-        outputs: google.protobuf.struct_pb2.Struct | None = ...,
-        error_class: builtins.str = ...,
-        error_message: builtins.str = ...,
-        traceback: builtins.str = ...,
-        streaming_chunk_count: builtins.int = ...,
-        first_token_latency_seconds: builtins.float = ...,
-        system_fingerprint: builtins.str = ...,
-        cached: builtins.bool = ...,
-        retry_count: builtins.int = ...,
-        fallback_depth: builtins.int = ...,
-        temperature: builtins.float = ...,
-        top_p: builtins.float = ...,
-        max_tokens: builtins.int = ...,
-        n_generations: builtins.int = ...,
-        finish_reasons: collections.abc.Iterable[builtins.str] | None = ...,
-        cached_input_tokens: builtins.int = ...,
-        cache_creation_input_tokens: builtins.int = ...,
-        langsmith_run_url: builtins.str = ...,
-        team_name: builtins.str = ...,
-        team_id: builtins.str = ...,
-        agent_role: builtins.str = ...,
-        sender_agent: builtins.str = ...,
-        recipient_agent: builtins.str = ...,
-        turn_index: builtins.int = ...,
-        reflection_iterations: builtins.int = ...,
-        termination_reason: builtins.str = ...,
-        evaluator_runs_join_key: builtins.str = ...,
-        llm_evaluation_feedbacks: collections.abc.Iterable[ondewo.nlu.llm_evaluation_pb2.LlmEvaluationFeedback] | None = ...,
-        ccai_service_name: builtins.str = ...,
-        base_url: builtins.str = ...,
-        default_headers: google.protobuf.struct_pb2.Struct | None = ...,
-        default_query: google.protobuf.struct_pb2.Struct | None = ...,
-        frequency_penalty: builtins.float | None = ...,
-        openai_metadata: google.protobuf.struct_pb2.Struct | None = ...,
-        presence_penalty: builtins.float | None = ...,
-        reasoning_effort: global___ReasoningEffort.ValueType | None = ...,
-        user: builtins.str | None = ...,
-        timeout: builtins.float | None = ...,
-        strict_response_validation: builtins.bool | None = ...,
-        extra_headers: google.protobuf.struct_pb2.Struct | None = ...,
-        extra_query: google.protobuf.struct_pb2.Struct | None = ...,
-        extra_body: google.protobuf.struct_pb2.Struct | None = ...,
-        ccai_service_provider: ondewo.nlu.ccai_project_pb2.CcaiServiceProvider.ValueType = ...,
-        llm_safety_assessment: global___LlmSafetyAssessment | None = ...,
-        llm_retrieval_metadata: global___LlmRetrievalMetadata | None = ...,
-        llm_call_id: builtins.str = ...,
+        provider: _builtins.str = ...,
+        model_name: _builtins.str = ...,
+        agent_name: _builtins.str = ...,
+        llm_token_usage: Global___LlmTokenUsage | None = ...,
+        llm_tool_call_metadatas: _abc.Iterable[Global___LlmToolCallMetadata] | None = ...,
+        tool_call_count: _builtins.int = ...,
+        llm_thinking_metadata: Global___LlmThinkingMetadata | None = ...,
+        start_time: _timestamp_pb2.Timestamp | None = ...,
+        end_time: _timestamp_pb2.Timestamp | None = ...,
+        duration_in_s: _builtins.float = ...,
+        run_id: _builtins.str = ...,
+        parent_run_id: _builtins.str = ...,
+        run_type: _builtins.str = ...,
+        component_name: _builtins.str = ...,
+        tags: _abc.Iterable[_builtins.str] | None = ...,
+        metadata: _struct_pb2.Struct | None = ...,
+        inputs: _struct_pb2.Struct | None = ...,
+        outputs: _struct_pb2.Struct | None = ...,
+        error_class: _builtins.str = ...,
+        error_message: _builtins.str = ...,
+        traceback: _builtins.str = ...,
+        streaming_chunk_count: _builtins.int = ...,
+        first_token_latency_seconds: _builtins.float = ...,
+        system_fingerprint: _builtins.str = ...,
+        cached: _builtins.bool = ...,
+        retry_count: _builtins.int = ...,
+        fallback_depth: _builtins.int = ...,
+        temperature: _builtins.float = ...,
+        top_p: _builtins.float = ...,
+        max_tokens: _builtins.int = ...,
+        n_generations: _builtins.int = ...,
+        finish_reasons: _abc.Iterable[_builtins.str] | None = ...,
+        cached_input_tokens: _builtins.int = ...,
+        cache_creation_input_tokens: _builtins.int = ...,
+        langsmith_run_url: _builtins.str = ...,
+        team_name: _builtins.str = ...,
+        team_id: _builtins.str = ...,
+        agent_role: _builtins.str = ...,
+        sender_agent: _builtins.str = ...,
+        recipient_agent: _builtins.str = ...,
+        turn_index: _builtins.int = ...,
+        reflection_iterations: _builtins.int = ...,
+        termination_reason: _builtins.str = ...,
+        evaluator_runs_join_key: _builtins.str = ...,
+        llm_evaluation_feedbacks: _abc.Iterable[_llm_evaluation_pb2.LlmEvaluationFeedback] | None = ...,
+        ccai_service_name: _builtins.str = ...,
+        base_url: _builtins.str = ...,
+        default_headers: _struct_pb2.Struct | None = ...,
+        default_query: _struct_pb2.Struct | None = ...,
+        frequency_penalty: _builtins.float | None = ...,
+        openai_metadata: _struct_pb2.Struct | None = ...,
+        presence_penalty: _builtins.float | None = ...,
+        reasoning_effort: Global___ReasoningEffort.ValueType | None = ...,
+        user: _builtins.str | None = ...,
+        timeout: _builtins.float | None = ...,
+        strict_response_validation: _builtins.bool | None = ...,
+        extra_headers: _struct_pb2.Struct | None = ...,
+        extra_query: _struct_pb2.Struct | None = ...,
+        extra_body: _struct_pb2.Struct | None = ...,
+        ccai_service_provider: _ccai_project_pb2.CcaiServiceProvider.ValueType = ...,
+        llm_safety_assessment: Global___LlmSafetyAssessment | None = ...,
+        llm_retrieval_metadata: Global___LlmRetrievalMetadata | None = ...,
+        llm_call_id: _builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_frequency_penalty", b"_frequency_penalty", "_presence_penalty", b"_presence_penalty", "_reasoning_effort", b"_reasoning_effort", "_strict_response_validation", b"_strict_response_validation", "_timeout", b"_timeout", "_user", b"_user", "default_headers", b"default_headers", "default_query", b"default_query", "end_time", b"end_time", "extra_body", b"extra_body", "extra_headers", b"extra_headers", "extra_query", b"extra_query", "frequency_penalty", b"frequency_penalty", "inputs", b"inputs", "llm_retrieval_metadata", b"llm_retrieval_metadata", "llm_safety_assessment", b"llm_safety_assessment", "llm_thinking_metadata", b"llm_thinking_metadata", "llm_token_usage", b"llm_token_usage", "metadata", b"metadata", "openai_metadata", b"openai_metadata", "outputs", b"outputs", "presence_penalty", b"presence_penalty", "reasoning_effort", b"reasoning_effort", "start_time", b"start_time", "strict_response_validation", b"strict_response_validation", "timeout", b"timeout", "user", b"user"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_frequency_penalty", b"_frequency_penalty", "_presence_penalty", b"_presence_penalty", "_reasoning_effort", b"_reasoning_effort", "_strict_response_validation", b"_strict_response_validation", "_timeout", b"_timeout", "_user", b"_user", "agent_name", b"agent_name", "agent_role", b"agent_role", "base_url", b"base_url", "cache_creation_input_tokens", b"cache_creation_input_tokens", "cached", b"cached", "cached_input_tokens", b"cached_input_tokens", "ccai_service_name", b"ccai_service_name", "ccai_service_provider", b"ccai_service_provider", "component_name", b"component_name", "default_headers", b"default_headers", "default_query", b"default_query", "duration_in_s", b"duration_in_s", "end_time", b"end_time", "error_class", b"error_class", "error_message", b"error_message", "evaluator_runs_join_key", b"evaluator_runs_join_key", "extra_body", b"extra_body", "extra_headers", b"extra_headers", "extra_query", b"extra_query", "fallback_depth", b"fallback_depth", "finish_reasons", b"finish_reasons", "first_token_latency_seconds", b"first_token_latency_seconds", "frequency_penalty", b"frequency_penalty", "inputs", b"inputs", "langsmith_run_url", b"langsmith_run_url", "llm_call_id", b"llm_call_id", "llm_evaluation_feedbacks", b"llm_evaluation_feedbacks", "llm_retrieval_metadata", b"llm_retrieval_metadata", "llm_safety_assessment", b"llm_safety_assessment", "llm_thinking_metadata", b"llm_thinking_metadata", "llm_token_usage", b"llm_token_usage", "llm_tool_call_metadatas", b"llm_tool_call_metadatas", "max_tokens", b"max_tokens", "metadata", b"metadata", "model_name", b"model_name", "n_generations", b"n_generations", "openai_metadata", b"openai_metadata", "outputs", b"outputs", "parent_run_id", b"parent_run_id", "presence_penalty", b"presence_penalty", "provider", b"provider", "reasoning_effort", b"reasoning_effort", "recipient_agent", b"recipient_agent", "reflection_iterations", b"reflection_iterations", "retry_count", b"retry_count", "run_id", b"run_id", "run_type", b"run_type", "sender_agent", b"sender_agent", "start_time", b"start_time", "streaming_chunk_count", b"streaming_chunk_count", "strict_response_validation", b"strict_response_validation", "system_fingerprint", b"system_fingerprint", "tags", b"tags", "team_id", b"team_id", "team_name", b"team_name", "temperature", b"temperature", "termination_reason", b"termination_reason", "timeout", b"timeout", "tool_call_count", b"tool_call_count", "top_p", b"top_p", "traceback", b"traceback", "turn_index", b"turn_index", "user", b"user"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_frequency_penalty", b"_frequency_penalty"]) -> typing.Literal["frequency_penalty"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_presence_penalty", b"_presence_penalty"]) -> typing.Literal["presence_penalty"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_reasoning_effort", b"_reasoning_effort"]) -> typing.Literal["reasoning_effort"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_strict_response_validation", b"_strict_response_validation"]) -> typing.Literal["strict_response_validation"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_timeout", b"_timeout"]) -> typing.Literal["timeout"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_user", b"_user"]) -> typing.Literal["user"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["_frequency_penalty", b"_frequency_penalty", "_presence_penalty", b"_presence_penalty", "_reasoning_effort", b"_reasoning_effort", "_strict_response_validation", b"_strict_response_validation", "_timeout", b"_timeout", "_user", b"_user", "default_headers", b"default_headers", "default_query", b"default_query", "end_time", b"end_time", "extra_body", b"extra_body", "extra_headers", b"extra_headers", "extra_query", b"extra_query", "frequency_penalty", b"frequency_penalty", "inputs", b"inputs", "llm_retrieval_metadata", b"llm_retrieval_metadata", "llm_safety_assessment", b"llm_safety_assessment", "llm_thinking_metadata", b"llm_thinking_metadata", "llm_token_usage", b"llm_token_usage", "metadata", b"metadata", "openai_metadata", b"openai_metadata", "outputs", b"outputs", "presence_penalty", b"presence_penalty", "reasoning_effort", b"reasoning_effort", "start_time", b"start_time", "strict_response_validation", b"strict_response_validation", "timeout", b"timeout", "user", b"user"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["_frequency_penalty", b"_frequency_penalty", "_presence_penalty", b"_presence_penalty", "_reasoning_effort", b"_reasoning_effort", "_strict_response_validation", b"_strict_response_validation", "_timeout", b"_timeout", "_user", b"_user", "agent_name", b"agent_name", "agent_role", b"agent_role", "base_url", b"base_url", "cache_creation_input_tokens", b"cache_creation_input_tokens", "cached", b"cached", "cached_input_tokens", b"cached_input_tokens", "ccai_service_name", b"ccai_service_name", "ccai_service_provider", b"ccai_service_provider", "component_name", b"component_name", "default_headers", b"default_headers", "default_query", b"default_query", "duration_in_s", b"duration_in_s", "end_time", b"end_time", "error_class", b"error_class", "error_message", b"error_message", "evaluator_runs_join_key", b"evaluator_runs_join_key", "extra_body", b"extra_body", "extra_headers", b"extra_headers", "extra_query", b"extra_query", "fallback_depth", b"fallback_depth", "finish_reasons", b"finish_reasons", "first_token_latency_seconds", b"first_token_latency_seconds", "frequency_penalty", b"frequency_penalty", "inputs", b"inputs", "langsmith_run_url", b"langsmith_run_url", "llm_call_id", b"llm_call_id", "llm_evaluation_feedbacks", b"llm_evaluation_feedbacks", "llm_retrieval_metadata", b"llm_retrieval_metadata", "llm_safety_assessment", b"llm_safety_assessment", "llm_thinking_metadata", b"llm_thinking_metadata", "llm_token_usage", b"llm_token_usage", "llm_tool_call_metadatas", b"llm_tool_call_metadatas", "max_tokens", b"max_tokens", "metadata", b"metadata", "model_name", b"model_name", "n_generations", b"n_generations", "openai_metadata", b"openai_metadata", "outputs", b"outputs", "parent_run_id", b"parent_run_id", "presence_penalty", b"presence_penalty", "provider", b"provider", "reasoning_effort", b"reasoning_effort", "recipient_agent", b"recipient_agent", "reflection_iterations", b"reflection_iterations", "retry_count", b"retry_count", "run_id", b"run_id", "run_type", b"run_type", "sender_agent", b"sender_agent", "start_time", b"start_time", "streaming_chunk_count", b"streaming_chunk_count", "strict_response_validation", b"strict_response_validation", "system_fingerprint", b"system_fingerprint", "tags", b"tags", "team_id", b"team_id", "team_name", b"team_name", "temperature", b"temperature", "termination_reason", b"termination_reason", "timeout", b"timeout", "tool_call_count", b"tool_call_count", "top_p", b"top_p", "traceback", b"traceback", "turn_index", b"turn_index", "user", b"user"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType__frequency_penalty: _TypeAlias = _typing.Literal["frequency_penalty"]  # noqa: Y015
+    _WhichOneofArgType__frequency_penalty: _TypeAlias = _typing.Literal["_frequency_penalty", b"_frequency_penalty"]  # noqa: Y015
+    _WhichOneofReturnType__presence_penalty: _TypeAlias = _typing.Literal["presence_penalty"]  # noqa: Y015
+    _WhichOneofArgType__presence_penalty: _TypeAlias = _typing.Literal["_presence_penalty", b"_presence_penalty"]  # noqa: Y015
+    _WhichOneofReturnType__reasoning_effort: _TypeAlias = _typing.Literal["reasoning_effort"]  # noqa: Y015
+    _WhichOneofArgType__reasoning_effort: _TypeAlias = _typing.Literal["_reasoning_effort", b"_reasoning_effort"]  # noqa: Y015
+    _WhichOneofReturnType__strict_response_validation: _TypeAlias = _typing.Literal["strict_response_validation"]  # noqa: Y015
+    _WhichOneofArgType__strict_response_validation: _TypeAlias = _typing.Literal["_strict_response_validation", b"_strict_response_validation"]  # noqa: Y015
+    _WhichOneofReturnType__timeout: _TypeAlias = _typing.Literal["timeout"]  # noqa: Y015
+    _WhichOneofArgType__timeout: _TypeAlias = _typing.Literal["_timeout", b"_timeout"]  # noqa: Y015
+    _WhichOneofReturnType__user: _TypeAlias = _typing.Literal["user"]  # noqa: Y015
+    _WhichOneofArgType__user: _TypeAlias = _typing.Literal["_user", b"_user"]  # noqa: Y015
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__frequency_penalty) -> _WhichOneofReturnType__frequency_penalty | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__presence_penalty) -> _WhichOneofReturnType__presence_penalty | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__reasoning_effort) -> _WhichOneofReturnType__reasoning_effort | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__strict_response_validation) -> _WhichOneofReturnType__strict_response_validation | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__timeout) -> _WhichOneofReturnType__timeout | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__user) -> _WhichOneofReturnType__user | None: ...
 
-global___LlmTelemetry = LlmTelemetry
+Global___LlmTelemetry: _TypeAlias = LlmTelemetry  # noqa: Y015
 
-@typing.final
-class LlmSafetyFinding(google.protobuf.message.Message):
+@_typing.final
+class LlmSafetyFinding(_message.Message):
     """One concrete safety finding inside an LlmSafetyAssessment."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    CATEGORY_FIELD_NUMBER: builtins.int
-    SEVERITY_FIELD_NUMBER: builtins.int
-    MATCHED_PATTERN_FIELD_NUMBER: builtins.int
-    LOCATION_FIELD_NUMBER: builtins.int
-    category: builtins.str
+    CATEGORY_FIELD_NUMBER: _builtins.int
+    SEVERITY_FIELD_NUMBER: _builtins.int
+    MATCHED_PATTERN_FIELD_NUMBER: _builtins.int
+    LOCATION_FIELD_NUMBER: _builtins.int
+    category: _builtins.str
     """Detector category that fired (e.g. <code>prompt_injection</code>,
     <code>jailbreak</code>, <code>pii</code>, <code>info_leak</code>).
     """
-    severity: builtins.str
+    severity: _builtins.str
     """Severity tag ("low" | "medium" | "high" | "critical")."""
-    matched_pattern: builtins.str
+    matched_pattern: _builtins.str
     """The pattern / detector rule that matched (may be a redacted excerpt)."""
-    location: global___LlmSafetyLocation.ValueType
+    location: Global___LlmSafetyLocation.ValueType
     """Whether the finding was located in the input or the output."""
     def __init__(
         self,
         *,
-        category: builtins.str = ...,
-        severity: builtins.str = ...,
-        matched_pattern: builtins.str = ...,
-        location: global___LlmSafetyLocation.ValueType = ...,
+        category: _builtins.str = ...,
+        severity: _builtins.str = ...,
+        matched_pattern: _builtins.str = ...,
+        location: Global___LlmSafetyLocation.ValueType = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["category", b"category", "location", b"location", "matched_pattern", b"matched_pattern", "severity", b"severity"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["category", b"category", "location", b"location", "matched_pattern", b"matched_pattern", "severity", b"severity"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___LlmSafetyFinding = LlmSafetyFinding
+Global___LlmSafetyFinding: _TypeAlias = LlmSafetyFinding  # noqa: Y015
 
-@typing.final
-class LlmSafetyAssessment(google.protobuf.message.Message):
+@_typing.final
+class LlmSafetyAssessment(_message.Message):
     """Native safety assessment for one LLM call, computed at telemetry build time by
     a dependency-free (regex / substring) assessor over the call's input / output
     text. Additive, optional: absent when safety scoring is disabled. This is the
@@ -1665,483 +1713,518 @@ class LlmSafetyAssessment(google.protobuf.message.Message):
     <code>llm_evaluation.proto</code>.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    FLAGGED_CATEGORIES_FIELD_NUMBER: builtins.int
-    HAS_PII_FIELD_NUMBER: builtins.int
-    HAS_INJECTION_ATTEMPT_FIELD_NUMBER: builtins.int
-    HAS_JAILBREAK_ATTEMPT_FIELD_NUMBER: builtins.int
-    SAFETY_SCORE_FIELD_NUMBER: builtins.int
-    FINDINGS_FIELD_NUMBER: builtins.int
-    has_pii: builtins.bool
+    FLAGGED_CATEGORIES_FIELD_NUMBER: _builtins.int
+    HAS_PII_FIELD_NUMBER: _builtins.int
+    HAS_INJECTION_ATTEMPT_FIELD_NUMBER: _builtins.int
+    HAS_JAILBREAK_ATTEMPT_FIELD_NUMBER: _builtins.int
+    SAFETY_SCORE_FIELD_NUMBER: _builtins.int
+    FINDINGS_FIELD_NUMBER: _builtins.int
+    has_pii: _builtins.bool
     """True when any PII pattern (email / phone / IBAN / credit-card / national-id)
     was detected in input or output.
     """
-    has_injection_attempt: builtins.bool
+    has_injection_attempt: _builtins.bool
     """True when a prompt-injection pattern was detected in the input."""
-    has_jailbreak_attempt: builtins.bool
+    has_jailbreak_attempt: _builtins.bool
     """True when a jailbreak / role-override pattern was detected in the input."""
-    safety_score: builtins.float
+    safety_score: _builtins.float
     """Overall safety score in <code>[0.0, 1.0]</code> where <code>1.0</code> means
     fully safe (no findings) and lower values indicate higher risk.
     """
-    @property
-    def flagged_categories(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def flagged_categories(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Detector categories that fired across input and output
         (<code>prompt_injection</code> | <code>jailbreak</code> | <code>pii</code> |
         <code>info_leak</code>). Empty when nothing was flagged.
         """
 
-    @property
-    def findings(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmSafetyFinding]:
+    @_builtins.property
+    def findings(self) -> _containers.RepeatedCompositeFieldContainer[Global___LlmSafetyFinding]:
         """Per-finding detail records (category / severity / matched pattern / location)."""
 
     def __init__(
         self,
         *,
-        flagged_categories: collections.abc.Iterable[builtins.str] | None = ...,
-        has_pii: builtins.bool = ...,
-        has_injection_attempt: builtins.bool = ...,
-        has_jailbreak_attempt: builtins.bool = ...,
-        safety_score: builtins.float = ...,
-        findings: collections.abc.Iterable[global___LlmSafetyFinding] | None = ...,
+        flagged_categories: _abc.Iterable[_builtins.str] | None = ...,
+        has_pii: _builtins.bool = ...,
+        has_injection_attempt: _builtins.bool = ...,
+        has_jailbreak_attempt: _builtins.bool = ...,
+        safety_score: _builtins.float = ...,
+        findings: _abc.Iterable[Global___LlmSafetyFinding] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["findings", b"findings", "flagged_categories", b"flagged_categories", "has_injection_attempt", b"has_injection_attempt", "has_jailbreak_attempt", b"has_jailbreak_attempt", "has_pii", b"has_pii", "safety_score", b"safety_score"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["findings", b"findings", "flagged_categories", b"flagged_categories", "has_injection_attempt", b"has_injection_attempt", "has_jailbreak_attempt", b"has_jailbreak_attempt", "has_pii", b"has_pii", "safety_score", b"safety_score"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___LlmSafetyAssessment = LlmSafetyAssessment
+Global___LlmSafetyAssessment: _TypeAlias = LlmSafetyAssessment  # noqa: Y015
 
-@typing.final
-class LlmRetrievedChunk(google.protobuf.message.Message):
+@_typing.final
+class LlmRetrievedChunk(_message.Message):
     """One retrieved RAG chunk surfaced during an LLM call. Mirrors the five-field
     chunk already emitted into <code>outputs.retrieved_chunks</code> (Struct) plus
     a typed <code>rank</code>.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    DOCUMENT_ID_FIELD_NUMBER: builtins.int
-    CHUNK_ID_FIELD_NUMBER: builtins.int
-    SCORE_FIELD_NUMBER: builtins.int
-    TEXT_FIELD_NUMBER: builtins.int
-    SOURCE_URI_FIELD_NUMBER: builtins.int
-    RANK_FIELD_NUMBER: builtins.int
-    document_id: builtins.str
+    DOCUMENT_ID_FIELD_NUMBER: _builtins.int
+    CHUNK_ID_FIELD_NUMBER: _builtins.int
+    SCORE_FIELD_NUMBER: _builtins.int
+    TEXT_FIELD_NUMBER: _builtins.int
+    SOURCE_URI_FIELD_NUMBER: _builtins.int
+    RANK_FIELD_NUMBER: _builtins.int
+    document_id: _builtins.str
     """Source document identifier the chunk was retrieved from."""
-    chunk_id: builtins.str
+    chunk_id: _builtins.str
     """Chunk identifier within the source document."""
-    score: builtins.float
+    score: _builtins.float
     """Retrieval similarity / relevance score assigned by the retriever."""
-    text: builtins.str
+    text: _builtins.str
     """Chunk text (already truncated to the emit-time character cap, ~2000 chars)."""
-    source_uri: builtins.str
+    source_uri: _builtins.str
     """Source URI (document URL or document name) for click-through."""
-    rank: builtins.int
+    rank: _builtins.int
     """Zero-based position of this chunk in the retrieval result order
     (RAGFlow reference order / LangChain document order).
     """
     def __init__(
         self,
         *,
-        document_id: builtins.str = ...,
-        chunk_id: builtins.str = ...,
-        score: builtins.float = ...,
-        text: builtins.str = ...,
-        source_uri: builtins.str = ...,
-        rank: builtins.int = ...,
+        document_id: _builtins.str = ...,
+        chunk_id: _builtins.str = ...,
+        score: _builtins.float = ...,
+        text: _builtins.str = ...,
+        source_uri: _builtins.str = ...,
+        rank: _builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["chunk_id", b"chunk_id", "document_id", b"document_id", "rank", b"rank", "score", b"score", "source_uri", b"source_uri", "text", b"text"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["chunk_id", b"chunk_id", "document_id", b"document_id", "rank", b"rank", "score", b"score", "source_uri", b"source_uri", "text", b"text"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___LlmRetrievedChunk = LlmRetrievedChunk
+Global___LlmRetrievedChunk: _TypeAlias = LlmRetrievedChunk  # noqa: Y015
 
-@typing.final
-class LlmRetrievalMetadata(google.protobuf.message.Message):
+@_typing.final
+class LlmRetrievalMetadata(_message.Message):
     """Typed view of the chunks retrieved for one LLM call. Populated alongside the
     unstructured <code>outputs.retrieved_chunks</code> Struct (field 18 on
     LlmTelemetry, kept for back-compat); both carry the same chunk list.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    CHUNKS_FIELD_NUMBER: builtins.int
-    @property
-    def chunks(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmRetrievedChunk]:
+    CHUNKS_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def chunks(self) -> _containers.RepeatedCompositeFieldContainer[Global___LlmRetrievedChunk]:
         """The retrieved chunks in retrieval-result order."""
 
     def __init__(
         self,
         *,
-        chunks: collections.abc.Iterable[global___LlmRetrievedChunk] | None = ...,
+        chunks: _abc.Iterable[Global___LlmRetrievedChunk] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["chunks", b"chunks"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["chunks", b"chunks"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___LlmRetrievalMetadata = LlmRetrievalMetadata
+Global___LlmRetrievalMetadata: _TypeAlias = LlmRetrievalMetadata  # noqa: Y015
 
-@typing.final
-class LlmLatencyStats(google.protobuf.message.Message):
+@_typing.final
+class LlmLatencyStats(_message.Message):
     """Latency aggregate (seconds) across the LLM calls in scope."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    CALL_COUNT_FIELD_NUMBER: builtins.int
-    MEAN_DURATION_SECONDS_FIELD_NUMBER: builtins.int
-    P50_DURATION_SECONDS_FIELD_NUMBER: builtins.int
-    P95_DURATION_SECONDS_FIELD_NUMBER: builtins.int
-    P99_DURATION_SECONDS_FIELD_NUMBER: builtins.int
-    MAX_DURATION_SECONDS_FIELD_NUMBER: builtins.int
-    MEAN_FIRST_TOKEN_LATENCY_SECONDS_FIELD_NUMBER: builtins.int
-    P95_FIRST_TOKEN_LATENCY_SECONDS_FIELD_NUMBER: builtins.int
-    call_count: builtins.int
+    CALL_COUNT_FIELD_NUMBER: _builtins.int
+    MEAN_DURATION_SECONDS_FIELD_NUMBER: _builtins.int
+    P50_DURATION_SECONDS_FIELD_NUMBER: _builtins.int
+    P95_DURATION_SECONDS_FIELD_NUMBER: _builtins.int
+    P99_DURATION_SECONDS_FIELD_NUMBER: _builtins.int
+    MAX_DURATION_SECONDS_FIELD_NUMBER: _builtins.int
+    MEAN_FIRST_TOKEN_LATENCY_SECONDS_FIELD_NUMBER: _builtins.int
+    P95_FIRST_TOKEN_LATENCY_SECONDS_FIELD_NUMBER: _builtins.int
+    call_count: _builtins.int
     """Number of LLM calls included in these latency stats."""
-    mean_duration_seconds: builtins.float
+    mean_duration_seconds: _builtins.float
     """Mean end-to-end call duration in seconds."""
-    p50_duration_seconds: builtins.float
+    p50_duration_seconds: _builtins.float
     """50th percentile end-to-end call duration in seconds."""
-    p95_duration_seconds: builtins.float
+    p95_duration_seconds: _builtins.float
     """95th percentile end-to-end call duration in seconds."""
-    p99_duration_seconds: builtins.float
+    p99_duration_seconds: _builtins.float
     """99th percentile end-to-end call duration in seconds."""
-    max_duration_seconds: builtins.float
+    max_duration_seconds: _builtins.float
     """Maximum observed end-to-end call duration in seconds."""
-    mean_first_token_latency_seconds: builtins.float
+    mean_first_token_latency_seconds: _builtins.float
     """Mean time-to-first-token in seconds (streaming calls only)."""
-    p95_first_token_latency_seconds: builtins.float
+    p95_first_token_latency_seconds: _builtins.float
     """95th percentile time-to-first-token in seconds."""
     def __init__(
         self,
         *,
-        call_count: builtins.int = ...,
-        mean_duration_seconds: builtins.float = ...,
-        p50_duration_seconds: builtins.float = ...,
-        p95_duration_seconds: builtins.float = ...,
-        p99_duration_seconds: builtins.float = ...,
-        max_duration_seconds: builtins.float = ...,
-        mean_first_token_latency_seconds: builtins.float = ...,
-        p95_first_token_latency_seconds: builtins.float = ...,
+        call_count: _builtins.int = ...,
+        mean_duration_seconds: _builtins.float = ...,
+        p50_duration_seconds: _builtins.float = ...,
+        p95_duration_seconds: _builtins.float = ...,
+        p99_duration_seconds: _builtins.float = ...,
+        max_duration_seconds: _builtins.float = ...,
+        mean_first_token_latency_seconds: _builtins.float = ...,
+        p95_first_token_latency_seconds: _builtins.float = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["call_count", b"call_count", "max_duration_seconds", b"max_duration_seconds", "mean_duration_seconds", b"mean_duration_seconds", "mean_first_token_latency_seconds", b"mean_first_token_latency_seconds", "p50_duration_seconds", b"p50_duration_seconds", "p95_duration_seconds", b"p95_duration_seconds", "p95_first_token_latency_seconds", b"p95_first_token_latency_seconds", "p99_duration_seconds", b"p99_duration_seconds"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["call_count", b"call_count", "max_duration_seconds", b"max_duration_seconds", "mean_duration_seconds", b"mean_duration_seconds", "mean_first_token_latency_seconds", b"mean_first_token_latency_seconds", "p50_duration_seconds", b"p50_duration_seconds", "p95_duration_seconds", b"p95_duration_seconds", "p95_first_token_latency_seconds", b"p95_first_token_latency_seconds", "p99_duration_seconds", b"p99_duration_seconds"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___LlmLatencyStats = LlmLatencyStats
+Global___LlmLatencyStats: _TypeAlias = LlmLatencyStats  # noqa: Y015
 
-@typing.final
-class LlmCacheStats(google.protobuf.message.Message):
+@_typing.final
+class LlmCacheStats(_message.Message):
     """Prompt-cache efficiency aggregate across the LLM calls in scope."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    CACHED_INPUT_TOKENS_FIELD_NUMBER: builtins.int
-    CACHE_CREATION_INPUT_TOKENS_FIELD_NUMBER: builtins.int
-    UNCACHED_INPUT_TOKENS_FIELD_NUMBER: builtins.int
-    CACHE_HIT_RATE_FIELD_NUMBER: builtins.int
-    TOKEN_SAVINGS_FIELD_NUMBER: builtins.int
-    cached_input_tokens: builtins.int
+    CACHED_INPUT_TOKENS_FIELD_NUMBER: _builtins.int
+    CACHE_CREATION_INPUT_TOKENS_FIELD_NUMBER: _builtins.int
+    UNCACHED_INPUT_TOKENS_FIELD_NUMBER: _builtins.int
+    CACHE_HIT_RATE_FIELD_NUMBER: _builtins.int
+    TOKEN_SAVINGS_FIELD_NUMBER: _builtins.int
+    cached_input_tokens: _builtins.int
     """Tokens served from prompt cache (cached_input_tokens summed)."""
-    cache_creation_input_tokens: builtins.int
+    cache_creation_input_tokens: _builtins.int
     """Tokens written to prompt cache (cache_creation_input_tokens summed)."""
-    uncached_input_tokens: builtins.int
+    uncached_input_tokens: _builtins.int
     """Non-cached input tokens."""
-    cache_hit_rate: builtins.float
+    cache_hit_rate: _builtins.float
     """cached_input_tokens / (cached_input_tokens + uncached_input_tokens)."""
-    token_savings: builtins.int
+    token_savings: _builtins.int
     """Input tokens avoided by cache reuse."""
     def __init__(
         self,
         *,
-        cached_input_tokens: builtins.int = ...,
-        cache_creation_input_tokens: builtins.int = ...,
-        uncached_input_tokens: builtins.int = ...,
-        cache_hit_rate: builtins.float = ...,
-        token_savings: builtins.int = ...,
+        cached_input_tokens: _builtins.int = ...,
+        cache_creation_input_tokens: _builtins.int = ...,
+        uncached_input_tokens: _builtins.int = ...,
+        cache_hit_rate: _builtins.float = ...,
+        token_savings: _builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["cache_creation_input_tokens", b"cache_creation_input_tokens", "cache_hit_rate", b"cache_hit_rate", "cached_input_tokens", b"cached_input_tokens", "token_savings", b"token_savings", "uncached_input_tokens", b"uncached_input_tokens"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["cache_creation_input_tokens", b"cache_creation_input_tokens", "cache_hit_rate", b"cache_hit_rate", "cached_input_tokens", b"cached_input_tokens", "token_savings", b"token_savings", "uncached_input_tokens", b"uncached_input_tokens"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___LlmCacheStats = LlmCacheStats
+Global___LlmCacheStats: _TypeAlias = LlmCacheStats  # noqa: Y015
 
-@typing.final
-class LlmModelUsage(google.protobuf.message.Message):
+@_typing.final
+class LlmModelUsage(_message.Message):
     """Per-model usage rollup across the scope."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    MODEL_NAME_FIELD_NUMBER: builtins.int
-    PROVIDER_FIELD_NUMBER: builtins.int
-    CALL_COUNT_FIELD_NUMBER: builtins.int
-    LLM_TOKEN_USAGE_FIELD_NUMBER: builtins.int
-    TOOL_CALL_COUNT_FIELD_NUMBER: builtins.int
-    ERROR_COUNT_FIELD_NUMBER: builtins.int
-    DURATION_SECONDS_TOTAL_FIELD_NUMBER: builtins.int
-    CACHE_STATS_FIELD_NUMBER: builtins.int
-    CCAI_SERVICE_NAME_FIELD_NUMBER: builtins.int
-    CCAI_SERVICE_PROVIDER_FIELD_NUMBER: builtins.int
-    BASE_URL_FIELD_NUMBER: builtins.int
-    THINKING_TOKENS_TOTAL_FIELD_NUMBER: builtins.int
-    THINKING_DURATION_SECONDS_TOTAL_FIELD_NUMBER: builtins.int
-    TOOL_CALL_TOKENS_TOTAL_FIELD_NUMBER: builtins.int
-    TOOL_CALL_DURATION_SECONDS_TOTAL_FIELD_NUMBER: builtins.int
-    model_name: builtins.str
+    MODEL_NAME_FIELD_NUMBER: _builtins.int
+    PROVIDER_FIELD_NUMBER: _builtins.int
+    CALL_COUNT_FIELD_NUMBER: _builtins.int
+    LLM_TOKEN_USAGE_FIELD_NUMBER: _builtins.int
+    TOOL_CALL_COUNT_FIELD_NUMBER: _builtins.int
+    ERROR_COUNT_FIELD_NUMBER: _builtins.int
+    DURATION_SECONDS_TOTAL_FIELD_NUMBER: _builtins.int
+    CACHE_STATS_FIELD_NUMBER: _builtins.int
+    CCAI_SERVICE_NAME_FIELD_NUMBER: _builtins.int
+    CCAI_SERVICE_PROVIDER_FIELD_NUMBER: _builtins.int
+    BASE_URL_FIELD_NUMBER: _builtins.int
+    THINKING_TOKENS_TOTAL_FIELD_NUMBER: _builtins.int
+    THINKING_DURATION_SECONDS_TOTAL_FIELD_NUMBER: _builtins.int
+    TOOL_CALL_TOKENS_TOTAL_FIELD_NUMBER: _builtins.int
+    TOOL_CALL_DURATION_SECONDS_TOTAL_FIELD_NUMBER: _builtins.int
+    model_name: _builtins.str
     """Concrete model identifier (e.g. "claude-3-5-sonnet-20241022")."""
-    provider: builtins.str
+    provider: _builtins.str
     """Provider tag owning the model (e.g. "anthropic")."""
-    call_count: builtins.int
+    call_count: _builtins.int
     """Number of LLM calls to this model in scope."""
-    tool_call_count: builtins.int
+    tool_call_count: _builtins.int
     """Tool-call count attributed to this model."""
-    error_count: builtins.int
+    error_count: _builtins.int
     """Error count attributed to this model."""
-    duration_seconds_total: builtins.float
+    duration_seconds_total: _builtins.float
     """Summed call duration in seconds for this model."""
-    ccai_service_name: builtins.str
+    ccai_service_name: _builtins.str
     """Resource name of the CCAI service that issued the calls."""
-    ccai_service_provider: ondewo.nlu.ccai_project_pb2.CcaiServiceProvider.ValueType
+    ccai_service_provider: _ccai_project_pb2.CcaiServiceProvider.ValueType
     """Provider of the CCAI service."""
-    base_url: builtins.str
+    base_url: _builtins.str
     """Base URL used for the calls (proxy / compatible provider)."""
-    thinking_tokens_total: builtins.int
+    thinking_tokens_total: _builtins.int
     """Summed thinking-block tokens for this model."""
-    thinking_duration_seconds_total: builtins.float
+    thinking_duration_seconds_total: _builtins.float
     """Summed thinking-block duration in seconds for this model."""
-    tool_call_tokens_total: builtins.int
+    tool_call_tokens_total: _builtins.int
     """Summed tool-call tokens for this model."""
-    tool_call_duration_seconds_total: builtins.float
+    tool_call_duration_seconds_total: _builtins.float
     """Summed tool-call duration in seconds for this model."""
-    @property
-    def llm_token_usage(self) -> global___LlmTokenUsage:
+    @_builtins.property
+    def llm_token_usage(self) -> Global___LlmTokenUsage:
         """Summed token usage (input / output / total) for this model."""
 
-    @property
-    def cache_stats(self) -> global___LlmCacheStats:
+    @_builtins.property
+    def cache_stats(self) -> Global___LlmCacheStats:
         """Optional cache stats for this model."""
 
     def __init__(
         self,
         *,
-        model_name: builtins.str = ...,
-        provider: builtins.str = ...,
-        call_count: builtins.int = ...,
-        llm_token_usage: global___LlmTokenUsage | None = ...,
-        tool_call_count: builtins.int = ...,
-        error_count: builtins.int = ...,
-        duration_seconds_total: builtins.float = ...,
-        cache_stats: global___LlmCacheStats | None = ...,
-        ccai_service_name: builtins.str = ...,
-        ccai_service_provider: ondewo.nlu.ccai_project_pb2.CcaiServiceProvider.ValueType = ...,
-        base_url: builtins.str = ...,
-        thinking_tokens_total: builtins.int = ...,
-        thinking_duration_seconds_total: builtins.float = ...,
-        tool_call_tokens_total: builtins.int = ...,
-        tool_call_duration_seconds_total: builtins.float = ...,
+        model_name: _builtins.str = ...,
+        provider: _builtins.str = ...,
+        call_count: _builtins.int = ...,
+        llm_token_usage: Global___LlmTokenUsage | None = ...,
+        tool_call_count: _builtins.int = ...,
+        error_count: _builtins.int = ...,
+        duration_seconds_total: _builtins.float = ...,
+        cache_stats: Global___LlmCacheStats | None = ...,
+        ccai_service_name: _builtins.str = ...,
+        ccai_service_provider: _ccai_project_pb2.CcaiServiceProvider.ValueType = ...,
+        base_url: _builtins.str = ...,
+        thinking_tokens_total: _builtins.int = ...,
+        thinking_duration_seconds_total: _builtins.float = ...,
+        tool_call_tokens_total: _builtins.int = ...,
+        tool_call_duration_seconds_total: _builtins.float = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["cache_stats", b"cache_stats", "llm_token_usage", b"llm_token_usage"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["base_url", b"base_url", "cache_stats", b"cache_stats", "call_count", b"call_count", "ccai_service_name", b"ccai_service_name", "ccai_service_provider", b"ccai_service_provider", "duration_seconds_total", b"duration_seconds_total", "error_count", b"error_count", "llm_token_usage", b"llm_token_usage", "model_name", b"model_name", "provider", b"provider", "thinking_duration_seconds_total", b"thinking_duration_seconds_total", "thinking_tokens_total", b"thinking_tokens_total", "tool_call_count", b"tool_call_count", "tool_call_duration_seconds_total", b"tool_call_duration_seconds_total", "tool_call_tokens_total", b"tool_call_tokens_total"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["cache_stats", b"cache_stats", "llm_token_usage", b"llm_token_usage"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["base_url", b"base_url", "cache_stats", b"cache_stats", "call_count", b"call_count", "ccai_service_name", b"ccai_service_name", "ccai_service_provider", b"ccai_service_provider", "duration_seconds_total", b"duration_seconds_total", "error_count", b"error_count", "llm_token_usage", b"llm_token_usage", "model_name", b"model_name", "provider", b"provider", "thinking_duration_seconds_total", b"thinking_duration_seconds_total", "thinking_tokens_total", b"thinking_tokens_total", "tool_call_count", b"tool_call_count", "tool_call_duration_seconds_total", b"tool_call_duration_seconds_total", "tool_call_tokens_total", b"tool_call_tokens_total"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___LlmModelUsage = LlmModelUsage
+Global___LlmModelUsage: _TypeAlias = LlmModelUsage  # noqa: Y015
 
-@typing.final
-class LlmProviderUsage(google.protobuf.message.Message):
+@_typing.final
+class LlmProviderUsage(_message.Message):
     """Per-provider usage rollup across the scope."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PROVIDER_FIELD_NUMBER: builtins.int
-    CALL_COUNT_FIELD_NUMBER: builtins.int
-    LLM_TOKEN_USAGE_FIELD_NUMBER: builtins.int
-    ERROR_COUNT_FIELD_NUMBER: builtins.int
-    DURATION_SECONDS_TOTAL_FIELD_NUMBER: builtins.int
-    MODEL_NAMES_FIELD_NUMBER: builtins.int
-    provider: builtins.str
+    PROVIDER_FIELD_NUMBER: _builtins.int
+    CALL_COUNT_FIELD_NUMBER: _builtins.int
+    LLM_TOKEN_USAGE_FIELD_NUMBER: _builtins.int
+    ERROR_COUNT_FIELD_NUMBER: _builtins.int
+    DURATION_SECONDS_TOTAL_FIELD_NUMBER: _builtins.int
+    MODEL_NAMES_FIELD_NUMBER: _builtins.int
+    provider: _builtins.str
     """Provider tag (e.g. "anthropic", "openai", "ollama")."""
-    call_count: builtins.int
+    call_count: _builtins.int
     """Number of LLM calls to this provider in scope."""
-    error_count: builtins.int
+    error_count: _builtins.int
     """Error count attributed to this provider."""
-    duration_seconds_total: builtins.float
+    duration_seconds_total: _builtins.float
     """Summed call duration in seconds for this provider."""
-    @property
-    def llm_token_usage(self) -> global___LlmTokenUsage:
+    @_builtins.property
+    def llm_token_usage(self) -> Global___LlmTokenUsage:
         """Summed token usage for this provider."""
 
-    @property
-    def model_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def model_names(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Distinct model names seen under this provider."""
 
     def __init__(
         self,
         *,
-        provider: builtins.str = ...,
-        call_count: builtins.int = ...,
-        llm_token_usage: global___LlmTokenUsage | None = ...,
-        error_count: builtins.int = ...,
-        duration_seconds_total: builtins.float = ...,
-        model_names: collections.abc.Iterable[builtins.str] | None = ...,
+        provider: _builtins.str = ...,
+        call_count: _builtins.int = ...,
+        llm_token_usage: Global___LlmTokenUsage | None = ...,
+        error_count: _builtins.int = ...,
+        duration_seconds_total: _builtins.float = ...,
+        model_names: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["llm_token_usage", b"llm_token_usage"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["call_count", b"call_count", "duration_seconds_total", b"duration_seconds_total", "error_count", b"error_count", "llm_token_usage", b"llm_token_usage", "model_names", b"model_names", "provider", b"provider"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["llm_token_usage", b"llm_token_usage"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["call_count", b"call_count", "duration_seconds_total", b"duration_seconds_total", "error_count", b"error_count", "llm_token_usage", b"llm_token_usage", "model_names", b"model_names", "provider", b"provider"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___LlmProviderUsage = LlmProviderUsage
+Global___LlmProviderUsage: _TypeAlias = LlmProviderUsage  # noqa: Y015
 
-@typing.final
-class LlmCcaiServiceUsage(google.protobuf.message.Message):
+@_typing.final
+class LlmCcaiServiceUsage(_message.Message):
     """Per-CCAI-service usage rollup across the scope."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    CCAI_SERVICE_PROVIDER_FIELD_NUMBER: builtins.int
-    CCAI_SERVICE_NAME_FIELD_NUMBER: builtins.int
-    CALL_COUNT_FIELD_NUMBER: builtins.int
-    LLM_TOKEN_USAGE_FIELD_NUMBER: builtins.int
-    BASE_URL_FIELD_NUMBER: builtins.int
-    MODEL_NAMES_FIELD_NUMBER: builtins.int
-    ccai_service_provider: ondewo.nlu.ccai_project_pb2.CcaiServiceProvider.ValueType
+    CCAI_SERVICE_PROVIDER_FIELD_NUMBER: _builtins.int
+    CCAI_SERVICE_NAME_FIELD_NUMBER: _builtins.int
+    CALL_COUNT_FIELD_NUMBER: _builtins.int
+    LLM_TOKEN_USAGE_FIELD_NUMBER: _builtins.int
+    BASE_URL_FIELD_NUMBER: _builtins.int
+    MODEL_NAMES_FIELD_NUMBER: _builtins.int
+    ccai_service_provider: _ccai_project_pb2.CcaiServiceProvider.ValueType
     """CCAI service provider enum value."""
-    ccai_service_name: builtins.str
+    ccai_service_name: _builtins.str
     """Resource name of the CCAI service."""
-    call_count: builtins.int
+    call_count: _builtins.int
     """Number of LLM calls attributed to this CCAI service in scope."""
-    base_url: builtins.str
+    base_url: _builtins.str
     """Base URL used by this CCAI service."""
-    @property
-    def llm_token_usage(self) -> global___LlmTokenUsage:
+    @_builtins.property
+    def llm_token_usage(self) -> Global___LlmTokenUsage:
         """Summed token usage for this CCAI service."""
 
-    @property
-    def model_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def model_names(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Distinct model names seen under this CCAI service."""
 
     def __init__(
         self,
         *,
-        ccai_service_provider: ondewo.nlu.ccai_project_pb2.CcaiServiceProvider.ValueType = ...,
-        ccai_service_name: builtins.str = ...,
-        call_count: builtins.int = ...,
-        llm_token_usage: global___LlmTokenUsage | None = ...,
-        base_url: builtins.str = ...,
-        model_names: collections.abc.Iterable[builtins.str] | None = ...,
+        ccai_service_provider: _ccai_project_pb2.CcaiServiceProvider.ValueType = ...,
+        ccai_service_name: _builtins.str = ...,
+        call_count: _builtins.int = ...,
+        llm_token_usage: Global___LlmTokenUsage | None = ...,
+        base_url: _builtins.str = ...,
+        model_names: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["llm_token_usage", b"llm_token_usage"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["base_url", b"base_url", "call_count", b"call_count", "ccai_service_name", b"ccai_service_name", "ccai_service_provider", b"ccai_service_provider", "llm_token_usage", b"llm_token_usage", "model_names", b"model_names"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["llm_token_usage", b"llm_token_usage"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["base_url", b"base_url", "call_count", b"call_count", "ccai_service_name", b"ccai_service_name", "ccai_service_provider", b"ccai_service_provider", "llm_token_usage", b"llm_token_usage", "model_names", b"model_names"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___LlmCcaiServiceUsage = LlmCcaiServiceUsage
+Global___LlmCcaiServiceUsage: _TypeAlias = LlmCcaiServiceUsage  # noqa: Y015
 
-@typing.final
-class LlmBaseUrlUsage(google.protobuf.message.Message):
+@_typing.final
+class LlmBaseUrlUsage(_message.Message):
     """Per-base-URL usage rollup across the scope. One entry per distinct
     <code>LlmTelemetry.base_url</code>; calls whose model configuration states no base URL are
     grouped under an empty <code>base_url</code>.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    BASE_URL_FIELD_NUMBER: builtins.int
-    CALL_COUNT_FIELD_NUMBER: builtins.int
-    LLM_TOKEN_USAGE_FIELD_NUMBER: builtins.int
-    MODEL_NAMES_FIELD_NUMBER: builtins.int
-    base_url: builtins.str
+    BASE_URL_FIELD_NUMBER: _builtins.int
+    CALL_COUNT_FIELD_NUMBER: _builtins.int
+    LLM_TOKEN_USAGE_FIELD_NUMBER: _builtins.int
+    MODEL_NAMES_FIELD_NUMBER: _builtins.int
+    base_url: _builtins.str
     """Base URL the calls went through (proxy / OpenAI-compatible endpoint), with embedded
     credentials redacted. Empty = the model configuration states no base URL.
     """
-    call_count: builtins.int
+    call_count: _builtins.int
     """Number of LLM calls made through this base URL in scope."""
-    @property
-    def llm_token_usage(self) -> global___LlmTokenUsage:
+    @_builtins.property
+    def llm_token_usage(self) -> Global___LlmTokenUsage:
         """Summed token usage for the calls made through this base URL."""
 
-    @property
-    def model_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def model_names(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Distinct model names called through this base URL."""
 
     def __init__(
         self,
         *,
-        base_url: builtins.str = ...,
-        call_count: builtins.int = ...,
-        llm_token_usage: global___LlmTokenUsage | None = ...,
-        model_names: collections.abc.Iterable[builtins.str] | None = ...,
+        base_url: _builtins.str = ...,
+        call_count: _builtins.int = ...,
+        llm_token_usage: Global___LlmTokenUsage | None = ...,
+        model_names: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["llm_token_usage", b"llm_token_usage"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["base_url", b"base_url", "call_count", b"call_count", "llm_token_usage", b"llm_token_usage", "model_names", b"model_names"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["llm_token_usage", b"llm_token_usage"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["base_url", b"base_url", "call_count", b"call_count", "llm_token_usage", b"llm_token_usage", "model_names", b"model_names"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___LlmBaseUrlUsage = LlmBaseUrlUsage
+Global___LlmBaseUrlUsage: _TypeAlias = LlmBaseUrlUsage  # noqa: Y015
 
-@typing.final
-class LlmAgentUsage(google.protobuf.message.Message):
+@_typing.final
+class LlmAgentUsage(_message.Message):
     """Per-intent-agent usage rollup across the scope."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    AGENT_NAME_FIELD_NUMBER: builtins.int
-    AGENT_ROLE_FIELD_NUMBER: builtins.int
-    TEAM_NAME_FIELD_NUMBER: builtins.int
-    CALL_COUNT_FIELD_NUMBER: builtins.int
-    LLM_TOKEN_USAGE_FIELD_NUMBER: builtins.int
-    TOOL_CALL_COUNT_FIELD_NUMBER: builtins.int
-    agent_name: builtins.str
+    AGENT_NAME_FIELD_NUMBER: _builtins.int
+    AGENT_ROLE_FIELD_NUMBER: _builtins.int
+    TEAM_NAME_FIELD_NUMBER: _builtins.int
+    CALL_COUNT_FIELD_NUMBER: _builtins.int
+    LLM_TOKEN_USAGE_FIELD_NUMBER: _builtins.int
+    TOOL_CALL_COUNT_FIELD_NUMBER: _builtins.int
+    agent_name: _builtins.str
     """intent_agent executor / agent name owning the calls."""
-    agent_role: builtins.str
+    agent_role: _builtins.str
     """Optional agent role."""
-    team_name: builtins.str
+    team_name: _builtins.str
     """Optional team name."""
-    call_count: builtins.int
+    call_count: _builtins.int
     """Number of LLM calls attributed to this agent in scope."""
-    tool_call_count: builtins.int
+    tool_call_count: _builtins.int
     """Tool-call count attributed to this agent."""
-    @property
-    def llm_token_usage(self) -> global___LlmTokenUsage:
+    @_builtins.property
+    def llm_token_usage(self) -> Global___LlmTokenUsage:
         """Summed token usage for this agent."""
 
     def __init__(
         self,
         *,
-        agent_name: builtins.str = ...,
-        agent_role: builtins.str = ...,
-        team_name: builtins.str = ...,
-        call_count: builtins.int = ...,
-        llm_token_usage: global___LlmTokenUsage | None = ...,
-        tool_call_count: builtins.int = ...,
+        agent_name: _builtins.str = ...,
+        agent_role: _builtins.str = ...,
+        team_name: _builtins.str = ...,
+        call_count: _builtins.int = ...,
+        llm_token_usage: Global___LlmTokenUsage | None = ...,
+        tool_call_count: _builtins.int = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["llm_token_usage", b"llm_token_usage"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["agent_name", b"agent_name", "agent_role", b"agent_role", "call_count", b"call_count", "llm_token_usage", b"llm_token_usage", "team_name", b"team_name", "tool_call_count", b"tool_call_count"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["llm_token_usage", b"llm_token_usage"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["agent_name", b"agent_name", "agent_role", b"agent_role", "call_count", b"call_count", "llm_token_usage", b"llm_token_usage", "team_name", b"team_name", "tool_call_count", b"tool_call_count"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___LlmAgentUsage = LlmAgentUsage
+Global___LlmAgentUsage: _TypeAlias = LlmAgentUsage  # noqa: Y015
 
-@typing.final
-class LlmToolUsage(google.protobuf.message.Message):
+@_typing.final
+class LlmToolUsage(_message.Message):
     """One tool's invocation aggregate across the scope."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    TOOL_NAME_FIELD_NUMBER: builtins.int
-    CALL_COUNT_FIELD_NUMBER: builtins.int
-    ERROR_COUNT_FIELD_NUMBER: builtins.int
-    ERROR_RATE_FIELD_NUMBER: builtins.int
-    DURATION_SECONDS_TOTAL_FIELD_NUMBER: builtins.int
-    MEAN_DURATION_SECONDS_FIELD_NUMBER: builtins.int
-    LLM_TOKEN_USAGE_FIELD_NUMBER: builtins.int
-    ARGUMENTS_FIELD_NUMBER: builtins.int
-    LLM_CALL_ID_FIELD_NUMBER: builtins.int
-    TOOL_CALL_ID_FIELD_NUMBER: builtins.int
-    tool_name: builtins.str
+    TOOL_NAME_FIELD_NUMBER: _builtins.int
+    CALL_COUNT_FIELD_NUMBER: _builtins.int
+    ERROR_COUNT_FIELD_NUMBER: _builtins.int
+    ERROR_RATE_FIELD_NUMBER: _builtins.int
+    DURATION_SECONDS_TOTAL_FIELD_NUMBER: _builtins.int
+    MEAN_DURATION_SECONDS_FIELD_NUMBER: _builtins.int
+    LLM_TOKEN_USAGE_FIELD_NUMBER: _builtins.int
+    ARGUMENTS_FIELD_NUMBER: _builtins.int
+    LLM_CALL_ID_FIELD_NUMBER: _builtins.int
+    TOOL_CALL_ID_FIELD_NUMBER: _builtins.int
+    tool_name: _builtins.str
     """Name of the tool / function."""
-    call_count: builtins.int
+    call_count: _builtins.int
     """Number of times the tool was invoked in scope."""
-    error_count: builtins.int
+    error_count: _builtins.int
     """Number of failed invocations."""
-    error_rate: builtins.float
+    error_rate: _builtins.float
     """error_count / call_count."""
-    duration_seconds_total: builtins.float
+    duration_seconds_total: _builtins.float
     """Summed tool-call duration in seconds."""
-    mean_duration_seconds: builtins.float
+    mean_duration_seconds: _builtins.float
     """Mean tool-call duration in seconds."""
-    llm_call_id: builtins.str
+    llm_call_id: _builtins.str
     """Groups the representative invocation under its <code>LlmTelemetry</code> entry."""
-    tool_call_id: builtins.str
+    tool_call_id: _builtins.str
     """Stable id of the representative invocation, assigned by the upstream framework
-    (autogen / langchain).
+    (e.g. langchain).
     """
-    @property
-    def llm_token_usage(self) -> global___LlmTokenUsage:
+    @_builtins.property
+    def llm_token_usage(self) -> Global___LlmTokenUsage:
         """Summed tool-call token usage (input / output / total)."""
 
-    @property
-    def arguments(self) -> google.protobuf.struct_pb2.Struct:
+    @_builtins.property
+    def arguments(self) -> _struct_pb2.Struct:
         """The three fields below describe ONE REPRESENTATIVE invocation of this tool -- the most
         recent one in scope -- not the whole aggregate. The message covers <code>call_count</code>
         invocations, each with its own arguments and ids, so a single value can only ever be a
@@ -2156,248 +2239,266 @@ class LlmToolUsage(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        tool_name: builtins.str = ...,
-        call_count: builtins.int = ...,
-        error_count: builtins.int = ...,
-        error_rate: builtins.float = ...,
-        duration_seconds_total: builtins.float = ...,
-        mean_duration_seconds: builtins.float = ...,
-        llm_token_usage: global___LlmTokenUsage | None = ...,
-        arguments: google.protobuf.struct_pb2.Struct | None = ...,
-        llm_call_id: builtins.str = ...,
-        tool_call_id: builtins.str = ...,
+        tool_name: _builtins.str = ...,
+        call_count: _builtins.int = ...,
+        error_count: _builtins.int = ...,
+        error_rate: _builtins.float = ...,
+        duration_seconds_total: _builtins.float = ...,
+        mean_duration_seconds: _builtins.float = ...,
+        llm_token_usage: Global___LlmTokenUsage | None = ...,
+        arguments: _struct_pb2.Struct | None = ...,
+        llm_call_id: _builtins.str = ...,
+        tool_call_id: _builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["arguments", b"arguments", "llm_token_usage", b"llm_token_usage"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["arguments", b"arguments", "call_count", b"call_count", "duration_seconds_total", b"duration_seconds_total", "error_count", b"error_count", "error_rate", b"error_rate", "llm_call_id", b"llm_call_id", "llm_token_usage", b"llm_token_usage", "mean_duration_seconds", b"mean_duration_seconds", "tool_call_id", b"tool_call_id", "tool_name", b"tool_name"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["arguments", b"arguments", "llm_token_usage", b"llm_token_usage"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["arguments", b"arguments", "call_count", b"call_count", "duration_seconds_total", b"duration_seconds_total", "error_count", b"error_count", "error_rate", b"error_rate", "llm_call_id", b"llm_call_id", "llm_token_usage", b"llm_token_usage", "mean_duration_seconds", b"mean_duration_seconds", "tool_call_id", b"tool_call_id", "tool_name", b"tool_name"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___LlmToolUsage = LlmToolUsage
+Global___LlmToolUsage: _TypeAlias = LlmToolUsage  # noqa: Y015
 
-@typing.final
-class LlmErrorStat(google.protobuf.message.Message):
+@_typing.final
+class LlmErrorStat(_message.Message):
     """One error class aggregate."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ERROR_CLASS_FIELD_NUMBER: builtins.int
-    COUNT_FIELD_NUMBER: builtins.int
-    RATE_FIELD_NUMBER: builtins.int
-    SAMPLE_MESSAGE_FIELD_NUMBER: builtins.int
-    error_class: builtins.str
+    ERROR_CLASS_FIELD_NUMBER: _builtins.int
+    COUNT_FIELD_NUMBER: _builtins.int
+    RATE_FIELD_NUMBER: _builtins.int
+    SAMPLE_MESSAGE_FIELD_NUMBER: _builtins.int
+    error_class: _builtins.str
     """Error class / type (LlmTelemetry.error_class)."""
-    count: builtins.int
+    count: _builtins.int
     """Number of occurrences in scope."""
-    rate: builtins.float
+    rate: _builtins.float
     """count / total LLM calls in scope."""
-    sample_message: builtins.str
+    sample_message: _builtins.str
     """A representative error_message sample (may be truncated / redacted)."""
     def __init__(
         self,
         *,
-        error_class: builtins.str = ...,
-        count: builtins.int = ...,
-        rate: builtins.float = ...,
-        sample_message: builtins.str = ...,
+        error_class: _builtins.str = ...,
+        count: _builtins.int = ...,
+        rate: _builtins.float = ...,
+        sample_message: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["count", b"count", "error_class", b"error_class", "rate", b"rate", "sample_message", b"sample_message"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["count", b"count", "error_class", b"error_class", "rate", b"rate", "sample_message", b"sample_message"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___LlmErrorStat = LlmErrorStat
+Global___LlmErrorStat: _TypeAlias = LlmErrorStat  # noqa: Y015
 
-@typing.final
-class LlmErrorStats(google.protobuf.message.Message):
+@_typing.final
+class LlmErrorStats(_message.Message):
     """Error breakdown aggregate across the scope."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    TOTAL_ERROR_COUNT_FIELD_NUMBER: builtins.int
-    OVERALL_ERROR_RATE_FIELD_NUMBER: builtins.int
-    ERRORS_BY_CLASS_FIELD_NUMBER: builtins.int
-    RETRY_COUNT_TOTAL_FIELD_NUMBER: builtins.int
-    MAX_FALLBACK_DEPTH_FIELD_NUMBER: builtins.int
-    total_error_count: builtins.int
+    TOTAL_ERROR_COUNT_FIELD_NUMBER: _builtins.int
+    OVERALL_ERROR_RATE_FIELD_NUMBER: _builtins.int
+    ERRORS_BY_CLASS_FIELD_NUMBER: _builtins.int
+    RETRY_COUNT_TOTAL_FIELD_NUMBER: _builtins.int
+    MAX_FALLBACK_DEPTH_FIELD_NUMBER: _builtins.int
+    total_error_count: _builtins.int
     """Total failed LLM calls in scope."""
-    overall_error_rate: builtins.float
+    overall_error_rate: _builtins.float
     """total_error_count / total LLM calls in scope."""
-    retry_count_total: builtins.int
+    retry_count_total: _builtins.int
     """Total retries observed (LlmTelemetry.retry_count summed)."""
-    max_fallback_depth: builtins.int
+    max_fallback_depth: _builtins.int
     """Max fallback depth observed (LlmTelemetry.fallback_depth max)."""
-    @property
-    def errors_by_class(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmErrorStat]:
+    @_builtins.property
+    def errors_by_class(self) -> _containers.RepeatedCompositeFieldContainer[Global___LlmErrorStat]:
         """Per-error-class breakdown, descending by count."""
 
     def __init__(
         self,
         *,
-        total_error_count: builtins.int = ...,
-        overall_error_rate: builtins.float = ...,
-        errors_by_class: collections.abc.Iterable[global___LlmErrorStat] | None = ...,
-        retry_count_total: builtins.int = ...,
-        max_fallback_depth: builtins.int = ...,
+        total_error_count: _builtins.int = ...,
+        overall_error_rate: _builtins.float = ...,
+        errors_by_class: _abc.Iterable[Global___LlmErrorStat] | None = ...,
+        retry_count_total: _builtins.int = ...,
+        max_fallback_depth: _builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["errors_by_class", b"errors_by_class", "max_fallback_depth", b"max_fallback_depth", "overall_error_rate", b"overall_error_rate", "retry_count_total", b"retry_count_total", "total_error_count", b"total_error_count"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["errors_by_class", b"errors_by_class", "max_fallback_depth", b"max_fallback_depth", "overall_error_rate", b"overall_error_rate", "retry_count_total", b"retry_count_total", "total_error_count", b"total_error_count"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___LlmErrorStats = LlmErrorStats
+Global___LlmErrorStats: _TypeAlias = LlmErrorStats  # noqa: Y015
 
-@typing.final
-class LlmFinishReasonStat(google.protobuf.message.Message):
+@_typing.final
+class LlmFinishReasonStat(_message.Message):
     """One finish-reason aggregate."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    FINISH_REASON_FIELD_NUMBER: builtins.int
-    COUNT_FIELD_NUMBER: builtins.int
-    RATE_FIELD_NUMBER: builtins.int
-    finish_reason: builtins.str
+    FINISH_REASON_FIELD_NUMBER: _builtins.int
+    COUNT_FIELD_NUMBER: _builtins.int
+    RATE_FIELD_NUMBER: _builtins.int
+    finish_reason: _builtins.str
     """Finish reason ("stop" | "length" | "tool_calls" | "content_filter" | "error" | ...)."""
-    count: builtins.int
+    count: _builtins.int
     """Number of occurrences in scope."""
-    rate: builtins.float
+    rate: _builtins.float
     """count / total LLM calls in scope."""
     def __init__(
         self,
         *,
-        finish_reason: builtins.str = ...,
-        count: builtins.int = ...,
-        rate: builtins.float = ...,
+        finish_reason: _builtins.str = ...,
+        count: _builtins.int = ...,
+        rate: _builtins.float = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["count", b"count", "finish_reason", b"finish_reason", "rate", b"rate"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["count", b"count", "finish_reason", b"finish_reason", "rate", b"rate"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___LlmFinishReasonStat = LlmFinishReasonStat
+Global___LlmFinishReasonStat: _TypeAlias = LlmFinishReasonStat  # noqa: Y015
 
-@typing.final
-class LlmReasoningEffortStat(google.protobuf.message.Message):
+@_typing.final
+class LlmReasoningEffortStat(_message.Message):
     """One reasoning-effort aggregate."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    REASONING_EFFORT_FIELD_NUMBER: builtins.int
-    COUNT_FIELD_NUMBER: builtins.int
-    RATE_FIELD_NUMBER: builtins.int
-    LLM_TOKEN_USAGE_FIELD_NUMBER: builtins.int
-    reasoning_effort: global___ReasoningEffort.ValueType
+    REASONING_EFFORT_FIELD_NUMBER: _builtins.int
+    COUNT_FIELD_NUMBER: _builtins.int
+    RATE_FIELD_NUMBER: _builtins.int
+    LLM_TOKEN_USAGE_FIELD_NUMBER: _builtins.int
+    reasoning_effort: Global___ReasoningEffort.ValueType
     """Reasoning effort enum value."""
-    count: builtins.int
+    count: _builtins.int
     """Number of LLM calls at this effort level in scope."""
-    rate: builtins.float
+    rate: _builtins.float
     """count / total LLM calls in scope."""
-    @property
-    def llm_token_usage(self) -> global___LlmTokenUsage:
+    @_builtins.property
+    def llm_token_usage(self) -> Global___LlmTokenUsage:
         """Summed token usage at this effort level."""
 
     def __init__(
         self,
         *,
-        reasoning_effort: global___ReasoningEffort.ValueType = ...,
-        count: builtins.int = ...,
-        rate: builtins.float = ...,
-        llm_token_usage: global___LlmTokenUsage | None = ...,
+        reasoning_effort: Global___ReasoningEffort.ValueType = ...,
+        count: _builtins.int = ...,
+        rate: _builtins.float = ...,
+        llm_token_usage: Global___LlmTokenUsage | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["llm_token_usage", b"llm_token_usage"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["count", b"count", "llm_token_usage", b"llm_token_usage", "rate", b"rate", "reasoning_effort", b"reasoning_effort"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["llm_token_usage", b"llm_token_usage"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["count", b"count", "llm_token_usage", b"llm_token_usage", "rate", b"rate", "reasoning_effort", b"reasoning_effort"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___LlmReasoningEffortStat = LlmReasoningEffortStat
+Global___LlmReasoningEffortStat: _TypeAlias = LlmReasoningEffortStat  # noqa: Y015
 
-@typing.final
-class LlmTelemetryReport(google.protobuf.message.Message):
+@_typing.final
+class LlmTelemetryReport(_message.Message):
     """Aggregated telemetry across all LLM calls in one DetectIntent turn, or across
     a session / agent-domain scope when used as a statistics report payload. The
     breakdown fields (6+) are populated only for the matching report type; a
     *_LLM_TOTAL_STATISTICS report populates all of them.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    LLM_TOKEN_USAGE_FIELD_NUMBER: builtins.int
-    TOOL_CALL_COUNT_TOTAL_FIELD_NUMBER: builtins.int
-    LLM_CALL_COUNT_FIELD_NUMBER: builtins.int
-    LLM_TELEMETRIES_FIELD_NUMBER: builtins.int
-    DURATION_SECONDS_TOTAL_FIELD_NUMBER: builtins.int
-    MODELS_USED_FIELD_NUMBER: builtins.int
-    PROVIDERS_USED_FIELD_NUMBER: builtins.int
-    CCAI_SERVICES_USED_FIELD_NUMBER: builtins.int
-    AGENTS_USED_FIELD_NUMBER: builtins.int
-    TOOLS_USED_FIELD_NUMBER: builtins.int
-    LATENCY_STATS_FIELD_NUMBER: builtins.int
-    CACHE_STATS_FIELD_NUMBER: builtins.int
-    ERROR_STATS_FIELD_NUMBER: builtins.int
-    FINISH_REASON_DISTRIBUTION_FIELD_NUMBER: builtins.int
-    REASONING_EFFORT_DISTRIBUTION_FIELD_NUMBER: builtins.int
-    THINKING_TOKENS_TOTAL_FIELD_NUMBER: builtins.int
-    THINKING_DURATION_SECONDS_TOTAL_FIELD_NUMBER: builtins.int
-    TOOL_CALL_TOKENS_TOTAL_FIELD_NUMBER: builtins.int
-    TOOL_CALL_DURATION_SECONDS_TOTAL_FIELD_NUMBER: builtins.int
-    SAFETY_STATS_FIELD_NUMBER: builtins.int
-    BASE_URLS_USED_FIELD_NUMBER: builtins.int
-    tool_call_count_total: builtins.int
+    LLM_TOKEN_USAGE_FIELD_NUMBER: _builtins.int
+    TOOL_CALL_COUNT_TOTAL_FIELD_NUMBER: _builtins.int
+    LLM_CALL_COUNT_FIELD_NUMBER: _builtins.int
+    LLM_TELEMETRIES_FIELD_NUMBER: _builtins.int
+    DURATION_SECONDS_TOTAL_FIELD_NUMBER: _builtins.int
+    MODELS_USED_FIELD_NUMBER: _builtins.int
+    PROVIDERS_USED_FIELD_NUMBER: _builtins.int
+    CCAI_SERVICES_USED_FIELD_NUMBER: _builtins.int
+    AGENTS_USED_FIELD_NUMBER: _builtins.int
+    TOOLS_USED_FIELD_NUMBER: _builtins.int
+    LATENCY_STATS_FIELD_NUMBER: _builtins.int
+    CACHE_STATS_FIELD_NUMBER: _builtins.int
+    ERROR_STATS_FIELD_NUMBER: _builtins.int
+    FINISH_REASON_DISTRIBUTION_FIELD_NUMBER: _builtins.int
+    REASONING_EFFORT_DISTRIBUTION_FIELD_NUMBER: _builtins.int
+    THINKING_TOKENS_TOTAL_FIELD_NUMBER: _builtins.int
+    THINKING_DURATION_SECONDS_TOTAL_FIELD_NUMBER: _builtins.int
+    TOOL_CALL_TOKENS_TOTAL_FIELD_NUMBER: _builtins.int
+    TOOL_CALL_DURATION_SECONDS_TOTAL_FIELD_NUMBER: _builtins.int
+    SAFETY_STATS_FIELD_NUMBER: _builtins.int
+    BASE_URLS_USED_FIELD_NUMBER: _builtins.int
+    tool_call_count_total: _builtins.int
     """Sum of LlmTelemetry.tool_call_count across llm_telemetries."""
-    llm_call_count: builtins.int
+    llm_call_count: _builtins.int
     """Denormalized len(llm_telemetries)."""
-    duration_seconds_total: builtins.float
+    duration_seconds_total: _builtins.float
     """Sum of LlmTelemetry.duration_in_s across llm_telemetries."""
-    thinking_tokens_total: builtins.int
+    thinking_tokens_total: _builtins.int
     """Scope-wide summed thinking-block tokens."""
-    thinking_duration_seconds_total: builtins.float
+    thinking_duration_seconds_total: _builtins.float
     """Scope-wide summed thinking-block duration in seconds."""
-    tool_call_tokens_total: builtins.int
+    tool_call_tokens_total: _builtins.int
     """Scope-wide summed tool-call tokens."""
-    tool_call_duration_seconds_total: builtins.float
+    tool_call_duration_seconds_total: _builtins.float
     """Scope-wide summed tool-call duration in seconds."""
-    @property
-    def llm_token_usage(self) -> global___LlmTokenUsage:
+    @_builtins.property
+    def llm_token_usage(self) -> Global___LlmTokenUsage:
         """Summed LlmTokenUsage across llm_telemetries."""
 
-    @property
-    def llm_telemetries(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmTelemetry]:
+    @_builtins.property
+    def llm_telemetries(self) -> _containers.RepeatedCompositeFieldContainer[Global___LlmTelemetry]:
         """Per-LLM-invocation breakdown."""
 
-    @property
-    def models_used(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmModelUsage]:
+    @_builtins.property
+    def models_used(self) -> _containers.RepeatedCompositeFieldContainer[Global___LlmModelUsage]:
         """Per-model usage rollup. Populated for *_LLM_MODELS_USED and *_LLM_TOTAL_STATISTICS."""
 
-    @property
-    def providers_used(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmProviderUsage]:
+    @_builtins.property
+    def providers_used(self) -> _containers.RepeatedCompositeFieldContainer[Global___LlmProviderUsage]:
         """Per-provider usage rollup. Populated for *_LLM_PROVIDERS_USED and *_LLM_TOTAL_STATISTICS."""
 
-    @property
-    def ccai_services_used(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmCcaiServiceUsage]:
+    @_builtins.property
+    def ccai_services_used(self) -> _containers.RepeatedCompositeFieldContainer[Global___LlmCcaiServiceUsage]:
         """Per-CCAI-service usage rollup. Populated for *_LLM_CCAI_SERVICES_USED and *_LLM_TOTAL_STATISTICS."""
 
-    @property
-    def agents_used(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmAgentUsage]:
+    @_builtins.property
+    def agents_used(self) -> _containers.RepeatedCompositeFieldContainer[Global___LlmAgentUsage]:
         """Per-intent-agent usage rollup. Populated for *_LLM_AGENTS_USED and *_LLM_TOTAL_STATISTICS."""
 
-    @property
-    def tools_used(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmToolUsage]:
+    @_builtins.property
+    def tools_used(self) -> _containers.RepeatedCompositeFieldContainer[Global___LlmToolUsage]:
         """Tool-usage rollup. Populated for *_LLM_TOP_X_TOOLS / *_LLM_LEAST_X_TOOLS and *_LLM_TOTAL_STATISTICS."""
 
-    @property
-    def latency_stats(self) -> global___LlmLatencyStats:
+    @_builtins.property
+    def latency_stats(self) -> Global___LlmLatencyStats:
         """Latency aggregate. Populated for *_LLM_LATENCY and *_LLM_TOTAL_STATISTICS."""
 
-    @property
-    def cache_stats(self) -> global___LlmCacheStats:
+    @_builtins.property
+    def cache_stats(self) -> Global___LlmCacheStats:
         """Cache efficiency aggregate. Populated for *_LLM_CACHE_EFFICIENCY and *_LLM_TOTAL_STATISTICS."""
 
-    @property
-    def error_stats(self) -> global___LlmErrorStats:
+    @_builtins.property
+    def error_stats(self) -> Global___LlmErrorStats:
         """Error aggregate. Populated for *_LLM_ERRORS and *_LLM_TOTAL_STATISTICS."""
 
-    @property
-    def finish_reason_distribution(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmFinishReasonStat]:
+    @_builtins.property
+    def finish_reason_distribution(self) -> _containers.RepeatedCompositeFieldContainer[Global___LlmFinishReasonStat]:
         """Finish-reason distribution. Populated for *_LLM_FINISH_REASONS and *_LLM_TOTAL_STATISTICS."""
 
-    @property
-    def reasoning_effort_distribution(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmReasoningEffortStat]:
+    @_builtins.property
+    def reasoning_effort_distribution(self) -> _containers.RepeatedCompositeFieldContainer[Global___LlmReasoningEffortStat]:
         """Reasoning-effort distribution. Populated for *_LLM_REASONING_EFFORT and *_LLM_TOTAL_STATISTICS."""
 
-    @property
-    def safety_stats(self) -> global___LlmSafetyStats:
+    @_builtins.property
+    def safety_stats(self) -> Global___LlmSafetyStats:
         """Native safety aggregate (counts / rates / mean score). Populated for
         *_LLM_SAFETY and *_LLM_TOTAL_STATISTICS reports.
         """
 
-    @property
-    def base_urls_used(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmBaseUrlUsage]:
+    @_builtins.property
+    def base_urls_used(self) -> _containers.RepeatedCompositeFieldContainer[Global___LlmBaseUrlUsage]:
         """Per-base-URL usage rollup. Populated for *_LLM_TOTAL_STATISTICS. Unlike
         <code>LlmModelUsage.base_url</code>, which carries one base URL per model, this lists every
         distinct base URL in scope.
@@ -2406,450 +2507,488 @@ class LlmTelemetryReport(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        llm_token_usage: global___LlmTokenUsage | None = ...,
-        tool_call_count_total: builtins.int = ...,
-        llm_call_count: builtins.int = ...,
-        llm_telemetries: collections.abc.Iterable[global___LlmTelemetry] | None = ...,
-        duration_seconds_total: builtins.float = ...,
-        models_used: collections.abc.Iterable[global___LlmModelUsage] | None = ...,
-        providers_used: collections.abc.Iterable[global___LlmProviderUsage] | None = ...,
-        ccai_services_used: collections.abc.Iterable[global___LlmCcaiServiceUsage] | None = ...,
-        agents_used: collections.abc.Iterable[global___LlmAgentUsage] | None = ...,
-        tools_used: collections.abc.Iterable[global___LlmToolUsage] | None = ...,
-        latency_stats: global___LlmLatencyStats | None = ...,
-        cache_stats: global___LlmCacheStats | None = ...,
-        error_stats: global___LlmErrorStats | None = ...,
-        finish_reason_distribution: collections.abc.Iterable[global___LlmFinishReasonStat] | None = ...,
-        reasoning_effort_distribution: collections.abc.Iterable[global___LlmReasoningEffortStat] | None = ...,
-        thinking_tokens_total: builtins.int = ...,
-        thinking_duration_seconds_total: builtins.float = ...,
-        tool_call_tokens_total: builtins.int = ...,
-        tool_call_duration_seconds_total: builtins.float = ...,
-        safety_stats: global___LlmSafetyStats | None = ...,
-        base_urls_used: collections.abc.Iterable[global___LlmBaseUrlUsage] | None = ...,
+        llm_token_usage: Global___LlmTokenUsage | None = ...,
+        tool_call_count_total: _builtins.int = ...,
+        llm_call_count: _builtins.int = ...,
+        llm_telemetries: _abc.Iterable[Global___LlmTelemetry] | None = ...,
+        duration_seconds_total: _builtins.float = ...,
+        models_used: _abc.Iterable[Global___LlmModelUsage] | None = ...,
+        providers_used: _abc.Iterable[Global___LlmProviderUsage] | None = ...,
+        ccai_services_used: _abc.Iterable[Global___LlmCcaiServiceUsage] | None = ...,
+        agents_used: _abc.Iterable[Global___LlmAgentUsage] | None = ...,
+        tools_used: _abc.Iterable[Global___LlmToolUsage] | None = ...,
+        latency_stats: Global___LlmLatencyStats | None = ...,
+        cache_stats: Global___LlmCacheStats | None = ...,
+        error_stats: Global___LlmErrorStats | None = ...,
+        finish_reason_distribution: _abc.Iterable[Global___LlmFinishReasonStat] | None = ...,
+        reasoning_effort_distribution: _abc.Iterable[Global___LlmReasoningEffortStat] | None = ...,
+        thinking_tokens_total: _builtins.int = ...,
+        thinking_duration_seconds_total: _builtins.float = ...,
+        tool_call_tokens_total: _builtins.int = ...,
+        tool_call_duration_seconds_total: _builtins.float = ...,
+        safety_stats: Global___LlmSafetyStats | None = ...,
+        base_urls_used: _abc.Iterable[Global___LlmBaseUrlUsage] | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["cache_stats", b"cache_stats", "error_stats", b"error_stats", "latency_stats", b"latency_stats", "llm_token_usage", b"llm_token_usage", "safety_stats", b"safety_stats"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["agents_used", b"agents_used", "base_urls_used", b"base_urls_used", "cache_stats", b"cache_stats", "ccai_services_used", b"ccai_services_used", "duration_seconds_total", b"duration_seconds_total", "error_stats", b"error_stats", "finish_reason_distribution", b"finish_reason_distribution", "latency_stats", b"latency_stats", "llm_call_count", b"llm_call_count", "llm_telemetries", b"llm_telemetries", "llm_token_usage", b"llm_token_usage", "models_used", b"models_used", "providers_used", b"providers_used", "reasoning_effort_distribution", b"reasoning_effort_distribution", "safety_stats", b"safety_stats", "thinking_duration_seconds_total", b"thinking_duration_seconds_total", "thinking_tokens_total", b"thinking_tokens_total", "tool_call_count_total", b"tool_call_count_total", "tool_call_duration_seconds_total", b"tool_call_duration_seconds_total", "tool_call_tokens_total", b"tool_call_tokens_total", "tools_used", b"tools_used"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["cache_stats", b"cache_stats", "error_stats", b"error_stats", "latency_stats", b"latency_stats", "llm_token_usage", b"llm_token_usage", "safety_stats", b"safety_stats"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["agents_used", b"agents_used", "base_urls_used", b"base_urls_used", "cache_stats", b"cache_stats", "ccai_services_used", b"ccai_services_used", "duration_seconds_total", b"duration_seconds_total", "error_stats", b"error_stats", "finish_reason_distribution", b"finish_reason_distribution", "latency_stats", b"latency_stats", "llm_call_count", b"llm_call_count", "llm_telemetries", b"llm_telemetries", "llm_token_usage", b"llm_token_usage", "models_used", b"models_used", "providers_used", b"providers_used", "reasoning_effort_distribution", b"reasoning_effort_distribution", "safety_stats", b"safety_stats", "thinking_duration_seconds_total", b"thinking_duration_seconds_total", "thinking_tokens_total", b"thinking_tokens_total", "tool_call_count_total", b"tool_call_count_total", "tool_call_duration_seconds_total", b"tool_call_duration_seconds_total", "tool_call_tokens_total", b"tool_call_tokens_total", "tools_used", b"tools_used"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___LlmTelemetryReport = LlmTelemetryReport
+Global___LlmTelemetryReport: _TypeAlias = LlmTelemetryReport  # noqa: Y015
 
-@typing.final
-class LlmSafetyCategoryStat(google.protobuf.message.Message):
+@_typing.final
+class LlmSafetyCategoryStat(_message.Message):
     """Per-category native-safety aggregate across the LLM calls in scope."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    CATEGORY_FIELD_NUMBER: builtins.int
-    COUNT_FIELD_NUMBER: builtins.int
-    RATE_FIELD_NUMBER: builtins.int
-    category: builtins.str
+    CATEGORY_FIELD_NUMBER: _builtins.int
+    COUNT_FIELD_NUMBER: _builtins.int
+    RATE_FIELD_NUMBER: _builtins.int
+    category: _builtins.str
     """Detector category (<code>prompt_injection</code> | <code>jailbreak</code> |
     <code>pii</code> | <code>info_leak</code>).
     """
-    count: builtins.int
+    count: _builtins.int
     """Number of calls flagged for this category in scope."""
-    rate: builtins.float
+    rate: _builtins.float
     """count / total_assessed."""
     def __init__(
         self,
         *,
-        category: builtins.str = ...,
-        count: builtins.int = ...,
-        rate: builtins.float = ...,
+        category: _builtins.str = ...,
+        count: _builtins.int = ...,
+        rate: _builtins.float = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["category", b"category", "count", b"count", "rate", b"rate"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["category", b"category", "count", b"count", "rate", b"rate"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___LlmSafetyCategoryStat = LlmSafetyCategoryStat
+Global___LlmSafetyCategoryStat: _TypeAlias = LlmSafetyCategoryStat  # noqa: Y015
 
-@typing.final
-class LlmSafetyStats(google.protobuf.message.Message):
+@_typing.final
+class LlmSafetyStats(_message.Message):
     """Native-safety breakdown aggregate across the LLM calls in scope. Computed from
     the per-call LlmSafetyAssessment records.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    TOTAL_ASSESSED_FIELD_NUMBER: builtins.int
-    FLAGGED_COUNT_FIELD_NUMBER: builtins.int
-    OVERALL_SAFETY_SCORE_FIELD_NUMBER: builtins.int
-    CATEGORY_STATS_FIELD_NUMBER: builtins.int
-    total_assessed: builtins.int
+    TOTAL_ASSESSED_FIELD_NUMBER: _builtins.int
+    FLAGGED_COUNT_FIELD_NUMBER: _builtins.int
+    OVERALL_SAFETY_SCORE_FIELD_NUMBER: _builtins.int
+    CATEGORY_STATS_FIELD_NUMBER: _builtins.int
+    total_assessed: _builtins.int
     """Number of LLM calls that carried a safety assessment in scope."""
-    flagged_count: builtins.int
+    flagged_count: _builtins.int
     """Number of assessed calls with at least one flagged category."""
-    overall_safety_score: builtins.float
+    overall_safety_score: _builtins.float
     """Mean LlmSafetyAssessment.safety_score across assessed calls
     (<code>1.0</code> = fully safe).
     """
-    @property
-    def category_stats(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmSafetyCategoryStat]:
+    @_builtins.property
+    def category_stats(self) -> _containers.RepeatedCompositeFieldContainer[Global___LlmSafetyCategoryStat]:
         """Per-category counts and rates, descending by count."""
 
     def __init__(
         self,
         *,
-        total_assessed: builtins.int = ...,
-        flagged_count: builtins.int = ...,
-        overall_safety_score: builtins.float = ...,
-        category_stats: collections.abc.Iterable[global___LlmSafetyCategoryStat] | None = ...,
+        total_assessed: _builtins.int = ...,
+        flagged_count: _builtins.int = ...,
+        overall_safety_score: _builtins.float = ...,
+        category_stats: _abc.Iterable[Global___LlmSafetyCategoryStat] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["category_stats", b"category_stats", "flagged_count", b"flagged_count", "overall_safety_score", b"overall_safety_score", "total_assessed", b"total_assessed"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["category_stats", b"category_stats", "flagged_count", b"flagged_count", "overall_safety_score", b"overall_safety_score", "total_assessed", b"total_assessed"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___LlmSafetyStats = LlmSafetyStats
+Global___LlmSafetyStats: _TypeAlias = LlmSafetyStats  # noqa: Y015
 
-@typing.final
-class LlmCallStartedEvent(google.protobuf.message.Message):
+@_typing.final
+class LlmCallStartedEvent(_message.Message):
     """Emitted on a streaming DetectIntent when an LLM invocation starts."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    LLM_CALL_ID_FIELD_NUMBER: builtins.int
-    PROVIDER_FIELD_NUMBER: builtins.int
-    MODEL_NAME_FIELD_NUMBER: builtins.int
-    AGENT_NAME_FIELD_NUMBER: builtins.int
-    START_TIME_FIELD_NUMBER: builtins.int
-    llm_call_id: builtins.str
+    LLM_CALL_ID_FIELD_NUMBER: _builtins.int
+    PROVIDER_FIELD_NUMBER: _builtins.int
+    MODEL_NAME_FIELD_NUMBER: _builtins.int
+    AGENT_NAME_FIELD_NUMBER: _builtins.int
+    START_TIME_FIELD_NUMBER: _builtins.int
+    llm_call_id: _builtins.str
     """Collector-assigned id grouping all events emitted for this LLM call."""
-    provider: builtins.str
-    """Provider tag: "autogen" | "langchain" | "openai" | "anthropic" | ..."""
-    model_name: builtins.str
+    provider: _builtins.str
+    """Provider tag: "langchain" | "openai" | "anthropic" | ... ("autogen" only on telemetry recorded before AutoGen
+    was removed).
+    """
+    model_name: _builtins.str
     """Concrete model identifier (e.g. "claude-3-5-sonnet-20241022")."""
-    agent_name: builtins.str
+    agent_name: _builtins.str
     """intent_agent executor / agent name owning the call."""
-    @property
-    def start_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def start_time(self) -> _timestamp_pb2.Timestamp:
         """Wall-clock start of the LLM call."""
 
     def __init__(
         self,
         *,
-        llm_call_id: builtins.str = ...,
-        provider: builtins.str = ...,
-        model_name: builtins.str = ...,
-        agent_name: builtins.str = ...,
-        start_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        llm_call_id: _builtins.str = ...,
+        provider: _builtins.str = ...,
+        model_name: _builtins.str = ...,
+        agent_name: _builtins.str = ...,
+        start_time: _timestamp_pb2.Timestamp | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["start_time", b"start_time"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["agent_name", b"agent_name", "llm_call_id", b"llm_call_id", "model_name", b"model_name", "provider", b"provider", "start_time", b"start_time"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["start_time", b"start_time"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["agent_name", b"agent_name", "llm_call_id", b"llm_call_id", "model_name", b"model_name", "provider", b"provider", "start_time", b"start_time"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___LlmCallStartedEvent = LlmCallStartedEvent
+Global___LlmCallStartedEvent: _TypeAlias = LlmCallStartedEvent  # noqa: Y015
 
-@typing.final
-class LlmCallFinishedEvent(google.protobuf.message.Message):
+@_typing.final
+class LlmCallFinishedEvent(_message.Message):
     """Emitted on a streaming DetectIntent when an LLM invocation finishes."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    LLM_CALL_ID_FIELD_NUMBER: builtins.int
-    END_TIME_FIELD_NUMBER: builtins.int
-    DURATION_IN_S_FIELD_NUMBER: builtins.int
-    LLM_TOKEN_USAGE_FIELD_NUMBER: builtins.int
-    llm_call_id: builtins.str
+    LLM_CALL_ID_FIELD_NUMBER: _builtins.int
+    END_TIME_FIELD_NUMBER: _builtins.int
+    DURATION_IN_S_FIELD_NUMBER: _builtins.int
+    LLM_TOKEN_USAGE_FIELD_NUMBER: _builtins.int
+    llm_call_id: _builtins.str
     """Collector-assigned id grouping events for this LLM call."""
-    duration_in_s: builtins.float
+    duration_in_s: _builtins.float
     """Convenience duration (end_time - start_time)."""
-    @property
-    def end_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def end_time(self) -> _timestamp_pb2.Timestamp:
         """Wall-clock end time of the LLM call."""
 
-    @property
-    def llm_token_usage(self) -> global___LlmTokenUsage:
+    @_builtins.property
+    def llm_token_usage(self) -> Global___LlmTokenUsage:
         """Final token totals for this LLM call."""
 
     def __init__(
         self,
         *,
-        llm_call_id: builtins.str = ...,
-        end_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        duration_in_s: builtins.float = ...,
-        llm_token_usage: global___LlmTokenUsage | None = ...,
+        llm_call_id: _builtins.str = ...,
+        end_time: _timestamp_pb2.Timestamp | None = ...,
+        duration_in_s: _builtins.float = ...,
+        llm_token_usage: Global___LlmTokenUsage | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["end_time", b"end_time", "llm_token_usage", b"llm_token_usage"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["duration_in_s", b"duration_in_s", "end_time", b"end_time", "llm_call_id", b"llm_call_id", "llm_token_usage", b"llm_token_usage"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["end_time", b"end_time", "llm_token_usage", b"llm_token_usage"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["duration_in_s", b"duration_in_s", "end_time", b"end_time", "llm_call_id", b"llm_call_id", "llm_token_usage", b"llm_token_usage"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___LlmCallFinishedEvent = LlmCallFinishedEvent
+Global___LlmCallFinishedEvent: _TypeAlias = LlmCallFinishedEvent  # noqa: Y015
 
-@typing.final
-class LlmToolCallStartedEvent(google.protobuf.message.Message):
+@_typing.final
+class LlmToolCallStartedEvent(_message.Message):
     """Emitted on a streaming DetectIntent when a tool call starts."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    TOOL_CALL_ID_FIELD_NUMBER: builtins.int
-    TOOL_NAME_FIELD_NUMBER: builtins.int
-    ARGUMENTS_FIELD_NUMBER: builtins.int
-    START_TIME_FIELD_NUMBER: builtins.int
-    LLM_CALL_ID_FIELD_NUMBER: builtins.int
-    tool_call_id: builtins.str
-    """Stable id assigned by the upstream framework (autogen / langchain)."""
-    tool_name: builtins.str
+    TOOL_CALL_ID_FIELD_NUMBER: _builtins.int
+    TOOL_NAME_FIELD_NUMBER: _builtins.int
+    ARGUMENTS_FIELD_NUMBER: _builtins.int
+    START_TIME_FIELD_NUMBER: _builtins.int
+    LLM_CALL_ID_FIELD_NUMBER: _builtins.int
+    tool_call_id: _builtins.str
+    """Stable id assigned by the upstream framework (e.g. langchain)."""
+    tool_name: _builtins.str
     """Name of the tool / function invoked."""
-    llm_call_id: builtins.str
+    llm_call_id: _builtins.str
     """Groups events under an LlmTelemetry entry."""
-    @property
-    def arguments(self) -> google.protobuf.struct_pb2.Struct:
+    @_builtins.property
+    def arguments(self) -> _struct_pb2.Struct:
         """Tool arguments as a structured payload (Struct kept as-is; not a custom Message)."""
 
-    @property
-    def start_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def start_time(self) -> _timestamp_pb2.Timestamp:
         """Wall-clock start time of the tool call."""
 
     def __init__(
         self,
         *,
-        tool_call_id: builtins.str = ...,
-        tool_name: builtins.str = ...,
-        arguments: google.protobuf.struct_pb2.Struct | None = ...,
-        start_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        llm_call_id: builtins.str = ...,
+        tool_call_id: _builtins.str = ...,
+        tool_name: _builtins.str = ...,
+        arguments: _struct_pb2.Struct | None = ...,
+        start_time: _timestamp_pb2.Timestamp | None = ...,
+        llm_call_id: _builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["arguments", b"arguments", "start_time", b"start_time"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["arguments", b"arguments", "llm_call_id", b"llm_call_id", "start_time", b"start_time", "tool_call_id", b"tool_call_id", "tool_name", b"tool_name"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["arguments", b"arguments", "start_time", b"start_time"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["arguments", b"arguments", "llm_call_id", b"llm_call_id", "start_time", b"start_time", "tool_call_id", b"tool_call_id", "tool_name", b"tool_name"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___LlmToolCallStartedEvent = LlmToolCallStartedEvent
+Global___LlmToolCallStartedEvent: _TypeAlias = LlmToolCallStartedEvent  # noqa: Y015
 
-@typing.final
-class LlmToolCallFinishedEvent(google.protobuf.message.Message):
+@_typing.final
+class LlmToolCallFinishedEvent(_message.Message):
     """Emitted on a streaming DetectIntent when a tool call finishes."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    TOOL_CALL_ID_FIELD_NUMBER: builtins.int
-    END_TIME_FIELD_NUMBER: builtins.int
-    DURATION_IN_S_FIELD_NUMBER: builtins.int
-    LLM_TOKEN_USAGE_FIELD_NUMBER: builtins.int
-    RESULT_FIELD_NUMBER: builtins.int
-    ERROR_MESSAGE_FIELD_NUMBER: builtins.int
-    LLM_CALL_ID_FIELD_NUMBER: builtins.int
-    tool_call_id: builtins.str
+    TOOL_CALL_ID_FIELD_NUMBER: _builtins.int
+    END_TIME_FIELD_NUMBER: _builtins.int
+    DURATION_IN_S_FIELD_NUMBER: _builtins.int
+    LLM_TOKEN_USAGE_FIELD_NUMBER: _builtins.int
+    RESULT_FIELD_NUMBER: _builtins.int
+    ERROR_MESSAGE_FIELD_NUMBER: _builtins.int
+    LLM_CALL_ID_FIELD_NUMBER: _builtins.int
+    tool_call_id: _builtins.str
     """Stable id matching the matching LlmToolCallStartedEvent."""
-    duration_in_s: builtins.float
+    duration_in_s: _builtins.float
     """Convenience duration (end_time - start_time)."""
-    error_message: builtins.str
+    error_message: _builtins.str
     """Populated only when the tool call failed; empty string on success."""
-    llm_call_id: builtins.str
+    llm_call_id: _builtins.str
     """Groups events under an LlmTelemetry entry."""
-    @property
-    def end_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def end_time(self) -> _timestamp_pb2.Timestamp:
         """Wall-clock end time of the tool call."""
 
-    @property
-    def llm_token_usage(self) -> global___LlmTokenUsage:
+    @_builtins.property
+    def llm_token_usage(self) -> Global___LlmTokenUsage:
         """Token attribution for this tool call when available."""
 
-    @property
-    def result(self) -> google.protobuf.struct_pb2.Struct:
+    @_builtins.property
+    def result(self) -> _struct_pb2.Struct:
         """Tool result payload (may be omitted on failure or redaction)."""
 
     def __init__(
         self,
         *,
-        tool_call_id: builtins.str = ...,
-        end_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        duration_in_s: builtins.float = ...,
-        llm_token_usage: global___LlmTokenUsage | None = ...,
-        result: google.protobuf.struct_pb2.Struct | None = ...,
-        error_message: builtins.str = ...,
-        llm_call_id: builtins.str = ...,
+        tool_call_id: _builtins.str = ...,
+        end_time: _timestamp_pb2.Timestamp | None = ...,
+        duration_in_s: _builtins.float = ...,
+        llm_token_usage: Global___LlmTokenUsage | None = ...,
+        result: _struct_pb2.Struct | None = ...,
+        error_message: _builtins.str = ...,
+        llm_call_id: _builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["end_time", b"end_time", "llm_token_usage", b"llm_token_usage", "result", b"result"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["duration_in_s", b"duration_in_s", "end_time", b"end_time", "error_message", b"error_message", "llm_call_id", b"llm_call_id", "llm_token_usage", b"llm_token_usage", "result", b"result", "tool_call_id", b"tool_call_id"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["end_time", b"end_time", "llm_token_usage", b"llm_token_usage", "result", b"result"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["duration_in_s", b"duration_in_s", "end_time", b"end_time", "error_message", b"error_message", "llm_call_id", b"llm_call_id", "llm_token_usage", b"llm_token_usage", "result", b"result", "tool_call_id", b"tool_call_id"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___LlmToolCallFinishedEvent = LlmToolCallFinishedEvent
+Global___LlmToolCallFinishedEvent: _TypeAlias = LlmToolCallFinishedEvent  # noqa: Y015
 
-@typing.final
-class LlmThinkingDeltaEvent(google.protobuf.message.Message):
+@_typing.final
+class LlmThinkingDeltaEvent(_message.Message):
     """Emitted on a streaming DetectIntent for each thinking-delta chunk."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    LLM_CALL_ID_FIELD_NUMBER: builtins.int
-    TEXT_DELTA_FIELD_NUMBER: builtins.int
-    TIMESTAMP_FIELD_NUMBER: builtins.int
-    llm_call_id: builtins.str
+    LLM_CALL_ID_FIELD_NUMBER: _builtins.int
+    TEXT_DELTA_FIELD_NUMBER: _builtins.int
+    TIMESTAMP_FIELD_NUMBER: _builtins.int
+    llm_call_id: _builtins.str
     """Groups events under an LlmTelemetry entry."""
-    text_delta: builtins.str
+    text_delta: _builtins.str
     """Incremental thinking text chunk (subject to redaction policy on the client)."""
-    @property
-    def timestamp(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def timestamp(self) -> _timestamp_pb2.Timestamp:
         """Wall-clock timestamp of the chunk."""
 
     def __init__(
         self,
         *,
-        llm_call_id: builtins.str = ...,
-        text_delta: builtins.str = ...,
-        timestamp: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        llm_call_id: _builtins.str = ...,
+        text_delta: _builtins.str = ...,
+        timestamp: _timestamp_pb2.Timestamp | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["timestamp", b"timestamp"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["llm_call_id", b"llm_call_id", "text_delta", b"text_delta", "timestamp", b"timestamp"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["timestamp", b"timestamp"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["llm_call_id", b"llm_call_id", "text_delta", b"text_delta", "timestamp", b"timestamp"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___LlmThinkingDeltaEvent = LlmThinkingDeltaEvent
+Global___LlmThinkingDeltaEvent: _TypeAlias = LlmThinkingDeltaEvent  # noqa: Y015
 
-@typing.final
-class LlmTokenUsageUpdateEvent(google.protobuf.message.Message):
+@_typing.final
+class LlmTokenUsageUpdateEvent(_message.Message):
     """Emitted on a streaming DetectIntent when running token counts update."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    LLM_CALL_ID_FIELD_NUMBER: builtins.int
-    LLM_TOKEN_USAGE_FIELD_NUMBER: builtins.int
-    llm_call_id: builtins.str
+    LLM_CALL_ID_FIELD_NUMBER: _builtins.int
+    LLM_TOKEN_USAGE_FIELD_NUMBER: _builtins.int
+    llm_call_id: _builtins.str
     """Groups events under an LlmTelemetry entry."""
-    @property
-    def llm_token_usage(self) -> global___LlmTokenUsage:
+    @_builtins.property
+    def llm_token_usage(self) -> Global___LlmTokenUsage:
         """Running totals for that llm_call."""
 
     def __init__(
         self,
         *,
-        llm_call_id: builtins.str = ...,
-        llm_token_usage: global___LlmTokenUsage | None = ...,
+        llm_call_id: _builtins.str = ...,
+        llm_token_usage: Global___LlmTokenUsage | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["llm_token_usage", b"llm_token_usage"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["llm_call_id", b"llm_call_id", "llm_token_usage", b"llm_token_usage"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["llm_token_usage", b"llm_token_usage"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["llm_call_id", b"llm_call_id", "llm_token_usage", b"llm_token_usage"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___LlmTokenUsageUpdateEvent = LlmTokenUsageUpdateEvent
+Global___LlmTokenUsageUpdateEvent: _TypeAlias = LlmTokenUsageUpdateEvent  # noqa: Y015
 
-@typing.final
-class LlmAgentNodeEvent(google.protobuf.message.Message):
+@_typing.final
+class LlmAgentNodeEvent(_message.Message):
     """Emitted on a streaming DetectIntent when a node of an AI Team graph starts, completes or fails.
     A node inside a nested graph (a subgraph, or a member agent of a supervisor or swarm) is reported too,
     with its full <code>llm_agent_node_event_node_path</code>.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    LLM_AGENT_NODE_EVENT_NODE_RUN_ID_FIELD_NUMBER: builtins.int
-    LLM_AGENT_NODE_EVENT_PARENT_NODE_RUN_ID_FIELD_NUMBER: builtins.int
-    LLM_AGENT_NODE_EVENT_NODE_DISPLAY_NAME_FIELD_NUMBER: builtins.int
-    LLM_AGENT_NODE_EVENT_NODE_PATH_FIELD_NUMBER: builtins.int
-    LLM_AGENT_NODE_PHASE_FIELD_NUMBER: builtins.int
-    TIMESTAMP_FIELD_NUMBER: builtins.int
-    LLM_AGENT_NODE_EVENT_DURATION_IN_S_FIELD_NUMBER: builtins.int
-    LLM_AGENT_NODE_EVENT_ERROR_MESSAGE_FIELD_NUMBER: builtins.int
-    llm_agent_node_event_node_run_id: builtins.str
+    LLM_AGENT_NODE_EVENT_NODE_RUN_ID_FIELD_NUMBER: _builtins.int
+    LLM_AGENT_NODE_EVENT_PARENT_NODE_RUN_ID_FIELD_NUMBER: _builtins.int
+    LLM_AGENT_NODE_EVENT_NODE_DISPLAY_NAME_FIELD_NUMBER: _builtins.int
+    LLM_AGENT_NODE_EVENT_NODE_PATH_FIELD_NUMBER: _builtins.int
+    LLM_AGENT_NODE_PHASE_FIELD_NUMBER: _builtins.int
+    TIMESTAMP_FIELD_NUMBER: _builtins.int
+    LLM_AGENT_NODE_EVENT_DURATION_IN_S_FIELD_NUMBER: _builtins.int
+    LLM_AGENT_NODE_EVENT_ERROR_MESSAGE_FIELD_NUMBER: _builtins.int
+    llm_agent_node_event_node_run_id: _builtins.str
     """Id of this run of the node. The <code>LLM_AGENT_NODE_PHASE_STARTED</code> event and the
     <code>LLM_AGENT_NODE_PHASE_COMPLETED</code> or <code>LLM_AGENT_NODE_PHASE_FAILED</code> event of one run share it.
     """
-    llm_agent_node_event_parent_node_run_id: builtins.str
+    llm_agent_node_event_parent_node_run_id: _builtins.str
     """<code>llm_agent_node_event_node_run_id</code> of the node run this one is nested in; empty for a node of the outermost graph."""
-    llm_agent_node_event_node_display_name: builtins.str
+    llm_agent_node_event_node_display_name: _builtins.str
     """Name of the node, e.g. <code>researcher</code>."""
-    llm_agent_node_phase: global___LlmAgentNodePhase.ValueType
+    llm_agent_node_phase: Global___LlmAgentNodePhase.ValueType
     """Lifecycle phase this event reports."""
-    llm_agent_node_event_duration_in_s: builtins.float
+    llm_agent_node_event_duration_in_s: _builtins.float
     """Duration of the node run in seconds; set only on <code>LLM_AGENT_NODE_PHASE_COMPLETED</code> and
     <code>LLM_AGENT_NODE_PHASE_FAILED</code>.
     """
-    llm_agent_node_event_error_message: builtins.str
+    llm_agent_node_event_error_message: _builtins.str
     """Populated only on <code>LLM_AGENT_NODE_PHASE_FAILED</code>; empty string otherwise."""
-    @property
-    def llm_agent_node_event_node_path(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def llm_agent_node_event_node_path(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Names of the nodes from the outermost graph down to this one, e.g.
         <code>["supervisor", "researcher", "model"]</code>. The last element equals <code>llm_agent_node_event_node_display_name</code>.
         """
 
-    @property
-    def timestamp(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def timestamp(self) -> _timestamp_pb2.Timestamp:
         """Wall-clock time of the event."""
 
     def __init__(
         self,
         *,
-        llm_agent_node_event_node_run_id: builtins.str = ...,
-        llm_agent_node_event_parent_node_run_id: builtins.str = ...,
-        llm_agent_node_event_node_display_name: builtins.str = ...,
-        llm_agent_node_event_node_path: collections.abc.Iterable[builtins.str] | None = ...,
-        llm_agent_node_phase: global___LlmAgentNodePhase.ValueType = ...,
-        timestamp: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        llm_agent_node_event_duration_in_s: builtins.float = ...,
-        llm_agent_node_event_error_message: builtins.str = ...,
+        llm_agent_node_event_node_run_id: _builtins.str = ...,
+        llm_agent_node_event_parent_node_run_id: _builtins.str = ...,
+        llm_agent_node_event_node_display_name: _builtins.str = ...,
+        llm_agent_node_event_node_path: _abc.Iterable[_builtins.str] | None = ...,
+        llm_agent_node_phase: Global___LlmAgentNodePhase.ValueType = ...,
+        timestamp: _timestamp_pb2.Timestamp | None = ...,
+        llm_agent_node_event_duration_in_s: _builtins.float = ...,
+        llm_agent_node_event_error_message: _builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["timestamp", b"timestamp"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["llm_agent_node_event_duration_in_s", b"llm_agent_node_event_duration_in_s", "llm_agent_node_event_error_message", b"llm_agent_node_event_error_message", "llm_agent_node_event_node_display_name", b"llm_agent_node_event_node_display_name", "llm_agent_node_event_node_path", b"llm_agent_node_event_node_path", "llm_agent_node_event_node_run_id", b"llm_agent_node_event_node_run_id", "llm_agent_node_event_parent_node_run_id", b"llm_agent_node_event_parent_node_run_id", "llm_agent_node_phase", b"llm_agent_node_phase", "timestamp", b"timestamp"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["timestamp", b"timestamp"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["llm_agent_node_event_duration_in_s", b"llm_agent_node_event_duration_in_s", "llm_agent_node_event_error_message", b"llm_agent_node_event_error_message", "llm_agent_node_event_node_display_name", b"llm_agent_node_event_node_display_name", "llm_agent_node_event_node_path", b"llm_agent_node_event_node_path", "llm_agent_node_event_node_run_id", b"llm_agent_node_event_node_run_id", "llm_agent_node_event_parent_node_run_id", b"llm_agent_node_event_parent_node_run_id", "llm_agent_node_phase", b"llm_agent_node_phase", "timestamp", b"timestamp"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___LlmAgentNodeEvent = LlmAgentNodeEvent
+Global___LlmAgentNodeEvent: _TypeAlias = LlmAgentNodeEvent  # noqa: Y015
 
-@typing.final
-class ReferencedChunk(google.protobuf.message.Message):
+@_typing.final
+class ReferencedChunk(_message.Message):
     """Chunk information for a document chunk referenced in a RAG based <code>StreamingDetectIntentResponse</code>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    REFERENCE_INDEX_FIELD_NUMBER: builtins.int
-    DATASET_ID_FIELD_NUMBER: builtins.int
-    DOCUMENT_ID_FIELD_NUMBER: builtins.int
-    CHUNK_ID_FIELD_NUMBER: builtins.int
-    DOCUMENT_NAME_FIELD_NUMBER: builtins.int
-    CONTENT_FIELD_NUMBER: builtins.int
-    SIMILARITY_FIELD_NUMBER: builtins.int
-    DOCUMENT_URL_FIELD_NUMBER: builtins.int
-    DEEP_LINK_URL_FIELD_NUMBER: builtins.int
-    DOCUMENT_TITLE_FIELD_NUMBER: builtins.int
-    reference_index: builtins.int
+    REFERENCE_INDEX_FIELD_NUMBER: _builtins.int
+    DATASET_ID_FIELD_NUMBER: _builtins.int
+    DOCUMENT_ID_FIELD_NUMBER: _builtins.int
+    CHUNK_ID_FIELD_NUMBER: _builtins.int
+    DOCUMENT_NAME_FIELD_NUMBER: _builtins.int
+    CONTENT_FIELD_NUMBER: _builtins.int
+    SIMILARITY_FIELD_NUMBER: _builtins.int
+    DOCUMENT_URL_FIELD_NUMBER: _builtins.int
+    DEEP_LINK_URL_FIELD_NUMBER: _builtins.int
+    DOCUMENT_TITLE_FIELD_NUMBER: _builtins.int
+    reference_index: _builtins.int
     """Index by which this chunk is referenced in the response text. For index <code>N</code> the reference in the response text has format <code>[ID:N]</code>"""
-    dataset_id: builtins.str
+    dataset_id: _builtins.str
     """ID of the dataset the chunk belongs to."""
-    document_id: builtins.str
+    document_id: _builtins.str
     """ID of the document the chunk belongs to."""
-    chunk_id: builtins.str
+    chunk_id: _builtins.str
     """ID of the chunk."""
-    document_name: builtins.str
+    document_name: _builtins.str
     """Name of the document the chunk belongs to."""
-    content: builtins.str
+    content: _builtins.str
     """Text of the chunk."""
-    similarity: builtins.float
+    similarity: _builtins.float
     """Similarity score of this chunk for response it is retruned with."""
-    document_url: builtins.str
+    document_url: _builtins.str
     """For crawled documents the URL of the source document. For any other document it is left empty."""
-    deep_link_url: builtins.str
+    deep_link_url: _builtins.str
     """For crawled documents link to the source document that directly jumps to the chunk's location on the page using a text fragment anchor (a bit fragile and might not always work). For any other document it is left empty."""
-    document_title: builtins.str
+    document_title: _builtins.str
     """Title of the document (optional)."""
     def __init__(
         self,
         *,
-        reference_index: builtins.int = ...,
-        dataset_id: builtins.str = ...,
-        document_id: builtins.str = ...,
-        chunk_id: builtins.str = ...,
-        document_name: builtins.str = ...,
-        content: builtins.str = ...,
-        similarity: builtins.float = ...,
-        document_url: builtins.str = ...,
-        deep_link_url: builtins.str = ...,
-        document_title: builtins.str = ...,
+        reference_index: _builtins.int = ...,
+        dataset_id: _builtins.str = ...,
+        document_id: _builtins.str = ...,
+        chunk_id: _builtins.str = ...,
+        document_name: _builtins.str = ...,
+        content: _builtins.str = ...,
+        similarity: _builtins.float = ...,
+        document_url: _builtins.str = ...,
+        deep_link_url: _builtins.str = ...,
+        document_title: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["chunk_id", b"chunk_id", "content", b"content", "dataset_id", b"dataset_id", "deep_link_url", b"deep_link_url", "document_id", b"document_id", "document_name", b"document_name", "document_title", b"document_title", "document_url", b"document_url", "reference_index", b"reference_index", "similarity", b"similarity"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["chunk_id", b"chunk_id", "content", b"content", "dataset_id", b"dataset_id", "deep_link_url", b"deep_link_url", "document_id", b"document_id", "document_name", b"document_name", "document_title", b"document_title", "document_url", b"document_url", "reference_index", b"reference_index", "similarity", b"similarity"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ReferencedChunk = ReferencedChunk
+Global___ReferencedChunk: _TypeAlias = ReferencedChunk  # noqa: Y015
 
-@typing.final
-class QueryResult(google.protobuf.message.Message):
+@_typing.final
+class QueryResult(_message.Message):
     """Represents the result of conversational query or event processing."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    QUERY_TEXT_FIELD_NUMBER: builtins.int
-    SPEECH_RECOGNITION_CONFIDENCE_FIELD_NUMBER: builtins.int
-    ACTION_FIELD_NUMBER: builtins.int
-    PARAMETERS_FIELD_NUMBER: builtins.int
-    ALL_REQUIRED_PARAMS_PRESENT_FIELD_NUMBER: builtins.int
-    FULFILLMENT_TEXT_FIELD_NUMBER: builtins.int
-    FULFILLMENT_MESSAGES_FIELD_NUMBER: builtins.int
-    WEBHOOK_SOURCE_FIELD_NUMBER: builtins.int
-    WEBHOOK_PAYLOAD_FIELD_NUMBER: builtins.int
-    OUTPUT_CONTEXTS_FIELD_NUMBER: builtins.int
-    INTENT_FIELD_NUMBER: builtins.int
-    INTENT_DETECTION_CONFIDENCE_FIELD_NUMBER: builtins.int
-    QUERY_TEXT_ORIGINAL_FIELD_NUMBER: builtins.int
-    DIAGNOSTIC_INFO_FIELD_NUMBER: builtins.int
-    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
-    FILE_RESOURCES_FIELD_NUMBER: builtins.int
-    LLM_TELEMETRY_REPORT_FIELD_NUMBER: builtins.int
-    REFERENCED_CHUNKS_FIELD_NUMBER: builtins.int
-    query_text: builtins.str
+    QUERY_TEXT_FIELD_NUMBER: _builtins.int
+    SPEECH_RECOGNITION_CONFIDENCE_FIELD_NUMBER: _builtins.int
+    ACTION_FIELD_NUMBER: _builtins.int
+    PARAMETERS_FIELD_NUMBER: _builtins.int
+    ALL_REQUIRED_PARAMS_PRESENT_FIELD_NUMBER: _builtins.int
+    FULFILLMENT_TEXT_FIELD_NUMBER: _builtins.int
+    FULFILLMENT_MESSAGES_FIELD_NUMBER: _builtins.int
+    WEBHOOK_SOURCE_FIELD_NUMBER: _builtins.int
+    WEBHOOK_PAYLOAD_FIELD_NUMBER: _builtins.int
+    OUTPUT_CONTEXTS_FIELD_NUMBER: _builtins.int
+    INTENT_FIELD_NUMBER: _builtins.int
+    INTENT_DETECTION_CONFIDENCE_FIELD_NUMBER: _builtins.int
+    QUERY_TEXT_ORIGINAL_FIELD_NUMBER: _builtins.int
+    DIAGNOSTIC_INFO_FIELD_NUMBER: _builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: _builtins.int
+    FILE_RESOURCES_FIELD_NUMBER: _builtins.int
+    LLM_TELEMETRY_REPORT_FIELD_NUMBER: _builtins.int
+    REFERENCED_CHUNKS_FIELD_NUMBER: _builtins.int
+    query_text: _builtins.str
     """The original conversational query text:
     <ul>
         <li>If natural language text was provided as input, <code>query_text</code> contains
@@ -2860,7 +2999,7 @@ class QueryResult(google.protobuf.message.Message):
         <li>If an event was provided as input, <code>query_text</code> is not set.</li>
     </ul>
     """
-    speech_recognition_confidence: builtins.float
+    speech_recognition_confidence: _builtins.float
     """The Speech recognition confidence between 0.0 and 1.0. A higher number
     indicates an estimated greater likelihood that the recognized words are
     correct. The default of 0.0 is a sentinel value indicating that confidence
@@ -2871,9 +3010,9 @@ class QueryResult(google.protobuf.message.Message):
     StreamingDetectIntent since the streaming endpoint has separate confidence
     estimates per portion of the audio in StreamingRecognitionResult.
     """
-    action: builtins.str
+    action: _builtins.str
     """The action name from the matched intent."""
-    all_required_params_present: builtins.bool
+    all_required_params_present: _builtins.bool
     """This field is set to:
     <ul>
         <li><code>false</code> if the matched intent has required parameters and not all of
@@ -2882,117 +3021,120 @@ class QueryResult(google.protobuf.message.Message):
        matched intent doesn&apos;t contain any required parameters.</li>
     </ul>
     """
-    fulfillment_text: builtins.str
+    fulfillment_text: _builtins.str
     """The text to be pronounced to the user or shown on the screen."""
-    webhook_source: builtins.str
+    webhook_source: _builtins.str
     """If the query was fulfilled by a webhook call, this field is set to the
     value of the <code>source</code> field returned in the webhook response.
     """
-    intent_detection_confidence: builtins.float
+    intent_detection_confidence: _builtins.float
     """The intent detection confidence. Values range from 0.0
     (completely uncertain) to 1.0 (completely certain).
     """
-    query_text_original: builtins.str
+    query_text_original: _builtins.str
     """The user input gets pre-processed by spelling correction, stop word removal etc. This property holds
     the string that is passed to the entity recognition and intent detection
     """
-    language_code: builtins.str
+    language_code: _builtins.str
     """The language that was triggered during intent detection.
     See <a href="https://dialogflow.com/docs/reference/language">Language Support</a>
     for a list of the currently supported language codes.
     """
-    @property
-    def parameters(self) -> google.protobuf.struct_pb2.Struct:
+    @_builtins.property
+    def parameters(self) -> _struct_pb2.Struct:
         """The collection of extracted parameters."""
 
-    @property
-    def fulfillment_messages(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.intent_pb2.Intent.Message]:
+    @_builtins.property
+    def fulfillment_messages(self) -> _containers.RepeatedCompositeFieldContainer[_intent_pb2.Intent.Message]:
         """The collection of rich messages to present to the user."""
 
-    @property
-    def webhook_payload(self) -> google.protobuf.struct_pb2.Struct:
+    @_builtins.property
+    def webhook_payload(self) -> _struct_pb2.Struct:
         """If the query was fulfilled by a webhook call, this field is set to the
         value of the <code>payload</code> field returned in the webhook response.
         """
 
-    @property
-    def output_contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]:
+    @_builtins.property
+    def output_contexts(self) -> _containers.RepeatedCompositeFieldContainer[_context_pb2.Context]:
         """The collection of output contexts. If applicable,
         <code>output_contexts.parameters</code> contains entries with name
         <code>&lt;parameter name&gt;.original</code> containing the original parameter values
         before the query.
         """
 
-    @property
-    def intent(self) -> ondewo.nlu.intent_pb2.Intent:
+    @_builtins.property
+    def intent(self) -> _intent_pb2.Intent:
         """The intent that matched the conversational query. Some, not
         all fields are filled in this message, including but not limited to:
         <code>name</code>, <code>display_name</code> and <code>webhook_state</code>.
         """
 
-    @property
-    def diagnostic_info(self) -> google.protobuf.struct_pb2.Struct:
+    @_builtins.property
+    def diagnostic_info(self) -> _struct_pb2.Struct:
         """The free-form diagnostic info. For example, this field
         could contain webhook call latency.
         """
 
-    @property
-    def file_resources(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FileResource]:
+    @_builtins.property
+    def file_resources(self) -> _containers.RepeatedCompositeFieldContainer[Global___FileResource]:
         """Generated or attached files, e.g., llm generates a picture or file attachment"""
 
-    @property
-    def llm_telemetry_report(self) -> global___LlmTelemetryReport:
+    @_builtins.property
+    def llm_telemetry_report(self) -> Global___LlmTelemetryReport:
         """Aggregated LLM telemetry (tokens, tool calls, thinking) for this turn."""
 
-    @property
-    def referenced_chunks(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___ReferencedChunk]:
+    @_builtins.property
+    def referenced_chunks(self) -> _containers.RepeatedCompositeFieldContainer[Global___ReferencedChunk]:
         """Source chunks the answer cited via in-text <code>[ID:N]</code> markers, documents. Empty when the turn was not answered from a RAG dataset."""
 
     def __init__(
         self,
         *,
-        query_text: builtins.str = ...,
-        speech_recognition_confidence: builtins.float = ...,
-        action: builtins.str = ...,
-        parameters: google.protobuf.struct_pb2.Struct | None = ...,
-        all_required_params_present: builtins.bool = ...,
-        fulfillment_text: builtins.str = ...,
-        fulfillment_messages: collections.abc.Iterable[ondewo.nlu.intent_pb2.Intent.Message] | None = ...,
-        webhook_source: builtins.str = ...,
-        webhook_payload: google.protobuf.struct_pb2.Struct | None = ...,
-        output_contexts: collections.abc.Iterable[ondewo.nlu.context_pb2.Context] | None = ...,
-        intent: ondewo.nlu.intent_pb2.Intent | None = ...,
-        intent_detection_confidence: builtins.float = ...,
-        query_text_original: builtins.str = ...,
-        diagnostic_info: google.protobuf.struct_pb2.Struct | None = ...,
-        language_code: builtins.str = ...,
-        file_resources: collections.abc.Iterable[global___FileResource] | None = ...,
-        llm_telemetry_report: global___LlmTelemetryReport | None = ...,
-        referenced_chunks: collections.abc.Iterable[global___ReferencedChunk] | None = ...,
+        query_text: _builtins.str = ...,
+        speech_recognition_confidence: _builtins.float = ...,
+        action: _builtins.str = ...,
+        parameters: _struct_pb2.Struct | None = ...,
+        all_required_params_present: _builtins.bool = ...,
+        fulfillment_text: _builtins.str = ...,
+        fulfillment_messages: _abc.Iterable[_intent_pb2.Intent.Message] | None = ...,
+        webhook_source: _builtins.str = ...,
+        webhook_payload: _struct_pb2.Struct | None = ...,
+        output_contexts: _abc.Iterable[_context_pb2.Context] | None = ...,
+        intent: _intent_pb2.Intent | None = ...,
+        intent_detection_confidence: _builtins.float = ...,
+        query_text_original: _builtins.str = ...,
+        diagnostic_info: _struct_pb2.Struct | None = ...,
+        language_code: _builtins.str = ...,
+        file_resources: _abc.Iterable[Global___FileResource] | None = ...,
+        llm_telemetry_report: Global___LlmTelemetryReport | None = ...,
+        referenced_chunks: _abc.Iterable[Global___ReferencedChunk] | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["diagnostic_info", b"diagnostic_info", "intent", b"intent", "llm_telemetry_report", b"llm_telemetry_report", "parameters", b"parameters", "webhook_payload", b"webhook_payload"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["action", b"action", "all_required_params_present", b"all_required_params_present", "diagnostic_info", b"diagnostic_info", "file_resources", b"file_resources", "fulfillment_messages", b"fulfillment_messages", "fulfillment_text", b"fulfillment_text", "intent", b"intent", "intent_detection_confidence", b"intent_detection_confidence", "language_code", b"language_code", "llm_telemetry_report", b"llm_telemetry_report", "output_contexts", b"output_contexts", "parameters", b"parameters", "query_text", b"query_text", "query_text_original", b"query_text_original", "referenced_chunks", b"referenced_chunks", "speech_recognition_confidence", b"speech_recognition_confidence", "webhook_payload", b"webhook_payload", "webhook_source", b"webhook_source"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["diagnostic_info", b"diagnostic_info", "intent", b"intent", "llm_telemetry_report", b"llm_telemetry_report", "parameters", b"parameters", "webhook_payload", b"webhook_payload"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["action", b"action", "all_required_params_present", b"all_required_params_present", "diagnostic_info", b"diagnostic_info", "file_resources", b"file_resources", "fulfillment_messages", b"fulfillment_messages", "fulfillment_text", b"fulfillment_text", "intent", b"intent", "intent_detection_confidence", b"intent_detection_confidence", "language_code", b"language_code", "llm_telemetry_report", b"llm_telemetry_report", "output_contexts", b"output_contexts", "parameters", b"parameters", "query_text", b"query_text", "query_text_original", b"query_text_original", "referenced_chunks", b"referenced_chunks", "speech_recognition_confidence", b"speech_recognition_confidence", "webhook_payload", b"webhook_payload", "webhook_source", b"webhook_source"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___QueryResult = QueryResult
+Global___QueryResult: _TypeAlias = QueryResult  # noqa: Y015
 
-@typing.final
-class StreamingDetectIntentRequest(google.protobuf.message.Message):
+@_typing.final
+class StreamingDetectIntentRequest(_message.Message):
     """The top-level message sent by the client to the <code>StreamingDetectIntent</code> method.
     Multiple request messages should be sent in order:
     1.  The first message must contain <code>session</code>, <code>query_input</code> plus optionally <code>query_params</code> and/or <code>single_utterance</code>. The message must not contain <code>input_audio</code>.
     2.  If <code>query_input</code> was set to a streaming input audio config, all subsequent messages must contain only <code>input_audio</code>. Otherwise, finish the request stream.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    SESSION_FIELD_NUMBER: builtins.int
-    QUERY_PARAMS_FIELD_NUMBER: builtins.int
-    QUERY_INPUT_FIELD_NUMBER: builtins.int
-    SINGLE_UTTERANCE_FIELD_NUMBER: builtins.int
-    INPUT_AUDIO_FIELD_NUMBER: builtins.int
-    TURN_CONTROL_FIELD_NUMBER: builtins.int
-    CLIENT_TURN_ID_FIELD_NUMBER: builtins.int
-    session: builtins.str
+    SESSION_FIELD_NUMBER: _builtins.int
+    QUERY_PARAMS_FIELD_NUMBER: _builtins.int
+    QUERY_INPUT_FIELD_NUMBER: _builtins.int
+    SINGLE_UTTERANCE_FIELD_NUMBER: _builtins.int
+    INPUT_AUDIO_FIELD_NUMBER: _builtins.int
+    TURN_CONTROL_FIELD_NUMBER: _builtins.int
+    CLIENT_TURN_ID_FIELD_NUMBER: _builtins.int
+    session: _builtins.str
     """Required. The name of the session the query is sent to.
     Format of the session name:
     <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code>. It&apos;s up to the API
@@ -3000,7 +3142,7 @@ class StreamingDetectIntentRequest(google.protobuf.message.Message):
     some type of user identifier (preferably hashed). The length of the session
     ID must not exceed 36 characters.
     """
-    single_utterance: builtins.bool
+    single_utterance: _builtins.bool
     """Optional. If <code>false</code> (default), recognition does not cease until the
     client closes the stream.
     If <code>true</code>, the recognizer will detect a single spoken utterance in input
@@ -3010,23 +3152,23 @@ class StreamingDetectIntentRequest(google.protobuf.message.Message):
     needed.
     This setting is ignored when <code>query_input</code> is a piece of text or an event.
     """
-    input_audio: builtins.bytes
+    input_audio: _builtins.bytes
     """Optional. The input audio content to be recognized. Must be sent if
     <code>query_input</code> was set to a streaming input audio config. The complete audio
     over all streaming messages must not exceed 1 minute.
     """
-    client_turn_id: builtins.str
+    client_turn_id: _builtins.str
     """Optional. Client-minted id (e.g. a uuid4 hex) of the turn this request STARTS; set together with
     <code>query_input</code>. The server echoes it on every response of that turn
     (<code>StreamingDetectIntentResponse.client_turn_id</code>), and a <code>CancelTurn</code> or
     <code>HeardReport</code> can name the turn by it before the server's <code>response_id</code> is known.
     """
-    @property
-    def query_params(self) -> global___QueryParameters:
+    @_builtins.property
+    def query_params(self) -> Global___QueryParameters:
         """Optional. The parameters of this query."""
 
-    @property
-    def query_input(self) -> global___QueryInput:
+    @_builtins.property
+    def query_input(self) -> Global___QueryInput:
         """Required. The input specification. It can be set to:
         <ol>
           <li>an audio config which instructs the speech recognizer how to process the speech audio,</li>
@@ -3035,8 +3177,8 @@ class StreamingDetectIntentRequest(google.protobuf.message.Message):
         </ol>
         """
 
-    @property
-    def turn_control(self) -> global___TurnControl:
+    @_builtins.property
+    def turn_control(self) -> Global___TurnControl:
         """Optional. Controls a turn of this stream: cancels it, reports what the user heard of its answer, or discards
         the session step of a preemptive draft. Sent ALONE (no <code>query_input</code>) on a call-length stream; the
         server applies it in stream order and starts no turn for it. Send it only to a server that advertised the
@@ -3047,92 +3189,95 @@ class StreamingDetectIntentRequest(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        session: builtins.str = ...,
-        query_params: global___QueryParameters | None = ...,
-        query_input: global___QueryInput | None = ...,
-        single_utterance: builtins.bool = ...,
-        input_audio: builtins.bytes = ...,
-        turn_control: global___TurnControl | None = ...,
-        client_turn_id: builtins.str = ...,
+        session: _builtins.str = ...,
+        query_params: Global___QueryParameters | None = ...,
+        query_input: Global___QueryInput | None = ...,
+        single_utterance: _builtins.bool = ...,
+        input_audio: _builtins.bytes = ...,
+        turn_control: Global___TurnControl | None = ...,
+        client_turn_id: _builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["query_input", b"query_input", "query_params", b"query_params", "turn_control", b"turn_control"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["client_turn_id", b"client_turn_id", "input_audio", b"input_audio", "query_input", b"query_input", "query_params", b"query_params", "session", b"session", "single_utterance", b"single_utterance", "turn_control", b"turn_control"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["query_input", b"query_input", "query_params", b"query_params", "turn_control", b"turn_control"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["client_turn_id", b"client_turn_id", "input_audio", b"input_audio", "query_input", b"query_input", "query_params", b"query_params", "session", b"session", "single_utterance", b"single_utterance", "turn_control", b"turn_control"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___StreamingDetectIntentRequest = StreamingDetectIntentRequest
+Global___StreamingDetectIntentRequest: _TypeAlias = StreamingDetectIntentRequest  # noqa: Y015
 
-@typing.final
-class StreamingDetectIntentResponse(google.protobuf.message.Message):
+@_typing.final
+class StreamingDetectIntentResponse(_message.Message):
     """The top-level message returned from the <code>StreamingDetectIntent</code> method.
     Multiple response messages can be returned in order:
     1.  If the input was set to streaming audio, the first one or more messages contain <code>recognition_result</code>. Each <code>recognition_result</code> represents a more complete transcript of what the user said. The last <code>recognition_result</code> has <code>is_final</code> set to <code>true</code>.
     2.  The next message contains <code>response_id</code>, <code>query_result</code> and optionally <code>webhook_status</code> if a WebHook was called.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    RESPONSE_ID_FIELD_NUMBER: builtins.int
-    RECOGNITION_RESULT_FIELD_NUMBER: builtins.int
-    QUERY_RESULT_FIELD_NUMBER: builtins.int
-    WEBHOOK_STATUS_FIELD_NUMBER: builtins.int
-    LLM_CALL_STARTED_FIELD_NUMBER: builtins.int
-    LLM_CALL_FINISHED_FIELD_NUMBER: builtins.int
-    LLM_TOOL_CALL_STARTED_FIELD_NUMBER: builtins.int
-    LLM_TOOL_CALL_FINISHED_FIELD_NUMBER: builtins.int
-    LLM_THINKING_DELTA_FIELD_NUMBER: builtins.int
-    LLM_TOKEN_USAGE_UPDATE_FIELD_NUMBER: builtins.int
-    LLM_AGENT_NODE_EVENT_FIELD_NUMBER: builtins.int
-    TURN_CONTROL_ACK_FIELD_NUMBER: builtins.int
-    CLIENT_TURN_ID_FIELD_NUMBER: builtins.int
-    response_id: builtins.str
+    RESPONSE_ID_FIELD_NUMBER: _builtins.int
+    RECOGNITION_RESULT_FIELD_NUMBER: _builtins.int
+    QUERY_RESULT_FIELD_NUMBER: _builtins.int
+    WEBHOOK_STATUS_FIELD_NUMBER: _builtins.int
+    LLM_CALL_STARTED_FIELD_NUMBER: _builtins.int
+    LLM_CALL_FINISHED_FIELD_NUMBER: _builtins.int
+    LLM_TOOL_CALL_STARTED_FIELD_NUMBER: _builtins.int
+    LLM_TOOL_CALL_FINISHED_FIELD_NUMBER: _builtins.int
+    LLM_THINKING_DELTA_FIELD_NUMBER: _builtins.int
+    LLM_TOKEN_USAGE_UPDATE_FIELD_NUMBER: _builtins.int
+    LLM_AGENT_NODE_EVENT_FIELD_NUMBER: _builtins.int
+    TURN_CONTROL_ACK_FIELD_NUMBER: _builtins.int
+    CLIENT_TURN_ID_FIELD_NUMBER: _builtins.int
+    response_id: _builtins.str
     """The unique identifier of the response. It can be used to
     locate a response in the training example set or for reporting issues.
     """
-    client_turn_id: builtins.str
+    client_turn_id: _builtins.str
     """Echo of <code>StreamingDetectIntentRequest.client_turn_id</code> of the turn this response belongs to; empty
     when the client sent none.
     """
-    @property
-    def recognition_result(self) -> global___StreamingRecognitionResult:
+    @_builtins.property
+    def recognition_result(self) -> Global___StreamingRecognitionResult:
         """The result of speech recognition."""
 
-    @property
-    def query_result(self) -> global___QueryResult:
+    @_builtins.property
+    def query_result(self) -> Global___QueryResult:
         """The result of the conversational query or event processing."""
 
-    @property
-    def webhook_status(self) -> google.rpc.status_pb2.Status:
+    @_builtins.property
+    def webhook_status(self) -> _status_pb2.Status:
         """Specifies the status of the webhook request."""
 
-    @property
-    def llm_call_started(self) -> global___LlmCallStartedEvent:
+    @_builtins.property
+    def llm_call_started(self) -> Global___LlmCallStartedEvent:
         """Emitted when an LLM call has started."""
 
-    @property
-    def llm_call_finished(self) -> global___LlmCallFinishedEvent:
+    @_builtins.property
+    def llm_call_finished(self) -> Global___LlmCallFinishedEvent:
         """Emitted when an LLM call has finished."""
 
-    @property
-    def llm_tool_call_started(self) -> global___LlmToolCallStartedEvent:
+    @_builtins.property
+    def llm_tool_call_started(self) -> Global___LlmToolCallStartedEvent:
         """Emitted when an LLM tool call has started."""
 
-    @property
-    def llm_tool_call_finished(self) -> global___LlmToolCallFinishedEvent:
+    @_builtins.property
+    def llm_tool_call_finished(self) -> Global___LlmToolCallFinishedEvent:
         """Emitted when an LLM tool call has finished."""
 
-    @property
-    def llm_thinking_delta(self) -> global___LlmThinkingDeltaEvent:
+    @_builtins.property
+    def llm_thinking_delta(self) -> Global___LlmThinkingDeltaEvent:
         """Emitted for an incremental LLM thinking (reasoning) update."""
 
-    @property
-    def llm_token_usage_update(self) -> global___LlmTokenUsageUpdateEvent:
+    @_builtins.property
+    def llm_token_usage_update(self) -> Global___LlmTokenUsageUpdateEvent:
         """Emitted when the running LLM token-usage totals are updated."""
 
-    @property
-    def llm_agent_node_event(self) -> global___LlmAgentNodeEvent:
+    @_builtins.property
+    def llm_agent_node_event(self) -> Global___LlmAgentNodeEvent:
         """Emitted when a node of an AI Team graph starts, completes or fails."""
 
-    @property
-    def turn_control_ack(self) -> global___TurnControlAck:
+    @_builtins.property
+    def turn_control_ack(self) -> Global___TurnControlAck:
         """Set on the response that acknowledges a <code>CancelTurn</code> or a <code>DiscardDraft</code> sent as
         <code>StreamingDetectIntentRequest.turn_control</code>; a <code>HeardReport</code> is not acknowledged on the
         stream. A response that carries it carries no query result and is never an answer. The acknowledgement of a
@@ -3147,49 +3292,53 @@ class StreamingDetectIntentResponse(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        response_id: builtins.str = ...,
-        recognition_result: global___StreamingRecognitionResult | None = ...,
-        query_result: global___QueryResult | None = ...,
-        webhook_status: google.rpc.status_pb2.Status | None = ...,
-        llm_call_started: global___LlmCallStartedEvent | None = ...,
-        llm_call_finished: global___LlmCallFinishedEvent | None = ...,
-        llm_tool_call_started: global___LlmToolCallStartedEvent | None = ...,
-        llm_tool_call_finished: global___LlmToolCallFinishedEvent | None = ...,
-        llm_thinking_delta: global___LlmThinkingDeltaEvent | None = ...,
-        llm_token_usage_update: global___LlmTokenUsageUpdateEvent | None = ...,
-        llm_agent_node_event: global___LlmAgentNodeEvent | None = ...,
-        turn_control_ack: global___TurnControlAck | None = ...,
-        client_turn_id: builtins.str = ...,
+        response_id: _builtins.str = ...,
+        recognition_result: Global___StreamingRecognitionResult | None = ...,
+        query_result: Global___QueryResult | None = ...,
+        webhook_status: _status_pb2.Status | None = ...,
+        llm_call_started: Global___LlmCallStartedEvent | None = ...,
+        llm_call_finished: Global___LlmCallFinishedEvent | None = ...,
+        llm_tool_call_started: Global___LlmToolCallStartedEvent | None = ...,
+        llm_tool_call_finished: Global___LlmToolCallFinishedEvent | None = ...,
+        llm_thinking_delta: Global___LlmThinkingDeltaEvent | None = ...,
+        llm_token_usage_update: Global___LlmTokenUsageUpdateEvent | None = ...,
+        llm_agent_node_event: Global___LlmAgentNodeEvent | None = ...,
+        turn_control_ack: Global___TurnControlAck | None = ...,
+        client_turn_id: _builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["llm_agent_node_event", b"llm_agent_node_event", "llm_call_finished", b"llm_call_finished", "llm_call_started", b"llm_call_started", "llm_thinking_delta", b"llm_thinking_delta", "llm_token_usage_update", b"llm_token_usage_update", "llm_tool_call_finished", b"llm_tool_call_finished", "llm_tool_call_started", b"llm_tool_call_started", "query_result", b"query_result", "recognition_result", b"recognition_result", "telemetry_event", b"telemetry_event", "turn_control_ack", b"turn_control_ack", "webhook_status", b"webhook_status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["client_turn_id", b"client_turn_id", "llm_agent_node_event", b"llm_agent_node_event", "llm_call_finished", b"llm_call_finished", "llm_call_started", b"llm_call_started", "llm_thinking_delta", b"llm_thinking_delta", "llm_token_usage_update", b"llm_token_usage_update", "llm_tool_call_finished", b"llm_tool_call_finished", "llm_tool_call_started", b"llm_tool_call_started", "query_result", b"query_result", "recognition_result", b"recognition_result", "response_id", b"response_id", "telemetry_event", b"telemetry_event", "turn_control_ack", b"turn_control_ack", "webhook_status", b"webhook_status"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["telemetry_event", b"telemetry_event"]) -> typing.Literal["llm_call_started", "llm_call_finished", "llm_tool_call_started", "llm_tool_call_finished", "llm_thinking_delta", "llm_token_usage_update", "llm_agent_node_event"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["llm_agent_node_event", b"llm_agent_node_event", "llm_call_finished", b"llm_call_finished", "llm_call_started", b"llm_call_started", "llm_thinking_delta", b"llm_thinking_delta", "llm_token_usage_update", b"llm_token_usage_update", "llm_tool_call_finished", b"llm_tool_call_finished", "llm_tool_call_started", b"llm_tool_call_started", "query_result", b"query_result", "recognition_result", b"recognition_result", "telemetry_event", b"telemetry_event", "turn_control_ack", b"turn_control_ack", "webhook_status", b"webhook_status"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["client_turn_id", b"client_turn_id", "llm_agent_node_event", b"llm_agent_node_event", "llm_call_finished", b"llm_call_finished", "llm_call_started", b"llm_call_started", "llm_thinking_delta", b"llm_thinking_delta", "llm_token_usage_update", b"llm_token_usage_update", "llm_tool_call_finished", b"llm_tool_call_finished", "llm_tool_call_started", b"llm_tool_call_started", "query_result", b"query_result", "recognition_result", b"recognition_result", "response_id", b"response_id", "telemetry_event", b"telemetry_event", "turn_control_ack", b"turn_control_ack", "webhook_status", b"webhook_status"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType_telemetry_event: _TypeAlias = _typing.Literal["llm_call_started", "llm_call_finished", "llm_tool_call_started", "llm_tool_call_finished", "llm_thinking_delta", "llm_token_usage_update", "llm_agent_node_event"]  # noqa: Y015
+    _WhichOneofArgType_telemetry_event: _TypeAlias = _typing.Literal["telemetry_event", b"telemetry_event"]  # noqa: Y015
+    def WhichOneof(self, oneof_group: _WhichOneofArgType_telemetry_event) -> _WhichOneofReturnType_telemetry_event | None: ...
 
-global___StreamingDetectIntentResponse = StreamingDetectIntentResponse
+Global___StreamingDetectIntentResponse: _TypeAlias = StreamingDetectIntentResponse  # noqa: Y015
 
-@typing.final
-class TurnControl(google.protobuf.message.Message):
+@_typing.final
+class TurnControl(_message.Message):
     """Controls one turn of a session. Sent as <code>StreamingDetectIntentRequest.turn_control</code> on a call-length
     stream, or in an <code>InterruptTurnRequest</code>.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    CANCEL_TURN_FIELD_NUMBER: builtins.int
-    HEARD_REPORT_FIELD_NUMBER: builtins.int
-    DISCARD_DRAFT_FIELD_NUMBER: builtins.int
-    @property
-    def cancel_turn(self) -> global___CancelTurn:
+    CANCEL_TURN_FIELD_NUMBER: _builtins.int
+    HEARD_REPORT_FIELD_NUMBER: _builtins.int
+    DISCARD_DRAFT_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def cancel_turn(self) -> Global___CancelTurn:
         """Cancel the turn: stop generating its answer. Acknowledged with a <code>TurnControlAck</code>."""
 
-    @property
-    def heard_report(self) -> global___HeardReport:
+    @_builtins.property
+    def heard_report(self) -> Global___HeardReport:
         """Report what the user heard of the turn's answer, so the server rewrites the session step and the LLM
         memory to it.
         """
 
-    @property
-    def discard_draft(self) -> global___DiscardDraft:
+    @_builtins.property
+    def discard_draft(self) -> Global___DiscardDraft:
         """Discard the session step of a preemptive draft the client did not use. Acknowledged with a
         <code>TurnControlAck</code>.
         """
@@ -3197,172 +3346,187 @@ class TurnControl(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        cancel_turn: global___CancelTurn | None = ...,
-        heard_report: global___HeardReport | None = ...,
-        discard_draft: global___DiscardDraft | None = ...,
+        cancel_turn: Global___CancelTurn | None = ...,
+        heard_report: Global___HeardReport | None = ...,
+        discard_draft: Global___DiscardDraft | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["cancel_turn", b"cancel_turn", "discard_draft", b"discard_draft", "heard_report", b"heard_report", "turn_control", b"turn_control"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["cancel_turn", b"cancel_turn", "discard_draft", b"discard_draft", "heard_report", b"heard_report", "turn_control", b"turn_control"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["turn_control", b"turn_control"]) -> typing.Literal["cancel_turn", "heard_report", "discard_draft"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["cancel_turn", b"cancel_turn", "discard_draft", b"discard_draft", "heard_report", b"heard_report", "turn_control", b"turn_control"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["cancel_turn", b"cancel_turn", "discard_draft", b"discard_draft", "heard_report", b"heard_report", "turn_control", b"turn_control"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType_turn_control: _TypeAlias = _typing.Literal["cancel_turn", "heard_report", "discard_draft"]  # noqa: Y015
+    _WhichOneofArgType_turn_control: _TypeAlias = _typing.Literal["turn_control", b"turn_control"]  # noqa: Y015
+    def WhichOneof(self, oneof_group: _WhichOneofArgType_turn_control) -> _WhichOneofReturnType_turn_control | None: ...
 
-global___TurnControl = TurnControl
+Global___TurnControl: _TypeAlias = TurnControl  # noqa: Y015
 
-@typing.final
-class CancelTurn(google.protobuf.message.Message):
+@_typing.final
+class CancelTurn(_message.Message):
     """Cancels a turn. At least one of <code>response_id</code> and <code>client_turn_id</code> must be set; when both
     are, <code>client_turn_id</code> is authoritative.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    RESPONSE_ID_FIELD_NUMBER: builtins.int
-    CLIENT_TURN_ID_FIELD_NUMBER: builtins.int
-    TURN_INTERRUPTION_REASON_FIELD_NUMBER: builtins.int
-    DECIDED_AT_FIELD_NUMBER: builtins.int
-    BACKGROUND_WORK_POLICY_FIELD_NUMBER: builtins.int
-    response_id: builtins.str
+    RESPONSE_ID_FIELD_NUMBER: _builtins.int
+    CLIENT_TURN_ID_FIELD_NUMBER: _builtins.int
+    TURN_INTERRUPTION_REASON_FIELD_NUMBER: _builtins.int
+    DECIDED_AT_FIELD_NUMBER: _builtins.int
+    BACKGROUND_WORK_POLICY_FIELD_NUMBER: _builtins.int
+    response_id: _builtins.str
     """The server's <code>response_id</code> of the turn, when the client has already received it; empty otherwise."""
-    client_turn_id: builtins.str
+    client_turn_id: _builtins.str
     """<code>StreamingDetectIntentRequest.client_turn_id</code> of the turn."""
-    turn_interruption_reason: global___TurnInterruptionReason.ValueType
+    turn_interruption_reason: Global___TurnInterruptionReason.ValueType
     """Why the turn is cancelled."""
-    background_work_policy: global___BackgroundWorkPolicy.ValueType
+    background_work_policy: Global___BackgroundWorkPolicy.ValueType
     """What happens to background work the turn started."""
-    @property
-    def decided_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def decided_at(self) -> _timestamp_pb2.Timestamp:
         """Wall-clock time at which the client decided to cancel. Telemetry only."""
 
     def __init__(
         self,
         *,
-        response_id: builtins.str = ...,
-        client_turn_id: builtins.str = ...,
-        turn_interruption_reason: global___TurnInterruptionReason.ValueType = ...,
-        decided_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        background_work_policy: global___BackgroundWorkPolicy.ValueType = ...,
+        response_id: _builtins.str = ...,
+        client_turn_id: _builtins.str = ...,
+        turn_interruption_reason: Global___TurnInterruptionReason.ValueType = ...,
+        decided_at: _timestamp_pb2.Timestamp | None = ...,
+        background_work_policy: Global___BackgroundWorkPolicy.ValueType = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["decided_at", b"decided_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["background_work_policy", b"background_work_policy", "client_turn_id", b"client_turn_id", "decided_at", b"decided_at", "response_id", b"response_id", "turn_interruption_reason", b"turn_interruption_reason"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["decided_at", b"decided_at"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["background_work_policy", b"background_work_policy", "client_turn_id", b"client_turn_id", "decided_at", b"decided_at", "response_id", b"response_id", "turn_interruption_reason", b"turn_interruption_reason"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___CancelTurn = CancelTurn
+Global___CancelTurn: _TypeAlias = CancelTurn  # noqa: Y015
 
-@typing.final
-class HeardMessage(google.protobuf.message.Message):
+@_typing.final
+class HeardMessage(_message.Message):
     """What the user heard of one spoken message of a turn."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    FULFILLMENT_MESSAGE_INDEX_FIELD_NUMBER: builtins.int
-    PLATFORM_FIELD_NUMBER: builtins.int
-    FULL_TEXT_FIELD_NUMBER: builtins.int
-    HEARD_TEXT_FIELD_NUMBER: builtins.int
-    HEARD_CHAR_COUNT_FIELD_NUMBER: builtins.int
-    HEARD_AUDIO_DURATION_IN_S_FIELD_NUMBER: builtins.int
-    TOTAL_AUDIO_DURATION_IN_S_FIELD_NUMBER: builtins.int
-    COMPLETED_FIELD_NUMBER: builtins.int
-    NEVER_STARTED_FIELD_NUMBER: builtins.int
-    SKIPPED_SIP_TRIGGER_FIELD_NUMBER: builtins.int
-    FILLER_ID_FIELD_NUMBER: builtins.int
-    fulfillment_message_index: builtins.int
+    FULFILLMENT_MESSAGE_INDEX_FIELD_NUMBER: _builtins.int
+    PLATFORM_FIELD_NUMBER: _builtins.int
+    FULL_TEXT_FIELD_NUMBER: _builtins.int
+    HEARD_TEXT_FIELD_NUMBER: _builtins.int
+    HEARD_CHAR_COUNT_FIELD_NUMBER: _builtins.int
+    HEARD_AUDIO_DURATION_IN_S_FIELD_NUMBER: _builtins.int
+    TOTAL_AUDIO_DURATION_IN_S_FIELD_NUMBER: _builtins.int
+    COMPLETED_FIELD_NUMBER: _builtins.int
+    NEVER_STARTED_FIELD_NUMBER: _builtins.int
+    SKIPPED_SIP_TRIGGER_FIELD_NUMBER: _builtins.int
+    FILLER_ID_FIELD_NUMBER: _builtins.int
+    fulfillment_message_index: _builtins.int
     """Index into the turn's <code>QueryResult.fulfillment_messages</code>; <code>-1</code> for a filler, which is
     not one of them.
     """
-    platform: ondewo.nlu.intent_pb2.Intent.Message.Platform.ValueType
+    platform: _intent_pb2.Intent.Message.Platform.ValueType
     """Platform of that fulfillment message."""
-    full_text: builtins.str
+    full_text: _builtins.str
     """The text that was synthesized for the message, SIP and SSML markup stripped."""
-    heard_text: builtins.str
+    heard_text: _builtins.str
     """The prefix of <code>full_text</code> the user heard, cut back to a word boundary."""
-    heard_char_count: builtins.int
+    heard_char_count: _builtins.int
     """Length of <code>heard_text</code> in Unicode code points."""
-    heard_audio_duration_in_s: builtins.float
+    heard_audio_duration_in_s: _builtins.float
     """Duration of the message's audio that was played to the user, in seconds."""
-    total_audio_duration_in_s: builtins.float
+    total_audio_duration_in_s: _builtins.float
     """Duration of the message's whole audio, in seconds; 0 when it was never synthesized."""
-    completed: builtins.bool
+    completed: _builtins.bool
     """The message was played to its end."""
-    never_started: builtins.bool
+    never_started: _builtins.bool
     """Nothing of the message was played (e.g. it was still queued when the turn was interrupted)."""
-    skipped_sip_trigger: builtins.bool
+    skipped_sip_trigger: _builtins.bool
     """The message carried a SIP trigger (e.g. a transfer or a hangup) that was NOT executed because the turn was
     interrupted first.
     """
-    filler_id: builtins.str
+    filler_id: _builtins.str
     """For a filler, the filler id the server sent in <code>diagnostic_info.ondewo_filler.filler_id</code>; empty
     otherwise.
     """
     def __init__(
         self,
         *,
-        fulfillment_message_index: builtins.int = ...,
-        platform: ondewo.nlu.intent_pb2.Intent.Message.Platform.ValueType = ...,
-        full_text: builtins.str = ...,
-        heard_text: builtins.str = ...,
-        heard_char_count: builtins.int = ...,
-        heard_audio_duration_in_s: builtins.float = ...,
-        total_audio_duration_in_s: builtins.float = ...,
-        completed: builtins.bool = ...,
-        never_started: builtins.bool = ...,
-        skipped_sip_trigger: builtins.bool = ...,
-        filler_id: builtins.str = ...,
+        fulfillment_message_index: _builtins.int = ...,
+        platform: _intent_pb2.Intent.Message.Platform.ValueType = ...,
+        full_text: _builtins.str = ...,
+        heard_text: _builtins.str = ...,
+        heard_char_count: _builtins.int = ...,
+        heard_audio_duration_in_s: _builtins.float = ...,
+        total_audio_duration_in_s: _builtins.float = ...,
+        completed: _builtins.bool = ...,
+        never_started: _builtins.bool = ...,
+        skipped_sip_trigger: _builtins.bool = ...,
+        filler_id: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["completed", b"completed", "filler_id", b"filler_id", "fulfillment_message_index", b"fulfillment_message_index", "full_text", b"full_text", "heard_audio_duration_in_s", b"heard_audio_duration_in_s", "heard_char_count", b"heard_char_count", "heard_text", b"heard_text", "never_started", b"never_started", "platform", b"platform", "skipped_sip_trigger", b"skipped_sip_trigger", "total_audio_duration_in_s", b"total_audio_duration_in_s"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["completed", b"completed", "filler_id", b"filler_id", "fulfillment_message_index", b"fulfillment_message_index", "full_text", b"full_text", "heard_audio_duration_in_s", b"heard_audio_duration_in_s", "heard_char_count", b"heard_char_count", "heard_text", b"heard_text", "never_started", b"never_started", "platform", b"platform", "skipped_sip_trigger", b"skipped_sip_trigger", "total_audio_duration_in_s", b"total_audio_duration_in_s"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___HeardMessage = HeardMessage
+Global___HeardMessage: _TypeAlias = HeardMessage  # noqa: Y015
 
-@typing.final
-class HeardReport(google.protobuf.message.Message):
+@_typing.final
+class HeardReport(_message.Message):
     """Reports what the user heard of a turn's answer. At least one of <code>response_id</code> and
     <code>client_turn_id</code> must be set. The server keeps the report with the highest <code>revision</code> per
     turn and ignores a lower or equal one.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    RESPONSE_ID_FIELD_NUMBER: builtins.int
-    CLIENT_TURN_ID_FIELD_NUMBER: builtins.int
-    REVISION_FIELD_NUMBER: builtins.int
-    TURN_INTERRUPTION_REASON_FIELD_NUMBER: builtins.int
-    HEARD_MESSAGES_FIELD_NUMBER: builtins.int
-    HEARD_TEXT_PRECISION_FIELD_NUMBER: builtins.int
-    CALLER_OVERLAP_DURATION_IN_S_FIELD_NUMBER: builtins.int
-    response_id: builtins.str
+    RESPONSE_ID_FIELD_NUMBER: _builtins.int
+    CLIENT_TURN_ID_FIELD_NUMBER: _builtins.int
+    REVISION_FIELD_NUMBER: _builtins.int
+    TURN_INTERRUPTION_REASON_FIELD_NUMBER: _builtins.int
+    HEARD_MESSAGES_FIELD_NUMBER: _builtins.int
+    HEARD_TEXT_PRECISION_FIELD_NUMBER: _builtins.int
+    CALLER_OVERLAP_DURATION_IN_S_FIELD_NUMBER: _builtins.int
+    response_id: _builtins.str
     """The server's <code>response_id</code> of the turn, when the client has already received it; empty otherwise."""
-    client_turn_id: builtins.str
+    client_turn_id: _builtins.str
     """<code>StreamingDetectIntentRequest.client_turn_id</code> of the turn."""
-    revision: builtins.int
+    revision: _builtins.int
     """Revision of this report, starting at 1. A later, more precise measurement of the same turn carries a higher
     revision.
     """
-    turn_interruption_reason: global___TurnInterruptionReason.ValueType
+    turn_interruption_reason: Global___TurnInterruptionReason.ValueType
     """Why the turn was interrupted."""
-    heard_text_precision: global___HeardTextPrecision.ValueType
+    heard_text_precision: Global___HeardTextPrecision.ValueType
     """How the heard text was determined."""
-    caller_overlap_duration_in_s: builtins.float
+    caller_overlap_duration_in_s: _builtins.float
     """Duration of heard audio that was played after the user had started speaking (the overlap of bot and user),
     in seconds.
     """
-    @property
-    def heard_messages(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___HeardMessage]:
+    @_builtins.property
+    def heard_messages(self) -> _containers.RepeatedCompositeFieldContainer[Global___HeardMessage]:
         """One entry per message of the turn that was spoken, queued or skipped, in playback order."""
 
     def __init__(
         self,
         *,
-        response_id: builtins.str = ...,
-        client_turn_id: builtins.str = ...,
-        revision: builtins.int = ...,
-        turn_interruption_reason: global___TurnInterruptionReason.ValueType = ...,
-        heard_messages: collections.abc.Iterable[global___HeardMessage] | None = ...,
-        heard_text_precision: global___HeardTextPrecision.ValueType = ...,
-        caller_overlap_duration_in_s: builtins.float = ...,
+        response_id: _builtins.str = ...,
+        client_turn_id: _builtins.str = ...,
+        revision: _builtins.int = ...,
+        turn_interruption_reason: Global___TurnInterruptionReason.ValueType = ...,
+        heard_messages: _abc.Iterable[Global___HeardMessage] | None = ...,
+        heard_text_precision: Global___HeardTextPrecision.ValueType = ...,
+        caller_overlap_duration_in_s: _builtins.float = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["caller_overlap_duration_in_s", b"caller_overlap_duration_in_s", "client_turn_id", b"client_turn_id", "heard_messages", b"heard_messages", "heard_text_precision", b"heard_text_precision", "response_id", b"response_id", "revision", b"revision", "turn_interruption_reason", b"turn_interruption_reason"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["caller_overlap_duration_in_s", b"caller_overlap_duration_in_s", "client_turn_id", b"client_turn_id", "heard_messages", b"heard_messages", "heard_text_precision", b"heard_text_precision", "response_id", b"response_id", "revision", b"revision", "turn_interruption_reason", b"turn_interruption_reason"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___HeardReport = HeardReport
+Global___HeardReport: _TypeAlias = HeardReport  # noqa: Y015
 
-@typing.final
-class DiscardDraft(google.protobuf.message.Message):
+@_typing.final
+class DiscardDraft(_message.Message):
     """Discards the session step of a preemptive draft: a turn the client started speculatively on a partial
     transcript and then did not use. The server deletes the session step only when it belongs to this session and its
     request carried <code>QueryParameters.preemptive_draft</code> = true; it answers
@@ -3370,104 +3534,118 @@ class DiscardDraft(google.protobuf.message.Message):
     <code>TURN_CONTROL_ACK_STATUS_UNKNOWN_TURN</code>.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    RESPONSE_ID_FIELD_NUMBER: builtins.int
-    response_id: builtins.str
+    RESPONSE_ID_FIELD_NUMBER: _builtins.int
+    response_id: _builtins.str
     """The server's <code>response_id</code> of the draft turn."""
     def __init__(
         self,
         *,
-        response_id: builtins.str = ...,
+        response_id: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["response_id", b"response_id"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["response_id", b"response_id"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___DiscardDraft = DiscardDraft
+Global___DiscardDraft: _TypeAlias = DiscardDraft  # noqa: Y015
 
-@typing.final
-class TurnControlAck(google.protobuf.message.Message):
+@_typing.final
+class TurnControlAck(_message.Message):
     """Acknowledges a turn control."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    RESPONSE_ID_FIELD_NUMBER: builtins.int
-    CLIENT_TURN_ID_FIELD_NUMBER: builtins.int
-    TURN_CONTROL_ACK_STATUS_FIELD_NUMBER: builtins.int
-    SERVER_CANCEL_DURATION_IN_S_FIELD_NUMBER: builtins.int
-    response_id: builtins.str
+    RESPONSE_ID_FIELD_NUMBER: _builtins.int
+    CLIENT_TURN_ID_FIELD_NUMBER: _builtins.int
+    TURN_CONTROL_ACK_STATUS_FIELD_NUMBER: _builtins.int
+    SERVER_CANCEL_DURATION_IN_S_FIELD_NUMBER: _builtins.int
+    response_id: _builtins.str
     """The server's <code>response_id</code> of the turn; empty when it is not known (e.g. a turn cancelled before
     it started).
     """
-    client_turn_id: builtins.str
+    client_turn_id: _builtins.str
     """<code>client_turn_id</code> of the turn, as sent by the client."""
-    turn_control_ack_status: global___TurnControlAckStatus.ValueType
+    turn_control_ack_status: Global___TurnControlAckStatus.ValueType
     """Outcome of the turn control."""
-    server_cancel_duration_in_s: builtins.float
+    server_cancel_duration_in_s: _builtins.float
     """Time the server took from receiving a <code>CancelTurn</code> until the turn's generation had stopped, in
     seconds; 0 for any other control.
     """
     def __init__(
         self,
         *,
-        response_id: builtins.str = ...,
-        client_turn_id: builtins.str = ...,
-        turn_control_ack_status: global___TurnControlAckStatus.ValueType = ...,
-        server_cancel_duration_in_s: builtins.float = ...,
+        response_id: _builtins.str = ...,
+        client_turn_id: _builtins.str = ...,
+        turn_control_ack_status: Global___TurnControlAckStatus.ValueType = ...,
+        server_cancel_duration_in_s: _builtins.float = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["client_turn_id", b"client_turn_id", "response_id", b"response_id", "server_cancel_duration_in_s", b"server_cancel_duration_in_s", "turn_control_ack_status", b"turn_control_ack_status"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["client_turn_id", b"client_turn_id", "response_id", b"response_id", "server_cancel_duration_in_s", b"server_cancel_duration_in_s", "turn_control_ack_status", b"turn_control_ack_status"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___TurnControlAck = TurnControlAck
+Global___TurnControlAck: _TypeAlias = TurnControlAck  # noqa: Y015
 
-@typing.final
-class InterruptTurnRequest(google.protobuf.message.Message):
+@_typing.final
+class InterruptTurnRequest(_message.Message):
     """The request to interrupt a turn of a session outside a <code>StreamingDetectIntent</code> stream."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    SESSION_FIELD_NUMBER: builtins.int
-    TURN_CONTROL_FIELD_NUMBER: builtins.int
-    session: builtins.str
+    SESSION_FIELD_NUMBER: _builtins.int
+    TURN_CONTROL_FIELD_NUMBER: _builtins.int
+    session: _builtins.str
     """Required. The session of the turn. Format:
     <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code>.
     """
-    @property
-    def turn_control(self) -> global___TurnControl:
+    @_builtins.property
+    def turn_control(self) -> Global___TurnControl:
         """Required. The control to apply."""
 
     def __init__(
         self,
         *,
-        session: builtins.str = ...,
-        turn_control: global___TurnControl | None = ...,
+        session: _builtins.str = ...,
+        turn_control: Global___TurnControl | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["turn_control", b"turn_control"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["session", b"session", "turn_control", b"turn_control"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["turn_control", b"turn_control"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["session", b"session", "turn_control", b"turn_control"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___InterruptTurnRequest = InterruptTurnRequest
+Global___InterruptTurnRequest: _TypeAlias = InterruptTurnRequest  # noqa: Y015
 
-@typing.final
-class InterruptTurnResponse(google.protobuf.message.Message):
+@_typing.final
+class InterruptTurnResponse(_message.Message):
     """The response to an <code>InterruptTurnRequest</code>."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    TURN_CONTROL_ACK_FIELD_NUMBER: builtins.int
-    @property
-    def turn_control_ack(self) -> global___TurnControlAck:
+    TURN_CONTROL_ACK_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def turn_control_ack(self) -> Global___TurnControlAck:
         """Outcome of the control."""
 
     def __init__(
         self,
         *,
-        turn_control_ack: global___TurnControlAck | None = ...,
+        turn_control_ack: Global___TurnControlAck | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["turn_control_ack", b"turn_control_ack"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["turn_control_ack", b"turn_control_ack"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["turn_control_ack", b"turn_control_ack"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["turn_control_ack", b"turn_control_ack"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___InterruptTurnResponse = InterruptTurnResponse
+Global___InterruptTurnResponse: _TypeAlias = InterruptTurnResponse  # noqa: Y015
 
-@typing.final
-class WarmTransferIntroConfig(google.protobuf.message.Message):
+@_typing.final
+class WarmTransferIntroConfig(_message.Message):
     """The configuration of one warm transfer intro, as resolved by the caller of
     <code>PrepareWarmTransferIntro</code>. A text left empty (or unset, for an <code>optional</code> field) falls back
     to the agent's default text for the language (<code>Agent.warm_transfer_settings</code>), then to the built-in
@@ -3475,186 +3653,199 @@ class WarmTransferIntroConfig(google.protobuf.message.Message):
     <code>caller_unreachable_message</code>.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    INTRO_PROMPT_FIELD_NUMBER: builtins.int
-    TEXT_SOURCE_FIELD_NUMBER: builtins.int
-    READY_QUESTION_FIELD_NUMBER: builtins.int
-    CONFIRM_HUMAN_BEFORE_INTRO_FIELD_NUMBER: builtins.int
-    ACCEPT_QUESTION_FIELD_NUMBER: builtins.int
-    DECLINE_REASON_QUESTION_FIELD_NUMBER: builtins.int
-    CALLER_DECLINED_MESSAGE_FIELD_NUMBER: builtins.int
-    CALLER_UNREACHABLE_MESSAGE_FIELD_NUMBER: builtins.int
-    ACCEPT_DTMF_FIELD_NUMBER: builtins.int
-    DECLINE_DTMF_FIELD_NUMBER: builtins.int
-    CALLEE_DISPLAY_NAME_FIELD_NUMBER: builtins.int
-    CALLEE_DESCRIPTION_FIELD_NUMBER: builtins.int
-    LLM_CCAI_SERVICE_NAME_FIELD_NUMBER: builtins.int
-    MAX_HISTORY_STEPS_FIELD_NUMBER: builtins.int
-    DECISION_TIMEOUT_S_FIELD_NUMBER: builtins.int
-    PROJECT_DISPLAY_NAME_FIELD_NUMBER: builtins.int
-    intro_prompt: builtins.str
+    INTRO_PROMPT_FIELD_NUMBER: _builtins.int
+    TEXT_SOURCE_FIELD_NUMBER: _builtins.int
+    READY_QUESTION_FIELD_NUMBER: _builtins.int
+    CONFIRM_HUMAN_BEFORE_INTRO_FIELD_NUMBER: _builtins.int
+    ACCEPT_QUESTION_FIELD_NUMBER: _builtins.int
+    DECLINE_REASON_QUESTION_FIELD_NUMBER: _builtins.int
+    CALLER_DECLINED_MESSAGE_FIELD_NUMBER: _builtins.int
+    CALLER_UNREACHABLE_MESSAGE_FIELD_NUMBER: _builtins.int
+    ACCEPT_DTMF_FIELD_NUMBER: _builtins.int
+    DECLINE_DTMF_FIELD_NUMBER: _builtins.int
+    CALLEE_DISPLAY_NAME_FIELD_NUMBER: _builtins.int
+    CALLEE_DESCRIPTION_FIELD_NUMBER: _builtins.int
+    LLM_CCAI_SERVICE_NAME_FIELD_NUMBER: _builtins.int
+    MAX_HISTORY_STEPS_FIELD_NUMBER: _builtins.int
+    DECISION_TIMEOUT_S_FIELD_NUMBER: _builtins.int
+    PROJECT_DISPLAY_NAME_FIELD_NUMBER: _builtins.int
+    intro_prompt: _builtins.str
     """The LLM instruction (<code>WARM_TRANSFER_INTRO_TEXT_SOURCE_LLM_SUMMARY</code>) or the template text
     (<code>WARM_TRANSFER_INTRO_TEXT_SOURCE_TEMPLATE</code>, placeholders <code>{caller_name}</code>,
     <code>{callee_name}</code>, <code>{topic}</code>, <code>{summary}</code>) of the intro. At most 4000 characters.
     """
-    text_source: global___WarmTransferIntroTextSource.ValueType
+    text_source: Global___WarmTransferIntroTextSource.ValueType
     """Where the intro text comes from."""
-    ready_question: builtins.str
+    ready_question: _builtins.str
     """The first question to the target, which must not reveal anything about the caller, e.g. "Hier ist der
     digitale Assistent von {project}. Ich habe einen Anruf für Sie. Sind Sie am Apparat? Sagen Sie ja oder
     drücken Sie 1." Placeholder <code>{project}</code>: <code>project_display_name</code>.
     """
-    confirm_human_before_intro: builtins.bool
+    confirm_human_before_intro: _builtins.bool
     """Whether the intro is spoken only after the target answered <code>ready_question</code> (a guard against a
     mailbox). Unset = true.
     """
-    accept_question: builtins.str
+    accept_question: _builtins.str
     """The question after the intro, e.g. "Möchten Sie das Gespräch übernehmen? Ja oder 1, nein oder 2." """
-    decline_reason_question: builtins.str
+    decline_reason_question: _builtins.str
     """The question after a decline, e.g. "Was darf ich dem Anrufer ausrichten?". Unset = the agent's or the
     built-in default; set to "" = the reason is not asked for.
     """
-    caller_declined_message: builtins.str
+    caller_declined_message: _builtins.str
     """The template of the message the caller hears after a decline. Placeholders <code>{callee_name}</code> and
     <code>{reason}</code>; without a reason, the variant without the reason clause is used.
     """
-    caller_unreachable_message: builtins.str
+    caller_unreachable_message: _builtins.str
     """The template of the message the caller hears when the target was busy, did not answer, gave no decision or
     the intro could not run. Placeholder <code>{callee_name}</code>.
     """
-    accept_dtmf: builtins.str
+    accept_dtmf: _builtins.str
     """The DTMF key that accepts: one of <code>0-9</code>, <code>*</code>, <code>#</code>. Empty = "1"."""
-    decline_dtmf: builtins.str
+    decline_dtmf: _builtins.str
     """The DTMF key that declines: one of <code>0-9</code>, <code>*</code>, <code>#</code>, different from
     <code>accept_dtmf</code>. Empty = "2".
     """
-    callee_display_name: builtins.str
+    callee_display_name: _builtins.str
     """Who the target is, e.g. "Frau Berger, Buchhaltung": <code>{callee_name}</code>. At most 128 characters."""
-    callee_description: builtins.str
+    callee_description: _builtins.str
     """The role and context of the target, given to the LLM intro. At most 512 characters."""
-    llm_ccai_service_name: builtins.str
+    llm_ccai_service_name: _builtins.str
     """The <code>ONDEWO_NLU_LLM</code> CCAI service of the LLM intro. Empty = the agent's
     <code>warm_transfer_settings.llm_ccai_service_name</code>, then the project's first
     <code>ONDEWO_NLU_LLM</code> service.
     """
-    max_history_steps: builtins.int
+    max_history_steps: _builtins.int
     """How many of the latest steps of the source session the intro reads. 0 = 30."""
-    decision_timeout_s: builtins.int
+    decision_timeout_s: _builtins.int
     """Seconds from a question to the decision, declared to the client as the expected input's timeout."""
-    project_display_name: builtins.str
+    project_display_name: _builtins.str
     """The project's display name: <code>{project}</code> in <code>ready_question</code>."""
     def __init__(
         self,
         *,
-        intro_prompt: builtins.str = ...,
-        text_source: global___WarmTransferIntroTextSource.ValueType = ...,
-        ready_question: builtins.str = ...,
-        confirm_human_before_intro: builtins.bool | None = ...,
-        accept_question: builtins.str = ...,
-        decline_reason_question: builtins.str | None = ...,
-        caller_declined_message: builtins.str = ...,
-        caller_unreachable_message: builtins.str = ...,
-        accept_dtmf: builtins.str = ...,
-        decline_dtmf: builtins.str = ...,
-        callee_display_name: builtins.str = ...,
-        callee_description: builtins.str = ...,
-        llm_ccai_service_name: builtins.str = ...,
-        max_history_steps: builtins.int = ...,
-        decision_timeout_s: builtins.int = ...,
-        project_display_name: builtins.str = ...,
+        intro_prompt: _builtins.str = ...,
+        text_source: Global___WarmTransferIntroTextSource.ValueType = ...,
+        ready_question: _builtins.str = ...,
+        confirm_human_before_intro: _builtins.bool | None = ...,
+        accept_question: _builtins.str = ...,
+        decline_reason_question: _builtins.str | None = ...,
+        caller_declined_message: _builtins.str = ...,
+        caller_unreachable_message: _builtins.str = ...,
+        accept_dtmf: _builtins.str = ...,
+        decline_dtmf: _builtins.str = ...,
+        callee_display_name: _builtins.str = ...,
+        callee_description: _builtins.str = ...,
+        llm_ccai_service_name: _builtins.str = ...,
+        max_history_steps: _builtins.int = ...,
+        decision_timeout_s: _builtins.int = ...,
+        project_display_name: _builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_confirm_human_before_intro", b"_confirm_human_before_intro", "_decline_reason_question", b"_decline_reason_question", "confirm_human_before_intro", b"confirm_human_before_intro", "decline_reason_question", b"decline_reason_question"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_confirm_human_before_intro", b"_confirm_human_before_intro", "_decline_reason_question", b"_decline_reason_question", "accept_dtmf", b"accept_dtmf", "accept_question", b"accept_question", "callee_description", b"callee_description", "callee_display_name", b"callee_display_name", "caller_declined_message", b"caller_declined_message", "caller_unreachable_message", b"caller_unreachable_message", "confirm_human_before_intro", b"confirm_human_before_intro", "decision_timeout_s", b"decision_timeout_s", "decline_dtmf", b"decline_dtmf", "decline_reason_question", b"decline_reason_question", "intro_prompt", b"intro_prompt", "llm_ccai_service_name", b"llm_ccai_service_name", "max_history_steps", b"max_history_steps", "project_display_name", b"project_display_name", "ready_question", b"ready_question", "text_source", b"text_source"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_confirm_human_before_intro", b"_confirm_human_before_intro"]) -> typing.Literal["confirm_human_before_intro"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_decline_reason_question", b"_decline_reason_question"]) -> typing.Literal["decline_reason_question"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["_confirm_human_before_intro", b"_confirm_human_before_intro", "_decline_reason_question", b"_decline_reason_question", "confirm_human_before_intro", b"confirm_human_before_intro", "decline_reason_question", b"decline_reason_question"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["_confirm_human_before_intro", b"_confirm_human_before_intro", "_decline_reason_question", b"_decline_reason_question", "accept_dtmf", b"accept_dtmf", "accept_question", b"accept_question", "callee_description", b"callee_description", "callee_display_name", b"callee_display_name", "caller_declined_message", b"caller_declined_message", "caller_unreachable_message", b"caller_unreachable_message", "confirm_human_before_intro", b"confirm_human_before_intro", "decision_timeout_s", b"decision_timeout_s", "decline_dtmf", b"decline_dtmf", "decline_reason_question", b"decline_reason_question", "intro_prompt", b"intro_prompt", "llm_ccai_service_name", b"llm_ccai_service_name", "max_history_steps", b"max_history_steps", "project_display_name", b"project_display_name", "ready_question", b"ready_question", "text_source", b"text_source"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType__confirm_human_before_intro: _TypeAlias = _typing.Literal["confirm_human_before_intro"]  # noqa: Y015
+    _WhichOneofArgType__confirm_human_before_intro: _TypeAlias = _typing.Literal["_confirm_human_before_intro", b"_confirm_human_before_intro"]  # noqa: Y015
+    _WhichOneofReturnType__decline_reason_question: _TypeAlias = _typing.Literal["decline_reason_question"]  # noqa: Y015
+    _WhichOneofArgType__decline_reason_question: _TypeAlias = _typing.Literal["_decline_reason_question", b"_decline_reason_question"]  # noqa: Y015
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__confirm_human_before_intro) -> _WhichOneofReturnType__confirm_human_before_intro | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__decline_reason_question) -> _WhichOneofReturnType__decline_reason_question | None: ...
 
-global___WarmTransferIntroConfig = WarmTransferIntroConfig
+Global___WarmTransferIntroConfig: _TypeAlias = WarmTransferIntroConfig  # noqa: Y015
 
-@typing.final
-class PrepareWarmTransferIntroRequest(google.protobuf.message.Message):
+@_typing.final
+class PrepareWarmTransferIntroRequest(_message.Message):
     """The request to prepare the intro session of a warm transfer."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    INTRO_SESSION_FIELD_NUMBER: builtins.int
-    SOURCE_SESSION_FIELD_NUMBER: builtins.int
-    CONFIG_FIELD_NUMBER: builtins.int
-    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
-    TRANSFER_REQUEST_ID_FIELD_NUMBER: builtins.int
-    intro_session: builtins.str
+    INTRO_SESSION_FIELD_NUMBER: _builtins.int
+    SOURCE_SESSION_FIELD_NUMBER: _builtins.int
+    CONFIG_FIELD_NUMBER: _builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: _builtins.int
+    TRANSFER_REQUEST_ID_FIELD_NUMBER: _builtins.int
+    intro_session: _builtins.str
     """Required. The intro session, which must not exist yet. Format:
     <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code>. An existing session that
     was not prepared with the same <code>transfer_request_id</code> is refused with
     <code>ALREADY_EXISTS</code>.
     """
-    source_session: builtins.str
+    source_session: _builtins.str
     """Required. The caller's session the intro summarises. Format:
     <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code>. A session of another project
     than <code>intro_session</code> is refused with <code>INVALID_ARGUMENT</code>.
     """
-    language_code: builtins.str
+    language_code: _builtins.str
     """The language of the intro session."""
-    transfer_request_id: builtins.str
+    transfer_request_id: _builtins.str
     """Required. The idempotency key of the transfer."""
-    @property
-    def config(self) -> global___WarmTransferIntroConfig:
+    @_builtins.property
+    def config(self) -> Global___WarmTransferIntroConfig:
         """The configuration of the intro."""
 
     def __init__(
         self,
         *,
-        intro_session: builtins.str = ...,
-        source_session: builtins.str = ...,
-        config: global___WarmTransferIntroConfig | None = ...,
-        language_code: builtins.str = ...,
-        transfer_request_id: builtins.str = ...,
+        intro_session: _builtins.str = ...,
+        source_session: _builtins.str = ...,
+        config: Global___WarmTransferIntroConfig | None = ...,
+        language_code: _builtins.str = ...,
+        transfer_request_id: _builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["config", b"config"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["config", b"config", "intro_session", b"intro_session", "language_code", b"language_code", "source_session", b"source_session", "transfer_request_id", b"transfer_request_id"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["config", b"config"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["config", b"config", "intro_session", b"intro_session", "language_code", b"language_code", "source_session", b"source_session", "transfer_request_id", b"transfer_request_id"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___PrepareWarmTransferIntroRequest = PrepareWarmTransferIntroRequest
+Global___PrepareWarmTransferIntroRequest: _TypeAlias = PrepareWarmTransferIntroRequest  # noqa: Y015
 
-@typing.final
-class PrepareWarmTransferIntroResponse(google.protobuf.message.Message):
+@_typing.final
+class PrepareWarmTransferIntroResponse(_message.Message):
     """The response to a <code>PrepareWarmTransferIntroRequest</code>. Never carries the intro text."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    TEXT_SOURCE_USED_FIELD_NUMBER: builtins.int
-    TEXT_FELL_BACK_FIELD_NUMBER: builtins.int
-    INTRO_TEXT_CHARS_FIELD_NUMBER: builtins.int
-    PROMPT_DIGEST_FIELD_NUMBER: builtins.int
-    text_source_used: global___WarmTransferIntroTextSource.ValueType
+    TEXT_SOURCE_USED_FIELD_NUMBER: _builtins.int
+    TEXT_FELL_BACK_FIELD_NUMBER: _builtins.int
+    INTRO_TEXT_CHARS_FIELD_NUMBER: _builtins.int
+    PROMPT_DIGEST_FIELD_NUMBER: _builtins.int
+    text_source_used: Global___WarmTransferIntroTextSource.ValueType
     """The source the intro text was rendered from."""
-    text_fell_back: builtins.bool
+    text_fell_back: _builtins.bool
     """True when the LLM failed or exceeded its budget and the TEMPLATE was used instead."""
-    intro_text_chars: builtins.int
+    intro_text_chars: _builtins.int
     """The length of the intro text in characters."""
-    prompt_digest: builtins.str
+    prompt_digest: _builtins.str
     """The SHA-256 (hex) of the resolved prompt, for audit."""
     def __init__(
         self,
         *,
-        text_source_used: global___WarmTransferIntroTextSource.ValueType = ...,
-        text_fell_back: builtins.bool = ...,
-        intro_text_chars: builtins.int = ...,
-        prompt_digest: builtins.str = ...,
+        text_source_used: Global___WarmTransferIntroTextSource.ValueType = ...,
+        text_fell_back: _builtins.bool = ...,
+        intro_text_chars: _builtins.int = ...,
+        prompt_digest: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["intro_text_chars", b"intro_text_chars", "prompt_digest", b"prompt_digest", "text_fell_back", b"text_fell_back", "text_source_used", b"text_source_used"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["intro_text_chars", b"intro_text_chars", "prompt_digest", b"prompt_digest", "text_fell_back", b"text_fell_back", "text_source_used", b"text_source_used"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___PrepareWarmTransferIntroResponse = PrepareWarmTransferIntroResponse
+Global___PrepareWarmTransferIntroResponse: _TypeAlias = PrepareWarmTransferIntroResponse  # noqa: Y015
 
-@typing.final
-class GetWarmTransferIntroOutcomeRequest(google.protobuf.message.Message):
+@_typing.final
+class GetWarmTransferIntroOutcomeRequest(_message.Message):
     """The request for the outcome of a warm transfer intro."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    INTRO_SESSION_FIELD_NUMBER: builtins.int
-    intro_session: builtins.str
+    INTRO_SESSION_FIELD_NUMBER: _builtins.int
+    intro_session: _builtins.str
     """Required. The intro session. Format:
     <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code>. A session that was not
     prepared by <code>PrepareWarmTransferIntro</code> is answered with <code>NOT_FOUND</code>.
@@ -3662,50 +3853,58 @@ class GetWarmTransferIntroOutcomeRequest(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        intro_session: builtins.str = ...,
+        intro_session: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["intro_session", b"intro_session"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["intro_session", b"intro_session"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GetWarmTransferIntroOutcomeRequest = GetWarmTransferIntroOutcomeRequest
+Global___GetWarmTransferIntroOutcomeRequest: _TypeAlias = GetWarmTransferIntroOutcomeRequest  # noqa: Y015
 
-@typing.final
-class WarmTransferIntroOutcome(google.protobuf.message.Message):
+@_typing.final
+class WarmTransferIntroOutcome(_message.Message):
     """The outcome of a warm transfer intro. Holds no intro text and no reason text."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    DECISION_FIELD_NUMBER: builtins.int
-    DECIDED_BY_FIELD_NUMBER: builtins.int
-    DECLINE_REASON_PRESENT_FIELD_NUMBER: builtins.int
-    STAGE_FIELD_NUMBER: builtins.int
-    CAUSE_FIELD_NUMBER: builtins.int
-    decision: global___WarmTransferIntroDecision.ValueType
+    DECISION_FIELD_NUMBER: _builtins.int
+    DECIDED_BY_FIELD_NUMBER: _builtins.int
+    DECLINE_REASON_PRESENT_FIELD_NUMBER: _builtins.int
+    STAGE_FIELD_NUMBER: _builtins.int
+    CAUSE_FIELD_NUMBER: _builtins.int
+    decision: Global___WarmTransferIntroDecision.ValueType
     """The decision of the target."""
-    decided_by: global___WarmTransferIntroDecidedBy.ValueType
+    decided_by: Global___WarmTransferIntroDecidedBy.ValueType
     """How the decision was given."""
-    decline_reason_present: builtins.bool
+    decline_reason_present: _builtins.bool
     """True when the target gave a reason after declining."""
-    stage: global___WarmTransferIntroStage.ValueType
+    stage: Global___WarmTransferIntroStage.ValueType
     """The stage of the intro session."""
-    cause: builtins.str
+    cause: _builtins.str
     """A bounded token naming why there is no decision, e.g. <code>voicemail-suspected</code> (no ready answer) or
     <code>unclear-twice</code>; empty otherwise.
     """
     def __init__(
         self,
         *,
-        decision: global___WarmTransferIntroDecision.ValueType = ...,
-        decided_by: global___WarmTransferIntroDecidedBy.ValueType = ...,
-        decline_reason_present: builtins.bool = ...,
-        stage: global___WarmTransferIntroStage.ValueType = ...,
-        cause: builtins.str = ...,
+        decision: Global___WarmTransferIntroDecision.ValueType = ...,
+        decided_by: Global___WarmTransferIntroDecidedBy.ValueType = ...,
+        decline_reason_present: _builtins.bool = ...,
+        stage: Global___WarmTransferIntroStage.ValueType = ...,
+        cause: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["cause", b"cause", "decided_by", b"decided_by", "decision", b"decision", "decline_reason_present", b"decline_reason_present", "stage", b"stage"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["cause", b"cause", "decided_by", b"decided_by", "decision", b"decision", "decline_reason_present", b"decline_reason_present", "stage", b"stage"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___WarmTransferIntroOutcome = WarmTransferIntroOutcome
+Global___WarmTransferIntroOutcome: _TypeAlias = WarmTransferIntroOutcome  # noqa: Y015
 
-@typing.final
-class StreamingRecognitionResult(google.protobuf.message.Message):
+@_typing.final
+class StreamingRecognitionResult(_message.Message):
     """Contains a speech recognition result corresponding to a portion of the audio that is currently being processed or an indication that this is the end of the single requested utterance.
 
     Example:
@@ -3738,14 +3937,14 @@ class StreamingRecognitionResult(google.protobuf.message.Message):
     </ul>
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     class _MessageType:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _TypeAlias = ValueType  # noqa: Y015
 
-    class _MessageTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[StreamingRecognitionResult._MessageType.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _MessageTypeEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[StreamingRecognitionResult._MessageType.ValueType], _builtins.type):
+        DESCRIPTOR: _descriptor.EnumDescriptor
         MESSAGE_TYPE_UNSPECIFIED: StreamingRecognitionResult._MessageType.ValueType  # 0
         """Not specified. Should never be used."""
         TRANSCRIPT: StreamingRecognitionResult._MessageType.ValueType  # 1
@@ -3777,24 +3976,24 @@ class StreamingRecognitionResult(google.protobuf.message.Message):
     <code>single_utterance</code> was set to <code>true</code>, and is not used otherwise.
     """
 
-    MESSAGE_TYPE_FIELD_NUMBER: builtins.int
-    TRANSCRIPT_FIELD_NUMBER: builtins.int
-    IS_FINAL_FIELD_NUMBER: builtins.int
-    CONFIDENCE_FIELD_NUMBER: builtins.int
-    message_type: global___StreamingRecognitionResult.MessageType.ValueType
+    MESSAGE_TYPE_FIELD_NUMBER: _builtins.int
+    TRANSCRIPT_FIELD_NUMBER: _builtins.int
+    IS_FINAL_FIELD_NUMBER: _builtins.int
+    CONFIDENCE_FIELD_NUMBER: _builtins.int
+    message_type: Global___StreamingRecognitionResult.MessageType.ValueType
     """Type of the result message."""
-    transcript: builtins.str
+    transcript: _builtins.str
     """Transcript text representing the words that the user spoke.
     Populated if and only if <code>event_type</code> = <code>RECOGNITION_EVENT_TRANSCRIPT</code>.
     """
-    is_final: builtins.bool
+    is_final: _builtins.bool
     """The default of 0.0 is a sentinel value indicating <code>confidence</code> was not set.
     If <code>false</code>, the <code>StreamingRecognitionResult</code> represents an
     interim result that may change. If <code>true</code>, the recognizer will not return
     any further hypotheses about this piece of the audio. May only be populated
     for <code>event_type</code> = <code>RECOGNITION_EVENT_TRANSCRIPT</code>.
     """
-    confidence: builtins.float
+    confidence: _builtins.float
     """The Speech confidence between 0.0 and 1.0 for the current portion of audio.
     A higher number indicates an estimated greater likelihood that the
     recognized words are correct. The default of 0.0 is a sentinel value
@@ -3806,41 +4005,45 @@ class StreamingRecognitionResult(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        message_type: global___StreamingRecognitionResult.MessageType.ValueType = ...,
-        transcript: builtins.str = ...,
-        is_final: builtins.bool = ...,
-        confidence: builtins.float = ...,
+        message_type: Global___StreamingRecognitionResult.MessageType.ValueType = ...,
+        transcript: _builtins.str = ...,
+        is_final: _builtins.bool = ...,
+        confidence: _builtins.float = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["confidence", b"confidence", "is_final", b"is_final", "message_type", b"message_type", "transcript", b"transcript"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["confidence", b"confidence", "is_final", b"is_final", "message_type", b"message_type", "transcript", b"transcript"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___StreamingRecognitionResult = StreamingRecognitionResult
+Global___StreamingRecognitionResult: _TypeAlias = StreamingRecognitionResult  # noqa: Y015
 
-@typing.final
-class InputAudioConfig(google.protobuf.message.Message):
+@_typing.final
+class InputAudioConfig(_message.Message):
     """Instructs the speech recognizer how to process the audio content."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    AUDIO_ENCODING_FIELD_NUMBER: builtins.int
-    SAMPLE_RATE_HERTZ_FIELD_NUMBER: builtins.int
-    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
-    PHRASE_HINTS_FIELD_NUMBER: builtins.int
-    audio_encoding: global___AudioEncoding.ValueType
+    AUDIO_ENCODING_FIELD_NUMBER: _builtins.int
+    SAMPLE_RATE_HERTZ_FIELD_NUMBER: _builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: _builtins.int
+    PHRASE_HINTS_FIELD_NUMBER: _builtins.int
+    audio_encoding: Global___AudioEncoding.ValueType
     """Required. Audio encoding of the audio content to process."""
-    sample_rate_hertz: builtins.int
+    sample_rate_hertz: _builtins.int
     """Required. Sample rate (in Hertz) of the audio content sent in the query.
     Refer to <a href="/speech/docs/basics">Cloud Speech API documentation</a> for more
     details.
     """
-    language_code: builtins.str
+    language_code: _builtins.str
     """Required. The language of the supplied audio. Dialogflow does not do
     translations. See <a href="https://dialogflow.com/docs/languages">Language
     Support</a> for a list of the
     currently supported language codes. Note that queries in the same session
     do not necessarily need to specify the same language.
     """
-    @property
-    def phrase_hints(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def phrase_hints(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Optional. The collection of phrase hints which are used to boost accuracy
         of speech recognition.
         Refer to <a href="/speech/docs/basics#phrase-hints">Cloud Speech API documentation</a>
@@ -3850,28 +4053,32 @@ class InputAudioConfig(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        audio_encoding: global___AudioEncoding.ValueType = ...,
-        sample_rate_hertz: builtins.int = ...,
-        language_code: builtins.str = ...,
-        phrase_hints: collections.abc.Iterable[builtins.str] | None = ...,
+        audio_encoding: Global___AudioEncoding.ValueType = ...,
+        sample_rate_hertz: _builtins.int = ...,
+        language_code: _builtins.str = ...,
+        phrase_hints: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["audio_encoding", b"audio_encoding", "language_code", b"language_code", "phrase_hints", b"phrase_hints", "sample_rate_hertz", b"sample_rate_hertz"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["audio_encoding", b"audio_encoding", "language_code", b"language_code", "phrase_hints", b"phrase_hints", "sample_rate_hertz", b"sample_rate_hertz"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___InputAudioConfig = InputAudioConfig
+Global___InputAudioConfig: _TypeAlias = InputAudioConfig  # noqa: Y015
 
-@typing.final
-class TextInput(google.protobuf.message.Message):
+@_typing.final
+class TextInput(_message.Message):
     """Represents the natural language text to be processed."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    TEXT_FIELD_NUMBER: builtins.int
-    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
-    text: builtins.str
+    TEXT_FIELD_NUMBER: _builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: _builtins.int
+    text: _builtins.str
     """Required. The UTF-8 encoded natural language text to be processed.
     Text length must not exceed 256 bytes.
     """
-    language_code: builtins.str
+    language_code: _builtins.str
     """Required. The language of this conversational query. See <a href="https://dialogflow.com/docs/languages">Language
     Support</a> for a list of the
     currently supported language codes. Note that queries in the same session
@@ -3880,64 +4087,71 @@ class TextInput(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        text: builtins.str = ...,
-        language_code: builtins.str = ...,
+        text: _builtins.str = ...,
+        language_code: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["language_code", b"language_code", "text", b"text"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["language_code", b"language_code", "text", b"text"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___TextInput = TextInput
+Global___TextInput: _TypeAlias = TextInput  # noqa: Y015
 
-@typing.final
-class EventInput(google.protobuf.message.Message):
+@_typing.final
+class EventInput(_message.Message):
     """Events allow for matching intents by event name instead of the natural language input.
     For instance, input <code>&lt;event: { name: &quot;welcome_event&quot;, parameters: { name: &quot;Sam&quot; } }&gt;</code> can trigger a personalized welcome response.
     The parameter <code>name</code> may be used by the agent in the response: <code>&quot;Hello #welcome_event.name! What can I do for you today?&quot;</code>.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NAME_FIELD_NUMBER: builtins.int
-    PARAMETERS_FIELD_NUMBER: builtins.int
-    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    PARAMETERS_FIELD_NUMBER: _builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """Required. The unique identifier of the event."""
-    language_code: builtins.str
+    language_code: _builtins.str
     """Required. The language of this query. See <a href="https://dialogflow.com/docs/languages">Language
     Support</a> for a list of the
     currently supported language codes. Note that queries in the same session
     do not necessarily need to specify the same language.
     """
-    @property
-    def parameters(self) -> google.protobuf.struct_pb2.Struct:
+    @_builtins.property
+    def parameters(self) -> _struct_pb2.Struct:
         """Optional. The collection of parameters associated with the event."""
 
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
-        parameters: google.protobuf.struct_pb2.Struct | None = ...,
-        language_code: builtins.str = ...,
+        name: _builtins.str = ...,
+        parameters: _struct_pb2.Struct | None = ...,
+        language_code: _builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["parameters", b"parameters"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["language_code", b"language_code", "name", b"name", "parameters", b"parameters"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["parameters", b"parameters"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["language_code", b"language_code", "name", b"name", "parameters", b"parameters"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___EventInput = EventInput
+Global___EventInput: _TypeAlias = EventInput  # noqa: Y015
 
-@typing.final
-class Session(google.protobuf.message.Message):
+@_typing.final
+class Session(_message.Message):
     """*** SESSION RELATED MESSAGES *** //
 
     Session of a user interaction
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     class _View:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _TypeAlias = ValueType  # noqa: Y015
 
-    class _ViewEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[Session._View.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _ViewEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[Session._View.ValueType], _builtins.type):
+        DESCRIPTOR: _descriptor.EnumDescriptor
         VIEW_UNSPECIFIED: Session._View.ValueType  # 0
         """Endpoints decide whether to return the full or the sparse view"""
         VIEW_FULL: Session._View.ValueType  # 1
@@ -3957,108 +4171,111 @@ class Session(google.protobuf.message.Message):
     VIEW_SPARSE: Session.View.ValueType  # 2
     """Only some fields are populated in the response."""
 
-    NAME_FIELD_NUMBER: builtins.int
-    SESSION_STEPS_FIELD_NUMBER: builtins.int
-    SESSION_INFO_FIELD_NUMBER: builtins.int
-    CREATED_AT_FIELD_NUMBER: builtins.int
-    MODIFIED_AT_FIELD_NUMBER: builtins.int
-    CREATED_BY_FIELD_NUMBER: builtins.int
-    MODIFIED_BY_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    SESSION_STEPS_FIELD_NUMBER: _builtins.int
+    SESSION_INFO_FIELD_NUMBER: _builtins.int
+    CREATED_AT_FIELD_NUMBER: _builtins.int
+    MODIFIED_AT_FIELD_NUMBER: _builtins.int
+    CREATED_BY_FIELD_NUMBER: _builtins.int
+    MODIFIED_BY_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """The unique identifier of the session
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
     """
-    created_by: builtins.str
+    created_by: _builtins.str
     """User id in form of a valid UUID."""
-    modified_by: builtins.str
+    modified_by: _builtins.str
     """User id in form of a valid UUID."""
-    @property
-    def session_steps(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___SessionStep]:
+    @_builtins.property
+    def session_steps(self) -> _containers.RepeatedCompositeFieldContainer[Global___SessionStep]:
         """The list of all the steps of the session"""
 
-    @property
-    def session_info(self) -> global___SessionInfo:
+    @_builtins.property
+    def session_info(self) -> Global___SessionInfo:
         """session information"""
 
-    @property
-    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def created_at(self) -> _timestamp_pb2.Timestamp:
         """Creation date and time. Read-only field."""
 
-    @property
-    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def modified_at(self) -> _timestamp_pb2.Timestamp:
         """Modification date and time. Read-only field."""
 
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
-        session_steps: collections.abc.Iterable[global___SessionStep] | None = ...,
-        session_info: global___SessionInfo | None = ...,
-        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        created_by: builtins.str = ...,
-        modified_by: builtins.str = ...,
+        name: _builtins.str = ...,
+        session_steps: _abc.Iterable[Global___SessionStep] | None = ...,
+        session_info: Global___SessionInfo | None = ...,
+        created_at: _timestamp_pb2.Timestamp | None = ...,
+        modified_at: _timestamp_pb2.Timestamp | None = ...,
+        created_by: _builtins.str = ...,
+        modified_by: _builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at", "session_info", b"session_info"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["created_at", b"created_at", "created_by", b"created_by", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "session_info", b"session_info", "session_steps", b"session_steps"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["created_at", b"created_at", "modified_at", b"modified_at", "session_info", b"session_info"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["created_at", b"created_at", "created_by", b"created_by", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "session_info", b"session_info", "session_steps", b"session_steps"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___Session = Session
+Global___Session: _TypeAlias = Session  # noqa: Y015
 
-@typing.final
-class SessionStep(google.protobuf.message.Message):
+@_typing.final
+class SessionStep(_message.Message):
     """SessionStep is a single user interaction as part of a session."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NAME_FIELD_NUMBER: builtins.int
-    DETECT_INTENT_REQUEST_FIELD_NUMBER: builtins.int
-    DETECT_INTENT_RESPONSE_FIELD_NUMBER: builtins.int
-    CONTEXTS_FIELD_NUMBER: builtins.int
-    TIMESTAMP_FIELD_NUMBER: builtins.int
-    CREATED_AT_FIELD_NUMBER: builtins.int
-    MODIFIED_AT_FIELD_NUMBER: builtins.int
-    CREATED_BY_FIELD_NUMBER: builtins.int
-    MODIFIED_BY_FIELD_NUMBER: builtins.int
-    AUDIO_FILE_RESOURCES_FIELD_NUMBER: builtins.int
-    LLM_TELEMETRY_REPORT_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    DETECT_INTENT_REQUEST_FIELD_NUMBER: _builtins.int
+    DETECT_INTENT_RESPONSE_FIELD_NUMBER: _builtins.int
+    CONTEXTS_FIELD_NUMBER: _builtins.int
+    TIMESTAMP_FIELD_NUMBER: _builtins.int
+    CREATED_AT_FIELD_NUMBER: _builtins.int
+    MODIFIED_AT_FIELD_NUMBER: _builtins.int
+    CREATED_BY_FIELD_NUMBER: _builtins.int
+    MODIFIED_BY_FIELD_NUMBER: _builtins.int
+    AUDIO_FILE_RESOURCES_FIELD_NUMBER: _builtins.int
+    LLM_TELEMETRY_REPORT_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """The unique identifier of the session step.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;</code></pre>
     """
-    created_by: builtins.str
+    created_by: _builtins.str
     """User id in form of a valid UUID."""
-    modified_by: builtins.str
+    modified_by: _builtins.str
     """User id in form of a valid UUID."""
-    @property
-    def detect_intent_request(self) -> global___DetectIntentRequest:
+    @_builtins.property
+    def detect_intent_request(self) -> Global___DetectIntentRequest:
         """The detect intent request of the session step"""
 
-    @property
-    def detect_intent_response(self) -> global___DetectIntentResponse:
+    @_builtins.property
+    def detect_intent_response(self) -> Global___DetectIntentResponse:
         """The detect intent response  of the session step"""
 
-    @property
-    def contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]:
+    @_builtins.property
+    def contexts(self) -> _containers.RepeatedCompositeFieldContainer[_context_pb2.Context]:
         """The contexts which were active at the beginning of this step"""
 
-    @property
-    def timestamp(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def timestamp(self) -> _timestamp_pb2.Timestamp:
         """Timestamp of session step"""
 
-    @property
-    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def created_at(self) -> _timestamp_pb2.Timestamp:
         """Creation date and time. Read-only field."""
 
-    @property
-    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def modified_at(self) -> _timestamp_pb2.Timestamp:
         """Modification date and time. Read-only field."""
 
-    @property
-    def audio_file_resources(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AudioFileResource]:
+    @_builtins.property
+    def audio_file_resources(self) -> _containers.RepeatedCompositeFieldContainer[Global___AudioFileResource]:
         """audio file resources associated with the session step"""
 
-    @property
-    def llm_telemetry_report(self) -> global___LlmTelemetryReport:
+    @_builtins.property
+    def llm_telemetry_report(self) -> Global___LlmTelemetryReport:
         """Aggregated LLM telemetry for this step (one entry per LLM invocation,
         plus turn-level totals).
         """
@@ -4066,37 +4283,40 @@ class SessionStep(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
-        detect_intent_request: global___DetectIntentRequest | None = ...,
-        detect_intent_response: global___DetectIntentResponse | None = ...,
-        contexts: collections.abc.Iterable[ondewo.nlu.context_pb2.Context] | None = ...,
-        timestamp: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        created_by: builtins.str = ...,
-        modified_by: builtins.str = ...,
-        audio_file_resources: collections.abc.Iterable[global___AudioFileResource] | None = ...,
-        llm_telemetry_report: global___LlmTelemetryReport | None = ...,
+        name: _builtins.str = ...,
+        detect_intent_request: Global___DetectIntentRequest | None = ...,
+        detect_intent_response: Global___DetectIntentResponse | None = ...,
+        contexts: _abc.Iterable[_context_pb2.Context] | None = ...,
+        timestamp: _timestamp_pb2.Timestamp | None = ...,
+        created_at: _timestamp_pb2.Timestamp | None = ...,
+        modified_at: _timestamp_pb2.Timestamp | None = ...,
+        created_by: _builtins.str = ...,
+        modified_by: _builtins.str = ...,
+        audio_file_resources: _abc.Iterable[Global___AudioFileResource] | None = ...,
+        llm_telemetry_report: Global___LlmTelemetryReport | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["created_at", b"created_at", "detect_intent_request", b"detect_intent_request", "detect_intent_response", b"detect_intent_response", "llm_telemetry_report", b"llm_telemetry_report", "modified_at", b"modified_at", "timestamp", b"timestamp"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["audio_file_resources", b"audio_file_resources", "contexts", b"contexts", "created_at", b"created_at", "created_by", b"created_by", "detect_intent_request", b"detect_intent_request", "detect_intent_response", b"detect_intent_response", "llm_telemetry_report", b"llm_telemetry_report", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "timestamp", b"timestamp"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["created_at", b"created_at", "detect_intent_request", b"detect_intent_request", "detect_intent_response", b"detect_intent_response", "llm_telemetry_report", b"llm_telemetry_report", "modified_at", b"modified_at", "timestamp", b"timestamp"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["audio_file_resources", b"audio_file_resources", "contexts", b"contexts", "created_at", b"created_at", "created_by", b"created_by", "detect_intent_request", b"detect_intent_request", "detect_intent_response", b"detect_intent_response", "llm_telemetry_report", b"llm_telemetry_report", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "timestamp", b"timestamp"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___SessionStep = SessionStep
+Global___SessionStep: _TypeAlias = SessionStep  # noqa: Y015
 
-@typing.final
-class GetSessionStepRequest(google.protobuf.message.Message):
+@_typing.final
+class GetSessionStepRequest(_message.Message):
     """This message is a request to get a session step"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NAME_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """The unique identifier for the given session step
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;
     """
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields will be filled with data.
         Example: path=["session_step.detect_intent_response.query_result.fulfillment_messages"]
         """
@@ -4104,35 +4324,38 @@ class GetSessionStepRequest(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        name: _builtins.str = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "name", b"name"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "name", b"name"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GetSessionStepRequest = GetSessionStepRequest
+Global___GetSessionStepRequest: _TypeAlias = GetSessionStepRequest  # noqa: Y015
 
-@typing.final
-class UpdateSessionStepRequest(google.protobuf.message.Message):
+@_typing.final
+class UpdateSessionStepRequest(_message.Message):
     """UpdateSessionStepRequest stores a session step into the session"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    SESSION_STEP_FIELD_NUMBER: builtins.int
-    UPDATE_MASK_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    @property
-    def session_step(self) -> global___SessionStep:
+    SESSION_STEP_FIELD_NUMBER: _builtins.int
+    UPDATE_MASK_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def session_step(self) -> Global___SessionStep:
         """The session step to be updated"""
 
-    @property
-    def update_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def update_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields will be updated.
         Example: path=["session_step.detect_intent_response.query_result.fulfillment_messages"]
         """
 
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields will be filled with data.
         Example: path=["session_step.detect_intent_response.query_result.fulfillment_messages"]
         """
@@ -4140,54 +4363,61 @@ class UpdateSessionStepRequest(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        session_step: global___SessionStep | None = ...,
-        update_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        session_step: Global___SessionStep | None = ...,
+        update_mask: _field_mask_pb2.FieldMask | None = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask", "session_step", b"session_step", "update_mask", b"update_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "session_step", b"session_step", "update_mask", b"update_mask"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "session_step", b"session_step", "update_mask", b"update_mask"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "session_step", b"session_step", "update_mask", b"update_mask"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___UpdateSessionStepRequest = UpdateSessionStepRequest
+Global___UpdateSessionStepRequest: _TypeAlias = UpdateSessionStepRequest  # noqa: Y015
 
-@typing.final
-class DeleteSessionStepRequest(google.protobuf.message.Message):
+@_typing.final
+class DeleteSessionStepRequest(_message.Message):
     """This message is a request to delete a session step of a session"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NAME_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """The unique identifier for the given session step
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;</code></pre>.
     """
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
+        name: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["name", b"name"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["name", b"name"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___DeleteSessionStepRequest = DeleteSessionStepRequest
+Global___DeleteSessionStepRequest: _TypeAlias = DeleteSessionStepRequest  # noqa: Y015
 
-@typing.final
-class CreateSessionStepRequest(google.protobuf.message.Message):
+@_typing.final
+class CreateSessionStepRequest(_message.Message):
     """Request to append a new SessionStep to an existing session."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    SESSION_ID_FIELD_NUMBER: builtins.int
-    SESSION_STEP_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    session_id: builtins.str
+    SESSION_ID_FIELD_NUMBER: _builtins.int
+    SESSION_STEP_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    session_id: _builtins.str
     """The unique identifier of the parent session.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>.
     """
-    @property
-    def session_step(self) -> global___SessionStep:
+    @_builtins.property
+    def session_step(self) -> Global___SessionStep:
         """The session step to be added."""
 
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Field mask specifying which fields the returned SessionStep should carry
         (e.g. only <code>name</code>, <code>created_at</code>).
         """
@@ -4195,33 +4425,36 @@ class CreateSessionStepRequest(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        session_id: builtins.str = ...,
-        session_step: global___SessionStep | None = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        session_id: _builtins.str = ...,
+        session_step: Global___SessionStep | None = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask", "session_step", b"session_step"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "session_id", b"session_id", "session_step", b"session_step"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "session_step", b"session_step"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "session_id", b"session_id", "session_step", b"session_step"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___CreateSessionStepRequest = CreateSessionStepRequest
+Global___CreateSessionStepRequest: _TypeAlias = CreateSessionStepRequest  # noqa: Y015
 
-@typing.final
-class ListSessionsRequest(google.protobuf.message.Message):
+@_typing.final
+class ListSessionsRequest(_message.Message):
     """This message is a request to list sessions"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    SESSION_VIEW_FIELD_NUMBER: builtins.int
-    PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    SESSION_FILTER_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    parent: builtins.str
+    PARENT_FIELD_NUMBER: _builtins.int
+    SESSION_VIEW_FIELD_NUMBER: _builtins.int
+    PAGE_TOKEN_FIELD_NUMBER: _builtins.int
+    SESSION_FILTER_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    parent: _builtins.str
     """Required. The project that the agent to fetch is associated with.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
-    session_view: global___Session.View.ValueType
+    session_view: Global___Session.View.ValueType
     """An enum specifying the amount of information to be returned per session"""
-    page_token: builtins.str
+    page_token: _builtins.str
     """Optional: The page token to support pagination.
     Pagination allows you to retrieve a large result set in smaller, more manageable portions.
     The page token is a string representing the current index and page size.
@@ -4252,12 +4485,12 @@ class ListSessionsRequest(google.protobuf.message.Message):
       <li><code>&quot;current_index-1--page_size--20&quot;</code></li>
     </ul>
     """
-    @property
-    def session_filter(self) -> global___SessionFilter:
+    @_builtins.property
+    def session_filter(self) -> Global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
 
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields will be filled with data.
         Example: path=["session_info.duration_in_s_min"]
         """
@@ -4265,255 +4498,262 @@ class ListSessionsRequest(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        session_view: global___Session.View.ValueType = ...,
-        page_token: builtins.str = ...,
-        session_filter: global___SessionFilter | None = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        parent: _builtins.str = ...,
+        session_view: Global___Session.View.ValueType = ...,
+        page_token: _builtins.str = ...,
+        session_filter: Global___SessionFilter | None = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "page_token", b"page_token", "parent", b"parent", "session_filter", b"session_filter", "session_view", b"session_view"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "session_filter", b"session_filter"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "page_token", b"page_token", "parent", b"parent", "session_filter", b"session_filter", "session_view", b"session_view"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListSessionsRequest = ListSessionsRequest
+Global___ListSessionsRequest: _TypeAlias = ListSessionsRequest  # noqa: Y015
 
-@typing.final
-class ContextFilter(google.protobuf.message.Message):
+@_typing.final
+class ContextFilter(_message.Message):
     """Message used to filter sessions based on contextual information"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    CONTEXT_NAME_FIELD_NUMBER: builtins.int
-    KEY_FIELD_NUMBER: builtins.int
-    VALUE_FIELD_NUMBER: builtins.int
-    OPERATOR_FIELD_NUMBER: builtins.int
-    context_name: builtins.str
+    CONTEXT_NAME_FIELD_NUMBER: _builtins.int
+    KEY_FIELD_NUMBER: _builtins.int
+    VALUE_FIELD_NUMBER: _builtins.int
+    OPERATOR_FIELD_NUMBER: _builtins.int
+    context_name: _builtins.str
     """name of the context"""
-    key: builtins.str
+    key: _builtins.str
     """name of the key of the context parameter"""
-    value: builtins.str
+    value: _builtins.str
     """value of the parameter"""
-    operator: global___ComparisonOperator.ValueType
+    operator: Global___ComparisonOperator.ValueType
     """comparison operator to use for filtering"""
     def __init__(
         self,
         *,
-        context_name: builtins.str = ...,
-        key: builtins.str = ...,
-        value: builtins.str = ...,
-        operator: global___ComparisonOperator.ValueType = ...,
+        context_name: _builtins.str = ...,
+        key: _builtins.str = ...,
+        value: _builtins.str = ...,
+        operator: Global___ComparisonOperator.ValueType = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["context_name", b"context_name", "key", b"key", "operator", b"operator", "value", b"value"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["context_name", b"context_name", "key", b"key", "operator", b"operator", "value", b"value"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ContextFilter = ContextFilter
+Global___ContextFilter: _TypeAlias = ContextFilter  # noqa: Y015
 
-@typing.final
-class SessionFilter(google.protobuf.message.Message):
+@_typing.final
+class SessionFilter(_message.Message):
     """This message contains a session filter"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    LANGUAGE_CODES_FIELD_NUMBER: builtins.int
-    MATCHED_INTENTS_FIELD_NUMBER: builtins.int
-    MATCHED_ENTITY_TYPES_FIELD_NUMBER: builtins.int
-    MIN_INTENTS_CONFIDENCE_MIN_FIELD_NUMBER: builtins.int
-    MIN_INTENTS_CONFIDENCE_MAX_FIELD_NUMBER: builtins.int
-    MIN_ENTITY_TYPES_CONFIDENCE_MIN_FIELD_NUMBER: builtins.int
-    MIN_ENTITY_TYPES_CONFIDENCE_MAX_FIELD_NUMBER: builtins.int
-    EARLIEST_FIELD_NUMBER: builtins.int
-    LATEST_FIELD_NUMBER: builtins.int
-    MIN_NUMBER_TURNS_FIELD_NUMBER: builtins.int
-    MAX_NUMBER_TURNS_FIELD_NUMBER: builtins.int
-    LABELS_FIELD_NUMBER: builtins.int
-    USER_IDS_FIELD_NUMBER: builtins.int
-    INTENT_TAGS_FIELD_NUMBER: builtins.int
-    SESSION_IDS_FIELD_NUMBER: builtins.int
-    INPUT_CONTEXTS_FIELD_NUMBER: builtins.int
-    OUTPUT_CONTEXTS_FIELD_NUMBER: builtins.int
-    DURATION_IN_S_MIN_FIELD_NUMBER: builtins.int
-    DURATION_IN_S_MAX_FIELD_NUMBER: builtins.int
-    DURATION_IN_M_MIN_FIELD_NUMBER: builtins.int
-    DURATION_IN_M_MAX_FIELD_NUMBER: builtins.int
-    DURATION_IN_M_ROUNDED_MIN_FIELD_NUMBER: builtins.int
-    DURATION_IN_M_ROUNDED_MAX_FIELD_NUMBER: builtins.int
-    DURATION_INTERVAL_15S_ROUNDED_MIN_FIELD_NUMBER: builtins.int
-    DURATION_INTERVAL_15S_ROUNDED_MAX_FIELD_NUMBER: builtins.int
-    DURATION_INTERVAL_30S_ROUNDED_MIN_FIELD_NUMBER: builtins.int
-    DURATION_INTERVAL_30S_ROUNDED_MAX_FIELD_NUMBER: builtins.int
-    DURATION_INTERVAL_45S_ROUNDED_MIN_FIELD_NUMBER: builtins.int
-    DURATION_INTERVAL_45S_ROUNDED_MAX_FIELD_NUMBER: builtins.int
-    STARTED_TIME_SLOT_PER_HOUR_MIN_FIELD_NUMBER: builtins.int
-    STARTED_TIME_SLOT_PER_HOUR_MAX_FIELD_NUMBER: builtins.int
-    STARTED_TIME_SLOT_PER_QUARTER_HOUR_MIN_FIELD_NUMBER: builtins.int
-    STARTED_TIME_SLOT_PER_QUARTER_HOUR_MAX_FIELD_NUMBER: builtins.int
-    STARTED_TIME_SLOT_PER_HALF_HOUR_MIN_FIELD_NUMBER: builtins.int
-    STARTED_TIME_SLOT_PER_HALF_HOUR_MAX_FIELD_NUMBER: builtins.int
-    STARTED_TIME_SLOT_PER_DAY_PHASE_MIN_FIELD_NUMBER: builtins.int
-    STARTED_TIME_SLOT_PER_DAY_PHASE_MAX_FIELD_NUMBER: builtins.int
-    STARTED_TIME_SLOT_PER_MINUTE_MIN_FIELD_NUMBER: builtins.int
-    STARTED_TIME_SLOT_PER_MINUTE_MAX_FIELD_NUMBER: builtins.int
-    DURATION_IN_S_ROUNDED_MIN_FIELD_NUMBER: builtins.int
-    DURATION_IN_S_ROUNDED_MAX_FIELD_NUMBER: builtins.int
-    PLATFORMS_FIELD_NUMBER: builtins.int
-    ACCOUNT_IDS_FIELD_NUMBER: builtins.int
-    PROPERTY_IDS_FIELD_NUMBER: builtins.int
-    DATASTREAM_IDS_FIELD_NUMBER: builtins.int
-    ORIGIN_IDS_FIELD_NUMBER: builtins.int
-    IDENTIFIED_USER_IDS_FIELD_NUMBER: builtins.int
-    DURATION_INTERVAL_60S_ROUNDED_MIN_FIELD_NUMBER: builtins.int
-    DURATION_INTERVAL_60S_ROUNDED_MAX_FIELD_NUMBER: builtins.int
-    min_intents_confidence_min: builtins.float
+    LANGUAGE_CODES_FIELD_NUMBER: _builtins.int
+    MATCHED_INTENTS_FIELD_NUMBER: _builtins.int
+    MATCHED_ENTITY_TYPES_FIELD_NUMBER: _builtins.int
+    MIN_INTENTS_CONFIDENCE_MIN_FIELD_NUMBER: _builtins.int
+    MIN_INTENTS_CONFIDENCE_MAX_FIELD_NUMBER: _builtins.int
+    MIN_ENTITY_TYPES_CONFIDENCE_MIN_FIELD_NUMBER: _builtins.int
+    MIN_ENTITY_TYPES_CONFIDENCE_MAX_FIELD_NUMBER: _builtins.int
+    EARLIEST_FIELD_NUMBER: _builtins.int
+    LATEST_FIELD_NUMBER: _builtins.int
+    MIN_NUMBER_TURNS_FIELD_NUMBER: _builtins.int
+    MAX_NUMBER_TURNS_FIELD_NUMBER: _builtins.int
+    LABELS_FIELD_NUMBER: _builtins.int
+    USER_IDS_FIELD_NUMBER: _builtins.int
+    INTENT_TAGS_FIELD_NUMBER: _builtins.int
+    SESSION_IDS_FIELD_NUMBER: _builtins.int
+    INPUT_CONTEXTS_FIELD_NUMBER: _builtins.int
+    OUTPUT_CONTEXTS_FIELD_NUMBER: _builtins.int
+    DURATION_IN_S_MIN_FIELD_NUMBER: _builtins.int
+    DURATION_IN_S_MAX_FIELD_NUMBER: _builtins.int
+    DURATION_IN_M_MIN_FIELD_NUMBER: _builtins.int
+    DURATION_IN_M_MAX_FIELD_NUMBER: _builtins.int
+    DURATION_IN_M_ROUNDED_MIN_FIELD_NUMBER: _builtins.int
+    DURATION_IN_M_ROUNDED_MAX_FIELD_NUMBER: _builtins.int
+    DURATION_INTERVAL_15S_ROUNDED_MIN_FIELD_NUMBER: _builtins.int
+    DURATION_INTERVAL_15S_ROUNDED_MAX_FIELD_NUMBER: _builtins.int
+    DURATION_INTERVAL_30S_ROUNDED_MIN_FIELD_NUMBER: _builtins.int
+    DURATION_INTERVAL_30S_ROUNDED_MAX_FIELD_NUMBER: _builtins.int
+    DURATION_INTERVAL_45S_ROUNDED_MIN_FIELD_NUMBER: _builtins.int
+    DURATION_INTERVAL_45S_ROUNDED_MAX_FIELD_NUMBER: _builtins.int
+    STARTED_TIME_SLOT_PER_HOUR_MIN_FIELD_NUMBER: _builtins.int
+    STARTED_TIME_SLOT_PER_HOUR_MAX_FIELD_NUMBER: _builtins.int
+    STARTED_TIME_SLOT_PER_QUARTER_HOUR_MIN_FIELD_NUMBER: _builtins.int
+    STARTED_TIME_SLOT_PER_QUARTER_HOUR_MAX_FIELD_NUMBER: _builtins.int
+    STARTED_TIME_SLOT_PER_HALF_HOUR_MIN_FIELD_NUMBER: _builtins.int
+    STARTED_TIME_SLOT_PER_HALF_HOUR_MAX_FIELD_NUMBER: _builtins.int
+    STARTED_TIME_SLOT_PER_DAY_PHASE_MIN_FIELD_NUMBER: _builtins.int
+    STARTED_TIME_SLOT_PER_DAY_PHASE_MAX_FIELD_NUMBER: _builtins.int
+    STARTED_TIME_SLOT_PER_MINUTE_MIN_FIELD_NUMBER: _builtins.int
+    STARTED_TIME_SLOT_PER_MINUTE_MAX_FIELD_NUMBER: _builtins.int
+    DURATION_IN_S_ROUNDED_MIN_FIELD_NUMBER: _builtins.int
+    DURATION_IN_S_ROUNDED_MAX_FIELD_NUMBER: _builtins.int
+    PLATFORMS_FIELD_NUMBER: _builtins.int
+    ACCOUNT_IDS_FIELD_NUMBER: _builtins.int
+    PROPERTY_IDS_FIELD_NUMBER: _builtins.int
+    DATASTREAM_IDS_FIELD_NUMBER: _builtins.int
+    ORIGIN_IDS_FIELD_NUMBER: _builtins.int
+    IDENTIFIED_USER_IDS_FIELD_NUMBER: _builtins.int
+    DURATION_INTERVAL_60S_ROUNDED_MIN_FIELD_NUMBER: _builtins.int
+    DURATION_INTERVAL_60S_ROUNDED_MAX_FIELD_NUMBER: _builtins.int
+    min_intents_confidence_min: _builtins.float
     """Match only sessions where the minimum confidence for intent detection along the session falls
     in the following range. Defaults to -1 if not set.
     """
-    min_intents_confidence_max: builtins.float
+    min_intents_confidence_max: _builtins.float
     """Match only sessions where the minimum confidence for intent detection along the session falls
     in the following range. Defaults to +1 if not set.
     """
-    min_entity_types_confidence_min: builtins.float
+    min_entity_types_confidence_min: _builtins.float
     """Match only sessions where the minimum confidence for entity recognition along the session falls
      in the following range. Defaults to -1 if not set.
     """
-    min_entity_types_confidence_max: builtins.float
+    min_entity_types_confidence_max: _builtins.float
     """Match only sessions where the minimum confidence for entity recognition along the session falls
      in the following range. Defaults to +1 if not set.
     """
-    earliest: builtins.float
+    earliest: _builtins.float
     """Match only sessions whose time range falls within the following range (in UNIX epochs).
     Defaults to 0 if not set.
     """
-    latest: builtins.float
+    latest: _builtins.float
     """Match only sessions whose time range falls within the following range (in UNIX epochs).
     Defaults to current epoch if not set
     """
-    min_number_turns: builtins.int
+    min_number_turns: _builtins.int
     """Match only sessions for which the number of turns (interaction steps) falls in the following range
     Defaults to 0 if not set.
     """
-    max_number_turns: builtins.int
+    max_number_turns: _builtins.int
     """Match only sessions for which the number of turns (interaction steps) falls in the following range
     Defaults to MAXINT if not set.
     """
-    duration_in_s_min: builtins.float
+    duration_in_s_min: _builtins.float
     """Match only sessions for which the duration in seconds are larger or equal"""
-    duration_in_s_max: builtins.float
+    duration_in_s_max: _builtins.float
     """Match only sessions for which the duration in seconds are smaller or equal"""
-    duration_in_m_min: builtins.float
+    duration_in_m_min: _builtins.float
     """Match only sessions for which the duration in minutes are larger or equal"""
-    duration_in_m_max: builtins.float
+    duration_in_m_max: _builtins.float
     """Match only sessions for which the duration in minutes are smaller or equal"""
-    duration_in_m_rounded_min: builtins.float
+    duration_in_m_rounded_min: _builtins.float
     """Match only sessions for which the duration in minutes rounded are larger or equal"""
-    duration_in_m_rounded_max: builtins.float
+    duration_in_m_rounded_max: _builtins.float
     """Match only sessions for which the duration in minutes rounded are smaller or equal"""
-    duration_interval_15s_rounded_min: builtins.float
+    duration_interval_15s_rounded_min: _builtins.float
     """Match only sessions for which the duration in 15 seconds rounded are larger or equal"""
-    duration_interval_15s_rounded_max: builtins.float
+    duration_interval_15s_rounded_max: _builtins.float
     """Match only sessions for which the duration in 15 seconds rounded are smaller or equal"""
-    duration_interval_30s_rounded_min: builtins.float
+    duration_interval_30s_rounded_min: _builtins.float
     """Match only sessions for which the duration in 30 seconds rounded are larger or equal"""
-    duration_interval_30s_rounded_max: builtins.float
+    duration_interval_30s_rounded_max: _builtins.float
     """Match only sessions for which the duration in 30 seconds rounded are smaller or equal"""
-    duration_interval_45s_rounded_min: builtins.float
+    duration_interval_45s_rounded_min: _builtins.float
     """Match only sessions for which the duration in 45 seconds rounded are larger or equal"""
-    duration_interval_45s_rounded_max: builtins.float
+    duration_interval_45s_rounded_max: _builtins.float
     """Match only sessions for which the duration in 45 seconds rounded are smaller or equal"""
-    started_time_slot_per_hour_min: builtins.str
+    started_time_slot_per_hour_min: _builtins.str
     """Match only sessions for which the started_time_slot_per_hour (e.g. 08:00) are larger or equal"""
-    started_time_slot_per_hour_max: builtins.str
+    started_time_slot_per_hour_max: _builtins.str
     """Match only sessions for which the started_time_slot_per_hour (e.g. 14:00) are smaller or equal"""
-    started_time_slot_per_quarter_hour_min: builtins.str
+    started_time_slot_per_quarter_hour_min: _builtins.str
     """Match only sessions for which the started_time_slot_per_quarter_hour (e.g. 08:00) are larger or equal"""
-    started_time_slot_per_quarter_hour_max: builtins.str
+    started_time_slot_per_quarter_hour_max: _builtins.str
     """Match only sessions for which the started_time_slot_per_quarter_hour (e.g. 14:00) are smaller or equal"""
-    started_time_slot_per_half_hour_min: builtins.str
+    started_time_slot_per_half_hour_min: _builtins.str
     """Match only sessions for which the started_time_slot_per_half_hour (e.g. 08:00) are larger or equal"""
-    started_time_slot_per_half_hour_max: builtins.str
+    started_time_slot_per_half_hour_max: _builtins.str
     """Match only sessions for which the started_time_slot_per_half_hour (e.g. 14:00) are smaller or equal"""
-    started_time_slot_per_day_phase_min: builtins.str
+    started_time_slot_per_day_phase_min: _builtins.str
     """Match only sessions for which the started_time_slot_per_day_phase (e.g. 08:00) are larger or equal"""
-    started_time_slot_per_day_phase_max: builtins.str
+    started_time_slot_per_day_phase_max: _builtins.str
     """Match only sessions for which the started_time_slot_per_day_phase (e.g. 14:00) are smaller or equal"""
-    started_time_slot_per_minute_min: builtins.str
+    started_time_slot_per_minute_min: _builtins.str
     """Match only sessions for which the started_time_slot_per_minute (e.g. 08:00) are larger or equal"""
-    started_time_slot_per_minute_max: builtins.str
+    started_time_slot_per_minute_max: _builtins.str
     """Match only sessions for which the started_time_slot_per_minute (e.g. 14:00) are smaller or equal"""
-    duration_in_s_rounded_min: builtins.float
+    duration_in_s_rounded_min: _builtins.float
     """Match only sessions for which the duration in seconds rounded are larger or equal"""
-    duration_in_s_rounded_max: builtins.float
+    duration_in_s_rounded_max: _builtins.float
     """Match only sessions for which the duration in seconds rounded are smaller or equal"""
-    duration_interval_60s_rounded_min: builtins.float
+    duration_interval_60s_rounded_min: _builtins.float
     """Match only sessions for which the duration in 60 seconds rounded are larger or equal"""
-    duration_interval_60s_rounded_max: builtins.float
+    duration_interval_60s_rounded_max: _builtins.float
     """Match only sessions for which the duration in 60 seconds rounded are smaller or equal"""
-    @property
-    def language_codes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def language_codes(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """A SessionFilter can be used in some requests to return only sessions matching certain filter conditions.
         All fields below are optional. Multiple fields specified at the same time are chained via AND.
         Match only sessions with all of the following language_codes
         """
 
-    @property
-    def matched_intents(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.intent_pb2.Intent]:
+    @_builtins.property
+    def matched_intents(self) -> _containers.RepeatedCompositeFieldContainer[_intent_pb2.Intent]:
         """Match only sessions during which all of the following intents were detected
         NOTE: only name and display name fields are used for comparison
         """
 
-    @property
-    def matched_entity_types(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.entity_type_pb2.EntityType]:
+    @_builtins.property
+    def matched_entity_types(self) -> _containers.RepeatedCompositeFieldContainer[_entity_type_pb2.EntityType]:
         """Match only sessions during which all of the following entity types were recognized
         NOTE: only name and display name fields are used for comparison
         """
 
-    @property
-    def labels(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def labels(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Match only session which have all of the following labels assigned"""
 
-    @property
-    def user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def user_ids(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Match only session which had all of the following user_ids interacting with them."""
 
-    @property
-    def intent_tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def intent_tags(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Match only session which have all of the following intent tags assigned"""
 
-    @property
-    def session_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def session_ids(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Match only sessions whose IDs are specified here"""
 
-    @property
-    def input_contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]:
+    @_builtins.property
+    def input_contexts(self) -> _containers.RepeatedCompositeFieldContainer[_context_pb2.Context]:
         """Match only sessions whose session info contains at least one step having all the contexts specified here
         The input contexts are pre-conditions for detecting intents
         """
 
-    @property
-    def output_contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]:
+    @_builtins.property
+    def output_contexts(self) -> _containers.RepeatedCompositeFieldContainer[_context_pb2.Context]:
         """The output contexts are the result of the intent matching and track the contextual state of a conversation"""
 
-    @property
-    def platforms(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[ondewo.nlu.intent_pb2.Intent.Message.Platform.ValueType]:
+    @_builtins.property
+    def platforms(self) -> _containers.RepeatedScalarFieldContainer[_intent_pb2.Intent.Message.Platform.ValueType]:
         """Messages for each of the Intent.Message.Platform were sent to the user"""
 
-    @property
-    def account_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def account_ids(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Ids of the account, e.g. Company Ondewo,
         This field can also be used for customized tracking ids or tag ids
         """
 
-    @property
-    def property_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def property_ids(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Ids of the property of the account, e.g. Domain ondewo.com
         This field can also be used for customized tracking ids or tag ids
         """
 
-    @property
-    def datastream_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def datastream_ids(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Ids of the datastream of the property of the account, e.g. Subdomain sub1.ondewo.com or sub2.ondewo.com
         This field can also be used for customized tracking ids or tag ids
         """
 
-    @property
-    def origin_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def origin_ids(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Ids of the the origin of the user request
 
         For a phone bot, this is the phone number +123456789 the user called (Note: This is not the user's phone number)
@@ -4521,166 +4761,174 @@ class SessionFilter(google.protobuf.message.Message):
         For a voice assistant device, this is the device-id or the app id
         """
 
-    @property
-    def identified_user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def identified_user_ids(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Ids of the "identified user" e.g. for a chatbot the email address or for a phone bot the phone number of the user"""
 
     def __init__(
         self,
         *,
-        language_codes: collections.abc.Iterable[builtins.str] | None = ...,
-        matched_intents: collections.abc.Iterable[ondewo.nlu.intent_pb2.Intent] | None = ...,
-        matched_entity_types: collections.abc.Iterable[ondewo.nlu.entity_type_pb2.EntityType] | None = ...,
-        min_intents_confidence_min: builtins.float = ...,
-        min_intents_confidence_max: builtins.float = ...,
-        min_entity_types_confidence_min: builtins.float = ...,
-        min_entity_types_confidence_max: builtins.float = ...,
-        earliest: builtins.float = ...,
-        latest: builtins.float = ...,
-        min_number_turns: builtins.int = ...,
-        max_number_turns: builtins.int = ...,
-        labels: collections.abc.Iterable[builtins.str] | None = ...,
-        user_ids: collections.abc.Iterable[builtins.str] | None = ...,
-        intent_tags: collections.abc.Iterable[builtins.str] | None = ...,
-        session_ids: collections.abc.Iterable[builtins.str] | None = ...,
-        input_contexts: collections.abc.Iterable[ondewo.nlu.context_pb2.Context] | None = ...,
-        output_contexts: collections.abc.Iterable[ondewo.nlu.context_pb2.Context] | None = ...,
-        duration_in_s_min: builtins.float = ...,
-        duration_in_s_max: builtins.float = ...,
-        duration_in_m_min: builtins.float = ...,
-        duration_in_m_max: builtins.float = ...,
-        duration_in_m_rounded_min: builtins.float = ...,
-        duration_in_m_rounded_max: builtins.float = ...,
-        duration_interval_15s_rounded_min: builtins.float = ...,
-        duration_interval_15s_rounded_max: builtins.float = ...,
-        duration_interval_30s_rounded_min: builtins.float = ...,
-        duration_interval_30s_rounded_max: builtins.float = ...,
-        duration_interval_45s_rounded_min: builtins.float = ...,
-        duration_interval_45s_rounded_max: builtins.float = ...,
-        started_time_slot_per_hour_min: builtins.str = ...,
-        started_time_slot_per_hour_max: builtins.str = ...,
-        started_time_slot_per_quarter_hour_min: builtins.str = ...,
-        started_time_slot_per_quarter_hour_max: builtins.str = ...,
-        started_time_slot_per_half_hour_min: builtins.str = ...,
-        started_time_slot_per_half_hour_max: builtins.str = ...,
-        started_time_slot_per_day_phase_min: builtins.str = ...,
-        started_time_slot_per_day_phase_max: builtins.str = ...,
-        started_time_slot_per_minute_min: builtins.str = ...,
-        started_time_slot_per_minute_max: builtins.str = ...,
-        duration_in_s_rounded_min: builtins.float = ...,
-        duration_in_s_rounded_max: builtins.float = ...,
-        platforms: collections.abc.Iterable[ondewo.nlu.intent_pb2.Intent.Message.Platform.ValueType] | None = ...,
-        account_ids: collections.abc.Iterable[builtins.str] | None = ...,
-        property_ids: collections.abc.Iterable[builtins.str] | None = ...,
-        datastream_ids: collections.abc.Iterable[builtins.str] | None = ...,
-        origin_ids: collections.abc.Iterable[builtins.str] | None = ...,
-        identified_user_ids: collections.abc.Iterable[builtins.str] | None = ...,
-        duration_interval_60s_rounded_min: builtins.float = ...,
-        duration_interval_60s_rounded_max: builtins.float = ...,
+        language_codes: _abc.Iterable[_builtins.str] | None = ...,
+        matched_intents: _abc.Iterable[_intent_pb2.Intent] | None = ...,
+        matched_entity_types: _abc.Iterable[_entity_type_pb2.EntityType] | None = ...,
+        min_intents_confidence_min: _builtins.float = ...,
+        min_intents_confidence_max: _builtins.float = ...,
+        min_entity_types_confidence_min: _builtins.float = ...,
+        min_entity_types_confidence_max: _builtins.float = ...,
+        earliest: _builtins.float = ...,
+        latest: _builtins.float = ...,
+        min_number_turns: _builtins.int = ...,
+        max_number_turns: _builtins.int = ...,
+        labels: _abc.Iterable[_builtins.str] | None = ...,
+        user_ids: _abc.Iterable[_builtins.str] | None = ...,
+        intent_tags: _abc.Iterable[_builtins.str] | None = ...,
+        session_ids: _abc.Iterable[_builtins.str] | None = ...,
+        input_contexts: _abc.Iterable[_context_pb2.Context] | None = ...,
+        output_contexts: _abc.Iterable[_context_pb2.Context] | None = ...,
+        duration_in_s_min: _builtins.float = ...,
+        duration_in_s_max: _builtins.float = ...,
+        duration_in_m_min: _builtins.float = ...,
+        duration_in_m_max: _builtins.float = ...,
+        duration_in_m_rounded_min: _builtins.float = ...,
+        duration_in_m_rounded_max: _builtins.float = ...,
+        duration_interval_15s_rounded_min: _builtins.float = ...,
+        duration_interval_15s_rounded_max: _builtins.float = ...,
+        duration_interval_30s_rounded_min: _builtins.float = ...,
+        duration_interval_30s_rounded_max: _builtins.float = ...,
+        duration_interval_45s_rounded_min: _builtins.float = ...,
+        duration_interval_45s_rounded_max: _builtins.float = ...,
+        started_time_slot_per_hour_min: _builtins.str = ...,
+        started_time_slot_per_hour_max: _builtins.str = ...,
+        started_time_slot_per_quarter_hour_min: _builtins.str = ...,
+        started_time_slot_per_quarter_hour_max: _builtins.str = ...,
+        started_time_slot_per_half_hour_min: _builtins.str = ...,
+        started_time_slot_per_half_hour_max: _builtins.str = ...,
+        started_time_slot_per_day_phase_min: _builtins.str = ...,
+        started_time_slot_per_day_phase_max: _builtins.str = ...,
+        started_time_slot_per_minute_min: _builtins.str = ...,
+        started_time_slot_per_minute_max: _builtins.str = ...,
+        duration_in_s_rounded_min: _builtins.float = ...,
+        duration_in_s_rounded_max: _builtins.float = ...,
+        platforms: _abc.Iterable[_intent_pb2.Intent.Message.Platform.ValueType] | None = ...,
+        account_ids: _abc.Iterable[_builtins.str] | None = ...,
+        property_ids: _abc.Iterable[_builtins.str] | None = ...,
+        datastream_ids: _abc.Iterable[_builtins.str] | None = ...,
+        origin_ids: _abc.Iterable[_builtins.str] | None = ...,
+        identified_user_ids: _abc.Iterable[_builtins.str] | None = ...,
+        duration_interval_60s_rounded_min: _builtins.float = ...,
+        duration_interval_60s_rounded_max: _builtins.float = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["account_ids", b"account_ids", "datastream_ids", b"datastream_ids", "duration_in_m_max", b"duration_in_m_max", "duration_in_m_min", b"duration_in_m_min", "duration_in_m_rounded_max", b"duration_in_m_rounded_max", "duration_in_m_rounded_min", b"duration_in_m_rounded_min", "duration_in_s_max", b"duration_in_s_max", "duration_in_s_min", b"duration_in_s_min", "duration_in_s_rounded_max", b"duration_in_s_rounded_max", "duration_in_s_rounded_min", b"duration_in_s_rounded_min", "duration_interval_15s_rounded_max", b"duration_interval_15s_rounded_max", "duration_interval_15s_rounded_min", b"duration_interval_15s_rounded_min", "duration_interval_30s_rounded_max", b"duration_interval_30s_rounded_max", "duration_interval_30s_rounded_min", b"duration_interval_30s_rounded_min", "duration_interval_45s_rounded_max", b"duration_interval_45s_rounded_max", "duration_interval_45s_rounded_min", b"duration_interval_45s_rounded_min", "duration_interval_60s_rounded_max", b"duration_interval_60s_rounded_max", "duration_interval_60s_rounded_min", b"duration_interval_60s_rounded_min", "earliest", b"earliest", "identified_user_ids", b"identified_user_ids", "input_contexts", b"input_contexts", "intent_tags", b"intent_tags", "labels", b"labels", "language_codes", b"language_codes", "latest", b"latest", "matched_entity_types", b"matched_entity_types", "matched_intents", b"matched_intents", "max_number_turns", b"max_number_turns", "min_entity_types_confidence_max", b"min_entity_types_confidence_max", "min_entity_types_confidence_min", b"min_entity_types_confidence_min", "min_intents_confidence_max", b"min_intents_confidence_max", "min_intents_confidence_min", b"min_intents_confidence_min", "min_number_turns", b"min_number_turns", "origin_ids", b"origin_ids", "output_contexts", b"output_contexts", "platforms", b"platforms", "property_ids", b"property_ids", "session_ids", b"session_ids", "started_time_slot_per_day_phase_max", b"started_time_slot_per_day_phase_max", "started_time_slot_per_day_phase_min", b"started_time_slot_per_day_phase_min", "started_time_slot_per_half_hour_max", b"started_time_slot_per_half_hour_max", "started_time_slot_per_half_hour_min", b"started_time_slot_per_half_hour_min", "started_time_slot_per_hour_max", b"started_time_slot_per_hour_max", "started_time_slot_per_hour_min", b"started_time_slot_per_hour_min", "started_time_slot_per_minute_max", b"started_time_slot_per_minute_max", "started_time_slot_per_minute_min", b"started_time_slot_per_minute_min", "started_time_slot_per_quarter_hour_max", b"started_time_slot_per_quarter_hour_max", "started_time_slot_per_quarter_hour_min", b"started_time_slot_per_quarter_hour_min", "user_ids", b"user_ids"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["account_ids", b"account_ids", "datastream_ids", b"datastream_ids", "duration_in_m_max", b"duration_in_m_max", "duration_in_m_min", b"duration_in_m_min", "duration_in_m_rounded_max", b"duration_in_m_rounded_max", "duration_in_m_rounded_min", b"duration_in_m_rounded_min", "duration_in_s_max", b"duration_in_s_max", "duration_in_s_min", b"duration_in_s_min", "duration_in_s_rounded_max", b"duration_in_s_rounded_max", "duration_in_s_rounded_min", b"duration_in_s_rounded_min", "duration_interval_15s_rounded_max", b"duration_interval_15s_rounded_max", "duration_interval_15s_rounded_min", b"duration_interval_15s_rounded_min", "duration_interval_30s_rounded_max", b"duration_interval_30s_rounded_max", "duration_interval_30s_rounded_min", b"duration_interval_30s_rounded_min", "duration_interval_45s_rounded_max", b"duration_interval_45s_rounded_max", "duration_interval_45s_rounded_min", b"duration_interval_45s_rounded_min", "duration_interval_60s_rounded_max", b"duration_interval_60s_rounded_max", "duration_interval_60s_rounded_min", b"duration_interval_60s_rounded_min", "earliest", b"earliest", "identified_user_ids", b"identified_user_ids", "input_contexts", b"input_contexts", "intent_tags", b"intent_tags", "labels", b"labels", "language_codes", b"language_codes", "latest", b"latest", "matched_entity_types", b"matched_entity_types", "matched_intents", b"matched_intents", "max_number_turns", b"max_number_turns", "min_entity_types_confidence_max", b"min_entity_types_confidence_max", "min_entity_types_confidence_min", b"min_entity_types_confidence_min", "min_intents_confidence_max", b"min_intents_confidence_max", "min_intents_confidence_min", b"min_intents_confidence_min", "min_number_turns", b"min_number_turns", "origin_ids", b"origin_ids", "output_contexts", b"output_contexts", "platforms", b"platforms", "property_ids", b"property_ids", "session_ids", b"session_ids", "started_time_slot_per_day_phase_max", b"started_time_slot_per_day_phase_max", "started_time_slot_per_day_phase_min", b"started_time_slot_per_day_phase_min", "started_time_slot_per_half_hour_max", b"started_time_slot_per_half_hour_max", "started_time_slot_per_half_hour_min", b"started_time_slot_per_half_hour_min", "started_time_slot_per_hour_max", b"started_time_slot_per_hour_max", "started_time_slot_per_hour_min", b"started_time_slot_per_hour_min", "started_time_slot_per_minute_max", b"started_time_slot_per_minute_max", "started_time_slot_per_minute_min", b"started_time_slot_per_minute_min", "started_time_slot_per_quarter_hour_max", b"started_time_slot_per_quarter_hour_max", "started_time_slot_per_quarter_hour_min", b"started_time_slot_per_quarter_hour_min", "user_ids", b"user_ids"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___SessionFilter = SessionFilter
+Global___SessionFilter: _TypeAlias = SessionFilter  # noqa: Y015
 
-@typing.final
-class SessionInfo(google.protobuf.message.Message):
+@_typing.final
+class SessionInfo(_message.Message):
     """This message contains information about session"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    @typing.final
-    class ContextSteps(google.protobuf.message.Message):
+    @_typing.final
+    class ContextSteps(_message.Message):
         """The list of contexts of each step collected in an outer list"""
 
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+        DESCRIPTOR: _descriptor.Descriptor
 
-        CONTEXTS_FIELD_NUMBER: builtins.int
-        @property
-        def contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]:
+        CONTEXTS_FIELD_NUMBER: _builtins.int
+        @_builtins.property
+        def contexts(self) -> _containers.RepeatedCompositeFieldContainer[_context_pb2.Context]:
             """List of contexts for a session step"""
 
         def __init__(
             self,
             *,
-            contexts: collections.abc.Iterable[ondewo.nlu.context_pb2.Context] | None = ...,
+            contexts: _abc.Iterable[_context_pb2.Context] | None = ...,
         ) -> None: ...
-        def ClearField(self, field_name: typing.Literal["contexts", b"contexts"]) -> None: ...
+        _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["contexts", b"contexts"]  # noqa: Y015
+        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+        def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-    LANGUAGE_CODES_FIELD_NUMBER: builtins.int
-    MATCHED_INTENTS_FIELD_NUMBER: builtins.int
-    MATCHED_ENTITY_TYPES_FIELD_NUMBER: builtins.int
-    MIN_INTENTS_CONFIDENCE_FIELD_NUMBER: builtins.int
-    MIN_ENTITY_TYPES_CONFIDENCE_FIELD_NUMBER: builtins.int
-    EARLIEST_FIELD_NUMBER: builtins.int
-    LATEST_FIELD_NUMBER: builtins.int
-    NUMBER_TURNS_FIELD_NUMBER: builtins.int
-    LABELS_FIELD_NUMBER: builtins.int
-    USER_IDS_FIELD_NUMBER: builtins.int
-    INTENT_TAGS_FIELD_NUMBER: builtins.int
-    INPUT_CONTEXT_STEPS_FIELD_NUMBER: builtins.int
-    OUTPUT_CONTEXT_STEPS_FIELD_NUMBER: builtins.int
-    DURATION_IN_S_FIELD_NUMBER: builtins.int
-    DURATION_IN_M_FIELD_NUMBER: builtins.int
-    DURATION_IN_M_ROUNDED_FIELD_NUMBER: builtins.int
-    DURATION_INTERVAL_15S_ROUNDED_FIELD_NUMBER: builtins.int
-    DURATION_INTERVAL_30S_ROUNDED_FIELD_NUMBER: builtins.int
-    DURATION_INTERVAL_45S_ROUNDED_FIELD_NUMBER: builtins.int
-    STARTED_TIME_SLOT_PER_HOUR_FIELD_NUMBER: builtins.int
-    STARTED_TIME_SLOT_PER_QUARTER_HOUR_FIELD_NUMBER: builtins.int
-    STARTED_TIME_SLOT_PER_HALF_HOUR_FIELD_NUMBER: builtins.int
-    STARTED_TIME_SLOT_PER_DAY_PHASE_FIELD_NUMBER: builtins.int
-    STARTED_TIME_SLOT_PER_MINUTE_FIELD_NUMBER: builtins.int
-    DURATION_IN_S_ROUNDED_FIELD_NUMBER: builtins.int
-    PLATFORMS_FIELD_NUMBER: builtins.int
-    ACCOUNT_IDS_FIELD_NUMBER: builtins.int
-    PROPERTY_IDS_FIELD_NUMBER: builtins.int
-    DATASTREAM_IDS_FIELD_NUMBER: builtins.int
-    ORIGIN_IDS_FIELD_NUMBER: builtins.int
-    IDENTIFIED_USER_IDS_FIELD_NUMBER: builtins.int
-    DURATION_INTERVAL_60S_ROUNDED_FIELD_NUMBER: builtins.int
-    PARENT_COMMENT_FIELD_NUMBER: builtins.int
-    min_intents_confidence: builtins.float
+    LANGUAGE_CODES_FIELD_NUMBER: _builtins.int
+    MATCHED_INTENTS_FIELD_NUMBER: _builtins.int
+    MATCHED_ENTITY_TYPES_FIELD_NUMBER: _builtins.int
+    MIN_INTENTS_CONFIDENCE_FIELD_NUMBER: _builtins.int
+    MIN_ENTITY_TYPES_CONFIDENCE_FIELD_NUMBER: _builtins.int
+    EARLIEST_FIELD_NUMBER: _builtins.int
+    LATEST_FIELD_NUMBER: _builtins.int
+    NUMBER_TURNS_FIELD_NUMBER: _builtins.int
+    LABELS_FIELD_NUMBER: _builtins.int
+    USER_IDS_FIELD_NUMBER: _builtins.int
+    INTENT_TAGS_FIELD_NUMBER: _builtins.int
+    INPUT_CONTEXT_STEPS_FIELD_NUMBER: _builtins.int
+    OUTPUT_CONTEXT_STEPS_FIELD_NUMBER: _builtins.int
+    DURATION_IN_S_FIELD_NUMBER: _builtins.int
+    DURATION_IN_M_FIELD_NUMBER: _builtins.int
+    DURATION_IN_M_ROUNDED_FIELD_NUMBER: _builtins.int
+    DURATION_INTERVAL_15S_ROUNDED_FIELD_NUMBER: _builtins.int
+    DURATION_INTERVAL_30S_ROUNDED_FIELD_NUMBER: _builtins.int
+    DURATION_INTERVAL_45S_ROUNDED_FIELD_NUMBER: _builtins.int
+    STARTED_TIME_SLOT_PER_HOUR_FIELD_NUMBER: _builtins.int
+    STARTED_TIME_SLOT_PER_QUARTER_HOUR_FIELD_NUMBER: _builtins.int
+    STARTED_TIME_SLOT_PER_HALF_HOUR_FIELD_NUMBER: _builtins.int
+    STARTED_TIME_SLOT_PER_DAY_PHASE_FIELD_NUMBER: _builtins.int
+    STARTED_TIME_SLOT_PER_MINUTE_FIELD_NUMBER: _builtins.int
+    DURATION_IN_S_ROUNDED_FIELD_NUMBER: _builtins.int
+    PLATFORMS_FIELD_NUMBER: _builtins.int
+    ACCOUNT_IDS_FIELD_NUMBER: _builtins.int
+    PROPERTY_IDS_FIELD_NUMBER: _builtins.int
+    DATASTREAM_IDS_FIELD_NUMBER: _builtins.int
+    ORIGIN_IDS_FIELD_NUMBER: _builtins.int
+    IDENTIFIED_USER_IDS_FIELD_NUMBER: _builtins.int
+    DURATION_INTERVAL_60S_ROUNDED_FIELD_NUMBER: _builtins.int
+    PARENT_COMMENT_FIELD_NUMBER: _builtins.int
+    min_intents_confidence: _builtins.float
     """The minimum confidence for intent recognition along the session"""
-    min_entity_types_confidence: builtins.float
+    min_entity_types_confidence: _builtins.float
     """The minimum confidence for entity recognition along the session"""
-    earliest: builtins.float
+    earliest: _builtins.float
     """The earliest date of the given session (in UNIX epochs), i.e. the time of the first interaction of a user
     in the given session
     """
-    latest: builtins.float
+    latest: _builtins.float
     """The latest date of the given session (in UNIX epochs), i.e. the time of the last interaction of a user
     in the given session
     """
-    number_turns: builtins.int
+    number_turns: _builtins.int
     """The number of turns (interaction steps) in the given session"""
-    duration_in_s: builtins.float
+    duration_in_s: _builtins.float
     """ duration in seconds"""
-    duration_in_m: builtins.float
+    duration_in_m: _builtins.float
     """duration in minutes"""
-    duration_in_m_rounded: builtins.float
+    duration_in_m_rounded: _builtins.float
     """duration in minutes rounded"""
-    duration_interval_15s_rounded: builtins.float
+    duration_interval_15s_rounded: _builtins.float
     """duration in 15 seconds intervals rounded"""
-    duration_interval_30s_rounded: builtins.float
+    duration_interval_30s_rounded: _builtins.float
     """duration in 30 seconds intervals rounded"""
-    duration_interval_45s_rounded: builtins.float
+    duration_interval_45s_rounded: _builtins.float
     """duration in 45 seconds intervals rounded"""
-    started_time_slot_per_hour: builtins.str
+    started_time_slot_per_hour: _builtins.str
     """started_time_slot_per_hour (e.g. 08:00)"""
-    started_time_slot_per_quarter_hour: builtins.str
+    started_time_slot_per_quarter_hour: _builtins.str
     """started_time_slot_per_quarter_hour (e.g. 08:00)"""
-    started_time_slot_per_half_hour: builtins.str
+    started_time_slot_per_half_hour: _builtins.str
     """started_time_slot_per_half_hour (e.g. 08:00)"""
-    started_time_slot_per_day_phase: builtins.str
+    started_time_slot_per_day_phase: _builtins.str
     """started_time_slot_per_day_phase (e.g. 14:00)"""
-    started_time_slot_per_minute: builtins.str
+    started_time_slot_per_minute: _builtins.str
     """started_time_slot_per_minute (e.g. 14:00)"""
-    duration_in_s_rounded: builtins.float
+    duration_in_s_rounded: _builtins.float
     """duration in seconds rounded"""
-    duration_interval_60s_rounded: builtins.float
+    duration_interval_60s_rounded: _builtins.float
     """duration in 60 seconds intervals rounded"""
-    @property
-    def language_codes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def language_codes(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """A SessionInfo contains some general information about a session.
 
         This information can be returned inside a Session object for consumption by a client.
@@ -4690,62 +4938,62 @@ class SessionInfo(google.protobuf.message.Message):
         The language codes used in the given session.
         """
 
-    @property
-    def matched_intents(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.intent_pb2.Intent]:
+    @_builtins.property
+    def matched_intents(self) -> _containers.RepeatedCompositeFieldContainer[_intent_pb2.Intent]:
         """A list of intents which have been matched"""
 
-    @property
-    def matched_entity_types(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.entity_type_pb2.EntityType]:
+    @_builtins.property
+    def matched_entity_types(self) -> _containers.RepeatedCompositeFieldContainer[_entity_type_pb2.EntityType]:
         """A list of entity types which have been matched"""
 
-    @property
-    def labels(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def labels(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """The list of labels of the given session"""
 
-    @property
-    def user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def user_ids(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """The user_ids of the users which were interacting within the given session"""
 
-    @property
-    def intent_tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def intent_tags(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """The list of intent tags in the given session"""
 
-    @property
-    def input_context_steps(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___SessionInfo.ContextSteps]:
+    @_builtins.property
+    def input_context_steps(self) -> _containers.RepeatedCompositeFieldContainer[Global___SessionInfo.ContextSteps]:
         """The input contexts that are matched in the given session. The name of the context here is the short name
         and not the full URL name including the project parent
         """
 
-    @property
-    def output_context_steps(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___SessionInfo.ContextSteps]:
+    @_builtins.property
+    def output_context_steps(self) -> _containers.RepeatedCompositeFieldContainer[Global___SessionInfo.ContextSteps]:
         """The output contexts that are matched in the given session. The name of the context here is the short name
         and not the full URL name including the project parent
         """
 
-    @property
-    def platforms(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[ondewo.nlu.intent_pb2.Intent.Message.Platform.ValueType]:
+    @_builtins.property
+    def platforms(self) -> _containers.RepeatedScalarFieldContainer[_intent_pb2.Intent.Message.Platform.ValueType]:
         """Messages for each of the Intent.Message.Platform were sent to the user"""
 
-    @property
-    def account_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def account_ids(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Ids of the account, e.g. Company Ondewo,
         This field can also be used for customized tracking ids or tag ids
         """
 
-    @property
-    def property_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def property_ids(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Ids of the property of the account, e.g. Domain ondewo.com
         This field can also be used for customized tracking ids or tag ids
         """
 
-    @property
-    def datastream_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def datastream_ids(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Ids of the datastream of the property of the account, e.g. Subdomain sub1.ondewo.com or sub2.ondewo.com
         This field can also be used for customized tracking ids or tag ids
         """
 
-    @property
-    def origin_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def origin_ids(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Ids of the the origin of the user request
 
         For a phone bot, this is the phone number +123456789 the user called (Note: This is not the user's phone number)
@@ -4753,98 +5001,106 @@ class SessionInfo(google.protobuf.message.Message):
         For a voice assistant device, this is the device-id or the app id
         """
 
-    @property
-    def identified_user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def identified_user_ids(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Ids of the "identified user" e.g. for a chatbot the email address or for a phone bot the phone number of the user"""
 
-    @property
-    def parent_comment(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.common_pb2.Comment]:
+    @_builtins.property
+    def parent_comment(self) -> _containers.RepeatedCompositeFieldContainer[_common_pb2.Comment]:
         """comments about a session"""
 
     def __init__(
         self,
         *,
-        language_codes: collections.abc.Iterable[builtins.str] | None = ...,
-        matched_intents: collections.abc.Iterable[ondewo.nlu.intent_pb2.Intent] | None = ...,
-        matched_entity_types: collections.abc.Iterable[ondewo.nlu.entity_type_pb2.EntityType] | None = ...,
-        min_intents_confidence: builtins.float = ...,
-        min_entity_types_confidence: builtins.float = ...,
-        earliest: builtins.float = ...,
-        latest: builtins.float = ...,
-        number_turns: builtins.int = ...,
-        labels: collections.abc.Iterable[builtins.str] | None = ...,
-        user_ids: collections.abc.Iterable[builtins.str] | None = ...,
-        intent_tags: collections.abc.Iterable[builtins.str] | None = ...,
-        input_context_steps: collections.abc.Iterable[global___SessionInfo.ContextSteps] | None = ...,
-        output_context_steps: collections.abc.Iterable[global___SessionInfo.ContextSteps] | None = ...,
-        duration_in_s: builtins.float = ...,
-        duration_in_m: builtins.float = ...,
-        duration_in_m_rounded: builtins.float = ...,
-        duration_interval_15s_rounded: builtins.float = ...,
-        duration_interval_30s_rounded: builtins.float = ...,
-        duration_interval_45s_rounded: builtins.float = ...,
-        started_time_slot_per_hour: builtins.str = ...,
-        started_time_slot_per_quarter_hour: builtins.str = ...,
-        started_time_slot_per_half_hour: builtins.str = ...,
-        started_time_slot_per_day_phase: builtins.str = ...,
-        started_time_slot_per_minute: builtins.str = ...,
-        duration_in_s_rounded: builtins.float = ...,
-        platforms: collections.abc.Iterable[ondewo.nlu.intent_pb2.Intent.Message.Platform.ValueType] | None = ...,
-        account_ids: collections.abc.Iterable[builtins.str] | None = ...,
-        property_ids: collections.abc.Iterable[builtins.str] | None = ...,
-        datastream_ids: collections.abc.Iterable[builtins.str] | None = ...,
-        origin_ids: collections.abc.Iterable[builtins.str] | None = ...,
-        identified_user_ids: collections.abc.Iterable[builtins.str] | None = ...,
-        duration_interval_60s_rounded: builtins.float = ...,
-        parent_comment: collections.abc.Iterable[ondewo.nlu.common_pb2.Comment] | None = ...,
+        language_codes: _abc.Iterable[_builtins.str] | None = ...,
+        matched_intents: _abc.Iterable[_intent_pb2.Intent] | None = ...,
+        matched_entity_types: _abc.Iterable[_entity_type_pb2.EntityType] | None = ...,
+        min_intents_confidence: _builtins.float = ...,
+        min_entity_types_confidence: _builtins.float = ...,
+        earliest: _builtins.float = ...,
+        latest: _builtins.float = ...,
+        number_turns: _builtins.int = ...,
+        labels: _abc.Iterable[_builtins.str] | None = ...,
+        user_ids: _abc.Iterable[_builtins.str] | None = ...,
+        intent_tags: _abc.Iterable[_builtins.str] | None = ...,
+        input_context_steps: _abc.Iterable[Global___SessionInfo.ContextSteps] | None = ...,
+        output_context_steps: _abc.Iterable[Global___SessionInfo.ContextSteps] | None = ...,
+        duration_in_s: _builtins.float = ...,
+        duration_in_m: _builtins.float = ...,
+        duration_in_m_rounded: _builtins.float = ...,
+        duration_interval_15s_rounded: _builtins.float = ...,
+        duration_interval_30s_rounded: _builtins.float = ...,
+        duration_interval_45s_rounded: _builtins.float = ...,
+        started_time_slot_per_hour: _builtins.str = ...,
+        started_time_slot_per_quarter_hour: _builtins.str = ...,
+        started_time_slot_per_half_hour: _builtins.str = ...,
+        started_time_slot_per_day_phase: _builtins.str = ...,
+        started_time_slot_per_minute: _builtins.str = ...,
+        duration_in_s_rounded: _builtins.float = ...,
+        platforms: _abc.Iterable[_intent_pb2.Intent.Message.Platform.ValueType] | None = ...,
+        account_ids: _abc.Iterable[_builtins.str] | None = ...,
+        property_ids: _abc.Iterable[_builtins.str] | None = ...,
+        datastream_ids: _abc.Iterable[_builtins.str] | None = ...,
+        origin_ids: _abc.Iterable[_builtins.str] | None = ...,
+        identified_user_ids: _abc.Iterable[_builtins.str] | None = ...,
+        duration_interval_60s_rounded: _builtins.float = ...,
+        parent_comment: _abc.Iterable[_common_pb2.Comment] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["account_ids", b"account_ids", "datastream_ids", b"datastream_ids", "duration_in_m", b"duration_in_m", "duration_in_m_rounded", b"duration_in_m_rounded", "duration_in_s", b"duration_in_s", "duration_in_s_rounded", b"duration_in_s_rounded", "duration_interval_15s_rounded", b"duration_interval_15s_rounded", "duration_interval_30s_rounded", b"duration_interval_30s_rounded", "duration_interval_45s_rounded", b"duration_interval_45s_rounded", "duration_interval_60s_rounded", b"duration_interval_60s_rounded", "earliest", b"earliest", "identified_user_ids", b"identified_user_ids", "input_context_steps", b"input_context_steps", "intent_tags", b"intent_tags", "labels", b"labels", "language_codes", b"language_codes", "latest", b"latest", "matched_entity_types", b"matched_entity_types", "matched_intents", b"matched_intents", "min_entity_types_confidence", b"min_entity_types_confidence", "min_intents_confidence", b"min_intents_confidence", "number_turns", b"number_turns", "origin_ids", b"origin_ids", "output_context_steps", b"output_context_steps", "parent_comment", b"parent_comment", "platforms", b"platforms", "property_ids", b"property_ids", "started_time_slot_per_day_phase", b"started_time_slot_per_day_phase", "started_time_slot_per_half_hour", b"started_time_slot_per_half_hour", "started_time_slot_per_hour", b"started_time_slot_per_hour", "started_time_slot_per_minute", b"started_time_slot_per_minute", "started_time_slot_per_quarter_hour", b"started_time_slot_per_quarter_hour", "user_ids", b"user_ids"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["account_ids", b"account_ids", "datastream_ids", b"datastream_ids", "duration_in_m", b"duration_in_m", "duration_in_m_rounded", b"duration_in_m_rounded", "duration_in_s", b"duration_in_s", "duration_in_s_rounded", b"duration_in_s_rounded", "duration_interval_15s_rounded", b"duration_interval_15s_rounded", "duration_interval_30s_rounded", b"duration_interval_30s_rounded", "duration_interval_45s_rounded", b"duration_interval_45s_rounded", "duration_interval_60s_rounded", b"duration_interval_60s_rounded", "earliest", b"earliest", "identified_user_ids", b"identified_user_ids", "input_context_steps", b"input_context_steps", "intent_tags", b"intent_tags", "labels", b"labels", "language_codes", b"language_codes", "latest", b"latest", "matched_entity_types", b"matched_entity_types", "matched_intents", b"matched_intents", "min_entity_types_confidence", b"min_entity_types_confidence", "min_intents_confidence", b"min_intents_confidence", "number_turns", b"number_turns", "origin_ids", b"origin_ids", "output_context_steps", b"output_context_steps", "parent_comment", b"parent_comment", "platforms", b"platforms", "property_ids", b"property_ids", "started_time_slot_per_day_phase", b"started_time_slot_per_day_phase", "started_time_slot_per_half_hour", b"started_time_slot_per_half_hour", "started_time_slot_per_hour", b"started_time_slot_per_hour", "started_time_slot_per_minute", b"started_time_slot_per_minute", "started_time_slot_per_quarter_hour", b"started_time_slot_per_quarter_hour", "user_ids", b"user_ids"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___SessionInfo = SessionInfo
+Global___SessionInfo: _TypeAlias = SessionInfo  # noqa: Y015
 
-@typing.final
-class ListSessionsResponse(google.protobuf.message.Message):
+@_typing.final
+class ListSessionsResponse(_message.Message):
     """This message is a response including the listing of sessions"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    SESSIONS_FIELD_NUMBER: builtins.int
-    NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    next_page_token: builtins.str
+    SESSIONS_FIELD_NUMBER: _builtins.int
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: _builtins.int
+    next_page_token: _builtins.str
     """The next_page_token is used to retrieve the next page of a returned result,
     e.g. next_page_token is current_index-2
     """
-    @property
-    def sessions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Session]:
+    @_builtins.property
+    def sessions(self) -> _containers.RepeatedCompositeFieldContainer[Global___Session]:
         """The requested sessions"""
 
     def __init__(
         self,
         *,
-        sessions: collections.abc.Iterable[global___Session] | None = ...,
-        next_page_token: builtins.str = ...,
+        sessions: _abc.Iterable[Global___Session] | None = ...,
+        next_page_token: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["next_page_token", b"next_page_token", "sessions", b"sessions"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["next_page_token", b"next_page_token", "sessions", b"sessions"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListSessionsResponse = ListSessionsResponse
+Global___ListSessionsResponse: _TypeAlias = ListSessionsResponse  # noqa: Y015
 
-@typing.final
-class GetSessionRequest(google.protobuf.message.Message):
+@_typing.final
+class GetSessionRequest(_message.Message):
     """This message is a request to get a session"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    SESSION_ID_FIELD_NUMBER: builtins.int
-    SESSION_VIEW_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    session_id: builtins.str
+    SESSION_ID_FIELD_NUMBER: _builtins.int
+    SESSION_VIEW_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    session_id: _builtins.str
     """The session to be returned
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
     """
-    session_view: global___Session.View.ValueType
+    session_view: Global___Session.View.ValueType
     """whether to return a full or sparse view; if unspecified full view is returned"""
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields will be filled with data.
         Example: path=["session_info.duration_in_s_min"]
         """
@@ -4852,129 +5108,143 @@ class GetSessionRequest(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        session_id: builtins.str = ...,
-        session_view: global___Session.View.ValueType = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        session_id: _builtins.str = ...,
+        session_view: Global___Session.View.ValueType = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "session_id", b"session_id", "session_view", b"session_view"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "session_id", b"session_id", "session_view", b"session_view"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GetSessionRequest = GetSessionRequest
+Global___GetSessionRequest: _TypeAlias = GetSessionRequest  # noqa: Y015
 
-@typing.final
-class CreateSessionRequest(google.protobuf.message.Message):
+@_typing.final
+class CreateSessionRequest(_message.Message):
     """This message is a request to create a session"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    SESSION_UUID_FIELD_NUMBER: builtins.int
-    LABELS_FIELD_NUMBER: builtins.int
-    CONTEXTS_FIELD_NUMBER: builtins.int
-    parent: builtins.str
+    PARENT_FIELD_NUMBER: _builtins.int
+    SESSION_UUID_FIELD_NUMBER: _builtins.int
+    LABELS_FIELD_NUMBER: _builtins.int
+    CONTEXTS_FIELD_NUMBER: _builtins.int
+    parent: _builtins.str
     """Required. The project that the agent to fetch is associated with.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
-    session_uuid: builtins.str
+    session_uuid: _builtins.str
     """The unique UUID of a Session
     Format: UUID Version 4, e.g. 2f59fad2-06bc-4730-9920-d3148f28f357
     Optional. If not provided, it will be auto-generated
     """
-    @property
-    def labels(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def labels(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Optional. labels for the session."""
 
-    @property
-    def contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]:
+    @_builtins.property
+    def contexts(self) -> _containers.RepeatedCompositeFieldContainer[_context_pb2.Context]:
         """Optional. The collection of contexts to be activated before this query is executed."""
 
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        session_uuid: builtins.str = ...,
-        labels: collections.abc.Iterable[builtins.str] | None = ...,
-        contexts: collections.abc.Iterable[ondewo.nlu.context_pb2.Context] | None = ...,
+        parent: _builtins.str = ...,
+        session_uuid: _builtins.str = ...,
+        labels: _abc.Iterable[_builtins.str] | None = ...,
+        contexts: _abc.Iterable[_context_pb2.Context] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["contexts", b"contexts", "labels", b"labels", "parent", b"parent", "session_uuid", b"session_uuid"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["contexts", b"contexts", "labels", b"labels", "parent", b"parent", "session_uuid", b"session_uuid"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___CreateSessionRequest = CreateSessionRequest
+Global___CreateSessionRequest: _TypeAlias = CreateSessionRequest  # noqa: Y015
 
-@typing.final
-class DeleteSessionRequest(google.protobuf.message.Message):
+@_typing.final
+class DeleteSessionRequest(_message.Message):
     """This message is a request to delete a session"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    SESSION_ID_FIELD_NUMBER: builtins.int
-    session_id: builtins.str
+    SESSION_ID_FIELD_NUMBER: _builtins.int
+    session_id: _builtins.str
     """Required. The session to be deleted
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
     """
     def __init__(
         self,
         *,
-        session_id: builtins.str = ...,
+        session_id: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["session_id", b"session_id"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["session_id", b"session_id"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___DeleteSessionRequest = DeleteSessionRequest
+Global___DeleteSessionRequest: _TypeAlias = DeleteSessionRequest  # noqa: Y015
 
-@typing.final
-class CreateSessionReviewRequest(google.protobuf.message.Message):
+@_typing.final
+class CreateSessionReviewRequest(_message.Message):
     """*** SESSION-REVIEW RELATED MESSAGES *** //
 
     Request to persist a session review for a given session.
     As a side effect, training data in ondewo-cai may also be updated.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    SESSION_ID_FIELD_NUMBER: builtins.int
-    PARENT_REVIEW_ID_FIELD_NUMBER: builtins.int
-    SESSION_REVIEW_FIELD_NUMBER: builtins.int
-    SESSION_REVIEW_VIEW_FIELD_NUMBER: builtins.int
-    session_id: builtins.str
+    SESSION_ID_FIELD_NUMBER: _builtins.int
+    PARENT_REVIEW_ID_FIELD_NUMBER: _builtins.int
+    SESSION_REVIEW_FIELD_NUMBER: _builtins.int
+    SESSION_REVIEW_VIEW_FIELD_NUMBER: _builtins.int
+    session_id: _builtins.str
     """The unique identifier for the session under review
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
     """
-    parent_review_id: builtins.str
+    parent_review_id: _builtins.str
     """Optional: The unique identifier of the parent review
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/reviews/&lt;session_review_uuid&gt;</code></pre>
     """
-    session_review_view: global___SessionReview.View.ValueType
+    session_review_view: Global___SessionReview.View.ValueType
     """Represents the options for views of a session_review.
     A session_review can be a sizable object. Therefore, we provide a resource view that does not return all data
     """
-    @property
-    def session_review(self) -> global___SessionReview:
+    @_builtins.property
+    def session_review(self) -> Global___SessionReview:
         """The reviews for all steps in the session"""
 
     def __init__(
         self,
         *,
-        session_id: builtins.str = ...,
-        parent_review_id: builtins.str = ...,
-        session_review: global___SessionReview | None = ...,
-        session_review_view: global___SessionReview.View.ValueType = ...,
+        session_id: _builtins.str = ...,
+        parent_review_id: _builtins.str = ...,
+        session_review: Global___SessionReview | None = ...,
+        session_review_view: Global___SessionReview.View.ValueType = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["session_review", b"session_review"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["parent_review_id", b"parent_review_id", "session_id", b"session_id", "session_review", b"session_review", "session_review_view", b"session_review_view"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["session_review", b"session_review"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["parent_review_id", b"parent_review_id", "session_id", b"session_id", "session_review", b"session_review", "session_review_view", b"session_review_view"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___CreateSessionReviewRequest = CreateSessionReviewRequest
+Global___CreateSessionReviewRequest: _TypeAlias = CreateSessionReviewRequest  # noqa: Y015
 
-@typing.final
-class SessionReview(google.protobuf.message.Message):
+@_typing.final
+class SessionReview(_message.Message):
     """This message contains a session review"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     class _View:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _TypeAlias = ValueType  # noqa: Y015
 
-    class _ViewEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[SessionReview._View.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _ViewEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[SessionReview._View.ValueType], _builtins.type):
+        DESCRIPTOR: _descriptor.EnumDescriptor
         VIEW_UNSPECIFIED: SessionReview._View.ValueType  # 0
         """Endpoints decide whether to return the full or the sparse view"""
         VIEW_FULL: SessionReview._View.ValueType  # 1
@@ -4994,170 +5264,176 @@ class SessionReview(google.protobuf.message.Message):
     VIEW_SPARSE: SessionReview.View.ValueType  # 2
     """Only some fields are populated in the response."""
 
-    NAME_FIELD_NUMBER: builtins.int
-    SESSION_REVIEW_STEPS_FIELD_NUMBER: builtins.int
-    CREATED_AT_FIELD_NUMBER: builtins.int
-    MODIFIED_AT_FIELD_NUMBER: builtins.int
-    CREATED_BY_FIELD_NUMBER: builtins.int
-    MODIFIED_BY_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    SESSION_REVIEW_STEPS_FIELD_NUMBER: _builtins.int
+    CREATED_AT_FIELD_NUMBER: _builtins.int
+    MODIFIED_AT_FIELD_NUMBER: _builtins.int
+    CREATED_BY_FIELD_NUMBER: _builtins.int
+    MODIFIED_BY_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """The unique identifier for the given review
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/reviews/&lt;session_review_uuid&gt;</code></pre>
     """
-    created_by: builtins.str
+    created_by: _builtins.str
     """User id in form of a valid UUID."""
-    modified_by: builtins.str
+    modified_by: _builtins.str
     """User id in form of a valid UUID."""
-    @property
-    def session_review_steps(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___SessionReviewStep]:
+    @_builtins.property
+    def session_review_steps(self) -> _containers.RepeatedCompositeFieldContainer[Global___SessionReviewStep]:
         """The reviews for all steps in the session"""
 
-    @property
-    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def created_at(self) -> _timestamp_pb2.Timestamp:
         """Creation date and time. Read-only field."""
 
-    @property
-    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def modified_at(self) -> _timestamp_pb2.Timestamp:
         """Modification date and time. Read-only field."""
 
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
-        session_review_steps: collections.abc.Iterable[global___SessionReviewStep] | None = ...,
-        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        created_by: builtins.str = ...,
-        modified_by: builtins.str = ...,
+        name: _builtins.str = ...,
+        session_review_steps: _abc.Iterable[Global___SessionReviewStep] | None = ...,
+        created_at: _timestamp_pb2.Timestamp | None = ...,
+        modified_at: _timestamp_pb2.Timestamp | None = ...,
+        created_by: _builtins.str = ...,
+        modified_by: _builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["created_at", b"created_at", "created_by", b"created_by", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "session_review_steps", b"session_review_steps"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["created_at", b"created_at", "created_by", b"created_by", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "session_review_steps", b"session_review_steps"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___SessionReview = SessionReview
+Global___SessionReview: _TypeAlias = SessionReview  # noqa: Y015
 
-@typing.final
-class SessionReviewStep(google.protobuf.message.Message):
+@_typing.final
+class SessionReviewStep(_message.Message):
     """This message contains a session review step"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NAME_FIELD_NUMBER: builtins.int
-    ANNOTATED_USERSAYS_FIELD_NUMBER: builtins.int
-    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
-    DETECTED_INTENTS_FIELD_NUMBER: builtins.int
-    CONTEXTS_FIELD_NUMBER: builtins.int
-    CONTEXTS_OUT_FIELD_NUMBER: builtins.int
-    QUERY_TEXT_ORIGINAL_FIELD_NUMBER: builtins.int
-    PLATFORMS_FIELD_NUMBER: builtins.int
-    TIMESTAMP_FIELD_NUMBER: builtins.int
-    CREATED_AT_FIELD_NUMBER: builtins.int
-    MODIFIED_AT_FIELD_NUMBER: builtins.int
-    CREATED_BY_FIELD_NUMBER: builtins.int
-    MODIFIED_BY_FIELD_NUMBER: builtins.int
-    AUDIO_FILE_RESOURCES_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    ANNOTATED_USERSAYS_FIELD_NUMBER: _builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: _builtins.int
+    DETECTED_INTENTS_FIELD_NUMBER: _builtins.int
+    CONTEXTS_FIELD_NUMBER: _builtins.int
+    CONTEXTS_OUT_FIELD_NUMBER: _builtins.int
+    QUERY_TEXT_ORIGINAL_FIELD_NUMBER: _builtins.int
+    PLATFORMS_FIELD_NUMBER: _builtins.int
+    TIMESTAMP_FIELD_NUMBER: _builtins.int
+    CREATED_AT_FIELD_NUMBER: _builtins.int
+    MODIFIED_AT_FIELD_NUMBER: _builtins.int
+    CREATED_BY_FIELD_NUMBER: _builtins.int
+    MODIFIED_BY_FIELD_NUMBER: _builtins.int
+    AUDIO_FILE_RESOURCES_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """The unique identifier for the given review step
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/reviews/&lt;review_uuid&gt;/sessionreviewsteps/&lt;session_review_step_uuid&gt;</code></pre>
     """
-    language_code: builtins.str
+    language_code: _builtins.str
     """The language code"""
-    query_text_original: builtins.str
+    query_text_original: _builtins.str
     """User input without any pre-processing applied"""
-    created_by: builtins.str
+    created_by: _builtins.str
     """User id in form of a valid UUID."""
-    modified_by: builtins.str
+    modified_by: _builtins.str
     """User id in form of a valid UUID."""
-    @property
-    def annotated_usersays(self) -> ondewo.nlu.intent_pb2.Intent.TrainingPhrase:
+    @_builtins.property
+    def annotated_usersays(self) -> _intent_pb2.Intent.TrainingPhrase:
         """The user says with markup of the detected entity types after the preprocessing such as spelling correction,
         stopword removal etc. has been applied.
 
         This string represents what has been passed to the entity recognition and intent detection algorithms.
         """
 
-    @property
-    def detected_intents(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___DetectedIntent]:
+    @_builtins.property
+    def detected_intents(self) -> _containers.RepeatedCompositeFieldContainer[Global___DetectedIntent]:
         """Unique detected intents ordered by descending confidence"""
 
-    @property
-    def contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]:
+    @_builtins.property
+    def contexts(self) -> _containers.RepeatedCompositeFieldContainer[_context_pb2.Context]:
         """The contexts which were active at the beginning of this step"""
 
-    @property
-    def contexts_out(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]:
+    @_builtins.property
+    def contexts_out(self) -> _containers.RepeatedCompositeFieldContainer[_context_pb2.Context]:
         """The output contexts of this step"""
 
-    @property
-    def platforms(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[ondewo.nlu.intent_pb2.Intent.Message.Platform.ValueType]:
+    @_builtins.property
+    def platforms(self) -> _containers.RepeatedScalarFieldContainer[_intent_pb2.Intent.Message.Platform.ValueType]:
         """Messages for each of the Intent.Message.Platform were sent to the user"""
 
-    @property
-    def timestamp(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def timestamp(self) -> _timestamp_pb2.Timestamp:
         """Timestamp of session review step"""
 
-    @property
-    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def created_at(self) -> _timestamp_pb2.Timestamp:
         """Creation date and time. Read-only field."""
 
-    @property
-    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def modified_at(self) -> _timestamp_pb2.Timestamp:
         """Modification date and time. Read-only field."""
 
-    @property
-    def audio_file_resources(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AudioFileResource]:
+    @_builtins.property
+    def audio_file_resources(self) -> _containers.RepeatedCompositeFieldContainer[Global___AudioFileResource]:
         """audio file resources associated with the session review step"""
 
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
-        annotated_usersays: ondewo.nlu.intent_pb2.Intent.TrainingPhrase | None = ...,
-        language_code: builtins.str = ...,
-        detected_intents: collections.abc.Iterable[global___DetectedIntent] | None = ...,
-        contexts: collections.abc.Iterable[ondewo.nlu.context_pb2.Context] | None = ...,
-        contexts_out: collections.abc.Iterable[ondewo.nlu.context_pb2.Context] | None = ...,
-        query_text_original: builtins.str = ...,
-        platforms: collections.abc.Iterable[ondewo.nlu.intent_pb2.Intent.Message.Platform.ValueType] | None = ...,
-        timestamp: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        created_by: builtins.str = ...,
-        modified_by: builtins.str = ...,
-        audio_file_resources: collections.abc.Iterable[global___AudioFileResource] | None = ...,
+        name: _builtins.str = ...,
+        annotated_usersays: _intent_pb2.Intent.TrainingPhrase | None = ...,
+        language_code: _builtins.str = ...,
+        detected_intents: _abc.Iterable[Global___DetectedIntent] | None = ...,
+        contexts: _abc.Iterable[_context_pb2.Context] | None = ...,
+        contexts_out: _abc.Iterable[_context_pb2.Context] | None = ...,
+        query_text_original: _builtins.str = ...,
+        platforms: _abc.Iterable[_intent_pb2.Intent.Message.Platform.ValueType] | None = ...,
+        timestamp: _timestamp_pb2.Timestamp | None = ...,
+        created_at: _timestamp_pb2.Timestamp | None = ...,
+        modified_at: _timestamp_pb2.Timestamp | None = ...,
+        created_by: _builtins.str = ...,
+        modified_by: _builtins.str = ...,
+        audio_file_resources: _abc.Iterable[Global___AudioFileResource] | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["annotated_usersays", b"annotated_usersays", "created_at", b"created_at", "modified_at", b"modified_at", "timestamp", b"timestamp"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["annotated_usersays", b"annotated_usersays", "audio_file_resources", b"audio_file_resources", "contexts", b"contexts", "contexts_out", b"contexts_out", "created_at", b"created_at", "created_by", b"created_by", "detected_intents", b"detected_intents", "language_code", b"language_code", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "platforms", b"platforms", "query_text_original", b"query_text_original", "timestamp", b"timestamp"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["annotated_usersays", b"annotated_usersays", "created_at", b"created_at", "modified_at", b"modified_at", "timestamp", b"timestamp"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["annotated_usersays", b"annotated_usersays", "audio_file_resources", b"audio_file_resources", "contexts", b"contexts", "contexts_out", b"contexts_out", "created_at", b"created_at", "created_by", b"created_by", "detected_intents", b"detected_intents", "language_code", b"language_code", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "platforms", b"platforms", "query_text_original", b"query_text_original", "timestamp", b"timestamp"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___SessionReviewStep = SessionReviewStep
+Global___SessionReviewStep: _TypeAlias = SessionReviewStep  # noqa: Y015
 
-@typing.final
-class DetectedIntent(google.protobuf.message.Message):
+@_typing.final
+class DetectedIntent(_message.Message):
     """This message contains a detected intent"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    INTENT_FIELD_NUMBER: builtins.int
-    SCORE_FIELD_NUMBER: builtins.int
-    ALGORITHM_FIELD_NUMBER: builtins.int
-    FULFILLMENT_MESSAGES_FIELD_NUMBER: builtins.int
-    REQUIRED_PARAM_MISSING_FIELD_NUMBER: builtins.int
-    score: builtins.float
+    INTENT_FIELD_NUMBER: _builtins.int
+    SCORE_FIELD_NUMBER: _builtins.int
+    ALGORITHM_FIELD_NUMBER: _builtins.int
+    FULFILLMENT_MESSAGES_FIELD_NUMBER: _builtins.int
+    REQUIRED_PARAM_MISSING_FIELD_NUMBER: _builtins.int
+    score: _builtins.float
     """score of intent detection"""
-    algorithm: builtins.str
+    algorithm: _builtins.str
     """intent detection algorithm"""
-    required_param_missing: builtins.bool
+    required_param_missing: _builtins.bool
     """This field is set to:
     <ul>
       <li><code>true</code> if the matched intent has required parameters and not all of the required parameter values have been collected.</li>
       <li><code>false</code> if all required parameter values have been collected, or if the matched intent doesn&apos;t contain any required parameters.</li>
     </ul>
     """
-    @property
-    def intent(self) -> ondewo.nlu.intent_pb2.Intent:
+    @_builtins.property
+    def intent(self) -> _intent_pb2.Intent:
         """intent"""
 
-    @property
-    def fulfillment_messages(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.intent_pb2.Intent.Message]:
+    @_builtins.property
+    def fulfillment_messages(self) -> _containers.RepeatedCompositeFieldContainer[_intent_pb2.Intent.Message]:
         """collection of rich messages to present to the user
         This field is set only for the first detected intent. For the rest of the intents the messages are not
           resolved and the raw messages for the current language code are available in self.intent.messages
@@ -5166,902 +5442,1025 @@ class DetectedIntent(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        intent: ondewo.nlu.intent_pb2.Intent | None = ...,
-        score: builtins.float = ...,
-        algorithm: builtins.str = ...,
-        fulfillment_messages: collections.abc.Iterable[ondewo.nlu.intent_pb2.Intent.Message] | None = ...,
-        required_param_missing: builtins.bool = ...,
+        intent: _intent_pb2.Intent | None = ...,
+        score: _builtins.float = ...,
+        algorithm: _builtins.str = ...,
+        fulfillment_messages: _abc.Iterable[_intent_pb2.Intent.Message] | None = ...,
+        required_param_missing: _builtins.bool = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["intent", b"intent"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["algorithm", b"algorithm", "fulfillment_messages", b"fulfillment_messages", "intent", b"intent", "required_param_missing", b"required_param_missing", "score", b"score"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["intent", b"intent"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["algorithm", b"algorithm", "fulfillment_messages", b"fulfillment_messages", "intent", b"intent", "required_param_missing", b"required_param_missing", "score", b"score"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___DetectedIntent = DetectedIntent
+Global___DetectedIntent: _TypeAlias = DetectedIntent  # noqa: Y015
 
-@typing.final
-class ListSessionLabelsRequest(google.protobuf.message.Message):
+@_typing.final
+class ListSessionLabelsRequest(_message.Message):
     """This message is a request to list session labels"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    SESSION_ID_FIELD_NUMBER: builtins.int
-    session_id: builtins.str
+    SESSION_ID_FIELD_NUMBER: _builtins.int
+    session_id: _builtins.str
     """The id of the session"""
     def __init__(
         self,
         *,
-        session_id: builtins.str = ...,
+        session_id: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["session_id", b"session_id"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["session_id", b"session_id"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListSessionLabelsRequest = ListSessionLabelsRequest
+Global___ListSessionLabelsRequest: _TypeAlias = ListSessionLabelsRequest  # noqa: Y015
 
-@typing.final
-class ListSessionLabelsOfAllSessionsRequest(google.protobuf.message.Message):
+@_typing.final
+class ListSessionLabelsOfAllSessionsRequest(_message.Message):
     """request to list all labels of all sessions"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    SESSION_FILTER_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    parent: builtins.str
+    PARENT_FIELD_NUMBER: _builtins.int
+    SESSION_FILTER_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    parent: _builtins.str
     """The parent for which the labels for all sessions should be listed
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
-    @property
-    def session_filter(self) -> global___SessionFilter:
+    @_builtins.property
+    def session_filter(self) -> Global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
 
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields gets returned."""
 
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        session_filter: global___SessionFilter | None = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        parent: _builtins.str = ...,
+        session_filter: Global___SessionFilter | None = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "session_filter", b"session_filter"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "parent", b"parent", "session_filter", b"session_filter"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListSessionLabelsOfAllSessionsRequest = ListSessionLabelsOfAllSessionsRequest
+Global___ListSessionLabelsOfAllSessionsRequest: _TypeAlias = ListSessionLabelsOfAllSessionsRequest  # noqa: Y015
 
-@typing.final
-class ListSessionLabelsResponse(google.protobuf.message.Message):
+@_typing.final
+class ListSessionLabelsResponse(_message.Message):
     """This message is a response of listing session labels"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    LABELS_FIELD_NUMBER: builtins.int
-    @property
-    def labels(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    LABELS_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def labels(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """The labels of the session"""
 
     def __init__(
         self,
         *,
-        labels: collections.abc.Iterable[builtins.str] | None = ...,
+        labels: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["labels", b"labels"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["labels", b"labels"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListSessionLabelsResponse = ListSessionLabelsResponse
+Global___ListSessionLabelsResponse: _TypeAlias = ListSessionLabelsResponse  # noqa: Y015
 
-@typing.final
-class ListLanguageCodesOfAllSessionsRequest(google.protobuf.message.Message):
+@_typing.final
+class ListLanguageCodesOfAllSessionsRequest(_message.Message):
     """request to list all language codes of all sessions"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    SESSION_FILTER_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    parent: builtins.str
+    PARENT_FIELD_NUMBER: _builtins.int
+    SESSION_FILTER_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    parent: _builtins.str
     """The parent for which the language_codes for all sessions should be listed
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
-    @property
-    def session_filter(self) -> global___SessionFilter:
+    @_builtins.property
+    def session_filter(self) -> Global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
 
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields gets returned."""
 
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        session_filter: global___SessionFilter | None = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        parent: _builtins.str = ...,
+        session_filter: Global___SessionFilter | None = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "session_filter", b"session_filter"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "parent", b"parent", "session_filter", b"session_filter"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListLanguageCodesOfAllSessionsRequest = ListLanguageCodesOfAllSessionsRequest
+Global___ListLanguageCodesOfAllSessionsRequest: _TypeAlias = ListLanguageCodesOfAllSessionsRequest  # noqa: Y015
 
-@typing.final
-class ListLanguageCodesResponse(google.protobuf.message.Message):
+@_typing.final
+class ListLanguageCodesResponse(_message.Message):
     """This message is a response of listing session language_codes"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    LANGUAGE_CODES_FIELD_NUMBER: builtins.int
-    @property
-    def language_codes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    LANGUAGE_CODES_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def language_codes(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """The language_codes of the session"""
 
     def __init__(
         self,
         *,
-        language_codes: collections.abc.Iterable[builtins.str] | None = ...,
+        language_codes: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["language_codes", b"language_codes"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["language_codes", b"language_codes"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListLanguageCodesResponse = ListLanguageCodesResponse
+Global___ListLanguageCodesResponse: _TypeAlias = ListLanguageCodesResponse  # noqa: Y015
 
-@typing.final
-class ListMatchedIntentsOfAllSessionsRequest(google.protobuf.message.Message):
+@_typing.final
+class ListMatchedIntentsOfAllSessionsRequest(_message.Message):
     """request to list all matched_intents of all sessions"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    SESSION_FILTER_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    parent: builtins.str
+    PARENT_FIELD_NUMBER: _builtins.int
+    SESSION_FILTER_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    parent: _builtins.str
     """The parent for which the matched_intents for all sessions should be listed
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
-    @property
-    def session_filter(self) -> global___SessionFilter:
+    @_builtins.property
+    def session_filter(self) -> Global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
 
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields gets returned."""
 
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        session_filter: global___SessionFilter | None = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        parent: _builtins.str = ...,
+        session_filter: Global___SessionFilter | None = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "session_filter", b"session_filter"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "parent", b"parent", "session_filter", b"session_filter"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListMatchedIntentsOfAllSessionsRequest = ListMatchedIntentsOfAllSessionsRequest
+Global___ListMatchedIntentsOfAllSessionsRequest: _TypeAlias = ListMatchedIntentsOfAllSessionsRequest  # noqa: Y015
 
-@typing.final
-class ListMatchedIntentsResponse(google.protobuf.message.Message):
+@_typing.final
+class ListMatchedIntentsResponse(_message.Message):
     """This message is a response of listing session matched_intents"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    MATCHED_INTENTS_FIELD_NUMBER: builtins.int
-    @property
-    def matched_intents(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    MATCHED_INTENTS_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def matched_intents(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """The matched_intents of the session"""
 
     def __init__(
         self,
         *,
-        matched_intents: collections.abc.Iterable[builtins.str] | None = ...,
+        matched_intents: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["matched_intents", b"matched_intents"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["matched_intents", b"matched_intents"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListMatchedIntentsResponse = ListMatchedIntentsResponse
+Global___ListMatchedIntentsResponse: _TypeAlias = ListMatchedIntentsResponse  # noqa: Y015
 
-@typing.final
-class ListMatchedEntityTypesOfAllSessionsRequest(google.protobuf.message.Message):
+@_typing.final
+class ListMatchedEntityTypesOfAllSessionsRequest(_message.Message):
     """request to list all matched_entity_types of all sessions"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    SESSION_FILTER_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    parent: builtins.str
+    PARENT_FIELD_NUMBER: _builtins.int
+    SESSION_FILTER_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    parent: _builtins.str
     """The parent for which the matched_entity_types for all sessions should be listed
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
-    @property
-    def session_filter(self) -> global___SessionFilter:
+    @_builtins.property
+    def session_filter(self) -> Global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
 
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields gets returned."""
 
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        session_filter: global___SessionFilter | None = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        parent: _builtins.str = ...,
+        session_filter: Global___SessionFilter | None = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "session_filter", b"session_filter"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "parent", b"parent", "session_filter", b"session_filter"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListMatchedEntityTypesOfAllSessionsRequest = ListMatchedEntityTypesOfAllSessionsRequest
+Global___ListMatchedEntityTypesOfAllSessionsRequest: _TypeAlias = ListMatchedEntityTypesOfAllSessionsRequest  # noqa: Y015
 
-@typing.final
-class ListMatchedEntityTypesResponse(google.protobuf.message.Message):
+@_typing.final
+class ListMatchedEntityTypesResponse(_message.Message):
     """This message is a response of listing session matched_entity_types"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    MATCHED_ENTITY_TYPES_FIELD_NUMBER: builtins.int
-    @property
-    def matched_entity_types(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    MATCHED_ENTITY_TYPES_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def matched_entity_types(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """The matched_entity_types of the session"""
 
     def __init__(
         self,
         *,
-        matched_entity_types: collections.abc.Iterable[builtins.str] | None = ...,
+        matched_entity_types: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["matched_entity_types", b"matched_entity_types"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["matched_entity_types", b"matched_entity_types"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListMatchedEntityTypesResponse = ListMatchedEntityTypesResponse
+Global___ListMatchedEntityTypesResponse: _TypeAlias = ListMatchedEntityTypesResponse  # noqa: Y015
 
-@typing.final
-class ListUserIdsOfAllSessionsRequest(google.protobuf.message.Message):
+@_typing.final
+class ListUserIdsOfAllSessionsRequest(_message.Message):
     """request to list all user_ids of all sessions"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    SESSION_FILTER_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    parent: builtins.str
+    PARENT_FIELD_NUMBER: _builtins.int
+    SESSION_FILTER_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    parent: _builtins.str
     """The parent for which the user_ids for all sessions should be listed
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
-    @property
-    def session_filter(self) -> global___SessionFilter:
+    @_builtins.property
+    def session_filter(self) -> Global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
 
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields gets returned."""
 
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        session_filter: global___SessionFilter | None = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        parent: _builtins.str = ...,
+        session_filter: Global___SessionFilter | None = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "session_filter", b"session_filter"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "parent", b"parent", "session_filter", b"session_filter"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListUserIdsOfAllSessionsRequest = ListUserIdsOfAllSessionsRequest
+Global___ListUserIdsOfAllSessionsRequest: _TypeAlias = ListUserIdsOfAllSessionsRequest  # noqa: Y015
 
-@typing.final
-class ListUserIdsResponse(google.protobuf.message.Message):
+@_typing.final
+class ListUserIdsResponse(_message.Message):
     """This message is a response of listing session user_ids"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    USER_IDS_FIELD_NUMBER: builtins.int
-    @property
-    def user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    USER_IDS_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def user_ids(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """The user_ids of the session"""
 
     def __init__(
         self,
         *,
-        user_ids: collections.abc.Iterable[builtins.str] | None = ...,
+        user_ids: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["user_ids", b"user_ids"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["user_ids", b"user_ids"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListUserIdsResponse = ListUserIdsResponse
+Global___ListUserIdsResponse: _TypeAlias = ListUserIdsResponse  # noqa: Y015
 
-@typing.final
-class ListIdentifiedUserIdsOfAllSessionsRequest(google.protobuf.message.Message):
+@_typing.final
+class ListIdentifiedUserIdsOfAllSessionsRequest(_message.Message):
     """request to list all identified_user_ids of all sessions"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    SESSION_FILTER_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    parent: builtins.str
+    PARENT_FIELD_NUMBER: _builtins.int
+    SESSION_FILTER_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    parent: _builtins.str
     """The parent for which the identified_user_ids for all sessions should be listed
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
-    @property
-    def session_filter(self) -> global___SessionFilter:
+    @_builtins.property
+    def session_filter(self) -> Global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
 
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields gets returned."""
 
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        session_filter: global___SessionFilter | None = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        parent: _builtins.str = ...,
+        session_filter: Global___SessionFilter | None = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "session_filter", b"session_filter"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "parent", b"parent", "session_filter", b"session_filter"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListIdentifiedUserIdsOfAllSessionsRequest = ListIdentifiedUserIdsOfAllSessionsRequest
+Global___ListIdentifiedUserIdsOfAllSessionsRequest: _TypeAlias = ListIdentifiedUserIdsOfAllSessionsRequest  # noqa: Y015
 
-@typing.final
-class ListIdentifiedUserIdsResponse(google.protobuf.message.Message):
+@_typing.final
+class ListIdentifiedUserIdsResponse(_message.Message):
     """This message is a response of listing session identified_user_ids"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    IDENTIFIED_USER_IDS_FIELD_NUMBER: builtins.int
-    @property
-    def identified_user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    IDENTIFIED_USER_IDS_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def identified_user_ids(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """The identified_user_ids of the session"""
 
     def __init__(
         self,
         *,
-        identified_user_ids: collections.abc.Iterable[builtins.str] | None = ...,
+        identified_user_ids: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["identified_user_ids", b"identified_user_ids"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["identified_user_ids", b"identified_user_ids"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListIdentifiedUserIdsResponse = ListIdentifiedUserIdsResponse
+Global___ListIdentifiedUserIdsResponse: _TypeAlias = ListIdentifiedUserIdsResponse  # noqa: Y015
 
-@typing.final
-class ListTagsOfAllSessionsRequest(google.protobuf.message.Message):
+@_typing.final
+class ListTagsOfAllSessionsRequest(_message.Message):
     """request to list all tags of all sessions"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    SESSION_FILTER_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    parent: builtins.str
+    PARENT_FIELD_NUMBER: _builtins.int
+    SESSION_FILTER_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    parent: _builtins.str
     """The parent for which the tags for all sessions should be listed
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
-    @property
-    def session_filter(self) -> global___SessionFilter:
+    @_builtins.property
+    def session_filter(self) -> Global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
 
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields gets returned."""
 
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        session_filter: global___SessionFilter | None = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        parent: _builtins.str = ...,
+        session_filter: Global___SessionFilter | None = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "session_filter", b"session_filter"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "parent", b"parent", "session_filter", b"session_filter"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListTagsOfAllSessionsRequest = ListTagsOfAllSessionsRequest
+Global___ListTagsOfAllSessionsRequest: _TypeAlias = ListTagsOfAllSessionsRequest  # noqa: Y015
 
-@typing.final
-class ListTagsResponse(google.protobuf.message.Message):
+@_typing.final
+class ListTagsResponse(_message.Message):
     """This message is a response of listing session tags"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    TAGS_FIELD_NUMBER: builtins.int
-    @property
-    def tags(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    TAGS_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def tags(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """The tags of the session"""
 
     def __init__(
         self,
         *,
-        tags: collections.abc.Iterable[builtins.str] | None = ...,
+        tags: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["tags", b"tags"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["tags", b"tags"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListTagsResponse = ListTagsResponse
+Global___ListTagsResponse: _TypeAlias = ListTagsResponse  # noqa: Y015
 
-@typing.final
-class ListInputContextsOfAllSessionsRequest(google.protobuf.message.Message):
+@_typing.final
+class ListInputContextsOfAllSessionsRequest(_message.Message):
     """request to list all input_contexts of all sessions"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    SESSION_FILTER_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    parent: builtins.str
+    PARENT_FIELD_NUMBER: _builtins.int
+    SESSION_FILTER_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    parent: _builtins.str
     """The parent for which the input_contexts for all sessions should be listed
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
-    @property
-    def session_filter(self) -> global___SessionFilter:
+    @_builtins.property
+    def session_filter(self) -> Global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
 
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields gets returned."""
 
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        session_filter: global___SessionFilter | None = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        parent: _builtins.str = ...,
+        session_filter: Global___SessionFilter | None = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "session_filter", b"session_filter"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "parent", b"parent", "session_filter", b"session_filter"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListInputContextsOfAllSessionsRequest = ListInputContextsOfAllSessionsRequest
+Global___ListInputContextsOfAllSessionsRequest: _TypeAlias = ListInputContextsOfAllSessionsRequest  # noqa: Y015
 
-@typing.final
-class ListInputContextsResponse(google.protobuf.message.Message):
+@_typing.final
+class ListInputContextsResponse(_message.Message):
     """This message is a response of listing session input_contexts"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    INPUT_CONTEXTS_FIELD_NUMBER: builtins.int
-    @property
-    def input_contexts(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    INPUT_CONTEXTS_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def input_contexts(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """The input_contexts ids of the session"""
 
     def __init__(
         self,
         *,
-        input_contexts: collections.abc.Iterable[builtins.str] | None = ...,
+        input_contexts: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["input_contexts", b"input_contexts"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["input_contexts", b"input_contexts"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListInputContextsResponse = ListInputContextsResponse
+Global___ListInputContextsResponse: _TypeAlias = ListInputContextsResponse  # noqa: Y015
 
-@typing.final
-class ListOutputContextsOfAllSessionsRequest(google.protobuf.message.Message):
+@_typing.final
+class ListOutputContextsOfAllSessionsRequest(_message.Message):
     """request to list all output_contexts of all sessions"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    SESSION_FILTER_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    parent: builtins.str
+    PARENT_FIELD_NUMBER: _builtins.int
+    SESSION_FILTER_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    parent: _builtins.str
     """The parent for which the output_contexts for all sessions should be listed
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
-    @property
-    def session_filter(self) -> global___SessionFilter:
+    @_builtins.property
+    def session_filter(self) -> Global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
 
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields gets returned."""
 
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        session_filter: global___SessionFilter | None = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        parent: _builtins.str = ...,
+        session_filter: Global___SessionFilter | None = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "session_filter", b"session_filter"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "parent", b"parent", "session_filter", b"session_filter"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListOutputContextsOfAllSessionsRequest = ListOutputContextsOfAllSessionsRequest
+Global___ListOutputContextsOfAllSessionsRequest: _TypeAlias = ListOutputContextsOfAllSessionsRequest  # noqa: Y015
 
-@typing.final
-class ListOutputContextsResponse(google.protobuf.message.Message):
+@_typing.final
+class ListOutputContextsResponse(_message.Message):
     """This message is a response of listing session output_contexts"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    OUTPUT_CONTEXTS_FIELD_NUMBER: builtins.int
-    @property
-    def output_contexts(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    OUTPUT_CONTEXTS_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def output_contexts(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """The output_contexts ids of the session"""
 
     def __init__(
         self,
         *,
-        output_contexts: collections.abc.Iterable[builtins.str] | None = ...,
+        output_contexts: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["output_contexts", b"output_contexts"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["output_contexts", b"output_contexts"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListOutputContextsResponse = ListOutputContextsResponse
+Global___ListOutputContextsResponse: _TypeAlias = ListOutputContextsResponse  # noqa: Y015
 
-@typing.final
-class ListPlatformsOfAllSessionsRequest(google.protobuf.message.Message):
+@_typing.final
+class ListPlatformsOfAllSessionsRequest(_message.Message):
     """request to list all labels of all sessions"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    SESSION_FILTER_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    parent: builtins.str
+    PARENT_FIELD_NUMBER: _builtins.int
+    SESSION_FILTER_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    parent: _builtins.str
     """The parent for which the platforms for all sessions should be listed
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
-    @property
-    def session_filter(self) -> global___SessionFilter:
+    @_builtins.property
+    def session_filter(self) -> Global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
 
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields gets returned."""
 
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        session_filter: global___SessionFilter | None = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        parent: _builtins.str = ...,
+        session_filter: Global___SessionFilter | None = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "session_filter", b"session_filter"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "parent", b"parent", "session_filter", b"session_filter"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListPlatformsOfAllSessionsRequest = ListPlatformsOfAllSessionsRequest
+Global___ListPlatformsOfAllSessionsRequest: _TypeAlias = ListPlatformsOfAllSessionsRequest  # noqa: Y015
 
-@typing.final
-class ListPlatformsResponse(google.protobuf.message.Message):
+@_typing.final
+class ListPlatformsResponse(_message.Message):
     """This message is a response of listing session platforms"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PLATFORMS_FIELD_NUMBER: builtins.int
-    @property
-    def platforms(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    PLATFORMS_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def platforms(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """The platforms of the session"""
 
     def __init__(
         self,
         *,
-        platforms: collections.abc.Iterable[builtins.str] | None = ...,
+        platforms: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["platforms", b"platforms"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["platforms", b"platforms"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListPlatformsResponse = ListPlatformsResponse
+Global___ListPlatformsResponse: _TypeAlias = ListPlatformsResponse  # noqa: Y015
 
-@typing.final
-class ListAccountIdsOfAllSessionsRequest(google.protobuf.message.Message):
+@_typing.final
+class ListAccountIdsOfAllSessionsRequest(_message.Message):
     """request to list all account_ids of all sessions"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    SESSION_FILTER_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    parent: builtins.str
+    PARENT_FIELD_NUMBER: _builtins.int
+    SESSION_FILTER_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    parent: _builtins.str
     """The parent for which the account_ids for all sessions should be listed
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
-    @property
-    def session_filter(self) -> global___SessionFilter:
+    @_builtins.property
+    def session_filter(self) -> Global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
 
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields gets returned."""
 
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        session_filter: global___SessionFilter | None = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        parent: _builtins.str = ...,
+        session_filter: Global___SessionFilter | None = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "session_filter", b"session_filter"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "parent", b"parent", "session_filter", b"session_filter"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListAccountIdsOfAllSessionsRequest = ListAccountIdsOfAllSessionsRequest
+Global___ListAccountIdsOfAllSessionsRequest: _TypeAlias = ListAccountIdsOfAllSessionsRequest  # noqa: Y015
 
-@typing.final
-class ListAccountIdsResponse(google.protobuf.message.Message):
+@_typing.final
+class ListAccountIdsResponse(_message.Message):
     """This message is a response of listing session account_ids"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ACCOUNT_IDS_FIELD_NUMBER: builtins.int
-    @property
-    def account_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    ACCOUNT_IDS_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def account_ids(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """The account_ids of the session"""
 
     def __init__(
         self,
         *,
-        account_ids: collections.abc.Iterable[builtins.str] | None = ...,
+        account_ids: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["account_ids", b"account_ids"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["account_ids", b"account_ids"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListAccountIdsResponse = ListAccountIdsResponse
+Global___ListAccountIdsResponse: _TypeAlias = ListAccountIdsResponse  # noqa: Y015
 
-@typing.final
-class ListPropertyIdsOfAllSessionsRequest(google.protobuf.message.Message):
+@_typing.final
+class ListPropertyIdsOfAllSessionsRequest(_message.Message):
     """request to list all property_ids of all sessions"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    SESSION_FILTER_FIELD_NUMBER: builtins.int
-    parent: builtins.str
+    PARENT_FIELD_NUMBER: _builtins.int
+    SESSION_FILTER_FIELD_NUMBER: _builtins.int
+    parent: _builtins.str
     """The parent for which the property_ids for all sessions should be listed
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
-    @property
-    def session_filter(self) -> global___SessionFilter:
+    @_builtins.property
+    def session_filter(self) -> Global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
 
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        session_filter: global___SessionFilter | None = ...,
+        parent: _builtins.str = ...,
+        session_filter: Global___SessionFilter | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["session_filter", b"session_filter"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["parent", b"parent", "session_filter", b"session_filter"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListPropertyIdsOfAllSessionsRequest = ListPropertyIdsOfAllSessionsRequest
+Global___ListPropertyIdsOfAllSessionsRequest: _TypeAlias = ListPropertyIdsOfAllSessionsRequest  # noqa: Y015
 
-@typing.final
-class ListPropertyIdsResponse(google.protobuf.message.Message):
+@_typing.final
+class ListPropertyIdsResponse(_message.Message):
     """This message is a response of listing session property_ids"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PROPERTY_IDS_FIELD_NUMBER: builtins.int
-    @property
-    def property_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    PROPERTY_IDS_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def property_ids(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """The property_ids of the session"""
 
     def __init__(
         self,
         *,
-        property_ids: collections.abc.Iterable[builtins.str] | None = ...,
+        property_ids: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["property_ids", b"property_ids"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["property_ids", b"property_ids"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListPropertyIdsResponse = ListPropertyIdsResponse
+Global___ListPropertyIdsResponse: _TypeAlias = ListPropertyIdsResponse  # noqa: Y015
 
-@typing.final
-class ListDatastreamIdsOfAllSessionsRequest(google.protobuf.message.Message):
+@_typing.final
+class ListDatastreamIdsOfAllSessionsRequest(_message.Message):
     """request to list all datastream_ids of all sessions"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    SESSION_FILTER_FIELD_NUMBER: builtins.int
-    parent: builtins.str
+    PARENT_FIELD_NUMBER: _builtins.int
+    SESSION_FILTER_FIELD_NUMBER: _builtins.int
+    parent: _builtins.str
     """The parent for which the datastream_ids for all sessions should be listed
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
-    @property
-    def session_filter(self) -> global___SessionFilter:
+    @_builtins.property
+    def session_filter(self) -> Global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
 
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        session_filter: global___SessionFilter | None = ...,
+        parent: _builtins.str = ...,
+        session_filter: Global___SessionFilter | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["session_filter", b"session_filter"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["parent", b"parent", "session_filter", b"session_filter"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListDatastreamIdsOfAllSessionsRequest = ListDatastreamIdsOfAllSessionsRequest
+Global___ListDatastreamIdsOfAllSessionsRequest: _TypeAlias = ListDatastreamIdsOfAllSessionsRequest  # noqa: Y015
 
-@typing.final
-class ListDatastreamIdsResponse(google.protobuf.message.Message):
+@_typing.final
+class ListDatastreamIdsResponse(_message.Message):
     """This message is a response of listing session datastream_ids"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    DATASTREAM_IDS_FIELD_NUMBER: builtins.int
-    @property
-    def datastream_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    DATASTREAM_IDS_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def datastream_ids(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """The datastream_ids of the session"""
 
     def __init__(
         self,
         *,
-        datastream_ids: collections.abc.Iterable[builtins.str] | None = ...,
+        datastream_ids: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["datastream_ids", b"datastream_ids"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["datastream_ids", b"datastream_ids"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListDatastreamIdsResponse = ListDatastreamIdsResponse
+Global___ListDatastreamIdsResponse: _TypeAlias = ListDatastreamIdsResponse  # noqa: Y015
 
-@typing.final
-class ListOriginIdsOfAllSessionsRequest(google.protobuf.message.Message):
+@_typing.final
+class ListOriginIdsOfAllSessionsRequest(_message.Message):
     """request to list all origin_ids of all sessions"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    SESSION_FILTER_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    parent: builtins.str
+    PARENT_FIELD_NUMBER: _builtins.int
+    SESSION_FILTER_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    parent: _builtins.str
     """The parent for which the origin_ids for all sessions should be listed
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
-    @property
-    def session_filter(self) -> global___SessionFilter:
+    @_builtins.property
+    def session_filter(self) -> Global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
 
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields gets returned."""
 
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        session_filter: global___SessionFilter | None = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        parent: _builtins.str = ...,
+        session_filter: Global___SessionFilter | None = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "session_filter", b"session_filter"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "parent", b"parent", "session_filter", b"session_filter"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListOriginIdsOfAllSessionsRequest = ListOriginIdsOfAllSessionsRequest
+Global___ListOriginIdsOfAllSessionsRequest: _TypeAlias = ListOriginIdsOfAllSessionsRequest  # noqa: Y015
 
-@typing.final
-class ListOriginIdsResponse(google.protobuf.message.Message):
+@_typing.final
+class ListOriginIdsResponse(_message.Message):
     """This message is a response of listing session origin_ids"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ORIGIN_IDS_FIELD_NUMBER: builtins.int
-    @property
-    def origin_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    ORIGIN_IDS_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def origin_ids(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """The origin_ids of the session"""
 
     def __init__(
         self,
         *,
-        origin_ids: collections.abc.Iterable[builtins.str] | None = ...,
+        origin_ids: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["origin_ids", b"origin_ids"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["origin_ids", b"origin_ids"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListOriginIdsResponse = ListOriginIdsResponse
+Global___ListOriginIdsResponse: _TypeAlias = ListOriginIdsResponse  # noqa: Y015
 
-@typing.final
-class AddSessionLabelsRequest(google.protobuf.message.Message):
+@_typing.final
+class AddSessionLabelsRequest(_message.Message):
     """This message is a request to add session labels"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    SESSION_ID_FIELD_NUMBER: builtins.int
-    LABELS_FIELD_NUMBER: builtins.int
-    session_id: builtins.str
+    SESSION_ID_FIELD_NUMBER: _builtins.int
+    LABELS_FIELD_NUMBER: _builtins.int
+    session_id: _builtins.str
     """The id of the session"""
-    @property
-    def labels(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def labels(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """The labels to add to the session"""
 
     def __init__(
         self,
         *,
-        session_id: builtins.str = ...,
-        labels: collections.abc.Iterable[builtins.str] | None = ...,
+        session_id: _builtins.str = ...,
+        labels: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["labels", b"labels", "session_id", b"session_id"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["labels", b"labels", "session_id", b"session_id"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___AddSessionLabelsRequest = AddSessionLabelsRequest
+Global___AddSessionLabelsRequest: _TypeAlias = AddSessionLabelsRequest  # noqa: Y015
 
-@typing.final
-class DeleteSessionLabelsRequest(google.protobuf.message.Message):
+@_typing.final
+class DeleteSessionLabelsRequest(_message.Message):
     """This message is a request to delete session labels"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    SESSION_ID_FIELD_NUMBER: builtins.int
-    LABELS_FIELD_NUMBER: builtins.int
-    session_id: builtins.str
+    SESSION_ID_FIELD_NUMBER: _builtins.int
+    LABELS_FIELD_NUMBER: _builtins.int
+    session_id: _builtins.str
     """The id of the session"""
-    @property
-    def labels(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def labels(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """The labels to delete from the session"""
 
     def __init__(
         self,
         *,
-        session_id: builtins.str = ...,
-        labels: collections.abc.Iterable[builtins.str] | None = ...,
+        session_id: _builtins.str = ...,
+        labels: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["labels", b"labels", "session_id", b"session_id"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["labels", b"labels", "session_id", b"session_id"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___DeleteSessionLabelsRequest = DeleteSessionLabelsRequest
+Global___DeleteSessionLabelsRequest: _TypeAlias = DeleteSessionLabelsRequest  # noqa: Y015
 
-@typing.final
-class AddSessionCommentRequest(google.protobuf.message.Message):
+@_typing.final
+class AddSessionCommentRequest(_message.Message):
     """This message is a request to add a comment to a session"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    SESSION_ID_FIELD_NUMBER: builtins.int
-    COMMENT_FIELD_NUMBER: builtins.int
-    session_id: builtins.str
+    SESSION_ID_FIELD_NUMBER: _builtins.int
+    COMMENT_FIELD_NUMBER: _builtins.int
+    session_id: _builtins.str
     """The id of the session"""
-    @property
-    def comment(self) -> ondewo.nlu.common_pb2.Comment:
+    @_builtins.property
+    def comment(self) -> _common_pb2.Comment:
         """The comment to add to the session"""
 
     def __init__(
         self,
         *,
-        session_id: builtins.str = ...,
-        comment: ondewo.nlu.common_pb2.Comment | None = ...,
+        session_id: _builtins.str = ...,
+        comment: _common_pb2.Comment | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["comment", b"comment"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["comment", b"comment", "session_id", b"session_id"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["comment", b"comment"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["comment", b"comment", "session_id", b"session_id"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___AddSessionCommentRequest = AddSessionCommentRequest
+Global___AddSessionCommentRequest: _TypeAlias = AddSessionCommentRequest  # noqa: Y015
 
-@typing.final
-class DeleteSessionCommentsRequest(google.protobuf.message.Message):
+@_typing.final
+class DeleteSessionCommentsRequest(_message.Message):
     """This message is a request to delete a session comment"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    SESSION_ID_FIELD_NUMBER: builtins.int
-    COMMENT_NAMES_FIELD_NUMBER: builtins.int
-    session_id: builtins.str
+    SESSION_ID_FIELD_NUMBER: _builtins.int
+    COMMENT_NAMES_FIELD_NUMBER: _builtins.int
+    session_id: _builtins.str
     """The id of the session"""
-    @property
-    def comment_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def comment_names(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """The comment names to delete from the session"""
 
     def __init__(
         self,
         *,
-        session_id: builtins.str = ...,
-        comment_names: collections.abc.Iterable[builtins.str] | None = ...,
+        session_id: _builtins.str = ...,
+        comment_names: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["comment_names", b"comment_names", "session_id", b"session_id"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["comment_names", b"comment_names", "session_id", b"session_id"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___DeleteSessionCommentsRequest = DeleteSessionCommentsRequest
+Global___DeleteSessionCommentsRequest: _TypeAlias = DeleteSessionCommentsRequest  # noqa: Y015
 
-@typing.final
-class UpdateSessionCommentsRequest(google.protobuf.message.Message):
+@_typing.final
+class UpdateSessionCommentsRequest(_message.Message):
     """This message is a request to update a session comment"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    SESSION_ID_FIELD_NUMBER: builtins.int
-    COMMENT_FIELD_NUMBER: builtins.int
-    session_id: builtins.str
+    SESSION_ID_FIELD_NUMBER: _builtins.int
+    COMMENT_FIELD_NUMBER: _builtins.int
+    session_id: _builtins.str
     """The id of the session"""
-    @property
-    def comment(self) -> ondewo.nlu.common_pb2.Comment:
+    @_builtins.property
+    def comment(self) -> _common_pb2.Comment:
         """The comment of a session to be updated"""
 
     def __init__(
         self,
         *,
-        session_id: builtins.str = ...,
-        comment: ondewo.nlu.common_pb2.Comment | None = ...,
+        session_id: _builtins.str = ...,
+        comment: _common_pb2.Comment | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["comment", b"comment"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["comment", b"comment", "session_id", b"session_id"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["comment", b"comment"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["comment", b"comment", "session_id", b"session_id"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___UpdateSessionCommentsRequest = UpdateSessionCommentsRequest
+Global___UpdateSessionCommentsRequest: _TypeAlias = UpdateSessionCommentsRequest  # noqa: Y015
 
-@typing.final
-class ListSessionCommentsRequest(google.protobuf.message.Message):
+@_typing.final
+class ListSessionCommentsRequest(_message.Message):
     """This message is a request to list comments of a session"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    SESSION_ID_FIELD_NUMBER: builtins.int
-    PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    IS_RESOLVED_FIELD_NUMBER: builtins.int
-    session_id: builtins.str
+    SESSION_ID_FIELD_NUMBER: _builtins.int
+    PAGE_TOKEN_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    IS_RESOLVED_FIELD_NUMBER: _builtins.int
+    session_id: _builtins.str
     """The unique identifier for the session for which comments should be listed
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
     """
-    page_token: builtins.str
+    page_token: _builtins.str
     """Optional: The page token to support pagination.
     Pagination allows you to retrieve a large result set in smaller, more manageable portions.
     The page token is a string representing the current index and page size.
@@ -6092,81 +6491,89 @@ class ListSessionCommentsRequest(google.protobuf.message.Message):
       <li><code>&quot;current_index-1--page_size--20&quot;</code></li>
     </ul>
     """
-    is_resolved: builtins.bool
+    is_resolved: _builtins.bool
     """Optional. Filter comments by their resolved status.
     If unset, comments with any resolved status are returned.
     """
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields gets returned."""
 
     def __init__(
         self,
         *,
-        session_id: builtins.str = ...,
-        page_token: builtins.str = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
-        is_resolved: builtins.bool | None = ...,
+        session_id: _builtins.str = ...,
+        page_token: _builtins.str = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
+        is_resolved: _builtins.bool | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_is_resolved", b"_is_resolved", "field_mask", b"field_mask", "is_resolved", b"is_resolved"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_is_resolved", b"_is_resolved", "field_mask", b"field_mask", "is_resolved", b"is_resolved", "page_token", b"page_token", "session_id", b"session_id"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["_is_resolved", b"_is_resolved"]) -> typing.Literal["is_resolved"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["_is_resolved", b"_is_resolved", "field_mask", b"field_mask", "is_resolved", b"is_resolved"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["_is_resolved", b"_is_resolved", "field_mask", b"field_mask", "is_resolved", b"is_resolved", "page_token", b"page_token", "session_id", b"session_id"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType__is_resolved: _TypeAlias = _typing.Literal["is_resolved"]  # noqa: Y015
+    _WhichOneofArgType__is_resolved: _TypeAlias = _typing.Literal["_is_resolved", b"_is_resolved"]  # noqa: Y015
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__is_resolved) -> _WhichOneofReturnType__is_resolved | None: ...
 
-global___ListSessionCommentsRequest = ListSessionCommentsRequest
+Global___ListSessionCommentsRequest: _TypeAlias = ListSessionCommentsRequest  # noqa: Y015
 
-@typing.final
-class ListSessionCommentsOfAllSessionsRequest(google.protobuf.message.Message):
+@_typing.final
+class ListSessionCommentsOfAllSessionsRequest(_message.Message):
     """This message is a request to list comments of all sessions of an agent"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    SESSION_FILTER_FIELD_NUMBER: builtins.int
-    PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    IS_RESOLVED_FIELD_NUMBER: builtins.int
-    parent: builtins.str
+    PARENT_FIELD_NUMBER: _builtins.int
+    SESSION_FILTER_FIELD_NUMBER: _builtins.int
+    PAGE_TOKEN_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    IS_RESOLVED_FIELD_NUMBER: _builtins.int
+    parent: _builtins.str
     """The parent for which the comments of all sessions should be listed
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
-    page_token: builtins.str
+    page_token: _builtins.str
     """Optional. The page token to support pagination."""
-    is_resolved: builtins.bool
+    is_resolved: _builtins.bool
     """Optional. Filter comments by their resolved status.
     If unset, comments with any resolved status are returned.
     """
-    @property
-    def session_filter(self) -> global___SessionFilter:
+    @_builtins.property
+    def session_filter(self) -> Global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
 
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields gets returned."""
 
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        session_filter: global___SessionFilter | None = ...,
-        page_token: builtins.str = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
-        is_resolved: builtins.bool | None = ...,
+        parent: _builtins.str = ...,
+        session_filter: Global___SessionFilter | None = ...,
+        page_token: _builtins.str = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
+        is_resolved: _builtins.bool | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_is_resolved", b"_is_resolved", "field_mask", b"field_mask", "is_resolved", b"is_resolved", "session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_is_resolved", b"_is_resolved", "field_mask", b"field_mask", "is_resolved", b"is_resolved", "page_token", b"page_token", "parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["_is_resolved", b"_is_resolved"]) -> typing.Literal["is_resolved"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["_is_resolved", b"_is_resolved", "field_mask", b"field_mask", "is_resolved", b"is_resolved", "session_filter", b"session_filter"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["_is_resolved", b"_is_resolved", "field_mask", b"field_mask", "is_resolved", b"is_resolved", "page_token", b"page_token", "parent", b"parent", "session_filter", b"session_filter"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType__is_resolved: _TypeAlias = _typing.Literal["is_resolved"]  # noqa: Y015
+    _WhichOneofArgType__is_resolved: _TypeAlias = _typing.Literal["_is_resolved", b"_is_resolved"]  # noqa: Y015
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__is_resolved) -> _WhichOneofReturnType__is_resolved | None: ...
 
-global___ListSessionCommentsOfAllSessionsRequest = ListSessionCommentsOfAllSessionsRequest
+Global___ListSessionCommentsOfAllSessionsRequest: _TypeAlias = ListSessionCommentsOfAllSessionsRequest  # noqa: Y015
 
-@typing.final
-class ListSessionCommentsResponse(google.protobuf.message.Message):
+@_typing.final
+class ListSessionCommentsResponse(_message.Message):
     """This message is a request to list comments of a session"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    COMMENT_FIELD_NUMBER: builtins.int
-    PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    page_token: builtins.str
+    COMMENT_FIELD_NUMBER: _builtins.int
+    PAGE_TOKEN_FIELD_NUMBER: _builtins.int
+    page_token: _builtins.str
     """Optional: The page token to support pagination.
     Pagination allows you to retrieve a large result set in smaller, more manageable portions.
     The page token is a string representing the current index and page size.
@@ -6197,8 +6604,8 @@ class ListSessionCommentsResponse(google.protobuf.message.Message):
       <li><code>&quot;current_index-1--page_size--20&quot;</code></li>
     </ul>
     """
-    @property
-    def comment(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.common_pb2.Comment]:
+    @_builtins.property
+    def comment(self) -> _containers.RepeatedCompositeFieldContainer[_common_pb2.Comment]:
         """The comments of a specific session
         Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/comments/&lt;comment_uuid&gt;</code></pre>
         """
@@ -6206,15 +6613,19 @@ class ListSessionCommentsResponse(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        comment: collections.abc.Iterable[ondewo.nlu.common_pb2.Comment] | None = ...,
-        page_token: builtins.str = ...,
+        comment: _abc.Iterable[_common_pb2.Comment] | None = ...,
+        page_token: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["comment", b"comment", "page_token", b"page_token"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["comment", b"comment", "page_token", b"page_token"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListSessionCommentsResponse = ListSessionCommentsResponse
+Global___ListSessionCommentsResponse: _TypeAlias = ListSessionCommentsResponse  # noqa: Y015
 
-@typing.final
-class SessionFeedback(google.protobuf.message.Message):
+@_typing.final
+class SessionFeedback(_message.Message):
     """A single piece of user feedback about a whole session or a single session step (turn).
 
     The rating is intentionally extensible: <code>rating</code> carries the thumbs signal surfaced in the UI
@@ -6225,46 +6636,46 @@ class SessionFeedback(google.protobuf.message.Message):
     reconstructed from the already-persisted session step.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NAME_FIELD_NUMBER: builtins.int
-    SESSION_ID_FIELD_NUMBER: builtins.int
-    SESSION_STEP_ID_FIELD_NUMBER: builtins.int
-    RESPONSE_ID_FIELD_NUMBER: builtins.int
-    SESSION_STEP_LLM_TELEMETRY_ID_FIELD_NUMBER: builtins.int
-    RATING_FIELD_NUMBER: builtins.int
-    CATEGORICAL_VALUE_FIELD_NUMBER: builtins.int
-    SCORE_FIELD_NUMBER: builtins.int
-    COMMENT_FIELD_NUMBER: builtins.int
-    CRITERION_FIELD_NUMBER: builtins.int
-    AUTHOR_TYPE_FIELD_NUMBER: builtins.int
-    ANNOTATOR_USER_ID_FIELD_NUMBER: builtins.int
-    ORIGIN_ID_FIELD_NUMBER: builtins.int
-    IDENTIFIED_USER_ID_FIELD_NUMBER: builtins.int
-    RAW_FIELD_NUMBER: builtins.int
-    CREATED_AT_FIELD_NUMBER: builtins.int
-    MODIFIED_AT_FIELD_NUMBER: builtins.int
-    CREATED_BY_FIELD_NUMBER: builtins.int
-    MODIFIED_BY_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    SESSION_ID_FIELD_NUMBER: _builtins.int
+    SESSION_STEP_ID_FIELD_NUMBER: _builtins.int
+    RESPONSE_ID_FIELD_NUMBER: _builtins.int
+    SESSION_STEP_LLM_TELEMETRY_ID_FIELD_NUMBER: _builtins.int
+    RATING_FIELD_NUMBER: _builtins.int
+    CATEGORICAL_VALUE_FIELD_NUMBER: _builtins.int
+    SCORE_FIELD_NUMBER: _builtins.int
+    COMMENT_FIELD_NUMBER: _builtins.int
+    CRITERION_FIELD_NUMBER: _builtins.int
+    AUTHOR_TYPE_FIELD_NUMBER: _builtins.int
+    ANNOTATOR_USER_ID_FIELD_NUMBER: _builtins.int
+    ORIGIN_ID_FIELD_NUMBER: _builtins.int
+    IDENTIFIED_USER_ID_FIELD_NUMBER: _builtins.int
+    RAW_FIELD_NUMBER: _builtins.int
+    CREATED_AT_FIELD_NUMBER: _builtins.int
+    MODIFIED_AT_FIELD_NUMBER: _builtins.int
+    CREATED_BY_FIELD_NUMBER: _builtins.int
+    MODIFIED_BY_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """The resource name of the feedback.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/feedback/&lt;feedback_uuid&gt;</code></pre>
     """
-    session_id: builtins.str
+    session_id: _builtins.str
     """The session this feedback belongs to.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
     """
-    session_step_id: builtins.str
+    session_step_id: _builtins.str
     """The session step (turn) this feedback targets. Empty for session-level feedback."""
-    response_id: builtins.str
+    response_id: _builtins.str
     """Optional. The specific detect-intent response this feedback pins."""
-    session_step_llm_telemetry_id: builtins.str
+    session_step_llm_telemetry_id: _builtins.str
     """Optional. The specific LLM-telemetry sub-event (llm call / tool call) this feedback pins."""
-    rating: global___FeedbackRating.ValueType
+    rating: Global___FeedbackRating.ValueType
     """The thumbs rating."""
-    categorical_value: builtins.str
+    categorical_value: _builtins.str
     """Optional. An extensible categorical value (e.g. star bucket, NPS/CSAT bucket)."""
-    score: builtins.float
+    score: _builtins.float
     """Optional. A numeric score in [0, 1] for future continuous scales.
 
     Explicit presence (<code>optional</code>): a score of <code>0.0</code> is a MEANINGFUL rating — the
@@ -6275,701 +6686,763 @@ class SessionFeedback(google.protobuf.message.Message):
     ratings and biased the reported average upward. Use <code>HasField("score")</code> to distinguish.
     Matches <code>FeedbackFilter.score_min</code> / <code>score_max</code>, which are already optional.
     """
-    comment: builtins.str
+    comment: _builtins.str
     """Optional. Free-text comment."""
-    criterion: builtins.str
+    criterion: _builtins.str
     """Optional. A dimension the feedback is about (e.g. "helpfulness", "accuracy")."""
-    author_type: global___FeedbackAuthorType.ValueType
+    author_type: Global___FeedbackAuthorType.ValueType
     """Who left the feedback."""
-    annotator_user_id: builtins.str
+    annotator_user_id: _builtins.str
     """The authenticated author's user id (Keycloak sub); empty for anonymous end-users."""
-    origin_id: builtins.str
+    origin_id: _builtins.str
     """Optional. The channel origin id (webchat / webphone) identifying an anonymous end-user."""
-    identified_user_id: builtins.str
+    identified_user_id: _builtins.str
     """Optional. The identified end-user id, when the channel provides one."""
-    created_by: builtins.str
+    created_by: _builtins.str
     """Who created the feedback."""
-    modified_by: builtins.str
+    modified_by: _builtins.str
     """Who last modified the feedback."""
-    @property
-    def raw(self) -> google.protobuf.struct_pb2.Struct:
+    @_builtins.property
+    def raw(self) -> _struct_pb2.Struct:
         """Optional. An extensibility escape hatch for channel-specific metadata."""
 
-    @property
-    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def created_at(self) -> _timestamp_pb2.Timestamp:
         """When the feedback was created."""
 
-    @property
-    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def modified_at(self) -> _timestamp_pb2.Timestamp:
         """When the feedback was last modified."""
 
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
-        session_id: builtins.str = ...,
-        session_step_id: builtins.str = ...,
-        response_id: builtins.str = ...,
-        session_step_llm_telemetry_id: builtins.str = ...,
-        rating: global___FeedbackRating.ValueType = ...,
-        categorical_value: builtins.str = ...,
-        score: builtins.float | None = ...,
-        comment: builtins.str = ...,
-        criterion: builtins.str = ...,
-        author_type: global___FeedbackAuthorType.ValueType = ...,
-        annotator_user_id: builtins.str = ...,
-        origin_id: builtins.str = ...,
-        identified_user_id: builtins.str = ...,
-        raw: google.protobuf.struct_pb2.Struct | None = ...,
-        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        created_by: builtins.str = ...,
-        modified_by: builtins.str = ...,
+        name: _builtins.str = ...,
+        session_id: _builtins.str = ...,
+        session_step_id: _builtins.str = ...,
+        response_id: _builtins.str = ...,
+        session_step_llm_telemetry_id: _builtins.str = ...,
+        rating: Global___FeedbackRating.ValueType = ...,
+        categorical_value: _builtins.str = ...,
+        score: _builtins.float | None = ...,
+        comment: _builtins.str = ...,
+        criterion: _builtins.str = ...,
+        author_type: Global___FeedbackAuthorType.ValueType = ...,
+        annotator_user_id: _builtins.str = ...,
+        origin_id: _builtins.str = ...,
+        identified_user_id: _builtins.str = ...,
+        raw: _struct_pb2.Struct | None = ...,
+        created_at: _timestamp_pb2.Timestamp | None = ...,
+        modified_at: _timestamp_pb2.Timestamp | None = ...,
+        created_by: _builtins.str = ...,
+        modified_by: _builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_score", b"_score", "created_at", b"created_at", "modified_at", b"modified_at", "raw", b"raw", "score", b"score"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_score", b"_score", "annotator_user_id", b"annotator_user_id", "author_type", b"author_type", "categorical_value", b"categorical_value", "comment", b"comment", "created_at", b"created_at", "created_by", b"created_by", "criterion", b"criterion", "identified_user_id", b"identified_user_id", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "origin_id", b"origin_id", "rating", b"rating", "raw", b"raw", "response_id", b"response_id", "score", b"score", "session_id", b"session_id", "session_step_id", b"session_step_id", "session_step_llm_telemetry_id", b"session_step_llm_telemetry_id"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["_score", b"_score"]) -> typing.Literal["score"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["_score", b"_score", "created_at", b"created_at", "modified_at", b"modified_at", "raw", b"raw", "score", b"score"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["_score", b"_score", "annotator_user_id", b"annotator_user_id", "author_type", b"author_type", "categorical_value", b"categorical_value", "comment", b"comment", "created_at", b"created_at", "created_by", b"created_by", "criterion", b"criterion", "identified_user_id", b"identified_user_id", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "origin_id", b"origin_id", "rating", b"rating", "raw", b"raw", "response_id", b"response_id", "score", b"score", "session_id", b"session_id", "session_step_id", b"session_step_id", "session_step_llm_telemetry_id", b"session_step_llm_telemetry_id"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType__score: _TypeAlias = _typing.Literal["score"]  # noqa: Y015
+    _WhichOneofArgType__score: _TypeAlias = _typing.Literal["_score", b"_score"]  # noqa: Y015
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__score) -> _WhichOneofReturnType__score | None: ...
 
-global___SessionFeedback = SessionFeedback
+Global___SessionFeedback: _TypeAlias = SessionFeedback  # noqa: Y015
 
-@typing.final
-class AddSessionFeedbackRequest(google.protobuf.message.Message):
+@_typing.final
+class AddSessionFeedbackRequest(_message.Message):
     """Request to record feedback about a whole session."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    SESSION_ID_FIELD_NUMBER: builtins.int
-    FEEDBACK_FIELD_NUMBER: builtins.int
-    session_id: builtins.str
+    SESSION_ID_FIELD_NUMBER: _builtins.int
+    FEEDBACK_FIELD_NUMBER: _builtins.int
+    session_id: _builtins.str
     """The id of the session."""
-    @property
-    def feedback(self) -> global___SessionFeedback:
+    @_builtins.property
+    def feedback(self) -> Global___SessionFeedback:
         """The feedback to record. session_step_id is left empty for session-level feedback."""
 
     def __init__(
         self,
         *,
-        session_id: builtins.str = ...,
-        feedback: global___SessionFeedback | None = ...,
+        session_id: _builtins.str = ...,
+        feedback: Global___SessionFeedback | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["feedback", b"feedback"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["feedback", b"feedback", "session_id", b"session_id"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["feedback", b"feedback"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["feedback", b"feedback", "session_id", b"session_id"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___AddSessionFeedbackRequest = AddSessionFeedbackRequest
+Global___AddSessionFeedbackRequest: _TypeAlias = AddSessionFeedbackRequest  # noqa: Y015
 
-@typing.final
-class AddSessionStepFeedbackRequest(google.protobuf.message.Message):
+@_typing.final
+class AddSessionStepFeedbackRequest(_message.Message):
     """Request to record feedback about a single session step (turn)."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    SESSION_ID_FIELD_NUMBER: builtins.int
-    SESSION_STEP_ID_FIELD_NUMBER: builtins.int
-    FEEDBACK_FIELD_NUMBER: builtins.int
-    session_id: builtins.str
+    SESSION_ID_FIELD_NUMBER: _builtins.int
+    SESSION_STEP_ID_FIELD_NUMBER: _builtins.int
+    FEEDBACK_FIELD_NUMBER: _builtins.int
+    session_id: _builtins.str
     """The id of the session."""
-    session_step_id: builtins.str
+    session_step_id: _builtins.str
     """The id of the session step (turn) the feedback is about."""
-    @property
-    def feedback(self) -> global___SessionFeedback:
+    @_builtins.property
+    def feedback(self) -> Global___SessionFeedback:
         """The feedback to record."""
 
     def __init__(
         self,
         *,
-        session_id: builtins.str = ...,
-        session_step_id: builtins.str = ...,
-        feedback: global___SessionFeedback | None = ...,
+        session_id: _builtins.str = ...,
+        session_step_id: _builtins.str = ...,
+        feedback: Global___SessionFeedback | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["feedback", b"feedback"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["feedback", b"feedback", "session_id", b"session_id", "session_step_id", b"session_step_id"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["feedback", b"feedback"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["feedback", b"feedback", "session_id", b"session_id", "session_step_id", b"session_step_id"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___AddSessionStepFeedbackRequest = AddSessionStepFeedbackRequest
+Global___AddSessionStepFeedbackRequest: _TypeAlias = AddSessionStepFeedbackRequest  # noqa: Y015
 
-@typing.final
-class GetSessionFeedbackRequest(google.protobuf.message.Message):
+@_typing.final
+class GetSessionFeedbackRequest(_message.Message):
     """Request to fetch a single feedback by resource name."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NAME_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """The resource name of the feedback."""
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields get returned."""
 
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        name: _builtins.str = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "name", b"name"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "name", b"name"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GetSessionFeedbackRequest = GetSessionFeedbackRequest
+Global___GetSessionFeedbackRequest: _TypeAlias = GetSessionFeedbackRequest  # noqa: Y015
 
-@typing.final
-class UpdateSessionFeedbackRequest(google.protobuf.message.Message):
+@_typing.final
+class UpdateSessionFeedbackRequest(_message.Message):
     """Request to update (revise) an existing feedback."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    FEEDBACK_FIELD_NUMBER: builtins.int
-    UPDATE_MASK_FIELD_NUMBER: builtins.int
-    @property
-    def feedback(self) -> global___SessionFeedback:
+    FEEDBACK_FIELD_NUMBER: _builtins.int
+    UPDATE_MASK_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def feedback(self) -> Global___SessionFeedback:
         """The feedback to update; feedback.name identifies the record."""
 
-    @property
-    def update_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def update_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The fields of the feedback to update."""
 
     def __init__(
         self,
         *,
-        feedback: global___SessionFeedback | None = ...,
-        update_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        feedback: Global___SessionFeedback | None = ...,
+        update_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["feedback", b"feedback", "update_mask", b"update_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["feedback", b"feedback", "update_mask", b"update_mask"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["feedback", b"feedback", "update_mask", b"update_mask"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["feedback", b"feedback", "update_mask", b"update_mask"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___UpdateSessionFeedbackRequest = UpdateSessionFeedbackRequest
+Global___UpdateSessionFeedbackRequest: _TypeAlias = UpdateSessionFeedbackRequest  # noqa: Y015
 
-@typing.final
-class DeleteSessionFeedbackRequest(google.protobuf.message.Message):
+@_typing.final
+class DeleteSessionFeedbackRequest(_message.Message):
     """Request to delete (withdraw) a feedback."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NAME_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """The resource name of the feedback to delete."""
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
+        name: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["name", b"name"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["name", b"name"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___DeleteSessionFeedbackRequest = DeleteSessionFeedbackRequest
+Global___DeleteSessionFeedbackRequest: _TypeAlias = DeleteSessionFeedbackRequest  # noqa: Y015
 
-@typing.final
-class ListSessionFeedbackRequest(google.protobuf.message.Message):
+@_typing.final
+class ListSessionFeedbackRequest(_message.Message):
     """Request to list all feedback attached to a session."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    SESSION_ID_FIELD_NUMBER: builtins.int
-    PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    session_id: builtins.str
+    SESSION_ID_FIELD_NUMBER: _builtins.int
+    PAGE_TOKEN_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    session_id: _builtins.str
     """The id of the session."""
-    page_token: builtins.str
+    page_token: _builtins.str
     """Optional. The page token to support pagination."""
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields get returned."""
 
     def __init__(
         self,
         *,
-        session_id: builtins.str = ...,
-        page_token: builtins.str = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        session_id: _builtins.str = ...,
+        page_token: _builtins.str = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "page_token", b"page_token", "session_id", b"session_id"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "page_token", b"page_token", "session_id", b"session_id"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListSessionFeedbackRequest = ListSessionFeedbackRequest
+Global___ListSessionFeedbackRequest: _TypeAlias = ListSessionFeedbackRequest  # noqa: Y015
 
-@typing.final
-class ListSessionFeedbackOfAllSessionsRequest(google.protobuf.message.Message):
+@_typing.final
+class ListSessionFeedbackOfAllSessionsRequest(_message.Message):
     """Request to list feedback across all sessions of an agent."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    SESSION_FILTER_FIELD_NUMBER: builtins.int
-    PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    FEEDBACK_FILTER_FIELD_NUMBER: builtins.int
-    ORDER_BY_FIELD_NUMBER: builtins.int
-    parent: builtins.str
+    PARENT_FIELD_NUMBER: _builtins.int
+    SESSION_FILTER_FIELD_NUMBER: _builtins.int
+    PAGE_TOKEN_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    FEEDBACK_FILTER_FIELD_NUMBER: _builtins.int
+    ORDER_BY_FIELD_NUMBER: _builtins.int
+    parent: _builtins.str
     """The parent for which the feedback of all sessions should be listed.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
-    page_token: builtins.str
+    page_token: _builtins.str
     """Optional. The page token to support pagination."""
-    order_by: builtins.str
+    order_by: _builtins.str
     """Optional. Sort order, e.g. "created_at desc" (default), "created_at asc", "rating desc"."""
-    @property
-    def session_filter(self) -> global___SessionFilter:
+    @_builtins.property
+    def session_filter(self) -> Global___SessionFilter:
         """Optional. A filter to narrow the response down to sessions of interest."""
 
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields get returned."""
 
-    @property
-    def feedback_filter(self) -> global___FeedbackFilter:
+    @_builtins.property
+    def feedback_filter(self) -> Global___FeedbackFilter:
         """Optional. A feedback-native filter (rating / author / comment / score / criterion / date window)."""
 
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        session_filter: global___SessionFilter | None = ...,
-        page_token: builtins.str = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
-        feedback_filter: global___FeedbackFilter | None = ...,
-        order_by: builtins.str = ...,
+        parent: _builtins.str = ...,
+        session_filter: Global___SessionFilter | None = ...,
+        page_token: _builtins.str = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
+        feedback_filter: Global___FeedbackFilter | None = ...,
+        order_by: _builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["feedback_filter", b"feedback_filter", "field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["feedback_filter", b"feedback_filter", "field_mask", b"field_mask", "order_by", b"order_by", "page_token", b"page_token", "parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["feedback_filter", b"feedback_filter", "field_mask", b"field_mask", "session_filter", b"session_filter"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["feedback_filter", b"feedback_filter", "field_mask", b"field_mask", "order_by", b"order_by", "page_token", b"page_token", "parent", b"parent", "session_filter", b"session_filter"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListSessionFeedbackOfAllSessionsRequest = ListSessionFeedbackOfAllSessionsRequest
+Global___ListSessionFeedbackOfAllSessionsRequest: _TypeAlias = ListSessionFeedbackOfAllSessionsRequest  # noqa: Y015
 
-@typing.final
-class ListSessionFeedbackResponse(google.protobuf.message.Message):
+@_typing.final
+class ListSessionFeedbackResponse(_message.Message):
     """A page of feedback."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    FEEDBACK_FIELD_NUMBER: builtins.int
-    NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    TOTAL_COUNT_FIELD_NUMBER: builtins.int
-    next_page_token: builtins.str
+    FEEDBACK_FIELD_NUMBER: _builtins.int
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: _builtins.int
+    TOTAL_COUNT_FIELD_NUMBER: _builtins.int
+    next_page_token: _builtins.str
     """The page token for the next page (empty when there are no more pages)."""
-    total_count: builtins.int
+    total_count: _builtins.int
     """Total number of feedback matching the filter across all pages."""
-    @property
-    def feedback(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___SessionFeedback]:
+    @_builtins.property
+    def feedback(self) -> _containers.RepeatedCompositeFieldContainer[Global___SessionFeedback]:
         """The feedback of the requested scope."""
 
     def __init__(
         self,
         *,
-        feedback: collections.abc.Iterable[global___SessionFeedback] | None = ...,
-        next_page_token: builtins.str = ...,
-        total_count: builtins.int = ...,
+        feedback: _abc.Iterable[Global___SessionFeedback] | None = ...,
+        next_page_token: _builtins.str = ...,
+        total_count: _builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["feedback", b"feedback", "next_page_token", b"next_page_token", "total_count", b"total_count"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["feedback", b"feedback", "next_page_token", b"next_page_token", "total_count", b"total_count"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListSessionFeedbackResponse = ListSessionFeedbackResponse
+Global___ListSessionFeedbackResponse: _TypeAlias = ListSessionFeedbackResponse  # noqa: Y015
 
-@typing.final
-class FeedbackFilter(google.protobuf.message.Message):
+@_typing.final
+class FeedbackFilter(_message.Message):
     """A key + up/down counts breakdown bucket (by language / intent / author type / ...).
     A feedback-native filter for feedback list + analytics requests, complementing SessionFilter (which
     filters the parent sessions). All set fields are AND-combined; repeated fields are OR-within-field.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    RATINGS_FIELD_NUMBER: builtins.int
-    AUTHOR_TYPES_FIELD_NUMBER: builtins.int
-    HAS_COMMENT_FIELD_NUMBER: builtins.int
-    EARLIEST_FIELD_NUMBER: builtins.int
-    LATEST_FIELD_NUMBER: builtins.int
-    CRITERIA_FIELD_NUMBER: builtins.int
-    LANGUAGE_CODES_FIELD_NUMBER: builtins.int
-    ANNOTATOR_USER_IDS_FIELD_NUMBER: builtins.int
-    ORIGIN_IDS_FIELD_NUMBER: builtins.int
-    SCORE_MIN_FIELD_NUMBER: builtins.int
-    SCORE_MAX_FIELD_NUMBER: builtins.int
-    SCOPE_FIELD_NUMBER: builtins.int
-    has_comment: builtins.bool
+    RATINGS_FIELD_NUMBER: _builtins.int
+    AUTHOR_TYPES_FIELD_NUMBER: _builtins.int
+    HAS_COMMENT_FIELD_NUMBER: _builtins.int
+    EARLIEST_FIELD_NUMBER: _builtins.int
+    LATEST_FIELD_NUMBER: _builtins.int
+    CRITERIA_FIELD_NUMBER: _builtins.int
+    LANGUAGE_CODES_FIELD_NUMBER: _builtins.int
+    ANNOTATOR_USER_IDS_FIELD_NUMBER: _builtins.int
+    ORIGIN_IDS_FIELD_NUMBER: _builtins.int
+    SCORE_MIN_FIELD_NUMBER: _builtins.int
+    SCORE_MAX_FIELD_NUMBER: _builtins.int
+    SCOPE_FIELD_NUMBER: _builtins.int
+    has_comment: _builtins.bool
     """When set, keep only feedback that has (true) or lacks (false) a free-text comment."""
-    score_min: builtins.float
+    score_min: _builtins.float
     """When set, keep only feedback with a numeric score at or above this value."""
-    score_max: builtins.float
+    score_max: _builtins.float
     """When set, keep only feedback with a numeric score at or below this value."""
-    scope: global___FeedbackScope.ValueType
+    scope: Global___FeedbackScope.ValueType
     """Restrict to session-level or step-level feedback (unspecified means both)."""
-    @property
-    def ratings(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[global___FeedbackRating.ValueType]:
+    @_builtins.property
+    def ratings(self) -> _containers.RepeatedScalarFieldContainer[Global___FeedbackRating.ValueType]:
         """Keep only feedback with one of these ratings (thumbs up / down / unspecified)."""
 
-    @property
-    def author_types(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[global___FeedbackAuthorType.ValueType]:
+    @_builtins.property
+    def author_types(self) -> _containers.RepeatedScalarFieldContainer[Global___FeedbackAuthorType.ValueType]:
         """Keep only feedback left by one of these author types."""
 
-    @property
-    def earliest(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def earliest(self) -> _timestamp_pb2.Timestamp:
         """Keep only feedback created at or after this time (feedback created_at, not session time)."""
 
-    @property
-    def latest(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def latest(self) -> _timestamp_pb2.Timestamp:
         """Keep only feedback created at or before this time."""
 
-    @property
-    def criteria(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def criteria(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Keep only feedback whose criterion is one of these."""
 
-    @property
-    def language_codes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def language_codes(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Keep only feedback whose language code is one of these."""
 
-    @property
-    def annotator_user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def annotator_user_ids(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Keep only feedback whose authenticated annotator is one of these user ids."""
 
-    @property
-    def origin_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def origin_ids(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Keep only feedback whose channel origin id is one of these."""
 
     def __init__(
         self,
         *,
-        ratings: collections.abc.Iterable[global___FeedbackRating.ValueType] | None = ...,
-        author_types: collections.abc.Iterable[global___FeedbackAuthorType.ValueType] | None = ...,
-        has_comment: builtins.bool | None = ...,
-        earliest: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        latest: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        criteria: collections.abc.Iterable[builtins.str] | None = ...,
-        language_codes: collections.abc.Iterable[builtins.str] | None = ...,
-        annotator_user_ids: collections.abc.Iterable[builtins.str] | None = ...,
-        origin_ids: collections.abc.Iterable[builtins.str] | None = ...,
-        score_min: builtins.float | None = ...,
-        score_max: builtins.float | None = ...,
-        scope: global___FeedbackScope.ValueType = ...,
+        ratings: _abc.Iterable[Global___FeedbackRating.ValueType] | None = ...,
+        author_types: _abc.Iterable[Global___FeedbackAuthorType.ValueType] | None = ...,
+        has_comment: _builtins.bool | None = ...,
+        earliest: _timestamp_pb2.Timestamp | None = ...,
+        latest: _timestamp_pb2.Timestamp | None = ...,
+        criteria: _abc.Iterable[_builtins.str] | None = ...,
+        language_codes: _abc.Iterable[_builtins.str] | None = ...,
+        annotator_user_ids: _abc.Iterable[_builtins.str] | None = ...,
+        origin_ids: _abc.Iterable[_builtins.str] | None = ...,
+        score_min: _builtins.float | None = ...,
+        score_max: _builtins.float | None = ...,
+        scope: Global___FeedbackScope.ValueType = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_has_comment", b"_has_comment", "_score_max", b"_score_max", "_score_min", b"_score_min", "earliest", b"earliest", "has_comment", b"has_comment", "latest", b"latest", "score_max", b"score_max", "score_min", b"score_min"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_has_comment", b"_has_comment", "_score_max", b"_score_max", "_score_min", b"_score_min", "annotator_user_ids", b"annotator_user_ids", "author_types", b"author_types", "criteria", b"criteria", "earliest", b"earliest", "has_comment", b"has_comment", "language_codes", b"language_codes", "latest", b"latest", "origin_ids", b"origin_ids", "ratings", b"ratings", "scope", b"scope", "score_max", b"score_max", "score_min", b"score_min"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_has_comment", b"_has_comment"]) -> typing.Literal["has_comment"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_score_max", b"_score_max"]) -> typing.Literal["score_max"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["_score_min", b"_score_min"]) -> typing.Literal["score_min"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["_has_comment", b"_has_comment", "_score_max", b"_score_max", "_score_min", b"_score_min", "earliest", b"earliest", "has_comment", b"has_comment", "latest", b"latest", "score_max", b"score_max", "score_min", b"score_min"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["_has_comment", b"_has_comment", "_score_max", b"_score_max", "_score_min", b"_score_min", "annotator_user_ids", b"annotator_user_ids", "author_types", b"author_types", "criteria", b"criteria", "earliest", b"earliest", "has_comment", b"has_comment", "language_codes", b"language_codes", "latest", b"latest", "origin_ids", b"origin_ids", "ratings", b"ratings", "scope", b"scope", "score_max", b"score_max", "score_min", b"score_min"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType__has_comment: _TypeAlias = _typing.Literal["has_comment"]  # noqa: Y015
+    _WhichOneofArgType__has_comment: _TypeAlias = _typing.Literal["_has_comment", b"_has_comment"]  # noqa: Y015
+    _WhichOneofReturnType__score_max: _TypeAlias = _typing.Literal["score_max"]  # noqa: Y015
+    _WhichOneofArgType__score_max: _TypeAlias = _typing.Literal["_score_max", b"_score_max"]  # noqa: Y015
+    _WhichOneofReturnType__score_min: _TypeAlias = _typing.Literal["score_min"]  # noqa: Y015
+    _WhichOneofArgType__score_min: _TypeAlias = _typing.Literal["_score_min", b"_score_min"]  # noqa: Y015
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__has_comment) -> _WhichOneofReturnType__has_comment | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__score_max) -> _WhichOneofReturnType__score_max | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__score_min) -> _WhichOneofReturnType__score_min | None: ...
 
-global___FeedbackFilter = FeedbackFilter
+Global___FeedbackFilter: _TypeAlias = FeedbackFilter  # noqa: Y015
 
-@typing.final
-class FeedbackBreakdownBucket(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class FeedbackBreakdownBucket(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
-    KEY_FIELD_NUMBER: builtins.int
-    THUMBS_UP_COUNT_FIELD_NUMBER: builtins.int
-    THUMBS_DOWN_COUNT_FIELD_NUMBER: builtins.int
-    TOTAL_FIELD_NUMBER: builtins.int
-    key: builtins.str
+    KEY_FIELD_NUMBER: _builtins.int
+    THUMBS_UP_COUNT_FIELD_NUMBER: _builtins.int
+    THUMBS_DOWN_COUNT_FIELD_NUMBER: _builtins.int
+    TOTAL_FIELD_NUMBER: _builtins.int
+    key: _builtins.str
     """The bucket key (e.g. a language code, an intent display name, an author type)."""
-    thumbs_up_count: builtins.int
+    thumbs_up_count: _builtins.int
     """Number of thumbs-up feedback in this bucket."""
-    thumbs_down_count: builtins.int
+    thumbs_down_count: _builtins.int
     """Number of thumbs-down feedback in this bucket."""
-    total: builtins.int
+    total: _builtins.int
     """Total feedback in this bucket (including unrated comment-only feedback)."""
     def __init__(
         self,
         *,
-        key: builtins.str = ...,
-        thumbs_up_count: builtins.int = ...,
-        thumbs_down_count: builtins.int = ...,
-        total: builtins.int = ...,
+        key: _builtins.str = ...,
+        thumbs_up_count: _builtins.int = ...,
+        thumbs_down_count: _builtins.int = ...,
+        total: _builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["key", b"key", "thumbs_down_count", b"thumbs_down_count", "thumbs_up_count", b"thumbs_up_count", "total", b"total"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "thumbs_down_count", b"thumbs_down_count", "thumbs_up_count", b"thumbs_up_count", "total", b"total"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___FeedbackBreakdownBucket = FeedbackBreakdownBucket
+Global___FeedbackBreakdownBucket: _TypeAlias = FeedbackBreakdownBucket  # noqa: Y015
 
-@typing.final
-class FeedbackStatistics(google.protobuf.message.Message):
+@_typing.final
+class FeedbackStatistics(_message.Message):
     """Aggregated feedback statistics for an agent."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    TOTAL_FEEDBACK_FIELD_NUMBER: builtins.int
-    THUMBS_UP_COUNT_FIELD_NUMBER: builtins.int
-    THUMBS_DOWN_COUNT_FIELD_NUMBER: builtins.int
-    SESSION_LEVEL_COUNT_FIELD_NUMBER: builtins.int
-    SESSION_STEP_LEVEL_COUNT_FIELD_NUMBER: builtins.int
-    COMMENT_COUNT_FIELD_NUMBER: builtins.int
-    SESSION_REVIEW_COUNT_FIELD_NUMBER: builtins.int
-    SESSION_COMMENT_COUNT_FIELD_NUMBER: builtins.int
-    BY_LANGUAGE_FIELD_NUMBER: builtins.int
-    BY_INTENT_FIELD_NUMBER: builtins.int
-    BY_AUTHOR_TYPE_FIELD_NUMBER: builtins.int
-    UNSPECIFIED_RATING_COUNT_FIELD_NUMBER: builtins.int
-    SCORED_COUNT_FIELD_NUMBER: builtins.int
-    AVERAGE_SCORE_FIELD_NUMBER: builtins.int
-    BY_ORIGIN_FIELD_NUMBER: builtins.int
-    BY_CRITERION_FIELD_NUMBER: builtins.int
-    total_feedback: builtins.int
+    TOTAL_FEEDBACK_FIELD_NUMBER: _builtins.int
+    THUMBS_UP_COUNT_FIELD_NUMBER: _builtins.int
+    THUMBS_DOWN_COUNT_FIELD_NUMBER: _builtins.int
+    SESSION_LEVEL_COUNT_FIELD_NUMBER: _builtins.int
+    SESSION_STEP_LEVEL_COUNT_FIELD_NUMBER: _builtins.int
+    COMMENT_COUNT_FIELD_NUMBER: _builtins.int
+    SESSION_REVIEW_COUNT_FIELD_NUMBER: _builtins.int
+    SESSION_COMMENT_COUNT_FIELD_NUMBER: _builtins.int
+    BY_LANGUAGE_FIELD_NUMBER: _builtins.int
+    BY_INTENT_FIELD_NUMBER: _builtins.int
+    BY_AUTHOR_TYPE_FIELD_NUMBER: _builtins.int
+    UNSPECIFIED_RATING_COUNT_FIELD_NUMBER: _builtins.int
+    SCORED_COUNT_FIELD_NUMBER: _builtins.int
+    AVERAGE_SCORE_FIELD_NUMBER: _builtins.int
+    BY_ORIGIN_FIELD_NUMBER: _builtins.int
+    BY_CRITERION_FIELD_NUMBER: _builtins.int
+    total_feedback: _builtins.int
     """Total feedback records."""
-    thumbs_up_count: builtins.int
+    thumbs_up_count: _builtins.int
     """Number of thumbs-up feedback."""
-    thumbs_down_count: builtins.int
+    thumbs_down_count: _builtins.int
     """Number of thumbs-down feedback."""
-    session_level_count: builtins.int
+    session_level_count: _builtins.int
     """Number of session-level feedback."""
-    session_step_level_count: builtins.int
+    session_step_level_count: _builtins.int
     """Number of session-step-level feedback."""
-    comment_count: builtins.int
+    comment_count: _builtins.int
     """Number of feedback that carry a free-text comment."""
-    session_review_count: builtins.int
+    session_review_count: _builtins.int
     """Roll-up of existing session reviews (additional quality signal)."""
-    session_comment_count: builtins.int
+    session_comment_count: _builtins.int
     """Roll-up of existing session comments (additional quality signal)."""
-    unspecified_rating_count: builtins.int
+    unspecified_rating_count: _builtins.int
     """Number of feedback with no rating (comment-only / unspecified rating)."""
-    scored_count: builtins.int
+    scored_count: _builtins.int
     """Number of feedback that carry a numeric score."""
-    average_score: builtins.float
+    average_score: _builtins.float
     """Mean of the numeric scores across scored feedback (0 when none)."""
-    @property
-    def by_language(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FeedbackBreakdownBucket]:
+    @_builtins.property
+    def by_language(self) -> _containers.RepeatedCompositeFieldContainer[Global___FeedbackBreakdownBucket]:
         """Up/down breakdown by language code."""
 
-    @property
-    def by_intent(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FeedbackBreakdownBucket]:
+    @_builtins.property
+    def by_intent(self) -> _containers.RepeatedCompositeFieldContainer[Global___FeedbackBreakdownBucket]:
         """Up/down breakdown by matched intent."""
 
-    @property
-    def by_author_type(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FeedbackBreakdownBucket]:
+    @_builtins.property
+    def by_author_type(self) -> _containers.RepeatedCompositeFieldContainer[Global___FeedbackBreakdownBucket]:
         """Up/down breakdown by author type."""
 
-    @property
-    def by_origin(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FeedbackBreakdownBucket]:
+    @_builtins.property
+    def by_origin(self) -> _containers.RepeatedCompositeFieldContainer[Global___FeedbackBreakdownBucket]:
         """Up/down breakdown by channel origin id."""
 
-    @property
-    def by_criterion(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FeedbackBreakdownBucket]:
+    @_builtins.property
+    def by_criterion(self) -> _containers.RepeatedCompositeFieldContainer[Global___FeedbackBreakdownBucket]:
         """Up/down breakdown by criterion."""
 
     def __init__(
         self,
         *,
-        total_feedback: builtins.int = ...,
-        thumbs_up_count: builtins.int = ...,
-        thumbs_down_count: builtins.int = ...,
-        session_level_count: builtins.int = ...,
-        session_step_level_count: builtins.int = ...,
-        comment_count: builtins.int = ...,
-        session_review_count: builtins.int = ...,
-        session_comment_count: builtins.int = ...,
-        by_language: collections.abc.Iterable[global___FeedbackBreakdownBucket] | None = ...,
-        by_intent: collections.abc.Iterable[global___FeedbackBreakdownBucket] | None = ...,
-        by_author_type: collections.abc.Iterable[global___FeedbackBreakdownBucket] | None = ...,
-        unspecified_rating_count: builtins.int = ...,
-        scored_count: builtins.int = ...,
-        average_score: builtins.float = ...,
-        by_origin: collections.abc.Iterable[global___FeedbackBreakdownBucket] | None = ...,
-        by_criterion: collections.abc.Iterable[global___FeedbackBreakdownBucket] | None = ...,
+        total_feedback: _builtins.int = ...,
+        thumbs_up_count: _builtins.int = ...,
+        thumbs_down_count: _builtins.int = ...,
+        session_level_count: _builtins.int = ...,
+        session_step_level_count: _builtins.int = ...,
+        comment_count: _builtins.int = ...,
+        session_review_count: _builtins.int = ...,
+        session_comment_count: _builtins.int = ...,
+        by_language: _abc.Iterable[Global___FeedbackBreakdownBucket] | None = ...,
+        by_intent: _abc.Iterable[Global___FeedbackBreakdownBucket] | None = ...,
+        by_author_type: _abc.Iterable[Global___FeedbackBreakdownBucket] | None = ...,
+        unspecified_rating_count: _builtins.int = ...,
+        scored_count: _builtins.int = ...,
+        average_score: _builtins.float = ...,
+        by_origin: _abc.Iterable[Global___FeedbackBreakdownBucket] | None = ...,
+        by_criterion: _abc.Iterable[Global___FeedbackBreakdownBucket] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["average_score", b"average_score", "by_author_type", b"by_author_type", "by_criterion", b"by_criterion", "by_intent", b"by_intent", "by_language", b"by_language", "by_origin", b"by_origin", "comment_count", b"comment_count", "scored_count", b"scored_count", "session_comment_count", b"session_comment_count", "session_level_count", b"session_level_count", "session_review_count", b"session_review_count", "session_step_level_count", b"session_step_level_count", "thumbs_down_count", b"thumbs_down_count", "thumbs_up_count", b"thumbs_up_count", "total_feedback", b"total_feedback", "unspecified_rating_count", b"unspecified_rating_count"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["average_score", b"average_score", "by_author_type", b"by_author_type", "by_criterion", b"by_criterion", "by_intent", b"by_intent", "by_language", b"by_language", "by_origin", b"by_origin", "comment_count", b"comment_count", "scored_count", b"scored_count", "session_comment_count", b"session_comment_count", "session_level_count", b"session_level_count", "session_review_count", b"session_review_count", "session_step_level_count", b"session_step_level_count", "thumbs_down_count", b"thumbs_down_count", "thumbs_up_count", b"thumbs_up_count", "total_feedback", b"total_feedback", "unspecified_rating_count", b"unspecified_rating_count"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___FeedbackStatistics = FeedbackStatistics
+Global___FeedbackStatistics: _TypeAlias = FeedbackStatistics  # noqa: Y015
 
-@typing.final
-class GetFeedbackStatisticsRequest(google.protobuf.message.Message):
+@_typing.final
+class GetFeedbackStatisticsRequest(_message.Message):
     """Request for aggregated feedback statistics."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    SESSION_FILTER_FIELD_NUMBER: builtins.int
-    INCLUDE_REVIEW_AND_COMMENT_ROLLUP_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    FEEDBACK_FILTER_FIELD_NUMBER: builtins.int
-    parent: builtins.str
+    PARENT_FIELD_NUMBER: _builtins.int
+    SESSION_FILTER_FIELD_NUMBER: _builtins.int
+    INCLUDE_REVIEW_AND_COMMENT_ROLLUP_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    FEEDBACK_FILTER_FIELD_NUMBER: _builtins.int
+    parent: _builtins.str
     """The agent parent.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
-    include_review_and_comment_rollup: builtins.bool
+    include_review_and_comment_rollup: _builtins.bool
     """Optional. When true, roll up existing session reviews and comments as additional signals."""
-    @property
-    def session_filter(self) -> global___SessionFilter:
+    @_builtins.property
+    def session_filter(self) -> Global___SessionFilter:
         """Optional. A filter to narrow the sessions considered."""
 
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields of the statistics get returned."""
 
-    @property
-    def feedback_filter(self) -> global___FeedbackFilter:
+    @_builtins.property
+    def feedback_filter(self) -> Global___FeedbackFilter:
         """Optional. A feedback-native filter (rating / author / comment / score / criterion / date window)."""
 
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        session_filter: global___SessionFilter | None = ...,
-        include_review_and_comment_rollup: builtins.bool = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
-        feedback_filter: global___FeedbackFilter | None = ...,
+        parent: _builtins.str = ...,
+        session_filter: Global___SessionFilter | None = ...,
+        include_review_and_comment_rollup: _builtins.bool = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
+        feedback_filter: Global___FeedbackFilter | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["feedback_filter", b"feedback_filter", "field_mask", b"field_mask", "session_filter", b"session_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["feedback_filter", b"feedback_filter", "field_mask", b"field_mask", "include_review_and_comment_rollup", b"include_review_and_comment_rollup", "parent", b"parent", "session_filter", b"session_filter"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["feedback_filter", b"feedback_filter", "field_mask", b"field_mask", "session_filter", b"session_filter"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["feedback_filter", b"feedback_filter", "field_mask", b"field_mask", "include_review_and_comment_rollup", b"include_review_and_comment_rollup", "parent", b"parent", "session_filter", b"session_filter"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GetFeedbackStatisticsRequest = GetFeedbackStatisticsRequest
+Global___GetFeedbackStatisticsRequest: _TypeAlias = GetFeedbackStatisticsRequest  # noqa: Y015
 
-@typing.final
-class GetFeedbackStatisticsResponse(google.protobuf.message.Message):
+@_typing.final
+class GetFeedbackStatisticsResponse(_message.Message):
     """Response carrying aggregated feedback statistics."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    STATISTICS_FIELD_NUMBER: builtins.int
-    @property
-    def statistics(self) -> global___FeedbackStatistics:
+    STATISTICS_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def statistics(self) -> Global___FeedbackStatistics:
         """The aggregated statistics."""
 
     def __init__(
         self,
         *,
-        statistics: global___FeedbackStatistics | None = ...,
+        statistics: Global___FeedbackStatistics | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["statistics", b"statistics"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["statistics", b"statistics"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["statistics", b"statistics"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["statistics", b"statistics"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GetFeedbackStatisticsResponse = GetFeedbackStatisticsResponse
+Global___GetFeedbackStatisticsResponse: _TypeAlias = GetFeedbackStatisticsResponse  # noqa: Y015
 
-@typing.final
-class FeedbackTimeSeriesBucket(google.protobuf.message.Message):
+@_typing.final
+class FeedbackTimeSeriesBucket(_message.Message):
     """One time bucket of feedback counts."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    BUCKET_START_FIELD_NUMBER: builtins.int
-    THUMBS_UP_COUNT_FIELD_NUMBER: builtins.int
-    THUMBS_DOWN_COUNT_FIELD_NUMBER: builtins.int
-    TOTAL_FIELD_NUMBER: builtins.int
-    BUCKET_END_FIELD_NUMBER: builtins.int
-    thumbs_up_count: builtins.int
+    BUCKET_START_FIELD_NUMBER: _builtins.int
+    THUMBS_UP_COUNT_FIELD_NUMBER: _builtins.int
+    THUMBS_DOWN_COUNT_FIELD_NUMBER: _builtins.int
+    TOTAL_FIELD_NUMBER: _builtins.int
+    BUCKET_END_FIELD_NUMBER: _builtins.int
+    thumbs_up_count: _builtins.int
     """Number of thumbs-up feedback in this bucket."""
-    thumbs_down_count: builtins.int
+    thumbs_down_count: _builtins.int
     """Number of thumbs-down feedback in this bucket."""
-    total: builtins.int
+    total: _builtins.int
     """Total feedback in this bucket."""
-    @property
-    def bucket_start(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def bucket_start(self) -> _timestamp_pb2.Timestamp:
         """The (inclusive) start of the time bucket."""
 
-    @property
-    def bucket_end(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def bucket_end(self) -> _timestamp_pb2.Timestamp:
         """The (exclusive) end of the time bucket."""
 
     def __init__(
         self,
         *,
-        bucket_start: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        thumbs_up_count: builtins.int = ...,
-        thumbs_down_count: builtins.int = ...,
-        total: builtins.int = ...,
-        bucket_end: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        bucket_start: _timestamp_pb2.Timestamp | None = ...,
+        thumbs_up_count: _builtins.int = ...,
+        thumbs_down_count: _builtins.int = ...,
+        total: _builtins.int = ...,
+        bucket_end: _timestamp_pb2.Timestamp | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["bucket_end", b"bucket_end", "bucket_start", b"bucket_start"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["bucket_end", b"bucket_end", "bucket_start", b"bucket_start", "thumbs_down_count", b"thumbs_down_count", "thumbs_up_count", b"thumbs_up_count", "total", b"total"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["bucket_end", b"bucket_end", "bucket_start", b"bucket_start"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["bucket_end", b"bucket_end", "bucket_start", b"bucket_start", "thumbs_down_count", b"thumbs_down_count", "thumbs_up_count", b"thumbs_up_count", "total", b"total"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___FeedbackTimeSeriesBucket = FeedbackTimeSeriesBucket
+Global___FeedbackTimeSeriesBucket: _TypeAlias = FeedbackTimeSeriesBucket  # noqa: Y015
 
-@typing.final
-class GetFeedbackStatisticsTimeSeriesRequest(google.protobuf.message.Message):
+@_typing.final
+class GetFeedbackStatisticsTimeSeriesRequest(_message.Message):
     """Request for feedback statistics bucketed over time."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    SESSION_FILTER_FIELD_NUMBER: builtins.int
-    BUCKET_WIDTH_SECONDS_FIELD_NUMBER: builtins.int
-    MAX_BUCKETS_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    FEEDBACK_FILTER_FIELD_NUMBER: builtins.int
-    GRANULARITY_FIELD_NUMBER: builtins.int
-    TIME_ZONE_FIELD_NUMBER: builtins.int
-    START_FIELD_NUMBER: builtins.int
-    END_FIELD_NUMBER: builtins.int
-    parent: builtins.str
+    PARENT_FIELD_NUMBER: _builtins.int
+    SESSION_FILTER_FIELD_NUMBER: _builtins.int
+    BUCKET_WIDTH_SECONDS_FIELD_NUMBER: _builtins.int
+    MAX_BUCKETS_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    FEEDBACK_FILTER_FIELD_NUMBER: _builtins.int
+    GRANULARITY_FIELD_NUMBER: _builtins.int
+    TIME_ZONE_FIELD_NUMBER: _builtins.int
+    START_FIELD_NUMBER: _builtins.int
+    END_FIELD_NUMBER: _builtins.int
+    parent: _builtins.str
     """The agent parent.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
-    bucket_width_seconds: builtins.int
+    bucket_width_seconds: _builtins.int
     """The width of each time bucket in seconds."""
-    max_buckets: builtins.int
+    max_buckets: _builtins.int
     """The maximum number of buckets to return."""
-    granularity: global___FeedbackTimeGranularity.ValueType
+    granularity: Global___FeedbackTimeGranularity.ValueType
     """Optional. Calendar granularity; when set (non-unspecified) it overrides bucket_width_seconds."""
-    time_zone: builtins.str
+    time_zone: _builtins.str
     """Optional. IANA timezone for calendar bucketing (e.g. "Europe/Vienna"); defaults to UTC."""
-    @property
-    def session_filter(self) -> global___SessionFilter:
+    @_builtins.property
+    def session_filter(self) -> Global___SessionFilter:
         """Optional. A filter to narrow the sessions considered."""
 
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields get returned."""
 
-    @property
-    def feedback_filter(self) -> global___FeedbackFilter:
+    @_builtins.property
+    def feedback_filter(self) -> Global___FeedbackFilter:
         """Optional. A feedback-native filter."""
 
-    @property
-    def start(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def start(self) -> _timestamp_pb2.Timestamp:
         """Optional. Inclusive start of the series window; when set, empty leading buckets are zero-filled."""
 
-    @property
-    def end(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def end(self) -> _timestamp_pb2.Timestamp:
         """Optional. Exclusive end of the series window; defaults to now."""
 
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        session_filter: global___SessionFilter | None = ...,
-        bucket_width_seconds: builtins.int = ...,
-        max_buckets: builtins.int = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
-        feedback_filter: global___FeedbackFilter | None = ...,
-        granularity: global___FeedbackTimeGranularity.ValueType = ...,
-        time_zone: builtins.str = ...,
-        start: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        end: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        parent: _builtins.str = ...,
+        session_filter: Global___SessionFilter | None = ...,
+        bucket_width_seconds: _builtins.int = ...,
+        max_buckets: _builtins.int = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
+        feedback_filter: Global___FeedbackFilter | None = ...,
+        granularity: Global___FeedbackTimeGranularity.ValueType = ...,
+        time_zone: _builtins.str = ...,
+        start: _timestamp_pb2.Timestamp | None = ...,
+        end: _timestamp_pb2.Timestamp | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["end", b"end", "feedback_filter", b"feedback_filter", "field_mask", b"field_mask", "session_filter", b"session_filter", "start", b"start"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["bucket_width_seconds", b"bucket_width_seconds", "end", b"end", "feedback_filter", b"feedback_filter", "field_mask", b"field_mask", "granularity", b"granularity", "max_buckets", b"max_buckets", "parent", b"parent", "session_filter", b"session_filter", "start", b"start", "time_zone", b"time_zone"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["end", b"end", "feedback_filter", b"feedback_filter", "field_mask", b"field_mask", "session_filter", b"session_filter", "start", b"start"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["bucket_width_seconds", b"bucket_width_seconds", "end", b"end", "feedback_filter", b"feedback_filter", "field_mask", b"field_mask", "granularity", b"granularity", "max_buckets", b"max_buckets", "parent", b"parent", "session_filter", b"session_filter", "start", b"start", "time_zone", b"time_zone"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GetFeedbackStatisticsTimeSeriesRequest = GetFeedbackStatisticsTimeSeriesRequest
+Global___GetFeedbackStatisticsTimeSeriesRequest: _TypeAlias = GetFeedbackStatisticsTimeSeriesRequest  # noqa: Y015
 
-@typing.final
-class GetFeedbackStatisticsTimeSeriesResponse(google.protobuf.message.Message):
+@_typing.final
+class GetFeedbackStatisticsTimeSeriesResponse(_message.Message):
     """Response carrying feedback counts bucketed over time."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    BUCKETS_FIELD_NUMBER: builtins.int
-    @property
-    def buckets(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___FeedbackTimeSeriesBucket]:
+    BUCKETS_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def buckets(self) -> _containers.RepeatedCompositeFieldContainer[Global___FeedbackTimeSeriesBucket]:
         """The time buckets, oldest first."""
 
     def __init__(
         self,
         *,
-        buckets: collections.abc.Iterable[global___FeedbackTimeSeriesBucket] | None = ...,
+        buckets: _abc.Iterable[Global___FeedbackTimeSeriesBucket] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["buckets", b"buckets"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["buckets", b"buckets"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GetFeedbackStatisticsTimeSeriesResponse = GetFeedbackStatisticsTimeSeriesResponse
+Global___GetFeedbackStatisticsTimeSeriesResponse: _TypeAlias = GetFeedbackStatisticsTimeSeriesResponse  # noqa: Y015
 
-@typing.final
-class ListSessionReviewsRequest(google.protobuf.message.Message):
+@_typing.final
+class ListSessionReviewsRequest(_message.Message):
     """This message is a request to list session reviews"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    SESSION_ID_FIELD_NUMBER: builtins.int
-    SESSION_REVIEW_VIEW_FIELD_NUMBER: builtins.int
-    PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    session_id: builtins.str
+    SESSION_ID_FIELD_NUMBER: _builtins.int
+    SESSION_REVIEW_VIEW_FIELD_NUMBER: _builtins.int
+    PAGE_TOKEN_FIELD_NUMBER: _builtins.int
+    session_id: _builtins.str
     """The unique identifier for the session for which reviews should be listed
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
     """
-    session_review_view: global___SessionReview.View.ValueType
+    session_review_view: Global___SessionReview.View.ValueType
     """An enum specifying the amount of information to be returned per session review"""
-    page_token: builtins.str
+    page_token: _builtins.str
     """Optional: The page token to support pagination.
     Pagination allows you to retrieve a large result set in smaller, more manageable portions.
     The page token is a string representing the current index and page size.
@@ -7003,393 +7476,423 @@ class ListSessionReviewsRequest(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        session_id: builtins.str = ...,
-        session_review_view: global___SessionReview.View.ValueType = ...,
-        page_token: builtins.str = ...,
+        session_id: _builtins.str = ...,
+        session_review_view: Global___SessionReview.View.ValueType = ...,
+        page_token: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["page_token", b"page_token", "session_id", b"session_id", "session_review_view", b"session_review_view"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["page_token", b"page_token", "session_id", b"session_id", "session_review_view", b"session_review_view"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListSessionReviewsRequest = ListSessionReviewsRequest
+Global___ListSessionReviewsRequest: _TypeAlias = ListSessionReviewsRequest  # noqa: Y015
 
-@typing.final
-class ListSessionReviewsResponse(google.protobuf.message.Message):
+@_typing.final
+class ListSessionReviewsResponse(_message.Message):
     """This message is a response of listing session reviews"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    SESSION_REVIEWS_FIELD_NUMBER: builtins.int
-    NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    next_page_token: builtins.str
+    SESSION_REVIEWS_FIELD_NUMBER: _builtins.int
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: _builtins.int
+    next_page_token: _builtins.str
     """The next_page_token is used to retrieve the next page of a returned result,
     e.g. next_page_token is current_index-2
     """
-    @property
-    def session_reviews(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___SessionReview]:
+    @_builtins.property
+    def session_reviews(self) -> _containers.RepeatedCompositeFieldContainer[Global___SessionReview]:
         """The requested session reviews"""
 
     def __init__(
         self,
         *,
-        session_reviews: collections.abc.Iterable[global___SessionReview] | None = ...,
-        next_page_token: builtins.str = ...,
+        session_reviews: _abc.Iterable[Global___SessionReview] | None = ...,
+        next_page_token: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["next_page_token", b"next_page_token", "session_reviews", b"session_reviews"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["next_page_token", b"next_page_token", "session_reviews", b"session_reviews"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListSessionReviewsResponse = ListSessionReviewsResponse
+Global___ListSessionReviewsResponse: _TypeAlias = ListSessionReviewsResponse  # noqa: Y015
 
-@typing.final
-class GetSessionReviewRequest(google.protobuf.message.Message):
+@_typing.final
+class GetSessionReviewRequest(_message.Message):
     """This message is a request to get session review"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    SESSION_REVIEW_ID_FIELD_NUMBER: builtins.int
-    SESSION_REVIEW_VIEW_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    session_review_id: builtins.str
+    SESSION_REVIEW_ID_FIELD_NUMBER: _builtins.int
+    SESSION_REVIEW_VIEW_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    session_review_id: _builtins.str
     """The unique identifier of the session review to be returned"""
-    session_review_view: global___SessionReview.View.ValueType
+    session_review_view: Global___SessionReview.View.ValueType
     """The view of the session review to be returned"""
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields gets returned."""
 
     def __init__(
         self,
         *,
-        session_review_id: builtins.str = ...,
-        session_review_view: global___SessionReview.View.ValueType = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        session_review_id: _builtins.str = ...,
+        session_review_view: Global___SessionReview.View.ValueType = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "session_review_id", b"session_review_id", "session_review_view", b"session_review_view"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "session_review_id", b"session_review_id", "session_review_view", b"session_review_view"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GetSessionReviewRequest = GetSessionReviewRequest
+Global___GetSessionReviewRequest: _TypeAlias = GetSessionReviewRequest  # noqa: Y015
 
-@typing.final
-class GetLatestSessionReviewRequest(google.protobuf.message.Message):
+@_typing.final
+class GetLatestSessionReviewRequest(_message.Message):
     """This message is a request to get latest session review"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    SESSION_ID_FIELD_NUMBER: builtins.int
-    SESSION_REVIEW_VIEW_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    session_id: builtins.str
+    SESSION_ID_FIELD_NUMBER: _builtins.int
+    SESSION_REVIEW_VIEW_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    session_id: _builtins.str
     """The unique identifier of the session for which the latest review should be returned
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
     """
-    session_review_view: global___SessionReview.View.ValueType
+    session_review_view: Global___SessionReview.View.ValueType
     """An enum specifying the amount of information to be returned for the desired session review"""
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields gets returned."""
 
     def __init__(
         self,
         *,
-        session_id: builtins.str = ...,
-        session_review_view: global___SessionReview.View.ValueType = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        session_id: _builtins.str = ...,
+        session_review_view: Global___SessionReview.View.ValueType = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "session_id", b"session_id", "session_review_view", b"session_review_view"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "session_id", b"session_id", "session_review_view", b"session_review_view"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GetLatestSessionReviewRequest = GetLatestSessionReviewRequest
+Global___GetLatestSessionReviewRequest: _TypeAlias = GetLatestSessionReviewRequest  # noqa: Y015
 
-@typing.final
-class FileResource(google.protobuf.message.Message):
+@_typing.final
+class FileResource(_message.Message):
     """Represents a file resource that can either be an image, audio, document, or video file."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    DOCUMENT_FILE_RESOURCE_FIELD_NUMBER: builtins.int
-    AUDIO_FILE_RESOURCE_FIELD_NUMBER: builtins.int
-    IMAGE_FILE_RESOURCE_FIELD_NUMBER: builtins.int
-    VIDEO_FILE_RESOURCE_FIELD_NUMBER: builtins.int
-    @property
-    def document_file_resource(self) -> global___DocumentFileResource:
+    DOCUMENT_FILE_RESOURCE_FIELD_NUMBER: _builtins.int
+    AUDIO_FILE_RESOURCE_FIELD_NUMBER: _builtins.int
+    IMAGE_FILE_RESOURCE_FIELD_NUMBER: _builtins.int
+    VIDEO_FILE_RESOURCE_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def document_file_resource(self) -> Global___DocumentFileResource:
         """Document file resource (e.g., markdown, text, word, powerpoint, pdf, excel etc.)."""
 
-    @property
-    def audio_file_resource(self) -> global___AudioFileResource:
+    @_builtins.property
+    def audio_file_resource(self) -> Global___AudioFileResource:
         """An audio file resource, such as a recording or sound file."""
 
-    @property
-    def image_file_resource(self) -> global___ImageFileResource:
+    @_builtins.property
+    def image_file_resource(self) -> Global___ImageFileResource:
         """An image file resource, such as a JPEG, PNG, etc."""
 
-    @property
-    def video_file_resource(self) -> global___VideoFileResource:
+    @_builtins.property
+    def video_file_resource(self) -> Global___VideoFileResource:
         """A video file resource, such as an MP4 or AVI file."""
 
     def __init__(
         self,
         *,
-        document_file_resource: global___DocumentFileResource | None = ...,
-        audio_file_resource: global___AudioFileResource | None = ...,
-        image_file_resource: global___ImageFileResource | None = ...,
-        video_file_resource: global___VideoFileResource | None = ...,
+        document_file_resource: Global___DocumentFileResource | None = ...,
+        audio_file_resource: Global___AudioFileResource | None = ...,
+        image_file_resource: Global___ImageFileResource | None = ...,
+        video_file_resource: Global___VideoFileResource | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["audio_file_resource", b"audio_file_resource", "document_file_resource", b"document_file_resource", "file_resource", b"file_resource", "image_file_resource", b"image_file_resource", "video_file_resource", b"video_file_resource"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["audio_file_resource", b"audio_file_resource", "document_file_resource", b"document_file_resource", "file_resource", b"file_resource", "image_file_resource", b"image_file_resource", "video_file_resource", b"video_file_resource"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["file_resource", b"file_resource"]) -> typing.Literal["document_file_resource", "audio_file_resource", "image_file_resource", "video_file_resource"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["audio_file_resource", b"audio_file_resource", "document_file_resource", b"document_file_resource", "file_resource", b"file_resource", "image_file_resource", b"image_file_resource", "video_file_resource", b"video_file_resource"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["audio_file_resource", b"audio_file_resource", "document_file_resource", b"document_file_resource", "file_resource", b"file_resource", "image_file_resource", b"image_file_resource", "video_file_resource", b"video_file_resource"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType_file_resource: _TypeAlias = _typing.Literal["document_file_resource", "audio_file_resource", "image_file_resource", "video_file_resource"]  # noqa: Y015
+    _WhichOneofArgType_file_resource: _TypeAlias = _typing.Literal["file_resource", b"file_resource"]  # noqa: Y015
+    def WhichOneof(self, oneof_group: _WhichOneofArgType_file_resource) -> _WhichOneofReturnType_file_resource | None: ...
 
-global___FileResource = FileResource
+Global___FileResource: _TypeAlias = FileResource  # noqa: Y015
 
-@typing.final
-class DocumentFileResource(google.protobuf.message.Message):
+@_typing.final
+class DocumentFileResource(_message.Message):
     """Represents a document file resource (e.g., text, markdown, PDF, DOCX)."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NAME_FIELD_NUMBER: builtins.int
-    DISPLAY_NAME_FIELD_NUMBER: builtins.int
-    BYTES_FIELD_NUMBER: builtins.int
-    CREATED_AT_FIELD_NUMBER: builtins.int
-    MODIFIED_AT_FIELD_NUMBER: builtins.int
-    CREATED_BY_FIELD_NUMBER: builtins.int
-    MODIFIED_BY_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    DISPLAY_NAME_FIELD_NUMBER: _builtins.int
+    BYTES_FIELD_NUMBER: _builtins.int
+    CREATED_AT_FIELD_NUMBER: _builtins.int
+    MODIFIED_AT_FIELD_NUMBER: _builtins.int
+    CREATED_BY_FIELD_NUMBER: _builtins.int
+    MODIFIED_BY_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """The unique identifier for the document file resource.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/documents/&lt;document_uuid&gt;</code></pre>
     """
-    display_name: builtins.str
+    display_name: _builtins.str
     """The display name of the document file, which can be the file name (e.g., "report.pdf")
     or a user-assigned name.
     """
-    bytes: builtins.bytes
+    bytes: _builtins.bytes
     """The raw bytes of the document file (e.g., PDF, DOCX, TXT)."""
-    created_by: builtins.str
+    created_by: _builtins.str
     """The UUID of the user who created the document file."""
-    modified_by: builtins.str
+    modified_by: _builtins.str
     """The UUID of the user who last modified the document file."""
-    @property
-    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def created_at(self) -> _timestamp_pb2.Timestamp:
         """Creation date and time of the document file. This is a read-only field."""
 
-    @property
-    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def modified_at(self) -> _timestamp_pb2.Timestamp:
         """The last modification date and time of the document file. This is a read-only field."""
 
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
-        display_name: builtins.str = ...,
-        bytes: builtins.bytes = ...,
-        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        created_by: builtins.str = ...,
-        modified_by: builtins.str = ...,
+        name: _builtins.str = ...,
+        display_name: _builtins.str = ...,
+        bytes: _builtins.bytes = ...,
+        created_at: _timestamp_pb2.Timestamp | None = ...,
+        modified_at: _timestamp_pb2.Timestamp | None = ...,
+        created_by: _builtins.str = ...,
+        modified_by: _builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["bytes", b"bytes", "created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["bytes", b"bytes", "created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___DocumentFileResource = DocumentFileResource
+Global___DocumentFileResource: _TypeAlias = DocumentFileResource  # noqa: Y015
 
-@typing.final
-class ImageFileResource(google.protobuf.message.Message):
+@_typing.final
+class ImageFileResource(_message.Message):
     """Represents an image file resource (e.g., JPEG, PNG, GIF) attached to a session."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NAME_FIELD_NUMBER: builtins.int
-    DISPLAY_NAME_FIELD_NUMBER: builtins.int
-    BYTES_FIELD_NUMBER: builtins.int
-    CREATED_AT_FIELD_NUMBER: builtins.int
-    MODIFIED_AT_FIELD_NUMBER: builtins.int
-    CREATED_BY_FIELD_NUMBER: builtins.int
-    MODIFIED_BY_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    DISPLAY_NAME_FIELD_NUMBER: _builtins.int
+    BYTES_FIELD_NUMBER: _builtins.int
+    CREATED_AT_FIELD_NUMBER: _builtins.int
+    MODIFIED_AT_FIELD_NUMBER: _builtins.int
+    CREATED_BY_FIELD_NUMBER: _builtins.int
+    MODIFIED_BY_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """The unique identifier of the image file resource.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/images/&lt;image_uuid&gt;</code></pre>
     """
-    display_name: builtins.str
+    display_name: _builtins.str
     """File name of the image, e.g., MyPicture.jpg, or a user assigned display name"""
-    bytes: builtins.bytes
+    bytes: _builtins.bytes
     """Raw bytes of the image file."""
-    created_by: builtins.str
+    created_by: _builtins.str
     """User id in form of a valid UUID."""
-    modified_by: builtins.str
+    modified_by: _builtins.str
     """User id in form of a valid UUID."""
-    @property
-    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def created_at(self) -> _timestamp_pb2.Timestamp:
         """Creation date and time. Read-only field."""
 
-    @property
-    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def modified_at(self) -> _timestamp_pb2.Timestamp:
         """Modification date and time. Read-only field."""
 
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
-        display_name: builtins.str = ...,
-        bytes: builtins.bytes = ...,
-        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        created_by: builtins.str = ...,
-        modified_by: builtins.str = ...,
+        name: _builtins.str = ...,
+        display_name: _builtins.str = ...,
+        bytes: _builtins.bytes = ...,
+        created_at: _timestamp_pb2.Timestamp | None = ...,
+        modified_at: _timestamp_pb2.Timestamp | None = ...,
+        created_by: _builtins.str = ...,
+        modified_by: _builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["bytes", b"bytes", "created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["bytes", b"bytes", "created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ImageFileResource = ImageFileResource
+Global___ImageFileResource: _TypeAlias = ImageFileResource  # noqa: Y015
 
-@typing.final
-class AudioFileResource(google.protobuf.message.Message):
+@_typing.final
+class AudioFileResource(_message.Message):
     """Represents an audio file resource attached to a session (input recording or generated TTS output)."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NAME_FIELD_NUMBER: builtins.int
-    BYTES_FIELD_NUMBER: builtins.int
-    LANGUAGE_FIELD_NUMBER: builtins.int
-    DURATION_IN_S_FIELD_NUMBER: builtins.int
-    SAMPLE_RATE_FIELD_NUMBER: builtins.int
-    AUDIO_FILE_RESOURCE_TYPE_FIELD_NUMBER: builtins.int
-    TRANSCRIPTIONS_FIELD_NUMBER: builtins.int
-    CREATED_AT_FIELD_NUMBER: builtins.int
-    MODIFIED_AT_FIELD_NUMBER: builtins.int
-    CREATED_BY_FIELD_NUMBER: builtins.int
-    MODIFIED_BY_FIELD_NUMBER: builtins.int
-    DISPLAY_NAME_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    BYTES_FIELD_NUMBER: _builtins.int
+    LANGUAGE_FIELD_NUMBER: _builtins.int
+    DURATION_IN_S_FIELD_NUMBER: _builtins.int
+    SAMPLE_RATE_FIELD_NUMBER: _builtins.int
+    AUDIO_FILE_RESOURCE_TYPE_FIELD_NUMBER: _builtins.int
+    TRANSCRIPTIONS_FIELD_NUMBER: _builtins.int
+    CREATED_AT_FIELD_NUMBER: _builtins.int
+    MODIFIED_AT_FIELD_NUMBER: _builtins.int
+    CREATED_BY_FIELD_NUMBER: _builtins.int
+    MODIFIED_BY_FIELD_NUMBER: _builtins.int
+    DISPLAY_NAME_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """The unique identifier of the audio file resource.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
     """
-    bytes: builtins.bytes
+    bytes: _builtins.bytes
     """Bytes of the audio file"""
-    language: builtins.str
+    language: _builtins.str
     """Language of the audio file"""
-    duration_in_s: builtins.float
+    duration_in_s: _builtins.float
     """Duration in seconds and milliseconds of the audio file"""
-    sample_rate: builtins.int
+    sample_rate: _builtins.int
     """sample rate of the audio"""
-    audio_file_resource_type: global___AudioFileResourceType.ValueType
+    audio_file_resource_type: Global___AudioFileResourceType.ValueType
     """File type of an audio resource"""
-    created_by: builtins.str
+    created_by: _builtins.str
     """User id in form of a valid UUID."""
-    modified_by: builtins.str
+    modified_by: _builtins.str
     """User id in form of a valid UUID."""
-    display_name: builtins.str
+    display_name: _builtins.str
     """Display name of the audio file, e.g., MyRecording.wav, or a user-assigned label."""
-    @property
-    def transcriptions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___S2tTranscription]:
+    @_builtins.property
+    def transcriptions(self) -> _containers.RepeatedCompositeFieldContainer[Global___S2tTranscription]:
         """transcriptions of the user input sorted by score.
         A transcription can be from a speech-to-text system or a human
         """
 
-    @property
-    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def created_at(self) -> _timestamp_pb2.Timestamp:
         """Creation date and time. Read-only field."""
 
-    @property
-    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def modified_at(self) -> _timestamp_pb2.Timestamp:
         """Modification date and time. Read-only field."""
 
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
-        bytes: builtins.bytes = ...,
-        language: builtins.str = ...,
-        duration_in_s: builtins.float = ...,
-        sample_rate: builtins.int = ...,
-        audio_file_resource_type: global___AudioFileResourceType.ValueType = ...,
-        transcriptions: collections.abc.Iterable[global___S2tTranscription] | None = ...,
-        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        created_by: builtins.str = ...,
-        modified_by: builtins.str = ...,
-        display_name: builtins.str = ...,
+        name: _builtins.str = ...,
+        bytes: _builtins.bytes = ...,
+        language: _builtins.str = ...,
+        duration_in_s: _builtins.float = ...,
+        sample_rate: _builtins.int = ...,
+        audio_file_resource_type: Global___AudioFileResourceType.ValueType = ...,
+        transcriptions: _abc.Iterable[Global___S2tTranscription] | None = ...,
+        created_at: _timestamp_pb2.Timestamp | None = ...,
+        modified_at: _timestamp_pb2.Timestamp | None = ...,
+        created_by: _builtins.str = ...,
+        modified_by: _builtins.str = ...,
+        display_name: _builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["audio_file_resource_type", b"audio_file_resource_type", "bytes", b"bytes", "created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "duration_in_s", b"duration_in_s", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "sample_rate", b"sample_rate", "transcriptions", b"transcriptions"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["audio_file_resource_type", b"audio_file_resource_type", "bytes", b"bytes", "created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "duration_in_s", b"duration_in_s", "language", b"language", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "sample_rate", b"sample_rate", "transcriptions", b"transcriptions"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___AudioFileResource = AudioFileResource
+Global___AudioFileResource: _TypeAlias = AudioFileResource  # noqa: Y015
 
-@typing.final
-class VideoFileResource(google.protobuf.message.Message):
+@_typing.final
+class VideoFileResource(_message.Message):
     """Represents a video file resource (e.g., MP4, AVI)."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NAME_FIELD_NUMBER: builtins.int
-    DISPLAY_NAME_FIELD_NUMBER: builtins.int
-    BYTES_FIELD_NUMBER: builtins.int
-    DURATION_IN_S_FIELD_NUMBER: builtins.int
-    RESOLUTION_FIELD_NUMBER: builtins.int
-    FRAME_RATE_FIELD_NUMBER: builtins.int
-    CREATED_AT_FIELD_NUMBER: builtins.int
-    MODIFIED_AT_FIELD_NUMBER: builtins.int
-    CREATED_BY_FIELD_NUMBER: builtins.int
-    MODIFIED_BY_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    DISPLAY_NAME_FIELD_NUMBER: _builtins.int
+    BYTES_FIELD_NUMBER: _builtins.int
+    DURATION_IN_S_FIELD_NUMBER: _builtins.int
+    RESOLUTION_FIELD_NUMBER: _builtins.int
+    FRAME_RATE_FIELD_NUMBER: _builtins.int
+    CREATED_AT_FIELD_NUMBER: _builtins.int
+    MODIFIED_AT_FIELD_NUMBER: _builtins.int
+    CREATED_BY_FIELD_NUMBER: _builtins.int
+    MODIFIED_BY_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """The unique identifier for the video file resource.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/videos/&lt;video_uuid&gt;</code></pre>
     """
-    display_name: builtins.str
+    display_name: _builtins.str
     """The display name of the video file, which can be a user-assigned label."""
-    bytes: builtins.bytes
+    bytes: _builtins.bytes
     """The raw bytes representing the video file (e.g., MP4, AVI)."""
-    duration_in_s: builtins.float
+    duration_in_s: _builtins.float
     """The duration of the video file in seconds."""
-    resolution: builtins.str
+    resolution: _builtins.str
     """The resolution of the video (e.g., "1920x1080" for Full HD)."""
-    frame_rate: builtins.float
+    frame_rate: _builtins.float
     """The frame rate of the video (e.g., 30 fps)."""
-    created_by: builtins.str
+    created_by: _builtins.str
     """The UUID of the user who created the video file."""
-    modified_by: builtins.str
+    modified_by: _builtins.str
     """The UUID of the user who last modified the video file."""
-    @property
-    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def created_at(self) -> _timestamp_pb2.Timestamp:
         """Creation date and time of the video file. This is a read-only field."""
 
-    @property
-    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def modified_at(self) -> _timestamp_pb2.Timestamp:
         """The last modification date and time of the video file. This is a read-only field."""
 
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
-        display_name: builtins.str = ...,
-        bytes: builtins.bytes = ...,
-        duration_in_s: builtins.float = ...,
-        resolution: builtins.str = ...,
-        frame_rate: builtins.float = ...,
-        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        created_by: builtins.str = ...,
-        modified_by: builtins.str = ...,
+        name: _builtins.str = ...,
+        display_name: _builtins.str = ...,
+        bytes: _builtins.bytes = ...,
+        duration_in_s: _builtins.float = ...,
+        resolution: _builtins.str = ...,
+        frame_rate: _builtins.float = ...,
+        created_at: _timestamp_pb2.Timestamp | None = ...,
+        modified_at: _timestamp_pb2.Timestamp | None = ...,
+        created_by: _builtins.str = ...,
+        modified_by: _builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["bytes", b"bytes", "created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "duration_in_s", b"duration_in_s", "frame_rate", b"frame_rate", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "resolution", b"resolution"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["bytes", b"bytes", "created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "duration_in_s", b"duration_in_s", "frame_rate", b"frame_rate", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "resolution", b"resolution"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___VideoFileResource = VideoFileResource
+Global___VideoFileResource: _TypeAlias = VideoFileResource  # noqa: Y015
 
-@typing.final
-class GetAudioFilesRequest(google.protobuf.message.Message):
+@_typing.final
+class GetAudioFilesRequest(_message.Message):
     """This message is a request to get audio files specified"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    NAMES_FIELD_NUMBER: builtins.int
-    RESOURCE_VIEW_FIELD_NUMBER: builtins.int
-    PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    SORTING_MODE_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    parent: builtins.str
+    PARENT_FIELD_NUMBER: _builtins.int
+    NAMES_FIELD_NUMBER: _builtins.int
+    RESOURCE_VIEW_FIELD_NUMBER: _builtins.int
+    PAGE_TOKEN_FIELD_NUMBER: _builtins.int
+    SORTING_MODE_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    parent: _builtins.str
     """Required. The project of this agent.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
-    resource_view: global___ResourceView.ValueType
+    resource_view: Global___ResourceView.ValueType
     """Represents the options for views of resources"""
-    page_token: builtins.str
+    page_token: _builtins.str
     """Optional: The page token to support pagination.
     Pagination allows you to retrieve a large result set in smaller, more manageable portions.
     The page token is a string representing the current index and page size.
@@ -7420,50 +7923,53 @@ class GetAudioFilesRequest(google.protobuf.message.Message):
       <li><code>&quot;current_index-1--page_size--20&quot;</code></li>
     </ul>
     """
-    sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType
+    sorting_mode: _common_pb2.SortingMode.ValueType
     """sorting mode"""
-    @property
-    def names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def names(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """The unique identifier of the audio file of the specific session
         Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
         """
 
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields gets returned."""
 
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        names: collections.abc.Iterable[builtins.str] | None = ...,
-        resource_view: global___ResourceView.ValueType = ...,
-        page_token: builtins.str = ...,
-        sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        parent: _builtins.str = ...,
+        names: _abc.Iterable[_builtins.str] | None = ...,
+        resource_view: Global___ResourceView.ValueType = ...,
+        page_token: _builtins.str = ...,
+        sorting_mode: _common_pb2.SortingMode.ValueType = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "names", b"names", "page_token", b"page_token", "parent", b"parent", "resource_view", b"resource_view", "sorting_mode", b"sorting_mode"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "names", b"names", "page_token", b"page_token", "parent", b"parent", "resource_view", b"resource_view", "sorting_mode", b"sorting_mode"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GetAudioFilesRequest = GetAudioFilesRequest
+Global___GetAudioFilesRequest: _TypeAlias = GetAudioFilesRequest  # noqa: Y015
 
-@typing.final
-class GetAudioFilesResponse(google.protobuf.message.Message):
+@_typing.final
+class GetAudioFilesResponse(_message.Message):
     """This message is a request to retrieve the audio files specified"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    AUDIO_FILES_FIELD_NUMBER: builtins.int
-    ERROR_MESSAGE_FIELD_NUMBER: builtins.int
-    NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    error_message: builtins.str
+    AUDIO_FILES_FIELD_NUMBER: _builtins.int
+    ERROR_MESSAGE_FIELD_NUMBER: _builtins.int
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: _builtins.int
+    error_message: _builtins.str
     """error message if there are any."""
-    next_page_token: builtins.str
+    next_page_token: _builtins.str
     """The next_page_token is used to retrieve the next page of a returned result,
     e.g. next_page_token is current_index-2
     """
-    @property
-    def audio_files(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AudioFileResource]:
+    @_builtins.property
+    def audio_files(self) -> _containers.RepeatedCompositeFieldContainer[Global___AudioFileResource]:
         """The unique identifier of the audio file for a specific session.
         Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
         """
@@ -7471,64 +7977,72 @@ class GetAudioFilesResponse(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        audio_files: collections.abc.Iterable[global___AudioFileResource] | None = ...,
-        error_message: builtins.str = ...,
-        next_page_token: builtins.str = ...,
+        audio_files: _abc.Iterable[Global___AudioFileResource] | None = ...,
+        error_message: _builtins.str = ...,
+        next_page_token: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["audio_files", b"audio_files", "error_message", b"error_message", "next_page_token", b"next_page_token"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["audio_files", b"audio_files", "error_message", b"error_message", "next_page_token", b"next_page_token"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GetAudioFilesResponse = GetAudioFilesResponse
+Global___GetAudioFilesResponse: _TypeAlias = GetAudioFilesResponse  # noqa: Y015
 
-@typing.final
-class AddAudioFilesRequest(google.protobuf.message.Message):
+@_typing.final
+class AddAudioFilesRequest(_message.Message):
     """This message is a request to add the audio files specified"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    SESSION_ID_FIELD_NUMBER: builtins.int
-    AUDIO_FILE_RESOURCES_FIELD_NUMBER: builtins.int
-    SESSION_STEP_ID_FIELD_NUMBER: builtins.int
-    parent: builtins.str
+    PARENT_FIELD_NUMBER: _builtins.int
+    SESSION_ID_FIELD_NUMBER: _builtins.int
+    AUDIO_FILE_RESOURCES_FIELD_NUMBER: _builtins.int
+    SESSION_STEP_ID_FIELD_NUMBER: _builtins.int
+    parent: _builtins.str
     """Required. The project of this agent.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
-    session_id: builtins.str
+    session_id: _builtins.str
     """The unique identifier of the session for which the audio files should be listed
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/&lt</code></pre>
     """
-    session_step_id: builtins.str
+    session_step_id: _builtins.str
     """The unique identifier of the session step for which the audio files should be listed
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;/&lt</code></pre>
     """
-    @property
-    def audio_file_resources(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AudioFileResource]:
+    @_builtins.property
+    def audio_file_resources(self) -> _containers.RepeatedCompositeFieldContainer[Global___AudioFileResource]:
         """AudioFileResources to be added"""
 
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        session_id: builtins.str = ...,
-        audio_file_resources: collections.abc.Iterable[global___AudioFileResource] | None = ...,
-        session_step_id: builtins.str = ...,
+        parent: _builtins.str = ...,
+        session_id: _builtins.str = ...,
+        audio_file_resources: _abc.Iterable[Global___AudioFileResource] | None = ...,
+        session_step_id: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["audio_file_resources", b"audio_file_resources", "parent", b"parent", "session_id", b"session_id", "session_step_id", b"session_step_id"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["audio_file_resources", b"audio_file_resources", "parent", b"parent", "session_id", b"session_id", "session_step_id", b"session_step_id"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___AddAudioFilesRequest = AddAudioFilesRequest
+Global___AddAudioFilesRequest: _TypeAlias = AddAudioFilesRequest  # noqa: Y015
 
-@typing.final
-class AddAudioFilesResponse(google.protobuf.message.Message):
+@_typing.final
+class AddAudioFilesResponse(_message.Message):
     """This message is a request to add the audio files specified"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    AUDIO_FILE_RESOURCES_FIELD_NUMBER: builtins.int
-    ERROR_MESSAGE_FIELD_NUMBER: builtins.int
-    error_message: builtins.str
+    AUDIO_FILE_RESOURCES_FIELD_NUMBER: _builtins.int
+    ERROR_MESSAGE_FIELD_NUMBER: _builtins.int
+    error_message: _builtins.str
     """error message if there are any."""
-    @property
-    def audio_file_resources(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AudioFileResource]:
+    @_builtins.property
+    def audio_file_resources(self) -> _containers.RepeatedCompositeFieldContainer[Global___AudioFileResource]:
         """The unique identifier of the audio files for a specific session.
         Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
         """
@@ -7536,27 +8050,31 @@ class AddAudioFilesResponse(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        audio_file_resources: collections.abc.Iterable[global___AudioFileResource] | None = ...,
-        error_message: builtins.str = ...,
+        audio_file_resources: _abc.Iterable[Global___AudioFileResource] | None = ...,
+        error_message: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["audio_file_resources", b"audio_file_resources", "error_message", b"error_message"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["audio_file_resources", b"audio_file_resources", "error_message", b"error_message"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___AddAudioFilesResponse = AddAudioFilesResponse
+Global___AddAudioFilesResponse: _TypeAlias = AddAudioFilesResponse  # noqa: Y015
 
-@typing.final
-class DeleteAudioFilesRequest(google.protobuf.message.Message):
+@_typing.final
+class DeleteAudioFilesRequest(_message.Message):
     """This message is a request to the delete audio files specified"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    NAMES_FIELD_NUMBER: builtins.int
-    parent: builtins.str
+    PARENT_FIELD_NUMBER: _builtins.int
+    NAMES_FIELD_NUMBER: _builtins.int
+    parent: _builtins.str
     """Required. The project of this agent.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
-    @property
-    def names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def names(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """The unique identifier of the audio file of the specific session
         Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
         """
@@ -7564,25 +8082,29 @@ class DeleteAudioFilesRequest(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        names: collections.abc.Iterable[builtins.str] | None = ...,
+        parent: _builtins.str = ...,
+        names: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["names", b"names", "parent", b"parent"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["names", b"names", "parent", b"parent"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___DeleteAudioFilesRequest = DeleteAudioFilesRequest
+Global___DeleteAudioFilesRequest: _TypeAlias = DeleteAudioFilesRequest  # noqa: Y015
 
-@typing.final
-class DeleteAudioFilesResponse(google.protobuf.message.Message):
+@_typing.final
+class DeleteAudioFilesResponse(_message.Message):
     """This message is a request to the delete audio files specified"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NAMES_FIELD_NUMBER: builtins.int
-    ERROR_MESSAGE_FIELD_NUMBER: builtins.int
-    error_message: builtins.str
+    NAMES_FIELD_NUMBER: _builtins.int
+    ERROR_MESSAGE_FIELD_NUMBER: _builtins.int
+    error_message: _builtins.str
     """error message if there are any."""
-    @property
-    def names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def names(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """The unique identifier of the audio file of the specific session
         Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
         """
@@ -7590,36 +8112,40 @@ class DeleteAudioFilesResponse(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        names: collections.abc.Iterable[builtins.str] | None = ...,
-        error_message: builtins.str = ...,
+        names: _abc.Iterable[_builtins.str] | None = ...,
+        error_message: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["error_message", b"error_message", "names", b"names"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["error_message", b"error_message", "names", b"names"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___DeleteAudioFilesResponse = DeleteAudioFilesResponse
+Global___DeleteAudioFilesResponse: _TypeAlias = DeleteAudioFilesResponse  # noqa: Y015
 
-@typing.final
-class ListAudioFilesRequest(google.protobuf.message.Message):
+@_typing.final
+class ListAudioFilesRequest(_message.Message):
     """This message is a request to list all available audio files of a session"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    SESSION_ID_FIELD_NUMBER: builtins.int
-    RESOURCE_VIEW_FIELD_NUMBER: builtins.int
-    PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    SORTING_MODE_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    parent: builtins.str
+    PARENT_FIELD_NUMBER: _builtins.int
+    SESSION_ID_FIELD_NUMBER: _builtins.int
+    RESOURCE_VIEW_FIELD_NUMBER: _builtins.int
+    PAGE_TOKEN_FIELD_NUMBER: _builtins.int
+    SORTING_MODE_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    parent: _builtins.str
     """Required. The project of this agent.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
-    session_id: builtins.str
+    session_id: _builtins.str
     """Optional: The unique identifier of the session for which the audio files should be listed
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/&lt</code></pre>
     """
-    resource_view: global___ResourceView.ValueType
+    resource_view: Global___ResourceView.ValueType
     """Represents the options for views of resources"""
-    page_token: builtins.str
+    page_token: _builtins.str
     """Optional: The page token to support pagination.
     Pagination allows you to retrieve a large result set in smaller, more manageable portions.
     The page token is a string representing the current index and page size.
@@ -7650,44 +8176,47 @@ class ListAudioFilesRequest(google.protobuf.message.Message):
       <li><code>&quot;current_index-1--page_size--20&quot;</code></li>
     </ul>
     """
-    sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType
+    sorting_mode: _common_pb2.SortingMode.ValueType
     """sorting mode"""
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields gets returned."""
 
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        session_id: builtins.str = ...,
-        resource_view: global___ResourceView.ValueType = ...,
-        page_token: builtins.str = ...,
-        sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        parent: _builtins.str = ...,
+        session_id: _builtins.str = ...,
+        resource_view: Global___ResourceView.ValueType = ...,
+        page_token: _builtins.str = ...,
+        sorting_mode: _common_pb2.SortingMode.ValueType = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "page_token", b"page_token", "parent", b"parent", "resource_view", b"resource_view", "session_id", b"session_id", "sorting_mode", b"sorting_mode"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "page_token", b"page_token", "parent", b"parent", "resource_view", b"resource_view", "session_id", b"session_id", "sorting_mode", b"sorting_mode"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListAudioFilesRequest = ListAudioFilesRequest
+Global___ListAudioFilesRequest: _TypeAlias = ListAudioFilesRequest  # noqa: Y015
 
-@typing.final
-class ListAudioFilesResponse(google.protobuf.message.Message):
+@_typing.final
+class ListAudioFilesResponse(_message.Message):
     """This message is a request to retrieve the audio files specified"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    AUDIO_FILES_FIELD_NUMBER: builtins.int
-    NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    ERROR_MESSAGE_FIELD_NUMBER: builtins.int
-    next_page_token: builtins.str
+    AUDIO_FILES_FIELD_NUMBER: _builtins.int
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: _builtins.int
+    ERROR_MESSAGE_FIELD_NUMBER: _builtins.int
+    next_page_token: _builtins.str
     """The next_page_token is used to retrieve the next page of a returned result,
     e.g. next_page_token is current_index-2
     """
-    error_message: builtins.str
+    error_message: _builtins.str
     """error message if there are any."""
-    @property
-    def audio_files(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AudioFileResource]:
+    @_builtins.property
+    def audio_files(self) -> _containers.RepeatedCompositeFieldContainer[Global___AudioFileResource]:
         """The requested audio files .
         Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/audios/&lt;audio_uuid&gt;</code></pre>
         """
@@ -7695,47 +8224,54 @@ class ListAudioFilesResponse(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        audio_files: collections.abc.Iterable[global___AudioFileResource] | None = ...,
-        next_page_token: builtins.str = ...,
-        error_message: builtins.str = ...,
+        audio_files: _abc.Iterable[Global___AudioFileResource] | None = ...,
+        next_page_token: _builtins.str = ...,
+        error_message: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["audio_files", b"audio_files", "error_message", b"error_message", "next_page_token", b"next_page_token"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["audio_files", b"audio_files", "error_message", b"error_message", "next_page_token", b"next_page_token"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListAudioFilesResponse = ListAudioFilesResponse
+Global___ListAudioFilesResponse: _TypeAlias = ListAudioFilesResponse  # noqa: Y015
 
-@typing.final
-class GetAudioFileOfSessionRequest(google.protobuf.message.Message):
+@_typing.final
+class GetAudioFileOfSessionRequest(_message.Message):
     """This message is a request to get one one file combining all audios of a specific session"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    SESSION_ID_FIELD_NUMBER: builtins.int
-    RESOURCE_VIEW_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    parent: builtins.str
+    PARENT_FIELD_NUMBER: _builtins.int
+    SESSION_ID_FIELD_NUMBER: _builtins.int
+    RESOURCE_VIEW_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    parent: _builtins.str
     """Required. The project of this agent.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
-    session_id: builtins.str
+    session_id: _builtins.str
     """The unique identifier of the session for which the audio files should be combined
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/&lt</code></pre>
     """
-    resource_view: global___ResourceView.ValueType
+    resource_view: Global___ResourceView.ValueType
     """Represents the options for views of resources"""
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields gets returned."""
 
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        session_id: builtins.str = ...,
-        resource_view: global___ResourceView.ValueType = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        parent: _builtins.str = ...,
+        session_id: _builtins.str = ...,
+        resource_view: Global___ResourceView.ValueType = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "parent", b"parent", "resource_view", b"resource_view", "session_id", b"session_id"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "parent", b"parent", "resource_view", b"resource_view", "session_id", b"session_id"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GetAudioFileOfSessionRequest = GetAudioFileOfSessionRequest
+Global___GetAudioFileOfSessionRequest: _TypeAlias = GetAudioFileOfSessionRequest  # noqa: Y015

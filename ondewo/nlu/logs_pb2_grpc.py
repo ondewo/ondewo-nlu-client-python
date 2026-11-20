@@ -5,7 +5,7 @@ import warnings
 
 from ondewo.nlu import logs_pb2 as ondewo_dot_nlu_dot_logs__pb2
 
-GRPC_GENERATED_VERSION = '1.67.1'
+GRPC_GENERATED_VERSION = '1.85.1'
 GRPC_VERSION = grpc.__version__
 _version_not_supported = False
 
@@ -18,14 +18,14 @@ except ImportError:
 if _version_not_supported:
     raise RuntimeError(
         f'The grpc package installed is at version {GRPC_VERSION},'
-        + f' but the generated code in ondewo/nlu/logs_pb2_grpc.py depends on'
+        + ' but the generated code in ondewo/nlu/logs_pb2_grpc.py depends on'
         + f' grpcio>={GRPC_GENERATED_VERSION}.'
         + f' Please upgrade your grpc module to grpcio>={GRPC_GENERATED_VERSION}'
         + f' or downgrade your generated code using grpcio-tools<={GRPC_VERSION}.'
     )
 
 
-class LogsStub(object):
+class LogsStub:
     """<p>Reads, follows, exports and erases the logs ONDEWO CAI captures: the log records of the CAI gRPC server
     processes themselves (every worker of every replica), the output of the docker containers that remote
     operations run (build cache, training, RAG crawl, LLM evaluation and simulation, RAGFlow upload / removal /
@@ -93,7 +93,7 @@ class LogsStub(object):
                 _registered_method=True)
 
 
-class LogsServicer(object):
+class LogsServicer:
     """<p>Reads, follows, exports and erases the logs ONDEWO CAI captures: the log records of the CAI gRPC server
     processes themselves (every worker of every replica), the output of the docker containers that remote
     operations run (build cache, training, RAG crawl, LLM evaluation and simulation, RAGFlow upload / removal /
@@ -291,7 +291,7 @@ def add_LogsServicer_to_server(servicer, server):
 
 
  # This class is part of an EXPERIMENTAL API.
-class Logs(object):
+class Logs:
     """<p>Reads, follows, exports and erases the logs ONDEWO CAI captures: the log records of the CAI gRPC server
     processes themselves (every worker of every replica), the output of the docker containers that remote
     operations run (build cache, training, RAG crawl, LLM evaluation and simulation, RAGFlow upload / removal /

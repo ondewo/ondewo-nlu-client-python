@@ -16,34 +16,34 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-import builtins
-import collections.abc
-import google.protobuf.descriptor
-import google.protobuf.field_mask_pb2
-import google.protobuf.internal.containers
-import google.protobuf.internal.enum_type_wrapper
-import google.protobuf.message
-import google.protobuf.struct_pb2
-import ondewo.nlu.ccai_project_pb2
-import ondewo.nlu.entity_type_pb2
-import ondewo.nlu.intent_pb2
-import ondewo.nlu.session_pb2
+from collections import abc as _abc
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import field_mask_pb2 as _field_mask_pb2
+from google.protobuf import message as _message
+from google.protobuf import struct_pb2 as _struct_pb2
+from google.protobuf.internal import containers as _containers
+from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
+from ondewo.nlu import ccai_project_pb2 as _ccai_project_pb2
+from ondewo.nlu import entity_type_pb2 as _entity_type_pb2
+from ondewo.nlu import intent_pb2 as _intent_pb2
+from ondewo.nlu import session_pb2 as _session_pb2
+import builtins as _builtins
 import sys
-import typing
+import typing as _typing
 
-if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+if sys.version_info >= (3, 11):
+    from typing import TypeAlias as _TypeAlias, Never as _Never
 else:
-    import typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias, Never as _Never
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 class _Mode:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _ModeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_Mode.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _ModeEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_Mode.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     UNSPECIFIED: _Mode.ValueType  # 0
     """default mode, described in agent config"""
     EXCLUSIVE: _Mode.ValueType  # 1
@@ -60,14 +60,14 @@ EXCLUSIVE: Mode.ValueType  # 1
 """skip algorithms listed in <code>algorithms</code> field,"""
 INCLUSIVE: Mode.ValueType  # 2
 """run ONLY algorithms listed in <code>algorithms</code> field"""
-global___Mode = Mode
+Global___Mode: _TypeAlias = Mode  # noqa: Y015
 
 class _IntentAlgorithms:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _IntentAlgorithmsEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_IntentAlgorithms.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _IntentAlgorithmsEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_IntentAlgorithms.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     OndewoIntentExactContextDetector: _IntentAlgorithms.ValueType  # 0
     """By enabling this, a specific intent is triggered if the context and the intent name in the user says is
     matched. This can be used for directly triggering &apos;quick reply&apos; button clicks confidence is always &apos;1.0&apos;.
@@ -144,44 +144,47 @@ OndewoIntentExitDetector: IntentAlgorithms.ValueType  # 14
 """Maximum number of repeated fallbacks before this algorithm exists the conversation and resets contexts"""
 OndewoIntentParameterMatch: IntentAlgorithms.ValueType  # 15
 """Matches the intent based on the parameter constellation and the current user context"""
-global___IntentAlgorithms = IntentAlgorithms
+Global___IntentAlgorithms: _TypeAlias = IntentAlgorithms  # noqa: Y015
 
-@typing.final
-class ListLlmModelsRequest(google.protobuf.message.Message):
+@_typing.final
+class ListLlmModelsRequest(_message.Message):
     """The request message to list available LLM models for a specified CCAI service."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    CCAI_SERVICE_NAME_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    ccai_service_name: builtins.str
+    CCAI_SERVICE_NAME_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    ccai_service_name: _builtins.str
     """The CCAI service for which to list models.
     Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;</code></pre>
     """
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields gets returned."""
 
     def __init__(
         self,
         *,
-        ccai_service_name: builtins.str = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        ccai_service_name: _builtins.str = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["ccai_service_name", b"ccai_service_name", "field_mask", b"field_mask"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["ccai_service_name", b"ccai_service_name", "field_mask", b"field_mask"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListLlmModelsRequest = ListLlmModelsRequest
+Global___ListLlmModelsRequest: _TypeAlias = ListLlmModelsRequest  # noqa: Y015
 
-@typing.final
-class ListLlmModelsResponse(google.protobuf.message.Message):
+@_typing.final
+class ListLlmModelsResponse(_message.Message):
     """The response message containing a list of available LLM models."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    LLM_MODELS_FIELD_NUMBER: builtins.int
-    @property
-    def llm_models(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___LlmModel]:
+    LLM_MODELS_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def llm_models(self) -> _containers.RepeatedCompositeFieldContainer[Global___LlmModel]:
         """A list of LLM models associated with the specified CCAI service.
         <br>
         Each model in this list represents an individual language model that can
@@ -192,76 +195,84 @@ class ListLlmModelsResponse(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        llm_models: collections.abc.Iterable[global___LlmModel] | None = ...,
+        llm_models: _abc.Iterable[Global___LlmModel] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["llm_models", b"llm_models"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["llm_models", b"llm_models"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListLlmModelsResponse = ListLlmModelsResponse
+Global___ListLlmModelsResponse: _TypeAlias = ListLlmModelsResponse  # noqa: Y015
 
-@typing.final
-class LlmModel(google.protobuf.message.Message):
+@_typing.final
+class LlmModel(_message.Message):
     """Represents an individual LLM model available within a CCAI service."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NAME_FIELD_NUMBER: builtins.int
-    DISPLAY_NAME_FIELD_NUMBER: builtins.int
-    DESCRIPTION_FIELD_NUMBER: builtins.int
-    CCAI_SERVICE_NAME_FIELD_NUMBER: builtins.int
-    CCAI_SERVICE_PROVIDER_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    DISPLAY_NAME_FIELD_NUMBER: _builtins.int
+    DESCRIPTION_FIELD_NUMBER: _builtins.int
+    CCAI_SERVICE_NAME_FIELD_NUMBER: _builtins.int
+    CCAI_SERVICE_PROVIDER_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """The resource name of the model.
     Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;/model/&lt;model_uuid&gt;</code></pre>
     This is a unique identifier for the model, specifying its project, service, and model ID.
     """
-    display_name: builtins.str
+    display_name: _builtins.str
     """The display name of the model.
     This is a human-readable name used for identifying the model in other requests,
     such as <pre><code>LlmGenerateRequest</code></pre> and <pre><code>StreamingLlmGenerateRequest</code></pre>
     """
-    description: builtins.str
+    description: _builtins.str
     """The description of the model.
     Provides additional details about the model, such as its purpose, architecture, or any other relevant information.
     """
-    ccai_service_name: builtins.str
+    ccai_service_name: _builtins.str
     """The resource name of the CCAI service to which the model belongs.
     This field links the model to its service context, helping clients understand
     which service hosts the model.
     """
-    ccai_service_provider: ondewo.nlu.ccai_project_pb2.CcaiServiceProvider.ValueType
+    ccai_service_provider: _ccai_project_pb2.CcaiServiceProvider.ValueType
     """The provider of the CCAI service that offers this model.
     Specifies the LLM provider (e.g., Ollama, OpenAI, Google, etc.), indicating the origin or vendor of the model.
     """
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
-        display_name: builtins.str = ...,
-        description: builtins.str = ...,
-        ccai_service_name: builtins.str = ...,
-        ccai_service_provider: ondewo.nlu.ccai_project_pb2.CcaiServiceProvider.ValueType = ...,
+        name: _builtins.str = ...,
+        display_name: _builtins.str = ...,
+        description: _builtins.str = ...,
+        ccai_service_name: _builtins.str = ...,
+        ccai_service_provider: _ccai_project_pb2.CcaiServiceProvider.ValueType = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["ccai_service_name", b"ccai_service_name", "ccai_service_provider", b"ccai_service_provider", "description", b"description", "display_name", b"display_name", "name", b"name"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["ccai_service_name", b"ccai_service_name", "ccai_service_provider", b"ccai_service_provider", "description", b"description", "display_name", b"display_name", "name", b"name"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___LlmModel = LlmModel
+Global___LlmModel: _TypeAlias = LlmModel  # noqa: Y015
 
-@typing.final
-class LlmGenerateRequest(google.protobuf.message.Message):
+@_typing.final
+class LlmGenerateRequest(_message.Message):
     """The request message to generate a response from a Large Language Model (LLM)."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    LLM_GENERATION_REQUEST_FIELD_NUMBER: builtins.int
-    CCAI_SERVICE_NAME_FIELD_NUMBER: builtins.int
-    FILE_RESOURCES_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    ccai_service_name: builtins.str
+    LLM_GENERATION_REQUEST_FIELD_NUMBER: _builtins.int
+    CCAI_SERVICE_NAME_FIELD_NUMBER: _builtins.int
+    FILE_RESOURCES_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    ccai_service_name: _builtins.str
     """The CCAI service to be used for processing the request.
     This specifies which large language model provider and model settings will handle the request.
     Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;</code></pre>
     """
-    @property
-    def llm_generation_request(self) -> google.protobuf.struct_pb2.Struct:
+    @_builtins.property
+    def llm_generation_request(self) -> _struct_pb2.Struct:
         """The request payload for the LLM, structured according to the specific
         requirements of the large language model provider.
         <br>
@@ -269,67 +280,73 @@ class LlmGenerateRequest(google.protobuf.message.Message):
         as defined by <pre><code>CcaiServiceProvider</code></pre>
         """
 
-    @property
-    def file_resources(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.session_pb2.FileResource]:
+    @_builtins.property
+    def file_resources(self) -> _containers.RepeatedCompositeFieldContainer[_session_pb2.FileResource]:
         """Files as input for the generation request"""
 
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields gets returned."""
 
     def __init__(
         self,
         *,
-        llm_generation_request: google.protobuf.struct_pb2.Struct | None = ...,
-        ccai_service_name: builtins.str = ...,
-        file_resources: collections.abc.Iterable[ondewo.nlu.session_pb2.FileResource] | None = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        llm_generation_request: _struct_pb2.Struct | None = ...,
+        ccai_service_name: _builtins.str = ...,
+        file_resources: _abc.Iterable[_session_pb2.FileResource] | None = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask", "llm_generation_request", b"llm_generation_request"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["ccai_service_name", b"ccai_service_name", "field_mask", b"field_mask", "file_resources", b"file_resources", "llm_generation_request", b"llm_generation_request"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "llm_generation_request", b"llm_generation_request"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["ccai_service_name", b"ccai_service_name", "field_mask", b"field_mask", "file_resources", b"file_resources", "llm_generation_request", b"llm_generation_request"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___LlmGenerateRequest = LlmGenerateRequest
+Global___LlmGenerateRequest: _TypeAlias = LlmGenerateRequest  # noqa: Y015
 
-@typing.final
-class LlmGenerateResponse(google.protobuf.message.Message):
+@_typing.final
+class LlmGenerateResponse(_message.Message):
     """The response message containing the generated output from a Large Language Model (LLM)."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    LLM_GENERATION_RESPONSE_FIELD_NUMBER: builtins.int
-    FILE_RESOURCES_FIELD_NUMBER: builtins.int
-    @property
-    def llm_generation_response(self) -> google.protobuf.struct_pb2.Struct:
+    LLM_GENERATION_RESPONSE_FIELD_NUMBER: _builtins.int
+    FILE_RESOURCES_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def llm_generation_response(self) -> _struct_pb2.Struct:
         """The response data from the LLM, returned as a structured payload.
         <br>
         This can contain the text generation, embeddings, or other outputs
         based on the specific request made to the LLM provider.
         """
 
-    @property
-    def file_resources(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.session_pb2.FileResource]:
+    @_builtins.property
+    def file_resources(self) -> _containers.RepeatedCompositeFieldContainer[_session_pb2.FileResource]:
         """Files as input for the generation request, e.g., generated pictures, audio or video"""
 
     def __init__(
         self,
         *,
-        llm_generation_response: google.protobuf.struct_pb2.Struct | None = ...,
-        file_resources: collections.abc.Iterable[ondewo.nlu.session_pb2.FileResource] | None = ...,
+        llm_generation_response: _struct_pb2.Struct | None = ...,
+        file_resources: _abc.Iterable[_session_pb2.FileResource] | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["llm_generation_response", b"llm_generation_response"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["file_resources", b"file_resources", "llm_generation_response", b"llm_generation_response"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["llm_generation_response", b"llm_generation_response"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["file_resources", b"file_resources", "llm_generation_response", b"llm_generation_response"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___LlmGenerateResponse = LlmGenerateResponse
+Global___LlmGenerateResponse: _TypeAlias = LlmGenerateResponse  # noqa: Y015
 
-@typing.final
-class StreamingLlmGenerateResponse(google.protobuf.message.Message):
+@_typing.final
+class StreamingLlmGenerateResponse(_message.Message):
     """The response message for streaming generation from a Large Language Model (LLM)."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    LLM_GENERATION_STREAM_RESPONSE_FIELD_NUMBER: builtins.int
-    @property
-    def llm_generation_stream_response(self) -> google.protobuf.struct_pb2.Struct:
+    LLM_GENERATION_STREAM_RESPONSE_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def llm_generation_stream_response(self) -> _struct_pb2.Struct:
         """The response data from the LLM in a streaming format, returned as a structured payload.
         <br>
         This response is part of a continuous stream of data from the LLM, allowing
@@ -339,112 +356,121 @@ class StreamingLlmGenerateResponse(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        llm_generation_stream_response: google.protobuf.struct_pb2.Struct | None = ...,
+        llm_generation_stream_response: _struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["llm_generation_stream_response", b"llm_generation_stream_response"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["llm_generation_stream_response", b"llm_generation_stream_response"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["llm_generation_stream_response", b"llm_generation_stream_response"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["llm_generation_stream_response", b"llm_generation_stream_response"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___StreamingLlmGenerateResponse = StreamingLlmGenerateResponse
+Global___StreamingLlmGenerateResponse: _TypeAlias = StreamingLlmGenerateResponse  # noqa: Y015
 
-@typing.final
-class ExtractEntitiesRequest(google.protobuf.message.Message):
+@_typing.final
+class ExtractEntitiesRequest(_message.Message):
     """The request to detect parameters."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    TEXT_FIELD_NUMBER: builtins.int
-    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
-    INTENT_NAME_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    parent: builtins.str
+    PARENT_FIELD_NUMBER: _builtins.int
+    TEXT_FIELD_NUMBER: _builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: _builtins.int
+    INTENT_NAME_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    parent: _builtins.str
     """the parent of the request
     Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     """
-    text: builtins.str
+    text: _builtins.str
     """the input text"""
-    language_code: builtins.str
+    language_code: _builtins.str
     """the input language"""
-    intent_name: builtins.str
+    intent_name: _builtins.str
     """Optional. The name of the relevant intent. Used to establish preference
     hierarchy for entities that correspond to intent parameters
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
     """
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields gets returned."""
 
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        text: builtins.str = ...,
-        language_code: builtins.str = ...,
-        intent_name: builtins.str = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        parent: _builtins.str = ...,
+        text: _builtins.str = ...,
+        language_code: _builtins.str = ...,
+        intent_name: _builtins.str = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "intent_name", b"intent_name", "language_code", b"language_code", "parent", b"parent", "text", b"text"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "intent_name", b"intent_name", "language_code", b"language_code", "parent", b"parent", "text", b"text"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ExtractEntitiesRequest = ExtractEntitiesRequest
+Global___ExtractEntitiesRequest: _TypeAlias = ExtractEntitiesRequest  # noqa: Y015
 
-@typing.final
-class ExtractEntitiesFuzzyRequest(google.protobuf.message.Message):
+@_typing.final
+class ExtractEntitiesFuzzyRequest(_message.Message):
     """This message is a request to extract entities with Fuzzy Entity Recognizer"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    TEXT_FIELD_NUMBER: builtins.int
-    POTENTIAL_ENTITIES_FIELD_NUMBER: builtins.int
-    MINIMAL_SCORE_FIELD_NUMBER: builtins.int
-    ALLOW_OVERLAPS_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    parent: builtins.str
+    PARENT_FIELD_NUMBER: _builtins.int
+    TEXT_FIELD_NUMBER: _builtins.int
+    POTENTIAL_ENTITIES_FIELD_NUMBER: _builtins.int
+    MINIMAL_SCORE_FIELD_NUMBER: _builtins.int
+    ALLOW_OVERLAPS_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    parent: _builtins.str
     """the parent of the request
     Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     """
-    text: builtins.str
+    text: _builtins.str
     """The text to be analyzed"""
-    minimal_score: builtins.float
+    minimal_score: _builtins.float
     """Minimal similarity score to consider entity as "matched" """
-    allow_overlaps: builtins.bool
+    allow_overlaps: _builtins.bool
     """Optional. Whether or not entities are allowed to overlap."""
-    @property
-    def potential_entities(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___EntityTypeFuzzyNerConfig]:
+    @_builtins.property
+    def potential_entities(self) -> _containers.RepeatedCompositeFieldContainer[Global___EntityTypeFuzzyNerConfig]:
         """Potential entities to be extracted from the text with entity-specific configs"""
 
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields gets returned."""
 
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        text: builtins.str = ...,
-        potential_entities: collections.abc.Iterable[global___EntityTypeFuzzyNerConfig] | None = ...,
-        minimal_score: builtins.float = ...,
-        allow_overlaps: builtins.bool = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        parent: _builtins.str = ...,
+        text: _builtins.str = ...,
+        potential_entities: _abc.Iterable[Global___EntityTypeFuzzyNerConfig] | None = ...,
+        minimal_score: _builtins.float = ...,
+        allow_overlaps: _builtins.bool = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["allow_overlaps", b"allow_overlaps", "field_mask", b"field_mask", "minimal_score", b"minimal_score", "parent", b"parent", "potential_entities", b"potential_entities", "text", b"text"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["allow_overlaps", b"allow_overlaps", "field_mask", b"field_mask", "minimal_score", b"minimal_score", "parent", b"parent", "potential_entities", b"potential_entities", "text", b"text"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ExtractEntitiesFuzzyRequest = ExtractEntitiesFuzzyRequest
+Global___ExtractEntitiesFuzzyRequest: _TypeAlias = ExtractEntitiesFuzzyRequest  # noqa: Y015
 
-@typing.final
-class EntityTypeFuzzyNerConfig(google.protobuf.message.Message):
+@_typing.final
+class EntityTypeFuzzyNerConfig(_message.Message):
     """Configuration for Fuzzy Entity Recognizer"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     class _FuzzyNerAlgorithm:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _TypeAlias = ValueType  # noqa: Y015
 
-    class _FuzzyNerAlgorithmEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[EntityTypeFuzzyNerConfig._FuzzyNerAlgorithm.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _FuzzyNerAlgorithmEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[EntityTypeFuzzyNerConfig._FuzzyNerAlgorithm.ValueType], _builtins.type):
+        DESCRIPTOR: _descriptor.EnumDescriptor
         PREFILTER_LEVENSHTEIN: EntityTypeFuzzyNerConfig._FuzzyNerAlgorithm.ValueType  # 0
         """Levenshtein algorithm for fuzzy ner matching"""
         LOCAL_MAXIMUM: EntityTypeFuzzyNerConfig._FuzzyNerAlgorithm.ValueType  # 1
@@ -458,804 +484,895 @@ class EntityTypeFuzzyNerConfig(google.protobuf.message.Message):
     LOCAL_MAXIMUM: EntityTypeFuzzyNerConfig.FuzzyNerAlgorithm.ValueType  # 1
     """local maximum"""
 
-    ENTITY_TYPE_FIELD_NUMBER: builtins.int
-    MINIMAL_SCORE_FIELD_NUMBER: builtins.int
-    ENTITY_VALUES_FIELD_NUMBER: builtins.int
-    ALGORITHM_FIELD_NUMBER: builtins.int
-    ALLOW_OVERLAPS_FIELD_NUMBER: builtins.int
-    minimal_score: builtins.float
+    ENTITY_TYPE_FIELD_NUMBER: _builtins.int
+    MINIMAL_SCORE_FIELD_NUMBER: _builtins.int
+    ENTITY_VALUES_FIELD_NUMBER: _builtins.int
+    ALGORITHM_FIELD_NUMBER: _builtins.int
+    ALLOW_OVERLAPS_FIELD_NUMBER: _builtins.int
+    minimal_score: _builtins.float
     """Optional. Overrides the minimal score in ExtractEntitiesFuzzyRequest."""
-    algorithm: global___EntityTypeFuzzyNerConfig.FuzzyNerAlgorithm.ValueType
+    algorithm: Global___EntityTypeFuzzyNerConfig.FuzzyNerAlgorithm.ValueType
     """Optional. Specify the Fuzzy Ner algorithm"""
-    allow_overlaps: builtins.bool
+    allow_overlaps: _builtins.bool
     """Should not use allow_overlaps here, since its default value is False"""
-    @property
-    def entity_type(self) -> ondewo.nlu.entity_type_pb2.EntityType:
+    @_builtins.property
+    def entity_type(self) -> _entity_type_pb2.EntityType:
         """The Entity Type"""
 
-    @property
-    def entity_values(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def entity_values(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Optional. If defined, only entity value from this list are considered."""
 
     def __init__(
         self,
         *,
-        entity_type: ondewo.nlu.entity_type_pb2.EntityType | None = ...,
-        minimal_score: builtins.float = ...,
-        entity_values: collections.abc.Iterable[builtins.str] | None = ...,
-        algorithm: global___EntityTypeFuzzyNerConfig.FuzzyNerAlgorithm.ValueType = ...,
-        allow_overlaps: builtins.bool = ...,
+        entity_type: _entity_type_pb2.EntityType | None = ...,
+        minimal_score: _builtins.float = ...,
+        entity_values: _abc.Iterable[_builtins.str] | None = ...,
+        algorithm: Global___EntityTypeFuzzyNerConfig.FuzzyNerAlgorithm.ValueType = ...,
+        allow_overlaps: _builtins.bool = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["entity_type", b"entity_type"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["algorithm", b"algorithm", "allow_overlaps", b"allow_overlaps", "entity_type", b"entity_type", "entity_values", b"entity_values", "minimal_score", b"minimal_score"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["entity_type", b"entity_type"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["algorithm", b"algorithm", "allow_overlaps", b"allow_overlaps", "entity_type", b"entity_type", "entity_values", b"entity_values", "minimal_score", b"minimal_score"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___EntityTypeFuzzyNerConfig = EntityTypeFuzzyNerConfig
+Global___EntityTypeFuzzyNerConfig: _TypeAlias = EntityTypeFuzzyNerConfig  # noqa: Y015
 
-@typing.final
-class EntityDetected(google.protobuf.message.Message):
+@_typing.final
+class EntityDetected(_message.Message):
     """This message contains the entity detected"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ENTITY_FIELD_NUMBER: builtins.int
-    EXTRACTION_METHOD_FIELD_NUMBER: builtins.int
-    SCORE_FIELD_NUMBER: builtins.int
-    extraction_method: builtins.str
+    ENTITY_FIELD_NUMBER: _builtins.int
+    EXTRACTION_METHOD_FIELD_NUMBER: _builtins.int
+    SCORE_FIELD_NUMBER: _builtins.int
+    extraction_method: _builtins.str
     """The extractor name, e.g. SpacyNer"""
-    score: builtins.float
+    score: _builtins.float
     """The confidence score of the detected entity"""
-    @property
-    def entity(self) -> ondewo.nlu.intent_pb2.Intent.TrainingPhrase.Entity:
+    @_builtins.property
+    def entity(self) -> _intent_pb2.Intent.TrainingPhrase.Entity:
         """The entity name that is detected"""
 
     def __init__(
         self,
         *,
-        entity: ondewo.nlu.intent_pb2.Intent.TrainingPhrase.Entity | None = ...,
-        extraction_method: builtins.str = ...,
-        score: builtins.float = ...,
+        entity: _intent_pb2.Intent.TrainingPhrase.Entity | None = ...,
+        extraction_method: _builtins.str = ...,
+        score: _builtins.float = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["entity", b"entity"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["entity", b"entity", "extraction_method", b"extraction_method", "score", b"score"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["entity", b"entity"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["entity", b"entity", "extraction_method", b"extraction_method", "score", b"score"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___EntityDetected = EntityDetected
+Global___EntityDetected: _TypeAlias = EntityDetected  # noqa: Y015
 
-@typing.final
-class ExtractEntitiesResponse(google.protobuf.message.Message):
+@_typing.final
+class ExtractEntitiesResponse(_message.Message):
     """This message is a response of extracting entities"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ENTITIES_DETECTED_FIELD_NUMBER: builtins.int
-    TEXT_FIELD_NUMBER: builtins.int
-    text: builtins.str
+    ENTITIES_DETECTED_FIELD_NUMBER: _builtins.int
+    TEXT_FIELD_NUMBER: _builtins.int
+    text: _builtins.str
     """The text containing the entities detected"""
-    @property
-    def entities_detected(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___EntityDetected]:
+    @_builtins.property
+    def entities_detected(self) -> _containers.RepeatedCompositeFieldContainer[Global___EntityDetected]:
         """A list of entities detected"""
 
     def __init__(
         self,
         *,
-        entities_detected: collections.abc.Iterable[global___EntityDetected] | None = ...,
-        text: builtins.str = ...,
+        entities_detected: _abc.Iterable[Global___EntityDetected] | None = ...,
+        text: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["entities_detected", b"entities_detected", "text", b"text"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["entities_detected", b"entities_detected", "text", b"text"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ExtractEntitiesResponse = ExtractEntitiesResponse
+Global___ExtractEntitiesResponse: _TypeAlias = ExtractEntitiesResponse  # noqa: Y015
 
-@typing.final
-class GetAlternativeSentencesRequest(google.protobuf.message.Message):
+@_typing.final
+class GetAlternativeSentencesRequest(_message.Message):
     """Request to get alternative sentences"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    CONFIG_FIELD_NUMBER: builtins.int
-    SENTENCE_FIELD_NUMBER: builtins.int
-    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
-    PARENT_FIELD_NUMBER: builtins.int
-    PROTECTED_WORDS_FIELD_NUMBER: builtins.int
-    WORDS_TO_CHANGE_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    sentence: builtins.str
+    CONFIG_FIELD_NUMBER: _builtins.int
+    SENTENCE_FIELD_NUMBER: _builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: _builtins.int
+    PARENT_FIELD_NUMBER: _builtins.int
+    PROTECTED_WORDS_FIELD_NUMBER: _builtins.int
+    WORDS_TO_CHANGE_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    sentence: _builtins.str
     """The sentence from which it is desired to get alternative sentences"""
-    language_code: builtins.str
+    language_code: _builtins.str
     """Language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
-    parent: builtins.str
+    parent: _builtins.str
     """the parent of the request
     Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     """
-    @property
-    def config(self) -> global___DataEnrichmentConfig:
+    @_builtins.property
+    def config(self) -> Global___DataEnrichmentConfig:
         """Configuration type of the enricher"""
 
-    @property
-    def protected_words(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def protected_words(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Protected words in the augmentation process"""
 
-    @property
-    def words_to_change(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def words_to_change(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Words to be changed in the augmentation process"""
 
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields gets returned."""
 
     def __init__(
         self,
         *,
-        config: global___DataEnrichmentConfig | None = ...,
-        sentence: builtins.str = ...,
-        language_code: builtins.str = ...,
-        parent: builtins.str = ...,
-        protected_words: collections.abc.Iterable[builtins.str] | None = ...,
-        words_to_change: collections.abc.Iterable[builtins.str] | None = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        config: Global___DataEnrichmentConfig | None = ...,
+        sentence: _builtins.str = ...,
+        language_code: _builtins.str = ...,
+        parent: _builtins.str = ...,
+        protected_words: _abc.Iterable[_builtins.str] | None = ...,
+        words_to_change: _abc.Iterable[_builtins.str] | None = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["config", b"config", "field_mask", b"field_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["config", b"config", "field_mask", b"field_mask", "language_code", b"language_code", "parent", b"parent", "protected_words", b"protected_words", "sentence", b"sentence", "words_to_change", b"words_to_change"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["config", b"config", "field_mask", b"field_mask"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["config", b"config", "field_mask", b"field_mask", "language_code", b"language_code", "parent", b"parent", "protected_words", b"protected_words", "sentence", b"sentence", "words_to_change", b"words_to_change"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GetAlternativeSentencesRequest = GetAlternativeSentencesRequest
+Global___GetAlternativeSentencesRequest: _TypeAlias = GetAlternativeSentencesRequest  # noqa: Y015
 
-@typing.final
-class GenerateUserSaysRequest(google.protobuf.message.Message):
+@_typing.final
+class GenerateUserSaysRequest(_message.Message):
     """Request to generate user sentences"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
-    PARENT_FIELD_NUMBER: builtins.int
-    N_REPEAT_SYNONYM_FIELD_NUMBER: builtins.int
-    BRANCH_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    language_code: builtins.str
+    LANGUAGE_CODE_FIELD_NUMBER: _builtins.int
+    PARENT_FIELD_NUMBER: _builtins.int
+    N_REPEAT_SYNONYM_FIELD_NUMBER: _builtins.int
+    BRANCH_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    language_code: _builtins.str
     """language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
-    parent: builtins.str
+    parent: _builtins.str
     """the parent of the request
     Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     """
-    n_repeat_synonym: builtins.int
+    n_repeat_synonym: _builtins.int
     """The number of synonyms desired"""
-    branch: builtins.str
+    branch: _builtins.str
     """Git branch"""
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields gets returned."""
 
     def __init__(
         self,
         *,
-        language_code: builtins.str = ...,
-        parent: builtins.str = ...,
-        n_repeat_synonym: builtins.int = ...,
-        branch: builtins.str = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        language_code: _builtins.str = ...,
+        parent: _builtins.str = ...,
+        n_repeat_synonym: _builtins.int = ...,
+        branch: _builtins.str = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["branch", b"branch", "field_mask", b"field_mask", "language_code", b"language_code", "n_repeat_synonym", b"n_repeat_synonym", "parent", b"parent"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["branch", b"branch", "field_mask", b"field_mask", "language_code", b"language_code", "n_repeat_synonym", b"n_repeat_synonym", "parent", b"parent"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GenerateUserSaysRequest = GenerateUserSaysRequest
+Global___GenerateUserSaysRequest: _TypeAlias = GenerateUserSaysRequest  # noqa: Y015
 
-@typing.final
-class GenerateResponsesRequest(google.protobuf.message.Message):
+@_typing.final
+class GenerateResponsesRequest(_message.Message):
     """Request to generate responses"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
-    PARENT_FIELD_NUMBER: builtins.int
-    N_REPEAT_SYNONYM_FIELD_NUMBER: builtins.int
-    BRANCH_FIELD_NUMBER: builtins.int
-    DROP_UNKNOWN_PARAMETERS_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    language_code: builtins.str
+    LANGUAGE_CODE_FIELD_NUMBER: _builtins.int
+    PARENT_FIELD_NUMBER: _builtins.int
+    N_REPEAT_SYNONYM_FIELD_NUMBER: _builtins.int
+    BRANCH_FIELD_NUMBER: _builtins.int
+    DROP_UNKNOWN_PARAMETERS_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    language_code: _builtins.str
     """language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
-    parent: builtins.str
+    parent: _builtins.str
     """the parent of the request
     Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     """
-    n_repeat_synonym: builtins.int
+    n_repeat_synonym: _builtins.int
     """The number of synonyms desired"""
-    branch: builtins.str
+    branch: _builtins.str
     """Git branch"""
-    drop_unknown_parameters: builtins.bool
+    drop_unknown_parameters: _builtins.bool
     """Optional. Whether to drop unknown parameters from the generated responses"""
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields gets returned."""
 
     def __init__(
         self,
         *,
-        language_code: builtins.str = ...,
-        parent: builtins.str = ...,
-        n_repeat_synonym: builtins.int = ...,
-        branch: builtins.str = ...,
-        drop_unknown_parameters: builtins.bool = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        language_code: _builtins.str = ...,
+        parent: _builtins.str = ...,
+        n_repeat_synonym: _builtins.int = ...,
+        branch: _builtins.str = ...,
+        drop_unknown_parameters: _builtins.bool = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["branch", b"branch", "drop_unknown_parameters", b"drop_unknown_parameters", "field_mask", b"field_mask", "language_code", b"language_code", "n_repeat_synonym", b"n_repeat_synonym", "parent", b"parent"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["branch", b"branch", "drop_unknown_parameters", b"drop_unknown_parameters", "field_mask", b"field_mask", "language_code", b"language_code", "n_repeat_synonym", b"n_repeat_synonym", "parent", b"parent"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GenerateResponsesRequest = GenerateResponsesRequest
+Global___GenerateResponsesRequest: _TypeAlias = GenerateResponsesRequest  # noqa: Y015
 
-@typing.final
-class GetAlternativeTrainingPhrasesRequest(google.protobuf.message.Message):
+@_typing.final
+class GetAlternativeTrainingPhrasesRequest(_message.Message):
     """Request to get alternative training phrases"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    CONFIG_FIELD_NUMBER: builtins.int
-    TRAINING_PHRASE_FIELD_NUMBER: builtins.int
-    INTENT_NAME_FIELD_NUMBER: builtins.int
-    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
-    PARENT_FIELD_NUMBER: builtins.int
-    DETECT_ENTITIES_FIELD_NUMBER: builtins.int
-    SIMILARITY_THRESHOLD_FIELD_NUMBER: builtins.int
-    PROTECTED_WORDS_FIELD_NUMBER: builtins.int
-    WORDS_TO_CHANGE_FIELD_NUMBER: builtins.int
-    BRANCH_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    intent_name: builtins.str
+    CONFIG_FIELD_NUMBER: _builtins.int
+    TRAINING_PHRASE_FIELD_NUMBER: _builtins.int
+    INTENT_NAME_FIELD_NUMBER: _builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: _builtins.int
+    PARENT_FIELD_NUMBER: _builtins.int
+    DETECT_ENTITIES_FIELD_NUMBER: _builtins.int
+    SIMILARITY_THRESHOLD_FIELD_NUMBER: _builtins.int
+    PROTECTED_WORDS_FIELD_NUMBER: _builtins.int
+    WORDS_TO_CHANGE_FIELD_NUMBER: _builtins.int
+    BRANCH_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    intent_name: _builtins.str
     """The intent tag attached to the training phrase"""
-    language_code: builtins.str
+    language_code: _builtins.str
     """language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
-    parent: builtins.str
+    parent: _builtins.str
     """the parent of the request
     Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     """
-    detect_entities: builtins.bool
+    detect_entities: _builtins.bool
     """Flag to determine whether entities must or not be detected"""
-    similarity_threshold: builtins.float
+    similarity_threshold: _builtins.float
     """similarity threshold defines how similar sentences should be to drop generated training phrase
     as duplicate. Meaningful values of similarity_threshold are between 0.95 and 1.0
     """
-    branch: builtins.str
+    branch: _builtins.str
     """Git branch"""
-    @property
-    def config(self) -> global___DataEnrichmentConfig:
+    @_builtins.property
+    def config(self) -> Global___DataEnrichmentConfig:
         """Configuration of the enricher"""
 
-    @property
-    def training_phrase(self) -> ondewo.nlu.intent_pb2.Intent.TrainingPhrase:
+    @_builtins.property
+    def training_phrase(self) -> _intent_pb2.Intent.TrainingPhrase:
         """Training phrase from which an alternative one is got"""
 
-    @property
-    def protected_words(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def protected_words(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Protected words in the augmentation process"""
 
-    @property
-    def words_to_change(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def words_to_change(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Words to be changed in the augmentation process"""
 
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields gets returned."""
 
     def __init__(
         self,
         *,
-        config: global___DataEnrichmentConfig | None = ...,
-        training_phrase: ondewo.nlu.intent_pb2.Intent.TrainingPhrase | None = ...,
-        intent_name: builtins.str = ...,
-        language_code: builtins.str = ...,
-        parent: builtins.str = ...,
-        detect_entities: builtins.bool = ...,
-        similarity_threshold: builtins.float = ...,
-        protected_words: collections.abc.Iterable[builtins.str] | None = ...,
-        words_to_change: collections.abc.Iterable[builtins.str] | None = ...,
-        branch: builtins.str = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        config: Global___DataEnrichmentConfig | None = ...,
+        training_phrase: _intent_pb2.Intent.TrainingPhrase | None = ...,
+        intent_name: _builtins.str = ...,
+        language_code: _builtins.str = ...,
+        parent: _builtins.str = ...,
+        detect_entities: _builtins.bool = ...,
+        similarity_threshold: _builtins.float = ...,
+        protected_words: _abc.Iterable[_builtins.str] | None = ...,
+        words_to_change: _abc.Iterable[_builtins.str] | None = ...,
+        branch: _builtins.str = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["config", b"config", "field_mask", b"field_mask", "training_phrase", b"training_phrase"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["branch", b"branch", "config", b"config", "detect_entities", b"detect_entities", "field_mask", b"field_mask", "intent_name", b"intent_name", "language_code", b"language_code", "parent", b"parent", "protected_words", b"protected_words", "similarity_threshold", b"similarity_threshold", "training_phrase", b"training_phrase", "words_to_change", b"words_to_change"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["config", b"config", "field_mask", b"field_mask", "training_phrase", b"training_phrase"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["branch", b"branch", "config", b"config", "detect_entities", b"detect_entities", "field_mask", b"field_mask", "intent_name", b"intent_name", "language_code", b"language_code", "parent", b"parent", "protected_words", b"protected_words", "similarity_threshold", b"similarity_threshold", "training_phrase", b"training_phrase", "words_to_change", b"words_to_change"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GetAlternativeTrainingPhrasesRequest = GetAlternativeTrainingPhrasesRequest
+Global___GetAlternativeTrainingPhrasesRequest: _TypeAlias = GetAlternativeTrainingPhrasesRequest  # noqa: Y015
 
-@typing.final
-class GetSynonymsRequest(google.protobuf.message.Message):
+@_typing.final
+class GetSynonymsRequest(_message.Message):
     """Request to get synonyms"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    CONFIG_FIELD_NUMBER: builtins.int
-    WORD_FIELD_NUMBER: builtins.int
-    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
-    PARENT_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    word: builtins.str
+    CONFIG_FIELD_NUMBER: _builtins.int
+    WORD_FIELD_NUMBER: _builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: _builtins.int
+    PARENT_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    word: _builtins.str
     """Word from which a synonym is got"""
-    language_code: builtins.str
+    language_code: _builtins.str
     """language code specifies the language of the request in IETF BCP 47 language tag format, e.g. de-DE, en-US, etc."""
-    parent: builtins.str
+    parent: _builtins.str
     """the parent of the request
     Format: <pre><code>projects/&lt;project_uuid&gt;</code></pre>
     """
-    @property
-    def config(self) -> global___DataEnrichmentConfig:
+    @_builtins.property
+    def config(self) -> Global___DataEnrichmentConfig:
         """Configuration of the enricher"""
 
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields gets returned."""
 
     def __init__(
         self,
         *,
-        config: global___DataEnrichmentConfig | None = ...,
-        word: builtins.str = ...,
-        language_code: builtins.str = ...,
-        parent: builtins.str = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        config: Global___DataEnrichmentConfig | None = ...,
+        word: _builtins.str = ...,
+        language_code: _builtins.str = ...,
+        parent: _builtins.str = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["config", b"config", "field_mask", b"field_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["config", b"config", "field_mask", b"field_mask", "language_code", b"language_code", "parent", b"parent", "word", b"word"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["config", b"config", "field_mask", b"field_mask"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["config", b"config", "field_mask", b"field_mask", "language_code", b"language_code", "parent", b"parent", "word", b"word"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GetSynonymsRequest = GetSynonymsRequest
+Global___GetSynonymsRequest: _TypeAlias = GetSynonymsRequest  # noqa: Y015
 
-@typing.final
-class GetSynonymsResponse(google.protobuf.message.Message):
+@_typing.final
+class GetSynonymsResponse(_message.Message):
     """Response containing synonyms"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    SYNONYMS_FIELD_NUMBER: builtins.int
-    @property
-    def synonyms(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Synonym]:
+    SYNONYMS_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def synonyms(self) -> _containers.RepeatedCompositeFieldContainer[Global___Synonym]:
         """A list of synonyms"""
 
     def __init__(
         self,
         *,
-        synonyms: collections.abc.Iterable[global___Synonym] | None = ...,
+        synonyms: _abc.Iterable[Global___Synonym] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["synonyms", b"synonyms"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["synonyms", b"synonyms"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GetSynonymsResponse = GetSynonymsResponse
+Global___GetSynonymsResponse: _TypeAlias = GetSynonymsResponse  # noqa: Y015
 
-@typing.final
-class Synonym(google.protobuf.message.Message):
+@_typing.final
+class Synonym(_message.Message):
     """This message contains a Synonym"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    SYNONYM_FIELD_NUMBER: builtins.int
-    SCORE_FIELD_NUMBER: builtins.int
-    synonym: builtins.str
+    SYNONYM_FIELD_NUMBER: _builtins.int
+    SCORE_FIELD_NUMBER: _builtins.int
+    synonym: _builtins.str
     """Synonym word"""
-    score: builtins.int
+    score: _builtins.int
     """Score associated to the synonym resulted"""
     def __init__(
         self,
         *,
-        synonym: builtins.str = ...,
-        score: builtins.int = ...,
+        synonym: _builtins.str = ...,
+        score: _builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["score", b"score", "synonym", b"synonym"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["score", b"score", "synonym", b"synonym"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___Synonym = Synonym
+Global___Synonym: _TypeAlias = Synonym  # noqa: Y015
 
-@typing.final
-class GetAlternativeSentencesResponse(google.protobuf.message.Message):
+@_typing.final
+class GetAlternativeSentencesResponse(_message.Message):
     """Response containing alternative sentences"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ALTERNATIVE_SENTENCES_FIELD_NUMBER: builtins.int
-    @property
-    def alternative_sentences(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AltSentence]:
+    ALTERNATIVE_SENTENCES_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def alternative_sentences(self) -> _containers.RepeatedCompositeFieldContainer[Global___AltSentence]:
         """A list of alternative sentences"""
 
     def __init__(
         self,
         *,
-        alternative_sentences: collections.abc.Iterable[global___AltSentence] | None = ...,
+        alternative_sentences: _abc.Iterable[Global___AltSentence] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["alternative_sentences", b"alternative_sentences"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["alternative_sentences", b"alternative_sentences"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GetAlternativeSentencesResponse = GetAlternativeSentencesResponse
+Global___GetAlternativeSentencesResponse: _TypeAlias = GetAlternativeSentencesResponse  # noqa: Y015
 
-@typing.final
-class GenerateResponsesResponse(google.protobuf.message.Message):
+@_typing.final
+class GenerateResponsesResponse(_message.Message):
     """Response containing responses"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    RESPONSES_FIELD_NUMBER: builtins.int
-    @property
-    def responses(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    RESPONSES_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def responses(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """A list of responses"""
 
     def __init__(
         self,
         *,
-        responses: collections.abc.Iterable[builtins.str] | None = ...,
+        responses: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["responses", b"responses"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["responses", b"responses"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GenerateResponsesResponse = GenerateResponsesResponse
+Global___GenerateResponsesResponse: _TypeAlias = GenerateResponsesResponse  # noqa: Y015
 
-@typing.final
-class GenerateUserSaysResponse(google.protobuf.message.Message):
+@_typing.final
+class GenerateUserSaysResponse(_message.Message):
     """Response containing user sentences"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    USER_SAYS_FIELD_NUMBER: builtins.int
-    @property
-    def user_says(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    USER_SAYS_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def user_says(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """A list of sampled sentences"""
 
     def __init__(
         self,
         *,
-        user_says: collections.abc.Iterable[builtins.str] | None = ...,
+        user_says: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["user_says", b"user_says"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["user_says", b"user_says"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GenerateUserSaysResponse = GenerateUserSaysResponse
+Global___GenerateUserSaysResponse: _TypeAlias = GenerateUserSaysResponse  # noqa: Y015
 
-@typing.final
-class GetAlternativeTrainingPhrasesResponse(google.protobuf.message.Message):
+@_typing.final
+class GetAlternativeTrainingPhrasesResponse(_message.Message):
     """Response containing alternative training phrases"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ALTERNATIVE_TRAINING_PHRASES_FIELD_NUMBER: builtins.int
-    @property
-    def alternative_training_phrases(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AltTrainingPhrase]:
+    ALTERNATIVE_TRAINING_PHRASES_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def alternative_training_phrases(self) -> _containers.RepeatedCompositeFieldContainer[Global___AltTrainingPhrase]:
         """A list of alternative training phrases"""
 
     def __init__(
         self,
         *,
-        alternative_training_phrases: collections.abc.Iterable[global___AltTrainingPhrase] | None = ...,
+        alternative_training_phrases: _abc.Iterable[Global___AltTrainingPhrase] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["alternative_training_phrases", b"alternative_training_phrases"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["alternative_training_phrases", b"alternative_training_phrases"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GetAlternativeTrainingPhrasesResponse = GetAlternativeTrainingPhrasesResponse
+Global___GetAlternativeTrainingPhrasesResponse: _TypeAlias = GetAlternativeTrainingPhrasesResponse  # noqa: Y015
 
-@typing.final
-class AltSentence(google.protobuf.message.Message):
+@_typing.final
+class AltSentence(_message.Message):
     """This message contains an alternative sentence"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    SENTENCE_FIELD_NUMBER: builtins.int
-    SCORE_FIELD_NUMBER: builtins.int
-    sentence: builtins.str
+    SENTENCE_FIELD_NUMBER: _builtins.int
+    SCORE_FIELD_NUMBER: _builtins.int
+    sentence: _builtins.str
     """Alternative sentence"""
-    score: builtins.float
+    score: _builtins.float
     """Score associated to the alternative sentence resulted"""
     def __init__(
         self,
         *,
-        sentence: builtins.str = ...,
-        score: builtins.float = ...,
+        sentence: _builtins.str = ...,
+        score: _builtins.float = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["score", b"score", "sentence", b"sentence"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["score", b"score", "sentence", b"sentence"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___AltSentence = AltSentence
+Global___AltSentence: _TypeAlias = AltSentence  # noqa: Y015
 
-@typing.final
-class AltTrainingPhrase(google.protobuf.message.Message):
+@_typing.final
+class AltTrainingPhrase(_message.Message):
     """This message contains an alternative training phrase"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    TRAINING_PHRASE_FIELD_NUMBER: builtins.int
-    SCORE_FIELD_NUMBER: builtins.int
-    score: builtins.float
+    TRAINING_PHRASE_FIELD_NUMBER: _builtins.int
+    SCORE_FIELD_NUMBER: _builtins.int
+    score: _builtins.float
     """Score associated to training_phrase"""
-    @property
-    def training_phrase(self) -> ondewo.nlu.intent_pb2.Intent.TrainingPhrase:
+    @_builtins.property
+    def training_phrase(self) -> _intent_pb2.Intent.TrainingPhrase:
         """Alternative training phrase"""
 
     def __init__(
         self,
         *,
-        training_phrase: ondewo.nlu.intent_pb2.Intent.TrainingPhrase | None = ...,
-        score: builtins.float = ...,
+        training_phrase: _intent_pb2.Intent.TrainingPhrase | None = ...,
+        score: _builtins.float = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["training_phrase", b"training_phrase"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["score", b"score", "training_phrase", b"training_phrase"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["training_phrase", b"training_phrase"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["score", b"score", "training_phrase", b"training_phrase"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___AltTrainingPhrase = AltTrainingPhrase
+Global___AltTrainingPhrase: _TypeAlias = AltTrainingPhrase  # noqa: Y015
 
-@typing.final
-class DataEnrichmentConfig(google.protobuf.message.Message):
+@_typing.final
+class DataEnrichmentConfig(_message.Message):
     """This message contains the configuration of data enrichment"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ENTITY_ENRICHMENT_FIELD_NUMBER: builtins.int
-    THESAURUS_ENRICHMENT_FIELD_NUMBER: builtins.int
-    WORD2VEC_ENRICHMENT_FIELD_NUMBER: builtins.int
-    WORD_NET_ENRICHMENT_FIELD_NUMBER: builtins.int
-    GPT2_ENRICHMENT_FIELD_NUMBER: builtins.int
-    GLOVE_ENRICHMENT_FIELD_NUMBER: builtins.int
-    BERT_ENRICHMENT_FIELD_NUMBER: builtins.int
-    XLNET_ENRICHMENT_FIELD_NUMBER: builtins.int
-    LLM_ENRICHMENT_FIELD_NUMBER: builtins.int
-    @property
-    def entity_enrichment(self) -> global___EntityEnrichmentConfig:
+    ENTITY_ENRICHMENT_FIELD_NUMBER: _builtins.int
+    THESAURUS_ENRICHMENT_FIELD_NUMBER: _builtins.int
+    WORD2VEC_ENRICHMENT_FIELD_NUMBER: _builtins.int
+    WORD_NET_ENRICHMENT_FIELD_NUMBER: _builtins.int
+    GPT2_ENRICHMENT_FIELD_NUMBER: _builtins.int
+    GLOVE_ENRICHMENT_FIELD_NUMBER: _builtins.int
+    BERT_ENRICHMENT_FIELD_NUMBER: _builtins.int
+    XLNET_ENRICHMENT_FIELD_NUMBER: _builtins.int
+    LLM_ENRICHMENT_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def entity_enrichment(self) -> Global___EntityEnrichmentConfig:
         """Entity augmenter configuration"""
 
-    @property
-    def thesaurus_enrichment(self) -> global___ThesaurusEnrichmentConfig:
+    @_builtins.property
+    def thesaurus_enrichment(self) -> Global___ThesaurusEnrichmentConfig:
         """Thesaurus augmenter configuration"""
 
-    @property
-    def word2vec_enrichment(self) -> global___Word2VecEnrichmentConfig:
+    @_builtins.property
+    def word2vec_enrichment(self) -> Global___Word2VecEnrichmentConfig:
         """Word2Vec augmenter configuration"""
 
-    @property
-    def word_net_enrichment(self) -> global___WordNetAugEnrichmentConfig:
+    @_builtins.property
+    def word_net_enrichment(self) -> Global___WordNetAugEnrichmentConfig:
         """WordNet augmenter configuration"""
 
-    @property
-    def gpt2_enrichment(self) -> global___GPT2EnrichmentConfig:
+    @_builtins.property
+    def gpt2_enrichment(self) -> Global___GPT2EnrichmentConfig:
         """GPT2 augmenter configuration"""
 
-    @property
-    def glove_enrichment(self) -> global___GloVeEnrichmentConfig:
+    @_builtins.property
+    def glove_enrichment(self) -> Global___GloVeEnrichmentConfig:
         """GloVe augmenter configuration"""
 
-    @property
-    def bert_enrichment(self) -> global___BertAugEnrichmentConfig:
+    @_builtins.property
+    def bert_enrichment(self) -> Global___BertAugEnrichmentConfig:
         """BERT augmenter configuration"""
 
-    @property
-    def xlnet_enrichment(self) -> global___XLNetAugEnrichmentConfig:
+    @_builtins.property
+    def xlnet_enrichment(self) -> Global___XLNetAugEnrichmentConfig:
         """XLNet augmenter configuration"""
 
-    @property
-    def llm_enrichment(self) -> global___LlmEnrichmentConfig:
+    @_builtins.property
+    def llm_enrichment(self) -> Global___LlmEnrichmentConfig:
         """Large language model (LLM) augmenter configuration"""
 
     def __init__(
         self,
         *,
-        entity_enrichment: global___EntityEnrichmentConfig | None = ...,
-        thesaurus_enrichment: global___ThesaurusEnrichmentConfig | None = ...,
-        word2vec_enrichment: global___Word2VecEnrichmentConfig | None = ...,
-        word_net_enrichment: global___WordNetAugEnrichmentConfig | None = ...,
-        gpt2_enrichment: global___GPT2EnrichmentConfig | None = ...,
-        glove_enrichment: global___GloVeEnrichmentConfig | None = ...,
-        bert_enrichment: global___BertAugEnrichmentConfig | None = ...,
-        xlnet_enrichment: global___XLNetAugEnrichmentConfig | None = ...,
-        llm_enrichment: global___LlmEnrichmentConfig | None = ...,
+        entity_enrichment: Global___EntityEnrichmentConfig | None = ...,
+        thesaurus_enrichment: Global___ThesaurusEnrichmentConfig | None = ...,
+        word2vec_enrichment: Global___Word2VecEnrichmentConfig | None = ...,
+        word_net_enrichment: Global___WordNetAugEnrichmentConfig | None = ...,
+        gpt2_enrichment: Global___GPT2EnrichmentConfig | None = ...,
+        glove_enrichment: Global___GloVeEnrichmentConfig | None = ...,
+        bert_enrichment: Global___BertAugEnrichmentConfig | None = ...,
+        xlnet_enrichment: Global___XLNetAugEnrichmentConfig | None = ...,
+        llm_enrichment: Global___LlmEnrichmentConfig | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["bert_enrichment", b"bert_enrichment", "entity_enrichment", b"entity_enrichment", "glove_enrichment", b"glove_enrichment", "gpt2_enrichment", b"gpt2_enrichment", "llm_enrichment", b"llm_enrichment", "thesaurus_enrichment", b"thesaurus_enrichment", "word2vec_enrichment", b"word2vec_enrichment", "word_net_enrichment", b"word_net_enrichment", "xlnet_enrichment", b"xlnet_enrichment"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["bert_enrichment", b"bert_enrichment", "entity_enrichment", b"entity_enrichment", "glove_enrichment", b"glove_enrichment", "gpt2_enrichment", b"gpt2_enrichment", "llm_enrichment", b"llm_enrichment", "thesaurus_enrichment", b"thesaurus_enrichment", "word2vec_enrichment", b"word2vec_enrichment", "word_net_enrichment", b"word_net_enrichment", "xlnet_enrichment", b"xlnet_enrichment"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["bert_enrichment", b"bert_enrichment", "entity_enrichment", b"entity_enrichment", "glove_enrichment", b"glove_enrichment", "gpt2_enrichment", b"gpt2_enrichment", "llm_enrichment", b"llm_enrichment", "thesaurus_enrichment", b"thesaurus_enrichment", "word2vec_enrichment", b"word2vec_enrichment", "word_net_enrichment", b"word_net_enrichment", "xlnet_enrichment", b"xlnet_enrichment"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["bert_enrichment", b"bert_enrichment", "entity_enrichment", b"entity_enrichment", "glove_enrichment", b"glove_enrichment", "gpt2_enrichment", b"gpt2_enrichment", "llm_enrichment", b"llm_enrichment", "thesaurus_enrichment", b"thesaurus_enrichment", "word2vec_enrichment", b"word2vec_enrichment", "word_net_enrichment", b"word_net_enrichment", "xlnet_enrichment", b"xlnet_enrichment"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___DataEnrichmentConfig = DataEnrichmentConfig
+Global___DataEnrichmentConfig: _TypeAlias = DataEnrichmentConfig  # noqa: Y015
 
-@typing.final
-class EntityEnrichmentConfig(google.protobuf.message.Message):
+@_typing.final
+class EntityEnrichmentConfig(_message.Message):
     """Configuration for Entity enrichment"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    IS_ACTIVE_FIELD_NUMBER: builtins.int
-    ENRICHMENT_FACTOR_FIELD_NUMBER: builtins.int
-    EXECUTION_ORDER_FIELD_NUMBER: builtins.int
-    is_active: builtins.bool
+    IS_ACTIVE_FIELD_NUMBER: _builtins.int
+    ENRICHMENT_FACTOR_FIELD_NUMBER: _builtins.int
+    EXECUTION_ORDER_FIELD_NUMBER: _builtins.int
+    is_active: _builtins.bool
     """Activation flag"""
-    enrichment_factor: builtins.int
+    enrichment_factor: _builtins.int
     """Factor of enrichment"""
-    execution_order: builtins.int
+    execution_order: _builtins.int
     """Order of augmenter execution"""
     def __init__(
         self,
         *,
-        is_active: builtins.bool = ...,
-        enrichment_factor: builtins.int = ...,
-        execution_order: builtins.int = ...,
+        is_active: _builtins.bool = ...,
+        enrichment_factor: _builtins.int = ...,
+        execution_order: _builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["enrichment_factor", b"enrichment_factor", "execution_order", b"execution_order", "is_active", b"is_active"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["enrichment_factor", b"enrichment_factor", "execution_order", b"execution_order", "is_active", b"is_active"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___EntityEnrichmentConfig = EntityEnrichmentConfig
+Global___EntityEnrichmentConfig: _TypeAlias = EntityEnrichmentConfig  # noqa: Y015
 
-@typing.final
-class ThesaurusEnrichmentConfig(google.protobuf.message.Message):
+@_typing.final
+class ThesaurusEnrichmentConfig(_message.Message):
     """Configuration for Thesaurus enrichment"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    IS_ACTIVE_FIELD_NUMBER: builtins.int
-    ENRICHMENT_FACTOR_FIELD_NUMBER: builtins.int
-    EXECUTION_ORDER_FIELD_NUMBER: builtins.int
-    is_active: builtins.bool
+    IS_ACTIVE_FIELD_NUMBER: _builtins.int
+    ENRICHMENT_FACTOR_FIELD_NUMBER: _builtins.int
+    EXECUTION_ORDER_FIELD_NUMBER: _builtins.int
+    is_active: _builtins.bool
     """Activation flag"""
-    enrichment_factor: builtins.int
+    enrichment_factor: _builtins.int
     """Factor of enrichment"""
-    execution_order: builtins.int
+    execution_order: _builtins.int
     """Order of augmenter execution"""
     def __init__(
         self,
         *,
-        is_active: builtins.bool = ...,
-        enrichment_factor: builtins.int = ...,
-        execution_order: builtins.int = ...,
+        is_active: _builtins.bool = ...,
+        enrichment_factor: _builtins.int = ...,
+        execution_order: _builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["enrichment_factor", b"enrichment_factor", "execution_order", b"execution_order", "is_active", b"is_active"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["enrichment_factor", b"enrichment_factor", "execution_order", b"execution_order", "is_active", b"is_active"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ThesaurusEnrichmentConfig = ThesaurusEnrichmentConfig
+Global___ThesaurusEnrichmentConfig: _TypeAlias = ThesaurusEnrichmentConfig  # noqa: Y015
 
-@typing.final
-class BertAugEnrichmentConfig(google.protobuf.message.Message):
+@_typing.final
+class BertAugEnrichmentConfig(_message.Message):
     """Configuration for BERT augmenter enrichment"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    IS_ACTIVE_FIELD_NUMBER: builtins.int
-    ENRICHMENT_FACTOR_FIELD_NUMBER: builtins.int
-    EXECUTION_ORDER_FIELD_NUMBER: builtins.int
-    is_active: builtins.bool
+    IS_ACTIVE_FIELD_NUMBER: _builtins.int
+    ENRICHMENT_FACTOR_FIELD_NUMBER: _builtins.int
+    EXECUTION_ORDER_FIELD_NUMBER: _builtins.int
+    is_active: _builtins.bool
     """Activation flag"""
-    enrichment_factor: builtins.int
+    enrichment_factor: _builtins.int
     """Factor of enrichment"""
-    execution_order: builtins.int
+    execution_order: _builtins.int
     """Order of augmenter execution"""
     def __init__(
         self,
         *,
-        is_active: builtins.bool = ...,
-        enrichment_factor: builtins.int = ...,
-        execution_order: builtins.int = ...,
+        is_active: _builtins.bool = ...,
+        enrichment_factor: _builtins.int = ...,
+        execution_order: _builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["enrichment_factor", b"enrichment_factor", "execution_order", b"execution_order", "is_active", b"is_active"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["enrichment_factor", b"enrichment_factor", "execution_order", b"execution_order", "is_active", b"is_active"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___BertAugEnrichmentConfig = BertAugEnrichmentConfig
+Global___BertAugEnrichmentConfig: _TypeAlias = BertAugEnrichmentConfig  # noqa: Y015
 
-@typing.final
-class GloVeEnrichmentConfig(google.protobuf.message.Message):
+@_typing.final
+class GloVeEnrichmentConfig(_message.Message):
     """Configuration for GloVe enrichment"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    IS_ACTIVE_FIELD_NUMBER: builtins.int
-    ENRICHMENT_FACTOR_FIELD_NUMBER: builtins.int
-    EXECUTION_ORDER_FIELD_NUMBER: builtins.int
-    is_active: builtins.bool
+    IS_ACTIVE_FIELD_NUMBER: _builtins.int
+    ENRICHMENT_FACTOR_FIELD_NUMBER: _builtins.int
+    EXECUTION_ORDER_FIELD_NUMBER: _builtins.int
+    is_active: _builtins.bool
     """Activation flag"""
-    enrichment_factor: builtins.int
+    enrichment_factor: _builtins.int
     """Factor of enrichment"""
-    execution_order: builtins.int
+    execution_order: _builtins.int
     """Order of augmenter execution"""
     def __init__(
         self,
         *,
-        is_active: builtins.bool = ...,
-        enrichment_factor: builtins.int = ...,
-        execution_order: builtins.int = ...,
+        is_active: _builtins.bool = ...,
+        enrichment_factor: _builtins.int = ...,
+        execution_order: _builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["enrichment_factor", b"enrichment_factor", "execution_order", b"execution_order", "is_active", b"is_active"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["enrichment_factor", b"enrichment_factor", "execution_order", b"execution_order", "is_active", b"is_active"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GloVeEnrichmentConfig = GloVeEnrichmentConfig
+Global___GloVeEnrichmentConfig: _TypeAlias = GloVeEnrichmentConfig  # noqa: Y015
 
-@typing.final
-class GPT2EnrichmentConfig(google.protobuf.message.Message):
+@_typing.final
+class GPT2EnrichmentConfig(_message.Message):
     """Configuration for GPT2 enrichment"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    IS_ACTIVE_FIELD_NUMBER: builtins.int
-    ENRICHMENT_FACTOR_FIELD_NUMBER: builtins.int
-    EXECUTION_ORDER_FIELD_NUMBER: builtins.int
-    is_active: builtins.bool
+    IS_ACTIVE_FIELD_NUMBER: _builtins.int
+    ENRICHMENT_FACTOR_FIELD_NUMBER: _builtins.int
+    EXECUTION_ORDER_FIELD_NUMBER: _builtins.int
+    is_active: _builtins.bool
     """Activation flag"""
-    enrichment_factor: builtins.int
+    enrichment_factor: _builtins.int
     """Factor of enrichment"""
-    execution_order: builtins.int
+    execution_order: _builtins.int
     """Order of augmenter execution"""
     def __init__(
         self,
         *,
-        is_active: builtins.bool = ...,
-        enrichment_factor: builtins.int = ...,
-        execution_order: builtins.int = ...,
+        is_active: _builtins.bool = ...,
+        enrichment_factor: _builtins.int = ...,
+        execution_order: _builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["enrichment_factor", b"enrichment_factor", "execution_order", b"execution_order", "is_active", b"is_active"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["enrichment_factor", b"enrichment_factor", "execution_order", b"execution_order", "is_active", b"is_active"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GPT2EnrichmentConfig = GPT2EnrichmentConfig
+Global___GPT2EnrichmentConfig: _TypeAlias = GPT2EnrichmentConfig  # noqa: Y015
 
-@typing.final
-class Word2VecEnrichmentConfig(google.protobuf.message.Message):
+@_typing.final
+class Word2VecEnrichmentConfig(_message.Message):
     """Configuration for Word2Vec enrichment"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    IS_ACTIVE_FIELD_NUMBER: builtins.int
-    ENRICHMENT_FACTOR_FIELD_NUMBER: builtins.int
-    EXECUTION_ORDER_FIELD_NUMBER: builtins.int
-    is_active: builtins.bool
+    IS_ACTIVE_FIELD_NUMBER: _builtins.int
+    ENRICHMENT_FACTOR_FIELD_NUMBER: _builtins.int
+    EXECUTION_ORDER_FIELD_NUMBER: _builtins.int
+    is_active: _builtins.bool
     """Activation flag"""
-    enrichment_factor: builtins.int
+    enrichment_factor: _builtins.int
     """Factor of enrichment"""
-    execution_order: builtins.int
+    execution_order: _builtins.int
     """Order of augmenter execution"""
     def __init__(
         self,
         *,
-        is_active: builtins.bool = ...,
-        enrichment_factor: builtins.int = ...,
-        execution_order: builtins.int = ...,
+        is_active: _builtins.bool = ...,
+        enrichment_factor: _builtins.int = ...,
+        execution_order: _builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["enrichment_factor", b"enrichment_factor", "execution_order", b"execution_order", "is_active", b"is_active"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["enrichment_factor", b"enrichment_factor", "execution_order", b"execution_order", "is_active", b"is_active"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___Word2VecEnrichmentConfig = Word2VecEnrichmentConfig
+Global___Word2VecEnrichmentConfig: _TypeAlias = Word2VecEnrichmentConfig  # noqa: Y015
 
-@typing.final
-class WordNetAugEnrichmentConfig(google.protobuf.message.Message):
+@_typing.final
+class WordNetAugEnrichmentConfig(_message.Message):
     """Configuration for WordNet augmenter enrichment"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    IS_ACTIVE_FIELD_NUMBER: builtins.int
-    ENRICHMENT_FACTOR_FIELD_NUMBER: builtins.int
-    EXECUTION_ORDER_FIELD_NUMBER: builtins.int
-    is_active: builtins.bool
+    IS_ACTIVE_FIELD_NUMBER: _builtins.int
+    ENRICHMENT_FACTOR_FIELD_NUMBER: _builtins.int
+    EXECUTION_ORDER_FIELD_NUMBER: _builtins.int
+    is_active: _builtins.bool
     """Activation flag"""
-    enrichment_factor: builtins.int
+    enrichment_factor: _builtins.int
     """Factor of enrichment"""
-    execution_order: builtins.int
+    execution_order: _builtins.int
     """Order of augmenter execution"""
     def __init__(
         self,
         *,
-        is_active: builtins.bool = ...,
-        enrichment_factor: builtins.int = ...,
-        execution_order: builtins.int = ...,
+        is_active: _builtins.bool = ...,
+        enrichment_factor: _builtins.int = ...,
+        execution_order: _builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["enrichment_factor", b"enrichment_factor", "execution_order", b"execution_order", "is_active", b"is_active"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["enrichment_factor", b"enrichment_factor", "execution_order", b"execution_order", "is_active", b"is_active"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___WordNetAugEnrichmentConfig = WordNetAugEnrichmentConfig
+Global___WordNetAugEnrichmentConfig: _TypeAlias = WordNetAugEnrichmentConfig  # noqa: Y015
 
-@typing.final
-class XLNetAugEnrichmentConfig(google.protobuf.message.Message):
+@_typing.final
+class XLNetAugEnrichmentConfig(_message.Message):
     """Configuration for XLNet enrichment"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    IS_ACTIVE_FIELD_NUMBER: builtins.int
-    ENRICHMENT_FACTOR_FIELD_NUMBER: builtins.int
-    EXECUTION_ORDER_FIELD_NUMBER: builtins.int
-    is_active: builtins.bool
+    IS_ACTIVE_FIELD_NUMBER: _builtins.int
+    ENRICHMENT_FACTOR_FIELD_NUMBER: _builtins.int
+    EXECUTION_ORDER_FIELD_NUMBER: _builtins.int
+    is_active: _builtins.bool
     """Activation flag"""
-    enrichment_factor: builtins.int
+    enrichment_factor: _builtins.int
     """Factor of enrichment"""
-    execution_order: builtins.int
+    execution_order: _builtins.int
     """Order of augmenter execution"""
     def __init__(
         self,
         *,
-        is_active: builtins.bool = ...,
-        enrichment_factor: builtins.int = ...,
-        execution_order: builtins.int = ...,
+        is_active: _builtins.bool = ...,
+        enrichment_factor: _builtins.int = ...,
+        execution_order: _builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["enrichment_factor", b"enrichment_factor", "execution_order", b"execution_order", "is_active", b"is_active"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["enrichment_factor", b"enrichment_factor", "execution_order", b"execution_order", "is_active", b"is_active"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___XLNetAugEnrichmentConfig = XLNetAugEnrichmentConfig
+Global___XLNetAugEnrichmentConfig: _TypeAlias = XLNetAugEnrichmentConfig  # noqa: Y015
 
-@typing.final
-class LlmEnrichmentConfig(google.protobuf.message.Message):
+@_typing.final
+class LlmEnrichmentConfig(_message.Message):
     """Configuration for large language model (LLM) enrichment"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    IS_ACTIVE_FIELD_NUMBER: builtins.int
-    ENRICHMENT_FACTOR_FIELD_NUMBER: builtins.int
-    EXECUTION_ORDER_FIELD_NUMBER: builtins.int
-    CCAI_SERVICE_NAME_FIELD_NUMBER: builtins.int
-    is_active: builtins.bool
+    IS_ACTIVE_FIELD_NUMBER: _builtins.int
+    ENRICHMENT_FACTOR_FIELD_NUMBER: _builtins.int
+    EXECUTION_ORDER_FIELD_NUMBER: _builtins.int
+    CCAI_SERVICE_NAME_FIELD_NUMBER: _builtins.int
+    is_active: _builtins.bool
     """Activation flag"""
-    enrichment_factor: builtins.int
+    enrichment_factor: _builtins.int
     """Factor of enrichment"""
-    execution_order: builtins.int
+    execution_order: _builtins.int
     """Order of augmenter execution"""
-    ccai_service_name: builtins.str
+    ccai_service_name: _builtins.str
     """The CCAI service to be used to enrich
     This specifies which large language model provider and model settings will handle the request.
     Format: <pre><code>projects/&lt;project_uuid&gt;/ccai/services/&lt;service_uuid&gt;</code></pre>
@@ -1263,40 +1380,44 @@ class LlmEnrichmentConfig(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        is_active: builtins.bool = ...,
-        enrichment_factor: builtins.int = ...,
-        execution_order: builtins.int = ...,
-        ccai_service_name: builtins.str = ...,
+        is_active: _builtins.bool = ...,
+        enrichment_factor: _builtins.int = ...,
+        execution_order: _builtins.int = ...,
+        ccai_service_name: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["ccai_service_name", b"ccai_service_name", "enrichment_factor", b"enrichment_factor", "execution_order", b"execution_order", "is_active", b"is_active"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["ccai_service_name", b"ccai_service_name", "enrichment_factor", b"enrichment_factor", "execution_order", b"execution_order", "is_active", b"is_active"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___LlmEnrichmentConfig = LlmEnrichmentConfig
+Global___LlmEnrichmentConfig: _TypeAlias = LlmEnrichmentConfig  # noqa: Y015
 
-@typing.final
-class ClassifyIntentsRequest(google.protobuf.message.Message):
+@_typing.final
+class ClassifyIntentsRequest(_message.Message):
     """The request for intent classification."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    TEXT_FIELD_NUMBER: builtins.int
-    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
-    ACTIVE_CONTEXTS_FIELD_NUMBER: builtins.int
-    CONTEXT_NAMES_FIELD_NUMBER: builtins.int
-    MODE_FIELD_NUMBER: builtins.int
-    ALGORITHMS_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    parent: builtins.str
+    PARENT_FIELD_NUMBER: _builtins.int
+    TEXT_FIELD_NUMBER: _builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: _builtins.int
+    ACTIVE_CONTEXTS_FIELD_NUMBER: _builtins.int
+    CONTEXT_NAMES_FIELD_NUMBER: _builtins.int
+    MODE_FIELD_NUMBER: _builtins.int
+    ALGORITHMS_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    parent: _builtins.str
     """Required. The project of this agent.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
-    text: builtins.str
+    text: _builtins.str
     """the input text"""
-    language_code: builtins.str
+    language_code: _builtins.str
     """the input language"""
-    active_contexts: builtins.bool
+    active_contexts: _builtins.bool
     """Optional: if restrict classification result with input contexts listed in the field <code>context_names</code>"""
-    mode: global___Mode.ValueType
+    mode: Global___Mode.ValueType
     """Optional: Which mode to use:
     <ul>
       <li>EXCLUSIVE - skip algorithms listed in <code>algorithms</code> field,</li>
@@ -1304,99 +1425,110 @@ class ClassifyIntentsRequest(google.protobuf.message.Message):
       <li>UNSPECIFIED - default mode, described in agent config</li>
     </ul>
     """
-    @property
-    def context_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def context_names(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Optional: names of the input contexts to restrict the classification result with.
         Intents can only be classified if the intent's input context set is the subset of the given context set.
         """
 
-    @property
-    def algorithms(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[global___IntentAlgorithms.ValueType]:
+    @_builtins.property
+    def algorithms(self) -> _containers.RepeatedScalarFieldContainer[Global___IntentAlgorithms.ValueType]:
         """Optional: Algorithm list"""
 
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields gets returned."""
 
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        text: builtins.str = ...,
-        language_code: builtins.str = ...,
-        active_contexts: builtins.bool = ...,
-        context_names: collections.abc.Iterable[builtins.str] | None = ...,
-        mode: global___Mode.ValueType = ...,
-        algorithms: collections.abc.Iterable[global___IntentAlgorithms.ValueType] | None = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        parent: _builtins.str = ...,
+        text: _builtins.str = ...,
+        language_code: _builtins.str = ...,
+        active_contexts: _builtins.bool = ...,
+        context_names: _abc.Iterable[_builtins.str] | None = ...,
+        mode: Global___Mode.ValueType = ...,
+        algorithms: _abc.Iterable[Global___IntentAlgorithms.ValueType] | None = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["active_contexts", b"active_contexts", "algorithms", b"algorithms", "context_names", b"context_names", "field_mask", b"field_mask", "language_code", b"language_code", "mode", b"mode", "parent", b"parent", "text", b"text"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["active_contexts", b"active_contexts", "algorithms", b"algorithms", "context_names", b"context_names", "field_mask", b"field_mask", "language_code", b"language_code", "mode", b"mode", "parent", b"parent", "text", b"text"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ClassifyIntentsRequest = ClassifyIntentsRequest
+Global___ClassifyIntentsRequest: _TypeAlias = ClassifyIntentsRequest  # noqa: Y015
 
-@typing.final
-class IntentClassified(google.protobuf.message.Message):
+@_typing.final
+class IntentClassified(_message.Message):
     """Intent classified by a certain intent classifier"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    INTENT_NAME_FIELD_NUMBER: builtins.int
-    INTENT_DISPLAY_NAME_FIELD_NUMBER: builtins.int
-    CLASSIFIER_FIELD_NUMBER: builtins.int
-    SCORE_FIELD_NUMBER: builtins.int
-    intent_name: builtins.str
+    INTENT_NAME_FIELD_NUMBER: _builtins.int
+    INTENT_DISPLAY_NAME_FIELD_NUMBER: _builtins.int
+    CLASSIFIER_FIELD_NUMBER: _builtins.int
+    SCORE_FIELD_NUMBER: _builtins.int
+    intent_name: _builtins.str
     """The unique identifier of this intent.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/intents/&lt;intent_uuid&gt;</code></pre>
     """
-    intent_display_name: builtins.str
+    intent_display_name: _builtins.str
     """The name of the intent."""
-    classifier: builtins.str
+    classifier: _builtins.str
     """The name of the classifier that detected the intent"""
-    score: builtins.float
+    score: _builtins.float
     """Score associated to the detection of the intent by the classifier"""
     def __init__(
         self,
         *,
-        intent_name: builtins.str = ...,
-        intent_display_name: builtins.str = ...,
-        classifier: builtins.str = ...,
-        score: builtins.float = ...,
+        intent_name: _builtins.str = ...,
+        intent_display_name: _builtins.str = ...,
+        classifier: _builtins.str = ...,
+        score: _builtins.float = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["classifier", b"classifier", "intent_display_name", b"intent_display_name", "intent_name", b"intent_name", "score", b"score"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["classifier", b"classifier", "intent_display_name", b"intent_display_name", "intent_name", b"intent_name", "score", b"score"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___IntentClassified = IntentClassified
+Global___IntentClassified: _TypeAlias = IntentClassified  # noqa: Y015
 
-@typing.final
-class ClassifyIntentsResponse(google.protobuf.message.Message):
+@_typing.final
+class ClassifyIntentsResponse(_message.Message):
     """Response containing the intents classified in a sentence"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    INTENTS_CLASSIFIED_FIELD_NUMBER: builtins.int
-    TEXT_FIELD_NUMBER: builtins.int
-    ACTIVE_CONTEXTS_FIELD_NUMBER: builtins.int
-    CONTEXT_NAMES_FIELD_NUMBER: builtins.int
-    text: builtins.str
+    INTENTS_CLASSIFIED_FIELD_NUMBER: _builtins.int
+    TEXT_FIELD_NUMBER: _builtins.int
+    ACTIVE_CONTEXTS_FIELD_NUMBER: _builtins.int
+    CONTEXT_NAMES_FIELD_NUMBER: _builtins.int
+    text: _builtins.str
     """The text containing from which the intents were detected"""
-    active_contexts: builtins.bool
+    active_contexts: _builtins.bool
     """Flag that enables the context through the conversation"""
-    @property
-    def intents_classified(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___IntentClassified]:
+    @_builtins.property
+    def intents_classified(self) -> _containers.RepeatedCompositeFieldContainer[Global___IntentClassified]:
         """A list of intents detected"""
 
-    @property
-    def context_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def context_names(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """The context tags associated to the intents"""
 
     def __init__(
         self,
         *,
-        intents_classified: collections.abc.Iterable[global___IntentClassified] | None = ...,
-        text: builtins.str = ...,
-        active_contexts: builtins.bool = ...,
-        context_names: collections.abc.Iterable[builtins.str] | None = ...,
+        intents_classified: _abc.Iterable[Global___IntentClassified] | None = ...,
+        text: _builtins.str = ...,
+        active_contexts: _builtins.bool = ...,
+        context_names: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["active_contexts", b"active_contexts", "context_names", b"context_names", "intents_classified", b"intents_classified", "text", b"text"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["active_contexts", b"active_contexts", "context_names", b"context_names", "intents_classified", b"intents_classified", "text", b"text"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ClassifyIntentsResponse = ClassifyIntentsResponse
+Global___ClassifyIntentsResponse: _TypeAlias = ClassifyIntentsResponse  # noqa: Y015

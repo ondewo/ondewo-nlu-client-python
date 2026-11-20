@@ -16,31 +16,31 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-import builtins
-import collections.abc
-import google.protobuf.descriptor
-import google.protobuf.field_mask_pb2
-import google.protobuf.internal.containers
-import google.protobuf.internal.enum_type_wrapper
-import google.protobuf.message
-import google.protobuf.struct_pb2
-import google.protobuf.timestamp_pb2
+from collections import abc as _abc
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import field_mask_pb2 as _field_mask_pb2
+from google.protobuf import message as _message
+from google.protobuf import struct_pb2 as _struct_pb2
+from google.protobuf import timestamp_pb2 as _timestamp_pb2
+from google.protobuf.internal import containers as _containers
+from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
+import builtins as _builtins
 import sys
-import typing
+import typing as _typing
 
-if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+if sys.version_info >= (3, 11):
+    from typing import TypeAlias as _TypeAlias, Never as _Never
 else:
-    import typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias, Never as _Never
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 class _SortingMode:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _SortingModeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_SortingMode.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _SortingModeEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_SortingMode.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     ASCENDING: _SortingMode.ValueType  # 0
     """ascending sorting"""
     DESCENDING: _SortingMode.ValueType  # 1
@@ -53,14 +53,14 @@ ASCENDING: SortingMode.ValueType  # 0
 """ascending sorting"""
 DESCENDING: SortingMode.ValueType  # 1
 """descending sorting"""
-global___SortingMode = SortingMode
+Global___SortingMode: _TypeAlias = SortingMode  # noqa: Y015
 
 class _NotificationFlaggedStatus:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _NotificationFlaggedStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_NotificationFlaggedStatus.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _NotificationFlaggedStatusEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_NotificationFlaggedStatus.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     NOTIFICATION_FLAGGED_STATUS_UNSPECIFIED: _NotificationFlaggedStatus.ValueType  # 0
     """Unspecified flagged status"""
     NOTIFICATION_FLAGGED_STATUS_FLAGGED: _NotificationFlaggedStatus.ValueType  # 1
@@ -77,14 +77,14 @@ NOTIFICATION_FLAGGED_STATUS_FLAGGED: NotificationFlaggedStatus.ValueType  # 1
 """Notification is flagged"""
 NOTIFICATION_FLAGGED_STATUS_UNFLAGGED: NotificationFlaggedStatus.ValueType  # 2
 """Notification is unflagged"""
-global___NotificationFlaggedStatus = NotificationFlaggedStatus
+Global___NotificationFlaggedStatus: _TypeAlias = NotificationFlaggedStatus  # noqa: Y015
 
 class _NotificationReadStatus:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _NotificationReadStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_NotificationReadStatus.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _NotificationReadStatusEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_NotificationReadStatus.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     NOTIFICATION_READ_STATUS_UNSPECIFIED: _NotificationReadStatus.ValueType  # 0
     """Unspecified read status"""
     NOTIFICATION_READ_STATUS_READ: _NotificationReadStatus.ValueType  # 1
@@ -101,14 +101,14 @@ NOTIFICATION_READ_STATUS_READ: NotificationReadStatus.ValueType  # 1
 """Notification is marked as read"""
 NOTIFICATION_READ_STATUS_UNREAD: NotificationReadStatus.ValueType  # 2
 """Notification is marked as unread"""
-global___NotificationReadStatus = NotificationReadStatus
+Global___NotificationReadStatus: _TypeAlias = NotificationReadStatus  # noqa: Y015
 
 class _NotificationVisibility:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _NotificationVisibilityEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_NotificationVisibility.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _NotificationVisibilityEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_NotificationVisibility.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     NOTIFICATION_VISIBILITY_UNSPECIFIED: _NotificationVisibility.ValueType  # 0
     """unspecified"""
     NOTIFICATION_VISIBILITY_USER: _NotificationVisibility.ValueType  # 1
@@ -165,14 +165,14 @@ NOTIFICATION_VISIBILITY_SERVER_USER: NotificationVisibility.ValueType  # 11
 """all admins of the server"""
 NOTIFICATION_VISIBILITY_SERVER_INACTIVE: NotificationVisibility.ValueType  # 12
 """all admins of the server"""
-global___NotificationVisibility = NotificationVisibility
+Global___NotificationVisibility: _TypeAlias = NotificationVisibility  # noqa: Y015
 
 class _NotificationType:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _NotificationTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_NotificationType.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _NotificationTypeEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_NotificationType.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     NOTIFICATION_TYPE_UNSPECIFIED: _NotificationType.ValueType  # 0
     """Unspecified notification type"""
     NOTIFICATION_TYPE_DEBUG: _NotificationType.ValueType  # 1
@@ -201,14 +201,14 @@ NOTIFICATION_TYPE_ERROR: NotificationType.ValueType  # 4
 """Error notification type"""
 NOTIFICATION_TYPE_NEWS: NotificationType.ValueType  # 5
 """News notification type"""
-global___NotificationType = NotificationType
+Global___NotificationType: _TypeAlias = NotificationType  # noqa: Y015
 
 class _NotificationOrigin:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _NotificationOriginEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_NotificationOrigin.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _NotificationOriginEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_NotificationOrigin.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     NOTIFICATION_ORIGIN_UNSPECIFIED: _NotificationOrigin.ValueType  # 0
     """unspecified"""
     NOTIFICATION_ORIGIN_ONDEWO_AIM: _NotificationOrigin.ValueType  # 1
@@ -257,14 +257,14 @@ NOTIFICATION_ORIGIN_ONDEWO_VTSI_RABBITMQ: NotificationOrigin.ValueType  # 9
 """ondewo-vtsi-rabbitmq service"""
 NOTIFICATION_ORIGIN_ONDEWO_SURVEY: NotificationOrigin.ValueType  # 10
 """ondewo-survey service"""
-global___NotificationOrigin = NotificationOrigin
+Global___NotificationOrigin: _TypeAlias = NotificationOrigin  # noqa: Y015
 
 class _LogSeverity:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _LogSeverityEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_LogSeverity.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _LogSeverityEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_LogSeverity.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     LOG_SEVERITY_UNSPECIFIED: _LogSeverity.ValueType  # 0
     """Unspecified log level."""
     LOG_SEVERITY_TRACE: _LogSeverity.ValueType  # 1
@@ -301,334 +301,355 @@ LOG_SEVERITY_ERROR: LogSeverity.ValueType  # 6
 """Error level - serious issues that might affect results."""
 LOG_SEVERITY_CRITICAL: LogSeverity.ValueType  # 7
 """Critical level - critical failures that stop the process."""
-global___LogSeverity = LogSeverity
+Global___LogSeverity: _TypeAlias = LogSeverity  # noqa: Y015
 
-@typing.final
-class StatResponse(google.protobuf.message.Message):
+@_typing.final
+class StatResponse(_message.Message):
     """statistic response"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    VALUE_FIELD_NUMBER: builtins.int
-    value: builtins.int
+    VALUE_FIELD_NUMBER: _builtins.int
+    value: _builtins.int
     """Response wrapper for the &quot;Get&lt;Stat&gt;&quot; endpoints"""
     def __init__(
         self,
         *,
-        value: builtins.int = ...,
+        value: _builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["value", b"value"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___StatResponse = StatResponse
+Global___StatResponse: _TypeAlias = StatResponse  # noqa: Y015
 
-@typing.final
-class Comment(google.protobuf.message.Message):
+@_typing.final
+class Comment(_message.Message):
     """Comment message"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NAME_FIELD_NUMBER: builtins.int
-    TEXT_FIELD_NUMBER: builtins.int
-    USER_ID_FIELD_NUMBER: builtins.int
-    COMMENT_ABOUT_NAME_FIELD_NUMBER: builtins.int
-    PARENT_COMMENT_NAME_FIELD_NUMBER: builtins.int
-    CREATED_AT_FIELD_NUMBER: builtins.int
-    MODIFIED_AT_FIELD_NUMBER: builtins.int
-    CREATED_BY_FIELD_NUMBER: builtins.int
-    MODIFIED_BY_FIELD_NUMBER: builtins.int
-    IS_RESOLVED_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    TEXT_FIELD_NUMBER: _builtins.int
+    USER_ID_FIELD_NUMBER: _builtins.int
+    COMMENT_ABOUT_NAME_FIELD_NUMBER: _builtins.int
+    PARENT_COMMENT_NAME_FIELD_NUMBER: _builtins.int
+    CREATED_AT_FIELD_NUMBER: _builtins.int
+    MODIFIED_AT_FIELD_NUMBER: _builtins.int
+    CREATED_BY_FIELD_NUMBER: _builtins.int
+    MODIFIED_BY_FIELD_NUMBER: _builtins.int
+    IS_RESOLVED_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """resource name of the comment"""
-    text: builtins.str
+    text: _builtins.str
     """text of the comment"""
-    user_id: builtins.str
+    user_id: _builtins.str
     """User id as resource name.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre>
     """
-    comment_about_name: builtins.str
+    comment_about_name: _builtins.str
     """name of the resource for which the comment is about.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/&lt;resource_type&gt;/&lt;resource_uuid&gt;/.../</code></pre>
     """
-    parent_comment_name: builtins.str
+    parent_comment_name: _builtins.str
     """The resource name of the parent comment. A parent comment is a reply to a certain comment.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/&lt;resource_type&gt;/&lt;resource_uuid&gt;/.../</code></pre>
     """
-    created_by: builtins.str
+    created_by: _builtins.str
     """User id in form of a valid UUID."""
-    modified_by: builtins.str
+    modified_by: _builtins.str
     """User id in form of a valid UUID."""
-    is_resolved: builtins.bool
+    is_resolved: _builtins.bool
     """Whether the comment has been resolved. Defaults to false.
     Declared `optional` so field presence is tracked: on UpdateSessionComments an unset value leaves
     the stored resolved status unchanged, so editing a comment's text never clobbers its resolved flag.
     """
-    @property
-    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def created_at(self) -> _timestamp_pb2.Timestamp:
         """Creation date and time. Read-only field."""
 
-    @property
-    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def modified_at(self) -> _timestamp_pb2.Timestamp:
         """Modification date and time. Read-only field."""
 
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
-        text: builtins.str = ...,
-        user_id: builtins.str = ...,
-        comment_about_name: builtins.str = ...,
-        parent_comment_name: builtins.str = ...,
-        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        created_by: builtins.str = ...,
-        modified_by: builtins.str = ...,
-        is_resolved: builtins.bool | None = ...,
+        name: _builtins.str = ...,
+        text: _builtins.str = ...,
+        user_id: _builtins.str = ...,
+        comment_about_name: _builtins.str = ...,
+        parent_comment_name: _builtins.str = ...,
+        created_at: _timestamp_pb2.Timestamp | None = ...,
+        modified_at: _timestamp_pb2.Timestamp | None = ...,
+        created_by: _builtins.str = ...,
+        modified_by: _builtins.str = ...,
+        is_resolved: _builtins.bool | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_is_resolved", b"_is_resolved", "created_at", b"created_at", "is_resolved", b"is_resolved", "modified_at", b"modified_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_is_resolved", b"_is_resolved", "comment_about_name", b"comment_about_name", "created_at", b"created_at", "created_by", b"created_by", "is_resolved", b"is_resolved", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "parent_comment_name", b"parent_comment_name", "text", b"text", "user_id", b"user_id"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["_is_resolved", b"_is_resolved"]) -> typing.Literal["is_resolved"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["_is_resolved", b"_is_resolved", "created_at", b"created_at", "is_resolved", b"is_resolved", "modified_at", b"modified_at"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["_is_resolved", b"_is_resolved", "comment_about_name", b"comment_about_name", "created_at", b"created_at", "created_by", b"created_by", "is_resolved", b"is_resolved", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "parent_comment_name", b"parent_comment_name", "text", b"text", "user_id", b"user_id"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType__is_resolved: _TypeAlias = _typing.Literal["is_resolved"]  # noqa: Y015
+    _WhichOneofArgType__is_resolved: _TypeAlias = _typing.Literal["_is_resolved", b"_is_resolved"]  # noqa: Y015
+    def WhichOneof(self, oneof_group: _WhichOneofArgType__is_resolved) -> _WhichOneofReturnType__is_resolved | None: ...
 
-global___Comment = Comment
+Global___Comment: _TypeAlias = Comment  # noqa: Y015
 
-@typing.final
-class Notification(google.protobuf.message.Message):
+@_typing.final
+class Notification(_message.Message):
     """Notification message"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NAME_FIELD_NUMBER: builtins.int
-    USER_NAME_FIELD_NUMBER: builtins.int
-    TITLE_FIELD_NUMBER: builtins.int
-    DESCRIPTION_SHORT_FIELD_NUMBER: builtins.int
-    DESCRIPTION_LONG_FIELD_NUMBER: builtins.int
-    NOTIFICATION_FLAGGED_STATUS_FIELD_NUMBER: builtins.int
-    NOTIFICATION_FLAGGED_TIMESTAMP_FIELD_NUMBER: builtins.int
-    NOTIFICATION_READ_STATUS_FIELD_NUMBER: builtins.int
-    NOTIFICATION_READ_TIMESTAMP_FIELD_NUMBER: builtins.int
-    NOTIFICATION_ORIGIN_FIELD_NUMBER: builtins.int
-    ORIGIN_NAME_FIELD_NUMBER: builtins.int
-    ORIGIN_LANGUAGE_FIELD_NUMBER: builtins.int
-    NOTIFICATION_TYPE_FIELD_NUMBER: builtins.int
-    NOTIFICATION_VISIBILITY_FIELD_NUMBER: builtins.int
-    CREATED_AT_FIELD_NUMBER: builtins.int
-    MODIFIED_AT_FIELD_NUMBER: builtins.int
-    CREATED_BY_FIELD_NUMBER: builtins.int
-    MODIFIED_BY_FIELD_NUMBER: builtins.int
-    LINK_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    USER_NAME_FIELD_NUMBER: _builtins.int
+    TITLE_FIELD_NUMBER: _builtins.int
+    DESCRIPTION_SHORT_FIELD_NUMBER: _builtins.int
+    DESCRIPTION_LONG_FIELD_NUMBER: _builtins.int
+    NOTIFICATION_FLAGGED_STATUS_FIELD_NUMBER: _builtins.int
+    NOTIFICATION_FLAGGED_TIMESTAMP_FIELD_NUMBER: _builtins.int
+    NOTIFICATION_READ_STATUS_FIELD_NUMBER: _builtins.int
+    NOTIFICATION_READ_TIMESTAMP_FIELD_NUMBER: _builtins.int
+    NOTIFICATION_ORIGIN_FIELD_NUMBER: _builtins.int
+    ORIGIN_NAME_FIELD_NUMBER: _builtins.int
+    ORIGIN_LANGUAGE_FIELD_NUMBER: _builtins.int
+    NOTIFICATION_TYPE_FIELD_NUMBER: _builtins.int
+    NOTIFICATION_VISIBILITY_FIELD_NUMBER: _builtins.int
+    CREATED_AT_FIELD_NUMBER: _builtins.int
+    MODIFIED_AT_FIELD_NUMBER: _builtins.int
+    CREATED_BY_FIELD_NUMBER: _builtins.int
+    MODIFIED_BY_FIELD_NUMBER: _builtins.int
+    LINK_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """resource name of the notification"""
-    user_name: builtins.str
+    user_name: _builtins.str
     """User id as resource name.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre>
     """
-    title: builtins.str
+    title: _builtins.str
     """User id as resource name.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre>
     """
-    description_short: builtins.str
+    description_short: _builtins.str
     """A short notification text is displayed directly with max. 50 chars which is a truncated version of the long message"""
-    description_long: builtins.str
+    description_long: _builtins.str
     """A long notification text"""
-    notification_flagged_status: global___NotificationFlaggedStatus.ValueType
+    notification_flagged_status: Global___NotificationFlaggedStatus.ValueType
     """Has a notification been flagged by a specific user"""
-    notification_read_status: global___NotificationReadStatus.ValueType
+    notification_read_status: Global___NotificationReadStatus.ValueType
     """Has a notification been read by a specific user"""
-    notification_origin: global___NotificationOrigin.ValueType
+    notification_origin: Global___NotificationOrigin.ValueType
     """The origin of a notification.
     A Notification origin can be from a product (service), e.g. ondewo-nlu, ondewo-s2t, ondewo-t2s, etc.
     """
-    origin_name: builtins.str
+    origin_name: _builtins.str
     """The name of resource of where the notification originated"""
-    origin_language: builtins.str
+    origin_language: _builtins.str
     """language of the origin resource e.g. language of the nlu agent or language of the speech-to-text service"""
-    notification_type: global___NotificationType.ValueType
+    notification_type: Global___NotificationType.ValueType
     """The type of notification"""
-    notification_visibility: global___NotificationVisibility.ValueType
+    notification_visibility: Global___NotificationVisibility.ValueType
     """The visibility level of the notification"""
-    created_by: builtins.str
+    created_by: _builtins.str
     """User id in form of a valid UUID."""
-    modified_by: builtins.str
+    modified_by: _builtins.str
     """User id in form of a valid UUID."""
-    link: builtins.str
+    link: _builtins.str
     """Optional deep-link / route target the notification navigates to when clicked, e.g. a relative AIM route to
     the referenced intent or entity. Empty when the notification is not clickable.
     """
-    @property
-    def notification_flagged_timestamp(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def notification_flagged_timestamp(self) -> _timestamp_pb2.Timestamp:
         """When the user marked the notification as read"""
 
-    @property
-    def notification_read_timestamp(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def notification_read_timestamp(self) -> _timestamp_pb2.Timestamp:
         """When the user marked the notification as read, i.e. read the notification"""
 
-    @property
-    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def created_at(self) -> _timestamp_pb2.Timestamp:
         """Creation date and time. Read-only field."""
 
-    @property
-    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def modified_at(self) -> _timestamp_pb2.Timestamp:
         """Modification date and time. Read-only field."""
 
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
-        user_name: builtins.str = ...,
-        title: builtins.str = ...,
-        description_short: builtins.str = ...,
-        description_long: builtins.str = ...,
-        notification_flagged_status: global___NotificationFlaggedStatus.ValueType = ...,
-        notification_flagged_timestamp: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        notification_read_status: global___NotificationReadStatus.ValueType = ...,
-        notification_read_timestamp: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        notification_origin: global___NotificationOrigin.ValueType = ...,
-        origin_name: builtins.str = ...,
-        origin_language: builtins.str = ...,
-        notification_type: global___NotificationType.ValueType = ...,
-        notification_visibility: global___NotificationVisibility.ValueType = ...,
-        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        created_by: builtins.str = ...,
-        modified_by: builtins.str = ...,
-        link: builtins.str = ...,
+        name: _builtins.str = ...,
+        user_name: _builtins.str = ...,
+        title: _builtins.str = ...,
+        description_short: _builtins.str = ...,
+        description_long: _builtins.str = ...,
+        notification_flagged_status: Global___NotificationFlaggedStatus.ValueType = ...,
+        notification_flagged_timestamp: _timestamp_pb2.Timestamp | None = ...,
+        notification_read_status: Global___NotificationReadStatus.ValueType = ...,
+        notification_read_timestamp: _timestamp_pb2.Timestamp | None = ...,
+        notification_origin: Global___NotificationOrigin.ValueType = ...,
+        origin_name: _builtins.str = ...,
+        origin_language: _builtins.str = ...,
+        notification_type: Global___NotificationType.ValueType = ...,
+        notification_visibility: Global___NotificationVisibility.ValueType = ...,
+        created_at: _timestamp_pb2.Timestamp | None = ...,
+        modified_at: _timestamp_pb2.Timestamp | None = ...,
+        created_by: _builtins.str = ...,
+        modified_by: _builtins.str = ...,
+        link: _builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at", "notification_flagged_timestamp", b"notification_flagged_timestamp", "notification_read_timestamp", b"notification_read_timestamp"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["created_at", b"created_at", "created_by", b"created_by", "description_long", b"description_long", "description_short", b"description_short", "link", b"link", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "notification_flagged_status", b"notification_flagged_status", "notification_flagged_timestamp", b"notification_flagged_timestamp", "notification_origin", b"notification_origin", "notification_read_status", b"notification_read_status", "notification_read_timestamp", b"notification_read_timestamp", "notification_type", b"notification_type", "notification_visibility", b"notification_visibility", "origin_language", b"origin_language", "origin_name", b"origin_name", "title", b"title", "user_name", b"user_name"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["created_at", b"created_at", "modified_at", b"modified_at", "notification_flagged_timestamp", b"notification_flagged_timestamp", "notification_read_timestamp", b"notification_read_timestamp"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["created_at", b"created_at", "created_by", b"created_by", "description_long", b"description_long", "description_short", b"description_short", "link", b"link", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "notification_flagged_status", b"notification_flagged_status", "notification_flagged_timestamp", b"notification_flagged_timestamp", "notification_origin", b"notification_origin", "notification_read_status", b"notification_read_status", "notification_read_timestamp", b"notification_read_timestamp", "notification_type", b"notification_type", "notification_visibility", b"notification_visibility", "origin_language", b"origin_language", "origin_name", b"origin_name", "title", b"title", "user_name", b"user_name"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___Notification = Notification
+Global___Notification: _TypeAlias = Notification  # noqa: Y015
 
-@typing.final
-class AddNotificationsRequest(google.protobuf.message.Message):
+@_typing.final
+class AddNotificationsRequest(_message.Message):
     """Message for adding notifications in a batch."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NOTIFICATIONS_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    @property
-    def notifications(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Notification]:
+    NOTIFICATIONS_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def notifications(self) -> _containers.RepeatedCompositeFieldContainer[Global___Notification]:
         """List of notifications to be added."""
 
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. Mask to control which fields of the returned notifications are filled with data."""
 
     def __init__(
         self,
         *,
-        notifications: collections.abc.Iterable[global___Notification] | None = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        notifications: _abc.Iterable[Global___Notification] | None = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "notifications", b"notifications"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "notifications", b"notifications"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___AddNotificationsRequest = AddNotificationsRequest
+Global___AddNotificationsRequest: _TypeAlias = AddNotificationsRequest  # noqa: Y015
 
-@typing.final
-class AddNotificationsResponse(google.protobuf.message.Message):
+@_typing.final
+class AddNotificationsResponse(_message.Message):
     """Message containing the response to adding notifications."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NOTIFICATIONS_FIELD_NUMBER: builtins.int
-    @property
-    def notifications(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Notification]:
+    NOTIFICATIONS_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def notifications(self) -> _containers.RepeatedCompositeFieldContainer[Global___Notification]:
         """List of notifications that have been added."""
 
     def __init__(
         self,
         *,
-        notifications: collections.abc.Iterable[global___Notification] | None = ...,
+        notifications: _abc.Iterable[Global___Notification] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["notifications", b"notifications"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["notifications", b"notifications"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___AddNotificationsResponse = AddNotificationsResponse
+Global___AddNotificationsResponse: _TypeAlias = AddNotificationsResponse  # noqa: Y015
 
-@typing.final
-class NotificationFilter(google.protobuf.message.Message):
+@_typing.final
+class NotificationFilter(_message.Message):
     """Message for filtering notifications based on various criteria."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    LANGUAGE_CODES_FIELD_NUMBER: builtins.int
-    NOTIFICATION_ORIGINS_FIELD_NUMBER: builtins.int
-    NOTIFICATION_VISIBILITIES_FIELD_NUMBER: builtins.int
-    NOTIFICATION_FLAGGED_STATUS_FIELD_NUMBER: builtins.int
-    NOTIFICATION_READ_STATUS_FIELD_NUMBER: builtins.int
-    EARLIEST_FIELD_NUMBER: builtins.int
-    LATEST_FIELD_NUMBER: builtins.int
-    USER_NAMES_FIELD_NUMBER: builtins.int
-    ORIGIN_NAMES_FIELD_NUMBER: builtins.int
-    NOTIFICATION_TYPES_FIELD_NUMBER: builtins.int
-    @property
-    def language_codes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    LANGUAGE_CODES_FIELD_NUMBER: _builtins.int
+    NOTIFICATION_ORIGINS_FIELD_NUMBER: _builtins.int
+    NOTIFICATION_VISIBILITIES_FIELD_NUMBER: _builtins.int
+    NOTIFICATION_FLAGGED_STATUS_FIELD_NUMBER: _builtins.int
+    NOTIFICATION_READ_STATUS_FIELD_NUMBER: _builtins.int
+    EARLIEST_FIELD_NUMBER: _builtins.int
+    LATEST_FIELD_NUMBER: _builtins.int
+    USER_NAMES_FIELD_NUMBER: _builtins.int
+    ORIGIN_NAMES_FIELD_NUMBER: _builtins.int
+    NOTIFICATION_TYPES_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def language_codes(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Language codes of the projects for which notifications are filtered."""
 
-    @property
-    def notification_origins(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[global___NotificationOrigin.ValueType]:
+    @_builtins.property
+    def notification_origins(self) -> _containers.RepeatedScalarFieldContainer[Global___NotificationOrigin.ValueType]:
         """Origins of the notifications to filter."""
 
-    @property
-    def notification_visibilities(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[global___NotificationVisibility.ValueType]:
+    @_builtins.property
+    def notification_visibilities(self) -> _containers.RepeatedScalarFieldContainer[Global___NotificationVisibility.ValueType]:
         """Visibilities of the notifications to filter."""
 
-    @property
-    def notification_flagged_status(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[global___NotificationFlaggedStatus.ValueType]:
+    @_builtins.property
+    def notification_flagged_status(self) -> _containers.RepeatedScalarFieldContainer[Global___NotificationFlaggedStatus.ValueType]:
         """Flagged status of the notifications to filter."""
 
-    @property
-    def notification_read_status(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[global___NotificationReadStatus.ValueType]:
+    @_builtins.property
+    def notification_read_status(self) -> _containers.RepeatedScalarFieldContainer[Global___NotificationReadStatus.ValueType]:
         """Read status of the notifications to filter."""
 
-    @property
-    def earliest(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def earliest(self) -> _timestamp_pb2.Timestamp:
         """Filter notifications with a time range starting from the specified earliest time."""
 
-    @property
-    def latest(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def latest(self) -> _timestamp_pb2.Timestamp:
         """Filter notifications with a time range ending at the specified latest time."""
 
-    @property
-    def user_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def user_names(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Resource names of users to filter notifications for."""
 
-    @property
-    def origin_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def origin_names(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Resource names of the origin of the notification to filter notifications."""
 
-    @property
-    def notification_types(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[global___NotificationType.ValueType]:
+    @_builtins.property
+    def notification_types(self) -> _containers.RepeatedScalarFieldContainer[Global___NotificationType.ValueType]:
         """Types of the notifications to filter."""
 
     def __init__(
         self,
         *,
-        language_codes: collections.abc.Iterable[builtins.str] | None = ...,
-        notification_origins: collections.abc.Iterable[global___NotificationOrigin.ValueType] | None = ...,
-        notification_visibilities: collections.abc.Iterable[global___NotificationVisibility.ValueType] | None = ...,
-        notification_flagged_status: collections.abc.Iterable[global___NotificationFlaggedStatus.ValueType] | None = ...,
-        notification_read_status: collections.abc.Iterable[global___NotificationReadStatus.ValueType] | None = ...,
-        earliest: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        latest: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        user_names: collections.abc.Iterable[builtins.str] | None = ...,
-        origin_names: collections.abc.Iterable[builtins.str] | None = ...,
-        notification_types: collections.abc.Iterable[global___NotificationType.ValueType] | None = ...,
+        language_codes: _abc.Iterable[_builtins.str] | None = ...,
+        notification_origins: _abc.Iterable[Global___NotificationOrigin.ValueType] | None = ...,
+        notification_visibilities: _abc.Iterable[Global___NotificationVisibility.ValueType] | None = ...,
+        notification_flagged_status: _abc.Iterable[Global___NotificationFlaggedStatus.ValueType] | None = ...,
+        notification_read_status: _abc.Iterable[Global___NotificationReadStatus.ValueType] | None = ...,
+        earliest: _timestamp_pb2.Timestamp | None = ...,
+        latest: _timestamp_pb2.Timestamp | None = ...,
+        user_names: _abc.Iterable[_builtins.str] | None = ...,
+        origin_names: _abc.Iterable[_builtins.str] | None = ...,
+        notification_types: _abc.Iterable[Global___NotificationType.ValueType] | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["earliest", b"earliest", "latest", b"latest"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["earliest", b"earliest", "language_codes", b"language_codes", "latest", b"latest", "notification_flagged_status", b"notification_flagged_status", "notification_origins", b"notification_origins", "notification_read_status", b"notification_read_status", "notification_types", b"notification_types", "notification_visibilities", b"notification_visibilities", "origin_names", b"origin_names", "user_names", b"user_names"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["earliest", b"earliest", "latest", b"latest"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["earliest", b"earliest", "language_codes", b"language_codes", "latest", b"latest", "notification_flagged_status", b"notification_flagged_status", "notification_origins", b"notification_origins", "notification_read_status", b"notification_read_status", "notification_types", b"notification_types", "notification_visibilities", b"notification_visibilities", "origin_names", b"origin_names", "user_names", b"user_names"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___NotificationFilter = NotificationFilter
+Global___NotificationFilter: _TypeAlias = NotificationFilter  # noqa: Y015
 
-@typing.final
-class ListNotificationsRequest(google.protobuf.message.Message):
+@_typing.final
+class ListNotificationsRequest(_message.Message):
     """Message for listing notifications based on certain criteria."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NOTIFICATION_FILTER_FIELD_NUMBER: builtins.int
-    PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    page_token: builtins.str
+    NOTIFICATION_FILTER_FIELD_NUMBER: _builtins.int
+    PAGE_TOKEN_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    page_token: _builtins.str
     """Optional. Token for pagination, obtained from a previous list request.
     The page token to support pagination.
     Pagination allows you to retrieve a large result set in smaller, more manageable portions.
@@ -660,12 +681,12 @@ class ListNotificationsRequest(google.protobuf.message.Message):
       <li>&quot;current_index-1--page_size--20&quot;</li>
     </ul>
     """
-    @property
-    def notification_filter(self) -> global___NotificationFilter:
+    @_builtins.property
+    def notification_filter(self) -> Global___NotificationFilter:
         """Optional filter to narrow the response down to specific notifications."""
 
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. Mask to control which fields will be filled with data.
         <br>
         Example: path=["notification.user_names"]
@@ -674,196 +695,219 @@ class ListNotificationsRequest(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        notification_filter: global___NotificationFilter | None = ...,
-        page_token: builtins.str = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        notification_filter: Global___NotificationFilter | None = ...,
+        page_token: _builtins.str = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask", "notification_filter", b"notification_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "notification_filter", b"notification_filter", "page_token", b"page_token"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "notification_filter", b"notification_filter"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "notification_filter", b"notification_filter", "page_token", b"page_token"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListNotificationsRequest = ListNotificationsRequest
+Global___ListNotificationsRequest: _TypeAlias = ListNotificationsRequest  # noqa: Y015
 
-@typing.final
-class ListNotificationsResponse(google.protobuf.message.Message):
+@_typing.final
+class ListNotificationsResponse(_message.Message):
     """Message containing the response to a list request for notifications."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NOTIFICATIONS_FIELD_NUMBER: builtins.int
-    @property
-    def notifications(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Notification]:
+    NOTIFICATIONS_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def notifications(self) -> _containers.RepeatedCompositeFieldContainer[Global___Notification]:
         """List of notifications that meet the specified criteria."""
 
     def __init__(
         self,
         *,
-        notifications: collections.abc.Iterable[global___Notification] | None = ...,
+        notifications: _abc.Iterable[Global___Notification] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["notifications", b"notifications"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["notifications", b"notifications"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListNotificationsResponse = ListNotificationsResponse
+Global___ListNotificationsResponse: _TypeAlias = ListNotificationsResponse  # noqa: Y015
 
-@typing.final
-class SetNotificationsFlaggedStatusRequest(google.protobuf.message.Message):
+@_typing.final
+class SetNotificationsFlaggedStatusRequest(_message.Message):
     """Message for setting the flagged status of notifications."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NOTIFICATION_NAMES_FIELD_NUMBER: builtins.int
-    FLAGGED_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    @property
-    def notification_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    NOTIFICATION_NAMES_FIELD_NUMBER: _builtins.int
+    FLAGGED_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def notification_names(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Names of notifications to set the flagged status for."""
 
-    @property
-    def flagged(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.bool]:
+    @_builtins.property
+    def flagged(self) -> _containers.RepeatedScalarFieldContainer[_builtins.bool]:
         """Flagged status to set for the specified notifications."""
 
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. Mask to control which fields of the returned notifications are filled with data."""
 
     def __init__(
         self,
         *,
-        notification_names: collections.abc.Iterable[builtins.str] | None = ...,
-        flagged: collections.abc.Iterable[builtins.bool] | None = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        notification_names: _abc.Iterable[_builtins.str] | None = ...,
+        flagged: _abc.Iterable[_builtins.bool] | None = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "flagged", b"flagged", "notification_names", b"notification_names"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "flagged", b"flagged", "notification_names", b"notification_names"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___SetNotificationsFlaggedStatusRequest = SetNotificationsFlaggedStatusRequest
+Global___SetNotificationsFlaggedStatusRequest: _TypeAlias = SetNotificationsFlaggedStatusRequest  # noqa: Y015
 
-@typing.final
-class SetNotificationsReadStatusRequest(google.protobuf.message.Message):
+@_typing.final
+class SetNotificationsReadStatusRequest(_message.Message):
     """Message for setting the read status of notifications."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NOTIFICATION_NAMES_FIELD_NUMBER: builtins.int
-    FLAGGED_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    @property
-    def notification_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    NOTIFICATION_NAMES_FIELD_NUMBER: _builtins.int
+    FLAGGED_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def notification_names(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Names of notifications to set the read status for."""
 
-    @property
-    def flagged(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.bool]:
+    @_builtins.property
+    def flagged(self) -> _containers.RepeatedScalarFieldContainer[_builtins.bool]:
         """Read status to set for the specified notifications."""
 
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. Mask to control which fields of the returned notifications are filled with data."""
 
     def __init__(
         self,
         *,
-        notification_names: collections.abc.Iterable[builtins.str] | None = ...,
-        flagged: collections.abc.Iterable[builtins.bool] | None = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        notification_names: _abc.Iterable[_builtins.str] | None = ...,
+        flagged: _abc.Iterable[_builtins.bool] | None = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "flagged", b"flagged", "notification_names", b"notification_names"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "flagged", b"flagged", "notification_names", b"notification_names"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___SetNotificationsReadStatusRequest = SetNotificationsReadStatusRequest
+Global___SetNotificationsReadStatusRequest: _TypeAlias = SetNotificationsReadStatusRequest  # noqa: Y015
 
-@typing.final
-class GetNotificationRequest(google.protobuf.message.Message):
+@_typing.final
+class GetNotificationRequest(_message.Message):
     """Message for retrieving a single notification by its resource name."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NAME_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """Resource name of the notification to retrieve."""
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. Mask to control which fields of the notification are returned."""
 
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        name: _builtins.str = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "name", b"name"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "name", b"name"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GetNotificationRequest = GetNotificationRequest
+Global___GetNotificationRequest: _TypeAlias = GetNotificationRequest  # noqa: Y015
 
-@typing.final
-class UpdateNotificationRequest(google.protobuf.message.Message):
+@_typing.final
+class UpdateNotificationRequest(_message.Message):
     """Message for updating a single notification."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NOTIFICATION_FIELD_NUMBER: builtins.int
-    UPDATE_MASK_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    @property
-    def notification(self) -> global___Notification:
+    NOTIFICATION_FIELD_NUMBER: _builtins.int
+    UPDATE_MASK_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def notification(self) -> Global___Notification:
         """The notification to update, identified by its resource name."""
 
-    @property
-    def update_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def update_mask(self) -> _field_mask_pb2.FieldMask:
         """Mask controlling which fields of the notification are updated."""
 
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. Mask to control which fields of the returned notification are filled with data."""
 
     def __init__(
         self,
         *,
-        notification: global___Notification | None = ...,
-        update_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        notification: Global___Notification | None = ...,
+        update_mask: _field_mask_pb2.FieldMask | None = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask", "notification", b"notification", "update_mask", b"update_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "notification", b"notification", "update_mask", b"update_mask"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "notification", b"notification", "update_mask", b"update_mask"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "notification", b"notification", "update_mask", b"update_mask"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___UpdateNotificationRequest = UpdateNotificationRequest
+Global___UpdateNotificationRequest: _TypeAlias = UpdateNotificationRequest  # noqa: Y015
 
-@typing.final
-class DeleteNotificationsRequest(google.protobuf.message.Message):
+@_typing.final
+class DeleteNotificationsRequest(_message.Message):
     """Message for deleting one or more notifications by their resource names."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NOTIFICATION_NAMES_FIELD_NUMBER: builtins.int
-    @property
-    def notification_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    NOTIFICATION_NAMES_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def notification_names(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Resource names of the notifications to delete."""
 
     def __init__(
         self,
         *,
-        notification_names: collections.abc.Iterable[builtins.str] | None = ...,
+        notification_names: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["notification_names", b"notification_names"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["notification_names", b"notification_names"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___DeleteNotificationsRequest = DeleteNotificationsRequest
+Global___DeleteNotificationsRequest: _TypeAlias = DeleteNotificationsRequest  # noqa: Y015
 
-@typing.final
-class StreamNotificationsRequest(google.protobuf.message.Message):
+@_typing.final
+class StreamNotificationsRequest(_message.Message):
     """Message for streaming notifications in real time via
     <a href="index.html#ondewo.nlu.Users.StreamNotifications">Users.StreamNotifications</a>.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NOTIFICATION_FILTER_FIELD_NUMBER: builtins.int
-    INCLUDE_EXISTING_FIELD_NUMBER: builtins.int
-    include_existing: builtins.bool
+    NOTIFICATION_FILTER_FIELD_NUMBER: _builtins.int
+    INCLUDE_EXISTING_FIELD_NUMBER: _builtins.int
+    include_existing: _builtins.bool
     """When true, the currently-stored matching notifications are replayed first (oldest first) before the
     stream switches to pushing only newly-created notifications. When false (the default) only
     notifications created after the stream opened are pushed.
     """
-    @property
-    def notification_filter(self) -> global___NotificationFilter:
+    @_builtins.property
+    def notification_filter(self) -> Global___NotificationFilter:
         """Optional filter to narrow the stream down to specific notifications (same semantics as
         <a href="index.html#ondewo.nlu.NotificationFilter">NotificationFilter</a> used by ListNotifications).
         The caller is always additionally scoped to their own notifications server-side.
@@ -872,117 +916,127 @@ class StreamNotificationsRequest(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        notification_filter: global___NotificationFilter | None = ...,
-        include_existing: builtins.bool = ...,
+        notification_filter: Global___NotificationFilter | None = ...,
+        include_existing: _builtins.bool = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["notification_filter", b"notification_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["include_existing", b"include_existing", "notification_filter", b"notification_filter"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["notification_filter", b"notification_filter"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["include_existing", b"include_existing", "notification_filter", b"notification_filter"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___StreamNotificationsRequest = StreamNotificationsRequest
+Global___StreamNotificationsRequest: _TypeAlias = StreamNotificationsRequest  # noqa: Y015
 
-@typing.final
-class KeyValuePair(google.protobuf.message.Message):
+@_typing.final
+class KeyValuePair(_message.Message):
     """Key-Value pair message, where the value can be one of various types (int, float, double, string, etc.)."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    KEY_FIELD_NUMBER: builtins.int
-    INT_VALUE_FIELD_NUMBER: builtins.int
-    FLOAT_VALUE_FIELD_NUMBER: builtins.int
-    DOUBLE_VALUE_FIELD_NUMBER: builtins.int
-    STRING_VALUE_FIELD_NUMBER: builtins.int
-    CREATED_AT_FIELD_NUMBER: builtins.int
-    key: builtins.str
+    KEY_FIELD_NUMBER: _builtins.int
+    INT_VALUE_FIELD_NUMBER: _builtins.int
+    FLOAT_VALUE_FIELD_NUMBER: _builtins.int
+    DOUBLE_VALUE_FIELD_NUMBER: _builtins.int
+    STRING_VALUE_FIELD_NUMBER: _builtins.int
+    CREATED_AT_FIELD_NUMBER: _builtins.int
+    key: _builtins.str
     """The key of the key-value pair."""
-    int_value: builtins.int
+    int_value: _builtins.int
     """The integer value (if applicable)."""
-    float_value: builtins.float
+    float_value: _builtins.float
     """The float value (if applicable)."""
-    double_value: builtins.float
+    double_value: _builtins.float
     """The double value (if applicable)."""
-    string_value: builtins.str
+    string_value: _builtins.str
     """The string value (if applicable)."""
-    @property
-    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def created_at(self) -> _timestamp_pb2.Timestamp:
         """The timestamp value (if applicable)."""
 
     def __init__(
         self,
         *,
-        key: builtins.str = ...,
-        int_value: builtins.int = ...,
-        float_value: builtins.float = ...,
-        double_value: builtins.float = ...,
-        string_value: builtins.str = ...,
-        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        key: _builtins.str = ...,
+        int_value: _builtins.int = ...,
+        float_value: _builtins.float = ...,
+        double_value: _builtins.float = ...,
+        string_value: _builtins.str = ...,
+        created_at: _timestamp_pb2.Timestamp | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["created_at", b"created_at", "double_value", b"double_value", "float_value", b"float_value", "int_value", b"int_value", "string_value", b"string_value", "value", b"value"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["created_at", b"created_at", "double_value", b"double_value", "float_value", b"float_value", "int_value", b"int_value", "key", b"key", "string_value", b"string_value", "value", b"value"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["value", b"value"]) -> typing.Literal["int_value", "float_value", "double_value", "string_value", "created_at"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["created_at", b"created_at", "double_value", b"double_value", "float_value", b"float_value", "int_value", b"int_value", "string_value", b"string_value", "value", b"value"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["created_at", b"created_at", "double_value", b"double_value", "float_value", b"float_value", "int_value", b"int_value", "key", b"key", "string_value", b"string_value", "value", b"value"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType_value: _TypeAlias = _typing.Literal["int_value", "float_value", "double_value", "string_value", "created_at"]  # noqa: Y015
+    _WhichOneofArgType_value: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
+    def WhichOneof(self, oneof_group: _WhichOneofArgType_value) -> _WhichOneofReturnType_value | None: ...
 
-global___KeyValuePair = KeyValuePair
+Global___KeyValuePair: _TypeAlias = KeyValuePair  # noqa: Y015
 
-@typing.final
-class LogEntry(google.protobuf.message.Message):
+@_typing.final
+class LogEntry(_message.Message):
     """A generic log entry structure."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NAME_FIELD_NUMBER: builtins.int
-    LOG_ENTRY_SEQUENCE_INDEX_FIELD_NUMBER: builtins.int
-    DISPLAY_NAME_FIELD_NUMBER: builtins.int
-    LOG_ENTRY_TIMESTAMP_FIELD_NUMBER: builtins.int
-    LOG_ENTRY_RECEIVE_TIMESTAMP_FIELD_NUMBER: builtins.int
-    LOG_ENTRY_SEVERITY_FIELD_NUMBER: builtins.int
-    LOG_ENTRY_PHASE_FIELD_NUMBER: builtins.int
-    LOG_ENTRY_OPERATION_NAME_FIELD_NUMBER: builtins.int
-    LOG_ENTRY_DETAILS_FIELD_NUMBER: builtins.int
-    LOG_ENTRY_CONTEXT_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    LOG_ENTRY_SEQUENCE_INDEX_FIELD_NUMBER: _builtins.int
+    DISPLAY_NAME_FIELD_NUMBER: _builtins.int
+    LOG_ENTRY_TIMESTAMP_FIELD_NUMBER: _builtins.int
+    LOG_ENTRY_RECEIVE_TIMESTAMP_FIELD_NUMBER: _builtins.int
+    LOG_ENTRY_SEVERITY_FIELD_NUMBER: _builtins.int
+    LOG_ENTRY_PHASE_FIELD_NUMBER: _builtins.int
+    LOG_ENTRY_OPERATION_NAME_FIELD_NUMBER: _builtins.int
+    LOG_ENTRY_DETAILS_FIELD_NUMBER: _builtins.int
+    LOG_ENTRY_CONTEXT_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """Resource name of the log entry.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/logs/&lt;log_uuid&gt;</code></pre>
     """
-    log_entry_sequence_index: builtins.int
+    log_entry_sequence_index: _builtins.int
     """Sequence index within the run."""
-    display_name: builtins.str
+    display_name: _builtins.str
     """Name of the log."""
-    log_entry_severity: global___LogSeverity.ValueType
+    log_entry_severity: Global___LogSeverity.ValueType
     """Severity of the log."""
-    log_entry_phase: builtins.str
+    log_entry_phase: _builtins.str
     """Execution phase (e.g. "discovery", "extraction")."""
-    log_entry_operation_name: builtins.str
+    log_entry_operation_name: _builtins.str
     """Name of the operation."""
-    @property
-    def log_entry_timestamp(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def log_entry_timestamp(self) -> _timestamp_pb2.Timestamp:
         """Timestamp of the log."""
 
-    @property
-    def log_entry_receive_timestamp(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def log_entry_receive_timestamp(self) -> _timestamp_pb2.Timestamp:
         """Output only. Timestamp when the log was received."""
 
-    @property
-    def log_entry_details(self) -> google.protobuf.struct_pb2.Struct:
+    @_builtins.property
+    def log_entry_details(self) -> _struct_pb2.Struct:
         """Raw details in Struct format."""
 
-    @property
-    def log_entry_context(self) -> google.protobuf.struct_pb2.Struct:
+    @_builtins.property
+    def log_entry_context(self) -> _struct_pb2.Struct:
         """Domain-specific metadata in Struct format."""
 
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
-        log_entry_sequence_index: builtins.int = ...,
-        display_name: builtins.str = ...,
-        log_entry_timestamp: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        log_entry_receive_timestamp: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        log_entry_severity: global___LogSeverity.ValueType = ...,
-        log_entry_phase: builtins.str = ...,
-        log_entry_operation_name: builtins.str = ...,
-        log_entry_details: google.protobuf.struct_pb2.Struct | None = ...,
-        log_entry_context: google.protobuf.struct_pb2.Struct | None = ...,
+        name: _builtins.str = ...,
+        log_entry_sequence_index: _builtins.int = ...,
+        display_name: _builtins.str = ...,
+        log_entry_timestamp: _timestamp_pb2.Timestamp | None = ...,
+        log_entry_receive_timestamp: _timestamp_pb2.Timestamp | None = ...,
+        log_entry_severity: Global___LogSeverity.ValueType = ...,
+        log_entry_phase: _builtins.str = ...,
+        log_entry_operation_name: _builtins.str = ...,
+        log_entry_details: _struct_pb2.Struct | None = ...,
+        log_entry_context: _struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["log_entry_context", b"log_entry_context", "log_entry_details", b"log_entry_details", "log_entry_receive_timestamp", b"log_entry_receive_timestamp", "log_entry_timestamp", b"log_entry_timestamp"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["display_name", b"display_name", "log_entry_context", b"log_entry_context", "log_entry_details", b"log_entry_details", "log_entry_operation_name", b"log_entry_operation_name", "log_entry_phase", b"log_entry_phase", "log_entry_receive_timestamp", b"log_entry_receive_timestamp", "log_entry_sequence_index", b"log_entry_sequence_index", "log_entry_severity", b"log_entry_severity", "log_entry_timestamp", b"log_entry_timestamp", "name", b"name"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["log_entry_context", b"log_entry_context", "log_entry_details", b"log_entry_details", "log_entry_receive_timestamp", b"log_entry_receive_timestamp", "log_entry_timestamp", b"log_entry_timestamp"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["display_name", b"display_name", "log_entry_context", b"log_entry_context", "log_entry_details", b"log_entry_details", "log_entry_operation_name", b"log_entry_operation_name", "log_entry_phase", b"log_entry_phase", "log_entry_receive_timestamp", b"log_entry_receive_timestamp", "log_entry_sequence_index", b"log_entry_sequence_index", "log_entry_severity", b"log_entry_severity", "log_entry_timestamp", b"log_entry_timestamp", "name", b"name"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___LogEntry = LogEntry
+Global___LogEntry: _TypeAlias = LogEntry  # noqa: Y015

@@ -16,27 +16,37 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-import builtins
-import google.protobuf.descriptor
-import google.protobuf.message
-import typing
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+import builtins as _builtins
+import sys
+import typing as _typing
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+if sys.version_info >= (3, 11):
+    from typing import TypeAlias as _TypeAlias, Never as _Never
+else:
+    from typing_extensions import TypeAlias as _TypeAlias, Never as _Never
 
-@typing.final
-class GetUserProjectCountRequest(google.protobuf.message.Message):
+DESCRIPTOR: _descriptor.FileDescriptor
+
+@_typing.final
+class GetUserProjectCountRequest(_message.Message):
     """Request to get user project count"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    USER_ID_FIELD_NUMBER: builtins.int
-    user_id: builtins.str
+    USER_ID_FIELD_NUMBER: _builtins.int
+    user_id: _builtins.str
     """Required. The ID of the User to count the projects from"""
     def __init__(
         self,
         *,
-        user_id: builtins.str = ...,
+        user_id: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["user_id", b"user_id"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["user_id", b"user_id"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GetUserProjectCountRequest = GetUserProjectCountRequest
+Global___GetUserProjectCountRequest: _TypeAlias = GetUserProjectCountRequest  # noqa: Y015

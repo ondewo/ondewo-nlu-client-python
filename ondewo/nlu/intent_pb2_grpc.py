@@ -7,7 +7,7 @@ from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 from ondewo.nlu import intent_pb2 as ondewo_dot_nlu_dot_intent__pb2
 from ondewo.nlu import operations_pb2 as ondewo_dot_nlu_dot_operations__pb2
 
-GRPC_GENERATED_VERSION = '1.67.1'
+GRPC_GENERATED_VERSION = '1.85.1'
 GRPC_VERSION = grpc.__version__
 _version_not_supported = False
 
@@ -20,14 +20,14 @@ except ImportError:
 if _version_not_supported:
     raise RuntimeError(
         f'The grpc package installed is at version {GRPC_VERSION},'
-        + f' but the generated code in ondewo/nlu/intent_pb2_grpc.py depends on'
+        + ' but the generated code in ondewo/nlu/intent_pb2_grpc.py depends on'
         + f' grpcio>={GRPC_GENERATED_VERSION}.'
         + f' Please upgrade your grpc module to grpcio>={GRPC_GENERATED_VERSION}'
         + f' or downgrade your generated code using grpcio-tools<={GRPC_VERSION}.'
     )
 
 
-class IntentsStub(object):
+class IntentsStub:
     """An intent represents a mapping between input from a user and an action to be taken by your application. When you pass user input to the <a href="index.html#ondewo.nlu.Sessions.DetectIntent">DetectIntent</a> (or <a href="index.html#ondewo.nlu.Sessions.StreamingDetectIntent">StreamingDetectIntent</a>) method, the Dialogflow API analyzes the input and searches for a matching intent. If no match is found, the Dialogflow API returns a fallback intent (<code>is_fallback</code> = true).
 
     You can provide additional information for the Dialogflow API to use to match user input to an intent by adding the following to your intent.
@@ -186,7 +186,7 @@ class IntentsStub(object):
                 _registered_method=True)
 
 
-class IntentsServicer(object):
+class IntentsServicer:
     """An intent represents a mapping between input from a user and an action to be taken by your application. When you pass user input to the <a href="index.html#ondewo.nlu.Sessions.DetectIntent">DetectIntent</a> (or <a href="index.html#ondewo.nlu.Sessions.StreamingDetectIntent">StreamingDetectIntent</a>) method, the Dialogflow API analyzes the input and searches for a matching intent. If no match is found, the Dialogflow API returns a fallback intent (<code>is_fallback</code> = true).
 
     You can provide additional information for the Dialogflow API to use to match user input to an intent by adding the following to your intent.
@@ -547,7 +547,7 @@ def add_IntentsServicer_to_server(servicer, server):
 
 
  # This class is part of an EXPERIMENTAL API.
-class Intents(object):
+class Intents:
     """An intent represents a mapping between input from a user and an action to be taken by your application. When you pass user input to the <a href="index.html#ondewo.nlu.Sessions.DetectIntent">DetectIntent</a> (or <a href="index.html#ondewo.nlu.Sessions.StreamingDetectIntent">StreamingDetectIntent</a>) method, the Dialogflow API analyzes the input and searches for a matching intent. If no match is found, the Dialogflow API returns a fallback intent (<code>is_fallback</code> = true).
 
     You can provide additional information for the Dialogflow API to use to match user input to an intent by adding the following to your intent.

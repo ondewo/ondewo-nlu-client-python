@@ -7,7 +7,7 @@ name = "ondewo-nlu-client"
 version = "7.6.0"
 description = "ONDEWO Natural Language Understanding (NLU) Client library for Python"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 authors = [
     { name = "ONDEWO GmbH", email = "office@ondewo.com" },
 ]
@@ -16,7 +16,6 @@ classifiers = [
     "Intended Audience :: Developers",
     "License :: OSI Approved :: Apache Software License",
     "Operating System :: OS Independent",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
@@ -24,16 +23,18 @@ classifiers = [
 ]
 dependencies = [
     "google-api-core",
-    "grpcio",
+    # The generated _pb2_grpc.py modules refuse an older grpcio at import (GRPC_GENERATED_VERSION = '1.85.1').
+    "grpcio>=1.85.1",
     "loguru",
     # Split by interpreter because ondewo-client-utils >=4.0.0 requires Python >=3.12 while this package still
-    # supports >=3.9. On 3.12+ the floor is 4.1.1, the release whose BaseClientConfig carries the mutual-TLS
+    # supports >=3.10. On 3.12+ the floor is 4.1.1, the release whose BaseClientConfig carries the mutual-TLS
     # grpc_client_cert / grpc_client_key fields that ClientConfig.__repr__ redacts. Older interpreters stay on
     # 3.2.0+, which has no client-key field, so there is nothing there to leak.
     "ondewo-client-utils>=4.1.1; python_version >= '3.12'",
     "ondewo-client-utils>=3.2.0; python_version < '3.12'",
     "polling",
-    "protobuf",
+    # The generated _pb2.py modules carry "Protobuf Python Version: 7.35.1" and refuse an older runtime.
+    "protobuf>=7.35.1,<8",
     "requests",
 ]
 
@@ -127,7 +128,7 @@ exclude_lines = [
 # ---------------------------------------------------------------------------
 [tool.ruff]
 line-length = 120
-target-version = "py39"
+target-version = "py310"
 # Never lint/format the generated protobuf/gRPC stubs (the old .flake8 excluded
 # every ondewo/**/*_pb2*.py / .pyi individually).
 extend-exclude = [

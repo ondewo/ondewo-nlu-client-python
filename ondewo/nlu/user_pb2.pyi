@@ -16,32 +16,32 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-import builtins
-import collections.abc
-import google.protobuf.descriptor
-import google.protobuf.field_mask_pb2
-import google.protobuf.internal.containers
-import google.protobuf.internal.enum_type_wrapper
-import google.protobuf.message
-import google.protobuf.timestamp_pb2
-import ondewo.nlu.common_pb2
-import ondewo.nlu.project_role_pb2
+from collections import abc as _abc
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import field_mask_pb2 as _field_mask_pb2
+from google.protobuf import message as _message
+from google.protobuf import timestamp_pb2 as _timestamp_pb2
+from google.protobuf.internal import containers as _containers
+from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
+from ondewo.nlu import common_pb2 as _common_pb2
+from ondewo.nlu import project_role_pb2 as _project_role_pb2
+import builtins as _builtins
 import sys
-import typing
+import typing as _typing
 
-if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+if sys.version_info >= (3, 11):
+    from typing import TypeAlias as _TypeAlias, Never as _Never
 else:
-    import typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias, Never as _Never
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 class _DefaultServerRole:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _DefaultServerRoleEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_DefaultServerRole.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _DefaultServerRoleEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_DefaultServerRole.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     SERVER_UNSPECIFIED: _DefaultServerRole.ValueType  # 0
     """unspecified server role"""
     SERVER_USER: _DefaultServerRole.ValueType  # 1
@@ -66,100 +66,106 @@ SERVER_ADMIN: DefaultServerRole.ValueType  # 3
 """this role can do everything"""
 SERVER_INACTIVE: DefaultServerRole.ValueType  # 4
 """this role can do nothing. Used to set a user as inactive in the server."""
-global___DefaultServerRole = DefaultServerRole
+Global___DefaultServerRole: _TypeAlias = DefaultServerRole  # noqa: Y015
 
-@typing.final
-class User(google.protobuf.message.Message):
+@_typing.final
+class User(_message.Message):
     """User messages
 
     this message contains all the fields that required for user db
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    USER_ID_FIELD_NUMBER: builtins.int
-    DISPLAY_NAME_FIELD_NUMBER: builtins.int
-    SERVER_ROLE_ID_FIELD_NUMBER: builtins.int
-    USER_EMAIL_FIELD_NUMBER: builtins.int
-    USER_PROFILE_PICTURE_FIELD_NUMBER: builtins.int
-    CREATED_AT_FIELD_NUMBER: builtins.int
-    MODIFIED_AT_FIELD_NUMBER: builtins.int
-    CREATED_BY_FIELD_NUMBER: builtins.int
-    MODIFIED_BY_FIELD_NUMBER: builtins.int
-    user_id: builtins.str
+    USER_ID_FIELD_NUMBER: _builtins.int
+    DISPLAY_NAME_FIELD_NUMBER: _builtins.int
+    SERVER_ROLE_ID_FIELD_NUMBER: _builtins.int
+    USER_EMAIL_FIELD_NUMBER: _builtins.int
+    USER_PROFILE_PICTURE_FIELD_NUMBER: _builtins.int
+    CREATED_AT_FIELD_NUMBER: _builtins.int
+    MODIFIED_AT_FIELD_NUMBER: _builtins.int
+    CREATED_BY_FIELD_NUMBER: _builtins.int
+    MODIFIED_BY_FIELD_NUMBER: _builtins.int
+    user_id: _builtins.str
     """when creating user user_id is empty, then it will be generated on creation time on backend"""
-    display_name: builtins.str
+    display_name: _builtins.str
     """Optional field display_name is the name that will be used on the frontend to interact with the user
     it shouldn&apos;t be unique. If not provided user_name will also be used as display name
     """
-    server_role_id: builtins.int
+    server_role_id: _builtins.int
     """server role type of the given user. If nothing is provided, the user is set to USER (minimum access)"""
-    user_email: builtins.str
+    user_email: _builtins.str
     """user e-mail should be a valid e-mail and unique"""
-    user_profile_picture: builtins.bytes
+    user_profile_picture: _builtins.bytes
     """user profile picture"""
-    created_by: builtins.str
+    created_by: _builtins.str
     """User id in form of a valid UUID."""
-    modified_by: builtins.str
+    modified_by: _builtins.str
     """User id in form of a valid UUID."""
-    @property
-    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def created_at(self) -> _timestamp_pb2.Timestamp:
         """Creation date and time. Read-only field."""
 
-    @property
-    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def modified_at(self) -> _timestamp_pb2.Timestamp:
         """Modification date and time. Read-only field."""
 
     def __init__(
         self,
         *,
-        user_id: builtins.str = ...,
-        display_name: builtins.str = ...,
-        server_role_id: builtins.int = ...,
-        user_email: builtins.str = ...,
-        user_profile_picture: builtins.bytes = ...,
-        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        created_by: builtins.str = ...,
-        modified_by: builtins.str = ...,
+        user_id: _builtins.str = ...,
+        display_name: _builtins.str = ...,
+        server_role_id: _builtins.int = ...,
+        user_email: _builtins.str = ...,
+        user_profile_picture: _builtins.bytes = ...,
+        created_at: _timestamp_pb2.Timestamp | None = ...,
+        modified_at: _timestamp_pb2.Timestamp | None = ...,
+        created_by: _builtins.str = ...,
+        modified_by: _builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "modified_at", b"modified_at", "modified_by", b"modified_by", "server_role_id", b"server_role_id", "user_email", b"user_email", "user_id", b"user_id", "user_profile_picture", b"user_profile_picture"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "modified_at", b"modified_at", "modified_by", b"modified_by", "server_role_id", b"server_role_id", "user_email", b"user_email", "user_id", b"user_id", "user_profile_picture", b"user_profile_picture"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___User = User
+Global___User: _TypeAlias = User  # noqa: Y015
 
-@typing.final
-class UserInfo(google.protobuf.message.Message):
+@_typing.final
+class UserInfo(_message.Message):
     """This message contains information about user"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    @typing.final
-    class ProjectRolesEntry(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class ProjectRolesEntry(_message.Message):
+        DESCRIPTOR: _descriptor.Descriptor
 
-        KEY_FIELD_NUMBER: builtins.int
-        VALUE_FIELD_NUMBER: builtins.int
-        key: builtins.str
-        @property
-        def value(self) -> ondewo.nlu.project_role_pb2.ProjectRole: ...
+        KEY_FIELD_NUMBER: _builtins.int
+        VALUE_FIELD_NUMBER: _builtins.int
+        key: _builtins.str
+        @_builtins.property
+        def value(self) -> _project_role_pb2.ProjectRole: ...
         def __init__(
             self,
             *,
-            key: builtins.str = ...,
-            value: ondewo.nlu.project_role_pb2.ProjectRole | None = ...,
+            key: _builtins.str = ...,
+            value: _project_role_pb2.ProjectRole | None = ...,
         ) -> None: ...
-        def HasField(self, field_name: typing.Literal["value", b"value"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing.Literal["key", b"key", "value", b"value"]) -> None: ...
+        _HasFieldArgType: _TypeAlias = _typing.Literal["value", b"value"]  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
+        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+        def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-    USER_FIELD_NUMBER: builtins.int
-    PROJECT_ROLES_FIELD_NUMBER: builtins.int
-    @property
-    def user(self) -> global___User:
+    USER_FIELD_NUMBER: _builtins.int
+    PROJECT_ROLES_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def user(self) -> Global___User:
         """user object"""
 
-    @property
-    def project_roles(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, ondewo.nlu.project_role_pb2.ProjectRole]:
+    @_builtins.property
+    def project_roles(self) -> _containers.MessageMap[_builtins.str, _project_role_pb2.ProjectRole]:
         """If in GetUser, ListUser requests UserView is FULL, then the mapping is additionally provided
         of parent of the project and corresponding ProjectRole of the user
         """
@@ -167,129 +173,146 @@ class UserInfo(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        user: global___User | None = ...,
-        project_roles: collections.abc.Mapping[builtins.str, ondewo.nlu.project_role_pb2.ProjectRole] | None = ...,
+        user: Global___User | None = ...,
+        project_roles: _abc.Mapping[_builtins.str, _project_role_pb2.ProjectRole] | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["user", b"user"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["project_roles", b"project_roles", "user", b"user"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["user", b"user"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["project_roles", b"project_roles", "user", b"user"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___UserInfo = UserInfo
+Global___UserInfo: _TypeAlias = UserInfo  # noqa: Y015
 
-@typing.final
-class CreateUserRequest(google.protobuf.message.Message):
+@_typing.final
+class CreateUserRequest(_message.Message):
     """Request to create user"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    USER_FIELD_NUMBER: builtins.int
-    PASSWORD_FIELD_NUMBER: builtins.int
-    password: builtins.str
+    USER_FIELD_NUMBER: _builtins.int
+    PASSWORD_FIELD_NUMBER: _builtins.int
+    password: _builtins.str
     """password"""
-    @property
-    def user(self) -> global___User:
+    @_builtins.property
+    def user(self) -> Global___User:
         """user_id in the User message should be given, if empty will throw an error in the backend"""
 
     def __init__(
         self,
         *,
-        user: global___User | None = ...,
-        password: builtins.str = ...,
+        user: Global___User | None = ...,
+        password: _builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["user", b"user"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["password", b"password", "user", b"user"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["user", b"user"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["password", b"password", "user", b"user"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___CreateUserRequest = CreateUserRequest
+Global___CreateUserRequest: _TypeAlias = CreateUserRequest  # noqa: Y015
 
-@typing.final
-class UpdateUserRequest(google.protobuf.message.Message):
+@_typing.final
+class UpdateUserRequest(_message.Message):
     """Request to update user"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    USER_FIELD_NUMBER: builtins.int
-    PASSWORD_FIELD_NUMBER: builtins.int
-    UPDATE_MASK_FIELD_NUMBER: builtins.int
-    password: builtins.str
+    USER_FIELD_NUMBER: _builtins.int
+    PASSWORD_FIELD_NUMBER: _builtins.int
+    UPDATE_MASK_FIELD_NUMBER: _builtins.int
+    password: _builtins.str
     """Password of the user"""
-    @property
-    def user(self) -> global___User:
+    @_builtins.property
+    def user(self) -> Global___User:
         """user_id in the User message should be given, if empty will throw an error in the backend
         password and other fields in the User are optional. Only the fields to be updated should be provided
         """
 
-    @property
-    def update_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def update_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields get updated."""
 
     def __init__(
         self,
         *,
-        user: global___User | None = ...,
-        password: builtins.str = ...,
-        update_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        user: Global___User | None = ...,
+        password: _builtins.str = ...,
+        update_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["update_mask", b"update_mask", "user", b"user"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["password", b"password", "update_mask", b"update_mask", "user", b"user"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["update_mask", b"update_mask", "user", b"user"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["password", b"password", "update_mask", b"update_mask", "user", b"user"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___UpdateUserRequest = UpdateUserRequest
+Global___UpdateUserRequest: _TypeAlias = UpdateUserRequest  # noqa: Y015
 
-@typing.final
-class GetUserRequest(google.protobuf.message.Message):
+@_typing.final
+class GetUserRequest(_message.Message):
     """Request to get user"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    USER_ID_FIELD_NUMBER: builtins.int
-    USER_EMAIL_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    user_id: builtins.str
+    USER_ID_FIELD_NUMBER: _builtins.int
+    USER_EMAIL_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    user_id: _builtins.str
     """the user is identified by user id"""
-    user_email: builtins.str
+    user_email: _builtins.str
     """the user can identified by their email"""
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional field mask to specify which fields to return in the response"""
 
     def __init__(
         self,
         *,
-        user_id: builtins.str = ...,
-        user_email: builtins.str = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        user_id: _builtins.str = ...,
+        user_email: _builtins.str = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask", "user_email", b"user_email", "user_id", b"user_id", "user_identifier", b"user_identifier"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "user_email", b"user_email", "user_id", b"user_id", "user_identifier", b"user_identifier"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["user_identifier", b"user_identifier"]) -> typing.Literal["user_id", "user_email"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "user_email", b"user_email", "user_id", b"user_id", "user_identifier", b"user_identifier"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "user_email", b"user_email", "user_id", b"user_id", "user_identifier", b"user_identifier"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType_user_identifier: _TypeAlias = _typing.Literal["user_id", "user_email"]  # noqa: Y015
+    _WhichOneofArgType_user_identifier: _TypeAlias = _typing.Literal["user_identifier", b"user_identifier"]  # noqa: Y015
+    def WhichOneof(self, oneof_group: _WhichOneofArgType_user_identifier) -> _WhichOneofReturnType_user_identifier | None: ...
 
-global___GetUserRequest = GetUserRequest
+Global___GetUserRequest: _TypeAlias = GetUserRequest  # noqa: Y015
 
-@typing.final
-class DeleteUserRequest(google.protobuf.message.Message):
+@_typing.final
+class DeleteUserRequest(_message.Message):
     """Request to delete user"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    USER_ID_FIELD_NUMBER: builtins.int
-    user_id: builtins.str
+    USER_ID_FIELD_NUMBER: _builtins.int
+    user_id: _builtins.str
     """user is identified by user id, if empty will throw an error in the backend"""
     def __init__(
         self,
         *,
-        user_id: builtins.str = ...,
+        user_id: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["user_id", b"user_id"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["user_id", b"user_id"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___DeleteUserRequest = DeleteUserRequest
+Global___DeleteUserRequest: _TypeAlias = DeleteUserRequest  # noqa: Y015
 
-@typing.final
-class ListUsersRequest(google.protobuf.message.Message):
+@_typing.final
+class ListUsersRequest(_message.Message):
     """Request to list user"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    page_token: builtins.str
+    PAGE_TOKEN_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    page_token: _builtins.str
     """Optional: The page token to support pagination.
     Pagination allows you to retrieve a large result set in smaller, more manageable portions.
     The page token is a string representing the current index and page size.
@@ -320,35 +343,38 @@ class ListUsersRequest(google.protobuf.message.Message):
         <li><code>&quot;current_index-1--page_size--20&quot;</code></li>
     </ul>
     """
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields gets returned."""
 
     def __init__(
         self,
         *,
-        page_token: builtins.str = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        page_token: _builtins.str = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "page_token", b"page_token"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "page_token", b"page_token"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListUsersRequest = ListUsersRequest
+Global___ListUsersRequest: _TypeAlias = ListUsersRequest  # noqa: Y015
 
-@typing.final
-class ListUsersResponse(google.protobuf.message.Message):
+@_typing.final
+class ListUsersResponse(_message.Message):
     """Response containing list of users"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    USERS_FIELD_NUMBER: builtins.int
-    NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    next_page_token: builtins.str
+    USERS_FIELD_NUMBER: _builtins.int
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: _builtins.int
+    next_page_token: _builtins.str
     """The next_page_token is used to retrieve the next page of a returned result,
     e.g. next_page_token is current_index-2
     """
-    @property
-    def users(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___User]:
+    @_builtins.property
+    def users(self) -> _containers.RepeatedCompositeFieldContainer[Global___User]:
         """The list of users. There will be a maximum number of items
         returned based on the page_token field in the request.
         """
@@ -356,27 +382,31 @@ class ListUsersResponse(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        users: collections.abc.Iterable[global___User] | None = ...,
-        next_page_token: builtins.str = ...,
+        users: _abc.Iterable[Global___User] | None = ...,
+        next_page_token: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["next_page_token", b"next_page_token", "users", b"users"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["next_page_token", b"next_page_token", "users", b"users"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListUsersResponse = ListUsersResponse
+Global___ListUsersResponse: _TypeAlias = ListUsersResponse  # noqa: Y015
 
-@typing.final
-class ListUserInfosResponse(google.protobuf.message.Message):
+@_typing.final
+class ListUserInfosResponse(_message.Message):
     """Response containing list of users"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    USERS_FIELD_NUMBER: builtins.int
-    NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    next_page_token: builtins.str
+    USERS_FIELD_NUMBER: _builtins.int
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: _builtins.int
+    next_page_token: _builtins.str
     """The next_page_token is used to retrieve the next page of a returned result,
     e.g. next_page_token is current_index-2
     """
-    @property
-    def users(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___UserInfo]:
+    @_builtins.property
+    def users(self) -> _containers.RepeatedCompositeFieldContainer[Global___UserInfo]:
         """The list of server roles. There will be a maximum number of items
         returned based on the page_token field in the request.
         """
@@ -384,71 +414,78 @@ class ListUserInfosResponse(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        users: collections.abc.Iterable[global___UserInfo] | None = ...,
-        next_page_token: builtins.str = ...,
+        users: _abc.Iterable[Global___UserInfo] | None = ...,
+        next_page_token: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["next_page_token", b"next_page_token", "users", b"users"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["next_page_token", b"next_page_token", "users", b"users"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListUserInfosResponse = ListUserInfosResponse
+Global___ListUserInfosResponse: _TypeAlias = ListUserInfosResponse  # noqa: Y015
 
-@typing.final
-class ServerRole(google.protobuf.message.Message):
+@_typing.final
+class ServerRole(_message.Message):
     """Server Role messages"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ROLE_ID_FIELD_NUMBER: builtins.int
-    NAME_FIELD_NUMBER: builtins.int
-    PERMISSIONS_FIELD_NUMBER: builtins.int
-    CREATED_AT_FIELD_NUMBER: builtins.int
-    MODIFIED_AT_FIELD_NUMBER: builtins.int
-    CREATED_BY_FIELD_NUMBER: builtins.int
-    MODIFIED_BY_FIELD_NUMBER: builtins.int
-    role_id: builtins.int
+    ROLE_ID_FIELD_NUMBER: _builtins.int
+    NAME_FIELD_NUMBER: _builtins.int
+    PERMISSIONS_FIELD_NUMBER: _builtins.int
+    CREATED_AT_FIELD_NUMBER: _builtins.int
+    MODIFIED_AT_FIELD_NUMBER: _builtins.int
+    CREATED_BY_FIELD_NUMBER: _builtins.int
+    MODIFIED_BY_FIELD_NUMBER: _builtins.int
+    role_id: _builtins.int
     """unique identifier of the role"""
-    name: builtins.str
+    name: _builtins.str
     """unique name of the role"""
-    created_by: builtins.str
+    created_by: _builtins.str
     """User id in form of a valid UUID."""
-    modified_by: builtins.str
+    modified_by: _builtins.str
     """User id in form of a valid UUID."""
-    @property
-    def permissions(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def permissions(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """defines the permissions for the given role (the strings can be gotten from the ListServerPermissions)"""
 
-    @property
-    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def created_at(self) -> _timestamp_pb2.Timestamp:
         """Creation date and time. Read-only field."""
 
-    @property
-    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def modified_at(self) -> _timestamp_pb2.Timestamp:
         """Modification date and time. Read-only field."""
 
     def __init__(
         self,
         *,
-        role_id: builtins.int = ...,
-        name: builtins.str = ...,
-        permissions: collections.abc.Iterable[builtins.str] | None = ...,
-        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        created_by: builtins.str = ...,
-        modified_by: builtins.str = ...,
+        role_id: _builtins.int = ...,
+        name: _builtins.str = ...,
+        permissions: _abc.Iterable[_builtins.str] | None = ...,
+        created_at: _timestamp_pb2.Timestamp | None = ...,
+        modified_at: _timestamp_pb2.Timestamp | None = ...,
+        created_by: _builtins.str = ...,
+        modified_by: _builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["created_at", b"created_at", "created_by", b"created_by", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "permissions", b"permissions", "role_id", b"role_id"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["created_at", b"created_at", "created_by", b"created_by", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "permissions", b"permissions", "role_id", b"role_id"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ServerRole = ServerRole
+Global___ServerRole: _TypeAlias = ServerRole  # noqa: Y015
 
-@typing.final
-class CreateServerRoleRequest(google.protobuf.message.Message):
+@_typing.final
+class CreateServerRoleRequest(_message.Message):
     """Request to create server role"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ROLE_FIELD_NUMBER: builtins.int
-    @property
-    def role(self) -> global___ServerRole:
+    ROLE_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def role(self) -> Global___ServerRole:
         """If the role_id is not provided, an incremental value will be assigned
         The &quot;name&quot; and &quot;role_type&quot; are mandatory values
         The permissions all default to False if not provided specifically
@@ -457,99 +494,113 @@ class CreateServerRoleRequest(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        role: global___ServerRole | None = ...,
+        role: Global___ServerRole | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["role", b"role"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["role", b"role"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["role", b"role"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["role", b"role"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___CreateServerRoleRequest = CreateServerRoleRequest
+Global___CreateServerRoleRequest: _TypeAlias = CreateServerRoleRequest  # noqa: Y015
 
-@typing.final
-class UpdateServerRoleRequest(google.protobuf.message.Message):
+@_typing.final
+class UpdateServerRoleRequest(_message.Message):
     """Request to update server role"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ROLE_FIELD_NUMBER: builtins.int
-    UPDATE_MASK_FIELD_NUMBER: builtins.int
-    @property
-    def role(self) -> global___ServerRole:
+    ROLE_FIELD_NUMBER: _builtins.int
+    UPDATE_MASK_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def role(self) -> Global___ServerRole:
         """role_id in the Role message should be given, if empty will throw an error in the backend
         other fields in the Role are optional. Only the fields to be updated should be provided
         """
 
-    @property
-    def update_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def update_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields get updated."""
 
     def __init__(
         self,
         *,
-        role: global___ServerRole | None = ...,
-        update_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        role: Global___ServerRole | None = ...,
+        update_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["role", b"role", "update_mask", b"update_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["role", b"role", "update_mask", b"update_mask"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["role", b"role", "update_mask", b"update_mask"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["role", b"role", "update_mask", b"update_mask"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___UpdateServerRoleRequest = UpdateServerRoleRequest
+Global___UpdateServerRoleRequest: _TypeAlias = UpdateServerRoleRequest  # noqa: Y015
 
-@typing.final
-class DeleteServerRoleRequest(google.protobuf.message.Message):
+@_typing.final
+class DeleteServerRoleRequest(_message.Message):
     """Request to delete server role"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ROLE_ID_FIELD_NUMBER: builtins.int
-    role_id: builtins.int
+    ROLE_ID_FIELD_NUMBER: _builtins.int
+    role_id: _builtins.int
     """role is identified by role id, if empty will throw an error in the backend"""
     def __init__(
         self,
         *,
-        role_id: builtins.int = ...,
+        role_id: _builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["role_id", b"role_id"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["role_id", b"role_id"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___DeleteServerRoleRequest = DeleteServerRoleRequest
+Global___DeleteServerRoleRequest: _TypeAlias = DeleteServerRoleRequest  # noqa: Y015
 
-@typing.final
-class GetServerRoleRequest(google.protobuf.message.Message):
+@_typing.final
+class GetServerRoleRequest(_message.Message):
     """Request to get server role"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ROLE_ID_FIELD_NUMBER: builtins.int
-    ROLE_NAME_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    role_id: builtins.int
+    ROLE_ID_FIELD_NUMBER: _builtins.int
+    ROLE_NAME_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    role_id: _builtins.int
     """role is identified by role id"""
-    role_name: builtins.str
+    role_name: _builtins.str
     """role can also be uniquely identified by its name"""
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields gets returned."""
 
     def __init__(
         self,
         *,
-        role_id: builtins.int = ...,
-        role_name: builtins.str = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        role_id: _builtins.int = ...,
+        role_name: _builtins.str = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask", "role_id", b"role_id", "role_name", b"role_name", "server_role_identifier", b"server_role_identifier"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "role_id", b"role_id", "role_name", b"role_name", "server_role_identifier", b"server_role_identifier"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["server_role_identifier", b"server_role_identifier"]) -> typing.Literal["role_id", "role_name"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "role_id", b"role_id", "role_name", b"role_name", "server_role_identifier", b"server_role_identifier"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "role_id", b"role_id", "role_name", b"role_name", "server_role_identifier", b"server_role_identifier"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType_server_role_identifier: _TypeAlias = _typing.Literal["role_id", "role_name"]  # noqa: Y015
+    _WhichOneofArgType_server_role_identifier: _TypeAlias = _typing.Literal["server_role_identifier", b"server_role_identifier"]  # noqa: Y015
+    def WhichOneof(self, oneof_group: _WhichOneofArgType_server_role_identifier) -> _WhichOneofReturnType_server_role_identifier | None: ...
 
-global___GetServerRoleRequest = GetServerRoleRequest
+Global___GetServerRoleRequest: _TypeAlias = GetServerRoleRequest  # noqa: Y015
 
-@typing.final
-class ListServerRolesRequest(google.protobuf.message.Message):
+@_typing.final
+class ListServerRolesRequest(_message.Message):
     """Request to list server roles"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    page_token: builtins.str
+    PAGE_TOKEN_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    page_token: _builtins.str
     """Optional: The page token to support pagination.
     Pagination allows you to retrieve a large result set in smaller, more manageable portions.
     The page token is a string representing the current index and page size.
@@ -580,35 +631,38 @@ class ListServerRolesRequest(google.protobuf.message.Message):
         <li><code>&quot;current_index-1--page_size--20&quot;</code></li>
     </ul>
     """
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields gets returned."""
 
     def __init__(
         self,
         *,
-        page_token: builtins.str = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        page_token: _builtins.str = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "page_token", b"page_token"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "page_token", b"page_token"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListServerRolesRequest = ListServerRolesRequest
+Global___ListServerRolesRequest: _TypeAlias = ListServerRolesRequest  # noqa: Y015
 
-@typing.final
-class ListServerRolesResponse(google.protobuf.message.Message):
+@_typing.final
+class ListServerRolesResponse(_message.Message):
     """Response containing list of server roles"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    SERVER_ROLES_FIELD_NUMBER: builtins.int
-    NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    next_page_token: builtins.str
+    SERVER_ROLES_FIELD_NUMBER: _builtins.int
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: _builtins.int
+    next_page_token: _builtins.str
     """The next_page_token is used to retrieve the next page of a returned result,
     e.g. next_page_token is current_index-2
     """
-    @property
-    def server_roles(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___ServerRole]:
+    @_builtins.property
+    def server_roles(self) -> _containers.RepeatedCompositeFieldContainer[Global___ServerRole]:
         """The list of server roles. There will be a maximum number of items
         returned based on the page_token field in the request.
         """
@@ -616,22 +670,26 @@ class ListServerRolesResponse(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        server_roles: collections.abc.Iterable[global___ServerRole] | None = ...,
-        next_page_token: builtins.str = ...,
+        server_roles: _abc.Iterable[Global___ServerRole] | None = ...,
+        next_page_token: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["next_page_token", b"next_page_token", "server_roles", b"server_roles"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["next_page_token", b"next_page_token", "server_roles", b"server_roles"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListServerRolesResponse = ListServerRolesResponse
+Global___ListServerRolesResponse: _TypeAlias = ListServerRolesResponse  # noqa: Y015
 
-@typing.final
-class ListServerPermissionsRequest(google.protobuf.message.Message):
+@_typing.final
+class ListServerPermissionsRequest(_message.Message):
     """Server permissions"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    page_token: builtins.str
+    PAGE_TOKEN_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    page_token: _builtins.str
     """Optional: The page token to support pagination.
     Pagination allows you to retrieve a large result set in smaller, more manageable portions.
     The page token is a string representing the current index and page size.
@@ -662,35 +720,38 @@ class ListServerPermissionsRequest(google.protobuf.message.Message):
         <li><code>&quot;current_index-1--page_size--20&quot;</code></li>
     </ul>
     """
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields gets returned."""
 
     def __init__(
         self,
         *,
-        page_token: builtins.str = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        page_token: _builtins.str = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "page_token", b"page_token"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "page_token", b"page_token"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListServerPermissionsRequest = ListServerPermissionsRequest
+Global___ListServerPermissionsRequest: _TypeAlias = ListServerPermissionsRequest  # noqa: Y015
 
-@typing.final
-class ListServerPermissionsResponse(google.protobuf.message.Message):
+@_typing.final
+class ListServerPermissionsResponse(_message.Message):
     """Response containing list of server permissions"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PERMISSIONS_FIELD_NUMBER: builtins.int
-    NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    next_page_token: builtins.str
+    PERMISSIONS_FIELD_NUMBER: _builtins.int
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: _builtins.int
+    next_page_token: _builtins.str
     """The next_page_token is used to retrieve the next page of a returned result,
     e.g. next_page_token is current_index-2
     """
-    @property
-    def permissions(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def permissions(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """The list of server permissions. There will be a maximum number of items
         returned based on the page_token field in the request.
         """
@@ -698,220 +759,247 @@ class ListServerPermissionsResponse(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        permissions: collections.abc.Iterable[builtins.str] | None = ...,
-        next_page_token: builtins.str = ...,
+        permissions: _abc.Iterable[_builtins.str] | None = ...,
+        next_page_token: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["next_page_token", b"next_page_token", "permissions", b"permissions"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["next_page_token", b"next_page_token", "permissions", b"permissions"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListServerPermissionsResponse = ListServerPermissionsResponse
+Global___ListServerPermissionsResponse: _TypeAlias = ListServerPermissionsResponse  # noqa: Y015
 
-@typing.final
-class GetUserPreferencesRequest(google.protobuf.message.Message):
+@_typing.final
+class GetUserPreferencesRequest(_message.Message):
     """Request to get user preferences."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    USER_NAME_FIELD_NUMBER: builtins.int
-    KEYS_FIELD_NUMBER: builtins.int
-    REGEX_INCLUDE_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    user_name: builtins.str
+    USER_NAME_FIELD_NUMBER: _builtins.int
+    KEYS_FIELD_NUMBER: _builtins.int
+    REGEX_INCLUDE_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    user_name: _builtins.str
     """The name of the user.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre>
     """
-    regex_include: builtins.str
+    regex_include: _builtins.str
     """Optional: In addition to the keys specified also include all <code>keys</code> that match the provided
     <code>regex_include</code> regular expression.
     If user does not add regex_filter, then only the keys specified in the keys field are returned.
     If both, a key in the keys field and in the regex_include will be matched than only a single
     <code>KeyValuePair</code> is returned.
     """
-    @property
-    def keys(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def keys(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Specific keys to retrieve from user preferences.
         If keys are specified multiple times then only one KeyValue pair is returned
         """
 
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields gets returned."""
 
     def __init__(
         self,
         *,
-        user_name: builtins.str = ...,
-        keys: collections.abc.Iterable[builtins.str] | None = ...,
-        regex_include: builtins.str = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        user_name: _builtins.str = ...,
+        keys: _abc.Iterable[_builtins.str] | None = ...,
+        regex_include: _builtins.str = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "keys", b"keys", "regex_include", b"regex_include", "user_name", b"user_name"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "keys", b"keys", "regex_include", b"regex_include", "user_name", b"user_name"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GetUserPreferencesRequest = GetUserPreferencesRequest
+Global___GetUserPreferencesRequest: _TypeAlias = GetUserPreferencesRequest  # noqa: Y015
 
-@typing.final
-class GetUserPreferencesResponse(google.protobuf.message.Message):
+@_typing.final
+class GetUserPreferencesResponse(_message.Message):
     """Response containing user preferences."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    USER_NAME_FIELD_NUMBER: builtins.int
-    KEY_VALUE_PAIRS_FIELD_NUMBER: builtins.int
-    ERROR_MESSAGE_FIELD_NUMBER: builtins.int
-    user_name: builtins.str
+    USER_NAME_FIELD_NUMBER: _builtins.int
+    KEY_VALUE_PAIRS_FIELD_NUMBER: _builtins.int
+    ERROR_MESSAGE_FIELD_NUMBER: _builtins.int
+    user_name: _builtins.str
     """The name of the user.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre>
     """
-    error_message: builtins.str
+    error_message: _builtins.str
     """error message if there are any."""
-    @property
-    def key_value_pairs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.common_pb2.KeyValuePair]:
+    @_builtins.property
+    def key_value_pairs(self) -> _containers.RepeatedCompositeFieldContainer[_common_pb2.KeyValuePair]:
         """List of key-value pairs representing user preferences."""
 
     def __init__(
         self,
         *,
-        user_name: builtins.str = ...,
-        key_value_pairs: collections.abc.Iterable[ondewo.nlu.common_pb2.KeyValuePair] | None = ...,
-        error_message: builtins.str = ...,
+        user_name: _builtins.str = ...,
+        key_value_pairs: _abc.Iterable[_common_pb2.KeyValuePair] | None = ...,
+        error_message: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["error_message", b"error_message", "key_value_pairs", b"key_value_pairs", "user_name", b"user_name"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["error_message", b"error_message", "key_value_pairs", b"key_value_pairs", "user_name", b"user_name"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GetUserPreferencesResponse = GetUserPreferencesResponse
+Global___GetUserPreferencesResponse: _TypeAlias = GetUserPreferencesResponse  # noqa: Y015
 
-@typing.final
-class SetUserPreferencesRequest(google.protobuf.message.Message):
+@_typing.final
+class SetUserPreferencesRequest(_message.Message):
     """Request to set or update user preferences."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    USER_NAME_FIELD_NUMBER: builtins.int
-    KEY_VALUE_PAIRS_FIELD_NUMBER: builtins.int
-    user_name: builtins.str
+    USER_NAME_FIELD_NUMBER: _builtins.int
+    KEY_VALUE_PAIRS_FIELD_NUMBER: _builtins.int
+    user_name: _builtins.str
     """The name of the user.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre>
     """
-    @property
-    def key_value_pairs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.common_pb2.KeyValuePair]:
+    @_builtins.property
+    def key_value_pairs(self) -> _containers.RepeatedCompositeFieldContainer[_common_pb2.KeyValuePair]:
         """List of key-value pairs to set or update."""
 
     def __init__(
         self,
         *,
-        user_name: builtins.str = ...,
-        key_value_pairs: collections.abc.Iterable[ondewo.nlu.common_pb2.KeyValuePair] | None = ...,
+        user_name: _builtins.str = ...,
+        key_value_pairs: _abc.Iterable[_common_pb2.KeyValuePair] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["key_value_pairs", b"key_value_pairs", "user_name", b"user_name"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["key_value_pairs", b"key_value_pairs", "user_name", b"user_name"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___SetUserPreferencesRequest = SetUserPreferencesRequest
+Global___SetUserPreferencesRequest: _TypeAlias = SetUserPreferencesRequest  # noqa: Y015
 
-@typing.final
-class SetUserPreferencesResponse(google.protobuf.message.Message):
+@_typing.final
+class SetUserPreferencesResponse(_message.Message):
     """Response to set or update user preferences."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    USER_NAME_FIELD_NUMBER: builtins.int
-    KEYS_FIELD_NUMBER: builtins.int
-    ERROR_MESSAGE_FIELD_NUMBER: builtins.int
-    user_name: builtins.str
+    USER_NAME_FIELD_NUMBER: _builtins.int
+    KEYS_FIELD_NUMBER: _builtins.int
+    ERROR_MESSAGE_FIELD_NUMBER: _builtins.int
+    user_name: _builtins.str
     """The name of the user.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre>
     """
-    error_message: builtins.str
+    error_message: _builtins.str
     """error message if there are any."""
-    @property
-    def keys(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def keys(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """List of keys to delete from user preferences."""
 
     def __init__(
         self,
         *,
-        user_name: builtins.str = ...,
-        keys: collections.abc.Iterable[builtins.str] | None = ...,
-        error_message: builtins.str = ...,
+        user_name: _builtins.str = ...,
+        keys: _abc.Iterable[_builtins.str] | None = ...,
+        error_message: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["error_message", b"error_message", "keys", b"keys", "user_name", b"user_name"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["error_message", b"error_message", "keys", b"keys", "user_name", b"user_name"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___SetUserPreferencesResponse = SetUserPreferencesResponse
+Global___SetUserPreferencesResponse: _TypeAlias = SetUserPreferencesResponse  # noqa: Y015
 
-@typing.final
-class DeleteUserPreferencesRequest(google.protobuf.message.Message):
+@_typing.final
+class DeleteUserPreferencesRequest(_message.Message):
     """Request to delete specific user preferences."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    USER_NAME_FIELD_NUMBER: builtins.int
-    KEYS_FIELD_NUMBER: builtins.int
-    REGEX_INCLUDE_FIELD_NUMBER: builtins.int
-    user_name: builtins.str
+    USER_NAME_FIELD_NUMBER: _builtins.int
+    KEYS_FIELD_NUMBER: _builtins.int
+    REGEX_INCLUDE_FIELD_NUMBER: _builtins.int
+    user_name: _builtins.str
     """The name of the user.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre>
     """
-    regex_include: builtins.str
+    regex_include: _builtins.str
     """Optional: In addition to the keys specified also include all <code>keys</code> that match the provided
     <code>regex_include</code> regular expression.
     If user does not add regex_filter, then only the keys specified in the keys field are deleted.
     If both, a key in the keys field and in the regex_include is matched then the key is deleted without raising an error.
     """
-    @property
-    def keys(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def keys(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """List of keys to delete from user preferences."""
 
     def __init__(
         self,
         *,
-        user_name: builtins.str = ...,
-        keys: collections.abc.Iterable[builtins.str] | None = ...,
-        regex_include: builtins.str = ...,
+        user_name: _builtins.str = ...,
+        keys: _abc.Iterable[_builtins.str] | None = ...,
+        regex_include: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["keys", b"keys", "regex_include", b"regex_include", "user_name", b"user_name"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["keys", b"keys", "regex_include", b"regex_include", "user_name", b"user_name"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___DeleteUserPreferencesRequest = DeleteUserPreferencesRequest
+Global___DeleteUserPreferencesRequest: _TypeAlias = DeleteUserPreferencesRequest  # noqa: Y015
 
-@typing.final
-class DeleteUserPreferencesResponse(google.protobuf.message.Message):
+@_typing.final
+class DeleteUserPreferencesResponse(_message.Message):
     """Response to delete specific user preferences."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    USER_NAME_FIELD_NUMBER: builtins.int
-    KEYS_FIELD_NUMBER: builtins.int
-    ERROR_MESSAGE_FIELD_NUMBER: builtins.int
-    user_name: builtins.str
+    USER_NAME_FIELD_NUMBER: _builtins.int
+    KEYS_FIELD_NUMBER: _builtins.int
+    ERROR_MESSAGE_FIELD_NUMBER: _builtins.int
+    user_name: _builtins.str
     """The name of the user.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre>
     """
-    error_message: builtins.str
+    error_message: _builtins.str
     """error message if there are any."""
-    @property
-    def keys(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def keys(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """List of keys to delete from user preferences."""
 
     def __init__(
         self,
         *,
-        user_name: builtins.str = ...,
-        keys: collections.abc.Iterable[builtins.str] | None = ...,
-        error_message: builtins.str = ...,
+        user_name: _builtins.str = ...,
+        keys: _abc.Iterable[_builtins.str] | None = ...,
+        error_message: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["error_message", b"error_message", "keys", b"keys", "user_name", b"user_name"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["error_message", b"error_message", "keys", b"keys", "user_name", b"user_name"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___DeleteUserPreferencesResponse = DeleteUserPreferencesResponse
+Global___DeleteUserPreferencesResponse: _TypeAlias = DeleteUserPreferencesResponse  # noqa: Y015
 
-@typing.final
-class DeleteAllUserPreferencesRequest(google.protobuf.message.Message):
+@_typing.final
+class DeleteAllUserPreferencesRequest(_message.Message):
     """Request to delete all user preferences with an optional filter substring."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    USER_NAME_FIELD_NUMBER: builtins.int
-    REGEX_FILTER_FIELD_NUMBER: builtins.int
-    user_name: builtins.str
+    USER_NAME_FIELD_NUMBER: _builtins.int
+    REGEX_FILTER_FIELD_NUMBER: _builtins.int
+    user_name: _builtins.str
     """The name of the user.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre>
     """
-    regex_filter: builtins.str
+    regex_filter: _builtins.str
     """Optional: Only delete keys that match the provided regular expression.
     If user does not add regex_filter, then all user preferences will be deleted
     Example:
@@ -921,68 +1009,79 @@ class DeleteAllUserPreferencesRequest(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        user_name: builtins.str = ...,
-        regex_filter: builtins.str = ...,
+        user_name: _builtins.str = ...,
+        regex_filter: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["regex_filter", b"regex_filter", "user_name", b"user_name"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["regex_filter", b"regex_filter", "user_name", b"user_name"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___DeleteAllUserPreferencesRequest = DeleteAllUserPreferencesRequest
+Global___DeleteAllUserPreferencesRequest: _TypeAlias = DeleteAllUserPreferencesRequest  # noqa: Y015
 
-@typing.final
-class ListUserPreferencesRequest(google.protobuf.message.Message):
+@_typing.final
+class ListUserPreferencesRequest(_message.Message):
     """Request to list all user preferences for a specific user."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    USER_NAME_FIELD_NUMBER: builtins.int
-    REGEX_FILTER_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    user_name: builtins.str
+    USER_NAME_FIELD_NUMBER: _builtins.int
+    REGEX_FILTER_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    user_name: _builtins.str
     """The name of the user.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/users/&lt;user_uuid&gt;</code></pre>
     """
-    regex_filter: builtins.str
+    regex_filter: _builtins.str
     """Optional: Only list keys that match the provided regular expression"""
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields gets returned."""
 
     def __init__(
         self,
         *,
-        user_name: builtins.str = ...,
-        regex_filter: builtins.str = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        user_name: _builtins.str = ...,
+        regex_filter: _builtins.str = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "regex_filter", b"regex_filter", "user_name", b"user_name"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "regex_filter", b"regex_filter", "user_name", b"user_name"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListUserPreferencesRequest = ListUserPreferencesRequest
+Global___ListUserPreferencesRequest: _TypeAlias = ListUserPreferencesRequest  # noqa: Y015
 
-@typing.final
-class ListUserPreferencesResponse(google.protobuf.message.Message):
+@_typing.final
+class ListUserPreferencesResponse(_message.Message):
     """Response containing a list of user preferences for a specific user with an optional filter substring."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    USER_NAME_FIELD_NUMBER: builtins.int
-    KEY_VALUE_PAIRS_FIELD_NUMBER: builtins.int
-    ERROR_MESSAGE_FIELD_NUMBER: builtins.int
-    user_name: builtins.str
+    USER_NAME_FIELD_NUMBER: _builtins.int
+    KEY_VALUE_PAIRS_FIELD_NUMBER: _builtins.int
+    ERROR_MESSAGE_FIELD_NUMBER: _builtins.int
+    user_name: _builtins.str
     """The name of the user."""
-    error_message: builtins.str
+    error_message: _builtins.str
     """error message if there are any."""
-    @property
-    def key_value_pairs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.common_pb2.KeyValuePair]:
+    @_builtins.property
+    def key_value_pairs(self) -> _containers.RepeatedCompositeFieldContainer[_common_pb2.KeyValuePair]:
         """List of key-value pairs representing user preferences."""
 
     def __init__(
         self,
         *,
-        user_name: builtins.str = ...,
-        key_value_pairs: collections.abc.Iterable[ondewo.nlu.common_pb2.KeyValuePair] | None = ...,
-        error_message: builtins.str = ...,
+        user_name: _builtins.str = ...,
+        key_value_pairs: _abc.Iterable[_common_pb2.KeyValuePair] | None = ...,
+        error_message: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["error_message", b"error_message", "key_value_pairs", b"key_value_pairs", "user_name", b"user_name"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["error_message", b"error_message", "key_value_pairs", b"key_value_pairs", "user_name", b"user_name"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListUserPreferencesResponse = ListUserPreferencesResponse
+Global___ListUserPreferencesResponse: _TypeAlias = ListUserPreferencesResponse  # noqa: Y015

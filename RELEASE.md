@@ -10,6 +10,10 @@
 * [[OND236-120]](https://ondewo.atlassian.net/browse/OND236-120) Warm transfer intros: `Sessions.prepare_warm_transfer_intro(request, timeout=None)` and `Sessions.get_warm_transfer_intro_outcome(request, timeout=None)` (sync and async) call the new `PrepareWarmTransferIntro` and `GetWarmTransferIntroOutcome` RPCs. `timeout` is the call's gRPC deadline in seconds; `None` keeps the default of no deadline. The generated `session_pb2` carries `WarmTransferIntroConfig`, `PrepareWarmTransferIntroRequest` / `PrepareWarmTransferIntroResponse`, `GetWarmTransferIntroOutcomeRequest`, `WarmTransferIntroOutcome` and the enums `WarmTransferIntroTextSource`, `WarmTransferIntroDecision`, `WarmTransferIntroDecidedBy` and `WarmTransferIntroStage`. `WarmTransferIntroConfig.confirm_human_before_intro` and `decline_reason_question` are `optional`: test them with `HasField`.
 * [[OND236-120]](https://ondewo.atlassian.net/browse/OND236-120) The generated `agent_pb2` carries `Agent.warm_transfer_settings` (field 15) with `WarmTransferAgentSettings`, `WarmTransferAgentTexts` and `WarmTransferAgentLexicon`, the per-agent warm transfer defaults. `WarmTransferAgentSettings.enabled` and `WarmTransferAgentTexts.decline_reason_question` are `optional`.
 
+### Improvements
+
+* Generated with ondewo-proto-compiler 5.17.0 (protoc 35.1, grpcio-tools 1.85.1, mypy-protobuf 5.1.0). New runtime floors: Python >= 3.10, `protobuf>=7.35.1,<8`, `grpcio>=1.85.1`; every `_pb2.py` carries `# Protobuf Python Version: 7.35.1` and every `_pb2_grpc.py` `GRPC_GENERATED_VERSION = '1.85.1'`, and both refuse an older runtime at import.
+
 *****************
 
 ## Release ONDEWO NLU Python Client 7.5.0

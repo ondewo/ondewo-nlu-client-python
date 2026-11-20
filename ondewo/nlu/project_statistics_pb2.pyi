@@ -16,92 +16,110 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-import builtins
-import google.protobuf.descriptor
-import google.protobuf.message
-import ondewo.nlu.entity_type_pb2
-import ondewo.nlu.intent_pb2
-import typing
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+from ondewo.nlu import entity_type_pb2 as _entity_type_pb2
+from ondewo.nlu import intent_pb2 as _intent_pb2
+import builtins as _builtins
+import sys
+import typing as _typing
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+if sys.version_info >= (3, 11):
+    from typing import TypeAlias as _TypeAlias, Never as _Never
+else:
+    from typing_extensions import TypeAlias as _TypeAlias, Never as _Never
 
-@typing.final
-class GetIntentCountRequest(google.protobuf.message.Message):
+DESCRIPTOR: _descriptor.FileDescriptor
+
+@_typing.final
+class GetIntentCountRequest(_message.Message):
     """Request to get the intent count"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    FILTER_BY_CATEGORY_FIELD_NUMBER: builtins.int
-    parent: builtins.str
+    PARENT_FIELD_NUMBER: _builtins.int
+    FILTER_BY_CATEGORY_FIELD_NUMBER: _builtins.int
+    parent: _builtins.str
     """Required. The project that the agent to fetch is associated with.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
-    filter_by_category: ondewo.nlu.intent_pb2.IntentCategory.ValueType
+    filter_by_category: _intent_pb2.IntentCategory.ValueType
     """Optional. Applies a filter to the list to be counted. Default, no filter."""
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        filter_by_category: ondewo.nlu.intent_pb2.IntentCategory.ValueType = ...,
+        parent: _builtins.str = ...,
+        filter_by_category: _intent_pb2.IntentCategory.ValueType = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["filter_by_category", b"filter_by_category", "parent", b"parent"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["filter_by_category", b"filter_by_category", "parent", b"parent"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GetIntentCountRequest = GetIntentCountRequest
+Global___GetIntentCountRequest: _TypeAlias = GetIntentCountRequest  # noqa: Y015
 
-@typing.final
-class GetEntityTypeCountRequest(google.protobuf.message.Message):
+@_typing.final
+class GetEntityTypeCountRequest(_message.Message):
     """Request to get entity type count"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    FILTER_BY_CATEGORY_FIELD_NUMBER: builtins.int
-    parent: builtins.str
+    PARENT_FIELD_NUMBER: _builtins.int
+    FILTER_BY_CATEGORY_FIELD_NUMBER: _builtins.int
+    parent: _builtins.str
     """Required. The project that the agent to fetch is associated with.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
-    filter_by_category: ondewo.nlu.entity_type_pb2.EntityTypeCategory.ValueType
+    filter_by_category: _entity_type_pb2.EntityTypeCategory.ValueType
     """Optional. Applies a filter to the list to be counted. Default, no filter."""
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        filter_by_category: ondewo.nlu.entity_type_pb2.EntityTypeCategory.ValueType = ...,
+        parent: _builtins.str = ...,
+        filter_by_category: _entity_type_pb2.EntityTypeCategory.ValueType = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["filter_by_category", b"filter_by_category", "parent", b"parent"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["filter_by_category", b"filter_by_category", "parent", b"parent"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GetEntityTypeCountRequest = GetEntityTypeCountRequest
+Global___GetEntityTypeCountRequest: _TypeAlias = GetEntityTypeCountRequest  # noqa: Y015
 
-@typing.final
-class GetProjectStatRequest(google.protobuf.message.Message):
+@_typing.final
+class GetProjectStatRequest(_message.Message):
     """Request to get project statistics"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    parent: builtins.str
+    PARENT_FIELD_NUMBER: _builtins.int
+    parent: _builtins.str
     """Required. The project that the agent to fetch is associated with.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
+        parent: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["parent", b"parent"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["parent", b"parent"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GetProjectStatRequest = GetProjectStatRequest
+Global___GetProjectStatRequest: _TypeAlias = GetProjectStatRequest  # noqa: Y015
 
-@typing.final
-class GetProjectElementStatRequest(google.protobuf.message.Message):
+@_typing.final
+class GetProjectElementStatRequest(_message.Message):
     """Request to get project element statistics"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NAME_FIELD_NUMBER: builtins.int
-    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """Required. The name/path of the concept to get the statistic from.
     Example:
     <ul>
@@ -110,14 +128,18 @@ class GetProjectElementStatRequest(google.protobuf.message.Message):
       <li><code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entityValues/&lt;entity_value_uuid&gt;</code></li>
     </ul>
     """
-    language_code: builtins.str
+    language_code: _builtins.str
     """Language code"""
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
-        language_code: builtins.str = ...,
+        name: _builtins.str = ...,
+        language_code: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["language_code", b"language_code", "name", b"name"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["language_code", b"language_code", "name", b"name"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GetProjectElementStatRequest = GetProjectElementStatRequest
+Global___GetProjectElementStatRequest: _TypeAlias = GetProjectElementStatRequest  # noqa: Y015

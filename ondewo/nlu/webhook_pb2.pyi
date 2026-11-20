@@ -30,121 +30,128 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-import builtins
-import collections.abc
-import google.protobuf.descriptor
-import google.protobuf.field_mask_pb2
-import google.protobuf.internal.containers
-import google.protobuf.internal.enum_type_wrapper
-import google.protobuf.message
-import google.protobuf.struct_pb2
-import ondewo.nlu.context_pb2
-import ondewo.nlu.entity_type_pb2
-import ondewo.nlu.intent_pb2
-import ondewo.nlu.session_pb2
+from collections import abc as _abc
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import field_mask_pb2 as _field_mask_pb2
+from google.protobuf import message as _message
+from google.protobuf import struct_pb2 as _struct_pb2
+from google.protobuf.internal import containers as _containers
+from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
+from ondewo.nlu import context_pb2 as _context_pb2
+from ondewo.nlu import entity_type_pb2 as _entity_type_pb2
+from ondewo.nlu import intent_pb2 as _intent_pb2
+from ondewo.nlu import session_pb2 as _session_pb2
+import builtins as _builtins
 import sys
-import typing
+import typing as _typing
 
-if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+if sys.version_info >= (3, 11):
+    from typing import TypeAlias as _TypeAlias, Never as _Never
 else:
-    import typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias, Never as _Never
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
-@typing.final
-class PingRequest(google.protobuf.message.Message):
+@_typing.final
+class PingRequest(_message.Message):
     """request sent for webhook ping"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    SESSION_FIELD_NUMBER: builtins.int
-    session: builtins.str
+    SESSION_FIELD_NUMBER: _builtins.int
+    session: _builtins.str
     """session ID for webhook ping"""
     def __init__(
         self,
         *,
-        session: builtins.str = ...,
+        session: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["session", b"session"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["session", b"session"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___PingRequest = PingRequest
+Global___PingRequest: _TypeAlias = PingRequest  # noqa: Y015
 
-@typing.final
-class WebhookRequest(google.protobuf.message.Message):
+@_typing.final
+class WebhookRequest(_message.Message):
     """The request message for a webhook call."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    RESPONSE_ID_FIELD_NUMBER: builtins.int
-    QUERY_RESULT_FIELD_NUMBER: builtins.int
-    ORIGINAL_DETECT_INTENT_REQUEST_FIELD_NUMBER: builtins.int
-    SESSION_FIELD_NUMBER: builtins.int
-    HEADERS_FIELD_NUMBER: builtins.int
-    response_id: builtins.str
+    RESPONSE_ID_FIELD_NUMBER: _builtins.int
+    QUERY_RESULT_FIELD_NUMBER: _builtins.int
+    ORIGINAL_DETECT_INTENT_REQUEST_FIELD_NUMBER: _builtins.int
+    SESSION_FIELD_NUMBER: _builtins.int
+    HEADERS_FIELD_NUMBER: _builtins.int
+    response_id: _builtins.str
     """The unique identifier of the response. Contains the same value as
     <code>[Streaming]DetectIntentResponse.response_id</code>.
     """
-    session: builtins.str
+    session: _builtins.str
     """The unique identifier of detectIntent request session.
     Can be used to identify end-user inside webhook implementation.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code></pre>
     """
-    @property
-    def query_result(self) -> ondewo.nlu.session_pb2.QueryResult:
+    @_builtins.property
+    def query_result(self) -> _session_pb2.QueryResult:
         """The result of the conversational query or event processing. Contains the
         same value as <code>[Streaming]DetectIntentResponse.query_result</code>.
         """
 
-    @property
-    def original_detect_intent_request(self) -> global___OriginalDetectIntentRequest:
+    @_builtins.property
+    def original_detect_intent_request(self) -> Global___OriginalDetectIntentRequest:
         """Optional. The contents of the original request that was passed to <code>[Streaming]DetectIntent</code> call."""
 
-    @property
-    def headers(self) -> google.protobuf.struct_pb2.Struct:
+    @_builtins.property
+    def headers(self) -> _struct_pb2.Struct:
         """Optional. The headers of the request message"""
 
     def __init__(
         self,
         *,
-        response_id: builtins.str = ...,
-        query_result: ondewo.nlu.session_pb2.QueryResult | None = ...,
-        original_detect_intent_request: global___OriginalDetectIntentRequest | None = ...,
-        session: builtins.str = ...,
-        headers: google.protobuf.struct_pb2.Struct | None = ...,
+        response_id: _builtins.str = ...,
+        query_result: _session_pb2.QueryResult | None = ...,
+        original_detect_intent_request: Global___OriginalDetectIntentRequest | None = ...,
+        session: _builtins.str = ...,
+        headers: _struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["headers", b"headers", "original_detect_intent_request", b"original_detect_intent_request", "query_result", b"query_result"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["headers", b"headers", "original_detect_intent_request", b"original_detect_intent_request", "query_result", b"query_result", "response_id", b"response_id", "session", b"session"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["headers", b"headers", "original_detect_intent_request", b"original_detect_intent_request", "query_result", b"query_result"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["headers", b"headers", "original_detect_intent_request", b"original_detect_intent_request", "query_result", b"query_result", "response_id", b"response_id", "session", b"session"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___WebhookRequest = WebhookRequest
+Global___WebhookRequest: _TypeAlias = WebhookRequest  # noqa: Y015
 
-@typing.final
-class WebhookResponse(google.protobuf.message.Message):
+@_typing.final
+class WebhookResponse(_message.Message):
     """The response message for a webhook call."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    FULFILLMENT_TEXT_FIELD_NUMBER: builtins.int
-    FULFILLMENT_MESSAGES_FIELD_NUMBER: builtins.int
-    SOURCE_FIELD_NUMBER: builtins.int
-    PAYLOAD_FIELD_NUMBER: builtins.int
-    OUTPUT_CONTEXTS_FIELD_NUMBER: builtins.int
-    FOLLOWUP_EVENT_INPUT_FIELD_NUMBER: builtins.int
-    SESSION_ENTITY_TYPES_FIELD_NUMBER: builtins.int
-    fulfillment_text: builtins.str
+    FULFILLMENT_TEXT_FIELD_NUMBER: _builtins.int
+    FULFILLMENT_MESSAGES_FIELD_NUMBER: _builtins.int
+    SOURCE_FIELD_NUMBER: _builtins.int
+    PAYLOAD_FIELD_NUMBER: _builtins.int
+    OUTPUT_CONTEXTS_FIELD_NUMBER: _builtins.int
+    FOLLOWUP_EVENT_INPUT_FIELD_NUMBER: _builtins.int
+    SESSION_ENTITY_TYPES_FIELD_NUMBER: _builtins.int
+    fulfillment_text: _builtins.str
     """Optional. The text to be shown on the screen. This value is passed directly
     to <code>QueryResult.fulfillment_text</code>.
     """
-    source: builtins.str
+    source: _builtins.str
     """Optional. This value is passed directly to <code>QueryResult.webhook_source</code>."""
-    @property
-    def fulfillment_messages(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.intent_pb2.Intent.Message]:
+    @_builtins.property
+    def fulfillment_messages(self) -> _containers.RepeatedCompositeFieldContainer[_intent_pb2.Intent.Message]:
         """Optional. The collection of rich messages to present to the user. This
         value is passed directly to <code>QueryResult.fulfillment_messages</code>.
         """
 
-    @property
-    def payload(self) -> google.protobuf.struct_pb2.Struct:
+    @_builtins.property
+    def payload(self) -> _struct_pb2.Struct:
         """Optional. This value is passed directly to <code>QueryResult.webhook_payload</code>.
         See the related <code>fulfillment_messages[i].payload field</code>, which may be used
         as an alternative to this field.
@@ -170,20 +177,20 @@ class WebhookResponse(google.protobuf.message.Message):
         }</pre>
         """
 
-    @property
-    def output_contexts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.context_pb2.Context]:
+    @_builtins.property
+    def output_contexts(self) -> _containers.RepeatedCompositeFieldContainer[_context_pb2.Context]:
         """Optional. The collection of output contexts. This value is passed directly
         to <code>QueryResult.output_contexts</code>.
         """
 
-    @property
-    def followup_event_input(self) -> ondewo.nlu.session_pb2.EventInput:
+    @_builtins.property
+    def followup_event_input(self) -> _session_pb2.EventInput:
         """Optional. Makes the platform immediately invoke another <code>DetectIntent</code> call
         internally with the specified event as input.
         """
 
-    @property
-    def session_entity_types(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___SessionEntityType]:
+    @_builtins.property
+    def session_entity_types(self) -> _containers.RepeatedCompositeFieldContainer[Global___SessionEntityType]:
         """Optional. Additional session entity types to replace or extend developer
         entity types with. The entity synonyms apply to all languages and persist
         for the session. Setting this data from a webhook overwrites
@@ -193,33 +200,36 @@ class WebhookResponse(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        fulfillment_text: builtins.str = ...,
-        fulfillment_messages: collections.abc.Iterable[ondewo.nlu.intent_pb2.Intent.Message] | None = ...,
-        source: builtins.str = ...,
-        payload: google.protobuf.struct_pb2.Struct | None = ...,
-        output_contexts: collections.abc.Iterable[ondewo.nlu.context_pb2.Context] | None = ...,
-        followup_event_input: ondewo.nlu.session_pb2.EventInput | None = ...,
-        session_entity_types: collections.abc.Iterable[global___SessionEntityType] | None = ...,
+        fulfillment_text: _builtins.str = ...,
+        fulfillment_messages: _abc.Iterable[_intent_pb2.Intent.Message] | None = ...,
+        source: _builtins.str = ...,
+        payload: _struct_pb2.Struct | None = ...,
+        output_contexts: _abc.Iterable[_context_pb2.Context] | None = ...,
+        followup_event_input: _session_pb2.EventInput | None = ...,
+        session_entity_types: _abc.Iterable[Global___SessionEntityType] | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["followup_event_input", b"followup_event_input", "payload", b"payload"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["followup_event_input", b"followup_event_input", "fulfillment_messages", b"fulfillment_messages", "fulfillment_text", b"fulfillment_text", "output_contexts", b"output_contexts", "payload", b"payload", "session_entity_types", b"session_entity_types", "source", b"source"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["followup_event_input", b"followup_event_input", "payload", b"payload"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["followup_event_input", b"followup_event_input", "fulfillment_messages", b"fulfillment_messages", "fulfillment_text", b"fulfillment_text", "output_contexts", b"output_contexts", "payload", b"payload", "session_entity_types", b"session_entity_types", "source", b"source"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___WebhookResponse = WebhookResponse
+Global___WebhookResponse: _TypeAlias = WebhookResponse  # noqa: Y015
 
-@typing.final
-class OriginalDetectIntentRequest(google.protobuf.message.Message):
+@_typing.final
+class OriginalDetectIntentRequest(_message.Message):
     """Represents the contents of the original request that was passed to the <code>[Streaming]DetectIntent</code> call."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    SOURCE_FIELD_NUMBER: builtins.int
-    PAYLOAD_FIELD_NUMBER: builtins.int
-    source: builtins.str
+    SOURCE_FIELD_NUMBER: _builtins.int
+    PAYLOAD_FIELD_NUMBER: _builtins.int
+    source: _builtins.str
     """The source of this request, e.g., <code>google</code>, <code>facebook</code>, <code>slack</code> or other &quot;platforms&quot;. .
     Used to identify the &quot;platform&quot;
     """
-    @property
-    def payload(self) -> google.protobuf.struct_pb2.Struct:
+    @_builtins.property
+    def payload(self) -> _struct_pb2.Struct:
         """Optional. This field is set to the value of the <code>QueryParameters.payload</code>
         field passed in the request. Some integrations that query an
         agent may provide additional data in the payload.
@@ -235,49 +245,56 @@ class OriginalDetectIntentRequest(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        source: builtins.str = ...,
-        payload: google.protobuf.struct_pb2.Struct | None = ...,
+        source: _builtins.str = ...,
+        payload: _struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["payload", b"payload"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["payload", b"payload", "source", b"source"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["payload", b"payload"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["payload", b"payload", "source", b"source"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___OriginalDetectIntentRequest = OriginalDetectIntentRequest
+Global___OriginalDetectIntentRequest: _TypeAlias = OriginalDetectIntentRequest  # noqa: Y015
 
-@typing.final
-class PingResponse(google.protobuf.message.Message):
+@_typing.final
+class PingResponse(_message.Message):
     """This message is a response of pinging"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    IS_REACHABLE_FIELD_NUMBER: builtins.int
-    is_reachable: builtins.bool
+    IS_REACHABLE_FIELD_NUMBER: _builtins.int
+    is_reachable: _builtins.bool
     """This is the response message of a Ping request.
     It&apos;s purpose is to report the reachability of a Webhook server.
     """
     def __init__(
         self,
         *,
-        is_reachable: builtins.bool = ...,
+        is_reachable: _builtins.bool = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["is_reachable", b"is_reachable"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["is_reachable", b"is_reachable"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___PingResponse = PingResponse
+Global___PingResponse: _TypeAlias = PingResponse  # noqa: Y015
 
-@typing.final
-class SessionEntityType(google.protobuf.message.Message):
+@_typing.final
+class SessionEntityType(_message.Message):
     """A session represents a conversation between a Dialogflow agent and an end-user. You can create special entities, called session entities, during a session. Session entities can extend or replace custom entity types and only exist during the session that they were created for. All session data, including session entities, is stored by Dialogflow for 20 minutes.
 
     For more information, see the <a href="https://cloud.google.com/dialogflow/docs/entities-session">session entity guide</a>.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     class _EntityOverrideMode:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _TypeAlias = ValueType  # noqa: Y015
 
-    class _EntityOverrideModeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[SessionEntityType._EntityOverrideMode.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _EntityOverrideModeEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[SessionEntityType._EntityOverrideMode.ValueType], _builtins.type):
+        DESCRIPTOR: _descriptor.EnumDescriptor
         ENTITY_OVERRIDE_MODE_UNSPECIFIED: SessionEntityType._EntityOverrideMode.ValueType  # 0
         """Not specified. This value should be never used."""
         ENTITY_OVERRIDE_MODE_OVERRIDE: SessionEntityType._EntityOverrideMode.ValueType  # 1
@@ -319,10 +336,10 @@ class SessionEntityType(google.protobuf.message.Message):
     on the custom entity type and merge.
     """
 
-    NAME_FIELD_NUMBER: builtins.int
-    ENTITY_OVERRIDE_MODE_FIELD_NUMBER: builtins.int
-    ENTITIES_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    ENTITY_OVERRIDE_MODE_FIELD_NUMBER: _builtins.int
+    ENTITIES_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """Required. The unique identifier of this session entity type. Format:
     <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/entityTypes/&lt;Entity Type
     Display Name&gt;</code>, or <code>projects/&lt;project_uuid&gt;/agent/environments/
@@ -334,12 +351,12 @@ class SessionEntityType(google.protobuf.message.Message):
     <code>&lt;Entity Type Display Name&gt;</code> must be the display name of an existing entity
     type in the same agent that will be overridden or supplemented.
     """
-    entity_override_mode: global___SessionEntityType.EntityOverrideMode.ValueType
+    entity_override_mode: Global___SessionEntityType.EntityOverrideMode.ValueType
     """Required. Indicates whether the additional data should override or
     supplement the custom entity type definition.
     """
-    @property
-    def entities(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[ondewo.nlu.entity_type_pb2.EntityType.Entity]:
+    @_builtins.property
+    def entities(self) -> _containers.RepeatedCompositeFieldContainer[_entity_type_pb2.EntityType.Entity]:
         """Required. The collection of entities associated with this session entity
         type.
         """
@@ -347,24 +364,28 @@ class SessionEntityType(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
-        entity_override_mode: global___SessionEntityType.EntityOverrideMode.ValueType = ...,
-        entities: collections.abc.Iterable[ondewo.nlu.entity_type_pb2.EntityType.Entity] | None = ...,
+        name: _builtins.str = ...,
+        entity_override_mode: Global___SessionEntityType.EntityOverrideMode.ValueType = ...,
+        entities: _abc.Iterable[_entity_type_pb2.EntityType.Entity] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["entities", b"entities", "entity_override_mode", b"entity_override_mode", "name", b"name"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["entities", b"entities", "entity_override_mode", b"entity_override_mode", "name", b"name"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___SessionEntityType = SessionEntityType
+Global___SessionEntityType: _TypeAlias = SessionEntityType  # noqa: Y015
 
-@typing.final
-class ListSessionEntityTypesRequest(google.protobuf.message.Message):
+@_typing.final
+class ListSessionEntityTypesRequest(_message.Message):
     """The request message for <a href="index.html#ondewo.nlu.Webhook.ListSessionEntityTypes">Webhook.ListSessionEntityTypes</a>."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    PAGE_SIZE_FIELD_NUMBER: builtins.int
-    PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    parent: builtins.str
+    PARENT_FIELD_NUMBER: _builtins.int
+    PAGE_SIZE_FIELD_NUMBER: _builtins.int
+    PAGE_TOKEN_FIELD_NUMBER: _builtins.int
+    parent: _builtins.str
     """Required. The session to list all session entity types from.
     Format: <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;</code> or
     <code>projects/&lt;project_uuid&gt;/agent/environments/&lt;environment_uuid&gt;/users/&lt;user_uuid&gt;/
@@ -372,11 +393,11 @@ class ListSessionEntityTypesRequest(google.protobuf.message.Message):
     If <code>Environment ID</code> is not specified, we assume default <code>&apos;draft&apos;</code>
     environment. If <code>User ID</code> is not specified, we assume default <code>&apos;-&apos;</code> user.
     """
-    page_size: builtins.int
+    page_size: _builtins.int
     """Optional. The maximum number of items to return in a single page. By
     default 100 and at most 1000.
     """
-    page_token: builtins.str
+    page_token: _builtins.str
     """Optional: The page token to support pagination.
     Pagination allows you to retrieve a large result set in smaller, more manageable portions.
     The page token is a string representing the current index and page size.
@@ -410,28 +431,32 @@ class ListSessionEntityTypesRequest(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        page_size: builtins.int = ...,
-        page_token: builtins.str = ...,
+        parent: _builtins.str = ...,
+        page_size: _builtins.int = ...,
+        page_token: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["page_size", b"page_size", "page_token", b"page_token", "parent", b"parent"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["page_size", b"page_size", "page_token", b"page_token", "parent", b"parent"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListSessionEntityTypesRequest = ListSessionEntityTypesRequest
+Global___ListSessionEntityTypesRequest: _TypeAlias = ListSessionEntityTypesRequest  # noqa: Y015
 
-@typing.final
-class ListSessionEntityTypesResponse(google.protobuf.message.Message):
+@_typing.final
+class ListSessionEntityTypesResponse(_message.Message):
     """The response message for <a href="index.html#ondewo.nlu.Webhook.ListSessionEntityTypes">Webhook.ListSessionEntityTypes</a>."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    SESSION_ENTITY_TYPES_FIELD_NUMBER: builtins.int
-    NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    next_page_token: builtins.str
+    SESSION_ENTITY_TYPES_FIELD_NUMBER: _builtins.int
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: _builtins.int
+    next_page_token: _builtins.str
     """The next_page_token is used to retrieve the next page of a returned result,
     e.g. next_page_token is current_index-2
     """
-    @property
-    def session_entity_types(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___SessionEntityType]:
+    @_builtins.property
+    def session_entity_types(self) -> _containers.RepeatedCompositeFieldContainer[Global___SessionEntityType]:
         """The list of session entity types. There will be a maximum number of items
         returned based on the page_size field in the request.
         """
@@ -439,21 +464,25 @@ class ListSessionEntityTypesResponse(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        session_entity_types: collections.abc.Iterable[global___SessionEntityType] | None = ...,
-        next_page_token: builtins.str = ...,
+        session_entity_types: _abc.Iterable[Global___SessionEntityType] | None = ...,
+        next_page_token: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["next_page_token", b"next_page_token", "session_entity_types", b"session_entity_types"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["next_page_token", b"next_page_token", "session_entity_types", b"session_entity_types"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListSessionEntityTypesResponse = ListSessionEntityTypesResponse
+Global___ListSessionEntityTypesResponse: _TypeAlias = ListSessionEntityTypesResponse  # noqa: Y015
 
-@typing.final
-class GetSessionEntityTypeRequest(google.protobuf.message.Message):
+@_typing.final
+class GetSessionEntityTypeRequest(_message.Message):
     """The request message for <a href="index.html#ondewo.nlu.Webhook.GetSessionEntityType">Webhook.GetSessionEntityType</a>."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NAME_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """Required. The name of the session entity type. Format:
     <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/entityTypes/&lt;Entity Type
     Display Name&gt;</code> or <code>projects/&lt;project_uuid&gt;/agent/environments/
@@ -465,26 +494,30 @@ class GetSessionEntityTypeRequest(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
+        name: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["name", b"name"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["name", b"name"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GetSessionEntityTypeRequest = GetSessionEntityTypeRequest
+Global___GetSessionEntityTypeRequest: _TypeAlias = GetSessionEntityTypeRequest  # noqa: Y015
 
-@typing.final
-class CreateSessionEntityTypeRequest(google.protobuf.message.Message):
+@_typing.final
+class CreateSessionEntityTypeRequest(_message.Message):
     """The request message for <a href="index.html#ondewo.nlu.Webhook.CreateSessionEntityType">Webhook.CreateSessionEntityType</a>"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    SESSION_ENTITY_TYPE_FIELD_NUMBER: builtins.int
-    SESSION_ID_FIELD_NUMBER: builtins.int
-    parent: builtins.str
+    PARENT_FIELD_NUMBER: _builtins.int
+    SESSION_ENTITY_TYPE_FIELD_NUMBER: _builtins.int
+    SESSION_ID_FIELD_NUMBER: _builtins.int
+    parent: _builtins.str
     """Required. The agent to list all intents from.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
-    session_id: builtins.str
+    session_id: _builtins.str
     """Required. The session to create a session entity type for.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agents/sessions/&lt;session_uuid&gt;</code></pre>
     or
@@ -497,57 +530,63 @@ class CreateSessionEntityTypeRequest(google.protobuf.message.Message):
     The session to create a session entity type for.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agents/sessions/&lt;session_uuid&gt;</code></pre>
     """
-    @property
-    def session_entity_type(self) -> global___SessionEntityType:
+    @_builtins.property
+    def session_entity_type(self) -> Global___SessionEntityType:
         """Required. The session entity type to create."""
 
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        session_entity_type: global___SessionEntityType | None = ...,
-        session_id: builtins.str = ...,
+        parent: _builtins.str = ...,
+        session_entity_type: Global___SessionEntityType | None = ...,
+        session_id: _builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["session_entity_type", b"session_entity_type"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["parent", b"parent", "session_entity_type", b"session_entity_type", "session_id", b"session_id"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["session_entity_type", b"session_entity_type"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["parent", b"parent", "session_entity_type", b"session_entity_type", "session_id", b"session_id"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___CreateSessionEntityTypeRequest = CreateSessionEntityTypeRequest
+Global___CreateSessionEntityTypeRequest: _TypeAlias = CreateSessionEntityTypeRequest  # noqa: Y015
 
-@typing.final
-class UpdateSessionEntityTypeRequest(google.protobuf.message.Message):
+@_typing.final
+class UpdateSessionEntityTypeRequest(_message.Message):
     """The request message for <a href="index.html#ondewo.nlu.Webhook.UpdateSessionEntityType">Webhook.UpdateSessionEntityType</a>."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    SESSION_ENTITY_TYPE_FIELD_NUMBER: builtins.int
-    UPDATE_MASK_FIELD_NUMBER: builtins.int
-    @property
-    def session_entity_type(self) -> global___SessionEntityType:
+    SESSION_ENTITY_TYPE_FIELD_NUMBER: _builtins.int
+    UPDATE_MASK_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def session_entity_type(self) -> Global___SessionEntityType:
         """Required. The session entity type to update."""
 
-    @property
-    def update_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def update_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields get updated."""
 
     def __init__(
         self,
         *,
-        session_entity_type: global___SessionEntityType | None = ...,
-        update_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        session_entity_type: Global___SessionEntityType | None = ...,
+        update_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["session_entity_type", b"session_entity_type", "update_mask", b"update_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["session_entity_type", b"session_entity_type", "update_mask", b"update_mask"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["session_entity_type", b"session_entity_type", "update_mask", b"update_mask"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["session_entity_type", b"session_entity_type", "update_mask", b"update_mask"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___UpdateSessionEntityTypeRequest = UpdateSessionEntityTypeRequest
+Global___UpdateSessionEntityTypeRequest: _TypeAlias = UpdateSessionEntityTypeRequest  # noqa: Y015
 
-@typing.final
-class DeleteSessionEntityTypeRequest(google.protobuf.message.Message):
+@_typing.final
+class DeleteSessionEntityTypeRequest(_message.Message):
     """The request message for <a href="index.html#ondewo.nlu.Webhook.DeleteSessionEntityType">Webhook.DeleteSessionEntityType</a>."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NAME_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """Required. The name of the entity type to delete. Format:
     <code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/entityTypes/&lt;Entity Type
     Display Name&gt;</code> or <code>projects/&lt;project_uuid&gt;/agent/environments/
@@ -559,8 +598,12 @@ class DeleteSessionEntityTypeRequest(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
+        name: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["name", b"name"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["name", b"name"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___DeleteSessionEntityTypeRequest = DeleteSessionEntityTypeRequest
+Global___DeleteSessionEntityTypeRequest: _TypeAlias = DeleteSessionEntityTypeRequest  # noqa: Y015

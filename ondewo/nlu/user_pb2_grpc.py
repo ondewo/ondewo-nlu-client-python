@@ -7,7 +7,7 @@ from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 from ondewo.nlu import common_pb2 as ondewo_dot_nlu_dot_common__pb2
 from ondewo.nlu import user_pb2 as ondewo_dot_nlu_dot_user__pb2
 
-GRPC_GENERATED_VERSION = '1.67.1'
+GRPC_GENERATED_VERSION = '1.85.1'
 GRPC_VERSION = grpc.__version__
 _version_not_supported = False
 
@@ -20,14 +20,14 @@ except ImportError:
 if _version_not_supported:
     raise RuntimeError(
         f'The grpc package installed is at version {GRPC_VERSION},'
-        + f' but the generated code in ondewo/nlu/user_pb2_grpc.py depends on'
+        + ' but the generated code in ondewo/nlu/user_pb2_grpc.py depends on'
         + f' grpcio>={GRPC_GENERATED_VERSION}.'
         + f' Please upgrade your grpc module to grpcio>={GRPC_GENERATED_VERSION}'
         + f' or downgrade your generated code using grpcio-tools<={GRPC_VERSION}.'
     )
 
 
-class UsersStub(object):
+class UsersStub:
     """gRPC service for managing users and server roles.
     """
 
@@ -169,7 +169,7 @@ class UsersStub(object):
                 _registered_method=True)
 
 
-class UsersServicer(object):
+class UsersServicer:
     """gRPC service for managing users and server roles.
     """
 
@@ -500,7 +500,7 @@ def add_UsersServicer_to_server(servicer, server):
 
 
  # This class is part of an EXPERIMENTAL API.
-class Users(object):
+class Users:
     """gRPC service for managing users and server roles.
     """
 

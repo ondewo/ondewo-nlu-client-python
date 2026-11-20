@@ -7,7 +7,7 @@ from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 from ondewo.nlu import agent_pb2 as ondewo_dot_nlu_dot_agent__pb2
 from ondewo.nlu import operations_pb2 as ondewo_dot_nlu_dot_operations__pb2
 
-GRPC_GENERATED_VERSION = '1.67.1'
+GRPC_GENERATED_VERSION = '1.85.1'
 GRPC_VERSION = grpc.__version__
 _version_not_supported = False
 
@@ -20,14 +20,14 @@ except ImportError:
 if _version_not_supported:
     raise RuntimeError(
         f'The grpc package installed is at version {GRPC_VERSION},'
-        + f' but the generated code in ondewo/nlu/agent_pb2_grpc.py depends on'
+        + ' but the generated code in ondewo/nlu/agent_pb2_grpc.py depends on'
         + f' grpcio>={GRPC_GENERATED_VERSION}.'
         + f' Please upgrade your grpc module to grpcio>={GRPC_GENERATED_VERSION}'
         + f' or downgrade your generated code using grpcio-tools<={GRPC_VERSION}.'
     )
 
 
-class AgentsStub(object):
+class AgentsStub:
     """Agents are best described as Natural Language Understanding (NLU) modules that transform user requests into actionable data. You can include agents in your app, product, or service to determine user intent and respond to the user in a natural way.
 
     After you create an agent, you can add <a href="index.html#ondewo.nlu.Intent">Intents</a>, <a href="index.html#ondewo.nlu.Context">Contexts</a>, <a href="index.html#ondewo.nlu.EntityType">Entity Types</a>, <a href="index.html#ondewo.nlu.WebhookRequest">Webhooks</a>, and so on to manage the flow of a conversation and match user input to predefined intents and actions.
@@ -279,7 +279,7 @@ class AgentsStub(object):
                 _registered_method=True)
 
 
-class AgentsServicer(object):
+class AgentsServicer:
     """Agents are best described as Natural Language Understanding (NLU) modules that transform user requests into actionable data. You can include agents in your app, product, or service to determine user intent and respond to the user in a natural way.
 
     After you create an agent, you can add <a href="index.html#ondewo.nlu.Intent">Intents</a>, <a href="index.html#ondewo.nlu.Context">Contexts</a>, <a href="index.html#ondewo.nlu.EntityType">Entity Types</a>, <a href="index.html#ondewo.nlu.WebhookRequest">Webhooks</a>, and so on to manage the flow of a conversation and match user input to predefined intents and actions.
@@ -1063,7 +1063,7 @@ def add_AgentsServicer_to_server(servicer, server):
 
 
  # This class is part of an EXPERIMENTAL API.
-class Agents(object):
+class Agents:
     """Agents are best described as Natural Language Understanding (NLU) modules that transform user requests into actionable data. You can include agents in your app, product, or service to determine user intent and respond to the user in a natural way.
 
     After you create an agent, you can add <a href="index.html#ondewo.nlu.Intent">Intents</a>, <a href="index.html#ondewo.nlu.Context">Contexts</a>, <a href="index.html#ondewo.nlu.EntityType">Entity Types</a>, <a href="index.html#ondewo.nlu.WebhookRequest">Webhooks</a>, and so on to manage the flow of a conversation and match user input to predefined intents and actions.

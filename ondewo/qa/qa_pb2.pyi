@@ -16,315 +16,371 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-import builtins
-import collections.abc
-import google.protobuf.descriptor
-import google.protobuf.internal.containers
-import google.protobuf.message
-import ondewo.nlu.session_pb2
-import typing
+from collections import abc as _abc
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+from google.protobuf.internal import containers as _containers
+from ondewo.nlu import session_pb2 as _session_pb2
+import builtins as _builtins
+import sys
+import typing as _typing
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+if sys.version_info >= (3, 11):
+    from typing import TypeAlias as _TypeAlias, Never as _Never
+else:
+    from typing_extensions import TypeAlias as _TypeAlias, Never as _Never
 
-@typing.final
-class GetAnswerRequest(google.protobuf.message.Message):
+DESCRIPTOR: _descriptor.FileDescriptor
+
+@_typing.final
+class GetAnswerRequest(_message.Message):
     """The request message"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    SESSION_ID_FIELD_NUMBER: builtins.int
-    TEXT_FIELD_NUMBER: builtins.int
-    MAX_NUM_ANSWERS_FIELD_NUMBER: builtins.int
-    THRESHOLD_READER_FIELD_NUMBER: builtins.int
-    THRESHOLD_RETRIEVER_FIELD_NUMBER: builtins.int
-    THRESHOLD_OVERALL_FIELD_NUMBER: builtins.int
-    READER_MODEL_NAME_FIELD_NUMBER: builtins.int
-    URL_FILTER_FIELD_NUMBER: builtins.int
-    session_id: builtins.str
+    SESSION_ID_FIELD_NUMBER: _builtins.int
+    TEXT_FIELD_NUMBER: _builtins.int
+    MAX_NUM_ANSWERS_FIELD_NUMBER: _builtins.int
+    THRESHOLD_READER_FIELD_NUMBER: _builtins.int
+    THRESHOLD_RETRIEVER_FIELD_NUMBER: _builtins.int
+    THRESHOLD_OVERALL_FIELD_NUMBER: _builtins.int
+    READER_MODEL_NAME_FIELD_NUMBER: _builtins.int
+    URL_FILTER_FIELD_NUMBER: _builtins.int
+    session_id: _builtins.str
     """Required. The name of the session this query is sent to. Format:
     <code>projects/&lt;Project ID&gt;/agent/sessions/&lt;Session ID&gt;</code>.
     It&apos;s up to the API caller to choose an appropriate session ID. It can be a random number or
     some type of user identifier (preferably hashed). The length of the session
     ID must not exceed 36 bytes.
     """
-    max_num_answers: builtins.int
+    max_num_answers: _builtins.int
     """Maximal number of answers returned"""
-    threshold_reader: builtins.float
+    threshold_reader: _builtins.float
     """Threshold (minimal score) to give back reader result"""
-    threshold_retriever: builtins.float
+    threshold_retriever: _builtins.float
     """Threshold (minimal score) to give back retriever result"""
-    threshold_overall: builtins.float
+    threshold_overall: _builtins.float
     """Threshold (minimal score) overall probability"""
-    reader_model_name: builtins.str
+    reader_model_name: _builtins.str
     """Reader model name"""
-    @property
-    def text(self) -> ondewo.nlu.session_pb2.TextInput:
+    @_builtins.property
+    def text(self) -> _session_pb2.TextInput:
         """Required. The context of the request. A message containing a string (in the form of a sentence) and a
         language code.
         """
 
-    @property
-    def url_filter(self) -> global___UrlFilter:
+    @_builtins.property
+    def url_filter(self) -> Global___UrlFilter:
         """Optional. Filters applied to the urls, to restrict the retrieved documents."""
 
     def __init__(
         self,
         *,
-        session_id: builtins.str = ...,
-        text: ondewo.nlu.session_pb2.TextInput | None = ...,
-        max_num_answers: builtins.int = ...,
-        threshold_reader: builtins.float = ...,
-        threshold_retriever: builtins.float = ...,
-        threshold_overall: builtins.float = ...,
-        reader_model_name: builtins.str = ...,
-        url_filter: global___UrlFilter | None = ...,
+        session_id: _builtins.str = ...,
+        text: _session_pb2.TextInput | None = ...,
+        max_num_answers: _builtins.int = ...,
+        threshold_reader: _builtins.float = ...,
+        threshold_retriever: _builtins.float = ...,
+        threshold_overall: _builtins.float = ...,
+        reader_model_name: _builtins.str = ...,
+        url_filter: Global___UrlFilter | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["text", b"text", "url_filter", b"url_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["max_num_answers", b"max_num_answers", "reader_model_name", b"reader_model_name", "session_id", b"session_id", "text", b"text", "threshold_overall", b"threshold_overall", "threshold_reader", b"threshold_reader", "threshold_retriever", b"threshold_retriever", "url_filter", b"url_filter"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["text", b"text", "url_filter", b"url_filter"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["max_num_answers", b"max_num_answers", "reader_model_name", b"reader_model_name", "session_id", b"session_id", "text", b"text", "threshold_overall", b"threshold_overall", "threshold_reader", b"threshold_reader", "threshold_retriever", b"threshold_retriever", "url_filter", b"url_filter"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GetAnswerRequest = GetAnswerRequest
+Global___GetAnswerRequest: _TypeAlias = GetAnswerRequest  # noqa: Y015
 
-@typing.final
-class GetAnswerResponse(google.protobuf.message.Message):
+@_typing.final
+class GetAnswerResponse(_message.Message):
     """Message containing the response for retrieving answers."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    QUERY_RESULT_FIELD_NUMBER: builtins.int
-    @property
-    def query_result(self) -> ondewo.nlu.session_pb2.DetectIntentResponse:
+    QUERY_RESULT_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def query_result(self) -> _session_pb2.DetectIntentResponse:
         """The results of the conversational query or event processing."""
 
     def __init__(
         self,
         *,
-        query_result: ondewo.nlu.session_pb2.DetectIntentResponse | None = ...,
+        query_result: _session_pb2.DetectIntentResponse | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["query_result", b"query_result"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["query_result", b"query_result"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["query_result", b"query_result"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["query_result", b"query_result"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GetAnswerResponse = GetAnswerResponse
+Global___GetAnswerResponse: _TypeAlias = GetAnswerResponse  # noqa: Y015
 
-@typing.final
-class RunScraperRequest(google.protobuf.message.Message):
+@_typing.final
+class RunScraperRequest(_message.Message):
     """Message for running a web scraper job."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PROJECT_IDS_FIELD_NUMBER: builtins.int
-    @property
-    def project_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    PROJECT_IDS_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def project_ids(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """List of project IDs to run the scraper on."""
 
     def __init__(
         self,
         *,
-        project_ids: collections.abc.Iterable[builtins.str] | None = ...,
+        project_ids: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["project_ids", b"project_ids"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["project_ids", b"project_ids"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___RunScraperRequest = RunScraperRequest
+Global___RunScraperRequest: _TypeAlias = RunScraperRequest  # noqa: Y015
 
-@typing.final
-class RunScraperResponse(google.protobuf.message.Message):
+@_typing.final
+class RunScraperResponse(_message.Message):
     """Message containing the response for running a web scraper job."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    @typing.final
-    class ScraperContainer(google.protobuf.message.Message):
+    @_typing.final
+    class ScraperContainer(_message.Message):
         """Message representing a scraper container."""
 
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+        DESCRIPTOR: _descriptor.Descriptor
 
-        CONTAINER_NAME_FIELD_NUMBER: builtins.int
-        CONTAINER_ID_FIELD_NUMBER: builtins.int
-        container_name: builtins.str
+        CONTAINER_NAME_FIELD_NUMBER: _builtins.int
+        CONTAINER_ID_FIELD_NUMBER: _builtins.int
+        container_name: _builtins.str
         """Name of the Docker container running the job."""
-        container_id: builtins.str
+        container_id: _builtins.str
         """ID of the Docker container running the scraping job."""
         def __init__(
             self,
             *,
-            container_name: builtins.str = ...,
-            container_id: builtins.str = ...,
+            container_name: _builtins.str = ...,
+            container_id: _builtins.str = ...,
         ) -> None: ...
-        def ClearField(self, field_name: typing.Literal["container_id", b"container_id", "container_name", b"container_name"]) -> None: ...
+        _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["container_id", b"container_id", "container_name", b"container_name"]  # noqa: Y015
+        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+        def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-    SCRAPER_CONTAINERS_FIELD_NUMBER: builtins.int
-    @property
-    def scraper_containers(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RunScraperResponse.ScraperContainer]:
+    SCRAPER_CONTAINERS_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def scraper_containers(self) -> _containers.RepeatedCompositeFieldContainer[Global___RunScraperResponse.ScraperContainer]:
         """List of scraper containers running the jobs."""
 
     def __init__(
         self,
         *,
-        scraper_containers: collections.abc.Iterable[global___RunScraperResponse.ScraperContainer] | None = ...,
+        scraper_containers: _abc.Iterable[Global___RunScraperResponse.ScraperContainer] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["scraper_containers", b"scraper_containers"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["scraper_containers", b"scraper_containers"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___RunScraperResponse = RunScraperResponse
+Global___RunScraperResponse: _TypeAlias = RunScraperResponse  # noqa: Y015
 
-@typing.final
-class RunTrainingResponse(google.protobuf.message.Message):
+@_typing.final
+class RunTrainingResponse(_message.Message):
     """Message containing the response for running a training job."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    F1_FIELD_NUMBER: builtins.int
-    ACCURACY_FIELD_NUMBER: builtins.int
-    f1: builtins.float
+    F1_FIELD_NUMBER: _builtins.int
+    ACCURACY_FIELD_NUMBER: _builtins.int
+    f1: _builtins.float
     """F1 score as a response of the training."""
-    accuracy: builtins.float
+    accuracy: _builtins.float
     """Accuracy as a response of the training."""
     def __init__(
         self,
         *,
-        f1: builtins.float = ...,
-        accuracy: builtins.float = ...,
+        f1: _builtins.float = ...,
+        accuracy: _builtins.float = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["accuracy", b"accuracy", "f1", b"f1"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["accuracy", b"accuracy", "f1", b"f1"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___RunTrainingResponse = RunTrainingResponse
+Global___RunTrainingResponse: _TypeAlias = RunTrainingResponse  # noqa: Y015
 
-@typing.final
-class UrlFilter(google.protobuf.message.Message):
+@_typing.final
+class UrlFilter(_message.Message):
     """Message for defining URL filters to include and exclude from the scraping process."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ALLOWED_VALUES_FIELD_NUMBER: builtins.int
-    REGEX_FILTER_INCLUDE_FIELD_NUMBER: builtins.int
-    REGEX_FILTER_EXCLUDE_FIELD_NUMBER: builtins.int
-    regex_filter_include: builtins.str
+    ALLOWED_VALUES_FIELD_NUMBER: _builtins.int
+    REGEX_FILTER_INCLUDE_FIELD_NUMBER: _builtins.int
+    REGEX_FILTER_EXCLUDE_FIELD_NUMBER: _builtins.int
+    regex_filter_include: _builtins.str
     """Optional. Regular expression that must be matched by the metadata."""
-    regex_filter_exclude: builtins.str
+    regex_filter_exclude: _builtins.str
     """Optional. Regular expression that must not be matched by the metadata."""
-    @property
-    def allowed_values(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def allowed_values(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Optional. List of allowed values for the metadata field <code>&apos;url&apos;</code>."""
 
     def __init__(
         self,
         *,
-        allowed_values: collections.abc.Iterable[builtins.str] | None = ...,
-        regex_filter_include: builtins.str = ...,
-        regex_filter_exclude: builtins.str = ...,
+        allowed_values: _abc.Iterable[_builtins.str] | None = ...,
+        regex_filter_include: _builtins.str = ...,
+        regex_filter_exclude: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["allowed_values", b"allowed_values", "regex_filter_exclude", b"regex_filter_exclude", "regex_filter_include", b"regex_filter_include"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["allowed_values", b"allowed_values", "regex_filter_exclude", b"regex_filter_exclude", "regex_filter_include", b"regex_filter_include"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___UrlFilter = UrlFilter
+Global___UrlFilter: _TypeAlias = UrlFilter  # noqa: Y015
 
-@typing.final
-class GetServerStateResponse(google.protobuf.message.Message):
+@_typing.final
+class GetServerStateResponse(_message.Message):
     """Message containing the response for checking the server state."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    SERVER_IS_READY_FIELD_NUMBER: builtins.int
-    server_is_ready: builtins.bool
+    SERVER_IS_READY_FIELD_NUMBER: _builtins.int
+    server_is_ready: _builtins.bool
     """Indicates whether the server is ready to accept requests."""
     def __init__(
         self,
         *,
-        server_is_ready: builtins.bool = ...,
+        server_is_ready: _builtins.bool = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["server_is_ready", b"server_is_ready"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["server_is_ready", b"server_is_ready"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GetServerStateResponse = GetServerStateResponse
+Global___GetServerStateResponse: _TypeAlias = GetServerStateResponse  # noqa: Y015
 
-@typing.final
-class ListProjectIdsResponse(google.protobuf.message.Message):
+@_typing.final
+class ListProjectIdsResponse(_message.Message):
     """Message for listing project IDs in the response."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PROJECT_IDS_FIELD_NUMBER: builtins.int
-    @property
-    def project_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    PROJECT_IDS_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def project_ids(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """List of project IDs."""
 
     def __init__(
         self,
         *,
-        project_ids: collections.abc.Iterable[builtins.str] | None = ...,
+        project_ids: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["project_ids", b"project_ids"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["project_ids", b"project_ids"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListProjectIdsResponse = ListProjectIdsResponse
+Global___ListProjectIdsResponse: _TypeAlias = ListProjectIdsResponse  # noqa: Y015
 
-@typing.final
-class GetProjectConfigRequest(google.protobuf.message.Message):
+@_typing.final
+class GetProjectConfigRequest(_message.Message):
     """Message for requesting the configuration of a specific project."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PROJECT_ID_FIELD_NUMBER: builtins.int
-    project_id: builtins.str
+    PROJECT_ID_FIELD_NUMBER: _builtins.int
+    project_id: _builtins.str
     """The ID of the project for which to retrieve the configuration."""
     def __init__(
         self,
         *,
-        project_id: builtins.str = ...,
+        project_id: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["project_id", b"project_id"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["project_id", b"project_id"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GetProjectConfigRequest = GetProjectConfigRequest
+Global___GetProjectConfigRequest: _TypeAlias = GetProjectConfigRequest  # noqa: Y015
 
-@typing.final
-class GetProjectConfigResponse(google.protobuf.message.Message):
+@_typing.final
+class GetProjectConfigResponse(_message.Message):
     """Message containing the response for getting the configuration of a project."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    CONFIG_SERIALIZED_FIELD_NUMBER: builtins.int
-    config_serialized: builtins.str
+    CONFIG_SERIALIZED_FIELD_NUMBER: _builtins.int
+    config_serialized: _builtins.str
     """Serialized configuration of the project."""
     def __init__(
         self,
         *,
-        config_serialized: builtins.str = ...,
+        config_serialized: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["config_serialized", b"config_serialized"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["config_serialized", b"config_serialized"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GetProjectConfigResponse = GetProjectConfigResponse
+Global___GetProjectConfigResponse: _TypeAlias = GetProjectConfigResponse  # noqa: Y015
 
-@typing.final
-class UpdateDatabaseRequest(google.protobuf.message.Message):
+@_typing.final
+class UpdateDatabaseRequest(_message.Message):
     """Message for requesting a database update for specific projects."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PROJECT_IDS_FIELD_NUMBER: builtins.int
-    @property
-    def project_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    PROJECT_IDS_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def project_ids(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """List of project IDs for which to update the database."""
 
     def __init__(
         self,
         *,
-        project_ids: collections.abc.Iterable[builtins.str] | None = ...,
+        project_ids: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["project_ids", b"project_ids"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["project_ids", b"project_ids"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___UpdateDatabaseRequest = UpdateDatabaseRequest
+Global___UpdateDatabaseRequest: _TypeAlias = UpdateDatabaseRequest  # noqa: Y015
 
-@typing.final
-class UpdateDatabaseResponse(google.protobuf.message.Message):
+@_typing.final
+class UpdateDatabaseResponse(_message.Message):
     """Message containing the response for updating the database of specific projects."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ERROR_MESSAGES_FIELD_NUMBER: builtins.int
-    @property
-    def error_messages(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    ERROR_MESSAGES_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def error_messages(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """List of error messages encountered during the database update."""
 
     def __init__(
         self,
         *,
-        error_messages: collections.abc.Iterable[builtins.str] | None = ...,
+        error_messages: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["error_messages", b"error_messages"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["error_messages", b"error_messages"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___UpdateDatabaseResponse = UpdateDatabaseResponse
+Global___UpdateDatabaseResponse: _TypeAlias = UpdateDatabaseResponse  # noqa: Y015

@@ -30,32 +30,32 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-import builtins
-import collections.abc
-import google.protobuf.descriptor
-import google.protobuf.empty_pb2
-import google.protobuf.field_mask_pb2
-import google.protobuf.internal.containers
-import google.protobuf.internal.enum_type_wrapper
-import google.protobuf.message
-import google.protobuf.timestamp_pb2
-import ondewo.nlu.common_pb2
+from collections import abc as _abc
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import empty_pb2 as _empty_pb2
+from google.protobuf import field_mask_pb2 as _field_mask_pb2
+from google.protobuf import message as _message
+from google.protobuf import timestamp_pb2 as _timestamp_pb2
+from google.protobuf.internal import containers as _containers
+from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
+from ondewo.nlu import common_pb2 as _common_pb2
+import builtins as _builtins
 import sys
-import typing
+import typing as _typing
 
-if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+if sys.version_info >= (3, 11):
+    from typing import TypeAlias as _TypeAlias, Never as _Never
 else:
-    import typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias, Never as _Never
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 class _EntityTypeView:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _EntityTypeViewEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_EntityTypeView.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _EntityTypeViewEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_EntityTypeView.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     ENTITY_TYPE_VIEW_UNSPECIFIED: _EntityTypeView.ValueType  # 0
     """Same as ENTITY_TYPE_VIEW_FULL"""
     ENTITY_TYPE_VIEW_FULL: _EntityTypeView.ValueType  # 1
@@ -83,14 +83,14 @@ ENTITY_TYPE_VIEW_SHALLOW: EntityTypeView.ValueType  # 3
 """No entity synonyms are returned, only entity values"""
 ENTITY_TYPE_VIEW_MINIMUM: EntityTypeView.ValueType  # 4
 """Minimum view including only entity type UUID and entity type display name"""
-global___EntityTypeView = EntityTypeView
+Global___EntityTypeView: _TypeAlias = EntityTypeView  # noqa: Y015
 
 class _EntityTypeCategory:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _EntityTypeCategoryEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_EntityTypeCategory.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _EntityTypeCategoryEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_EntityTypeCategory.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     ALL_ENTITY_TYPES: _EntityTypeCategory.ValueType  # 0
     """represent all entity types"""
     DEFAULT_ENTITY_TYPES: _EntityTypeCategory.ValueType  # 1
@@ -107,23 +107,23 @@ DEFAULT_ENTITY_TYPES: EntityTypeCategory.ValueType  # 1
 """represent the default entity types"""
 USER_DEFINED_ENTITY_TYPES: EntityTypeCategory.ValueType  # 2
 """represent the user defined (custom) entity types"""
-global___EntityTypeCategory = EntityTypeCategory
+Global___EntityTypeCategory: _TypeAlias = EntityTypeCategory  # noqa: Y015
 
-@typing.final
-class EntityType(google.protobuf.message.Message):
+@_typing.final
+class EntityType(_message.Message):
     """Represents an entity type.
     Entity types serve as a tool for extracting parameter values from natural
     language queries.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     class _Kind:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _TypeAlias = ValueType  # noqa: Y015
 
-    class _KindEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[EntityType._Kind.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _KindEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[EntityType._Kind.ValueType], _builtins.type):
+        DESCRIPTOR: _descriptor.EnumDescriptor
         KIND_UNSPECIFIED: EntityType._Kind.ValueType  # 0
         """Not specified. This value should be never used."""
         KIND_MAP: EntityType._Kind.ValueType  # 1
@@ -152,11 +152,11 @@ class EntityType(google.protobuf.message.Message):
     """
 
     class _EntityTypeStatus:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _TypeAlias = ValueType  # noqa: Y015
 
-    class _EntityTypeStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[EntityType._EntityTypeStatus.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _EntityTypeStatusEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[EntityType._EntityTypeStatus.ValueType], _builtins.type):
+        DESCRIPTOR: _descriptor.EnumDescriptor
         ACTIVE: EntityType._EntityTypeStatus.ValueType  # 0
         """Entity type is active"""
         INACTIVE: EntityType._EntityTypeStatus.ValueType  # 1
@@ -169,11 +169,11 @@ class EntityType(google.protobuf.message.Message):
     """Entity type is inactive"""
 
     class _AutoExpansionMode:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _TypeAlias = ValueType  # noqa: Y015
 
-    class _AutoExpansionModeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[EntityType._AutoExpansionMode.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _AutoExpansionModeEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[EntityType._AutoExpansionMode.ValueType], _builtins.type):
+        DESCRIPTOR: _descriptor.EnumDescriptor
         AUTO_EXPANSION_MODE_UNSPECIFIED: EntityType._AutoExpansionMode.ValueType  # 0
         """Auto expansion disabled for the entity."""
         AUTO_EXPANSION_MODE_DEFAULT: EntityType._AutoExpansionMode.ValueType  # 1
@@ -194,23 +194,23 @@ class EntityType(google.protobuf.message.Message):
     listed in the entity.
     """
 
-    @typing.final
-    class Entity(google.protobuf.message.Message):
+    @_typing.final
+    class Entity(_message.Message):
         """Represents an entity value within an entity type"""
 
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+        DESCRIPTOR: _descriptor.Descriptor
 
-        VALUE_FIELD_NUMBER: builtins.int
-        SYNONYMS_FIELD_NUMBER: builtins.int
-        NAME_FIELD_NUMBER: builtins.int
-        DISPLAY_NAME_FIELD_NUMBER: builtins.int
-        SYNONYM_COUNT_FIELD_NUMBER: builtins.int
-        LANGUAGE_CODE_FIELD_NUMBER: builtins.int
-        CREATED_AT_FIELD_NUMBER: builtins.int
-        MODIFIED_AT_FIELD_NUMBER: builtins.int
-        CREATED_BY_FIELD_NUMBER: builtins.int
-        MODIFIED_BY_FIELD_NUMBER: builtins.int
-        value: builtins.str
+        VALUE_FIELD_NUMBER: _builtins.int
+        SYNONYMS_FIELD_NUMBER: _builtins.int
+        NAME_FIELD_NUMBER: _builtins.int
+        DISPLAY_NAME_FIELD_NUMBER: _builtins.int
+        SYNONYM_COUNT_FIELD_NUMBER: _builtins.int
+        LANGUAGE_CODE_FIELD_NUMBER: _builtins.int
+        CREATED_AT_FIELD_NUMBER: _builtins.int
+        MODIFIED_AT_FIELD_NUMBER: _builtins.int
+        CREATED_BY_FIELD_NUMBER: _builtins.int
+        MODIFIED_BY_FIELD_NUMBER: _builtins.int
+        value: _builtins.str
         """Required.
         For <code>KIND_MAP</code> entity types: A canonical name to be used in place of synonyms.
         For <code>KIND_LIST</code> entity types: A string that can contain references to other entity types (with or without aliases).
@@ -239,22 +239,22 @@ class EntityType(google.protobuf.message.Message):
          * regex('&lt;#SC&gt;//1') => matches 1st group and converts to snake_case
         </code></pre>
         """
-        name: builtins.str
+        name: _builtins.str
         """The unique identifier of the entity. Format:
         <code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;</code>.
         """
-        display_name: builtins.str
+        display_name: _builtins.str
         """The name of the entity."""
-        synonym_count: builtins.int
+        synonym_count: _builtins.int
         """Optional. Total count of entity synonyms"""
-        language_code: builtins.str
+        language_code: _builtins.str
         """Required. The language to list entity synonyms for."""
-        created_by: builtins.str
+        created_by: _builtins.str
         """User id in form of a valid UUID."""
-        modified_by: builtins.str
+        modified_by: _builtins.str
         """User id in form of a valid UUID."""
-        @property
-        def synonyms(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        @_builtins.property
+        def synonyms(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
             """Required. A collection of synonyms. For <code>KIND_LIST</code> entity types this
             must contain exactly one synonym equal to <code>value</code>.
             Synonyms can be regex expressions, i.e. regular expressions, that are python compatible.
@@ -269,130 +269,136 @@ class EntityType(google.protobuf.message.Message):
             </code></pre>
             """
 
-        @property
-        def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        @_builtins.property
+        def created_at(self) -> _timestamp_pb2.Timestamp:
             """Creation date and time. Read-only field."""
 
-        @property
-        def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        @_builtins.property
+        def modified_at(self) -> _timestamp_pb2.Timestamp:
             """Modification date and time. Read-only field."""
 
         def __init__(
             self,
             *,
-            value: builtins.str = ...,
-            synonyms: collections.abc.Iterable[builtins.str] | None = ...,
-            name: builtins.str = ...,
-            display_name: builtins.str = ...,
-            synonym_count: builtins.int = ...,
-            language_code: builtins.str = ...,
-            created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-            modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-            created_by: builtins.str = ...,
-            modified_by: builtins.str = ...,
+            value: _builtins.str = ...,
+            synonyms: _abc.Iterable[_builtins.str] | None = ...,
+            name: _builtins.str = ...,
+            display_name: _builtins.str = ...,
+            synonym_count: _builtins.int = ...,
+            language_code: _builtins.str = ...,
+            created_at: _timestamp_pb2.Timestamp | None = ...,
+            modified_at: _timestamp_pb2.Timestamp | None = ...,
+            created_by: _builtins.str = ...,
+            modified_by: _builtins.str = ...,
         ) -> None: ...
-        def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing.Literal["created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "language_code", b"language_code", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "synonym_count", b"synonym_count", "synonyms", b"synonyms", "value", b"value"]) -> None: ...
+        _HasFieldArgType: _TypeAlias = _typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "language_code", b"language_code", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "synonym_count", b"synonym_count", "synonyms", b"synonyms", "value", b"value"]  # noqa: Y015
+        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+        def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-    NAME_FIELD_NUMBER: builtins.int
-    DISPLAY_NAME_FIELD_NUMBER: builtins.int
-    KIND_FIELD_NUMBER: builtins.int
-    AUTO_EXPANSION_MODE_FIELD_NUMBER: builtins.int
-    ENTITIES_FIELD_NUMBER: builtins.int
-    NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    ENTITY_COUNT_FIELD_NUMBER: builtins.int
-    STATUS_FIELD_NUMBER: builtins.int
-    SYNONYM_COUNT_FIELD_NUMBER: builtins.int
-    CREATED_AT_FIELD_NUMBER: builtins.int
-    MODIFIED_AT_FIELD_NUMBER: builtins.int
-    CREATED_BY_FIELD_NUMBER: builtins.int
-    MODIFIED_BY_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    DISPLAY_NAME_FIELD_NUMBER: _builtins.int
+    KIND_FIELD_NUMBER: _builtins.int
+    AUTO_EXPANSION_MODE_FIELD_NUMBER: _builtins.int
+    ENTITIES_FIELD_NUMBER: _builtins.int
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: _builtins.int
+    ENTITY_COUNT_FIELD_NUMBER: _builtins.int
+    STATUS_FIELD_NUMBER: _builtins.int
+    SYNONYM_COUNT_FIELD_NUMBER: _builtins.int
+    CREATED_AT_FIELD_NUMBER: _builtins.int
+    MODIFIED_AT_FIELD_NUMBER: _builtins.int
+    CREATED_BY_FIELD_NUMBER: _builtins.int
+    MODIFIED_BY_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """Required for all methods except <code>create</code> (<code>create</code> populates the name
     automatically.
     The unique identifier of the entity type. Format:
     <code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;</code>.
     """
-    display_name: builtins.str
+    display_name: _builtins.str
     """Required. The name of the entity type."""
-    kind: global___EntityType.Kind.ValueType
+    kind: Global___EntityType.Kind.ValueType
     """Required. Indicates the kind of entity type."""
-    auto_expansion_mode: global___EntityType.AutoExpansionMode.ValueType
+    auto_expansion_mode: Global___EntityType.AutoExpansionMode.ValueType
     """Optional. Indicates whether the entity type can be automatically
     expanded.
     """
-    next_page_token: builtins.str
+    next_page_token: _builtins.str
     """The next_page_token is used to retrieve the next page of a returned result,
     e.g. next_page_token is current_index-2
     """
-    entity_count: builtins.int
+    entity_count: _builtins.int
     """Read-Only field. Total count of entity values of the entity type"""
-    status: global___EntityType.EntityTypeStatus.ValueType
+    status: Global___EntityType.EntityTypeStatus.ValueType
     """Indicates whether the entity type is active or not"""
-    synonym_count: builtins.int
+    synonym_count: _builtins.int
     """Read-Only field. Total count of entity synonyms of the entity type"""
-    created_by: builtins.str
+    created_by: _builtins.str
     """User id in form of a valid UUID."""
-    modified_by: builtins.str
+    modified_by: _builtins.str
     """User id in form of a valid UUID."""
-    @property
-    def entities(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___EntityType.Entity]:
+    @_builtins.property
+    def entities(self) -> _containers.RepeatedCompositeFieldContainer[Global___EntityType.Entity]:
         """Optional. The collection of entities associated with the entity type."""
 
-    @property
-    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def created_at(self) -> _timestamp_pb2.Timestamp:
         """Creation date and time. Read-only field."""
 
-    @property
-    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def modified_at(self) -> _timestamp_pb2.Timestamp:
         """Modification date and time. Read-only field."""
 
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
-        display_name: builtins.str = ...,
-        kind: global___EntityType.Kind.ValueType = ...,
-        auto_expansion_mode: global___EntityType.AutoExpansionMode.ValueType = ...,
-        entities: collections.abc.Iterable[global___EntityType.Entity] | None = ...,
-        next_page_token: builtins.str = ...,
-        entity_count: builtins.int = ...,
-        status: global___EntityType.EntityTypeStatus.ValueType = ...,
-        synonym_count: builtins.int = ...,
-        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        created_by: builtins.str = ...,
-        modified_by: builtins.str = ...,
+        name: _builtins.str = ...,
+        display_name: _builtins.str = ...,
+        kind: Global___EntityType.Kind.ValueType = ...,
+        auto_expansion_mode: Global___EntityType.AutoExpansionMode.ValueType = ...,
+        entities: _abc.Iterable[Global___EntityType.Entity] | None = ...,
+        next_page_token: _builtins.str = ...,
+        entity_count: _builtins.int = ...,
+        status: Global___EntityType.EntityTypeStatus.ValueType = ...,
+        synonym_count: _builtins.int = ...,
+        created_at: _timestamp_pb2.Timestamp | None = ...,
+        modified_at: _timestamp_pb2.Timestamp | None = ...,
+        created_by: _builtins.str = ...,
+        modified_by: _builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["auto_expansion_mode", b"auto_expansion_mode", "created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "entities", b"entities", "entity_count", b"entity_count", "kind", b"kind", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "next_page_token", b"next_page_token", "status", b"status", "synonym_count", b"synonym_count"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["auto_expansion_mode", b"auto_expansion_mode", "created_at", b"created_at", "created_by", b"created_by", "display_name", b"display_name", "entities", b"entities", "entity_count", b"entity_count", "kind", b"kind", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "next_page_token", b"next_page_token", "status", b"status", "synonym_count", b"synonym_count"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___EntityType = EntityType
+Global___EntityType: _TypeAlias = EntityType  # noqa: Y015
 
-@typing.final
-class ListEntityTypesRequest(google.protobuf.message.Message):
+@_typing.final
+class ListEntityTypesRequest(_message.Message):
     """The request message for <a href="index.html#ondewo.nlu.EntityTypes.ListEntityTypes">EntityTypes.ListEntityTypes</a>."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
-    PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    ENTITY_TYPE_VIEW_FIELD_NUMBER: builtins.int
-    FILTER_BY_CATEGORY_FIELD_NUMBER: builtins.int
-    SORT_BY_FIELD_FIELD_NUMBER: builtins.int
-    parent: builtins.str
+    PARENT_FIELD_NUMBER: _builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: _builtins.int
+    PAGE_TOKEN_FIELD_NUMBER: _builtins.int
+    ENTITY_TYPE_VIEW_FIELD_NUMBER: _builtins.int
+    FILTER_BY_CATEGORY_FIELD_NUMBER: _builtins.int
+    SORT_BY_FIELD_FIELD_NUMBER: _builtins.int
+    parent: _builtins.str
     """Required. The agent to list all entity types from.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
-    language_code: builtins.str
+    language_code: _builtins.str
     """Optional. The language to list entity synonyms for. If not specified,
     the agent&apos;s default language is used.
     <a href="https://dialogflow.com/docs/reference/language">More than a dozen
     languages</a> are supported.
     Note: languages must be enabled in the agent, before they can be used.
     """
-    page_token: builtins.str
+    page_token: _builtins.str
     """Optional. The next_page_token value returned from a previous list request.
     The page token to support pagination.
     Pagination allows you to retrieve a large result set in smaller, more manageable portions.
@@ -424,43 +430,46 @@ class ListEntityTypesRequest(google.protobuf.message.Message):
       <li>&quot;current_index-1--page_size--20&quot;</li>
     </ul>
     """
-    entity_type_view: global___EntityTypeView.ValueType
+    entity_type_view: Global___EntityTypeView.ValueType
     """Optional. The resource view to apply to the returned entity type."""
-    filter_by_category: global___EntityTypeCategory.ValueType
+    filter_by_category: Global___EntityTypeCategory.ValueType
     """Optional. Applies a filter to the list. Default, no filter."""
-    @property
-    def sort_by_field(self) -> global___EntityTypeSorting:
+    @_builtins.property
+    def sort_by_field(self) -> Global___EntityTypeSorting:
         """Optional. Defines the sorting of the list. Default, no sorting."""
 
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        language_code: builtins.str = ...,
-        page_token: builtins.str = ...,
-        entity_type_view: global___EntityTypeView.ValueType = ...,
-        filter_by_category: global___EntityTypeCategory.ValueType = ...,
-        sort_by_field: global___EntityTypeSorting | None = ...,
+        parent: _builtins.str = ...,
+        language_code: _builtins.str = ...,
+        page_token: _builtins.str = ...,
+        entity_type_view: Global___EntityTypeView.ValueType = ...,
+        filter_by_category: Global___EntityTypeCategory.ValueType = ...,
+        sort_by_field: Global___EntityTypeSorting | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["sort_by_field", b"sort_by_field"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["entity_type_view", b"entity_type_view", "filter_by_category", b"filter_by_category", "language_code", b"language_code", "page_token", b"page_token", "parent", b"parent", "sort_by_field", b"sort_by_field"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["sort_by_field", b"sort_by_field"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["entity_type_view", b"entity_type_view", "filter_by_category", b"filter_by_category", "language_code", b"language_code", "page_token", b"page_token", "parent", b"parent", "sort_by_field", b"sort_by_field"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListEntityTypesRequest = ListEntityTypesRequest
+Global___ListEntityTypesRequest: _TypeAlias = ListEntityTypesRequest  # noqa: Y015
 
-@typing.final
-class ListEntityTypesResponse(google.protobuf.message.Message):
+@_typing.final
+class ListEntityTypesResponse(_message.Message):
     """The response message for <a href="index.html#ondewo.nlu.EntityTypes.ListEntityTypes">EntityTypes.ListEntityTypes</a>."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ENTITY_TYPES_FIELD_NUMBER: builtins.int
-    NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    next_page_token: builtins.str
+    ENTITY_TYPES_FIELD_NUMBER: _builtins.int
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: _builtins.int
+    next_page_token: _builtins.str
     """The next_page_token is used to retrieve the next page of a returned result,
     e.g. next_page_token is current_index-2
     """
-    @property
-    def entity_types(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___EntityType]:
+    @_builtins.property
+    def entity_types(self) -> _containers.RepeatedCompositeFieldContainer[Global___EntityType]:
         """The list of agent entity types. There will be a maximum number of items
         returned based on the page_token field in the request.
         """
@@ -468,35 +477,39 @@ class ListEntityTypesResponse(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        entity_types: collections.abc.Iterable[global___EntityType] | None = ...,
-        next_page_token: builtins.str = ...,
+        entity_types: _abc.Iterable[Global___EntityType] | None = ...,
+        next_page_token: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["entity_types", b"entity_types", "next_page_token", b"next_page_token"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["entity_types", b"entity_types", "next_page_token", b"next_page_token"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListEntityTypesResponse = ListEntityTypesResponse
+Global___ListEntityTypesResponse: _TypeAlias = ListEntityTypesResponse  # noqa: Y015
 
-@typing.final
-class GetEntityTypeRequest(google.protobuf.message.Message):
+@_typing.final
+class GetEntityTypeRequest(_message.Message):
     """The request message for <a href="index.html#ondewo.nlu.EntityTypes.GetEntityType">EntityTypes.GetEntityType</a>."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NAME_FIELD_NUMBER: builtins.int
-    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
-    PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    ENTITY_TYPE_VIEW_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: _builtins.int
+    PAGE_TOKEN_FIELD_NUMBER: _builtins.int
+    ENTITY_TYPE_VIEW_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """Required. The name of the entity type.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;</code></pre>
     """
-    language_code: builtins.str
+    language_code: _builtins.str
     """Optional. The language to retrieve entity synonyms for. If not specified,
     the agent&apos;s default language is used.
     <a href="https://dialogflow.com/docs/reference/language">More than a dozen
     languages</a> are supported.
     Note: languages must be enabled in the agent, before they can be used.
     """
-    page_token: builtins.str
+    page_token: _builtins.str
     """The page token to support pagination.
     Pagination allows you to retrieve a large result set in smaller, more manageable portions.
     The page token is a string representing the current index and page size.
@@ -527,207 +540,229 @@ class GetEntityTypeRequest(google.protobuf.message.Message):
       <li>&quot;current_index-1--page_size--20&quot;</li>
     </ul>
     """
-    entity_type_view: global___EntityTypeView.ValueType
+    entity_type_view: Global___EntityTypeView.ValueType
     """Optional. The resource view to apply to the returned Entity Type"""
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
-        language_code: builtins.str = ...,
-        page_token: builtins.str = ...,
-        entity_type_view: global___EntityTypeView.ValueType = ...,
+        name: _builtins.str = ...,
+        language_code: _builtins.str = ...,
+        page_token: _builtins.str = ...,
+        entity_type_view: Global___EntityTypeView.ValueType = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["entity_type_view", b"entity_type_view", "language_code", b"language_code", "name", b"name", "page_token", b"page_token"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["entity_type_view", b"entity_type_view", "language_code", b"language_code", "name", b"name", "page_token", b"page_token"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GetEntityTypeRequest = GetEntityTypeRequest
+Global___GetEntityTypeRequest: _TypeAlias = GetEntityTypeRequest  # noqa: Y015
 
-@typing.final
-class CreateEntityTypeRequest(google.protobuf.message.Message):
+@_typing.final
+class CreateEntityTypeRequest(_message.Message):
     """The request message for <a href="index.html#ondewo.nlu.EntityTypes.CreateEntityType">EntityTypes.CreateEntityType</a>."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    ENTITY_TYPE_FIELD_NUMBER: builtins.int
-    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
-    ENTITY_TYPE_VIEW_FIELD_NUMBER: builtins.int
-    parent: builtins.str
+    PARENT_FIELD_NUMBER: _builtins.int
+    ENTITY_TYPE_FIELD_NUMBER: _builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: _builtins.int
+    ENTITY_TYPE_VIEW_FIELD_NUMBER: _builtins.int
+    parent: _builtins.str
     """Required. The agent to create a entity type for.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
-    language_code: builtins.str
+    language_code: _builtins.str
     """Optional. The language of entity synonyms defined in <code>entity_type</code>. If not
     specified, the agent&apos;s default language is used.
     <a href="https://dialogflow.com/docs/reference/language">More than a dozen
     languages</a> are supported.
     Note: languages must be enabled in the agent, before they can be used.
     """
-    entity_type_view: global___EntityTypeView.ValueType
+    entity_type_view: Global___EntityTypeView.ValueType
     """Optional. The resource view to apply to the returned Entity Type"""
-    @property
-    def entity_type(self) -> global___EntityType:
+    @_builtins.property
+    def entity_type(self) -> Global___EntityType:
         """Required. The entity type to create."""
 
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        entity_type: global___EntityType | None = ...,
-        language_code: builtins.str = ...,
-        entity_type_view: global___EntityTypeView.ValueType = ...,
+        parent: _builtins.str = ...,
+        entity_type: Global___EntityType | None = ...,
+        language_code: _builtins.str = ...,
+        entity_type_view: Global___EntityTypeView.ValueType = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["entity_type", b"entity_type"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["entity_type", b"entity_type", "entity_type_view", b"entity_type_view", "language_code", b"language_code", "parent", b"parent"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["entity_type", b"entity_type"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["entity_type", b"entity_type", "entity_type_view", b"entity_type_view", "language_code", b"language_code", "parent", b"parent"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___CreateEntityTypeRequest = CreateEntityTypeRequest
+Global___CreateEntityTypeRequest: _TypeAlias = CreateEntityTypeRequest  # noqa: Y015
 
-@typing.final
-class UpdateEntityTypeRequest(google.protobuf.message.Message):
+@_typing.final
+class UpdateEntityTypeRequest(_message.Message):
     """The request message for <a href="index.html#ondewo.nlu.EntityTypes.UpdateEntityType">EntityTypes.UpdateEntityType</a>."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ENTITY_TYPE_FIELD_NUMBER: builtins.int
-    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
-    UPDATE_MASK_FIELD_NUMBER: builtins.int
-    ENTITY_TYPE_VIEW_FIELD_NUMBER: builtins.int
-    language_code: builtins.str
+    ENTITY_TYPE_FIELD_NUMBER: _builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: _builtins.int
+    UPDATE_MASK_FIELD_NUMBER: _builtins.int
+    ENTITY_TYPE_VIEW_FIELD_NUMBER: _builtins.int
+    language_code: _builtins.str
     """Optional. The language of entity synonyms defined in <code>entity_type</code>. If not
     specified, the agent&apos;s default language is used.
     <a href="https://dialogflow.com/docs/reference/language">More than a dozen
     languages</a> are supported.
     Note: languages must be enabled in the agent, before they can be used.
     """
-    entity_type_view: global___EntityTypeView.ValueType
+    entity_type_view: Global___EntityTypeView.ValueType
     """Optional. The resource view to apply to the returned Entity Type"""
-    @property
-    def entity_type(self) -> global___EntityType:
+    @_builtins.property
+    def entity_type(self) -> Global___EntityType:
         """Required. The entity type to update.
         Format: <pre><code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;</code></pre>
         """
 
-    @property
-    def update_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def update_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields get updated."""
 
     def __init__(
         self,
         *,
-        entity_type: global___EntityType | None = ...,
-        language_code: builtins.str = ...,
-        update_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
-        entity_type_view: global___EntityTypeView.ValueType = ...,
+        entity_type: Global___EntityType | None = ...,
+        language_code: _builtins.str = ...,
+        update_mask: _field_mask_pb2.FieldMask | None = ...,
+        entity_type_view: Global___EntityTypeView.ValueType = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["entity_type", b"entity_type", "update_mask", b"update_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["entity_type", b"entity_type", "entity_type_view", b"entity_type_view", "language_code", b"language_code", "update_mask", b"update_mask"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["entity_type", b"entity_type", "update_mask", b"update_mask"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["entity_type", b"entity_type", "entity_type_view", b"entity_type_view", "language_code", b"language_code", "update_mask", b"update_mask"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___UpdateEntityTypeRequest = UpdateEntityTypeRequest
+Global___UpdateEntityTypeRequest: _TypeAlias = UpdateEntityTypeRequest  # noqa: Y015
 
-@typing.final
-class DeleteEntityTypeRequest(google.protobuf.message.Message):
+@_typing.final
+class DeleteEntityTypeRequest(_message.Message):
     """The request message for <a href="index.html#ondewo.nlu.EntityTypes.DeleteEntityType">EntityTypes.DeleteEntityType</a>."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NAME_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """Required. The name of the entity type to delete.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;</code></pre>
     """
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
+        name: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["name", b"name"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["name", b"name"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___DeleteEntityTypeRequest = DeleteEntityTypeRequest
+Global___DeleteEntityTypeRequest: _TypeAlias = DeleteEntityTypeRequest  # noqa: Y015
 
-@typing.final
-class BatchUpdateEntityTypesRequest(google.protobuf.message.Message):
+@_typing.final
+class BatchUpdateEntityTypesRequest(_message.Message):
     """The request message for <a href="index.html#ondewo.nlu.EntityTypes.BatchUpdateEntityTypes">EntityTypes.BatchUpdateEntityTypes</a>."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    ENTITY_TYPE_BATCH_URI_FIELD_NUMBER: builtins.int
-    ENTITY_TYPE_BATCH_INLINE_FIELD_NUMBER: builtins.int
-    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
-    UPDATE_MASK_FIELD_NUMBER: builtins.int
-    parent: builtins.str
+    PARENT_FIELD_NUMBER: _builtins.int
+    ENTITY_TYPE_BATCH_URI_FIELD_NUMBER: _builtins.int
+    ENTITY_TYPE_BATCH_INLINE_FIELD_NUMBER: _builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: _builtins.int
+    UPDATE_MASK_FIELD_NUMBER: _builtins.int
+    parent: _builtins.str
     """Required. The name of the agent to update or create entity types in.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent</code></pre>
     """
-    entity_type_batch_uri: builtins.str
+    entity_type_batch_uri: _builtins.str
     """The URI to a Google Cloud Storage file containing entity types to update
     or create. The file format can either be a serialized proto (of
     EntityBatch type) or a JSON object. Note: The URI must start with
     &quot;gs://&quot;.
     """
-    language_code: builtins.str
+    language_code: _builtins.str
     """Optional. The language of entity synonyms defined in <code>entity_types</code>. If not
     specified, the agent&apos;s default language is used.
     <a href="https://dialogflow.com/docs/reference/language">More than a dozen
     languages</a> are supported.
     Note: languages must be enabled in the agent, before they can be used.
     """
-    @property
-    def entity_type_batch_inline(self) -> global___EntityTypeBatch:
+    @_builtins.property
+    def entity_type_batch_inline(self) -> Global___EntityTypeBatch:
         """The collection of entity type to update or create."""
 
-    @property
-    def update_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def update_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields get updated."""
 
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        entity_type_batch_uri: builtins.str = ...,
-        entity_type_batch_inline: global___EntityTypeBatch | None = ...,
-        language_code: builtins.str = ...,
-        update_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        parent: _builtins.str = ...,
+        entity_type_batch_uri: _builtins.str = ...,
+        entity_type_batch_inline: Global___EntityTypeBatch | None = ...,
+        language_code: _builtins.str = ...,
+        update_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["entity_type_batch", b"entity_type_batch", "entity_type_batch_inline", b"entity_type_batch_inline", "entity_type_batch_uri", b"entity_type_batch_uri", "update_mask", b"update_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["entity_type_batch", b"entity_type_batch", "entity_type_batch_inline", b"entity_type_batch_inline", "entity_type_batch_uri", b"entity_type_batch_uri", "language_code", b"language_code", "parent", b"parent", "update_mask", b"update_mask"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["entity_type_batch", b"entity_type_batch"]) -> typing.Literal["entity_type_batch_uri", "entity_type_batch_inline"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["entity_type_batch", b"entity_type_batch", "entity_type_batch_inline", b"entity_type_batch_inline", "entity_type_batch_uri", b"entity_type_batch_uri", "update_mask", b"update_mask"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["entity_type_batch", b"entity_type_batch", "entity_type_batch_inline", b"entity_type_batch_inline", "entity_type_batch_uri", b"entity_type_batch_uri", "language_code", b"language_code", "parent", b"parent", "update_mask", b"update_mask"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType_entity_type_batch: _TypeAlias = _typing.Literal["entity_type_batch_uri", "entity_type_batch_inline"]  # noqa: Y015
+    _WhichOneofArgType_entity_type_batch: _TypeAlias = _typing.Literal["entity_type_batch", b"entity_type_batch"]  # noqa: Y015
+    def WhichOneof(self, oneof_group: _WhichOneofArgType_entity_type_batch) -> _WhichOneofReturnType_entity_type_batch | None: ...
 
-global___BatchUpdateEntityTypesRequest = BatchUpdateEntityTypesRequest
+Global___BatchUpdateEntityTypesRequest: _TypeAlias = BatchUpdateEntityTypesRequest  # noqa: Y015
 
-@typing.final
-class BatchUpdateEntityTypesResponse(google.protobuf.message.Message):
+@_typing.final
+class BatchUpdateEntityTypesResponse(_message.Message):
     """The response message for <a href="index.html#ondewo.nlu.EntityTypes.BatchUpdateEntityTypes">EntityTypes.BatchUpdateEntityTypes</a>."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ENTITY_TYPES_FIELD_NUMBER: builtins.int
-    @property
-    def entity_types(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___EntityType]:
+    ENTITY_TYPES_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def entity_types(self) -> _containers.RepeatedCompositeFieldContainer[Global___EntityType]:
         """The collection of updated or created entity types."""
 
     def __init__(
         self,
         *,
-        entity_types: collections.abc.Iterable[global___EntityType] | None = ...,
+        entity_types: _abc.Iterable[Global___EntityType] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["entity_types", b"entity_types"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["entity_types", b"entity_types"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___BatchUpdateEntityTypesResponse = BatchUpdateEntityTypesResponse
+Global___BatchUpdateEntityTypesResponse: _TypeAlias = BatchUpdateEntityTypesResponse  # noqa: Y015
 
-@typing.final
-class BatchDeleteEntityTypesRequest(google.protobuf.message.Message):
+@_typing.final
+class BatchDeleteEntityTypesRequest(_message.Message):
     """The request message for <a href="index.html#ondewo.nlu.EntityTypes.BatchDeleteEntityTypes">EntityTypes.BatchDeleteEntityTypes</a>."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    ENTITY_TYPE_NAMES_FIELD_NUMBER: builtins.int
-    parent: builtins.str
+    PARENT_FIELD_NUMBER: _builtins.int
+    ENTITY_TYPE_NAMES_FIELD_NUMBER: _builtins.int
+    parent: _builtins.str
     """Required. The name of the agent to delete all entities types for. Format:
     <code>projects/&lt;project_uuid&gt;/agent</code>.
     """
-    @property
-    def entity_type_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def entity_type_names(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Required. The names entity types to delete. All names must point to the
         same agent as `parent`.
         """
@@ -735,45 +770,53 @@ class BatchDeleteEntityTypesRequest(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        entity_type_names: collections.abc.Iterable[builtins.str] | None = ...,
+        parent: _builtins.str = ...,
+        entity_type_names: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["entity_type_names", b"entity_type_names", "parent", b"parent"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["entity_type_names", b"entity_type_names", "parent", b"parent"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___BatchDeleteEntityTypesRequest = BatchDeleteEntityTypesRequest
+Global___BatchDeleteEntityTypesRequest: _TypeAlias = BatchDeleteEntityTypesRequest  # noqa: Y015
 
-@typing.final
-class EntityTypeBatch(google.protobuf.message.Message):
+@_typing.final
+class EntityTypeBatch(_message.Message):
     """This message is a wrapper around a collection of entity types."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ENTITY_TYPES_FIELD_NUMBER: builtins.int
-    @property
-    def entity_types(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___EntityType]:
+    ENTITY_TYPES_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def entity_types(self) -> _containers.RepeatedCompositeFieldContainer[Global___EntityType]:
         """A collection of entity types."""
 
     def __init__(
         self,
         *,
-        entity_types: collections.abc.Iterable[global___EntityType] | None = ...,
+        entity_types: _abc.Iterable[Global___EntityType] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["entity_types", b"entity_types"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["entity_types", b"entity_types"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___EntityTypeBatch = EntityTypeBatch
+Global___EntityTypeBatch: _TypeAlias = EntityTypeBatch  # noqa: Y015
 
-@typing.final
-class EntityTypeSorting(google.protobuf.message.Message):
+@_typing.final
+class EntityTypeSorting(_message.Message):
     """This message contains Entity type sorting"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     class _EntityTypeSortingField:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _TypeAlias = ValueType  # noqa: Y015
 
-    class _EntityTypeSortingFieldEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[EntityTypeSorting._EntityTypeSortingField.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _EntityTypeSortingFieldEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[EntityTypeSorting._EntityTypeSortingField.ValueType], _builtins.type):
+        DESCRIPTOR: _descriptor.EnumDescriptor
         NO_ENTITY_TYPE_SORTING: EntityTypeSorting._EntityTypeSortingField.ValueType  # 0
         """No sorting applied"""
         SORT_ENTITY_TYPE_BY_NAME: EntityTypeSorting._EntityTypeSortingField.ValueType  # 1
@@ -803,187 +846,217 @@ class EntityTypeSorting(google.protobuf.message.Message):
     SORT_ENTITY_TYPE_BY_SYNONYM_COUNT: EntityTypeSorting.EntityTypeSortingField.ValueType  # 5
     """Sort by synonym count"""
 
-    SORTING_FIELD_FIELD_NUMBER: builtins.int
-    SORTING_MODE_FIELD_NUMBER: builtins.int
-    sorting_field: global___EntityTypeSorting.EntityTypeSortingField.ValueType
+    SORTING_FIELD_FIELD_NUMBER: _builtins.int
+    SORTING_MODE_FIELD_NUMBER: _builtins.int
+    sorting_field: Global___EntityTypeSorting.EntityTypeSortingField.ValueType
     """The field to sort the entity types by"""
-    sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType
+    sorting_mode: _common_pb2.SortingMode.ValueType
     """The sorting mode: ascending or descending"""
     def __init__(
         self,
         *,
-        sorting_field: global___EntityTypeSorting.EntityTypeSortingField.ValueType = ...,
-        sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType = ...,
+        sorting_field: Global___EntityTypeSorting.EntityTypeSortingField.ValueType = ...,
+        sorting_mode: _common_pb2.SortingMode.ValueType = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["sorting_field", b"sorting_field", "sorting_mode", b"sorting_mode"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["sorting_field", b"sorting_field", "sorting_mode", b"sorting_mode"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___EntityTypeSorting = EntityTypeSorting
+Global___EntityTypeSorting: _TypeAlias = EntityTypeSorting  # noqa: Y015
 
-@typing.final
-class EntityStatus(google.protobuf.message.Message):
+@_typing.final
+class EntityStatus(_message.Message):
     """This message is for the entity status"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ENTITY_FIELD_NUMBER: builtins.int
-    ERROR_MESSAGE_FIELD_NUMBER: builtins.int
-    error_message: builtins.str
+    ENTITY_FIELD_NUMBER: _builtins.int
+    ERROR_MESSAGE_FIELD_NUMBER: _builtins.int
+    error_message: _builtins.str
     """Error message"""
-    @property
-    def entity(self) -> global___EntityType.Entity:
+    @_builtins.property
+    def entity(self) -> Global___EntityType.Entity:
         """The entity"""
 
     def __init__(
         self,
         *,
-        entity: global___EntityType.Entity | None = ...,
-        error_message: builtins.str = ...,
+        entity: Global___EntityType.Entity | None = ...,
+        error_message: _builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["entity", b"entity", "entity_or_status", b"entity_or_status", "error_message", b"error_message"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["entity", b"entity", "entity_or_status", b"entity_or_status", "error_message", b"error_message"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["entity_or_status", b"entity_or_status"]) -> typing.Literal["entity", "error_message"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["entity", b"entity", "entity_or_status", b"entity_or_status", "error_message", b"error_message"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["entity", b"entity", "entity_or_status", b"entity_or_status", "error_message", b"error_message"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType_entity_or_status: _TypeAlias = _typing.Literal["entity", "error_message"]  # noqa: Y015
+    _WhichOneofArgType_entity_or_status: _TypeAlias = _typing.Literal["entity_or_status", b"entity_or_status"]  # noqa: Y015
+    def WhichOneof(self, oneof_group: _WhichOneofArgType_entity_or_status) -> _WhichOneofReturnType_entity_or_status | None: ...
 
-global___EntityStatus = EntityStatus
+Global___EntityStatus: _TypeAlias = EntityStatus  # noqa: Y015
 
-@typing.final
-class BatchEntitiesResponse(google.protobuf.message.Message):
+@_typing.final
+class BatchEntitiesResponse(_message.Message):
     """This message is a response of batch entities"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ENTITY_STATUSES_FIELD_NUMBER: builtins.int
-    HAS_ERRORS_FIELD_NUMBER: builtins.int
-    has_errors: builtins.bool
+    ENTITY_STATUSES_FIELD_NUMBER: _builtins.int
+    HAS_ERRORS_FIELD_NUMBER: _builtins.int
+    has_errors: _builtins.bool
     """indicates if statuses of some of the training phrases have errors"""
-    @property
-    def entity_statuses(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___EntityStatus]:
+    @_builtins.property
+    def entity_statuses(self) -> _containers.RepeatedCompositeFieldContainer[Global___EntityStatus]:
         """A list of entity statuses"""
 
     def __init__(
         self,
         *,
-        entity_statuses: collections.abc.Iterable[global___EntityStatus] | None = ...,
-        has_errors: builtins.bool = ...,
+        entity_statuses: _abc.Iterable[Global___EntityStatus] | None = ...,
+        has_errors: _builtins.bool = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["entity_statuses", b"entity_statuses", "has_errors", b"has_errors"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["entity_statuses", b"entity_statuses", "has_errors", b"has_errors"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___BatchEntitiesResponse = BatchEntitiesResponse
+Global___BatchEntitiesResponse: _TypeAlias = BatchEntitiesResponse  # noqa: Y015
 
-@typing.final
-class CreateEntityRequest(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+@_typing.final
+class CreateEntityRequest(_message.Message):
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ENTITY_TYPE_NAME_FIELD_NUMBER: builtins.int
-    ENTITY_FIELD_NUMBER: builtins.int
-    entity_type_name: builtins.str
+    ENTITY_TYPE_NAME_FIELD_NUMBER: _builtins.int
+    ENTITY_FIELD_NUMBER: _builtins.int
+    entity_type_name: _builtins.str
     """Required. Name of the entity type in which to create the entity value. Format:
     <code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;</code>.
     """
-    @property
-    def entity(self) -> global___EntityType.Entity:
+    @_builtins.property
+    def entity(self) -> Global___EntityType.Entity:
         """The entity value to create"""
 
     def __init__(
         self,
         *,
-        entity_type_name: builtins.str = ...,
-        entity: global___EntityType.Entity | None = ...,
+        entity_type_name: _builtins.str = ...,
+        entity: Global___EntityType.Entity | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["entity", b"entity"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["entity", b"entity", "entity_type_name", b"entity_type_name"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["entity", b"entity"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["entity", b"entity", "entity_type_name", b"entity_type_name"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___CreateEntityRequest = CreateEntityRequest
+Global___CreateEntityRequest: _TypeAlias = CreateEntityRequest  # noqa: Y015
 
-@typing.final
-class BatchCreateEntitiesRequest(google.protobuf.message.Message):
+@_typing.final
+class BatchCreateEntitiesRequest(_message.Message):
     """This message is a request to create a batch entities"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    CREATE_ENTITY_REQUESTS_FIELD_NUMBER: builtins.int
-    @property
-    def create_entity_requests(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___CreateEntityRequest]:
+    CREATE_ENTITY_REQUESTS_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def create_entity_requests(self) -> _containers.RepeatedCompositeFieldContainer[Global___CreateEntityRequest]:
         """The create entity requests in a batch"""
 
     def __init__(
         self,
         *,
-        create_entity_requests: collections.abc.Iterable[global___CreateEntityRequest] | None = ...,
+        create_entity_requests: _abc.Iterable[Global___CreateEntityRequest] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["create_entity_requests", b"create_entity_requests"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["create_entity_requests", b"create_entity_requests"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___BatchCreateEntitiesRequest = BatchCreateEntitiesRequest
+Global___BatchCreateEntitiesRequest: _TypeAlias = BatchCreateEntitiesRequest  # noqa: Y015
 
-@typing.final
-class BatchUpdateEntitiesRequest(google.protobuf.message.Message):
+@_typing.final
+class BatchUpdateEntitiesRequest(_message.Message):
     """This message is a request to update a batch of entities"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ENTITIES_FIELD_NUMBER: builtins.int
-    @property
-    def entities(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___EntityType.Entity]:
+    ENTITIES_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def entities(self) -> _containers.RepeatedCompositeFieldContainer[Global___EntityType.Entity]:
         """The entities to update"""
 
     def __init__(
         self,
         *,
-        entities: collections.abc.Iterable[global___EntityType.Entity] | None = ...,
+        entities: _abc.Iterable[Global___EntityType.Entity] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["entities", b"entities"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["entities", b"entities"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___BatchUpdateEntitiesRequest = BatchUpdateEntitiesRequest
+Global___BatchUpdateEntitiesRequest: _TypeAlias = BatchUpdateEntitiesRequest  # noqa: Y015
 
-@typing.final
-class UpdateEntityRequest(google.protobuf.message.Message):
+@_typing.final
+class UpdateEntityRequest(_message.Message):
     """This message is a request to update an entity"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ENTITY_FIELD_NUMBER: builtins.int
-    @property
-    def entity(self) -> global___EntityType.Entity:
+    ENTITY_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def entity(self) -> Global___EntityType.Entity:
         """The entity to update"""
 
     def __init__(
         self,
         *,
-        entity: global___EntityType.Entity | None = ...,
+        entity: Global___EntityType.Entity | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["entity", b"entity"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["entity", b"entity"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["entity", b"entity"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["entity", b"entity"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___UpdateEntityRequest = UpdateEntityRequest
+Global___UpdateEntityRequest: _TypeAlias = UpdateEntityRequest  # noqa: Y015
 
-@typing.final
-class GetEntityRequest(google.protobuf.message.Message):
+@_typing.final
+class GetEntityRequest(_message.Message):
     """This message is a request to get a an entity"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NAME_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """The unique identifiers of the entities. Format:
     <code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;</code>.
     """
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
+        name: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["name", b"name"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["name", b"name"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GetEntityRequest = GetEntityRequest
+Global___GetEntityRequest: _TypeAlias = GetEntityRequest  # noqa: Y015
 
-@typing.final
-class BatchGetEntitiesRequest(google.protobuf.message.Message):
+@_typing.final
+class BatchGetEntitiesRequest(_message.Message):
     """This message is a request to get a batch of entities"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NAMES_FIELD_NUMBER: builtins.int
-    @property
-    def names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    NAMES_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def names(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """The unique identifiers of the entities. Format:
         <code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;</code>.
         """
@@ -991,21 +1064,25 @@ class BatchGetEntitiesRequest(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        names: collections.abc.Iterable[builtins.str] | None = ...,
+        names: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["names", b"names"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["names", b"names"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___BatchGetEntitiesRequest = BatchGetEntitiesRequest
+Global___BatchGetEntitiesRequest: _TypeAlias = BatchGetEntitiesRequest  # noqa: Y015
 
-@typing.final
-class BatchDeleteEntitiesRequest(google.protobuf.message.Message):
+@_typing.final
+class BatchDeleteEntitiesRequest(_message.Message):
     """This message is a request to delete a batch of entities"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NAMES_FIELD_NUMBER: builtins.int
-    @property
-    def names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    NAMES_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def names(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """The unique identifiers of the entities. Format:
         <code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;</code>.
         """
@@ -1013,102 +1090,118 @@ class BatchDeleteEntitiesRequest(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        names: collections.abc.Iterable[builtins.str] | None = ...,
+        names: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["names", b"names"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["names", b"names"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___BatchDeleteEntitiesRequest = BatchDeleteEntitiesRequest
+Global___BatchDeleteEntitiesRequest: _TypeAlias = BatchDeleteEntitiesRequest  # noqa: Y015
 
-@typing.final
-class DeleteEntityRequest(google.protobuf.message.Message):
+@_typing.final
+class DeleteEntityRequest(_message.Message):
     """This message is a request to delete a batch of entities"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NAME_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """The unique identifiers of the entities. Format:
     <code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;/entities/&lt;entity_uuid&gt;</code>.
     """
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
+        name: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["name", b"name"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["name", b"name"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___DeleteEntityRequest = DeleteEntityRequest
+Global___DeleteEntityRequest: _TypeAlias = DeleteEntityRequest  # noqa: Y015
 
-@typing.final
-class DeleteEntityStatus(google.protobuf.message.Message):
+@_typing.final
+class DeleteEntityStatus(_message.Message):
     """This message contains the status of an entity deletion"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    SUCCESSFULLY_DELETED_FIELD_NUMBER: builtins.int
-    ERROR_MESSAGE_FIELD_NUMBER: builtins.int
-    error_message: builtins.str
+    SUCCESSFULLY_DELETED_FIELD_NUMBER: _builtins.int
+    ERROR_MESSAGE_FIELD_NUMBER: _builtins.int
+    error_message: _builtins.str
     """The error message when deleting the entity failed"""
-    @property
-    def successfully_deleted(self) -> google.protobuf.empty_pb2.Empty:
+    @_builtins.property
+    def successfully_deleted(self) -> _empty_pb2.Empty:
         """Set when the entity was successfully deleted"""
 
     def __init__(
         self,
         *,
-        successfully_deleted: google.protobuf.empty_pb2.Empty | None = ...,
-        error_message: builtins.str = ...,
+        successfully_deleted: _empty_pb2.Empty | None = ...,
+        error_message: _builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["delete_status", b"delete_status", "error_message", b"error_message", "successfully_deleted", b"successfully_deleted"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["delete_status", b"delete_status", "error_message", b"error_message", "successfully_deleted", b"successfully_deleted"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["delete_status", b"delete_status"]) -> typing.Literal["successfully_deleted", "error_message"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["delete_status", b"delete_status", "error_message", b"error_message", "successfully_deleted", b"successfully_deleted"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["delete_status", b"delete_status", "error_message", b"error_message", "successfully_deleted", b"successfully_deleted"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType_delete_status: _TypeAlias = _typing.Literal["successfully_deleted", "error_message"]  # noqa: Y015
+    _WhichOneofArgType_delete_status: _TypeAlias = _typing.Literal["delete_status", b"delete_status"]  # noqa: Y015
+    def WhichOneof(self, oneof_group: _WhichOneofArgType_delete_status) -> _WhichOneofReturnType_delete_status | None: ...
 
-global___DeleteEntityStatus = DeleteEntityStatus
+Global___DeleteEntityStatus: _TypeAlias = DeleteEntityStatus  # noqa: Y015
 
-@typing.final
-class BatchDeleteEntitiesResponse(google.protobuf.message.Message):
+@_typing.final
+class BatchDeleteEntitiesResponse(_message.Message):
     """This message is a response of deletion of a batch of entities"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    DELETE_STATUSES_FIELD_NUMBER: builtins.int
-    HAS_ERRORS_FIELD_NUMBER: builtins.int
-    has_errors: builtins.bool
+    DELETE_STATUSES_FIELD_NUMBER: _builtins.int
+    HAS_ERRORS_FIELD_NUMBER: _builtins.int
+    has_errors: _builtins.bool
     """error messages"""
-    @property
-    def delete_statuses(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___DeleteEntityStatus]:
+    @_builtins.property
+    def delete_statuses(self) -> _containers.RepeatedCompositeFieldContainer[Global___DeleteEntityStatus]:
         """status of an entity deletion"""
 
     def __init__(
         self,
         *,
-        delete_statuses: collections.abc.Iterable[global___DeleteEntityStatus] | None = ...,
-        has_errors: builtins.bool = ...,
+        delete_statuses: _abc.Iterable[Global___DeleteEntityStatus] | None = ...,
+        has_errors: _builtins.bool = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["delete_statuses", b"delete_statuses", "has_errors", b"has_errors"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["delete_statuses", b"delete_statuses", "has_errors", b"has_errors"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___BatchDeleteEntitiesResponse = BatchDeleteEntitiesResponse
+Global___BatchDeleteEntitiesResponse: _TypeAlias = BatchDeleteEntitiesResponse  # noqa: Y015
 
-@typing.final
-class ListEntitiesRequest(google.protobuf.message.Message):
+@_typing.final
+class ListEntitiesRequest(_message.Message):
     """This message is a request to get a list of entities"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ENTITY_TYPE_NAME_FIELD_NUMBER: builtins.int
-    LANGUAGE_CODE_FIELD_NUMBER: builtins.int
-    PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    SORT_BY_FIELD_FIELD_NUMBER: builtins.int
-    SEARCH_BY_PATTERN_FIELD_NUMBER: builtins.int
-    entity_type_name: builtins.str
+    ENTITY_TYPE_NAME_FIELD_NUMBER: _builtins.int
+    LANGUAGE_CODE_FIELD_NUMBER: _builtins.int
+    PAGE_TOKEN_FIELD_NUMBER: _builtins.int
+    SORT_BY_FIELD_FIELD_NUMBER: _builtins.int
+    SEARCH_BY_PATTERN_FIELD_NUMBER: _builtins.int
+    entity_type_name: _builtins.str
     """The unique identifier of the entity type. Format:
     <code>projects/&lt;project_uuid&gt;/agent/entityTypes/&lt;entity_type_uuid&gt;</code>
     """
-    language_code: builtins.str
+    language_code: _builtins.str
     """Optional. The language to list training phrases, parameters and rich
     messages for. If not specified, the agent&apos;s default language is used.
     """
-    page_token: builtins.str
+    page_token: _builtins.str
     """Optional. The next_page_token value returned from a previous list request.
     The page token to support pagination.
     Pagination allows you to retrieve a large result set in smaller, more manageable portions.
@@ -1140,7 +1233,7 @@ class ListEntitiesRequest(google.protobuf.message.Message):
       <li>&quot;current_index-1--page_size--20&quot;</li>
     </ul>
     """
-    search_by_pattern: builtins.str
+    search_by_pattern: _builtins.str
     """Optional. Defines a pattern to search for in the entity type &quot;values&quot; and &quot;synonyms&quot;
     Example:
     <pre><code>
@@ -1152,62 +1245,69 @@ class ListEntitiesRequest(google.protobuf.message.Message):
                  Dark                    obscure, black, opaque, ...
     </code></pre>
     """
-    @property
-    def sort_by_field(self) -> global___EntityValueSorting:
+    @_builtins.property
+    def sort_by_field(self) -> Global___EntityValueSorting:
         """Optional. Defines the sorting of the list. Default, no sorting."""
 
     def __init__(
         self,
         *,
-        entity_type_name: builtins.str = ...,
-        language_code: builtins.str = ...,
-        page_token: builtins.str = ...,
-        sort_by_field: global___EntityValueSorting | None = ...,
-        search_by_pattern: builtins.str = ...,
+        entity_type_name: _builtins.str = ...,
+        language_code: _builtins.str = ...,
+        page_token: _builtins.str = ...,
+        sort_by_field: Global___EntityValueSorting | None = ...,
+        search_by_pattern: _builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["sort_by_field", b"sort_by_field"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["entity_type_name", b"entity_type_name", "language_code", b"language_code", "page_token", b"page_token", "search_by_pattern", b"search_by_pattern", "sort_by_field", b"sort_by_field"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["sort_by_field", b"sort_by_field"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["entity_type_name", b"entity_type_name", "language_code", b"language_code", "page_token", b"page_token", "search_by_pattern", b"search_by_pattern", "sort_by_field", b"sort_by_field"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListEntitiesRequest = ListEntitiesRequest
+Global___ListEntitiesRequest: _TypeAlias = ListEntitiesRequest  # noqa: Y015
 
-@typing.final
-class ListEntitiesResponse(google.protobuf.message.Message):
+@_typing.final
+class ListEntitiesResponse(_message.Message):
     """This message is a response of listing entities"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ENTITIES_FIELD_NUMBER: builtins.int
-    NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    next_page_token: builtins.str
+    ENTITIES_FIELD_NUMBER: _builtins.int
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: _builtins.int
+    next_page_token: _builtins.str
     """The next_page_token is used to retrieve the next page of a returned result,
     e.g. next_page_token is current_index-2
     """
-    @property
-    def entities(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___EntityType.Entity]:
+    @_builtins.property
+    def entities(self) -> _containers.RepeatedCompositeFieldContainer[Global___EntityType.Entity]:
         """The list of entities"""
 
     def __init__(
         self,
         *,
-        entities: collections.abc.Iterable[global___EntityType.Entity] | None = ...,
-        next_page_token: builtins.str = ...,
+        entities: _abc.Iterable[Global___EntityType.Entity] | None = ...,
+        next_page_token: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["entities", b"entities", "next_page_token", b"next_page_token"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["entities", b"entities", "next_page_token", b"next_page_token"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListEntitiesResponse = ListEntitiesResponse
+Global___ListEntitiesResponse: _TypeAlias = ListEntitiesResponse  # noqa: Y015
 
-@typing.final
-class EntityValueSorting(google.protobuf.message.Message):
+@_typing.final
+class EntityValueSorting(_message.Message):
     """This message contains entity value sorting"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     class _EntityValueSortingField:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _TypeAlias = ValueType  # noqa: Y015
 
-    class _EntityValueSortingFieldEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[EntityValueSorting._EntityValueSortingField.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _EntityValueSortingFieldEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[EntityValueSorting._EntityValueSortingField.ValueType], _builtins.type):
+        DESCRIPTOR: _descriptor.EnumDescriptor
         NO_ENTITY_VALUE_SORTING: EntityValueSorting._EntityValueSortingField.ValueType  # 0
         """Default behaviour: Sorts by value"""
         SORT_ENTITY_VALUE_BY_DISPLAY_NAME: EntityValueSorting._EntityValueSortingField.ValueType  # 1
@@ -1229,18 +1329,22 @@ class EntityValueSorting(google.protobuf.message.Message):
     SORT_ENTITY_VALUE_BY_SYNONYM_COUNT: EntityValueSorting.EntityValueSortingField.ValueType  # 3
     """Sort by synonym count"""
 
-    SORTING_FIELD_FIELD_NUMBER: builtins.int
-    SORTING_MODE_FIELD_NUMBER: builtins.int
-    sorting_field: global___EntityValueSorting.EntityValueSortingField.ValueType
+    SORTING_FIELD_FIELD_NUMBER: _builtins.int
+    SORTING_MODE_FIELD_NUMBER: _builtins.int
+    sorting_field: Global___EntityValueSorting.EntityValueSortingField.ValueType
     """The field to sort the entity values by"""
-    sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType
+    sorting_mode: _common_pb2.SortingMode.ValueType
     """The sorting mode: ascending or descending"""
     def __init__(
         self,
         *,
-        sorting_field: global___EntityValueSorting.EntityValueSortingField.ValueType = ...,
-        sorting_mode: ondewo.nlu.common_pb2.SortingMode.ValueType = ...,
+        sorting_field: Global___EntityValueSorting.EntityValueSortingField.ValueType = ...,
+        sorting_mode: _common_pb2.SortingMode.ValueType = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["sorting_field", b"sorting_field", "sorting_mode", b"sorting_mode"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["sorting_field", b"sorting_field", "sorting_mode", b"sorting_mode"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___EntityValueSorting = EntityValueSorting
+Global___EntityValueSorting: _TypeAlias = EntityValueSorting  # noqa: Y015

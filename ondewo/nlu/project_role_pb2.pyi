@@ -16,30 +16,30 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-import builtins
-import collections.abc
-import google.protobuf.descriptor
-import google.protobuf.field_mask_pb2
-import google.protobuf.internal.containers
-import google.protobuf.internal.enum_type_wrapper
-import google.protobuf.message
-import google.protobuf.timestamp_pb2
+from collections import abc as _abc
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import field_mask_pb2 as _field_mask_pb2
+from google.protobuf import message as _message
+from google.protobuf import timestamp_pb2 as _timestamp_pb2
+from google.protobuf.internal import containers as _containers
+from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
+import builtins as _builtins
 import sys
-import typing
+import typing as _typing
 
-if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+if sys.version_info >= (3, 11):
+    from typing import TypeAlias as _TypeAlias, Never as _Never
 else:
-    import typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias, Never as _Never
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 class _DefaultProjectRole:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _DefaultProjectRoleEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_DefaultProjectRole.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _DefaultProjectRoleEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_DefaultProjectRole.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     PROJECT_UNSPECIFIED: _DefaultProjectRole.ValueType  # 0
     """These roles have permissions valid only on a specific project unspecified, default value depends on endpoint"""
     PROJECT_USER: _DefaultProjectRole.ValueType  # 1
@@ -68,14 +68,14 @@ PROJECT_ADMIN: DefaultProjectRole.ValueType  # 4
 """this role can do everything. The creator of a project is set automatically as PROJECT_ADMIN of it."""
 PROJECT_INACTIVE: DefaultProjectRole.ValueType  # 5
 """This role can do nothing.  Used to set a user as inactive inside a project"""
-global___DefaultProjectRole = DefaultProjectRole
+Global___DefaultProjectRole: _TypeAlias = DefaultProjectRole  # noqa: Y015
 
 class _ProjectRoleView:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _ProjectRoleViewEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_ProjectRoleView.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _ProjectRoleViewEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_ProjectRoleView.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     PROJECT_ROLE_VIEW_UNSPECIFIED: _ProjectRoleView.ValueType  # 0
     """The view depends on the endpoint:
     <ul>
@@ -106,74 +106,77 @@ PROJECT_ROLE_VIEW_SHALLOW: ProjectRoleView.ValueType  # 1
 """only role ID and name fields are populated"""
 PROJECT_ROLE_VIEW_FULL: ProjectRoleView.ValueType  # 2
 """all fields including permissions are populated"""
-global___ProjectRoleView = ProjectRoleView
+Global___ProjectRoleView: _TypeAlias = ProjectRoleView  # noqa: Y015
 
-@typing.final
-class ProjectRole(google.protobuf.message.Message):
+@_typing.final
+class ProjectRole(_message.Message):
     """Project Role messages"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    ROLE_ID_FIELD_NUMBER: builtins.int
-    NAME_FIELD_NUMBER: builtins.int
-    PERMISSIONS_FIELD_NUMBER: builtins.int
-    CREATED_AT_FIELD_NUMBER: builtins.int
-    MODIFIED_AT_FIELD_NUMBER: builtins.int
-    CREATED_BY_FIELD_NUMBER: builtins.int
-    MODIFIED_BY_FIELD_NUMBER: builtins.int
-    role_id: builtins.int
+    ROLE_ID_FIELD_NUMBER: _builtins.int
+    NAME_FIELD_NUMBER: _builtins.int
+    PERMISSIONS_FIELD_NUMBER: _builtins.int
+    CREATED_AT_FIELD_NUMBER: _builtins.int
+    MODIFIED_AT_FIELD_NUMBER: _builtins.int
+    CREATED_BY_FIELD_NUMBER: _builtins.int
+    MODIFIED_BY_FIELD_NUMBER: _builtins.int
+    role_id: _builtins.int
     """unique identifier of the role"""
-    name: builtins.str
+    name: _builtins.str
     """unique name of the role"""
-    created_by: builtins.str
+    created_by: _builtins.str
     """User id in form of a valid UUID."""
-    modified_by: builtins.str
+    modified_by: _builtins.str
     """User id in form of a valid UUID."""
-    @property
-    def permissions(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def permissions(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """defines the permissions for the given role (the strings can be gotten from the ListProjectPermissions)"""
 
-    @property
-    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def created_at(self) -> _timestamp_pb2.Timestamp:
         """Creation date and time. Read-only field."""
 
-    @property
-    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def modified_at(self) -> _timestamp_pb2.Timestamp:
         """Modification date and time. Read-only field."""
 
     def __init__(
         self,
         *,
-        role_id: builtins.int = ...,
-        name: builtins.str = ...,
-        permissions: collections.abc.Iterable[builtins.str] | None = ...,
-        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        created_by: builtins.str = ...,
-        modified_by: builtins.str = ...,
+        role_id: _builtins.int = ...,
+        name: _builtins.str = ...,
+        permissions: _abc.Iterable[_builtins.str] | None = ...,
+        created_at: _timestamp_pb2.Timestamp | None = ...,
+        modified_at: _timestamp_pb2.Timestamp | None = ...,
+        created_by: _builtins.str = ...,
+        modified_by: _builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["created_at", b"created_at", "created_by", b"created_by", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "permissions", b"permissions", "role_id", b"role_id"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["created_at", b"created_at", "modified_at", b"modified_at"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["created_at", b"created_at", "created_by", b"created_by", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "permissions", b"permissions", "role_id", b"role_id"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ProjectRole = ProjectRole
+Global___ProjectRole: _TypeAlias = ProjectRole  # noqa: Y015
 
-@typing.final
-class CreateProjectRoleRequest(google.protobuf.message.Message):
+@_typing.final
+class CreateProjectRoleRequest(_message.Message):
     """This message is a request to create project role"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    ROLE_FIELD_NUMBER: builtins.int
-    PROJECT_ROLE_VIEW_FIELD_NUMBER: builtins.int
-    parent: builtins.str
+    PARENT_FIELD_NUMBER: _builtins.int
+    ROLE_FIELD_NUMBER: _builtins.int
+    PROJECT_ROLE_VIEW_FIELD_NUMBER: _builtins.int
+    parent: _builtins.str
     """Required. The project that the agent to fetch is associated with.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
-    project_role_view: global___ProjectRoleView.ValueType
+    project_role_view: Global___ProjectRoleView.ValueType
     """Optional. specify the view of the created project role, PROJECT_ROLE_VIEW_FULL by default"""
-    @property
-    def role(self) -> global___ProjectRole:
+    @_builtins.property
+    def role(self) -> Global___ProjectRole:
         """If the role_id is not provided, an incremental value will be assigned
         The &quot;name&quot; and &quot;role_type&quot; are mandatory values
         The permissions all default to False if not provided specifically
@@ -182,133 +185,147 @@ class CreateProjectRoleRequest(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        role: global___ProjectRole | None = ...,
-        project_role_view: global___ProjectRoleView.ValueType = ...,
+        parent: _builtins.str = ...,
+        role: Global___ProjectRole | None = ...,
+        project_role_view: Global___ProjectRoleView.ValueType = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["role", b"role"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["parent", b"parent", "project_role_view", b"project_role_view", "role", b"role"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["role", b"role"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["parent", b"parent", "project_role_view", b"project_role_view", "role", b"role"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___CreateProjectRoleRequest = CreateProjectRoleRequest
+Global___CreateProjectRoleRequest: _TypeAlias = CreateProjectRoleRequest  # noqa: Y015
 
-@typing.final
-class UpdateProjectRoleRequest(google.protobuf.message.Message):
+@_typing.final
+class UpdateProjectRoleRequest(_message.Message):
     """This message is a request to update project role"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    ROLE_FIELD_NUMBER: builtins.int
-    UPDATE_MASK_FIELD_NUMBER: builtins.int
-    PROJECT_ROLE_VIEW_FIELD_NUMBER: builtins.int
-    parent: builtins.str
+    PARENT_FIELD_NUMBER: _builtins.int
+    ROLE_FIELD_NUMBER: _builtins.int
+    UPDATE_MASK_FIELD_NUMBER: _builtins.int
+    PROJECT_ROLE_VIEW_FIELD_NUMBER: _builtins.int
+    parent: _builtins.str
     """Required. The project that the agent to fetch is associated with.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
-    project_role_view: global___ProjectRoleView.ValueType
+    project_role_view: Global___ProjectRoleView.ValueType
     """Optional. specify the view of the updated project role, PROJECT_ROLE_VIEW_FULL by default"""
-    @property
-    def role(self) -> global___ProjectRole:
+    @_builtins.property
+    def role(self) -> Global___ProjectRole:
         """role_id in the Role message should be given, if empty will throw an error in the backend
         other fields in the Role are optional. Only the fields to be updated should be provided
         """
 
-    @property
-    def update_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def update_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields get updated."""
 
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        role: global___ProjectRole | None = ...,
-        update_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
-        project_role_view: global___ProjectRoleView.ValueType = ...,
+        parent: _builtins.str = ...,
+        role: Global___ProjectRole | None = ...,
+        update_mask: _field_mask_pb2.FieldMask | None = ...,
+        project_role_view: Global___ProjectRoleView.ValueType = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["role", b"role", "update_mask", b"update_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["parent", b"parent", "project_role_view", b"project_role_view", "role", b"role", "update_mask", b"update_mask"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["role", b"role", "update_mask", b"update_mask"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["parent", b"parent", "project_role_view", b"project_role_view", "role", b"role", "update_mask", b"update_mask"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___UpdateProjectRoleRequest = UpdateProjectRoleRequest
+Global___UpdateProjectRoleRequest: _TypeAlias = UpdateProjectRoleRequest  # noqa: Y015
 
-@typing.final
-class GetProjectRoleRequest(google.protobuf.message.Message):
+@_typing.final
+class GetProjectRoleRequest(_message.Message):
     """This message is a request to get project role"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    ROLE_ID_FIELD_NUMBER: builtins.int
-    ROLE_NAME_FIELD_NUMBER: builtins.int
-    PROJECT_ROLE_VIEW_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    parent: builtins.str
+    PARENT_FIELD_NUMBER: _builtins.int
+    ROLE_ID_FIELD_NUMBER: _builtins.int
+    ROLE_NAME_FIELD_NUMBER: _builtins.int
+    PROJECT_ROLE_VIEW_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    parent: _builtins.str
     """Required. The project that the agent to fetch is associated with.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
-    role_id: builtins.int
+    role_id: _builtins.int
     """role is identified by role id"""
-    role_name: builtins.str
+    role_name: _builtins.str
     """role can also be uniquely identified by its name"""
-    project_role_view: global___ProjectRoleView.ValueType
+    project_role_view: Global___ProjectRoleView.ValueType
     """Optional. specify the view of the project role, PROJECT_ROLE_VIEW_FULL by default"""
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields gets returned."""
 
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        role_id: builtins.int = ...,
-        role_name: builtins.str = ...,
-        project_role_view: global___ProjectRoleView.ValueType = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        parent: _builtins.str = ...,
+        role_id: _builtins.int = ...,
+        role_name: _builtins.str = ...,
+        project_role_view: Global___ProjectRoleView.ValueType = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask", "project_role_identifier", b"project_role_identifier", "role_id", b"role_id", "role_name", b"role_name"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "parent", b"parent", "project_role_identifier", b"project_role_identifier", "project_role_view", b"project_role_view", "role_id", b"role_id", "role_name", b"role_name"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["project_role_identifier", b"project_role_identifier"]) -> typing.Literal["role_id", "role_name"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "project_role_identifier", b"project_role_identifier", "role_id", b"role_id", "role_name", b"role_name"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "parent", b"parent", "project_role_identifier", b"project_role_identifier", "project_role_view", b"project_role_view", "role_id", b"role_id", "role_name", b"role_name"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType_project_role_identifier: _TypeAlias = _typing.Literal["role_id", "role_name"]  # noqa: Y015
+    _WhichOneofArgType_project_role_identifier: _TypeAlias = _typing.Literal["project_role_identifier", b"project_role_identifier"]  # noqa: Y015
+    def WhichOneof(self, oneof_group: _WhichOneofArgType_project_role_identifier) -> _WhichOneofReturnType_project_role_identifier | None: ...
 
-global___GetProjectRoleRequest = GetProjectRoleRequest
+Global___GetProjectRoleRequest: _TypeAlias = GetProjectRoleRequest  # noqa: Y015
 
-@typing.final
-class DeleteProjectRoleRequest(google.protobuf.message.Message):
+@_typing.final
+class DeleteProjectRoleRequest(_message.Message):
     """This message is a request to delete project role"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    ROLE_ID_FIELD_NUMBER: builtins.int
-    parent: builtins.str
+    PARENT_FIELD_NUMBER: _builtins.int
+    ROLE_ID_FIELD_NUMBER: _builtins.int
+    parent: _builtins.str
     """Required. The project that the agent to fetch is associated with.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
-    role_id: builtins.int
+    role_id: _builtins.int
     """role is identified by role id, if empty will throw an error in the backend"""
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        role_id: builtins.int = ...,
+        parent: _builtins.str = ...,
+        role_id: _builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["parent", b"parent", "role_id", b"role_id"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["parent", b"parent", "role_id", b"role_id"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___DeleteProjectRoleRequest = DeleteProjectRoleRequest
+Global___DeleteProjectRoleRequest: _TypeAlias = DeleteProjectRoleRequest  # noqa: Y015
 
-@typing.final
-class ListProjectRolesRequest(google.protobuf.message.Message):
+@_typing.final
+class ListProjectRolesRequest(_message.Message):
     """This message is a request to list project role"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PARENT_FIELD_NUMBER: builtins.int
-    PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    PROJECT_ROLE_VIEW_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    parent: builtins.str
+    PARENT_FIELD_NUMBER: _builtins.int
+    PAGE_TOKEN_FIELD_NUMBER: _builtins.int
+    PROJECT_ROLE_VIEW_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    parent: _builtins.str
     """Required. The project that the agent to fetch is associated with.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agents</code></pre>
     """
-    page_token: builtins.str
+    page_token: _builtins.str
     """Optional: The page token to support pagination.
     Pagination allows you to retrieve a large result set in smaller, more manageable portions.
     The page token is a string representing the current index and page size.
@@ -339,39 +356,42 @@ class ListProjectRolesRequest(google.protobuf.message.Message):
       <li>&quot;current_index-1--page_size--20&quot;</li>
     </ul>
     """
-    project_role_view: global___ProjectRoleView.ValueType
+    project_role_view: Global___ProjectRoleView.ValueType
     """Optional. specify the view of the project roles, PROJECT_ROLE_VIEW_FULL by default"""
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields gets returned."""
 
     def __init__(
         self,
         *,
-        parent: builtins.str = ...,
-        page_token: builtins.str = ...,
-        project_role_view: global___ProjectRoleView.ValueType = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        parent: _builtins.str = ...,
+        page_token: _builtins.str = ...,
+        project_role_view: Global___ProjectRoleView.ValueType = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "page_token", b"page_token", "parent", b"parent", "project_role_view", b"project_role_view"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "page_token", b"page_token", "parent", b"parent", "project_role_view", b"project_role_view"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListProjectRolesRequest = ListProjectRolesRequest
+Global___ListProjectRolesRequest: _TypeAlias = ListProjectRolesRequest  # noqa: Y015
 
-@typing.final
-class ListProjectRolesResponse(google.protobuf.message.Message):
+@_typing.final
+class ListProjectRolesResponse(_message.Message):
     """This message is a response of listing project role"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PROJECT_ROLES_FIELD_NUMBER: builtins.int
-    NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    next_page_token: builtins.str
+    PROJECT_ROLES_FIELD_NUMBER: _builtins.int
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: _builtins.int
+    next_page_token: _builtins.str
     """The next_page_token is used to retrieve the next page of a returned result,
     e.g. next_page_token is current_index-2
     """
-    @property
-    def project_roles(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___ProjectRole]:
+    @_builtins.property
+    def project_roles(self) -> _containers.RepeatedCompositeFieldContainer[Global___ProjectRole]:
         """The list of project roles. There will be a maximum number of items
         returned based on the page_token field in the request.
         """
@@ -379,9 +399,13 @@ class ListProjectRolesResponse(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        project_roles: collections.abc.Iterable[global___ProjectRole] | None = ...,
-        next_page_token: builtins.str = ...,
+        project_roles: _abc.Iterable[Global___ProjectRole] | None = ...,
+        next_page_token: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["next_page_token", b"next_page_token", "project_roles", b"project_roles"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["next_page_token", b"next_page_token", "project_roles", b"project_roles"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListProjectRolesResponse = ListProjectRolesResponse
+Global___ListProjectRolesResponse: _TypeAlias = ListProjectRolesResponse  # noqa: Y015

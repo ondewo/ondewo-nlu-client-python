@@ -16,34 +16,34 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-import builtins
-import collections.abc
-import google.protobuf.any_pb2
-import google.protobuf.descriptor
-import google.protobuf.field_mask_pb2
-import google.protobuf.internal.containers
-import google.protobuf.internal.enum_type_wrapper
-import google.protobuf.message
-import google.protobuf.timestamp_pb2
-import google.rpc.status_pb2
-import ondewo.nlu.common_pb2
-import ondewo.nlu.operation_metadata_pb2
+from collections import abc as _abc
+from google.protobuf import any_pb2 as _any_pb2
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import field_mask_pb2 as _field_mask_pb2
+from google.protobuf import message as _message
+from google.protobuf import timestamp_pb2 as _timestamp_pb2
+from google.protobuf.internal import containers as _containers
+from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
+from google.rpc import status_pb2 as _status_pb2
+from ondewo.nlu import common_pb2 as _common_pb2
+from ondewo.nlu import operation_metadata_pb2 as _operation_metadata_pb2
+import builtins as _builtins
 import sys
-import typing
+import typing as _typing
 
-if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+if sys.version_info >= (3, 11):
+    from typing import TypeAlias as _TypeAlias, Never as _Never
 else:
-    import typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias, Never as _Never
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
 class _RemoteOperationContainerLifecycleState:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
 
-class _RemoteOperationContainerLifecycleStateEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_RemoteOperationContainerLifecycleState.ValueType], builtins.type):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+class _RemoteOperationContainerLifecycleStateEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_RemoteOperationContainerLifecycleState.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
     REMOTE_OPERATION_CONTAINER_LIFECYCLE_STATE_UNSPECIFIED: _RemoteOperationContainerLifecycleState.ValueType  # 0
     """The lifecycle state could not be determined."""
     REMOTE_OPERATION_CONTAINER_LIFECYCLE_STATE_NOT_FOUND: _RemoteOperationContainerLifecycleState.ValueType  # 1
@@ -84,43 +84,43 @@ REMOTE_OPERATION_CONTAINER_LIFECYCLE_STATE_EXITED: RemoteOperationContainerLifec
 """The container has exited (successfully or with an error — see <code>exit_code</code>)."""
 REMOTE_OPERATION_CONTAINER_LIFECYCLE_STATE_DEAD: RemoteOperationContainerLifecycleState.ValueType  # 7
 """The container is dead (Docker could not stop/remove it cleanly)."""
-global___RemoteOperationContainerLifecycleState = RemoteOperationContainerLifecycleState
+Global___RemoteOperationContainerLifecycleState: _TypeAlias = RemoteOperationContainerLifecycleState  # noqa: Y015
 
-@typing.final
-class Operation(google.protobuf.message.Message):
+@_typing.final
+class Operation(_message.Message):
     """This resource represents a long-running operation that is the result of a network API call."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NAME_FIELD_NUMBER: builtins.int
-    METADATA_FIELD_NUMBER: builtins.int
-    DONE_FIELD_NUMBER: builtins.int
-    ERROR_FIELD_NUMBER: builtins.int
-    RESPONSE_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    METADATA_FIELD_NUMBER: _builtins.int
+    DONE_FIELD_NUMBER: _builtins.int
+    ERROR_FIELD_NUMBER: _builtins.int
+    RESPONSE_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """The server-assigned name, which is only unique within the same service that
     originally returns it. If you use the default HTTP mapping, the
     <code>name</code> should have the format of <code>operations/some/unique/name</code>.
     """
-    done: builtins.bool
+    done: _builtins.bool
     """If the value is <code>false</code>, it means the operation is still in progress.
     If true, the operation is completed, and either <code>error</code> or <code>response</code> is
     available.
     """
-    @property
-    def metadata(self) -> ondewo.nlu.operation_metadata_pb2.OperationMetadata:
+    @_builtins.property
+    def metadata(self) -> _operation_metadata_pb2.OperationMetadata:
         """Service-specific metadata associated with the operation.  It typically
         contains progress information and common metadata such as create time.
         Some services might not provide such metadata.  Any method that returns a
         long-running operation should document the metadata type, if any.
         """
 
-    @property
-    def error(self) -> google.rpc.status_pb2.Status:
+    @_builtins.property
+    def error(self) -> _status_pb2.Status:
         """The error result of the operation in case of failure or cancellation."""
 
-    @property
-    def response(self) -> google.protobuf.any_pb2.Any:
+    @_builtins.property
+    def response(self) -> _any_pb2.Any:
         """The normal response of the operation in case of success.  If the original
         method returns no data on success, such as <code>Delete</code>, the response is
         <code>google.protobuf.Empty</code>.  If the original method is standard
@@ -134,62 +134,69 @@ class Operation(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
-        metadata: ondewo.nlu.operation_metadata_pb2.OperationMetadata | None = ...,
-        done: builtins.bool = ...,
-        error: google.rpc.status_pb2.Status | None = ...,
-        response: google.protobuf.any_pb2.Any | None = ...,
+        name: _builtins.str = ...,
+        metadata: _operation_metadata_pb2.OperationMetadata | None = ...,
+        done: _builtins.bool = ...,
+        error: _status_pb2.Status | None = ...,
+        response: _any_pb2.Any | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["error", b"error", "metadata", b"metadata", "response", b"response", "result", b"result"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["done", b"done", "error", b"error", "metadata", b"metadata", "name", b"name", "response", b"response", "result", b"result"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["result", b"result"]) -> typing.Literal["error", "response"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["error", b"error", "metadata", b"metadata", "response", b"response", "result", b"result"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["done", b"done", "error", b"error", "metadata", b"metadata", "name", b"name", "response", b"response", "result", b"result"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType_result: _TypeAlias = _typing.Literal["error", "response"]  # noqa: Y015
+    _WhichOneofArgType_result: _TypeAlias = _typing.Literal["result", b"result"]  # noqa: Y015
+    def WhichOneof(self, oneof_group: _WhichOneofArgType_result) -> _WhichOneofReturnType_result | None: ...
 
-global___Operation = Operation
+Global___Operation: _TypeAlias = Operation  # noqa: Y015
 
-@typing.final
-class GetOperationRequest(google.protobuf.message.Message):
+@_typing.final
+class GetOperationRequest(_message.Message):
     """The request message for <a href="index.html#ondewo.nlu.Operations.GetOperation">Operations.GetOperation</a>."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NAME_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """The name of the operation resource."""
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields gets returned."""
 
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        name: _builtins.str = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "name", b"name"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "name", b"name"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GetOperationRequest = GetOperationRequest
+Global___GetOperationRequest: _TypeAlias = GetOperationRequest  # noqa: Y015
 
-@typing.final
-class ListOperationsRequest(google.protobuf.message.Message):
+@_typing.final
+class ListOperationsRequest(_message.Message):
     """The request message for <a href="index.html#ondewo.nlu.Operations.ListOperations">Operations.ListOperations</a>."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NAME_FIELD_NUMBER: builtins.int
-    FILTER_FIELD_NUMBER: builtins.int
-    PAGE_SIZE_FIELD_NUMBER: builtins.int
-    PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    OPERATION_FILTER_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    FILTER_FIELD_NUMBER: _builtins.int
+    PAGE_SIZE_FIELD_NUMBER: _builtins.int
+    PAGE_TOKEN_FIELD_NUMBER: _builtins.int
+    OPERATION_FILTER_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """The name of the operation collection."""
-    filter: builtins.str
+    filter: _builtins.str
     """The standard list filter."""
-    page_size: builtins.int
+    page_size: _builtins.int
     """The standard list page size."""
-    page_token: builtins.str
+    page_token: _builtins.str
     """Optional: The page token to support pagination.
     Pagination allows you to retrieve a large result set in smaller, more manageable portions.
     The page token is a string representing the current index and page size.
@@ -220,184 +227,205 @@ class ListOperationsRequest(google.protobuf.message.Message):
       <li>&quot;current_index-1--page_size--20&quot;</li>
     </ul>
     """
-    @property
-    def operation_filter(self) -> global___OperationFilter:
+    @_builtins.property
+    def operation_filter(self) -> Global___OperationFilter:
         """Optional. A filter to narrow the response down to operations of interest."""
 
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. The mask to control which fields gets returned."""
 
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
-        filter: builtins.str = ...,
-        page_size: builtins.int = ...,
-        page_token: builtins.str = ...,
-        operation_filter: global___OperationFilter | None = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
+        name: _builtins.str = ...,
+        filter: _builtins.str = ...,
+        page_size: _builtins.int = ...,
+        page_token: _builtins.str = ...,
+        operation_filter: Global___OperationFilter | None = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["field_mask", b"field_mask", "operation_filter", b"operation_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["field_mask", b"field_mask", "filter", b"filter", "name", b"name", "operation_filter", b"operation_filter", "page_size", b"page_size", "page_token", b"page_token"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "operation_filter", b"operation_filter"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["field_mask", b"field_mask", "filter", b"filter", "name", b"name", "operation_filter", b"operation_filter", "page_size", b"page_size", "page_token", b"page_token"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListOperationsRequest = ListOperationsRequest
+Global___ListOperationsRequest: _TypeAlias = ListOperationsRequest  # noqa: Y015
 
-@typing.final
-class OperationFilter(google.protobuf.message.Message):
+@_typing.final
+class OperationFilter(_message.Message):
     """This message contains an operation filter"""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    PROJECT_PARENTS_FIELD_NUMBER: builtins.int
-    STATUSES_FIELD_NUMBER: builtins.int
-    TYPES_FIELD_NUMBER: builtins.int
-    START_TIME_FIELD_NUMBER: builtins.int
-    END_TIME_FIELD_NUMBER: builtins.int
-    USER_IDS_FIELD_NUMBER: builtins.int
-    @property
-    def project_parents(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    PROJECT_PARENTS_FIELD_NUMBER: _builtins.int
+    STATUSES_FIELD_NUMBER: _builtins.int
+    TYPES_FIELD_NUMBER: _builtins.int
+    START_TIME_FIELD_NUMBER: _builtins.int
+    END_TIME_FIELD_NUMBER: _builtins.int
+    USER_IDS_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def project_parents(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """An operationFilter can be used in some requests to return only operations matching certain filter conditions.
 
         All fields below are  optional. Multiple fields specified at the same time are chained via OR.
         Match operations with any of the following project parents.
         """
 
-    @property
-    def statuses(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[ondewo.nlu.operation_metadata_pb2.OperationMetadata.Status.ValueType]:
+    @_builtins.property
+    def statuses(self) -> _containers.RepeatedScalarFieldContainer[_operation_metadata_pb2.OperationMetadata.Status.ValueType]:
         """Match operation which had any of the following operation statuses."""
 
-    @property
-    def types(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[ondewo.nlu.operation_metadata_pb2.OperationMetadata.OperationType.ValueType]:
+    @_builtins.property
+    def types(self) -> _containers.RepeatedScalarFieldContainer[_operation_metadata_pb2.OperationMetadata.OperationType.ValueType]:
         """Match operation which had any of the following operation types."""
 
-    @property
-    def start_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def start_time(self) -> _timestamp_pb2.Timestamp:
         """The time operation processing started."""
 
-    @property
-    def end_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def end_time(self) -> _timestamp_pb2.Timestamp:
         """The time operation processing completed."""
 
-    @property
-    def user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def user_ids(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """Match operation which had any of the following user_ids."""
 
     def __init__(
         self,
         *,
-        project_parents: collections.abc.Iterable[builtins.str] | None = ...,
-        statuses: collections.abc.Iterable[ondewo.nlu.operation_metadata_pb2.OperationMetadata.Status.ValueType] | None = ...,
-        types: collections.abc.Iterable[ondewo.nlu.operation_metadata_pb2.OperationMetadata.OperationType.ValueType] | None = ...,
-        start_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        end_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        user_ids: collections.abc.Iterable[builtins.str] | None = ...,
+        project_parents: _abc.Iterable[_builtins.str] | None = ...,
+        statuses: _abc.Iterable[_operation_metadata_pb2.OperationMetadata.Status.ValueType] | None = ...,
+        types: _abc.Iterable[_operation_metadata_pb2.OperationMetadata.OperationType.ValueType] | None = ...,
+        start_time: _timestamp_pb2.Timestamp | None = ...,
+        end_time: _timestamp_pb2.Timestamp | None = ...,
+        user_ids: _abc.Iterable[_builtins.str] | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["end_time", b"end_time", "end_time_oneof", b"end_time_oneof", "start_time", b"start_time", "start_time_oneof", b"start_time_oneof"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["end_time", b"end_time", "end_time_oneof", b"end_time_oneof", "project_parents", b"project_parents", "start_time", b"start_time", "start_time_oneof", b"start_time_oneof", "statuses", b"statuses", "types", b"types", "user_ids", b"user_ids"]) -> None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["end_time_oneof", b"end_time_oneof"]) -> typing.Literal["end_time"] | None: ...
-    @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["start_time_oneof", b"start_time_oneof"]) -> typing.Literal["start_time"] | None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["end_time", b"end_time", "end_time_oneof", b"end_time_oneof", "start_time", b"start_time", "start_time_oneof", b"start_time_oneof"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["end_time", b"end_time", "end_time_oneof", b"end_time_oneof", "project_parents", b"project_parents", "start_time", b"start_time", "start_time_oneof", b"start_time_oneof", "statuses", b"statuses", "types", b"types", "user_ids", b"user_ids"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    _WhichOneofReturnType_end_time_oneof: _TypeAlias = _typing.Literal["end_time"]  # noqa: Y015
+    _WhichOneofArgType_end_time_oneof: _TypeAlias = _typing.Literal["end_time_oneof", b"end_time_oneof"]  # noqa: Y015
+    _WhichOneofReturnType_start_time_oneof: _TypeAlias = _typing.Literal["start_time"]  # noqa: Y015
+    _WhichOneofArgType_start_time_oneof: _TypeAlias = _typing.Literal["start_time_oneof", b"start_time_oneof"]  # noqa: Y015
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType_end_time_oneof) -> _WhichOneofReturnType_end_time_oneof | None: ...
+    @_typing.overload
+    def WhichOneof(self, oneof_group: _WhichOneofArgType_start_time_oneof) -> _WhichOneofReturnType_start_time_oneof | None: ...
 
-global___OperationFilter = OperationFilter
+Global___OperationFilter: _TypeAlias = OperationFilter  # noqa: Y015
 
-@typing.final
-class ListOperationsResponse(google.protobuf.message.Message):
+@_typing.final
+class ListOperationsResponse(_message.Message):
     """The response message for <a href="index.html#ondewo.nlu.Operations.ListOperations">Operations.ListOperations</a>."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    OPERATIONS_FIELD_NUMBER: builtins.int
-    NEXT_PAGE_TOKEN_FIELD_NUMBER: builtins.int
-    next_page_token: builtins.str
+    OPERATIONS_FIELD_NUMBER: _builtins.int
+    NEXT_PAGE_TOKEN_FIELD_NUMBER: _builtins.int
+    next_page_token: _builtins.str
     """The next_page_token is used to retrieve the next page of a returned result,
     e.g. next_page_token is current_index-2
     """
-    @property
-    def operations(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Operation]:
+    @_builtins.property
+    def operations(self) -> _containers.RepeatedCompositeFieldContainer[Global___Operation]:
         """A list of operations that matches the specified filter in the request."""
 
     def __init__(
         self,
         *,
-        operations: collections.abc.Iterable[global___Operation] | None = ...,
-        next_page_token: builtins.str = ...,
+        operations: _abc.Iterable[Global___Operation] | None = ...,
+        next_page_token: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["next_page_token", b"next_page_token", "operations", b"operations"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["next_page_token", b"next_page_token", "operations", b"operations"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListOperationsResponse = ListOperationsResponse
+Global___ListOperationsResponse: _TypeAlias = ListOperationsResponse  # noqa: Y015
 
-@typing.final
-class CancelOperationRequest(google.protobuf.message.Message):
+@_typing.final
+class CancelOperationRequest(_message.Message):
     """The request message for <a href="index.html#ondewo.nlu.Operations.CancelOperation">Operations.CancelOperation</a>."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NAME_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """The name of the operation resource to be cancelled."""
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
+        name: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["name", b"name"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["name", b"name"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___CancelOperationRequest = CancelOperationRequest
+Global___CancelOperationRequest: _TypeAlias = CancelOperationRequest  # noqa: Y015
 
-@typing.final
-class DeleteOperationRequest(google.protobuf.message.Message):
+@_typing.final
+class DeleteOperationRequest(_message.Message):
     """The request message for <a href="index.html#ondewo.nlu.Operations.DeleteOperation">Operations.DeleteOperation</a>."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NAME_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """The name of the operation resource to be deleted."""
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
+        name: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["name", b"name"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["name", b"name"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___DeleteOperationRequest = DeleteOperationRequest
+Global___DeleteOperationRequest: _TypeAlias = DeleteOperationRequest  # noqa: Y015
 
-@typing.final
-class StreamRemoteOperationContainerLogsRequest(google.protobuf.message.Message):
+@_typing.final
+class StreamRemoteOperationContainerLogsRequest(_message.Message):
     """The request message for <a href="index.html#ondewo.nlu.Operations.StreamRemoteOperationContainerLogs">Operations.StreamRemoteOperationContainerLogs</a>."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NAME_FIELD_NUMBER: builtins.int
-    MIN_LOG_LEVEL_FIELD_NUMBER: builtins.int
-    TAIL_LINES_FIELD_NUMBER: builtins.int
-    CONTAINER_ID_FIELD_NUMBER: builtins.int
-    REGEX_FIELD_NUMBER: builtins.int
-    RESUME_TOKEN_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    MIN_LOG_LEVEL_FIELD_NUMBER: _builtins.int
+    TAIL_LINES_FIELD_NUMBER: _builtins.int
+    CONTAINER_ID_FIELD_NUMBER: _builtins.int
+    REGEX_FIELD_NUMBER: _builtins.int
+    RESUME_TOKEN_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """The name of the operation resource whose container logs should be streamed."""
-    min_log_level: ondewo.nlu.common_pb2.LogSeverity.ValueType
+    min_log_level: _common_pb2.LogSeverity.ValueType
     """Only stream lines at or above this loguru severity. <code>LOG_SEVERITY_UNSPECIFIED</code> (the
     default) streams every line regardless of level.
     """
-    tail_lines: builtins.int
+    tail_lines: _builtins.int
     """Replay at most this many of the most recent existing log lines before switching to live follow.
     <code>0</code> (the default) starts the follow with no historical replay.
     """
-    container_id: builtins.str
+    container_id: _builtins.str
     """Optional. Scope the stream to a single container of the operation, identified by its docker
     container id (as returned by <a href="index.html#ondewo.nlu.RemoteOperationContainer">RemoteOperationContainer</a>).
     Empty (the default) streams the operation&apos;s currently-registered container, preserving the
     legacy single-container behavior.
     """
-    regex: builtins.str
+    regex: _builtins.str
     """Optional. Only stream lines whose message matches this regular expression (Python <code>re</code> syntax,
     at most 512 characters). Empty (the default) disables regex filtering. An invalid, oversized or
     catastrophically backtracking pattern is rejected with <code>INVALID_ARGUMENT</code>.
     """
-    resume_token: builtins.str
+    resume_token: _builtins.str
     """Optional. Resume exactly where a previous stream or <code>GetRemoteOperationContainerLogs</code> page
     stopped: the <code>next_resume_token</code> of that response, echoed back verbatim. When set, no
     historical replay is applied and <code>tail_lines</code> is ignored. The token is interchangeable with
@@ -406,82 +434,86 @@ class StreamRemoteOperationContainerLogsRequest(google.protobuf.message.Message)
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
-        min_log_level: ondewo.nlu.common_pb2.LogSeverity.ValueType = ...,
-        tail_lines: builtins.int = ...,
-        container_id: builtins.str = ...,
-        regex: builtins.str = ...,
-        resume_token: builtins.str = ...,
+        name: _builtins.str = ...,
+        min_log_level: _common_pb2.LogSeverity.ValueType = ...,
+        tail_lines: _builtins.int = ...,
+        container_id: _builtins.str = ...,
+        regex: _builtins.str = ...,
+        resume_token: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["container_id", b"container_id", "min_log_level", b"min_log_level", "name", b"name", "regex", b"regex", "resume_token", b"resume_token", "tail_lines", b"tail_lines"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["container_id", b"container_id", "min_log_level", b"min_log_level", "name", b"name", "regex", b"regex", "resume_token", b"resume_token", "tail_lines", b"tail_lines"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___StreamRemoteOperationContainerLogsRequest = StreamRemoteOperationContainerLogsRequest
+Global___StreamRemoteOperationContainerLogsRequest: _TypeAlias = StreamRemoteOperationContainerLogsRequest  # noqa: Y015
 
-@typing.final
-class GetRemoteOperationContainerLogsRequest(google.protobuf.message.Message):
+@_typing.final
+class GetRemoteOperationContainerLogsRequest(_message.Message):
     """The request message for <a href="index.html#ondewo.nlu.Operations.GetRemoteOperationContainerLogs">Operations.GetRemoteOperationContainerLogs</a>."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NAME_FIELD_NUMBER: builtins.int
-    MIN_LOG_LEVEL_FIELD_NUMBER: builtins.int
-    START_TIME_FIELD_NUMBER: builtins.int
-    END_TIME_FIELD_NUMBER: builtins.int
-    MAX_LINES_FIELD_NUMBER: builtins.int
-    REGEX_FIELD_NUMBER: builtins.int
-    CONTAINER_ID_FIELD_NUMBER: builtins.int
-    BEFORE_SEQ_FIELD_NUMBER: builtins.int
-    AFTER_SEQ_FIELD_NUMBER: builtins.int
-    FIELD_MASK_FIELD_NUMBER: builtins.int
-    RESUME_TOKEN_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    MIN_LOG_LEVEL_FIELD_NUMBER: _builtins.int
+    START_TIME_FIELD_NUMBER: _builtins.int
+    END_TIME_FIELD_NUMBER: _builtins.int
+    MAX_LINES_FIELD_NUMBER: _builtins.int
+    REGEX_FIELD_NUMBER: _builtins.int
+    CONTAINER_ID_FIELD_NUMBER: _builtins.int
+    BEFORE_SEQ_FIELD_NUMBER: _builtins.int
+    AFTER_SEQ_FIELD_NUMBER: _builtins.int
+    FIELD_MASK_FIELD_NUMBER: _builtins.int
+    RESUME_TOKEN_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """The name of the operation resource whose container logs should be returned."""
-    min_log_level: ondewo.nlu.common_pb2.LogSeverity.ValueType
+    min_log_level: _common_pb2.LogSeverity.ValueType
     """Only return lines at or above this loguru severity. <code>LOG_SEVERITY_UNSPECIFIED</code> (the
     default) returns every line regardless of level.
     """
-    max_lines: builtins.int
+    max_lines: _builtins.int
     """Return at most this many lines, keeping the most recent matches. <code>0</code> (the default)
     applies a server-side safety cap.
     """
-    regex: builtins.str
+    regex: _builtins.str
     """Only return lines whose message matches this regular expression (Python <code>re</code> syntax).
     Empty (the default) disables regex filtering.
     """
-    container_id: builtins.str
+    container_id: _builtins.str
     """Optional. Scope the query to a single container of the operation, identified by its docker
     container id. Empty (the default) queries the operation&apos;s currently-registered container,
     preserving the legacy single-container behavior. When the container has finished and been removed,
     its persisted logs are served from the server-side log archive.
     """
-    before_seq: builtins.int
+    before_seq: _builtins.int
     """Optional cursor for infinite-scroll-UP paging: return the newest lines with
     <a href="index.html#ondewo.nlu.RemoteOperationContainerLogLine">seq</a> &lt; <code>before_seq</code>
     (older window). <code>0</code> (the default) disables backward paging.
     """
-    after_seq: builtins.int
+    after_seq: _builtins.int
     """Optional cursor for infinite-scroll-DOWN paging: return lines with <code>seq</code> &gt;
     <code>after_seq</code> (newer window). <code>0</code> (the default) disables forward paging.
     """
-    resume_token: builtins.str
+    resume_token: _builtins.str
     """Optional. An opaque cursor from a previous response&apos;s <code>next_resume_token</code>. Use it instead of
     <code>after_seq</code> / <code>before_seq</code> when the operation ran several containers. Cannot be
     combined with <code>before_seq</code> or <code>after_seq</code>.
     """
-    @property
-    def start_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def start_time(self) -> _timestamp_pb2.Timestamp:
         """Only return lines whose timestamp is at or after this instant. Unset returns from the start of
         the available logs.
         """
 
-    @property
-    def end_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def end_time(self) -> _timestamp_pb2.Timestamp:
         """Only return lines whose timestamp is at or before this instant. Unset returns up to the latest
         available log line.
         """
 
-    @property
-    def field_mask(self) -> google.protobuf.field_mask_pb2.FieldMask:
+    @_builtins.property
+    def field_mask(self) -> _field_mask_pb2.FieldMask:
         """Optional. Partial response: the field paths to populate in every returned
         <code>RemoteOperationContainerLogLine</code>, relative to that message (no <code>log_lines.</code>
         prefix). <code>seq</code> and <code>log_stream</code> are always populated. Unset or empty returns every
@@ -491,140 +523,150 @@ class GetRemoteOperationContainerLogsRequest(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
-        min_log_level: ondewo.nlu.common_pb2.LogSeverity.ValueType = ...,
-        start_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        end_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        max_lines: builtins.int = ...,
-        regex: builtins.str = ...,
-        container_id: builtins.str = ...,
-        before_seq: builtins.int = ...,
-        after_seq: builtins.int = ...,
-        field_mask: google.protobuf.field_mask_pb2.FieldMask | None = ...,
-        resume_token: builtins.str = ...,
+        name: _builtins.str = ...,
+        min_log_level: _common_pb2.LogSeverity.ValueType = ...,
+        start_time: _timestamp_pb2.Timestamp | None = ...,
+        end_time: _timestamp_pb2.Timestamp | None = ...,
+        max_lines: _builtins.int = ...,
+        regex: _builtins.str = ...,
+        container_id: _builtins.str = ...,
+        before_seq: _builtins.int = ...,
+        after_seq: _builtins.int = ...,
+        field_mask: _field_mask_pb2.FieldMask | None = ...,
+        resume_token: _builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["end_time", b"end_time", "field_mask", b"field_mask", "start_time", b"start_time"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["after_seq", b"after_seq", "before_seq", b"before_seq", "container_id", b"container_id", "end_time", b"end_time", "field_mask", b"field_mask", "max_lines", b"max_lines", "min_log_level", b"min_log_level", "name", b"name", "regex", b"regex", "resume_token", b"resume_token", "start_time", b"start_time"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["end_time", b"end_time", "field_mask", b"field_mask", "start_time", b"start_time"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["after_seq", b"after_seq", "before_seq", b"before_seq", "container_id", b"container_id", "end_time", b"end_time", "field_mask", b"field_mask", "max_lines", b"max_lines", "min_log_level", b"min_log_level", "name", b"name", "regex", b"regex", "resume_token", b"resume_token", "start_time", b"start_time"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GetRemoteOperationContainerLogsRequest = GetRemoteOperationContainerLogsRequest
+Global___GetRemoteOperationContainerLogsRequest: _TypeAlias = GetRemoteOperationContainerLogsRequest  # noqa: Y015
 
-@typing.final
-class GetRemoteOperationContainerLogsResponse(google.protobuf.message.Message):
+@_typing.final
+class GetRemoteOperationContainerLogsResponse(_message.Message):
     """The response message for <a href="index.html#ondewo.nlu.Operations.GetRemoteOperationContainerLogs">Operations.GetRemoteOperationContainerLogs</a>."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    LOG_LINES_FIELD_NUMBER: builtins.int
-    TRUNCATED_FIELD_NUMBER: builtins.int
-    MIN_AVAILABLE_SEQ_FIELD_NUMBER: builtins.int
-    MAX_AVAILABLE_SEQ_FIELD_NUMBER: builtins.int
-    HAS_MORE_OLDER_FIELD_NUMBER: builtins.int
-    NEXT_RESUME_TOKEN_FIELD_NUMBER: builtins.int
-    HAS_MORE_NEWER_FIELD_NUMBER: builtins.int
-    truncated: builtins.bool
+    LOG_LINES_FIELD_NUMBER: _builtins.int
+    TRUNCATED_FIELD_NUMBER: _builtins.int
+    MIN_AVAILABLE_SEQ_FIELD_NUMBER: _builtins.int
+    MAX_AVAILABLE_SEQ_FIELD_NUMBER: _builtins.int
+    HAS_MORE_OLDER_FIELD_NUMBER: _builtins.int
+    NEXT_RESUME_TOKEN_FIELD_NUMBER: _builtins.int
+    HAS_MORE_NEWER_FIELD_NUMBER: _builtins.int
+    truncated: _builtins.bool
     """True when older matching lines were dropped because <code>max_lines</code> was reached."""
-    min_available_seq: builtins.int
+    min_available_seq: _builtins.int
     """The smallest <code>seq</code> currently available for this container (its oldest captured line).
     A client paging up has reached the beginning when the returned lines start at this value.
     """
-    max_available_seq: builtins.int
+    max_available_seq: _builtins.int
     """The largest <code>seq</code> currently available for this container (its newest captured line)."""
-    has_more_older: builtins.bool
+    has_more_older: _builtins.bool
     """True when older lines than the returned window still exist (i.e. the window&apos;s first
     <code>seq</code> &gt; <code>min_available_seq</code>) — the client may keep scrolling up.
     """
-    next_resume_token: builtins.str
+    next_resume_token: _builtins.str
     """Cursor to fetch the next window, or to start a <code>StreamRemoteOperationContainerLogs</code> (or a
     <code>Logs.StreamLogs</code>) that continues exactly where this window ended.
     """
-    has_more_newer: builtins.bool
+    has_more_newer: _builtins.bool
     """True when entries newer than this window exist."""
-    @property
-    def log_lines(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RemoteOperationContainerLogLine]:
+    @_builtins.property
+    def log_lines(self) -> _containers.RepeatedCompositeFieldContainer[Global___RemoteOperationContainerLogLine]:
         """The matching log lines, oldest first. Secrets are redacted server-side."""
 
     def __init__(
         self,
         *,
-        log_lines: collections.abc.Iterable[global___RemoteOperationContainerLogLine] | None = ...,
-        truncated: builtins.bool = ...,
-        min_available_seq: builtins.int = ...,
-        max_available_seq: builtins.int = ...,
-        has_more_older: builtins.bool = ...,
-        next_resume_token: builtins.str = ...,
-        has_more_newer: builtins.bool = ...,
+        log_lines: _abc.Iterable[Global___RemoteOperationContainerLogLine] | None = ...,
+        truncated: _builtins.bool = ...,
+        min_available_seq: _builtins.int = ...,
+        max_available_seq: _builtins.int = ...,
+        has_more_older: _builtins.bool = ...,
+        next_resume_token: _builtins.str = ...,
+        has_more_newer: _builtins.bool = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["has_more_newer", b"has_more_newer", "has_more_older", b"has_more_older", "log_lines", b"log_lines", "max_available_seq", b"max_available_seq", "min_available_seq", b"min_available_seq", "next_resume_token", b"next_resume_token", "truncated", b"truncated"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["has_more_newer", b"has_more_newer", "has_more_older", b"has_more_older", "log_lines", b"log_lines", "max_available_seq", b"max_available_seq", "min_available_seq", b"min_available_seq", "next_resume_token", b"next_resume_token", "truncated", b"truncated"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GetRemoteOperationContainerLogsResponse = GetRemoteOperationContainerLogsResponse
+Global___GetRemoteOperationContainerLogsResponse: _TypeAlias = GetRemoteOperationContainerLogsResponse  # noqa: Y015
 
-@typing.final
-class RemoteOperationContainerLogLine(google.protobuf.message.Message):
+@_typing.final
+class RemoteOperationContainerLogLine(_message.Message):
     """A single parsed container log line, emitted by both the streaming and the query RPCs."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    TIMESTAMP_FIELD_NUMBER: builtins.int
-    LEVEL_FIELD_NUMBER: builtins.int
-    MESSAGE_FIELD_NUMBER: builtins.int
-    CONTAINER_ID_FIELD_NUMBER: builtins.int
-    CONTAINER_NAME_FIELD_NUMBER: builtins.int
-    SEQ_FIELD_NUMBER: builtins.int
-    LOG_STREAM_FIELD_NUMBER: builtins.int
-    level: ondewo.nlu.common_pb2.LogSeverity.ValueType
+    TIMESTAMP_FIELD_NUMBER: _builtins.int
+    LEVEL_FIELD_NUMBER: _builtins.int
+    MESSAGE_FIELD_NUMBER: _builtins.int
+    CONTAINER_ID_FIELD_NUMBER: _builtins.int
+    CONTAINER_NAME_FIELD_NUMBER: _builtins.int
+    SEQ_FIELD_NUMBER: _builtins.int
+    LOG_STREAM_FIELD_NUMBER: _builtins.int
+    level: _common_pb2.LogSeverity.ValueType
     """The loguru severity parsed from the line, or <code>LOG_SEVERITY_UNSPECIFIED</code> if the line
     carried no recognizable level (e.g. a continuation / traceback line).
     """
-    message: builtins.str
+    message: _builtins.str
     """The log message text, with ANSI colour codes stripped and secrets redacted."""
-    container_id: builtins.str
+    container_id: _builtins.str
     """The docker container id this line was produced by. Lets a client attribute or group lines when an
     operation ran several containers. Empty when the id was not captured.
     """
-    container_name: builtins.str
+    container_name: _builtins.str
     """The docker container name this line was produced by. Empty when unavailable."""
-    seq: builtins.int
+    seq: _builtins.int
     """Ordering cursor of this line, assigned by the database. Monotonically increasing WITHIN ONE CONTAINER but
     NOT contiguous: values come from a sequence shared by every log stream and are removed by retention. Never
     compute the next cursor as <code>seq + 1</code>; pass it back as <code>after_seq</code> /
     <code>before_seq</code> (strictly greater / smaller) or use <code>resume_token</code>. <code>0</code> when
     the line was produced by a legacy path that did not assign a sequence.
     """
-    log_stream: builtins.str
+    log_stream: _builtins.str
     """Resource name of the log stream this line belongs to (see
     <a href="index.html#ondewo.nlu.CaiLogEntry">CaiLogEntry.log_stream</a>).
     """
-    @property
-    def timestamp(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def timestamp(self) -> _timestamp_pb2.Timestamp:
         """The timestamp parsed from the loguru line prefix, if present."""
 
     def __init__(
         self,
         *,
-        timestamp: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        level: ondewo.nlu.common_pb2.LogSeverity.ValueType = ...,
-        message: builtins.str = ...,
-        container_id: builtins.str = ...,
-        container_name: builtins.str = ...,
-        seq: builtins.int = ...,
-        log_stream: builtins.str = ...,
+        timestamp: _timestamp_pb2.Timestamp | None = ...,
+        level: _common_pb2.LogSeverity.ValueType = ...,
+        message: _builtins.str = ...,
+        container_id: _builtins.str = ...,
+        container_name: _builtins.str = ...,
+        seq: _builtins.int = ...,
+        log_stream: _builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["timestamp", b"timestamp"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["container_id", b"container_id", "container_name", b"container_name", "level", b"level", "log_stream", b"log_stream", "message", b"message", "seq", b"seq", "timestamp", b"timestamp"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["timestamp", b"timestamp"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["container_id", b"container_id", "container_name", b"container_name", "level", b"level", "log_stream", b"log_stream", "message", b"message", "seq", b"seq", "timestamp", b"timestamp"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___RemoteOperationContainerLogLine = RemoteOperationContainerLogLine
+Global___RemoteOperationContainerLogLine: _TypeAlias = RemoteOperationContainerLogLine  # noqa: Y015
 
-@typing.final
-class GetRemoteOperationContainerStatusRequest(google.protobuf.message.Message):
+@_typing.final
+class GetRemoteOperationContainerStatusRequest(_message.Message):
     """The request message for <a href="index.html#ondewo.nlu.Operations.GetRemoteOperationContainerStatus">Operations.GetRemoteOperationContainerStatus</a>."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NAME_FIELD_NUMBER: builtins.int
-    CONTAINER_ID_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    CONTAINER_ID_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """The name of the operation resource whose container status should be returned."""
-    container_id: builtins.str
+    container_id: _builtins.str
     """Optional. Scope the status to a single container of the operation, identified by its docker
     container id. Empty (the default) returns the status of the operation&apos;s currently-registered
     container, preserving the legacy single-container behavior.
@@ -632,318 +674,344 @@ class GetRemoteOperationContainerStatusRequest(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
-        container_id: builtins.str = ...,
+        name: _builtins.str = ...,
+        container_id: _builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["container_id", b"container_id", "name", b"name"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["container_id", b"container_id", "name", b"name"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___GetRemoteOperationContainerStatusRequest = GetRemoteOperationContainerStatusRequest
+Global___GetRemoteOperationContainerStatusRequest: _TypeAlias = GetRemoteOperationContainerStatusRequest  # noqa: Y015
 
-@typing.final
-class RemoteOperationContainerStatus(google.protobuf.message.Message):
+@_typing.final
+class RemoteOperationContainerStatus(_message.Message):
     """The response message for <a href="index.html#ondewo.nlu.Operations.GetRemoteOperationContainerStatus">Operations.GetRemoteOperationContainerStatus</a>."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    @typing.final
-    class EnvironmentVariablesEntry(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class EnvironmentVariablesEntry(_message.Message):
+        DESCRIPTOR: _descriptor.Descriptor
 
-        KEY_FIELD_NUMBER: builtins.int
-        VALUE_FIELD_NUMBER: builtins.int
-        key: builtins.str
-        value: builtins.str
+        KEY_FIELD_NUMBER: _builtins.int
+        VALUE_FIELD_NUMBER: _builtins.int
+        key: _builtins.str
+        value: _builtins.str
         def __init__(
             self,
             *,
-            key: builtins.str = ...,
-            value: builtins.str = ...,
+            key: _builtins.str = ...,
+            value: _builtins.str = ...,
         ) -> None: ...
-        def ClearField(self, field_name: typing.Literal["key", b"key", "value", b"value"]) -> None: ...
+        _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
+        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+        def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-    NAME_FIELD_NUMBER: builtins.int
-    LIFECYCLE_STATE_FIELD_NUMBER: builtins.int
-    HOST_NAME_FIELD_NUMBER: builtins.int
-    CONTAINER_NAME_FIELD_NUMBER: builtins.int
-    CONTAINER_ID_FIELD_NUMBER: builtins.int
-    EXIT_CODE_FIELD_NUMBER: builtins.int
-    OOM_KILLED_FIELD_NUMBER: builtins.int
-    HEALTH_STATUS_FIELD_NUMBER: builtins.int
-    STARTED_AT_FIELD_NUMBER: builtins.int
-    FINISHED_AT_FIELD_NUMBER: builtins.int
-    OBSERVED_AT_FIELD_NUMBER: builtins.int
-    ENVIRONMENT_VARIABLES_FIELD_NUMBER: builtins.int
-    COMMAND_FIELD_NUMBER: builtins.int
-    MEMORY_LIMIT_BYTES_FIELD_NUMBER: builtins.int
-    NANO_CPUS_FIELD_NUMBER: builtins.int
-    CPUSET_CPUS_FIELD_NUMBER: builtins.int
-    CPU_QUOTA_FIELD_NUMBER: builtins.int
-    CPU_PERIOD_FIELD_NUMBER: builtins.int
-    IMAGE_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    LIFECYCLE_STATE_FIELD_NUMBER: _builtins.int
+    HOST_NAME_FIELD_NUMBER: _builtins.int
+    CONTAINER_NAME_FIELD_NUMBER: _builtins.int
+    CONTAINER_ID_FIELD_NUMBER: _builtins.int
+    EXIT_CODE_FIELD_NUMBER: _builtins.int
+    OOM_KILLED_FIELD_NUMBER: _builtins.int
+    HEALTH_STATUS_FIELD_NUMBER: _builtins.int
+    STARTED_AT_FIELD_NUMBER: _builtins.int
+    FINISHED_AT_FIELD_NUMBER: _builtins.int
+    OBSERVED_AT_FIELD_NUMBER: _builtins.int
+    ENVIRONMENT_VARIABLES_FIELD_NUMBER: _builtins.int
+    COMMAND_FIELD_NUMBER: _builtins.int
+    MEMORY_LIMIT_BYTES_FIELD_NUMBER: _builtins.int
+    NANO_CPUS_FIELD_NUMBER: _builtins.int
+    CPUSET_CPUS_FIELD_NUMBER: _builtins.int
+    CPU_QUOTA_FIELD_NUMBER: _builtins.int
+    CPU_PERIOD_FIELD_NUMBER: _builtins.int
+    IMAGE_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """The name of the operation resource this status describes."""
-    lifecycle_state: global___RemoteOperationContainerLifecycleState.ValueType
+    lifecycle_state: Global___RemoteOperationContainerLifecycleState.ValueType
     """The lifecycle state of the container."""
-    host_name: builtins.str
+    host_name: _builtins.str
     """The host the container was dispatched to (empty when the dispatch record is unavailable)."""
-    container_name: builtins.str
+    container_name: _builtins.str
     """The container name (empty when the dispatch record is unavailable)."""
-    container_id: builtins.str
+    container_id: _builtins.str
     """The docker container id (64-hex), empty when it was not captured or the record is unavailable."""
-    exit_code: builtins.int
+    exit_code: _builtins.int
     """The container exit code. Only meaningful when <code>lifecycle_state</code> is
     <code>EXITED</code> or <code>DEAD</code>.
     """
-    oom_killed: builtins.bool
+    oom_killed: _builtins.bool
     """True when the container was killed by the out-of-memory killer."""
-    health_status: builtins.str
+    health_status: _builtins.str
     """The Docker healthcheck status (<code>healthy</code> / <code>unhealthy</code> / <code>starting</code>),
     empty when the container declares no healthcheck.
     """
-    memory_limit_bytes: builtins.int
+    memory_limit_bytes: _builtins.int
     """The container&apos;s hard memory limit in bytes (docker <code>HostConfig.Memory</code>).
     <code>0</code> means unlimited.
     """
-    nano_cpus: builtins.int
+    nano_cpus: _builtins.int
     """The container&apos;s CPU limit in billionths of a CPU (docker <code>HostConfig.NanoCpus</code>);
     cores = <code>nano_cpus</code> / 1e9. <code>0</code> means unset (see <code>cpu_quota</code>).
     """
-    cpuset_cpus: builtins.str
+    cpuset_cpus: _builtins.str
     """The CPUs the container is pinned to (docker <code>HostConfig.CpusetCpus</code>), empty when unset."""
-    cpu_quota: builtins.int
+    cpu_quota: _builtins.int
     """The CFS CPU quota (docker <code>HostConfig.CpuQuota</code>), the older cpu-limit form; cores =
     <code>cpu_quota</code> / <code>cpu_period</code> when both are &gt; 0.
     """
-    cpu_period: builtins.int
+    cpu_period: _builtins.int
     """The CFS CPU period (docker <code>HostConfig.CpuPeriod</code>)."""
-    image: builtins.str
+    image: _builtins.str
     """The docker image reference the container was started from (docker <code>Config.Image</code>)."""
-    @property
-    def started_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def started_at(self) -> _timestamp_pb2.Timestamp:
         """When the container started, if known."""
 
-    @property
-    def finished_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def finished_at(self) -> _timestamp_pb2.Timestamp:
         """When the container finished, if it has exited."""
 
-    @property
-    def observed_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def observed_at(self) -> _timestamp_pb2.Timestamp:
         """When this status was observed by the server."""
 
-    @property
-    def environment_variables(self) -> google.protobuf.internal.containers.ScalarMap[builtins.str, builtins.str]:
+    @_builtins.property
+    def environment_variables(self) -> _containers.ScalarMap[_builtins.str, _builtins.str]:
         """The container&apos;s environment variables (docker <code>Config.Env</code>), as a name→value map.
         Secret values (passwords, tokens, private keys, certificates) are redacted server-side; plain
         non-secret values such as numeric limits remain visible.
         """
 
-    @property
-    def command(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def command(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """The container&apos;s command/args (docker <code>Config.Cmd</code>)."""
 
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
-        lifecycle_state: global___RemoteOperationContainerLifecycleState.ValueType = ...,
-        host_name: builtins.str = ...,
-        container_name: builtins.str = ...,
-        container_id: builtins.str = ...,
-        exit_code: builtins.int = ...,
-        oom_killed: builtins.bool = ...,
-        health_status: builtins.str = ...,
-        started_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        finished_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        observed_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        environment_variables: collections.abc.Mapping[builtins.str, builtins.str] | None = ...,
-        command: collections.abc.Iterable[builtins.str] | None = ...,
-        memory_limit_bytes: builtins.int = ...,
-        nano_cpus: builtins.int = ...,
-        cpuset_cpus: builtins.str = ...,
-        cpu_quota: builtins.int = ...,
-        cpu_period: builtins.int = ...,
-        image: builtins.str = ...,
+        name: _builtins.str = ...,
+        lifecycle_state: Global___RemoteOperationContainerLifecycleState.ValueType = ...,
+        host_name: _builtins.str = ...,
+        container_name: _builtins.str = ...,
+        container_id: _builtins.str = ...,
+        exit_code: _builtins.int = ...,
+        oom_killed: _builtins.bool = ...,
+        health_status: _builtins.str = ...,
+        started_at: _timestamp_pb2.Timestamp | None = ...,
+        finished_at: _timestamp_pb2.Timestamp | None = ...,
+        observed_at: _timestamp_pb2.Timestamp | None = ...,
+        environment_variables: _abc.Mapping[_builtins.str, _builtins.str] | None = ...,
+        command: _abc.Iterable[_builtins.str] | None = ...,
+        memory_limit_bytes: _builtins.int = ...,
+        nano_cpus: _builtins.int = ...,
+        cpuset_cpus: _builtins.str = ...,
+        cpu_quota: _builtins.int = ...,
+        cpu_period: _builtins.int = ...,
+        image: _builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["finished_at", b"finished_at", "observed_at", b"observed_at", "started_at", b"started_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["command", b"command", "container_id", b"container_id", "container_name", b"container_name", "cpu_period", b"cpu_period", "cpu_quota", b"cpu_quota", "cpuset_cpus", b"cpuset_cpus", "environment_variables", b"environment_variables", "exit_code", b"exit_code", "finished_at", b"finished_at", "health_status", b"health_status", "host_name", b"host_name", "image", b"image", "lifecycle_state", b"lifecycle_state", "memory_limit_bytes", b"memory_limit_bytes", "name", b"name", "nano_cpus", b"nano_cpus", "observed_at", b"observed_at", "oom_killed", b"oom_killed", "started_at", b"started_at"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["finished_at", b"finished_at", "observed_at", b"observed_at", "started_at", b"started_at"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["command", b"command", "container_id", b"container_id", "container_name", b"container_name", "cpu_period", b"cpu_period", "cpu_quota", b"cpu_quota", "cpuset_cpus", b"cpuset_cpus", "environment_variables", b"environment_variables", "exit_code", b"exit_code", "finished_at", b"finished_at", "health_status", b"health_status", "host_name", b"host_name", "image", b"image", "lifecycle_state", b"lifecycle_state", "memory_limit_bytes", b"memory_limit_bytes", "name", b"name", "nano_cpus", b"nano_cpus", "observed_at", b"observed_at", "oom_killed", b"oom_killed", "started_at", b"started_at"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___RemoteOperationContainerStatus = RemoteOperationContainerStatus
+Global___RemoteOperationContainerStatus: _TypeAlias = RemoteOperationContainerStatus  # noqa: Y015
 
-@typing.final
-class RemoteOperationContainer(google.protobuf.message.Message):
+@_typing.final
+class RemoteOperationContainer(_message.Message):
     """Describes one docker container started by a remote operation. A single operation may start several
     containers sequentially (hardware-check, GPU pre-allocation, build-cache, and one training container
     per algorithm), so containers are enumerated by
     <a href="index.html#ondewo.nlu.Operations.ListRemoteOperationContainers">Operations.ListRemoteOperationContainers</a>.
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    @typing.final
-    class EnvironmentVariablesEntry(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    @_typing.final
+    class EnvironmentVariablesEntry(_message.Message):
+        DESCRIPTOR: _descriptor.Descriptor
 
-        KEY_FIELD_NUMBER: builtins.int
-        VALUE_FIELD_NUMBER: builtins.int
-        key: builtins.str
-        value: builtins.str
+        KEY_FIELD_NUMBER: _builtins.int
+        VALUE_FIELD_NUMBER: _builtins.int
+        key: _builtins.str
+        value: _builtins.str
         def __init__(
             self,
             *,
-            key: builtins.str = ...,
-            value: builtins.str = ...,
+            key: _builtins.str = ...,
+            value: _builtins.str = ...,
         ) -> None: ...
-        def ClearField(self, field_name: typing.Literal["key", b"key", "value", b"value"]) -> None: ...
+        _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+        def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+        _ClearFieldArgType: _TypeAlias = _typing.Literal["key", b"key", "value", b"value"]  # noqa: Y015
+        def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+        def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-    CONTAINER_ID_FIELD_NUMBER: builtins.int
-    CONTAINER_NAME_FIELD_NUMBER: builtins.int
-    HOST_NAME_FIELD_NUMBER: builtins.int
-    LIFECYCLE_STATE_FIELD_NUMBER: builtins.int
-    OPERATION_NAME_FIELD_NUMBER: builtins.int
-    IMAGE_FIELD_NUMBER: builtins.int
-    PHASE_FIELD_NUMBER: builtins.int
-    EXIT_CODE_FIELD_NUMBER: builtins.int
-    OOM_KILLED_FIELD_NUMBER: builtins.int
-    STARTED_AT_FIELD_NUMBER: builtins.int
-    FINISHED_AT_FIELD_NUMBER: builtins.int
-    LOGS_AVAILABLE_FIELD_NUMBER: builtins.int
-    ENVIRONMENT_VARIABLES_FIELD_NUMBER: builtins.int
-    COMMAND_FIELD_NUMBER: builtins.int
-    MEMORY_LIMIT_BYTES_FIELD_NUMBER: builtins.int
-    NANO_CPUS_FIELD_NUMBER: builtins.int
-    CPUSET_CPUS_FIELD_NUMBER: builtins.int
-    CPU_QUOTA_FIELD_NUMBER: builtins.int
-    CPU_PERIOD_FIELD_NUMBER: builtins.int
-    container_id: builtins.str
+    CONTAINER_ID_FIELD_NUMBER: _builtins.int
+    CONTAINER_NAME_FIELD_NUMBER: _builtins.int
+    HOST_NAME_FIELD_NUMBER: _builtins.int
+    LIFECYCLE_STATE_FIELD_NUMBER: _builtins.int
+    OPERATION_NAME_FIELD_NUMBER: _builtins.int
+    IMAGE_FIELD_NUMBER: _builtins.int
+    PHASE_FIELD_NUMBER: _builtins.int
+    EXIT_CODE_FIELD_NUMBER: _builtins.int
+    OOM_KILLED_FIELD_NUMBER: _builtins.int
+    STARTED_AT_FIELD_NUMBER: _builtins.int
+    FINISHED_AT_FIELD_NUMBER: _builtins.int
+    LOGS_AVAILABLE_FIELD_NUMBER: _builtins.int
+    ENVIRONMENT_VARIABLES_FIELD_NUMBER: _builtins.int
+    COMMAND_FIELD_NUMBER: _builtins.int
+    MEMORY_LIMIT_BYTES_FIELD_NUMBER: _builtins.int
+    NANO_CPUS_FIELD_NUMBER: _builtins.int
+    CPUSET_CPUS_FIELD_NUMBER: _builtins.int
+    CPU_QUOTA_FIELD_NUMBER: _builtins.int
+    CPU_PERIOD_FIELD_NUMBER: _builtins.int
+    container_id: _builtins.str
     """The docker container id (64-hex). Empty until captured at launch."""
-    container_name: builtins.str
+    container_name: _builtins.str
     """The deterministic docker container name (the <code>--name</code>)."""
-    host_name: builtins.str
+    host_name: _builtins.str
     """The host the container runs (or ran) on."""
-    lifecycle_state: global___RemoteOperationContainerLifecycleState.ValueType
+    lifecycle_state: Global___RemoteOperationContainerLifecycleState.ValueType
     """The last-known lifecycle state of the container."""
-    operation_name: builtins.str
+    operation_name: _builtins.str
     """The operation resource that started this container. May be a sub-operation of the queried
     operation when <code>include_sub_operations</code> was set.
     """
-    image: builtins.str
+    image: _builtins.str
     """The docker image reference the container was started from."""
-    phase: builtins.str
+    phase: _builtins.str
     """A human-readable phase label for the container within the operation, e.g. <code>hw_check</code>,
     <code>gpu_prealloc</code>, <code>build_cache</code>, <code>train</code>, <code>rag_crawl</code>.
     """
-    exit_code: builtins.int
+    exit_code: _builtins.int
     """The container exit code. Only meaningful once the container has exited."""
-    oom_killed: builtins.bool
+    oom_killed: _builtins.bool
     """True when the container was killed by the out-of-memory killer."""
-    logs_available: builtins.bool
+    logs_available: _builtins.bool
     """True when logs for this container can still be fetched — either the container is live, or its logs
     were persisted to the server-side archive after it finished.
     """
-    memory_limit_bytes: builtins.int
+    memory_limit_bytes: _builtins.int
     """The container&apos;s hard memory limit in bytes (docker <code>HostConfig.Memory</code>).
     <code>0</code> means unlimited.
     """
-    nano_cpus: builtins.int
+    nano_cpus: _builtins.int
     """The container&apos;s CPU limit in billionths of a CPU (docker <code>HostConfig.NanoCpus</code>);
     cores = <code>nano_cpus</code> / 1e9. <code>0</code> means unset (see <code>cpu_quota</code>).
     """
-    cpuset_cpus: builtins.str
+    cpuset_cpus: _builtins.str
     """The CPUs the container is pinned to (docker <code>HostConfig.CpusetCpus</code>), empty when unset."""
-    cpu_quota: builtins.int
+    cpu_quota: _builtins.int
     """The CFS CPU quota (docker <code>HostConfig.CpuQuota</code>); cores =
     <code>cpu_quota</code> / <code>cpu_period</code> when both are &gt; 0.
     """
-    cpu_period: builtins.int
+    cpu_period: _builtins.int
     """The CFS CPU period (docker <code>HostConfig.CpuPeriod</code>)."""
-    @property
-    def started_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def started_at(self) -> _timestamp_pb2.Timestamp:
         """When the container started, if known."""
 
-    @property
-    def finished_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def finished_at(self) -> _timestamp_pb2.Timestamp:
         """When the container finished, if it has exited."""
 
-    @property
-    def environment_variables(self) -> google.protobuf.internal.containers.ScalarMap[builtins.str, builtins.str]:
+    @_builtins.property
+    def environment_variables(self) -> _containers.ScalarMap[_builtins.str, _builtins.str]:
         """The container&apos;s environment variables (docker <code>Config.Env</code>), as a name→value map.
         Secret values (passwords, tokens, private keys, certificates) are redacted server-side; plain
         non-secret values such as numeric limits remain visible. Persisted at launch so it is available
         even after the container is removed.
         """
 
-    @property
-    def command(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def command(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """The container&apos;s command/args (docker <code>Config.Cmd</code>)."""
 
     def __init__(
         self,
         *,
-        container_id: builtins.str = ...,
-        container_name: builtins.str = ...,
-        host_name: builtins.str = ...,
-        lifecycle_state: global___RemoteOperationContainerLifecycleState.ValueType = ...,
-        operation_name: builtins.str = ...,
-        image: builtins.str = ...,
-        phase: builtins.str = ...,
-        exit_code: builtins.int = ...,
-        oom_killed: builtins.bool = ...,
-        started_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        finished_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        logs_available: builtins.bool = ...,
-        environment_variables: collections.abc.Mapping[builtins.str, builtins.str] | None = ...,
-        command: collections.abc.Iterable[builtins.str] | None = ...,
-        memory_limit_bytes: builtins.int = ...,
-        nano_cpus: builtins.int = ...,
-        cpuset_cpus: builtins.str = ...,
-        cpu_quota: builtins.int = ...,
-        cpu_period: builtins.int = ...,
+        container_id: _builtins.str = ...,
+        container_name: _builtins.str = ...,
+        host_name: _builtins.str = ...,
+        lifecycle_state: Global___RemoteOperationContainerLifecycleState.ValueType = ...,
+        operation_name: _builtins.str = ...,
+        image: _builtins.str = ...,
+        phase: _builtins.str = ...,
+        exit_code: _builtins.int = ...,
+        oom_killed: _builtins.bool = ...,
+        started_at: _timestamp_pb2.Timestamp | None = ...,
+        finished_at: _timestamp_pb2.Timestamp | None = ...,
+        logs_available: _builtins.bool = ...,
+        environment_variables: _abc.Mapping[_builtins.str, _builtins.str] | None = ...,
+        command: _abc.Iterable[_builtins.str] | None = ...,
+        memory_limit_bytes: _builtins.int = ...,
+        nano_cpus: _builtins.int = ...,
+        cpuset_cpus: _builtins.str = ...,
+        cpu_quota: _builtins.int = ...,
+        cpu_period: _builtins.int = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["finished_at", b"finished_at", "started_at", b"started_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["command", b"command", "container_id", b"container_id", "container_name", b"container_name", "cpu_period", b"cpu_period", "cpu_quota", b"cpu_quota", "cpuset_cpus", b"cpuset_cpus", "environment_variables", b"environment_variables", "exit_code", b"exit_code", "finished_at", b"finished_at", "host_name", b"host_name", "image", b"image", "lifecycle_state", b"lifecycle_state", "logs_available", b"logs_available", "memory_limit_bytes", b"memory_limit_bytes", "nano_cpus", b"nano_cpus", "oom_killed", b"oom_killed", "operation_name", b"operation_name", "phase", b"phase", "started_at", b"started_at"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["finished_at", b"finished_at", "started_at", b"started_at"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["command", b"command", "container_id", b"container_id", "container_name", b"container_name", "cpu_period", b"cpu_period", "cpu_quota", b"cpu_quota", "cpuset_cpus", b"cpuset_cpus", "environment_variables", b"environment_variables", "exit_code", b"exit_code", "finished_at", b"finished_at", "host_name", b"host_name", "image", b"image", "lifecycle_state", b"lifecycle_state", "logs_available", b"logs_available", "memory_limit_bytes", b"memory_limit_bytes", "nano_cpus", b"nano_cpus", "oom_killed", b"oom_killed", "operation_name", b"operation_name", "phase", b"phase", "started_at", b"started_at"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___RemoteOperationContainer = RemoteOperationContainer
+Global___RemoteOperationContainer: _TypeAlias = RemoteOperationContainer  # noqa: Y015
 
-@typing.final
-class ListRemoteOperationContainersRequest(google.protobuf.message.Message):
+@_typing.final
+class ListRemoteOperationContainersRequest(_message.Message):
     """The request message for <a href="index.html#ondewo.nlu.Operations.ListRemoteOperationContainers">Operations.ListRemoteOperationContainers</a>."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    NAME_FIELD_NUMBER: builtins.int
-    INCLUDE_SUB_OPERATIONS_FIELD_NUMBER: builtins.int
-    name: builtins.str
+    NAME_FIELD_NUMBER: _builtins.int
+    INCLUDE_SUB_OPERATIONS_FIELD_NUMBER: _builtins.int
+    name: _builtins.str
     """The name of the operation resource whose containers should be listed."""
-    include_sub_operations: builtins.bool
+    include_sub_operations: _builtins.bool
     """When true, also include the containers of the operation&apos;s sub-operations
     (<a href="index.html#ondewo.nlu.OperationMetadata">OperationMetadata.sub_operation_names</a>).
     """
     def __init__(
         self,
         *,
-        name: builtins.str = ...,
-        include_sub_operations: builtins.bool = ...,
+        name: _builtins.str = ...,
+        include_sub_operations: _builtins.bool = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["include_sub_operations", b"include_sub_operations", "name", b"name"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["include_sub_operations", b"include_sub_operations", "name", b"name"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListRemoteOperationContainersRequest = ListRemoteOperationContainersRequest
+Global___ListRemoteOperationContainersRequest: _TypeAlias = ListRemoteOperationContainersRequest  # noqa: Y015
 
-@typing.final
-class ListRemoteOperationContainersResponse(google.protobuf.message.Message):
+@_typing.final
+class ListRemoteOperationContainersResponse(_message.Message):
     """The response message for <a href="index.html#ondewo.nlu.Operations.ListRemoteOperationContainers">Operations.ListRemoteOperationContainers</a>."""
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
-    CONTAINERS_FIELD_NUMBER: builtins.int
-    @property
-    def containers(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RemoteOperationContainer]:
+    CONTAINERS_FIELD_NUMBER: _builtins.int
+    @_builtins.property
+    def containers(self) -> _containers.RepeatedCompositeFieldContainer[Global___RemoteOperationContainer]:
         """The containers started by the operation (and, when requested, its sub-operations), oldest first."""
 
     def __init__(
         self,
         *,
-        containers: collections.abc.Iterable[global___RemoteOperationContainer] | None = ...,
+        containers: _abc.Iterable[Global___RemoteOperationContainer] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["containers", b"containers"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["containers", b"containers"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___ListRemoteOperationContainersResponse = ListRemoteOperationContainersResponse
+Global___ListRemoteOperationContainersResponse: _TypeAlias = ListRemoteOperationContainersResponse  # noqa: Y015

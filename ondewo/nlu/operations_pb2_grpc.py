@@ -6,7 +6,7 @@ import warnings
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 from ondewo.nlu import operations_pb2 as ondewo_dot_nlu_dot_operations__pb2
 
-GRPC_GENERATED_VERSION = '1.67.1'
+GRPC_GENERATED_VERSION = '1.85.1'
 GRPC_VERSION = grpc.__version__
 _version_not_supported = False
 
@@ -19,14 +19,14 @@ except ImportError:
 if _version_not_supported:
     raise RuntimeError(
         f'The grpc package installed is at version {GRPC_VERSION},'
-        + f' but the generated code in ondewo/nlu/operations_pb2_grpc.py depends on'
+        + ' but the generated code in ondewo/nlu/operations_pb2_grpc.py depends on'
         + f' grpcio>={GRPC_GENERATED_VERSION}.'
         + f' Please upgrade your grpc module to grpcio>={GRPC_GENERATED_VERSION}'
         + f' or downgrade your generated code using grpcio-tools<={GRPC_VERSION}.'
     )
 
 
-class OperationsStub(object):
+class OperationsStub:
     """Manages long-running operations with an API service.
 
     When an API method normally takes long time to complete, it can be designed to return <a href="index.html#ondewo.nlu.Operation">Operation</a> to the client, and the client can use this interface to receive the real response asynchronously by polling the operation resource, or pass the operation resource to another API (such as Google Cloud Pub/Sub API) to receive the response.  Any API service that returns long-running operations should implement the <code>Operations</code> interface so developers can have a consistent client experience.
@@ -80,7 +80,7 @@ class OperationsStub(object):
                 _registered_method=True)
 
 
-class OperationsServicer(object):
+class OperationsServicer:
     """Manages long-running operations with an API service.
 
     When an API method normally takes long time to complete, it can be designed to return <a href="index.html#ondewo.nlu.Operation">Operation</a> to the client, and the client can use this interface to receive the real response asynchronously by polling the operation resource, or pass the operation resource to another API (such as Google Cloud Pub/Sub API) to receive the response.  Any API service that returns long-running operations should implement the <code>Operations</code> interface so developers can have a consistent client experience.
@@ -222,7 +222,7 @@ def add_OperationsServicer_to_server(servicer, server):
 
 
  # This class is part of an EXPERIMENTAL API.
-class Operations(object):
+class Operations:
     """Manages long-running operations with an API service.
 
     When an API method normally takes long time to complete, it can be designed to return <a href="index.html#ondewo.nlu.Operation">Operation</a> to the client, and the client can use this interface to receive the real response asynchronously by polling the operation resource, or pass the operation resource to another API (such as Google Cloud Pub/Sub API) to receive the response.  Any API service that returns long-running operations should implement the <code>Operations</code> interface so developers can have a consistent client experience.

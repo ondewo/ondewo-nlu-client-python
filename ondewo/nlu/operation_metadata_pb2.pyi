@@ -16,37 +16,37 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-import builtins
-import collections.abc
-import google.protobuf.descriptor
-import google.protobuf.internal.containers
-import google.protobuf.internal.enum_type_wrapper
-import google.protobuf.message
-import google.protobuf.timestamp_pb2
+from collections import abc as _abc
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+from google.protobuf import timestamp_pb2 as _timestamp_pb2
+from google.protobuf.internal import containers as _containers
+from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
+import builtins as _builtins
 import sys
-import typing
+import typing as _typing
 
-if sys.version_info >= (3, 10):
-    import typing as typing_extensions
+if sys.version_info >= (3, 11):
+    from typing import TypeAlias as _TypeAlias, Never as _Never
 else:
-    import typing_extensions
+    from typing_extensions import TypeAlias as _TypeAlias, Never as _Never
 
-DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
+DESCRIPTOR: _descriptor.FileDescriptor
 
-@typing.final
-class OperationMetadata(google.protobuf.message.Message):
+@_typing.final
+class OperationMetadata(_message.Message):
     """Represents the metadata of the long-running operation that can be a parent operation for sub-operations or
     can be a sub-operation itself
     """
 
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    DESCRIPTOR: _descriptor.Descriptor
 
     class _Status:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _TypeAlias = ValueType  # noqa: Y015
 
-    class _StatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[OperationMetadata._Status.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _StatusEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[OperationMetadata._Status.ValueType], _builtins.type):
+        DESCRIPTOR: _descriptor.EnumDescriptor
         STATUS_UNSPECIFIED: OperationMetadata._Status.ValueType  # 0
         """unspecified status code"""
         NOT_STARTED: OperationMetadata._Status.ValueType  # 1
@@ -79,11 +79,11 @@ class OperationMetadata(google.protobuf.message.Message):
     """operation has completed with errors"""
 
     class _OperationType:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
+        ValueType = _typing.NewType("ValueType", _builtins.int)
+        V: _TypeAlias = ValueType  # noqa: Y015
 
-    class _OperationTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[OperationMetadata._OperationType.ValueType], builtins.type):
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    class _OperationTypeEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[OperationMetadata._OperationType.ValueType], _builtins.type):
+        DESCRIPTOR: _descriptor.EnumDescriptor
         OPERATION_TYPE_UNSPECIFIED: OperationMetadata._OperationType.ValueType  # 0
         """unspecified operation type"""
         CREATE_AGENT: OperationMetadata._OperationType.ValueType  # 1
@@ -151,113 +151,116 @@ class OperationMetadata(google.protobuf.message.Message):
     REPARSE_DATASET: OperationMetadata.OperationType.ValueType  # 14
     """re-parse of all documents in a dataset"""
 
-    STATUS_FIELD_NUMBER: builtins.int
-    PARENT_OPERATION_NAME_FIELD_NUMBER: builtins.int
-    SUB_OPERATION_NAMES_FIELD_NUMBER: builtins.int
-    CREATE_TIME_FIELD_NUMBER: builtins.int
-    START_TIME_FIELD_NUMBER: builtins.int
-    END_TIME_FIELD_NUMBER: builtins.int
-    IS_CANCELLATION_REQUESTED_FIELD_NUMBER: builtins.int
-    CANCEL_COMMAND_FIELD_NUMBER: builtins.int
-    USER_ID_CREATED_FIELD_NUMBER: builtins.int
-    USER_ID_CANCELLED_FIELD_NUMBER: builtins.int
-    PROJECT_PARENT_FIELD_NUMBER: builtins.int
-    OPERATION_TYPE_FIELD_NUMBER: builtins.int
-    HOST_NAME_FIELD_NUMBER: builtins.int
-    NUM_RERUNS_FIELD_NUMBER: builtins.int
-    MAX_NUM_RERUNS_FIELD_NUMBER: builtins.int
-    DESCRIPTION_FIELD_NUMBER: builtins.int
-    LOG_FIELD_NUMBER: builtins.int
-    LOG_LIMIT_FIELD_NUMBER: builtins.int
-    CREATED_AT_FIELD_NUMBER: builtins.int
-    MODIFIED_AT_FIELD_NUMBER: builtins.int
-    CREATED_BY_FIELD_NUMBER: builtins.int
-    MODIFIED_BY_FIELD_NUMBER: builtins.int
-    status: global___OperationMetadata.Status.ValueType
+    STATUS_FIELD_NUMBER: _builtins.int
+    PARENT_OPERATION_NAME_FIELD_NUMBER: _builtins.int
+    SUB_OPERATION_NAMES_FIELD_NUMBER: _builtins.int
+    CREATE_TIME_FIELD_NUMBER: _builtins.int
+    START_TIME_FIELD_NUMBER: _builtins.int
+    END_TIME_FIELD_NUMBER: _builtins.int
+    IS_CANCELLATION_REQUESTED_FIELD_NUMBER: _builtins.int
+    CANCEL_COMMAND_FIELD_NUMBER: _builtins.int
+    USER_ID_CREATED_FIELD_NUMBER: _builtins.int
+    USER_ID_CANCELLED_FIELD_NUMBER: _builtins.int
+    PROJECT_PARENT_FIELD_NUMBER: _builtins.int
+    OPERATION_TYPE_FIELD_NUMBER: _builtins.int
+    HOST_NAME_FIELD_NUMBER: _builtins.int
+    NUM_RERUNS_FIELD_NUMBER: _builtins.int
+    MAX_NUM_RERUNS_FIELD_NUMBER: _builtins.int
+    DESCRIPTION_FIELD_NUMBER: _builtins.int
+    LOG_FIELD_NUMBER: _builtins.int
+    LOG_LIMIT_FIELD_NUMBER: _builtins.int
+    CREATED_AT_FIELD_NUMBER: _builtins.int
+    MODIFIED_AT_FIELD_NUMBER: _builtins.int
+    CREATED_BY_FIELD_NUMBER: _builtins.int
+    MODIFIED_BY_FIELD_NUMBER: _builtins.int
+    status: Global___OperationMetadata.Status.ValueType
     """long-running operation status code"""
-    parent_operation_name: builtins.str
+    parent_operation_name: _builtins.str
     """optional parent operation name"""
-    is_cancellation_requested: builtins.bool
+    is_cancellation_requested: _builtins.bool
     """indicates whether a request to cancel this operation has been made."""
-    cancel_command: builtins.str
+    cancel_command: _builtins.str
     """command executed at cancel operation"""
-    user_id_created: builtins.str
+    user_id_created: _builtins.str
     """id of the user who created the operation"""
-    user_id_cancelled: builtins.str
+    user_id_cancelled: _builtins.str
     """id of the user who cancelled the operation"""
-    project_parent: builtins.str
+    project_parent: _builtins.str
     """project parent name, e.g. &quot;projects/pepper/agent&quot;"""
-    operation_type: global___OperationMetadata.OperationType.ValueType
+    operation_type: Global___OperationMetadata.OperationType.ValueType
     """operation type"""
-    host_name: builtins.str
+    host_name: _builtins.str
     """name of the host where the operation was executed"""
-    num_reruns: builtins.int
+    num_reruns: _builtins.int
     """number of times the operation was re-run"""
-    max_num_reruns: builtins.int
+    max_num_reruns: _builtins.int
     """maximum number of re-runs in case the operation fails"""
-    description: builtins.str
+    description: _builtins.str
     """description, normally needed for sub operations when type is OPERATION_TYPE_UNSPECIFIED"""
-    log_limit: builtins.int
+    log_limit: _builtins.int
     """The log output of an operation limited to the last x log entries"""
-    created_by: builtins.str
+    created_by: _builtins.str
     """User id in form of a valid UUID."""
-    modified_by: builtins.str
+    modified_by: _builtins.str
     """User id in form of a valid UUID."""
-    @property
-    def sub_operation_names(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def sub_operation_names(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """list of the sub-operations&apos; names of the operation"""
 
-    @property
-    def create_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def create_time(self) -> _timestamp_pb2.Timestamp:
         """the time the operation was submitted."""
 
-    @property
-    def start_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def start_time(self) -> _timestamp_pb2.Timestamp:
         """the time operation processing started."""
 
-    @property
-    def end_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def end_time(self) -> _timestamp_pb2.Timestamp:
         """the time operation processing completed."""
 
-    @property
-    def log(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    @_builtins.property
+    def log(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
         """The log output of an operation"""
 
-    @property
-    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def created_at(self) -> _timestamp_pb2.Timestamp:
         """Creation date and time. Read-only field."""
 
-    @property
-    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+    @_builtins.property
+    def modified_at(self) -> _timestamp_pb2.Timestamp:
         """Modification date and time. Read-only field."""
 
     def __init__(
         self,
         *,
-        status: global___OperationMetadata.Status.ValueType = ...,
-        parent_operation_name: builtins.str = ...,
-        sub_operation_names: collections.abc.Iterable[builtins.str] | None = ...,
-        create_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        start_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        end_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        is_cancellation_requested: builtins.bool = ...,
-        cancel_command: builtins.str = ...,
-        user_id_created: builtins.str = ...,
-        user_id_cancelled: builtins.str = ...,
-        project_parent: builtins.str = ...,
-        operation_type: global___OperationMetadata.OperationType.ValueType = ...,
-        host_name: builtins.str = ...,
-        num_reruns: builtins.int = ...,
-        max_num_reruns: builtins.int = ...,
-        description: builtins.str = ...,
-        log: collections.abc.Iterable[builtins.str] | None = ...,
-        log_limit: builtins.int = ...,
-        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        created_by: builtins.str = ...,
-        modified_by: builtins.str = ...,
+        status: Global___OperationMetadata.Status.ValueType = ...,
+        parent_operation_name: _builtins.str = ...,
+        sub_operation_names: _abc.Iterable[_builtins.str] | None = ...,
+        create_time: _timestamp_pb2.Timestamp | None = ...,
+        start_time: _timestamp_pb2.Timestamp | None = ...,
+        end_time: _timestamp_pb2.Timestamp | None = ...,
+        is_cancellation_requested: _builtins.bool = ...,
+        cancel_command: _builtins.str = ...,
+        user_id_created: _builtins.str = ...,
+        user_id_cancelled: _builtins.str = ...,
+        project_parent: _builtins.str = ...,
+        operation_type: Global___OperationMetadata.OperationType.ValueType = ...,
+        host_name: _builtins.str = ...,
+        num_reruns: _builtins.int = ...,
+        max_num_reruns: _builtins.int = ...,
+        description: _builtins.str = ...,
+        log: _abc.Iterable[_builtins.str] | None = ...,
+        log_limit: _builtins.int = ...,
+        created_at: _timestamp_pb2.Timestamp | None = ...,
+        modified_at: _timestamp_pb2.Timestamp | None = ...,
+        created_by: _builtins.str = ...,
+        modified_by: _builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["create_time", b"create_time", "created_at", b"created_at", "end_time", b"end_time", "modified_at", b"modified_at", "start_time", b"start_time"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["cancel_command", b"cancel_command", "create_time", b"create_time", "created_at", b"created_at", "created_by", b"created_by", "description", b"description", "end_time", b"end_time", "host_name", b"host_name", "is_cancellation_requested", b"is_cancellation_requested", "log", b"log", "log_limit", b"log_limit", "max_num_reruns", b"max_num_reruns", "modified_at", b"modified_at", "modified_by", b"modified_by", "num_reruns", b"num_reruns", "operation_type", b"operation_type", "parent_operation_name", b"parent_operation_name", "project_parent", b"project_parent", "start_time", b"start_time", "status", b"status", "sub_operation_names", b"sub_operation_names", "user_id_cancelled", b"user_id_cancelled", "user_id_created", b"user_id_created"]) -> None: ...
+    _HasFieldArgType: _TypeAlias = _typing.Literal["create_time", b"create_time", "created_at", b"created_at", "end_time", b"end_time", "modified_at", b"modified_at", "start_time", b"start_time"]  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["cancel_command", b"cancel_command", "create_time", b"create_time", "created_at", b"created_at", "created_by", b"created_by", "description", b"description", "end_time", b"end_time", "host_name", b"host_name", "is_cancellation_requested", b"is_cancellation_requested", "log", b"log", "log_limit", b"log_limit", "max_num_reruns", b"max_num_reruns", "modified_at", b"modified_at", "modified_by", b"modified_by", "num_reruns", b"num_reruns", "operation_type", b"operation_type", "parent_operation_name", b"parent_operation_name", "project_parent", b"project_parent", "start_time", b"start_time", "status", b"status", "sub_operation_names", b"sub_operation_names", "user_id_cancelled", b"user_id_cancelled", "user_id_created", b"user_id_created"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
 
-global___OperationMetadata = OperationMetadata
+Global___OperationMetadata: _TypeAlias = OperationMetadata  # noqa: Y015
