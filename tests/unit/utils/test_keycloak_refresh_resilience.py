@@ -629,6 +629,94 @@ class TestTheRealThreadRecovers:
         assert provider._refresh_thread is not None and not provider._refresh_thread.is_alive()
 
 
+class TestTheOfflineTokenStartUp:
+    """A provider handed an offline ``refresh_token`` starts with a refresh grant and never logs in.
+
+    Keycloak's brute-force detection counts failed LOGINS: N processes booting at once with one
+    technical user are a burst the realm penalises (measured 3/10 password grants accepted at 0 ms
+    spacing), N concurrent refresh grants of one offline token are not (10/10).
+    """
+
+    @staticmethod
+    def handed_off(
+        transport: FakeTransport,
+        clock: Dict[str, float],
+        password: str = "",
+        token_expiration_in_s: Optional[int] = None,
+        stop_event: Optional[ScriptedEvent] = None,
+    ) -> KeycloakTokenProvider:
+        return KeycloakTokenProvider(
+            keycloak_url=KEYCLOAK_URL,
+            realm=REALM,
+            client_id=CLIENT_ID,
+            username=USERNAME,
+            password=password,
+            token_expiration_in_s=token_expiration_in_s,
+            transport=transport,  # type: ignore[arg-type]
+            time_fn=lambda: clock["now"],
+            random_fn=lambda: 0.0,
+            stop_event=stop_event if stop_event is not None else threading.Event(),  # type: ignore[arg-type]
+            start_background_refresh=False,
+            refresh_token="off-handed-0",
+        )
+
+    def test_the_start_up_is_a_refresh_grant_with_the_handed_off_token(self) -> None:
+        transport: FakeTransport = FakeTransport([token("acc-1", 300, refresh="off-1")])
+        provider: KeycloakTokenProvider = self.handed_off(transport, {"now": 1000.0})
+
+        assert transport.grants() == ["refresh_token"]
+        assert transport.calls[0]["refresh_token"] == "off-handed-0"
+        assert "password" not in transport.calls[0]
+        assert provider.access_token == "acc-1"
+
+    def test_a_password_alongside_the_token_is_never_sent(self) -> None:
+        clock: Dict[str, float] = {"now": 1000.0}
+        transport: FakeTransport = FakeTransport([token("acc-1", 300), refused(), token("acc-3", 300)])
+        provider: KeycloakTokenProvider = self.handed_off(transport, clock, password=PASSWORD)
+        clock["now"] += 280.0
+        provider.authorization_metadata()
+        clock["now"] += km._REFRESH_RETRY_BASE_DELAY_S
+        provider.authorization_metadata()
+
+        assert "password" not in transport.grants(), "a password grant was sent on the offline-token path"
+
+    def test_a_refused_start_up_token_raises_at_construction_without_a_password_fallback(self) -> None:
+        transport: FakeTransport = FakeTransport([refused(), token("acc-never", 300)])
+        with pytest.raises(KeycloakAuthenticationError, match="status 400"):
+            self.handed_off(transport, {"now": 1000.0}, password=PASSWORD)
+        assert transport.grants() == ["refresh_token"]
+
+    def test_the_rotated_refresh_token_is_used_from_then_on(self) -> None:
+        clock: Dict[str, float] = {"now": 1000.0}
+        transport: FakeTransport = FakeTransport([token("acc-1", 300, refresh="off-rotated"), token("acc-2", 300)])
+        provider: KeycloakTokenProvider = self.handed_off(transport, clock)
+        clock["now"] += 280.0
+        provider.authorization_metadata()
+
+        assert transport.calls[1]["refresh_token"] == "off-rotated"
+
+    def test_the_auto_refresh_deadline_is_armed_on_the_offline_token_path(self) -> None:
+        clock: Dict[str, float] = {"now": 1000.0}
+        event: ScriptedEvent = ScriptedEvent([False] * 50, clock)
+        transport: FakeTransport = FakeTransport([token("acc-1", 60)])
+        provider: KeycloakTokenProvider = self.handed_off(transport, clock, token_expiration_in_s=200, stop_event=event)
+
+        assert provider._login_deadline == 1200.0
+        run_loop(provider, event, clock)
+        assert event.is_set() and clock["now"] <= 1200.0 + km._MIN_REFRESH_DELAY_S
+
+    def test_the_background_loop_survives_a_failing_offline_token(self) -> None:
+        clock: Dict[str, float] = {"now": 1000.0}
+        event: ScriptedEvent = ScriptedEvent([False, False, False], clock)
+        transport: FakeTransport = FakeTransport([token("acc-1", 300), refused(), refused(), token("acc-4", 300)])
+        provider: KeycloakTokenProvider = self.handed_off(transport, clock, stop_event=event)
+
+        run_loop(provider, event, clock)
+
+        assert transport.grants() == ["refresh_token"] * 4
+        assert provider.access_token == "acc-4"
+
+
 class TestTheProviderRegistryIsKeyedByCredentials:
     """Two clients share a provider exactly when they authenticate as the same identity."""
 
@@ -687,6 +775,16 @@ class TestTheProviderRegistryIsKeyedByCredentials:
             # The config dies right after the call, so CPython is free to reuse its address.
             keep.append(km.get_keycloak_token_provider(self.config(user_name=f"user-{index}@example.com")))
         assert [kwargs["username"] for kwargs in built] == [f"user-{index}@example.com" for index in range(50)]
+
+    def test_two_offline_tokens_with_no_password_never_share_a_provider(self, built: List[Dict[str, Any]]) -> None:
+        first: Any = km.get_keycloak_token_provider(self.config(password="", refresh_token="off-tenant-a"))
+        second: Any = km.get_keycloak_token_provider(self.config(password="", refresh_token="off-tenant-b"))
+        assert first is not second
+        assert [kwargs["refresh_token"] for kwargs in built] == ["off-tenant-a", "off-tenant-b"]
+
+    def test_the_registry_key_does_not_contain_the_refresh_token(self) -> None:
+        key: str = km._provider_registry_key(self.config(refresh_token="off-secret-key-9"))
+        assert "off-secret-key-9" not in key
 
     def test_the_registry_key_does_not_contain_the_password(self) -> None:
         key: str = km._provider_registry_key(self.config())
