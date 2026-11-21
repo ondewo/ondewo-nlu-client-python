@@ -70,11 +70,11 @@ _EXPIRY_LEEWAY_S: float = 30.0
 # ``expires_in`` cannot spin the refresh thread into a hot loop.
 _MIN_REFRESH_DELAY_S: float = 1.0
 
-# First retry delay (seconds) after a FAILED background refresh. Deliberately far above
-# ``_MIN_REFRESH_DELAY_S``: a failed refresh leaves ``_access_token_expires_at`` in the past, so the
-# ordinary delay computation clamps to the 1 s floor and a Keycloak outage becomes a 1 Hz poll per
-# client. ondewo runs one client per call container, so a floor that is harmless for a single
-# process is an amplifier against a realm they all share (see the login-burst note in 7.0.5).
+# First retry delay (seconds) after a FAILED refresh. Deliberately far above
+# ``_MIN_REFRESH_DELAY_S``: a failed refresh leaves ``_access_token_expires_at`` unchanged, so the
+# ordinary delay computation would clamp to the 1 s floor and a Keycloak outage would become a 1 Hz
+# poll per client. ondewo runs one client per call container, so a floor that is harmless for a
+# single process is an amplifier against a realm they all share.
 _REFRESH_RETRY_BASE_DELAY_S: float = 5.0
 
 # Ceiling (seconds) for the failure backoff: a persistent outage is retried at most this often.
@@ -83,8 +83,14 @@ _REFRESH_RETRY_MAX_DELAY_S: float = 300.0
 # Exponent cap so ``2 ** n`` cannot grow without bound; 5 * 2^6 = 320 already exceeds the ceiling.
 _MAX_REFRESH_RETRY_EXPONENT: int = 6
 
-# HTTP timeout for the (single, fast) token-endpoint calls.
-_HTTP_TIMEOUT_S: float = 30.0
+# HTTP timeout (seconds) for one token-endpoint call. A refresh runs while the provider lock is held,
+# and every gRPC call reads its bearer token under that lock, so this bounds how long a hung Keycloak
+# can stall the client's calls. A healthy token endpoint answers in well under a second.
+_HTTP_TIMEOUT_S: float = 10.0
+
+# The longest slice of a Keycloak error body quoted in an exception. A proxy in front of Keycloak can
+# answer a 502 with a whole HTML page, which is noise in a log line and in a traceback.
+_MAX_ERROR_BODY_CHARS: int = 500
 
 # Timeout (seconds) for joining the background refresh thread on stop()/__del__ so a
 # refresh stuck in an HTTP call cannot block teardown indefinitely.
@@ -157,29 +163,30 @@ def _backoff_delay_s(consecutive_failures: int, random_fn: Callable[[], float]) 
     The ceiling grows ``_REFRESH_RETRY_BASE_DELAY_S * 2 ** (failures - 1)`` up to
     :data:`_REFRESH_RETRY_MAX_DELAY_S`, and the returned delay is drawn uniformly from
     ``[base, ceiling]``. The jitter is the load-bearing half: N containers whose refreshes fail in
-    the same instant would otherwise retry in lockstep for as long as the outage lasts, which is
-    the same thundering-herd shape as the login burst the offline-token hand-off exists to remove.
+    the same instant would otherwise retry in lockstep for as long as the outage lasts.
 
     Args:
         consecutive_failures (int):
-            Number of consecutive failed refreshes; must be >= 1.
+            Number of consecutive failed refreshes; values below 1 are treated as 1.
         random_fn (Callable[[], float]):
-            Source of a ``[0.0, 1.0)`` fraction (injectable so tests get an exact delay).
+            Source of a ``[0.0, 1.0)`` fraction (injectable so tests get an exact delay). A value
+            outside that range is clamped, so a faulty source can never yield a negative delay or
+            one above the ceiling.
 
     Returns:
         float:
             Seconds to wait before the next refresh attempt.
     """
-    exponent: int = min(consecutive_failures - 1, _MAX_REFRESH_RETRY_EXPONENT)
+    exponent: int = min(max(consecutive_failures, 1) - 1, _MAX_REFRESH_RETRY_EXPONENT)
     ceiling_s: float = min(_REFRESH_RETRY_BASE_DELAY_S * float(2**exponent), _REFRESH_RETRY_MAX_DELAY_S)
-    return _REFRESH_RETRY_BASE_DELAY_S + random_fn() * (ceiling_s - _REFRESH_RETRY_BASE_DELAY_S)
+    fraction: float = min(max(random_fn(), 0.0), 1.0)
+    return _REFRESH_RETRY_BASE_DELAY_S + fraction * (ceiling_s - _REFRESH_RETRY_BASE_DELAY_S)
 
 
 def _refresh_loop(
     provider_ref: "weakref.ref[KeycloakTokenProvider]",
     stop_event: threading.Event,
     time_fn: Callable[[], float],
-    random_fn: Optional[Callable[[], float]] = None,
 ) -> None:
     """
     Background daemon-thread target that proactively refreshes the access token.
@@ -188,11 +195,19 @@ def _refresh_loop(
     resolves to ``None`` — the provider has been garbage-collected (it is held only weakly
     by :data:`_PROVIDER_REGISTRY`), so a strong ``self`` reference here would pin it forever
     and leak the thread. On each iteration it computes the delay until
-    :data:`_EXPIRY_LEEWAY_S` before the current access token's expiry, clamps it to
+    :data:`_EXPIRY_LEEWAY_S` before the current access token's expiry — or, after a failed
+    refresh, until the provider's backoff allows the next attempt — clamps it to
     :data:`_MIN_REFRESH_DELAY_S`, then waits that long on ``stop_event`` (so :meth:`stop`
     interrupts the sleep immediately). When the wait times out it refreshes the access token
     under the provider lock. The loop stops once :meth:`stop` is called or the
     ``token_expiration_in_s`` login deadline has elapsed.
+
+    A failed refresh NEVER ends the loop. This function is the thread target and nothing re-arms
+    the thread, so an exception escaping it would end proactive refresh for the life of the
+    process -- one transient answer from the token endpoint (a 502 from a proxy, a DNS blip, a
+    restarting Keycloak, a dead offline session) was enough to let every token lapse. The provider
+    records and logs each failure and schedules the retry (:meth:`KeycloakTokenProvider._record_refresh_failure`),
+    so the loop only has to keep going.
 
     Args:
         provider_ref (weakref.ref[KeycloakTokenProvider]):
@@ -201,14 +216,7 @@ def _refresh_loop(
             Event signalled by :meth:`stop`; also used as the interruptible sleep primitive.
         time_fn (Callable[[], float]):
             Monotonic clock (injectable for deterministic tests).
-        random_fn (Optional[Callable[[], float]]):
-            Source of a ``[0.0, 1.0)`` fraction for the failure-backoff jitter; defaults to
-            :func:`random.random`. Injected by tests so a retry delay is exact.
     """
-    jitter_fn: Callable[[], float] = random_fn if random_fn is not None else random.random
-    # Consecutive failed refreshes. Zero on the healthy path, so the ordinary
-    # expiry-driven schedule below is completely unaffected by this counter.
-    consecutive_failures: int = 0
     while not stop_event.is_set():
         provider: Optional["KeycloakTokenProvider"] = provider_ref()
         if provider is None:
@@ -223,13 +231,12 @@ def _refresh_loop(
             return
 
         delay: float = provider._access_token_expires_at - _EXPIRY_LEEWAY_S - now
+        if provider._consecutive_refresh_failures > 0:
+            # A failed refresh leaves ``_access_token_expires_at`` unchanged, so the computation
+            # above would retry at the 1 s floor for the whole outage. Wait for the backoff instead.
+            delay = provider._next_refresh_attempt_at - now
         if delay < _MIN_REFRESH_DELAY_S:
             delay = _MIN_REFRESH_DELAY_S
-        if consecutive_failures > 0:
-            # A failed refresh leaves ``_access_token_expires_at`` unchanged and therefore in the
-            # past, so the computation above has already clamped to the 1 s floor. Retrying there
-            # would poll the token endpoint once a second for the whole outage; back off instead.
-            delay = _backoff_delay_s(consecutive_failures, jitter_fn)
         if deadline is not None:
             remaining: float = deadline - now
             if remaining < delay:
@@ -248,35 +255,11 @@ def _refresh_loop(
         try:
             with provider._lock:
                 provider._refresh_if_within_window(now=time_fn())
-            consecutive_failures = 0
         except Exception as exception:
-            # A FAILED REFRESH MUST NOT END PROACTIVE REFRESH FOR THE PROCESS'S LIFETIME.
-            # This function is the thread target, so before this guard any exception out of the
-            # refresh escaped it and killed the daemon thread -- permanently, because
-            # ``_start_background_refresh`` runs once from ``__init__`` and nothing re-arms it.
-            # A single transient answer from the token endpoint (a 502 from a proxy, a DNS blip,
-            # a restarting Keycloak) was therefore enough to disable background refresh for good,
-            # with the only symptom a traceback on stderr from the dying thread.
-            #
-            # Observed in production as the dead-offline-session case: Keycloak answered
-            # ``400 invalid_grant: Offline user session not found``, ``_post_token_request``
-            # raised, and neither ``_refresh``, ``_refresh_if_within_window`` nor this loop
-            # caught it.
-            #
-            # Retrying on the next tick is the whole remedy for a transient failure. It is
-            # deliberately NOT a remedy for a dead offline session: that keeps failing, and the
-            # lazy read path in ``authorization_metadata`` keeps raising, so a caller still finds
-            # out and can build a new provider. What changes is that the failure stays VISIBLE
-            # and self-heals the moment the endpoint recovers, instead of being silently
-            # terminal. There is deliberately no fallback to a password grant here -- see the
-            # 7.0.5 release note: a silent re-login would reintroduce, at the least predictable
-            # moment, exactly the login burst the handed-off token exists to avoid.
-            consecutive_failures += 1
-            logger.warning(
-                f"Keycloak background refresh failed (attempt {consecutive_failures}) and will be "
-                f"retried after a jittered backoff "
-                f"({type(exception).__name__}: {exception})"
-            )
+            # The provider has already recorded, logged and scheduled the retry of the failure that
+            # raised here (the access token has expired, so the lazy read path raises it too). This
+            # guard exists so the thread survives it; logging it again would double every warning.
+            logger.debug(f"Keycloak background refresh will be retried ({type(exception).__name__}: {exception})")
         provider = None
 
 
@@ -418,6 +401,11 @@ class KeycloakTokenProvider:
         # Signalled by stop(); also the interruptible sleep primitive for the refresh thread.
         self._stop_event: threading.Event = stop_event if stop_event is not None else threading.Event()
         self._refresh_thread: Optional[threading.Thread] = None
+        # Refresh-failure bookkeeping shared by the lazy read path and the background thread, so
+        # both honour ONE backoff: consecutive failed refreshes, and the monotonic time before
+        # which no new refresh request is sent. Both are reset by the next successful refresh.
+        self._consecutive_refresh_failures: int = 0
+        self._next_refresh_attempt_at: float = 0.0
 
         if refresh_token:
             # Handed-off offline token: bootstrap with a refresh grant. Keycloak's brute-force
@@ -469,11 +457,18 @@ class KeycloakTokenProvider:
         """
         Return the ``Authorization: Bearer`` gRPC metadata tuple, refreshing if needed.
 
+        Within the ``token_expiration_in_s`` window the token returned is valid for at least
+        :data:`_EXPIRY_LEEWAY_S` more seconds, or, while a failed refresh is backing off, for
+        whatever validity it has left. Once the token has expired and cannot be refreshed this
+        raises instead of handing out a token the server would refuse.
+
         Returns:
             Tuple[str, str]:
-                ``('authorization', 'Bearer <access_token>')`` with a token that is valid
-                for at least :data:`_EXPIRY_LEEWAY_S` more seconds (when within the
-                ``token_expiration_in_s`` window).
+                ``('authorization', 'Bearer <access_token>')``.
+
+        Raises:
+            KeycloakAuthenticationError:
+                If the access token has expired and could not be refreshed.
         """
         with self._lock:
             self._refresh_if_within_window(now=self._time_fn())
@@ -533,7 +528,7 @@ class KeycloakTokenProvider:
         provider_ref: "weakref.ref[KeycloakTokenProvider]" = weakref.ref(self)
         thread: threading.Thread = threading.Thread(
             target=_refresh_loop,
-            args=(provider_ref, self._stop_event, self._time_fn, self._random_fn),
+            args=(provider_ref, self._stop_event, self._time_fn),
             name=f"keycloak-token-refresh-{self.client_id}",
             daemon=True,
         )
@@ -542,16 +537,27 @@ class KeycloakTokenProvider:
 
     def _refresh_if_within_window(self, now: float) -> None:
         """
-        Refresh the access token if it is near expiry and refresh is still permitted.
+        Refresh the access token if it is near expiry, refresh is permitted and not backing off.
 
         Shared by the lazy read path and the background thread; callers hold :attr:`_lock`.
         Does nothing once ``token_expiration_in_s`` has elapsed since login (the access token
         is then allowed to lapse). Within the window, refreshes via the offline refresh token
         whenever the current access token is within the leeway of its ``exp``.
 
+        A failed refresh is recorded and backed off (:meth:`_record_refresh_failure`), and it is
+        only RAISED once the current access token has actually expired: inside the leeway the
+        token is still valid, so the call that triggered the refresh goes out with it rather than
+        failing for a refresh it did not need yet. While the backoff runs no request is sent at
+        all, so an outage never turns every gRPC call into a token request under this lock.
+
         Args:
             now (float):
                 The current monotonic time, sampled by the caller from :attr:`_time_fn`.
+
+        Raises:
+            KeycloakAuthenticationError:
+                If the access token has expired and it could not be refreshed, either because the
+                refresh failed now or because a previous failure's backoff has not elapsed yet.
         """
         if self._login_deadline is not None and now >= self._login_deadline:
             # The auto-refresh window has closed: stop renewing and let the token lapse.
@@ -559,7 +565,71 @@ class KeycloakTokenProvider:
         if now < self._access_token_expires_at - _EXPIRY_LEEWAY_S:
             # Current access token is still comfortably valid.
             return
-        self._refresh()
+        if now < self._next_refresh_attempt_at:
+            # A previous refresh failed and its backoff has not elapsed: send nothing.
+            if now < self._access_token_expires_at:
+                return
+            raise KeycloakAuthenticationError(
+                f"The Keycloak access token has expired and the refresh is backing off after "
+                f"{self._consecutive_refresh_failures} consecutive failure(s); the next attempt is due in "
+                f"{self._next_refresh_attempt_at - now:.1f}s"
+            )
+        try:
+            self._refresh()
+        except Exception as exception:
+            self._record_refresh_failure(exception=exception)
+            # Re-read the clock: the failed attempt may itself have taken up to _HTTP_TIMEOUT_S.
+            if self._time_fn() < self._access_token_expires_at:
+                # Still valid (inside the leeway): serve it, the backoff schedules the retry.
+                return
+            if isinstance(exception, KeycloakAuthenticationError):
+                raise
+            raise KeycloakAuthenticationError(
+                f"Keycloak token refresh failed ({type(exception).__name__}: {exception})"
+            ) from exception
+        self._record_refresh_success()
+
+    def _record_refresh_failure(self, exception: BaseException) -> None:
+        """
+        Count a failed refresh, schedule the next attempt with jittered backoff and log it.
+
+        Deliberately NOT a fallback to a password grant: a refused offline token keeps being
+        refused, the lazy read path raises once the access token has expired, and a caller can
+        build a new provider. A silent re-login would reintroduce, at the least predictable moment
+        (a realm restart invalidates every offline session at once), the login burst the offline
+        token exists to avoid. Callers hold :attr:`_lock`.
+
+        The backoff is measured from the moment the failure is RECORDED, not from when the attempt
+        started: an attempt that hung for the whole :data:`_HTTP_TIMEOUT_S` would otherwise schedule
+        a retry that is already due, and the outage would be polled at the 1 s floor after all.
+
+        Args:
+            exception (BaseException):
+                What the attempt raised; only its type and message are logged.
+        """
+        now: float = self._time_fn()
+        self._consecutive_refresh_failures += 1
+        delay_s: float = _backoff_delay_s(self._consecutive_refresh_failures, self._random_fn)
+        self._next_refresh_attempt_at = now + delay_s
+        remaining_s: float = self._access_token_expires_at - now
+        validity: str = (
+            f"the current access token stays valid for {remaining_s:.1f}s"
+            if remaining_s > 0
+            else "the current access token has expired"
+        )
+        logger.warning(
+            f"Keycloak token refresh failed (attempt {self._consecutive_refresh_failures}); retrying in "
+            f"{delay_s:.1f}s, {validity} ({type(exception).__name__}: {exception})"
+        )
+
+    def _record_refresh_success(self) -> None:
+        """Reset the failure backoff after a successful refresh and log the recovery, if any."""
+        if self._consecutive_refresh_failures > 0:
+            logger.info(
+                f"Keycloak token refresh recovered after {self._consecutive_refresh_failures} failed attempt(s)"
+            )
+        self._consecutive_refresh_failures = 0
+        self._next_refresh_attempt_at = 0.0
 
     def _login(self) -> None:
         """
@@ -611,6 +681,11 @@ class KeycloakTokenProvider:
         """
         POST a form-encoded request to the token endpoint and return the parsed body.
 
+        Every way the exchange can fail surfaces as :class:`KeycloakAuthenticationError`, with the
+        original exception chained: a network error (refused connection, DNS failure, timeout), a
+        non-2xx status, a body that is not JSON and a JSON body that is not an object. Callers then
+        handle ONE exception type, and a proxy's HTML error page cannot escape as a ``ValueError``.
+
         Args:
             data (Dict[str, str]):
                 The ``application/x-www-form-urlencoded`` form parameters.
@@ -623,18 +698,34 @@ class KeycloakTokenProvider:
 
         Raises:
             KeycloakAuthenticationError:
-                On a non-2xx status or an unparseable body.
+                If the endpoint cannot be reached, answers a non-2xx status or an unusable body.
         """
-        response: TokenResponse = self._transport.post(
-            self._token_endpoint,
-            data=data,
-            timeout=_HTTP_TIMEOUT_S,
-        )
+        try:
+            response: TokenResponse = self._transport.post(
+                self._token_endpoint,
+                data=data,
+                timeout=_HTTP_TIMEOUT_S,
+            )
+        except OSError as exception:
+            # requests' ConnectionError / Timeout derive from OSError, as do raw socket errors.
+            raise KeycloakAuthenticationError(
+                f"Keycloak token {action} could not reach the token endpoint ({type(exception).__name__}: {exception})"
+            ) from exception
         if response.status_code < 200 or response.status_code >= 300:
             raise KeycloakAuthenticationError(
-                f"Keycloak token {action} failed with status {response.status_code}: {response.text}"
+                f"Keycloak token {action} failed with status {response.status_code}: "
+                f"{response.text[:_MAX_ERROR_BODY_CHARS]}"
             )
-        body: Dict[str, Any] = response.json()
+        try:
+            body: Any = response.json()
+        except ValueError as exception:
+            raise KeycloakAuthenticationError(
+                f"Keycloak token {action} returned status {response.status_code} with a body that is not JSON"
+            ) from exception
+        if not isinstance(body, dict):
+            raise KeycloakAuthenticationError(
+                f"Keycloak token {action} returned a JSON {type(body).__name__} instead of an object"
+            )
         return body
 
     def _store_tokens(self, payload: Dict[str, Any]) -> None:
@@ -647,10 +738,10 @@ class KeycloakTokenProvider:
 
         Raises:
             KeycloakAuthenticationError:
-                If the response carries no ``access_token``.
+                If the response carries no usable ``access_token`` or a non-numeric ``expires_in``.
         """
-        access_token: str = payload.get("access_token", "")
-        if not access_token:
+        access_token: Any = payload.get("access_token", "")
+        if not access_token or not isinstance(access_token, str):
             # Report the field NAMES, never the values. A Keycloak token response is made almost
             # entirely of credentials -- an offline ``refresh_token`` mints access tokens for the
             # life of the offline session -- and rendering the body here wrote them into whatever
@@ -661,15 +752,21 @@ class KeycloakTokenProvider:
                 "Keycloak token response did not contain an access_token; the response carried "
                 f"the fields {sorted(payload)} (values withheld: a token response is credential material)"
             )
+        try:
+            expires_in: float = float(payload.get("expires_in", 0))
+        except (TypeError, ValueError) as exception:
+            raise KeycloakAuthenticationError(
+                "Keycloak token response carried a non-numeric expires_in (value withheld)"
+            ) from exception
+        # Validate everything BEFORE assigning anything, so a malformed response never leaves the
+        # provider holding a new access token paired with the previous one's expiry.
         self._access_token = access_token
         # Keycloak always re-issues the refresh token; keep the previous one if absent so a
         # response that omits it (e.g. a same-token refresh) does not blank out the offline token.
-        refresh_token: str = payload.get("refresh_token", "")
-        if refresh_token:
+        refresh_token: Any = payload.get("refresh_token", "")
+        if refresh_token and isinstance(refresh_token, str):
             self._refresh_token = refresh_token
-
-        expires_in: int = int(payload.get("expires_in", 0))
-        self._access_token_expires_at = self._time_fn() + expires_in
+        self._access_token_expires_at = self._time_fn() + max(expires_in, 0.0)
 
 
 # One shared provider per set of Keycloak credentials so the ROPC offline-token login happens
