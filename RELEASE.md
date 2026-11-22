@@ -2,6 +2,14 @@
 
 *****************
 
+## Release ONDEWO NLU Python Client 7.7.0
+
+### New Features
+
+* [[OND236-120]](https://ondewo.atlassian.net/browse/OND236-120) Tracks ondewo-nlu-api 7.7.0: read-only `SessionStep.interruption` (12, `SessionStepInterruption`), the enum `SessionStepInterruptionPhase`, and `HeardTextPrecision` values `HEARD_TEXT_PRECISION_SENTENCE_ALIGNED` (5) and `HEARD_TEXT_PRECISION_WORD_TIMED` (6).
+
+*****************
+
 ## Release ONDEWO NLU Python Client 7.6.1
 
 ### Bug Fixes

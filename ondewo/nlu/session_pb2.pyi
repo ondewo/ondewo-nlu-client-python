@@ -251,6 +251,14 @@ class _HeardTextPrecisionEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_He
     """
     HEARD_TEXT_PRECISION_PROPORTIONAL: _HeardTextPrecision.ValueType  # 4
     """The played share of the audio was measured by the audio player and mapped proportionally onto the text."""
+    HEARD_TEXT_PRECISION_SENTENCE_ALIGNED: _HeardTextPrecision.ValueType  # 5
+    """The played share of the audio was measured by the audio player and mapped onto the text through the speech
+    synthesizer's per-segment text spans; proportionally only inside the segment that was cut.
+    """
+    HEARD_TEXT_PRECISION_WORD_TIMED: _HeardTextPrecision.ValueType  # 6
+    """The played share of the audio was measured by the audio player and mapped onto the text through the speech
+    synthesizer's word timings.
+    """
 
 class HeardTextPrecision(_HeardTextPrecision, metaclass=_HeardTextPrecisionEnumTypeWrapper):
     """How the heard text of a <code>HeardReport</code> was determined."""
@@ -267,6 +275,14 @@ measured by the player, and mapped proportionally onto the text.
 """
 HEARD_TEXT_PRECISION_PROPORTIONAL: HeardTextPrecision.ValueType  # 4
 """The played share of the audio was measured by the audio player and mapped proportionally onto the text."""
+HEARD_TEXT_PRECISION_SENTENCE_ALIGNED: HeardTextPrecision.ValueType  # 5
+"""The played share of the audio was measured by the audio player and mapped onto the text through the speech
+synthesizer's per-segment text spans; proportionally only inside the segment that was cut.
+"""
+HEARD_TEXT_PRECISION_WORD_TIMED: HeardTextPrecision.ValueType  # 6
+"""The played share of the audio was measured by the audio player and mapped onto the text through the speech
+synthesizer's word timings.
+"""
 Global___HeardTextPrecision: _TypeAlias = HeardTextPrecision  # noqa: Y015
 
 class _TurnControlAckStatus:
@@ -538,6 +554,30 @@ is replaced with a single byte containing the block length. Only Speex
 wideband is supported. <code>sample_rate_hertz</code> must be 16000.
 """
 Global___AudioEncoding: _TypeAlias = AudioEncoding  # noqa: Y015
+
+class _SessionStepInterruptionPhase:
+    ValueType = _typing.NewType("ValueType", _builtins.int)
+    V: _TypeAlias = ValueType  # noqa: Y015
+
+class _SessionStepInterruptionPhaseEnumTypeWrapper(_enum_type_wrapper._EnumTypeWrapper[_SessionStepInterruptionPhase.ValueType], _builtins.type):
+    DESCRIPTOR: _descriptor.EnumDescriptor
+    SESSION_STEP_INTERRUPTION_PHASE_UNSPECIFIED: _SessionStepInterruptionPhase.ValueType  # 0
+    """Not set."""
+    SESSION_STEP_INTERRUPTION_PHASE_GENERATING: _SessionStepInterruptionPhase.ValueType  # 1
+    """The turn was still being generated."""
+    SESSION_STEP_INTERRUPTION_PHASE_FINISHED: _SessionStepInterruptionPhase.ValueType  # 2
+    """The turn had finished generating; its answer was being played."""
+
+class SessionStepInterruptionPhase(_SessionStepInterruptionPhase, metaclass=_SessionStepInterruptionPhaseEnumTypeWrapper):
+    """The phase a turn was in when it was interrupted."""
+
+SESSION_STEP_INTERRUPTION_PHASE_UNSPECIFIED: SessionStepInterruptionPhase.ValueType  # 0
+"""Not set."""
+SESSION_STEP_INTERRUPTION_PHASE_GENERATING: SessionStepInterruptionPhase.ValueType  # 1
+"""The turn was still being generated."""
+SESSION_STEP_INTERRUPTION_PHASE_FINISHED: SessionStepInterruptionPhase.ValueType  # 2
+"""The turn had finished generating; its answer was being played."""
+Global___SessionStepInterruptionPhase: _TypeAlias = SessionStepInterruptionPhase  # noqa: Y015
 
 class _ComparisonOperator:
     ValueType = _typing.NewType("ValueType", _builtins.int)
@@ -4238,6 +4278,7 @@ class SessionStep(_message.Message):
     MODIFIED_BY_FIELD_NUMBER: _builtins.int
     AUDIO_FILE_RESOURCES_FIELD_NUMBER: _builtins.int
     LLM_TELEMETRY_REPORT_FIELD_NUMBER: _builtins.int
+    INTERRUPTION_FIELD_NUMBER: _builtins.int
     name: _builtins.str
     """The unique identifier of the session step.
     Format: <pre><code>projects/&lt;project_uuid&gt;/agent/sessions/&lt;session_uuid&gt;/sessionsteps/&lt;session_step_uuid&gt;</code></pre>
@@ -4280,6 +4321,12 @@ class SessionStep(_message.Message):
         plus turn-level totals).
         """
 
+    @_builtins.property
+    def interruption(self) -> Global___SessionStepInterruption:
+        """Read-only. How the step's turn was interrupted; set only when it was. The server fills it from the step it
+        stored and ignores a value a client sends.
+        """
+
     def __init__(
         self,
         *,
@@ -4294,14 +4341,83 @@ class SessionStep(_message.Message):
         modified_by: _builtins.str = ...,
         audio_file_resources: _abc.Iterable[Global___AudioFileResource] | None = ...,
         llm_telemetry_report: Global___LlmTelemetryReport | None = ...,
+        interruption: Global___SessionStepInterruption | None = ...,
     ) -> None: ...
-    _HasFieldArgType: _TypeAlias = _typing.Literal["created_at", b"created_at", "detect_intent_request", b"detect_intent_request", "detect_intent_response", b"detect_intent_response", "llm_telemetry_report", b"llm_telemetry_report", "modified_at", b"modified_at", "timestamp", b"timestamp"]  # noqa: Y015
+    _HasFieldArgType: _TypeAlias = _typing.Literal["created_at", b"created_at", "detect_intent_request", b"detect_intent_request", "detect_intent_response", b"detect_intent_response", "interruption", b"interruption", "llm_telemetry_report", b"llm_telemetry_report", "modified_at", b"modified_at", "timestamp", b"timestamp"]  # noqa: Y015
     def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
-    _ClearFieldArgType: _TypeAlias = _typing.Literal["audio_file_resources", b"audio_file_resources", "contexts", b"contexts", "created_at", b"created_at", "created_by", b"created_by", "detect_intent_request", b"detect_intent_request", "detect_intent_response", b"detect_intent_response", "llm_telemetry_report", b"llm_telemetry_report", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "timestamp", b"timestamp"]  # noqa: Y015
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["audio_file_resources", b"audio_file_resources", "contexts", b"contexts", "created_at", b"created_at", "created_by", b"created_by", "detect_intent_request", b"detect_intent_request", "detect_intent_response", b"detect_intent_response", "interruption", b"interruption", "llm_telemetry_report", b"llm_telemetry_report", "modified_at", b"modified_at", "modified_by", b"modified_by", "name", b"name", "timestamp", b"timestamp"]  # noqa: Y015
     def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
     def WhichOneof(self, oneof_group: _Never) -> None: ...
 
 Global___SessionStep: _TypeAlias = SessionStep  # noqa: Y015
+
+@_typing.final
+class SessionStepInterruption(_message.Message):
+    """How a session step's turn was interrupted. Read-only; the server fills it from the step it stored."""
+
+    DESCRIPTOR: _descriptor.Descriptor
+
+    INTERRUPTED_FIELD_NUMBER: _builtins.int
+    CANCELLED_FIELD_NUMBER: _builtins.int
+    PHASE_FIELD_NUMBER: _builtins.int
+    TURN_INTERRUPTION_REASON_FIELD_NUMBER: _builtins.int
+    HEARD_REPORT_REVISION_FIELD_NUMBER: _builtins.int
+    HEARD_TEXT_PRECISION_FIELD_NUMBER: _builtins.int
+    HEARD_CHAR_COUNT_FIELD_NUMBER: _builtins.int
+    TOTAL_CHAR_COUNT_FIELD_NUMBER: _builtins.int
+    GENERATED_TEXT_FIELD_NUMBER: _builtins.int
+    TOOLS_IN_FLIGHT_FIELD_NUMBER: _builtins.int
+    SKIPPED_SIP_TRIGGER_COUNT_FIELD_NUMBER: _builtins.int
+    CALLER_OVERLAP_DURATION_IN_S_FIELD_NUMBER: _builtins.int
+    interrupted: _builtins.bool
+    """Whether the turn was interrupted: cancelled, or its answer was not heard in full."""
+    cancelled: _builtins.bool
+    """Whether the turn was cancelled by a <code>CancelTurn</code>."""
+    phase: Global___SessionStepInterruptionPhase.ValueType
+    """The phase the turn was in when it was interrupted."""
+    turn_interruption_reason: Global___TurnInterruptionReason.ValueType
+    """Why the turn was interrupted."""
+    heard_report_revision: _builtins.int
+    """<code>HeardReport.revision</code> of the report applied; <code>0</code> when none arrived."""
+    heard_text_precision: Global___HeardTextPrecision.ValueType
+    """How the heard text of the applied report was determined."""
+    heard_char_count: _builtins.int
+    """Unicode code points of the answer the user heard."""
+    total_char_count: _builtins.int
+    """Unicode code points of the answer that was spoken, queued or skipped."""
+    generated_text: _builtins.str
+    """The answer text as generated, before it was rewritten to the heard text."""
+    skipped_sip_trigger_count: _builtins.int
+    """Number of messages whose SIP trigger was not executed because the turn was interrupted first."""
+    caller_overlap_duration_in_s: _builtins.float
+    """Duration of heard audio that was played after the user had started speaking, in seconds."""
+    @_builtins.property
+    def tools_in_flight(self) -> _containers.RepeatedScalarFieldContainer[_builtins.str]:
+        """The tools the turn called whose result was never recorded."""
+
+    def __init__(
+        self,
+        *,
+        interrupted: _builtins.bool = ...,
+        cancelled: _builtins.bool = ...,
+        phase: Global___SessionStepInterruptionPhase.ValueType = ...,
+        turn_interruption_reason: Global___TurnInterruptionReason.ValueType = ...,
+        heard_report_revision: _builtins.int = ...,
+        heard_text_precision: Global___HeardTextPrecision.ValueType = ...,
+        heard_char_count: _builtins.int = ...,
+        total_char_count: _builtins.int = ...,
+        generated_text: _builtins.str = ...,
+        tools_in_flight: _abc.Iterable[_builtins.str] | None = ...,
+        skipped_sip_trigger_count: _builtins.int = ...,
+        caller_overlap_duration_in_s: _builtins.float = ...,
+    ) -> None: ...
+    _HasFieldArgType: _TypeAlias = _Never  # noqa: Y015
+    def HasField(self, field_name: _HasFieldArgType) -> _builtins.bool: ...
+    _ClearFieldArgType: _TypeAlias = _typing.Literal["caller_overlap_duration_in_s", b"caller_overlap_duration_in_s", "cancelled", b"cancelled", "generated_text", b"generated_text", "heard_char_count", b"heard_char_count", "heard_report_revision", b"heard_report_revision", "heard_text_precision", b"heard_text_precision", "interrupted", b"interrupted", "phase", b"phase", "skipped_sip_trigger_count", b"skipped_sip_trigger_count", "tools_in_flight", b"tools_in_flight", "total_char_count", b"total_char_count", "turn_interruption_reason", b"turn_interruption_reason"]  # noqa: Y015
+    def ClearField(self, field_name: _ClearFieldArgType) -> None: ...
+    def WhichOneof(self, oneof_group: _Never) -> None: ...
+
+Global___SessionStepInterruption: _TypeAlias = SessionStepInterruption  # noqa: Y015
 
 @_typing.final
 class GetSessionStepRequest(_message.Message):

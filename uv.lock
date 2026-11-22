@@ -970,7 +970,7 @@ wheels = [
 
 [[package]]
 name = "ondewo-nlu-client"
-version = "7.6.1"
+version = "7.7.0"
 source = { editable = "." }
 dependencies = [
     { name = "google-api-core" },

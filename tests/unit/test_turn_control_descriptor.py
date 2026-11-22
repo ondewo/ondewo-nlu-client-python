@@ -133,6 +133,8 @@ EXPECTED_ENUMS: Dict[str, Tuple[str, List[str]]] = {
             "HEARD_TEXT_PRECISION_FULL",
             "HEARD_TEXT_PRECISION_ESTIMATED_SERVER",
             "HEARD_TEXT_PRECISION_PROPORTIONAL",
+            "HEARD_TEXT_PRECISION_SENTENCE_ALIGNED",
+            "HEARD_TEXT_PRECISION_WORD_TIMED",
         ],
     ),
     "TurnControlAckStatus": (
