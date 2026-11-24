@@ -2,6 +2,15 @@
 
 *****************
 
+## Release ONDEWO NLU Python Client 7.5.0
+
+### Improvements
+
+* Tracking API Version [7.5.0](https://github.com/ondewo/ondewo-nlu-api/releases/tag/7.5.0) ( [Documentation](https://ondewo.github.io/ondewo-nlu-api/) )
+* [[OAMXXX-13]](https://ondewo.atlassian.net/browse/OAMXXX-13) `ReferencedChunk` carries `document_title` (field 10), the title of the crawled source page.
+
+*****************
+
 ## Release ONDEWO NLU Python Client 7.4.0
 
 ### Improvements

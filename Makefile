@@ -16,8 +16,8 @@ export
 
 # MUST BE THE SAME AS API in Mayor and Minor Version Number
 # example: API 2.9.0 --> Client 2.9.X
-ONDEWO_NLU_VERSION=7.4.0
-ONDEWO_NLU_API_GIT_BRANCH=tags/7.4.0
+ONDEWO_NLU_VERSION=7.5.0
+ONDEWO_NLU_API_GIT_BRANCH=tags/7.5.0
 ONDEWO_PROTO_COMPILER_GIT_BRANCH=tags/5.15.7
 PYPI_USERNAME?=ENTER_HERE_YOUR_PYPI_USERNAME
 PYPI_PASSWORD?=ENTER_HERE_YOUR_PYPI_PASSWORD
@@ -213,7 +213,7 @@ login_to_gh: ## Login to Github CLI with Access Token
 	@printf '%s\n' "$${GITHUB_GH_TOKEN}" | gh auth login -p ssh --with-token
 
 build_gh_release: ## Generate Github Release with CLI
-	gh release create --repo $(GH_REPO) "$(ONDEWO_NLU_VERSION)" -n "$(CURRENT_RELEASE_NOTES)" -t "Release ${ONDEWO_NLU_VERSION}"
+	gh release create --latest=false --repo $(GH_REPO) "$(ONDEWO_NLU_VERSION)" -n "$(CURRENT_RELEASE_NOTES)" -t "Release ${ONDEWO_NLU_VERSION}"
 
 ########################################################
 #		Submodules
